@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginContainer renders correctly 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <LoginContainer
+    login={[Function]}
+    loginError={[Function]}
+    loginSuccess={[Function]}
+    navigateToRegisterScreen={[Function]}
+    redirectToAuthFailureScreen={[Function]}
+    redirectToMainScreen={[Function]}
+    user={
+      Object {
+        "email": null,
+        "isLoggedIn": false,
+        "password": null,
+      }
+    }
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "areCredentialsValid": undefined,
+      "email": null,
+      "isEmailError": false,
+      "isLoading": false,
+      "isMnemonicError": false,
+      "isPasswordError": false,
+      "isRedirectedFromRegister": undefined,
+      "mnemonic": undefined,
+      "onChangeLogin": [Function],
+      "onChangeMnemonic": [Function],
+      "onChangePassCode": [Function],
+      "onChangePassword": [Function],
+      "onSubmit": [Function],
+      "password": null,
+      "registerButtonOnPress": [Function],
+    },
+    "ref": null,
+    "rendered": null,
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "areCredentialsValid": undefined,
+        "email": null,
+        "isEmailError": false,
+        "isLoading": false,
+        "isMnemonicError": false,
+        "isPasswordError": false,
+        "isRedirectedFromRegister": undefined,
+        "mnemonic": undefined,
+        "onChangeLogin": [Function],
+        "onChangeMnemonic": [Function],
+        "onChangePassCode": [Function],
+        "onChangePassword": [Function],
+        "onSubmit": [Function],
+        "password": null,
+        "registerButtonOnPress": [Function],
+      },
+      "ref": null,
+      "rendered": null,
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+    "context": Object {
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+    },
+  },
+}
+`;

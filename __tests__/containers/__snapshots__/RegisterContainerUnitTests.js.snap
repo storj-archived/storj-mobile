@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RegisterContainer renders correctly 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <RegisterContainer
+    redirectToAuthFailureScreen={[Function]}
+    redirectToLoginScreen={[Function]}
+    redirectToRegisterSuccessScreen={[Function]}
+    register={[Function]}
+    registerError={[Function]}
+    registerSuccess={[Function]}
+    returnToLoginScreen={[Function]}
+    user={undefined}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "isEmailError": false,
+      "isLoading": false,
+      "isPasswordError": false,
+      "isPasswordMatchError": false,
+      "isTermsAcceptedError": false,
+      "navigateBack": [Function],
+      "onChangeEmail": [Function],
+      "onChangePassword": [Function],
+      "onChangePasswordRepeat": [Function],
+      "onChangeTermsAcceptence": [Function],
+      "onSubmit": [Function],
+      "redirectToLoginScreen": [Function],
+    },
+    "ref": null,
+    "rendered": null,
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "isEmailError": false,
+        "isLoading": false,
+        "isPasswordError": false,
+        "isPasswordMatchError": false,
+        "isTermsAcceptedError": false,
+        "navigateBack": [Function],
+        "onChangeEmail": [Function],
+        "onChangePassword": [Function],
+        "onChangePasswordRepeat": [Function],
+        "onChangeTermsAcceptence": [Function],
+        "onSubmit": [Function],
+        "redirectToLoginScreen": [Function],
+      },
+      "ref": null,
+      "rendered": null,
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+    "context": Object {
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+    },
+  },
+}
+`;

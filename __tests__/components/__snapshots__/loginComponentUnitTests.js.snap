@@ -1,0 +1,1309 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RegisterComponent renders correctly 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <LoginComponent />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <View
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+        >
+          <Image
+            resizeMode="contain"
+            source="LogoBlue.png"
+            style={
+              Object {
+                "height": 116,
+                "left": 62,
+                "position": "absolute",
+                "top": 72,
+                "width": 240,
+              }
+            }
+          />
+        </View>,
+        <View
+          style={
+            Object {
+              "marginTop": 216,
+              "paddingBottom": 44,
+              "paddingLeft": 62,
+              "paddingRight": 50,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#2782ff",
+                "fontFamily": "Montserrat-ExtraBold",
+                "fontSize": 92,
+                "marginBottom": 10,
+              }
+            }
+          >
+            Sign In
+          </Text>
+          <InputComponent
+            errorMessage="Invalid email"
+            isError={undefined}
+            isPassword={false}
+            onChangeText={[Function]}
+            placeholder="Email address"
+            value={undefined}
+          />
+          <InputComponent
+            errorMessage="Invalid password"
+            isError={undefined}
+            isPassword={true}
+            onChangeText={[Function]}
+            placeholder="Password"
+            value={undefined}
+          />
+          <InputComponent
+            editable={true}
+            errorMessage="Invalid mnemonic"
+            isError={undefined}
+            isPassword={false}
+            onChangeText={[Function]}
+            placeholder="Mnemonic"
+            value={undefined}
+          />
+          <InputComponent
+            isPassword={true}
+            onChangeText={[Function]}
+            placeholder="Passcode"
+          />
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "marginTop": 32,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#384b65",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 32,
+                  "lineHeight": 48,
+                }
+              }
+            >
+              Forgot password?
+            </Text>
+          </View>
+        </View>,
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "height": 226,
+            }
+          }
+        >
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPressOut={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#2782ff",
+                "borderRadius": 16,
+                "height": 110,
+                "justifyContent": "center",
+                "width": 686,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "white",
+                  "fontFamily": "Montserrat-Bold",
+                  "fontSize": 28,
+                }
+              }
+            >
+              SIGN IN
+            </Text>
+          </TouchableOpacity>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#4d5664",
+                "fontFamily": "Montserrat",
+                "fontSize": 28,
+                "lineHeight": 48,
+                "marginTop": 34,
+              }
+            }
+          >
+            Don't have an account? 
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              onPress={undefined}
+              style={
+                Object {
+                  "color": "#2782ff",
+                }
+              }
+            >
+              Sign Up
+            </Text>
+          </Text>
+        </View>,
+        null,
+      ],
+      "style": Object {
+        "backgroundColor": "white",
+        "flex": 1,
+      },
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <Image
+            resizeMode="contain"
+            source="LogoBlue.png"
+            style={
+              Object {
+                "height": 116,
+                "left": 62,
+                "position": "absolute",
+                "top": 72,
+                "width": 240,
+              }
+            }
+          />,
+          "style": Object {
+            "backgroundColor": "transparent",
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "resizeMode": "contain",
+            "source": "LogoBlue.png",
+            "style": Object {
+              "height": 116,
+              "left": 62,
+              "position": "absolute",
+              "top": 72,
+              "width": 240,
+            },
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#2782ff",
+                  "fontFamily": "Montserrat-ExtraBold",
+                  "fontSize": 92,
+                  "marginBottom": 10,
+                }
+              }
+            >
+              Sign In
+            </Text>,
+            <InputComponent
+              errorMessage="Invalid email"
+              isError={undefined}
+              isPassword={false}
+              onChangeText={[Function]}
+              placeholder="Email address"
+              value={undefined}
+            />,
+            <InputComponent
+              errorMessage="Invalid password"
+              isError={undefined}
+              isPassword={true}
+              onChangeText={[Function]}
+              placeholder="Password"
+              value={undefined}
+            />,
+            <InputComponent
+              editable={true}
+              errorMessage="Invalid mnemonic"
+              isError={undefined}
+              isPassword={false}
+              onChangeText={[Function]}
+              placeholder="Mnemonic"
+              value={undefined}
+            />,
+            <InputComponent
+              isPassword={true}
+              onChangeText={[Function]}
+              placeholder="Passcode"
+            />,
+            <View
+              style={
+                Object {
+                  "flexDirection": "row",
+                  "marginTop": 32,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#384b65",
+                    "fontFamily": "Montserrat",
+                    "fontSize": 32,
+                    "lineHeight": 48,
+                  }
+                }
+              >
+                Forgot password?
+              </Text>
+            </View>,
+          ],
+          "style": Object {
+            "marginTop": 216,
+            "paddingBottom": 44,
+            "paddingLeft": 62,
+            "paddingRight": 50,
+          },
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "accessible": true,
+              "allowFontScaling": true,
+              "children": "Sign In",
+              "ellipsizeMode": "tail",
+              "style": Object {
+                "color": "#2782ff",
+                "fontFamily": "Montserrat-ExtraBold",
+                "fontSize": 92,
+                "marginBottom": 10,
+              },
+            },
+            "ref": null,
+            "rendered": "Sign In",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "errorMessage": "Invalid email",
+              "isError": undefined,
+              "isPassword": false,
+              "onChangeText": [Function],
+              "placeholder": "Email address",
+              "value": undefined,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "errorMessage": "Invalid password",
+              "isError": undefined,
+              "isPassword": true,
+              "onChangeText": [Function],
+              "placeholder": "Password",
+              "value": undefined,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "editable": true,
+              "errorMessage": "Invalid mnemonic",
+              "isError": undefined,
+              "isPassword": false,
+              "onChangeText": [Function],
+              "placeholder": "Mnemonic",
+              "value": undefined,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "isPassword": true,
+              "onChangeText": [Function],
+              "placeholder": "Passcode",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#384b65",
+                    "fontFamily": "Montserrat",
+                    "fontSize": 32,
+                    "lineHeight": 48,
+                  }
+                }
+              >
+                Forgot password?
+              </Text>,
+              "style": Object {
+                "flexDirection": "row",
+                "marginTop": 32,
+              },
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "accessible": true,
+                "allowFontScaling": true,
+                "children": "Forgot password?",
+                "ellipsizeMode": "tail",
+                "style": Object {
+                  "color": "#384b65",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 32,
+                  "lineHeight": 48,
+                },
+              },
+              "ref": null,
+              "rendered": "Forgot password?",
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPressOut={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#2782ff",
+                  "borderRadius": 16,
+                  "height": 110,
+                  "justifyContent": "center",
+                  "width": 686,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "white",
+                    "fontFamily": "Montserrat-Bold",
+                    "fontSize": 28,
+                  }
+                }
+              >
+                SIGN IN
+              </Text>
+            </TouchableOpacity>,
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#4d5664",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 28,
+                  "lineHeight": 48,
+                  "marginTop": 34,
+                }
+              }
+            >
+              Don't have an account? 
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                onPress={undefined}
+                style={
+                  Object {
+                    "color": "#2782ff",
+                  }
+                }
+              >
+                Sign Up
+              </Text>
+            </Text>,
+          ],
+          "style": Object {
+            "alignItems": "center",
+            "height": 226,
+          },
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "activeOpacity": 0.2,
+              "children": <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "white",
+                    "fontFamily": "Montserrat-Bold",
+                    "fontSize": 28,
+                  }
+                }
+              >
+                SIGN IN
+              </Text>,
+              "onPressOut": [Function],
+              "style": Object {
+                "alignItems": "center",
+                "backgroundColor": "#2782ff",
+                "borderRadius": 16,
+                "height": 110,
+                "justifyContent": "center",
+                "width": 686,
+              },
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "accessible": true,
+                "allowFontScaling": true,
+                "children": "SIGN IN",
+                "ellipsizeMode": "tail",
+                "style": Object {
+                  "color": "white",
+                  "fontFamily": "Montserrat-Bold",
+                  "fontSize": 28,
+                },
+              },
+              "ref": null,
+              "rendered": "SIGN IN",
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "accessible": true,
+              "allowFontScaling": true,
+              "children": Array [
+                "Don't have an account? ",
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  onPress={undefined}
+                  style={
+                    Object {
+                      "color": "#2782ff",
+                    }
+                  }
+                >
+                  Sign Up
+                </Text>,
+              ],
+              "ellipsizeMode": "tail",
+              "style": Object {
+                "color": "#4d5664",
+                "fontFamily": "Montserrat",
+                "fontSize": 28,
+                "lineHeight": 48,
+                "marginTop": 34,
+              },
+            },
+            "ref": null,
+            "rendered": Array [
+              "Don't have an account? ",
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "accessible": true,
+                  "allowFontScaling": true,
+                  "children": "Sign Up",
+                  "ellipsizeMode": "tail",
+                  "onPress": undefined,
+                  "style": Object {
+                    "color": "#2782ff",
+                  },
+                },
+                "ref": null,
+                "rendered": "Sign Up",
+                "type": [Function],
+              },
+            ],
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      null,
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <View
+            style={
+              Object {
+                "backgroundColor": "transparent",
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          >
+            <Image
+              resizeMode="contain"
+              source="LogoBlue.png"
+              style={
+                Object {
+                  "height": 116,
+                  "left": 62,
+                  "position": "absolute",
+                  "top": 72,
+                  "width": 240,
+                }
+              }
+            />
+          </View>,
+          <View
+            style={
+              Object {
+                "marginTop": 216,
+                "paddingBottom": 44,
+                "paddingLeft": 62,
+                "paddingRight": 50,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#2782ff",
+                  "fontFamily": "Montserrat-ExtraBold",
+                  "fontSize": 92,
+                  "marginBottom": 10,
+                }
+              }
+            >
+              Sign In
+            </Text>
+            <InputComponent
+              errorMessage="Invalid email"
+              isError={undefined}
+              isPassword={false}
+              onChangeText={[Function]}
+              placeholder="Email address"
+              value={undefined}
+            />
+            <InputComponent
+              errorMessage="Invalid password"
+              isError={undefined}
+              isPassword={true}
+              onChangeText={[Function]}
+              placeholder="Password"
+              value={undefined}
+            />
+            <InputComponent
+              editable={true}
+              errorMessage="Invalid mnemonic"
+              isError={undefined}
+              isPassword={false}
+              onChangeText={[Function]}
+              placeholder="Mnemonic"
+              value={undefined}
+            />
+            <InputComponent
+              isPassword={true}
+              onChangeText={[Function]}
+              placeholder="Passcode"
+            />
+            <View
+              style={
+                Object {
+                  "flexDirection": "row",
+                  "marginTop": 32,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#384b65",
+                    "fontFamily": "Montserrat",
+                    "fontSize": 32,
+                    "lineHeight": 48,
+                  }
+                }
+              >
+                Forgot password?
+              </Text>
+            </View>
+          </View>,
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "height": 226,
+              }
+            }
+          >
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPressOut={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#2782ff",
+                  "borderRadius": 16,
+                  "height": 110,
+                  "justifyContent": "center",
+                  "width": 686,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "white",
+                    "fontFamily": "Montserrat-Bold",
+                    "fontSize": 28,
+                  }
+                }
+              >
+                SIGN IN
+              </Text>
+            </TouchableOpacity>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#4d5664",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 28,
+                  "lineHeight": 48,
+                  "marginTop": 34,
+                }
+              }
+            >
+              Don't have an account? 
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                onPress={undefined}
+                style={
+                  Object {
+                    "color": "#2782ff",
+                  }
+                }
+              >
+                Sign Up
+              </Text>
+            </Text>
+          </View>,
+          null,
+        ],
+        "style": Object {
+          "backgroundColor": "white",
+          "flex": 1,
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <Image
+              resizeMode="contain"
+              source="LogoBlue.png"
+              style={
+                Object {
+                  "height": 116,
+                  "left": 62,
+                  "position": "absolute",
+                  "top": 72,
+                  "width": 240,
+                }
+              }
+            />,
+            "style": Object {
+              "backgroundColor": "transparent",
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "resizeMode": "contain",
+              "source": "LogoBlue.png",
+              "style": Object {
+                "height": 116,
+                "left": 62,
+                "position": "absolute",
+                "top": 72,
+                "width": 240,
+              },
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#2782ff",
+                    "fontFamily": "Montserrat-ExtraBold",
+                    "fontSize": 92,
+                    "marginBottom": 10,
+                  }
+                }
+              >
+                Sign In
+              </Text>,
+              <InputComponent
+                errorMessage="Invalid email"
+                isError={undefined}
+                isPassword={false}
+                onChangeText={[Function]}
+                placeholder="Email address"
+                value={undefined}
+              />,
+              <InputComponent
+                errorMessage="Invalid password"
+                isError={undefined}
+                isPassword={true}
+                onChangeText={[Function]}
+                placeholder="Password"
+                value={undefined}
+              />,
+              <InputComponent
+                editable={true}
+                errorMessage="Invalid mnemonic"
+                isError={undefined}
+                isPassword={false}
+                onChangeText={[Function]}
+                placeholder="Mnemonic"
+                value={undefined}
+              />,
+              <InputComponent
+                isPassword={true}
+                onChangeText={[Function]}
+                placeholder="Passcode"
+              />,
+              <View
+                style={
+                  Object {
+                    "flexDirection": "row",
+                    "marginTop": 32,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#384b65",
+                      "fontFamily": "Montserrat",
+                      "fontSize": 32,
+                      "lineHeight": 48,
+                    }
+                  }
+                >
+                  Forgot password?
+                </Text>
+              </View>,
+            ],
+            "style": Object {
+              "marginTop": 216,
+              "paddingBottom": 44,
+              "paddingLeft": 62,
+              "paddingRight": 50,
+            },
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "accessible": true,
+                "allowFontScaling": true,
+                "children": "Sign In",
+                "ellipsizeMode": "tail",
+                "style": Object {
+                  "color": "#2782ff",
+                  "fontFamily": "Montserrat-ExtraBold",
+                  "fontSize": 92,
+                  "marginBottom": 10,
+                },
+              },
+              "ref": null,
+              "rendered": "Sign In",
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "errorMessage": "Invalid email",
+                "isError": undefined,
+                "isPassword": false,
+                "onChangeText": [Function],
+                "placeholder": "Email address",
+                "value": undefined,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "errorMessage": "Invalid password",
+                "isError": undefined,
+                "isPassword": true,
+                "onChangeText": [Function],
+                "placeholder": "Password",
+                "value": undefined,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "editable": true,
+                "errorMessage": "Invalid mnemonic",
+                "isError": undefined,
+                "isPassword": false,
+                "onChangeText": [Function],
+                "placeholder": "Mnemonic",
+                "value": undefined,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "isPassword": true,
+                "onChangeText": [Function],
+                "placeholder": "Passcode",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#384b65",
+                      "fontFamily": "Montserrat",
+                      "fontSize": 32,
+                      "lineHeight": 48,
+                    }
+                  }
+                >
+                  Forgot password?
+                </Text>,
+                "style": Object {
+                  "flexDirection": "row",
+                  "marginTop": 32,
+                },
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "accessible": true,
+                  "allowFontScaling": true,
+                  "children": "Forgot password?",
+                  "ellipsizeMode": "tail",
+                  "style": Object {
+                    "color": "#384b65",
+                    "fontFamily": "Montserrat",
+                    "fontSize": 32,
+                    "lineHeight": 48,
+                  },
+                },
+                "ref": null,
+                "rendered": "Forgot password?",
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <TouchableOpacity
+                activeOpacity={0.2}
+                onPressOut={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#2782ff",
+                    "borderRadius": 16,
+                    "height": 110,
+                    "justifyContent": "center",
+                    "width": 686,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "white",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 28,
+                    }
+                  }
+                >
+                  SIGN IN
+                </Text>
+              </TouchableOpacity>,
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#4d5664",
+                    "fontFamily": "Montserrat",
+                    "fontSize": 28,
+                    "lineHeight": 48,
+                    "marginTop": 34,
+                  }
+                }
+              >
+                Don't have an account? 
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  onPress={undefined}
+                  style={
+                    Object {
+                      "color": "#2782ff",
+                    }
+                  }
+                >
+                  Sign Up
+                </Text>
+              </Text>,
+            ],
+            "style": Object {
+              "alignItems": "center",
+              "height": 226,
+            },
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "activeOpacity": 0.2,
+                "children": <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "white",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 28,
+                    }
+                  }
+                >
+                  SIGN IN
+                </Text>,
+                "onPressOut": [Function],
+                "style": Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#2782ff",
+                  "borderRadius": 16,
+                  "height": 110,
+                  "justifyContent": "center",
+                  "width": 686,
+                },
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "accessible": true,
+                  "allowFontScaling": true,
+                  "children": "SIGN IN",
+                  "ellipsizeMode": "tail",
+                  "style": Object {
+                    "color": "white",
+                    "fontFamily": "Montserrat-Bold",
+                    "fontSize": 28,
+                  },
+                },
+                "ref": null,
+                "rendered": "SIGN IN",
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "accessible": true,
+                "allowFontScaling": true,
+                "children": Array [
+                  "Don't have an account? ",
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    onPress={undefined}
+                    style={
+                      Object {
+                        "color": "#2782ff",
+                      }
+                    }
+                  >
+                    Sign Up
+                  </Text>,
+                ],
+                "ellipsizeMode": "tail",
+                "style": Object {
+                  "color": "#4d5664",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 28,
+                  "lineHeight": 48,
+                  "marginTop": 34,
+                },
+              },
+              "ref": null,
+              "rendered": Array [
+                "Don't have an account? ",
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "accessible": true,
+                    "allowFontScaling": true,
+                    "children": "Sign Up",
+                    "ellipsizeMode": "tail",
+                    "onPress": undefined,
+                    "style": Object {
+                      "color": "#2782ff",
+                    },
+                  },
+                  "ref": null,
+                  "rendered": "Sign Up",
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        null,
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
