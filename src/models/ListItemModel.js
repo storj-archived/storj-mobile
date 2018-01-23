@@ -14,6 +14,5 @@ export default class ListItemModel {
         this.mainTitlePath = mainTitlePath;
         this.sortOptions = sortingOptions;
         this.idPath = idPath;
-        this.key = item[idPath];
     };
 }

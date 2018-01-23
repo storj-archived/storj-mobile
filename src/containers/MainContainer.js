@@ -1,35 +1,47 @@
-import {
-    View,
-    Text
-} from 'react-native';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { mainContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import StorjLib from '../utils/StorjModule';
+import MainComponent from '../components/MainComponent';
 
 class MainContainer extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            name: null,
-            id: null
-        };
     };
 
-    componentDidMount() {
-        StorjLib.getBuckets().then((value) => {
-            if(value.length) 
-                value.forEach((bucket) => {
-                    this.bucket = bucket;
+    onActionBarPress() {
+        this.props.state.isActionBarShown ? 
+            this.props.hideActionBar() : this.props.showActionBar();
+    };
 
-                    this.setState({
-                        name: bucket.name,
-                        id: bucket.id
-                    });
-                });
-        });
+    async createBucket(bucketName) {
+        let createBucketResponse = await StorjLib.createBucket(bucketName);
+
+        console.log('createBucket', createBucketResponse);
+
+        if(createBucketResponse && createBucketResponse.isSuccess) {
+            this.props.createBucket(createBucketResponse.bucket);
+        }
+    };
+
+    deleteBucket() {};
+
+    async getBuckets() {
+        let buckets = await StorjLib.getBuckets();
+        /* console.log(buckets); */
+        this.props.getBuckets(buckets);
+    };
+
+    async componentDidMount() {
+        await StorjLib.importKeys(
+            'yar.vorobiov@gmail.com', 
+            'testpassword', 
+            'explain coil family embody good dentist okay flat govern ship honey mango comfort onion trade divide asset motion affair crime cycle office arrest agree',
+            'testpasscode');
+
+        await this.getBuckets();
     };
 
     static navigationOptions = {
@@ -38,17 +50,21 @@ class MainContainer extends Component {
 
     render() {
         return(
-            <View>
-                <Text>Hello main</Text>
-                <Text>{ this.state.name }</Text>
-                <Text>{ this.state.id }</Text>
-            </View>
+            <MainComponent
+                disableSelectionMode = { this.props.disableSelectionMode }
+                isSelectionMode = { this.props.state.isSelectionMode }
+                currentRoute = { this.props.navState.routes[this.props.navState.index].routeName }
+                buckets = { this.props.state.buckets }
+                createBucket = { (bucketName) => { this.createBucket(bucketName); } }
+                selectedBuckets = { this.props.state.selectedBuckets }
+                onActionBarPress = { () => { this.onActionBarPress(); } } 
+                isActionBarShown = { this.props.state.isActionBarShown } />
         );
     };
 }
 
-function mapStateToProps(state) { return { main: {} }; };
-function mapDispatchToProps(dispatch) { return bindActionCreators({ mainActions: () => {} }, dispatch); };
+function mapStateToProps(state) { return { state: state.mainReducer, navState: state.mainScreenNavReducer }; };
+function mapDispatchToProps(dispatch) { return bindActionCreators(mainContainerActions, dispatch); };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
 

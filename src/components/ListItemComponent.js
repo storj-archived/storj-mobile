@@ -19,7 +19,7 @@ export default ListItemComponent = (props) =>
                 {
                     (() => {
                         if(props.isSelectionModeEnabled) {
-                            if(props.item.isSelected) {
+                            if(props.item.entity.isSelected) {
                                 return(<Image style = { listItemStyles.selectedIcon } source = { require('../images/Icons/ListItemSelected.png') } />);    
                             } else {
                                 return(<Image style = { listItemStyles.selectedIcon } source = { require('../images/Icons/ListItemUnselected.png') } />);

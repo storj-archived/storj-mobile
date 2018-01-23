@@ -4,6 +4,13 @@ export default class BucketModel {
     * @param {object} - bucket
     */
     constructor(bucket) {
+        this.name = null;
+        this.id = null;
+        this.hash = 0;
+        this.isDecrypted = false;
+        this.created = null;
+        this.isSelected = false;
+
         if(
             bucket
             && bucket.name
@@ -17,12 +24,7 @@ export default class BucketModel {
             this.hash = bucket.hash;
             this.isDecrypted = bucket.isDecrypted;
             this.created = bucket.created;
-        } else {
-            this.name = null;
-            this.id = null;
-            this.hash = 0;
-            this.isDecrypted = false;
-            this.created = null;
-        }
+            this.isSelected = false;
+        } 
     };
 }

@@ -12,6 +12,7 @@ import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 
 import io.storj.libstorj.Bucket;
+import io.storj.libstorj.CreateBucketCallback;
 import io.storj.libstorj.GetBucketsCallback;
 import io.storj.libstorj.Keys;
 import io.storj.libstorj.KeysNotFoundException;
@@ -33,6 +34,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
     private static final String E_CHECK_MNEMONIC = "E_CHECK_MNEMONIC";
     private static final String E_KEYS_NOT_FOUND = "E_KEYS_NOT_FOUND";
     private static final String E_GET_BUCKETS = "E_GET_BUCKETS";
+    private static final String E_CREATE_BUCKET = "E_CREATE_BUCKET";
     private static final String MODULE_NAME = "StorjLibAndroid";
 
     public StorjLibModule(ReactApplicationContext reactContext) {
@@ -133,6 +135,20 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void createBucket(final String bucketName, final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    StorjAndroid.getInstance(getReactApplicationContext()).createBucket(bucketName, new CreateBucketCallbackWrapper(promise));
+                } catch(Exception e) {
+                    promise.reject(E_CREATE_BUCKET, e);
+                }
+            }
+        }).run();
+    }
+
+    @ReactMethod
     public void getBuckets(Promise promise) {
         try {
             StorjAndroid.getInstance(getReactApplicationContext()).getBuckets(new GetBucketsCallbackWrapper(promise));
@@ -140,6 +156,43 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
             promise.reject(E_KEYS_NOT_FOUND, e);
         } catch (Exception e) {
             promise.reject(E_GET_BUCKETS, e);
+        }
+    }
+
+    private class CreateBucketCallbackWrapper implements CreateBucketCallback {
+
+        private Promise _promise;
+        private WritableMap map;
+
+        public CreateBucketCallbackWrapper(Promise promise) {
+            _promise = promise;
+            map = Arguments.createMap();
+        }
+
+        @Override
+        public void onError(final String message) {
+            map.putBoolean("isSuccess", false);
+            map.putMap("bucket", null);
+            map.putString("errorMessage", message);
+
+            _promise.resolve(map);
+        }
+
+        @Override
+        public  void onBucketCreated(Bucket bucket) {
+            WritableMap bucketJs = Arguments.createMap();
+
+            bucketJs.putString("id", bucket.getId());
+            bucketJs.putString("name", bucket.getName());
+            bucketJs.putString("created", bucket.getCreated());
+            bucketJs.putInt("hash", bucket.hashCode());
+            bucketJs.putBoolean("isDecrypted", bucket.isDecrypted());
+
+            map.putBoolean("isSuccess", true);
+            map.putMap("bucket", bucketJs);
+            map.putString("errorMessage", null);
+
+            _promise.resolve(map);
         }
     }
 

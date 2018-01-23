@@ -133,19 +133,31 @@ const StorjLib = (() => {
                         return new bucketModel(bucket);
                     });
                 }
-
-                return [];
             } catch(e) {
                 console.log(e);
             }
+
+            return [];
         };
     
         static getBucket() {
             //Not implemented yet
         };
     
-        static createBucket() {
-            //Not implemented yet   
+        /**
+        * Create bucket
+        * @returns {Promise<bucketModel>}
+        */
+        async createBucket(bucketName) {
+            try {
+                let res = await storjLib.createBucket(bucketName);
+
+                console.log(res);
+
+                return res;
+            } catch(e) {
+                console.log(e);
+            }
         };
     
         static deleteBucket() {
