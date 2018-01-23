@@ -150,11 +150,7 @@ const StorjLib = (() => {
         */
         async createBucket(bucketName) {
             try {
-                let res = await storjLib.createBucket(bucketName);
-
-                console.log(res);
-
-                return res;
+                return await storjLib.createBucket(bucketName);
             } catch(e) {
                 console.log(e);
             }
