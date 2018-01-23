@@ -3,7 +3,6 @@ import { Dimensions } from 'react-native';
 const design = {
     height: 667,
     width: 375,
-    fontFamily: 'Arial',
     deviceHeight: Dimensions.get('window').height,
     deviceWidth: Dimensions.get('window').width,
 }
