@@ -17,6 +17,9 @@ export default class TabBarComponent extends Component {
     };
 
     render() {
+        let actionButtonSource = !this.props.navigation.isActionBarShown 
+                                    ? require('../images/TabBar/Ellipse.png')
+                                    : require('../images/TabBar/EllipseCancel.png');
         return(
             this.props.navigation.isSelectionMode ? null :
             <View style = { styles.mainContainer }>       
@@ -39,11 +42,14 @@ export default class TabBarComponent extends Component {
                 </View>
                 <View style = { styles.actionButtonWrapper }>
                     <TouchableOpacity onPress = { () => { this.props.navigation.onActionBarPress(); } }>
-                        <View><Image source = { require('../images/TabBar/Ellipse.png') } style = { styles.circleActionbutton }/></View>
+                        <View>
+                            <Image 
+                                source = { actionButtonSource } 
+                                style = { styles.circleActionbutton } />
+                        </View>
                     </TouchableOpacity>
                 </View>
-            </View>
-        );
+            </View>);
     };
 }
 

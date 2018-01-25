@@ -24,6 +24,7 @@ export default class MainComponent extends Component {
                     currentRoute = { this.props.currentRoute } />
                 <View style = { styles.navigationContainer }>
                     <MainNavigationContainer
+                        isActionBarShown = { this.props.isActionBarShown }
                         isSelectionMode = { this.props.isSelectionMode }
                         onActionBarPress = { () => { this.props.onActionBarPress(); } } />
                 </View>
