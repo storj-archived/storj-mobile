@@ -37,7 +37,7 @@ class MainContainer extends Component {
     async createBucket(bucketName) {
         try {
             let createBucketResponse = await StorjLib.createBucket(bucketName);
-
+            console.log(createBucketResponse);
             if(createBucketResponse.isSuccess) {
                 this.props.createBucket(new ListItemModel(createBucketResponse.result));
             }
@@ -49,7 +49,7 @@ class MainContainer extends Component {
 
     async deleteBucket(bucket) {
         let result = await StorjLib.deleteBucket(bucket.getId());
-
+        console.log(result);
         if(result.isSuccess) {
             this.props.deleteBucket(bucket);
         }
@@ -57,7 +57,6 @@ class MainContainer extends Component {
 
     deleteBuckets() {
         this.getSelectedBuckets().forEach(item => {
-            console.log("DELETE BUCKETS", item);
             this.deleteBucket(item);
         });
     }
@@ -77,7 +76,6 @@ class MainContainer extends Component {
 
         this.props.state.buckets.map(item => {
             if(item.isSelected) {
-                console.log("SELECTED ITEMS", item);
                 selectedBuckets.push(item);
             }
         });

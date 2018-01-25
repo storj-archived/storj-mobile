@@ -49,7 +49,7 @@ export default class ListComponent extends Component {
     */
     selectItem(selectedItem) {
         if(!this.props.isSelectionMode) return;
-        console.log(selectedItem.isSelected);
+
         if(selectedItem.isSelected)
             this.props.deselectItem(selectedItem);
         else

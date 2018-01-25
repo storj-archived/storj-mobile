@@ -97,8 +97,6 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
         }
     }
 
-    ;
-
     @ReactMethod
     public void importKeys(String email, String password, String mnemonic, String passcode, Promise promise) {
         try {
@@ -174,14 +172,19 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void getBuckets(Promise promise) {
-        try {
-            StorjAndroid.getInstance(getReactApplicationContext()).getBuckets(new GetBucketsCallbackWrapper(promise));
-        } catch (KeysNotFoundException e) {
-            promise.reject(E_KEYS_NOT_FOUND, e);
-        } catch (Exception e) {
-            promise.reject(E_GET_BUCKETS, e);
-        }
+    public void getBuckets(final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    StorjAndroid.getInstance(getReactApplicationContext()).getBuckets(new GetBucketsCallbackWrapper(promise));
+                } catch (KeysNotFoundException e) {
+                    promise.reject(E_KEYS_NOT_FOUND, e);
+                } catch (Exception e) {
+                    promise.reject(E_GET_BUCKETS, e);
+                }
+            }
+        }).start();
     }
 
     private class DeleteCallbackWrapper implements DeleteBucketCallback {
