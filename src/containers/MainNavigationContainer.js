@@ -5,6 +5,9 @@ import { addNavigationHelpers } from 'react-navigation';
 import { mainNavContainerActions, mainContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import MainScreenTabNav from '../navigators/MainScreenNavigator';
 
+/**
+* Container for main screen navigation
+*/
 class MainNavigationContainer extends Component {
 
     constructor(props) {

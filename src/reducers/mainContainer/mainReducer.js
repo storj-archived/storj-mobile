@@ -1,9 +1,11 @@
 import { MAIN_ACTIONS } from '../../utils/constants/actionConstants';
+import ListItemModel from '../../models/ListItemModel';
 
 const { 
     SELECT_BUCKET, 
     DESELECT_BUCKET, 
-    CREATE_BUCKET, 
+    CREATE_BUCKET,
+    DELETE_BUCKET,
     GET_BUCKETS, 
     SHOW_ACTION_BAR, 
     HIDE_ACTION_BAR,
@@ -20,7 +22,7 @@ const initialState = {
 
 export default function mainReducer(state = initialState, action) {
     let newState = Object.assign({}, state);
-    let bucketsManager = new BucketsManager(newState.buckets, newState.selectedBuckets);
+    let bucketsManager = new ItemManager(newState.buckets, newState.selectedBuckets);
 
     switch(action.type) {
         case SHOW_ACTION_BAR:
@@ -30,13 +32,16 @@ export default function mainReducer(state = initialState, action) {
             newState.isActionBarShown = false;
             return newState;
         case SELECT_BUCKET:
-            newState.buckets = bucketsManager.changeBucketSelectionStatus(action.payload.bucket, true);
+            newState.buckets = bucketsManager.changeItemSelectionStatus(action.payload.bucket, true);
             return newState;
         case DESELECT_BUCKET:
-            newState.buckets = bucketsManager.changeBucketSelectionStatus(action.payload.bucket, false);
+            newState.buckets = bucketsManager.changeItemSelectionStatus(action.payload.bucket, false);
             return newState;
         case CREATE_BUCKET:
             newState.buckets.push(action.payload.bucket);
+            return newState;
+        case DELETE_BUCKET:
+            bucketsManager.deleteItem(action.payload.bucket);
             return newState;
         case GET_BUCKETS:
             newState.buckets = action.payload.buckets;
@@ -53,28 +58,60 @@ export default function mainReducer(state = initialState, action) {
     }
 };
 
-class BucketsManager {
-    constructor(buckets, selectedBuckets) {
+/**
+ * Helper class for working with items
+ */
+class ItemManager {
+    /**
+     * @param {ListItemModel[]} itemList 
+     * @param {*} selectedBuckets 
+     */
+    constructor(itemList, selectedBuckets) {
         this.selectedBuckets = selectedBuckets;
-        this.buckets = buckets;
+        this.itemList = itemList;
     };
 
-    changeBucketSelectionStatus(bucket, value) {
-        let index = this.buckets.indexOf(bucket);
+    /**
+     * Change isSelected prop to value for selected item 
+     * @param {ListItemModel} item selected item
+     * @param {boolean} value value to set 
+     * @returns {ListItemModel[]} 
+     */
+    changeItemSelectionStatus(item, value) {
+        let index = this.itemList.indexOf(item);
 
         if(index > -1) {
-            this.buckets[index].isSelected = value;
+            this.itemList[index].isSelected = value;
         }
 
-        return this.buckets;
+        return this.itemList;
     };
 
+    /**
+     * Set isSelected prop of whole array to false
+     * * @returns {ListItemModel[]}
+     */
     clearSelection() {
-        for(i = 0; i < this.buckets.length; i++) {
-            this.buckets[i].isSelected = false;
+        for(i = 0; i < this.itemList.length; i++) {
+            this.itemList[i].isSelected = false;
         }
 
-        return this.buckets;
+        return this.itemList;
+    };
+
+    /**
+     * Delete item from array
+     * @param {ListItemModel} item
+     * @returns {ListItemModel[]} 
+     */
+    deleteItem(item) {
+        let index = this.itemList.indexOf(item);
+
+        if(index > -1) {
+            this.itemList.splice(index, 1);
+        }
+
+        return this.itemList;
     };
 
     //TODO: delete, depreciated

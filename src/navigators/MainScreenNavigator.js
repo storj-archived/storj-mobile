@@ -2,6 +2,9 @@ import { TabNavigator } from 'react-navigation';
 import TabBarComponent from '../components/TabBarComponent';
 import BucketsScreen from '../components/BucketsComponent';
 
+/**
+ * Main Screen Tab Navigator
+ */
 const MainScreenNavigator = TabNavigator(
     {
         BucketsScreen: {
@@ -16,7 +19,8 @@ const MainScreenNavigator = TabNavigator(
     {
         initialRouteName: 'BucketsScreen',
         tabBarPosition: 'bottom',
-        tabBarComponent: TabBarComponent 
+        tabBarComponent: TabBarComponent,
+        swipeEnabled: false
     }
 );
 

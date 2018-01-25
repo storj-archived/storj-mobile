@@ -1,7 +1,7 @@
 export default class keysModel {
     /**
     * Describes auth file
-    * @param {object} - auth file
+    * @param {object} keys - auth file
     */
     constructor(keys) {
         if(

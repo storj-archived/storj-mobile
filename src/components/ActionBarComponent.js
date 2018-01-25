@@ -18,6 +18,12 @@ export default class ActionBarComponent extends Component {
         super(props);
     };
 
+    deleteBuckets() {
+        this.props.selectedBuckets.map(item => {
+            this.props.deleteBucket(item);
+        });
+    };
+
     render() {
         return(
             <View style = { this.props.isSelectionMode ? styles.popUpRectangleWrapperSelectionMode : styles.popUpRectangleWrapper }>

@@ -29,6 +29,7 @@ export default class ContentSlider extends Component {
                 };
             })
         };
+
         this.ref = null;
     }
 

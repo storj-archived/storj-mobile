@@ -25,6 +25,7 @@ export default class ListComponent extends Component {
     * @param {object} item type of ListItemModel
     */
     onItemLongPress(item) {
+        console.log("Long Press", item);
         this.props.enableSelectionMode();
         this.selectItem(item);
     };   
@@ -46,11 +47,11 @@ export default class ListComponent extends Component {
     */
     selectItem(selectedItem) {
         if(!this.props.isSelectionMode) return;
-
-        if(selectedItem.entity.isSelected)
-            this.props.deselectItem(selectedItem.entity);
+        console.log(selectedItem.isSelected);
+        if(selectedItem.isSelected)
+            this.props.deselectItem(selectedItem);
         else
-            this.props.selectItem(selectedItem.entity);
+            this.props.selectItem(selectedItem);
     };
 
     render() {
@@ -62,8 +63,9 @@ export default class ListComponent extends Component {
                         refreshing = { this.state.refreshing }
                         onRefresh = { this.onRefresh.bind(this) } /> }>
                 {
-                    this.props.data.map((item) => {
+                    this.props.data.map((item, index) => {
                          return(<ListItemComponent
+                                    key = { index }
                                     item = { item } 
                                     onLongPress = { () => { this.onItemLongPress(item); } }
                                     isSelectionModeEnabled = { this.props.isSelectionMode }

@@ -1,30 +1,29 @@
-export default class BucketModel {
+import ItemModel from './ItemModel';
+
+export default class BucketModel extends ItemModel {
     /**
     * Describes bucket entity
-    * @param {object} - bucket
+    * @param {object} bucket
     */
     constructor(bucket) {
-        this.name = null;
-        this.id = null;
-        this.hash = 0;
-        this.isDecrypted = false;
-        this.created = null;
-        this.isSelected = false;
-
-        if(
-            bucket
+        if( bucket
             && bucket.name
             && bucket.id
             && Number.isInteger(bucket.hash)
             && typeof(bucket.isDecrypted) === "boolean"
-            && bucket.created
-        ) {
-            this.name = bucket.name;
-            this.id = bucket.id;
+            && bucket.created) {
+
+            super(bucket.name, bucket.id);
+            
             this.hash = bucket.hash;
             this.isDecrypted = bucket.isDecrypted;
             this.created = bucket.created;
-            this.isSelected = false;
-        } 
+        } else {
+            super();
+
+            this.hash = 0;
+            this.isDecrypted = false;
+            this.created = null;
+        }
     };
 }

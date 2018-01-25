@@ -2,7 +2,7 @@ import {
     NativeModules,
     Platform
 } from 'react-native'
-import bucketModel from '../models/bucketModel';
+import BucketModel from '../models/BucketModel';
 import keysModel from '../models/keysModel';
 
 const StorjLib = (() => {
@@ -122,22 +122,19 @@ const StorjLib = (() => {
     
         /**
         * List buckets for logged in user
-        * @returns {Promise<bucketModel[]>}
+        * @returns {Promise<BucketModel[]>}
         */
         async getBuckets() {
-            try {
-                let buckets = await storjLib.getBuckets();
+            let result = [];
+            let buckets = await storjLib.getBuckets();
 
-                if(Array.isArray(buckets)) {
-                    return buckets.map((bucket) => {
-                        return new bucketModel(bucket);
-                    });
-                }
-            } catch(e) {
-                console.log(e);
+            if(Array.isArray(buckets)) {
+                result = buckets.map((bucket) => {
+                    return new BucketModel(bucket);
+                });
             }
 
-            return [];
+            return result;
         };
     
         static getBucket() {
@@ -146,18 +143,21 @@ const StorjLib = (() => {
     
         /**
         * Create bucket
-        * @returns {Promise<bucketModel>}
+        * @returns {Promise<BucketModel>}
         */
         async createBucket(bucketName) {
-            try {
-                return await storjLib.createBucket(bucketName);
-            } catch(e) {
-                console.log(e);
+            let result = await storjLib.createBucket(bucketName);
+            
+            if(result.isSuccess) {
+                result.result = new BucketModel(result.result);
             }
+
+            return result;
         };
     
-        static deleteBucket() {
-            //Not implemented yet
+        //Not implemented yet
+        async deleteBucket(bucketId) {
+            return await storjLib.deleteBucket(bucketId);
         };
     
         static uploadFile() {

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { mainContainerActions } from '../reducers/mainContainer/mainReducerActions';
+import ListItemModel from '../models/ListItemModel';
 import StorjLib from '../utils/StorjModule';
 import TabBarActionModel from '../models/TabBarActionModel';
 import MainComponent from '../components/MainComponent';
@@ -14,8 +15,8 @@ class MainContainer extends Component {
         //this.state = {
         this.tapBarActions = [
             //actions for bucket screen
-            new TabBarActionModel(() => { console.log('Action 1') }, 'Action 1', require('../images/Icons/BucketItemFolderAction.png')), 
-            new TabBarActionModel(() => { console.log('Action 2') }, 'Action 2', require('../images/Icons/TrashBucket.png')),
+            new TabBarActionModel(() => { this.createBucket("Test" + Math.random()); }, 'Action 1', require('../images/Icons/BucketItemFolderAction.png')), 
+            new TabBarActionModel(() => { this.deleteBuckets(); }, 'Action 2', require('../images/Icons/TrashBucket.png')),
             new TabBarActionModel(() => { console.log('Action 3') }, 'Action 3', require('../images/Icons/CreateBucketIcon.png')), 
             //actions for file screen
             new TabBarActionModel(() => { console.log('Action 4') }, 'Action 4', require('../images/Icons/CreateBucketIcon.png')), 
@@ -35,21 +36,54 @@ class MainContainer extends Component {
     };
 
     async createBucket(bucketName) {
-        let createBucketResponse = await StorjLib.createBucket(bucketName);
+        try {
+            let createBucketResponse = await StorjLib.createBucket(bucketName);
 
-        console.log('createBucket', createBucketResponse);
-
-        if(createBucketResponse && createBucketResponse.isSuccess) {
-            this.props.createBucket(createBucketResponse.bucket);
+            if(createBucketResponse.isSuccess) {
+                this.props.createBucket(new ListItemModel(createBucketResponse.result));
+            }
+        } catch(e) {
+            //Eror callback
+            console.log('errorName: ' + e.name, "// errorMessage: " + e.message, "// errorCode: " + e.code);
         }
     };
 
-    deleteBucket() {};
+    async deleteBucket(bucket) {
+        let result = await StorjLib.deleteBucket(bucket.getId());
+
+        if(result.isSuccess) {
+            this.props.deleteBucket(bucket);
+        }
+    };
+
+    deleteBuckets() {
+        this.getSelectedBuckets().forEach(item => {
+            console.log("DELETE BUCKETS", item);
+            this.deleteBucket(item);
+        });
+    }
 
     async getBuckets() {
-        let buckets = await StorjLib.getBuckets();
-        /* console.log(buckets); */
-        this.props.getBuckets(buckets);
+        try {
+            let buckets = await StorjLib.getBuckets();
+            this.props.getBuckets(buckets.map((bucket => new ListItemModel(bucket))));
+        } catch(e) {
+            //Eror callback
+            console.log('errorName: ' + e.name, "// errorMessage: " + e.message, "// errorCode: " + e.code);
+        }
+    };
+
+    getSelectedBuckets() {
+        let selectedBuckets = [];
+
+        this.props.state.buckets.map(item => {
+            if(item.isSelected) {
+                console.log("SELECTED ITEMS", item);
+                selectedBuckets.push(item);
+            }
+        });
+        
+        return selectedBuckets;
     };
 
     async componentDidMount() {
@@ -60,7 +94,6 @@ class MainContainer extends Component {
             'testpasscode');
 
         await this.getBuckets();
-        console.log(this.props.navState.routes[this.props.navState.index].routeName);
     };
 
     static navigationOptions = {
@@ -73,12 +106,13 @@ class MainContainer extends Component {
                 tapBarActions = { this.props.navState.routes[this.props.navState.index].routeName === 'BucketsScreen' 
                                     ? [ this.tapBarActions[0], this.tapBarActions[1], this.tapBarActions[2] ] 
                                     : [ this.tapBarActions[3], this.tapBarActions[4], this.tapBarActions[5] ] } 
+                selectedBuckets = { this.getSelectedBuckets() }
                 disableSelectionMode = { this.props.disableSelectionMode }
                 isSelectionMode = { this.props.state.isSelectionMode }
                 currentRoute = { this.props.navState.routes[this.props.navState.index].routeName }
                 buckets = { this.props.state.buckets }
                 createBucket = { (bucketName) => { this.createBucket(bucketName); } }
-                selectedBuckets = { this.props.state.selectedBuckets }
+                deleteBucket = { (bucket) => { this.deleteBucket(bucket); } }
                 onActionBarPress = { () => { this.onActionBarPress(); } } 
                 isActionBarShown = { this.props.state.isActionBarShown } />
         );

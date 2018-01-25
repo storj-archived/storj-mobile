@@ -1,9 +1,9 @@
 export class LoginStateModel {
     /**
     * State model used for storing email and password in LoginContainer. For internal usage, not for reducer or store
-    * @param {string} - email
-    * @param {string} - password
-    * @param {string} - mnemonic
+    * @param {string} email
+    * @param {string} password
+    * @param {string} mnemonic
     */
     constructor(email, password, mnemonic, passCode) {
         this.email = email ? email : '';

@@ -1,18 +1,30 @@
+import ItemModel from '../models/ItemModel';
+
 export default class ListItemModel {
     /**
     * Describes list item
-    * @param {object} item selected entity that should be handled
-    * @param {string} mainTitlePath path to property of object, that should be displayed as main title. F.e. name.
-    * @param {string} idPath path to the unique identificator of object
-    * @param {string[]} sortingOptions path to properties of object, that should be used for sorting
-    * @param {bool} isSelected indicates if item is selected
+    * @param {ItemModel} item selected entity that should be handled
+    * @param {boolean} isSelected indicates if item is selected
     */
-    constructor(item, mainTitlePath, idPath, sortingOptions, isSelected = false) {
+    constructor(item, isSelected = false) {
         this.entity = item;
         this.isSelected = isSelected;
+        this.sortOrder = 0;
+    };
 
-        this.mainTitlePath = mainTitlePath;
-        this.sortOptions = sortingOptions;
-        this.idPath = idPath;
+    /**
+     * Get entity name
+     * @returns {string}
+     */
+    getName() {
+        return this.entity.Name;
+    };
+
+    /**
+     * Get entity id
+     * @returns {string}
+     */
+    getId() {
+        return this.entity.Id;
     };
 }

@@ -11,7 +11,7 @@ import { getWidth, getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 
 export default ListItemComponent = (props) => 
-    <TouchableOpacity   
+    <TouchableOpacity 
         style = { listItemStyles.listItemContainer }
         onPress = { () => { props.onPress(props.item); } }
         onLongPress = { () => { props.onLongPress(props.item); } }>
@@ -19,7 +19,7 @@ export default ListItemComponent = (props) =>
                 {
                     (() => {
                         if(props.isSelectionModeEnabled) {
-                            if(props.item.entity.isSelected) {
+                            if(props.item.isSelected) {
                                 return(<Image style = { listItemStyles.selectedIcon } source = { require('../images/Icons/ListItemSelected.png') } />);    
                             } else {
                                 return(<Image style = { listItemStyles.selectedIcon } source = { require('../images/Icons/ListItemUnselected.png') } />);
@@ -30,7 +30,7 @@ export default ListItemComponent = (props) =>
                 <View style = { listItemStyles.imageContainer }>
                     <Image style = { listItemStyles.itemTypeIcon } source = { require('../images/Icons/BucketItemFolder.png') } />
                 </View>
-                <Text style = { listItemStyles.mainTitleText }>{ props.item.entity[props.item.mainTitlePath] }</Text>
+                <Text style = { listItemStyles.mainTitleText }>{ props.item.getName() }</Text>
             </View>
     </TouchableOpacity>
 
