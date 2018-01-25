@@ -19,26 +19,27 @@ export default class TabBarComponent extends Component {
     render() {
         return(
             this.props.navigation.isSelectionMode ? null :
-            <View style = { styles.mainContainer }>
+            <View style = { styles.mainContainer }>       
                 <View style = { styles.navContainer }>
                     <View style = { styles.tabContainer }>
                         <TouchableOpacity style = { styles.tabItemContainer } onPress = { () => { this.props.navigation.goToBucketsScreen(); } }>
-                            <View><Text>Item 1</Text></View>
+                            <View><Image source = { require('../images/TabBar/HomeTabBar.png') } style = { styles.tabItemImage }/></View>
                         </TouchableOpacity>
                         <TouchableOpacity style = { styles.tabItemContainer } onPress = { () => { this.props.navigation.test(); } }>
-                            <View><Text>Item 2</Text></View>
+                            <View><Image source = { require('../images/TabBar/BucketTabBar.png') } style = { styles.tabItemImage }/></View>
                         </TouchableOpacity>
-                        <View style = { styles.tabItemContainer }><Text>Action ButtonSpace</Text></View>
-                        <View style = { styles.tabItemContainer }><Text>Item 3</Text></View>
-                        <View style = { styles.tabItemContainer }><Text>Item 4</Text></View>   
+                        <View style = { styles.tabItemContainer } onPress = { () => { this.props.navigation.onActionBarPress(); } }></View>
+                        <TouchableOpacity style = { styles.tabItemContainer } onPress = { () => { this.props.navigation.goToBucketsScreen(); } }>
+                            <View><Image source = { require('../images/TabBar/TrashTabBar.png') } style = { styles.tabItemImage }/></View>
+                        </TouchableOpacity>
+                        <TouchableOpacity style = { styles.tabItemContainer } onPress = { () => { this.props.navigation.goToBucketsScreen(); } }>
+                            <View><Image source = { require('../images/TabBar/UserTabBar.png') } style = { styles.tabItemImage }/></View>
+                        </TouchableOpacity>
                     </View>
                 </View>
-                <View style = { styles.actionButtonBackgroundWrapper }>                    
-                    <TouchableOpacity onPress = { this.props.navigation.onActionBarPress } style = { styles.circleActionbutton }>
-                        <View>
-                            <Image source = { require('../images/ActionBar/Ellipse.png') } style = { styles.circleImage }/>
-                            <Text style = { styles.circleText }>+</Text>
-                        </View>
+                <View style = { styles.actionButtonWrapper }>
+                    <TouchableOpacity onPress = { () => { this.props.navigation.onActionBarPress(); } }>
+                        <View><Image source = { require('../images/TabBar/Ellipse.png') } style = { styles.circleActionbutton }/></View>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -47,16 +48,23 @@ export default class TabBarComponent extends Component {
 }
 
 const styles = StyleSheet.create({
+    actionButtonWrapper: {
+        position: 'absolute',
+        top: 0, left: 0, bottom: 0, right: 0,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     mainContainer: {
+        position: 'absolute',
+        left: 0, bottom: 0, right: 0,
         backgroundColor: 'transparent',
-        height: getHeight(65),
-        borderColor: 'black',
-        borderWidth: 0.5,
+        height: getHeight(70),
         justifyContent: 'flex-end'
     },
     navContainer: {
-        backgroundColor: 'green',
-        height: 50
+        bottom: 0,
+        backgroundColor: 'white',
+        height:  getHeight(50)
     },
     tabContainer: {
         flexDirection: 'row',
@@ -64,35 +72,17 @@ const styles = StyleSheet.create({
         flex: 1
     },
     tabItemContainer: {
-        borderWidth: 1,
-        borderColor: 'black',
-        flex: 0.15
+        backgroundColor: 'white',
+        flex: 20,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
-    actionButtonContainer: {
-        backgroundColor: 'transparent'
-    },
-    actionButtonBackgroundWrapper: {
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        justifyContent: 'center',
-        alignItems: 'center'
+    tabItemImage: {
+        width: getWidth(22),
+        height: getWidth(22)
     },
     circleActionbutton: {
         height: getWidth(56),
         width: getWidth(56)
-    },
-    circleImage: {
-        height: getWidth(56),
-        width: getWidth(56)
-    },
-    circleText: {
-        color: 'white',
-        fontSize: getHeight(32),
-        marginHorizontal: getWidth(20),
-        zIndex: 100,
-        position: 'absolute',
     }
 });

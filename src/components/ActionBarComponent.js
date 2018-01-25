@@ -40,15 +40,18 @@ export default class ActionBarComponent extends Component {
                             })
                         }
                 </View>
-                <View style = { styles.bottomTriangle }>
-                    <Image source = { require('../images/ActionBar/ActionBarBottomTriangle.png') } style = { styles.triangleImage }/>
-                </View>
+                {
+                    !this.props.isSelectionMode ?
+                    <View style = { styles.bottomTriangle }>
+                        <Image source = { require('../images/ActionBar/ActionBarBottomTriangle.png') } style = { styles.triangleImage }/>
+                    </View> : null
+                }
             </View>
         );
     };
 } 
 
-ActionBarComponent.PropTypes = {
+ActionBarComponent.propTypes = {
     isSelectionMode: PropTypes.bool,
     tapBarActions: PropTypes.arrayOf(PropTypes.instanceOf(TabBarActionModel))
 };
@@ -60,14 +63,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginHorizontal: getWidth(10)
     },  
-    popUpRectangleWrapperSelectionMode: {
+    popUpRectangleWrapperSelectionMode: {   
         position: 'absolute',
         bottom: getHeight(7),
         alignItems: 'center',
         marginHorizontal: getWidth(10)
     },  
     popUpRectangle: {
-        width: getWidth(350),
         height: getHeight(51),
         borderRadius: getWidth(10),
         backgroundColor: '#2684FF',

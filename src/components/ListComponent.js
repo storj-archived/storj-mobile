@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+    View,
     StyleSheet,
     ScrollView,
     RefreshControl
@@ -7,6 +8,7 @@ import {
 import ListItemComponent from '../components/ListItemComponent'
 import ListItemModel from '../models/ListItemModel'
 import PropTypes from 'prop-types';
+import { getWidth, getHeight } from '../utils/adaptive';
 
 /**
 * Custom List component
@@ -72,12 +74,13 @@ export default class ListComponent extends Component {
                                     onPress = { () => { this.selectItem(item); } } /> 
                         )})   
                 }
+                <View style = { styles.emptyListItemContainer }></View>
             </ScrollView>
         );
     };
 }
 
-ListComponent.PropTypes = {
+ListComponent.propTypes = {
     data: PropTypes.array,
     selectedItems: PropTypes.array,
     selectItem: PropTypes.function,
@@ -90,5 +93,10 @@ ListComponent.PropTypes = {
 const styles = StyleSheet.create({
     listContainer: {
         backgroundColor: 'white'
+    },
+    emptyListItemContainer: {
+        width: getWidth(375),
+        height: getHeight(55),
+        paddingHorizontal: getWidth(20)
     }
 });

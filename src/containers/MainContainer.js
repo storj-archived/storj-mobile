@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { mainContainerActions } from '../reducers/mainContainer/mainReducerActions';
@@ -88,7 +87,7 @@ class MainContainer extends Component {
 
     async componentDidMount() {
         await StorjLib.importKeys(
-            'yar.vorobiov@gmail.com', 
+            'elvy.baila@arockee.com', 
             'testpassword', 
             'explain coil family embody good dentist okay flat govern ship honey mango comfort onion trade divide asset motion affair crime cycle office arrest agree',
             'testpasscode');
@@ -123,7 +122,3 @@ function mapStateToProps(state) { return { state: state.mainReducer, navState: s
 function mapDispatchToProps(dispatch) { return bindActionCreators(mainContainerActions, dispatch); };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
-
-MainContainer.PropTypes = {
-    main: PropTypes.object
-};

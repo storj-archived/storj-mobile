@@ -34,7 +34,7 @@ export default ListItemComponent = (props) =>
             </View>
     </TouchableOpacity>
 
-ListItemComponent.PropTypes = {
+ListItemComponent.propTypes = {
     item: PropTypes.object,
     onLongPress: PropTypes.func,
     isSelectionModeEnabled: PropTypes.bool,
