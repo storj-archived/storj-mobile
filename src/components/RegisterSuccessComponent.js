@@ -2,14 +2,12 @@ import {
     View,
     Text,
     Image,
-    Button,
     TouchableOpacity,
     StyleSheet
 } from 'react-native';
 import React, { Component } from 'react';
 import infoScreensConstants from '../utils/constants/infoScreensConstants';
 import { getWidth, getHeight, getDeviceWidth, getDeviceHeight } from '../utils/adaptive';
-import { NavigationActions } from 'react-navigation';
 
 /**
 * RegisterSuccess component
@@ -18,40 +16,34 @@ export default class RegisterSuccessComponent extends Component {
     constructor(props) {
         super(props);
 
-        this.timer = null;
+        /**
+         * Generated mnemonic and registered email
+         */
+        this.mnemonic = this.props.navigation.state.params.mnemonic;
+        this.email = this.props.navigation.state.params.email;
     }
-
-    componentDidMount() {
-        this.timer = setTimeout(() => { 
-            const action = NavigationActions.reset({
-                index: 0,
-                actions: [
-                  NavigationActions.navigate({ routeName: 'LoginScreen'})
-                ]
-            });
-            
-            this.props.navigation.dispatch(action); 
-        }, 2000);
-    }
-
-    componentWillUnmount() {
-        clearTimeout(this.timer);
-    }
-
+    
     render() {
         return(
             <View style = { styles.screen }>
                 <View style = { styles.backgoundWrapper }>
                     <Image 
                         style = { styles.backgroundImage } 
-                        source = { require('../images/RegisterInfoScreens/RegisterSuccessBackground.png') } />
+                        source = { require('../images/RegisterInfoScreens/RegSuccess.png') } />
                 </View>
                 <View style = { styles.titleBoldContainer }>
-                    <Text style = { styles.titleBold }>{ infoScreensConstants.registerSuccessMainText }</Text>
+                    <Text style = { styles.titleBold }>{ infoScreensConstants.registerSuccessTitleBoldText }</Text>
                 </View>
                 <View style = { styles.titleLightContainer }>
-                    <Text style = { styles.titleLight }>{ infoScreensConstants.registerSuccessAdditionalText }</Text>
+                    <Text style = { styles.titleBold }>{ infoScreensConstants.registerSuccessTitleLightText }</Text>
                 </View>
+                <View style = { styles.mainTextContainer }>
+                    <Text style = { styles.mainText }>{ infoScreensConstants.registerSuccessMainText }</Text>
+                </View>
+                <TouchableOpacity style = { styles.nextButton }
+                     onPressOut = { () => { this.props.navigation.navigate('MnemonicGenerationScreen', { mnemonic: this.mnemonic, email: this.email }) } }>
+                    <Text style = { styles.nextButtonText }>NEXT</Text>
+                </TouchableOpacity>
             </View>
         );
     }   
@@ -76,9 +68,9 @@ const styles = StyleSheet.create({
         position: 'absolute'
     },
     titleBoldContainer: {
-        width: getWidth(320),
+        width: getWidth(200),
         height: getHeight(42),
-        marginTop: getHeight(413),
+        marginTop: getHeight(285),
         marginLeft: getWidth(31)
     },
     titleBold: {
@@ -87,14 +79,36 @@ const styles = StyleSheet.create({
         color: '#2782ff'
     },
     titleLightContainer: {
-        width: getWidth(280),
-        height: getHeight(120),
-        marginTop: getHeight(20),
+        marginTop: getHeight(5),
+        width: getWidth(306),
+        height: getHeight(42),
         marginLeft: getWidth(31)
     },
-    titleLight: {
+    mainTextContainer: {
+        marginTop: getHeight(13),
+        width: getWidth(310),
+        height: getHeight(120),
+        marginLeft: getWidth(31)
+    },
+    mainText: {
         fontFamily: 'Montserrat',
         fontSize: getHeight(16),
+        lineHeight: getHeight(24),
         color: '#384b65'
+    },
+    nextButton: {
+        marginTop: getHeight(69),
+        alignSelf: 'center',
+        width: getWidth(343),
+        height: getHeight(44),
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#2782ff',
+        borderRadius: getWidth(6)
+    },
+    nextButtonText: {
+        fontFamily: 'Montserrat-Bold',
+        fontSize: getHeight(14),
+        color: 'white'
     }
 });

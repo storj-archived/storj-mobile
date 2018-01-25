@@ -4,7 +4,6 @@ import {
     Button,
     NativeModules
 } from 'react-native';
-import LoginContainer from '../../src/containers/LoginContainer';
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16'
 import configureStore from 'redux-mock-store';
@@ -16,7 +15,7 @@ Enzyme.configure({ adapter: new Adapter() });
 const mockStore = configureStore();
 const initialState = { loginReducer : {user: { isLoggedIn: false, email: null, password: null }} };
 
-describe('RegisterComponent', () => {
+describe('LoginComponent', () => {
 
     it('renders correctly', () => {
 

@@ -133,7 +133,7 @@ export class RegisterContainer extends Component {
         
         this.props.registerSuccess(registrationResult.mnemonic);
         this.handleFirstLaunch();
-        this.props.redirectToRegisterSuccessScreen();    
+        this.props.redirectToRegisterSuccessScreen(registrationResult.mnemonic, this.state.stateModel.email);    
     };
 
     /**
@@ -150,14 +150,21 @@ export class RegisterContainer extends Component {
     };
 
     /**
-    * Navigate back to login screen
+    * Navigate back to previous screen
     */
     navigateBack() {
-        this.props.returnToLoginScreen();
+        this.props.navigateBack();
     };
 
     /**
-    * Redirecting back to login screen
+     * Navigate to TermsOfUseScreen
+     */
+    redirectToTermsOfUse() {
+        this.props.redirectToTermsOfUse();
+    }
+
+    /**
+    * Navigate to LoginScreen
     */
     redirectToLoginScreen() {
         this.props.redirectToLoginScreen();
@@ -173,6 +180,7 @@ export class RegisterContainer extends Component {
                     onChangePasswordRepeat = { this.onChangePasswordRepeat.bind(this) }
                     onChangeTermsAcceptence = { this.onChangeTermsAcceptence.bind(this) }
                     navigateBack = { this.navigateBack.bind(this) }
+                    redirectToTermsOfUse = { this.redirectToTermsOfUse.bind(this) }
                     redirectToLoginScreen = { this.redirectToLoginScreen.bind(this) }
                     isEmailError = { this.state.errorModel.isEmailError }
                     isPasswordError = { this.state.errorModel.isPasswordError }
@@ -203,7 +211,6 @@ RegisterContainer.propTypes = {
         email: PropTypes.string,
         password: PropTypes.string,
         mnemonic: PropTypes.string,
-        passCode: PropTypes.string,
         isLoading: PropTypes.bool,
         error: PropTypes.string
     })

@@ -8,6 +8,8 @@ import MainScreen from '../containers/MainContainer';
 import AuthFailureInfoScreen from '../components/AuthFailureComponent';
 import RegisterSuccessInfoScreen from '../components/RegisterSuccessComponent';
 import TermsOfUseScreen from '../components/TermsOfUseComponent';
+import MnemonicGenerationScreen from '../components/MnemonicGenerationComponent';
+
 /**
  * Creating program main navigator
  */
@@ -44,6 +46,10 @@ const StackNav = StackNavigator(
         TermsOfUseScreen: {
             screen: TermsOfUseScreen,
             routeName: 'TermsOfUseScreen'
+        },
+        MnemonicGenerationScreen: {
+            screen: MnemonicGenerationScreen,
+            routeName: 'MnemonicGenerationScreen'
         }
     },
     {

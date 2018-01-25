@@ -30,6 +30,7 @@ export default class RegisterComponent extends Component {
         this.onChangePasswordRepeat = props.onChangePasswordRepeat ? props.onChangePasswordRepeat : () => {};
         this.onChangeTermsAccepted = props.onChangeTermsAcceptence ? props.onChangeTermsAcceptence : () => {};
         this.navigateBack = props.navigateBack ? props.navigateBack : () => {};
+        this.redirectToTermsOfUse = props.redirectToTermsOfUse ? props.redirectToTermsOfUse : () => {};
         this.redirectToLoginScreen = props.redirectToLoginScreen ? props.redirectToLoginScreen : () => {};
     };
 
@@ -68,7 +69,9 @@ export default class RegisterComponent extends Component {
                         errorMessage = {'Passwords should match'} />
                     <View style = { styles.agreementWrapper }>
                         <Checkbox onPress = { this.onChangeTermsAccepted }/>
-                        <Text style = { styles.agreementText }>I agree to the Terms of Service</Text>
+                        <Text style = { styles.agreementText }>I agree to the  
+                            <Text style = { styles.footerLink } onPress = { this.redirectToTermsOfUse } > Terms of Service</Text> 
+                        </Text>
                     </View>
                 </View>
                 <View style = { styles.footer }>
@@ -148,7 +151,7 @@ const styles = StyleSheet.create({
         height: getHeight(58),
         width: getWidth(120),
         top: getHeight(36),
-        left: getWidth(31)
+        left: getWidth(16)
     },
     titleBold: {
         fontFamily: 'Montserrat-ExtraBold',
@@ -157,15 +160,15 @@ const styles = StyleSheet.create({
         color: '#2782ff'
     },
     titleLight: {
-        fontFamily: 'Montserrat-Light',
+        fontFamily: 'Montserrat-ExtraBold',
         lineHeight: getHeight(36),
-        fontSize: getHeight(30),
-        color: '#384b65',
+        fontSize: getHeight(46),
+        color: '#2782ff',
         backgroundColor: 'transparent',
         marginBottom: getHeight(13)
     },
     contentWrapper: {
-        paddingLeft: getWidth(31),
+        paddingLeft: getWidth(16),
         paddingRight: getWidth(25),
         marginTop: getHeight(110)
     },

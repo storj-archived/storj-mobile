@@ -5,11 +5,10 @@ export class LoginStateModel {
     * @param {string} password
     * @param {string} mnemonic
     */
-    constructor(email, password, mnemonic, passCode) {
+    constructor(email, password, mnemonic) {
         this.email = email ? email : '';
         this.password = password ? password : '';
         this.mnemonic = mnemonic ? mnemonic : '';
-        this.passCode = passCode ? passCode : '';
     };
 
     /**
@@ -21,14 +20,13 @@ export class LoginStateModel {
     isEqualTo(stateModel) {
         let props = Object.getOwnPropertyNames(stateModel);
 
-        if(!(props.length === 4 && props.includes('email', 'password', 'mnemonic', 'passcode')))
+        if(!(props.length === 3 && props.includes('email', 'password', 'mnemonic')))
             return false;          
             
         return(
             stateModel.email === this.email 
             && stateModel.password === this.password
             && stateModel.mnemonic === this.mnemonic
-            && stateModel.passCode === this.passCode
         );
     };
 }

@@ -10,18 +10,24 @@ describe('Authentification reducer tests', () => {
             user: { 
                 isLoggedIn: false, 
                 email: null, 
-                password: null 
+                password: null, 
+                mnemonic: null,
+                error: null,
+                isLoading: false, 
+                isRedirectedFromRegister: false
             } 
         };
 
-        const action = { type: LOGIN, payload: { email: "test@gmail.com", password: "1234567", mnemonic: 'mnemonic', passCode: 'passCode' } };
+        const action = { type: LOGIN, payload: { email: "test@gmail.com", password: "1234567", mnemonic: 'mnemonic' } };
         const expected = { 
             user: {  
                 isLoggedIn: false, 
                 email: "test@gmail.com", 
                 password: "1234567", 
-                mnemonic: 'mnemonic', 
-                passCode: 'passCode'
+                mnemonic: 'mnemonic',
+                error: null,
+                isLoading: false, 
+                isRedirectedFromRegister: false
             } 
         };
         
@@ -34,10 +40,10 @@ describe('Authentification reducer tests', () => {
      * login action test to see if reducer returns a new object
      */
     it('login state immutability test', () => {
-        let state = { user: { isLoggedIn: false, email: null, password: null, mnemonic: null, passCode: null,
+        let state = { user: { isLoggedIn: false, email: null, password: null, mnemonic: null,
                                 IsRedirectedFromRegister: false, error: null, isLoading: false } };
 
-        const action = { type: LOGIN, payload: { email: "test@gmail.com", password: "1234567", mnemonic: 'mnemonic', passCode: 'passCode' } };
+        const action = { type: LOGIN, payload: { email: "test@gmail.com", password: "1234567", mnemonic: 'mnemonic' } };
         const result = authReducer(state, action);
 
         expect(result).not.toBe(state);
@@ -52,8 +58,10 @@ describe('Authentification reducer tests', () => {
                 isLoggedIn: false, 
                 email: "test@gmail.com", 
                 password: "1234567", 
-                mnemonic: 'mnemonic', 
-                passCode: 'passCode' 
+                mnemonic: 'mnemonic',
+                error: null,
+                isLoading: false, 
+                isRedirectedFromRegister: false
             } 
         };
 
@@ -64,8 +72,10 @@ describe('Authentification reducer tests', () => {
                 isLoggedIn: true, 
                 email: "test@gmail.com", 
                 password: "1234567",
-                mnemonic: 'mnemonic', 
-                passCode: 'passCode'
+                mnemonic: 'mnemonic',
+                error: null,
+                isLoading: false, 
+                isRedirectedFromRegister: false
             } 
         };
 
@@ -76,8 +86,8 @@ describe('Authentification reducer tests', () => {
      * registerSuccess action test to see if reducer returns a new object
      */
     it('loginSuccess state immutability test', () => {
-        let state = { user: { isLoggedIn: false, email: "test@gmail.com", password: "1234567", mnemonic: 'mnemonic', passCode: 'passCode',
-                                 error: null, isLoading: false, IsRedirectedFromRegister: false } };
+        let state = { user: { isLoggedIn: false, email: "test@gmail.com", password: "1234567", mnemonic: 'mnemonic',
+                                error: null, isLoading: false, IsRedirectedFromRegister: false } };
 
         const action = { type: LOGIN_SUCCESS };
         const result = authReducer(state, action);
@@ -94,8 +104,10 @@ describe('Authentification reducer tests', () => {
                 isLoggedIn: false, 
                 email: "test@gmail.com", 
                 password: "1234567", 
-                mnemonic: 'mnemonic', 
-                passCode: 'passCode' 
+                mnemonic: 'mnemonic',
+                error: null,
+                isLoading: false, 
+                isRedirectedFromRegister: false
             } 
         };
 
@@ -106,8 +118,10 @@ describe('Authentification reducer tests', () => {
                 isLoggedIn: false, 
                 email: 'test@gmail.com', 
                 password: '1234567',
-                mnemonic: 'mnemonic', 
-                passCode: 'passCode', 
+                mnemonic: 'mnemonic',
+                error: null,
+                isLoading: false, 
+                isRedirectedFromRegister: false
             } 
         };
 
@@ -118,7 +132,7 @@ describe('Authentification reducer tests', () => {
      * loginError action test to see if reducer returns a new object
      */
     it('loginError state immutability test', () => {
-        let state = { user: { isLoggedIn: false, email: "test@gmail.com", password: "1234567", mnemonic: 'mnemonic', passCode: 'passCode',
+        let state = { user: { isLoggedIn: false, email: "test@gmail.com", password: "1234567", mnemonic: 'mnemonic',
                                 error: null, isLoading: false, IsRedirectedFromRegister: false } };
 
         const action = { type: LOGIN_ERROR };
@@ -131,12 +145,12 @@ describe('Authentification reducer tests', () => {
         let state = { 
             user: {
                 email: null, 
-                password: null, 
-                passCode: null, 
+                password: null,  
                 mnemonic: null, 
                 error: null, 
                 isLoading: false, 
-                isLoggedIn: false
+                isLoggedIn: false,
+                isRedirectedFromRegister: false
             } 
         };
 
@@ -149,10 +163,10 @@ describe('Authentification reducer tests', () => {
             email: "test@gmail.com", 
             password: "1234567", 
             mnemonic: null, 
-            passCode: null,
             error: null, 
             isLoading: true, 
-            isLoggedIn: false
+            isLoggedIn: false,
+            isRedirectedFromRegister: false
         }};
 
         const result = authReducer(state, action); 
@@ -164,7 +178,7 @@ describe('Authentification reducer tests', () => {
      * register action test to see if reducer returns a new object
      */
     it('register state immutability test', () => {
-        let state = { user: {email: null, password: null, passCode: null, mnemonic: null,  error: null, 
+        let state = { user: {email: null, password: null, mnemonic: null,  error: null, 
                                 isLoading: false, isLoggedIn: false, IsRedirectedFromRegister: false } };
 
         const action = { type: REGISTER, payload: { email: "test@gmail.com", password: "1234567", mnemonic: "test mnemonic" } };
@@ -182,7 +196,6 @@ describe('Authentification reducer tests', () => {
                 email: "test@gmail.com", 
                 password: "1234567",
                 mnemonic: "test mnemonic", 
-                passCode: null,  
                 error: null, 
                 isLoading: false, 
                 isLoggedIn: false,
@@ -196,8 +209,7 @@ describe('Authentification reducer tests', () => {
             user: {
                 email: "test@gmail.com", 
                 password: "1234567",
-                mnemonic: "test mnemonic", 
-                passCode: null,  
+                mnemonic: "test mnemonic",  
                 error: null, 
                 isLoading: false, 
                 isLoggedIn: false,
@@ -212,7 +224,7 @@ describe('Authentification reducer tests', () => {
      * registerSuccess action test to see if reducer returns a new object
      */
     it('registerSuccess state immutability test', () => {
-        let state = { user: { email: "test@gmail.com", password: "1234567",mnemonic: "test mnemonic", passCode: null,
+        let state = { user: { email: "test@gmail.com", password: "1234567",mnemonic: "test mnemonic",
                                 error: null, isLoading: true, isLoggedIn: false, IsRedirectedFromRegister: true } };
 
         const action = { type: REGISTER_SUCCESS, payload: { mnemonic: "test mnemonic"} };
@@ -225,13 +237,13 @@ describe('Authentification reducer tests', () => {
      * registerError action test to see if reducer returns valid state
      */
     it('registerError state validity test', () => {
-        let state = { user: { email: "test@gmail.com", password: "1234567", mnemonic: "test mnemonic", passCode: null,
+        let state = { user: { email: "test@gmail.com", password: "1234567", mnemonic: "test mnemonic",
                                 error: null, isLoading: true, isLoggedIn: false, IsRedirectedFromRegister: false } };
 
         const error = "Test error";
         const action = { type: REGISTER_ERROR, error };
         const result = authReducer(state, action);
-        const expected = { user: { email: null, password: null, passCode: null, mnemonic: null,
+        const expected = { user: { email: null, password: null, mnemonic: null,
                                     error: "Test error", isLoading: true, isLoggedIn: false, IsRedirectedFromRegister: false } };
 
         expect(result).toEqual(expected);
@@ -241,7 +253,7 @@ describe('Authentification reducer tests', () => {
      * registerError action test to see if reducer returns a new object
      */
     it('registerError state immutability test', () => {
-        let state = { user: { email: "test@gmail.com", password: "1234567", mnemonic: "test mnemonic", passCode: null,
+        let state = { user: { email: "test@gmail.com", password: "1234567", mnemonic: "test mnemonic",
                                 error: null, isLoading: true, isLoggedIn: false, IsRedirectedFromRegister: false } };
 
         const error = "Test error";

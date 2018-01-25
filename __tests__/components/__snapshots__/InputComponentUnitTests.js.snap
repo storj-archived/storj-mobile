@@ -30,20 +30,25 @@ ShallowWrapper {
             allowFontScaling={true}
             autoCorrect={false}
             editable={undefined}
+            multiline={undefined}
             onChangeText={undefined}
             placeholder={undefined}
+            placeholderTextColor="grey"
             secureTextEntry={undefined}
             style={
-              Object {
-                "color": "#384b65",
-                "fontFamily": "Montserrat",
-                "fontSize": 32,
-                "height": 48,
-                "lineHeight": 48,
-                "marginBottom": 16,
-                "padding": 0,
-                "width": 562,
-              }
+              Array [
+                Object {
+                  "color": "#1c1b1b",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 32,
+                  "height": 48,
+                  "lineHeight": 48,
+                  "marginBottom": 16,
+                  "padding": 0,
+                  "width": 562,
+                },
+                undefined,
+              ]
             }
             underlineColorAndroid="transparent"
             value={undefined}
@@ -83,20 +88,25 @@ ShallowWrapper {
               allowFontScaling={true}
               autoCorrect={false}
               editable={undefined}
+              multiline={undefined}
               onChangeText={undefined}
               placeholder={undefined}
+              placeholderTextColor="grey"
               secureTextEntry={undefined}
               style={
-                Object {
-                  "color": "#384b65",
-                  "fontFamily": "Montserrat",
-                  "fontSize": 32,
-                  "height": 48,
-                  "lineHeight": 48,
-                  "marginBottom": 16,
-                  "padding": 0,
-                  "width": 562,
-                }
+                Array [
+                  Object {
+                    "color": "#1c1b1b",
+                    "fontFamily": "Montserrat",
+                    "fontSize": 32,
+                    "height": 48,
+                    "lineHeight": 48,
+                    "marginBottom": 16,
+                    "padding": 0,
+                    "width": 562,
+                  },
+                  undefined,
+                ]
               }
               underlineColorAndroid="transparent"
               value={undefined}
@@ -118,19 +128,24 @@ ShallowWrapper {
               "allowFontScaling": true,
               "autoCorrect": false,
               "editable": undefined,
+              "multiline": undefined,
               "onChangeText": undefined,
               "placeholder": undefined,
+              "placeholderTextColor": "grey",
               "secureTextEntry": undefined,
-              "style": Object {
-                "color": "#384b65",
-                "fontFamily": "Montserrat",
-                "fontSize": 32,
-                "height": 48,
-                "lineHeight": 48,
-                "marginBottom": 16,
-                "padding": 0,
-                "width": 562,
-              },
+              "style": Array [
+                Object {
+                  "color": "#1c1b1b",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 32,
+                  "height": 48,
+                  "lineHeight": 48,
+                  "marginBottom": 16,
+                  "padding": 0,
+                  "width": 562,
+                },
+                undefined,
+              ],
               "underlineColorAndroid": "transparent",
               "value": undefined,
             },
@@ -192,20 +207,25 @@ ShallowWrapper {
               allowFontScaling={true}
               autoCorrect={false}
               editable={undefined}
+              multiline={undefined}
               onChangeText={undefined}
               placeholder={undefined}
+              placeholderTextColor="grey"
               secureTextEntry={undefined}
               style={
-                Object {
-                  "color": "#384b65",
-                  "fontFamily": "Montserrat",
-                  "fontSize": 32,
-                  "height": 48,
-                  "lineHeight": 48,
-                  "marginBottom": 16,
-                  "padding": 0,
-                  "width": 562,
-                }
+                Array [
+                  Object {
+                    "color": "#1c1b1b",
+                    "fontFamily": "Montserrat",
+                    "fontSize": 32,
+                    "height": 48,
+                    "lineHeight": 48,
+                    "marginBottom": 16,
+                    "padding": 0,
+                    "width": 562,
+                  },
+                  undefined,
+                ]
               }
               underlineColorAndroid="transparent"
               value={undefined}
@@ -245,20 +265,25 @@ ShallowWrapper {
                 allowFontScaling={true}
                 autoCorrect={false}
                 editable={undefined}
+                multiline={undefined}
                 onChangeText={undefined}
                 placeholder={undefined}
+                placeholderTextColor="grey"
                 secureTextEntry={undefined}
                 style={
-                  Object {
-                    "color": "#384b65",
-                    "fontFamily": "Montserrat",
-                    "fontSize": 32,
-                    "height": 48,
-                    "lineHeight": 48,
-                    "marginBottom": 16,
-                    "padding": 0,
-                    "width": 562,
-                  }
+                  Array [
+                    Object {
+                      "color": "#1c1b1b",
+                      "fontFamily": "Montserrat",
+                      "fontSize": 32,
+                      "height": 48,
+                      "lineHeight": 48,
+                      "marginBottom": 16,
+                      "padding": 0,
+                      "width": 562,
+                    },
+                    undefined,
+                  ]
                 }
                 underlineColorAndroid="transparent"
                 value={undefined}
@@ -280,11 +305,118 @@ ShallowWrapper {
                 "allowFontScaling": true,
                 "autoCorrect": false,
                 "editable": undefined,
+                "multiline": undefined,
                 "onChangeText": undefined,
                 "placeholder": undefined,
+                "placeholderTextColor": "grey",
                 "secureTextEntry": undefined,
-                "style": Object {
-                  "color": "#384b65",
+                "style": Array [
+                  Object {
+                    "color": "#1c1b1b",
+                    "fontFamily": "Montserrat",
+                    "fontSize": 32,
+                    "height": 48,
+                    "lineHeight": 48,
+                    "marginBottom": 16,
+                    "padding": 0,
+                    "width": 562,
+                  },
+                  undefined,
+                ],
+                "underlineColorAndroid": "transparent",
+                "value": undefined,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            undefined,
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "style": Object {
+              "backgroundColor": "#a6b5ca",
+              "height": 2,
+            },
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "accessible": true,
+            "allowFontScaling": true,
+            "children": null,
+            "ellipsizeMode": "tail",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`InputComponent renders correctly with multiline 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <InputComponent
+    multiline={true}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+            }
+          }
+        >
+          <TextInput
+            allowFontScaling={true}
+            autoCorrect={false}
+            editable={undefined}
+            multiline={true}
+            onChangeText={undefined}
+            placeholder={undefined}
+            placeholderTextColor="grey"
+            secureTextEntry={undefined}
+            style={
+              Array [
+                Object {
+                  "color": "#1c1b1b",
                   "fontFamily": "Montserrat",
                   "fontSize": 32,
                   "height": 48,
@@ -293,6 +425,282 @@ ShallowWrapper {
                   "padding": 0,
                   "width": 562,
                 },
+                undefined,
+              ]
+            }
+            underlineColorAndroid="transparent"
+            value={undefined}
+          />
+        </View>,
+        <View
+          style={
+            Object {
+              "backgroundColor": "#a6b5ca",
+              "height": 2,
+            }
+          }
+        />,
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        />,
+      ],
+      "style": Array [
+        Object {
+          "height": 148,
+          "paddingTop": 24,
+        },
+        null,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <TextInput
+              allowFontScaling={true}
+              autoCorrect={false}
+              editable={undefined}
+              multiline={true}
+              onChangeText={undefined}
+              placeholder={undefined}
+              placeholderTextColor="grey"
+              secureTextEntry={undefined}
+              style={
+                Array [
+                  Object {
+                    "color": "#1c1b1b",
+                    "fontFamily": "Montserrat",
+                    "fontSize": 32,
+                    "height": 48,
+                    "lineHeight": 48,
+                    "marginBottom": 16,
+                    "padding": 0,
+                    "width": 562,
+                  },
+                  undefined,
+                ]
+              }
+              underlineColorAndroid="transparent"
+              value={undefined}
+            />,
+            undefined,
+          ],
+          "style": Object {
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+          },
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "allowFontScaling": true,
+              "autoCorrect": false,
+              "editable": undefined,
+              "multiline": true,
+              "onChangeText": undefined,
+              "placeholder": undefined,
+              "placeholderTextColor": "grey",
+              "secureTextEntry": undefined,
+              "style": Array [
+                Object {
+                  "color": "#1c1b1b",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 32,
+                  "height": 48,
+                  "lineHeight": 48,
+                  "marginBottom": 16,
+                  "padding": 0,
+                  "width": 562,
+                },
+                undefined,
+              ],
+              "underlineColorAndroid": "transparent",
+              "value": undefined,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          undefined,
+        ],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "style": Object {
+            "backgroundColor": "#a6b5ca",
+            "height": 2,
+          },
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "accessible": true,
+          "allowFontScaling": true,
+          "children": null,
+          "ellipsizeMode": "tail",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+              }
+            }
+          >
+            <TextInput
+              allowFontScaling={true}
+              autoCorrect={false}
+              editable={undefined}
+              multiline={true}
+              onChangeText={undefined}
+              placeholder={undefined}
+              placeholderTextColor="grey"
+              secureTextEntry={undefined}
+              style={
+                Array [
+                  Object {
+                    "color": "#1c1b1b",
+                    "fontFamily": "Montserrat",
+                    "fontSize": 32,
+                    "height": 48,
+                    "lineHeight": 48,
+                    "marginBottom": 16,
+                    "padding": 0,
+                    "width": 562,
+                  },
+                  undefined,
+                ]
+              }
+              underlineColorAndroid="transparent"
+              value={undefined}
+            />
+          </View>,
+          <View
+            style={
+              Object {
+                "backgroundColor": "#a6b5ca",
+                "height": 2,
+              }
+            }
+          />,
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          />,
+        ],
+        "style": Array [
+          Object {
+            "height": 148,
+            "paddingTop": 24,
+          },
+          null,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <TextInput
+                allowFontScaling={true}
+                autoCorrect={false}
+                editable={undefined}
+                multiline={true}
+                onChangeText={undefined}
+                placeholder={undefined}
+                placeholderTextColor="grey"
+                secureTextEntry={undefined}
+                style={
+                  Array [
+                    Object {
+                      "color": "#1c1b1b",
+                      "fontFamily": "Montserrat",
+                      "fontSize": 32,
+                      "height": 48,
+                      "lineHeight": 48,
+                      "marginBottom": 16,
+                      "padding": 0,
+                      "width": 562,
+                    },
+                    undefined,
+                  ]
+                }
+                underlineColorAndroid="transparent"
+                value={undefined}
+              />,
+              undefined,
+            ],
+            "style": Object {
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+            },
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "allowFontScaling": true,
+                "autoCorrect": false,
+                "editable": undefined,
+                "multiline": true,
+                "onChangeText": undefined,
+                "placeholder": undefined,
+                "placeholderTextColor": "grey",
+                "secureTextEntry": undefined,
+                "style": Array [
+                  Object {
+                    "color": "#1c1b1b",
+                    "fontFamily": "Montserrat",
+                    "fontSize": 32,
+                    "height": 48,
+                    "lineHeight": 48,
+                    "marginBottom": 16,
+                    "padding": 0,
+                    "width": 562,
+                  },
+                  undefined,
+                ],
                 "underlineColorAndroid": "transparent",
                 "value": undefined,
               },

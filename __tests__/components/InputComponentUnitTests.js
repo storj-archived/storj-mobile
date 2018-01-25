@@ -17,6 +17,15 @@ describe('InputComponent', () => {
         expect(wrapper).toMatchSnapshot();
     });
 
+    it('renders correctly with multiline', () => {
+        const wrapper = shallow(
+            <InputComponent 
+                multiline = { true }/>
+        );
+
+        expect(wrapper).toMatchSnapshot();
+    });
+
     it('triggers onChangeText correctly', () => {
         const onChangeTextSpy = jest.fn();
 

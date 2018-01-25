@@ -8,8 +8,9 @@ const infoScreensConstants = {
     loginFailureAdditionalText: 'Login failed',
 
     //register success infoScreens constans
-    registerSuccessMainText: 'Success!',
-    registerSuccessAdditionalText: 'Registration went successfully! Notification was already sent to your email address',
+    registerSuccessTitleBoldText: 'Success',
+    registerSuccessTitleLightText: 'registration',
+    registerSuccessMainText: 'Registration went successfully! Notification was already sent to your email address',
    
 };
 

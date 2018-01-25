@@ -5,13 +5,14 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <RegisterContainer
+    navigateBack={[Function]}
     redirectToAuthFailureScreen={[Function]}
     redirectToLoginScreen={[Function]}
     redirectToRegisterSuccessScreen={[Function]}
+    redirectToTermsOfUse={[Function]}
     register={[Function]}
     registerError={[Function]}
     registerSuccess={[Function]}
-    returnToLoginScreen={[Function]}
     user={undefined}
   />,
   Symbol(enzyme.__renderer__): Object {
@@ -38,6 +39,7 @@ ShallowWrapper {
       "onChangeTermsAcceptence": [Function],
       "onSubmit": [Function],
       "redirectToLoginScreen": [Function],
+      "redirectToTermsOfUse": [Function],
     },
     "ref": null,
     "rendered": null,
@@ -61,6 +63,7 @@ ShallowWrapper {
         "onChangeTermsAcceptence": [Function],
         "onSubmit": [Function],
         "redirectToLoginScreen": [Function],
+        "redirectToTermsOfUse": [Function],
       },
       "ref": null,
       "rendered": null,

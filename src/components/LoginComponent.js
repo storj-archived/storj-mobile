@@ -25,7 +25,6 @@ export default class LoginComponent extends Component {
         this.onChangeLogin = props.onChangeLogin ? props.onChangeLogin : () => {};
         this.onChangePassword = props.onChangePassword ? props.onChangePassword : () => {};
         this.onChangeMnemonic = props.onChangeMnemonic ? props.onChangeMnemonic : () => {};
-        this.onChangePassCode = props.onChangePassCode ? props.onChangePassCode : () => {};
         this.registerButtonOnPress = props.registerButtonOnPress ? props.registerButtonOnPress : () => {};
 	};
 
@@ -37,10 +36,9 @@ export default class LoginComponent extends Component {
                     style = { styles.logo } 
                     source = { require('../images/Icons/LogoBlue.png') } 
                     resizeMode = 'contain'/>
-
                 </View>
                 <View style={ styles.contentWrapper }>
-                    <Text style = { styles.titleBold }>Sign In</Text>
+                    <Text style = { styles.titleBold }>Login</Text>
                     <InputComponent 
                         onChangeText = { this.onChangeLogin }
                         isPassword = { false } 
@@ -48,7 +46,6 @@ export default class LoginComponent extends Component {
                         value = { this.props.email }
                         isError = { this.props.isEmailError }
                         errorMessage = {'Invalid email'} />
-
                     <InputComponent 
                         onChangeText = { this.onChangePassword } 
                         isPassword = { true } 
@@ -56,28 +53,27 @@ export default class LoginComponent extends Component {
                         value = { this.props.password }
                         isError = { this.props.isPasswordError }
                         errorMessage = {'Invalid password'} />
-
+                    <Text style = { styles.mnemonicPlaceholderText }>Mnemonic</Text>
                     <InputComponent 
+                        inputStyle = { styles.mnemonicInput }
+                        multiline = { true }
                         onChangeText = { this.onChangeMnemonic } 
                         editable = { !this.props.isRedirectedFromRegister}
-                        isPassword = { false } 
-                        placeholder = {'Mnemonic'} 
+                        isPassword = { false }  
                         value = { this.props.mnemonic }
                         isError = { this.props.isMnemonicError } 
                         errorMessage = {'Invalid mnemonic'} />
-                        
-                    <InputComponent 
-                        onChangeText = { this.onChangePassCode } 
-                        isPassword = { true } 
-                        placeholder = {'Passcode'} />
-
                     <View style = { styles.agreementWrapper }>
                         <Text style = { styles.agreementText }>Forgot password?</Text>
+                        <Text style = { styles.mnemonicInfoLinkText }>What is Mnemonic?</Text>
                     </View>
                 </View>
                 <View style = { styles.footer }>
                     <TouchableOpacity style = { styles.createAccountButton } onPressOut = { this.onSubmit }>
-                        <Text style = { styles.createAccountText }>SIGN IN</Text>
+                        <Text style = { styles.createAccountText }>LOGIN</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style = { styles.loginViaQRButton } onPressOut = { () => {} }> 
+                        <Text style = { styles.loginViaQRText }>LOGIN VIA QR</Text>
                     </TouchableOpacity>
                     <Text style = { styles.footerText }>Don't have an account? <Text onPress={ this.props.registerButtonOnPress } style = { styles.footerLink }>Sign Up</Text></Text>              
                 </View>
@@ -113,10 +109,9 @@ const styles = StyleSheet.create({
         opacity: 0.3
     },
     contentWrapper: {
-        marginTop: getHeight(108),
-        paddingLeft: getWidth(31),
-        paddingRight: getWidth(25),
-        paddingBottom: getHeight(22)
+        marginTop: getHeight(95),
+        paddingLeft: getWidth(16),
+        paddingRight: getWidth(25)
     },
     setChildCenter: {
         alignItems: 'center',
@@ -126,8 +121,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         height: getHeight(58),
         width: getWidth(120),
-        top: getHeight(36),
-        left: getWidth(31)
+        top: getHeight(26),
+        left: getWidth(16)
     },
     loadingSpinner: {
         height: 150,
@@ -139,38 +134,72 @@ const styles = StyleSheet.create({
         color: '#2782ff',
         marginBottom: getHeight(5)
     },
+    mnemonicInput: {
+        height: getHeight(100)
+    },
+    mnemonicPlaceholderText: {
+        fontSize: getHeight(12),
+        color: '#8c92ac',
+        fontFamily: 'Montserrat'
+    },
+    mnemonicInfoLinkText: {
+        fontSize: getHeight(12),
+        color: '#8c92ac',
+        alignSelf: 'flex-end',
+        fontFamily: 'Montserrat',
+        textDecorationLine: 'underline',
+        marginBottom: getHeight(24)
+    },
     footer: {
+        marginTop: getHeight(7),
         height: getHeight(113),
         alignItems: 'center'
      },
-     createAccountButton: {
+    createAccountButton: {
         width: getWidth(343),
-        height: getHeight(55),
+        height: getHeight(44),
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#2782ff',
-        borderRadius: getWidth(8)
-     },
-     createAccountText: {
-         fontFamily: 'Montserrat-Bold',
-         fontSize: getHeight(14),
-         color: 'white'
-     },
-     footerText: {
-         fontFamily: 'Montserrat',
-         lineHeight: getHeight(24),
-         fontSize: getHeight(14),
-         color: '#4d5664',
-         marginTop: getHeight(17)
-     },
-     footerLink: {
-         color: '#2782ff'
-     },
-     agreementWrapper: {
-        flexDirection: 'row',
+        borderRadius: getWidth(6)
+    },
+    loginViaQRButton: {
+        marginTop: getHeight(10),
+        width: getWidth(343),
+        height: getHeight(44),
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white',
+        borderRadius: getWidth(6),
+        borderColor: '#2782ff',
+        borderWidth: getWidth(1)
+    },
+    loginViaQRText: {
+        fontFamily: 'Montserrat-Bold',
+        fontSize: getHeight(14),
+        color: '#2782ff'
+    },
+    createAccountText: {
+        fontFamily: 'Montserrat-Bold',
+        fontSize: getHeight(14),
+        color: 'white'
+    },
+    footerText: {
+        fontFamily: 'Montserrat',
+        fontSize: getHeight(14),
+        color: '#4d5664',
         marginTop: getHeight(16)
+     },
+    footerLink: {
+         color: '#2782ff'
+    },
+    agreementWrapper: {
+        flexDirection: 'row',
+        marginTop: getHeight(45),
+        justifyContent: 'space-between'
     },
     agreementText: {
+        marginTop: getHeight(20),
         lineHeight: getHeight(24),
         fontSize: getHeight(16),
         color: '#384b65',
@@ -182,12 +211,10 @@ const styles = StyleSheet.create({
  * Checking RegisterComponent correct prop types
  */
 LoginComponent.propTypes = {
-    getInfo: PropTypes.func,
     onSubmit: PropTypes.func,
     onChangeLogin: PropTypes.func,
     onChangePassword: PropTypes.func,
     onChangeMnenonic: PropTypes.func,
-    onChangePassCode: PropTypes.func,
     registerButtonOnPress: PropTypes.func,
     email: PropTypes.string,
     password: PropTypes.string,

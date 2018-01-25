@@ -11,9 +11,8 @@ it('login actionCreator test', () => {
     const email = "test@gmail.com";
     const password = '1234567';
     const mnemonic = 'mnemonic';
-    const passCode = 'passCode';
-    const expected = { type: LOGIN, payload: { email, password, mnemonic, passCode} };
-    const result = loginActionsCreators.login(email, password, mnemonic, passCode);
+    const expected = { type: LOGIN, payload: { email, password, mnemonic} };
+    const result = loginActionsCreators.login(email, password, mnemonic);
 
     expect(result).toEqual(expected);
 });

@@ -30,10 +30,12 @@ export default class InputComponent extends Component {
             <View style = { [ styles.inputWrapper, style ] }>
                 <View style = { styles.textInputWrapper }>
                     <TextInput 
+                        placeholderTextColor = 'grey'
                         placeholder = { this.props.placeholder }
                         editable = { this.props.editable}
                         secureTextEntry = { this.state.isTextShown }
-                        style = { styles.textInput } 
+                        style = { [styles.textInput, this.props.inputStyle] } 
+                        multiline = { this.props.multiline }
                         underlineColorAndroid = 'transparent'
                         autoCorrect={ false }
                         onChangeText={ this.props.onChangeText }
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
         width: getWidth(281),
         lineHeight: getHeight(24),
         fontSize: getHeight(16),
-        color: '#384b65',
+        color: '#1c1b1b',
         fontFamily: 'Montserrat',
         padding: 0,
         marginBottom: getHeight(8)

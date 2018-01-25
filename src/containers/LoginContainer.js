@@ -27,6 +27,9 @@ class LoginContainer extends Component {
         };
     };
 
+    /**
+     * Hiding navigation header
+     */
     static navigationOptions = {
         header: null
     };
@@ -54,8 +57,7 @@ class LoginContainer extends Component {
             stateModel: new LoginStateModel(
                 value,
                 this.state.stateModel.password,
-                this.state.stateModel.mnemonic,
-                this.state.stateModel.passCode
+                this.state.stateModel.mnemonic
             )
         });
     };
@@ -69,8 +71,7 @@ class LoginContainer extends Component {
             stateModel: new LoginStateModel(
                 this.state.stateModel.email,
                 value,
-                this.state.stateModel.mnemonic,
-                this.state.stateModel.passCode
+                this.state.stateModel.mnemonic
             )
         });
     };
@@ -83,21 +84,6 @@ class LoginContainer extends Component {
             stateModel: new LoginStateModel(
                 this.state.stateModel.email,
                 this.state.stateModel.password,
-                value,
-                this.state.stateModel.passCode
-            )
-        });
-    };
-    /**
-     * Changing internal state when user password inputting
-     * @param {string} value current value in Input
-     */
-    onChangePassCodeInput(value) {
-        this.setState({
-            stateModel: new LoginStateModel(
-                this.state.stateModel.email,
-                this.state.stateModel.password,
-                this.state.stateModel.mnemonic,
                 value
             )
         });
@@ -144,8 +130,7 @@ class LoginContainer extends Component {
     async login() {
         this.props.login(this.state.stateModel.email, 
                          this.state.stateModel.password,
-                         this.state.stateModel.mnemonic, 
-                         this.state.stateModel.passCode);
+                         this.state.stateModel.mnemonic);
 
         let areCredentialsValid = await StorjLib.verifyKeys(
             this.state.stateModel.email, 
@@ -173,8 +158,7 @@ class LoginContainer extends Component {
         let areKeysImported = await StorjLib.importKeys(
             this.state.stateModel.email,
             this.state.stateModel.password,
-            this.state.stateModel.mnemonic,
-            this.state.stateModel.passCode
+            this.state.stateModel.mnemonic
         );
         
         if(areKeysImported) {
@@ -215,7 +199,6 @@ class LoginContainer extends Component {
                     onChangeLogin = { this.onChangeEmailInput.bind(this) }
                     onChangePassword = { this.onChangePasswordInput.bind(this) }
                     onChangeMnemonic = { this.onChangeMnemonicInput.bind(this) }
-                    onChangePassCode = { this.onChangePassCodeInput.bind(this) }
                     onSubmit = { this.tryLogin.bind(this) }
                     registerButtonOnPress = { this.redirectToRegisterScreen.bind(this) }
                 />
@@ -243,7 +226,6 @@ LoginContainer.propTypes = {
         email: PropTypes.string,
         password: PropTypes.string,
         mnemonic: PropTypes.string,
-        passCode: PropTypes.string,
         isLoading: PropTypes.bool,
         error: PropTypes.string
     })

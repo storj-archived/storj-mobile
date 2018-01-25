@@ -12,6 +12,9 @@ import onBoardingScreensConstants from '../utils/constants/onBoardingScreeensCon
 import { getDeviceWidth, getWidth, getHeight } from '../utils/adaptive';
 import { NavigationActions } from 'react-navigation';
 
+/**
+ * Stateless SafetyInfo screen view
+ */
 SafetyOnBoardingScreen = () => {
     return(
         <View style={ styles.contentContainer }>
@@ -29,6 +32,9 @@ SafetyOnBoardingScreen = () => {
     );
 };
 
+/**
+ * Stateless IncomeInfo screen view
+ */
 IncomeOnBoardingScreen = () =>  {
     return(
         <View style={ styles.contentContainer }>
@@ -46,15 +52,24 @@ IncomeOnBoardingScreen = () =>  {
     );
 };
 
+/**
+ * OnBoarding component
+ */
 export default class OnBoardingComponent extends Component {
     constructor(props) {
         super(props);
     };
 
+    /**
+     * hiding navigation header
+     */
     static navigationOptions = {
         header: null
     };
     
+    /**
+     * Navigation to LoginScreen
+     */
     redirectToSingInScreen() {
         this.props.navigation.dispatch(NavigationActions.reset({
             index: 0,
@@ -64,6 +79,9 @@ export default class OnBoardingComponent extends Component {
         }));
     }
 
+    /**
+     * Navigation to RegisterScreen
+     */
     redirectToSingUpScreen() {
         this.props.navigation.dispatch(NavigationActions.reset({
             index: 0,
@@ -102,8 +120,7 @@ const params = {
     footerFlex: 0.15,
     contentPadding: getWidth(37),
     contentPaddingVertical: getHeight(10),
-    titleBoldSize: getHeight(46),
-    titleSide: getHeight(30),
+    titleBoldSize: getHeight(37),
     text: getHeight(16),
     buttonText: getHeight(14),
     imageTopPadding: getHeight(60),
@@ -180,10 +197,9 @@ const styles = StyleSheet.create({
         color: params.colorBlue
     },
     titleLight: {
-        fontFamily: 'Montserrat-Light',
-        lineHeight: getHeight(36),
-        fontSize: params.titleSide,
-        color: params.colorDarkBlue,
+        fontFamily: 'Montserrat-ExtraBold',
+        fontSize: params.titleBoldSize,
+        color: params.colorBlue,
         backgroundColor: 'transparent'
     },
     textInfo: {

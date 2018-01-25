@@ -3,38 +3,81 @@ import authActions from '../../utils/constants/actionConstants';
 
 const { LOGIN, LOGIN_SUCCESS, LOGIN_ERROR, REGISTER, REGISTER_SUCCESS, REGISTER_ERROR } = authActions;
 
+/**
+ * ActionCreator on login success 
+ * @returns action
+ */
 function loginSuccess() {
     return { type: LOGIN_SUCCESS };
 };
 
+/**
+ * ActionCreator on login error
+ * @returns action 
+ */
 function loginError() {
     return { type: LOGIN_ERROR };
 };
 
-function login( email, password, mnemonic, passCode) {
-    return { type: LOGIN, payload: { email, password, mnemonic, passCode } };
+/**
+ * ActionCreator on login that changing authreducer userInfo state
+ * @param {string} email registered email
+ * @param {string} password registered password 
+ * @param {string} mnemonic registered mnemonic
+ * @returns action
+ */
+function login(email, password, mnemonic) {
+    return { type: LOGIN, payload: { email, password, mnemonic } };
 };
 
+/**
+ * ActionCreator that provides redux navigation to RegisterScreen
+ * @returns action
+ */
 function navigateToRegisterScreen() {
-    return NavigationActions.navigate({ routeName: 'RegisterScreen' });
+    return NavigationActions.navigate({ routeName: 'RegisterScreen'});
 };
 
+/**
+ * ActionCreator on register that changing authreducer userInfo state
+ * @param {string} email 
+ * @param {string} password 
+ * @param {string} mnemonic 
+ * @returns action
+ */
 function register(email, password) {
-    return { type: REGISTER, payload: {email, password} };
+    return { type: REGISTER, payload: { email, password } };
 };
 
+/**
+ * ActionCreator on register success 
+ * @returns action
+ */
 function registerSuccess(mnemonic) {
     return { type: REGISTER_SUCCESS, payload: { mnemonic }};
 };
 
+/**
+ * ActionCreator on register error that setting error property in authREducer state in errorMessage
+ * @param {string} error error massage 
+ * @returns action
+ */
 function registerError(error) {
     return { type: REGISTER_ERROR, error };
 };
 
-function returnToLoginScreen() {
+/**
+ * ActionCreator that provides redux back navigation
+ * @returns action
+ */
+function navigateBack() {
     return NavigationActions.back();
 };
 
+/**
+ * ActionCreator that provides redux navigation to LoginScreen
+ * @returns action
+ */
 function redirectToLoginScreen() {
     return NavigationActions.reset({
         index: 0,
@@ -44,6 +87,10 @@ function redirectToLoginScreen() {
     });
 };
 
+/**
+ * ActionCreator that provides redux navigation to MainScreen
+ * @returns action
+ */
 function redirectToMainScreen() {
     return NavigationActions.reset({
         index: 0,
@@ -53,14 +100,32 @@ function redirectToMainScreen() {
     });
 };
 
+/**
+ * ActionCreator that provides redux navigation to TermsOfUseScreen
+ * @returns action
+ */
+function redirectToTermsOfUse() {
+    return NavigationActions.navigate({ routeName: 'TermsOfUseScreen' })
+};
+
+/**
+ * ActionCreator that provides redux navigation to AuthFailureInfoScreen
+ * @param {string} error
+ * @returns action
+ */
 function redirectToAuthFailureScreen(params) {
     return NavigationActions.navigate({ routeName: 'AuthFailureInfoScreen', params });
 };
 
-function redirectToRegisterSuccessScreen() {
-    return NavigationActions.navigate({ routeName: 'RegisterSuccessInfoScreen' });
+/**
+ * ActionCreator that provides redux navigation to RegisterSuccessInfoScreen
+ * @returns action
+ */
+function redirectToRegisterSuccessScreen(mnemonic, email) {
+    return NavigationActions.navigate({ routeName: 'RegisterSuccessInfoScreen', params: { mnemonic, email } });
 };
 
+// ActionCreators for LoginContainer
 export const loginActionsCreators = {
     loginSuccess,
     loginError,
@@ -70,11 +135,13 @@ export const loginActionsCreators = {
     redirectToMainScreen
 };
 
+// ActionCreators for RegisterContainer
 export const registerActionsCreators = {
     registerSuccess,
     registerError,
     register,
-    returnToLoginScreen,
+    navigateBack,
+    redirectToTermsOfUse,
     redirectToLoginScreen,
     redirectToAuthFailureScreen,
     redirectToRegisterSuccessScreen
