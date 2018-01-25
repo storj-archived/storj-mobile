@@ -6,7 +6,11 @@ import {
     TouchableOpacity
 } from 'react-native';
 import React, { Component } from 'react';
+import { getWidth, getHeight } from '../utils/adaptive';
 
+/**
+* Footer component in main page 
+*/
 export default class TabBarComponent extends Component {
     constructor(props) {
         super(props);
@@ -14,6 +18,7 @@ export default class TabBarComponent extends Component {
 
     render() {
         return(
+            this.props.navigation.isSelectionMode ? null :
             <View style = { styles.mainContainer }>
                 <View style = { styles.navContainer }>
                     <View style = { styles.tabContainer }>
@@ -28,9 +33,12 @@ export default class TabBarComponent extends Component {
                         <View style = { styles.tabItemContainer }><Text>Item 4</Text></View>   
                     </View>
                 </View>
-                <View style = { styles.actionButtonBackgroundWrapper }>
+                <View style = { styles.actionButtonBackgroundWrapper }>                    
                     <TouchableOpacity onPress = { this.props.navigation.onActionBarPress } style = { styles.circleActionbutton }>
-                        <View />
+                        <View>
+                            <Image source = { require('../images/ActionBar/Ellipse.png') } style = { styles.circleImage }/>
+                            <Text style = { styles.circleText }>+</Text>
+                        </View>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -41,7 +49,7 @@ export default class TabBarComponent extends Component {
 const styles = StyleSheet.create({
     mainContainer: {
         backgroundColor: 'transparent',
-        height: 60,
+        height: getHeight(65),
         borderColor: 'black',
         borderWidth: 0.5,
         justifyContent: 'flex-end'
@@ -61,7 +69,7 @@ const styles = StyleSheet.create({
         flex: 0.15
     },
     actionButtonContainer: {
-
+        backgroundColor: 'transparent'
     },
     actionButtonBackgroundWrapper: {
         position: 'absolute',
@@ -73,9 +81,18 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     circleActionbutton: {
-        height: 60,
-        width: 60,
-        borderRadius: 30,
-        backgroundColor: 'blue'
+        height: getWidth(56),
+        width: getWidth(56)
+    },
+    circleImage: {
+        height: getWidth(56),
+        width: getWidth(56)
+    },
+    circleText: {
+        color: 'white',
+        fontSize: getHeight(32),
+        marginHorizontal: getWidth(20),
+        zIndex: 100,
+        position: 'absolute',
     }
 });

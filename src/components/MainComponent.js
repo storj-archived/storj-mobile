@@ -13,7 +13,7 @@ export default class MainComponent extends Component {
     constructor(props) {
         super(props);
     };
-
+    
     render() {
         return(
             <View style={ styles.mainContainer }>
@@ -24,13 +24,14 @@ export default class MainComponent extends Component {
                     currentRoute = { this.props.currentRoute } />
                 <View style = { styles.navigationContainer }>
                     <MainNavigationContainer
+                        isSelectionMode = { this.props.isSelectionMode }
                         onActionBarPress = { () => { this.props.onActionBarPress(); } } />
                 </View>
                 {
-                    this.props.isActionBarShown ? 
+                    this.props.isActionBarShown || this.props.isSelectionMode ? 
                         <ActionBarComponent
-                            createBucket = { this.props.createBucket }
-                            isSelectionMode = { this.props.isSelectionMode } /> : null
+                            isSelectionMode = { this.props.isSelectionMode }
+                            tapBarActions = { this.props.tapBarActions } /> : null
                 }
             </View>
         );
