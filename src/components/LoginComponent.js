@@ -33,11 +33,10 @@ export default class LoginComponent extends Component {
 		return(
 			<View style={ styles.mainContainer }>
                 <View style={ styles.backgoundWrapper }>
-                <Image 
-                    style = { styles.logo } 
-                    source = { require('../images/Icons/LogoBlue.png') } 
-                    resizeMode = 'contain'/>
-
+                    <Image 
+                        style = { styles.logo } 
+                        source = { require('../images/Icons/LogoBlue.png') } 
+                        resizeMode = 'contain'/>
                 </View>
                 <View style={ styles.contentWrapper }>
                     <Text style = { styles.titleBold }>Sign In</Text>
@@ -48,7 +47,6 @@ export default class LoginComponent extends Component {
                         value = { this.props.email }
                         isError = { this.props.isEmailError }
                         errorMessage = {'Invalid email'} />
-
                     <InputComponent 
                         onChangeText = { this.onChangePassword } 
                         isPassword = { true } 
@@ -56,7 +54,6 @@ export default class LoginComponent extends Component {
                         value = { this.props.password }
                         isError = { this.props.isPasswordError }
                         errorMessage = {'Invalid password'} />
-
                     <InputComponent 
                         onChangeText = { this.onChangeMnemonic } 
                         editable = { !this.props.isRedirectedFromRegister}
@@ -65,12 +62,10 @@ export default class LoginComponent extends Component {
                         value = { this.props.mnemonic }
                         isError = { this.props.isMnemonicError } 
                         errorMessage = {'Invalid mnemonic'} />
-                        
                     <InputComponent 
                         onChangeText = { this.onChangePassCode } 
                         isPassword = { true } 
                         placeholder = {'Passcode'} />
-
                     <View style = { styles.agreementWrapper }>
                         <Text style = { styles.agreementText }>Forgot password?</Text>
                     </View>
@@ -79,14 +74,14 @@ export default class LoginComponent extends Component {
                     <TouchableOpacity style = { styles.createAccountButton } onPressOut = { this.onSubmit }>
                         <Text style = { styles.createAccountText }>SIGN IN</Text>
                     </TouchableOpacity>
-                    <Text style = { styles.footerText }>Don't have an account? <Text onPress={ this.props.registerButtonOnPress } style = { styles.footerLink }>Sign Up</Text></Text>              
+                    <Text style = { styles.footerText }>Don't have an account? <Text onPress = { this.props.registerButtonOnPress } style = { styles.footerLink }>Sign Up</Text></Text>              
                 </View>
                 {
                     this.props.isLoading ?
-                        <View style={ [ styles.backgoundWrapper ] }>
-                            <View style={ [ styles.backgoundWrapper, styles.dimBlack ] } />
-                            <View style={ [ styles.backgoundWrapper, styles.setChildCenter ] }>
-                                <ActivityIndicator animating={ true } color={ "#2782ff" } size={ "large" }/>
+                        <View style = { [ styles.backgoundWrapper ] }>
+                            <View style = { [ styles.backgoundWrapper, styles.dimBlack ] } />
+                            <View style = { [ styles.backgoundWrapper, styles.setChildCenter ] }>
+                                <ActivityIndicator animating = { true } color = { "#2782ff" } size = { "large" }/>
                             </View>
                         </View> : null
                 }
@@ -94,6 +89,23 @@ export default class LoginComponent extends Component {
 		);
 	};
 }
+
+/**
+ * Checking RegisterComponent correct prop types
+ */
+LoginComponent.propTypes = {
+    getInfo: PropTypes.func,
+    onSubmit: PropTypes.func,
+    onChangeLogin: PropTypes.func,
+    onChangePassword: PropTypes.func,
+    onChangeMnenonic: PropTypes.func,
+    onChangePassCode: PropTypes.func,
+    registerButtonOnPress: PropTypes.func,
+    email: PropTypes.string,
+    password: PropTypes.string,
+    mnemonic: PropTypes.string,
+    isRedirectedFromRegister: PropTypes.bool
+};
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -177,20 +189,3 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat'
     }
 });
-
-/**
- * Checking RegisterComponent correct prop types
- */
-LoginComponent.propTypes = {
-    getInfo: PropTypes.func,
-    onSubmit: PropTypes.func,
-    onChangeLogin: PropTypes.func,
-    onChangePassword: PropTypes.func,
-    onChangeMnenonic: PropTypes.func,
-    onChangePassCode: PropTypes.func,
-    registerButtonOnPress: PropTypes.func,
-    email: PropTypes.string,
-    password: PropTypes.string,
-    mnemonic: PropTypes.string,
-    isRedirectedFromRegister: PropTypes.bool
-};

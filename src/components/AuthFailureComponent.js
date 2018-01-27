@@ -18,7 +18,7 @@ const AuthFailureComponent = (props) => {
         <View style = { styles.screen }>
             <View style = { styles.content }>
                 <View style = { styles.imageContainer }>
-                    <Image></Image>
+                    <Image style = { styles.attentionImage } source = { require('../images/Register/Attention.png') }/>
                 </View>
                 <View style = { styles.titleBoldContainer }>
                     <Text style = { styles.titleBold }>{ props.navigation.state.params.mainText }</Text>
@@ -47,10 +47,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent'
     },
     imageContainer: {
-        width: getWidth(126.5),
-        height: getHeight(135.2),
-        marginTop: getHeight(76),
-        marginLeft: getWidth(31)
+        marginTop: getHeight(96),
+        marginLeft: getWidth(16)
+    },
+    attentionImage: {
+        width: getWidth(127),
+        height: getHeight(136)
     },
     titleBoldContainer: {
         width: getWidth(300),

@@ -14,7 +14,7 @@ export default class App extends Component {
 
 	render() {
 		return (
-			<Provider store={ store }>
+			<Provider store = { store }>
 				<AppWithNavigationState />
 			</Provider>
 		);

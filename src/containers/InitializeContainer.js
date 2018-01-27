@@ -64,34 +64,35 @@ class InitializeContainer extends Component {
 
     render() {
         return(
-                <View style={ styles.mainContainer }>
-                    <View style={ styles.backgroundWrapper }>
+                <View style = { styles.mainContainer }>
+                    <View style = { styles.backgroundWrapper }>
                         <Image 
                             style = { styles.logo } 
                             source = { require('../images/Icons/LogoBlue.png') } 
                             resizeMode = 'contain' />
                     </View>
-                    {
-                        (()=>{
-                            if(this.state.enterPassCode){
-                                return(
-                                    <View style={ styles.contentWrapper }>
-                                    <InputComponent 
-                                            onChangeText = { this.onChangePassode.bind(this) }
-                                            isPassword = { true } 
-                                            placeholder = {'Passcode'} 
-                                            value={ this.state.passcode }
-                                            isError={ this.state.isPasscodeWrong }
-                                            errorMessage={'Invalid passcode'} />
-                                    <TouchableOpacity style = { styles.createAccountButton } onPressOut = { this.onSubmit.bind(this) }>
-                                        <Text style = { styles.createAccountText }>SIGN IN</Text>
-                                    </TouchableOpacity>
-                                </View>);
-                            }
-                        })()
-                    }
-                    
-                </View> 
+                        {
+                            (()=>{
+                                if(this.state.enterPassCode){
+                                    return(
+                                        <View style = { styles.contentWrapper }>
+                                        <InputComponent 
+                                                onChangeText = { this.onChangePassode.bind(this) }
+                                                isPassword = { true } 
+                                                placeholder = {'Passcode'} 
+                                                value = { this.state.passcode }
+                                                isError = { this.state.isPasscodeWrong }
+                                                errorMessage = {'Invalid passcode'} />
+                                        <TouchableOpacity 
+                                            style = { styles.createAccountButton } 
+                                            onPressOut = { this.onSubmit.bind(this) }>
+                                                <Text style = { styles.createAccountText }>SIGN IN</Text>
+                                        </TouchableOpacity>
+                                    </View>);
+                                }
+                            })()
+                        }                 
+                    </View> 
         );
     }
 }

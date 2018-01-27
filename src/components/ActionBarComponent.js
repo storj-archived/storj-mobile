@@ -11,8 +11,8 @@ import TabBarActionModel from '../models/TabBarActionModel';
 import PropTypes from 'prop-types';
 
 /**
-* pop up that is shown after pressing '+' button in TapBarComponent 
-*/
+ * pop up that is shown after pressing '+' button in TapBarComponent 
+ */
 export default class ActionBarComponent extends Component {
     constructor(props) {
         super(props);

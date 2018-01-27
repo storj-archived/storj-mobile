@@ -98,8 +98,8 @@ export default class ContentSlider extends Component {
                                     key = { item.index }
                                     style = { { height, width } } >
                                     { this.props.content[item.index] }
-                                </View>);
-                        
+                                </View>
+                            );
                     })}
                 </ScrollView>
                 <View style={styles.buttons}>

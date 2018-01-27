@@ -40,7 +40,14 @@ export class RegisterContainer extends Component {
      * @param {*} value current value in Input
      */
     onChangeEmail(value) {
-        this.setState({stateModel: new RegisterStateModel(value, this.state.stateModel.password, this.state.stateModel.passwordRepeat, this.state.stateModel.areTermsAccepted)});
+        this.setState({
+            stateModel: 
+                new RegisterStateModel(
+                    value, 
+                    this.state.stateModel.password, 
+                    this.state.stateModel.passwordRepeat, 
+                    this.state.stateModel.areTermsAccepted)
+        });
     };
 
     /**
@@ -48,7 +55,14 @@ export class RegisterContainer extends Component {
      * @param {*} value current value in Input
      */
     onChangePassword(value) {
-        this.setState({stateModel: new RegisterStateModel(this.state.stateModel.email, value, this.state.stateModel.passwordRepeat, this.state.stateModel.areTermsAccepted)});
+        this.setState({
+            stateModel: 
+            new RegisterStateModel(
+                this.state.stateModel.email, 
+                value, 
+                this.state.stateModel.passwordRepeat, 
+                this.state.stateModel.areTermsAccepted)
+            });
     };
 
     /**
@@ -56,7 +70,14 @@ export class RegisterContainer extends Component {
      * @param {*} value current value in Input
      */
     onChangePasswordRepeat(value) {
-        this.setState({stateModel: new RegisterStateModel(this.state.stateModel.email, this.state.stateModel.password, value, this.state.stateModel.areTermsAccepted)});
+        this.setState({
+            stateModel: 
+                new RegisterStateModel(
+                    this.state.stateModel.email, 
+                    this.state.stateModel.password, 
+                    value, 
+                    this.state.stateModel.areTermsAccepted)
+            });
     };
 
     /**
@@ -64,16 +85,23 @@ export class RegisterContainer extends Component {
      * @param {bool} value current value in Input
      */
     onChangeTermsAcceptence(value) {
-        this.setState({stateModel: new RegisterStateModel(this.state.stateModel.email, this.state.stateModel.password, this.state.stateModel.passwordRepeat, value)});
+        this.setState({
+            stateModel: 
+                new RegisterStateModel(
+                    this.state.stateModel.email, 
+                    this.state.stateModel.password, 
+                    this.state.stateModel.passwordRepeat, 
+                    value)
+            });
     };
     
     /**
      * Handle if was allready in use
      */
     async handleFirstLaunch() {
-        if(!await AsyncStorage.getItem(FIRST_ACTION)) {
+        if(!await AsyncStorage.getItem(FIRST_ACTION)) 
             await AsyncStorage.setItem(FIRST_ACTION, 'true');
-        }
+        
     };
 
     /**
@@ -121,12 +149,13 @@ export class RegisterContainer extends Component {
             const errorMessage = registrationResult.errorMessage;
             this.props.registerError(errorMessage);
 
+            //TODO: improve in future, we need better error codes from StorjLib
             if(errorMessage.includes('is already registered')) { 
                 this.props.redirectToAuthFailureScreen({ 
                     mainText: infoScreensConstants.registerFailureMainText, 
                     additionalText: infoScreensConstants.registerFailureAdditionalText 
                 });
-            }   
+            }    
             
             return;
         }
@@ -177,8 +206,7 @@ export class RegisterContainer extends Component {
                     isEmailError = { this.state.errorModel.isEmailError }
                     isPasswordError = { this.state.errorModel.isPasswordError }
                     isPasswordMatchError = { this.state.errorModel.isPasswordMatchError }
-                    isTermsAcceptedError = { this.state.errorModel.isTermsAcceptedError }
-                />
+                    isTermsAcceptedError = { this.state.errorModel.isTermsAcceptedError } />
 		);
 	};
 }

@@ -22,6 +22,10 @@ export default class InputComponent extends Component {
         };
     };
 
+    onPress() {
+        this.setState({isTextShown: !this.state.isTextShown})
+    }
+
     render() {
         const style = typeof(this.props.style) === "object" ? this.props.style : null; 
         const errorMessage = this.props.errorMessage ? this.props.errorMessage : null; 
@@ -40,14 +44,13 @@ export default class InputComponent extends Component {
                         value={ this.props.value } />
                         {
                             (() => {
-                                if(this.props.isPassword)
-                                {
+                                if(this.props.isPassword) {
                                     return (
-                                         <TouchableOpacity onPress = { () => { this.setState({isTextShown: !this.state.isTextShown}) } }>
+                                         <TouchableOpacity onPress = { () => { this.onPress() } }>
                                             <Image                     
-                                            style = { styles.eye  } 
-                                            source = { require('../images/Icons/Eye.png') } 
-                                            resizeMode = 'contain'/>
+                                                style = { styles.eye  } 
+                                                source = { require('../images/Icons/Eye.png') } 
+                                                resizeMode = 'contain'/>
                                         </TouchableOpacity>
                                     );
                                 }
@@ -55,7 +58,7 @@ export default class InputComponent extends Component {
                         }
                 </View>
                 <View style = { styles.underline }/>
-                <Text>{this.props.isError ? errorMessage : null }</Text>
+                <Text>{ this.props.isError ? errorMessage : null }</Text>
             </View>
         );
     };

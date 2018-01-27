@@ -1,6 +1,5 @@
 import {
     View,
-    TextInput,
     Text,
     TouchableOpacity,
     Image,
@@ -35,61 +34,65 @@ export default class RegisterComponent extends Component {
 
 	render() {
 		return(
-            <KeyboardAvoidingView style = { styles.mainContainer } keyboardVerticalOffset = { getHeight(30) } resetScrollToCoords = { { x: 0, y: 0 } } scrollEnabled = { true } >
-                <View style = { styles.backgoundWrapper }>
-                    <Image 
-                        style = { styles.backgroundImage } 
-                        source = { require('../images/Register/RegisterBackground.png') } />
-                    <Image 
-                        style = { styles.logo } 
-                        source = { require('../images/Icons/LogoBlue.png') } 
-                        resizeMode = 'contain'/>
-                </View>
-                <View style = { styles.contentWrapper }>
-                    <Text style = { styles.titleBold }>Welcome</Text>
-                    <Text style = { styles.titleLight }>on board</Text>
-                    <InputComponent 
-                        onChangeText = { this.onChangeEmail }
-                         isPassword = { false } 
-                         placeholder = {'Email'}
-                         isError = { this.props.isEmailError }
-                         errorMessage = {'Invalid email'} />
-                    <InputComponent 
-                        onChangeText = { this.onChangePassword } 
-                        isPassword = { true } 
-                        placeholder = {'Password'}
-                        isError = { this.props.isPasswordError }
-                        errorMessage = {'Invalid password'} />
-                    <InputComponent 
-                        onChangeText = { this.onChangePasswordRepeat } 
-                        isPassword = { true } 
-                        placeholder = {'Repeat password'}
-                        isError = { this.props.isPasswordMatchError }
-                        errorMessage = {'Passwords should match'} />
-                    <View style = { styles.agreementWrapper }>
-                        <Checkbox onPress = { this.onChangeTermsAccepted }/>
-                        <Text style = { styles.agreementText }>I agree to the Terms of Service</Text>
+            <KeyboardAvoidingView 
+                style = { styles.mainContainer } 
+                keyboardVerticalOffset = { getHeight(30) } 
+                resetScrollToCoords = { { x: 0, y: 0 } } 
+                scrollEnabled = { true } >
+                    <View style = { styles.backgoundWrapper }>
+                        <Image 
+                            style = { styles.backgroundImage } 
+                            source = { require('../images/Register/RegisterBackground.png') } />
+                        <Image 
+                            style = { styles.logo } 
+                            source = { require('../images/Icons/LogoBlue.png') } 
+                            resizeMode = 'contain'/>
                     </View>
-                </View>
-                <View style = { styles.footer }>
-                    <TouchableOpacity style = { styles.createAccountButton } onPressOut = { this.onSubmit }>
-                        <Text style = { styles.createAccountText }>CREATE ACCOUNT</Text>
-                    </TouchableOpacity>
-                    <Text 
-                        style = { styles.footerText }>Already have an account? 
+                    <View style = { styles.contentWrapper }>
+                        <Text style = { styles.titleBold }>Welcome</Text>
+                        <Text style = { styles.titleLight }>on board</Text>
+                        <InputComponent 
+                            onChangeText = { this.onChangeEmail }
+                            isPassword = { false } 
+                            placeholder = {'Email'}
+                            isError = { this.props.isEmailError }
+                            errorMessage = {'Invalid email'} />
+                        <InputComponent 
+                            onChangeText = { this.onChangePassword } 
+                            isPassword = { true } 
+                            placeholder = {'Password'}
+                            isError = { this.props.isPasswordError }
+                            errorMessage = {'Invalid password'} />
+                        <InputComponent 
+                            onChangeText = { this.onChangePasswordRepeat } 
+                            isPassword = { true } 
+                            placeholder = {'Repeat password'}
+                            isError = { this.props.isPasswordMatchError }
+                            errorMessage = {'Passwords should match'} />
+                        <View style = { styles.agreementWrapper }>
+                            <Checkbox onPress = { this.onChangeTermsAccepted }/>
+                            <Text style = { styles.agreementText }>I agree to the Terms of Service</Text>
+                        </View>
+                    </View>
+                    <View style = { styles.footer }>
+                        <TouchableOpacity style = { styles.createAccountButton } onPressOut = { this.onSubmit }>
+                            <Text style = { styles.createAccountText }>CREATE ACCOUNT</Text>
+                        </TouchableOpacity>
                         <Text 
-                            style = { styles.footerLink }
-                            onPress = { () => { this.redirectToLoginScreen(); } }> Sign in</Text></Text>
-                </View>
-                {
-                    this.props.isLoading ?
-                        <View style={ [ styles.backgoundWrapper ] }>
-                            <View style={ [ styles.backgoundWrapper, styles.dimBlack ] } />
-                            <View style={ [ styles.backgoundWrapper, styles.setChildCenter ] }>
-                                <ActivityIndicator animating={ true } color={ "#2782ff" } size={ "large" }/>
-                            </View>
-                        </View> : null
-                }
+                            style = { styles.footerText }>Already have an account? 
+                            <Text 
+                                style = { styles.footerLink }
+                                onPress = { () => { this.redirectToLoginScreen(); } }> Sign in</Text></Text>
+                    </View>
+                    {
+                        this.props.isLoading ?
+                            <View style={ [ styles.backgoundWrapper ] }>
+                                <View style={ [ styles.backgoundWrapper, styles.dimBlack ] } />
+                                <View style={ [ styles.backgoundWrapper, styles.setChildCenter ] }>
+                                    <ActivityIndicator animating={ true } color={ "#2782ff" } size={ "large" }/>
+                                </View>
+                            </View> : null
+                    }
             </KeyboardAvoidingView>
 		);
 	};
