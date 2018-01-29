@@ -65,6 +65,7 @@ class MainContainer extends Component {
     async getBuckets() {
         try {
             let buckets = await StorjLib.getBuckets();
+
             this.props.getBuckets(buckets.map((bucket => new ListItemModel(bucket))));
         } catch(e) {
             //Eror callback
@@ -74,10 +75,9 @@ class MainContainer extends Component {
 
     getSelectedBuckets() {
         let selectedBuckets = [];
-
+        
         this.props.state.buckets.map(item => {
             if(item.isSelected) {
-                console.log("SELECTED ITEMS", item);
                 selectedBuckets.push(item);
             }
         });

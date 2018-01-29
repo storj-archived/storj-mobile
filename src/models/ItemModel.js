@@ -6,10 +6,12 @@ export default class ItemModel {
      * 
      * @param {string} name 
      * @param {string} id 
+     * @param {string} date
      */
-    constructor(name = null, id = null) {
+    constructor(name = null, id = null, date = null) {
         this.name = name;
         this.id = id;
+        this.date = date;
     };
 
     /**
@@ -37,4 +39,17 @@ export default class ItemModel {
      * set public id property
      */
     set Id(value) {};
+
+    /**
+     * get public date property
+     * @returns {string}
+     */
+    get Date() {
+        return this.date;
+    };
+
+    /**
+     * set public date property
+     */
+    set Date(value) {};
 }
