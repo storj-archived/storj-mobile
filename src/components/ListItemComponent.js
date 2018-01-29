@@ -48,7 +48,6 @@ const listItemStyles = StyleSheet.create({
     listItemContainer: {
         width: getWidth(375),
         height: getHeight(55),
-        paddingHorizontal: getWidth(20),
         backgroundColor: 'transparent'
     },
     listItemContent: {

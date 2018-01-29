@@ -114,35 +114,36 @@ export default class ListComponent extends Component {
                         enabled = { !this.props.isSelectionMode }
                         refreshing = { this.state.refreshing }
                         onRefresh = { this.onRefresh.bind(this) } /> }>
-                        {
-                            Object.getOwnPropertyNames(sorting).map((propName, index) => {
-                                return (
-                                    <View>
-                                        {
-                                            (() => {
-                                                let prop = sorting[propName];
-                                                if(Array.isArray(prop) && prop.length) {
-                                                    var listItems = prop.map((item) => {
-                                                        return(<ListItemComponent
-                                                                    key = { index }
-                                                                    item = { item } 
-                                                                    onLongPress = { () => { this.onItemLongPress(item); } }
-                                                                    isSelectionModeEnabled = { this.props.isSelectionMode }
-                                                                    onPress = { () => { this.selectItem(item); } } />)
-                                                    });
-                                                    return(
-                                                        <ExpanderComponent
-                                                            propName = { propName } 
-                                                            listItems = { listItems } />
-                                                    );
-                                                }
-                                            })()
-                                        }
-                                    </View>
-                                );
-                            })
-                        }
-                    <View style = { styles.emptyListItemContainer }></View>
+                        <View style = { styles.contentWrapper }>
+                            {
+                                Object.getOwnPropertyNames(sorting).map((propName, index) => {
+                                    return (
+                                        <View>
+                                            {
+                                                (() => {
+                                                    let prop = sorting[propName];
+                                                    if(Array.isArray(prop) && prop.length) {
+                                                        var listItems = prop.map((item) => {
+                                                            return(<ListItemComponent
+                                                                        key = { index }
+                                                                        item = { item } 
+                                                                        onLongPress = { () => { this.onItemLongPress(item); } }
+                                                                        isSelectionModeEnabled = { this.props.isSelectionMode }
+                                                                        onPress = { () => { this.selectItem(item); } } />)
+                                                        });
+                                                        return(
+                                                            <ExpanderComponent
+                                                                propName = { propName } 
+                                                                listItems = { listItems } />
+                                                        );
+                                                    }
+                                                })()
+                                            }
+                                        </View>
+                                    );
+                                })
+                            }
+                        </View>
             </ScrollView>
         );
     };
@@ -161,8 +162,7 @@ const styles = StyleSheet.create({
     listContainer: {
         backgroundColor: 'white',
     },
-    emptyListItemContainer: {
-        width: getWidth(335),
-        height: getHeight(55)
+    contentWrapper: {
+        paddingVertical: getHeight(55)
     }
 });
