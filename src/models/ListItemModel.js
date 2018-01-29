@@ -27,4 +27,12 @@ export default class ListItemModel {
     getId() {
         return this.entity.Id;
     };
+
+    /**
+     * Get entity id
+     * @returns {string}
+     */
+    getDate() {
+        return this.entity.Date;
+    };
 }

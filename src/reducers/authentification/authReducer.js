@@ -22,6 +22,7 @@ export default function authReducer(state, action) {
         newState.user = Object.assign({}, state.user);
     }
 
+    //TODO: we can call return after switch, and reduce lines of code
     switch(action.type) {
         case LOGIN_SUCCESS:
             newState.user.isLoggedIn = true;
@@ -29,7 +30,9 @@ export default function authReducer(state, action) {
             return newState;
 
         case LOGIN_ERROR: 
-            //TODO: should be removed. Logout action will set isLoggedIn ==> false. So here we just setting false into false. Redundant
+            //TODO: should be removed. 
+            //Logout action will set isLoggedIn ==> false. 
+            //So here we just setting false into false. Redundant
             newState.user.isLoggedIn = false;
 
             return newState;

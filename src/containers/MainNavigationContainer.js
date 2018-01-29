@@ -18,6 +18,7 @@ class MainNavigationContainer extends Component {
         return(
             <MainScreenTabNav
                 navigation = { addNavigationHelpers({
+                    isActionBarShown: this.props.isActionBarShown,
                     isSelectionMode: this.props.isSelectionMode,
                     dispatch: this.props.dispatch,
                     state: this.props.nav,

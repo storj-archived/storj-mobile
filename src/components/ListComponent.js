@@ -3,10 +3,14 @@ import {
     View,
     StyleSheet,
     ScrollView,
-    RefreshControl
+    RefreshControl,
+    Text,
+    Image,
+    TouchableOpacity
 } from 'react-native';
-import ListItemComponent from '../components/ListItemComponent'
-import ListItemModel from '../models/ListItemModel'
+import ListItemComponent from '../components/ListItemComponent';
+import ListItemModel from '../models/ListItemModel';
+import ExpanderComponent from '../components/ExpanderComponent';
 import PropTypes from 'prop-types';
 import { getWidth, getHeight } from '../utils/adaptive';
 
@@ -18,7 +22,7 @@ export default class ListComponent extends Component {
         super(props); 
 
         this.state = {
-            refreshing: false
+            refreshing: false        
         };
     }
 
@@ -48,16 +52,49 @@ export default class ListComponent extends Component {
     */
     selectItem(selectedItem) {
         if(!this.props.isSelectionMode) return;
-
+        
         if(selectedItem.isSelected)
             this.props.deselectItem(selectedItem);
         else
             this.props.selectItem(selectedItem);
     };
 
-    render() {
-        return (
-            <ScrollView
+    sort(buckets) {
+        let sortingObject = [];
+        let monthNames = [
+            "January", "February", "March",
+            "April", "May", "June", "July",
+            "August", "September", "October",
+            "November", "December"
+          ];
+
+        buckets.forEach((item) => {
+            
+            // comparer, depends on property, should be a callback
+            var date = new Date(item.getDate());
+            
+            var day = date.getDate();
+            var monthIndex = date.getMonth();
+            var year = date.getFullYear();
+
+            var prop = day + ' ' + monthNames[monthIndex] + ' ' + year;            
+            prop += '';
+            
+            if(!sortingObject[prop]) {
+                sortingObject[prop] = [];
+            }
+
+            sortingObject[prop].push(item);
+        });
+
+        return sortingObject;
+    }
+
+    render() {        
+        let sorting = this.sort(this.props.data);
+
+        return (            
+            <ScrollView style = { styles.listContainer }
                 scrollEventThrottle = { 16 }
                 style = { styles.listContainer }
                 onScroll = { (event) => {
@@ -77,19 +114,35 @@ export default class ListComponent extends Component {
                         enabled = { !this.props.isSelectionMode }
                         refreshing = { this.state.refreshing }
                         onRefresh = { this.onRefresh.bind(this) } /> }>
-                <View style={ styles.test }>
-                    {
-                        this.props.data.map((item, index) => {
-                                return(<ListItemComponent
-                                        key = { index }
-                                        item = { item }
-                                        isSelected = { item.isSelected }
-                                        onLongPress = { () => { this.onItemLongPress(item); } }
-                                        isSelectionModeEnabled = { this.props.isSelectionMode }
-                                        onPress = { () => { this.selectItem(item); } } /> 
-                            )})   
-                    }
-                </View>
+                        {
+                            Object.getOwnPropertyNames(sorting).map((propName, index) => {
+                                return (
+                                    <View>
+                                        {
+                                            (() => {
+                                                let prop = sorting[propName];
+                                                if(Array.isArray(prop) && prop.length) {
+                                                    var listItems = prop.map((item) => {
+                                                        return(<ListItemComponent
+                                                                    key = { index }
+                                                                    item = { item } 
+                                                                    onLongPress = { () => { this.onItemLongPress(item); } }
+                                                                    isSelectionModeEnabled = { this.props.isSelectionMode }
+                                                                    onPress = { () => { this.selectItem(item); } } />)
+                                                    });
+                                                    return(
+                                                        <ExpanderComponent
+                                                            propName = { propName } 
+                                                            listItems = { listItems } />
+                                                    );
+                                                }
+                                            })()
+                                        }
+                                    </View>
+                                );
+                            })
+                        }
+                    <View style = { styles.emptyListItemContainer }></View>
             </ScrollView>
         );
     };
@@ -106,10 +159,10 @@ ListComponent.propTypes = {
 
 const styles = StyleSheet.create({
     listContainer: {
-        backgroundColor: 'transparent'
+        backgroundColor: 'white',
     },
-    test: {
-        marginTop: getHeight(70),
-        marginBottom: getHeight(55)
+    emptyListItemContainer: {
+        width: getWidth(335),
+        height: getHeight(55)
     }
 });

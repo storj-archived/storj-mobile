@@ -3,7 +3,7 @@ import StackNavigator from '../../navigators/StackNavigator';
 /**
  * Declaring initial route of program
  */
-export const initialState = StackNavigator.router.getStateForAction(StackNavigator.router.getActionForPathAndParams('MainScreen'));
+export const initialState = StackNavigator.router.getStateForAction(StackNavigator.router.getActionForPathAndParams('RegisterScreen'));
 
 /**
  * Creating navigation reducer

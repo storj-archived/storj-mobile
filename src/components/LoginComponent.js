@@ -32,10 +32,10 @@ export default class LoginComponent extends Component {
 		return(
 			<View style={ styles.mainContainer }>
                 <View style={ styles.backgoundWrapper }>
-                <Image 
-                    style = { styles.logo } 
-                    source = { require('../images/Icons/LogoBlue.png') } 
-                    resizeMode = 'contain'/>
+                    <Image 
+                        style = { styles.logo } 
+                        source = { require('../images/Icons/LogoBlue.png') } 
+                        resizeMode = 'contain'/>
                 </View>
                 <View style={ styles.contentWrapper }>
                     <Text style = { styles.titleBold }>Login</Text>
@@ -75,14 +75,14 @@ export default class LoginComponent extends Component {
                     <TouchableOpacity style = { styles.loginViaQRButton } onPressOut = { () => {} }> 
                         <Text style = { styles.loginViaQRText }>LOGIN VIA QR</Text>
                     </TouchableOpacity>
-                    <Text style = { styles.footerText }>Don't have an account? <Text onPress={ this.props.registerButtonOnPress } style = { styles.footerLink }>Sign Up</Text></Text>              
+                    <Text style = { styles.footerText }>Don't have an account? <Text onPress = { this.props.registerButtonOnPress } style = { styles.footerLink }>Sign Up</Text></Text>              
                 </View>
                 {
                     this.props.isLoading ?
-                        <View style={ [ styles.backgoundWrapper ] }>
-                            <View style={ [ styles.backgoundWrapper, styles.dimBlack ] } />
-                            <View style={ [ styles.backgoundWrapper, styles.setChildCenter ] }>
-                                <ActivityIndicator animating={ true } color={ "#2782ff" } size={ "large" }/>
+                        <View style = { [ styles.backgoundWrapper ] }>
+                            <View style = { [ styles.backgoundWrapper, styles.dimBlack ] } />
+                            <View style = { [ styles.backgoundWrapper, styles.setChildCenter ] }>
+                                <ActivityIndicator animating = { true } color = { "#2782ff" } size = { "large" }/>
                             </View>
                         </View> : null
                 }
@@ -90,6 +90,23 @@ export default class LoginComponent extends Component {
 		);
 	};
 }
+
+/**
+ * Checking RegisterComponent correct prop types
+ */
+LoginComponent.propTypes = {
+    getInfo: PropTypes.func,
+    onSubmit: PropTypes.func,
+    onChangeLogin: PropTypes.func,
+    onChangePassword: PropTypes.func,
+    onChangeMnenonic: PropTypes.func,
+    onChangePassCode: PropTypes.func,
+    registerButtonOnPress: PropTypes.func,
+    email: PropTypes.string,
+    password: PropTypes.string,
+    mnemonic: PropTypes.string,
+    isRedirectedFromRegister: PropTypes.bool
+};
 
 const styles = StyleSheet.create({
     mainContainer: {

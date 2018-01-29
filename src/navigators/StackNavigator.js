@@ -1,6 +1,6 @@
 import StorjLib from '../utils/StorjModule';
 import { StackNavigator } from 'react-navigation';
-import InititializationScreen from '../containers/InitializeContainer';
+import InitializationScreen from '../containers/InitializeContainer';
 import OnBoardingScreen from '../components/OnBoardingComponent';
 import RegisterScreen from '../containers/RegisterContainer';
 import LoginScreen from '../containers/LoginContainer';
@@ -15,9 +15,9 @@ import MnemonicGenerationScreen from '../components/MnemonicGenerationComponent'
  */
 const StackNav = StackNavigator(
     {
-        InititializationScreen: {
-            screen: InititializationScreen,
-            routeName: 'InititializationScreen'
+        InitializationScreen: {
+            screen: InitializationScreen,
+            routeName: 'InitializationScreen'
         },
         OnBoardingScreen: {
             screen: OnBoardingScreen,

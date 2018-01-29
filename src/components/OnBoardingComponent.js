@@ -13,7 +13,7 @@ import { getDeviceWidth, getWidth, getHeight } from '../utils/adaptive';
 import { NavigationActions } from 'react-navigation';
 
 /**
- * Stateless SafetyInfo screen view
+ * Content of 1 onBoarding screen
  */
 SafetyOnBoardingScreen = () => {
     return(
@@ -33,7 +33,7 @@ SafetyOnBoardingScreen = () => {
 };
 
 /**
- * Stateless IncomeInfo screen view
+ * Content of 2 onBoarding screen
  */
 IncomeOnBoardingScreen = () =>  {
     return(
@@ -53,7 +53,7 @@ IncomeOnBoardingScreen = () =>  {
 };
 
 /**
- * OnBoarding component
+ * OnBoarding component, using SliderComponent to switch between 1 and 2 content screens, described above
  */
 export default class OnBoardingComponent extends Component {
     constructor(props) {
@@ -101,12 +101,16 @@ export default class OnBoardingComponent extends Component {
                         position = { 0 } />  
                 </View>
                 <View style={ styles.footer }>                   
-                        <TouchableOpacity style={ [ styles.button, styles.buttonLogin ] } onPress = { this.redirectToSingInScreen.bind(this) }>
-                                <Text style={ styles.loginText }>SIGN IN</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={ [ styles.button, styles.buttonSignUp ] } onPress = { this.redirectToSingUpScreen.bind(this) }>
-                                <Text style={ styles.signUpText }>SIGN UP</Text>
-                        </TouchableOpacity>
+                    <TouchableOpacity 
+                        style={ [ styles.button, styles.buttonLogin ] } 
+                        onPress = { this.redirectToSingInScreen.bind(this) }>
+                            <Text style={ styles.loginText }>SIGN IN</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity 
+                        style={ [ styles.button, styles.buttonSignUp ] } 
+                        onPress = { this.redirectToSingUpScreen.bind(this) }>
+                            <Text style={ styles.signUpText }>SIGN UP</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );

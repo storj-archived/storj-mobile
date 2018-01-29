@@ -40,7 +40,7 @@ class LoginContainer extends Component {
     componentDidMount() {
         if(this.props.user) 
             this.setState({
-                stateModel: new LoginStateModel( //u1978044@mvrht.net
+                stateModel: new LoginStateModel(
                     this.props.user.email,
                     this.props.user.password,
                     this.props.user.mnemonic,

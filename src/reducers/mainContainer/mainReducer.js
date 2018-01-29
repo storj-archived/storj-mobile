@@ -24,6 +24,7 @@ export default function mainReducer(state = initialState, action) {
     let newState = Object.assign({}, state);
     let bucketsManager = new ItemManager(newState.buckets, newState.selectedBuckets);
 
+    //TODO: we can call return after switch, and reduce lines of code
     switch(action.type) {
         case SHOW_ACTION_BAR:
             newState.isActionBarShown = true; 

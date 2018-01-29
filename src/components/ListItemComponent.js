@@ -31,6 +31,9 @@ export default ListItemComponent = (props) =>
                     <Image style = { listItemStyles.itemTypeIcon } source = { require('../images/Icons/BucketItemFolder.png') } />
                 </View>
                 <Text style = { listItemStyles.mainTitleText }>{ props.item.getName() }</Text>
+                <View style = { listItemStyles.listItemActionsIconContainer }>
+                    <Image style = { listItemStyles.listItemActionsIcon } source = { require('../images/Icons/listItemActions.png') } />
+                </View>
             </View>
     </TouchableOpacity>
 
@@ -51,7 +54,7 @@ const listItemStyles = StyleSheet.create({
     listItemContent: {
         flex: 1,
         flexDirection: 'row',
-        borderTopWidth: getHeight(1),
+        borderBottomWidth: getHeight(1),
         borderColor: 'gray',
         alignItems: 'center'
     },
@@ -59,14 +62,23 @@ const listItemStyles = StyleSheet.create({
         fontFamily: 'Montserrat',
         lineHeight: getHeight(20),
         fontSize: getHeight(16),
-        color: 'black'
+        color: 'black',
+        width: getWidth(271)
     },
     imageContainer: {
         width: getWidth(40)
     },
+    listItemActionsIconContainer: {        
+        marginRight: getWidth(10),
+        alignItems: 'flex-end'
+    },
     itemTypeIcon: {
         width: getWidth(25),
         height: getHeight(22)
+    },
+    listItemActionsIcon: {
+        width: getWidth(20),
+        height: getWidth(20)
     },
     selectedIcon: {
         width: getWidth(20),
