@@ -64,7 +64,9 @@ const styles = StyleSheet.create({
     navContainer: {
         bottom: 0,
         backgroundColor: 'white',
-        height:  getHeight(50)
+        height:  getHeight(50),
+        borderTopColor: 'gray',
+        borderTopWidth: 1
     },
     tabContainer: {
         flexDirection: 'row',

@@ -30,7 +30,7 @@ class MainContainer extends Component {
     };
 
     onActionBarPress() {
-        this.props.state.isActionBarShown ? 
+        this.props.isActionBarShown ? 
             this.props.hideActionBar() : this.props.showActionBar();
     };
 
@@ -55,6 +55,18 @@ class MainContainer extends Component {
         }
     };
 
+    getSelectedBuckets() {
+        let selectedBuckets = [];
+
+        this.props.buckets.map(item => {
+            if(item.isSelected) {
+                selectedBuckets.push(item);
+            }
+        });
+        
+        return selectedBuckets;
+    };
+
     deleteBuckets() {
         this.getSelectedBuckets().forEach(item => {
             this.deleteBucket(item);
@@ -69,18 +81,6 @@ class MainContainer extends Component {
             //Eror callback
             console.log('errorName: ' + e.name, "// errorMessage: " + e.message, "// errorCode: " + e.code);
         }
-    };
-
-    getSelectedBuckets() {
-        let selectedBuckets = [];
-
-        this.props.state.buckets.map(item => {
-            if(item.isSelected) {
-                selectedBuckets.push(item);
-            }
-        });
-        
-        return selectedBuckets;
     };
 
     async componentDidMount() {
@@ -100,23 +100,21 @@ class MainContainer extends Component {
     render() {
         return(
             <MainComponent
-                tapBarActions = { this.props.navState.routes[this.props.navState.index].routeName === 'BucketsScreen' 
-                                    ? [ this.tapBarActions[0], this.tapBarActions[1], this.tapBarActions[2] ] 
-                                    : [ this.tapBarActions[3], this.tapBarActions[4], this.tapBarActions[5] ] } 
-                selectedBuckets = { this.getSelectedBuckets() }
-                disableSelectionMode = { this.props.disableSelectionMode }
-                isSelectionMode = { this.props.state.isSelectionMode }
-                currentRoute = { this.props.navState.routes[this.props.navState.index].routeName }
-                buckets = { this.props.state.buckets }
-                createBucket = { (bucketName) => { this.createBucket(bucketName); } }
-                deleteBucket = { (bucket) => { this.deleteBucket(bucket); } }
+                tapBarActions = { [ this.tapBarActions[0], this.tapBarActions[1], this.tapBarActions[2] ] } 
+                isSelectionMode = { this.props.isSelectionMode }
                 onActionBarPress = { () => { this.onActionBarPress(); } } 
-                isActionBarShown = { this.props.state.isActionBarShown } />
+                isActionBarShown = { this.props.isActionBarShown } />
         );
     };
 }
 
-function mapStateToProps(state) { return { state: state.mainReducer, navState: state.mainScreenNavReducer }; };
+function mapStateToProps(state) { 
+    return { 
+        isSelectionMode: state.mainReducer.isSelectionMode, 
+        isActionBarShown: state.mainReducer.isActionBarShown,
+        buckets: state.mainReducer.buckets
+    };
+}
 function mapDispatchToProps(dispatch) { return bindActionCreators(mainContainerActions, dispatch); };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

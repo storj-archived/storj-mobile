@@ -6,7 +6,6 @@ import {
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MainNavigationContainer from '../containers/MainNavigationContainer';
-import MainScreenHeaderComponent from '../components/MainScreenHeaderComponent';
 import ActionBarComponent from '../components/ActionBarComponent';
 
 export default class MainComponent extends Component {
@@ -17,11 +16,6 @@ export default class MainComponent extends Component {
     render() {
         return(
             <View style={ styles.mainContainer }>
-                <MainScreenHeaderComponent
-                    isSelectionMode = { this.props.isSelectionMode }
-                    disableSelectionMode = { this.props.disableSelectionMode }
-                    buckets = { this.props.buckets }
-                    currentRoute = { this.props.currentRoute } />
                 <View style = { styles.navigationContainer }>
                     <MainNavigationContainer
                         isSelectionMode = { this.props.isSelectionMode }
@@ -47,6 +41,7 @@ const styles = StyleSheet.create({
     }
 });
 
+//TODO: Add prop types
 /* MainComponent.PropTypes = {
 
 }; */

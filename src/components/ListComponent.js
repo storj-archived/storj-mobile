@@ -20,17 +20,16 @@ export default class ListComponent extends Component {
         this.state = {
             refreshing: false
         };
-    };
+    }
 
     /**
     * Fires on long press
     * @param {object} item type of ListItemModel
     */
     onItemLongPress(item) {
-        console.log("Long Press", item);
         this.props.enableSelectionMode();
         this.selectItem(item);
-    };   
+    }   
 
     /**
     * Fires on swipe from top to bottom to refresh the data
@@ -58,23 +57,39 @@ export default class ListComponent extends Component {
 
     render() {
         return (
-            <ScrollView style = { styles.listContainer }
+            <ScrollView
+                scrollEventThrottle = { 16 }
+                style = { styles.listContainer }
+                onScroll = { (event) => {
+                    /* let y_offset = event.nativeEvent.contentOffset.y;
+
+                    if(y_offset >= 0 && y_offset < 100) {
+                        console.log(y_offset);
+                        this.props.onScrollCallback(0);
+                    }
+
+                    if(y_offset > 100) {
+                        this.props.onScrollCallback(100);
+                    } */
+                } }
                 refreshControl={
                     <RefreshControl
                         enabled = { !this.props.isSelectionMode }
                         refreshing = { this.state.refreshing }
                         onRefresh = { this.onRefresh.bind(this) } /> }>
-                {
-                    this.props.data.map((item, index) => {
-                         return(<ListItemComponent
-                                    key = { index }
-                                    item = { item } 
-                                    onLongPress = { () => { this.onItemLongPress(item); } }
-                                    isSelectionModeEnabled = { this.props.isSelectionMode }
-                                    onPress = { () => { this.selectItem(item); } } /> 
-                        )})   
-                }
-                <View style = { styles.emptyListItemContainer }></View>
+                <View style={ styles.test }>
+                    {
+                        this.props.data.map((item, index) => {
+                                return(<ListItemComponent
+                                        key = { index }
+                                        item = { item }
+                                        isSelected = { item.isSelected }
+                                        onLongPress = { () => { this.onItemLongPress(item); } }
+                                        isSelectionModeEnabled = { this.props.isSelectionMode }
+                                        onPress = { () => { this.selectItem(item); } } /> 
+                            )})   
+                    }
+                </View>
             </ScrollView>
         );
     };
@@ -82,7 +97,6 @@ export default class ListComponent extends Component {
 
 ListComponent.propTypes = {
     data: PropTypes.array,
-    selectedItems: PropTypes.array,
     selectItem: PropTypes.function,
     deselectItem: PropTypes.function,
     mainTitlePath: PropTypes.string,
@@ -92,11 +106,10 @@ ListComponent.propTypes = {
 
 const styles = StyleSheet.create({
     listContainer: {
-        backgroundColor: 'white'
+        backgroundColor: 'transparent'
     },
-    emptyListItemContainer: {
-        width: getWidth(375),
-        height: getHeight(55),
-        paddingHorizontal: getWidth(20)
+    test: {
+        marginTop: getHeight(70),
+        marginBottom: getHeight(55)
     }
 });

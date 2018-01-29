@@ -8,6 +8,7 @@ import {
 import React, { Component } from 'react';
 import { getWidth, getHeight } from '../utils/adaptive';
 import TabBarActionModel from '../models/TabBarActionModel';
+import InputPopUpComponent from '../components/InputPopUpComponent';
 import PropTypes from 'prop-types';
 
 /**
@@ -16,6 +17,11 @@ import PropTypes from 'prop-types';
 export default class ActionBarComponent extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            newBucketName: '',
+            isBucketNamePopUpShown: false
+        };
     };
 
     deleteBuckets() {
@@ -27,6 +33,7 @@ export default class ActionBarComponent extends Component {
     render() {
         return(
             <View style = { this.props.isSelectionMode ? styles.popUpRectangleWrapperSelectionMode : styles.popUpRectangleWrapper }>
+                {/* <InputPopUpComponent /> */}
                 <View style = { styles.popUpRectangle }>
                     {
                             this.props.tapBarActions.map((action) => {
@@ -36,15 +43,16 @@ export default class ActionBarComponent extends Component {
                                         <TouchableOpacity onPress={ action.callback }> 
                                             <Image style = { styles.image } source = { action.icon }/>
                                         </TouchableOpacity>
-                                    </View>);            
+                                    </View>
+                                );            
                             })
                         }
                 </View>
                 {
                     !this.props.isSelectionMode ?
-                    <View style = { styles.bottomTriangle }>
-                        <Image source = { require('../images/ActionBar/ActionBarBottomTriangle.png') } style = { styles.triangleImage }/>
-                    </View> : null
+                        <View style = { styles.bottomTriangle }>
+                            <Image source = { require('../images/ActionBar/ActionBarBottomTriangle.png') } style = { styles.triangleImage }/>
+                        </View> : null
                 }
             </View>
         );
@@ -61,7 +69,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: getHeight(62),
         alignItems: 'center',
-        marginHorizontal: getWidth(10)
+        left: 0, 
+        right: 0
     },  
     popUpRectangleWrapperSelectionMode: {   
         position: 'absolute',

@@ -1,6 +1,6 @@
 import { TabNavigator } from 'react-navigation';
 import TabBarComponent from '../components/TabBarComponent';
-import BucketsScreen from '../components/BucketsComponent';
+import BucketsScreen from '../containers/BucketsContainer';
 
 /**
  * Main Screen Tab Navigator

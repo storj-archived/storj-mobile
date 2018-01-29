@@ -54,8 +54,7 @@ export const mainContainerActions = {
     showActionBar,
     hideActionBar,
     createBucket,
-    deleteBucket,
-    disableSelectionMode
+    deleteBucket
 };
 
 //action creators for main screen navigation container
@@ -63,4 +62,11 @@ export const mainNavContainerActions = {
     selectBucket,
     deselectBucket,
     enableSelectionMode
+};
+
+export const bucketsContainerActions = {
+    selectBucket,
+    deselectBucket,
+    enableSelectionMode,
+    disableSelectionMode
 };

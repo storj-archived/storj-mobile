@@ -38,10 +38,10 @@ export default function mainReducer(state = initialState, action) {
             newState.buckets = bucketsManager.changeItemSelectionStatus(action.payload.bucket, false);
             return newState;
         case CREATE_BUCKET:
-            newState.buckets.push(action.payload.bucket);
+            newState.buckets = bucketsManager.addItem(action.payload.bucket);
             return newState;
         case DELETE_BUCKET:
-            bucketsManager.deleteItem(action.payload.bucket);
+            newState.buckets = bucketsManager.deleteItem(action.payload.bucket);
             return newState;
         case GET_BUCKETS:
             newState.buckets = action.payload.buckets;
@@ -68,7 +68,7 @@ class ItemManager {
      */
     constructor(itemList, selectedBuckets) {
         this.selectedBuckets = selectedBuckets;
-        this.itemList = itemList;
+        this.itemList = itemList.slice();
     };
 
     /**
@@ -95,6 +95,17 @@ class ItemManager {
         for(i = 0; i < this.itemList.length; i++) {
             this.itemList[i].isSelected = false;
         }
+
+        return this.itemList;
+    };
+
+    /**
+     * Add item to array
+     * @param {ListItemModel} item
+     * @returns {ListItemModel[]} 
+     */
+    addItem(item) {
+        this.itemList.push(item);
 
         return this.itemList;
     };

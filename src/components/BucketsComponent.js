@@ -3,27 +3,53 @@ import {
     Text,
     TouchableOpacity,
     ScrollView,
-    FlatList
+    StyleSheet
 } from 'react-native';
 import React, { Component } from 'react';
 import ListComponent from '../components/ListComponent';
+import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderComponent';
 
 export default class BucketsComponent extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            headerFlex: 1
+        };
+    };
+
+    onScrollCallback(value) {
+        let res = 1 - (value * 0.5 / 100);
+        console.log(res);
+        if(this.state.headerFlex != res) {
+            this.setState({ headerFlex: res });
+        }
     };
 
     render() {
         return(
-            <View>
+            <View style={ styles.mainContainer }>
                 <ListComponent
-                    enableSelectionMode = { this.props.screenProps.enableSelectionMode }
-                    isSelectionMode = { this.props.screenProps.isSelectionMode }
-                    deselectItem = { this.props.screenProps.deselectBucket }
-                    selectItem = { this.props.screenProps.selectBucket }
-                    selectedItems = { this.props.screenProps.selectedBuckets }
-                    data = { this.props.screenProps.buckets } />
+                    enableSelectionMode = { this.props.enableSelectionMode }
+                    isSelectionMode = { this.props.isSelectionMode }
+                    deselectItem = { this.props.deselectBucket }
+                    selectItem = { this.props.selectBucket }
+                    data = { this.props.buckets } 
+                    onScrollCallback = { (value) => { this.onScrollCallback(value); } } />
+
+                <BucketsScreenHeaderComponent
+                    isSelectionMode = { this.props.isSelectionMode }
+                    disableSelectionMode = { this.props.disableSelectionMode }
+                    selectedBucketsCount = { this.props.selectedBucketsCount } 
+                    headerFlex = { this.state.headerFlex } />
             </View>
         );
     };
 }
+
+const styles = StyleSheet.create({
+    mainContainer: {
+        flex: 1,
+        backgroundColor: 'white'
+    }
+});
