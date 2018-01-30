@@ -48,6 +48,9 @@
 		C05D61CF12024121ADCF9706 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A820F35CDD6411E81E361D6 /* OpenSans-ExtraBold.ttf */; };
 		C2719E17360C41F0870EA216 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D57884CA17224EC589F7D3FA /* OpenSans-Light.ttf */; };
 		D68D4C0D19FC44AFA409AB73 /* Montserrat-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEF7D3FD619949DEBB4F5660 /* Montserrat-SemiBoldItalic.ttf */; };
+		DCACD444201FDF630050921B /* StorjLibIos.m in Sources */ = {isa = PBXBuildFile; fileRef = DCACD443201FDF630050921B /* StorjLibIos.m */; };
+		DCACD454201FE4180050921B /* SwiftyStorj.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCACD44F201FE3FB0050921B /* SwiftyStorj.framework */; };
+		DCACD455201FE4180050921B /* SwiftyStorj.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DCACD44F201FE3FB0050921B /* SwiftyStorj.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DDD138767961421DB8C87363 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A51459F91D3420BBC6E2C58 /* Montserrat-ExtraLight.ttf */; };
 		E1B69957B9F74BD08F47F764 /* Montserrat-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA3A41C878E0424E92862DE9 /* Montserrat-ExtraLightItalic.ttf */; };
 		E6A2862F2CF54CA4A398C3EB /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6614E0B481304028A1D06F8A /* Montserrat-Black.ttf */; };
@@ -246,6 +249,34 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
+		DCACD44E201FE3FB0050921B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCACD448201FE3FA0050921B /* SwiftyStorj.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 935DE84E1F0E3DCA00B01D6D;
+			remoteInfo = SwiftyStorj;
+		};
+		DCACD450201FE3FB0050921B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCACD448201FE3FA0050921B /* SwiftyStorj.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 935DE8571F0E3DCA00B01D6D;
+			remoteInfo = SwiftyStorjTests;
+		};
+		DCACD452201FE3FB0050921B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCACD448201FE3FA0050921B /* SwiftyStorj.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 93C95F261F190AFA00F6144A;
+			remoteInfo = StorjTestApp;
+		};
+		DCACD456201FE4180050921B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DCACD448201FE3FA0050921B /* SwiftyStorj.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 935DE84D1F0E3DCA00B01D6D;
+			remoteInfo = SwiftyStorj;
+		};
 		DCF000852012169A00383770 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */;
@@ -311,6 +342,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		DCACD447201FE1E30050921B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DCACD455201FE4180050921B /* SwiftyStorj.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
@@ -357,6 +402,9 @@
 		BAF764F240EF436C9FDBC9F8 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBoldItalic.ttf"; path = "../src/fonts/OpenSans/OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		CC74FFF11A4D422EA4F02E08 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../src/fonts/Montserrat/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		D57884CA17224EC589F7D3FA /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../src/fonts/OpenSans/OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		DCACD442201FDF630050921B /* StorjLibIos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StorjLibIos.h; path = StorjMobile/StorjLibIos.h; sourceTree = "<group>"; };
+		DCACD443201FDF630050921B /* StorjLibIos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StorjLibIos.m; path = StorjMobile/StorjLibIos.m; sourceTree = "<group>"; };
+		DCACD448201FE3FA0050921B /* SwiftyStorj.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyStorj.xcodeproj; path = ../../SwiftyStorj/SwiftyStorj/SwiftyStorj.xcodeproj; sourceTree = "<group>"; };
 		DEF7D3FD619949DEBB4F5660 /* Montserrat-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBoldItalic.ttf"; path = "../src/fonts/Montserrat/Montserrat-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		E8B379A61F534A10BAAA4E4B /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-LightItalic.ttf"; path = "../src/fonts/OpenSans/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
 		EDC564F35292492DA53A5EBD /* Montserrat-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-BoldItalic.ttf"; path = "../src/fonts/Montserrat/Montserrat-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -391,6 +439,7 @@
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
+				DCACD454201FE4180050921B /* SwiftyStorj.framework in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
@@ -485,6 +534,9 @@
 		13B07FAE1A68108700A75B9A /* StorjMobile */ = {
 			isa = PBXGroup;
 			children = (
+				DCACD448201FE3FA0050921B /* SwiftyStorj.xcodeproj */,
+				DCACD442201FDF630050921B /* StorjLibIos.h */,
+				DCACD443201FDF630050921B /* StorjLibIos.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -632,6 +684,16 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		DCACD449201FE3FA0050921B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DCACD44F201FE3FB0050921B /* SwiftyStorj.framework */,
+				DCACD451201FE3FB0050921B /* SwiftyStorjTests.xctest */,
+				DCACD453201FE3FB0050921B /* StorjTestApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -661,10 +723,12 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				DCACD447201FE1E30050921B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				DCACD457201FE4180050921B /* PBXTargetDependency */,
 			);
 			name = StorjMobile;
 			productName = "Hello World";
@@ -749,6 +813,10 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+				},
+				{
+					ProductGroup = DCACD449201FE3FA0050921B /* Products */;
+					ProjectRef = DCACD448201FE3FA0050921B /* SwiftyStorj.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -942,6 +1010,27 @@
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		DCACD44F201FE3FB0050921B /* SwiftyStorj.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyStorj.framework;
+			remoteRef = DCACD44E201FE3FB0050921B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DCACD451201FE3FB0050921B /* SwiftyStorjTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftyStorjTests.xctest;
+			remoteRef = DCACD450201FE3FB0050921B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DCACD453201FE3FB0050921B /* StorjTestApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = StorjTestApp.app;
+			remoteRef = DCACD452201FE3FB0050921B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		DCF000862012169A00383770 /* libRCTBlob-tvOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1086,6 +1175,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				DCACD444201FDF630050921B /* StorjLibIos.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1096,6 +1186,11 @@
 			isa = PBXTargetDependency;
 			target = 13B07F861A680F5B00A75B9A /* StorjMobile */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
+		};
+		DCACD457201FE4180050921B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyStorj;
+			targetProxy = DCACD456201FE4180050921B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1175,9 +1270,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 5YZ2ANFT4Z;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = StorjMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1199,8 +1296,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5YZ2ANFT4Z;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = StorjMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
