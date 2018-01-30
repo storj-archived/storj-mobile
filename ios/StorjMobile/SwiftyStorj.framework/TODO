@@ -1,0 +1,6 @@
+1. `storj_util_timestamp` and `storj_mnemonic_check` to verify calling the C methods works and types can be translated
+2. `storj_bridge_get_info` to test unauthenticated requests and to get asynchronous code working with the event loop
+3. `storj_bridge_get_buckets` and `storj_bridge_list_files` for authenticated requests and handling additional types
+4. `storj_bridge_create_bucket` to test creating items
+5. `storj_bridge_resolve_file` for downloading files, and handling multiple callbacks and file handling
+6. `storj_bridge_store_file` for uploads

@@ -12,9 +12,10 @@ const StorjLib = (() => {
     let instance = null;
 
     const storjLibAndroid = NativeModules.StorjLibAndroid;
+    const storjLibIos = NativeModules.StorjLibIos;
     const isAndroid = Platform.OS === 'android';
 
-    const storjLib = isAndroid ? storjLibAndroid : {};
+    const storjLib = isAndroid ? storjLibAndroid : storjLibIos;
 
     /**
      * This module wraps Native Modules for StorjLib.
