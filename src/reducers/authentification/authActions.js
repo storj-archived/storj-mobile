@@ -101,6 +101,14 @@ function redirectToMainScreen() {
 };
 
 /**
+ * ActionCreator that provides redux navigation to QRScannerScreen
+ * @returns action
+ */
+function redirectToQRScannerScreen() {
+    return NavigationActions.navigate({ routeName: 'QRScannerScreen' })
+};
+
+/**
  * ActionCreator that provides redux navigation to TermsOfUseScreen
  * @returns action
  */
@@ -132,7 +140,8 @@ export const loginActionsCreators = {
     login,
     navigateToRegisterScreen,
     redirectToAuthFailureScreen,
-    redirectToMainScreen
+    redirectToMainScreen,
+    redirectToQRScannerScreen
 };
 
 // ActionCreators for RegisterContainer
@@ -145,4 +154,13 @@ export const registerActionsCreators = {
     redirectToLoginScreen,
     redirectToAuthFailureScreen,
     redirectToRegisterSuccessScreen
+}
+export const qrScannerActionCreators = {
+    loginSuccess,
+    loginError,
+    login,
+    navigateToRegisterScreen,
+    redirectToAuthFailureScreen,
+    redirectToMainScreen,
+    navigateBack
 }

@@ -1,3 +1,5 @@
 rootProject.name = 'StorjMobile'
+include ':react-native-smart-barcode'
+project(':react-native-smart-barcode').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-smart-barcode/android')
 
 include ':app'

@@ -183,6 +183,9 @@ class LoginContainer extends Component {
     redirectToMainPageScreen() {
 		this.props.redirectToMainScreen();
     };
+    redirectToQRScannerScreen() {
+        this.props.redirectToQRScannerScreen();
+    };
 
 	render() {
 		return(
@@ -200,6 +203,7 @@ class LoginContainer extends Component {
                     onChangePassword = { this.onChangePasswordInput.bind(this) }
                     onChangeMnemonic = { this.onChangeMnemonicInput.bind(this) }
                     onSubmit = { this.tryLogin.bind(this) }
+                    redirectToQRScannerScreen = { this.redirectToQRScannerScreen.bind(this) }
                     registerButtonOnPress = { this.redirectToRegisterScreen.bind(this) }
                 />
 		);
@@ -218,7 +222,7 @@ function mapDispatchToProps(dispatch) { return bindActionCreators(loginActionsCr
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
 
 /**
- * Checking RegisterContainer correct prop types
+ * Checking LoginContainer correct prop types
  */
 LoginContainer.propTypes = {
     user: PropTypes.shape({

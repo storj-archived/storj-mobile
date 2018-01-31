@@ -100,7 +100,7 @@ const StorjLib = (() => {
          * @param {string} passcode optional, pass if you want to protect auth file with additional password
          * @returns {Promise<boolean>}
          */
-        async importKeys(email, password, mnemonic, passcode) {
+        async importKeys(email, password, mnemonic, passcode = 'testpasscode') {
             try {
                 return await storjLib.importKeys(email, password, mnemonic, passcode);
             } catch(e) {
