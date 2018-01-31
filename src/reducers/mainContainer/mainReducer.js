@@ -10,14 +10,17 @@ const {
     SHOW_ACTION_BAR, 
     HIDE_ACTION_BAR,
     ENABLE_SELECTION_MODE, 
-    DISABLE_SELECTION_MODE
+    DISABLE_SELECTION_MODE,
+    SINGLE_ITEM_ACTIONS_SELECTED
  } = MAIN_ACTIONS;
                                                         
 const initialState = { 
     isActionBarShown: false, 
     buckets: [], 
     selectedBuckets: [], //TODO: delete, depreciated
-    isSelectionMode: false
+    isSelectionMode: false,
+    isSingleItemSelected: false,
+    selectedItemId: null
 };
 
 export default function mainReducer(state = initialState, action) {
@@ -53,6 +56,13 @@ export default function mainReducer(state = initialState, action) {
         case DISABLE_SELECTION_MODE:
             newState.isSelectionMode = false;
             newState.buckets = bucketsManager.clearSelection();
+            return newState;
+        case SINGLE_ITEM_ACTIONS_SELECTED:                  
+            if(newState.isSingleItemSelected) newState.selectedItemId = null;
+
+            newState.isActionBarShown = !newState.isSingleItemSelected;    
+            newState.isSingleItemSelected = !newState.isSingleItemSelected;
+            
             return newState;
         default:
             return state || initialState;

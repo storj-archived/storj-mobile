@@ -22,16 +22,16 @@ export default class ExpanderComponent extends Component {
     };
 
     render() {        
+        var expanderContainerStyle = this.state.isExpanded ? styles.expanderContainer : [styles.expanderContainer, styles.expanderBorder];
         return (
-            <View style = { styles.expanderContainer }>
+            <TouchableOpacity style = { expanderContainerStyle } onPress = { () => { this.setState({ isExpanded: !this.state.isExpanded }); }}>
                 <View style = { styles.expanderTextView }>
                     <Text style = { styles.expanderText }> { this.props.propName } </Text>
-                    <TouchableOpacity 
-                        onPress = { () => { this.setState({ isExpanded: !this.state.isExpanded }); }}>
-                            <Image 
-                                source = { this.state.isExpanded ? require('../images/Icons/expandList.png') : require('../images/Icons/collapsList.png') } 
-                                style = { this.state.isExpanded ? styles.expanderImage : styles.collapseImage } />
-                    </TouchableOpacity>
+                    <View style = { styles.imageWrapper }>
+                        <Image 
+                            source = { this.state.isExpanded ? require('../images/Icons/expandList.png') : require('../images/Icons/collapsList.png') } 
+                            style = { this.state.isExpanded ? styles.expanderImage : styles.collapseImage } />
+                    </View>
                 </View>
                 { 
                     (() => {
@@ -40,7 +40,7 @@ export default class ExpanderComponent extends Component {
                         }
                     })()
                 }
-            </View>)
+            </TouchableOpacity>)
     };
 }
 
@@ -50,31 +50,36 @@ ExpanderComponent.propTypes = {
 };
 
 const styles = StyleSheet.create({
+    imageWrapper: {
+        marginVertical: getHeight(8),
+        marginRight: getWidth(5),
+        justifyContent: 'center',
+        alignContent: 'center'
+    },
     expanderTextView: {
         height: getHeight(44),
         justifyContent: 'space-between',
         flexDirection: 'row'
     },
     expanderText: {
-        marginVertical: getHeight(15),        
+        marginVertical: getHeight(13),        
         fontFamily: 'Montserrat-Regular',
-        lineHeight: getHeight(17),
+        lineHeight: getHeight(18),
         fontSize: getHeight(14),
         color: 'black'
     },
     expanderImage: {
-        marginVertical: getHeight(17),
-        width: getHeight(10),
-        height: getHeight(10)
+        width: getWidth(15),
+        height: getHeight(10),
     },
     collapseImage: {
-        marginTop: getHeight(18),
-        marginBottom: getHeight(18),
-        width: getHeight(10),
-        height: getHeight(10)
+        width: getWidth(10),
+        height: getHeight(12),
     },
     expanderContainer: {
         marginHorizontal: getWidth(20),
+    },
+    expanderBorder: {
         borderBottomWidth: getHeight(1),
         borderColor: 'gray'
     }

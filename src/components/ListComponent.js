@@ -22,7 +22,8 @@ export default class ListComponent extends Component {
         super(props); 
 
         this.state = {
-            refreshing: false        
+            refreshing: false,
+            selectedItemId: null        
         };
     }
 
@@ -59,6 +60,8 @@ export default class ListComponent extends Component {
             this.props.selectItem(selectedItem);
     };
 
+    //created for test purpose, this functionality will be placed in separated module,
+    // when sorting functionality will be added
     sort(buckets) {
         let sortingObject = [];
         let monthNames = [
@@ -69,7 +72,6 @@ export default class ListComponent extends Component {
           ];
 
         buckets.forEach((item) => {
-            
             // comparer, depends on property, should be a callback
             var date = new Date(item.getDate());
             
@@ -123,13 +125,17 @@ export default class ListComponent extends Component {
                                                 (() => {
                                                     let prop = sorting[propName];
                                                     if(Array.isArray(prop) && prop.length) {
-                                                        var listItems = prop.map((item) => {
+                                                        var listItems = prop.map((item) => {                                                            
                                                             return(<ListItemComponent
-                                                                        key = { index }
+                                                                        key = { item.entity.id }
                                                                         item = { item } 
+                                                                        selectItemId = { (itemId) => { this.setState({ selectItemId: itemId }) }}
+                                                                        isItemActionsSelected = { this.state.selectItemId === item.entity.id }
                                                                         onLongPress = { () => { this.onItemLongPress(item); } }
                                                                         isSelectionModeEnabled = { this.props.isSelectionMode }
-                                                                        onPress = { () => { this.selectItem(item); } } />)
+                                                                        isSingleItemSelected = { this.props.isSingleItemSelected }
+                                                                        onPress = { () => { this.selectItem(item); } }
+                                                                        onSingleItemSelected = { this.props.onSingleItemSelected } />)
                                                         });
                                                         return(
                                                             <ExpanderComponent
@@ -152,6 +158,7 @@ export default class ListComponent extends Component {
 ListComponent.propTypes = {
     data: PropTypes.array,
     selectItem: PropTypes.function,
+    onSingleItemSelected: PropTypes.function,
     deselectItem: PropTypes.function,
     mainTitlePath: PropTypes.string,
     sortOptions: PropTypes.string,

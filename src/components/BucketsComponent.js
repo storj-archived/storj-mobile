@@ -20,7 +20,7 @@ export default class BucketsComponent extends Component {
 
     onScrollCallback(value) {
         let res = 1 - (value * 0.5 / 100);
-        console.log(res);
+        
         if(this.state.headerFlex != res) {
             this.setState({ headerFlex: res });
         }
@@ -30,13 +30,14 @@ export default class BucketsComponent extends Component {
         return(
             <View style={ styles.mainContainer }>
                 <ListComponent
+                    onSingleItemSelected = { this.props.onSingleItemSelected }                    
                     enableSelectionMode = { this.props.enableSelectionMode }
                     isSelectionMode = { this.props.isSelectionMode }
+                    isSingleItemSelected = { this.props.isSingleItemSelected }
                     deselectItem = { this.props.deselectBucket }
                     selectItem = { this.props.selectBucket }
                     data = { this.props.buckets } 
-                    onScrollCallback = { (value) => { this.onScrollCallback(value); } } />
-
+                    onScrollCallback = { (value) => { this.onScrollCallback(value); }} />
                 <BucketsScreenHeaderComponent
                     isSelectionMode = { this.props.isSelectionMode }
                     disableSelectionMode = { this.props.disableSelectionMode }

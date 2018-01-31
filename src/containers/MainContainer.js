@@ -102,8 +102,10 @@ class MainContainer extends Component {
         return(
             <MainComponent
                 tapBarActions = { [ this.tapBarActions[0], this.tapBarActions[1], this.tapBarActions[2] ] } 
+                selectionModeActions = { [ this.tapBarActions[0], this.tapBarActions[1], this.tapBarActions[2], this.tapBarActions[2] ] }
                 isSelectionMode = { this.props.isSelectionMode }
-                onActionBarPress = { () => { this.onActionBarPress(); } } 
+                isSingleItemSelected = { this.props.isSingleItemSelected }
+                onActionBarPress = { () => { this.onActionBarPress(); } }
                 isActionBarShown = { this.props.isActionBarShown } />
         );
     };
@@ -112,6 +114,7 @@ class MainContainer extends Component {
 function mapStateToProps(state) { 
     return { 
         isSelectionMode: state.mainReducer.isSelectionMode, 
+        isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         isActionBarShown: state.mainReducer.isActionBarShown,
         buckets: state.mainReducer.buckets
     };

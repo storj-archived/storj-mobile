@@ -18,6 +18,7 @@ export default class MainComponent extends Component {
             <View style={ styles.mainContainer }>
                 <View style = { styles.navigationContainer }>
                     <MainNavigationContainer
+                        isSingleItemSelected = { this.props.isSingleItemSelected }
                         isActionBarShown = { this.props.isActionBarShown }
                         isSelectionMode = { this.props.isSelectionMode }
                         onActionBarPress = { () => { this.props.onActionBarPress(); } } />
@@ -25,7 +26,9 @@ export default class MainComponent extends Component {
                 {
                     this.props.isActionBarShown || this.props.isSelectionMode ? 
                         <ActionBarComponent
+                            isSingleItemSelected = { this.props.isSingleItemSelected }
                             isSelectionMode = { this.props.isSelectionMode }
+                            selectionModeActions = { this.props.selectionModeActions }
                             tapBarActions = { this.props.tapBarActions } /> : null
                 }
             </View>

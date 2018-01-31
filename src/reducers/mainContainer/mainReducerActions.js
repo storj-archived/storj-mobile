@@ -8,9 +8,14 @@ const {
     GET_BUCKETS, 
     SHOW_ACTION_BAR, 
     HIDE_ACTION_BAR, 
-    ENABLE_SELECTION_MODE, 
+    ENABLE_SELECTION_MODE,
+    SINGLE_ITEM_ACTIONS_SELECTED, 
     DISABLE_SELECTION_MODE 
 } = MAIN_ACTIONS;
+
+function onSingleItemSelected() {
+    return { type: SINGLE_ITEM_ACTIONS_SELECTED };
+};
 
 function selectBucket(bucket) {
     return { type: SELECT_BUCKET, payload: { bucket } };
@@ -64,9 +69,11 @@ export const mainNavContainerActions = {
     enableSelectionMode
 };
 
+//action creators for bucket screen
 export const bucketsContainerActions = {
     selectBucket,
     deselectBucket,
     enableSelectionMode,
-    disableSelectionMode
+    disableSelectionMode,
+    onSingleItemSelected
 };

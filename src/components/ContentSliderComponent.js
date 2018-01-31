@@ -89,7 +89,7 @@ export default class ContentSlider extends Component {
                     decelerationRate = { 0.99 }
                     horizontal = { true }
                     scrollEnabled = { true }
-                    onMomentumScrollEnd = { (event) => { console.log('sosat');this.onSwipe(event) } }
+                    onMomentumScrollEnd = { (event) => { this.onSwipe(event) } }
                     showsHorizontalScrollIndicator = { false }
                     style={ styles.container }>
                     { this.state.content.map((item) => {                    

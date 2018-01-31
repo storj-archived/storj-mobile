@@ -20,6 +20,7 @@ class MainNavigationContainer extends Component {
                 navigation = { addNavigationHelpers({
                     isActionBarShown: this.props.isActionBarShown,
                     isSelectionMode: this.props.isSelectionMode,
+                    isSingleItemSelected: this.props.isSingleItemSelected,
                     dispatch: this.props.dispatch,
                     state: this.props.nav,
                     test: this.props.testAction,

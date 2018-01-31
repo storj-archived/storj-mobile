@@ -31,27 +31,36 @@ export default class ActionBarComponent extends Component {
     };
 
     render() {
+        let actions = this.props.isSelectionMode ? this.props.selectionModeActions : this.props.tapBarActions;
+        let isSelectionMode = this.props.isSelectionMode || this.props.isSingleItemSelected;
+        let popUpWrapperStyle = isSelectionMode ? styles.popUpRectangleWrapperSelectionMode : styles.popUpRectangleWrapper;
+
         return(
-            <View style = { this.props.isSelectionMode ? styles.popUpRectangleWrapperSelectionMode : styles.popUpRectangleWrapper }>
-                {/* <InputPopUpComponent /> */}
+            <View style = { popUpWrapperStyle }>
                 <View style = { styles.popUpRectangle }>
                     {
-                            this.props.tapBarActions.map((action) => {
-                                var icon = action.iconPath;
-                                return (
-                                    <View style = { styles.imageWrapper }>
-                                        <TouchableOpacity onPress={ action.callback }> 
-                                            <Image style = { styles.image } source = { action.icon }/>
-                                        </TouchableOpacity>
-                                    </View>
-                                );            
-                            })
-                        }
+                        actions.map((action, index) => {
+                            var icon = action.iconPath;
+                            let imageWrapperStyle = index === 0 
+                                ? styles.imageWrapper 
+                                : [styles.imageWrapper, styles.imageWrapperBorder];
+
+                            return (
+                                <View style = { imageWrapperStyle }>
+                                    <TouchableOpacity onPress = { action.callback }> 
+                                        <Image style = { styles.image } source = { action.icon } />
+                                    </TouchableOpacity>
+                                </View>
+                            );            
+                        })
+                    }
                 </View>
                 {
-                    !this.props.isSelectionMode ?
+                    !this.props.isSelectionMode && !this.props.isSingleItemSelected ?
                         <View style = { styles.bottomTriangle }>
-                            <Image source = { require('../images/ActionBar/ActionBarBottomTriangle.png') } style = { styles.triangleImage }/>
+                            <Image 
+                                source = { require('../images/ActionBar/ActionBarBottomTriangle.png') } 
+                                style = { styles.triangleImage } />
                         </View> : null
                 }
             </View>
@@ -61,13 +70,15 @@ export default class ActionBarComponent extends Component {
 
 ActionBarComponent.propTypes = {
     isSelectionMode: PropTypes.bool,
-    tapBarActions: PropTypes.arrayOf(PropTypes.instanceOf(TabBarActionModel))
+    isSingleItemSelected: PropTypes.bool,
+    tapBarActions: PropTypes.arrayOf(PropTypes.instanceOf(TabBarActionModel)),
+    selectionModeActions: PropTypes.arrayOf(PropTypes.instanceOf(TabBarActionModel))
 };
 
 const styles = StyleSheet.create({
     popUpRectangleWrapper: {
         position: 'absolute',
-        bottom: getHeight(62),
+        bottom: getHeight(66),
         alignItems: 'center',
         left: 0, 
         right: 0
@@ -79,16 +90,23 @@ const styles = StyleSheet.create({
         marginHorizontal: getWidth(10)
     },  
     popUpRectangle: {
+        width: getWidth(355),
         height: getHeight(51),
         borderRadius: getWidth(10),
         backgroundColor: '#2684FF',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'space-around'
     },
     imageWrapper: {
-        width: getWidth(117),
+        flex: 1,
         height: getHeight(50),
-        paddingHorizontal: getWidth(46),
-        paddingVertical: getHeight(10)
+        paddingVertical: getHeight(10),
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    imageWrapperBorder: {
+        borderLeftWidth: getWidth(1),
+        borderColor: 'gray',
     },
     image: {
         width: getHeight(30),
@@ -96,7 +114,6 @@ const styles = StyleSheet.create({
     },
     bottomTriangle: {
         height: getHeight(12),
-        width: getWidth(350),
         alignItems: 'center'
     }
 });

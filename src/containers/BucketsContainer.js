@@ -24,10 +24,12 @@ class BucketsContainer extends Component {
 
     render() {
         return(
-            <BucketsComponent 
+            <BucketsComponent
+                onSingleItemSelected = { this.props.onSingleItemSelected }
                 enableSelectionMode = { this.props.enableSelectionMode }
                 disableSelectionMode = { this.props.disableSelectionMode }
                 isSelectionMode = { this.props.isSelectionMode }
+                isSingleItemSelected = { this.props.isSingleItemSelected }
                 deselectBucket = { this.props.deselectBucket }
                 selectBucket = { this.props.selectBucket }
                 selectedBucketsCount = { this.getSelectedBucketsCount() }
@@ -38,8 +40,9 @@ class BucketsContainer extends Component {
 
 function mapStateToProps(state) {
     return {
-        isSelectionMode: state.mainReducer.isSelectionMode,
-        buckets: state.mainReducer.buckets
+        isSelectionMode: state.mainReducer.isSelectionMode,        
+        buckets: state.mainReducer.buckets,
+        isSingleItemSelected: state.mainReducer.isSingleItemSelected
     };
 }
     
