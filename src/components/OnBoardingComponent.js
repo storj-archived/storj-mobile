@@ -23,10 +23,14 @@ SafetyOnBoardingScreen = () => {
             </View>
             <View>
                 <Text style={ styles.titleBold }>{ onBoardingScreensConstants.safetyBoldTitle }</Text>
-                <Text style={ styles.titleLight }>{ onBoardingScreensConstants.safetySemiBoldTitle }</Text>
             </View>
             <View style={ styles.textContainer }>
-                <Text style={ styles.textInfo }>{ onBoardingScreensConstants.safetyMainText }</Text>
+            {
+                onBoardingScreensConstants.safetyMainText.map((element, index) => {
+                    return <Text 
+                    key = {index} style={ styles.textInfo }>{ element }</Text>
+                })
+            }
             </View>
         </View>
     );
@@ -46,7 +50,11 @@ IncomeOnBoardingScreen = () =>  {
                 <Text style={ styles.titleLight }>{ onBoardingScreensConstants.incomeSemiBoldTitle }</Text>
             </View>
             <View style={ styles.textContainer }>
-                <Text style={ styles.textInfo }>{ onBoardingScreensConstants.incomeMainText }</Text>
+            {
+                onBoardingScreensConstants.incomeMainText.map((element, index) => {
+                    return <Text key = {index} style={ styles.textInfo }>{ element }</Text>
+                })
+            }
             </View>
         </View>
     );
@@ -104,12 +112,12 @@ export default class OnBoardingComponent extends Component {
                     <TouchableOpacity 
                         style={ [ styles.button, styles.buttonLogin ] } 
                         onPress = { this.redirectToSingInScreen.bind(this) }>
-                            <Text style={ styles.loginText }>SIGN IN</Text>
+                            <Text style={ styles.loginText }>Login</Text>
                     </TouchableOpacity>
                     <TouchableOpacity 
                         style={ [ styles.button, styles.buttonSignUp ] } 
                         onPress = { this.redirectToSingUpScreen.bind(this) }>
-                            <Text style={ styles.signUpText }>SIGN UP</Text>
+                            <Text style={ styles.signUpText }>Signup</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -124,11 +132,11 @@ const params = {
     footerFlex: 0.15,
     contentPadding: getWidth(37),
     contentPaddingVertical: getHeight(10),
-    titleBoldSize: getHeight(37),
+    titleBoldSize: getHeight(28),
     text: getHeight(16),
     buttonText: getHeight(14),
     imageTopPadding: getHeight(60),
-    colorBlue: '#2782ff',
+    colorBlue: '#2794FF',
     colorDarkBlue: '#384b65',
     buttonPaddingHorizontal: getWidth(20)
 };
@@ -192,13 +200,15 @@ const styles = StyleSheet.create({
     textContainer: {
         backgroundColor: 'transparent',
         flex: 1,
+        alignItems: 'center',
         justifyContent: 'flex-end'
     },
     titleBold: {
-        fontFamily: 'Montserrat-ExtraBold',       
-        marginTop: getHeight(23),
+        fontFamily: 'Montserrat-ExtraBold',   
+        alignSelf: 'center',  
+        marginTop: getHeight(30),
         fontSize: params.titleBoldSize,
-        color: params.colorBlue
+        color: '#384B65'
     },
     titleLight: {
         fontFamily: 'Montserrat-ExtraBold',

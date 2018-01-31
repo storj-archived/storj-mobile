@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     },
     buttons: {
         paddingVertical: getHeight(20),
-        alignSelf: 'flex-start',
+        alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',

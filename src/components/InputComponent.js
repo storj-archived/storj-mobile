@@ -7,7 +7,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { oneOfType } from 'prop-types';
 import { getWidth, getHeight } from '../utils/adaptive';
 
 /**
@@ -27,11 +27,10 @@ export default class InputComponent extends Component {
     }
 
     render() {
-        const style = typeof(this.props.style) === "object" ? this.props.style : null; 
         const errorMessage = this.props.errorMessage ? this.props.errorMessage : null; 
 
         return (
-            <View style = { [ styles.inputWrapper, style ] }>
+            <View style = { [ styles.inputWrapper, this.props.style ] }>
                 <View style = { styles.textInputWrapper }>
                     <TextInput 
                         placeholderTextColor = 'grey'
@@ -71,8 +70,18 @@ InputComponent.propTypes = {
     isPassword: PropTypes.bool,
     editable: PropTypes.bool,
     placeholder: PropTypes.string,
-    style: PropTypes.object,
-    value: PropTypes.string
+    value: PropTypes.string,
+    style: oneOfType([
+        PropTypes.numbers,
+        PropTypes.object
+    ]),
+    multiline: PropTypes.bool,
+    errorMessage: PropTypes.string,
+    inputStyle: oneOfType([
+        PropTypes.numbers,
+        PropTypes.object
+    ]),
+    isError: PropTypes.bool
 };
 
 const styles = StyleSheet.create({
@@ -96,7 +105,8 @@ const styles = StyleSheet.create({
     },
     underline: {
         height: getHeight(1),
-        backgroundColor: '#a6b5ca'
+        backgroundColor: '#a6b5ca',
+        opacity: 0.15
     },
     eye: {
         width: getHeight(24),

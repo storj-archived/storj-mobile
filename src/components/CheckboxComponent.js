@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         borderWidth: getHeight(1),
         borderRadius: getHeight(5),
+        borderColor: '#2684FF',
         padding: getHeight(2)
     },
     checked: {

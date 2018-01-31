@@ -39,17 +39,21 @@ export default class LoginComponent extends Component {
                 </View>
                 <View style={ styles.contentWrapper }>
                     <Text style = { styles.titleBold }>Login</Text>
+                    <Text style = { styles.placeholderText } >Email</Text>
                     <InputComponent 
+                        style = { styles.inputHeight }
                         onChangeText = { this.onChangeLogin }
                         isPassword = { false } 
-                        placeholder = {'Email address'} 
+                        placeholder = {'your_email@mail.com'} 
                         value = { this.props.email }
                         isError = { this.props.isEmailError }
                         errorMessage = {'Invalid email'} />
+                    <Text style = { styles.placeholderText } >Password</Text>
                     <InputComponent 
+                        style = { styles.inputHeight }
                         onChangeText = { this.onChangePassword } 
                         isPassword = { true } 
-                        placeholder = {'Password'}
+                        placeholder = {'Enter your password'}
                         value = { this.props.password }
                         isError = { this.props.isPasswordError }
                         errorMessage = {'Invalid password'} />
@@ -57,6 +61,7 @@ export default class LoginComponent extends Component {
                     <InputComponent 
                         inputStyle = { styles.mnemonicInput }
                         multiline = { true }
+                        placeholder = {'Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code'}
                         onChangeText = { this.onChangeMnemonic } 
                         editable = { !this.props.isRedirectedFromRegister}
                         isPassword = { false }  
@@ -70,10 +75,10 @@ export default class LoginComponent extends Component {
                 </View>
                 <View style = { styles.footer }>
                     <TouchableOpacity style = { styles.createAccountButton } onPressOut = { this.onSubmit }>
-                        <Text style = { styles.createAccountText }>LOGIN</Text>
+                        <Text style = { styles.createAccountText }>Login</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style = { styles.loginViaQRButton } onPressOut = { () => {} }> 
-                        <Text style = { styles.loginViaQRText }>LOGIN VIA QR</Text>
+                        <Text style = { styles.loginViaQRText }>Login via QR</Text>
                     </TouchableOpacity>
                     <Text style = { styles.footerText }>Don't have an account? <Text onPress = { this.props.registerButtonOnPress } style = { styles.footerLink }>Sign Up</Text></Text>              
                 </View>
@@ -90,23 +95,6 @@ export default class LoginComponent extends Component {
 		);
 	};
 }
-
-/**
- * Checking RegisterComponent correct prop types
- */
-LoginComponent.propTypes = {
-    getInfo: PropTypes.func,
-    onSubmit: PropTypes.func,
-    onChangeLogin: PropTypes.func,
-    onChangePassword: PropTypes.func,
-    onChangeMnenonic: PropTypes.func,
-    onChangePassCode: PropTypes.func,
-    registerButtonOnPress: PropTypes.func,
-    email: PropTypes.string,
-    password: PropTypes.string,
-    mnemonic: PropTypes.string,
-    isRedirectedFromRegister: PropTypes.bool
-};
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -126,9 +114,9 @@ const styles = StyleSheet.create({
         opacity: 0.3
     },
     contentWrapper: {
-        marginTop: getHeight(95),
-        paddingLeft: getWidth(16),
-        paddingRight: getWidth(25)
+        marginTop: getHeight(86),
+        paddingLeft: getWidth(20),
+        paddingRight: getWidth(20)
     },
     setChildCenter: {
         alignItems: 'center',
@@ -136,79 +124,92 @@ const styles = StyleSheet.create({
     },
     logo: {
         position: 'absolute',
-        height: getHeight(58),
+        height: getHeight(56),
         width: getWidth(120),
-        top: getHeight(26),
-        left: getWidth(16)
-    },
-    loadingSpinner: {
-        height: 150,
-        width: 150
+        top: getHeight(20),
+        left: getWidth(20)
     },
     titleBold: {
         fontFamily: 'Montserrat-ExtraBold',
-        fontSize: getHeight(46),
-        color: '#2782ff',
+        fontSize: getHeight(30),
+        color: '#384B65',
         marginBottom: getHeight(5)
     },
     mnemonicInput: {
-        height: getHeight(100)
+        height: getHeight(90)
+    },
+    placeholderText: {
+        fontSize: getHeight(12),
+        marginTop: getHeight(15),
+        color: '#4b657d',
+        opacity: 0.4,
+        fontFamily: 'Montserrat',
+        fontWeight: 'bold',
+        height: getHeight(15), 
+        marginTop: getHeight(29)
+    },
+    inputHeight: {
+        height: getHeight(30)
     },
     mnemonicPlaceholderText: {
         fontSize: getHeight(12),
-        color: '#8c92ac',
-        fontFamily: 'Montserrat'
+        marginTop: getHeight(21),
+        color: '#4b657d',
+        opacity: 0.4,
+        fontFamily: 'Montserrat',
+        fontWeight: 'bold'
     },
     mnemonicInfoLinkText: {
-        fontSize: getHeight(12),
-        color: '#8c92ac',
+        fontSize: getHeight(13),
+        color: '#2794FF',
         alignSelf: 'flex-end',
         fontFamily: 'Montserrat',
-        textDecorationLine: 'underline',
+        fontWeight: 'bold',
         marginBottom: getHeight(24)
     },
     footer: {
-        marginTop: getHeight(7),
+        marginTop: getHeight(10),
         height: getHeight(113),
         alignItems: 'center'
      },
     createAccountButton: {
         width: getWidth(343),
-        height: getHeight(44),
+        height: getHeight(50),
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#2782ff',
+        backgroundColor: '#2794FF',
         borderRadius: getWidth(6)
     },
     loginViaQRButton: {
         marginTop: getHeight(10),
         width: getWidth(343),
-        height: getHeight(44),
+        height: getHeight(50),
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'white',
         borderRadius: getWidth(6),
-        borderColor: '#2782ff',
+        borderColor: '#2794FF',
         borderWidth: getWidth(1)
     },
     loginViaQRText: {
         fontFamily: 'Montserrat-Bold',
-        fontSize: getHeight(14),
-        color: '#2782ff'
+        fontSize: getHeight(16),
+        color: '#2794FF'
     },
     createAccountText: {
         fontFamily: 'Montserrat-Bold',
-        fontSize: getHeight(14),
+        fontSize: getHeight(16),
         color: 'white'
     },
     footerText: {
         fontFamily: 'Montserrat',
-        fontSize: getHeight(14),
-        color: '#4d5664',
-        marginTop: getHeight(16)
+        fontSize: getHeight(16),
+        color: '#384B65',
+        marginTop: getHeight(10)
      },
     footerLink: {
-         color: '#2782ff'
+        fontFamily: 'Montserrat-Bold',
+        color: '#2794FF'
     },
     agreementWrapper: {
         flexDirection: 'row',
@@ -219,8 +220,8 @@ const styles = StyleSheet.create({
         marginTop: getHeight(20),
         lineHeight: getHeight(24),
         fontSize: getHeight(16),
-        color: '#384b65',
-        fontFamily: 'Montserrat'
+        color: '#2794FF',
+        fontFamily: 'Montserrat-Bold'
     }
 });
 
@@ -231,10 +232,10 @@ LoginComponent.propTypes = {
     onSubmit: PropTypes.func,
     onChangeLogin: PropTypes.func,
     onChangePassword: PropTypes.func,
-    onChangeMnenonic: PropTypes.func,
     registerButtonOnPress: PropTypes.func,
     email: PropTypes.string,
     password: PropTypes.string,
     mnemonic: PropTypes.string,
+    isEmailError: PropTypes.bool,
     isRedirectedFromRegister: PropTypes.bool
 };

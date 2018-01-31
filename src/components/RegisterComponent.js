@@ -38,22 +38,19 @@ export default class RegisterComponent extends Component {
             <KeyboardAvoidingView style = { styles.mainContainer } keyboardVerticalOffset = { getHeight(30) } resetScrollToCoords = { { x: 0, y: 0 } } scrollEnabled = { true } >
                 <View style = { styles.backgoundWrapper }>
                     <Image 
-                        style = { styles.backgroundImage } 
-                        source = { require('../images/Register/RegisterBackground.png') } />
-                    <Image 
                         style = { styles.logo } 
                         source = { require('../images/Icons/LogoBlue.png') } 
                         resizeMode = 'contain'/>
                 </View>
                 <View style = { styles.contentWrapper }>
-                    <Text style = { styles.titleBold }>Welcome</Text>
-                    <Text style = { styles.titleLight }>on board</Text>
+                    <Text style = { styles.titleBold }>Welcome on board</Text>
                     <InputComponent 
+                        style = { styles.firstInputMargin }
                         onChangeText = { this.onChangeEmail }
-                         isPassword = { false } 
-                         placeholder = {'Email'}
-                         isError = { this.props.isEmailError }
-                         errorMessage = {'Invalid email'} />
+                        isPassword = { false } 
+                        placeholder = {'Email'}
+                        isError = { this.props.isEmailError }
+                        errorMessage = {'Invalid email'} />
                     <InputComponent 
                         onChangeText = { this.onChangePassword } 
                         isPassword = { true } 
@@ -63,7 +60,7 @@ export default class RegisterComponent extends Component {
                     <InputComponent 
                         onChangeText = { this.onChangePasswordRepeat } 
                         isPassword = { true } 
-                        placeholder = {'Repeat password'}
+                        placeholder = {'Confirm password'}
                         isError = { this.props.isPasswordMatchError }
                         errorMessage = {'Passwords should match'} />
                     <View style = { styles.agreementWrapper }>
@@ -75,13 +72,13 @@ export default class RegisterComponent extends Component {
                 </View>
                 <View style = { styles.footer }>
                     <TouchableOpacity style = { styles.createAccountButton } onPressOut = { this.onSubmit }>
-                        <Text style = { styles.createAccountText }>CREATE ACCOUNT</Text>
+                        <Text style = { styles.createAccountText }>Create account</Text>
                     </TouchableOpacity>
                     <Text 
                         style = { styles.footerText }>Already have an account? 
                         <Text 
                             style = { styles.footerLink }
-                            onPress = { () => { this.redirectToLoginScreen(); } }> Sign in</Text></Text>
+                            onPress = { () => { this.redirectToLoginScreen(); } }> Login</Text></Text>
                 </View>
                 {
                     this.props.isLoading ?
@@ -147,67 +144,63 @@ const styles = StyleSheet.create({
     },
     logo: {
         position: 'absolute',
-        height: getHeight(58),
+        height: getHeight(56),
         width: getWidth(120),
-        top: getHeight(36),
-        left: getWidth(16)
+        top: getHeight(20),
+        left: getWidth(20)
     },
     titleBold: {
         fontFamily: 'Montserrat-ExtraBold',
-        marginTop: getHeight(23),
-        fontSize: getHeight(46),
-        color: '#2782ff'
-    },
-    titleLight: {
-        fontFamily: 'Montserrat-ExtraBold',
-        lineHeight: getHeight(36),
-        fontSize: getHeight(46),
-        color: '#2782ff',
-        backgroundColor: 'transparent',
-        marginBottom: getHeight(13)
+        fontSize: getHeight(30),
+        color: '#384B65'
     },
     contentWrapper: {
-        paddingLeft: getWidth(16),
+        paddingLeft: getWidth(21),
         paddingRight: getWidth(25),
-        marginTop: getHeight(110)
+        marginTop: getHeight(86)
+    },
+    firstInputMargin: { 
+        marginTop: getHeight(99),
+        backgroundColor: 'transparent'
     },
     footer: {
        height: getHeight(113),
-       alignItems: 'center'
+       alignItems: 'center',
+       marginTop: getHeight(50)
     },
     createAccountButton: {
-       width: getWidth(343),
-       height: getHeight(55),
-       alignItems: 'center',
-       justifyContent: 'center',
-       backgroundColor: '#2782ff',
-       borderRadius: getWidth(8)
+        width: getWidth(343),
+        height: getHeight(55),
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#2794FF',
+        borderRadius: getWidth(8)
     },
     createAccountText: {
         fontFamily: 'Montserrat-Bold',
-        fontSize: getHeight(14),
-        color: 'white'
+        fontSize: getHeight(16),
+        color: '#FFFFFF'
     },
     footerText: {
         fontFamily: 'Montserrat',
         lineHeight: getHeight(24),
-        fontSize: getHeight(14),
-        color: '#4d5664',
-        marginTop: getHeight(17)
+        fontSize: getHeight(16),
+        color: '#384B65',
+        marginTop: getHeight(20)
     },
     footerLink: {
-        color: '#2782ff'
+        fontFamily: 'Montserrat-Bold',
+        color: '#2794FF'
     },
     agreementWrapper: {
         flexDirection: 'row',
-        marginTop: getHeight(16),
-        marginBottom: getHeight(27)
+        marginTop: getHeight(5),
     },
     agreementText: {
         lineHeight: getHeight(24),
         fontSize: getHeight(16),
         color: '#384b65',
         fontFamily: 'Montserrat',
-        marginLeft: getWidth(16)
+        marginLeft: getWidth(11)
     }
 });
