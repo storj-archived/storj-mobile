@@ -33,6 +33,7 @@ export default class ExpanderComponent extends Component {
                             style = { this.state.isExpanded ? styles.expanderImage : styles.collapseImage } />
                     </View>
                 </View>
+                <View style = { styles.contentWrapper }>
                 { 
                     (() => {
                         if(this.state.isExpanded) {
@@ -40,6 +41,7 @@ export default class ExpanderComponent extends Component {
                         }
                     })()
                 }
+                </View>
             </TouchableOpacity>)
     };
 }
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Regular',
         lineHeight: getHeight(18),
         fontSize: getHeight(14),
-        color: 'black'
+        color: 'rgba(56, 75, 101, 0.4)'
     },
     expanderImage: {
         width: getWidth(15),
@@ -77,10 +79,13 @@ const styles = StyleSheet.create({
         height: getHeight(12),
     },
     expanderContainer: {
-        marginHorizontal: getWidth(20),
+        marginHorizontal: getWidth(10)
+    },
+    contentWrapper: {
+        /* alignItems: 'center' */
     },
     expanderBorder: {
-        borderBottomWidth: getHeight(1),
-        borderColor: 'gray'
+        borderBottomWidth: getHeight(0.5),
+        borderColor: 'rgba(56, 75, 101, 0.4)'
     }
 });

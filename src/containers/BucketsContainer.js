@@ -20,7 +20,7 @@ class BucketsContainer extends Component {
         });
 
         return count;
-    };
+    }
 
     render() {
         return(

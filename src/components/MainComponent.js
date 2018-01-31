@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MainNavigationContainer from '../containers/MainNavigationContainer';
 import ActionBarComponent from '../components/ActionBarComponent';
+import CreateBucketPopUpComponent from '../components/InputPopUpComponent';
 
 export default class MainComponent extends Component {
     constructor(props) {
@@ -31,6 +32,18 @@ export default class MainComponent extends Component {
                             selectionModeActions = { this.props.selectionModeActions }
                             tapBarActions = { this.props.tapBarActions } /> : null
                 }
+                {
+                    this.props.isCreateBucketInputShown ? 
+                        <View style = { styles.popUpBackgroundtWrapper }>
+                            <View style={ [ styles.popUpBackgroundtWrapper, styles.dimBlack ] } />
+                            <CreateBucketPopUpComponent 
+                                onCancel = { () => { this.props.hideCreateBucketInput(); } }
+                                onApply = { (bucketName) => { 
+                                    this.props.createBucket(bucketName);
+                                    this.props.hideCreateBucketInput(); 
+                                }} />
+                        </View> : null
+                }
             </View>
         );
     };
@@ -42,6 +55,20 @@ const styles = StyleSheet.create({
     },
     navigationContainer: {
         flex: 1
+    },
+    dimBlack: {
+        backgroundColor: 'black',
+        opacity: 0.4
+    },
+    popUpBackgroundtWrapper: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: 'transparent',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
 

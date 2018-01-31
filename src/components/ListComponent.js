@@ -6,7 +6,9 @@ import {
     RefreshControl,
     Text,
     Image,
-    TouchableOpacity
+    Keyboard,
+    TouchableOpacity,
+    Animated
 } from 'react-native';
 import ListItemComponent from '../components/ListItemComponent';
 import ListItemModel from '../models/ListItemModel';
@@ -25,6 +27,18 @@ export default class ListComponent extends Component {
             refreshing: false,
             selectedItemId: null        
         };
+    }
+
+    componentWillMount () {
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => { this.setState({ selectedItemId: null }); });
+    }
+    
+    componentWillUnmount () {
+        this.keyboardDidShowListener.remove();
+    }
+
+    shouldComponentUpdate(nextProps) {
+        return true;
     }
 
     /**
@@ -52,13 +66,13 @@ export default class ListComponent extends Component {
     * @param {object} item type of ListItemModel
     */
     selectItem(selectedItem) {
-        if(!this.props.isSelectionMode) return;
+        /* if(!this.props.isSelectionMode) return; */
         
         if(selectedItem.isSelected)
             this.props.deselectItem(selectedItem);
         else
             this.props.selectItem(selectedItem);
-    };
+    }
 
     //created for test purpose, this functionality will be placed in separated module,
     // when sorting functionality will be added
@@ -92,74 +106,83 @@ export default class ListComponent extends Component {
         return sortingObject;
     }
 
-    render() {        
+    getBucketsList() {
         let sorting = this.sort(this.props.data);
 
-        return (            
-            <ScrollView style = { styles.listContainer }
-                scrollEventThrottle = { 16 }
-                style = { styles.listContainer }
-                onScroll = { (event) => {
-                    /* let y_offset = event.nativeEvent.contentOffset.y;
-
-                    if(y_offset >= 0 && y_offset < 100) {
-                        console.log(y_offset);
-                        this.props.onScrollCallback(0);
-                    }
-
-                    if(y_offset > 100) {
-                        this.props.onScrollCallback(100);
-                    } */
-                } }
-                refreshControl={
-                    <RefreshControl
-                        enabled = { !this.props.isSelectionMode }
-                        refreshing = { this.state.refreshing }
-                        onRefresh = { this.onRefresh.bind(this) } /> }>
-                        <View style = { styles.contentWrapper }>
-                            {
-                                Object.getOwnPropertyNames(sorting).map((propName, index) => {
-                                    return (
-                                        <View>
-                                            {
-                                                (() => {
-                                                    let prop = sorting[propName];
-                                                    if(Array.isArray(prop) && prop.length) {
-                                                        var listItems = prop.map((item) => {                                                            
-                                                            return(<ListItemComponent
-                                                                        key = { item.entity.id }
-                                                                        item = { item } 
-                                                                        selectItemId = { (itemId) => { this.setState({ selectItemId: itemId }) }}
-                                                                        isItemActionsSelected = { this.state.selectItemId === item.entity.id }
-                                                                        onLongPress = { () => { this.onItemLongPress(item); } }
-                                                                        isSelectionModeEnabled = { this.props.isSelectionMode }
-                                                                        isSingleItemSelected = { this.props.isSingleItemSelected }
-                                                                        onPress = { () => { this.selectItem(item); } }
-                                                                        onSingleItemSelected = { this.props.onSingleItemSelected } />)
-                                                        });
-                                                        return(
-                                                            <ExpanderComponent
-                                                                propName = { propName } 
-                                                                listItems = { listItems } />
-                                                        );
-                                                    }
-                                                })()
-                                            }
-                                        </View>
+        return Object.getOwnPropertyNames(sorting).map((propName, index) => {
+            return (
+                <View key = { propName }>
+                    {
+                        (() => {
+                            let prop = sorting[propName];
+                            if(Array.isArray(prop) && prop.length) {
+                                var listItems = prop.map((item, indexInner) => {
+                                    return(
+                                        <ListItemComponent
+                                            key = { item.entity.id }
+                                            item = { item } 
+                                            selectItemId = { (itemId) => { this.setState({ selectedItemId: itemId }) }} //mistake
+                                            isItemActionsSelected = { this.state.selectedItemId === item.getId() }
+                                            onLongPress = { () => { this.onItemLongPress(item); } }
+                                            isSelectionModeEnabled = { this.props.isSelectionMode }
+                                            isSelected = { item.isSelected }
+                                            isSingleItemSelected = { this.props.isSingleItemSelected }
+                                            disableSelectionMode = { this.props.disableSelectionMode }
+                                            onPress = { () => { this.selectItem(item); } }
+                                            onSingleItemSelected = { this.props.onSingleItemSelected } />
                                     );
-                                })
+                                });
+                                return(
+                                    <ExpanderComponent
+                                        propName = { propName } 
+                                        listItems = { listItems } />
+                                );
                             }
-                        </View>
-            </ScrollView>
+                        })()
+                    }
+                </View>
+            );
+        });
+    }
+
+    render() {        
+        return (
+            <View>
+                <Animated.ScrollView style = { styles.listContainer }
+                    scrollEventThrottle = { 16 }
+                    style = { styles.listContainer }
+                    onScroll = {
+                        Animated.event([{
+                            nativeEvent: { 
+                                    contentOffset: { 
+                                        y: this.props.animatedScrollValue 
+                                    } 
+                                }
+                            }
+                        ], { useNativeDriver: true }) }
+                    refreshControl={
+                        <RefreshControl
+                            enabled = { !this.props.isSelectionMode }
+                            refreshing = { this.state.refreshing }
+                            onRefresh = { this.onRefresh.bind(this) } /> }>
+
+                            <View style = { styles.contentWrapper }>
+                                {
+                                    this.getBucketsList()
+                                }
+                            </View>
+                </Animated.ScrollView>
+            </View>            
         );
-    };
+    }
 }
 
+//TODO: check if all props are valid
 ListComponent.propTypes = {
     data: PropTypes.array,
-    selectItem: PropTypes.function,
-    onSingleItemSelected: PropTypes.function,
-    deselectItem: PropTypes.function,
+    /* onSingleItemSelected: PropTypes.function, */
+    /* selectItem: PropTypes.function,
+    deselectItem: PropTypes.function, */
     mainTitlePath: PropTypes.string,
     sortOptions: PropTypes.string,
     idPath: PropTypes.string
@@ -170,6 +193,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     contentWrapper: {
-        paddingVertical: getHeight(55)
+        paddingVertical: getHeight(80)
     }
 });

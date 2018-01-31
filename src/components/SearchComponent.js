@@ -21,7 +21,7 @@ export default class SearchComponent extends Component {
 
     render() {
         return(
-            <View style = { [ styles.rowContainer, styles.mainContainer ] }>
+            <View style = { [ styles.rowContainer, styles.mainContainer, this.props.styleContainer ] }>
                     <View style = { styles.rowContainer }>
                         { this.state.isSearchIconShown ? <Image style={ styles.image } source = { require("../images/Icons/Search.png") } resizeMode = { 'contain' } /> : null }
                         <TextInput
@@ -36,7 +36,7 @@ export default class SearchComponent extends Component {
                             onChangeText = { (value) => { this.setState({ searchValue: value }); } } 
                             value = { this.state.searchValue } />
                     </View>
-                    <View style = { styles.rowContainer }>
+                    <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>
                         <Text style = { styles.updateStatus }>Update Status</Text>
                         <TouchableOpacity>
                             <Image style = { styles.image } source = { require("../images/Icons/SearchOptions.png") } resizeMode = { 'contain' } />
@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
     rowContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        flex: 0.6
     },
     mainContainer: {
         flex: 1,
@@ -59,6 +60,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: getWidth(15),
         borderRadius: getHeight(10),
         justifyContent: 'space-between'
+    },
+    updateStatusContainer: {
+        justifyContent: 'flex-end',
+        flex: 0.4
     },
     image: {
         width: getHeight(16.5),
@@ -68,7 +73,8 @@ const styles = StyleSheet.create({
         paddingVertical: 0,
         fontSize: getHeight(16),
         color: '#384B65',
-        fontFamily: 'Montserrat-SemiBold'
+        fontFamily: 'Montserrat-SemiBold',
+        flex: 1
     },
     updateStatus: {
         marginRight: getWidth(15),

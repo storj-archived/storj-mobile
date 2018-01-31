@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import { getWidth, getHeight } from '../utils/adaptive';
-import TabBarActionModel from '../models/TabBarActionModel';
+import { TabBarActionModel } from '../models/TabBarActionModel';
 import InputPopUpComponent from '../components/InputPopUpComponent';
 import PropTypes from 'prop-types';
 
@@ -22,13 +22,42 @@ export default class ActionBarComponent extends Component {
             newBucketName: '',
             isBucketNamePopUpShown: false
         };
-    };
+    }
+
+    shouldComponentUpdate(nextProps) {
+        if(this.props.isSelectionMode !== nextProps.isSelectionMode) 
+            return true;
+
+        if(this.props.isSingleItemSelected !== nextProps.isSingleItemSelected) 
+            return true;
+
+        return false;
+    }
 
     deleteBuckets() {
         this.props.selectedBuckets.map(item => {
             this.props.deleteBucket(item);
         });
-    };
+    }
+
+    getTapBarAction() {
+        let actions = this.props.isSelectionMode || this.props.isSingleItemSelected ? this.props.selectionModeActions : this.props.tapBarActions;
+
+        return actions.map((action, index) => {
+            var icon = action.iconPath;
+            let imageWrapperStyle = index === 0 
+                ? styles.imageWrapper 
+                : [styles.imageWrapper, styles.imageWrapperBorder];
+
+            return (
+                <View key = { action.id } style = { imageWrapperStyle }>
+                    <TouchableOpacity onPress = { action.callback }> 
+                        <Image style = { styles.image } source = { action.icon } />
+                    </TouchableOpacity>
+                </View>
+            );            
+        });
+    } 
 
     render() {
         let actions = this.props.isSelectionMode ? this.props.selectionModeActions : this.props.tapBarActions;
@@ -36,23 +65,10 @@ export default class ActionBarComponent extends Component {
         let popUpWrapperStyle = isSelectionMode ? styles.popUpRectangleWrapperSelectionMode : styles.popUpRectangleWrapper;
 
         return(
-            <View style = { popUpWrapperStyle }>
+            <View style = { [ popUpWrapperStyle ] }>
                 <View style = { styles.popUpRectangle }>
                     {
-                        actions.map((action, index) => {
-                            var icon = action.iconPath;
-                            let imageWrapperStyle = index === 0 
-                                ? styles.imageWrapper 
-                                : [styles.imageWrapper, styles.imageWrapperBorder];
-
-                            return (
-                                <View style = { imageWrapperStyle }>
-                                    <TouchableOpacity onPress = { action.callback }> 
-                                        <Image style = { styles.image } source = { action.icon } />
-                                    </TouchableOpacity>
-                                </View>
-                            );            
-                        })
+                        this.getTapBarAction()
                     }
                 </View>
                 {
@@ -68,6 +84,7 @@ export default class ActionBarComponent extends Component {
     };
 } 
 
+//TODO: double check all props, maybe some are missing
 ActionBarComponent.propTypes = {
     isSelectionMode: PropTypes.bool,
     isSingleItemSelected: PropTypes.bool,

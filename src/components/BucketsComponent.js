@@ -3,7 +3,8 @@ import {
     Text,
     TouchableOpacity,
     ScrollView,
-    StyleSheet
+    StyleSheet,
+    Animated
 } from 'react-native';
 import React, { Component } from 'react';
 import ListComponent from '../components/ListComponent';
@@ -16,36 +17,33 @@ export default class BucketsComponent extends Component {
         this.state = {
             headerFlex: 1
         };
-    };
 
-    onScrollCallback(value) {
-        let res = 1 - (value * 0.5 / 100);
-        
-        if(this.state.headerFlex != res) {
-            this.setState({ headerFlex: res });
-        }
-    };
+        this.animatedScrollValue = new Animated.Value(0);
+    }
 
     render() {
         return(
             <View style={ styles.mainContainer }>
                 <ListComponent
                     onSingleItemSelected = { this.props.onSingleItemSelected }                    
+                    animatedScrollValue = { this.animatedScrollValue }
                     enableSelectionMode = { this.props.enableSelectionMode }
+                    disableSelectionMode = { this.props.disableSelectionMode }
                     isSelectionMode = { this.props.isSelectionMode }
                     isSingleItemSelected = { this.props.isSingleItemSelected }
                     deselectItem = { this.props.deselectBucket }
                     selectItem = { this.props.selectBucket }
-                    data = { this.props.buckets } 
-                    onScrollCallback = { (value) => { this.onScrollCallback(value); }} />
+                    data = { this.props.buckets }
+                    bucketsCount = { this.props.buckets.length } />
+
                 <BucketsScreenHeaderComponent
                     isSelectionMode = { this.props.isSelectionMode }
                     disableSelectionMode = { this.props.disableSelectionMode }
-                    selectedBucketsCount = { this.props.selectedBucketsCount } 
-                    headerFlex = { this.state.headerFlex } />
+                    selectedBucketsCount = { this.props.selectedBucketsCount }
+                    animatedScrollValue = { this.animatedScrollValue } />
             </View>
         );
-    };
+    }
 }
 
 const styles = StyleSheet.create({

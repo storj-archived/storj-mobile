@@ -11,16 +11,18 @@ const {
     HIDE_ACTION_BAR,
     ENABLE_SELECTION_MODE, 
     DISABLE_SELECTION_MODE,
-    SINGLE_ITEM_ACTIONS_SELECTED
+    SINGLE_ITEM_ACTIONS_SELECTED,
+    SHOW_CREATE_BUCKET_INPUT,
+    HIDE_CREATE_BUCKET_INPUT
  } = MAIN_ACTIONS;
                                                         
 const initialState = { 
-    isActionBarShown: false, 
+    isCreateBucketInputShown: false,
+    isActionBarShown: false,
     buckets: [], 
     selectedBuckets: [], //TODO: delete, depreciated
     isSelectionMode: false,
-    isSingleItemSelected: false,
-    selectedItemId: null
+    isSingleItemSelected: false
 };
 
 export default function mainReducer(state = initialState, action) {
@@ -51,18 +53,25 @@ export default function mainReducer(state = initialState, action) {
             newState.buckets = action.payload.buckets;
             return newState;
         case ENABLE_SELECTION_MODE:
+            newState.buckets = bucketsManager.clearSelection();
             newState.isSelectionMode = true;
             return newState;
         case DISABLE_SELECTION_MODE:
-            newState.isSelectionMode = false;
+            newState.isSingleItemSelected = false;
+            newState.isActionBarShown = false;
             newState.buckets = bucketsManager.clearSelection();
+            newState.isSelectionMode = false;
             return newState;
-        case SINGLE_ITEM_ACTIONS_SELECTED:                  
-            if(newState.isSingleItemSelected) newState.selectedItemId = null;
-
-            newState.isActionBarShown = !newState.isSingleItemSelected;    
-            newState.isSingleItemSelected = !newState.isSingleItemSelected;
-            
+        case SINGLE_ITEM_ACTIONS_SELECTED:                
+            newState.isSingleItemSelected = true;
+            newState.isActionBarShown = true;
+            return newState;
+        case SHOW_CREATE_BUCKET_INPUT:
+            newState.isCreateBucketInputShown = true;
+            newState.isActionBarShown = false;                        
+            return newState;
+        case HIDE_CREATE_BUCKET_INPUT:
+            newState.isCreateBucketInputShown = false;
             return newState;
         default:
             return state || initialState;

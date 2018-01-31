@@ -25,7 +25,8 @@ class MainNavigationContainer extends Component {
                     state: this.props.nav,
                     test: this.props.testAction,
                     goToBucketsScreen: this.props.goToBucketsScreen,
-                    onActionBarPress: this.props.onActionBarPress
+                    onActionBarPress: this.props.onActionBarPress,
+                    currentRouteIndex: this.props.nav.index
                 })} />
         );
     };
