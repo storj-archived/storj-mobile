@@ -54,7 +54,7 @@ const StackNav = StackNavigator(
     },
     {
         headerMode: 'none',
-        initialRouteName: 'InititializationScreen'
+        initialRouteName: 'InitializationScreen'
     }
 );
 

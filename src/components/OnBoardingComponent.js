@@ -25,12 +25,12 @@ SafetyOnBoardingScreen = () => {
                 <Text style={ styles.titleBold }>{ onBoardingScreensConstants.safetyBoldTitle }</Text>
             </View>
             <View style={ styles.textContainer }>
-            {
-                onBoardingScreensConstants.safetyMainText.map((element, index) => {
-                    return <Text 
-                    key = {index} style={ styles.textInfo }>{ element }</Text>
-                })
-            }
+                {
+                    onBoardingScreensConstants.safetyMainText.map((element, index) => {
+                        return <Text 
+                        key = {index} style={ styles.textInfo }>{ element }</Text>
+                    })
+                }
             </View>
         </View>
     );
@@ -50,11 +50,11 @@ IncomeOnBoardingScreen = () =>  {
                 <Text style={ styles.titleLight }>{ onBoardingScreensConstants.incomeSemiBoldTitle }</Text>
             </View>
             <View style={ styles.textContainer }>
-            {
-                onBoardingScreensConstants.incomeMainText.map((element, index) => {
-                    return <Text key = {index} style={ styles.textInfo }>{ element }</Text>
-                })
-            }
+                {
+                    onBoardingScreensConstants.incomeMainText.map((element, index) => {
+                        return <Text key = {index} style={ styles.textInfo }>{ element }</Text>
+                    })
+                }
             </View>
         </View>
     );
@@ -117,7 +117,7 @@ export default class OnBoardingComponent extends Component {
                     <TouchableOpacity 
                         style={ [ styles.button, styles.buttonSignUp ] } 
                         onPress = { this.redirectToSingUpScreen.bind(this) }>
-                            <Text style={ styles.signUpText }>Signup</Text>
+                            <Text style={ styles.signUpText }>Sign Up</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -171,7 +171,6 @@ const styles = StyleSheet.create({
     },
     loginText: {
         fontFamily: 'Montserrat-Bold',
-        fontWeight: 'bold',
         fontSize: params.buttonText,
         color: params.colorBlue
     },

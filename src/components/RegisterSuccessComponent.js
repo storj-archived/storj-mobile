@@ -13,14 +13,9 @@ import { getWidth, getHeight, getDeviceWidth, getDeviceHeight } from '../utils/a
 * RegisterSuccess component
 */
 export default class RegisterSuccessComponent extends Component {
+    
     constructor(props) {
         super(props);
-
-        /**
-         * Generated mnemonic and registered email
-         */
-        this.mnemonic = this.props.navigation.state.params.mnemonic;
-        this.email = this.props.navigation.state.params.email;
     }
     
     render() {
@@ -41,7 +36,7 @@ export default class RegisterSuccessComponent extends Component {
                     <Text style = { styles.mainText }>{ infoScreensConstants.registerSuccessMainText }</Text>
                 </View>
                 <TouchableOpacity style = { styles.nextButton }
-                     onPressOut = { () => { this.props.navigation.navigate('MnemonicGenerationScreen', { mnemonic: this.mnemonic, email: this.email }) } }>
+                     onPressOut = { () => { this.props.navigation.navigate('MnemonicGenerationScreen') } }>
                     <Text style = { styles.nextButtonText }>NEXT</Text>
                 </TouchableOpacity>
             </View>

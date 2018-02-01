@@ -7,7 +7,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import React, { Component } from 'react';
-import PropTypes, { oneOfType } from 'prop-types';
+import PropTypes from 'prop-types';
 import { getWidth, getHeight } from '../utils/adaptive';
 
 /**
@@ -71,16 +71,10 @@ InputComponent.propTypes = {
     editable: PropTypes.bool,
     placeholder: PropTypes.string,
     value: PropTypes.string,
-    style: oneOfType([
-        PropTypes.numbers,
-        PropTypes.object
-    ]),
+    style: PropTypes.number,
     multiline: PropTypes.bool,
     errorMessage: PropTypes.string,
-    inputStyle: oneOfType([
-        PropTypes.numbers,
-        PropTypes.object
-    ]),
+    inputStyle: PropTypes.number,
     isError: PropTypes.bool
 };
 

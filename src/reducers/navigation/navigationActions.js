@@ -26,3 +26,12 @@ export function redirectToMainScreen() {
         ]
     });
 };
+
+export function redirectToMnemonicGenerationScreen() {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'MnemonicGenerationScreen'})
+        ]
+    });
+};

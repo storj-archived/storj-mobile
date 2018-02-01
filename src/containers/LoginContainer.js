@@ -10,6 +10,7 @@ import validator from '../utils/validator';
 import { LoginStateModel } from '../models/LoginStateModel';
 import { LoginErrorModel } from '../models/LoginErrorModel';
 import infoScreensConstants from '../utils/constants/infoScreensConstants';
+import { authConstants } from '../utils/constants/storageConstants';
 
 const FIRST_ACTION = 'FIRST_ACTION';
 
@@ -37,15 +38,22 @@ class LoginContainer extends Component {
     /**
      * Fill local state from store on component did mount
      */
-    componentDidMount() {
-        if(this.props.user) 
-            this.setState({
-                stateModel: new LoginStateModel(
-                    this.props.user.email,
-                    this.props.user.password,
-                    this.props.user.mnemonic,
-                )
-            });
+    async componentDidMount() {
+        let email, password, mnemonic;
+
+        if(this.props.user.mnemonic) {
+            email = this.props.user.email;
+            password = this.props.user.password;
+            mnemonic = this.props.user.mnemonic;
+        } else {
+            email = await AsyncStorage.getItem(authConstants.EMAIL),
+            password = await AsyncStorage.getItem(authConstants.PASSWORD),
+            mnemonic = await AsyncStorage.getItem(authConstants.MNEMONIC)   
+        }
+
+        this.setState({
+            stateModel: new LoginStateModel(email, password, mnemonic)
+        });
     };
 
     /**
@@ -186,22 +194,22 @@ class LoginContainer extends Component {
 
 	render() {
 		return(
-                <LoginComponent
-                    isLoading = { this.state.isLoading }
-                    email = { this.props.user.email }
-                    password = { this.props.user.password }
-                    mnemonic = { this.props.user.mnemonic }
-                    isRedirectedFromRegister = { this.props.user.isRedirectedFromRegister }
-                    isEmailError = { this.state.errorModel.isEmailError }
-                    isPasswordError = { this.state.errorModel.isPasswordError }
-                    isMnemonicError = { this.state.errorModel.isMnemonicError }
-                    areCredentialsValid = { this.state.errorModel.areCredentialsValid }
-                    onChangeLogin = { this.onChangeEmailInput.bind(this) }
-                    onChangePassword = { this.onChangePasswordInput.bind(this) }
-                    onChangeMnemonic = { this.onChangeMnemonicInput.bind(this) }
-                    onSubmit = { this.tryLogin.bind(this) }
-                    registerButtonOnPress = { this.redirectToRegisterScreen.bind(this) }
-                />
+            <LoginComponent
+                isLoading = { this.state.isLoading }
+                email = { this.state.stateModel.email }
+                password = { this.state.stateModel.password }
+                mnemonic = { this.state.stateModel.mnemonic }
+                isRedirectedFromRegister = { this.props.user.isRedirectedFromRegister }
+                isEmailError = { this.state.errorModel.isEmailError }
+                isPasswordError = { this.state.errorModel.isPasswordError }
+                isMnemonicError = { this.state.errorModel.isMnemonicError }
+                areCredentialsValid = { this.state.errorModel.areCredentialsValid }
+                onChangeLogin = { this.onChangeEmailInput.bind(this) }
+                onChangePassword = { this.onChangePasswordInput.bind(this) }
+                onChangeMnemonic = { this.onChangeMnemonicInput.bind(this) }
+                onSubmit = { this.tryLogin.bind(this) }
+                registerButtonOnPress = { this.redirectToRegisterScreen.bind(this) }
+            />
 		);
 	};
 }

@@ -121,8 +121,8 @@ function redirectToAuthFailureScreen(params) {
  * ActionCreator that provides redux navigation to RegisterSuccessInfoScreen
  * @returns action
  */
-function redirectToRegisterSuccessScreen(mnemonic, email) {
-    return NavigationActions.navigate({ routeName: 'RegisterSuccessInfoScreen', params: { mnemonic, email } });
+function redirectToRegisterSuccessScreen() {
+    return NavigationActions.navigate({ routeName: 'RegisterSuccessInfoScreen' });
 };
 
 // ActionCreators for LoginContainer

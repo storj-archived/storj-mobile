@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import * as Actions from '../reducers/navigation/navigationActions';
 import StorjLib from '../utils/StorjModule';
 import { getWidth, getHeight } from '../utils/adaptive';
+import { authConstants } from '../utils/constants/storageConstants';
 
 const FIRST_ACTION = 'FIRST_ACTION';
 
@@ -31,6 +32,11 @@ class InitializeContainer extends Component {
         try {
             if(!await AsyncStorage.getItem(FIRST_ACTION)) {
                 this.props.redirectToOnBoardingScreen();
+                return;
+            }
+
+            if(await AsyncStorage.getItem(authConstants.IS_MNEMONIC_SAVED) === 'false') {
+                this.props.redirectToMnemonicGenerationScreen();
                 return;
             }
 

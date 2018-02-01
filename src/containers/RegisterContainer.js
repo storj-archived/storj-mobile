@@ -10,6 +10,7 @@ import RegisterComponent from '../components/RegisterComponent';
 import StorjModule from '../utils/StorjModule';
 import validator from '../utils/validator';
 import infoScreensConstants from '../utils/constants/infoScreensConstants';
+import { authConstants } from '../utils/constants/storageConstants';
 
 const FIRST_ACTION = 'FIRST_ACTION';
 
@@ -105,6 +106,16 @@ export class RegisterContainer extends Component {
     };
 
     /**
+     * Saving Auth data into AsyncStorage after successfull register
+     */
+    saveData = async (mnemonic, email, password) => {
+        await AsyncStorage.setItem(authConstants.MNEMONIC, mnemonic);
+        await AsyncStorage.setItem(authConstants.EMAIL, email);
+        await AsyncStorage.setItem(authConstants.PASSWORD, password);
+        await AsyncStorage.setItem(authConstants.IS_MNEMONIC_SAVED, 'false');
+    }
+
+    /**
      * Submit registration info
      */
     async onSubmit() {
@@ -159,10 +170,14 @@ export class RegisterContainer extends Component {
             
             return;
         }
-        
+        await this.saveData(
+            registrationResult.mnemonic, 
+            this.state.stateModel.email, 
+            this.state.stateModel.password
+        );
         this.props.registerSuccess(registrationResult.mnemonic);
         this.handleFirstLaunch();
-        this.props.redirectToRegisterSuccessScreen(registrationResult.mnemonic, this.state.stateModel.email);    
+        this.props.redirectToRegisterSuccessScreen();    
     };
 
     /**

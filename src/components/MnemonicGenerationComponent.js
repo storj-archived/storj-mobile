@@ -7,11 +7,13 @@ import {
     StyleSheet,
     Clipboard,
     Linking,
-    Alert
+    Alert,
+    AsyncStorage
 } from 'react-native';
 import React, { Component } from 'react';
 import mnemonicScreenConstants from '../utils/constants/mnemonicScreenConstants';
 import { getWidth, getHeight, getDeviceWidth, getDeviceHeight } from '../utils/adaptive';
+import { authConstants } from '../utils/constants/storageConstants';
 
 /**
 * MnemonicGeneration component
@@ -24,17 +26,25 @@ export default class MnemonicGenerationComponent extends Component {
          * Local state for changing rendered view
          */
         this.state = {
+            mnemonic: null,
+            email: null,
+            isLoading: false,
             showMnemonic: false,
             showModal: false,
             isMnemonicCopied: false,
             showConfirmation: false
         }
+    }
 
-        /**
-         * Generated mnemonic and registered email from register screen
-         */
-        this.mnemonic = this.props.navigation.state.params.mnemonic;
-        this.email = this.props.navigation.state.params.email; 
+    async componentDidMount() {
+        this.setState({ isLoading: true });
+
+        this.setState({ 
+            mnemonic: await AsyncStorage.getItem(authConstants.MNEMONIC), 
+            email: await AsyncStorage.getItem(authConstants.EMAIL)
+        });
+
+        this.setState({ isLoading: false });
     }
 
     /**
@@ -62,15 +72,15 @@ export default class MnemonicGenerationComponent extends Component {
      * Saving mnemonic by saving to Clipboard
      */
     onCopyToClipboard() {
-        Clipboard.setString(this.mnemonic);
+        Clipboard.setString( this.state.mnemonic );
         this.setState({ showModal: false, isMnemonicCopied: true });
     }
 
     /**
      * Saving mnemonic by sending via email
      */
-    onSendViaEmail() {
-        this.preparingEmailSending();
+    async onSendViaEmail() {
+        await this.preparingEmailSending();
         this.setState({ showModal: false, isMnemonicCopied: true });
     }
 
@@ -91,7 +101,8 @@ export default class MnemonicGenerationComponent extends Component {
     /**
      * Navigation to login screen
      */
-    redirectToLoginScreen() {
+    async redirectToLoginScreen() {
+        await AsyncStorage.removeItem(authConstants.IS_MNEMONIC_SAVED);
         this.props.navigation.navigate('LoginScreen');
     }
 
@@ -121,7 +132,7 @@ export default class MnemonicGenerationComponent extends Component {
      * Forming url and link user to mailbox to send mnemonic to registered address
      */
     preparingEmailSending() {
-        const url = 'mailto:' + this.email + '?subject=Your Storj mnemonic&body=' + this.mnemonic;
+        const url = 'mailto:' + this.state.email + '?subject=Your Storj mnemonic&body=' + this.state.mnemonic;
         Linking.openURL(url); 
     }
     
@@ -191,22 +202,23 @@ export default class MnemonicGenerationComponent extends Component {
      * Showing generated mnemonic
      */
     showMnemonicVisibleView() {
-        return(
+        return(  
             <View style = { styles.changingContainer }>
-                
                 <View style = { styles.mnemonicContainer }>
                     <Text style = { styles.mnemonicPlaceholderText }>Mnemonic</Text>   
                     <View style = { styles.textInputWrapper }>
                         <TextInput style = { styles.mnemonic } editable = { false } 
-                                    multiline = { true } value = { this.mnemonic } placeholderTextColor = 'grey'/>
+                                    multiline = { true } 
+                                    value = { this.state.mnemonic } 
+                                    placeholderTextColor = 'grey'/>
                     </View>
                 </View>
                 { !this.state.isMnemonicCopied ? this.showSaveMnemonicButton() : this.showContinueButton() }
             </View>
-        );
+        );       
     }
 
-    render() {
+    render() { 
         return(
             <View style = { styles.screen }>
                 <Image 
@@ -223,7 +235,7 @@ export default class MnemonicGenerationComponent extends Component {
                 <View style = { styles.titleLightContainer }>
                     <Text style = { styles.titleBold }>{ mnemonicScreenConstants.mnemonicScreenAdditionalText }</Text>
                 </View>
-                { this.state.showMnemonic ? this.showMnemonicVisibleView() : this.showGetMnemonicButton() } 
+                { this.state.showMnemonic && !this.state.isLoading ? this.showMnemonicVisibleView(this.state.mnemonic) : this.showGetMnemonicButton() } 
                 { this.state.showModal ? this.savingOptionView() : null }
                 { this.state.showConfirmation ? this.confirmationModalView() : null }
             </View>

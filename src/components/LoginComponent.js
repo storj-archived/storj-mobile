@@ -136,7 +136,8 @@ const styles = StyleSheet.create({
         marginBottom: getHeight(5)
     },
     mnemonicInput: {
-        height: getHeight(90)
+        height: getHeight(90),
+        fontSize: getHeight(14)
     },
     placeholderText: {
         fontSize: getHeight(12),
