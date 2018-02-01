@@ -7,7 +7,6 @@ import { qrScannerActionCreators } from '../reducers/authentification/authAction
 import QRScannerComponent from '../components/QRScannerComponent';
 import StorjLib from '../utils/StorjModule';
 import { LoginStateModel } from '../models/LoginStateModel';
-import { LoginErrorModel } from '../models/LoginErrorModel';
 import infoScreensConstants from '../utils/constants/infoScreensConstants';
  
 const FIRST_ACTION = 'FIRST_ACTION';
@@ -22,7 +21,7 @@ class QRScannerContainer extends Component {
 
         this.state = {
             viewAppear: true,
-            isLoading: false
+            layout: ''
         };
 
         this.stateModel = new LoginStateModel();
@@ -33,6 +32,7 @@ class QRScannerContainer extends Component {
             this.setTimeout( () => {
                 this.setState({
                     viewAppear: true,
+                    layout: 'scanning'
                 })
             }, 255);
         };
@@ -55,8 +55,8 @@ class QRScannerContainer extends Component {
         console.log('trylogin');
         console.log(this.state);
         console.log(this.stateModel);
-        if(this.state.isLoading) return;
-        this.setState({ isLoading: true });
+        if(!this.state.layout === 'error' || !this.state.layout === 'scanning') return;
+        this.setState({ layout: 'success' });
 
         let isEmailValid = validator.isEmail(this.stateModel.email);
         let isPasswordValid = this.stateModel.password ? true : false;
@@ -68,7 +68,7 @@ class QRScannerContainer extends Component {
             console.log('onError');
         }
 
-        this.setState({ isLoading: false });
+        this.setState({ layout: 'scanning' });
     };
 
     /**
@@ -120,10 +120,10 @@ class QRScannerContainer extends Component {
      */
     _onBarCodeRead = (e) => {
         console.log(`e.nativeEvent.data.type = ${e.nativeEvent.data.type}, e.nativeEvent.data.code = ${e.nativeEvent.data.code}`);
-        this.setState({ isLoading: true });
         this._stopScan();
         try {
             const result = JSON.parse(e.nativeEvent.data.code);
+            this.setState({ layout: 'success' });
             console.log(result);
             if(result.email && result.password && result.mnemonic) {
                 this.stateModel.email = result.email;
@@ -134,23 +134,22 @@ class QRScannerContainer extends Component {
             } 
             else { 
                 console.log('not valid JSON');
-                this.setState({ isLoading: false });
+                this.setState({ layout: 'error' });
                 this._startScan();
             }
         }
         catch(error) {
             console.log(error);
-            this.setState({ isLoading: false });
-            Alert.alert(e.nativeEvent.data.type, 'Is not valid', [
-                {text: 'Try Again', onPress: () => this._startScan()},
-            ]);
+            this.setState({ layout: 'error' });
         }
+        this._startScan();
     }
  
     /**
      * Functions that starting and stopping scanning action in QRScannerComponent
      */
     _startScan = (e) => {
+        this.setState({ layout: 'scanning' });
         this._barComponent._barCode.startScan();
     }
     _stopScan = (e) => {
@@ -168,7 +167,7 @@ class QRScannerContainer extends Component {
         
         return (
             <QRScannerComponent
-                isLoading = { this.state.isLoading }
+                layout = { this.state.layout }
                 ref = { component => this._barComponent = component }
                 viewAppear = { this.state.viewAppear }
                 navigateBack = { this.navigateBack }

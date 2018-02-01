@@ -22,7 +22,56 @@ export default class QRScannerComponent extends Component {
 
         this.navigateBack = this.props.navigateBack ? this.props.navigateBack : () => {};
         this.onBarCodeRead = this.props.onBarCodeRead ? this.props.onBarCodeRead : () => {};
-	};
+    };
+    
+    chooseLayout = () => {
+        switch(this.props.layout) {
+            case 'scanning': {
+                return(
+                    <View style = { [ styles.backgoundWrapper, { justifyContent: 'center', alignItems: 'center', flexDirection: 'column' } ] }>
+                        <View style = { { marginTop: getHeight(30) } }>
+                            <Image source = { require('../images/Icons/BackButton.png') }/>
+                        </View>
+                        <View style = { { marginTop: getHeight(139) } }>
+                            <Image source = { require('../images/QRScannerScreen/DefaultBorder.png') }/>
+                        </View>
+                    </View>
+                )
+            }
+            break;
+            case 'error': {
+                return(
+                    <View style = { [ styles.backgoundWrapper, { justifyContent: 'center', alignItems: 'center', flexDirection: 'column' } ] }>
+                        <View style = { { marginTop: getHeight(30) } }>
+                            <Image source = { require('../images/Icons/BackButton.png') }/>
+                        </View>
+                        <View style = { { marginTop: getHeight(139) } }>
+                            <Image source = { require('../images/QRScannerScreen/ErrorBorder.png') }/>
+                        </View>
+                        <View style = { { marginTop: getHeight(114) } }>
+                            <Image source = { require('../images/QRScannerScreen/ErrorMessage.png') }/>
+                        </View>
+                    </View>
+                )
+            }
+            break;
+            case 'success': {
+                return(
+                    <View style = { [ styles.backgoundWrapper, { justifyContent: 'center', alignItems: 'center', flexDirection: 'column' } ] }>
+                        <View style = { { marginTop: getHeight(30) } }>
+                            <Image source = { require('../images/Icons/BackButton.png') }/>
+                        </View>
+                        <View style = { { marginTop: getHeight(139) } }>
+                            <Image source = { require('../images/QRScannerScreen/SuccessBorder.png') }/>
+                        </View>
+                    </View>
+                )
+            }
+            break;
+            default: null
+            break;
+        }
+    }
 
 	render() {
 		return(
@@ -38,13 +87,7 @@ export default class QRScannerComponent extends Component {
                 }
                 
                 {
-                    this.props.isLoading ?
-                        <View style = { [ styles.backgoundWrapper ] }>
-                            <View style = { [ styles.backgoundWrapper, styles.dimBlack ] } />
-                            <View style = { [ styles.backgoundWrapper, styles.setChildCenter ] }>
-                                <ActivityIndicator animating = { true } color = { "#2782ff" } size = { "large" }/>
-                            </View>
-                        </View> : null
+                    this.chooseLayout()
                 }
 			</View>
 		);
