@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "react-native": "0.51.0",
-    "react-native-smart-barcode": "^1.0.6",
+    "react-native-smart-barcode": "https://github.com/Barterio/react-native-smart-barcode/archive/react-nativeSmartBarcode1.0.0.1.tar.gz",
     "react-navigation": "^1.0.0-beta.25",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2"
