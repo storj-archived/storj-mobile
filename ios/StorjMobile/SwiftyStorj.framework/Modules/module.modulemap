@@ -1,6 +1,0 @@
-framework module SwiftyStorj {
-  umbrella header "SwiftyStorj.h"
-
-  export *
-  module * { export * }
-}
