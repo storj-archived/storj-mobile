@@ -4,6 +4,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     Text,
+    Image,
     Alert,
     ActivityIndicator
 } from 'react-native';
@@ -76,18 +77,22 @@ export default class QRScannerComponent extends Component {
 	render() {
 		return(
 			<View style={ styles.mainContainer }>
-                <TouchableOpacity onPressOut = { this.navigateBack } style = { { width: 30, height: 30, backgroundColor: 'red' } }>
-                    <Text>BACK</Text>
-                </TouchableOpacity>
                 {
                     this.props.viewAppear ?
-                        <Barcode style = { styles.barCodeContainer } 
+                        <Barcode 
+                        scannerRectCornerColor = { 'green' }
+                        style = { styles.barCodeContainer } 
                         ref = { component => this._barCode = component }
                         onBarCodeRead = {this.onBarCodeRead}/> : <Text>Some error</Text>
                 }
-                
                 {
-                    this.chooseLayout()
+                    <View style = { [ styles.backgoundWrapper, { alignItems: 'center', flexDirection: 'column' } ] }>
+                        <View style = { { marginTop: getHeight(30), flexDirection: 'row', backgroundColor: 'green'} }>
+                            <Image style = { { width: getWidth(24), height: getHeight(24), marginLeft: getWidth(20) } } source = { require('../images/Icons/BackButton.png') }/>
+                            <Image style = { { width: getWidth(24), height: getHeight(36),  } } source = { require('../images/Icons/Flash.png') }/>
+                            <Image style = { { width: getWidth(30), height: getHeight(30),  } } source = { require('../images/Icons/SwitchCamera.png') }/>
+                        </View>
+                    </View>
                 }
 			</View>
 		);
@@ -97,7 +102,7 @@ export default class QRScannerComponent extends Component {
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'transparent'
     },
     barCodeContainer: {
         width: getDeviceWidth(), 
