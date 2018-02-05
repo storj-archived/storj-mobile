@@ -101,12 +101,6 @@ class MainContainer extends Component {
     }
 
     async componentDidMount() {
-        // await StorjLib.importKeys(
-        //     'elvy.baila@arockee.com', 
-        //     'testpassword', 
-        //     'explain coil family embody good dentist okay flat govern ship honey mango comfort onion trade divide asset motion affair crime cycle office arrest agree',
-        //     'testpasscode');
-
         await this.getBuckets();
     }
 
