@@ -20,6 +20,9 @@ export default class QRScannerComponent extends Component {
 
 	constructor(props) {
         super(props);
+        this.state = {
+            borderColor: 'white'
+        }
 
         this.navigateBack = this.props.navigateBack ? this.props.navigateBack : () => {};
         this.onBarCodeRead = this.props.onBarCodeRead ? this.props.onBarCodeRead : () => {};
@@ -74,23 +77,46 @@ export default class QRScannerComponent extends Component {
         }
     }
 
+    resetBorderColor () {
+        console.log("resetBorderColor");
+        this.setState({ borderColor: 'white' })
+    }
+
+    changeToErrorBorderColor() {
+        console.log('changeToErrorBorderColor');
+        this.setState({ borderColor: 'red' })
+    }
+
+    changeToSuccessBorderColor() {
+        console.log('changeToSuccessBorderColor');
+        this.setState({ borderColor: 'green' })
+    }
+
 	render() {
 		return(
 			<View style={ styles.mainContainer }>
                 {
                     this.props.viewAppear ?
                         <Barcode 
-                        scannerRectCornerColor = { 'green' }
+                        scannerRectCornerColor = { this.state.borderColor }
                         style = { styles.barCodeContainer } 
                         ref = { component => this._barCode = component }
                         onBarCodeRead = {this.onBarCodeRead}/> : <Text>Some error</Text>
                 }
                 {
-                    <View style = { [ styles.backgoundWrapper, { alignItems: 'center', flexDirection: 'column' } ] }>
-                        <View style = { { marginTop: getHeight(30), flexDirection: 'row', backgroundColor: 'green'} }>
-                            <Image style = { { width: getWidth(24), height: getHeight(24), marginLeft: getWidth(20) } } source = { require('../images/Icons/BackButton.png') }/>
-                            <Image style = { { width: getWidth(24), height: getHeight(36),  } } source = { require('../images/Icons/Flash.png') }/>
-                            <Image style = { { width: getWidth(30), height: getHeight(30),  } } source = { require('../images/Icons/SwitchCamera.png') }/>
+                    <View style = {  styles.backgoundWrapper  }>
+                        <View style = { styles.buttonPanelContainer }>
+                            <TouchableOpacity onPress = { () => this.navigateBack() } >
+                                <Image style = { styles.backButton } source = { require('../images/Icons/BackButton.png') }/>
+                            </TouchableOpacity>
+                            <View style = { styles.flexRow }>
+                                <TouchableOpacity onPress = { () => this._barCode.startFlash() } >
+                                    <Image style = { styles.flashButton } source = { require('../images/Icons/Flash.png') } />
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress = { () => this._barCode.stopFlash() } >
+                                    <Image style = { styles.reverseCameraButton } source = { require('../images/Icons/SwitchCamera.png') }/>
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     </View>
                 }
@@ -124,6 +150,29 @@ const styles = StyleSheet.create({
     setChildCenter: {
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    buttonPanelContainer: {
+        marginTop: getHeight(30), 
+        flexDirection: 'row', 
+        justifyContent: 'space-between',
+        paddingLeft: getWidth(20), 
+        paddingRight: getWidth(20)
+    },
+    backButton: {
+        width: getWidth(24), 
+        height: getHeight(24)
+    },
+    flexRow: {
+        flexDirection: 'row'
+    },
+    flashButton: {
+        width: getWidth(24), 
+        height: getHeight(36), 
+        marginRight: getWidth(23)
+    },
+    reverseCameraButton: {
+        width: getWidth(30),
+        height: getHeight(30)
     }
 });
 

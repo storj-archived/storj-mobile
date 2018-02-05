@@ -3,7 +3,7 @@ import StackNavigator from '../../navigators/StackNavigator';
 /**
  * Declaring initial route of program
  */
-export const initialState = StackNavigator.router.getStateForAction(StackNavigator.router.getActionForPathAndParams('QRScannerScreen'));
+export const initialState = StackNavigator.router.getStateForAction(StackNavigator.router.getActionForPathAndParams('LoginScreen'));
 
 /**
  * Creating navigation reducer

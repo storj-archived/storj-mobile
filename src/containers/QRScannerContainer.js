@@ -20,8 +20,7 @@ class QRScannerContainer extends Component {
         super(props);
 
         this.state = {
-            viewAppear: true,
-            layout: ''
+            viewAppear: true
         };
 
         this.stateModel = new LoginStateModel();
@@ -31,8 +30,7 @@ class QRScannerContainer extends Component {
         let viewAppearCallBack = (event) => {
             this.setTimeout( () => {
                 this.setState({
-                    viewAppear: true,
-                    layout: 'scanning'
+                    viewAppear: true
                 })
             }, 255);
         };
@@ -55,8 +53,6 @@ class QRScannerContainer extends Component {
         console.log('trylogin');
         console.log(this.state);
         console.log(this.stateModel);
-        if(!this.state.layout === 'error' || !this.state.layout === 'scanning') return;
-        this.setState({ layout: 'success' });
 
         let isEmailValid = validator.isEmail(this.stateModel.email);
         let isPasswordValid = this.stateModel.password ? true : false;
@@ -67,8 +63,6 @@ class QRScannerContainer extends Component {
         } else {
             console.log('onError');
         }
-
-        this.setState({ layout: 'scanning' });
     };
 
     /**
@@ -123,33 +117,34 @@ class QRScannerContainer extends Component {
         this._stopScan();
         try {
             const result = JSON.parse(e.nativeEvent.data.code);
-            this.setState({ layout: 'success' });
             console.log(result);
             if(result.email && result.password && result.mnemonic) {
                 this.stateModel.email = result.email;
                 this.stateModel.password = result.password;
                 this.stateModel.mnemonic = result.mnemonic;
                 console.log(this.state);
+                this._barComponent.changeToSuccessBorderColor();
                 this.tryLogin();
             } 
             else { 
+                this._barComponent.changeToErrorBorderColor();
                 console.log('not valid JSON');
-                this.setState({ layout: 'error' });
                 this._startScan();
             }
         }
         catch(error) {
+            this._barComponent.changeToErrorBorderColor();
             console.log(error);
-            this.setState({ layout: 'error' });
+            this._startScan();
         }
-        this._startScan();
+        
     }
- 
+
     /**
      * Functions that starting and stopping scanning action in QRScannerComponent
      */
     _startScan = (e) => {
-        this.setState({ layout: 'scanning' });
+        // this._barComponent.resetBorderColor();
         this._barComponent._barCode.startScan();
     }
     _stopScan = (e) => {
@@ -167,7 +162,6 @@ class QRScannerContainer extends Component {
         
         return (
             <QRScannerComponent
-                layout = { this.state.layout }
                 ref = { component => this._barComponent = component }
                 viewAppear = { this.state.viewAppear }
                 navigateBack = { this.navigateBack }
