@@ -50,9 +50,6 @@ class QRScannerContainer extends Component {
      * to change userInfo in store
      */
 	tryLogin = async () => {
-        console.log('trylogin');
-        console.log(this.state);
-        console.log(this.stateModel);
 
         let isEmailValid = validator.isEmail(this.stateModel.email);
         let isPasswordValid = this.stateModel.password ? true : false;
@@ -69,7 +66,6 @@ class QRScannerContainer extends Component {
      * validating data on server and try login into storj
      */
     login = async () => {
-        console.log('login');
         this.props.login(
             this.stateModel.email, 
             this.stateModel.password,
@@ -113,22 +109,19 @@ class QRScannerContainer extends Component {
      * Function that triggers when some barcode was read
      */
     _onBarCodeRead = (e) => {
-        console.log(`e.nativeEvent.data.type = ${e.nativeEvent.data.type}, e.nativeEvent.data.code = ${e.nativeEvent.data.code}`);
         this._stopScan();
         try {
             const result = JSON.parse(e.nativeEvent.data.code);
-            console.log(result);
             if(result.email && result.password && result.mnemonic) {
                 this.stateModel.email = result.email;
                 this.stateModel.password = result.password;
                 this.stateModel.mnemonic = result.mnemonic;
-                console.log(this.state);
+
                 this._barComponent.changeToSuccessBorderColor();
                 this.tryLogin();
             } 
             else { 
                 this._barComponent.changeToErrorBorderColor();
-                console.log('not valid JSON');
                 this._startScan();
             }
         }

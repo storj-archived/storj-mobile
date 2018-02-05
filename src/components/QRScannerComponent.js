@@ -1,12 +1,8 @@
 import {
     View,
-    TextInput,
     StyleSheet,
     TouchableOpacity,
-    Text,
-    Image,
-    Alert,
-    ActivityIndicator
+    Image
 } from 'react-native';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -78,17 +74,14 @@ export default class QRScannerComponent extends Component {
     }
 
     resetBorderColor () {
-        console.log("resetBorderColor");
         this.setState({ borderColor: 'white' })
     }
 
     changeToErrorBorderColor() {
-        console.log('changeToErrorBorderColor');
         this.setState({ borderColor: 'red' })
     }
 
     changeToSuccessBorderColor() {
-        console.log('changeToSuccessBorderColor');
         this.setState({ borderColor: 'green' })
     }
 
@@ -175,9 +168,3 @@ const styles = StyleSheet.create({
         height: getHeight(30)
     }
 });
-
-/**
- * Checking QRScannerComponent correct prop types
- */
-QRScannerComponent.propTypes = {
-};
