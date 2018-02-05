@@ -102,12 +102,12 @@ const StorjLib = (() => {
          */
         async importKeys(email, password, mnemonic, passcode) {
             try {
-                return await storjLib.importKeys(email, password, mnemonic, passcode);
+                return await storjLib.importKeys(email, password, mnemonic, /*passcode*/"");
             } catch(e) {
                 console.log(e);
-
-                return false;
             }
+
+            return false;
         };
     
         /**
@@ -117,7 +117,7 @@ const StorjLib = (() => {
          * @param {function} errorCallback 
          */
         getKeys(passcode, successCallback, errorCallback) {
-            storjLib.getKeys(passcode, successCallback, errorCallback);
+            storjLib.getKeys(/*passcode*/"", successCallback, errorCallback);
         };
     
         /**

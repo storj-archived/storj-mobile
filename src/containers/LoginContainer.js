@@ -208,8 +208,7 @@ class LoginContainer extends Component {
                 onChangePassword = { this.onChangePasswordInput.bind(this) }
                 onChangeMnemonic = { this.onChangeMnemonicInput.bind(this) }
                 onSubmit = { this.tryLogin.bind(this) }
-                registerButtonOnPress = { this.redirectToRegisterScreen.bind(this) }
-            />
+                registerButtonOnPress = { this.redirectToRegisterScreen.bind(this) } />
 		);
 	};
 }
