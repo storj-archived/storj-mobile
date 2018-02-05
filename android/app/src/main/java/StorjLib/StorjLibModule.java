@@ -1,5 +1,6 @@
 package StorjLib;
 
+import android.net.Uri;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
@@ -9,18 +10,21 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeMap;
 
 import StorjLib.CallbackWrappers.CreateBucketCallbackWrapper;
 import StorjLib.Responses.SingleResponse;
 import StorjLib.StorjTypesWrappers.BucketWrapper;
+import StorjLib.Utils.FileUtils;
 import io.storj.libstorj.Bucket;
-import io.storj.libstorj.CreateBucketCallback;
 import io.storj.libstorj.DeleteBucketCallback;
+import io.storj.libstorj.File;
 import io.storj.libstorj.GetBucketsCallback;
 import io.storj.libstorj.Keys;
 import io.storj.libstorj.KeysNotFoundException;
 import io.storj.libstorj.RegisterCallback;
 import io.storj.libstorj.Storj;
+import io.storj.libstorj.UploadFileCallback;
 import io.storj.libstorj.android.StorjAndroid;
 
 //TODO: 1. validate all input parameters (check in sources)
@@ -129,11 +133,11 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
     public void register(final String login, final String password, final Promise promise) {
         new Thread(new Runnable() {
             public void run() {
-            try {
-                StorjAndroid.getInstance(getReactApplicationContext()).register(login, password, new RegisterCallbackWrapper(promise));
-            } catch (Exception e) {
-                promise.reject(E_REGISTER, e);
-            }
+                try {
+                    StorjAndroid.getInstance(getReactApplicationContext()).register(login, password, new RegisterCallbackWrapper(promise));
+                } catch (Exception e) {
+                    promise.reject(E_REGISTER, e);
+                }
             }
         }).start();
     }
@@ -143,19 +147,20 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
         new Thread(new Runnable() {
             @Override
             public void run() {
-            SingleResponse<BucketWrapper> response = new SingleResponse<>();
+                SingleResponse<BucketWrapper> response = new SingleResponse<>();
 
-            try {
-                StorjAndroid.getInstance(getReactApplicationContext()).createBucket(bucketName, new CreateBucketCallbackWrapper(promise, response));
-            } catch (Exception e) {
-                response.error(e.getMessage());
-                promise.resolve(response.toJsObject());
-            }
+                try {
+                    StorjAndroid.getInstance(getReactApplicationContext()).createBucket(bucketName, new CreateBucketCallbackWrapper(promise, response));
+                } catch (Exception e) {
+                    response.error(e.getMessage());
+                    promise.resolve(response.toJsObject());
+                }
             }
         }).start();
     }
 
-    @ReactMethod void deleteBucket(final String bucketId, final Promise promise) {
+    @ReactMethod
+    void deleteBucket(final String bucketId, final Promise promise) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -163,7 +168,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
 
                 try {
                     StorjAndroid.getInstance(getReactApplicationContext()).deleteBucket(bucketId, new DeleteCallbackWrapper(promise, response));
-                } catch(Exception e) {
+                } catch (Exception e) {
                     response.error(e.getMessage());
                     promise.resolve(response.toJsObject());
                 }
@@ -183,6 +188,66 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
                 } catch (Exception e) {
                     promise.reject(E_GET_BUCKETS, e);
                 }
+            }
+        }).start();
+    }
+
+
+    public void uploadFile(final String bucketId,
+                           final String uri,
+                           final Callback resultCallback,
+                           final Callback progressCallback) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String path = FileUtils.getPath(getCurrentActivity().getApplicationContext(),
+                            Uri.parse(uri));
+                    if (path != null && FileUtils.isLocal(path)) {
+
+                        StorjAndroid.getInstance(getReactApplicationContext()).uploadFile(bucketId,
+                                path, new UploadFileCallback() {
+                                    @Override
+                                    public void onProgress(String filePath, double progress, long uploadedBytes, long totalBytes) {
+                                        WritableMap progressMap = new WritableNativeMap();
+
+                                        progressMap.putString("filePath", filePath);
+                                        progressMap.putDouble("progress", progress);
+                                        if (progressCallback != null) {
+                                            progressCallback.invoke(progressMap);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onComplete(String filePath, File file) {
+                                        WritableMap resultMap = new WritableNativeMap();
+                                        resultMap.putBoolean("isSuccess", true);
+                                        resultMap.putNull("errorMessage");
+                                        if (resultCallback != null) {
+                                            resultCallback.invoke(resultMap);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(String filePath, String message) {
+                                        WritableMap resultMap = new WritableNativeMap();
+                                        resultMap.putBoolean("isSuccess", false);
+                                        resultMap.putString("errorMessage", message);
+                                        if (resultCallback != null) {
+                                            resultCallback.invoke(resultMap);
+                                        }
+                                    }
+                                });
+                    }
+                } catch (Exception e) {
+                    WritableMap resultMap = new WritableNativeMap();
+                    resultMap.putBoolean("isSuccess", false);
+                    resultMap.putString("errorMessage", e.getLocalizedMessage());
+                    if (resultCallback != null) {
+                        resultCallback.invoke(resultMap);
+                    }
+                }
+
             }
         }).start();
     }
