@@ -4,13 +4,13 @@ import {
 } from 'react-native';
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16'
+import Adapter from 'enzyme-adapter-react-16';
 import ActionBarComponent from '../../src/components/ActionBarComponent';
 import TabBarActionModelFactory from '../../src/models/TabBarActionModel';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('ActionBarComponent', ()=> {    
+describe('ActionBarComponent', () => {    
 
 	it('renders correctly with SelectionMode and SingleItemSelected', () => {
         const pressSpy = jest.fn();
