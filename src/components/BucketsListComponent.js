@@ -21,6 +21,7 @@ export default class BucketsListComponent extends Component {
                     disableSelectionMode = { this.props.disableSelectionMode }
                     isSelectionMode = { this.props.isSelectionMode }
                     isSingleItemSelected = { this.props.isSingleItemSelected }
+                    listItemIcon = { require('../images/Icons/BucketItemFolder.png') }
                     deselectItem = { this.props.deselectBucket }
                     selectItem = { this.props.selectBucket }
                     data = { this.props.buckets }
