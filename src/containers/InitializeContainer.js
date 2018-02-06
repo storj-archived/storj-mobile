@@ -58,7 +58,7 @@ class InitializeContainer extends Component {
 
     getKeys() {
         StorjLib.getKeys(this.state.passcode, async (keys) => {
-            await this.getBuckets()
+            await this.getBuckets();
             this.props.redirectToMainScreen();
         }, (error) => {
             if(!this.state.enterPassCode)
