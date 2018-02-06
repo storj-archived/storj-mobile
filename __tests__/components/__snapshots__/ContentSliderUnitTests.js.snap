@@ -58,7 +58,7 @@ ShallowWrapper {
           style={
             Object {
               "alignItems": "center",
-              "alignSelf": "flex-start",
+              "alignSelf": "center",
               "flexDirection": "row",
               "justifyContent": "center",
               "paddingHorizontal": 74,
@@ -245,7 +245,7 @@ ShallowWrapper {
           ],
           "style": Object {
             "alignItems": "center",
-            "alignSelf": "flex-start",
+            "alignSelf": "center",
             "flexDirection": "row",
             "justifyContent": "center",
             "paddingHorizontal": 74,
@@ -371,7 +371,7 @@ ShallowWrapper {
             style={
               Object {
                 "alignItems": "center",
-                "alignSelf": "flex-start",
+                "alignSelf": "center",
                 "flexDirection": "row",
                 "justifyContent": "center",
                 "paddingHorizontal": 74,
@@ -558,7 +558,7 @@ ShallowWrapper {
             ],
             "style": Object {
               "alignItems": "center",
-              "alignSelf": "flex-start",
+              "alignSelf": "center",
               "flexDirection": "row",
               "justifyContent": "center",
               "paddingHorizontal": 74,

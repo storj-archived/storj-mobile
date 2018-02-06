@@ -46,8 +46,8 @@ describe('Navigation reducer tests', () => {
     it('redirect to RegisterSuccessScreen test from RegisterScreen', () => {
         const routeName = 'RegisterSuccessInfoScreen';
         const mnemonic = 'mnemonic'
-        const expected = { type: "Navigation/NAVIGATE", routeName: routeName, params: { mnemonic } };
-        const result = registerActionsCreators.redirectToRegisterSuccessScreen(mnemonic);
+        const expected = { type: "Navigation/NAVIGATE", routeName: routeName };
+        const result = registerActionsCreators.redirectToRegisterSuccessScreen();
     
         expect(result).toEqual(expected);
     });

@@ -24,6 +24,7 @@ ShallowWrapper {
       "onPress": [Function],
       "style": Object {
         "backgroundColor": "transparent",
+        "borderColor": "#2684FF",
         "borderRadius": 10,
         "borderWidth": 2,
         "height": 48,
@@ -58,6 +59,7 @@ ShallowWrapper {
         "onPress": [Function],
         "style": Object {
           "backgroundColor": "transparent",
+          "borderColor": "#2684FF",
           "borderRadius": 10,
           "borderWidth": 2,
           "height": 48,

@@ -30,25 +30,14 @@ ShallowWrapper {
           }
         >
           <Image
-            source="RegisterBackground.png"
-            style={
-              Object {
-                "height": 1334,
-                "right": 0,
-                "top": 0,
-                "width": 750,
-              }
-            }
-          />
-          <Image
             resizeMode="contain"
             source="LogoBlue.png"
             style={
               Object {
-                "height": 116,
-                "left": 32,
+                "height": 112,
+                "left": 40,
                 "position": "absolute",
-                "top": 72,
+                "top": 40,
                 "width": 240,
               }
             }
@@ -57,8 +46,8 @@ ShallowWrapper {
         <View
           style={
             Object {
-              "marginTop": 220,
-              "paddingLeft": 32,
+              "marginTop": 172,
+              "paddingLeft": 42,
               "paddingRight": 50,
             }
           }
@@ -69,31 +58,13 @@ ShallowWrapper {
             ellipsizeMode="tail"
             style={
               Object {
-                "color": "#2782ff",
+                "color": "#384B65",
                 "fontFamily": "Montserrat-ExtraBold",
-                "fontSize": 92,
-                "marginTop": 46,
+                "fontSize": 60,
               }
             }
           >
-            Welcome
-          </Text>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Object {
-                "backgroundColor": "transparent",
-                "color": "#2782ff",
-                "fontFamily": "Montserrat-ExtraBold",
-                "fontSize": 92,
-                "lineHeight": 72,
-                "marginBottom": 26,
-              }
-            }
-          >
-            on board
+            Welcome on board
           </Text>
           <InputComponent
             errorMessage="Invalid email"
@@ -101,6 +72,12 @@ ShallowWrapper {
             isPassword={false}
             onChangeText={[Function]}
             placeholder="Email"
+            style={
+              Object {
+                "backgroundColor": "transparent",
+                "marginTop": 198,
+              }
+            }
           />
           <InputComponent
             errorMessage="Invalid password"
@@ -114,14 +91,13 @@ ShallowWrapper {
             isError={undefined}
             isPassword={true}
             onChangeText={[Function]}
-            placeholder="Repeat password"
+            placeholder="Confirm password"
           />
           <View
             style={
               Object {
                 "flexDirection": "row",
-                "marginBottom": 54,
-                "marginTop": 32,
+                "marginTop": 10,
               }
             }
           >
@@ -138,7 +114,7 @@ ShallowWrapper {
                   "fontFamily": "Montserrat",
                   "fontSize": 32,
                   "lineHeight": 48,
-                  "marginLeft": 32,
+                  "marginLeft": 22,
                 }
               }
             >
@@ -150,7 +126,8 @@ ShallowWrapper {
                 onPress={[Function]}
                 style={
                   Object {
-                    "color": "#2782ff",
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-Bold",
                   }
                 }
               >
@@ -164,6 +141,7 @@ ShallowWrapper {
             Object {
               "alignItems": "center",
               "height": 226,
+              "marginTop": 100,
             }
           }
         >
@@ -173,7 +151,7 @@ ShallowWrapper {
             style={
               Object {
                 "alignItems": "center",
-                "backgroundColor": "#2782ff",
+                "backgroundColor": "#2794FF",
                 "borderRadius": 16,
                 "height": 110,
                 "justifyContent": "center",
@@ -187,13 +165,13 @@ ShallowWrapper {
               ellipsizeMode="tail"
               style={
                 Object {
-                  "color": "white",
+                  "color": "#FFFFFF",
                   "fontFamily": "Montserrat-Bold",
-                  "fontSize": 28,
+                  "fontSize": 32,
                 }
               }
             >
-              CREATE ACCOUNT
+              Create account
             </Text>
           </TouchableOpacity>
           <Text
@@ -202,11 +180,11 @@ ShallowWrapper {
             ellipsizeMode="tail"
             style={
               Object {
-                "color": "#4d5664",
+                "color": "#384B65",
                 "fontFamily": "Montserrat",
-                "fontSize": 28,
+                "fontSize": 32,
                 "lineHeight": 48,
-                "marginTop": 34,
+                "marginTop": 40,
               }
             }
           >
@@ -218,11 +196,12 @@ ShallowWrapper {
               onPress={[Function]}
               style={
                 Object {
-                  "color": "#2782ff",
+                  "color": "#2794FF",
+                  "fontFamily": "Montserrat-Bold",
                 }
               }
             >
-               Sign in
+               Login
             </Text>
           </Text>
         </View>,
@@ -246,32 +225,19 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
-          "children": Array [
-            <Image
-              source="RegisterBackground.png"
-              style={
-                Object {
-                  "height": 1334,
-                  "right": 0,
-                  "top": 0,
-                  "width": 750,
-                }
+          "children": <Image
+            resizeMode="contain"
+            source="LogoBlue.png"
+            style={
+              Object {
+                "height": 112,
+                "left": 40,
+                "position": "absolute",
+                "top": 40,
+                "width": 240,
               }
-            />,
-            <Image
-              resizeMode="contain"
-              source="LogoBlue.png"
-              style={
-                Object {
-                  "height": 116,
-                  "left": 32,
-                  "position": "absolute",
-                  "top": 72,
-                  "width": 240,
-                }
-              }
-            />,
-          ],
+            }
+          />,
           "style": Object {
             "bottom": 0,
             "left": 0,
@@ -281,44 +247,25 @@ ShallowWrapper {
           },
         },
         "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "source": "RegisterBackground.png",
-              "style": Object {
-                "height": 1334,
-                "right": 0,
-                "top": 0,
-                "width": 750,
-              },
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "resizeMode": "contain",
+            "source": "LogoBlue.png",
+            "style": Object {
+              "height": 112,
+              "left": 40,
+              "position": "absolute",
+              "top": 40,
+              "width": 240,
             },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
           },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "resizeMode": "contain",
-              "source": "LogoBlue.png",
-              "style": Object {
-                "height": 116,
-                "left": 32,
-                "position": "absolute",
-                "top": 72,
-                "width": 240,
-              },
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-        ],
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
         "type": [Function],
       },
       Object {
@@ -333,31 +280,13 @@ ShallowWrapper {
               ellipsizeMode="tail"
               style={
                 Object {
-                  "color": "#2782ff",
+                  "color": "#384B65",
                   "fontFamily": "Montserrat-ExtraBold",
-                  "fontSize": 92,
-                  "marginTop": 46,
+                  "fontSize": 60,
                 }
               }
             >
-              Welcome
-            </Text>,
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "backgroundColor": "transparent",
-                  "color": "#2782ff",
-                  "fontFamily": "Montserrat-ExtraBold",
-                  "fontSize": 92,
-                  "lineHeight": 72,
-                  "marginBottom": 26,
-                }
-              }
-            >
-              on board
+              Welcome on board
             </Text>,
             <InputComponent
               errorMessage="Invalid email"
@@ -365,6 +294,12 @@ ShallowWrapper {
               isPassword={false}
               onChangeText={[Function]}
               placeholder="Email"
+              style={
+                Object {
+                  "backgroundColor": "transparent",
+                  "marginTop": 198,
+                }
+              }
             />,
             <InputComponent
               errorMessage="Invalid password"
@@ -378,14 +313,13 @@ ShallowWrapper {
               isError={undefined}
               isPassword={true}
               onChangeText={[Function]}
-              placeholder="Repeat password"
+              placeholder="Confirm password"
             />,
             <View
               style={
                 Object {
                   "flexDirection": "row",
-                  "marginBottom": 54,
-                  "marginTop": 32,
+                  "marginTop": 10,
                 }
               }
             >
@@ -402,7 +336,7 @@ ShallowWrapper {
                     "fontFamily": "Montserrat",
                     "fontSize": 32,
                     "lineHeight": 48,
-                    "marginLeft": 32,
+                    "marginLeft": 22,
                   }
                 }
               >
@@ -414,7 +348,8 @@ ShallowWrapper {
                   onPress={[Function]}
                   style={
                     Object {
-                      "color": "#2782ff",
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Bold",
                     }
                   }
                 >
@@ -424,8 +359,8 @@ ShallowWrapper {
             </View>,
           ],
           "style": Object {
-            "marginTop": 220,
-            "paddingLeft": 32,
+            "marginTop": 172,
+            "paddingLeft": 42,
             "paddingRight": 50,
           },
         },
@@ -438,39 +373,16 @@ ShallowWrapper {
             "props": Object {
               "accessible": true,
               "allowFontScaling": true,
-              "children": "Welcome",
+              "children": "Welcome on board",
               "ellipsizeMode": "tail",
               "style": Object {
-                "color": "#2782ff",
+                "color": "#384B65",
                 "fontFamily": "Montserrat-ExtraBold",
-                "fontSize": 92,
-                "marginTop": 46,
+                "fontSize": 60,
               },
             },
             "ref": null,
-            "rendered": "Welcome",
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "accessible": true,
-              "allowFontScaling": true,
-              "children": "on board",
-              "ellipsizeMode": "tail",
-              "style": Object {
-                "backgroundColor": "transparent",
-                "color": "#2782ff",
-                "fontFamily": "Montserrat-ExtraBold",
-                "fontSize": 92,
-                "lineHeight": 72,
-                "marginBottom": 26,
-              },
-            },
-            "ref": null,
-            "rendered": "on board",
+            "rendered": "Welcome on board",
             "type": [Function],
           },
           Object {
@@ -483,6 +395,10 @@ ShallowWrapper {
               "isPassword": false,
               "onChangeText": [Function],
               "placeholder": "Email",
+              "style": Object {
+                "backgroundColor": "transparent",
+                "marginTop": 198,
+              },
             },
             "ref": null,
             "rendered": null,
@@ -512,7 +428,7 @@ ShallowWrapper {
               "isError": undefined,
               "isPassword": true,
               "onChangeText": [Function],
-              "placeholder": "Repeat password",
+              "placeholder": "Confirm password",
             },
             "ref": null,
             "rendered": null,
@@ -537,7 +453,7 @@ ShallowWrapper {
                       "fontFamily": "Montserrat",
                       "fontSize": 32,
                       "lineHeight": 48,
-                      "marginLeft": 32,
+                      "marginLeft": 22,
                     }
                   }
                 >
@@ -549,7 +465,8 @@ ShallowWrapper {
                     onPress={[Function]}
                     style={
                       Object {
-                        "color": "#2782ff",
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Bold",
                       }
                     }
                   >
@@ -559,8 +476,7 @@ ShallowWrapper {
               ],
               "style": Object {
                 "flexDirection": "row",
-                "marginBottom": 54,
-                "marginTop": 32,
+                "marginTop": 10,
               },
             },
             "ref": null,
@@ -592,7 +508,8 @@ ShallowWrapper {
                       onPress={[Function]}
                       style={
                         Object {
-                          "color": "#2782ff",
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Bold",
                         }
                       }
                     >
@@ -605,7 +522,7 @@ ShallowWrapper {
                     "fontFamily": "Montserrat",
                     "fontSize": 32,
                     "lineHeight": 48,
-                    "marginLeft": 32,
+                    "marginLeft": 22,
                   },
                 },
                 "ref": null,
@@ -622,7 +539,8 @@ ShallowWrapper {
                       "ellipsizeMode": "tail",
                       "onPress": [Function],
                       "style": Object {
-                        "color": "#2782ff",
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Bold",
                       },
                     },
                     "ref": null,
@@ -650,7 +568,7 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "#2782ff",
+                  "backgroundColor": "#2794FF",
                   "borderRadius": 16,
                   "height": 110,
                   "justifyContent": "center",
@@ -664,13 +582,13 @@ ShallowWrapper {
                 ellipsizeMode="tail"
                 style={
                   Object {
-                    "color": "white",
+                    "color": "#FFFFFF",
                     "fontFamily": "Montserrat-Bold",
-                    "fontSize": 28,
+                    "fontSize": 32,
                   }
                 }
               >
-                CREATE ACCOUNT
+                Create account
               </Text>
             </TouchableOpacity>,
             <Text
@@ -679,11 +597,11 @@ ShallowWrapper {
               ellipsizeMode="tail"
               style={
                 Object {
-                  "color": "#4d5664",
+                  "color": "#384B65",
                   "fontFamily": "Montserrat",
-                  "fontSize": 28,
+                  "fontSize": 32,
                   "lineHeight": 48,
-                  "marginTop": 34,
+                  "marginTop": 40,
                 }
               }
             >
@@ -695,17 +613,19 @@ ShallowWrapper {
                 onPress={[Function]}
                 style={
                   Object {
-                    "color": "#2782ff",
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-Bold",
                   }
                 }
               >
-                 Sign in
+                 Login
               </Text>
             </Text>,
           ],
           "style": Object {
             "alignItems": "center",
             "height": 226,
+            "marginTop": 100,
           },
         },
         "ref": null,
@@ -722,18 +642,18 @@ ShallowWrapper {
                 ellipsizeMode="tail"
                 style={
                   Object {
-                    "color": "white",
+                    "color": "#FFFFFF",
                     "fontFamily": "Montserrat-Bold",
-                    "fontSize": 28,
+                    "fontSize": 32,
                   }
                 }
               >
-                CREATE ACCOUNT
+                Create account
               </Text>,
               "onPressOut": [Function],
               "style": Object {
                 "alignItems": "center",
-                "backgroundColor": "#2782ff",
+                "backgroundColor": "#2794FF",
                 "borderRadius": 16,
                 "height": 110,
                 "justifyContent": "center",
@@ -748,16 +668,16 @@ ShallowWrapper {
               "props": Object {
                 "accessible": true,
                 "allowFontScaling": true,
-                "children": "CREATE ACCOUNT",
+                "children": "Create account",
                 "ellipsizeMode": "tail",
                 "style": Object {
-                  "color": "white",
+                  "color": "#FFFFFF",
                   "fontFamily": "Montserrat-Bold",
-                  "fontSize": 28,
+                  "fontSize": 32,
                 },
               },
               "ref": null,
-              "rendered": "CREATE ACCOUNT",
+              "rendered": "Create account",
               "type": [Function],
             },
             "type": [Function],
@@ -778,20 +698,21 @@ ShallowWrapper {
                   onPress={[Function]}
                   style={
                     Object {
-                      "color": "#2782ff",
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Bold",
                     }
                   }
                 >
-                   Sign in
+                   Login
                 </Text>,
               ],
               "ellipsizeMode": "tail",
               "style": Object {
-                "color": "#4d5664",
+                "color": "#384B65",
                 "fontFamily": "Montserrat",
-                "fontSize": 28,
+                "fontSize": 32,
                 "lineHeight": 48,
-                "marginTop": 34,
+                "marginTop": 40,
               },
             },
             "ref": null,
@@ -804,15 +725,16 @@ ShallowWrapper {
                 "props": Object {
                   "accessible": true,
                   "allowFontScaling": true,
-                  "children": " Sign in",
+                  "children": " Login",
                   "ellipsizeMode": "tail",
                   "onPress": [Function],
                   "style": Object {
-                    "color": "#2782ff",
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-Bold",
                   },
                 },
                 "ref": null,
-                "rendered": " Sign in",
+                "rendered": " Login",
                 "type": [Function],
               },
             ],
@@ -844,25 +766,14 @@ ShallowWrapper {
             }
           >
             <Image
-              source="RegisterBackground.png"
-              style={
-                Object {
-                  "height": 1334,
-                  "right": 0,
-                  "top": 0,
-                  "width": 750,
-                }
-              }
-            />
-            <Image
               resizeMode="contain"
               source="LogoBlue.png"
               style={
                 Object {
-                  "height": 116,
-                  "left": 32,
+                  "height": 112,
+                  "left": 40,
                   "position": "absolute",
-                  "top": 72,
+                  "top": 40,
                   "width": 240,
                 }
               }
@@ -871,8 +782,8 @@ ShallowWrapper {
           <View
             style={
               Object {
-                "marginTop": 220,
-                "paddingLeft": 32,
+                "marginTop": 172,
+                "paddingLeft": 42,
                 "paddingRight": 50,
               }
             }
@@ -883,31 +794,13 @@ ShallowWrapper {
               ellipsizeMode="tail"
               style={
                 Object {
-                  "color": "#2782ff",
+                  "color": "#384B65",
                   "fontFamily": "Montserrat-ExtraBold",
-                  "fontSize": 92,
-                  "marginTop": 46,
+                  "fontSize": 60,
                 }
               }
             >
-              Welcome
-            </Text>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "backgroundColor": "transparent",
-                  "color": "#2782ff",
-                  "fontFamily": "Montserrat-ExtraBold",
-                  "fontSize": 92,
-                  "lineHeight": 72,
-                  "marginBottom": 26,
-                }
-              }
-            >
-              on board
+              Welcome on board
             </Text>
             <InputComponent
               errorMessage="Invalid email"
@@ -915,6 +808,12 @@ ShallowWrapper {
               isPassword={false}
               onChangeText={[Function]}
               placeholder="Email"
+              style={
+                Object {
+                  "backgroundColor": "transparent",
+                  "marginTop": 198,
+                }
+              }
             />
             <InputComponent
               errorMessage="Invalid password"
@@ -928,14 +827,13 @@ ShallowWrapper {
               isError={undefined}
               isPassword={true}
               onChangeText={[Function]}
-              placeholder="Repeat password"
+              placeholder="Confirm password"
             />
             <View
               style={
                 Object {
                   "flexDirection": "row",
-                  "marginBottom": 54,
-                  "marginTop": 32,
+                  "marginTop": 10,
                 }
               }
             >
@@ -952,7 +850,7 @@ ShallowWrapper {
                     "fontFamily": "Montserrat",
                     "fontSize": 32,
                     "lineHeight": 48,
-                    "marginLeft": 32,
+                    "marginLeft": 22,
                   }
                 }
               >
@@ -964,7 +862,8 @@ ShallowWrapper {
                   onPress={[Function]}
                   style={
                     Object {
-                      "color": "#2782ff",
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Bold",
                     }
                   }
                 >
@@ -978,6 +877,7 @@ ShallowWrapper {
               Object {
                 "alignItems": "center",
                 "height": 226,
+                "marginTop": 100,
               }
             }
           >
@@ -987,7 +887,7 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "#2782ff",
+                  "backgroundColor": "#2794FF",
                   "borderRadius": 16,
                   "height": 110,
                   "justifyContent": "center",
@@ -1001,13 +901,13 @@ ShallowWrapper {
                 ellipsizeMode="tail"
                 style={
                   Object {
-                    "color": "white",
+                    "color": "#FFFFFF",
                     "fontFamily": "Montserrat-Bold",
-                    "fontSize": 28,
+                    "fontSize": 32,
                   }
                 }
               >
-                CREATE ACCOUNT
+                Create account
               </Text>
             </TouchableOpacity>
             <Text
@@ -1016,11 +916,11 @@ ShallowWrapper {
               ellipsizeMode="tail"
               style={
                 Object {
-                  "color": "#4d5664",
+                  "color": "#384B65",
                   "fontFamily": "Montserrat",
-                  "fontSize": 28,
+                  "fontSize": 32,
                   "lineHeight": 48,
-                  "marginTop": 34,
+                  "marginTop": 40,
                 }
               }
             >
@@ -1032,11 +932,12 @@ ShallowWrapper {
                 onPress={[Function]}
                 style={
                   Object {
-                    "color": "#2782ff",
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-Bold",
                   }
                 }
               >
-                 Sign in
+                 Login
               </Text>
             </Text>
           </View>,
@@ -1060,32 +961,19 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "children": Array [
-              <Image
-                source="RegisterBackground.png"
-                style={
-                  Object {
-                    "height": 1334,
-                    "right": 0,
-                    "top": 0,
-                    "width": 750,
-                  }
+            "children": <Image
+              resizeMode="contain"
+              source="LogoBlue.png"
+              style={
+                Object {
+                  "height": 112,
+                  "left": 40,
+                  "position": "absolute",
+                  "top": 40,
+                  "width": 240,
                 }
-              />,
-              <Image
-                resizeMode="contain"
-                source="LogoBlue.png"
-                style={
-                  Object {
-                    "height": 116,
-                    "left": 32,
-                    "position": "absolute",
-                    "top": 72,
-                    "width": 240,
-                  }
-                }
-              />,
-            ],
+              }
+            />,
             "style": Object {
               "bottom": 0,
               "left": 0,
@@ -1095,44 +983,25 @@ ShallowWrapper {
             },
           },
           "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "source": "RegisterBackground.png",
-                "style": Object {
-                  "height": 1334,
-                  "right": 0,
-                  "top": 0,
-                  "width": 750,
-                },
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "resizeMode": "contain",
+              "source": "LogoBlue.png",
+              "style": Object {
+                "height": 112,
+                "left": 40,
+                "position": "absolute",
+                "top": 40,
+                "width": 240,
               },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
             },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "resizeMode": "contain",
-                "source": "LogoBlue.png",
-                "style": Object {
-                  "height": 116,
-                  "left": 32,
-                  "position": "absolute",
-                  "top": 72,
-                  "width": 240,
-                },
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-          ],
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
           "type": [Function],
         },
         Object {
@@ -1147,31 +1016,13 @@ ShallowWrapper {
                 ellipsizeMode="tail"
                 style={
                   Object {
-                    "color": "#2782ff",
+                    "color": "#384B65",
                     "fontFamily": "Montserrat-ExtraBold",
-                    "fontSize": 92,
-                    "marginTop": 46,
+                    "fontSize": 60,
                   }
                 }
               >
-                Welcome
-              </Text>,
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "backgroundColor": "transparent",
-                    "color": "#2782ff",
-                    "fontFamily": "Montserrat-ExtraBold",
-                    "fontSize": 92,
-                    "lineHeight": 72,
-                    "marginBottom": 26,
-                  }
-                }
-              >
-                on board
+                Welcome on board
               </Text>,
               <InputComponent
                 errorMessage="Invalid email"
@@ -1179,6 +1030,12 @@ ShallowWrapper {
                 isPassword={false}
                 onChangeText={[Function]}
                 placeholder="Email"
+                style={
+                  Object {
+                    "backgroundColor": "transparent",
+                    "marginTop": 198,
+                  }
+                }
               />,
               <InputComponent
                 errorMessage="Invalid password"
@@ -1192,14 +1049,13 @@ ShallowWrapper {
                 isError={undefined}
                 isPassword={true}
                 onChangeText={[Function]}
-                placeholder="Repeat password"
+                placeholder="Confirm password"
               />,
               <View
                 style={
                   Object {
                     "flexDirection": "row",
-                    "marginBottom": 54,
-                    "marginTop": 32,
+                    "marginTop": 10,
                   }
                 }
               >
@@ -1216,7 +1072,7 @@ ShallowWrapper {
                       "fontFamily": "Montserrat",
                       "fontSize": 32,
                       "lineHeight": 48,
-                      "marginLeft": 32,
+                      "marginLeft": 22,
                     }
                   }
                 >
@@ -1228,7 +1084,8 @@ ShallowWrapper {
                     onPress={[Function]}
                     style={
                       Object {
-                        "color": "#2782ff",
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Bold",
                       }
                     }
                   >
@@ -1238,8 +1095,8 @@ ShallowWrapper {
               </View>,
             ],
             "style": Object {
-              "marginTop": 220,
-              "paddingLeft": 32,
+              "marginTop": 172,
+              "paddingLeft": 42,
               "paddingRight": 50,
             },
           },
@@ -1252,39 +1109,16 @@ ShallowWrapper {
               "props": Object {
                 "accessible": true,
                 "allowFontScaling": true,
-                "children": "Welcome",
+                "children": "Welcome on board",
                 "ellipsizeMode": "tail",
                 "style": Object {
-                  "color": "#2782ff",
+                  "color": "#384B65",
                   "fontFamily": "Montserrat-ExtraBold",
-                  "fontSize": 92,
-                  "marginTop": 46,
+                  "fontSize": 60,
                 },
               },
               "ref": null,
-              "rendered": "Welcome",
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "accessible": true,
-                "allowFontScaling": true,
-                "children": "on board",
-                "ellipsizeMode": "tail",
-                "style": Object {
-                  "backgroundColor": "transparent",
-                  "color": "#2782ff",
-                  "fontFamily": "Montserrat-ExtraBold",
-                  "fontSize": 92,
-                  "lineHeight": 72,
-                  "marginBottom": 26,
-                },
-              },
-              "ref": null,
-              "rendered": "on board",
+              "rendered": "Welcome on board",
               "type": [Function],
             },
             Object {
@@ -1297,6 +1131,10 @@ ShallowWrapper {
                 "isPassword": false,
                 "onChangeText": [Function],
                 "placeholder": "Email",
+                "style": Object {
+                  "backgroundColor": "transparent",
+                  "marginTop": 198,
+                },
               },
               "ref": null,
               "rendered": null,
@@ -1326,7 +1164,7 @@ ShallowWrapper {
                 "isError": undefined,
                 "isPassword": true,
                 "onChangeText": [Function],
-                "placeholder": "Repeat password",
+                "placeholder": "Confirm password",
               },
               "ref": null,
               "rendered": null,
@@ -1351,7 +1189,7 @@ ShallowWrapper {
                         "fontFamily": "Montserrat",
                         "fontSize": 32,
                         "lineHeight": 48,
-                        "marginLeft": 32,
+                        "marginLeft": 22,
                       }
                     }
                   >
@@ -1363,7 +1201,8 @@ ShallowWrapper {
                       onPress={[Function]}
                       style={
                         Object {
-                          "color": "#2782ff",
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Bold",
                         }
                       }
                     >
@@ -1373,8 +1212,7 @@ ShallowWrapper {
                 ],
                 "style": Object {
                   "flexDirection": "row",
-                  "marginBottom": 54,
-                  "marginTop": 32,
+                  "marginTop": 10,
                 },
               },
               "ref": null,
@@ -1406,7 +1244,8 @@ ShallowWrapper {
                         onPress={[Function]}
                         style={
                           Object {
-                            "color": "#2782ff",
+                            "color": "#2794FF",
+                            "fontFamily": "Montserrat-Bold",
                           }
                         }
                       >
@@ -1419,7 +1258,7 @@ ShallowWrapper {
                       "fontFamily": "Montserrat",
                       "fontSize": 32,
                       "lineHeight": 48,
-                      "marginLeft": 32,
+                      "marginLeft": 22,
                     },
                   },
                   "ref": null,
@@ -1436,7 +1275,8 @@ ShallowWrapper {
                         "ellipsizeMode": "tail",
                         "onPress": [Function],
                         "style": Object {
-                          "color": "#2782ff",
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Bold",
                         },
                       },
                       "ref": null,
@@ -1464,7 +1304,7 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "#2782ff",
+                    "backgroundColor": "#2794FF",
                     "borderRadius": 16,
                     "height": 110,
                     "justifyContent": "center",
@@ -1478,13 +1318,13 @@ ShallowWrapper {
                   ellipsizeMode="tail"
                   style={
                     Object {
-                      "color": "white",
+                      "color": "#FFFFFF",
                       "fontFamily": "Montserrat-Bold",
-                      "fontSize": 28,
+                      "fontSize": 32,
                     }
                   }
                 >
-                  CREATE ACCOUNT
+                  Create account
                 </Text>
               </TouchableOpacity>,
               <Text
@@ -1493,11 +1333,11 @@ ShallowWrapper {
                 ellipsizeMode="tail"
                 style={
                   Object {
-                    "color": "#4d5664",
+                    "color": "#384B65",
                     "fontFamily": "Montserrat",
-                    "fontSize": 28,
+                    "fontSize": 32,
                     "lineHeight": 48,
-                    "marginTop": 34,
+                    "marginTop": 40,
                   }
                 }
               >
@@ -1509,17 +1349,19 @@ ShallowWrapper {
                   onPress={[Function]}
                   style={
                     Object {
-                      "color": "#2782ff",
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Bold",
                     }
                   }
                 >
-                   Sign in
+                   Login
                 </Text>
               </Text>,
             ],
             "style": Object {
               "alignItems": "center",
               "height": 226,
+              "marginTop": 100,
             },
           },
           "ref": null,
@@ -1536,18 +1378,18 @@ ShallowWrapper {
                   ellipsizeMode="tail"
                   style={
                     Object {
-                      "color": "white",
+                      "color": "#FFFFFF",
                       "fontFamily": "Montserrat-Bold",
-                      "fontSize": 28,
+                      "fontSize": 32,
                     }
                   }
                 >
-                  CREATE ACCOUNT
+                  Create account
                 </Text>,
                 "onPressOut": [Function],
                 "style": Object {
                   "alignItems": "center",
-                  "backgroundColor": "#2782ff",
+                  "backgroundColor": "#2794FF",
                   "borderRadius": 16,
                   "height": 110,
                   "justifyContent": "center",
@@ -1562,16 +1404,16 @@ ShallowWrapper {
                 "props": Object {
                   "accessible": true,
                   "allowFontScaling": true,
-                  "children": "CREATE ACCOUNT",
+                  "children": "Create account",
                   "ellipsizeMode": "tail",
                   "style": Object {
-                    "color": "white",
+                    "color": "#FFFFFF",
                     "fontFamily": "Montserrat-Bold",
-                    "fontSize": 28,
+                    "fontSize": 32,
                   },
                 },
                 "ref": null,
-                "rendered": "CREATE ACCOUNT",
+                "rendered": "Create account",
                 "type": [Function],
               },
               "type": [Function],
@@ -1592,20 +1434,21 @@ ShallowWrapper {
                     onPress={[Function]}
                     style={
                       Object {
-                        "color": "#2782ff",
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Bold",
                       }
                     }
                   >
-                     Sign in
+                     Login
                   </Text>,
                 ],
                 "ellipsizeMode": "tail",
                 "style": Object {
-                  "color": "#4d5664",
+                  "color": "#384B65",
                   "fontFamily": "Montserrat",
-                  "fontSize": 28,
+                  "fontSize": 32,
                   "lineHeight": 48,
-                  "marginTop": 34,
+                  "marginTop": 40,
                 },
               },
               "ref": null,
@@ -1618,15 +1461,16 @@ ShallowWrapper {
                   "props": Object {
                     "accessible": true,
                     "allowFontScaling": true,
-                    "children": " Sign in",
+                    "children": " Login",
                     "ellipsizeMode": "tail",
                     "onPress": [Function],
                     "style": Object {
-                      "color": "#2782ff",
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Bold",
                     },
                   },
                   "ref": null,
-                  "rendered": " Sign in",
+                  "rendered": " Login",
                   "type": [Function],
                 },
               ],

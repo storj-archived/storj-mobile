@@ -35,10 +35,10 @@ ShallowWrapper {
             source="LogoBlue.png"
             style={
               Object {
-                "height": 116,
-                "left": 32,
+                "height": 112,
+                "left": 40,
                 "position": "absolute",
-                "top": 52,
+                "top": 40,
                 "width": 240,
               }
             }
@@ -47,9 +47,9 @@ ShallowWrapper {
         <View
           style={
             Object {
-              "marginTop": 190,
-              "paddingLeft": 32,
-              "paddingRight": 50,
+              "marginTop": 172,
+              "paddingLeft": 40,
+              "paddingRight": 40,
             }
           }
         >
@@ -59,29 +59,44 @@ ShallowWrapper {
             ellipsizeMode="tail"
             style={
               Object {
-                "color": "#2782ff",
+                "color": "#384B65",
                 "fontFamily": "Montserrat-ExtraBold",
-                "fontSize": 92,
+                "fontSize": 60,
                 "marginBottom": 10,
               }
             }
           >
             Login
           </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#4b657d",
+                "fontFamily": "Montserrat",
+                "fontSize": 24,
+                "fontWeight": "bold",
+                "height": 30,
+                "marginTop": 58,
+                "opacity": 0.4,
+              }
+            }
+          >
+            Email
+          </Text>
           <InputComponent
             errorMessage="Invalid email"
             isError={undefined}
             isPassword={false}
             onChangeText={[Function]}
-            placeholder="Email address"
-            value={undefined}
-          />
-          <InputComponent
-            errorMessage="Invalid password"
-            isError={undefined}
-            isPassword={true}
-            onChangeText={[Function]}
-            placeholder="Password"
+            placeholder="your_email@mail.com"
+            style={
+              Object {
+                "height": 60,
+              }
+            }
             value={undefined}
           />
           <Text
@@ -90,9 +105,43 @@ ShallowWrapper {
             ellipsizeMode="tail"
             style={
               Object {
-                "color": "#8c92ac",
+                "color": "#4b657d",
                 "fontFamily": "Montserrat",
                 "fontSize": 24,
+                "fontWeight": "bold",
+                "height": 30,
+                "marginTop": 58,
+                "opacity": 0.4,
+              }
+            }
+          >
+            Password
+          </Text>
+          <InputComponent
+            errorMessage="Invalid password"
+            isError={undefined}
+            isPassword={true}
+            onChangeText={[Function]}
+            placeholder="Enter your password"
+            style={
+              Object {
+                "height": 60,
+              }
+            }
+            value={undefined}
+          />
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#4b657d",
+                "fontFamily": "Montserrat",
+                "fontSize": 24,
+                "fontWeight": "bold",
+                "marginTop": 42,
+                "opacity": 0.4,
               }
             }
           >
@@ -103,13 +152,15 @@ ShallowWrapper {
             errorMessage="Invalid mnemonic"
             inputStyle={
               Object {
-                "height": 200,
+                "fontSize": 28,
+                "height": 180,
               }
             }
             isError={undefined}
             isPassword={false}
             multiline={true}
             onChangeText={[Function]}
+            placeholder="Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code"
             value={undefined}
           />
           <View
@@ -127,8 +178,8 @@ ShallowWrapper {
               ellipsizeMode="tail"
               style={
                 Object {
-                  "color": "#384b65",
-                  "fontFamily": "Montserrat",
+                  "color": "#2794FF",
+                  "fontFamily": "Montserrat-Bold",
                   "fontSize": 32,
                   "lineHeight": 48,
                   "marginTop": 40,
@@ -144,11 +195,11 @@ ShallowWrapper {
               style={
                 Object {
                   "alignSelf": "flex-end",
-                  "color": "#8c92ac",
+                  "color": "#2794FF",
                   "fontFamily": "Montserrat",
-                  "fontSize": 24,
+                  "fontSize": 26,
+                  "fontWeight": "bold",
                   "marginBottom": 48,
-                  "textDecorationLine": "underline",
                 }
               }
             >
@@ -161,7 +212,7 @@ ShallowWrapper {
             Object {
               "alignItems": "center",
               "height": 226,
-              "marginTop": 14,
+              "marginTop": 20,
             }
           }
         >
@@ -171,9 +222,9 @@ ShallowWrapper {
             style={
               Object {
                 "alignItems": "center",
-                "backgroundColor": "#2782ff",
+                "backgroundColor": "#2794FF",
                 "borderRadius": 12,
-                "height": 88,
+                "height": 100,
                 "justifyContent": "center",
                 "width": 686,
               }
@@ -187,11 +238,11 @@ ShallowWrapper {
                 Object {
                   "color": "white",
                   "fontFamily": "Montserrat-Bold",
-                  "fontSize": 28,
+                  "fontSize": 32,
                 }
               }
             >
-              LOGIN
+              Login
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -201,10 +252,10 @@ ShallowWrapper {
               Object {
                 "alignItems": "center",
                 "backgroundColor": "white",
-                "borderColor": "#2782ff",
+                "borderColor": "#2794FF",
                 "borderRadius": 12,
                 "borderWidth": 2,
-                "height": 88,
+                "height": 100,
                 "justifyContent": "center",
                 "marginTop": 20,
                 "width": 686,
@@ -217,13 +268,13 @@ ShallowWrapper {
               ellipsizeMode="tail"
               style={
                 Object {
-                  "color": "#2782ff",
+                  "color": "#2794FF",
                   "fontFamily": "Montserrat-Bold",
-                  "fontSize": 28,
+                  "fontSize": 32,
                 }
               }
             >
-              LOGIN VIA QR
+              Login via QR
             </Text>
           </TouchableOpacity>
           <Text
@@ -232,10 +283,10 @@ ShallowWrapper {
             ellipsizeMode="tail"
             style={
               Object {
-                "color": "#4d5664",
+                "color": "#384B65",
                 "fontFamily": "Montserrat",
-                "fontSize": 28,
-                "marginTop": 32,
+                "fontSize": 32,
+                "marginTop": 20,
               }
             }
           >
@@ -247,7 +298,8 @@ ShallowWrapper {
               onPress={undefined}
               style={
                 Object {
-                  "color": "#2782ff",
+                  "color": "#2794FF",
+                  "fontFamily": "Montserrat-Bold",
                 }
               }
             >
@@ -274,10 +326,10 @@ ShallowWrapper {
             source="LogoBlue.png"
             style={
               Object {
-                "height": 116,
-                "left": 32,
+                "height": 112,
+                "left": 40,
                 "position": "absolute",
-                "top": 52,
+                "top": 40,
                 "width": 240,
               }
             }
@@ -300,10 +352,10 @@ ShallowWrapper {
             "resizeMode": "contain",
             "source": "LogoBlue.png",
             "style": Object {
-              "height": 116,
-              "left": 32,
+              "height": 112,
+              "left": 40,
               "position": "absolute",
-              "top": 52,
+              "top": 40,
               "width": 240,
             },
           },
@@ -325,29 +377,44 @@ ShallowWrapper {
               ellipsizeMode="tail"
               style={
                 Object {
-                  "color": "#2782ff",
+                  "color": "#384B65",
                   "fontFamily": "Montserrat-ExtraBold",
-                  "fontSize": 92,
+                  "fontSize": 60,
                   "marginBottom": 10,
                 }
               }
             >
               Login
             </Text>,
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#4b657d",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 24,
+                  "fontWeight": "bold",
+                  "height": 30,
+                  "marginTop": 58,
+                  "opacity": 0.4,
+                }
+              }
+            >
+              Email
+            </Text>,
             <InputComponent
               errorMessage="Invalid email"
               isError={undefined}
               isPassword={false}
               onChangeText={[Function]}
-              placeholder="Email address"
-              value={undefined}
-            />,
-            <InputComponent
-              errorMessage="Invalid password"
-              isError={undefined}
-              isPassword={true}
-              onChangeText={[Function]}
-              placeholder="Password"
+              placeholder="your_email@mail.com"
+              style={
+                Object {
+                  "height": 60,
+                }
+              }
               value={undefined}
             />,
             <Text
@@ -356,9 +423,43 @@ ShallowWrapper {
               ellipsizeMode="tail"
               style={
                 Object {
-                  "color": "#8c92ac",
+                  "color": "#4b657d",
                   "fontFamily": "Montserrat",
                   "fontSize": 24,
+                  "fontWeight": "bold",
+                  "height": 30,
+                  "marginTop": 58,
+                  "opacity": 0.4,
+                }
+              }
+            >
+              Password
+            </Text>,
+            <InputComponent
+              errorMessage="Invalid password"
+              isError={undefined}
+              isPassword={true}
+              onChangeText={[Function]}
+              placeholder="Enter your password"
+              style={
+                Object {
+                  "height": 60,
+                }
+              }
+              value={undefined}
+            />,
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#4b657d",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 24,
+                  "fontWeight": "bold",
+                  "marginTop": 42,
+                  "opacity": 0.4,
                 }
               }
             >
@@ -369,13 +470,15 @@ ShallowWrapper {
               errorMessage="Invalid mnemonic"
               inputStyle={
                 Object {
-                  "height": 200,
+                  "fontSize": 28,
+                  "height": 180,
                 }
               }
               isError={undefined}
               isPassword={false}
               multiline={true}
               onChangeText={[Function]}
+              placeholder="Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code"
               value={undefined}
             />,
             <View
@@ -393,8 +496,8 @@ ShallowWrapper {
                 ellipsizeMode="tail"
                 style={
                   Object {
-                    "color": "#384b65",
-                    "fontFamily": "Montserrat",
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-Bold",
                     "fontSize": 32,
                     "lineHeight": 48,
                     "marginTop": 40,
@@ -410,11 +513,11 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignSelf": "flex-end",
-                    "color": "#8c92ac",
+                    "color": "#2794FF",
                     "fontFamily": "Montserrat",
-                    "fontSize": 24,
+                    "fontSize": 26,
+                    "fontWeight": "bold",
                     "marginBottom": 48,
-                    "textDecorationLine": "underline",
                   }
                 }
               >
@@ -423,9 +526,9 @@ ShallowWrapper {
             </View>,
           ],
           "style": Object {
-            "marginTop": 190,
-            "paddingLeft": 32,
-            "paddingRight": 50,
+            "marginTop": 172,
+            "paddingLeft": 40,
+            "paddingRight": 40,
           },
         },
         "ref": null,
@@ -440,9 +543,9 @@ ShallowWrapper {
               "children": "Login",
               "ellipsizeMode": "tail",
               "style": Object {
-                "color": "#2782ff",
+                "color": "#384B65",
                 "fontFamily": "Montserrat-ExtraBold",
-                "fontSize": 92,
+                "fontSize": 60,
                 "marginBottom": 10,
               },
             },
@@ -455,11 +558,37 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
+              "accessible": true,
+              "allowFontScaling": true,
+              "children": "Email",
+              "ellipsizeMode": "tail",
+              "style": Object {
+                "color": "#4b657d",
+                "fontFamily": "Montserrat",
+                "fontSize": 24,
+                "fontWeight": "bold",
+                "height": 30,
+                "marginTop": 58,
+                "opacity": 0.4,
+              },
+            },
+            "ref": null,
+            "rendered": "Email",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
               "errorMessage": "Invalid email",
               "isError": undefined,
               "isPassword": false,
               "onChangeText": [Function],
-              "placeholder": "Email address",
+              "placeholder": "your_email@mail.com",
+              "style": Object {
+                "height": 60,
+              },
               "value": undefined,
             },
             "ref": null,
@@ -471,11 +600,37 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
+              "accessible": true,
+              "allowFontScaling": true,
+              "children": "Password",
+              "ellipsizeMode": "tail",
+              "style": Object {
+                "color": "#4b657d",
+                "fontFamily": "Montserrat",
+                "fontSize": 24,
+                "fontWeight": "bold",
+                "height": 30,
+                "marginTop": 58,
+                "opacity": 0.4,
+              },
+            },
+            "ref": null,
+            "rendered": "Password",
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
               "errorMessage": "Invalid password",
               "isError": undefined,
               "isPassword": true,
               "onChangeText": [Function],
-              "placeholder": "Password",
+              "placeholder": "Enter your password",
+              "style": Object {
+                "height": 60,
+              },
               "value": undefined,
             },
             "ref": null,
@@ -492,9 +647,12 @@ ShallowWrapper {
               "children": "Mnemonic",
               "ellipsizeMode": "tail",
               "style": Object {
-                "color": "#8c92ac",
+                "color": "#4b657d",
                 "fontFamily": "Montserrat",
                 "fontSize": 24,
+                "fontWeight": "bold",
+                "marginTop": 42,
+                "opacity": 0.4,
               },
             },
             "ref": null,
@@ -509,12 +667,14 @@ ShallowWrapper {
               "editable": true,
               "errorMessage": "Invalid mnemonic",
               "inputStyle": Object {
-                "height": 200,
+                "fontSize": 28,
+                "height": 180,
               },
               "isError": undefined,
               "isPassword": false,
               "multiline": true,
               "onChangeText": [Function],
+              "placeholder": "Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code",
               "value": undefined,
             },
             "ref": null,
@@ -533,8 +693,8 @@ ShallowWrapper {
                   ellipsizeMode="tail"
                   style={
                     Object {
-                      "color": "#384b65",
-                      "fontFamily": "Montserrat",
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Bold",
                       "fontSize": 32,
                       "lineHeight": 48,
                       "marginTop": 40,
@@ -550,11 +710,11 @@ ShallowWrapper {
                   style={
                     Object {
                       "alignSelf": "flex-end",
-                      "color": "#8c92ac",
+                      "color": "#2794FF",
                       "fontFamily": "Montserrat",
-                      "fontSize": 24,
+                      "fontSize": 26,
+                      "fontWeight": "bold",
                       "marginBottom": 48,
-                      "textDecorationLine": "underline",
                     }
                   }
                 >
@@ -579,8 +739,8 @@ ShallowWrapper {
                   "children": "Forgot password?",
                   "ellipsizeMode": "tail",
                   "style": Object {
-                    "color": "#384b65",
-                    "fontFamily": "Montserrat",
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-Bold",
                     "fontSize": 32,
                     "lineHeight": 48,
                     "marginTop": 40,
@@ -601,11 +761,11 @@ ShallowWrapper {
                   "ellipsizeMode": "tail",
                   "style": Object {
                     "alignSelf": "flex-end",
-                    "color": "#8c92ac",
+                    "color": "#2794FF",
                     "fontFamily": "Montserrat",
-                    "fontSize": 24,
+                    "fontSize": 26,
+                    "fontWeight": "bold",
                     "marginBottom": 48,
-                    "textDecorationLine": "underline",
                   },
                 },
                 "ref": null,
@@ -630,9 +790,9 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "#2782ff",
+                  "backgroundColor": "#2794FF",
                   "borderRadius": 12,
-                  "height": 88,
+                  "height": 100,
                   "justifyContent": "center",
                   "width": 686,
                 }
@@ -646,11 +806,11 @@ ShallowWrapper {
                   Object {
                     "color": "white",
                     "fontFamily": "Montserrat-Bold",
-                    "fontSize": 28,
+                    "fontSize": 32,
                   }
                 }
               >
-                LOGIN
+                Login
               </Text>
             </TouchableOpacity>,
             <TouchableOpacity
@@ -660,10 +820,10 @@ ShallowWrapper {
                 Object {
                   "alignItems": "center",
                   "backgroundColor": "white",
-                  "borderColor": "#2782ff",
+                  "borderColor": "#2794FF",
                   "borderRadius": 12,
                   "borderWidth": 2,
-                  "height": 88,
+                  "height": 100,
                   "justifyContent": "center",
                   "marginTop": 20,
                   "width": 686,
@@ -676,13 +836,13 @@ ShallowWrapper {
                 ellipsizeMode="tail"
                 style={
                   Object {
-                    "color": "#2782ff",
+                    "color": "#2794FF",
                     "fontFamily": "Montserrat-Bold",
-                    "fontSize": 28,
+                    "fontSize": 32,
                   }
                 }
               >
-                LOGIN VIA QR
+                Login via QR
               </Text>
             </TouchableOpacity>,
             <Text
@@ -691,10 +851,10 @@ ShallowWrapper {
               ellipsizeMode="tail"
               style={
                 Object {
-                  "color": "#4d5664",
+                  "color": "#384B65",
                   "fontFamily": "Montserrat",
-                  "fontSize": 28,
-                  "marginTop": 32,
+                  "fontSize": 32,
+                  "marginTop": 20,
                 }
               }
             >
@@ -706,7 +866,8 @@ ShallowWrapper {
                 onPress={undefined}
                 style={
                   Object {
-                    "color": "#2782ff",
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-Bold",
                   }
                 }
               >
@@ -717,7 +878,7 @@ ShallowWrapper {
           "style": Object {
             "alignItems": "center",
             "height": 226,
-            "marginTop": 14,
+            "marginTop": 20,
           },
         },
         "ref": null,
@@ -736,18 +897,18 @@ ShallowWrapper {
                   Object {
                     "color": "white",
                     "fontFamily": "Montserrat-Bold",
-                    "fontSize": 28,
+                    "fontSize": 32,
                   }
                 }
               >
-                LOGIN
+                Login
               </Text>,
               "onPressOut": [Function],
               "style": Object {
                 "alignItems": "center",
-                "backgroundColor": "#2782ff",
+                "backgroundColor": "#2794FF",
                 "borderRadius": 12,
-                "height": 88,
+                "height": 100,
                 "justifyContent": "center",
                 "width": 686,
               },
@@ -760,16 +921,16 @@ ShallowWrapper {
               "props": Object {
                 "accessible": true,
                 "allowFontScaling": true,
-                "children": "LOGIN",
+                "children": "Login",
                 "ellipsizeMode": "tail",
                 "style": Object {
                   "color": "white",
                   "fontFamily": "Montserrat-Bold",
-                  "fontSize": 28,
+                  "fontSize": 32,
                 },
               },
               "ref": null,
-              "rendered": "LOGIN",
+              "rendered": "Login",
               "type": [Function],
             },
             "type": [Function],
@@ -786,22 +947,22 @@ ShallowWrapper {
                 ellipsizeMode="tail"
                 style={
                   Object {
-                    "color": "#2782ff",
+                    "color": "#2794FF",
                     "fontFamily": "Montserrat-Bold",
-                    "fontSize": 28,
+                    "fontSize": 32,
                   }
                 }
               >
-                LOGIN VIA QR
+                Login via QR
               </Text>,
               "onPressOut": [Function],
               "style": Object {
                 "alignItems": "center",
                 "backgroundColor": "white",
-                "borderColor": "#2782ff",
+                "borderColor": "#2794FF",
                 "borderRadius": 12,
                 "borderWidth": 2,
-                "height": 88,
+                "height": 100,
                 "justifyContent": "center",
                 "marginTop": 20,
                 "width": 686,
@@ -815,16 +976,16 @@ ShallowWrapper {
               "props": Object {
                 "accessible": true,
                 "allowFontScaling": true,
-                "children": "LOGIN VIA QR",
+                "children": "Login via QR",
                 "ellipsizeMode": "tail",
                 "style": Object {
-                  "color": "#2782ff",
+                  "color": "#2794FF",
                   "fontFamily": "Montserrat-Bold",
-                  "fontSize": 28,
+                  "fontSize": 32,
                 },
               },
               "ref": null,
-              "rendered": "LOGIN VIA QR",
+              "rendered": "Login via QR",
               "type": [Function],
             },
             "type": [Function],
@@ -845,7 +1006,8 @@ ShallowWrapper {
                   onPress={undefined}
                   style={
                     Object {
-                      "color": "#2782ff",
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Bold",
                     }
                   }
                 >
@@ -854,10 +1016,10 @@ ShallowWrapper {
               ],
               "ellipsizeMode": "tail",
               "style": Object {
-                "color": "#4d5664",
+                "color": "#384B65",
                 "fontFamily": "Montserrat",
-                "fontSize": 28,
-                "marginTop": 32,
+                "fontSize": 32,
+                "marginTop": 20,
               },
             },
             "ref": null,
@@ -874,7 +1036,8 @@ ShallowWrapper {
                   "ellipsizeMode": "tail",
                   "onPress": undefined,
                   "style": Object {
-                    "color": "#2782ff",
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-Bold",
                   },
                 },
                 "ref": null,
@@ -915,10 +1078,10 @@ ShallowWrapper {
               source="LogoBlue.png"
               style={
                 Object {
-                  "height": 116,
-                  "left": 32,
+                  "height": 112,
+                  "left": 40,
                   "position": "absolute",
-                  "top": 52,
+                  "top": 40,
                   "width": 240,
                 }
               }
@@ -927,9 +1090,9 @@ ShallowWrapper {
           <View
             style={
               Object {
-                "marginTop": 190,
-                "paddingLeft": 32,
-                "paddingRight": 50,
+                "marginTop": 172,
+                "paddingLeft": 40,
+                "paddingRight": 40,
               }
             }
           >
@@ -939,29 +1102,44 @@ ShallowWrapper {
               ellipsizeMode="tail"
               style={
                 Object {
-                  "color": "#2782ff",
+                  "color": "#384B65",
                   "fontFamily": "Montserrat-ExtraBold",
-                  "fontSize": 92,
+                  "fontSize": 60,
                   "marginBottom": 10,
                 }
               }
             >
               Login
             </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#4b657d",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 24,
+                  "fontWeight": "bold",
+                  "height": 30,
+                  "marginTop": 58,
+                  "opacity": 0.4,
+                }
+              }
+            >
+              Email
+            </Text>
             <InputComponent
               errorMessage="Invalid email"
               isError={undefined}
               isPassword={false}
               onChangeText={[Function]}
-              placeholder="Email address"
-              value={undefined}
-            />
-            <InputComponent
-              errorMessage="Invalid password"
-              isError={undefined}
-              isPassword={true}
-              onChangeText={[Function]}
-              placeholder="Password"
+              placeholder="your_email@mail.com"
+              style={
+                Object {
+                  "height": 60,
+                }
+              }
               value={undefined}
             />
             <Text
@@ -970,9 +1148,43 @@ ShallowWrapper {
               ellipsizeMode="tail"
               style={
                 Object {
-                  "color": "#8c92ac",
+                  "color": "#4b657d",
                   "fontFamily": "Montserrat",
                   "fontSize": 24,
+                  "fontWeight": "bold",
+                  "height": 30,
+                  "marginTop": 58,
+                  "opacity": 0.4,
+                }
+              }
+            >
+              Password
+            </Text>
+            <InputComponent
+              errorMessage="Invalid password"
+              isError={undefined}
+              isPassword={true}
+              onChangeText={[Function]}
+              placeholder="Enter your password"
+              style={
+                Object {
+                  "height": 60,
+                }
+              }
+              value={undefined}
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#4b657d",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 24,
+                  "fontWeight": "bold",
+                  "marginTop": 42,
+                  "opacity": 0.4,
                 }
               }
             >
@@ -983,13 +1195,15 @@ ShallowWrapper {
               errorMessage="Invalid mnemonic"
               inputStyle={
                 Object {
-                  "height": 200,
+                  "fontSize": 28,
+                  "height": 180,
                 }
               }
               isError={undefined}
               isPassword={false}
               multiline={true}
               onChangeText={[Function]}
+              placeholder="Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code"
               value={undefined}
             />
             <View
@@ -1007,8 +1221,8 @@ ShallowWrapper {
                 ellipsizeMode="tail"
                 style={
                   Object {
-                    "color": "#384b65",
-                    "fontFamily": "Montserrat",
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-Bold",
                     "fontSize": 32,
                     "lineHeight": 48,
                     "marginTop": 40,
@@ -1024,11 +1238,11 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignSelf": "flex-end",
-                    "color": "#8c92ac",
+                    "color": "#2794FF",
                     "fontFamily": "Montserrat",
-                    "fontSize": 24,
+                    "fontSize": 26,
+                    "fontWeight": "bold",
                     "marginBottom": 48,
-                    "textDecorationLine": "underline",
                   }
                 }
               >
@@ -1041,7 +1255,7 @@ ShallowWrapper {
               Object {
                 "alignItems": "center",
                 "height": 226,
-                "marginTop": 14,
+                "marginTop": 20,
               }
             }
           >
@@ -1051,9 +1265,9 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "#2782ff",
+                  "backgroundColor": "#2794FF",
                   "borderRadius": 12,
-                  "height": 88,
+                  "height": 100,
                   "justifyContent": "center",
                   "width": 686,
                 }
@@ -1067,11 +1281,11 @@ ShallowWrapper {
                   Object {
                     "color": "white",
                     "fontFamily": "Montserrat-Bold",
-                    "fontSize": 28,
+                    "fontSize": 32,
                   }
                 }
               >
-                LOGIN
+                Login
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -1081,10 +1295,10 @@ ShallowWrapper {
                 Object {
                   "alignItems": "center",
                   "backgroundColor": "white",
-                  "borderColor": "#2782ff",
+                  "borderColor": "#2794FF",
                   "borderRadius": 12,
                   "borderWidth": 2,
-                  "height": 88,
+                  "height": 100,
                   "justifyContent": "center",
                   "marginTop": 20,
                   "width": 686,
@@ -1097,13 +1311,13 @@ ShallowWrapper {
                 ellipsizeMode="tail"
                 style={
                   Object {
-                    "color": "#2782ff",
+                    "color": "#2794FF",
                     "fontFamily": "Montserrat-Bold",
-                    "fontSize": 28,
+                    "fontSize": 32,
                   }
                 }
               >
-                LOGIN VIA QR
+                Login via QR
               </Text>
             </TouchableOpacity>
             <Text
@@ -1112,10 +1326,10 @@ ShallowWrapper {
               ellipsizeMode="tail"
               style={
                 Object {
-                  "color": "#4d5664",
+                  "color": "#384B65",
                   "fontFamily": "Montserrat",
-                  "fontSize": 28,
-                  "marginTop": 32,
+                  "fontSize": 32,
+                  "marginTop": 20,
                 }
               }
             >
@@ -1127,7 +1341,8 @@ ShallowWrapper {
                 onPress={undefined}
                 style={
                   Object {
-                    "color": "#2782ff",
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-Bold",
                   }
                 }
               >
@@ -1154,10 +1369,10 @@ ShallowWrapper {
               source="LogoBlue.png"
               style={
                 Object {
-                  "height": 116,
-                  "left": 32,
+                  "height": 112,
+                  "left": 40,
                   "position": "absolute",
-                  "top": 52,
+                  "top": 40,
                   "width": 240,
                 }
               }
@@ -1180,10 +1395,10 @@ ShallowWrapper {
               "resizeMode": "contain",
               "source": "LogoBlue.png",
               "style": Object {
-                "height": 116,
-                "left": 32,
+                "height": 112,
+                "left": 40,
                 "position": "absolute",
-                "top": 52,
+                "top": 40,
                 "width": 240,
               },
             },
@@ -1205,29 +1420,44 @@ ShallowWrapper {
                 ellipsizeMode="tail"
                 style={
                   Object {
-                    "color": "#2782ff",
+                    "color": "#384B65",
                     "fontFamily": "Montserrat-ExtraBold",
-                    "fontSize": 92,
+                    "fontSize": 60,
                     "marginBottom": 10,
                   }
                 }
               >
                 Login
               </Text>,
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#4b657d",
+                    "fontFamily": "Montserrat",
+                    "fontSize": 24,
+                    "fontWeight": "bold",
+                    "height": 30,
+                    "marginTop": 58,
+                    "opacity": 0.4,
+                  }
+                }
+              >
+                Email
+              </Text>,
               <InputComponent
                 errorMessage="Invalid email"
                 isError={undefined}
                 isPassword={false}
                 onChangeText={[Function]}
-                placeholder="Email address"
-                value={undefined}
-              />,
-              <InputComponent
-                errorMessage="Invalid password"
-                isError={undefined}
-                isPassword={true}
-                onChangeText={[Function]}
-                placeholder="Password"
+                placeholder="your_email@mail.com"
+                style={
+                  Object {
+                    "height": 60,
+                  }
+                }
                 value={undefined}
               />,
               <Text
@@ -1236,9 +1466,43 @@ ShallowWrapper {
                 ellipsizeMode="tail"
                 style={
                   Object {
-                    "color": "#8c92ac",
+                    "color": "#4b657d",
                     "fontFamily": "Montserrat",
                     "fontSize": 24,
+                    "fontWeight": "bold",
+                    "height": 30,
+                    "marginTop": 58,
+                    "opacity": 0.4,
+                  }
+                }
+              >
+                Password
+              </Text>,
+              <InputComponent
+                errorMessage="Invalid password"
+                isError={undefined}
+                isPassword={true}
+                onChangeText={[Function]}
+                placeholder="Enter your password"
+                style={
+                  Object {
+                    "height": 60,
+                  }
+                }
+                value={undefined}
+              />,
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#4b657d",
+                    "fontFamily": "Montserrat",
+                    "fontSize": 24,
+                    "fontWeight": "bold",
+                    "marginTop": 42,
+                    "opacity": 0.4,
                   }
                 }
               >
@@ -1249,13 +1513,15 @@ ShallowWrapper {
                 errorMessage="Invalid mnemonic"
                 inputStyle={
                   Object {
-                    "height": 200,
+                    "fontSize": 28,
+                    "height": 180,
                   }
                 }
                 isError={undefined}
                 isPassword={false}
                 multiline={true}
                 onChangeText={[Function]}
+                placeholder="Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code"
                 value={undefined}
               />,
               <View
@@ -1273,8 +1539,8 @@ ShallowWrapper {
                   ellipsizeMode="tail"
                   style={
                     Object {
-                      "color": "#384b65",
-                      "fontFamily": "Montserrat",
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Bold",
                       "fontSize": 32,
                       "lineHeight": 48,
                       "marginTop": 40,
@@ -1290,11 +1556,11 @@ ShallowWrapper {
                   style={
                     Object {
                       "alignSelf": "flex-end",
-                      "color": "#8c92ac",
+                      "color": "#2794FF",
                       "fontFamily": "Montserrat",
-                      "fontSize": 24,
+                      "fontSize": 26,
+                      "fontWeight": "bold",
                       "marginBottom": 48,
-                      "textDecorationLine": "underline",
                     }
                   }
                 >
@@ -1303,9 +1569,9 @@ ShallowWrapper {
               </View>,
             ],
             "style": Object {
-              "marginTop": 190,
-              "paddingLeft": 32,
-              "paddingRight": 50,
+              "marginTop": 172,
+              "paddingLeft": 40,
+              "paddingRight": 40,
             },
           },
           "ref": null,
@@ -1320,9 +1586,9 @@ ShallowWrapper {
                 "children": "Login",
                 "ellipsizeMode": "tail",
                 "style": Object {
-                  "color": "#2782ff",
+                  "color": "#384B65",
                   "fontFamily": "Montserrat-ExtraBold",
-                  "fontSize": 92,
+                  "fontSize": 60,
                   "marginBottom": 10,
                 },
               },
@@ -1335,11 +1601,37 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
+                "accessible": true,
+                "allowFontScaling": true,
+                "children": "Email",
+                "ellipsizeMode": "tail",
+                "style": Object {
+                  "color": "#4b657d",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 24,
+                  "fontWeight": "bold",
+                  "height": 30,
+                  "marginTop": 58,
+                  "opacity": 0.4,
+                },
+              },
+              "ref": null,
+              "rendered": "Email",
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
                 "errorMessage": "Invalid email",
                 "isError": undefined,
                 "isPassword": false,
                 "onChangeText": [Function],
-                "placeholder": "Email address",
+                "placeholder": "your_email@mail.com",
+                "style": Object {
+                  "height": 60,
+                },
                 "value": undefined,
               },
               "ref": null,
@@ -1351,11 +1643,37 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
+                "accessible": true,
+                "allowFontScaling": true,
+                "children": "Password",
+                "ellipsizeMode": "tail",
+                "style": Object {
+                  "color": "#4b657d",
+                  "fontFamily": "Montserrat",
+                  "fontSize": 24,
+                  "fontWeight": "bold",
+                  "height": 30,
+                  "marginTop": 58,
+                  "opacity": 0.4,
+                },
+              },
+              "ref": null,
+              "rendered": "Password",
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
                 "errorMessage": "Invalid password",
                 "isError": undefined,
                 "isPassword": true,
                 "onChangeText": [Function],
-                "placeholder": "Password",
+                "placeholder": "Enter your password",
+                "style": Object {
+                  "height": 60,
+                },
                 "value": undefined,
               },
               "ref": null,
@@ -1372,9 +1690,12 @@ ShallowWrapper {
                 "children": "Mnemonic",
                 "ellipsizeMode": "tail",
                 "style": Object {
-                  "color": "#8c92ac",
+                  "color": "#4b657d",
                   "fontFamily": "Montserrat",
                   "fontSize": 24,
+                  "fontWeight": "bold",
+                  "marginTop": 42,
+                  "opacity": 0.4,
                 },
               },
               "ref": null,
@@ -1389,12 +1710,14 @@ ShallowWrapper {
                 "editable": true,
                 "errorMessage": "Invalid mnemonic",
                 "inputStyle": Object {
-                  "height": 200,
+                  "fontSize": 28,
+                  "height": 180,
                 },
                 "isError": undefined,
                 "isPassword": false,
                 "multiline": true,
                 "onChangeText": [Function],
+                "placeholder": "Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code",
                 "value": undefined,
               },
               "ref": null,
@@ -1413,8 +1736,8 @@ ShallowWrapper {
                     ellipsizeMode="tail"
                     style={
                       Object {
-                        "color": "#384b65",
-                        "fontFamily": "Montserrat",
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Bold",
                         "fontSize": 32,
                         "lineHeight": 48,
                         "marginTop": 40,
@@ -1430,11 +1753,11 @@ ShallowWrapper {
                     style={
                       Object {
                         "alignSelf": "flex-end",
-                        "color": "#8c92ac",
+                        "color": "#2794FF",
                         "fontFamily": "Montserrat",
-                        "fontSize": 24,
+                        "fontSize": 26,
+                        "fontWeight": "bold",
                         "marginBottom": 48,
-                        "textDecorationLine": "underline",
                       }
                     }
                   >
@@ -1459,8 +1782,8 @@ ShallowWrapper {
                     "children": "Forgot password?",
                     "ellipsizeMode": "tail",
                     "style": Object {
-                      "color": "#384b65",
-                      "fontFamily": "Montserrat",
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Bold",
                       "fontSize": 32,
                       "lineHeight": 48,
                       "marginTop": 40,
@@ -1481,11 +1804,11 @@ ShallowWrapper {
                     "ellipsizeMode": "tail",
                     "style": Object {
                       "alignSelf": "flex-end",
-                      "color": "#8c92ac",
+                      "color": "#2794FF",
                       "fontFamily": "Montserrat",
-                      "fontSize": 24,
+                      "fontSize": 26,
+                      "fontWeight": "bold",
                       "marginBottom": 48,
-                      "textDecorationLine": "underline",
                     },
                   },
                   "ref": null,
@@ -1510,9 +1833,9 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "#2782ff",
+                    "backgroundColor": "#2794FF",
                     "borderRadius": 12,
-                    "height": 88,
+                    "height": 100,
                     "justifyContent": "center",
                     "width": 686,
                   }
@@ -1526,11 +1849,11 @@ ShallowWrapper {
                     Object {
                       "color": "white",
                       "fontFamily": "Montserrat-Bold",
-                      "fontSize": 28,
+                      "fontSize": 32,
                     }
                   }
                 >
-                  LOGIN
+                  Login
                 </Text>
               </TouchableOpacity>,
               <TouchableOpacity
@@ -1540,10 +1863,10 @@ ShallowWrapper {
                   Object {
                     "alignItems": "center",
                     "backgroundColor": "white",
-                    "borderColor": "#2782ff",
+                    "borderColor": "#2794FF",
                     "borderRadius": 12,
                     "borderWidth": 2,
-                    "height": 88,
+                    "height": 100,
                     "justifyContent": "center",
                     "marginTop": 20,
                     "width": 686,
@@ -1556,13 +1879,13 @@ ShallowWrapper {
                   ellipsizeMode="tail"
                   style={
                     Object {
-                      "color": "#2782ff",
+                      "color": "#2794FF",
                       "fontFamily": "Montserrat-Bold",
-                      "fontSize": 28,
+                      "fontSize": 32,
                     }
                   }
                 >
-                  LOGIN VIA QR
+                  Login via QR
                 </Text>
               </TouchableOpacity>,
               <Text
@@ -1571,10 +1894,10 @@ ShallowWrapper {
                 ellipsizeMode="tail"
                 style={
                   Object {
-                    "color": "#4d5664",
+                    "color": "#384B65",
                     "fontFamily": "Montserrat",
-                    "fontSize": 28,
-                    "marginTop": 32,
+                    "fontSize": 32,
+                    "marginTop": 20,
                   }
                 }
               >
@@ -1586,7 +1909,8 @@ ShallowWrapper {
                   onPress={undefined}
                   style={
                     Object {
-                      "color": "#2782ff",
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Bold",
                     }
                   }
                 >
@@ -1597,7 +1921,7 @@ ShallowWrapper {
             "style": Object {
               "alignItems": "center",
               "height": 226,
-              "marginTop": 14,
+              "marginTop": 20,
             },
           },
           "ref": null,
@@ -1616,18 +1940,18 @@ ShallowWrapper {
                     Object {
                       "color": "white",
                       "fontFamily": "Montserrat-Bold",
-                      "fontSize": 28,
+                      "fontSize": 32,
                     }
                   }
                 >
-                  LOGIN
+                  Login
                 </Text>,
                 "onPressOut": [Function],
                 "style": Object {
                   "alignItems": "center",
-                  "backgroundColor": "#2782ff",
+                  "backgroundColor": "#2794FF",
                   "borderRadius": 12,
-                  "height": 88,
+                  "height": 100,
                   "justifyContent": "center",
                   "width": 686,
                 },
@@ -1640,16 +1964,16 @@ ShallowWrapper {
                 "props": Object {
                   "accessible": true,
                   "allowFontScaling": true,
-                  "children": "LOGIN",
+                  "children": "Login",
                   "ellipsizeMode": "tail",
                   "style": Object {
                     "color": "white",
                     "fontFamily": "Montserrat-Bold",
-                    "fontSize": 28,
+                    "fontSize": 32,
                   },
                 },
                 "ref": null,
-                "rendered": "LOGIN",
+                "rendered": "Login",
                 "type": [Function],
               },
               "type": [Function],
@@ -1666,22 +1990,22 @@ ShallowWrapper {
                   ellipsizeMode="tail"
                   style={
                     Object {
-                      "color": "#2782ff",
+                      "color": "#2794FF",
                       "fontFamily": "Montserrat-Bold",
-                      "fontSize": 28,
+                      "fontSize": 32,
                     }
                   }
                 >
-                  LOGIN VIA QR
+                  Login via QR
                 </Text>,
                 "onPressOut": [Function],
                 "style": Object {
                   "alignItems": "center",
                   "backgroundColor": "white",
-                  "borderColor": "#2782ff",
+                  "borderColor": "#2794FF",
                   "borderRadius": 12,
                   "borderWidth": 2,
-                  "height": 88,
+                  "height": 100,
                   "justifyContent": "center",
                   "marginTop": 20,
                   "width": 686,
@@ -1695,16 +2019,16 @@ ShallowWrapper {
                 "props": Object {
                   "accessible": true,
                   "allowFontScaling": true,
-                  "children": "LOGIN VIA QR",
+                  "children": "Login via QR",
                   "ellipsizeMode": "tail",
                   "style": Object {
-                    "color": "#2782ff",
+                    "color": "#2794FF",
                     "fontFamily": "Montserrat-Bold",
-                    "fontSize": 28,
+                    "fontSize": 32,
                   },
                 },
                 "ref": null,
-                "rendered": "LOGIN VIA QR",
+                "rendered": "Login via QR",
                 "type": [Function],
               },
               "type": [Function],
@@ -1725,7 +2049,8 @@ ShallowWrapper {
                     onPress={undefined}
                     style={
                       Object {
-                        "color": "#2782ff",
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Bold",
                       }
                     }
                   >
@@ -1734,10 +2059,10 @@ ShallowWrapper {
                 ],
                 "ellipsizeMode": "tail",
                 "style": Object {
-                  "color": "#4d5664",
+                  "color": "#384B65",
                   "fontFamily": "Montserrat",
-                  "fontSize": 28,
-                  "marginTop": 32,
+                  "fontSize": 32,
+                  "marginTop": 20,
                 },
               },
               "ref": null,
@@ -1754,1315 +2079,8 @@ ShallowWrapper {
                     "ellipsizeMode": "tail",
                     "onPress": undefined,
                     "style": Object {
-                      "color": "#2782ff",
-                    },
-                  },
-                  "ref": null,
-                  "rendered": "Sign Up",
-                  "type": [Function],
-                },
-              ],
-              "type": [Function],
-            },
-          ],
-          "type": [Function],
-        },
-        null,
-      ],
-      "type": [Function],
-    },
-  ],
-  Symbol(enzyme.__options__): Object {
-    "adapter": ReactSixteenAdapter {
-      "options": Object {
-        "enableComponentDidUpdateOnSetState": true,
-      },
-    },
-  },
-}
-`;
-
-exports[`RegisterComponent renders correctly 1`] = `
-ShallowWrapper {
-  "length": 1,
-  Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <LoginComponent />,
-  Symbol(enzyme.__renderer__): Object {
-    "batchedUpdates": [Function],
-    "getNode": [Function],
-    "render": [Function],
-    "simulateEvent": [Function],
-    "unmount": [Function],
-  },
-  Symbol(enzyme.__node__): Object {
-    "instance": null,
-    "key": undefined,
-    "nodeType": "class",
-    "props": Object {
-      "children": Array [
-        <View
-          style={
-            Object {
-              "backgroundColor": "transparent",
-              "bottom": 0,
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            }
-          }
-        >
-          <Image
-            resizeMode="contain"
-            source="LogoBlue.png"
-            style={
-              Object {
-                "height": 116,
-                "left": 62,
-                "position": "absolute",
-                "top": 72,
-                "width": 240,
-              }
-            }
-          />
-        </View>,
-        <View
-          style={
-            Object {
-              "marginTop": 216,
-              "paddingBottom": 44,
-              "paddingLeft": 62,
-              "paddingRight": 50,
-            }
-          }
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Object {
-                "color": "#2782ff",
-                "fontFamily": "Montserrat-ExtraBold",
-                "fontSize": 92,
-                "marginBottom": 10,
-              }
-            }
-          >
-            Sign In
-          </Text>
-          <InputComponent
-            errorMessage="Invalid email"
-            isError={undefined}
-            isPassword={false}
-            onChangeText={[Function]}
-            placeholder="Email address"
-            value={undefined}
-          />
-          <InputComponent
-            errorMessage="Invalid password"
-            isError={undefined}
-            isPassword={true}
-            onChangeText={[Function]}
-            placeholder="Password"
-            value={undefined}
-          />
-          <InputComponent
-            editable={true}
-            errorMessage="Invalid mnemonic"
-            isError={undefined}
-            isPassword={false}
-            onChangeText={[Function]}
-            placeholder="Mnemonic"
-            value={undefined}
-          />
-          <InputComponent
-            isPassword={true}
-            onChangeText={[Function]}
-            placeholder="Passcode"
-          />
-          <View
-            style={
-              Object {
-                "flexDirection": "row",
-                "marginTop": 32,
-              }
-            }
-          >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "#384b65",
-                  "fontFamily": "Montserrat",
-                  "fontSize": 32,
-                  "lineHeight": 48,
-                }
-              }
-            >
-              Forgot password?
-            </Text>
-          </View>
-        </View>,
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "height": 226,
-            }
-          }
-        >
-          <TouchableOpacity
-            activeOpacity={0.2}
-            onPressOut={[Function]}
-            style={
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "#2782ff",
-                "borderRadius": 16,
-                "height": 110,
-                "justifyContent": "center",
-                "width": 686,
-              }
-            }
-          >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "white",
-                  "fontFamily": "Montserrat-Bold",
-                  "fontSize": 28,
-                }
-              }
-            >
-              SIGN IN
-            </Text>
-          </TouchableOpacity>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Object {
-                "color": "#4d5664",
-                "fontFamily": "Montserrat",
-                "fontSize": 28,
-                "lineHeight": 48,
-                "marginTop": 34,
-              }
-            }
-          >
-            Don't have an account? 
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              onPress={undefined}
-              style={
-                Object {
-                  "color": "#2782ff",
-                }
-              }
-            >
-              Sign Up
-            </Text>
-          </Text>
-        </View>,
-        null,
-      ],
-      "style": Object {
-        "backgroundColor": "white",
-        "flex": 1,
-      },
-    },
-    "ref": null,
-    "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "children": <Image
-            resizeMode="contain"
-            source="LogoBlue.png"
-            style={
-              Object {
-                "height": 116,
-                "left": 62,
-                "position": "absolute",
-                "top": 72,
-                "width": 240,
-              }
-            }
-          />,
-          "style": Object {
-            "backgroundColor": "transparent",
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "resizeMode": "contain",
-            "source": "LogoBlue.png",
-            "style": Object {
-              "height": 116,
-              "left": 62,
-              "position": "absolute",
-              "top": 72,
-              "width": 240,
-            },
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "children": Array [
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "#2782ff",
-                  "fontFamily": "Montserrat-ExtraBold",
-                  "fontSize": 92,
-                  "marginBottom": 10,
-                }
-              }
-            >
-              Sign In
-            </Text>,
-            <InputComponent
-              errorMessage="Invalid email"
-              isError={undefined}
-              isPassword={false}
-              onChangeText={[Function]}
-              placeholder="Email address"
-              value={undefined}
-            />,
-            <InputComponent
-              errorMessage="Invalid password"
-              isError={undefined}
-              isPassword={true}
-              onChangeText={[Function]}
-              placeholder="Password"
-              value={undefined}
-            />,
-            <InputComponent
-              editable={true}
-              errorMessage="Invalid mnemonic"
-              isError={undefined}
-              isPassword={false}
-              onChangeText={[Function]}
-              placeholder="Mnemonic"
-              value={undefined}
-            />,
-            <InputComponent
-              isPassword={true}
-              onChangeText={[Function]}
-              placeholder="Passcode"
-            />,
-            <View
-              style={
-                Object {
-                  "flexDirection": "row",
-                  "marginTop": 32,
-                }
-              }
-            >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "color": "#384b65",
-                    "fontFamily": "Montserrat",
-                    "fontSize": 32,
-                    "lineHeight": 48,
-                  }
-                }
-              >
-                Forgot password?
-              </Text>
-            </View>,
-          ],
-          "style": Object {
-            "marginTop": 216,
-            "paddingBottom": 44,
-            "paddingLeft": 62,
-            "paddingRight": 50,
-          },
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "accessible": true,
-              "allowFontScaling": true,
-              "children": "Sign In",
-              "ellipsizeMode": "tail",
-              "style": Object {
-                "color": "#2782ff",
-                "fontFamily": "Montserrat-ExtraBold",
-                "fontSize": 92,
-                "marginBottom": 10,
-              },
-            },
-            "ref": null,
-            "rendered": "Sign In",
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "errorMessage": "Invalid email",
-              "isError": undefined,
-              "isPassword": false,
-              "onChangeText": [Function],
-              "placeholder": "Email address",
-              "value": undefined,
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "errorMessage": "Invalid password",
-              "isError": undefined,
-              "isPassword": true,
-              "onChangeText": [Function],
-              "placeholder": "Password",
-              "value": undefined,
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "editable": true,
-              "errorMessage": "Invalid mnemonic",
-              "isError": undefined,
-              "isPassword": false,
-              "onChangeText": [Function],
-              "placeholder": "Mnemonic",
-              "value": undefined,
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "isPassword": true,
-              "onChangeText": [Function],
-              "placeholder": "Passcode",
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "color": "#384b65",
-                    "fontFamily": "Montserrat",
-                    "fontSize": 32,
-                    "lineHeight": 48,
-                  }
-                }
-              >
-                Forgot password?
-              </Text>,
-              "style": Object {
-                "flexDirection": "row",
-                "marginTop": 32,
-              },
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "accessible": true,
-                "allowFontScaling": true,
-                "children": "Forgot password?",
-                "ellipsizeMode": "tail",
-                "style": Object {
-                  "color": "#384b65",
-                  "fontFamily": "Montserrat",
-                  "fontSize": 32,
-                  "lineHeight": 48,
-                },
-              },
-              "ref": null,
-              "rendered": "Forgot password?",
-              "type": [Function],
-            },
-            "type": [Function],
-          },
-        ],
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "children": Array [
-            <TouchableOpacity
-              activeOpacity={0.2}
-              onPressOut={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#2782ff",
-                  "borderRadius": 16,
-                  "height": 110,
-                  "justifyContent": "center",
-                  "width": 686,
-                }
-              }
-            >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "color": "white",
-                    "fontFamily": "Montserrat-Bold",
-                    "fontSize": 28,
-                  }
-                }
-              >
-                SIGN IN
-              </Text>
-            </TouchableOpacity>,
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "#4d5664",
-                  "fontFamily": "Montserrat",
-                  "fontSize": 28,
-                  "lineHeight": 48,
-                  "marginTop": 34,
-                }
-              }
-            >
-              Don't have an account? 
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                onPress={undefined}
-                style={
-                  Object {
-                    "color": "#2782ff",
-                  }
-                }
-              >
-                Sign Up
-              </Text>
-            </Text>,
-          ],
-          "style": Object {
-            "alignItems": "center",
-            "height": 226,
-          },
-        },
-        "ref": null,
-        "rendered": Array [
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "activeOpacity": 0.2,
-              "children": <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "color": "white",
-                    "fontFamily": "Montserrat-Bold",
-                    "fontSize": 28,
-                  }
-                }
-              >
-                SIGN IN
-              </Text>,
-              "onPressOut": [Function],
-              "style": Object {
-                "alignItems": "center",
-                "backgroundColor": "#2782ff",
-                "borderRadius": 16,
-                "height": 110,
-                "justifyContent": "center",
-                "width": 686,
-              },
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "accessible": true,
-                "allowFontScaling": true,
-                "children": "SIGN IN",
-                "ellipsizeMode": "tail",
-                "style": Object {
-                  "color": "white",
-                  "fontFamily": "Montserrat-Bold",
-                  "fontSize": 28,
-                },
-              },
-              "ref": null,
-              "rendered": "SIGN IN",
-              "type": [Function],
-            },
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "accessible": true,
-              "allowFontScaling": true,
-              "children": Array [
-                "Don't have an account? ",
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  onPress={undefined}
-                  style={
-                    Object {
-                      "color": "#2782ff",
-                    }
-                  }
-                >
-                  Sign Up
-                </Text>,
-              ],
-              "ellipsizeMode": "tail",
-              "style": Object {
-                "color": "#4d5664",
-                "fontFamily": "Montserrat",
-                "fontSize": 28,
-                "lineHeight": 48,
-                "marginTop": 34,
-              },
-            },
-            "ref": null,
-            "rendered": Array [
-              "Don't have an account? ",
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "accessible": true,
-                  "allowFontScaling": true,
-                  "children": "Sign Up",
-                  "ellipsizeMode": "tail",
-                  "onPress": undefined,
-                  "style": Object {
-                    "color": "#2782ff",
-                  },
-                },
-                "ref": null,
-                "rendered": "Sign Up",
-                "type": [Function],
-              },
-            ],
-            "type": [Function],
-          },
-        ],
-        "type": [Function],
-      },
-      null,
-    ],
-    "type": [Function],
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
-      "instance": null,
-      "key": undefined,
-      "nodeType": "class",
-      "props": Object {
-        "children": Array [
-          <View
-            style={
-              Object {
-                "backgroundColor": "transparent",
-                "bottom": 0,
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-              }
-            }
-          >
-            <Image
-              resizeMode="contain"
-              source="LogoBlue.png"
-              style={
-                Object {
-                  "height": 116,
-                  "left": 62,
-                  "position": "absolute",
-                  "top": 72,
-                  "width": 240,
-                }
-              }
-            />
-          </View>,
-          <View
-            style={
-              Object {
-                "marginTop": 216,
-                "paddingBottom": 44,
-                "paddingLeft": 62,
-                "paddingRight": 50,
-              }
-            }
-          >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "#2782ff",
-                  "fontFamily": "Montserrat-ExtraBold",
-                  "fontSize": 92,
-                  "marginBottom": 10,
-                }
-              }
-            >
-              Sign In
-            </Text>
-            <InputComponent
-              errorMessage="Invalid email"
-              isError={undefined}
-              isPassword={false}
-              onChangeText={[Function]}
-              placeholder="Email address"
-              value={undefined}
-            />
-            <InputComponent
-              errorMessage="Invalid password"
-              isError={undefined}
-              isPassword={true}
-              onChangeText={[Function]}
-              placeholder="Password"
-              value={undefined}
-            />
-            <InputComponent
-              editable={true}
-              errorMessage="Invalid mnemonic"
-              isError={undefined}
-              isPassword={false}
-              onChangeText={[Function]}
-              placeholder="Mnemonic"
-              value={undefined}
-            />
-            <InputComponent
-              isPassword={true}
-              onChangeText={[Function]}
-              placeholder="Passcode"
-            />
-            <View
-              style={
-                Object {
-                  "flexDirection": "row",
-                  "marginTop": 32,
-                }
-              }
-            >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "color": "#384b65",
-                    "fontFamily": "Montserrat",
-                    "fontSize": 32,
-                    "lineHeight": 48,
-                  }
-                }
-              >
-                Forgot password?
-              </Text>
-            </View>
-          </View>,
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "height": 226,
-              }
-            }
-          >
-            <TouchableOpacity
-              activeOpacity={0.2}
-              onPressOut={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#2782ff",
-                  "borderRadius": 16,
-                  "height": 110,
-                  "justifyContent": "center",
-                  "width": 686,
-                }
-              }
-            >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "color": "white",
-                    "fontFamily": "Montserrat-Bold",
-                    "fontSize": 28,
-                  }
-                }
-              >
-                SIGN IN
-              </Text>
-            </TouchableOpacity>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "#4d5664",
-                  "fontFamily": "Montserrat",
-                  "fontSize": 28,
-                  "lineHeight": 48,
-                  "marginTop": 34,
-                }
-              }
-            >
-              Don't have an account? 
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                onPress={undefined}
-                style={
-                  Object {
-                    "color": "#2782ff",
-                  }
-                }
-              >
-                Sign Up
-              </Text>
-            </Text>
-          </View>,
-          null,
-        ],
-        "style": Object {
-          "backgroundColor": "white",
-          "flex": 1,
-        },
-      },
-      "ref": null,
-      "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": <Image
-              resizeMode="contain"
-              source="LogoBlue.png"
-              style={
-                Object {
-                  "height": 116,
-                  "left": 62,
-                  "position": "absolute",
-                  "top": 72,
-                  "width": 240,
-                }
-              }
-            />,
-            "style": Object {
-              "backgroundColor": "transparent",
-              "bottom": 0,
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            },
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "resizeMode": "contain",
-              "source": "LogoBlue.png",
-              "style": Object {
-                "height": 116,
-                "left": 62,
-                "position": "absolute",
-                "top": 72,
-                "width": 240,
-              },
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": Array [
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "color": "#2782ff",
-                    "fontFamily": "Montserrat-ExtraBold",
-                    "fontSize": 92,
-                    "marginBottom": 10,
-                  }
-                }
-              >
-                Sign In
-              </Text>,
-              <InputComponent
-                errorMessage="Invalid email"
-                isError={undefined}
-                isPassword={false}
-                onChangeText={[Function]}
-                placeholder="Email address"
-                value={undefined}
-              />,
-              <InputComponent
-                errorMessage="Invalid password"
-                isError={undefined}
-                isPassword={true}
-                onChangeText={[Function]}
-                placeholder="Password"
-                value={undefined}
-              />,
-              <InputComponent
-                editable={true}
-                errorMessage="Invalid mnemonic"
-                isError={undefined}
-                isPassword={false}
-                onChangeText={[Function]}
-                placeholder="Mnemonic"
-                value={undefined}
-              />,
-              <InputComponent
-                isPassword={true}
-                onChangeText={[Function]}
-                placeholder="Passcode"
-              />,
-              <View
-                style={
-                  Object {
-                    "flexDirection": "row",
-                    "marginTop": 32,
-                  }
-                }
-              >
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  style={
-                    Object {
-                      "color": "#384b65",
-                      "fontFamily": "Montserrat",
-                      "fontSize": 32,
-                      "lineHeight": 48,
-                    }
-                  }
-                >
-                  Forgot password?
-                </Text>
-              </View>,
-            ],
-            "style": Object {
-              "marginTop": 216,
-              "paddingBottom": 44,
-              "paddingLeft": 62,
-              "paddingRight": 50,
-            },
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "accessible": true,
-                "allowFontScaling": true,
-                "children": "Sign In",
-                "ellipsizeMode": "tail",
-                "style": Object {
-                  "color": "#2782ff",
-                  "fontFamily": "Montserrat-ExtraBold",
-                  "fontSize": 92,
-                  "marginBottom": 10,
-                },
-              },
-              "ref": null,
-              "rendered": "Sign In",
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "errorMessage": "Invalid email",
-                "isError": undefined,
-                "isPassword": false,
-                "onChangeText": [Function],
-                "placeholder": "Email address",
-                "value": undefined,
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "errorMessage": "Invalid password",
-                "isError": undefined,
-                "isPassword": true,
-                "onChangeText": [Function],
-                "placeholder": "Password",
-                "value": undefined,
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "editable": true,
-                "errorMessage": "Invalid mnemonic",
-                "isError": undefined,
-                "isPassword": false,
-                "onChangeText": [Function],
-                "placeholder": "Mnemonic",
-                "value": undefined,
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "isPassword": true,
-                "onChangeText": [Function],
-                "placeholder": "Passcode",
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  style={
-                    Object {
-                      "color": "#384b65",
-                      "fontFamily": "Montserrat",
-                      "fontSize": 32,
-                      "lineHeight": 48,
-                    }
-                  }
-                >
-                  Forgot password?
-                </Text>,
-                "style": Object {
-                  "flexDirection": "row",
-                  "marginTop": 32,
-                },
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "accessible": true,
-                  "allowFontScaling": true,
-                  "children": "Forgot password?",
-                  "ellipsizeMode": "tail",
-                  "style": Object {
-                    "color": "#384b65",
-                    "fontFamily": "Montserrat",
-                    "fontSize": 32,
-                    "lineHeight": 48,
-                  },
-                },
-                "ref": null,
-                "rendered": "Forgot password?",
-                "type": [Function],
-              },
-              "type": [Function],
-            },
-          ],
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": Array [
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPressOut={[Function]}
-                style={
-                  Object {
-                    "alignItems": "center",
-                    "backgroundColor": "#2782ff",
-                    "borderRadius": 16,
-                    "height": 110,
-                    "justifyContent": "center",
-                    "width": 686,
-                  }
-                }
-              >
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  style={
-                    Object {
-                      "color": "white",
+                      "color": "#2794FF",
                       "fontFamily": "Montserrat-Bold",
-                      "fontSize": 28,
-                    }
-                  }
-                >
-                  SIGN IN
-                </Text>
-              </TouchableOpacity>,
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "color": "#4d5664",
-                    "fontFamily": "Montserrat",
-                    "fontSize": 28,
-                    "lineHeight": 48,
-                    "marginTop": 34,
-                  }
-                }
-              >
-                Don't have an account? 
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  onPress={undefined}
-                  style={
-                    Object {
-                      "color": "#2782ff",
-                    }
-                  }
-                >
-                  Sign Up
-                </Text>
-              </Text>,
-            ],
-            "style": Object {
-              "alignItems": "center",
-              "height": 226,
-            },
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "activeOpacity": 0.2,
-                "children": <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  style={
-                    Object {
-                      "color": "white",
-                      "fontFamily": "Montserrat-Bold",
-                      "fontSize": 28,
-                    }
-                  }
-                >
-                  SIGN IN
-                </Text>,
-                "onPressOut": [Function],
-                "style": Object {
-                  "alignItems": "center",
-                  "backgroundColor": "#2782ff",
-                  "borderRadius": 16,
-                  "height": 110,
-                  "justifyContent": "center",
-                  "width": 686,
-                },
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "accessible": true,
-                  "allowFontScaling": true,
-                  "children": "SIGN IN",
-                  "ellipsizeMode": "tail",
-                  "style": Object {
-                    "color": "white",
-                    "fontFamily": "Montserrat-Bold",
-                    "fontSize": 28,
-                  },
-                },
-                "ref": null,
-                "rendered": "SIGN IN",
-                "type": [Function],
-              },
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "accessible": true,
-                "allowFontScaling": true,
-                "children": Array [
-                  "Don't have an account? ",
-                  <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
-                    onPress={undefined}
-                    style={
-                      Object {
-                        "color": "#2782ff",
-                      }
-                    }
-                  >
-                    Sign Up
-                  </Text>,
-                ],
-                "ellipsizeMode": "tail",
-                "style": Object {
-                  "color": "#4d5664",
-                  "fontFamily": "Montserrat",
-                  "fontSize": 28,
-                  "lineHeight": 48,
-                  "marginTop": 34,
-                },
-              },
-              "ref": null,
-              "rendered": Array [
-                "Don't have an account? ",
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "accessible": true,
-                    "allowFontScaling": true,
-                    "children": "Sign Up",
-                    "ellipsizeMode": "tail",
-                    "onPress": undefined,
-                    "style": Object {
-                      "color": "#2782ff",
                     },
                   },
                   "ref": null,

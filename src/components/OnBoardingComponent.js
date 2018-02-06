@@ -21,8 +21,9 @@ SafetyOnBoardingScreen = () => {
             <View style={ styles.imageContainer }>
                 <Image style={ styles.image } source={ onBoardingScreensConstants.safetyImagePath } />
             </View>
-            <View>
-                <Text style={ styles.titleBold }>{ onBoardingScreensConstants.safetyBoldTitle }</Text>
+            <View >
+                <Text style={ styles.titleBold }>{ onBoardingScreensConstants.safetyBoldTitle[0] }</Text>
+                <Text style={ styles.titleBold }>{ onBoardingScreensConstants.safetyBoldTitle[1] }</Text>
             </View>
             <View style={ styles.textContainer }>
                 {
@@ -46,8 +47,8 @@ IncomeOnBoardingScreen = () =>  {
                 <Image style={ styles.image } source={ onBoardingScreensConstants.incomeImagePath } />
             </View>
             <View>
-                <Text style={ styles.titleBold }>{ onBoardingScreensConstants.incomeBoldTitle }</Text>
-                <Text style={ styles.titleLight }>{ onBoardingScreensConstants.incomeSemiBoldTitle }</Text>
+                <Text style={ styles.titleBold }>{ onBoardingScreensConstants.incomeBoldTitle[0] }</Text>
+                <Text style={ styles.titleBold }>{ onBoardingScreensConstants.incomeBoldTitle[1] }</Text>
             </View>
             <View style={ styles.textContainer }>
                 {
@@ -130,9 +131,9 @@ const params = {
     buttonBorderRadius: getWidth(8),
     buttonFlex: 0.432,
     footerFlex: 0.15,
-    contentPadding: getWidth(37),
+    contentPadding: getWidth(20),
     contentPaddingVertical: getHeight(10),
-    titleBoldSize: getHeight(28),
+    titleBoldSize: getHeight(30),
     text: getHeight(16),
     buttonText: getHeight(14),
     imageTopPadding: getHeight(60),
@@ -149,6 +150,9 @@ const styles = StyleSheet.create({
     content: {
         backgroundColor: 'transparent',
         flex: 1
+    },
+    titleContainer: {
+        justifyContent: 'flex-start'
     },
     footer: {
         justifyContent: 'center',
@@ -199,13 +203,12 @@ const styles = StyleSheet.create({
     textContainer: {
         backgroundColor: 'transparent',
         flex: 1,
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'flex-end'
     },
     titleBold: {
         fontFamily: 'Montserrat-ExtraBold',   
-        alignSelf: 'center',  
-        marginTop: getHeight(30),
+        alignSelf: 'flex-start',  
         fontSize: params.titleBoldSize,
         color: '#384B65'
     },
@@ -217,7 +220,7 @@ const styles = StyleSheet.create({
     },
     textInfo: {
         fontFamily: 'Montserrat',
-        lineHeight: getHeight(24),
+        lineHeight: getHeight(25),
         fontSize: params.text,
         color: params.colorDarkBlue
     },
