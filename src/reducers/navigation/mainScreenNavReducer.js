@@ -15,4 +15,4 @@ export default function navReducer (state = initialState, action) {
 	const nextState = MainScreenNavigators.router.getStateForAction(action, state);
 
 	return nextState || state;
-};
+}

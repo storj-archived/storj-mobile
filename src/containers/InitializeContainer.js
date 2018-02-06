@@ -22,7 +22,7 @@ class InitializeContainer extends Component {
         super(props);
 
         this.state = {
-            passcode: '',
+            passcode: "",
             enterPassCode: false,
             isPasscodeWrong: false
         };
@@ -40,6 +40,7 @@ class InitializeContainer extends Component {
                 return;
             }
 
+            console.log('before keys exist');
             if(!await StorjLib.keysExists()) {
                 this.props.redirectToLoginScreen();
                 return;

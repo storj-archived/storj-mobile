@@ -119,4 +119,12 @@ export const bucketsContainerActions = {
 export const initializeContainerActions = {
     getBuckets, 
     setFirstSignIn
-}
+};
+
+export const bucketsListContainerAction = {
+    onSingleItemSelected,
+    enableSelectionMode,
+    disableSelectionMode,
+    selectBucket,
+    deselectBucket
+};
