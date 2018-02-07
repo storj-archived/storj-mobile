@@ -7,13 +7,11 @@ import {
     StyleSheet,
     Clipboard,
     Linking,
-    Alert, 
-    AsyncStorage
+    Alert
 } from 'react-native';
 import React, { Component } from 'react';
 import mnemonicScreenConstants from '../utils/constants/mnemonicScreenConstants';
 import { getWidth, getHeight, getDeviceWidth, getDeviceHeight } from '../utils/adaptive';
-import { authConstants } from '../utils/constants/storageConstants';
 import { getEmail, getMnemonic, removeMnemonicNotSaved } from '../utils/AsyncStorageModule';
 
 /**
@@ -236,7 +234,7 @@ export default class MnemonicGenerationComponent extends Component {
                 <View style = { styles.titleLightContainer }>
                     <Text style = { styles.titleBold }>{ mnemonicScreenConstants.mnemonicScreenAdditionalText }</Text>
                 </View>
-                { this.state.showMnemonic && !this.state.isLoading ? this.showMnemonicVisibleView(this.state.mnemonic) : this.showGetMnemonicButton() } 
+                { this.state.showMnemonic && !this.state.isLoading ? this.showMnemonicVisibleView() : this.showGetMnemonicButton() } 
                 { this.state.showModal ? this.savingOptionView() : null }
                 { this.state.showConfirmation ? this.confirmationModalView() : null }
             </View>

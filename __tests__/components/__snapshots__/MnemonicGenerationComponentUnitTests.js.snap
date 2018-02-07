@@ -4,17 +4,7 @@ exports[`MnemonicGenerationComponent renders correctly 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <MnemonicGenerationComponent
-    navigation={
-      Object {
-        "state": Object {
-          "params": Object {
-            "mnemonic": "mnemonic",
-          },
-        },
-      }
-    }
-  />,
+  Symbol(enzyme.__unrendered__): <MnemonicGenerationComponent />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -531,7 +521,7 @@ ShallowWrapper {
           },
           Object {
             "instance": null,
-            "key": undefined,
+            "key": "getMnemonic",
             "nodeType": "class",
             "props": Object {
               "activeOpacity": 0.2,
@@ -1101,7 +1091,7 @@ ShallowWrapper {
             },
             Object {
               "instance": null,
-              "key": undefined,
+              "key": "getMnemonic",
               "nodeType": "class",
               "props": Object {
                 "activeOpacity": 0.2,
