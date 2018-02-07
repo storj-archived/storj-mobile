@@ -44,25 +44,30 @@ export default class RegisterComponent extends Component {
                 </View>
                 <View style = { styles.contentWrapper }>
                     <Text style = { styles.titleBold }>Welcome on board</Text>
-                    <InputComponent 
-                        style = { styles.firstInputMargin }
-                        onChangeText = { this.onChangeEmail }
-                        isPassword = { false } 
-                        placeholder = {'Email'}
-                        isError = { this.props.isEmailError }
-                        errorMessage = {'Invalid email'} />
-                    <InputComponent 
-                        onChangeText = { this.onChangePassword } 
-                        isPassword = { true } 
-                        placeholder = {'Password'}
-                        isError = { this.props.isPasswordError }
-                        errorMessage = {'Invalid password'} />
-                    <InputComponent 
-                        onChangeText = { this.onChangePasswordRepeat } 
-                        isPassword = { true } 
-                        placeholder = {'Confirm password'}
-                        isError = { this.props.isPasswordMatchError }
-                        errorMessage = {'Passwords should match'} />
+                    <View style = { styles.firstInputMargin }>
+                        <InputComponent 
+                            onChangeText = { this.onChangeEmail }
+                            isPassword = { false } 
+                            placeholder = {'Email'}
+                            isError = { this.props.isEmailError }
+                            errorMessage = { 'Invalid Email' } />
+                    </View>
+                    <View>
+                        <InputComponent 
+                            onChangeText = { this.onChangePassword } 
+                            isPassword = { true } 
+                            placeholder = {'Password'}
+                            isError = { this.props.isPasswordError }
+                            errorMessage = { 'Invalid password' } />
+                    </View>
+                    <View>
+                        <InputComponent 
+                            onChangeText = { this.onChangePasswordRepeat } 
+                            isPassword = { true } 
+                            placeholder = {'Confirm password'}
+                            isError = { this.props.isPasswordMatchError }
+                            errorMessage = { 'Password doesn`t match' } />
+                    </View>
                     <View style = { styles.agreementWrapper }>
                         <Checkbox onPress = { this.onChangeTermsAccepted }/>
                         <Text style = { styles.agreementText }>I agree to the  
@@ -82,9 +87,9 @@ export default class RegisterComponent extends Component {
                 </View>
                 {
                     this.props.isLoading ?
-                        <View style={ [ styles.backgoundWrapper ] }>
-                            <View style={ [ styles.backgoundWrapper, styles.dimBlack ] } />
-                            <View style={ [ styles.backgoundWrapper, styles.setChildCenter ] }>
+                        <View style={ [ styles.backgroundWrapper ] }>
+                            <View style={ [ styles.backgroundWrapper, styles.dimBlack ] } />
+                            <View style={ [ styles.backgroundWrapper, styles.setChildCenter ] }>
                                 <ActivityIndicator animating={ true } color={ "#2782ff" } size={ "large" }/>
                             </View>
                         </View> : null
@@ -123,7 +128,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    backgoundWrapper: {
+    backgroundWrapper: {
         top: 0,
         right: 0,
         bottom: 0,
@@ -134,13 +139,6 @@ const styles = StyleSheet.create({
     dimBlack: {
         backgroundColor: 'black',
         opacity: 0.3
-    },
-    backgoundWrapper: {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        position: 'absolute'
     },
     logo: {
         position: 'absolute',
@@ -166,7 +164,7 @@ const styles = StyleSheet.create({
     footer: {
        height: getHeight(113),
        alignItems: 'center',
-       marginTop: getHeight(50)
+       marginTop: getHeight(40)
     },
     createAccountButton: {
         width: getWidth(343),
@@ -186,7 +184,7 @@ const styles = StyleSheet.create({
         lineHeight: getHeight(24),
         fontSize: getHeight(16),
         color: '#384B65',
-        marginTop: getHeight(20)
+        marginTop: getHeight(15)
     },
     footerLink: {
         fontFamily: 'Montserrat-Bold',
@@ -194,7 +192,7 @@ const styles = StyleSheet.create({
     },
     agreementWrapper: {
         flexDirection: 'row',
-        marginTop: getHeight(5),
+        marginTop: getHeight(20),
     },
     agreementText: {
         lineHeight: getHeight(24),

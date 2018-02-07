@@ -27,10 +27,21 @@ export default class InputComponent extends Component {
     }
 
     render() {
-        const errorMessage = this.props.errorMessage ? this.props.errorMessage : null; 
+        let placeholderStyle, message, underlineStyle;
+
+        if(this.props.isError) {
+            placeholderStyle = styles.placeholderOnErrorText;
+            message = this.props.errorMessage;
+            underlineStyle = styles.errorUnderline;
+        } else {
+            placeholderStyle = styles.placeholderText;
+            message = this.props.regularMessage;
+            underlineStyle = styles.underline;
+        }
 
         return (
             <View style = { [ styles.inputWrapper, this.props.style ] }>
+                <Text style = { placeholderStyle }> { message } </Text>
                 <View style = { styles.textInputWrapper }>
                     <TextInput 
                         placeholderTextColor = 'grey'
@@ -58,8 +69,7 @@ export default class InputComponent extends Component {
                             })()
                         }
                 </View>
-                <View style = { styles.underline }/>
-                <Text>{ this.props.isError ? errorMessage : null }</Text>
+                <View style = { underlineStyle }/>
             </View>
         );
     };
@@ -98,12 +108,30 @@ const styles = StyleSheet.create({
         marginBottom: getHeight(8)
     },
     underline: {
-        height: getHeight(1),
+        height: getHeight(0.5),
         backgroundColor: '#a6b5ca',
-        opacity: 0.15
+        opacity: 0.2
+    },
+    errorUnderline: {
+        height: getHeight(0.5),
+        backgroundColor: '#EB5757'
     },
     eye: {
         width: getHeight(24),
         height: getHeight(24)
-    }
+    },
+    placeholderText: {
+        fontSize: getHeight(12),
+        color: '#4b657d',
+        opacity: 0.4,
+        fontFamily: 'Montserrat',
+        fontWeight: 'bold',
+        height: getHeight(15), 
+    },
+    placeholderOnErrorText: {
+        fontSize: getHeight(12),
+        color: '#EB5757',
+        fontFamily: 'Montserrat',
+        fontWeight: 'bold',
+    },
 });

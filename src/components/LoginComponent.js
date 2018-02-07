@@ -39,7 +39,6 @@ export default class LoginComponent extends Component {
                 </View>
                 <View style={ styles.contentWrapper }>
                     <Text style = { styles.titleBold }>Login</Text>
-                    <Text style = { styles.placeholderText } >Email</Text>
                     <InputComponent 
                         style = { styles.inputHeight }
                         onChangeText = { this.onChangeLogin }
@@ -47,8 +46,8 @@ export default class LoginComponent extends Component {
                         placeholder = {'your_email@mail.com'} 
                         value = { this.props.email }
                         isError = { this.props.isEmailError }
-                        errorMessage = {'Invalid email'} />
-                    <Text style = { styles.placeholderText } >Password</Text>
+                        errorMessage = { 'Invalid Email' }
+                        regularMessage = { 'Email' } />
                     <InputComponent 
                         style = { styles.inputHeight }
                         onChangeText = { this.onChangePassword } 
@@ -56,9 +55,10 @@ export default class LoginComponent extends Component {
                         placeholder = {'Enter your password'}
                         value = { this.props.password }
                         isError = { this.props.isPasswordError }
-                        errorMessage = {'Invalid password'} />
-                    <Text style = { styles.mnemonicPlaceholderText }>Mnemonic</Text>
+                        errorMessage = { 'Invalid password' }
+                        regularMessage = { 'Password' } />
                     <InputComponent 
+                        style = { styles.mnemonicContainer }
                         inputStyle = { styles.mnemonicInput }
                         multiline = { true }
                         placeholder = {'Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code'}
@@ -66,8 +66,9 @@ export default class LoginComponent extends Component {
                         editable = { !this.props.isRedirectedFromRegister}
                         isPassword = { false }  
                         value = { this.props.mnemonic }
-                        isError = { this.props.isMnemonicError } 
-                        errorMessage = {'Invalid mnemonic'} />
+                        isError = { this.props.isMnemonicError }
+                        errorMessage = { 'Invalid mnemonic' }
+                        regularMessage = { 'Mnemonic' } />
                     <View style = { styles.agreementWrapper }>
                         <Text style = { styles.agreementText }>Forgot password?</Text>
                         <Text style = { styles.mnemonicInfoLinkText }>What is Mnemonic?</Text>
@@ -84,9 +85,9 @@ export default class LoginComponent extends Component {
                 </View>
                 {
                     this.props.isLoading ?
-                        <View style = { [ styles.backgoundWrapper ] }>
-                            <View style = { [ styles.backgoundWrapper, styles.dimBlack ] } />
-                            <View style = { [ styles.backgoundWrapper, styles.setChildCenter ] }>
+                        <View style = { [ styles.backgroundWrapper ] }>
+                            <View style = { [ styles.backgroundWrapper, styles.dimBlack ] } />
+                            <View style = { [ styles.backgroundWrapper, styles.setChildCenter ] }>
                                 <ActivityIndicator animating = { true } color = { "#2782ff" } size = { "large" }/>
                             </View>
                         </View> : null
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white'
     },
-    backgoundWrapper: {
+    backgroundWrapper: {
         top: 0,
         right: 0,
         bottom: 0,
@@ -135,22 +136,17 @@ const styles = StyleSheet.create({
         color: '#384B65',
         marginBottom: getHeight(5)
     },
+    mnemonicContainer: {
+        height: getHeight(90), 
+        marginTop: getHeight(20)
+    },
     mnemonicInput: {
-        height: getHeight(90),
+        height: getHeight(80),
         fontSize: getHeight(14)
     },
-    placeholderText: {
-        fontSize: getHeight(12),
-        marginTop: getHeight(15),
-        color: '#4b657d',
-        opacity: 0.4,
-        fontFamily: 'Montserrat',
-        fontWeight: 'bold',
-        height: getHeight(15), 
-        marginTop: getHeight(29)
-    },
     inputHeight: {
-        height: getHeight(30)
+        marginTop: getHeight(20),
+        height: getHeight(50)
     },
     mnemonicPlaceholderText: {
         fontSize: getHeight(12),
@@ -206,7 +202,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat',
         fontSize: getHeight(16),
         color: '#384B65',
-        marginTop: getHeight(10)
+        marginTop: getHeight(15)
      },
     footerLink: {
         fontFamily: 'Montserrat-Bold',
@@ -238,5 +234,7 @@ LoginComponent.propTypes = {
     password: PropTypes.string,
     mnemonic: PropTypes.string,
     isEmailError: PropTypes.bool,
+    isPasswordError: PropTypes.bool,
+    isMnemonicError: PropTypes.bool,
     isRedirectedFromRegister: PropTypes.bool
 };
