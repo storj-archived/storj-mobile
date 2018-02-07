@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { AsyncStorage } from 'react-native';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -11,8 +10,7 @@ import StorjModule from '../utils/StorjModule';
 import validator from '../utils/validator';
 import infoScreensConstants from '../utils/constants/infoScreensConstants';
 import { authConstants } from '../utils/constants/storageConstants';
-
-const FIRST_ACTION = 'FIRST_ACTION';
+import { setEmail, setMnemonic, setMnemonicNotSaved, setPassword, getFirstAction, setFirstAction } from '../utils/AsyncStorageModule';
 
 /**
  * Redux container for register component
@@ -100,8 +98,8 @@ export class RegisterContainer extends Component {
      * Handle if was allready in use
      */
     async handleFirstLaunch() {
-        if(!await AsyncStorage.getItem(FIRST_ACTION)) 
-            await AsyncStorage.setItem(FIRST_ACTION, 'true');
+        if(!await getFirstAction()) 
+            await setFirstAction();
         
     };
 
@@ -109,10 +107,10 @@ export class RegisterContainer extends Component {
      * Saving Auth data into AsyncStorage after successfull register
      */
     saveData = async (mnemonic, email, password) => {
-        await AsyncStorage.setItem(authConstants.MNEMONIC, mnemonic);
-        await AsyncStorage.setItem(authConstants.EMAIL, email);
-        await AsyncStorage.setItem(authConstants.PASSWORD, password);
-        await AsyncStorage.setItem(authConstants.IS_MNEMONIC_SAVED, 'false');
+        await setMnemonic(mnemonic);
+        await setEmail(email);
+        await setPassword(password);
+        await setMnemonicNotSaved();
     }
 
     /**

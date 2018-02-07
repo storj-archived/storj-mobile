@@ -7,13 +7,14 @@ import {
     StyleSheet,
     Clipboard,
     Linking,
-    Alert,
+    Alert, 
     AsyncStorage
 } from 'react-native';
 import React, { Component } from 'react';
 import mnemonicScreenConstants from '../utils/constants/mnemonicScreenConstants';
 import { getWidth, getHeight, getDeviceWidth, getDeviceHeight } from '../utils/adaptive';
 import { authConstants } from '../utils/constants/storageConstants';
+import { getEmail, getMnemonic, removeMnemonicNotSaved } from '../utils/AsyncStorageModule';
 
 /**
 * MnemonicGeneration component
@@ -40,8 +41,8 @@ export default class MnemonicGenerationComponent extends Component {
         this.setState({ isLoading: true });
 
         this.setState({ 
-            mnemonic: await AsyncStorage.getItem(authConstants.MNEMONIC), 
-            email: await AsyncStorage.getItem(authConstants.EMAIL)
+            mnemonic: await getMnemonic(), 
+            email: await getEmail()
         });
 
         this.setState({ isLoading: false });
@@ -102,7 +103,7 @@ export default class MnemonicGenerationComponent extends Component {
      * Navigation to login screen
      */
     async redirectToLoginScreen() {
-        await AsyncStorage.removeItem(authConstants.IS_MNEMONIC_SAVED);
+        await removeMnemonicNotSaved();
         this.props.navigation.navigate('LoginScreen');
     }
 

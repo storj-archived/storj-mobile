@@ -2,7 +2,6 @@ import {
     View,
     Text,
     StyleSheet,
-    AsyncStorage,
     Image,
     TouchableOpacity
 } from 'react-native';
@@ -14,8 +13,7 @@ import * as Actions from '../reducers/navigation/navigationActions';
 import StorjLib from '../utils/StorjModule';
 import { getWidth, getHeight } from '../utils/adaptive';
 import { authConstants } from '../utils/constants/storageConstants';
-
-const FIRST_ACTION = 'FIRST_ACTION';
+import { getMnemonicNotSaved, getFirstAction } from '../utils/AsyncStorageModule';
 
 class InitializeContainer extends Component {
     constructor(props) {
@@ -30,12 +28,12 @@ class InitializeContainer extends Component {
 
     async componentWillMount() {
         try {
-            if(!await AsyncStorage.getItem(FIRST_ACTION)) {
+            if(!await getFirstAction()) {
                 this.props.redirectToOnBoardingScreen();
                 return;
             }
 
-            if(await AsyncStorage.getItem(authConstants.IS_MNEMONIC_SAVED) === 'false') {
+            if(await getMnemonicNotSaved() === 'false') {
                 this.props.redirectToMnemonicGenerationScreen();
                 return;
             }

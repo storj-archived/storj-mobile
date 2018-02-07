@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { AsyncStorage } from 'react-native';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -11,8 +10,7 @@ import { LoginStateModel } from '../models/LoginStateModel';
 import { LoginErrorModel } from '../models/LoginErrorModel';
 import infoScreensConstants from '../utils/constants/infoScreensConstants';
 import { authConstants } from '../utils/constants/storageConstants';
-
-const FIRST_ACTION = 'FIRST_ACTION';
+import { getEmail, getMnemonic, getPassword, getFirstAction, setFirstAction } from '../utils/AsyncStorageModule';
 
 /**
  * Container for LoginComponent
@@ -46,9 +44,9 @@ class LoginContainer extends Component {
             password = this.props.user.password;
             mnemonic = this.props.user.mnemonic;
         } else {
-            email = await AsyncStorage.getItem(authConstants.EMAIL),
-            password = await AsyncStorage.getItem(authConstants.PASSWORD),
-            mnemonic = await AsyncStorage.getItem(authConstants.MNEMONIC)   
+            email = await getEmail(),
+            password = await getPassword(),
+            mnemonic = await getMnemonic()   
         }
 
         this.setState({
@@ -101,8 +99,8 @@ class LoginContainer extends Component {
      * Handle if was allready in use
      */
     async handleFirstLaunch() {
-        if(!await AsyncStorage.getItem(FIRST_ACTION)) {
-            await AsyncStorage.setItem(FIRST_ACTION, 'true');
+        if(!await getFirstAction()) {
+            await setFirstAction();
         }
     };
 
