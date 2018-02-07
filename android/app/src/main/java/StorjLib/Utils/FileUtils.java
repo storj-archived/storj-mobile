@@ -32,19 +32,21 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 /**
- * @version 2009-07-03
  * @author Peli
- * @version 2013-12-11
  * @author paulburke (ipaulpro)
- * @version 2017-08-25
  * @author Kaloyan Raev
+ * @author Bogdan Artemenko
+ * @version 2018-02-07
  */
 public class FileUtils {
-    private FileUtils() {} //private constructor to enforce Singleton pattern
-
-    /** TAG for log messages. */
+    /**
+     * TAG for log messages.
+     */
     private static final String TAG = "FileUtils";
     private static final boolean DEBUG = false; // Set to true to enable logging
+
+    private FileUtils() {
+    } //private constructor to enforce Singleton pattern
 
     /**
      * @return Whether the URI is a local one.
@@ -92,9 +94,9 @@ public class FileUtils {
      * Get the value of the data column for this Uri. This is useful for
      * MediaStore Uris, and other file-based ContentProviders.
      *
-     * @param context The context.
-     * @param uri The Uri to query.
-     * @param selection (Optional) Filter used in the query.
+     * @param context       The context.
+     * @param uri           The Uri to query.
+     * @param selection     (Optional) Filter used in the query.
      * @param selectionArgs (Optional) Selection arguments used in the query.
      * @return The value of the _data column, which is typically a file path.
      * @author paulburke
@@ -107,22 +109,25 @@ public class FileUtils {
         final String[] projection = {
                 column
         };
+        cursor = context.getContentResolver().
+                query(uri, projection, selection, selectionArgs, null);
+
+        if (cursor == null || !cursor.moveToFirst()) return null;
+
+        if (DEBUG) {
+            DatabaseUtils.dumpCursor(cursor);
+        }
 
         try {
-            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
-                    null);
-            if (cursor != null && cursor.moveToFirst()) {
-                if (DEBUG)
-                    DatabaseUtils.dumpCursor(cursor);
+            final int column_index = cursor.getColumnIndexOrThrow(column);
 
-                final int column_index = cursor.getColumnIndexOrThrow(column);
-                return cursor.getString(column_index);
-            }
+            return cursor.getString(column_index);
+
+        } catch (Exception ex) {
+            return null;
         } finally {
-            if (cursor != null)
-                cursor.close();
+            cursor.close();
         }
-        return null;
     }
 
     /**
@@ -134,9 +139,9 @@ public class FileUtils {
      * represents a local file.
      *
      * @param context The context.
-     * @param uri The Uri to query.
-     * @see #isLocal(String)
+     * @param uri     The Uri to query.
      * @author paulburke
+     * @see #isLocal(String)
      */
     public static String getPath(final Context context, final Uri uri) {
 
@@ -157,46 +162,15 @@ public class FileUtils {
         if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
             // ExternalStorageProvider
             if (isExternalStorageDocument(uri)) {
-                final String docId = DocumentsContract.getDocumentId(uri);
-                final String[] split = docId.split(":");
-                final String type = split[0];
-
-                if ("primary".equalsIgnoreCase(type)) {
-                    return Environment.getExternalStorageDirectory() + "/" + split[1];
-                }
-
-                // TODO handle non-primary volumes
+                return getExternalStorageFilePath(uri);
             }
             // DownloadsProvider
-            else if (isDownloadsDocument(uri)) {
-
-                final String id = DocumentsContract.getDocumentId(uri);
-                final Uri contentUri = ContentUris.withAppendedId(
-                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
-
-                return getDataColumn(context, contentUri, null, null);
+            if (isDownloadsDocument(uri)) {
+                return getDownloadDocumentFilePath(context, uri);
             }
             // MediaProvider
-            else if (isMediaDocument(uri)) {
-                final String docId = DocumentsContract.getDocumentId(uri);
-                final String[] split = docId.split(":");
-                final String type = split[0];
-
-                Uri contentUri = null;
-                if ("image".equals(type)) {
-                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-                } else if ("video".equals(type)) {
-                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
-                } else if ("audio".equals(type)) {
-                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-                }
-
-                final String selection = "_id=?";
-                final String[] selectionArgs = new String[] {
-                        split[1]
-                };
-
-                return getDataColumn(context, contentUri, selection, selectionArgs);
+            if (isMediaDocument(uri)) {
+                return getMediaDocumentFilePath(context, uri);
             }
         }
         // MediaStore (and general)
@@ -216,6 +190,53 @@ public class FileUtils {
         return null;
     }
 
+    private static String getDownloadDocumentFilePath(Context context, Uri uri) {
+        final String id = DocumentsContract.getDocumentId(uri);
+        final Uri contentUri = ContentUris.withAppendedId(
+                Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+
+        return getDataColumn(context, contentUri, null, null);
+    }
+
+    private static String getExternalStorageFilePath(Uri uri) {
+        final String docId = DocumentsContract.getDocumentId(uri);
+        final String[] split = docId.split(":");
+        final String type = split[0];
+
+        if ("primary".equalsIgnoreCase(type)) {
+            return Environment.getExternalStorageDirectory() + "/" + split[1];
+        }
+
+        // TODO handle non-primary volumes
+        return null;
+    }
+
+    private static String getMediaDocumentFilePath(Context context, Uri uri) {
+        final String docId = DocumentsContract.getDocumentId(uri);
+        final String[] split = docId.split(":");
+        final String type = split[0];
+
+        Uri contentUri = null;
+        switch (type) {
+            case "image":
+                contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                break;
+            case "video":
+                contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                break;
+            case "audio":
+                contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                break;
+        }
+
+        final String selection = "_id=?";
+        final String[] selectionArgs = new String[]{
+                split[1]
+        };
+
+        return getDataColumn(context, contentUri, selection, selectionArgs);
+    }
+
     /**
      * Get the Intent for selecting content to be used in an Intent Chooser.
      *
@@ -223,12 +244,17 @@ public class FileUtils {
      * @author paulburke
      */
     public static Intent createGetContentIntent() {
-        // Implicitly allow the user to select a particular kind of data
+        return createGetContentIntent("*/*");
+    }
+
+    public static Intent createGetContentIntent(String mimeType) {
         final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         // The MIME data type filter
-        intent.setType("*/*");
+        mimeType = mimeType != null ? mimeType : "*/*";
+        intent.setType(mimeType);
         // Only return URIs that can be opened with ContentResolver
         intent.addCategory(Intent.CATEGORY_OPENABLE);
+
         return intent;
     }
 }

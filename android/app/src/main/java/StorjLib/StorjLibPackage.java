@@ -26,6 +26,7 @@ public class StorjLibPackage implements ReactPackage {
         List<NativeModule> modules = new ArrayList<>();
 
         modules.add(new StorjLibModule(reactContext));
+        modules.add(new FilePickerModule(reactContext));
 
         return modules;
     }
