@@ -93,6 +93,8 @@ class MainContainer extends Component {
         try {
             let buckets = await StorjLib.getBuckets();
 
+            console.log(buckets);
+
             this.props.getBuckets(buckets.map((bucket => new ListItemModel(bucket))));
         } catch(e) {
             //Eror callback

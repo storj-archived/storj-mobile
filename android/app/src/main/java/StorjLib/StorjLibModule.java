@@ -18,10 +18,12 @@ import StorjLib.StorjTypesWrappers.BucketWrapper;
 import StorjLib.Utils.FileUtils;
 import io.storj.libstorj.Bucket;
 import io.storj.libstorj.DeleteBucketCallback;
+import io.storj.libstorj.DownloadFileCallback;
 import io.storj.libstorj.File;
 import io.storj.libstorj.GetBucketsCallback;
 import io.storj.libstorj.Keys;
 import io.storj.libstorj.KeysNotFoundException;
+import io.storj.libstorj.ListFilesCallback;
 import io.storj.libstorj.RegisterCallback;
 import io.storj.libstorj.Storj;
 import io.storj.libstorj.UploadFileCallback;
@@ -192,7 +194,120 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
         }).start();
     }
 
+    @ReactMethod
+    void downloadFile(final String bucketId,
+                      final String fileId,
+                      final String localPath,
+                      final Callback onProgressCallback,
+                      final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                StorjAndroid.getInstance(getReactApplicationContext()).downloadFile(bucketId, fileId, localPath, new DownloadFileCallback() {
+                    @Override
+                    public void onProgress(String fileId, double progress, long downloadedBytes, long totalBytes) {
+                        onProgressCallback.invoke(fileId, progress, downloadedBytes, totalBytes);
+                    }
 
+                    @Override
+                    public void onComplete(String fileId, String localPath) {
+                        WritableMap response = new WritableNativeMap();
+
+                        response.putBoolean("isSuccess", true);
+                        response.putString("errorMessage", null);
+
+                        WritableMap result = new WritableNativeMap();
+
+                        result.putString("fileId", fileId);
+                        result.putString("localPath", localPath);
+
+                        response.putMap("result", result);
+                    }
+
+                    @Override
+                    public void onError(String fileId, String message) {
+`                       WritableMap response = new WritableNativeMap();
+
+                        response.putBoolean("isSuccess", false);
+                        response.putString("errorMessage", message);
+
+                        WritableMap result = new WritableNativeMap();
+
+                        result.putString("fileId", fileId);
+                        result.putString("localPath", null);
+
+                        response.putMap("result", result);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    @ReactMethod
+    void listFiles(final String bucketId, final Promise promise) {
+
+        if(bucketId == null) {
+            WritableMap result = Arguments.createMap();
+
+            result.putBoolean("isSuccess", false);
+            result.putString("errorMessage", "Invalid bucketId");
+            result.putNull("result");
+
+            promise.resolve(result);
+            return;
+        }
+
+
+         new Thread(new Runnable() {
+             @Override
+             public void run() {
+                 StorjAndroid.getInstance(getReactApplicationContext()).listFiles(bucketId, new ListFilesCallback() {
+                     @Override
+                     public void onFilesReceived(File[] files) {
+                         WritableMap result = Arguments.createMap();
+
+                         result.putBoolean("isSuccess", true);
+                         result.putString("errorMessage", null);
+
+                         WritableArray array = Arguments.createArray();
+
+                         for (File file: files) {
+                             WritableMap fileJs = new WritableNativeMap();
+
+                             fileJs.putString("bucketId", file.getBucketId());
+                             fileJs.putString("created", file.getCreated());
+                             fileJs.putString("erasure", file.getErasure());
+                             fileJs.putString("hmac", file.getHMAC());
+                             fileJs.putString("fileId", file.getId());
+                             fileJs.putString("index", file.getIndex());
+                             fileJs.putString("mimeType", file.getMimeType());
+                             fileJs.putString("name", file.getName());
+                             fileJs.putDouble("size", file.getSize());
+
+                             array.pushMap(fileJs);
+                         }
+
+                         result.putArray("result", array);
+
+                         promise.resolve(result);
+                     }
+
+                     @Override
+                     public void onError(String message) {
+                         WritableMap result = Arguments.createMap();
+
+                         result.putBoolean("isSuccess", false);
+                         result.putString("errorMessage", message);
+                         result.putNull("result");
+
+                         promise.resolve(result);
+                     }
+                 });
+             }
+         }).start();
+    }
+
+    @ReactMethod
     public void uploadFile(final String bucketId,
                            final String uri,
                            final Callback resultCallback,
