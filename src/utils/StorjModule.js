@@ -136,6 +136,38 @@ const StorjLib = (() => {
 
             return result;
         };
+
+        /**
+         * download file to storj network
+         * @returns {Promise<any>}
+         */
+        async downloadFile(bucketId, fileId, localPath, onProgressCallback) {
+            let downloadFileResult = await storjLib.downloadFile(bucketId, fileId, localPath, onProgressCallback);
+
+            return downloadFileResult;
+        };
+
+        /**
+         * List buckets for logged in user
+         * @returns {Promise<BucketModel[]>}
+         */
+        async listFiles(bucketId) {
+            let listFilesResult = await storjLib.listFiles(bucketId);
+
+            if(listFilesResult.isSuccess) {
+                listFilesResult.result.forEach(element => {
+                    console.log(element);
+                });
+            }
+
+            /* if(Array.isArray(buckets)) {
+                result = buckets.map((bucket) => {
+                    return new BucketModel(bucket);
+                });
+            } */
+
+            return listFilesResult;
+        };
     
         static getBucket() {
             //Not implemented yet
