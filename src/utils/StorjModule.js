@@ -141,10 +141,21 @@ const StorjLib = (() => {
          * download file to storj network
          * @returns {Promise<any>}
          */
-        async downloadFile(bucketId, fileId, localPath, onProgressCallback) {
-            let downloadFileResult = await storjLib.downloadFile(bucketId, fileId, localPath, onProgressCallback);
+        async downloadFile(bucketId, fileId, localPath) {
+            let downloadFileResult = await storjLib.downloadFile(bucketId, fileId, localPath);
 
             return downloadFileResult;
+        }
+
+        /**
+         * download file to storj network
+         * @returns {Promise<any>}
+         */
+         uploadFile(bucketId, localPath, onProgressCallback, onResponsseCallback) {
+            console.log(onProgressCallback);
+            let uploadFileResult = storjLib.uploadFile(bucketId, localPath, onProgressCallback, onResponsseCallback);
+
+            return uploadFileResult;
         };
 
         /**
