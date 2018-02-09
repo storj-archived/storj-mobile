@@ -10,7 +10,9 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import StorjLib.CallbackWrappers.CreateBucketCallbackWrapper;
 import StorjLib.Responses.SingleResponse;
@@ -198,7 +200,6 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
     void downloadFile(final String bucketId,
                       final String fileId,
                       final String localPath,
-                      final Callback onProgressCallback,
                       final Promise promise) {
         new Thread(new Runnable() {
             @Override
@@ -206,7 +207,15 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
                 StorjAndroid.getInstance(getReactApplicationContext()).downloadFile(bucketId, fileId, localPath, new DownloadFileCallback() {
                     @Override
                     public void onProgress(String fileId, double progress, long downloadedBytes, long totalBytes) {
-                        onProgressCallback.invoke(fileId, progress, downloadedBytes, totalBytes);
+                        //onProgressCallback.invoke(fileId, progress, downloadedBytes, totalBytes);
+                        WritableMap map = new WritableNativeMap();
+
+                        map.putString("fileId", fileId);
+                        map.putDouble("progress", progress);
+                        map.putDouble("downloadedBytes", downloadedBytes);
+                        map.putDouble("totalBytes", totalBytes);
+
+                        getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("test2", map);
                     }
 
                     @Override
@@ -222,11 +231,13 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
                         result.putString("localPath", localPath);
 
                         response.putMap("result", result);
+
+                        promise.resolve(response);
                     }
 
                     @Override
                     public void onError(String fileId, String message) {
-`                       WritableMap response = new WritableNativeMap();
+                        WritableMap response = new WritableNativeMap();
 
                         response.putBoolean("isSuccess", false);
                         response.putString("errorMessage", message);
@@ -237,6 +248,84 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
                         result.putString("localPath", null);
 
                         response.putMap("result", result);
+
+                        promise.resolve(response);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    @ReactMethod
+    void uploadFile(final String bucketId,
+                    final String localPath,
+                    final Callback onProgressCallback,
+                    final Callback onResponsseCallback) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                StorjAndroid.getInstance(getReactApplicationContext()).uploadFile(bucketId, localPath, new UploadFileCallback() {
+                    @Override
+                    public void onProgress(String filePath, double progress, long uploadedBytes, long totalBytes) {
+                        /*if(onProgressCallback != null) {
+                            WritableMap map = new WritableNativeMap();
+
+                            map.putString("filePath", filePath);
+                            map.putDouble("progress", progress);
+                            map.putDouble("uploadedBytes", uploadedBytes);
+                            map.putDouble("totalBytes", totalBytes);
+
+                            onProgressCallback.invoke(map);
+                        }*/
+                        WritableMap map = new WritableNativeMap();
+
+                        map.putString("filePath", filePath);
+                        map.putDouble("progress", progress);
+                        map.putDouble("uploadedBytes", uploadedBytes);
+                        map.putDouble("totalBytes", totalBytes);
+
+                        getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("test", map);
+                    }
+
+                    @Override
+                    public void onComplete(String filePath, File file) {
+                        if(onResponsseCallback == null)
+                            return;
+
+                        WritableMap response = new WritableNativeMap();
+
+                        response.putBoolean("isSuccess", true);
+                        response.putString("errorMessage", null);
+
+                        WritableMap result = new WritableNativeMap();
+
+                        result.putDouble("size", file.getSize());
+                        result.putString("name", file.getName());
+                        result.putString("mimeType", file.getMimeType());
+                        result.putString("index", file.getIndex());
+                        result.putString("id", file.getId());
+                        result.putString("hmac", file.getHMAC());
+                        result.putString("erasure", file.getErasure());
+                        result.putString("created", file.getCreated());
+
+                        response.putMap("result", result);
+
+                        onResponsseCallback.invoke(response);
+                    }
+
+                    @Override
+                    public void onError(String filePath, String message) {
+                        if(onResponsseCallback == null)
+                            return;
+
+                        WritableMap response = new WritableNativeMap();
+
+                        response.putBoolean("isSuccess", false);
+                        response.putString("errorMessage", message);
+
+                        response.putMap("result", null);
+
+                        onResponsseCallback.invoke(response);
                     }
                 });
             }
@@ -256,7 +345,6 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
             promise.resolve(result);
             return;
         }
-
 
          new Thread(new Runnable() {
              @Override
@@ -307,7 +395,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
          }).start();
     }
 
-    @ReactMethod
+    /*@ReactMethod
     public void uploadFile(final String bucketId,
                            final String uri,
                            final Callback resultCallback,
@@ -365,7 +453,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
 
             }
         }).start();
-    }
+    }*/
 
     private class DeleteCallbackWrapper implements DeleteBucketCallback {
 
