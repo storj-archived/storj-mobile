@@ -33,7 +33,7 @@ export default class ExpanderComponent extends Component {
                             style = { this.state.isExpanded ? styles.expanderImage : styles.collapseImage } />
                     </View>
                 </View>
-                <View style = { styles.contentWrapper }>
+                <View>
                 { 
                     (() => {
                         if(this.state.isExpanded) {
@@ -80,9 +80,6 @@ const styles = StyleSheet.create({
     },
     expanderContainer: {
         marginHorizontal: getWidth(10)
-    },
-    contentWrapper: {
-        /* alignItems: 'center' */
     },
     expanderBorder: {
         borderBottomWidth: getHeight(0.5),

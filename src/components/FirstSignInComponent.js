@@ -18,11 +18,13 @@ export default class FirstSignInComponent extends Component {
         super(props);
 
         this.state = {
-            showModal: false,
-            photosSelected: true,
-            videosSelected: true,
-            musicSelected: true,
-            filesSelected: true
+            androidOptions: [
+                { type: 'photos', isSelected: false, title: 'My photos' },
+                { type: 'videos', isSelected: false, title: 'My videos' },
+                { type: 'music', isSelected: false, title: 'My music' },
+                { type: 'files', isSelected: false, title: 'Files' }
+            ],
+            showModal: false
         }
     }
 
@@ -38,36 +40,47 @@ export default class FirstSignInComponent extends Component {
             musicSelected: true,
             filesSelected: true 
         });
-        this.props.createBucket('photos');
+
+        this.state.androidOptions.forEach(option => {
+            if (option.isSelected) {
+                this.props.createBucket(option.type);
+            }
+        });
+    }
+
+    changeOptions = (type) => {
+        let oldValues = this.state.androidOptions;
+        
+        this.setState({ androidOptions: oldValues.map(value => {
+            if(value.type === type) value.isSelected = !value.isSelected;
+            return value;
+        })});
+    }
+
+    getCallback = (type) => {
+        switch(type) {
+            case 'photos': this.photosSelection();
+            break;
+            case 'videos': this.videosSelection();
+            break;
+            case 'music': this.musicSelection();
+            break;
+            case 'files': this.filesSelection();
+            break;
+        }
     }
 
     photosSelection = () => {
-        if(!this.state.photosSelected) {
-            this.setState({ photosSelected: true });
-        } else {
-            this.setState({ photosSelected: false });
-        }
+        this.changeOptions('photos');
     }
     videosSelection = () => {
-        if(!this.state.videosSelected) {
-            this.setState({ videosSelected: true });
-        } else {
-            this.setState({ videosSelected: false });
-        }
+        this.changeOptions('videos');
     }
     musicSelection = () => {
-        if(!this.state.musicSelected) {
-            this.setState({ musicSelected: true })
-        } else {
-            this.setState({ musicSelected: false });
-        }       
+        this.changeOptions('music');
     }
     filesSelection = () => {
-        if(!this.state.filesSelected) {
-            this.setState({ filesSelected: true })
-        } else {
-            this.setState({ filesSelected: false });
-        }
+        this.changeOptions('files');
     }
 
     showModalView = () => {
@@ -79,49 +92,22 @@ export default class FirstSignInComponent extends Component {
                         <View style = { styles.modalTitleContainer }>
                             <Text style = { styles.titleLightBoldText }>What do you want to sync?</Text>
                         </View>
-                        <TouchableOpacity style = { styles.modalCheckListItemContainer } onPress = { this.photosSelection.bind(this) } >
-                            <View style = { styles.flexRow }>
-                                <Image style = { styles.selectedIcon }
-                                    source = {
-                                        this.state.photosSelected ? 
-                                        require('../images/Icons/ListItemSelected.png') :
-                                        require('../images/Icons/ListItemUnselected.png') } />
-                                <Text style = { styles.label }>My photos</Text>
-                            </View>
-                        </TouchableOpacity>
-                        <View style = { styles.underline }/>
-                        <TouchableOpacity style = { styles.modalCheckListItemContainer } onPress = { this.videosSelection.bind(this) } >
-                            <View style = { styles.flexRow }>
-                                <Image style = { styles.selectedIcon }
-                                    source = {
-                                        this.state.videosSelected ? 
-                                        require('../images/Icons/ListItemSelected.png') :
-                                        require('../images/Icons/ListItemUnselected.png') } />
-                                <Text style = { styles.label }>My videos</Text>
-                            </View>
-                        </TouchableOpacity>
-                        <View style = { styles.underline }/>
-                        <TouchableOpacity style = { styles.modalCheckListItemContainer } onPress = { this.musicSelection.bind(this) } >
-                            <View style = { styles.flexRow }>
-                                <Image style = { styles.selectedIcon }
-                                    source = {
-                                        this.state.musicSelected ? 
-                                        require('../images/Icons/ListItemSelected.png') :
-                                        require('../images/Icons/ListItemUnselected.png') } />
-                                <Text style = { styles.label }>My music</Text>
-                            </View>
-                        </TouchableOpacity>
-                        <View style = { styles.underline }/>
-                        <TouchableOpacity style = { styles.modalCheckListItemContainer } onPress = { this.filesSelection.bind(this) } >
-                            <View style = { styles.flexRow }>
-                                <Image style = { styles.selectedIcon }
-                                    source = {
-                                        this.state.filesSelected ? 
-                                        require('../images/Icons/ListItemSelected.png') :
-                                        require('../images/Icons/ListItemUnselected.png') } />
-                                <Text style = { styles.label }>Files</Text>
-                            </View>
-                        </TouchableOpacity>
+                        {
+                            this.state.androidOptions.map(option => {
+                                console.log(option);
+                                return (
+                                    <TouchableOpacity style = { styles.modalCheckListItemContainer } onPress = { () => { this.getCallback(option.type); } } >
+                                    <View style = { styles.flexRow }>
+                                        <Image style = { styles.selectedIcon }
+                                            source = {
+                                                option.isSelected ? 
+                                                require('../images/Icons/ListItemSelected.png') :
+                                                require('../images/Icons/ListItemUnselected.png') } />
+                                        <Text style = { styles.label }>{ option.title }</Text>
+                                    </View>
+                                </TouchableOpacity>);
+                            })
+                        }
                         <TouchableOpacity style = { styles.goButton } onPress = { this.closeModal.bind(this) }>
                             <Text style = { styles.syncMyDeviceText }>Go</Text>
                         </TouchableOpacity>

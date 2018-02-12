@@ -26,7 +26,7 @@ export default class LoginComponent extends Component {
         this.onChangePassword = props.onChangePassword ? props.onChangePassword : () => {};
         this.onChangeMnemonic = props.onChangeMnemonic ? props.onChangeMnemonic : () => {};
         this.registerButtonOnPress = props.registerButtonOnPress ? props.registerButtonOnPress : () => {};
-	};
+    };
 
 	render() {
 		return(

@@ -21,23 +21,18 @@ export default class ListItemComponent extends Component {
     }
 
     shouldComponentUpdate(nextProps) {
-        if(this.props.item !== nextProps.item) {
-            return true;
-        } else if(this.props.isSelectionModeEnabled !== nextProps.isSelectionModeEnabled) {
-            return true;
-        } else if(this.props.isSelected !== nextProps.isSelected) {
-            return true;
-        } else if(this.props.isItemActionsSelected !== nextProps.isItemActionsSelected) {
-            return true;
-        } else if(this.props.isSingleItemSelected !== nextProps.isSingleItemSelected) { //TODO: Optimize render performance
-            return true;
-        }
-
+        if( this.props.item !== nextProps.item ||
+            this.props.isSelectionModeEnabled !== nextProps.isSelectionModeEnabled ||
+            this.props.isSelected !== nextProps.isSelected ||
+            this.props.isItemActionsSelected !== nextProps.isItemActionsSelected ||
+            this.props.isSingleItemSelected !== nextProps.isSingleItemSelected) 
+                return true;
+        
+        //TODO: Optimize render performance
         return false;
     }
 
     deselectAllItems() {
-        //this.props.onSingleItemSelected();
         this.props.selectItemId(null);
         this.props.disableSelectionMode();
     }
@@ -58,9 +53,6 @@ export default class ListItemComponent extends Component {
                     }
                 }}
                 onLongPress = { () => { 
-                    /* if(!props.isSingleItemSelected) {
-                        props.onLongPress(props.item);
-                    } */
                     props.onLongPress(props.item);
                 }}>
                     <View style = { listItemStyles.listItemContent }>
@@ -75,26 +67,27 @@ export default class ListItemComponent extends Component {
                                 }
                             })()
                         }
-                        <View style = { listItemStyles.imageContainer }>
+                        <View>
                             <Image style = { listItemStyles.itemTypeIcon } source = { require('../images/Icons/BucketItemFolder.png') } />
                         </View>
                         <View style = { listItemStyles.textWrapper }>
                             <Text numberOfLines = {1} style = { listItemStyles.mainTitleText }>{ props.item.getName() }</Text>
                             {
-                                Platform.select({
-                                    ios: 
-                                        <ProgressViewIOS 
-                                            progress = { 0 }
-                                            trackTintColor = { '#f2f2f2' }
-                                            progressTintColor = { '#2794ff' } />,
-                                    android:
-                                        <ProgressBarAndroid    
-                                            progress = { 0 } 
-                                            styleAttr = { 'Horizontal' } 
-                                            color = { '#2794FF' } 
-                                            animating = {true} 
-                                            indeterminate = { false } />
-                                })
+                                this.props.progress ? 
+                                    Platform.select({
+                                        ios: 
+                                            <ProgressViewIOS 
+                                                progress = { 0 }
+                                                trackTintColor = { '#f2f2f2' }
+                                                progressTintColor = { '#2794ff' } />,
+                                        android:
+                                            <ProgressBarAndroid    
+                                                progress = { 0 } 
+                                                styleAttr = { 'Horizontal' } 
+                                                color = { '#2794FF' } 
+                                                animating = {true} 
+                                                indeterminate = { false } />
+                                    }) : null
                             }
                         </View>
                         {
@@ -127,7 +120,8 @@ ListItemComponent.propTypes = {
     isSingleItemSelected: PropTypes.bool,
     isItemActionsSelected: PropTypes.bool,
     selectItemId: PropTypes.func,
-    onPress: PropTypes.func    
+    onPress: PropTypes.func,
+    progress: PropTypes.number
 };
 
 const listItemStyles = StyleSheet.create({
@@ -156,10 +150,6 @@ const listItemStyles = StyleSheet.create({
         lineHeight: getHeight(20),
         fontSize: getHeight(16),
         color: '#384B65'
-        /* width: getWidth(241), */
-    },
-    imageContainer: {
-        /* width: getWidth(40) */
     },
     listItemActionsIconContainer: {        
         height: getHeight(55),
@@ -177,7 +167,6 @@ const listItemStyles = StyleSheet.create({
     },
     selectedIcon: {
         width: getWidth(20),
-        height: getWidth(20),
-        /* marginRight: getWidth(20), */
+        height: getWidth(20)
     }
 });
