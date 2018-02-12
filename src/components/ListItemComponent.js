@@ -4,7 +4,10 @@ import {
     StyleSheet,
     TouchableOpacity,
     Image,
-    ScrollView
+    ScrollView,
+    Platform,
+    ProgressViewIOS,
+    ProgressBarAndroid
 } from 'react-native';
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
@@ -77,6 +80,22 @@ export default class ListItemComponent extends Component {
                         </View>
                         <View style = { listItemStyles.textWrapper }>
                             <Text numberOfLines = {1} style = { listItemStyles.mainTitleText }>{ props.item.getName() }</Text>
+                            {
+                                Platform.select({
+                                    ios: 
+                                        <ProgressViewIOS 
+                                            progress = { 0 }
+                                            trackTintColor = { '#f2f2f2' }
+                                            progressTintColor = { '#2794ff' } />,
+                                    android:
+                                        <ProgressBarAndroid    
+                                            progress = { 0 } 
+                                            styleAttr = { 'Horizontal' } 
+                                            color = { '#2794FF' } 
+                                            animating = {true} 
+                                            indeterminate = { false } />
+                                })
+                            }
                         </View>
                         {
                             !props.isSelectionModeEnabled ? 

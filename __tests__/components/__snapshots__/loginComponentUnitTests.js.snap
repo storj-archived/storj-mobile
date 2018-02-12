@@ -19,16 +19,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <View
-          style={
-            Object {
-              "backgroundColor": "transparent",
-              "bottom": 0,
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            }
-          }
+          style={undefined}
         >
           <Image
             resizeMode="contain"
@@ -68,92 +59,43 @@ ShallowWrapper {
           >
             Login
           </Text>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Object {
-                "color": "#4b657d",
-                "fontFamily": "Montserrat",
-                "fontSize": 24,
-                "fontWeight": "bold",
-                "height": 30,
-                "marginTop": 58,
-                "opacity": 0.4,
-              }
-            }
-          >
-            Email
-          </Text>
           <InputComponent
-            errorMessage="Invalid email"
+            errorMessage="Invalid Email"
             isError={undefined}
             isPassword={false}
             onChangeText={[Function]}
             placeholder="your_email@mail.com"
+            regularMessage="Email"
             style={
               Object {
-                "height": 60,
+                "height": 100,
+                "marginTop": 40,
               }
             }
             value={undefined}
           />
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Object {
-                "color": "#4b657d",
-                "fontFamily": "Montserrat",
-                "fontSize": 24,
-                "fontWeight": "bold",
-                "height": 30,
-                "marginTop": 58,
-                "opacity": 0.4,
-              }
-            }
-          >
-            Password
-          </Text>
           <InputComponent
             errorMessage="Invalid password"
             isError={undefined}
             isPassword={true}
             onChangeText={[Function]}
             placeholder="Enter your password"
+            regularMessage="Password"
             style={
               Object {
-                "height": 60,
+                "height": 100,
+                "marginTop": 40,
               }
             }
             value={undefined}
           />
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Object {
-                "color": "#4b657d",
-                "fontFamily": "Montserrat",
-                "fontSize": 24,
-                "fontWeight": "bold",
-                "marginTop": 42,
-                "opacity": 0.4,
-              }
-            }
-          >
-            Mnemonic
-          </Text>
           <InputComponent
             editable={true}
             errorMessage="Invalid mnemonic"
             inputStyle={
               Object {
                 "fontSize": 28,
-                "height": 180,
+                "height": 160,
               }
             }
             isError={undefined}
@@ -161,6 +103,13 @@ ShallowWrapper {
             multiline={true}
             onChangeText={[Function]}
             placeholder="Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code"
+            regularMessage="Mnemonic"
+            style={
+              Object {
+                "height": 180,
+                "marginTop": 40,
+              }
+            }
             value={undefined}
           />
           <View
@@ -196,7 +145,7 @@ ShallowWrapper {
                 Object {
                   "alignSelf": "flex-end",
                   "color": "#2794FF",
-                  "fontFamily": "Montserrat",
+                  "fontFamily": "Montserrat-Regular",
                   "fontSize": 26,
                   "fontWeight": "bold",
                   "marginBottom": 48,
@@ -284,9 +233,9 @@ ShallowWrapper {
             style={
               Object {
                 "color": "#384B65",
-                "fontFamily": "Montserrat",
+                "fontFamily": "Montserrat-Regular",
                 "fontSize": 32,
-                "marginTop": 20,
+                "marginTop": 30,
               }
             }
           >
@@ -334,14 +283,7 @@ ShallowWrapper {
               }
             }
           />,
-          "style": Object {
-            "backgroundColor": "transparent",
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
+          "style": undefined,
         },
         "ref": null,
         "rendered": Object {
@@ -386,92 +328,43 @@ ShallowWrapper {
             >
               Login
             </Text>,
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "#4b657d",
-                  "fontFamily": "Montserrat",
-                  "fontSize": 24,
-                  "fontWeight": "bold",
-                  "height": 30,
-                  "marginTop": 58,
-                  "opacity": 0.4,
-                }
-              }
-            >
-              Email
-            </Text>,
             <InputComponent
-              errorMessage="Invalid email"
+              errorMessage="Invalid Email"
               isError={undefined}
               isPassword={false}
               onChangeText={[Function]}
               placeholder="your_email@mail.com"
+              regularMessage="Email"
               style={
                 Object {
-                  "height": 60,
+                  "height": 100,
+                  "marginTop": 40,
                 }
               }
               value={undefined}
             />,
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "#4b657d",
-                  "fontFamily": "Montserrat",
-                  "fontSize": 24,
-                  "fontWeight": "bold",
-                  "height": 30,
-                  "marginTop": 58,
-                  "opacity": 0.4,
-                }
-              }
-            >
-              Password
-            </Text>,
             <InputComponent
               errorMessage="Invalid password"
               isError={undefined}
               isPassword={true}
               onChangeText={[Function]}
               placeholder="Enter your password"
+              regularMessage="Password"
               style={
                 Object {
-                  "height": 60,
+                  "height": 100,
+                  "marginTop": 40,
                 }
               }
               value={undefined}
             />,
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "#4b657d",
-                  "fontFamily": "Montserrat",
-                  "fontSize": 24,
-                  "fontWeight": "bold",
-                  "marginTop": 42,
-                  "opacity": 0.4,
-                }
-              }
-            >
-              Mnemonic
-            </Text>,
             <InputComponent
               editable={true}
               errorMessage="Invalid mnemonic"
               inputStyle={
                 Object {
                   "fontSize": 28,
-                  "height": 180,
+                  "height": 160,
                 }
               }
               isError={undefined}
@@ -479,6 +372,13 @@ ShallowWrapper {
               multiline={true}
               onChangeText={[Function]}
               placeholder="Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code"
+              regularMessage="Mnemonic"
+              style={
+                Object {
+                  "height": 180,
+                  "marginTop": 40,
+                }
+              }
               value={undefined}
             />,
             <View
@@ -514,7 +414,7 @@ ShallowWrapper {
                   Object {
                     "alignSelf": "flex-end",
                     "color": "#2794FF",
-                    "fontFamily": "Montserrat",
+                    "fontFamily": "Montserrat-Regular",
                     "fontSize": 26,
                     "fontWeight": "bold",
                     "marginBottom": 48,
@@ -558,64 +458,20 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "accessible": true,
-              "allowFontScaling": true,
-              "children": "Email",
-              "ellipsizeMode": "tail",
-              "style": Object {
-                "color": "#4b657d",
-                "fontFamily": "Montserrat",
-                "fontSize": 24,
-                "fontWeight": "bold",
-                "height": 30,
-                "marginTop": 58,
-                "opacity": 0.4,
-              },
-            },
-            "ref": null,
-            "rendered": "Email",
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "errorMessage": "Invalid email",
+              "errorMessage": "Invalid Email",
               "isError": undefined,
               "isPassword": false,
               "onChangeText": [Function],
               "placeholder": "your_email@mail.com",
+              "regularMessage": "Email",
               "style": Object {
-                "height": 60,
+                "height": 100,
+                "marginTop": 40,
               },
               "value": undefined,
             },
             "ref": null,
             "rendered": null,
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "accessible": true,
-              "allowFontScaling": true,
-              "children": "Password",
-              "ellipsizeMode": "tail",
-              "style": Object {
-                "color": "#4b657d",
-                "fontFamily": "Montserrat",
-                "fontSize": 24,
-                "fontWeight": "bold",
-                "height": 30,
-                "marginTop": 58,
-                "opacity": 0.4,
-              },
-            },
-            "ref": null,
-            "rendered": "Password",
             "type": [Function],
           },
           Object {
@@ -628,8 +484,10 @@ ShallowWrapper {
               "isPassword": true,
               "onChangeText": [Function],
               "placeholder": "Enter your password",
+              "regularMessage": "Password",
               "style": Object {
-                "height": 60,
+                "height": 100,
+                "marginTop": 40,
               },
               "value": undefined,
             },
@@ -642,39 +500,22 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "accessible": true,
-              "allowFontScaling": true,
-              "children": "Mnemonic",
-              "ellipsizeMode": "tail",
-              "style": Object {
-                "color": "#4b657d",
-                "fontFamily": "Montserrat",
-                "fontSize": 24,
-                "fontWeight": "bold",
-                "marginTop": 42,
-                "opacity": 0.4,
-              },
-            },
-            "ref": null,
-            "rendered": "Mnemonic",
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
               "editable": true,
               "errorMessage": "Invalid mnemonic",
               "inputStyle": Object {
                 "fontSize": 28,
-                "height": 180,
+                "height": 160,
               },
               "isError": undefined,
               "isPassword": false,
               "multiline": true,
               "onChangeText": [Function],
               "placeholder": "Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code",
+              "regularMessage": "Mnemonic",
+              "style": Object {
+                "height": 180,
+                "marginTop": 40,
+              },
               "value": undefined,
             },
             "ref": null,
@@ -711,7 +552,7 @@ ShallowWrapper {
                     Object {
                       "alignSelf": "flex-end",
                       "color": "#2794FF",
-                      "fontFamily": "Montserrat",
+                      "fontFamily": "Montserrat-Regular",
                       "fontSize": 26,
                       "fontWeight": "bold",
                       "marginBottom": 48,
@@ -762,7 +603,7 @@ ShallowWrapper {
                   "style": Object {
                     "alignSelf": "flex-end",
                     "color": "#2794FF",
-                    "fontFamily": "Montserrat",
+                    "fontFamily": "Montserrat-Regular",
                     "fontSize": 26,
                     "fontWeight": "bold",
                     "marginBottom": 48,
@@ -852,9 +693,9 @@ ShallowWrapper {
               style={
                 Object {
                   "color": "#384B65",
-                  "fontFamily": "Montserrat",
+                  "fontFamily": "Montserrat-Regular",
                   "fontSize": 32,
-                  "marginTop": 20,
+                  "marginTop": 30,
                 }
               }
             >
@@ -1017,9 +858,9 @@ ShallowWrapper {
               "ellipsizeMode": "tail",
               "style": Object {
                 "color": "#384B65",
-                "fontFamily": "Montserrat",
+                "fontFamily": "Montserrat-Regular",
                 "fontSize": 32,
-                "marginTop": 20,
+                "marginTop": 30,
               },
             },
             "ref": null,
@@ -1062,16 +903,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <View
-            style={
-              Object {
-                "backgroundColor": "transparent",
-                "bottom": 0,
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-              }
-            }
+            style={undefined}
           >
             <Image
               resizeMode="contain"
@@ -1111,92 +943,43 @@ ShallowWrapper {
             >
               Login
             </Text>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "#4b657d",
-                  "fontFamily": "Montserrat",
-                  "fontSize": 24,
-                  "fontWeight": "bold",
-                  "height": 30,
-                  "marginTop": 58,
-                  "opacity": 0.4,
-                }
-              }
-            >
-              Email
-            </Text>
             <InputComponent
-              errorMessage="Invalid email"
+              errorMessage="Invalid Email"
               isError={undefined}
               isPassword={false}
               onChangeText={[Function]}
               placeholder="your_email@mail.com"
+              regularMessage="Email"
               style={
                 Object {
-                  "height": 60,
+                  "height": 100,
+                  "marginTop": 40,
                 }
               }
               value={undefined}
             />
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "#4b657d",
-                  "fontFamily": "Montserrat",
-                  "fontSize": 24,
-                  "fontWeight": "bold",
-                  "height": 30,
-                  "marginTop": 58,
-                  "opacity": 0.4,
-                }
-              }
-            >
-              Password
-            </Text>
             <InputComponent
               errorMessage="Invalid password"
               isError={undefined}
               isPassword={true}
               onChangeText={[Function]}
               placeholder="Enter your password"
+              regularMessage="Password"
               style={
                 Object {
-                  "height": 60,
+                  "height": 100,
+                  "marginTop": 40,
                 }
               }
               value={undefined}
             />
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "#4b657d",
-                  "fontFamily": "Montserrat",
-                  "fontSize": 24,
-                  "fontWeight": "bold",
-                  "marginTop": 42,
-                  "opacity": 0.4,
-                }
-              }
-            >
-              Mnemonic
-            </Text>
             <InputComponent
               editable={true}
               errorMessage="Invalid mnemonic"
               inputStyle={
                 Object {
                   "fontSize": 28,
-                  "height": 180,
+                  "height": 160,
                 }
               }
               isError={undefined}
@@ -1204,6 +987,13 @@ ShallowWrapper {
               multiline={true}
               onChangeText={[Function]}
               placeholder="Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code"
+              regularMessage="Mnemonic"
+              style={
+                Object {
+                  "height": 180,
+                  "marginTop": 40,
+                }
+              }
               value={undefined}
             />
             <View
@@ -1239,7 +1029,7 @@ ShallowWrapper {
                   Object {
                     "alignSelf": "flex-end",
                     "color": "#2794FF",
-                    "fontFamily": "Montserrat",
+                    "fontFamily": "Montserrat-Regular",
                     "fontSize": 26,
                     "fontWeight": "bold",
                     "marginBottom": 48,
@@ -1327,9 +1117,9 @@ ShallowWrapper {
               style={
                 Object {
                   "color": "#384B65",
-                  "fontFamily": "Montserrat",
+                  "fontFamily": "Montserrat-Regular",
                   "fontSize": 32,
-                  "marginTop": 20,
+                  "marginTop": 30,
                 }
               }
             >
@@ -1377,14 +1167,7 @@ ShallowWrapper {
                 }
               }
             />,
-            "style": Object {
-              "backgroundColor": "transparent",
-              "bottom": 0,
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            },
+            "style": undefined,
           },
           "ref": null,
           "rendered": Object {
@@ -1429,92 +1212,43 @@ ShallowWrapper {
               >
                 Login
               </Text>,
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "color": "#4b657d",
-                    "fontFamily": "Montserrat",
-                    "fontSize": 24,
-                    "fontWeight": "bold",
-                    "height": 30,
-                    "marginTop": 58,
-                    "opacity": 0.4,
-                  }
-                }
-              >
-                Email
-              </Text>,
               <InputComponent
-                errorMessage="Invalid email"
+                errorMessage="Invalid Email"
                 isError={undefined}
                 isPassword={false}
                 onChangeText={[Function]}
                 placeholder="your_email@mail.com"
+                regularMessage="Email"
                 style={
                   Object {
-                    "height": 60,
+                    "height": 100,
+                    "marginTop": 40,
                   }
                 }
                 value={undefined}
               />,
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "color": "#4b657d",
-                    "fontFamily": "Montserrat",
-                    "fontSize": 24,
-                    "fontWeight": "bold",
-                    "height": 30,
-                    "marginTop": 58,
-                    "opacity": 0.4,
-                  }
-                }
-              >
-                Password
-              </Text>,
               <InputComponent
                 errorMessage="Invalid password"
                 isError={undefined}
                 isPassword={true}
                 onChangeText={[Function]}
                 placeholder="Enter your password"
+                regularMessage="Password"
                 style={
                   Object {
-                    "height": 60,
+                    "height": 100,
+                    "marginTop": 40,
                   }
                 }
                 value={undefined}
               />,
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "color": "#4b657d",
-                    "fontFamily": "Montserrat",
-                    "fontSize": 24,
-                    "fontWeight": "bold",
-                    "marginTop": 42,
-                    "opacity": 0.4,
-                  }
-                }
-              >
-                Mnemonic
-              </Text>,
               <InputComponent
                 editable={true}
                 errorMessage="Invalid mnemonic"
                 inputStyle={
                   Object {
                     "fontSize": 28,
-                    "height": 180,
+                    "height": 160,
                   }
                 }
                 isError={undefined}
@@ -1522,6 +1256,13 @@ ShallowWrapper {
                 multiline={true}
                 onChangeText={[Function]}
                 placeholder="Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code"
+                regularMessage="Mnemonic"
+                style={
+                  Object {
+                    "height": 180,
+                    "marginTop": 40,
+                  }
+                }
                 value={undefined}
               />,
               <View
@@ -1557,7 +1298,7 @@ ShallowWrapper {
                     Object {
                       "alignSelf": "flex-end",
                       "color": "#2794FF",
-                      "fontFamily": "Montserrat",
+                      "fontFamily": "Montserrat-Regular",
                       "fontSize": 26,
                       "fontWeight": "bold",
                       "marginBottom": 48,
@@ -1601,64 +1342,20 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "accessible": true,
-                "allowFontScaling": true,
-                "children": "Email",
-                "ellipsizeMode": "tail",
-                "style": Object {
-                  "color": "#4b657d",
-                  "fontFamily": "Montserrat",
-                  "fontSize": 24,
-                  "fontWeight": "bold",
-                  "height": 30,
-                  "marginTop": 58,
-                  "opacity": 0.4,
-                },
-              },
-              "ref": null,
-              "rendered": "Email",
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "errorMessage": "Invalid email",
+                "errorMessage": "Invalid Email",
                 "isError": undefined,
                 "isPassword": false,
                 "onChangeText": [Function],
                 "placeholder": "your_email@mail.com",
+                "regularMessage": "Email",
                 "style": Object {
-                  "height": 60,
+                  "height": 100,
+                  "marginTop": 40,
                 },
                 "value": undefined,
               },
               "ref": null,
               "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "accessible": true,
-                "allowFontScaling": true,
-                "children": "Password",
-                "ellipsizeMode": "tail",
-                "style": Object {
-                  "color": "#4b657d",
-                  "fontFamily": "Montserrat",
-                  "fontSize": 24,
-                  "fontWeight": "bold",
-                  "height": 30,
-                  "marginTop": 58,
-                  "opacity": 0.4,
-                },
-              },
-              "ref": null,
-              "rendered": "Password",
               "type": [Function],
             },
             Object {
@@ -1671,8 +1368,10 @@ ShallowWrapper {
                 "isPassword": true,
                 "onChangeText": [Function],
                 "placeholder": "Enter your password",
+                "regularMessage": "Password",
                 "style": Object {
-                  "height": 60,
+                  "height": 100,
+                  "marginTop": 40,
                 },
                 "value": undefined,
               },
@@ -1685,39 +1384,22 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "accessible": true,
-                "allowFontScaling": true,
-                "children": "Mnemonic",
-                "ellipsizeMode": "tail",
-                "style": Object {
-                  "color": "#4b657d",
-                  "fontFamily": "Montserrat",
-                  "fontSize": 24,
-                  "fontWeight": "bold",
-                  "marginTop": 42,
-                  "opacity": 0.4,
-                },
-              },
-              "ref": null,
-              "rendered": "Mnemonic",
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
                 "editable": true,
                 "errorMessage": "Invalid mnemonic",
                 "inputStyle": Object {
                   "fontSize": 28,
-                  "height": 180,
+                  "height": 160,
                 },
                 "isError": undefined,
                 "isPassword": false,
                 "multiline": true,
                 "onChangeText": [Function],
                 "placeholder": "Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code",
+                "regularMessage": "Mnemonic",
+                "style": Object {
+                  "height": 180,
+                  "marginTop": 40,
+                },
                 "value": undefined,
               },
               "ref": null,
@@ -1754,7 +1436,7 @@ ShallowWrapper {
                       Object {
                         "alignSelf": "flex-end",
                         "color": "#2794FF",
-                        "fontFamily": "Montserrat",
+                        "fontFamily": "Montserrat-Regular",
                         "fontSize": 26,
                         "fontWeight": "bold",
                         "marginBottom": 48,
@@ -1805,7 +1487,7 @@ ShallowWrapper {
                     "style": Object {
                       "alignSelf": "flex-end",
                       "color": "#2794FF",
-                      "fontFamily": "Montserrat",
+                      "fontFamily": "Montserrat-Regular",
                       "fontSize": 26,
                       "fontWeight": "bold",
                       "marginBottom": 48,
@@ -1895,9 +1577,9 @@ ShallowWrapper {
                 style={
                   Object {
                     "color": "#384B65",
-                    "fontFamily": "Montserrat",
+                    "fontFamily": "Montserrat-Regular",
                     "fontSize": 32,
-                    "marginTop": 20,
+                    "marginTop": 30,
                   }
                 }
               >
@@ -2060,9 +1742,9 @@ ShallowWrapper {
                 "ellipsizeMode": "tail",
                 "style": Object {
                   "color": "#384B65",
-                  "fontFamily": "Montserrat",
+                  "fontFamily": "Montserrat-Regular",
                   "fontSize": 32,
-                  "marginTop": 20,
+                  "marginTop": 30,
                 },
               },
               "ref": null,

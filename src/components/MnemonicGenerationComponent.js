@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     infoText: {
-        fontFamily: 'Montserrat',
+        fontFamily: 'Montserrat-Regular',
         fontSize: getHeight(14),
         lineHeight: getHeight(24),
         color: '#2782ff',
@@ -303,7 +303,7 @@ const styles = StyleSheet.create({
         marginTop: getHeight(10)
     },
     explanation: {
-        fontFamily: 'Montserrat',
+        fontFamily: 'Montserrat-Regular',
         fontSize: getHeight(16),
         color: '#384b65'
     },
@@ -314,14 +314,14 @@ const styles = StyleSheet.create({
         width: getWidth(300)
     },
     mnemonic: {
-        fontFamily: 'Montserrat',
+        fontFamily: 'Montserrat-Regular',
         fontSize: getHeight(16),
         color: '#1c1b1b'
     },
     mnemonicPlaceholderText: {
         fontSize: getHeight(12),
         color: '#8c92ac',
-        fontFamily: 'Montserrat'
+        fontFamily: 'Montserrat-Regular'
     },
     changingContainer: {
         marginTop: getHeight(10),
@@ -394,12 +394,12 @@ const styles = StyleSheet.create({
         borderRadius: getWidth(8)
     },
     confirmationMainText: {
-        fontFamily: 'Montserrat',
+        fontFamily: 'Montserrat-Regular',
         fontSize: getHeight(20),
         color: '#2782ff'
     },
     confirmationAdditionalText: {
-        fontFamily: 'Montserrat',
+        fontFamily: 'Montserrat-Regular',
         fontSize: getHeight(15),
         color: '#384b65'
     }

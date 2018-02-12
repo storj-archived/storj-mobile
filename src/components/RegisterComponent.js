@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
         lineHeight: getHeight(24),
         fontSize: getHeight(16),
         color: '#384b65',
-        fontFamily: 'Montserrat',
+        fontFamily: 'Montserrat-Regular',
         marginLeft: getWidth(11)
     }
 });

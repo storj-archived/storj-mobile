@@ -153,14 +153,14 @@ const styles = StyleSheet.create({
         marginTop: getHeight(21),
         color: '#4b657d',
         opacity: 0.4,
-        fontFamily: 'Montserrat',
+        fontFamily: 'Montserrat-Regular',
         fontWeight: 'bold'
     },
     mnemonicInfoLinkText: {
         fontSize: getHeight(13),
         color: '#2794FF',
         alignSelf: 'flex-end',
-        fontFamily: 'Montserrat',
+        fontFamily: 'Montserrat-Regular',
         fontWeight: 'bold',
         marginBottom: getHeight(24)
     },
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     footerText: {
-        fontFamily: 'Montserrat',
+        fontFamily: 'Montserrat-Regular',
         fontSize: getHeight(16),
         color: '#384B65',
         marginTop: getHeight(15)

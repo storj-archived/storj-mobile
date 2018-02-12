@@ -18,6 +18,24 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#4b657d",
+              "fontFamily": "Montserrat",
+              "fontSize": 24,
+              "fontWeight": "bold",
+              "height": 30,
+              "opacity": 0.4,
+            }
+          }
+        >
+           
+           
+        </Text>,
         <View
           style={
             Object {
@@ -58,15 +76,10 @@ ShallowWrapper {
           style={
             Object {
               "backgroundColor": "#a6b5ca",
-              "height": 2,
-              "opacity": 0.15,
+              "height": 1,
+              "opacity": 0.2,
             }
           }
-        />,
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
         />,
       ],
       "style": Array [
@@ -79,6 +92,36 @@ ShallowWrapper {
     },
     "ref": null,
     "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "accessible": true,
+          "allowFontScaling": true,
+          "children": Array [
+            " ",
+            undefined,
+            " ",
+          ],
+          "ellipsizeMode": "tail",
+          "style": Object {
+            "color": "#4b657d",
+            "fontFamily": "Montserrat",
+            "fontSize": 24,
+            "fontWeight": "bold",
+            "height": 30,
+            "opacity": 0.4,
+          },
+        },
+        "ref": null,
+        "rendered": Array [
+          " ",
+          undefined,
+          " ",
+        ],
+        "type": [Function],
+      },
       Object {
         "instance": null,
         "key": undefined,
@@ -165,23 +208,9 @@ ShallowWrapper {
         "props": Object {
           "style": Object {
             "backgroundColor": "#a6b5ca",
-            "height": 2,
-            "opacity": 0.15,
+            "height": 1,
+            "opacity": 0.2,
           },
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "accessible": true,
-          "allowFontScaling": true,
-          "children": null,
-          "ellipsizeMode": "tail",
         },
         "ref": null,
         "rendered": null,
@@ -197,6 +226,24 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#4b657d",
+                "fontFamily": "Montserrat",
+                "fontSize": 24,
+                "fontWeight": "bold",
+                "height": 30,
+                "opacity": 0.4,
+              }
+            }
+          >
+             
+             
+          </Text>,
           <View
             style={
               Object {
@@ -237,15 +284,10 @@ ShallowWrapper {
             style={
               Object {
                 "backgroundColor": "#a6b5ca",
-                "height": 2,
-                "opacity": 0.15,
+                "height": 1,
+                "opacity": 0.2,
               }
             }
-          />,
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
           />,
         ],
         "style": Array [
@@ -258,6 +300,36 @@ ShallowWrapper {
       },
       "ref": null,
       "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "accessible": true,
+            "allowFontScaling": true,
+            "children": Array [
+              " ",
+              undefined,
+              " ",
+            ],
+            "ellipsizeMode": "tail",
+            "style": Object {
+              "color": "#4b657d",
+              "fontFamily": "Montserrat",
+              "fontSize": 24,
+              "fontWeight": "bold",
+              "height": 30,
+              "opacity": 0.4,
+            },
+          },
+          "ref": null,
+          "rendered": Array [
+            " ",
+            undefined,
+            " ",
+          ],
+          "type": [Function],
+        },
         Object {
           "instance": null,
           "key": undefined,
@@ -344,23 +416,9 @@ ShallowWrapper {
           "props": Object {
             "style": Object {
               "backgroundColor": "#a6b5ca",
-              "height": 2,
-              "opacity": 0.15,
+              "height": 1,
+              "opacity": 0.2,
             },
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "accessible": true,
-            "allowFontScaling": true,
-            "children": null,
-            "ellipsizeMode": "tail",
           },
           "ref": null,
           "rendered": null,
@@ -400,6 +458,24 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#4b657d",
+              "fontFamily": "Montserrat",
+              "fontSize": 24,
+              "fontWeight": "bold",
+              "height": 30,
+              "opacity": 0.4,
+            }
+          }
+        >
+           
+           
+        </Text>,
         <View
           style={
             Object {
@@ -440,15 +516,10 @@ ShallowWrapper {
           style={
             Object {
               "backgroundColor": "#a6b5ca",
-              "height": 2,
-              "opacity": 0.15,
+              "height": 1,
+              "opacity": 0.2,
             }
           }
-        />,
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
         />,
       ],
       "style": Array [
@@ -461,6 +532,36 @@ ShallowWrapper {
     },
     "ref": null,
     "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "accessible": true,
+          "allowFontScaling": true,
+          "children": Array [
+            " ",
+            undefined,
+            " ",
+          ],
+          "ellipsizeMode": "tail",
+          "style": Object {
+            "color": "#4b657d",
+            "fontFamily": "Montserrat",
+            "fontSize": 24,
+            "fontWeight": "bold",
+            "height": 30,
+            "opacity": 0.4,
+          },
+        },
+        "ref": null,
+        "rendered": Array [
+          " ",
+          undefined,
+          " ",
+        ],
+        "type": [Function],
+      },
       Object {
         "instance": null,
         "key": undefined,
@@ -547,23 +648,9 @@ ShallowWrapper {
         "props": Object {
           "style": Object {
             "backgroundColor": "#a6b5ca",
-            "height": 2,
-            "opacity": 0.15,
+            "height": 1,
+            "opacity": 0.2,
           },
-        },
-        "ref": null,
-        "rendered": null,
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "accessible": true,
-          "allowFontScaling": true,
-          "children": null,
-          "ellipsizeMode": "tail",
         },
         "ref": null,
         "rendered": null,
@@ -579,6 +666,24 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#4b657d",
+                "fontFamily": "Montserrat",
+                "fontSize": 24,
+                "fontWeight": "bold",
+                "height": 30,
+                "opacity": 0.4,
+              }
+            }
+          >
+             
+             
+          </Text>,
           <View
             style={
               Object {
@@ -619,15 +724,10 @@ ShallowWrapper {
             style={
               Object {
                 "backgroundColor": "#a6b5ca",
-                "height": 2,
-                "opacity": 0.15,
+                "height": 1,
+                "opacity": 0.2,
               }
             }
-          />,
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
           />,
         ],
         "style": Array [
@@ -640,6 +740,36 @@ ShallowWrapper {
       },
       "ref": null,
       "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "accessible": true,
+            "allowFontScaling": true,
+            "children": Array [
+              " ",
+              undefined,
+              " ",
+            ],
+            "ellipsizeMode": "tail",
+            "style": Object {
+              "color": "#4b657d",
+              "fontFamily": "Montserrat",
+              "fontSize": 24,
+              "fontWeight": "bold",
+              "height": 30,
+              "opacity": 0.4,
+            },
+          },
+          "ref": null,
+          "rendered": Array [
+            " ",
+            undefined,
+            " ",
+          ],
+          "type": [Function],
+        },
         Object {
           "instance": null,
           "key": undefined,
@@ -726,23 +856,9 @@ ShallowWrapper {
           "props": Object {
             "style": Object {
               "backgroundColor": "#a6b5ca",
-              "height": 2,
-              "opacity": 0.15,
+              "height": 1,
+              "opacity": 0.2,
             },
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "accessible": true,
-            "allowFontScaling": true,
-            "children": null,
-            "ellipsizeMode": "tail",
           },
           "ref": null,
           "rendered": null,

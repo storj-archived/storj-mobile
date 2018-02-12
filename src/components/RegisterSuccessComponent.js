@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         marginLeft: getWidth(31)
     },
     mainText: {
-        fontFamily: 'Montserrat',
+        fontFamily: 'Montserrat-Regular',
         fontSize: getHeight(16),
         lineHeight: getHeight(24),
         color: '#384b65'

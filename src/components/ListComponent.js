@@ -121,7 +121,8 @@ export default class ListComponent extends Component {
                                         <ListItemComponent
                                             key = { item.entity.id }
                                             item = { item } 
-                                            selectItemId = { (itemId) => { this.setState({ selectedItemId: itemId }) }} //mistake
+                                            isFileLoading = { false }
+                                            selectItemId = { (itemId) => { this.setState({ selectedItemId: itemId }) }}
                                             isItemActionsSelected = { this.state.selectedItemId === item.getId() }
                                             onLongPress = { () => { this.onItemLongPress(item); } }
                                             isSelectionModeEnabled = { this.props.isSelectionMode }

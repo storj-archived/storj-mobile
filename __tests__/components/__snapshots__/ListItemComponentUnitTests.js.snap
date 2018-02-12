@@ -70,6 +70,11 @@ ShallowWrapper {
               }
             }
           />
+          <ProgressViewIOS
+            progress={0.5}
+            progressTintColor="#2794ff"
+            trackTintColor="#f2f2f2"
+          />
         </View>
         <TouchableOpacity
           activeOpacity={0.2}
@@ -143,6 +148,11 @@ ShallowWrapper {
                   "lineHeight": 40,
                 }
               }
+            />
+            <ProgressViewIOS
+              progress={0.5}
+              progressTintColor="#2794ff"
+              trackTintColor="#f2f2f2"
             />
           </View>,
           <TouchableOpacity
@@ -219,46 +229,68 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "children": <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              numberOfLines={1}
-              style={
-                Object {
-                  "color": "#384B65",
-                  "fontFamily": "Montserrat-Regular",
-                  "fontSize": 32,
-                  "lineHeight": 40,
+            "children": Array [
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                numberOfLines={1}
+                style={
+                  Object {
+                    "color": "#384B65",
+                    "fontFamily": "Montserrat-Regular",
+                    "fontSize": 32,
+                    "lineHeight": 40,
+                  }
                 }
-              }
-            />,
+              />,
+              <ProgressViewIOS
+                progress={0.5}
+                progressTintColor="#2794ff"
+                trackTintColor="#f2f2f2"
+              />,
+            ],
             "style": Object {
               "flex": 0.9,
             },
           },
           "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "accessible": true,
-              "allowFontScaling": true,
-              "children": undefined,
-              "ellipsizeMode": "tail",
-              "numberOfLines": 1,
-              "style": Object {
-                "color": "#384B65",
-                "fontFamily": "Montserrat-Regular",
-                "fontSize": 32,
-                "lineHeight": 40,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "accessible": true,
+                "allowFontScaling": true,
+                "children": undefined,
+                "ellipsizeMode": "tail",
+                "numberOfLines": 1,
+                "style": Object {
+                  "color": "#384B65",
+                  "fontFamily": "Montserrat-Regular",
+                  "fontSize": 32,
+                  "lineHeight": 40,
+                },
               },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
             },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "progress": 0.5,
+                "progressTintColor": "#2794ff",
+                "trackTintColor": "#f2f2f2",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
           "type": [Function],
         },
         Object {
@@ -360,6 +392,11 @@ ShallowWrapper {
                 }
               }
             />
+            <ProgressViewIOS
+              progress={0.5}
+              progressTintColor="#2794ff"
+              trackTintColor="#f2f2f2"
+            />
           </View>
           <TouchableOpacity
             activeOpacity={0.2}
@@ -433,6 +470,11 @@ ShallowWrapper {
                     "lineHeight": 40,
                   }
                 }
+              />
+              <ProgressViewIOS
+                progress={0.5}
+                progressTintColor="#2794ff"
+                trackTintColor="#f2f2f2"
               />
             </View>,
             <TouchableOpacity
@@ -509,46 +551,68 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "children": <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                numberOfLines={1}
-                style={
-                  Object {
-                    "color": "#384B65",
-                    "fontFamily": "Montserrat-Regular",
-                    "fontSize": 32,
-                    "lineHeight": 40,
+              "children": Array [
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  style={
+                    Object {
+                      "color": "#384B65",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 40,
+                    }
                   }
-                }
-              />,
+                />,
+                <ProgressViewIOS
+                  progress={0.5}
+                  progressTintColor="#2794ff"
+                  trackTintColor="#f2f2f2"
+                />,
+              ],
               "style": Object {
                 "flex": 0.9,
               },
             },
             "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "accessible": true,
-                "allowFontScaling": true,
-                "children": undefined,
-                "ellipsizeMode": "tail",
-                "numberOfLines": 1,
-                "style": Object {
-                  "color": "#384B65",
-                  "fontFamily": "Montserrat-Regular",
-                  "fontSize": 32,
-                  "lineHeight": 40,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "accessible": true,
+                  "allowFontScaling": true,
+                  "children": undefined,
+                  "ellipsizeMode": "tail",
+                  "numberOfLines": 1,
+                  "style": Object {
+                    "color": "#384B65",
+                    "fontFamily": "Montserrat-Regular",
+                    "fontSize": 32,
+                    "lineHeight": 40,
+                  },
                 },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
               },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "progress": 0.5,
+                  "progressTintColor": "#2794ff",
+                  "trackTintColor": "#f2f2f2",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
             "type": [Function],
           },
           Object {

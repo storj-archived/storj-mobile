@@ -19,15 +19,7 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <View
-          style={
-            Object {
-              "bottom": 0,
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            }
-          }
+          style={undefined}
         >
           <Image
             resizeMode="contain"
@@ -66,38 +58,45 @@ ShallowWrapper {
           >
             Welcome on board
           </Text>
-          <InputComponent
-            errorMessage="Invalid email"
-            isError={undefined}
-            isPassword={false}
-            onChangeText={[Function]}
-            placeholder="Email"
+          <View
             style={
               Object {
                 "backgroundColor": "transparent",
                 "marginTop": 198,
               }
             }
-          />
-          <InputComponent
-            errorMessage="Invalid password"
-            isError={undefined}
-            isPassword={true}
-            onChangeText={[Function]}
-            placeholder="Password"
-          />
-          <InputComponent
-            errorMessage="Passwords should match"
-            isError={undefined}
-            isPassword={true}
-            onChangeText={[Function]}
-            placeholder="Confirm password"
-          />
+          >
+            <InputComponent
+              errorMessage="Invalid Email"
+              isError={undefined}
+              isPassword={false}
+              onChangeText={[Function]}
+              placeholder="Email"
+            />
+          </View>
+          <View>
+            <InputComponent
+              errorMessage="Invalid password"
+              isError={undefined}
+              isPassword={true}
+              onChangeText={[Function]}
+              placeholder="Password"
+            />
+          </View>
+          <View>
+            <InputComponent
+              errorMessage="Password doesn\`t match"
+              isError={undefined}
+              isPassword={true}
+              onChangeText={[Function]}
+              placeholder="Confirm password"
+            />
+          </View>
           <View
             style={
               Object {
                 "flexDirection": "row",
-                "marginTop": 10,
+                "marginTop": 40,
               }
             }
           >
@@ -111,7 +110,7 @@ ShallowWrapper {
               style={
                 Object {
                   "color": "#384b65",
-                  "fontFamily": "Montserrat",
+                  "fontFamily": "Montserrat-Regular",
                   "fontSize": 32,
                   "lineHeight": 48,
                   "marginLeft": 22,
@@ -141,7 +140,7 @@ ShallowWrapper {
             Object {
               "alignItems": "center",
               "height": 226,
-              "marginTop": 100,
+              "marginTop": 80,
             }
           }
         >
@@ -184,7 +183,7 @@ ShallowWrapper {
                 "fontFamily": "Montserrat",
                 "fontSize": 32,
                 "lineHeight": 48,
-                "marginTop": 40,
+                "marginTop": 30,
               }
             }
           >
@@ -238,13 +237,7 @@ ShallowWrapper {
               }
             }
           />,
-          "style": Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
+          "style": undefined,
         },
         "ref": null,
         "rendered": Object {
@@ -288,38 +281,45 @@ ShallowWrapper {
             >
               Welcome on board
             </Text>,
-            <InputComponent
-              errorMessage="Invalid email"
-              isError={undefined}
-              isPassword={false}
-              onChangeText={[Function]}
-              placeholder="Email"
+            <View
               style={
                 Object {
                   "backgroundColor": "transparent",
                   "marginTop": 198,
                 }
               }
-            />,
-            <InputComponent
-              errorMessage="Invalid password"
-              isError={undefined}
-              isPassword={true}
-              onChangeText={[Function]}
-              placeholder="Password"
-            />,
-            <InputComponent
-              errorMessage="Passwords should match"
-              isError={undefined}
-              isPassword={true}
-              onChangeText={[Function]}
-              placeholder="Confirm password"
-            />,
+            >
+              <InputComponent
+                errorMessage="Invalid Email"
+                isError={undefined}
+                isPassword={false}
+                onChangeText={[Function]}
+                placeholder="Email"
+              />
+            </View>,
+            <View>
+              <InputComponent
+                errorMessage="Invalid password"
+                isError={undefined}
+                isPassword={true}
+                onChangeText={[Function]}
+                placeholder="Password"
+              />
+            </View>,
+            <View>
+              <InputComponent
+                errorMessage="Password doesn\`t match"
+                isError={undefined}
+                isPassword={true}
+                onChangeText={[Function]}
+                placeholder="Confirm password"
+              />
+            </View>,
             <View
               style={
                 Object {
                   "flexDirection": "row",
-                  "marginTop": 10,
+                  "marginTop": 40,
                 }
               }
             >
@@ -333,7 +333,7 @@ ShallowWrapper {
                 style={
                   Object {
                     "color": "#384b65",
-                    "fontFamily": "Montserrat",
+                    "fontFamily": "Montserrat-Regular",
                     "fontSize": 32,
                     "lineHeight": 48,
                     "marginLeft": 22,
@@ -390,18 +390,34 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "errorMessage": "Invalid email",
-              "isError": undefined,
-              "isPassword": false,
-              "onChangeText": [Function],
-              "placeholder": "Email",
+              "children": <InputComponent
+                errorMessage="Invalid Email"
+                isError={undefined}
+                isPassword={false}
+                onChangeText={[Function]}
+                placeholder="Email"
+              />,
               "style": Object {
                 "backgroundColor": "transparent",
                 "marginTop": 198,
               },
             },
             "ref": null,
-            "rendered": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "errorMessage": "Invalid Email",
+                "isError": undefined,
+                "isPassword": false,
+                "onChangeText": [Function],
+                "placeholder": "Email",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
             "type": [Function],
           },
           Object {
@@ -409,14 +425,30 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "errorMessage": "Invalid password",
-              "isError": undefined,
-              "isPassword": true,
-              "onChangeText": [Function],
-              "placeholder": "Password",
+              "children": <InputComponent
+                errorMessage="Invalid password"
+                isError={undefined}
+                isPassword={true}
+                onChangeText={[Function]}
+                placeholder="Password"
+              />,
             },
             "ref": null,
-            "rendered": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "errorMessage": "Invalid password",
+                "isError": undefined,
+                "isPassword": true,
+                "onChangeText": [Function],
+                "placeholder": "Password",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
             "type": [Function],
           },
           Object {
@@ -424,14 +456,30 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "errorMessage": "Passwords should match",
-              "isError": undefined,
-              "isPassword": true,
-              "onChangeText": [Function],
-              "placeholder": "Confirm password",
+              "children": <InputComponent
+                errorMessage="Password doesn\`t match"
+                isError={undefined}
+                isPassword={true}
+                onChangeText={[Function]}
+                placeholder="Confirm password"
+              />,
             },
             "ref": null,
-            "rendered": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "errorMessage": "Password doesn\`t match",
+                "isError": undefined,
+                "isPassword": true,
+                "onChangeText": [Function],
+                "placeholder": "Confirm password",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
             "type": [Function],
           },
           Object {
@@ -450,7 +498,7 @@ ShallowWrapper {
                   style={
                     Object {
                       "color": "#384b65",
-                      "fontFamily": "Montserrat",
+                      "fontFamily": "Montserrat-Regular",
                       "fontSize": 32,
                       "lineHeight": 48,
                       "marginLeft": 22,
@@ -476,7 +524,7 @@ ShallowWrapper {
               ],
               "style": Object {
                 "flexDirection": "row",
-                "marginTop": 10,
+                "marginTop": 40,
               },
             },
             "ref": null,
@@ -519,7 +567,7 @@ ShallowWrapper {
                   "ellipsizeMode": "tail",
                   "style": Object {
                     "color": "#384b65",
-                    "fontFamily": "Montserrat",
+                    "fontFamily": "Montserrat-Regular",
                     "fontSize": 32,
                     "lineHeight": 48,
                     "marginLeft": 22,
@@ -601,7 +649,7 @@ ShallowWrapper {
                   "fontFamily": "Montserrat",
                   "fontSize": 32,
                   "lineHeight": 48,
-                  "marginTop": 40,
+                  "marginTop": 30,
                 }
               }
             >
@@ -625,7 +673,7 @@ ShallowWrapper {
           "style": Object {
             "alignItems": "center",
             "height": 226,
-            "marginTop": 100,
+            "marginTop": 80,
           },
         },
         "ref": null,
@@ -712,7 +760,7 @@ ShallowWrapper {
                 "fontFamily": "Montserrat",
                 "fontSize": 32,
                 "lineHeight": 48,
-                "marginTop": 40,
+                "marginTop": 30,
               },
             },
             "ref": null,
@@ -755,15 +803,7 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <View
-            style={
-              Object {
-                "bottom": 0,
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-              }
-            }
+            style={undefined}
           >
             <Image
               resizeMode="contain"
@@ -802,38 +842,45 @@ ShallowWrapper {
             >
               Welcome on board
             </Text>
-            <InputComponent
-              errorMessage="Invalid email"
-              isError={undefined}
-              isPassword={false}
-              onChangeText={[Function]}
-              placeholder="Email"
+            <View
               style={
                 Object {
                   "backgroundColor": "transparent",
                   "marginTop": 198,
                 }
               }
-            />
-            <InputComponent
-              errorMessage="Invalid password"
-              isError={undefined}
-              isPassword={true}
-              onChangeText={[Function]}
-              placeholder="Password"
-            />
-            <InputComponent
-              errorMessage="Passwords should match"
-              isError={undefined}
-              isPassword={true}
-              onChangeText={[Function]}
-              placeholder="Confirm password"
-            />
+            >
+              <InputComponent
+                errorMessage="Invalid Email"
+                isError={undefined}
+                isPassword={false}
+                onChangeText={[Function]}
+                placeholder="Email"
+              />
+            </View>
+            <View>
+              <InputComponent
+                errorMessage="Invalid password"
+                isError={undefined}
+                isPassword={true}
+                onChangeText={[Function]}
+                placeholder="Password"
+              />
+            </View>
+            <View>
+              <InputComponent
+                errorMessage="Password doesn\`t match"
+                isError={undefined}
+                isPassword={true}
+                onChangeText={[Function]}
+                placeholder="Confirm password"
+              />
+            </View>
             <View
               style={
                 Object {
                   "flexDirection": "row",
-                  "marginTop": 10,
+                  "marginTop": 40,
                 }
               }
             >
@@ -847,7 +894,7 @@ ShallowWrapper {
                 style={
                   Object {
                     "color": "#384b65",
-                    "fontFamily": "Montserrat",
+                    "fontFamily": "Montserrat-Regular",
                     "fontSize": 32,
                     "lineHeight": 48,
                     "marginLeft": 22,
@@ -877,7 +924,7 @@ ShallowWrapper {
               Object {
                 "alignItems": "center",
                 "height": 226,
-                "marginTop": 100,
+                "marginTop": 80,
               }
             }
           >
@@ -920,7 +967,7 @@ ShallowWrapper {
                   "fontFamily": "Montserrat",
                   "fontSize": 32,
                   "lineHeight": 48,
-                  "marginTop": 40,
+                  "marginTop": 30,
                 }
               }
             >
@@ -974,13 +1021,7 @@ ShallowWrapper {
                 }
               }
             />,
-            "style": Object {
-              "bottom": 0,
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            },
+            "style": undefined,
           },
           "ref": null,
           "rendered": Object {
@@ -1024,38 +1065,45 @@ ShallowWrapper {
               >
                 Welcome on board
               </Text>,
-              <InputComponent
-                errorMessage="Invalid email"
-                isError={undefined}
-                isPassword={false}
-                onChangeText={[Function]}
-                placeholder="Email"
+              <View
                 style={
                   Object {
                     "backgroundColor": "transparent",
                     "marginTop": 198,
                   }
                 }
-              />,
-              <InputComponent
-                errorMessage="Invalid password"
-                isError={undefined}
-                isPassword={true}
-                onChangeText={[Function]}
-                placeholder="Password"
-              />,
-              <InputComponent
-                errorMessage="Passwords should match"
-                isError={undefined}
-                isPassword={true}
-                onChangeText={[Function]}
-                placeholder="Confirm password"
-              />,
+              >
+                <InputComponent
+                  errorMessage="Invalid Email"
+                  isError={undefined}
+                  isPassword={false}
+                  onChangeText={[Function]}
+                  placeholder="Email"
+                />
+              </View>,
+              <View>
+                <InputComponent
+                  errorMessage="Invalid password"
+                  isError={undefined}
+                  isPassword={true}
+                  onChangeText={[Function]}
+                  placeholder="Password"
+                />
+              </View>,
+              <View>
+                <InputComponent
+                  errorMessage="Password doesn\`t match"
+                  isError={undefined}
+                  isPassword={true}
+                  onChangeText={[Function]}
+                  placeholder="Confirm password"
+                />
+              </View>,
               <View
                 style={
                   Object {
                     "flexDirection": "row",
-                    "marginTop": 10,
+                    "marginTop": 40,
                   }
                 }
               >
@@ -1069,7 +1117,7 @@ ShallowWrapper {
                   style={
                     Object {
                       "color": "#384b65",
-                      "fontFamily": "Montserrat",
+                      "fontFamily": "Montserrat-Regular",
                       "fontSize": 32,
                       "lineHeight": 48,
                       "marginLeft": 22,
@@ -1126,18 +1174,34 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "errorMessage": "Invalid email",
-                "isError": undefined,
-                "isPassword": false,
-                "onChangeText": [Function],
-                "placeholder": "Email",
+                "children": <InputComponent
+                  errorMessage="Invalid Email"
+                  isError={undefined}
+                  isPassword={false}
+                  onChangeText={[Function]}
+                  placeholder="Email"
+                />,
                 "style": Object {
                   "backgroundColor": "transparent",
                   "marginTop": 198,
                 },
               },
               "ref": null,
-              "rendered": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "errorMessage": "Invalid Email",
+                  "isError": undefined,
+                  "isPassword": false,
+                  "onChangeText": [Function],
+                  "placeholder": "Email",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
               "type": [Function],
             },
             Object {
@@ -1145,14 +1209,30 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "errorMessage": "Invalid password",
-                "isError": undefined,
-                "isPassword": true,
-                "onChangeText": [Function],
-                "placeholder": "Password",
+                "children": <InputComponent
+                  errorMessage="Invalid password"
+                  isError={undefined}
+                  isPassword={true}
+                  onChangeText={[Function]}
+                  placeholder="Password"
+                />,
               },
               "ref": null,
-              "rendered": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "errorMessage": "Invalid password",
+                  "isError": undefined,
+                  "isPassword": true,
+                  "onChangeText": [Function],
+                  "placeholder": "Password",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
               "type": [Function],
             },
             Object {
@@ -1160,14 +1240,30 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "errorMessage": "Passwords should match",
-                "isError": undefined,
-                "isPassword": true,
-                "onChangeText": [Function],
-                "placeholder": "Confirm password",
+                "children": <InputComponent
+                  errorMessage="Password doesn\`t match"
+                  isError={undefined}
+                  isPassword={true}
+                  onChangeText={[Function]}
+                  placeholder="Confirm password"
+                />,
               },
               "ref": null,
-              "rendered": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "errorMessage": "Password doesn\`t match",
+                  "isError": undefined,
+                  "isPassword": true,
+                  "onChangeText": [Function],
+                  "placeholder": "Confirm password",
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
               "type": [Function],
             },
             Object {
@@ -1186,7 +1282,7 @@ ShallowWrapper {
                     style={
                       Object {
                         "color": "#384b65",
-                        "fontFamily": "Montserrat",
+                        "fontFamily": "Montserrat-Regular",
                         "fontSize": 32,
                         "lineHeight": 48,
                         "marginLeft": 22,
@@ -1212,7 +1308,7 @@ ShallowWrapper {
                 ],
                 "style": Object {
                   "flexDirection": "row",
-                  "marginTop": 10,
+                  "marginTop": 40,
                 },
               },
               "ref": null,
@@ -1255,7 +1351,7 @@ ShallowWrapper {
                     "ellipsizeMode": "tail",
                     "style": Object {
                       "color": "#384b65",
-                      "fontFamily": "Montserrat",
+                      "fontFamily": "Montserrat-Regular",
                       "fontSize": 32,
                       "lineHeight": 48,
                       "marginLeft": 22,
@@ -1337,7 +1433,7 @@ ShallowWrapper {
                     "fontFamily": "Montserrat",
                     "fontSize": 32,
                     "lineHeight": 48,
-                    "marginTop": 40,
+                    "marginTop": 30,
                   }
                 }
               >
@@ -1361,7 +1457,7 @@ ShallowWrapper {
             "style": Object {
               "alignItems": "center",
               "height": 226,
-              "marginTop": 100,
+              "marginTop": 80,
             },
           },
           "ref": null,
@@ -1448,7 +1544,7 @@ ShallowWrapper {
                   "fontFamily": "Montserrat",
                   "fontSize": 32,
                   "lineHeight": 48,
-                  "marginTop": 40,
+                  "marginTop": 30,
                 },
               },
               "ref": null,
