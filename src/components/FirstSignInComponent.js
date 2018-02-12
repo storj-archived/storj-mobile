@@ -144,7 +144,11 @@ export default class FirstSignInComponent extends Component {
                 </View>
                 {
                     this.showModalView()
+<<<<<<< HEAD
                 } 
+=======
+                }
+>>>>>>> added first sign in screen ui and updated listItem ui
             </View>
         );
     }
