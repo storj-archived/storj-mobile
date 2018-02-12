@@ -46,6 +46,7 @@ export default class FirstSignInComponent extends Component {
                 this.props.createBucket(option.type);
             }
         });
+        this.props.createBucket('photos');
     }
 
     changeOptions = (type) => {
@@ -144,11 +145,7 @@ export default class FirstSignInComponent extends Component {
                 </View>
                 {
                     this.showModalView()
-<<<<<<< HEAD
                 } 
-=======
-                }
->>>>>>> added first sign in screen ui and updated listItem ui
             </View>
         );
     }
