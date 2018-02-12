@@ -3,6 +3,7 @@ import {
     Platform
 } from 'react-native'
 import BucketModel from '../models/BucketModel';
+import FileModel from '../models//FileModel';
 import keysModel from '../models/keysModel';
 
 const StorjLib = (() => {
@@ -166,16 +167,14 @@ const StorjLib = (() => {
             let listFilesResult = await storjLib.listFiles(bucketId);
 
             if(listFilesResult.isSuccess) {
-                listFilesResult.result.forEach(element => {
-                    console.log(element);
-                });
-            }
+                listFilesResult.result = listFilesResult.result.map(file => {
+                    file = new FileModel(file);
 
-            /* if(Array.isArray(buckets)) {
-                result = buckets.map((bucket) => {
-                    return new BucketModel(bucket);
+                    return file;
                 });
-            } */
+            } else {
+                listFilesResult.result = [];
+            }
 
             return listFilesResult;
         };

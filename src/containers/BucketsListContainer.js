@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { bucketsListContainerAction } from '../reducers/mainContainer/mainReducerActions';
+import { navigateToFilesScreen, navigateBack } from '../reducers/navigation/navigationActions';
 import BucketsListComponent from '../components/BucketsListComponent';
 
 class BucketsListContainer extends Component {
@@ -13,9 +14,14 @@ class BucketsListContainer extends Component {
         header: null
     };
 
+    onPress(params) {
+        this.props.navigateToFilesScreen(params.bucketId);    
+    }
+
     render() {
         return(
-            <BucketsListComponent 
+            <BucketsListComponent
+                onPress = { (params) => { this.onPress(params); } }
                 animatedScrollValue = { this.props.screenProps.animatedScrollValue }
                 onSingleItemSelected = { this.props.onSingleItemSelected }
                 enableSelectionMode = { this.props.enableSelectionMode }
@@ -38,7 +44,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(bucketsListContainerAction, dispatch);
+    return bindActionCreators({ ...bucketsListContainerAction, navigateToFilesScreen }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BucketsListContainer);
