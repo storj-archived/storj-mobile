@@ -128,3 +128,8 @@ export const bucketsListContainerAction = {
     selectBucket,
     deselectBucket
 };
+
+export const initializeContainerActions = {
+    getBuckets, 
+    setFirstSignIn
+};

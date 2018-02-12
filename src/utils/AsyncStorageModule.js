@@ -5,8 +5,7 @@ const storageConstants = {
     PASSWORD: 'PASSWORD',
     MNEMONIC: 'MNEMONIC',
     IS_MNEMONIC_SAVED: 'IS_MNEMONIC_SAVED',
-    FIRST_ACTION: 'FIRST_ACTION',
-    FIRST_SIGN_IN: 'FIRST_SIGN_IN'
+    FIRST_ACTION: 'FIRST_ACTION'
 };
 
 /**
@@ -15,14 +14,6 @@ const storageConstants = {
  */
 export async function setFirstAction() {
     await AsyncStorage.setItem(storageConstants.FIRST_ACTION, 'true')
-}
-
-/**
- * Setting local device variable FIRST_SIGN_IN with true
- * @returns {String}  
- */
-export async function setFirstSignIn() {
-    await AsyncStorage.setItem(storageConstants.FIRST_SIGN_IN, 'true')
 }
 
 /**
@@ -62,15 +53,6 @@ export async function setMnemonicNotSaved() {
  */
 export async function getFirstAction() {
     return await AsyncStorage.getItem(storageConstants.FIRST_ACTION)
-}
-
-
-/**
- * Getting value from local device variable FIRST_SIGN_IN
- * @returns {String}  
- */
-export async function getFirstSignIn() {
-    return await AsyncStorage.getItem(storageConstants.FIRST_SIGN_IN)
 }
 
 /**
