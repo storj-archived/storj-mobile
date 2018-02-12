@@ -28,9 +28,11 @@ export default class MainComponent extends Component {
                 {
                     this.props.isActionBarShown || this.props.isSelectionMode ? 
                         <ActionBarComponent
+                            openedBucketId = { this.props.openedBucketId }
                             isSingleItemSelected = { this.props.isSingleItemSelected }
                             isSelectionMode = { this.props.isSelectionMode }
                             selectionModeActions = { this.props.selectionModeActions }
+                            openedBucketActions = { this.props.openedBucketActions }
                             tapBarActions = { this.props.tapBarActions } /> : null
                 }
                 {

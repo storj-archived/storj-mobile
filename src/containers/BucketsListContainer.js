@@ -15,6 +15,7 @@ class BucketsListContainer extends Component {
     };
 
     onPress(params) {
+        this.props.openBucket(params.bucketId);
         this.props.navigateToFilesScreen(params.bucketId);    
     }
 

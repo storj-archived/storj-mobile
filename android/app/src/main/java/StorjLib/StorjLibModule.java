@@ -259,7 +259,6 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
     @ReactMethod
     void uploadFile(final String bucketId,
                     final String localPath,
-                    final Callback onProgressCallback,
                     final Callback onResponsseCallback) {
         new Thread(new Runnable() {
             @Override
@@ -323,7 +322,11 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
                         response.putBoolean("isSuccess", false);
                         response.putString("errorMessage", message);
 
-                        response.putMap("result", null);
+                        WritableMap result = new WritableNativeMap();
+
+                        result.putString("filePath", filePath);
+
+                        response.putMap("result", result);
 
                         onResponsseCallback.invoke(response);
                     }

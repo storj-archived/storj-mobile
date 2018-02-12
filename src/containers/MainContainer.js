@@ -5,8 +5,10 @@ import { connect } from 'react-redux';
 import { mainContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import ListItemModel from '../models/ListItemModel';
 import StorjLib from '../utils/StorjModule';
+import FilePicker from '../utils/filePicker';
 import TabBarActionModelFactory from '../models/TabBarActionModel';
 import MainComponent from '../components/MainComponent';
+import filePicker from '../utils/filePicker';
 
 class MainContainer extends Component {
     constructor(props) {
@@ -28,6 +30,11 @@ class MainContainer extends Component {
             TabBarActionModelFactory.createNewAction(() => { this.deleteBuckets(); }, 'Action 3', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
         //};  
+        this.openedBucketActions = [
+            TabBarActionModelFactory.createNewAction(() => { this.uploadFile(); }, 'Action 1', require('../images/ActionBar/UploadFileIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 2', require('../images/ActionBar/DownloadIFileIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 3', require('../images/ActionBar/UploadPhotoIcon.png'))
+        ]
     }
 
     componentWillMount () {
@@ -45,6 +52,23 @@ class MainContainer extends Component {
     onActionBarPress() {
         this.props.isActionBarShown ? 
             this.props.hideActionBar() : this.props.showActionBar();
+    }
+
+    async uploadFile() {
+        let filePicketResponse = await filePicker.show();
+
+        this.props.setLoading();
+        this.props.hideActionBar();
+
+        if(filePicketResponse.path) {
+            StorjLib.uploadFile(this.props.openedBucketId, filePicketResponse.path, (response) => {
+                if(response.isSuccess) {
+                    this.props.uploadFile(response.result);
+                }
+
+                this.props.unsetLoading();
+            });
+        }
     }
 
     async createBucket(bucketName) {
@@ -109,10 +133,12 @@ class MainContainer extends Component {
     render() {
         return(
             <MainComponent
+                openedBucketId = { this.props.openedBucketId }
                 createBucket = { this.createBucket.bind(this) }
                 hideCreateBucketInput = { this.props.hideCreateBucketInput }
                 tapBarActions = { this.tapBarActions } 
                 selectionModeActions = { this.selectionModeActions }
+                openedBucketActions = { this.openedBucketActions }
                 isSelectionMode = { this.props.isSelectionMode }
                 isSingleItemSelected = { this.props.isSingleItemSelected }
                 onActionBarPress = { () => { this.onActionBarPress(); } }
@@ -124,7 +150,8 @@ class MainContainer extends Component {
 }
 
 function mapStateToProps(state) { 
-    return { 
+    return {
+        openedBucketId: state.mainReducer.openedBucketId,
         isSelectionMode: state.mainReducer.isSelectionMode, 
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         isActionBarShown: state.mainReducer.isActionBarShown,

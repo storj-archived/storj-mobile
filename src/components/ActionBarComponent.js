@@ -43,6 +43,12 @@ export default class ActionBarComponent extends Component {
     getTapBarAction() {
         let actions = this.props.isSelectionMode || this.props.isSingleItemSelected ? this.props.selectionModeActions : this.props.tapBarActions;
 
+        console.log(this.props.openedBucketId);
+
+        if(this.props.openedBucketId) {
+            actions = this.props.openedBucketActions;
+        }
+
         return actions.map((action, index) => {
             var icon = action.iconPath;
             let imageWrapperStyle = index === 0 

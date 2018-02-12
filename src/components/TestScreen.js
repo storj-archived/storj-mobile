@@ -11,6 +11,7 @@ import filePicker from '../utils/filePicker';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { navigateBack } from '../reducers/navigation/navigationActions';
+import { filesListContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import ListComponent from '../components/ListComponent';
 import ListItemModel from '../models/ListItemModel';
 import storj from '../utils/StorjModule';
@@ -20,30 +21,32 @@ class TestComponent extends Component {
         super(props);
 
         this.onHardwareBackPress = () => {
+            this.props.closeBucket();
             this.props.navigateBack();
         };
 
         this.state = {
             files: []
         };
+
+        this.bucketId = props.navigation.state.params.bucketId;
     }
 
-    async componentDidMount() {
-        //console.log(this.props);
-        console.log("componentDidMount------------");
-        console.log(this.props);
-        
-        let filesResponse = await storj.listFiles(this.props.navigation.state.params.bucketId);
+    componentDidMount() {
+        this.listfiles();
+    }
+    
+    componentDidUpdate() {
+        //console.log(this.props.files);
+    }
 
-        console.log(filesResponse);
+    async listfiles() {
+        let filesResponse = await storj.listFiles(this.bucketId);
 
-        let mappedResult = filesResponse.result.map((bucket => new ListItemModel(bucket)));
-
-        console.log(mappedResult);
-
-        this.setState({ files: mappedResult });
-
-        
+        if(filesResponse.isSuccess) {
+            let mappedResult = filesResponse.result.map((file => new ListItemModel(file)));
+            this.props.listFiles({ bucketId: this.bucketId, files: mappedResult });
+        }
     }
 
     componentWillMount() {
@@ -59,22 +62,43 @@ class TestComponent extends Component {
 	}
 
     render() {
+        let data = [];
+
+        console.log(this.props.files);
+
+        this.props.files.forEach(element => {
+            if(element.bucketId === this.bucketId) {
+                data = element.files;
+            }
+        });
+
         return(
             <View style = { styles.mainContainer }>
                 <ListComponent
-                    data = { this.state.files }
-                    bucketsCount = { this.state.files.length } />
+                    onPress = { () => {} }
+                    onSingleItemSelected = { () => {} }                    
+                    animatedScrollValue = { this.props.screenProps.animatedScrollValue }
+                    enableSelectionMode = { () => {} }
+                    disableSelectionMode = { () => {} }
+                    isSelectionMode = { false }
+                    isSingleItemSelected = { false }
+                    deselectItem = { () => {} }
+                    selectItem = { () => {} }
+                    data = { data }
+                    bucketsCount = { data.length } />
             </View>
         );
     }
 }
 
 function mapStateToProps(state) {
-    return {};
+    return {
+        files: state.mainReducer.files
+    };
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ navigateBack }, dispatch);
+    return bindActionCreators({ navigateBack, ...filesListContainerActions }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TestComponent);

@@ -37,6 +37,7 @@ export default class BucketsListComponent extends Component {
 
 const styles = StyleSheet.create({
     mainContainer: {
-        flex: 1
+        flex: 1,
+        backgroundColor: 'white'
     }
 });
