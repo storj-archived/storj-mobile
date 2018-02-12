@@ -1,6 +1,7 @@
 import {
     View,
     Text,
+    ActivityIndicator,
     StyleSheet
 } from 'react-native';
 import React, { Component } from 'react';
@@ -44,6 +45,15 @@ export default class MainComponent extends Component {
                                 }} />
                         </View> : null
                 }
+                {
+                    this.props.isLoading ?
+                        <View style = { [ styles.backgroundWrapper ] }>
+                            <View style = { [ styles.backgroundWrapper, styles.dimBlack ] } />
+                            <View style = { [ styles.backgroundWrapper, styles.setChildCenter ] }>
+                                <ActivityIndicator animating = { true } color = { "#2782ff" } size = { "large" }/>
+                            </View>
+                        </View> : null
+                }
             </View>
         );
     };
@@ -56,9 +66,17 @@ const styles = StyleSheet.create({
     navigationContainer: {
         flex: 1
     },
+    backgroundWrapper: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        position: 'absolute',
+        backgroundColor: 'transparent'
+    },
     dimBlack: {
         backgroundColor: 'black',
-        opacity: 0.4
+        opacity: 0.3
     },
     popUpBackgroundtWrapper: {
         position: 'absolute',
@@ -69,7 +87,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         alignItems: 'center',
         justifyContent: 'center'
-    }
+    },
+    setChildCenter: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
 });
 
 //TODO: Add prop types

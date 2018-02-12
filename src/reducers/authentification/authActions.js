@@ -125,6 +125,14 @@ function redirectToRegisterSuccessScreen() {
     return NavigationActions.navigate({ routeName: 'RegisterSuccessInfoScreen' });
 };
 
+/**
+ * ActionCreator that provides redux navigation to InitializationScreen
+ * @returns action
+ */
+function redirectToInitializeScreen() {
+    return NavigationActions.navigate({ routeName: 'InitializationScreen' });
+}
+
 // ActionCreators for LoginContainer
 export const loginActionsCreators = {
     loginSuccess,
@@ -132,7 +140,8 @@ export const loginActionsCreators = {
     login,
     navigateToRegisterScreen,
     redirectToAuthFailureScreen,
-    redirectToMainScreen
+    redirectToMainScreen,
+    redirectToInitializeScreen
 };
 
 // ActionCreators for RegisterContainer

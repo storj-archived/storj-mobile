@@ -170,7 +170,7 @@ class LoginContainer extends Component {
         if(areKeysImported) {
             await this.handleFirstLaunch();
             this.props.loginSuccess();
-            this.props.redirectToMainScreen();
+            this.props.redirectToInitializeScreen();
         } else {
             this.props.loginError();
             this.props.redirectToAuthFailureScreen({ 

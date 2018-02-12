@@ -13,7 +13,11 @@ const {
     DISABLE_SELECTION_MODE,
     SINGLE_ITEM_ACTIONS_SELECTED,
     SHOW_CREATE_BUCKET_INPUT,
-    HIDE_CREATE_BUCKET_INPUT
+    HIDE_CREATE_BUCKET_INPUT,
+    SET_FIRST_SIGN_IN,
+    REMOVE_FIRST_SIGN_IN,
+    SET_LOADING,
+    UNSET_LOADING
  } = MAIN_ACTIONS;
                                                         
 const initialState = { 
@@ -22,7 +26,9 @@ const initialState = {
     buckets: [], 
     selectedBuckets: [], //TODO: delete, depreciated
     isSelectionMode: false,
-    isSingleItemSelected: false
+    isSingleItemSelected: false,
+    isFirstSignIn: false,
+    isLoading: false
 };
 
 export default function mainReducer(state = initialState, action) {
@@ -72,6 +78,18 @@ export default function mainReducer(state = initialState, action) {
             return newState;
         case HIDE_CREATE_BUCKET_INPUT:
             newState.isCreateBucketInputShown = false;
+            return newState;
+        case SET_FIRST_SIGN_IN: 
+            newState.isFirstSignIn = true;
+            return newState;
+        case REMOVE_FIRST_SIGN_IN: 
+            newState.isFirstSignIn = false;
+            return newState;
+        case SET_LOADING: 
+            newState.isLoading = true;
+            return newState;
+        case UNSET_LOADING:
+            newState.isLoading = false;
             return newState;
         default:
             return state || initialState;

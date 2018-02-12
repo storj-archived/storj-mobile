@@ -11,6 +11,7 @@ import MainNavigationContainer from '../containers/MainNavigationContainer';
 import ActionBarComponent from '../components/ActionBarComponent';
 import CreateBucketPopUpComponent from '../components/InputPopUpComponent';
 import { getWidth, getHeight, getDeviceWidth } from '../utils/adaptive';
+import StorjLib from '../utils/StorjModule';
 
 export default class FirstSignInComponent extends Component {
     constructor(props) {
@@ -18,10 +19,10 @@ export default class FirstSignInComponent extends Component {
 
         this.state = {
             showModal: false,
-            photosSelected: false,
-            videosSelected: false,
-            musicSelected: false,
-            filesSelected: false
+            photosSelected: true,
+            videosSelected: true,
+            musicSelected: true,
+            filesSelected: true
         }
     }
 
@@ -29,14 +30,15 @@ export default class FirstSignInComponent extends Component {
         this.setState({ showModal: true });
     }
 
-    closeModal = () => {
+    closeModal = async () => {
         this.setState({ 
             showModal: false,
-            photosSelected: false,
-            videosSelected: false,
-            musicSelected: false,
-            filesSelected: false 
+            photosSelected: true,
+            videosSelected: true,
+            musicSelected: true,
+            filesSelected: true 
         });
+        this.props.createBucket('photos');
     }
 
     photosSelection = () => {
@@ -156,7 +158,7 @@ export default class FirstSignInComponent extends Component {
                 </View>
                 {
                     this.showModalView()
-                }
+                } 
             </View>
         );
     }

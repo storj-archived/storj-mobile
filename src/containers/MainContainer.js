@@ -100,10 +100,6 @@ class MainContainer extends Component {
         }
     }
 
-    async componentDidMount() {
-        await this.getBuckets();
-    }
-
     static navigationOptions = {
         header: null
     };
@@ -119,7 +115,8 @@ class MainContainer extends Component {
                 isSingleItemSelected = { this.props.isSingleItemSelected }
                 onActionBarPress = { () => { this.onActionBarPress(); } }
                 isActionBarShown = { this.props.isActionBarShown } 
-                isCreateBucketInputShown = { this.props.isCreateBucketInputShown } />
+                isCreateBucketInputShown = { this.props.isCreateBucketInputShown }
+                isLoading = { this.props.isLoading } />
         );
     }
 }
@@ -130,7 +127,9 @@ function mapStateToProps(state) {
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         isActionBarShown: state.mainReducer.isActionBarShown,
         buckets: state.mainReducer.buckets,
-        isCreateBucketInputShown: state.mainReducer.isCreateBucketInputShown
+        isCreateBucketInputShown: state.mainReducer.isCreateBucketInputShown,
+        isFirstSignIn: state.mainReducer.isFirstSignIn,
+        isLoading: state.mainReducer.isLoading
     };
 }
 function mapDispatchToProps(dispatch) { return bindActionCreators(mainContainerActions, dispatch); };

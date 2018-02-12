@@ -14,6 +14,8 @@ import StorjLib from '../utils/StorjModule';
 import { getWidth, getHeight } from '../utils/adaptive';
 import { authConstants } from '../utils/constants/storageConstants';
 import { getMnemonicNotSaved, getFirstAction } from '../utils/AsyncStorageModule';
+import ListItemModel from '../models/ListItemModel';
+import { initializeContainerActions } from '../reducers/mainContainer/mainReducerActions';
 
 class InitializeContainer extends Component {
     constructor(props) {
@@ -54,12 +56,24 @@ class InitializeContainer extends Component {
     }
 
     getKeys() {
-        StorjLib.getKeys(this.state.passcode, (keys) => {
+        StorjLib.getKeys(this.state.passcode, async (keys) => {
+            await this.getBuckets()
             this.props.redirectToMainScreen();
         }, (error) => {
             if(!this.state.enterPassCode)
                 this.setState({ enterPassCode: true });
         });
+    }
+
+    async getBuckets() {
+        try {
+            let buckets = await StorjLib.getBuckets();
+            if(buckets.length == 0)  this.props.setFirstSignIn();
+
+            this.props.getBuckets(buckets.map((bucket => new ListItemModel(bucket))));
+        } catch(e) {
+            console.log('errorName: ' + e.name, "// errorMessage: " + e.message, "// errorCode: " + e.code);
+        }
     }
 
     onSubmit() {
@@ -157,9 +171,11 @@ const styles = StyleSheet.create({
  * connecting reducer to component props 
  */
 function mapStateToProps(state) { return { navigation: state.navReducer }; };
-function mapDispatchToProps(dispatch) { return bindActionCreators(Actions, dispatch); };
+function mapDispatchToProps(dispatch) { return bindActionCreators({...Actions, ...initializeContainerActions}, dispatch); };
 
 /**
  * Creating LoginScreen container
  */
 export default connect(mapStateToProps, mapDispatchToProps)(InitializeContainer);
+
+//TODO: add PropTypes

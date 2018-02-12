@@ -12,7 +12,11 @@ const {
     SINGLE_ITEM_ACTIONS_SELECTED, 
     DISABLE_SELECTION_MODE,
     SHOW_CREATE_BUCKET_INPUT,
-    HIDE_CREATE_BUCKET_INPUT
+    HIDE_CREATE_BUCKET_INPUT,
+    SET_FIRST_SIGN_IN,
+    REMOVE_FIRST_SIGN_IN,
+    SET_LOADING,
+    UNSET_LOADING
 } = MAIN_ACTIONS;
 
 function onSingleItemSelected() {
@@ -62,6 +66,22 @@ function hideCreateBucketInput() {
     return { type: HIDE_CREATE_BUCKET_INPUT };
 }
 
+function setFirstSignIn() {
+    return { type: SET_FIRST_SIGN_IN };
+}
+
+function removeFirstSignIn() {
+    return { type: REMOVE_FIRST_SIGN_IN };
+}
+
+function setLoading() {
+    return { type: SET_LOADING };
+}
+
+function unsetLoading() {
+    return { type: UNSET_LOADING };
+}
+
 //action creators for main container
 export const mainContainerActions = {
     getBuckets,
@@ -71,7 +91,9 @@ export const mainContainerActions = {
     deleteBucket,
     disableSelectionMode,
     showCreateBucketInput,
-    hideCreateBucketInput
+    hideCreateBucketInput,
+    setFirstSignIn,
+    removeFirstSignIn
 };
 
 //action creators for main screen navigation container
@@ -87,5 +109,14 @@ export const bucketsContainerActions = {
     deselectBucket,
     enableSelectionMode,
     disableSelectionMode,
-    onSingleItemSelected
+    onSingleItemSelected,
+    createBucket,
+    removeFirstSignIn,
+    setLoading,
+    unsetLoading
 };
+
+export const initializeContainerActions = {
+    getBuckets, 
+    setFirstSignIn
+}
