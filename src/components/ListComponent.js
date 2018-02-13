@@ -224,7 +224,7 @@ ListComponent.propTypes = {
 
 const styles = StyleSheet.create({
     listContainer: {
-        backgroundColor: 'white',
+        backgroundColor: 'white'
     },
     contentWrapper: {
         paddingVertical: getHeight(70)

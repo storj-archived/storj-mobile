@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { mainContainerActions } from '../reducers/mainContainer/mainReducerActions';
+import { mainContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import ListItemModel from '../models/ListItemModel';
 import StorjLib from '../utils/StorjModule';
 import FilePicker from '../utils/filePicker';
@@ -61,14 +62,14 @@ class MainContainer extends Component {
         this.props.hideActionBar();
 
         if(filePicketResponse.path) {
-            StorjLib.uploadFile(this.props.openedBucketId, filePicketResponse.path, (response) => {
-                if(response.isSuccess) {
-                    this.props.uploadFile(response.result);
-                }
+            let uploadFileResponse = await StorjLib.uploadFile(this.props.openedBucketId, filePicketResponse.path);
 
-                this.props.unsetLoading();
-            });
+            if(uploadFileResponse.isSuccess) {
+                this.props.uploadFile(this.props.openedBucketId, new ListItemModel(uploadFileResponse.result));
+            }
         }
+
+        this.props.unsetLoading();
     }
 
     async createBucket(bucketName) {
@@ -161,6 +162,6 @@ function mapStateToProps(state) {
         isLoading: state.mainReducer.isLoading
     };
 }
-function mapDispatchToProps(dispatch) { return bindActionCreators(mainContainerActions, dispatch); };
+function mapDispatchToProps(dispatch) { return bindActionCreators({ ...mainContainerActions, ...mainContainerFileActions }, dispatch); };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

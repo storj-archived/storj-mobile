@@ -104,7 +104,7 @@ export default class ListItemComponent extends Component {
                                         } else {
                                             props.onSingleItemSelected();
                                             props.selectItemId(props.item.getId());
-                                            props.onPress(props.item);
+                                            //props.onPress(props.item);
                                         }
                                     }}>
                                     <Image style = { listItemStyles.listItemActionsIcon } source = { require('../images/Icons/listItemActions.png') } />

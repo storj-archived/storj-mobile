@@ -106,19 +106,6 @@ export default function mainReducer(state = initialState, action) {
         case CLOSE_BUCKET:
             newState.openedBucketId = null;
             return newState;
-        case LIST_FILES:
-            newState.files = listFiles(newState.files, action.payload.filesHandler);
-            return newState;
-        case UPLOAD_FILE:
-            console.log(action);
-            newState.files = uploadFile(newState.files, newState.openedBucketId, action.payload.file);
-            return newState;
-        case UPLOAD_FILE_START:
-            newState.files = addUploadingFile(newState.files, action.payload.filePath, newState.openedBucketId);
-            return newState;
-        case UPLOAD_FILE_COMPLETE:
-            newState.files = completeFileUploading(newState.files, action.payload.uploadResponse, newState.openedBucketId)
-            return newState;
         default:
             return state || initialState;
     }
@@ -144,20 +131,27 @@ function listFiles(array, newItem) {
 
 function uploadFile(array, bucketId, file) {
     let newArray = array.slice();
+    let isListHandler = false;
 
     for(let i = 0; i < newArray.length; i++) {
         if(newArray[i].bucketId === bucketId) {
             let doesContain = false;
+            isListHandler = true;
 
             newArray[i].files.forEach(element => {
-                if(element.Id === file.id)
+                if(element.Id === file.fileId)
                     doesContain = true;
             });
 
             if(!doesContain) {
+                console.log(file);
                 newArray[i].files.push(new ListItemModel(new FileModel(file)));
             }
         }
+    }
+
+    if(!isListHandler) {
+        newArray.push({ bucketId, files: [ new ListItemModel(new FileModel(file)) ] });
     }
 
     console.log("newArray", newArray);

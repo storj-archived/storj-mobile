@@ -124,8 +124,6 @@ export const mainContainerActions = {
     hideCreateBucketInput,
     setFirstSignIn,
     removeFirstSignIn,
-    uploadFile,
-    completeFileUploading,
     setLoading,
     unsetLoading
 };
@@ -164,9 +162,10 @@ export const bucketsListContainerAction = {
     openBucket
 };
 
-export const filesListContainerActions = {
+export const filesListContainerMainActions = {
     closeBucket,
-    listFiles
+    setLoading,
+    unsetLoading
 };
 
 export const initializeContainerActions = {

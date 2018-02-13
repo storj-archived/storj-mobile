@@ -152,8 +152,12 @@ const StorjLib = (() => {
          * download file to storj network
          * @returns {Promise<any>}
          */
-         uploadFile(bucketId, localPath, onResponsseCallback) {
-            let uploadFileResult = storjLib.uploadFile(bucketId, localPath, onResponsseCallback);
+         async uploadFile(bucketId, localPath) {
+            let uploadFileResult = await storjLib.uploadFile(bucketId, localPath);
+
+            if(uploadFileResult.isSuccess) {
+                uploadFileResult.result = new FileModel(uploadFileResult.result);
+            }
 
             return uploadFileResult;
         };
