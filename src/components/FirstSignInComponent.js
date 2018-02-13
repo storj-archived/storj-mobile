@@ -46,7 +46,6 @@ export default class FirstSignInComponent extends Component {
                 this.props.createBucket(option.type);
             }
         });
-        this.props.createBucket('photos');
     }
 
     changeOptions = (type) => {

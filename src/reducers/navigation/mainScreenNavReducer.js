@@ -1,9 +1,9 @@
-import MainScreenNavigator from '../../navigators/MainScreenNavigator';
+import MainScreenNavigators from '../../navigators/MainScreenNavigator';
 
 /**
  * Declaring initial route of program
  */
-export const initialState = MainScreenNavigator.router.getStateForAction(MainScreenNavigator.router.getActionForPathAndParams('BucketsScreen'));
+export const initialState = MainScreenNavigators.router.getStateForAction(MainScreenNavigators.router.getActionForPathAndParams('BucketsScreen'));
 
 /**
  * Creating navigation reducer
@@ -12,7 +12,7 @@ export const initialState = MainScreenNavigator.router.getStateForAction(MainScr
  * @returns new state 
  */
 export default function navReducer (state = initialState, action) {
-	const nextState = MainScreenNavigator.router.getStateForAction(action, state);
+	const nextState = MainScreenNavigators.router.getStateForAction(action, state);
 
 	return nextState || state;
-}
+};

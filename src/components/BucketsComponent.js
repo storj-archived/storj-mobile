@@ -8,12 +8,15 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import ListComponent from '../components/ListComponent';
-import BucketsScreenNavigation from '../containers/BucketsScreenNavContainer';
 import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderComponent';
 
 export default class BucketsComponent extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            headerFlex: 1
+        };
 
         this.animatedScrollValue = new Animated.Value(0);
     }
@@ -21,8 +24,19 @@ export default class BucketsComponent extends Component {
     render() {
         return(
             <View style={ styles.mainContainer }>
-                <BucketsScreenNavigation
-                    animatedScrollValue = { this.animatedScrollValue }  />
+                <ListComponent
+                    onSingleItemSelected = { this.props.onSingleItemSelected }                    
+                    animatedScrollValue = { this.animatedScrollValue }
+                    enableSelectionMode = { this.props.enableSelectionMode }
+                    disableSelectionMode = { this.props.disableSelectionMode }
+                    isSelectionMode = { this.props.isSelectionMode }
+                    isSingleItemSelected = { this.props.isSingleItemSelected }
+                    deselectItem = { this.props.deselectBucket }
+                    selectItem = { this.props.selectBucket }
+                    data = { this.props.buckets }
+                    listItemIcon = { require('../images/Icons/BucketItemFolder.png') }
+                    bucketsCount = { this.props.buckets.length } />
+
                 <BucketsScreenHeaderComponent
                     isSelectionMode = { this.props.isSelectionMode }
                     disableSelectionMode = { this.props.disableSelectionMode }

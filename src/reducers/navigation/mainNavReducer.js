@@ -12,14 +12,7 @@ export const initialState = StackNavigator.router.getStateForAction(StackNavigat
  * @returns new state 
  */
 export default function navReducer (state = initialState, action) {
-	let nextState = StackNavigator.router.getStateForAction(action, state);
-
-	try {
-        StackNavigator.router.getPathAndParamsForState(nextState);
-    } catch(e) {
-        console.log(e.message);
-        nextState = state;
-    }
+	const nextState = StackNavigator.router.getStateForAction(action, state);
 
 	return nextState || state;
-}
+};

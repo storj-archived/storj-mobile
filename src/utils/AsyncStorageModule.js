@@ -55,6 +55,7 @@ export async function getFirstAction() {
     return await AsyncStorage.getItem(storageConstants.FIRST_ACTION)
 }
 
+
 /**
  * Getting value from local device variable EMAIL
  * @returns {String}  

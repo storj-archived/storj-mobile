@@ -22,7 +22,7 @@ class InitializeContainer extends Component {
         super(props);
 
         this.state = {
-            passcode: "",
+            passcode: '',
             enterPassCode: false,
             isPasscodeWrong: false
         };
@@ -40,7 +40,6 @@ class InitializeContainer extends Component {
                 return;
             }
 
-            console.log('before keys exist');
             if(!await StorjLib.keysExists()) {
                 this.props.redirectToLoginScreen();
                 return;
@@ -58,7 +57,7 @@ class InitializeContainer extends Component {
 
     getKeys() {
         StorjLib.getKeys(this.state.passcode, async (keys) => {
-            await this.getBuckets();
+            await this.getBuckets()
             this.props.redirectToMainScreen();
         }, (error) => {
             if(!this.state.enterPassCode)

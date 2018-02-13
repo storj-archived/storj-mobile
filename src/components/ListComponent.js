@@ -225,6 +225,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     contentWrapper: {
-        paddingVertical: getHeight(0)
+        paddingVertical: getHeight(80)
     }
 });

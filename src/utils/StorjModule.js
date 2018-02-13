@@ -136,49 +136,6 @@ const StorjLib = (() => {
 
             return result;
         };
-
-        /**
-         * download file to storj network
-         * @returns {Promise<any>}
-         */
-        async downloadFile(bucketId, fileId, localPath) {
-            let downloadFileResult = await storjLib.downloadFile(bucketId, fileId, localPath);
-
-            return downloadFileResult;
-        }
-
-        /**
-         * download file to storj network
-         * @returns {Promise<any>}
-         */
-         uploadFile(bucketId, localPath, onProgressCallback, onResponsseCallback) {
-            console.log(onProgressCallback);
-            let uploadFileResult = storjLib.uploadFile(bucketId, localPath, onProgressCallback, onResponsseCallback);
-
-            return uploadFileResult;
-        };
-
-        /**
-         * List buckets for logged in user
-         * @returns {Promise<BucketModel[]>}
-         */
-        async listFiles(bucketId) {
-            let listFilesResult = await storjLib.listFiles(bucketId);
-
-            if(listFilesResult.isSuccess) {
-                listFilesResult.result.forEach(element => {
-                    console.log(element);
-                });
-            }
-
-            /* if(Array.isArray(buckets)) {
-                result = buckets.map((bucket) => {
-                    return new BucketModel(bucket);
-                });
-            } */
-
-            return listFilesResult;
-        };
     
         static getBucket() {
             //Not implemented yet
