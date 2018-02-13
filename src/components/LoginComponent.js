@@ -1,12 +1,10 @@
 import {
     View,
     TextInput,
-    Button,
     StyleSheet,
     TouchableOpacity,
     Image,
     Text,
-    KeyboardAvoidingView,
     ActivityIndicator
 } from 'react-native';
 import React, { Component } from 'react';
@@ -22,6 +20,7 @@ export default class LoginComponent extends Component {
         super(props);
 
         this.onSubmit = props.onSubmit ? props.onSubmit : () => {};
+        this.redirectToQRScannerScreen = props.redirectToQRScannerScreen ? props.redirectToQRScannerScreen : () => {};
         this.onChangeLogin = props.onChangeLogin ? props.onChangeLogin : () => {};
         this.onChangePassword = props.onChangePassword ? props.onChangePassword : () => {};
         this.onChangeMnemonic = props.onChangeMnemonic ? props.onChangeMnemonic : () => {};
@@ -78,7 +77,7 @@ export default class LoginComponent extends Component {
                     <TouchableOpacity style = { styles.createAccountButton } onPressOut = { this.onSubmit }>
                         <Text style = { styles.createAccountText }>Login</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style = { styles.loginViaQRButton } onPressOut = { () => {} }> 
+                    <TouchableOpacity style = { styles.loginViaQRButton } onPressOut = { this.redirectToQRScannerScreen }> 
                         <Text style = { styles.loginViaQRText }>Login via QR</Text>
                     </TouchableOpacity>
                     <Text style = { styles.footerText }>Don't have an account? <Text onPress = { this.props.registerButtonOnPress } style = { styles.footerLink }>Sign Up</Text></Text>              

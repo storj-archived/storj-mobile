@@ -189,24 +189,29 @@ class LoginContainer extends Component {
     redirectToMainPageScreen() {
 		this.props.redirectToMainScreen();
     };
+    redirectToQRScannerScreen() {
+        this.props.redirectToQRScannerScreen();
+    };
 
 	render() {
 		return(
-            <LoginComponent
-                isLoading = { this.state.isLoading }
-                email = { this.state.stateModel.email }
-                password = { this.state.stateModel.password }
-                mnemonic = { this.state.stateModel.mnemonic }
-                isRedirectedFromRegister = { this.props.user.isRedirectedFromRegister }
-                isEmailError = { this.state.errorModel.isEmailError }
-                isPasswordError = { this.state.errorModel.isPasswordError }
-                isMnemonicError = { this.state.errorModel.isMnemonicError }
-                areCredentialsValid = { this.state.errorModel.areCredentialsValid }
-                onChangeLogin = { this.onChangeEmailInput.bind(this) }
-                onChangePassword = { this.onChangePasswordInput.bind(this) }
-                onChangeMnemonic = { this.onChangeMnemonicInput.bind(this) }
-                onSubmit = { this.tryLogin.bind(this) }
-                registerButtonOnPress = { this.redirectToRegisterScreen.bind(this) } />
+                <LoginComponent
+                    isLoading = { this.state.isLoading }
+                    email = { this.props.user.email }
+                    password = { this.props.user.password }
+                    mnemonic = { this.props.user.mnemonic }
+                    isRedirectedFromRegister = { this.props.user.isRedirectedFromRegister }
+                    isEmailError = { this.state.errorModel.isEmailError }
+                    isPasswordError = { this.state.errorModel.isPasswordError }
+                    isMnemonicError = { this.state.errorModel.isMnemonicError }
+                    areCredentialsValid = { this.state.errorModel.areCredentialsValid }
+                    onChangeLogin = { this.onChangeEmailInput.bind(this) }
+                    onChangePassword = { this.onChangePasswordInput.bind(this) }
+                    onChangeMnemonic = { this.onChangeMnemonicInput.bind(this) }
+                    onSubmit = { this.tryLogin.bind(this) }
+                    redirectToQRScannerScreen = { this.redirectToQRScannerScreen.bind(this) }
+                    registerButtonOnPress = { this.redirectToRegisterScreen.bind(this) }
+                />
 		);
 	};
 }
@@ -223,7 +228,7 @@ function mapDispatchToProps(dispatch) { return bindActionCreators(loginActionsCr
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
 
 /**
- * Checking RegisterContainer correct prop types
+ * Checking LoginContainer correct prop types
  */
 LoginContainer.propTypes = {
     user: PropTypes.shape({

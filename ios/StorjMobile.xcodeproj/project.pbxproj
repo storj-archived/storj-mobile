@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -53,6 +52,7 @@
 		E1B69957B9F74BD08F47F764 /* Montserrat-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA3A41C878E0424E92862DE9 /* Montserrat-ExtraLightItalic.ttf */; };
 		E6A2862F2CF54CA4A398C3EB /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6614E0B481304028A1D06F8A /* Montserrat-Black.ttf */; };
 		E897D74594BA49939DB05574 /* Montserrat-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C778753B10440D3B23670E2 /* Montserrat-LightItalic.ttf */; };
+		1435D6A1901847E898646868 /* libRCTBarcode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04954185B8E34BC3A4B12469 /* libRCTBarcode.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -362,6 +362,8 @@
 		F04347ECBAEC4A348F8B4E29 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Bold.ttf"; path = "../src/fonts/OpenSans/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		F76C6AA2A02B4583A7084288 /* Montserrat-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraBoldItalic.ttf"; path = "../src/fonts/Montserrat/Montserrat-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		FED5CF1007864C3FB8C7BA2E /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../src/fonts/OpenSans/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		FD483430D07D4D6395ABDE9B /* RCTBarCode.xcodeproj */ = {isa = PBXFileReference; name = "RCTBarCode.xcodeproj"; path = "../node_modules/react-native-smart-barcode/ios/RCTBarcode/RCTBarCode.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		04954185B8E34BC3A4B12469 /* libRCTBarcode.a */ = {isa = PBXFileReference; name = "libRCTBarcode.a"; path = "libRCTBarcode.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -390,6 +392,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				1435D6A1901847E898646868 /* libRCTBarcode.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,6 +546,7 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
+				FD483430D07D4D6395ABDE9B /* RCTBarCode.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1121,6 +1125,14 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StorjMobile.app/StorjMobile";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-smart-barcode\ios\RCTBarcode\RCTBarcode",
+				);
 			};
 			name = Debug;
 		};
@@ -1139,6 +1151,14 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StorjMobile.app/StorjMobile";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-smart-barcode\ios\RCTBarcode\RCTBarcode",
+				);
 			};
 			name = Release;
 		};
@@ -1158,6 +1178,10 @@
 				);
 				PRODUCT_NAME = StorjMobile;
 				VERSIONING_SYSTEM = "apple-generic";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-smart-barcode\ios\RCTBarcode\RCTBarcode",
+				);
 			};
 			name = Debug;
 		};
@@ -1176,6 +1200,10 @@
 				);
 				PRODUCT_NAME = StorjMobile;
 				VERSIONING_SYSTEM = "apple-generic";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-smart-barcode\ios\RCTBarcode\RCTBarcode",
+				);
 			};
 			name = Release;
 		};

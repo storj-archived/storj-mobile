@@ -1,6 +1,7 @@
 package com.storjmobile;
 
 import com.facebook.react.ReactActivity;
+import com.reactnativecomponent.barcode.RCTCapturePackage;
 
 public class MainActivity extends ReactActivity {
 

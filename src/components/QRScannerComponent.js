@@ -1,0 +1,155 @@
+import {
+    View,
+    StyleSheet,
+    TouchableOpacity,
+    ActivityIndicator,
+    Image
+} from 'react-native';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { getWidth, getHeight, getDeviceWidth, getDeviceHeight } from '../utils/adaptive';
+import Barcode from 'react-native-smart-barcode';
+
+/**
+ * QRCodeScannerScreen component
+ */
+export default class QRScannerComponent extends Component {
+
+	constructor(props) {
+        super(props);
+
+        this.state = {
+            borderColor: 'white'
+        }
+
+        this.navigateBack = this.props.navigateBack ? this.props.navigateBack : () => {};
+        this.onBarCodeRead = this.props.onBarCodeRead ? this.props.onBarCodeRead : () => {};
+    };
+
+    /**
+     * Setting border color of qrscanner 
+     * @param {String} color 
+     */
+    setBorderColor(color) {
+        this.setState({ borderColor: color })
+    }
+
+    /** 
+     * ErrorMessageView
+    */
+    showErrorMessage() {
+        return(
+            <View style = { styles.errorMessageContainer }> 
+                <Image 
+                    style = { styles.errorMessage }
+                    source = { require('../images/QRScannerScreen/ErrorMessage.png') } 
+                    resizeMode = 'contain' />
+            </View>
+        )
+    }
+
+	render() {
+		return(
+			<View style={ styles.mainContainer }>
+                {
+                    this.props.viewAppear ?
+                        <Barcode 
+                        scannerRectCornerColor = { this.state.borderColor }
+                        style = { styles.barCodeContainer } 
+                        ref = { component => this._barCode = component }
+                        onBarCodeRead = {this.onBarCodeRead}/> : null
+                }
+                { 
+                    <View style = {  styles.backgroundWrapper  }>
+                        <View style = { styles.buttonPanelContainer }>
+                            <TouchableOpacity onPress = { () => this.navigateBack() } >
+                                <Image style = { styles.backButton } source = { require('../images/Icons/BackButton.png') }/>
+                            </TouchableOpacity>
+                            <View style = { styles.flexRow }>
+                                <TouchableOpacity onPress = { () => this._barCode.startFlash() } >
+                                    <Image style = { styles.flashButton } source = { require('../images/Icons/Flash.png') } />
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress = { () => this._barCode.stopFlash() } >
+                                    <Image style = { styles.reverseCameraButton } source = { require('../images/Icons/SwitchCamera.png') }/>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        {
+                            this.state.borderColor === '#EB5757' ?
+                                this.showErrorMessage() : null
+                        }
+                    </View>
+                }
+                {
+                    this.state.borderColor === '#27AE60' ?
+                        <View style = { [ styles.backgroundWrapper ] }>
+                            <View style = { [ styles.backgroundWrapper, styles.dimBlack ] } />
+                            <View style = { [ styles.backgroundWrapper, styles.setChildCenter ] }>
+                                <ActivityIndicator animating = { true } color = { "#2782ff" } size = { "large" }/>
+                            </View>
+                        </View> : null
+                }
+            </View>
+            
+		);
+	};
+}
+
+const styles = StyleSheet.create({
+    mainContainer: {
+        flex: 1,
+        backgroundColor: 'transparent'
+    },
+    barCodeContainer: {
+        width: getDeviceWidth(), 
+        height: getDeviceHeight(), 
+        backgroundColor: 'transparent'
+    },
+    backgroundWrapper: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        position: 'absolute',
+        backgroundColor: 'transparent'
+    },
+    dimBlack: {
+        backgroundColor: 'black',
+        opacity: 0.3
+    },
+    setChildCenter: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    buttonPanelContainer: {
+        marginTop: getHeight(30), 
+        flexDirection: 'row', 
+        justifyContent: 'space-between',
+        paddingLeft: getWidth(20), 
+        paddingRight: getWidth(20)
+    },
+    backButton: {
+        width: getWidth(24), 
+        height: getHeight(24)
+    },
+    flexRow: {
+        flexDirection: 'row'
+    },
+    flashButton: {
+        width: getWidth(24), 
+        height: getHeight(36), 
+        marginRight: getWidth(23)
+    },
+    reverseCameraButton: {
+        width: getWidth(30),
+        height: getHeight(30)
+    },
+    errorMessageContainer: {
+        marginTop: getHeight(500),
+        alignItems: 'center'
+    },
+    errorMessage: {
+        width: getWidth(275),
+        height: getHeight(50)
+    }
+});
