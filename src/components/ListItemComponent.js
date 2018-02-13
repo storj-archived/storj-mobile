@@ -17,7 +17,6 @@ import PropTypes from 'prop-types';
 export default class ListItemComponent extends Component {
     constructor(props) {
         super(props);
-        this.bucket = null;
     }
 
     shouldComponentUpdate(nextProps) {
@@ -68,7 +67,7 @@ export default class ListItemComponent extends Component {
                             })()
                         }
                         <View>
-                            <Image style = { listItemStyles.itemTypeIcon } source = { require('../images/Icons/BucketItemFolder.png') } />
+                            <Image style = { listItemStyles.itemTypeIcon } source = { props.listItemIcon } />
                         </View>
                         <View style = { listItemStyles.textWrapper }>
                             <Text numberOfLines = {1} style = { listItemStyles.mainTitleText }>{ props.item.getName() }</Text>
@@ -113,6 +112,7 @@ export default class ListItemComponent extends Component {
     }
 }   
 
+//TODO: add comments for all this stuff
 ListItemComponent.propTypes = {
     item: PropTypes.object,
     onLongPress: PropTypes.func,
@@ -121,7 +121,12 @@ ListItemComponent.propTypes = {
     isItemActionsSelected: PropTypes.bool,
     selectItemId: PropTypes.func,
     onPress: PropTypes.func,
-    progress: PropTypes.number
+    progress: PropTypes.number,
+    listItemIcon: PropTypes.number, //wtf?
+    isFileLoading: PropTypes.bool,
+    isSelected: PropTypes.bool,
+    disableSelectionMode: PropTypes.func,
+    onSingleItemSelected: PropTypes.func
 };
 
 const listItemStyles = StyleSheet.create({

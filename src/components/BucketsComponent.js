@@ -34,6 +34,7 @@ export default class BucketsComponent extends Component {
                     deselectItem = { this.props.deselectBucket }
                     selectItem = { this.props.selectBucket }
                     data = { this.props.buckets }
+                    listItemIcon = { require('../images/Icons/BucketItemFolder.png') }
                     bucketsCount = { this.props.buckets.length } />
 
                 <BucketsScreenHeaderComponent

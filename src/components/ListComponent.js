@@ -52,7 +52,7 @@ export default class ListComponent extends Component {
     onRefresh() {
         this.setState({refreshing: true});
         
-        //TODO: call getBuckets function
+        //TODO: call getData function
 
         this.setState({refreshing: false});
     }
@@ -70,7 +70,7 @@ export default class ListComponent extends Component {
             this.props.selectItem(selectedItem);
     }
 
-    sortByDate(buckets, sortingObject) {
+    sortByDate(items, sortingObject) {
         let monthNames = [
             "January", "February", "March",
             "April", "May", "June", "July",
@@ -78,7 +78,7 @@ export default class ListComponent extends Component {
             "November", "December"
           ];
 
-        buckets.forEach((item) => {
+          items.forEach((item) => {
             var date = new Date(item.getDate());
             
             var day = date.getDate();
@@ -95,9 +95,9 @@ export default class ListComponent extends Component {
         });
     }
 
-    sortByName(buckets, sortingObject) {        
+    sortByName(items, sortingObject) {        
         let rows = [];
-        rows = [...new Set(buckets.map((item) => {
+        rows = [...new Set(items.map((item) => {
             let firstChar = item.getName().charAt(0);
             if(rows.exists(firstChar.toUpperCase()))
                 return ;
@@ -105,7 +105,7 @@ export default class ListComponent extends Component {
 
         console.log(rows);        
 
-        buckets.forEach((item) => {
+        items.forEach((item) => {
             var firstLetter = item.getName()[0];
 
             var prop = item.getName().charAt(0);            
@@ -118,7 +118,7 @@ export default class ListComponent extends Component {
         });
     }
 
-    sort(buckets) {
+    sort(items) {
         let sortingObject = {};
         let sortingCallback;
 
@@ -129,12 +129,12 @@ export default class ListComponent extends Component {
                 break;
         }
         
-        sortingCallback(buckets, sortingObject);
+        sortingCallback(items, sortingObject);
         
         return sortingObject;
     }
 
-    getBucketsList() {
+    getItemsList() {
         let sorting = this.sort(this.props.data);
 
         return Object.getOwnPropertyNames(sorting).reverse().map((propName, index) => {
@@ -159,6 +159,7 @@ export default class ListComponent extends Component {
                                             disableSelectionMode = { this.props.disableSelectionMode }
                                             onPress = { () => { this.selectItem(item); } }
                                             progress = { 0 }
+                                            listItemIcon = { this.props.listItemIcon }
                                             onSingleItemSelected = { this.props.onSingleItemSelected } />
                                     );
                                 });
@@ -198,7 +199,7 @@ export default class ListComponent extends Component {
 
                             <View style = { styles.contentWrapper }>
                                 {
-                                    this.getBucketsList()
+                                    this.getItemsList()
                                 }
                             </View>
                 </Animated.ScrollView>
@@ -213,6 +214,7 @@ ListComponent.propTypes = {
     /* onSingleItemSelected: PropTypes.function, */
     /* selectItem: PropTypes.function,
     deselectItem: PropTypes.function, */
+    listItemIcon: PropTypes.number, //wtf?
     mainTitlePath: PropTypes.string,
     sortOptions: PropTypes.string,
     idPath: PropTypes.string
