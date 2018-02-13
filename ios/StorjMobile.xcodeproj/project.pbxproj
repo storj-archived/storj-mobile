@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -20,6 +21,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		1435D6A1901847E898646868 /* libRCTBarcode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04954185B8E34BC3A4B12469 /* libRCTBarcode.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		152E3468DD6345C5A53FE66B /* OpenSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58A73DA89F68471DA7E3CDB0 /* OpenSans-SemiBoldItalic.ttf */; };
 		1663BFBB36C546D488F0D477 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC74FFF11A4D422EA4F02E08 /* Montserrat-Bold.ttf */; };
@@ -38,6 +40,7 @@
 		884D802C003D4D1F898F7B61 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7DCA3D082A87430DA5999249 /* Montserrat-SemiBold.ttf */; };
 		9AD24F9EDE0A4B60ADB16720 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FED5CF1007864C3FB8C7BA2E /* OpenSans-Regular.ttf */; };
 		A2C622A8D5CE48C68F6BACD3 /* Montserrat-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F76C6AA2A02B4583A7084288 /* Montserrat-ExtraBoldItalic.ttf */; };
+		AA965E90A4504713B494707A /* libRNPhotoView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B58D099AFEE40A99DE3139F /* libRNPhotoView.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		AE12725088A24B0CB243685D /* Montserrat-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BCBDADEFA5A4F58946F1771 /* Montserrat-MediumItalic.ttf */; };
 		B083ABF91BED48869F445CBF /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AC03BB0C09B846B9ACB1EEC4 /* OpenSans-Italic.ttf */; };
@@ -49,14 +52,11 @@
 		C2719E17360C41F0870EA216 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D57884CA17224EC589F7D3FA /* OpenSans-Light.ttf */; };
 		D68D4C0D19FC44AFA409AB73 /* Montserrat-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEF7D3FD619949DEBB4F5660 /* Montserrat-SemiBoldItalic.ttf */; };
 		DCACD444201FDF630050921B /* StorjLibIos.m in Sources */ = {isa = PBXBuildFile; fileRef = DCACD443201FDF630050921B /* StorjLibIos.m */; };
-		DCACD454201FE4180050921B /* SwiftyStorj.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCACD44F201FE3FB0050921B /* SwiftyStorj.framework */; };
-		DCACD455201FE4180050921B /* SwiftyStorj.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DCACD44F201FE3FB0050921B /* SwiftyStorj.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DCCD2FD520459F610032D3F5 /* FilePickerLib.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCD2FD420459F600032D3F5 /* FilePickerLib.m */; };
 		DDD138767961421DB8C87363 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A51459F91D3420BBC6E2C58 /* Montserrat-ExtraLight.ttf */; };
 		E1B69957B9F74BD08F47F764 /* Montserrat-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA3A41C878E0424E92862DE9 /* Montserrat-ExtraLightItalic.ttf */; };
 		E6A2862F2CF54CA4A398C3EB /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6614E0B481304028A1D06F8A /* Montserrat-Black.ttf */; };
 		E897D74594BA49939DB05574 /* Montserrat-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C778753B10440D3B23670E2 /* Montserrat-LightItalic.ttf */; };
-		1435D6A1901847E898646868 /* libRCTBarcode.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04954185B8E34BC3A4B12469 /* libRCTBarcode.a */; };
-		AA965E90A4504713B494707A /* libRNPhotoView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B58D099AFEE40A99DE3139F /* libRNPhotoView.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -249,33 +249,40 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
-		DCACD44E201FE3FB0050921B /* PBXContainerItemProxy */ = {
+		DC2841BC20496AEA0093183F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = DCACD448201FE3FA0050921B /* SwiftyStorj.xcodeproj */;
+			containerPortal = FD483430D07D4D6395ABDE9B /* RCTBarCode.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9FCCD7581DAC8DA800025BFD;
+			remoteInfo = RCTBarcode;
+		};
+		DC2841DF20496AEA0093183F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 935DE84E1F0E3DCA00B01D6D;
-			remoteInfo = SwiftyStorj;
+			remoteInfo = StorjIOS;
 		};
-		DCACD450201FE3FB0050921B /* PBXContainerItemProxy */ = {
+		DC2841E420496AEA0093183F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = DCACD448201FE3FA0050921B /* SwiftyStorj.xcodeproj */;
+			containerPortal = C04E439E0DB043ECBF958C35 /* RNPhotoView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNPhotoView;
+		};
+		DC68D1972044264100D8D05D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 935DE8571F0E3DCA00B01D6D;
-			remoteInfo = SwiftyStorjTests;
+			remoteInfo = StorjIOSTests;
 		};
-		DCACD452201FE3FB0050921B /* PBXContainerItemProxy */ = {
+		DC68D1AD2044437B00D8D05D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = DCACD448201FE3FA0050921B /* SwiftyStorj.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 93C95F261F190AFA00F6144A;
-			remoteInfo = StorjTestApp;
-		};
-		DCACD456201FE4180050921B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DCACD448201FE3FA0050921B /* SwiftyStorj.xcodeproj */;
+			containerPortal = DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 935DE84D1F0E3DCA00B01D6D;
-			remoteInfo = SwiftyStorj;
+			remoteInfo = StorjIOS;
 		};
 		DCF000852012169A00383770 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -349,7 +356,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				DCACD455201FE4180050921B /* SwiftyStorj.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,6 +372,7 @@
 		00E356EE1AD99517003FC87E /* StorjMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StorjMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* StorjMobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StorjMobileTests.m; sourceTree = "<group>"; };
+		04954185B8E34BC3A4B12469 /* libRCTBarcode.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTBarcode.a; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* StorjMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StorjMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -385,6 +392,7 @@
 		671C0663E00A43BABB58D4A8 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../src/fonts/Montserrat/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		6A3CA3953CEA4465BD334722 /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraBold.ttf"; path = "../src/fonts/Montserrat/Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		7B58D099AFEE40A99DE3139F /* libRNPhotoView.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNPhotoView.a; sourceTree = "<group>"; };
 		7DCA3D082A87430DA5999249 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBold.ttf"; path = "../src/fonts/Montserrat/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8A51459F91D3420BBC6E2C58 /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraLight.ttf"; path = "../src/fonts/Montserrat/Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
@@ -400,21 +408,21 @@
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		BA3A41C878E0424E92862DE9 /* Montserrat-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraLightItalic.ttf"; path = "../src/fonts/Montserrat/Montserrat-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		BAF764F240EF436C9FDBC9F8 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBoldItalic.ttf"; path = "../src/fonts/OpenSans/OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		C04E439E0DB043ECBF958C35 /* RNPhotoView.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNPhotoView.xcodeproj; path = "../node_modules/react-native-photo-view/ios/RNPhotoView.xcodeproj"; sourceTree = "<group>"; };
 		CC74FFF11A4D422EA4F02E08 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../src/fonts/Montserrat/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		D57884CA17224EC589F7D3FA /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../src/fonts/OpenSans/OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StorjIOS.xcodeproj; path = "../../iOS-libstorj/StorjIOS/StorjIOS.xcodeproj"; sourceTree = "<group>"; };
 		DCACD442201FDF630050921B /* StorjLibIos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StorjLibIos.h; path = StorjMobile/StorjLibIos.h; sourceTree = "<group>"; };
 		DCACD443201FDF630050921B /* StorjLibIos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StorjLibIos.m; path = StorjMobile/StorjLibIos.m; sourceTree = "<group>"; };
-		DCACD448201FE3FA0050921B /* SwiftyStorj.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyStorj.xcodeproj; path = ../../SwiftyStorj/SwiftyStorj/SwiftyStorj.xcodeproj; sourceTree = "<group>"; };
+		DCCD2FD320459F600032D3F5 /* FilePickerLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilePickerLib.h; sourceTree = "<group>"; };
+		DCCD2FD420459F600032D3F5 /* FilePickerLib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilePickerLib.m; sourceTree = "<group>"; };
 		DEF7D3FD619949DEBB4F5660 /* Montserrat-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBoldItalic.ttf"; path = "../src/fonts/Montserrat/Montserrat-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		E8B379A61F534A10BAAA4E4B /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-LightItalic.ttf"; path = "../src/fonts/OpenSans/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
 		EDC564F35292492DA53A5EBD /* Montserrat-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-BoldItalic.ttf"; path = "../src/fonts/Montserrat/Montserrat-BoldItalic.ttf"; sourceTree = "<group>"; };
 		F04347ECBAEC4A348F8B4E29 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Bold.ttf"; path = "../src/fonts/OpenSans/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		F76C6AA2A02B4583A7084288 /* Montserrat-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraBoldItalic.ttf"; path = "../src/fonts/Montserrat/Montserrat-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		FD483430D07D4D6395ABDE9B /* RCTBarCode.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTBarCode.xcodeproj; path = "../node_modules/react-native-smart-barcode/ios/RCTBarcode/RCTBarCode.xcodeproj"; sourceTree = "<group>"; };
 		FED5CF1007864C3FB8C7BA2E /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../src/fonts/OpenSans/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
-		FD483430D07D4D6395ABDE9B /* RCTBarCode.xcodeproj */ = {isa = PBXFileReference; name = "RCTBarCode.xcodeproj"; path = "../node_modules/react-native-smart-barcode/ios/RCTBarcode/RCTBarCode.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		04954185B8E34BC3A4B12469 /* libRCTBarcode.a */ = {isa = PBXFileReference; name = "libRCTBarcode.a"; path = "libRCTBarcode.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		C04E439E0DB043ECBF958C35 /* RNPhotoView.xcodeproj */ = {isa = PBXFileReference; name = "RNPhotoView.xcodeproj"; path = "../node_modules/react-native-photo-view/ios/RNPhotoView.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		7B58D099AFEE40A99DE3139F /* libRNPhotoView.a */ = {isa = PBXFileReference; name = "libRNPhotoView.a"; path = "libRNPhotoView.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -439,7 +447,6 @@
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
-				DCACD454201FE4180050921B /* SwiftyStorj.framework in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
@@ -534,9 +541,11 @@
 		13B07FAE1A68108700A75B9A /* StorjMobile */ = {
 			isa = PBXGroup;
 			children = (
-				DCACD448201FE3FA0050921B /* SwiftyStorj.xcodeproj */,
+				DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */,
 				DCACD442201FDF630050921B /* StorjLibIos.h */,
 				DCACD443201FDF630050921B /* StorjLibIos.m */,
+				DCCD2FD320459F600032D3F5 /* FilePickerLib.h */,
+				DCCD2FD420459F600032D3F5 /* FilePickerLib.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -625,6 +634,8 @@
 				00E356EF1AD99517003FC87E /* StorjMobileTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				B38072926BD74408A9BE629A /* Resources */,
+				DC1605DA2035321800CBBE71 /* Recovered References */,
+				DC68D199204427AD00D8D05D /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -684,14 +695,45 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		DCACD449201FE3FA0050921B /* Products */ = {
+		DC1605DA2035321800CBBE71 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				DCACD44F201FE3FB0050921B /* SwiftyStorj.framework */,
-				DCACD451201FE3FB0050921B /* SwiftyStorjTests.xctest */,
-				DCACD453201FE3FB0050921B /* StorjTestApp.app */,
+				04954185B8E34BC3A4B12469 /* libRCTBarcode.a */,
+				7B58D099AFEE40A99DE3139F /* libRNPhotoView.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		DC1605FF2035321A00CBBE71 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC2841BD20496AEA0093183F /* libRCTBarcode.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		DC2841E120496AEA0093183F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC2841E520496AEA0093183F /* libRNPhotoView.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DC68D1912044264000D8D05D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC2841E020496AEA0093183F /* StorjIOS.framework */,
+				DC68D1982044264100D8D05D /* StorjIOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DC68D199204427AD00D8D05D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -728,7 +770,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				DCACD457201FE4180050921B /* PBXTargetDependency */,
+				DC68D1AE2044437B00D8D05D /* PBXTargetDependency */,
 			);
 			name = StorjMobile;
 			productName = "Hello World";
@@ -775,6 +817,10 @@
 					ProjectRef = 5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */;
 				},
 				{
+					ProductGroup = DC1605FF2035321A00CBBE71 /* Products */;
+					ProjectRef = FD483430D07D4D6395ABDE9B /* RCTBarCode.xcodeproj */;
+				},
+				{
 					ProductGroup = ADBDB9201DFEBF0600ED6528 /* Products */;
 					ProjectRef = ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */;
 				},
@@ -815,8 +861,12 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
-					ProductGroup = DCACD449201FE3FA0050921B /* Products */;
-					ProjectRef = DCACD448201FE3FA0050921B /* SwiftyStorj.xcodeproj */;
+					ProductGroup = DC2841E120496AEA0093183F /* Products */;
+					ProjectRef = C04E439E0DB043ECBF958C35 /* RNPhotoView.xcodeproj */;
+				},
+				{
+					ProductGroup = DC68D1912044264000D8D05D /* Products */;
+					ProjectRef = DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1010,25 +1060,32 @@
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		DCACD44F201FE3FB0050921B /* SwiftyStorj.framework */ = {
+		DC2841BD20496AEA0093183F /* libRCTBarcode.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTBarcode.a;
+			remoteRef = DC2841BC20496AEA0093183F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DC2841E020496AEA0093183F /* StorjIOS.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = SwiftyStorj.framework;
-			remoteRef = DCACD44E201FE3FB0050921B /* PBXContainerItemProxy */;
+			path = StorjIOS.framework;
+			remoteRef = DC2841DF20496AEA0093183F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		DCACD451201FE3FB0050921B /* SwiftyStorjTests.xctest */ = {
+		DC2841E520496AEA0093183F /* libRNPhotoView.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNPhotoView.a;
+			remoteRef = DC2841E420496AEA0093183F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DC68D1982044264100D8D05D /* StorjIOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = SwiftyStorjTests.xctest;
-			remoteRef = DCACD450201FE3FB0050921B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DCACD453201FE3FB0050921B /* StorjTestApp.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = StorjTestApp.app;
-			remoteRef = DCACD452201FE3FB0050921B /* PBXContainerItemProxy */;
+			path = StorjIOSTests.xctest;
+			remoteRef = DC68D1972044264100D8D05D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		DCF000862012169A00383770 /* libRCTBlob-tvOS.a */ = {
@@ -1176,6 +1233,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				DCACD444201FDF630050921B /* StorjLibIos.m in Sources */,
+				DCCD2FD520459F610032D3F5 /* FilePickerLib.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1187,10 +1245,10 @@
 			target = 13B07F861A680F5B00A75B9A /* StorjMobile */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
-		DCACD457201FE4180050921B /* PBXTargetDependency */ = {
+		DC68D1AE2044437B00D8D05D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = SwiftyStorj;
-			targetProxy = DCACD456201FE4180050921B /* PBXContainerItemProxy */;
+			name = StorjIOS;
+			targetProxy = DC68D1AD2044437B00D8D05D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1216,25 +1274,23 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)..\node_modules\neact-native-smart-barcodeiosRCTBarcodeRCTBarcode",
+				);
 				INFOPLIST_FILE = StorjMobileTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StorjMobile.app/StorjMobile";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)\..\node_modules\react-native-smart-barcode\ios\RCTBarcode\RCTBarcode",
-					"$(SRCROOT)\..\node_modules\react-native-photo-view\ios/**",
-				);
 			};
 			name = Debug;
 		};
@@ -1244,37 +1300,42 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = 5YZ2ANFT4Z;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)..\node_modules\neact-native-smart-barcodeiosRCTBarcodeRCTBarcode",
+				);
 				INFOPLIST_FILE = StorjMobileTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StorjMobile.app/StorjMobile";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)\..\node_modules\react-native-smart-barcode\ios\RCTBarcode\RCTBarcode",
-					"$(SRCROOT)\..\node_modules\react-native-photo-view\ios/**",
-				);
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 5YZ2ANFT4Z;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)..\node_modules\neact-native-smart-barcodeiosRCTBarcodeRCTBarcode",
+					"$(SRCROOT)..\node_modules\neact-native-photo-viewios/**",
+				);
 				INFOPLIST_FILE = StorjMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1283,23 +1344,26 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = StorjMobile;
+				VALID_ARCHS = "x86_64 i386 armv7 arm64 armv7s";
 				VERSIONING_SYSTEM = "apple-generic";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)\..\node_modules\react-native-smart-barcode\ios\RCTBarcode\RCTBarcode",
-					"$(SRCROOT)\..\node_modules\react-native-photo-view\ios/**",
-				);
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5YZ2ANFT4Z;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)..\node_modules\neact-native-smart-barcodeiosRCTBarcodeRCTBarcode",
+					"$(SRCROOT)..\node_modules\neact-native-photo-viewios/**",
+				);
 				INFOPLIST_FILE = StorjMobile/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1308,12 +1372,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = StorjMobile;
+				VALID_ARCHS = "x86_64 i386 armv7 arm64 armv7s";
 				VERSIONING_SYSTEM = "apple-generic";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)\..\node_modules\react-native-smart-barcode\ios\RCTBarcode\RCTBarcode",
-					"$(SRCROOT)\..\node_modules\react-native-photo-view\ios/**",
-				);
 			};
 			name = Release;
 		};
