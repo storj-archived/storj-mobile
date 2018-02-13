@@ -76,7 +76,7 @@ export default class ListComponent extends Component {
             "April", "May", "June", "July",
             "August", "September", "October",
             "November", "December"
-          ];
+        ];
 
           items.forEach((item) => {
             var date = new Date(item.getDate());
@@ -151,15 +151,17 @@ export default class ListComponent extends Component {
                                             item = { item } 
                                             isFileLoading = { false }
                                             selectItemId = { (itemId) => { this.setState({ selectedItemId: itemId }) }}
+                                            navigateToFilesScreen = { this.props.navigateToFilesScreen ? this.props.navigateToFilesScreen : () => {} }
                                             isItemActionsSelected = { this.state.selectedItemId === item.getId() }
                                             onLongPress = { () => { this.onItemLongPress(item); } }
                                             isSelectionModeEnabled = { this.props.isSelectionMode }
                                             isSelected = { item.isSelected }
                                             isSingleItemSelected = { this.props.isSingleItemSelected }
                                             disableSelectionMode = { this.props.disableSelectionMode }
-                                            onPress = { () => { this.selectItem(item); } }
                                             progress = { 0 }
                                             listItemIcon = { this.props.listItemIcon }
+                                            onSelectionPress = { () => { this.selectItem(item); } }
+                                            onPress = { this.props.onPress }
                                             onSingleItemSelected = { this.props.onSingleItemSelected } />
                                     );
                                 });
@@ -222,9 +224,9 @@ ListComponent.propTypes = {
 
 const styles = StyleSheet.create({
     listContainer: {
-        backgroundColor: 'white',
+        backgroundColor: 'white'
     },
     contentWrapper: {
-        paddingVertical: getHeight(80)
+        paddingVertical: getHeight(70)
     }
 });

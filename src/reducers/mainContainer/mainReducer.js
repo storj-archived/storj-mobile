@@ -1,5 +1,6 @@
 import { MAIN_ACTIONS } from '../../utils/constants/actionConstants';
 import ListItemModel from '../../models/ListItemModel';
+import FileModel from '../../models/FileModel';
 
 const { 
     SELECT_BUCKET, 
@@ -17,18 +18,26 @@ const {
     SET_FIRST_SIGN_IN,
     REMOVE_FIRST_SIGN_IN,
     SET_LOADING,
-    UNSET_LOADING
+    UNSET_LOADING,
+    OPEN_BUCKET,
+    CLOSE_BUCKET,
+    LIST_FILES,
+    UPLOAD_FILE,
+    UPLOAD_FILE_START,
+    UPLOAD_FILE_COMPLETE
  } = MAIN_ACTIONS;
                                                         
 const initialState = { 
     isCreateBucketInputShown: false,
     isActionBarShown: false,
-    buckets: [], 
+    buckets: [],
+    files: [],
     selectedBuckets: [], //TODO: delete, depreciated
     isSelectionMode: false,
     isSingleItemSelected: false,
     isFirstSignIn: false,
-    isLoading: false
+    isLoading: false,
+    openedBucketId: null
 };
 
 export default function mainReducer(state = initialState, action) {
@@ -91,10 +100,110 @@ export default function mainReducer(state = initialState, action) {
         case UNSET_LOADING:
             newState.isLoading = false;
             return newState;
+        case OPEN_BUCKET: 
+            newState.openedBucketId = action.payload.bucketId;
+            return newState;
+        case CLOSE_BUCKET:
+            newState.openedBucketId = null;
+            return newState;
         default:
             return state || initialState;
     }
 };
+
+function listFiles(array, newItem) {
+    let doesContain = false;
+    let newArray = array.slice();
+
+    for(let i = 0; i < newArray.length; i++) {
+        if(newArray[i].bucketId === newItem.bucketId) {
+            newArray[i] = newItem;
+            doesContain = true;
+        }
+    }
+
+    if(!doesContain) {
+        newArray.push(newItem);
+    }
+
+    return newArray;
+}
+
+function uploadFile(array, bucketId, file) {
+    let newArray = array.slice();
+    let isListHandler = false;
+
+    for(let i = 0; i < newArray.length; i++) {
+        if(newArray[i].bucketId === bucketId) {
+            let doesContain = false;
+            isListHandler = true;
+
+            newArray[i].files.forEach(element => {
+                if(element.Id === file.fileId)
+                    doesContain = true;
+            });
+
+            if(!doesContain) {
+                console.log(file);
+                newArray[i].files.push(new ListItemModel(new FileModel(file)));
+            }
+        }
+    }
+
+    if(!isListHandler) {
+        newArray.push({ bucketId, files: [ new ListItemModel(new FileModel(file)) ] });
+    }
+
+    console.log("newArray", newArray);
+
+    return newArray;
+}
+
+function addUploadingFile(array, filePath, bucketId) {
+    let newArray = array.slice();
+
+    for(let i = 0; i < newArray.length; i++) {
+        if(newArray[i].bucketId === bucketId) {
+            newArray[i].files.push(new ListItemModel(new FileModel({ name: filePath, id: null, created: null })));
+        }
+    }
+
+    return newArray;
+}
+
+function completeFileUploading(array, uploadResponse, bucketId) {
+    let newArray = array.slice();
+
+    let actionSuccess = (entry, filePath, newFile) => {
+        if(entry.Name === filePath) {
+            return new ListItemModel(new FileModel(newFile)); 
+        }
+
+        return entry;
+    };
+
+    let actionFailure = (entry, filePath) => {
+        if(entry.Name === filePath) {
+            return null;
+        }
+
+        return entry;
+    };
+
+    let action = uploadResponse.isSuccess ? actionSuccess : actionFailure;
+
+    for(let i = 0; i < newArray.length; i++) {
+        if(newArray[i].bucketId === bucketId) {
+            for(let y = 0; y < newArray[i].files.length; y++) {
+                newArray[i].files[y] = action(newArray[i].files[y], uploadResponse.result.filePath, uploadResponse.result.file);
+            }
+        }
+    }
+
+
+
+    return newArray;
+}
 
 /**
  * Helper class for working with items

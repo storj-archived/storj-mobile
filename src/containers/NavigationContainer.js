@@ -34,7 +34,7 @@ class Apps extends Component {
 
 	onHardwareBackPress() {
 		if (this.props.nav.index === 0) {
-			return false;
+			return true;
 		}
 
 		this.props.dispatch(NavigationActions.back());

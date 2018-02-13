@@ -17,6 +17,8 @@ import PropTypes from 'prop-types';
 export default class ListItemComponent extends Component {
     constructor(props) {
         super(props);
+        this.bucket = null;
+        //console.log(props);
     }
 
     shouldComponentUpdate(nextProps) {
@@ -48,7 +50,9 @@ export default class ListItemComponent extends Component {
                     if(props.isSingleItemSelected) {
                         this.deselectAllItems()
                     } else if(props.isSelectionModeEnabled) {
-                        props.onPress(props.item); 
+                        props.onSelectionPress(props.item); 
+                    } else {
+                        this.props.onPress({ bucketId: this.props.item.getId() });
                     }
                 }}
                 onLongPress = { () => { 
@@ -100,7 +104,7 @@ export default class ListItemComponent extends Component {
                                         } else {
                                             props.onSingleItemSelected();
                                             props.selectItemId(props.item.getId());
-                                            props.onPress(props.item);
+                                            //props.onPress(props.item);
                                         }
                                     }}>
                                     <Image style = { listItemStyles.listItemActionsIcon } source = { require('../images/Icons/listItemActions.png') } />

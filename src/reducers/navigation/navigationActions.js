@@ -35,3 +35,11 @@ export function redirectToMnemonicGenerationScreen() {
         ]
     });
 };
+
+export function navigateToFilesScreen(bucketId) {
+    return NavigationActions.navigate({ routeName: 'FilesScreen', params: { bucketId } });
+}
+
+export function navigateBack() {
+    return NavigationActions.back();
+}

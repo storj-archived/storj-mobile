@@ -3,6 +3,7 @@ import {
     Platform
 } from 'react-native'
 import BucketModel from '../models/BucketModel';
+import FileModel from '../models//FileModel';
 import keysModel from '../models/keysModel';
 
 const StorjLib = (() => {
@@ -135,6 +136,50 @@ const StorjLib = (() => {
             }
 
             return result;
+        };
+
+        /**
+         * download file to storj network
+         * @returns {Promise<any>}
+         */
+        async downloadFile(bucketId, fileId, localPath) {
+            let downloadFileResult = await storjLib.downloadFile(bucketId, fileId, localPath);
+
+            return downloadFileResult;
+        }
+
+        /**
+         * download file to storj network
+         * @returns {Promise<any>}
+         */
+         async uploadFile(bucketId, localPath) {
+            let uploadFileResult = await storjLib.uploadFile(bucketId, localPath);
+
+            if(uploadFileResult.isSuccess) {
+                uploadFileResult.result = new FileModel(uploadFileResult.result);
+            }
+
+            return uploadFileResult;
+        };
+
+        /**
+         * List buckets for logged in user
+         * @returns {Promise<BucketModel[]>}
+         */
+        async listFiles(bucketId) {
+            let listFilesResult = await storjLib.listFiles(bucketId);
+
+            if(listFilesResult.isSuccess) {
+                listFilesResult.result = listFilesResult.result.map(file => {
+                    file = new FileModel(file);
+
+                    return file;
+                });
+            } else {
+                listFilesResult.result = [];
+            }
+
+            return listFilesResult;
         };
     
         static getBucket() {

@@ -16,7 +16,13 @@ const {
     SET_FIRST_SIGN_IN,
     REMOVE_FIRST_SIGN_IN,
     SET_LOADING,
-    UNSET_LOADING
+    UNSET_LOADING,
+    OPEN_BUCKET,
+    CLOSE_BUCKET,
+    LIST_FILES,
+    UPLOAD_FILE,
+    UPLOAD_FILE_START,
+    UPLOAD_FILE_COMPLETE
 } = MAIN_ACTIONS;
 
 function onSingleItemSelected() {
@@ -82,6 +88,30 @@ function unsetLoading() {
     return { type: UNSET_LOADING };
 }
 
+function openBucket(bucketId) {
+    return { type: OPEN_BUCKET, payload: { bucketId } };
+}
+
+function closeBucket() {
+    return { type: CLOSE_BUCKET };
+}
+
+function listFiles(filesHandler) {
+    return { type: LIST_FILES, payload: { filesHandler } };
+}
+
+function uploadFile(file) {
+    return { type: UPLOAD_FILE, payload: { file } }
+}
+
+function uploadFileStart(bucketId, filePath) {
+    return { type: UPLOAD_FILE_START, payload: { bucketId, filePath } }
+}
+
+function completeFileUploading(uploadResponse) {
+    return { type: UPLOAD_FILE_COMPLETE, payload: { uploadResponse } };
+}
+
 //action creators for main container
 export const mainContainerActions = {
     getBuckets,
@@ -93,7 +123,9 @@ export const mainContainerActions = {
     showCreateBucketInput,
     hideCreateBucketInput,
     setFirstSignIn,
-    removeFirstSignIn
+    removeFirstSignIn,
+    setLoading,
+    unsetLoading
 };
 
 //action creators for main screen navigation container
@@ -119,4 +151,20 @@ export const bucketsContainerActions = {
 export const initializeContainerActions = {
     getBuckets, 
     setFirstSignIn
-}
+};
+
+export const bucketsListContainerAction = {
+    onSingleItemSelected,
+    enableSelectionMode,
+    disableSelectionMode,
+    selectBucket,
+    deselectBucket,
+    openBucket
+};
+
+export const filesListContainerMainActions = {
+    closeBucket,
+    setLoading,
+    unsetLoading
+};
+
