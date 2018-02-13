@@ -12,7 +12,7 @@ import infoScreensConstants from '../utils/constants/infoScreensConstants';
 const FIRST_ACTION = 'FIRST_ACTION';
 
 /**
- * Redux container for QRCodeScannerComponent
+ * Container for QRCodeScannerComponent
  */
 class QRScannerContainer extends Component {
 
@@ -23,21 +23,12 @@ class QRScannerContainer extends Component {
             viewAppear: true
         };
 
+        this.releaseTimer = null;
         this.stateModel = new LoginStateModel();
     }
 
-    componentDidMount() {
-        let viewAppearCallBack = (event) => {
-            this.setTimeout( () => {
-                this.setState({
-                    viewAppear: true
-                })
-            }, 255);
-        };
-    }
-
     /**
-     * Handle if was allready in use
+     * Handle if was already in use
      */
     handleFirstLaunch = async () => {
         if(!await AsyncStorage.getItem(FIRST_ACTION)) {
@@ -46,11 +37,10 @@ class QRScannerContainer extends Component {
     };
 
     /**
-     * try validate login as email and invokes actionCreators  
+     * try validate credentials and invokes actionCreators  
      * to change userInfo in store
      */
 	tryLogin = async () => {
-
         let isEmailValid = validator.isEmail(this.stateModel.email);
         let isPasswordValid = this.stateModel.password ? true : false;
         let isMnemonicValid = await StorjLib.checkMnemonic(this.stateModel.mnemonic);
@@ -63,7 +53,7 @@ class QRScannerContainer extends Component {
     };
 
     /**
-     * validating data on server and try login into storj
+     * validating data on server and try login into Storj
      */
     login = async () => {
         this.props.login(
@@ -95,7 +85,7 @@ class QRScannerContainer extends Component {
         if(areKeysImported) {
             await this.handleFirstLaunch();
             this.props.loginSuccess();
-            this.props.redirectToMainScreen();
+            this.props.redirectToMainScreen();// to initialize
         } else {
             this.props.loginError();
             this.props.redirectToAuthFailureScreen({ 
@@ -110,34 +100,36 @@ class QRScannerContainer extends Component {
      */
     _onBarCodeRead = (e) => {
         this._stopScan();
+        
         try {
             const result = JSON.parse(e.nativeEvent.data.code);
             if(result.email && result.password && result.mnemonic) {
+                this._barComponent.setBorderColor('#27AE60');
+
                 this.stateModel.email = result.email;
                 this.stateModel.password = result.password;
                 this.stateModel.mnemonic = result.mnemonic;
-
-                this._barComponent.changeToSuccessBorderColor();
+                
                 this.tryLogin();
             } 
             else { 
-                this._barComponent.changeToErrorBorderColor();
-                this._startScan();
+                this._barComponent.setBorderColor('#EB5757');
+                this.releaseTimer = setTimeout(() => {this._startScan();}, 2500); 
             }
         }
         catch(error) {
-            this._barComponent.changeToErrorBorderColor();
             console.log(error);
-            this._startScan();
+            this._barComponent.setBorderColor('#EB5757');
+            this.releaseTimer = setTimeout(() => {this._startScan();}, 2500);
         }
-        
     }
 
     /**
      * Functions that starting and stopping scanning action in QRScannerComponent
      */
     _startScan = (e) => {
-        // this._barComponent.resetBorderColor();
+        clearTimeout(this.releaseTimer);
+        this._barComponent.setBorderColor('white');
         this._barComponent._barCode.startScan();
     }
     _stopScan = (e) => {
@@ -152,14 +144,13 @@ class QRScannerContainer extends Component {
     }
 
     render() {
-        
         return (
             <QRScannerComponent
                 ref = { component => this._barComponent = component }
                 viewAppear = { this.state.viewAppear }
                 navigateBack = { this.navigateBack }
                 onBarCodeRead = { this._onBarCodeRead }
-            />
+                isLoading = { this.state.isLoading } />
         )
     }  
 }

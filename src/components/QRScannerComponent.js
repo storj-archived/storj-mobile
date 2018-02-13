@@ -2,6 +2,7 @@ import {
     View,
     StyleSheet,
     TouchableOpacity,
+    ActivityIndicator,
     Image
 } from 'react-native';
 import React, { Component } from 'react';
@@ -16,6 +17,7 @@ export default class QRScannerComponent extends Component {
 
 	constructor(props) {
         super(props);
+
         this.state = {
             borderColor: 'white'
         }
@@ -23,66 +25,27 @@ export default class QRScannerComponent extends Component {
         this.navigateBack = this.props.navigateBack ? this.props.navigateBack : () => {};
         this.onBarCodeRead = this.props.onBarCodeRead ? this.props.onBarCodeRead : () => {};
     };
-    
-    chooseLayout = () => {
-        switch(this.props.layout) {
-            case 'scanning': {
-                return(
-                    <View style = { [ styles.backgoundWrapper, { justifyContent: 'center', alignItems: 'center', flexDirection: 'column' } ] }>
-                        <View style = { { marginTop: getHeight(30) } }>
-                            <Image source = { require('../images/Icons/BackButton.png') }/>
-                        </View>
-                        <View style = { { marginTop: getHeight(139) } }>
-                            <Image source = { require('../images/QRScannerScreen/DefaultBorder.png') }/>
-                        </View>
-                    </View>
-                )
-            }
-            break;
-            case 'error': {
-                return(
-                    <View style = { [ styles.backgoundWrapper, { justifyContent: 'center', alignItems: 'center', flexDirection: 'column' } ] }>
-                        <View style = { { marginTop: getHeight(30) } }>
-                            <Image source = { require('../images/Icons/BackButton.png') }/>
-                        </View>
-                        <View style = { { marginTop: getHeight(139) } }>
-                            <Image source = { require('../images/QRScannerScreen/ErrorBorder.png') }/>
-                        </View>
-                        <View style = { { marginTop: getHeight(114) } }>
-                            <Image source = { require('../images/QRScannerScreen/ErrorMessage.png') }/>
-                        </View>
-                    </View>
-                )
-            }
-            break;
-            case 'success': {
-                return(
-                    <View style = { [ styles.backgoundWrapper, { justifyContent: 'center', alignItems: 'center', flexDirection: 'column' } ] }>
-                        <View style = { { marginTop: getHeight(30) } }>
-                            <Image source = { require('../images/Icons/BackButton.png') }/>
-                        </View>
-                        <View style = { { marginTop: getHeight(139) } }>
-                            <Image source = { require('../images/QRScannerScreen/SuccessBorder.png') }/>
-                        </View>
-                    </View>
-                )
-            }
-            break;
-            default: null
-            break;
-        }
+
+    /**
+     * Setting border color of qrscanner 
+     * @param {String} color 
+     */
+    setBorderColor(color) {
+        this.setState({ borderColor: color })
     }
 
-    resetBorderColor () {
-        this.setState({ borderColor: 'white' })
-    }
-
-    changeToErrorBorderColor() {
-        this.setState({ borderColor: 'red' })
-    }
-
-    changeToSuccessBorderColor() {
-        this.setState({ borderColor: 'green' })
+    /** 
+     * ErrorMessageView
+    */
+    showErrorMessage() {
+        return(
+            <View style = { styles.errorMessageContainer }> 
+                <Image 
+                    style = { styles.errorMessage }
+                    source = { require('../images/QRScannerScreen/ErrorMessage.png') } 
+                    resizeMode = 'contain' />
+            </View>
+        )
     }
 
 	render() {
@@ -94,10 +57,10 @@ export default class QRScannerComponent extends Component {
                         scannerRectCornerColor = { this.state.borderColor }
                         style = { styles.barCodeContainer } 
                         ref = { component => this._barCode = component }
-                        onBarCodeRead = {this.onBarCodeRead}/> : <Text>Some error</Text>
+                        onBarCodeRead = {this.onBarCodeRead}/> : null
                 }
-                {
-                    <View style = {  styles.backgoundWrapper  }>
+                { 
+                    <View style = {  styles.backgroundWrapper  }>
                         <View style = { styles.buttonPanelContainer }>
                             <TouchableOpacity onPress = { () => this.navigateBack() } >
                                 <Image style = { styles.backButton } source = { require('../images/Icons/BackButton.png') }/>
@@ -111,9 +74,23 @@ export default class QRScannerComponent extends Component {
                                 </TouchableOpacity>
                             </View>
                         </View>
+                        {
+                            this.state.borderColor === '#EB5757' ?
+                                this.showErrorMessage() : null
+                        }
                     </View>
                 }
-			</View>
+                {
+                    this.state.borderColor === '#27AE60' ?
+                        <View style = { [ styles.backgroundWrapper ] }>
+                            <View style = { [ styles.backgroundWrapper, styles.dimBlack ] } />
+                            <View style = { [ styles.backgroundWrapper, styles.setChildCenter ] }>
+                                <ActivityIndicator animating = { true } color = { "#2782ff" } size = { "large" }/>
+                            </View>
+                        </View> : null
+                }
+            </View>
+            
 		);
 	};
 }
@@ -128,7 +105,7 @@ const styles = StyleSheet.create({
         height: getDeviceHeight(), 
         backgroundColor: 'transparent'
     },
-    backgoundWrapper: {
+    backgroundWrapper: {
         top: 0,
         right: 0,
         bottom: 0,
@@ -166,5 +143,13 @@ const styles = StyleSheet.create({
     reverseCameraButton: {
         width: getWidth(30),
         height: getHeight(30)
+    },
+    errorMessageContainer: {
+        marginTop: getHeight(500),
+        alignItems: 'center'
+    },
+    errorMessage: {
+        width: getWidth(275),
+        height: getHeight(50)
     }
 });
