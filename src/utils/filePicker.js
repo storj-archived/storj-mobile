@@ -7,11 +7,10 @@ const FilePicker = (() => {
     let instance = null;
 
     const filePickerLibAndroid = NativeModules.FilePickerAndroid;
-    //TODO: implement file picker for iOS native module
-    // const filePickerLibIos = NativeModules.FilePickerIos;
+    const filePickerLibIos = NativeModules.FilePickerIos;
     const isAndroid = Platform.OS === 'android';
 
-    const filePickerLib = isAndroid ? filePickerLibAndroid : {};
+    const filePickerLib = isAndroid ? filePickerLibAndroid : filePickerLibIos;
 
     class FilePicker {
 
