@@ -168,7 +168,3 @@ export const filesListContainerMainActions = {
     unsetLoading
 };
 
-export const initializeContainerActions = {
-    getBuckets, 
-    setFirstSignIn
-};
