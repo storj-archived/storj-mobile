@@ -52,6 +52,10 @@ class FilesListContainer extends Component {
         this.props.navigateBack();
     }
 
+    onPress(params) {
+        //Download file  
+    }
+
     render() {
         let data = [];
 
@@ -64,7 +68,14 @@ class FilesListContainer extends Component {
         return(
             <FilesListComponent
                 data = { data }
+                onPress = { (params) => { this.onPress(params); } }
                 animatedScrollValue = { this.props.screenProps.animatedScrollValue }
+                enableSelectionMode = { this.props.enableSelectionMode }
+                disableSelectionMode = { this.props.disableSelectionMode }
+                isSelectionMode = { this.props.isSelectionMode }
+                isSingleItemSelected = { this.props.isSingleItemSelected }
+                deselectFile = { this.props.deselectFile }
+                selectFile = { this.props.selectFile }
                 listFiles = { async () => { await this.listFiles(); } } />
         );
     }
@@ -72,6 +83,8 @@ class FilesListContainer extends Component {
 
 function mapStateToProps(state) {
     return {
+        isSelectionMode: state.mainReducer.isSelectionMode,
+        isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         fileListModels: state.filesReducer.fileListModels,
         isLoading: state.mainReducer.isLoading
     };

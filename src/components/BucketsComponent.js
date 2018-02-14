@@ -24,8 +24,10 @@ export default class BucketsComponent extends Component {
                 <BucketsScreenNavigation
                     animatedScrollValue = { this.animatedScrollValue }  />
                 <BucketsScreenHeaderComponent
+                    screenName = { this.props.screenName }
                     isSelectionMode = { this.props.isSelectionMode }
                     disableSelectionMode = { this.props.disableSelectionMode }
+                    selectedFilesCount = {this.props.selectedFilesCount }
                     selectedBucketsCount = { this.props.selectedBucketsCount }
                     animatedScrollValue = { this.animatedScrollValue } />
             </View>

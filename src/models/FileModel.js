@@ -41,5 +41,6 @@ export default class FileModel extends ItemModel {
             this.index = file.index;
             this.mimeType = file.mimeType;
             this.size = file.size;
+            this.bucketId = file.bucketId;
     }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { bucketsListContainerAction } from '../reducers/mainContainer/mainReducerActions';
+import { bucketsListContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import { navigateToFilesScreen, navigateBack } from '../reducers/navigation/navigationActions';
 import BucketsListComponent from '../components/BucketsListComponent';
 
@@ -45,7 +45,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ ...bucketsListContainerAction, navigateToFilesScreen }, dispatch);
+    return bindActionCreators({ ...bucketsListContainerActions, navigateToFilesScreen }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BucketsListContainer);

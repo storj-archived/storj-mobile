@@ -29,6 +29,23 @@ class BucketsContainer extends Component {
         return count;
     }
 
+    getSelectedFilesCount() {
+        if(!this.props.selectedBucketId || !this.props.files || this.props.files.length === 0) return 0;
+
+        let count = 0;
+
+        var openedBucketFiles = this.props.files.filter(item => {
+            return item.bucketId === this.props.selectedBucketId;
+        });
+
+        //[0] couse there could be only 1 selected bucket at the same time
+        openedBucketFiles[0].files.forEach(item => {
+            if(item.isSelected) count ++
+        });
+
+        return count;
+    }
+
     async createBucket(name) {
         this.props.setLoading();
 
@@ -64,18 +81,28 @@ class BucketsContainer extends Component {
                     deselectBucket = { this.props.deselectBucket }
                     selectBucket = { this.props.selectBucket }
                     selectedBucketsCount = { this.getSelectedBucketsCount() }
-                    buckets = { this.props.buckets } /> 
+                    selectedFilesCount = { this.getSelectedFilesCount() }
+                    buckets = { this.props.buckets }
+                    files = { this.props.files }
+                    screenName = { this.props.screenName } /> 
             );
         }
     }
 }
 
 function mapStateToProps(state) {
+    let routes = state.bucketsScreenNavReducer.routes;
+    let index = state.bucketsScreenNavReducer.index;
+    let currentBucketScreenName = routes[index].routeName;
+
     return {
         isSelectionMode: state.mainReducer.isSelectionMode,        
         buckets: state.mainReducer.buckets,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
-        isFirstSignIn: state.mainReducer.isFirstSignIn
+        isFirstSignIn: state.mainReducer.isFirstSignIn,
+        files: state.filesReducer.fileListModels,
+        screenName: currentBucketScreenName,
+        selectedBucketId: state.mainReducer.openedBucketId
     };
 }
     

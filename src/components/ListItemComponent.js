@@ -17,12 +17,11 @@ import PropTypes from 'prop-types';
 export default class ListItemComponent extends Component {
     constructor(props) {
         super(props);
-        this.bucket = null;
-        //console.log(props);
+        this.bucket = null;        
     }
 
     shouldComponentUpdate(nextProps) {
-        if( this.props.item !== nextProps.item ||
+        if (this.props.item !== nextProps.item ||
             this.props.isSelectionModeEnabled !== nextProps.isSelectionModeEnabled ||
             this.props.isSelected !== nextProps.isSelected ||
             this.props.isItemActionsSelected !== nextProps.isItemActionsSelected ||
@@ -48,12 +47,16 @@ export default class ListItemComponent extends Component {
                 style = { props.isItemActionsSelected ? [listItemStyles.listItemContainer, listItemStyles.itemSelected] : listItemStyles.listItemContainer }
                 onPress = { () => {
                     if(props.isSingleItemSelected) {
-                        this.deselectAllItems()
-                    } else if(props.isSelectionModeEnabled) {
-                        props.onSelectionPress(props.item); 
-                    } else {
-                        this.props.onPress({ bucketId: this.props.item.getId() });
+                        this.deselectAllItems();
+                        return;
                     }
+
+                    if(props.isSelectionModeEnabled) {                                             
+                        props.onSelectionPress(props.item); 
+                        return;
+                    }
+                    
+                    this.props.onPress({ bucketId: props.item.getId() });
                 }}
                 onLongPress = { () => { 
                     props.onLongPress(props.item);
@@ -104,7 +107,6 @@ export default class ListItemComponent extends Component {
                                         } else {
                                             props.onSingleItemSelected();
                                             props.selectItemId(props.item.getId());
-                                            //props.onPress(props.item);
                                         }
                                     }}>
                                     <Image style = { listItemStyles.listItemActionsIcon } source = { require('../images/Icons/listItemActions.png') } />

@@ -6,7 +6,7 @@ const {
     DOWNLOAD_FILE,
     DELETE_FILE, 
     SELECT_FILE, 
-    DESELECT_FILE 
+    DESELECT_FILE
 } = FILE_ACTIONS;
 
 /**
@@ -19,7 +19,6 @@ function listFiles(bucketId, files) {
 }
 
 /**
- * 
  * @param {string} bucketId 
  * @param {ListItemModel} files 
  */
@@ -36,12 +35,17 @@ function deleteFile(bucketId, fileId) {
     return { type: DELETE_FILE, payload: { bucketId, fileId } };
 }
 
-function selectFile(bucketId, fileId) {
-    return { type: SELECT_FILE, payload: { bucketId, fileId } };
+function selectFile(file) {
+    return { type: SELECT_FILE, payload: { file } };
 }
 
-function deselectFile(bucketId, fileId) {
-    return { type: DESELECT_FILE, payload: { bucketId, fileId } };
+function deselectFile(file) {
+    return { type: DESELECT_FILE, payload: { file } };
+}
+
+//list component
+function enableSelectionMode() {
+    return { type: ENABLE_SELECTION_MODE };
 }
 
 export const filesListContainerFileActions = {

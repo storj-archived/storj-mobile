@@ -30,7 +30,7 @@ export default class CreateBucketPopUpComponent extends Component {
             <View style = { styles.mainContainer }>
                 <View style = { styles.inputContainer }>
                     <View style = { styles.backgroundWrapper } />
-                    <Image style = { styles.image } source = { require("../images/Icons/BucketItemFolder.png") } />
+                    <Image style = { styles.image } source = { require('../images/Icons/BucketListItemIcon.png') } />
                     <TextInput
                         autoFocus
                         value = { this.state.bucketName }

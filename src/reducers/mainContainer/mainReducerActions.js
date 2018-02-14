@@ -153,7 +153,7 @@ export const initializeContainerActions = {
     setFirstSignIn
 };
 
-export const bucketsListContainerAction = {
+export const bucketsListContainerActions = {
     onSingleItemSelected,
     enableSelectionMode,
     disableSelectionMode,
@@ -165,6 +165,8 @@ export const bucketsListContainerAction = {
 export const filesListContainerMainActions = {
     closeBucket,
     setLoading,
+    enableSelectionMode,
+    disableSelectionMode, 
     unsetLoading
 };
 

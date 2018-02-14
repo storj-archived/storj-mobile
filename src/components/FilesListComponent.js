@@ -14,17 +14,17 @@ export default class FilesListComponent extends Component {
         return(
             <View style = { styles.mainContainer }>
                 <ListComponent
-                    onPress = { () => {} }
+                    onPress = { this.props.onPress }
                     onSingleItemSelected = { () => {} }                    
                     animatedScrollValue = { this.props.animatedScrollValue }
-                    enableSelectionMode = { () => {} }
-                    disableSelectionMode = { () => {} }
-                    isSelectionMode = { false }
-                    isSingleItemSelected = { false }
-                    deselectItem = { () => {} }
-                    selectItem = { () => {} }
+                    enableSelectionMode = { this.props.enableSelectionMode }
+                    disableSelectionMode = { this.props.disableSelectionMode }
+                    isSelectionMode = { this.props.isSelectionMode }
+                    isSingleItemSelected = { this.props.isSingleItemSelected }
+                    deselectItem = { this.props.deselectFile }
+                    selectItem = { this.props.selectFile }
                     data = { this.props.data }
-                    bucketsCount = { this.props.data.length } />
+                    listItemIcon = { require('../images/Icons/FileListItemIcon.png') } />
             </View>
         );
     }

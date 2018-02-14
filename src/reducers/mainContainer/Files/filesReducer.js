@@ -1,5 +1,5 @@
-import FileModel from '../../../models/FileModel';
-import ListItemModel from '../../../models/ListItemModel';
+import FileListModel from '../../../models/FileListModel';
+import FileListManager from '../../../utils/itemManagers/FileListManager';
 import { FILE_ACTIONS } from '../../../utils/constants/actionConstants';
 
 const { 
@@ -8,7 +8,8 @@ const {
     DOWNLOAD_FILE,
     DELETE_FILE, 
     SELECT_FILE, 
-    DESELECT_FILE 
+    DESELECT_FILE,
+    ENABLE_SELECTION_MODE
 } = FILE_ACTIONS;
 
 
@@ -35,8 +36,10 @@ export default function filesReducer(state = initialState, action) {
             newState.fileListModels = filesManager.deleteFile(action.payload.bucketId, action.payload.fileId);
             break;
         case SELECT_FILE: 
+            newState.fileListModels = filesManager.selectFile(action.payload.file);
             break;
-        case DESELECT_FILE: 
+        case DESELECT_FILE:
+            newState.fileListModels = filesManager.deselectFile(action.payload.file);
             break;
         default:
             return state || initialState;
@@ -45,99 +48,4 @@ export default function filesReducer(state = initialState, action) {
     return newState;
 }
 
-class FileListModel {
-    /**
-     * @param {string} bucketId 
-     * @param {ListItemModel[]} files 
-     */
-    constructor(bucketId = null, files = []) {
-        this.bucketId = bucketId;
-        this.files = files;
-    }
-}
 
-class FileListManager {
-    /**
-     * 
-     * @param {FileListModel} filesList 
-     */
-    constructor(filesList) {
-        this.newFilesList = filesList.map(item => new FileListModel(item.bucketId, item.files));
-    }
-
-    /**
-     * 
-     * @param {string} bucketId 
-     * @param {ListItemModel} file 
-     */
-    uploadFile(bucketId, file) {
-        let doesContain = this._isInArray(bucketId, (itemsList) => {
-            itemsList.files.push(file);
-        });
-
-        if(!doesContain) {
-            this.newFilesList.push(new FileListModel(bucketId, [ file ]));
-        }
-
-        return this.newFilesList;
-    }
-
-    /**
-     * 
-     * @param {string} bucketId 
-     * @param {string} fileId 
-     */
-    deleteFile(bucketId, fileId) {s
-        let doesContain = this._isInArray(bucketId, (itemsList) => {
-            let newList = [];
-
-            itemsList.files.forEach(file => {
-                if(file.getId() !== fileId)
-                    newList.push(file);
-            });
-
-            itemsList.files = newList;
-        });
-
-        return this.newFilesList;
-    }
-
-    /**
-     * 
-     * @param {string} bucketId 
-     * @param {ListItemModel[]} files 
-     */
-    listFiles(bucketId, files) {
-        let doesContain = this._isInArray(bucketId, (itemsList) => {
-            itemsList.files = files;
-        });
-
-        if(!doesContain) {
-            this.newFilesList.push(new FileListModel(bucketId, files));
-        }
-
-        return this.newFilesList;
-    }
-
-    changeFileSelection(bucketId, fileId, value) {
-        return this.newFilesList;
-    }
-
-    /**
-     * 
-     * @param {string} bucketId 
-     * @param {function<FileListModel>} callback 
-     */
-    _isInArray(bucketId, callback) {
-        let doesContain = false;
-
-        this.newFilesList.forEach(itemsList => {
-            if(itemsList.bucketId === bucketId) {
-                doesContain = true;
-                callback(itemsList);
-            }
-        });
-
-        return doesContain;
-    }
-}

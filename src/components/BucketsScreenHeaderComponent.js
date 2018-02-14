@@ -19,10 +19,12 @@ export default class BucketsScreenHeaderComponent extends Component {
         return(
             <View style={ styles.mainContainer }>
                 <AnimatedHeader 
-                   isSelectionMode = { this.props.isSelectionMode }
-                   disableSelectionMode = { this.props.disableSelectionMode }
-                   selectedBucketsCount = { this.props.selectedBucketsCount } 
-                   animatedScrollValue = { this.props.animatedScrollValue } />
+                    screenName = { this.props.screenName }
+                    isSelectionMode = { this.props.isSelectionMode }
+                    disableSelectionMode = { this.props.disableSelectionMode }
+                    selectedFilesCount = {this.props.selectedFilesCount }
+                    selectedBucketsCount = { this.props.selectedBucketsCount } 
+                    animatedScrollValue = { this.props.animatedScrollValue } />
             </View>
         );
     }
@@ -125,10 +127,11 @@ class AnimatedHeader extends Component {
     }
 
     renderSelectComponent(res) {
+        let count = this.props.screenName === 'BucketsScreen' ? this.props.selectedBucketsCount : this.props.selectedFilesCount;
         return(
             <View style = { styles.selectionContainer }>
                 <Animated.View style = { [ styles.selectionWrapper, res[2] ] }>
-                    <Text style = { styles.selectionText }>{ this.props.selectedBucketsCount + " selected" }</Text>
+                    <Text style = { styles.selectionText }>{ count + " selected" }</Text>
                     <Text
                         style = { styles.textDone } 
                         onPress = { this.props.disableSelectionMode }>Done</Text>
