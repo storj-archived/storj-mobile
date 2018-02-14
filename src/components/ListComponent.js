@@ -117,7 +117,7 @@ export default class ListComponent extends Component {
             sortingObject[prop].push(item);
         });
     }
-
+    //TODO: IF NO DATA OR/AND NAME USE TODAY DATE
     sort(items) {
         let sortingObject = {};
         let sortingCallback;
@@ -147,9 +147,9 @@ export default class ListComponent extends Component {
                                 var listItems = prop.map((item, indexInner) => {
                                     return(
                                         <ListItemComponent
+                                            bucketId = { this.props.bucketId }
                                             key = { item.entity.id }
                                             item = { item } 
-                                            isFileLoading = { false }
                                             selectItemId = { (itemId) => { this.setState({ selectedItemId: itemId }) }}
                                             navigateToFilesScreen = { this.props.navigateToFilesScreen ? this.props.navigateToFilesScreen : () => {} }
                                             isItemActionsSelected = { this.state.selectedItemId === item.getId() }
@@ -158,7 +158,8 @@ export default class ListComponent extends Component {
                                             isSelected = { item.isSelected }
                                             isSingleItemSelected = { this.props.isSingleItemSelected }
                                             disableSelectionMode = { this.props.disableSelectionMode }
-                                            progress = { 0 }
+                                            progress = { item.progress }
+                                            isLoading = { item.isLoading }
                                             listItemIcon = { this.props.listItemIcon }
                                             onSelectionPress = { () => { this.selectItem(item); } }
                                             onPress = { this.props.onPress }

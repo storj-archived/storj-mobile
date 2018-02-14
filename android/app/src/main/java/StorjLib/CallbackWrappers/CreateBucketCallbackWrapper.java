@@ -22,14 +22,14 @@ public class CreateBucketCallbackWrapper implements CreateBucketCallback {
     }
 
     @Override
-    public void onError(final String message) {
-        _response.error(message);
+    public void onBucketCreated(Bucket bucket) {
+        _response.success(new BucketWrapper(bucket));
         _promise.resolve(_response.toJsObject());
     }
 
     @Override
-    public void onBucketCreated(Bucket bucket) {
-        _response.success(new BucketWrapper(bucket));
+    public void onError(int code, String message) {
+        _response.error(message);
         _promise.resolve(_response.toJsObject());
     }
 }

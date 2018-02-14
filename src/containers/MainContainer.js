@@ -1,15 +1,17 @@
-import { Keyboard } from 'react-native';
+import { Keyboard, DeviceEventEmitter } from 'react-native';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { mainContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import { mainContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
+import FileModel from '../models/FileModel';
 import ListItemModel from '../models/ListItemModel';
 import StorjLib from '../utils/StorjModule';
 import FilePicker from '../utils/filePicker';
 import TabBarActionModelFactory from '../models/TabBarActionModel';
 import MainComponent from '../components/MainComponent';
 import filePicker from '../utils/filePicker';
+import observablePropFactory from '../models/ObservableProperty';
 
 class MainContainer extends Component {
     constructor(props) {
@@ -36,13 +38,24 @@ class MainContainer extends Component {
             TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 2', require('../images/ActionBar/DownloadIFileIcon.png')),
             TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 3', require('../images/ActionBar/UploadPhotoIcon.png'))
         ]
+
+
+        this.uploadListener = (fileParams) => {
+            let res = observablePropFactory.getObservable(fileParams.filePath);
+            res.Property = fileParams;
+        }
     }
 
     componentWillMount () {
+        DeviceEventEmitter.addListener("uploadFile", this.uploadListener);
+
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => { this.props.disableSelectionMode(); });
     }
     
     componentWillUnmount () {
+        DeviceEventEmitter.removeListener("uploadFile", this.uploadListener);
+        observablePropFactory.clean();
+
         this.keyboardDidShowListener.remove();
     }
 
@@ -56,20 +69,37 @@ class MainContainer extends Component {
     }
 
     async uploadFile() {
-        let filePicketResponse = await filePicker.show();
+        let filePickerResponse = await filePicker.show();
 
-        this.props.setLoading();
+        //this.props.setLoading();
         this.props.hideActionBar();
 
-        if(filePicketResponse.path) {
-            let uploadFileResponse = await StorjLib.uploadFile(this.props.openedBucketId, filePicketResponse.path);
+        if(filePickerResponse.path) {
+            const path = filePickerResponse.path;
 
+            let tempFile = { name: "uploading...", fileId: path, created: "" };
+            
+            this.props.uploadFileStart(this.props.openedBucketId, new ListItemModel(new FileModel(tempFile), false, true));
+
+
+            console.log(filePickerResponse.path + this.props.openedBucketId);
+            const observer = observablePropFactory.getObservable(filePickerResponse.path);
+            observer.addListener({ id: filePickerResponse.path + this.props.openedBucketId, callback: (param) => { 
+                console.log(param);
+                if(this.props.openedBucketId === param.bucketId)
+                    this.props.updateFileUploadProgress(param.bucketId, param.filePath, param.progress);
+            }});
+
+            let uploadFileResponse = await StorjLib.uploadFile(this.props.openedBucketId, path);
+            console.log(uploadFileResponse);
             if(uploadFileResponse.isSuccess) {
-                this.props.uploadFile(this.props.openedBucketId, new ListItemModel(uploadFileResponse.result));
+                this.props.uploadFileSuccess(this.props.openedBucketId, new ListItemModel(uploadFileResponse.result), path);
+            } else {
+                this.props.uploadFileError(this.props.openedBucketId, path);
             }
         }
 
-        this.props.unsetLoading();
+        //this.props.unsetLoading();
     }
 
     async createBucket(bucketName) {

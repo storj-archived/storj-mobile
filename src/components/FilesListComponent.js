@@ -15,6 +15,7 @@ export default class FilesListComponent extends Component {
             <View style = { styles.mainContainer }>
                 <ListComponent
                     onPress = { this.props.onPress }
+                    bucketId = { this.props.bucketId }
                     onSingleItemSelected = { () => {} }                    
                     animatedScrollValue = { this.props.animatedScrollValue }
                     enableSelectionMode = { this.props.enableSelectionMode }

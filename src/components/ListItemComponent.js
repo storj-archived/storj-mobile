@@ -17,7 +17,17 @@ import PropTypes from 'prop-types';
 export default class ListItemComponent extends Component {
     constructor(props) {
         super(props);
-        this.bucket = null;        
+        this.bucket = null;
+        this.item = this.props.item;
+
+        this.state = {
+            isShown: this.props.item.isLoading,
+            progress: 0
+        };
+    }
+
+    componentDidUpdate() {
+        console.log(this.state.progress);
     }
 
     shouldComponentUpdate(nextProps) {
@@ -25,7 +35,9 @@ export default class ListItemComponent extends Component {
             this.props.isSelectionModeEnabled !== nextProps.isSelectionModeEnabled ||
             this.props.isSelected !== nextProps.isSelected ||
             this.props.isItemActionsSelected !== nextProps.isItemActionsSelected ||
-            this.props.isSingleItemSelected !== nextProps.isSingleItemSelected) 
+            this.props.isSingleItemSelected !== nextProps.isSingleItemSelected ||
+            this.props.progress !== nextProps.progress ||
+            this.props.isLoading !== nextProps.isLoading) 
                 return true;
         
         //TODO: Optimize render performance
@@ -79,16 +91,16 @@ export default class ListItemComponent extends Component {
                         <View style = { listItemStyles.textWrapper }>
                             <Text numberOfLines = {1} style = { listItemStyles.mainTitleText }>{ props.item.getName() }</Text>
                             {
-                                this.props.progress ? 
+                                /* this.props.progress */this.props.item.isLoading ? 
                                     Platform.select({
                                         ios: 
                                             <ProgressViewIOS 
-                                                progress = { 0 }
+                                                progress = { this.props.item.progress }
                                                 trackTintColor = { '#f2f2f2' }
                                                 progressTintColor = { '#2794ff' } />,
                                         android:
                                             <ProgressBarAndroid    
-                                                progress = { 0 } 
+                                                progress = { this.props.item.progress } 
                                                 styleAttr = { 'Horizontal' } 
                                                 color = { '#2794FF' } 
                                                 animating = {true} 

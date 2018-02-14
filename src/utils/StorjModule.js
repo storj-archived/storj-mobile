@@ -135,6 +135,8 @@ const StorjLib = (() => {
                 });
             }
 
+            console.log(result);
+
             return result;
         };
 
@@ -179,6 +181,8 @@ const StorjLib = (() => {
                 listFilesResult.result = [];
             }
 
+            console.log(listFilesResult.result);
+
             return listFilesResult;
         };
     
@@ -212,6 +216,15 @@ const StorjLib = (() => {
         static downloadFile() {
             //Not implemented yet
         };
+
+        /**
+         * 
+         * @param {string} bucketId 
+         * @param {string} fileId 
+         */
+        async deleteFile(bucketId, fileId) {
+            return await storjLib.deleteFile(bucketId, fileId);
+        }
     }
 
     return {

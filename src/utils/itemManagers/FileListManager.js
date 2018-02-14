@@ -1,45 +1,79 @@
 import ListItemModel from '../../models/ListItemModel';
 import FileListModel from '../../models/FileListModel';
 
-
 export default class FileListManager {
     /**
      * 
-     * @param {FileListModel} filesList 
+     * @param {FileListModel[]} filesList 
+     * @param {FileListModel[]} uploadingFileList 
      */
-    constructor(filesList) {
+    constructor(filesList, uploadingFileList) {
         this.newFilesList = filesList.map(item => new FileListModel(item.bucketId, item.files));
+        this.newFileUploadingList = uploadingFileList.map(item => new FileListModel(item.bucketId, item.files));
+    }
+
+    addFileEntry(bucketId, file) {
+        return this._addFileEntry(this.newFilesList, bucketId, file);
+    }
+
+    addFileEntryU(bucketId, file) {
+        return this._addFileEntry(this.newFileUploadingList, bucketId, file);
+    }
+
+    //--------------------------------------------------------------------------
+    updateFileEntry(bucketId, file, id) {
+        return this._updateFileEntry(this.newFilesList, bucketId, file, id);
+    }
+
+    updateFileEntryU(bucketId, file, id) {
+        return this._updateFileEntry(this.newFileUploadingList, bucketId, file, id);
+    }
+
+    //------------------------------------------------------------------------
+    deleteFileEntry(bucketId, fileId) {
+        return this._deleteFileEntry(this.newFilesList, bucketId, fileId);
+    }
+
+    deleteFileEntryU(bucketId, fileId) {
+        return this._deleteFileEntry(this.newFileUploadingList, bucketId, fileId);
     }
 
     /**
-     * Set isSelected prop of whole array to false
-     * * @returns {ListItemModel[]}
-     */
-    clearSelection() {
-        for(i = 0; i < this.newFilesList.length; i++) {
-            this.itemList[i].files.forEach(file => {
-                file.isSelected = false;
-            });
-        }
-
-        return this.newFilesList;
-    };
-
-    /**
-     * 
+     * @param {FileListModel[]} array
      * @param {string} bucketId 
      * @param {ListItemModel} file 
      */
-    uploadFile(bucketId, file) {
-        let doesContain = this._isInArray(bucketId, (itemsList) => {
+    _addFileEntry(array, bucketId, file) {
+
+        let doesContain = this._isInArray(array, bucketId, (itemsList) => {
             itemsList.files.push(file);
         });
 
         if(!doesContain) {
-            this.newFilesList.push(new FileListModel(bucketId, [ file ]));
+            array.push(new FileListModel(bucketId, [ file ]));
         }
 
-        return this.newFilesList;
+        return array;
+    }
+
+    /**
+     * @param {FileListModel[]} array
+     * @param {string} bucketId 
+     * @param {ListItemModel} file 
+     * @param {string} id 
+     */
+    _updateFileEntry(array, bucketId, file, id) {
+        let doesContain = this._isInArray(array, bucketId, (itemsList) => {
+
+            itemsList.files.forEach(fileEntry => {
+                if(fileEntry.getId() === id) {
+                    fileEntry.entity = file.entity;
+                    fileEntry.isLoading = false;
+                }
+            });
+        });
+
+        return array;
     }
 
     /**
@@ -47,19 +81,19 @@ export default class FileListManager {
      * @param {string} bucketId 
      * @param {string} fileId 
      */
-    deleteFile(bucketId, fileId) {s
-        let doesContain = this._isInArray(bucketId, (itemsList) => {
+    _deleteFileEntry(array, bucketId, fileId) {
+        let doesContain = this._isInArray(array, bucketId, (itemsList) => {
             let newList = [];
 
-            itemsList.files.forEach(file => {
-                if(file.getId() !== fileId)
-                    newList.push(file);
+            itemsList.files.forEach(fileEntry => {
+                if(fileEntry.getId() !== fileId)
+                    newList.push(fileEntry);
             });
 
             itemsList.files = newList;
         });
 
-        return this.newFilesList;
+        return array;
     }
 
     /**
@@ -68,8 +102,16 @@ export default class FileListManager {
      * @param {ListItemModel[]} files 
      */
     listFiles(bucketId, files) {
-        let doesContain = this._isInArray(bucketId, (itemsList) => {
-            itemsList.files = files;
+        let doesContain = this._isInArray(this.newFilesList, bucketId, (itemsList) => {
+            let loadingFiles = [];
+
+            // left for later
+            /* itemsList.files.forEach(file => { 
+                if(file.isLoading)
+                    loadingFiles.push(file);
+            }); */
+
+            itemsList.files = files.concat(loadingFiles);
         });
 
         if(!doesContain) {
@@ -77,6 +119,17 @@ export default class FileListManager {
         }
 
         return this.newFilesList;
+    }
+
+    updateFileUploadingProgress(bucketId, fileId, progress) {
+        this._isInArray(this.newFileUploadingList, bucketId, (itemsList) => {
+            itemsList.files.forEach(fileEntry => {
+                if(fileEntry.getId() === fileId)
+                    fileEntry.progress = progress;
+            });
+        });
+
+        return this.newFileUploadingList;
     }
 
     selectFile(file) {        
@@ -103,10 +156,10 @@ export default class FileListManager {
      * @param {string} bucketId 
      * @param {function<FileListModel>} callback 
      */
-    _isInArray(bucketId, callback) {
+    _isInArray(array, bucketId, callback) {
         let doesContain = false;
 
-        this.newFilesList.forEach(itemsList => {
+        array.forEach(itemsList => {
             if(itemsList.bucketId === bucketId) {
                 doesContain = true;
                 callback(itemsList);

@@ -1,4 +1,4 @@
-import { BackHandler, Platform } from 'react-native';
+import { BackHandler, Platform, DeviceEventEmitter } from 'react-native';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -57,18 +57,14 @@ class FilesListContainer extends Component {
     }
 
     render() {
-        let data = [];
-
-        this.props.fileListModels.forEach(element => {
-            if(element.bucketId === this.bucketId) {
-                data = element.files;
-            }
-        });
+        let data = getFilesFormFileModelList(this.props.fileListModels, this.bucketId);
+        let uploadingData = getFilesFormFileModelList(this.props.uploadingFileListModels, this.bucketId);
 
         return(
             <FilesListComponent
-                data = { data }
                 onPress = { (params) => { this.onPress(params); } }
+                bucketId = { this.bucketId }
+                data = { data.concat(uploadingData) }
                 animatedScrollValue = { this.props.screenProps.animatedScrollValue }
                 enableSelectionMode = { this.props.enableSelectionMode }
                 disableSelectionMode = { this.props.disableSelectionMode }
@@ -86,6 +82,7 @@ function mapStateToProps(state) {
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         fileListModels: state.filesReducer.fileListModels,
+        uploadingFileListModels: state.filesReducer.uploadingFileListModels, //uploadingFileListModels
         isLoading: state.mainReducer.isLoading
     };
 }
@@ -95,3 +92,15 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilesListContainer);
+
+function getFilesFormFileModelList(fileModelList, bucketId) {
+    let files = [];
+
+    fileModelList.forEach(element => {
+        if(element.bucketId === bucketId) {
+            files = element.files;
+        }
+    });
+
+    return files;
+}

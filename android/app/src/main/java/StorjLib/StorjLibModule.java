@@ -85,8 +85,9 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
             @Override
             public void run() {
                 try {
-                    boolean result = StorjAndroid.getInstance(getReactApplicationContext()).verifyKeys(email, password);
+                    int error_code = StorjAndroid.getInstance(getReactApplicationContext()).verifyKeys(email, password);
 
+                    boolean result = error_code == 0;
                     promise.resolve(result);
                 } catch (Exception e) {
                     promise.reject(E_VERIFY_KEYS, e);
@@ -216,7 +217,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
                         map.putDouble("downloadedBytes", downloadedBytes);
                         map.putDouble("totalBytes", totalBytes);
 
-                        getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("test2", map);
+                        getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("downloadFile", map);
                     }
 
                     @Override
@@ -237,7 +238,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
                     }
 
                     @Override
-                    public void onError(String fileId, String message) {
+                    public void onError(String fileId, int code, String message) {
                         WritableMap response = new WritableNativeMap();
 
                         response.putBoolean("isSuccess", false);
@@ -269,12 +270,13 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
                     public void onProgress(String filePath, double progress, long uploadedBytes, long totalBytes) {
                         WritableMap map = new WritableNativeMap();
 
+                        map.putString("bucketId", bucketId);
                         map.putString("filePath", filePath);
                         map.putDouble("progress", progress);
                         map.putDouble("uploadedBytes", uploadedBytes);
                         map.putDouble("totalBytes", totalBytes);
 
-                        getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("test", map);
+                        getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("uploadFile", map);
                     }
 
                     @Override
@@ -304,7 +306,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
                     }
 
                     @Override
-                    public void onError(String filePath, String message) {
+                    public void onError(String filePath, int code, String message) {
                         if(promise == null)
                             return;
 
@@ -327,6 +329,9 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void deleteFile(final String bucketId, final String fileId, final Promise promise) {
+        if(bucketId == null || fileId == null)
+            return;
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -337,25 +342,27 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
                             WritableMap response = new WritableNativeMap();
 
                             response.putBoolean("isSuccess", true);
-                            response.putString("errorMEssage", null);
+                            response.putString("errorMessage", null);
 
                             WritableMap result = new WritableNativeMap();
                             result.putString("fileId", fileId);
 
                             response.putMap("result", result);
 
-                            promise.resolve(response);
+                            if(promise != null)
+                                promise.resolve(response);
                         }
 
                         @Override
-                        public void onError(String message) {
+                        public void onError(int code, String message) {
                             WritableMap response = new WritableNativeMap();
 
                             response.putBoolean("isSuccess", false);
-                            response.putString("errorMEssage", message);
+                            response.putString("errorMessage", message);
                             response.putMap("result", null);
 
-                            promise.resolve(response);
+                            if(promise != null)
+                                promise.resolve(response);
                         }
                     });
                 } catch(Exception e) {
@@ -365,7 +372,8 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
                     response.putString("errorMEssage", e.getMessage());
                     response.putMap("result", null);
 
-                    promise.resolve(response);
+                    if(promise != null)
+                        promise.resolve(response);
                 }
             }
         }).start();
@@ -420,7 +428,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
                      }
 
                      @Override
-                     public void onError(String message) {
+                     public void onError(int code, String message) {
                          WritableMap result = Arguments.createMap();
 
                          result.putBoolean("isSuccess", false);
@@ -445,14 +453,14 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
         }
 
         @Override
-        public void onError(final String message) {
-            _response.error(message);
+        public void onBucketDeleted() {
+            _response.success(new BucketWrapper(null));
             _promise.resolve(_response.toJsObject());
         }
 
         @Override
-        public void onBucketDeleted() {
-            _response.success(new BucketWrapper(null));
+        public void onError(int code, String message) {
+            _response.error(message);
             _promise.resolve(_response.toJsObject());
         }
     }
@@ -482,7 +490,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
         }
 
         @Override
-        public void onError(final String message) {
+        public void onError(int code, String message) {
             RegisterResponse response = new RegisterResponse(
                     false,
                     null,
@@ -549,7 +557,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
         }
 
         @Override
-        public void onError(final String message) {
+        public void onError(int code, String message) {
             _promise.reject(E_GET_BUCKETS, message);
         }
     }
