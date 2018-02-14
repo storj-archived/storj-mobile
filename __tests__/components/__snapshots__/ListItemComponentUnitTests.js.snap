@@ -36,11 +36,9 @@ ShallowWrapper {
           }
         }
       >
-        <View
-          style={Object {}}
-        >
+        <View>
           <Image
-            source="BucketItemFolder.png"
+            source={undefined}
             style={
               Object {
                 "height": 44,
@@ -69,11 +67,6 @@ ShallowWrapper {
                 "lineHeight": 40,
               }
             }
-          />
-          <ProgressViewIOS
-            progress={0.5}
-            progressTintColor="#2794ff"
-            trackTintColor="#f2f2f2"
           />
         </View>
         <TouchableOpacity
@@ -115,11 +108,9 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           undefined,
-          <View
-            style={Object {}}
-          >
+          <View>
             <Image
-              source="BucketItemFolder.png"
+              source={undefined}
               style={
                 Object {
                   "height": 44,
@@ -148,11 +139,6 @@ ShallowWrapper {
                   "lineHeight": 40,
                 }
               }
-            />
-            <ProgressViewIOS
-              progress={0.5}
-              progressTintColor="#2794ff"
-              trackTintColor="#f2f2f2"
             />
           </View>,
           <TouchableOpacity
@@ -196,7 +182,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": <Image
-              source="BucketItemFolder.png"
+              source={undefined}
               style={
                 Object {
                   "height": 44,
@@ -204,7 +190,6 @@ ShallowWrapper {
                 }
               }
             />,
-            "style": Object {},
           },
           "ref": null,
           "rendered": Object {
@@ -212,7 +197,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "source": "BucketItemFolder.png",
+              "source": undefined,
               "style": Object {
                 "height": 44,
                 "width": 50,
@@ -244,11 +229,7 @@ ShallowWrapper {
                   }
                 }
               />,
-              <ProgressViewIOS
-                progress={0.5}
-                progressTintColor="#2794ff"
-                trackTintColor="#f2f2f2"
-              />,
+              null,
             ],
             "style": Object {
               "flex": 0.9,
@@ -277,19 +258,7 @@ ShallowWrapper {
               "rendered": null,
               "type": [Function],
             },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "progress": 0.5,
-                "progressTintColor": "#2794ff",
-                "trackTintColor": "#f2f2f2",
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
+            null,
           ],
           "type": [Function],
         },
@@ -358,11 +327,9 @@ ShallowWrapper {
             }
           }
         >
-          <View
-            style={Object {}}
-          >
+          <View>
             <Image
-              source="BucketItemFolder.png"
+              source={undefined}
               style={
                 Object {
                   "height": 44,
@@ -391,11 +358,6 @@ ShallowWrapper {
                   "lineHeight": 40,
                 }
               }
-            />
-            <ProgressViewIOS
-              progress={0.5}
-              progressTintColor="#2794ff"
-              trackTintColor="#f2f2f2"
             />
           </View>
           <TouchableOpacity
@@ -437,11 +399,9 @@ ShallowWrapper {
         "props": Object {
           "children": Array [
             undefined,
-            <View
-              style={Object {}}
-            >
+            <View>
               <Image
-                source="BucketItemFolder.png"
+                source={undefined}
                 style={
                   Object {
                     "height": 44,
@@ -470,11 +430,6 @@ ShallowWrapper {
                     "lineHeight": 40,
                   }
                 }
-              />
-              <ProgressViewIOS
-                progress={0.5}
-                progressTintColor="#2794ff"
-                trackTintColor="#f2f2f2"
               />
             </View>,
             <TouchableOpacity
@@ -518,7 +473,7 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "children": <Image
-                source="BucketItemFolder.png"
+                source={undefined}
                 style={
                   Object {
                     "height": 44,
@@ -526,7 +481,6 @@ ShallowWrapper {
                   }
                 }
               />,
-              "style": Object {},
             },
             "ref": null,
             "rendered": Object {
@@ -534,7 +488,7 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "source": "BucketItemFolder.png",
+                "source": undefined,
                 "style": Object {
                   "height": 44,
                   "width": 50,
@@ -566,11 +520,7 @@ ShallowWrapper {
                     }
                   }
                 />,
-                <ProgressViewIOS
-                  progress={0.5}
-                  progressTintColor="#2794ff"
-                  trackTintColor="#f2f2f2"
-                />,
+                null,
               ],
               "style": Object {
                 "flex": 0.9,
@@ -599,19 +549,7 @@ ShallowWrapper {
                 "rendered": null,
                 "type": [Function],
               },
-              Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "progress": 0.5,
-                  "progressTintColor": "#2794ff",
-                  "trackTintColor": "#f2f2f2",
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
+              null,
             ],
             "type": [Function],
           },

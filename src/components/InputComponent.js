@@ -60,8 +60,12 @@ export default class InputComponent extends Component {
                                     return (
                                          <TouchableOpacity onPress = { () => { this.onPress() } }>
                                             <Image                     
-                                                style = { styles.eye  } 
-                                                source = { require('../images/Icons/Eye.png') } 
+                                                style = { styles.eye } 
+                                                source = {
+                                                    this.state.isTextShown ? 
+                                                    require('../images/Icons/Eye.png') : 
+                                                    require('../images/Icons/EyeClosed.png') 
+                                                } 
                                                 resizeMode = 'contain'/>
                                         </TouchableOpacity>
                                     );

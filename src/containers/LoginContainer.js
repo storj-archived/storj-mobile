@@ -197,9 +197,9 @@ class LoginContainer extends Component {
 		return(
                 <LoginComponent
                     isLoading = { this.state.isLoading }
-                    email = { this.props.user.email }
-                    password = { this.props.user.password }
-                    mnemonic = { this.props.user.mnemonic }
+                    email = { this.state.stateModel.email }
+                    password = { this.state.stateModel.password }
+                    mnemonic = { this.state.stateModel.mnemonic }
                     isRedirectedFromRegister = { this.props.user.isRedirectedFromRegister }
                     isEmailError = { this.state.errorModel.isEmailError }
                     isPasswordError = { this.state.errorModel.isPasswordError }

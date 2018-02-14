@@ -71,12 +71,12 @@ const styles = StyleSheet.create({
         color: 'rgba(56, 75, 101, 0.4)'
     },
     expanderImage: {
-        width: getWidth(15),
-        height: getHeight(10),
+        width: getWidth(10),
+        height: getHeight(5),
     },
     collapseImage: {
-        width: getWidth(10),
-        height: getHeight(12),
+        width: getWidth(5),
+        height: getHeight(10),
     },
     expanderContainer: {
         marginHorizontal: getWidth(10)

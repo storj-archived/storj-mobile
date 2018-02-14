@@ -210,16 +210,22 @@ export default class ListComponent extends Component {
     }
 }
 
-//TODO: check if all props are valid
 ListComponent.propTypes = {
-    data: PropTypes.array,
-    /* onSingleItemSelected: PropTypes.function, */
-    /* selectItem: PropTypes.function,
-    deselectItem: PropTypes.function, */
     listItemIcon: PropTypes.number, //wtf?
     mainTitlePath: PropTypes.string,
     sortOptions: PropTypes.string,
-    idPath: PropTypes.string
+    idPath: PropTypes.string,
+    onPress: PropTypes.func,
+    onSingleItemSelected: PropTypes.func,                   
+    animatedScrollValue: PropTypes.object,
+    enableSelectionMode: PropTypes.func,
+    disableSelectionMode: PropTypes.func,
+    isSelectionMode: PropTypes.bool,
+    isSingleItemSelected: PropTypes.bool,
+    deselectItem: PropTypes.func,
+    selectItem: PropTypes.func,
+    data: PropTypes.array,
+    bucketsCount: PropTypes.number
 };
 
 const styles = StyleSheet.create({
@@ -230,3 +236,5 @@ const styles = StyleSheet.create({
         paddingVertical: getHeight(70)
     }
 });
+
+

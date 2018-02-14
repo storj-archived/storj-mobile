@@ -10,7 +10,9 @@ ShallowWrapper {
     loginSuccess={[Function]}
     navigateToRegisterScreen={[Function]}
     redirectToAuthFailureScreen={[Function]}
+    redirectToInitializeScreen={[Function]}
     redirectToMainScreen={[Function]}
+    redirectToQRScannerScreen={[Function]}
     user={
       Object {
         "email": null,
@@ -44,6 +46,7 @@ ShallowWrapper {
       "onChangePassword": [Function],
       "onSubmit": [Function],
       "password": "",
+      "redirectToQRScannerScreen": [Function],
       "registerButtonOnPress": [Function],
     },
     "ref": null,
@@ -69,6 +72,7 @@ ShallowWrapper {
         "onChangePassword": [Function],
         "onSubmit": [Function],
         "password": "",
+        "redirectToQRScannerScreen": [Function],
         "registerButtonOnPress": [Function],
       },
       "ref": null,

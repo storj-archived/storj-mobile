@@ -43,8 +43,6 @@ export default class ActionBarComponent extends Component {
     getTapBarAction() {
         let actions = this.props.isSelectionMode || this.props.isSingleItemSelected ? this.props.selectionModeActions : this.props.tapBarActions;
 
-        console.log(this.props.openedBucketId);
-
         if(this.props.openedBucketId) {
             actions = this.props.openedBucketActions;
         }
@@ -90,12 +88,13 @@ export default class ActionBarComponent extends Component {
     };
 } 
 
-//TODO: double check all props, maybe some are missing
 ActionBarComponent.propTypes = {
     isSelectionMode: PropTypes.bool,
     isSingleItemSelected: PropTypes.bool,
     tapBarActions: PropTypes.arrayOf(PropTypes.instanceOf(TabBarActionModel)),
-    selectionModeActions: PropTypes.arrayOf(PropTypes.instanceOf(TabBarActionModel))
+    selectionModeActions: PropTypes.arrayOf(PropTypes.instanceOf(TabBarActionModel)),
+    openedBucketId: PropTypes.string, 
+    openedBucketActions: PropTypes.array
 };
 
 const styles = StyleSheet.create({
