@@ -60,6 +60,8 @@ class FilesListContainer extends Component {
         this.props.navigateBack();
     }
 
+
+
     onPress(params) {
         //Download file  
     }

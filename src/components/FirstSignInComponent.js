@@ -95,7 +95,6 @@ export default class FirstSignInComponent extends Component {
                         </View>
                         {
                             this.state.androidOptions.map(option => {
-                                console.log(option);
                                 return (
                                     <TouchableOpacity style = { styles.modalCheckListItemContainer } onPress = { () => { this.getCallback(option.type); } } >
                                     <View style = { styles.flexRow }>

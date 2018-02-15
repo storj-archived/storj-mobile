@@ -212,6 +212,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
                         //onProgressCallback.invoke(fileId, progress, downloadedBytes, totalBytes);
                         WritableMap map = new WritableNativeMap();
 
+                        map.putString("bucketId", bucketId);
                         map.putString("fileId", fileId);
                         map.putDouble("progress", progress);
                         map.putDouble("downloadedBytes", downloadedBytes);
@@ -246,6 +247,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
 
                         WritableMap result = new WritableNativeMap();
 
+                        result.putString("bucketId", bucketId);
                         result.putString("fileId", fileId);
                         result.putString("localPath", null);
 
@@ -291,6 +293,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
 
                         WritableMap result = new WritableNativeMap();
 
+                        result.putString("bucketId", bucketId);
                         result.putDouble("size", file.getSize());
                         result.putString("name", file.getName());
                         result.putString("mimeType", file.getMimeType());
@@ -317,6 +320,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
 
                         WritableMap result = new WritableNativeMap();
                         result.putString("filePath", filePath);
+                        result.putString("bucketId", bucketId);
 
                         response.putMap("result", result);
 
@@ -346,6 +350,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
 
                             WritableMap result = new WritableNativeMap();
                             result.putString("fileId", fileId);
+                            result.putString("bucketId", bucketId);
 
                             response.putMap("result", result);
 

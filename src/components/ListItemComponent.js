@@ -114,7 +114,7 @@ export default class ListItemComponent extends Component {
                                             this.deselectAllItems()
                                         } else {
                                             props.onSingleItemSelected();
-                                            props.onSelectionPress(props.item.getId());
+                                            props.onSelectionPress(props.item);
                                             props.selectItemId(props.item.getId());
                                         }
                                     }}>

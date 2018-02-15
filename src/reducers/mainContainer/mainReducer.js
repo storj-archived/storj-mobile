@@ -139,7 +139,6 @@ function uploadFile(array, bucketId, file) {
             });
 
             if(!doesContain) {
-                console.log(file);
                 newArray[i].files.push(new ListItemModel(new FileModel(file)));
             }
         }
@@ -148,8 +147,6 @@ function uploadFile(array, bucketId, file) {
     if(!isListHandler) {
         newArray.push({ bucketId, files: [ new ListItemModel(new FileModel(file)) ] });
     }
-
-    console.log("newArray", newArray);
 
     return newArray;
 }

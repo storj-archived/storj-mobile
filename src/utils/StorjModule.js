@@ -203,19 +203,6 @@ const StorjLib = (() => {
 
             return result;
         };
-    
-        //Not implemented yet
-        async deleteBucket(bucketId) {
-            return await storjLib.deleteBucket(bucketId);
-        };
-    
-        static uploadFile() {
-            //Not implemented yet
-        };
-    
-        static downloadFile() {
-            //Not implemented yet
-        };
 
         /**
          * 

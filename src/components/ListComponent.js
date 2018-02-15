@@ -63,7 +63,6 @@ export default class ListComponent extends Component {
     */
     selectItem(selectedItem) {
         /* if(!this.props.isSelectionMode) return; */
-        
         if(selectedItem.isSelected)
             this.props.deselectItem(selectedItem);
         else
@@ -101,9 +100,7 @@ export default class ListComponent extends Component {
             let firstChar = item.getName().charAt(0);
             if(rows.exists(firstChar.toUpperCase()))
                 return ;
-        }))];
-
-        console.log(rows);        
+        }))];      
 
         items.forEach((item) => {
             var firstLetter = item.getName()[0];
@@ -144,11 +141,11 @@ export default class ListComponent extends Component {
                         (() => {
                             let prop = sorting[propName];
                             if(Array.isArray(prop) && prop.length) {
-                                var listItems = prop.map((item, indexInner) => {
+                                var listItems = prop.map((item, indexInner) => {   
                                     return(
                                         <ListItemComponent
                                             bucketId = { this.props.bucketId }
-                                            key = { item.entity.id }
+                                            key = { item.getId() }
                                             item = { item } 
                                             selectItemId = { (itemId) => { this.setState({ selectedItemId: itemId }) }}
                                             navigateToFilesScreen = { this.props.navigateToFilesScreen ? this.props.navigateToFilesScreen : () => {} }
@@ -179,7 +176,7 @@ export default class ListComponent extends Component {
         });
     }
 
-    render() {        
+    render() {     
         return (
             <View>
                 <Animated.ScrollView style = { styles.listContainer }
