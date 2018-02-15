@@ -163,6 +163,7 @@ export const bucketsListContainerActions = {
 };
 
 export const filesListContainerMainActions = {
+    onSingleItemSelected,
     closeBucket,
     setLoading,
     enableSelectionMode,

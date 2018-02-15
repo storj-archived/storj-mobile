@@ -73,6 +73,7 @@ class FilesListContainer extends Component {
                 onPress = { (params) => { this.onPress(params); } }
                 bucketId = { this.bucketId }
                 data = { data.concat(uploadingData) }
+                onSingleItemSelected = { this.props.onSingleItemSelected }
                 animatedScrollValue = { this.props.screenProps.animatedScrollValue }
                 enableSelectionMode = { this.props.enableSelectionMode }
                 disableSelectionMode = { this.props.disableSelectionMode }
