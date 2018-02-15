@@ -134,6 +134,16 @@ export default class FileListManager {
         return this._changeFileSelection(file.entity.bucketId, file.entity.id, false);
     }
 
+    clearSelection() {
+        this.newFilesList.forEach(fileList => {
+            fileList.files.forEach((file) => {
+                file.isSelected = false;
+            })
+        });
+
+        return this.newFilesList;
+    }
+
     _changeFileSelection(bucketId, fileId, value) {
         this._isInArray(this.newFilesList, bucketId, (fileList) => {
             fileList.files.forEach(file => {

@@ -1,6 +1,8 @@
 import FileListModel from '../../../models/FileListModel';
 import FileListManager from '../../../utils/itemManagers/FileListManager';
-import { FILE_ACTIONS } from '../../../utils/constants/actionConstants';
+import { FILE_ACTIONS, MAIN_ACTIONS } from '../../../utils/constants/actionConstants';
+
+const { DISABLE_SELECTION_MODE } = MAIN_ACTIONS;
 
 const { 
     LIST_FILES,
@@ -52,6 +54,9 @@ export default function filesReducer(state = initialState, action) {
             break;
         case DESELECT_FILE:
             newState.fileListModels = filesManager.deselectFile(action.payload.file);
+            break;
+        case DISABLE_SELECTION_MODE:
+            newState.fileListModels = filesManager.clearSelection();
             break;
         default:
             return state || initialState;
