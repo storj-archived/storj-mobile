@@ -84,5 +84,6 @@ export const mainContainerFileActions = {
     uploadFileStart,
     uploadFileSuccess,
     uploadFileError,
-    updateFileUploadProgress
+    updateFileUploadProgress,
+    deleteFile
 };

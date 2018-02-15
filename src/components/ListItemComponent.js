@@ -26,10 +26,6 @@ export default class ListItemComponent extends Component {
         };
     }
 
-    componentDidUpdate() {
-        console.log(this.state.progress);
-    }
-
     shouldComponentUpdate(nextProps) {
         if (this.props.item !== nextProps.item ||
             this.props.isSelectionModeEnabled !== nextProps.isSelectionModeEnabled ||
@@ -118,6 +114,7 @@ export default class ListItemComponent extends Component {
                                             this.deselectAllItems()
                                         } else {
                                             props.onSingleItemSelected();
+                                            props.onSelectionPress(props.item.getId());
                                             props.selectItemId(props.item.getId());
                                         }
                                     }}>

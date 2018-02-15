@@ -36,7 +36,7 @@ class MainContainer extends Component {
         this.openedBucketActions = [
             TabBarActionModelFactory.createNewAction(() => { this.uploadFile(); }, 'Action 1', require('../images/ActionBar/UploadFileIcon.png')), 
             TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 2', require('../images/ActionBar/DownloadIFileIcon.png')),
-            TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 3', require('../images/ActionBar/UploadPhotoIcon.png'))
+            TabBarActionModelFactory.createNewAction(() => { this.deleteSelectedFiles(); }, 'Action 3', require('../images/ActionBar/TrashBucketIcon.png'))
         ]
 
 
@@ -71,21 +71,16 @@ class MainContainer extends Component {
     async uploadFile() {
         let filePickerResponse = await filePicker.show();
 
-        //this.props.setLoading();
         this.props.hideActionBar();
 
         if(filePickerResponse.path) {
             const path = filePickerResponse.path;
 
-            let tempFile = { name: "uploading...", fileId: path, created: "" };
-            
+            let tempFile = { name: "uploading...", fileId: path, created: new Date().toLocaleString() };
             this.props.uploadFileStart(this.props.openedBucketId, new ListItemModel(new FileModel(tempFile), false, true));
 
-
-            console.log(filePickerResponse.path + this.props.openedBucketId);
             const observer = observablePropFactory.getObservable(filePickerResponse.path);
             observer.addListener({ id: filePickerResponse.path + this.props.openedBucketId, callback: (param) => { 
-                console.log(param);
                 if(this.props.openedBucketId === param.bucketId)
                     this.props.updateFileUploadProgress(param.bucketId, param.filePath, param.progress);
             }});
@@ -98,8 +93,24 @@ class MainContainer extends Component {
                 this.props.uploadFileError(this.props.openedBucketId, path);
             }
         }
+    }
 
-        //this.props.unsetLoading();
+    async deleteFile(bucketId, fileId) {
+        let response = await  StorjLib.deleteFile(bucketId, fileId);
+
+        console.log(response);
+        if(response.isSuccess) {
+            this.props.deleteFile(bucketId, fileId);
+        }
+    }
+
+    deleteSelectedFiles() {
+        this.props.fileListModels.forEach(fileEntry => {
+            fileEntry.files.forEach(fileItem => {
+                if(fileItem.isSelected)
+                    this.deleteFile(fileEntry.bucketId, fileItem.getId());
+            });
+        });
     }
 
     async createBucket(bucketName) {
@@ -162,8 +173,12 @@ class MainContainer extends Component {
     };
 
     render() {
+        const index = this.props.bucketsScreenNavReducer.index;
+        const routes = this.props.bucketsScreenNavReducer.routes;
+
         return(
             <MainComponent
+                bucketScreenRouteName = { routes[index].routeName }
                 openedBucketId = { this.props.openedBucketId }
                 createBucket = { this.createBucket.bind(this) }
                 hideCreateBucketInput = { this.props.hideCreateBucketInput }
@@ -182,6 +197,8 @@ class MainContainer extends Component {
 
 function mapStateToProps(state) { 
     return {
+        bucketsScreenNavReducer: state.bucketsScreenNavReducer,
+        fileListModels: state.filesReducer.fileListModels,
         openedBucketId: state.mainReducer.openedBucketId,
         isSelectionMode: state.mainReducer.isSelectionMode, 
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,

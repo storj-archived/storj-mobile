@@ -53,9 +53,11 @@ export default class TabBarComponent extends Component {
         if(this.props.navigation.isSelectionMode !== nextProps.navigation.isSelectionMode 
            || this.props.navigation.isActionBarShown !== nextProps.navigation.isActionBarShown) {
             return true;
-        } else if(this.props.currentRouteIndex !== nextProps.navigation.currentRouteIndex) {
+        } 
+
+        if(this.props.currentRouteIndex !== nextProps.navigation.currentRouteIndex) {
             return true;
-        }       
+        }
 
         return false;
     }

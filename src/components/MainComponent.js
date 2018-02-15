@@ -28,6 +28,7 @@ export default class MainComponent extends Component {
                 {
                     this.props.isActionBarShown || this.props.isSelectionMode ? 
                         <ActionBarComponent
+                            bucketScreenRouteName = { this.props.bucketScreenRouteName }
                             openedBucketId = { this.props.openedBucketId }
                             isSingleItemSelected = { this.props.isSingleItemSelected }
                             isSelectionMode = { this.props.isSelectionMode }

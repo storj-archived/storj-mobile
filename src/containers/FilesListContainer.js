@@ -1,4 +1,4 @@
-import { BackHandler, Platform, DeviceEventEmitter } from 'react-native';
+import { BackHandler, Platform, DeviceEventEmitter, Animated } from 'react-native';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -23,6 +23,14 @@ class FilesListContainer extends Component {
         }
 
         this.listFiles();
+
+        Animated.timing(
+            this.props.screenProps.animatedScrollValue,
+            {
+              toValue: 0,
+              useNativeDriver: true
+            }
+        ).start();
     }
 
     componentWillUnmount() {

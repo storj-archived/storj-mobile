@@ -27,8 +27,9 @@ export default class ActionBarComponent extends Component {
     shouldComponentUpdate(nextProps) {
         if(this.props.isSelectionMode !== nextProps.isSelectionMode) 
             return true;
-
         if(this.props.isSingleItemSelected !== nextProps.isSingleItemSelected) 
+            return true;
+        if(this.props.bucketScreenRouteName !== nextProps.bucketScreenRouteName)
             return true;
 
         return false;

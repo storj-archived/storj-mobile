@@ -105,12 +105,6 @@ export default class FileListManager {
         let doesContain = this._isInArray(this.newFilesList, bucketId, (itemsList) => {
             let loadingFiles = [];
 
-            // left for later
-            /* itemsList.files.forEach(file => { 
-                if(file.isLoading)
-                    loadingFiles.push(file);
-            }); */
-
             itemsList.files = files.concat(loadingFiles);
         });
 
