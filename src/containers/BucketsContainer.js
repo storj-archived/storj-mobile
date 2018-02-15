@@ -34,15 +34,17 @@ class BucketsContainer extends Component {
 
         let count = 0;
 
-        var openedBucketFiles = this.props.files.filter(item => {
+        let openedBucket = this.props.files.find(item => {
             return item.bucketId === this.props.selectedBucketId;
         });
 
-        //[0] couse there could be only 1 selected bucket at the same time
-        openedBucketFiles[0].files.forEach(item => {
-            if(item.isSelected) count ++
-        });
-
+        if(openedBucket) {
+            openedBucket.files.forEach(item => {
+                if(item.isSelected) 
+                    count++;
+            });
+        }
+    
         return count;
     }
 

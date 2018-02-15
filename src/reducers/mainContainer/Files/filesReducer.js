@@ -59,15 +59,3 @@ export default function filesReducer(state = initialState, action) {
 
     return newState;
 }
-
-class FileListModel {
-    /**
-     * @param {string} bucketId 
-     * @param {ListItemModel[]} files 
-     */
-    constructor(bucketId = null, files = []) {
-        this.bucketId = bucketId;
-        this.files = files;
-    }
-}
-

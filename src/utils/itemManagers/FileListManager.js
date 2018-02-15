@@ -141,7 +141,7 @@ export default class FileListManager {
     }
 
     _changeFileSelection(bucketId, fileId, value) {
-        this._isInArray(bucketId, (fileList) => {
+        this._isInArray(this.newFilesList, bucketId, (fileList) => {
             fileList.files.forEach(file => {
                 if(file.getId() === fileId) 
                     file.isSelected = value;
