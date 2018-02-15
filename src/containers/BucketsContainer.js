@@ -7,6 +7,7 @@ import FirstSignInComponent from '../components/FirstSignInComponent';
 import StorjLib from '../utils/StorjModule';
 import ListItemModel from '../models/ListItemModel';
 import { getFirstSignIn } from '../utils/AsyncStorageModule';
+import { navigateBack } from '../reducers/navigation/navigationActions';
 
 class BucketsContainer extends Component {
     constructor(props) {
@@ -85,8 +86,10 @@ class BucketsContainer extends Component {
                     selectedBucketsCount = { this.getSelectedBucketsCount() }
                     selectedFilesCount = { this.getSelectedFilesCount() }
                     buckets = { this.props.buckets }
+                    selectedBucketId = { this.props.selectedBucketId }
                     files = { this.props.files }
-                    screenName = { this.props.screenName } /> 
+                    screenName = { this.props.screenName }
+                    navigateBack = { this.props.navigateBack } /> 
             );
         }
     }
@@ -109,7 +112,7 @@ function mapStateToProps(state) {
 }
     
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(bucketsContainerActions, dispatch);
+    return bindActionCreators( { ...bucketsContainerActions, navigateBack }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BucketsContainer);

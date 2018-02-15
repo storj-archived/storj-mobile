@@ -29,7 +29,10 @@ export default class BucketsComponent extends Component {
                     disableSelectionMode = { this.props.disableSelectionMode }
                     selectedFilesCount = {this.props.selectedFilesCount }
                     selectedBucketsCount = { this.props.selectedBucketsCount }
-                    animatedScrollValue = { this.animatedScrollValue } />
+                    animatedScrollValue = { this.animatedScrollValue }
+                    navigateBack = { this.props.navigateBack }
+                    buckets = { this.props.buckets }
+                    selectedBucketId = { this.props.selectedBucketId } />
             </View>
         );
     }

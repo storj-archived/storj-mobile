@@ -19,7 +19,46 @@ export default class SearchComponent extends Component {
         };
     }
 
+    getSelectedBucketName() {
+        let buckets = this.props.buckets;
+
+        return buckets.find((bucket) => {
+            if(bucket.entity.id == this.props.selectedBucketId) return true;
+        }).getName();
+    }
+
     render() {
+        if(this.props.screenName == 'FilesScreen') {
+            return(
+                <View style = { [ styles.rowContainer, this.props.styleContainer ] }>
+                    <TouchableOpacity onPress = { () => { this.props.navigateBack(); } }>
+                        <Image style = { styles.backButton } source = { require("../images/Icons/BackButton.png") } resizeMode = { 'contain' } />
+                    </TouchableOpacity>
+                    <View style = { [ styles.rowContainer, styles.mainContainer, styles.fileHeader ] }>
+                        <View style = {[ styles.rowContainer, { height: getHeight(50) } ]}>
+                            <TextInput
+                                onFocus = { () => { this.setState({ isSearchIconShown: false }); } }
+                                onBlur = { () => { 
+                                    if(!this.state.searchValue) {
+                                        this.setState({ isSearchIconShown: true }); 
+                                    }
+                                }}
+                                placeholder = { this.getSelectedBucketName() }
+                                underlineColorAndroid = { 'transparent' } 
+                                style = { styles.textInput }
+                                onChangeText = { (value) => { this.setState({ searchValue: value }); } } 
+                                value = { this.state.searchValue } />
+                        </View>
+                        <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>
+                            <Text style = { styles.updateStatus }>Just now</Text>
+                            <TouchableOpacity>
+                                <Image style = { styles.image } source = { require("../images/Icons/SearchOptions.png") } resizeMode = { 'contain' } />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            );
+        }
         return(
             <View style = { [ styles.rowContainer, styles.mainContainer, this.props.styleContainer ] }>
                     <View style = { styles.rowContainer }>
@@ -61,6 +100,9 @@ const styles = StyleSheet.create({
         borderRadius: getHeight(10),
         justifyContent: 'space-between'
     },
+    fileHeader: {
+        marginLeft: getWidth(16)
+    },
     updateStatusContainer: {
         justifyContent: 'flex-end',
         flex: 0.4
@@ -68,6 +110,10 @@ const styles = StyleSheet.create({
     image: {
         width: getHeight(16.5),
         height: getHeight(16.5)
+    },
+    backButton: {
+        width: getHeight(24),
+        height: getHeight(24)
     },
     textInput: {
         paddingVertical: 0,

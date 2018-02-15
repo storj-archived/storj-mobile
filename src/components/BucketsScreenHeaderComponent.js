@@ -19,6 +19,9 @@ export default class BucketsScreenHeaderComponent extends Component {
         return(
             <View style={ styles.mainContainer }>
                 <AnimatedHeader 
+                    buckets = { this.props.buckets }
+                    selectedBucketId = { this.props.selectedBucketId }
+                    navigateBack = { this.props.navigateBack }
                     screenName = { this.props.screenName }
                     isSelectionMode = { this.props.isSelectionMode }
                     disableSelectionMode = { this.props.disableSelectionMode }
@@ -120,7 +123,12 @@ class AnimatedHeader extends Component {
                     <Image style = { styles.backButton } source = { require("../images/Icons/BackButton.png") } />
                 </TouchableOpacity> */}
                 <Animated.View style = { [ styles.searchWrapperInner, res[1] ] }>
-                    <SearchComponent styleContainer = { styles.searchComponent } />
+                    <SearchComponent 
+                        buckets = { this.props.buckets }
+                        selectedBucketId = { this.props.selectedBucketId }
+                        styleContainer = { styles.searchComponent }
+                        screenName = { this.props.screenName }
+                        navigateBack = { this.props.navigateBack } />
                 </Animated.View>
             </View>
         );
