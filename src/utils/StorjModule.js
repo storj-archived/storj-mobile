@@ -138,7 +138,15 @@ const StorjLib = (() => {
             console.log(result);
 
             return result;
-        };
+        }
+
+        /**
+         * Deletes bucket by Id
+         * @param {string} bucketId 
+         */
+        async deleteBucket(bucketId) {
+            return await storjLib.deleteBucket(bucketId);
+        }
 
         /**
          * download file to storj network
