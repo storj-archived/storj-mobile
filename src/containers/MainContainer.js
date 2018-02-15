@@ -70,13 +70,20 @@ class MainContainer extends Component {
 
     async uploadFile() {
         let filePickerResponse = await filePicker.show();
-
         this.props.hideActionBar();
 
         if(filePickerResponse.path) {
             const path = filePickerResponse.path;
 
-            let tempFile = { name: "uploading...", fileId: path, created: new Date().toLocaleString() };
+            let re = /\/(\w||[\-\s])+\..+$/i;
+            let result = path.match(re);
+            let name = "uploading...";
+
+            if(result) {
+                name = result[0].slice(1);
+            }
+
+            let tempFile = { name, fileId: path, created: new Date().toLocaleString() };
             this.props.uploadFileStart(this.props.openedBucketId, new ListItemModel(new FileModel(tempFile), false, true));
 
             const observer = observablePropFactory.getObservable(filePickerResponse.path);
