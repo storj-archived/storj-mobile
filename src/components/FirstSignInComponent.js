@@ -6,12 +6,8 @@ import {
     Image
 } from 'react-native';
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import MainNavigationContainer from '../containers/MainNavigationContainer';
-import ActionBarComponent from '../components/ActionBarComponent';
-import CreateBucketPopUpComponent from '../components/InputPopUpComponent';
 import { getWidth, getHeight, getDeviceWidth } from '../utils/adaptive';
-import StorjLib from '../utils/StorjModule';
+import PropTypes from 'prop-types';
 
 export default class FirstSignInComponent extends Component {
     constructor(props) {
@@ -34,11 +30,7 @@ export default class FirstSignInComponent extends Component {
 
     closeModal = async () => {
         this.setState({ 
-            showModal: false,
-            photosSelected: true,
-            videosSelected: true,
-            musicSelected: true,
-            filesSelected: true 
+            showModal: false
         });
 
         this.state.androidOptions.forEach(option => {
@@ -46,7 +38,6 @@ export default class FirstSignInComponent extends Component {
                 this.props.createBucket(option.type);
             }
         });
-        this.props.createBucket('photos');
     }
 
     changeOptions = (type) => {
@@ -96,16 +87,20 @@ export default class FirstSignInComponent extends Component {
                         {
                             this.state.androidOptions.map(option => {
                                 return (
-                                    <TouchableOpacity style = { styles.modalCheckListItemContainer } onPress = { () => { this.getCallback(option.type); } } >
-                                    <View style = { styles.flexRow }>
-                                        <Image style = { styles.selectedIcon }
-                                            source = {
-                                                option.isSelected ? 
-                                                require('../images/Icons/ListItemSelected.png') :
-                                                require('../images/Icons/ListItemUnselected.png') } />
-                                        <Text style = { styles.label }>{ option.title }</Text>
-                                    </View>
-                                </TouchableOpacity>);
+                                    <TouchableOpacity 
+                                        key = { option.type }
+                                        style = { styles.modalCheckListItemContainer } 
+                                        onPress = { () => { this.getCallback(option.type); } } >
+                                        <View style = { styles.flexRow }>
+                                            <Image style = { styles.selectedIcon }
+                                                source = {
+                                                    option.isSelected ? 
+                                                    require('../images/Icons/ListItemSelected.png') :
+                                                    require('../images/Icons/ListItemUnselected.png') } />
+                                            <Text style = { styles.label }>{ option.title }</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                );
                             })
                         }
                         <TouchableOpacity style = { styles.goButton } onPress = { this.closeModal.bind(this) }>
@@ -148,6 +143,10 @@ export default class FirstSignInComponent extends Component {
             </View>
         );
     }
+}
+
+FirstSignInComponent.propTypes = {
+    createBucket: PropTypes.func
 }
 
 const styles = StyleSheet.create({

@@ -108,7 +108,8 @@ export default class TabBarComponent extends Component {
                         <View>
                             <Image 
                                 source = { actionButtonSource } 
-                                style = { styles.circleActionbutton } />
+                                style = { styles.circleActionbutton }
+                                resizeMode = { 'contain' } />
                         </View>
                     </TouchableOpacity>
                 </View>

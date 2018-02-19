@@ -53,20 +53,19 @@ ExpanderComponent.propTypes = {
 
 const styles = StyleSheet.create({
     imageWrapper: {
-        marginVertical: getHeight(8),
+        marginTop: getHeight(25),
         marginRight: getWidth(5),
         justifyContent: 'center',
         alignContent: 'center'
     },
     expanderTextView: {
-        height: getHeight(44),
+        height: getHeight(55),
         justifyContent: 'space-between',
         flexDirection: 'row'
     },
     expanderText: {
-        marginVertical: getHeight(13),        
+        marginTop: getHeight(30),        
         fontFamily: 'Montserrat-Regular',
-        lineHeight: getHeight(18),
         fontSize: getHeight(14),
         color: 'rgba(56, 75, 101, 0.4)'
     },
@@ -79,10 +78,10 @@ const styles = StyleSheet.create({
         height: getHeight(10),
     },
     expanderContainer: {
-        marginHorizontal: getWidth(10)
+        marginHorizontal: getWidth(20)
     },
     expanderBorder: {
         borderBottomWidth: getHeight(0.5),
-        borderColor: 'rgba(56, 75, 101, 0.4)'
+        borderColor: 'rgba(56, 75, 101, 0.2)'
     }
 });

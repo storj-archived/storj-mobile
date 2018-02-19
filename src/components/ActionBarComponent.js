@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     },
     imageWrapperBorder: {
         borderLeftWidth: getWidth(1),
-        borderColor: 'gray',
+        borderColor: 'rgba(255, 255, 255, 0.4)',
     },
     image: {
         width: getHeight(30),

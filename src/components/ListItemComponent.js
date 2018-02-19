@@ -147,8 +147,7 @@ ListItemComponent.propTypes = {
 const listItemStyles = StyleSheet.create({
     listItemContainer: {
         flex: 1,
-        height: getHeight(55),
-        paddingHorizontal: getWidth(10)
+        height: getHeight(55)
     },
     itemSelected: {
         backgroundColor: '#d4e6ff',
