@@ -14,22 +14,19 @@ import io.storj.libstorj.CreateBucketCallback;
 public class CreateBucketCallbackWrapper implements CreateBucketCallback {
 
     private Promise _promise;
-    private SingleResponse<BucketWrapper> _response;
 
-    public CreateBucketCallbackWrapper(Promise promise, SingleResponse<BucketWrapper> response) {
+    public CreateBucketCallbackWrapper(Promise promise) {
         _promise = promise;
-        _response = response;
     }
 
     @Override
     public void onBucketCreated(Bucket bucket) {
-        _response.success(new BucketWrapper(bucket));
-        _promise.resolve(_response.toJsObject());
+        _promise.resolve(new SingleResponse<>(true, new BucketWrapper(bucket).toString(), null));
     }
 
     @Override
     public void onError(int code, String message) {
-        _response.error(message);
-        _promise.resolve(_response.toJsObject());
+        //TODO: create error model to pass both message and error code
+        _promise.resolve(new SingleResponse<String>(false, null, message));
     }
 }
