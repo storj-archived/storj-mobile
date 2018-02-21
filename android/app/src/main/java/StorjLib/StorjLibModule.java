@@ -86,12 +86,28 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
             public void callback(IMethodParams param) {
                 String result = Storj.generateMnemonic(256);
 
-                param.getPromise().resolve(
+                param.getPromise().resolve(GsonSingle.getInstanse().toJson(
                         result != null && !result.isEmpty()
                                 ? new SingleResponse<>(true, result, null)
-                                : new SingleResponse<String>(false, null, "Unable to generate mnemonic"));
+                                : new SingleResponse<String>(false, null, "Unable to generate " +
+                                "mnemonic")));
             }
         });
+    }
+
+    public static void main(String... args){
+        String result = "afsdfa;sdfakls;d faksdjf aksldjf alksdjf lkd fjalksd falksdj falksd jf";
+        gsonTest(result);
+        result = null;
+        gsonTest(result);
+
+    }
+    private static void gsonTest(String result){
+        System.out.println(GsonSingle.getInstanse().toJson(
+                result != null && !result.isEmpty()
+                        ? new SingleResponse<>(true, result, null)
+                        : new SingleResponse<String>(false, null, "Unable to generate " +
+                        "mnemonic")));
     }
 
     @ReactMethod
