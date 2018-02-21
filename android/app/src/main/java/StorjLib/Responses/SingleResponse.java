@@ -16,7 +16,17 @@ public class SingleResponse<T> extends Response {
         _result = result;
     }
 
+    @Override
+    public WritableMap toJsObject() {
+        WritableMap map = super.toJsObject();
+
+        map.putString(KEY_RESULT, );
+
+        return map;
+    }
+
     public T result() {
         return _result;
     }
 }
+

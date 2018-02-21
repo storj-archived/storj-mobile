@@ -10,15 +10,12 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import StorjLib.CallbackWrappers.CreateBucketCallbackWrapper;
 import StorjLib.Responses.Response;
 import StorjLib.Responses.SingleResponse;
-import StorjLib.StorjTypesWrappers.BucketWrapper;
-import StorjLib.Utils.FileUtils;
 import io.storj.libstorj.Bucket;
 import io.storj.libstorj.DeleteBucketCallback;
 import io.storj.libstorj.DeleteFileCallback;
@@ -26,7 +23,6 @@ import io.storj.libstorj.DownloadFileCallback;
 import io.storj.libstorj.File;
 import io.storj.libstorj.GetBucketsCallback;
 import io.storj.libstorj.Keys;
-import io.storj.libstorj.KeysNotFoundException;
 import io.storj.libstorj.ListFilesCallback;
 import io.storj.libstorj.RegisterCallback;
 import io.storj.libstorj.Storj;
@@ -35,9 +31,6 @@ import io.storj.libstorj.android.StorjAndroid;
 
 //TODO: 1. validate all input parameters (check in sources)
 //TODO: split StorjLibModule into several modules to prevent God object creating
-
-
-
 interface IMethodParams {
     Promise getPromise();
 }
@@ -55,142 +48,102 @@ class BaseMethodParams implements IMethodParams {
 }
 
 interface ICallback {
-    void callback(IMethodParams param);
+    void callback(IMethodParams param) throws Exception;
 }
 
-class MethodResult  {
-    public void invoke(final IMethodParams param, final ICallback callback) {
-        try {
-            if(callback == null) return;
+public class StorjLibModule extends ReactContextBaseJavaModule {
 
-            callback.callback(param);
-        }
-        catch(Exception error) {
+    private static final String E_VERIFY_KEYS = "STORJ_E_VERIFY_KEYS";
+    private static final String E_IMPORT_KEYS = "E_IMPORT_KEYS";
+    private static final String E_KEYS_EXISTS = "E_KEYS_EXISTS";
+    private static final String E_GET_KEYS = "E_GET_KEYS";
+    private static final String E_REGISTER = "E_REGISTER";
+    private static final String E_GENERATE_MNEMONIC = "STORJ_E_GENERATE_MNEMONIC";
+    private static final String E_CHECK_MNEMONIC = "E_CHECK_MNEMONIC";
+    private static final String E_KEYS_NOT_FOUND = "E_KEYS_NOT_FOUND";
+    private static final String E_GET_BUCKETS = "E_GET_BUCKETS";
+    private static final String E_CREATE_BUCKET = "E_CREATE_BUCKET";
+    private static final String MODULE_NAME = "StorjLibAndroid";
 
-        }
+    public StorjLibModule(ReactApplicationContext reactContext) {
+        super(reactContext);
     }
 
-    public void invokeParallel(final IMethodParams param, final ICallback callback) {
-        new Thread(new Runnable() {
+    @Override
+    public String getName() {
+        return MODULE_NAME;
+    }
+
+    public Storj getStorj() {
+        return StorjAndroid.getInstance(getReactApplicationContext());
+    }
+
+    @ReactMethod
+    @Deprecated
+    public void generateMnemonic(Promise promise) {
+        new MethodHandler().invoke(new BaseMethodParams(promise), new ICallback() {
             @Override
-            public void run() {
-                try {
-                    if(callback == null) return;
+            public void callback(IMethodParams param) {
+                String result = Storj.generateMnemonic(256);
 
-                    callback.callback(param);
-                }
-                catch(Exception error) {
-
-                }
-            }
-        }).start();
-    }
-}
-
-    public class StorjLibModule extends ReactContextBaseJavaModule {
-
-        private static final String E_VERIFY_KEYS = "STORJ_E_VERIFY_KEYS";
-        private static final String E_IMPORT_KEYS = "E_IMPORT_KEYS";
-        private static final String E_KEYS_EXISTS = "E_KEYS_EXISTS";
-        private static final String E_GET_KEYS = "E_GET_KEYS";
-        private static final String E_REGISTER = "E_REGISTER";
-        private static final String E_GENERATE_MNEMONIC = "STORJ_E_GENERATE_MNEMONIC";
-        private static final String E_CHECK_MNEMONIC = "E_CHECK_MNEMONIC";
-        private static final String E_KEYS_NOT_FOUND = "E_KEYS_NOT_FOUND";
-        private static final String E_GET_BUCKETS = "E_GET_BUCKETS";
-        private static final String E_CREATE_BUCKET = "E_CREATE_BUCKET";
-        private static final String MODULE_NAME = "StorjLibAndroid";
-
-        public StorjLibModule(ReactApplicationContext reactContext) {
-            super(reactContext);
-        }
-
-        @Override
-        public String getName() {
-            return MODULE_NAME;
-        }
-
-        public Storj getStorj() {
-            return StorjAndroid.getInstance(getReactApplicationContext());
-        }
-
-        @ReactMethod
-        @Deprecated
-        public void generateMnemonic(Promise promise) {
-            ICallback callback = new ICallback() {
-                @Override
-                public void callback(IMethodParams param) {
-                    String result = Storj.generateMnemonic(256);
-
-                    param.getPromise().resolve(
-                            result != null && !result.isEmpty()
+                param.getPromise().resolve(
+                        result != null && !result.isEmpty()
                                 ? new SingleResponse<>(true, result, null)
                                 : new SingleResponse<String>(false, null, "Unable to generate mnemonic"));
-                }
-            };
-
-            new MethodResult().invoke(new BaseMethodParams(promise), callback);
+            }
+        });
     }
-
 
     @ReactMethod
     public void checkMnemonic(final String mnemonic, Promise promise) {
-        ICallback callback = new ICallback() {
+        new MethodHandler().invoke(new BaseMethodParams(promise), new ICallback() {
             @Override
             public void callback(IMethodParams param) {
-
                 param.getPromise().resolve(
                         Storj.checkMnemonic(mnemonic)
                                 ? new Response(true, null)
                                 : new Response(false, E_CHECK_MNEMONIC));
             }
-        };
-
-        new MethodResult().invoke(new BaseMethodParams(promise), callback);
+        });
     }
 
     @ReactMethod
     public void verifyKeys(final String email, final String password, final Promise promise) {
-        ICallback callback = new ICallback() {
+        new MethodHandler().invokeParallel(new BaseMethodParams(promise), new ICallback() {
             @Override
-            public void callback(IMethodParams param) {
-                try {
-                    int error_code = getStorj().verifyKeys(email, password);
-
-                    param.getPromise().resolve(
-                            error_code == 0
-                                    ? new Response(true, null)
-                                    : new Response(false, E_VERIFY_KEYS));
-
-                } catch (Exception e) {
-                    promise.reject(E_VERIFY_KEYS, e);
-                }
+            public void callback(IMethodParams param) throws Exception {
+                param.getPromise().resolve(
+                        getStorj().verifyKeys(email, password) == 0
+                                ? new Response(true, null)
+                                : new Response(false, E_VERIFY_KEYS));
             }
-        };
-
-        new MethodResult().invokeParallel(new BaseMethodParams(promise), callback);
+        });
     }
 
     @ReactMethod
     public void keysExists(Promise promise) {
-        try {
-            boolean result = StorjAndroid.getInstance(getReactApplicationContext()).keysExist();
-
-            promise.resolve(result);
-        } catch (Exception e) {
-            promise.reject(E_KEYS_EXISTS, e);
-        }
+        new MethodHandler().invokeParallel(new BaseMethodParams(promise), new ICallback() {
+            @Override
+            public void callback(IMethodParams param) throws Exception {
+                param.getPromise().resolve(
+                        getStorj().keysExist()
+                                ? new Response(true, null)
+                                : new Response(false, E_VERIFY_KEYS));
+            }
+        });
     }
 
     @ReactMethod
-    public void importKeys(String email, String password, String mnemonic, String passcode, Promise promise) {
-        try {
-            boolean result = StorjAndroid.getInstance(getReactApplicationContext()).importKeys(new Keys(email, password, mnemonic), passcode);
-
-            promise.resolve(result);
-        } catch (Exception e) {
-            promise.reject(E_IMPORT_KEYS, e);
-        }
+    public void importKeys(final String email, final String password, final String mnemonic, final String passcode, Promise promise) {
+        new MethodHandler().invokeParallel(new BaseMethodParams(promise), new ICallback() {
+            @Override
+            public void callback(IMethodParams param) throws Exception {
+                param.getPromise().resolve(
+                        getStorj().importKeys(new Keys(email, password, mnemonic), passcode)
+                                ? new Response(true, null)
+                                : new Response(false, E_VERIFY_KEYS));
+            }
+        });
     }
 
     @ReactMethod
@@ -212,58 +165,42 @@ class MethodResult  {
 
     @ReactMethod
     public void register(final String login, final String password, final Promise promise) {
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    StorjAndroid.getInstance(getReactApplicationContext()).register(login, password, new RegisterCallbackWrapper(promise));
-                } catch (Exception e) {
-                    promise.reject(E_REGISTER, e);
-                }
+        new MethodHandler().invokeParallel(new BaseMethodParams(promise), new ICallback() {
+            @Override
+            public void callback(IMethodParams param) {
+                StorjAndroid.getInstance(getReactApplicationContext()).register(login, password, new RegisterCallbackWrapper(promise)); //TODO: fix wrapper
             }
-        }).start();
+        });
     }
 
     @ReactMethod
     public void createBucket(final String bucketName, final Promise promise) {
-        ICallback callback = new ICallback() {
+        new MethodHandler().invokeParallel(new BaseMethodParams(promise), new ICallback() {
             @Override
             public void callback(IMethodParams param) {
                 StorjAndroid.getInstance(getReactApplicationContext()).createBucket(bucketName, new CreateBucketCallbackWrapper(promise));
             }
-        };
-
-        new MethodResult().invokeParallel(new BaseMethodParams(promise), callback);
+        });
     }
 
     @ReactMethod
     void deleteBucket(final String bucketId, final Promise promise) {
-
-        new Thread(new Runnable() {
+        new MethodHandler().invokeParallel(new BaseMethodParams(promise), new ICallback() {
             @Override
-            public void run() {
-                try {
-                    StorjAndroid.getInstance(getReactApplicationContext()).deleteBucket(bucketId, new DeleteCallbackWrapper(promise, bucketId));
-                } catch (Exception e) {
-                    promise.resolve(new SingleResponse<String>(true, null, "Error message"));
-                }
+            public void callback(IMethodParams param) {
+                StorjAndroid.getInstance(getReactApplicationContext()).deleteBucket(bucketId, new DeleteCallbackWrapper(promise, bucketId));
             }
-        }).start();
+        });
     }
 
     @ReactMethod
     public void getBuckets(final Promise promise) {
-        new Thread(new Runnable() {
+        new MethodHandler().invokeParallel(new BaseMethodParams(promise), new ICallback() {
             @Override
-            public void run() {
-                try {
-                    StorjAndroid.getInstance(getReactApplicationContext()).getBuckets(new GetBucketsCallbackWrapper(promise));
-                } catch (KeysNotFoundException e) {
-                    promise.reject(E_KEYS_NOT_FOUND, e);
-                } catch (Exception e) {
-                    promise.reject(E_GET_BUCKETS, e);
-                }
+            public void callback(IMethodParams param) {
+                StorjAndroid.getInstance(getReactApplicationContext()).getBuckets(new GetBucketsCallbackWrapper(promise));
             }
-        }).start();
+        });
     }
 
     @ReactMethod
