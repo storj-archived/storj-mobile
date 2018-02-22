@@ -18,35 +18,28 @@ class BucketsContainer extends Component {
         }
     }
 
+    getArraySelectedCount(array) {
+        return array.filter((item) => {
+            return item.isSelected;
+        }).length;
+    }
+  
     getSelectedBucketsCount() {
-        let count = 0;
+        if(!this.props.buckets) return 0;
 
-        this.props.buckets.map(item => {
-            if(item.isSelected) {
-                count++;
-            }
-        });
-
-        return count;
+        return this.getArraySelectedCount(this.props.buckets);
     }
 
     getSelectedFilesCount() {
-        if(!this.props.selectedBucketId || !this.props.files || this.props.files.length === 0) return 0;
-
-        let count = 0;
+        if(!this.props.selectedBucketId || !this.props.files || this.props.files.length === 0) return 0; 
 
         let openedBucket = this.props.files.find(item => {
             return item.bucketId === this.props.selectedBucketId;
         });
 
         if(openedBucket) {
-            openedBucket.files.forEach(item => {
-                if(item.isSelected) 
-                    count++;
-            });
+            return this.getArraySelectedCount(openedBucket.files);
         }
-    
-        return count;
     }
 
     async createBucket(name) {

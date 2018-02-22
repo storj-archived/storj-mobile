@@ -1,20 +1,47 @@
 import React, { Component } from 'react';
+import {
+    View
+} from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { dashboardContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { navigateBack, navigateToFilesScreen } from '../reducers/navigation/navigationActions';
-import DashboardListComponent from '../components/DashboardListComponent';
+import DashboardComponent from '../components/DashboardComponent';
 
-class DashboardContainer extends Component {
+class DashboardScreenContainer extends Component {
     constructor(props) {
         super(props);
     }
 
+    getArraySelectedCount(array) {
+        return array.filter((item) => {
+            return item.isSelected;
+        }).length;
+    }
+  
+    getSelectedBucketsCount() {
+        if(!this.props.buckets) return 0;
+
+        return this.getArraySelectedCount(this.props.buckets);
+    }
+
+    getSelectedFilesCount() {
+        if(!this.props.selectedBucketId || !this.props.files || this.props.files.length === 0) return 0; 
+
+        let openedBucket = this.props.files.find(item => {
+            return item.bucketId === this.props.selectedBucketId;
+        });
+
+        if(openedBucket) {
+            return this.getArraySelectedCount(openedBucket.files);
+        }
+    }
+
     render() {
         return(
-            <DashboardListComponent
+            <DashboardComponent
                 files = { this.props.files }
                 buckets = { this.props.buckets }
                 openBucket = { this.props.openBucket}
@@ -24,8 +51,9 @@ class DashboardContainer extends Component {
                 deselectItem = { this.props.deselectBucket }      
                 isSelectionMode = { this.props.isSelectionMode }
                 selectedBucketId = { this.props.selectedBucketId }
-                animatedScrollValue = { this.animatedScrollValue  }
-                enableSelectionMode = { this.props.enableSelectionMode }
+                animatedScrollValue = { this.animatedScrollValue }
+                selectedFilesCount = { this.getSelectedFilesCount() }  
+                selectedBucketsCount = { this.getSelectedBucketsCount() }
                 disableSelectionMode = { this.props.disableSelectionMode }
                 onSingleItemSelected = { this.props.onSingleItemSelected }  
                 isSingleItemSelected = { this.props.isSingleItemSelected }
@@ -37,15 +65,16 @@ class DashboardContainer extends Component {
 function mapStateToProps(state) {
     let routes = state.dashboardScreenNavReducer.routes;
     let index = state.dashboardScreenNavReducer.index;
-    let currentBucketScreenName = routes[index].routeName;
+    let currentScreenName = routes[index].routeName;
 
     return {
         isSelectionMode: state.mainReducer.isSelectionMode,        
         buckets: state.mainReducer.buckets,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
+        isFirstSignIn: state.mainReducer.isFirstSignIn,
         fileListModels: state.filesReducer.fileListModels,
         files: state.filesReducer.fileListModels,
-        screenName: currentBucketScreenName,
+        screenName: currentScreenName,
         selectedBucketId: state.mainReducer.openedBucketId
     };
 }
@@ -53,11 +82,11 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators( { 
         ...dashboardContainerActions, 
-        ...filesListContainerFileActions, 
         ...filesListContainerMainActions, 
+        ...filesListContainerFileActions, 
         navigateBack,
         navigateToFilesScreen
     }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardScreenContainer);;

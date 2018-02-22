@@ -148,6 +148,17 @@ export const bucketsContainerActions = {
     unsetLoading
 };
 
+export const dashboardContainerActions = {
+    selectBucket,
+    deselectBucket,
+    enableSelectionMode,
+    disableSelectionMode,
+    onSingleItemSelected,
+    setLoading,
+    unsetLoading,
+    openBucket
+}
+
 export const initializeContainerActions = {
     getBuckets, 
     setFirstSignIn

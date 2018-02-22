@@ -1,17 +1,13 @@
 import {
     View,
-    Text,
     StyleSheet
 } from 'react-native';
 import React, { Component } from 'react';
 import ListComponent from '../components/ListComponent';
-import { getHeight } from '../utils/adaptive';
 
 export default class BucketsListComponent extends Component {
     constructor(props) {
         super(props);
-
-        console.log(props);
     }
 
     render() {

@@ -1,10 +1,14 @@
 import { StackNavigator } from 'react-navigation';
 import BucketsScreen from '../containers/BucketsListContainer';
 import FilesScreen from '../containers/FilesListContainer';
+import DashboardScreen from '../containers/DashboardContainer';
 
-
-const BucketsScreenNavigator = StackNavigator(
+const DashboardScreenNavigator = StackNavigator(
     {
+        DashboardScreen: {
+            screen: DashboardScreen,
+            routeName: 'DashboardScreen'
+        },
         BucketsScreen: {
             screen: BucketsScreen,
             routeName: 'BucketsScreen'
@@ -15,8 +19,9 @@ const BucketsScreenNavigator = StackNavigator(
         }
     }, 
     {
-        initialRouteName: 'BucketsScreen'
+        initialRouteName: 'DashboardScreen',
+        headerMode : 'none'
     }
 );
 
-export default BucketsScreenNavigator;
+export default DashboardScreenNavigator;

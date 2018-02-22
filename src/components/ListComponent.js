@@ -11,8 +11,8 @@ import {
     Animated
 } from 'react-native';
 import ListItemComponent from '../components/ListItemComponent';
-import ListItemModel from '../models/ListItemModel';
 import ExpanderComponent from '../components/ExpanderComponent';
+import ListItemModel from '../models/ListItemModel';
 import PropTypes from 'prop-types';
 import { getWidth, getHeight } from '../utils/adaptive';
 
@@ -176,6 +176,32 @@ export default class ListComponent extends Component {
         });
     }
 
+    //TODO: rework after getting actual data
+    getItemsWithoutExpander() {
+        return this.props.data.map((item) => {
+            return (
+                <ListItemComponent
+                    bucketId = { this.props.bucketId }
+                    key = { item.getId() }
+                    item = { item } 
+                    selectItemId = { (itemId) => { this.setState({ selectedItemId: itemId }) }}
+                    navigateToFilesScreen = { this.props.navigateToFilesScreen ? this.props.navigateToFilesScreen : () => {} }
+                    isItemActionsSelected = { this.state.selectedItemId === item.getId() }
+                    onLongPress = { () => { this.onItemLongPress(item); } }
+                    isSelectionModeEnabled = { this.props.isSelectionMode }
+                    isSelected = { item.isSelected }
+                    isSingleItemSelected = { this.props.isSingleItemSelected }
+                    disableSelectionMode = { this.props.disableSelectionMode }
+                    progress = { item.progress }
+                    isLoading = { item.isLoading }
+                    listItemIcon = { this.props.listItemIcon }
+                    onSelectionPress = { () => { this.selectItem(item); } }
+                    onPress = { this.props.onPress }
+                    onSingleItemSelected = { this.props.onSingleItemSelected } />
+            )
+        })
+    }
+
     render() {     
         return (
             <View>
@@ -197,9 +223,11 @@ export default class ListComponent extends Component {
                             refreshing = { this.state.refreshing }
                             onRefresh = { this.onRefresh.bind(this) } /> }>
 
-                            <View style = { styles.contentWrapper }>
+                            <View style = { this.props.verticalPaddingDisabled ? null : styles.contentWrapper  }>
                                 {
-                                    this.getItemsList()
+                                    !this.props.isExpanderDisabled ?
+                                        this.getItemsList() :   
+                                        this.getItemsWithoutExpander()
                                 }
                             </View>
                 </Animated.ScrollView>
@@ -209,6 +237,7 @@ export default class ListComponent extends Component {
 }
 
 ListComponent.propTypes = {
+    isExpanderDisabled: PropTypes.bool,
     listItemIcon: PropTypes.number, //wtf?
     mainTitlePath: PropTypes.string,
     sortOptions: PropTypes.string,
@@ -231,7 +260,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     contentWrapper: {
-        paddingVertical: getHeight(70)
+        marginTop: getHeight(70)
     }
 });
 

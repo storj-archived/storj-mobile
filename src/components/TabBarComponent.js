@@ -1,7 +1,6 @@
 import {
     View,
     Image,
-    Text,
     StyleSheet,
     TouchableOpacity,
     Keyboard,
@@ -88,7 +87,7 @@ export default class TabBarComponent extends Component {
             <Animated.View style = { [ styles.mainContainer, this.getTabBarTrasformProperties() ] }>       
                 <View style = { styles.navContainer }>
                     <View style = { styles.tabContainer }>
-                        <TouchableOpacity style = { styles.tabItemContainer } onPress = { () => { this.props.navigation.test(); } }>
+                        <TouchableOpacity style = { styles.tabItemContainer } onPress = { () => { this.props.navigation.navigate("DashboardScreen"); } }>
                             <View><Image source = { require('../images/TabBar/HomeTabBar.png') } style = { navIndex === 0 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
                         <TouchableOpacity style = { styles.tabItemContainer } onPress = { () => {  this.props.navigation.goToBucketsScreen(); } }>

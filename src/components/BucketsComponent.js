@@ -1,13 +1,9 @@
 import {
     View,
-    Text,
-    TouchableOpacity,
-    ScrollView,
     StyleSheet,
     Animated
 } from 'react-native';
 import React, { Component } from 'react';
-import ListComponent from '../components/ListComponent';
 import BucketsScreenNavigation from '../containers/BucketsScreenNavContainer';
 import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderComponent';
 
