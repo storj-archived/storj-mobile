@@ -12,6 +12,8 @@ import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderCompo
 import ListComponent from '../components/ListComponent';
 import ListItemModel from '../models/ListItemModel';
 import BucketModel from '../models/BucketModel';
+import DashboardListFooterComponent from '../components/Dashboard/DashboardListFooterComponent';
+import DashboardListHeaderComponent from '../components/Dashboard/DashboardListHeaderComponent';
 import { getHeight, getWidth } from '../utils/adaptive';
 
 export default class DashboardListComponent extends Component{
@@ -122,9 +124,9 @@ const listComponent = (title, data, props) => {
     
     return(
         <View>  
-            {
-                titleLink(title)
-            }
+            <DashboardListHeaderComponent
+                onPress = { () => {} }
+                title = { title } />
             <ListComponent
                 verticalPaddingDisabled = { true }
                 isExpanderDisabled = { true }
@@ -140,60 +142,9 @@ const listComponent = (title, data, props) => {
                 navigateToFilesScreen = { props.navigateToFilesScreen ? props.navigateToFilesScreen : () => {} }
                 selectItem = { props.selectItem }
                 data = { data } />
-            {
-                footerLink()
-            }
+            <DashboardListFooterComponent
+                onPress = { () => {} } />
         </View>
-    )
-}
-
-const footerLink = () => {
-    return(
-        <TouchableOpacity onPress = { () => {} }>
-            <View style = { footerLinkStyles.container }>
-                <View style = { footerLinkStyles.contentContainer }>
-                    <Text style = { footerLinkStyles.titleText }>2 more...</Text>
-                    <View style = { footerLinkStyles.flexRow } >
-                        <Image 
-                            style = { footerLinkStyles.expandImage } 
-                            source = { require('../images/DashboardScreen/BlueVector.png') } 
-                            resizeMode = 'contain' />
-                    </View>
-                </View>
-            </View>
-            <View style = { footerLinkStyles.underLine }></View>
-        </TouchableOpacity>
-    )
-}
-
-const titleLink = (title) => {
-    let routeName;
-
-    switch (title) {
-        case 'Favourites': routeName = "FavouritesScreen";
-        break;
-        case 'Recent sync': routeName = "RecentScreen";
-        break;
-        case 'Trash': routeName = "TrashScreen";
-        break;
-        default: routeName = null;
-    }
-
-    return(
-        <TouchableOpacity onPress = { () => {} }>
-            <View style = { titleLinkStyles.container }>
-                <View style = { titleLinkStyles.contentContainer }>
-                    <Text style = { titleLinkStyles.titleText }>{title}</Text>
-                    <View style = { titleLinkStyles.flexRow } >
-                        <Text style = { titleLinkStyles.linkText } >View all</Text>
-                        <Image 
-                            style = { titleLinkStyles.expandImage } 
-                            source = { require('../images/DashboardScreen/BlueVector.png') } 
-                            resizeMode = 'contain' />
-                    </View>
-                </View>
-            </View>
-        </TouchableOpacity>
     )
 }
 
@@ -245,62 +196,3 @@ const styles = StyleSheet.create({
         marginTop: getHeight(5) 
     }
 });
-
-const titleLinkStyles = StyleSheet.create({
-    container: {
-        height: getHeight(54)
-    },
-    contentContainer: { 
-        marginTop: getHeight(20), 
-        flexDirection: 'row', 
-        justifyContent: 'space-between' 
-    },
-    flexRow: {
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    titleText: {
-        fontFamily: 'Montserrat-Regular',
-        fontSize: getHeight(14), 
-        color: 'rgba(56, 75, 101, 0.4)'
-    },
-    linkText: {
-        fontFamily: 'Montserrat-Medium',
-        fontSize: getHeight(12), 
-        color: '#2794FF'
-    },
-    expandImage: {
-        height: getHeight(12), 
-        width: getWidth(7), 
-        marginLeft: getWidth(10)
-    }
-});
-
-const footerLinkStyles = StyleSheet.create({
-    container: {
-        height: getHeight(54)
-    },
-    contentContainer: { 
-        marginTop: getHeight(20), 
-        flexDirection: 'row', 
-        justifyContent: 'space-between' 
-    },
-    flexRow: {
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    titleText: {
-        fontFamily: 'Montserrat-Regular',
-        fontSize: getHeight(16), 
-        color: '#2794FF'
-    },
-    expandImage: {
-        height: getHeight(12), 
-        width: getWidth(7), 
-        marginLeft: getWidth(10)
-    },
-    underLine: { 
-        height: 1, 
-        backgroundColor: 'rgba(56, 75, 101, 0.2)' 
-    }
-})
