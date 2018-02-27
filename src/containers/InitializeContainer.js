@@ -39,13 +39,13 @@ class InitializeContainer extends Component {
                 this.props.redirectToMnemonicGenerationScreen();
                 return;
             }
-
+            
             if(!await StorjLib.keysExists()) {
                 this.props.redirectToLoginScreen();
                 return;
             }
             
-            this.getKeys();
+            await this.getKeys();
         } catch(e) {            
             this.props.redirectToOnBoardingScreen();
         }
@@ -55,19 +55,22 @@ class InitializeContainer extends Component {
         this.setState({ passcode: value });
     }
 
-    getKeys() {
-        StorjLib.getKeys(this.state.passcode, async (keys) => {
-            await this.getBuckets();
-            this.props.redirectToMainScreen();
-        }, (error) => {
-            if(!this.state.enterPassCode)
-                this.setState({ enterPassCode: true });
-        });
+    async getKeys() {        
+        let getKeyResponse = await StorjLib.getKeys(this.state.passcode);
+        
+        if(!getKeyResponse.isSuccess) { 
+            this.setState({ enterPassCode: true });   
+            return;
+        }
+
+        await this.getBuckets();
+        this.props.redirectToMainScreen();
     }
 
     async getBuckets() {
         try {
             let buckets = await StorjLib.getBuckets();
+            console.log('GET BUCKETS', buckets);
             if(buckets.length == 0)  this.props.setFirstSignIn();
 
             this.props.getBuckets(buckets.map((bucket => new ListItemModel(bucket))));

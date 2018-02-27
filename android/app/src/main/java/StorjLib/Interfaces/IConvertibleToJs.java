@@ -7,5 +7,5 @@ import com.facebook.react.bridge.WritableMap;
  */
 
 public interface IConvertibleToJs {
-    WritableMap toJsObject();
+    WritableMap toWritableMap();
 }

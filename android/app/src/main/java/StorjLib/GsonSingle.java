@@ -17,7 +17,6 @@ public static Gson getInstanse(){
         // TODO: 2/21/18 Add more options for serializer/deserializer if needed
         sInstanse = new GsonBuilder()
                 .excludeFieldsWithoutExposeAnnotation()
-                .setPrettyPrinting()
                 .create();
     }
     return sInstanse;

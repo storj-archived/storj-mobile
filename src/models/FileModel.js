@@ -2,9 +2,9 @@ import ItemModel from './ItemModel';
 
 export default class FileModel extends ItemModel {
     /**
-    * Describes file entity
-    * @param {object} file
-    */
+     * Describes file entity
+     * @param {object} file
+     */
     constructor(file) {
             super(file.name, file.fileId, file.created);
             

@@ -6,6 +6,8 @@ import BucketModel from '../models/BucketModel';
 import FileModel from '../models//FileModel';
 import keysModel from '../models/keysModel';
 
+//TODO: StorjModule wil send us only Response objects, 
+// so all try/catch blocks should be removed and all error logic should be after checking !isSuccess
 const StorjLib = (() => {
     let instance = null;
 
@@ -37,14 +39,10 @@ const StorjLib = (() => {
          * @param {string} mnemonic
          * @returns {Promise<boolean>} 
          */
-        async checkMnemonic(mnemonic) {
-            try {
-                return storjLib.checkMnemonic(mnemonic);
-            } catch(e) {
-                console.log(e);
-
-                return false;
-            }
+        async checkMnemonic(mnemonic) {    
+            let checkMnemonicResponse = await storjLib.checkMnemonic(mnemonic);
+            console.log('checkMnemonicResponse', checkMnemonicResponse);
+            return checkMnemonicResponse.isSuccess;
         };
     
         /**
@@ -68,28 +66,18 @@ const StorjLib = (() => {
          * @param {string} password 
          * @returns {Promise<boolean>}
          */
-        async verifyKeys(email, password) {
-            try {
-                return await storjLib.verifyKeys(email, password);
-            } catch(e) {
-                console.log(e);
-            } 
-
-            return false;
+        async verifyKeys(email, password) {            
+            let verifyKeysPesponse = await storjLib.verifyKeys(email, password);
+            return verifyKeysPesponse.isSuccess;
         };
     
         /**
          * Check if auth file allready exist on the device
          * @returns {Promise<boolean>}
          */
-        async keysExists() {
-            try {
-                return await storjLib.keysExists();
-            } catch(e) {
-                console.log(e);
-
-                return false;
-            }
+        async keysExists() {   
+            let keysExistsReponse = await storjLib.keysExists();
+            return keysExistsReponse.isSuccess;
         };
     
         /**
@@ -101,24 +89,23 @@ const StorjLib = (() => {
          * @param {string} passcode optional, pass if you want to protect auth file with additional password
          * @returns {Promise<boolean>}
          */
-        async importKeys(email, password, mnemonic, passcode = 'testpasscode') {
-            try {
-                return await storjLib.importKeys(email, password, mnemonic, /*passcode*/"");
-            } catch(e) {
-                console.log(e);
-            }
-
-            return false;
+        async importKeys(email, password, mnemonic, passcode) {            
+            let importKeysResponse = await storjLib.importKeys(email, password, mnemonic, /*passcode*/"");
+            return importKeysResponse.isSuccess;
         };
     
         /**
          * 
          * @param {string} passcode needed if user has protected your auth file with additional password
-         * @param {string} successCallback 
-         * @param {function} errorCallback 
          */
-        getKeys(passcode, successCallback, errorCallback) {
-            storjLib.getKeys(/*passcode*/"", successCallback, errorCallback);
+        async getKeys(passcode) {
+            let getKeysResponse = await storjLib.getKeys(/*passcode*/"");
+
+            if(!getKeysResponse.isSuccess) {
+                //TODO: add some error handling logic here
+            }
+
+            return getKeysResponse;
         };
     
         /**
@@ -127,15 +114,13 @@ const StorjLib = (() => {
          */
         async getBuckets() {
             let result = [];
-            let buckets = await storjLib.getBuckets();
+            let bucketResponse = await storjLib.getBuckets();
 
-            if(Array.isArray(buckets)) {
-                result = buckets.map((bucket) => {
-                    return new BucketModel(bucket);
-                });
-            }
+            if(!bucketResponse.isSuccess) return result;
 
-            console.log(result);
+            result = JSON.parse(bucketResponse.result).map((bucket) => {
+                return new BucketModel(bucket);
+            });
 
             return result;
         }
@@ -165,37 +150,31 @@ const StorjLib = (() => {
          async uploadFile(bucketId, localPath) {
             let uploadFileResult = await storjLib.uploadFile(bucketId, localPath);
 
+            console.log(uploadFileResult);
+
             if(uploadFileResult.isSuccess) {
-                uploadFileResult.result = new FileModel(uploadFileResult.result);
+                uploadFileResult.result = new FileModel(JSON.parse(uploadFileResult.result));
             }
+
+            console.log(uploadFileResult);
 
             return uploadFileResult;
         };
 
         /**
          * List buckets for logged in user
-         * @returns {Promise<BucketModel[]>}
+         * @returns {Promise<FileModel[]>}
          */
         async listFiles(bucketId) {
             let listFilesResult = await storjLib.listFiles(bucketId);
 
             if(listFilesResult.isSuccess) {
-                listFilesResult.result = listFilesResult.result.map(file => {
-                    file = new FileModel(file);
-
-                    return file;
-                });
-            } else {
-                listFilesResult.result = [];
-            }
-
-            console.log(listFilesResult.result);
+                listFilesResult.result = JSON.parse(listFilesResult.result).map(file => {
+                    return new FileModel(file);
+                });      
+            } 
 
             return listFilesResult;
-        };
-    
-        static getBucket() {
-            //Not implemented yet
         };
     
         /**
@@ -203,13 +182,13 @@ const StorjLib = (() => {
          * @returns {Promise<BucketModel>}
          */
         async createBucket(bucketName) {
-            let result = await storjLib.createBucket(bucketName);
+            let createBucketResponse = await storjLib.createBucket(bucketName);
             
-            if(result.isSuccess) {
-                result.result = new BucketModel(result.result);
+            if(createBucketResponse.isSuccess) {
+                createBucketResponse.result = new BucketModel(JSON.parse(createBucketResponse.result));
             }
 
-            return result;
+            return createBucketResponse;         
         };
 
         /**

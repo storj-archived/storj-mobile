@@ -7,7 +7,7 @@ import io.storj.libstorj.KeysNotFoundException;
  */
 
 public class MethodHandler  {
-    public void invoke(final IMethodParams param, final ICallback callback) {
+    public void invoke(final IMethodParams param, final IMethodHandlerCallback callback) {
         try {
             if(callback == null) return;
 
@@ -21,7 +21,7 @@ public class MethodHandler  {
         }
     }
 
-    public void invokeParallel(final IMethodParams param, final ICallback callback) {
+    public void invokeParallel(final IMethodParams param, final IMethodHandlerCallback callback) {
         new Thread(new Runnable() {
             @Override
             public void run() {

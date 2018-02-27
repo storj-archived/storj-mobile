@@ -1,8 +1,6 @@
 package StorjLib.Responses;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
 import StorjLib.Interfaces.IConvertibleToJs;
 
@@ -10,15 +8,12 @@ import StorjLib.Interfaces.IConvertibleToJs;
  * Created by Crawter on 19.02.2018.
  */
 
-public class Response implements IConvertibleToJs {
+public class Response implements IConvertibleToJs, IResponse {
     private final String KEY_IS_SUCCESS = "isSuccess";
     private final String KEY_ERROR_MESSAGE = "errorMessage";
     protected final String KEY_RESULT = "result";
-    @Expose
-    @SerializedName("isSuccess")
+
     private boolean _isSuccess = false;
-    @Expose
-    @SerializedName("errorMessage")
     private String _errorMessage = null;
 
     public Response(boolean isSuccess, String errorMessage) {
@@ -27,7 +22,7 @@ public class Response implements IConvertibleToJs {
     }
 
     @Override
-    public WritableMap toJsObject() {
+    public WritableMap toWritableMap() {
 
         WritableMap map = Arguments.createMap();
 

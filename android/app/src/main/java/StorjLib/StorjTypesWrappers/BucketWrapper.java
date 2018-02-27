@@ -19,7 +19,7 @@ public class BucketWrapper implements IConvertibleToJs {
     }
 
     @Override
-    public WritableMap toJsObject() {
+    public WritableMap toWritableMap() {
         WritableMap bucketJs = null;
 
         if(_bucket != null) {
