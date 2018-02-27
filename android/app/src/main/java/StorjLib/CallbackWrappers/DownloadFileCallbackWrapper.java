@@ -6,6 +6,7 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import StorjLib.GsonSingle;
 import StorjLib.Models.DownloadFileModel;
+import StorjLib.Models.DownloadFileProgressModel;
 import StorjLib.Models.FileModel;
 import StorjLib.Models.UploadFileProgressModel;
 import StorjLib.Responses.Response;
@@ -21,18 +22,20 @@ public class DownloadFileCallbackWrapper implements DownloadFileCallback {
     private Promise _promise;
     private String _bucketId;
     private String _fileId;
+    private String _localPath;
     private ReactApplicationContext _context;
 
-    public DownloadFileCallbackWrapper(ReactApplicationContext context, Promise promise, String bucketId, String fileId) {
+    public DownloadFileCallbackWrapper(ReactApplicationContext context, Promise promise, String bucketId, String fileId, String localPath) {
         _promise = promise;
         _bucketId = bucketId;
+        _localPath = localPath;
         _context = context;
         _fileId = fileId;
     }
 
     @Override
     public void onProgress(String fileId, double progress, long downloadedBytes, long totalBytes) {
-        UploadFileProgressModel uploadModel = new UploadFileProgressModel(_bucketId, "", progress, downloadedBytes, totalBytes);
+        DownloadFileProgressModel uploadModel = new DownloadFileProgressModel(_bucketId, fileId,_localPath, progress, downloadedBytes, totalBytes);
 
         _context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("downloadFile", uploadModel.toWritableMap());
     }
@@ -41,7 +44,7 @@ public class DownloadFileCallbackWrapper implements DownloadFileCallback {
     public void onComplete(String fileId, String localPath) {
         DownloadFileModel model = new DownloadFileModel(fileId, localPath);
 
-        _promise.resolve(new SingleResponse(true, toJson(model), "File is not valid").toWritableMap());
+        _promise.resolve(new SingleResponse(true, toJson(model), null).toWritableMap());
     }
 
     @Override

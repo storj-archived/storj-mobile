@@ -9,11 +9,13 @@ const {
     UPLOAD_FILE_START,
     UPLOAD_FILE_SUCCESS,
     UPLOAD_FILE_ERROR,
-    DOWNLOAD_FILE,
+    DOWNLOAD_FILE_SUCCESS,
+    DOWNLOAD_FILE_ERROR,
     DELETE_FILE, 
     SELECT_FILE, 
     DESELECT_FILE,
-    UPDATE_FILE_UPLOAD_PROGRESS 
+    UPDATE_FILE_UPLOAD_PROGRESS,
+    UPDATE_FILE_DOWNLOAD_PROGRESS 
 } = FILE_ACTIONS;
 
 /**
@@ -45,6 +47,16 @@ export default function filesReducer(state = initialState, action) {
             break;
         case UPDATE_FILE_UPLOAD_PROGRESS: 
             newState.uploadingFileListModels = filesManager.updateFileUploadingProgress(action.payload.bucketId, action.payload.filePath, action.payload.progress);
+            break;
+        case DOWNLOAD_FILE_SUCCESS:
+            newState.fileListModels = filesManager.fileDownloaded(action.payload.bucketId, action.payload.fileId);
+            break;
+        case DOWNLOAD_FILE_ERROR:
+            newState.fileListModels = filesManager.fileDownloaded(action.payload.bucketId, action.payload.fileId);
+            //TODO: we should show some additional message here
+            break;
+        case UPDATE_FILE_DOWNLOAD_PROGRESS:             
+            newState.fileListModels = filesManager.updateFileDownloadingProgress(action.payload.bucketId, action.payload.fileId, action.payload.progress);
             break;
         case DELETE_FILE:
             newState.fileListModels = filesManager.deleteFileEntry(action.payload.bucketId, action.payload.fileId);

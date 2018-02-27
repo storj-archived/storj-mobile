@@ -5,11 +5,13 @@ const {
     UPLOAD_FILE_START,
     UPLOAD_FILE_SUCCESS,
     UPLOAD_FILE_ERROR,
-    DOWNLOAD_FILE,
+    DOWNLOAD_FILE_SUCCESS,
+    DOWNLOAD_FILE_ERROR,
     DELETE_FILE, 
     SELECT_FILE, 
     DESELECT_FILE,
-    UPDATE_FILE_UPLOAD_PROGRESS
+    UPDATE_FILE_UPLOAD_PROGRESS,
+    UPDATE_FILE_DOWNLOAD_PROGRESS
 } = FILE_ACTIONS;
 
 /**
@@ -52,9 +54,26 @@ function updateFileUploadProgress(bucketId, filePath, progress) {
     return { type: UPDATE_FILE_UPLOAD_PROGRESS, payload: { bucketId, filePath, progress } }
 }
 
-//NOT IMPLEMENTED
-function downloadFile() {
-    return { type: DOWNLOAD_FILE };
+/**
+ * Occurs when file downloading ends successfully 
+ * @param {string} bucketId
+ * @param {string} fileId
+ */
+function downloadFileSuccess(bucketId, fileId) {
+    return { type: DOWNLOAD_FILE_SUCCESS, payload: { bucketId, fileId } };
+}
+
+/**
+ * Occurs when file downloading fails
+ * @param {string} bucketId
+ * @param {string} fileId
+ */
+function downloadFileError(bucketId, fileId) {
+    return { type: DOWNLOAD_FILE_ERROR, payload: { bucketId, fileId } };
+}
+
+function updateFileDownloadProgress(bucketId, fileId, progress) {
+    return { type: UPDATE_FILE_DOWNLOAD_PROGRESS, payload: { bucketId, fileId, progress } }
 }
 
 function deleteFile(bucketId, fileId) {
@@ -85,5 +104,8 @@ export const mainContainerFileActions = {
     uploadFileSuccess,
     uploadFileError,
     updateFileUploadProgress,
+    downloadFileSuccess,
+    downloadFileError,
+    updateFileDownloadProgress,
     deleteFile
 };

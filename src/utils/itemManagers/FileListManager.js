@@ -126,6 +126,34 @@ export default class FileListManager {
         return this.newFileUploadingList;
     }
 
+    fileDownloaded(bucketId, fileId) {
+        this._isInArray(this.newFilesList, bucketId, (itemsList) => {
+            itemsList.files.forEach(fileEntry => {
+                if(fileEntry.getId() === fileId) {
+                    fileEntry.isLoading = false;
+                    fileEntry.progress = 0;
+                }                    
+            });
+        });
+
+        return this.newFilesList;
+    }
+
+    updateFileDownloadingProgress(bucketId, fileId, progress) {
+        console.log('SOSAT');
+        this._isInArray(this.newFilesList, bucketId, (itemsList) => {
+            itemsList.files.forEach(fileEntry => {
+                if(fileEntry.getId() === fileId) {
+
+                    fileEntry.isLoading = true;
+                    fileEntry.progress = progress;
+                }                    
+            });
+        });
+
+        return this.newFilesList;
+    }
+
     selectFile(file) {        
         return this._changeFileSelection(file.entity.bucketId, file.entity.id, true);
     }

@@ -35,25 +35,31 @@ class MainContainer extends Component {
         //};  
         this.openedBucketActions = [
             TabBarActionModelFactory.createNewAction(() => { this.uploadFile(); }, 'Action 1', require('../images/ActionBar/UploadFileIcon.png')), 
-            TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 2', require('../images/ActionBar/DownloadIFileIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { this.downloadSelectedFiles(); }, '2', require('../images/ActionBar/DownloadIFileIcon.png')),
             TabBarActionModelFactory.createNewAction(() => { this.deleteSelectedFiles(); }, 'Action 3', require('../images/ActionBar/TrashBucketIcon.png'))
-        ]
+        ];
 
 
         this.uploadListener = (fileParams) => {
             let res = observablePropFactory.getObservable(fileParams.filePath);
             res.Property = fileParams;
         }
+        this.downloadListener = (fileParams) => {
+            let res = observablePropFactory.getObservable(fileParams.fileId);
+            res.Property = fileParams;
+        }
     }
 
     componentWillMount () {
         DeviceEventEmitter.addListener("uploadFile", this.uploadListener);
+        DeviceEventEmitter.addListener("downloadFile", this.downloadListener);
 
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => { this.props.disableSelectionMode(); });
     }
     
     componentWillUnmount () {
         DeviceEventEmitter.removeListener("uploadFile", this.uploadListener);
+        DeviceEventEmitter.removeListener("downloadFile", this.downloadListener);
         observablePropFactory.clean();
 
         this.keyboardDidShowListener.remove();
@@ -100,6 +106,35 @@ class MainContainer extends Component {
                 this.props.uploadFileError(this.props.openedBucketId, path);
             }
         }
+    }
+
+    async downloadFile(file, localPath) {        
+        const fileId = file.getId();
+        const observer = observablePropFactory.getObservable(fileId);
+        
+
+        observer.addListener({ id: fileId, callback: (param) => { 
+            if(this.props.openedBucketId === param.bucketId)
+                this.props.updateFileDownloadProgress(param.bucketId, fileId, param.progress);
+        }});
+
+        let response = await StorjLib.downloadFile(this.props.openedBucketId, fileId, localPath);
+        
+        if(response.isSuccess) {
+            this.props.downloadFileSuccess(this.props.openedBucketId, fileId);
+        } else {
+            this.props.downloadFileError(this.props.openedBucketId, fileId);
+        }
+    }
+
+    async downloadSelectedFiles() {
+        this.props.fileListModels.forEach(fileEntry => {
+            fileEntry.files.forEach(fileItem => {
+                if(fileItem.isSelected) {
+                    this.downloadFile(fileItem, '/storage/emulated/0/Download/' + fileItem.getName()); 
+                }
+            });
+        });
     }
 
     async deleteFile(bucketId, fileId) {

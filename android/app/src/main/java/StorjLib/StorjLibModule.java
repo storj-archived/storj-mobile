@@ -217,7 +217,12 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
                              final String fileId,
                              final String localPath,
                              final Promise promise) {
-        getStorj().downloadFile(bucketId, fileId, localPath, new DownloadFileCallbackWrapper(getReactApplicationContext(), promise, bucketId, fileId));
+        new MethodHandler().invokeParallel(new BaseMethodParams(promise), new IMethodHandlerCallback() {
+            @Override
+            public void callback(IMethodParams param) {
+                getStorj().downloadFile(bucketId, fileId, localPath, new DownloadFileCallbackWrapper(getReactApplicationContext(), promise, bucketId, fileId, localPath));
+            }
+        });
     }
 
     @ReactMethod

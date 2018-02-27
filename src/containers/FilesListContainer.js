@@ -93,7 +93,7 @@ function mapStateToProps(state) {
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         fileListModels: state.filesReducer.fileListModels,
-        uploadingFileListModels: state.filesReducer.uploadingFileListModels, //uploadingFileListModels
+        uploadingFileListModels: state.filesReducer.uploadingFileListModels,  
         isLoading: state.mainReducer.isLoading
     };
 }
