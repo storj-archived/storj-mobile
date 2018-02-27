@@ -41,7 +41,6 @@ const StorjLib = (() => {
          */
         async checkMnemonic(mnemonic) {    
             let checkMnemonicResponse = await storjLib.checkMnemonic(mnemonic);
-            console.log('checkMnemonicResponse', checkMnemonicResponse);
             return checkMnemonicResponse.isSuccess;
         };
     
@@ -150,13 +149,9 @@ const StorjLib = (() => {
          async uploadFile(bucketId, localPath) {
             let uploadFileResult = await storjLib.uploadFile(bucketId, localPath);
 
-            console.log(uploadFileResult);
-
             if(uploadFileResult.isSuccess) {
                 uploadFileResult.result = new FileModel(JSON.parse(uploadFileResult.result));
             }
-
-            console.log(uploadFileResult);
 
             return uploadFileResult;
         };

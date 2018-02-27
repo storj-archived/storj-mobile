@@ -93,7 +93,7 @@ class MainContainer extends Component {
             }});
 
             let uploadFileResponse = await StorjLib.uploadFile(this.props.openedBucketId, path);
-            console.log(uploadFileResponse);
+
             if(uploadFileResponse.isSuccess) {
                 this.props.uploadFileSuccess(this.props.openedBucketId, new ListItemModel(uploadFileResponse.result), path);
             } else {
@@ -159,8 +159,6 @@ class MainContainer extends Component {
     async getBuckets() {
         try {
             let buckets = await StorjLib.getBuckets();
-
-            console.log(buckets);
 
             this.props.getBuckets(buckets.map((bucket => new ListItemModel(bucket))));
         } catch(e) {

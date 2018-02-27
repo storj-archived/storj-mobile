@@ -70,7 +70,7 @@ class InitializeContainer extends Component {
     async getBuckets() {
         try {
             let buckets = await StorjLib.getBuckets();
-            console.log('GET BUCKETS', buckets);
+            
             if(buckets.length == 0)  this.props.setFirstSignIn();
 
             this.props.getBuckets(buckets.map((bucket => new ListItemModel(bucket))));

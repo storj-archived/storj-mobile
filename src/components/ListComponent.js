@@ -258,9 +258,6 @@ ListComponent.propTypes = {
 const styles = StyleSheet.create({
     listContainer: {
         backgroundColor: 'white'
-    },
-    contentWrapper: {
-        marginTop: getHeight(70)
     }
 });
 

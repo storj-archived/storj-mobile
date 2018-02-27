@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import ListComponent from '../components/ListComponent';
+import { getHeight } from '../utils/adaptive';
 
 export default class BucketsListComponent extends Component {
     constructor(props) {
@@ -33,6 +34,7 @@ export default class BucketsListComponent extends Component {
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        marginTop: getHeight(70)
     }
 });
