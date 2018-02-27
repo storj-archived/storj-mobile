@@ -17,12 +17,11 @@ public class MnemonicWrapper implements IConvertibleToJs {
         _mnemonic = mnemonic;
     }
 
-    public WritableMap toJsObject() {
+    public WritableMap toWritableMap() {
         WritableMap stringJs = Arguments.createMap();
 
         stringJs.putString("mnemonic", _mnemonic);
 
         return stringJs;
     }
-
 }

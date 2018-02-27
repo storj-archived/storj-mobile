@@ -40,7 +40,7 @@ export default class ListItemModel {
     };
 
     /**
-     * Get entity id
+     * Get entity date
      * @returns {string}
      */
     getDate() {

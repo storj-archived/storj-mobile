@@ -104,8 +104,7 @@ class MainContainer extends Component {
 
     async deleteFile(bucketId, fileId) {
         let response = await  StorjLib.deleteFile(bucketId, fileId);
-
-        console.log(response);
+        
         if(response.isSuccess) {
             this.props.deleteFile(bucketId, fileId);
         }
@@ -121,15 +120,10 @@ class MainContainer extends Component {
     }
 
     async createBucket(bucketName) {
-        try {
-            let createBucketResponse = await StorjLib.createBucket(bucketName);
-           
-            if(createBucketResponse.isSuccess) {
-                this.props.createBucket(new ListItemModel(createBucketResponse.result));
-            }
-        } catch(e) {
-            //Eror callback
-            console.log('errorName: ' + e.name, "// errorMessage: " + e.message, "// errorCode: " + e.code);
+        let createBucketResponse = await StorjLib.createBucket(bucketName);
+    
+        if(createBucketResponse.isSuccess) {
+            this.props.createBucket(new ListItemModel(createBucketResponse.result)) ;
         }
     }
 

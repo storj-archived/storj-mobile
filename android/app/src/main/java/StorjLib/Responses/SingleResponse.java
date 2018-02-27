@@ -1,48 +1,33 @@
 package StorjLib.Responses;
 
-import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
-
-import StorjLib.Interfaces.IConvertibleToJs;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by Yaroslav-Note on 1/24/2018.
+ * Created by Yehor Butko on 1/24/2018.
  */
+public class SingleResponse extends Response {
+    @Expose
+    @SerializedName("result")
+    private String _result;
 
-public class SingleResponse<T extends IConvertibleToJs> implements IConvertibleToJs {
-
-    private boolean _isSuccess = false;
-    private String _errorMessage = null;
-    private T _result = null;
-
-    public SingleResponse() {
-
-    }
-
-    public void error(String errorMessage) {
-        _isSuccess = false;
-        _errorMessage = errorMessage;
-        _result = null;
-    }
-
-    public void success(T result) {
-        _isSuccess = true;
-        _errorMessage = null;
+    public SingleResponse(boolean isSuccess, String result, String errorMessage)  {
+        super(isSuccess, errorMessage);
         _result = result;
     }
 
-    public WritableMap toJsObject() {
-        WritableMap responseJs = Arguments.createMap();
+    @Override
+    public WritableMap toWritableMap() {
+        WritableMap map = super.toWritableMap();
 
-        responseJs.putBoolean("isSuccess", _isSuccess);
-        responseJs.putString("errorMessage", _errorMessage);
+        map.putString(KEY_RESULT, _result);
 
-        if(_result != null) {
-            responseJs.putMap("result", _result.toJsObject());
-        } else {
-            responseJs.putMap("result", null);
-        }
+        return map;
+    }
 
-        return responseJs;
+    public String result() {
+        return _result;
     }
 }
+
