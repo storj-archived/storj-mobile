@@ -1,0 +1,108 @@
+import {
+    View,
+    Text,
+    StyleSheet,
+    Image,
+    TouchableOpacity
+} from 'react-native';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { getHeight, getWidth } from '../utils/adaptive';
+
+export default class ViewOptionsComponent extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    renderOptionItem(imageSource, title, onPress) {
+        return(
+            <TouchableOpacity style = { styles.itemContainer } onPress = { onPress } >
+                <View style = { styles.marginImage }>
+                    <Image source = { imageSource } style = { styles.iconContainer } resizeMode = 'contain' />
+                </View> 
+                <View style = { styles.marginLabel }>
+                    <Text style = { styles.labelText }>{ title }</Text>
+                </View>
+            </TouchableOpacity>
+        )
+    }
+
+    render() {
+        return(
+            <View style = { [ styles.backgroundWrapper ] }>  
+                <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { this.props.showOptions } />
+                    <View style = { styles.mainContainer } >
+                        {
+                            this.renderOptionItem( require('../images/Icons/SortIcon.png'), "Sort items...", () => {})
+                        }
+                        {
+                            this.props.isGridViewShown ?
+                                this.renderOptionItem( 
+                                    require('../images/Icons/ListIcon.png'), 
+                                    "List view", 
+                                    () => this.props.setListView()) :
+                                this.renderOptionItem( 
+                                    require('../images/Icons/GridIcon.png'), 
+                                    "Grid view", 
+                                    () => this.props.setGridView())   
+                        }
+                        {
+                            this.renderOptionItem( require('../images/Icons/SelectItems.png'), "Select items", () => {})
+                        }
+                    </View>
+            </View>
+        )
+    }
+}
+
+ViewOptionsComponent.PropTypes = {
+    showOptions: PropTypes.func,
+    isGridViewShown: PropTypes.bool,
+    setGridView: PropTypes.func,
+    setListView: PropTypes.func
+}
+
+const styles = StyleSheet.create({
+    mainContainer: {
+        backgroundColor: 'white', 
+        width: getWidth(355),
+        alignSelf: 'center',
+        borderRadius: 6,
+        marginTop: getHeight(30)
+    },
+    backgroundWrapper: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        position: 'absolute',
+        backgroundColor: 'transparent'
+    },
+    dimBlack: {
+        backgroundColor: 'black',
+        opacity: 0.2
+    },
+    itemContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        height: getHeight(55), 
+        borderBottomWidth: 0.5, 
+        borderBottomColor: 'rgba(56, 75, 101, 0.2)'
+    },
+    iconContainer: {
+        height: getHeight(24),
+        width: getWidth(24)
+    },
+    labelText: {
+        fontFamily: 'Montserrat-Regular',
+        fontSize: getHeight(16),
+        lineHeight: getHeight(19),
+        color: '#2794FF'
+    },
+    marginImage: {
+        marginLeft: getWidth(20)
+    },
+    marginLabel: {
+        marginLeft: getWidth(15)
+    }
+});

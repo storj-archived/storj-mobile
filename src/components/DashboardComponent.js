@@ -4,8 +4,10 @@ import {
     Animated
 } from 'react-native';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderComponent';
 import DashboardScreenNavigation from '../containers/DashboardScreenNavContainer';
+import { getWidth, getHeight } from '../utils/adaptive';
 
 export default class DashboardComponent extends Component {
     constructor(props) {
@@ -18,6 +20,7 @@ export default class DashboardComponent extends Component {
         return(
             <View style={ styles.mainContainer }>
                 <DashboardScreenNavigation
+                    defaultRoute = { this.props.defaultRoute }
                     animatedScrollValue = { this.animatedScrollValue } />
                 <BucketsScreenHeaderComponent
                     files = { this.props.files }
@@ -25,13 +28,13 @@ export default class DashboardComponent extends Component {
                     openBucket = { this.props.openBucket}
                     screenName = { this.props.screenName }
                     selectItem = { this.props.selectBucket }
+                    showOptions = { this.props.showOptions }
                     navigateBack = { this.props.navigateBack }
                     deselectItem = { this.props.deselectBucket }      
                     isSelectionMode = { this.props.isSelectionMode }
                     selectedBucketId = { this.props.selectedBucketId }
                     animatedScrollValue = { this.animatedScrollValue  }
                     selectedFilesCount = { this.props.selectedFilesCount }
-                    selectedItemsCount = { this.props.selectedItemsCount }
                     disableSelectionMode = { this.props.disableSelectionMode }
                     selectedBucketsCount = { this.props.selectedBucketsCount }  
                     onSingleItemSelected = { this.props.onSingleItemSelected }  
@@ -40,6 +43,29 @@ export default class DashboardComponent extends Component {
             </View>
         )
     }
+}
+
+DashboardComponent.PropTypes = {
+    showOptions: PropTypes.func,
+    files: PropTypes.array,
+    buckets: PropTypes.array,
+    openBucket: PropTypes.func,
+    screenName: PropTypes.string,
+    selectItem: PropTypes.func,
+    navigateBack: PropTypes.func,
+    deselectItem: PropTypes.func,
+    isSelectionMode: PropTypes.bool,
+    selectedBucketId: PropTypes.number,
+    animatedScrollValue: PropTypes.number,
+    selectedFilesCount: PropTypes.number,
+    disableSelectionMode: PropTypes.func,
+    selectedBucketsCount: PropTypes.number,
+    onSingleItemSelected: PropTypes.func,
+    isSingleItemSelected: PropTypes.bool,
+    navigateToFilesScreen: PropTypes.func,
+    isGridViewShown: PropTypes.bool,
+    setListView: PropTypes.func,
+    setGridView: PropTypes.func
 }
 
 const styles = StyleSheet.create({

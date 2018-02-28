@@ -94,21 +94,22 @@ export default class ListItemComponent extends Component {
                         <View style = { listItemStyles.textWrapper }>
                             <Text numberOfLines = {1} style = { listItemStyles.mainTitleText }>{ props.item.getName() }</Text>
                             {
-                                this.props.item.isLoading ? 
-                                    Platform.select({
-                                        ios: 
-                                            <ProgressViewIOS 
-                                                progress = { this.props.item.progress }
-                                                trackTintColor = { '#f2f2f2' }
-                                                progressTintColor = { '#2794ff' } />,
-                                        android:
-                                            <ProgressBarAndroid    
-                                                progress = { this.props.item.progress } 
-                                                styleAttr = { 'Horizontal' } 
-                                                color = { '#2794FF' } 
-                                                animating = {true} 
-                                                indeterminate = { false } />
-                                    }) : null
+                                props.item.isLoading ? 
+                                        Platform.select({
+                                            ios: 
+                                                <ProgressViewIOS 
+                                                    progress = { props.item.progress }
+                                                    trackTintColor = { '#f2f2f2' }
+                                                    progressTintColor = { '#2794ff' } />,
+                                            android:
+                                                <ProgressBarAndroid    
+                                                    progress = { props.item.progress } 
+                                                    styleAttr = { 'Horizontal' } 
+                                                    color = { '#2794FF' } 
+                                                    animating = {true} 
+                                                    indeterminate = { false } />
+                                        })
+                                : null
                             }
                         </View>
                         {
@@ -125,7 +126,14 @@ export default class ListItemComponent extends Component {
                                             props.selectItemId(props.item.getId());
                                         }
                                     }}>
-                                    <Image style = { listItemStyles.listItemActionsIcon } source = { require('../images/Icons/listItemActions.png') } />
+                                    {
+                                        props.item.isLoading ? 
+                                            <Image 
+                                                source = { require('../images/Icons/CancelDownload.png') } 
+                                                style = { listItemStyles.cancelDownloadImage } 
+                                                resizeMode = 'contain' /> :
+                                            <Image style = { listItemStyles.listItemActionsIcon } source = { require('../images/Icons/listItemActions.png') } />
+                                    }
                                 </TouchableOpacity> : null
                         }
                     </View>
@@ -194,5 +202,9 @@ const listItemStyles = StyleSheet.create({
     selectedIcon: {
         width: getWidth(20),
         height: getWidth(20)
+    },
+    cancelDownloadImage: { 
+        height: getHeight(24), 
+        width: getWidth(24) 
     }
 });

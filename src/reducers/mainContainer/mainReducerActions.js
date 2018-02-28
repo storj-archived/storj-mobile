@@ -22,7 +22,9 @@ const {
     LIST_FILES,
     UPLOAD_FILE,
     UPLOAD_FILE_START,
-    UPLOAD_FILE_COMPLETE
+    UPLOAD_FILE_COMPLETE,
+    SET_GRID_VIEW,
+    SET_LIST_VIEW
 } = MAIN_ACTIONS;
 
 function onSingleItemSelected() {
@@ -112,6 +114,14 @@ function completeFileUploading(uploadResponse) {
     return { type: UPLOAD_FILE_COMPLETE, payload: { uploadResponse } };
 }
 
+function setGridView() {
+    return { type: SET_GRID_VIEW }
+}
+
+function setListView() {
+    return { type: SET_LIST_VIEW }
+}
+
 //action creators for main container
 export const mainContainerActions = {
     getBuckets,
@@ -125,7 +135,9 @@ export const mainContainerActions = {
     setFirstSignIn,
     removeFirstSignIn,
     setLoading,
-    unsetLoading
+    unsetLoading,
+    setGridView,
+    setListView
 };
 
 //action creators for main screen navigation container

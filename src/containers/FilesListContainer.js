@@ -2,7 +2,7 @@ import { BackHandler, Platform, DeviceEventEmitter, Animated } from 'react-nativ
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { navigateBack } from '../reducers/navigation/navigationActions';
+import { bucketNavigateBack, dashboardNavigateBack } from '../reducers/navigation/navigationActions';
 import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import StorjModule from '../utils/StorjModule';
@@ -52,14 +52,6 @@ class FilesListContainer extends Component {
         this.props.unsetLoading();
     }
 
-    onHardwareBackPress() {
-        if(this.props.isLoading)
-            return;
-
-        this.props.closeBucket();
-        this.props.navigateBack();
-    }
-
     async cancelDownload(file) {
 
         let cancelDownloadResponse = await StorjModule.cancelDownload(file.fileRef);
@@ -77,6 +69,19 @@ class FilesListContainer extends Component {
         }
     }
 
+    onHardwareBackPress() {
+        if(this.props.isLoading)
+            return;
+
+        this.props.closeBucket();
+
+        if(this.props.screenProps.defaultRoute == 'DashboardScreen') {
+            this.props.dashboardNavigateBack();
+        } else {
+            this.props.bucketNavigateBack();
+        }
+    }
+
     onPress(params) {
         //Download file  
     }
@@ -87,6 +92,7 @@ class FilesListContainer extends Component {
 
         return(
             <FilesListComponent
+                isGridViewShown = { this.props.isGridViewShown }
                 onPress = { (params) => { this.onPress(params); } }
                 cancelDownload = { (params) => { this.cancelDownload(params); } }
                 cancelUpload = { (params) => { this.cancelUpload(params); } }
@@ -110,13 +116,14 @@ function mapStateToProps(state) {
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         fileListModels: state.filesReducer.fileListModels,
-        uploadingFileListModels: state.filesReducer.uploadingFileListModels,  
-        isLoading: state.mainReducer.isLoading
+        uploadingFileListModels: state.filesReducer.uploadingFileListModels, //uploadingFileListModels
+        isLoading: state.mainReducer.isLoading,
+        isGridViewShown: state.mainReducer.isGridViewShown
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ navigateBack, ...filesListContainerMainActions, ...filesListContainerFileActions }, dispatch);
+    return bindActionCreators({ bucketNavigateBack, dashboardNavigateBack, ...filesListContainerMainActions, ...filesListContainerFileActions }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilesListContainer);

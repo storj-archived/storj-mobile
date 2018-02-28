@@ -8,18 +8,28 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MainNavigationContainer from '../containers/MainNavigationContainer';
 import ActionBarComponent from '../components/ActionBarComponent';
+import ViewOptionsComponent from '../components/ViewOptionsComponent';
 import CreateBucketPopUpComponent from '../components/InputPopUpComponent';
 
 export default class MainComponent extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            showOptions: false
+        }
     };
+
+    showOptions() {
+        this.setState({ showOptions: !this.state.showOptions })
+    }
     
     render() {
         return(
             <View style={ styles.mainContainer }>
                 <View style = { styles.navigationContainer }>
                     <MainNavigationContainer
+                        showOptions = { this.showOptions.bind(this) }
                         isSingleItemSelected = { this.props.isSingleItemSelected }
                         isActionBarShown = { this.props.isActionBarShown }
                         isSelectionMode = { this.props.isSelectionMode }
@@ -56,6 +66,14 @@ export default class MainComponent extends Component {
                                 <ActivityIndicator animating = { true } color = { "#2782ff" } size = { "large" }/>
                             </View>
                         </View> : null
+                }
+                {
+                    this.state.showOptions ? 
+                        <ViewOptionsComponent 
+                            isGridViewShown = { this.props.isGridViewShown }
+                            setGridView = { this.props.setGridView }
+                            setListView = { this.props.setListView }
+                            showOptions = { this.showOptions.bind(this) } /> : null
                 }
             </View>
         );

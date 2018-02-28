@@ -20,6 +20,7 @@ export default class BucketsComponent extends Component {
                 <BucketsScreenNavigation
                     animatedScrollValue = { this.animatedScrollValue }  />
                 <BucketsScreenHeaderComponent
+                    showOptions = { this.props.showOptions }
                     screenName = { this.props.screenName }
                     isSelectionMode = { this.props.isSelectionMode }
                     disableSelectionMode = { this.props.disableSelectionMode }

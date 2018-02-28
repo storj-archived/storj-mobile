@@ -53,7 +53,7 @@ export default class SearchComponent extends Component {
                         </View>
                         <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>
                             <Text style = { styles.updateStatus }>Just now</Text>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress = { this.props.showOptions }>
                                 <Image style = { styles.image } source = { require("../images/Icons/SearchOptions.png") } resizeMode = { 'contain' } />
                             </TouchableOpacity>
                         </View>
@@ -79,7 +79,7 @@ export default class SearchComponent extends Component {
                     </View>
                     <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>
                         <Text style = { styles.updateStatus }>Update Status</Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress = { this.props.showOptions }>
                             <Image style = { styles.image } source = { require("../images/Icons/SearchOptions.png") } resizeMode = { 'contain' } />
                         </TouchableOpacity>
                     </View>

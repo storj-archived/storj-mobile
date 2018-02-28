@@ -21,7 +21,9 @@ const {
     SET_LOADING,
     UNSET_LOADING,
     OPEN_BUCKET,
-    CLOSE_BUCKET
+    CLOSE_BUCKET,
+    SET_GRID_VIEW,
+    SET_LIST_VIEW
  } = MAIN_ACTIONS;
                                                         
 const initialState = { 
@@ -31,6 +33,7 @@ const initialState = {
     isSelectionMode: false,
     isSingleItemSelected: false,
     isFirstSignIn: false,
+    isGridViewShown: false,
     isLoading: false,
     openedBucketId: null
 };
@@ -100,6 +103,12 @@ export default function mainReducer(state = initialState, action) {
             return newState;
         case CLOSE_BUCKET:
             newState.openedBucketId = null;
+            return newState;
+        case SET_GRID_VIEW: 
+            newState.isGridViewShown = true;
+            return newState;
+        case SET_LIST_VIEW: 
+            newState.isGridViewShown = false;
             return newState;
         default:
             return state || initialState;

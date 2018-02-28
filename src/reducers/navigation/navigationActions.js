@@ -43,3 +43,21 @@ export function navigateToFilesScreen(bucketId) {
 export function navigateBack() {
     return NavigationActions.back();
 }
+
+export function dashboardNavigateBack() {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'DashboardScreen'})
+        ]
+    });
+}
+
+export function bucketNavigateBack() {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'BucketsScreen'})
+        ]
+    });
+}

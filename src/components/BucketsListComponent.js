@@ -5,6 +5,7 @@ import {
 import React, { Component } from 'react';
 import ListComponent from '../components/ListComponent';
 import { getHeight } from '../utils/adaptive';
+import { TYPES } from '../utils/constants/typesConstants';
 
 export default class BucketsListComponent extends Component {
     constructor(props) {
@@ -15,7 +16,9 @@ export default class BucketsListComponent extends Component {
         return(
             <View style = { styles.mainContainer }>
                 <ListComponent
+                    isGridViewShown = { this.props.isGridViewShown }
                     onPress = { this.props.onPress }
+                    itemType = { TYPES.REGULAR_BUCKET }
                     onSingleItemSelected = { this.props.onSingleItemSelected }                    
                     animatedScrollValue = { this.props.animatedScrollValue }
                     enableSelectionMode = { this.props.enableSelectionMode }
@@ -25,7 +28,7 @@ export default class BucketsListComponent extends Component {
                     listItemIcon = { require('../images/Icons/BucketListItemIcon.png') }
                     deselectItem = { this.props.deselectBucket }
                     selectItem = { this.props.selectBucket }
-                    data = { this.props.buckets } />
+                    data = { this.props.buckets } />              
             </View>
         );
     }

@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     },
     expanderTextView: {
         height: getHeight(55),
+        width: getWidth(333),
         justifyContent: 'space-between',
         flexDirection: 'row'
     },

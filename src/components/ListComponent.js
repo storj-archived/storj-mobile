@@ -11,6 +11,7 @@ import {
     Animated
 } from 'react-native';
 import ListItemComponent from '../components/ListItemComponent';
+import GridItemComponent from '../components/GridItemComponent';
 import ExpanderComponent from '../components/ExpanderComponent';
 import ListItemModel from '../models/ListItemModel';
 import PropTypes from 'prop-types';
@@ -131,7 +132,79 @@ export default class ListComponent extends Component {
         return sortingObject;
     }
 
-    getItemsList() {
+    getGridItemsList() {
+        let sorting = this.sort(this.props.data);
+
+        return Object.getOwnPropertyNames(sorting).reverse().map((propName, index) => {
+            return (
+                <View key = { propName }>
+                    {
+                        (() => {
+                            let prop = sorting[propName];
+                            let rowNumber = 1;
+
+                            if(Array.isArray(prop) && prop.length) {
+
+                                if(prop.length > 3) {
+                                    rowNumber = Math.floor(prop.length / 3);
+
+                                    if(prop.length % 3 != 0) {
+                                        rowNumber += 1
+                                    }
+                                }
+
+                                let data = [];
+
+                                for(let i = 0; i < rowNumber; i++) {
+                                    data.push(prop.splice(0,3));
+                                }
+
+                                let listItems = data.map((element, listIndex) => {
+                                    return(
+                                        <View key = { listIndex } style = { styles.unitContainer }>
+                                            {
+                                                element.map((item) => {
+                                                    return(
+                                                        <View style = { styles.itemContainer } key = { item.getId() }>
+                                                            <GridItemComponent
+                                                                bucketId = { this.props.bucketId }
+                                                                item = { item } 
+                                                                selectItemId = { (itemId) => { this.setState({ selectedItemId: itemId }) }}
+                                                                navigateToFilesScreen = { this.props.navigateToFilesScreen ? this.props.navigateToFilesScreen : () => {} }
+                                                                isItemActionsSelected = { this.state.selectedItemId === item.getId() }
+                                                                onLongPress = { () => { this.onItemLongPress(item); } }
+                                                                isSelectionModeEnabled = { this.props.isSelectionMode }
+                                                                isSelected = { item.isSelected }
+                                                                isSingleItemSelected = { this.props.isSingleItemSelected }
+                                                                disableSelectionMode = { this.props.disableSelectionMode }
+                                                                progress = { item.progress }
+                                                                isLoading = { item.isLoading }
+                                                                itemType = { this.props.itemType }
+                                                                listItemIcon = { this.props.listItemIcon }
+                                                                onSelectionPress = { () => { this.selectItem(item); } }
+                                                                onPress = { this.props.onPress }
+                                                                onSingleItemSelected = { this.props.onSingleItemSelected } />
+                                                        </View>
+                                                    )
+                                                })
+                                            }
+                                        </View>
+                                    );
+                                })
+                                return(
+                                    <ExpanderComponent
+                                        propName = { propName } 
+                                        listItems = { listItems } />
+                                );
+                            }
+                        })()
+                    }
+                </View>
+            );
+        });
+    }
+
+    getListItemsList() {
         let sorting = this.sort(this.props.data);
 
         return Object.getOwnPropertyNames(sorting).reverse().map((propName, index) => {
@@ -204,6 +277,20 @@ export default class ListComponent extends Component {
         })
     }
 
+    getItemsList() {
+        if(!this.props.isExpanderDisabled) {
+
+            if(this.props.isGridViewShown) {
+                return this.getGridItemsList()
+            } else {
+                return this.getListItemsList()
+            }
+
+        } else {
+            return this.getItemsWithoutExpander()
+        }
+    }
+
     render() {     
         return (
             <View>
@@ -225,11 +312,9 @@ export default class ListComponent extends Component {
                             refreshing = { this.state.refreshing }
                             onRefresh = { this.onRefresh.bind(this) } /> }>
 
-                            <View style = { this.props.verticalPaddingDisabled ? null : styles.contentWrapper  }>
+                            <View >
                                 {
-                                    !this.props.isExpanderDisabled ?
-                                        this.getItemsList() :   
-                                        this.getItemsWithoutExpander()
+                                    this.getItemsList()
                                 }
                             </View>
                 </Animated.ScrollView>
@@ -260,6 +345,14 @@ ListComponent.propTypes = {
 const styles = StyleSheet.create({
     listContainer: {
         backgroundColor: 'white'
+    },
+    unitContainer: { 
+        flexDirection: 'row',
+        width: getWidth(333),  
+        height: getHeight(155)
+    },
+    itemContainer: {
+        alignSelf: 'flex-start'
     }
 });
 

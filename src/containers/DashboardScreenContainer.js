@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { dashboardContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
-import { navigateBack, navigateToFilesScreen } from '../reducers/navigation/navigationActions';
+import { dashboardNavigateBack, navigateToFilesScreen } from '../reducers/navigation/navigationActions';
 import DashboardComponent from '../components/DashboardComponent';
 
 class DashboardScreenContainer extends Component {
@@ -42,12 +42,14 @@ class DashboardScreenContainer extends Component {
     render() {
         return(
             <DashboardComponent
+                showOptions = { this.props.screenProps.showOptions }
                 files = { this.props.files }
                 buckets = { this.props.buckets }
                 openBucket = { this.props.openBucket}
+                defaultRoute = { this.props.defaultRoute }
                 screenName = { this.props.screenName }
                 selectItem = { this.props.selectBucket }
-                navigateBack = { this.props.navigateBack }
+                navigateBack = { this.props.dashboardNavigateBack }
                 deselectItem = { this.props.deselectBucket }      
                 isSelectionMode = { this.props.isSelectionMode }
                 selectedBucketId = { this.props.selectedBucketId }
@@ -74,6 +76,8 @@ function mapStateToProps(state) {
         isFirstSignIn: state.mainReducer.isFirstSignIn,
         fileListModels: state.filesReducer.fileListModels,
         files: state.filesReducer.fileListModels,
+        isGridViewShown: state.mainReducer.isGridViewShown,
+        defaultRoute: routes[0].routeName,
         screenName: currentScreenName,
         selectedBucketId: state.mainReducer.openedBucketId
     };
@@ -84,7 +88,7 @@ function mapDispatchToProps(dispatch) {
         ...dashboardContainerActions, 
         ...filesListContainerMainActions, 
         ...filesListContainerFileActions, 
-        navigateBack,
+        dashboardNavigateBack,
         navigateToFilesScreen
     }, dispatch);
 }

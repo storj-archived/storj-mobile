@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import ListComponent from '../components/ListComponent';
+import { TYPES } from '../utils/constants/typesConstants';
 
 export default class FilesListComponent extends Component {
     constructor(props) {
@@ -16,7 +17,9 @@ export default class FilesListComponent extends Component {
                 <ListComponent
                     cancelDownload = { this.props.cancelDownload }
                     cancelUpload = { this.props.cancelUpload }
+                    isGridViewShown = { this.props.isGridViewShown }
                     onPress = { this.props.onPress }
+                    itemType = { TYPES.REGULAR_FILE }
                     bucketId = { this.props.bucketId }
                     onSingleItemSelected = { this.props.onSingleItemSelected }                    
                     animatedScrollValue = { this.props.animatedScrollValue }
@@ -26,7 +29,7 @@ export default class FilesListComponent extends Component {
                     isSingleItemSelected = { this.props.isSingleItemSelected }
                     deselectItem = { this.props.deselectFile }
                     selectItem = { this.props.selectFile }
-                    data = { this.props.data }
+                    data = { this.props.data }   
                     listItemIcon = { require('../images/Icons/FileListItemIcon.png') } />
             </View>
         );

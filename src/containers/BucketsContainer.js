@@ -7,7 +7,7 @@ import FirstSignInComponent from '../components/FirstSignInComponent';
 import StorjLib from '../utils/StorjModule';
 import ListItemModel from '../models/ListItemModel';
 import { getFirstSignIn } from '../utils/AsyncStorageModule';
-import { navigateBack } from '../reducers/navigation/navigationActions';
+import { bucketNavigateBack } from '../reducers/navigation/navigationActions';
 
 class BucketsContainer extends Component {
     constructor(props) {
@@ -69,6 +69,7 @@ class BucketsContainer extends Component {
         } else {
             return(
                 <BucketsComponent
+                    showOptions = { this.props.screenProps.showOptions }
                     onSingleItemSelected = { this.props.onSingleItemSelected }
                     enableSelectionMode = { this.props.enableSelectionMode }
                     disableSelectionMode = { this.props.disableSelectionMode }
@@ -82,7 +83,7 @@ class BucketsContainer extends Component {
                     selectedBucketId = { this.props.selectedBucketId }
                     files = { this.props.files }
                     screenName = { this.props.screenName }
-                    navigateBack = { this.props.navigateBack } /> 
+                    navigateBack = { this.props.bucketNavigateBack } /> 
             );
         }
     }
@@ -100,12 +101,13 @@ function mapStateToProps(state) {
         isFirstSignIn: state.mainReducer.isFirstSignIn,
         files: state.filesReducer.fileListModels,
         screenName: currentBucketScreenName,
+        isGridViewShown: state.mainReducer.isGridViewShown,
         selectedBucketId: state.mainReducer.openedBucketId
     };
 }
     
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators( { ...bucketsContainerActions, navigateBack }, dispatch);
+    return bindActionCreators( { ...bucketsContainerActions, bucketNavigateBack }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BucketsContainer);

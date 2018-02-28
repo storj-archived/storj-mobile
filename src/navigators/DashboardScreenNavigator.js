@@ -7,19 +7,15 @@ const DashboardScreenNavigator = StackNavigator(
     {
         DashboardScreen: {
             screen: DashboardScreen,
-            routeName: 'DashboardScreen'
-        },
-        BucketsScreen: {
-            screen: BucketsScreen,
-            routeName: 'BucketsScreen'
+            routeName: 'DashboardDefaultScreen'
         },
         FilesScreen: {
             screen: FilesScreen,
-            routeName: 'FilesScreen'
+            routeName: 'DashboardFilesScreen'
         }
     }, 
     {
-        initialRouteName: 'DashboardScreen',
+        initialRouteName: 'DashboardDefaultScreen',
         headerMode : 'none'
     }
 );

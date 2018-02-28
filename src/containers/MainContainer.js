@@ -212,6 +212,9 @@ class MainContainer extends Component {
 
         return(
             <MainComponent
+                isGridViewShown = { this.props.isGridViewShown }
+                setGridView = { this.props.setGridView }
+                setListView = { this.props.setListView }
                 bucketScreenRouteName = { routes[index].routeName }
                 openedBucketId = { this.props.openedBucketId }
                 createBucket = { this.createBucket.bind(this) }
@@ -240,7 +243,8 @@ function mapStateToProps(state) {
         buckets: state.mainReducer.buckets,
         isCreateBucketInputShown: state.mainReducer.isCreateBucketInputShown,
         isFirstSignIn: state.mainReducer.isFirstSignIn,
-        isLoading: state.mainReducer.isLoading
+        isLoading: state.mainReducer.isLoading,
+        isGridViewShown: state.mainReducer.isGridViewShown
     };
 }
 function mapDispatchToProps(dispatch) { return bindActionCreators({ ...mainContainerActions, ...mainContainerFileActions }, dispatch); };

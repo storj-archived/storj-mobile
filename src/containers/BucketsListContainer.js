@@ -22,6 +22,7 @@ class BucketsListContainer extends Component {
     render() {
         return(
             <BucketsListComponent
+                isGridViewShown = { this.props.isGridViewShown }
                 onPress = { (params) => { this.onPress(params); } }
                 animatedScrollValue = { this.props.screenProps.animatedScrollValue }
                 onSingleItemSelected = { this.props.onSingleItemSelected }
@@ -40,7 +41,8 @@ function mapStateToProps(state) {
     return {
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
-        buckets: state.mainReducer.buckets
+        buckets: state.mainReducer.buckets,
+        isGridViewShown: state.mainReducer.isGridViewShown
     };
 }
 
