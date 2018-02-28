@@ -38,17 +38,17 @@ export default class ListComponent extends Component {
     }
 
     /**
-    * Fires on long press
-    * @param {object} item type of ListItemModel
-    */
+     * Fires on long press
+     * @param {object} item type of ListItemModel
+     */
     onItemLongPress(item) {
         this.props.enableSelectionMode();
         this.selectItem(item);
     }   
 
     /**
-    * Fires on swipe from top to bottom to refresh the data
-    */
+     * Fires on swipe from top to bottom to refresh the data
+     */
     onRefresh() {
         this.setState({refreshing: true});
         
@@ -144,6 +144,8 @@ export default class ListComponent extends Component {
                                 var listItems = prop.map((item, indexInner) => {   
                                     return(
                                         <ListItemComponent
+                                            cancelUpload = { this.props.cancelUpload }
+                                            cancelDownload = { this.props.cancelDownload }
                                             bucketId = { this.props.bucketId }
                                             key = { item.getId() }
                                             item = { item } 

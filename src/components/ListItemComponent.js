@@ -53,7 +53,14 @@ export default class ListItemComponent extends Component {
         return(
             <TouchableOpacity 
                 style = { props.isItemActionsSelected ? [listItemStyles.listItemContainer, listItemStyles.itemSelected] : listItemStyles.listItemContainer }
-                onPress = { () => {
+                onPress = { () => {                    
+                    // if(this.props.cancelDownload && props.item.isLoading){
+                    //     this.props.cancelDownload(props.item);
+                    // }
+                    if(this.props.cancelUpload && props.item.isLoading){
+                        this.props.cancelUpload(props.item);
+                    } 
+ 
                     if(props.isSingleItemSelected) {
                         this.deselectAllItems();
                         return;
@@ -87,7 +94,7 @@ export default class ListItemComponent extends Component {
                         <View style = { listItemStyles.textWrapper }>
                             <Text numberOfLines = {1} style = { listItemStyles.mainTitleText }>{ props.item.getName() }</Text>
                             {
-                                /* this.props.progress */this.props.item.isLoading ? 
+                                this.props.item.isLoading ? 
                                     Platform.select({
                                         ios: 
                                             <ProgressViewIOS 

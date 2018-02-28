@@ -60,7 +60,22 @@ class FilesListContainer extends Component {
         this.props.navigateBack();
     }
 
+    async cancelDownload(file) {
 
+        let cancelDownloadResponse = await StorjModule.cancelDownload(file.fileRef);
+
+        if(cancelDownloadResponse.isSuccess) {
+            this.props.fileDownloadCanceled(this.bucketId, file.getId());
+        }
+    }
+
+    async cancelUpload(file) {        
+        let cancelUploadResponse = await StorjModule.cancelUpload(file.fileRef);
+
+        if(cancelUploadResponse.isSuccess) {
+            this.props.fileUploadCanceled(this.bucketId, file.getId());
+        }
+    }
 
     onPress(params) {
         //Download file  
@@ -73,6 +88,8 @@ class FilesListContainer extends Component {
         return(
             <FilesListComponent
                 onPress = { (params) => { this.onPress(params); } }
+                cancelDownload = { (params) => { this.cancelDownload(params); } }
+                cancelUpload = { (params) => { this.cancelUpload(params); } }
                 bucketId = { this.bucketId }
                 data = { data.concat(uploadingData) }
                 onSingleItemSelected = { this.props.onSingleItemSelected }

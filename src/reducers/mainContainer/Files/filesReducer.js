@@ -15,7 +15,9 @@ const {
     SELECT_FILE, 
     DESELECT_FILE,
     UPDATE_FILE_UPLOAD_PROGRESS,
-    UPDATE_FILE_DOWNLOAD_PROGRESS 
+    UPDATE_FILE_DOWNLOAD_PROGRESS,
+    FILE_DOWNLOAD_CANCELED,
+    FILE_UPLOAD_CANCELED
 } = FILE_ACTIONS;
 
 /**
@@ -46,7 +48,7 @@ export default function filesReducer(state = initialState, action) {
             newState.uploadingFileListModels = filesManager.deleteFileEntryU(action.payload.bucketId, action.payload.filePath);
             break;
         case UPDATE_FILE_UPLOAD_PROGRESS: 
-            newState.uploadingFileListModels = filesManager.updateFileUploadingProgress(action.payload.bucketId, action.payload.filePath, action.payload.progress);
+            newState.uploadingFileListModels = filesManager.updateFileUploadingProgress(action.payload.bucketId, action.payload.filePath, action.payload.progress, action.payload.fileRef);
             break;
         case DOWNLOAD_FILE_SUCCESS:
             newState.fileListModels = filesManager.fileDownloaded(action.payload.bucketId, action.payload.fileId);
@@ -56,7 +58,13 @@ export default function filesReducer(state = initialState, action) {
             //TODO: we should show some additional message here
             break;
         case UPDATE_FILE_DOWNLOAD_PROGRESS:             
-            newState.fileListModels = filesManager.updateFileDownloadingProgress(action.payload.bucketId, action.payload.fileId, action.payload.progress);
+            newState.fileListModels = filesManager.updateFileDownloadingProgress(action.payload.bucketId, action.payload.fileId, action.payload.progress, action.payload.fileRef);
+            break;
+        case FILE_DOWNLOAD_CANCELED:
+            newState.fileListModels = filesManager.cancelDownload(action.payload.bucketId, action.payload.fileId);
+            break;
+        case FILE_DOWNLOAD_CANCELED:
+            newState.uploadingFileListModels = filesManager.cancelDownload(action.payload.bucketId, action.payload.fileId);
             break;
         case DELETE_FILE:
             newState.fileListModels = filesManager.deleteFileEntry(action.payload.bucketId, action.payload.fileId);

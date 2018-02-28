@@ -43,7 +43,7 @@ public class FileUtils {
      * TAG for log messages.
      */
     private static final String TAG = "FileUtils";
-    private static final boolean DEBUG = false; // Set to true to enable logging
+    private static final boolean DEBUG = true; // Set to true to enable logging
 
     private FileUtils() {
     } //private constructor to enforce Singleton pattern
@@ -152,6 +152,7 @@ public class FileUtils {
                             ", Port: " + uri.getPort() +
                             ", Query: " + uri.getQuery() +
                             ", Scheme: " + uri.getScheme() +
+                            ", Authority: " + uri.getAuthority() +
                             ", Host: " + uri.getHost() +
                             ", Segments: " + uri.getPathSegments().toString()
             );

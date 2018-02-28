@@ -11,6 +11,7 @@ import StorjLib.Models.FileModel;
 import StorjLib.Models.UploadFileProgressModel;
 import StorjLib.Responses.Response;
 import StorjLib.Responses.SingleResponse;
+import StorjLib.StorjLibModule;
 import io.storj.libstorj.DownloadFileCallback;
 
 /**
@@ -24,6 +25,8 @@ public class DownloadFileCallbackWrapper implements DownloadFileCallback {
     private String _fileId;
     private String _localPath;
     private ReactApplicationContext _context;
+    private long _fileRef;
+    private boolean _uploadStart = false;
 
     public DownloadFileCallbackWrapper(ReactApplicationContext context, Promise promise, String bucketId, String fileId, String localPath) {
         _promise = promise;
@@ -35,7 +38,12 @@ public class DownloadFileCallbackWrapper implements DownloadFileCallback {
 
     @Override
     public void onProgress(String fileId, double progress, long downloadedBytes, long totalBytes) {
-        DownloadFileProgressModel uploadModel = new DownloadFileProgressModel(_bucketId, fileId,_localPath, progress, downloadedBytes, totalBytes);
+        if(!_uploadStart) {
+            _uploadStart = true;
+            _fileRef = StorjLibModule._downloadFileRef;
+        }
+
+        DownloadFileProgressModel uploadModel = new DownloadFileProgressModel(_bucketId, fileId,_localPath, progress, downloadedBytes, totalBytes, _fileRef);
 
         _context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("downloadFile", uploadModel.toWritableMap());
     }

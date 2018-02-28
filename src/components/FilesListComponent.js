@@ -14,6 +14,8 @@ export default class FilesListComponent extends Component {
         return(
             <View style = { styles.mainContainer }>
                 <ListComponent
+                    cancelDownload = { this.props.cancelDownload }
+                    cancelUpload = { this.props.cancelUpload }
                     onPress = { this.props.onPress }
                     bucketId = { this.props.bucketId }
                     onSingleItemSelected = { this.props.onSingleItemSelected }                    

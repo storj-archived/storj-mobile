@@ -32,7 +32,7 @@ class MainContainer extends Component {
             TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 3', require('../images/ActionBar/CopyBucketIcon.png')), 
             TabBarActionModelFactory.createNewAction(() => { this.deleteBuckets(); }, 'Action 3', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
-        //};  
+        
         this.openedBucketActions = [
             TabBarActionModelFactory.createNewAction(() => { this.uploadFile(); }, 'Action 1', require('../images/ActionBar/UploadFileIcon.png')), 
             TabBarActionModelFactory.createNewAction(() => { this.downloadSelectedFiles(); }, '2', require('../images/ActionBar/DownloadIFileIcon.png')),
@@ -95,7 +95,7 @@ class MainContainer extends Component {
             const observer = observablePropFactory.getObservable(filePickerResponse.path);
             observer.addListener({ id: filePickerResponse.path + this.props.openedBucketId, callback: (param) => { 
                 if(this.props.openedBucketId === param.bucketId)
-                    this.props.updateFileUploadProgress(param.bucketId, param.filePath, param.progress);
+                    this.props.updateFileUploadProgress(param.bucketId, param.filePath, param.progress, param.filePointer);
             }});
 
             let uploadFileResponse = await StorjLib.uploadFile(this.props.openedBucketId, path);
@@ -115,7 +115,7 @@ class MainContainer extends Component {
 
         observer.addListener({ id: fileId, callback: (param) => { 
             if(this.props.openedBucketId === param.bucketId)
-                this.props.updateFileDownloadProgress(param.bucketId, fileId, param.progress);
+                this.props.updateFileDownloadProgress(param.bucketId, fileId, param.progress, param.filePointer);
         }});
 
         let response = await StorjLib.downloadFile(this.props.openedBucketId, fileId, localPath);

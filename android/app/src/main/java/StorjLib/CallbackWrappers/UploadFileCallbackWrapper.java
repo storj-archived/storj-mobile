@@ -9,6 +9,7 @@ import StorjLib.Models.FileModel;
 import StorjLib.Models.UploadFileProgressModel;
 import StorjLib.Responses.Response;
 import StorjLib.Responses.SingleResponse;
+import StorjLib.StorjLibModule;
 import io.storj.libstorj.File;
 import io.storj.libstorj.UploadFileCallback;
 
@@ -21,6 +22,8 @@ public class UploadFileCallbackWrapper implements UploadFileCallback {
     private Promise _promise;
     private String _bucketId;
     private ReactApplicationContext _context;
+    private long _fileRef;
+    private boolean _uploadStart = false;
 
     public UploadFileCallbackWrapper(ReactApplicationContext context, Promise promise, String bucketId) {
         _promise = promise;
@@ -30,7 +33,12 @@ public class UploadFileCallbackWrapper implements UploadFileCallback {
 
     @Override
     public void onProgress(String filePath, double progress, long uploadedBytes, long totalBytes) {
-        UploadFileProgressModel uploadModel = new UploadFileProgressModel(_bucketId, filePath, progress, uploadedBytes, totalBytes);
+        if(!_uploadStart) {
+            _uploadStart = true;
+            _fileRef = StorjLibModule._uploadFileRef;
+        }
+
+        UploadFileProgressModel uploadModel = new UploadFileProgressModel(_bucketId, filePath, progress, uploadedBytes, totalBytes, _fileRef);
 
         _context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("uploadFile", uploadModel.toWritableMap());
     }

@@ -143,6 +143,22 @@ const StorjLib = (() => {
         }
 
         /**
+         * cancel file downloading
+         * @returns {Promise<any>}
+         */
+        async cancelDownload(fileRef) {
+            return await storjLib.cancelDownload(fileRef);
+        }
+
+        /**
+         * cancel file uploading
+         * @returns {Promise<any>}
+         */
+        async cancelUpload(fileRef) {
+            return await storjLib.cancelUpload(fileRef);
+        }
+
+        /**
          * download file to storj network
          * @returns {Promise<any>}
          */

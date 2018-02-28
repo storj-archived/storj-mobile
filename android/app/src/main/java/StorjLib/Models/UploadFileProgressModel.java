@@ -31,12 +31,17 @@ public class UploadFileProgressModel {
     @SerializedName("totalBytes")
     private long _totalBytes;
 
-    public UploadFileProgressModel(String bucketId, String filePath, double progress, long uploadedBytes, long totalBytes) {
+    @Expose
+    @SerializedName("filePointer")
+    private long _filePointer;
+
+    public UploadFileProgressModel(String bucketId, String filePath, double progress, long uploadedBytes, long totalBytes, long filePointer) {
         _bucketId = bucketId;
         _filePath = filePath;
         _progress = progress;
         _uploadedBytes = uploadedBytes;
         _totalBytes = totalBytes;
+        _filePointer = filePointer;
     }
 
     public WritableMap toWritableMap() {
@@ -47,6 +52,7 @@ public class UploadFileProgressModel {
         wMap.putDouble("progress", _progress);
         wMap.putDouble("uploadedBytes", _uploadedBytes);
         wMap.putDouble("totalBytes", _totalBytes);
+        wMap.putDouble("filePointer", _filePointer);
 
         return wMap;
     }

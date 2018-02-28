@@ -73,6 +73,9 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
     private static final String E_CREATE_BUCKET = "E_CREATE_BUCKET";
     private static final String MODULE_NAME = "StorjLibAndroid";
 
+    public static long _downloadFileRef = 0;
+    public static long _uploadFileRef = 0;
+
     public StorjLibModule(ReactApplicationContext reactContext) {
         super(reactContext);
     }
@@ -220,7 +223,8 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
         new MethodHandler().invokeParallel(new BaseMethodParams(promise), new IMethodHandlerCallback() {
             @Override
             public void callback(IMethodParams param) {
-                getStorj().downloadFile(bucketId, fileId, localPath, new DownloadFileCallbackWrapper(getReactApplicationContext(), promise, bucketId, fileId, localPath));
+                _downloadFileRef = getStorj().downloadFile(bucketId, fileId, localPath, new DownloadFileCallbackWrapper(
+                        getReactApplicationContext(), promise, bucketId, fileId, localPath));
             }
         });
     }
@@ -232,7 +236,8 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
         new MethodHandler().invokeParallel(new BaseMethodParams(promise), new IMethodHandlerCallback() {
             @Override
             public void callback(IMethodParams param) {
-                getStorj().uploadFile(bucketId, localPath, new UploadFileCallbackWrapper(getReactApplicationContext(), promise, bucketId));
+                _uploadFileRef = getStorj().uploadFile(bucketId, localPath, new UploadFileCallbackWrapper(
+                        getReactApplicationContext(), promise, bucketId));
             }
         });
     }
@@ -257,6 +262,28 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
             @Override
             public void callback(IMethodParams param) {
                 getStorj().listFiles(bucketId, new ListFilesCallbackWrapper(promise));
+            }
+        });
+    }
+
+    @ReactMethod
+    public void cancelDownload(final double fileRef, final Promise promise) {
+        new MethodHandler().invokeParallel(new BaseMethodParams(promise), new IMethodHandlerCallback() {
+            @Override
+            public void callback(IMethodParams param) {
+                boolean isSuccess = getStorj().cancelDownload((long)fileRef);
+                promise.resolve(new Response(isSuccess, "")) ;
+            }
+        });
+    }
+
+    @ReactMethod
+    public void cancelUpload(final double fileRef, final Promise promise) {
+        new MethodHandler().invokeParallel(new BaseMethodParams(promise), new IMethodHandlerCallback() {
+            @Override
+            public void callback(IMethodParams param) {
+                boolean isSuccess = getStorj().cancelUpload((long)fileRef);
+                promise.resolve(new Response(isSuccess, "")) ;
             }
         });
     }

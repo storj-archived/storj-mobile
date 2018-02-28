@@ -11,7 +11,9 @@ const {
     SELECT_FILE, 
     DESELECT_FILE,
     UPDATE_FILE_UPLOAD_PROGRESS,
-    UPDATE_FILE_DOWNLOAD_PROGRESS
+    UPDATE_FILE_DOWNLOAD_PROGRESS,
+    FILE_DOWNLOAD_CANCELED,
+    FILE_UPLOAD_CANCELED
 } = FILE_ACTIONS;
 
 /**
@@ -50,8 +52,8 @@ function uploadFileError(bucketId, filePath) {
     return { type: UPLOAD_FILE_ERROR, payload: { bucketId, filePath } };
 }
 
-function updateFileUploadProgress(bucketId, filePath, progress) {
-    return { type: UPDATE_FILE_UPLOAD_PROGRESS, payload: { bucketId, filePath, progress } }
+function updateFileUploadProgress(bucketId, filePath, progress, fileRef) {
+    return { type: UPDATE_FILE_UPLOAD_PROGRESS, payload: { bucketId, filePath, progress, fileRef } }
 }
 
 /**
@@ -72,8 +74,27 @@ function downloadFileError(bucketId, fileId) {
     return { type: DOWNLOAD_FILE_ERROR, payload: { bucketId, fileId } };
 }
 
-function updateFileDownloadProgress(bucketId, fileId, progress) {
-    return { type: UPDATE_FILE_DOWNLOAD_PROGRESS, payload: { bucketId, fileId, progress } }
+/**
+ * Occurs when file downloading fails
+ * @param {string} bucketId
+ * @param {string} fileId
+ * @param {string} progress - current progress of downloading
+ * @param {string} fileRef - reference of file downloading state. Needed for canceling download
+ */
+function updateFileDownloadProgress(bucketId, fileId, progress, fileRef) {
+    return { type: UPDATE_FILE_DOWNLOAD_PROGRESS, payload: { bucketId, fileId, progress, fileRef } }
+}
+
+/**
+ * Occurs when file downloading canceled
+ * @param {string} fileRef - reference of file downloading state. Needed for canceling download
+ */
+function fileDownloadCanceled(bucketId, fileId) {
+    return { type: FILE_DOWNLOAD_CANCELED, payload: { bucketId, fileId } }
+}
+
+function fileUploadCanceled(bucketId, fileId) {
+    return { type: FILE_UPLOAD_CANCELED, payload: { bucketId, fileId } }
 }
 
 function deleteFile(bucketId, fileId) {
@@ -107,5 +128,7 @@ export const mainContainerFileActions = {
     downloadFileSuccess,
     downloadFileError,
     updateFileDownloadProgress,
-    deleteFile
+    deleteFile,
+    fileDownloadCanceled,
+    fileUploadCanceled
 };

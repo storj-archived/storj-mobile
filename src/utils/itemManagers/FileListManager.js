@@ -115,11 +115,12 @@ export default class FileListManager {
         return this.newFilesList;
     }
 
-    updateFileUploadingProgress(bucketId, fileId, progress) {
+    updateFileUploadingProgress(bucketId, fileId, progress, fileRef) {
         this._isInArray(this.newFileUploadingList, bucketId, (itemsList) => {
             itemsList.files.forEach(fileEntry => {
                 if(fileEntry.getId() === fileId)
                     fileEntry.progress = progress;
+                    fileEntry.fileRef = fileRef;
             });
         });
 
@@ -139,18 +140,37 @@ export default class FileListManager {
         return this.newFilesList;
     }
 
-    updateFileDownloadingProgress(bucketId, fileId, progress) {
-        console.log('SOSAT');
+    updateFileDownloadingProgress(bucketId, fileId, progress, fileRef) {
         this._isInArray(this.newFilesList, bucketId, (itemsList) => {
             itemsList.files.forEach(fileEntry => {
                 if(fileEntry.getId() === fileId) {
-
                     fileEntry.isLoading = true;
                     fileEntry.progress = progress;
+                    fileEntry.fileRef = fileRef;
                 }                    
             });
         });
 
+        return this.newFilesList;
+    }
+
+    cancelDownload(bucketId, fileId) {
+        this._isInArray(this.newFilesList, bucketId, (itemsList) => {
+            itemsList.files = itemsList.files.filter(fileEntry => {
+                return fileEntry.getId() !== fileId          
+            });
+        });
+       
+        return this.newFilesList;
+    }
+
+    cancelUpload(bucketId, fileId) {
+        this._isInArray(this.newFileUploadingList, bucketId, (itemsList) => {
+            itemsList.files = itemsList.files.filter(fileEntry => {
+                return fileEntry.getId() !== fileId          
+            });
+        });
+       
         return this.newFilesList;
     }
 
