@@ -2,7 +2,7 @@ import { BackHandler, Platform, DeviceEventEmitter, Animated } from 'react-nativ
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { bucketNavigateBack, dashboardNavigateBack } from '../reducers/navigation/navigationActions';
+import { bucketNavigateBack, dashboardNavigateBack, openImageViewer } from '../reducers/navigation/navigationActions';
 import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import StorjModule from '../utils/StorjModule';
@@ -91,7 +91,23 @@ class FilesListContainer extends Component {
     }
 
     onPress(params) {
-        //Download file  
+        let downloadedFileListModel = this.props.downloadedFileListModels.find(item => item.bucketId === this.bucketId);
+
+        console.log(downloadedFileListModel, this.props.downloadedFileListModels);
+
+        if(!downloadedFileListModel) 
+            return;
+        
+        let downloadedFile = downloadedFileListModel.files.find(file => { 
+            console.log(file.id, params.bucketId);
+            return file.id === params.bucketId 
+        });
+
+        console.log(downloadedFile, params);
+
+        if(downloadedFile) {
+            this.props.openImageViewer(downloadedFile.id, downloadedFile.path, downloadedFileListModel.bucketId);
+        }
     }
 
     render() {
@@ -126,12 +142,13 @@ function mapStateToProps(state) {
         fileListModels: state.filesReducer.fileListModels,
         uploadingFileListModels: state.filesReducer.uploadingFileListModels, //uploadingFileListModels
         isLoading: state.mainReducer.isLoading,
-        isGridViewShown: state.mainReducer.isGridViewShown
+        isGridViewShown: state.mainReducer.isGridViewShown,
+        downloadedFileListModels: state.filesReducer.downloadedFileListModels
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ bucketNavigateBack, dashboardNavigateBack, ...filesListContainerMainActions, ...filesListContainerFileActions }, dispatch);
+    return bindActionCreators({ bucketNavigateBack, dashboardNavigateBack, openImageViewer, ...filesListContainerMainActions, ...filesListContainerFileActions }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilesListContainer);

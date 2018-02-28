@@ -7,9 +7,10 @@ export default class FileListManager {
      * @param {FileListModel[]} filesList 
      * @param {FileListModel[]} uploadingFileList 
      */
-    constructor(filesList, uploadingFileList) {
+    constructor(filesList, uploadingFileList, downloadedFileList) {
         this.newFilesList = filesList.map(item => new FileListModel(item.bucketId, item.files));
         this.newFileUploadingList = uploadingFileList.map(item => new FileListModel(item.bucketId, item.files));
+        this.newFileDownloadedList = downloadedFileList.map(item => new FileListModel(item.bucketId, item.files));
     }
 
     addFileEntry(bucketId, file) {
@@ -18,6 +19,10 @@ export default class FileListManager {
 
     addFileEntryU(bucketId, file) {
         return this._addFileEntry(this.newFileUploadingList, bucketId, file);
+    }
+
+    addFileEntryD(bucketId, file) {
+        return this._addFileEntry(this.newFileDownloadedList, bucketId, file);
     }
 
     //--------------------------------------------------------------------------

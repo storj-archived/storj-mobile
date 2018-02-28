@@ -26,12 +26,13 @@ const {
  */
 const initialState = {
     fileListModels: [],
-    uploadingFileListModels: []
+    uploadingFileListModels: [],
+    downloadedFileListModels: []
 };
 
 export default function filesReducer(state = initialState, action) {
     let newState = Object.assign({}, state);
-    let filesManager = new FileListManager(newState.fileListModels, newState.uploadingFileListModels);
+    let filesManager = new FileListManager(newState.fileListModels, newState.uploadingFileListModels, newState.downloadedFileListModels);
 
     switch(action.type) {
         case LIST_FILES:
@@ -52,6 +53,7 @@ export default function filesReducer(state = initialState, action) {
             break;
         case DOWNLOAD_FILE_SUCCESS:
             newState.fileListModels = filesManager.fileDownloaded(action.payload.bucketId, action.payload.fileId);
+            newState.downloadedFileListModels = filesManager.addFileEntryD(action.payload.bucketId, { id: action.payload.fileId, path: action.payload.filePath });
             break;
         case DOWNLOAD_FILE_ERROR:
             newState.fileListModels = filesManager.fileDownloaded(action.payload.bucketId, action.payload.fileId);

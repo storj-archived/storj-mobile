@@ -61,8 +61,8 @@ function updateFileUploadProgress(bucketId, filePath, progress, fileRef) {
  * @param {string} bucketId
  * @param {string} fileId
  */
-function downloadFileSuccess(bucketId, fileId) {
-    return { type: DOWNLOAD_FILE_SUCCESS, payload: { bucketId, fileId } };
+function downloadFileSuccess(bucketId, fileId, filePath) {
+    return { type: DOWNLOAD_FILE_SUCCESS, payload: { bucketId, fileId, filePath } };
 }
 
 /**
@@ -130,5 +130,10 @@ export const mainContainerFileActions = {
     downloadFileSuccess,
     downloadFileError,
     updateFileDownloadProgress,
+    deleteFile,
+    fileUploadCanceled
+};
+
+export const imageViewerActions = {
     deleteFile
 };

@@ -10,6 +10,7 @@ import RegisterSuccessInfoScreen from '../components/RegisterSuccessComponent';
 import TermsOfUseScreen from '../components/TermsOfUseComponent';
 import MnemonicGenerationScreen from '../components/MnemonicGenerationComponent';
 import QRScannerScreen from '../containers/QRScannerContainer';
+import ImageViewerScreen from '../containers/ImageViewerContainer';
 
 /**
  * Creating program main navigator
@@ -55,6 +56,10 @@ const StackNav = StackNavigator(
         QRScannerScreen: {
             screen: QRScannerScreen,
             routeName: 'QRScannerScreen'
+        },
+        ImageViewerScreen: {
+            screen: ImageViewerScreen,
+            routeName: "ImageViewerScreen"
         }
     },
     {

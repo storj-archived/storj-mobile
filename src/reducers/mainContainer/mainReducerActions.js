@@ -157,7 +157,8 @@ export const bucketsContainerActions = {
     createBucket,
     removeFirstSignIn,
     setLoading,
-    unsetLoading
+    unsetLoading,
+    closeBucket
 };
 
 export const dashboardContainerActions = {

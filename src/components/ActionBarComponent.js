@@ -25,9 +25,12 @@ export default class ActionBarComponent extends Component {
     }
 
     shouldComponentUpdate(nextProps) {
-        if(this.props.isSelectionMode !== nextProps.isSelectionMode) 
+        console.log(this.props, nextProps);
+        if(this.props.tapBarActions !== nextProps.tapBarActions)
             return true;
-        if(this.props.isSingleItemSelected !== nextProps.isSingleItemSelected) 
+        if(this.props.applyMargin !== nextProps.applyMargin) 
+            return true;
+        if(this.props.showTriangle !== nextProps.showTriangle) 
             return true;
         if(this.props.bucketScreenRouteName !== nextProps.bucketScreenRouteName)
             return true;
@@ -42,13 +45,7 @@ export default class ActionBarComponent extends Component {
     }
 
     getTapBarAction() {
-        let actions = this.props.isSelectionMode || this.props.isSingleItemSelected ? this.props.selectionModeActions : this.props.tapBarActions;
-
-        if(this.props.openedBucketId) {
-            actions = this.props.openedBucketActions;
-        }
-
-        return actions.map((action, index) => {
+        return this.props.actions.map((action, index) => {
             var icon = action.iconPath;
             let imageWrapperStyle = index === 0 
                 ? styles.imageWrapper 
@@ -65,9 +62,7 @@ export default class ActionBarComponent extends Component {
     } 
 
     render() {
-        let actions = this.props.isSelectionMode ? this.props.selectionModeActions : this.props.tapBarActions;
-        let isSelectionMode = this.props.isSelectionMode || this.props.isSingleItemSelected;
-        let popUpWrapperStyle = isSelectionMode ? styles.popUpRectangleWrapperSelectionMode : styles.popUpRectangleWrapper;
+        let popUpWrapperStyle = this.props.applyMargin ? styles.popUpRectangleWrapper : styles.popUpRectangleWrapperSelectionMode;
 
         return(
             <View style = { [ popUpWrapperStyle ] }>
@@ -77,7 +72,7 @@ export default class ActionBarComponent extends Component {
                     }
                 </View>
                 {
-                    !this.props.isSelectionMode && !this.props.isSingleItemSelected ?
+                    this.props.showTriangle ?
                         <View style = { styles.bottomTriangle }>
                             <Image 
                                 source = { require('../images/ActionBar/ActionBarBottomTriangle.png') } 
@@ -90,12 +85,10 @@ export default class ActionBarComponent extends Component {
 } 
 
 ActionBarComponent.propTypes = {
-    isSelectionMode: PropTypes.bool,
-    isSingleItemSelected: PropTypes.bool,
     tapBarActions: PropTypes.arrayOf(PropTypes.instanceOf(TabBarActionModel)),
-    selectionModeActions: PropTypes.arrayOf(PropTypes.instanceOf(TabBarActionModel)),
-    openedBucketId: PropTypes.string, 
-    openedBucketActions: PropTypes.array
+    applyMargin: PropTypes.bool,
+    showTriangle: PropTypes.bool,
+    bucketScreenRouteName: PropTypes.string
 };
 
 const styles = StyleSheet.create({

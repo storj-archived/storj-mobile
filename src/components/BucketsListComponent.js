@@ -38,6 +38,6 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: 'white',
-        marginTop: getHeight(70)
+        marginTop: getHeight(58)
     }
 });
