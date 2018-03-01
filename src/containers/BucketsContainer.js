@@ -40,6 +40,15 @@ class BucketsContainer extends Component {
         if(openedBucket) {
             return this.getArraySelectedCount(openedBucket.files);
         }
+    } 
+
+    getSelectedItemsCount() {
+        if(this.props.screenName === "FilesScreen") {
+            let result = this.getSelectedFilesCount();
+            return result;
+        } else {
+            return this.getSelectedBucketsCount();
+        }
     }
 
     async createBucket(name) {
@@ -74,6 +83,7 @@ class BucketsContainer extends Component {
         } else {
             return(
                 <BucketsComponent
+                    selectedItemsCount = { this.getSelectedItemsCount() }
                     showOptions = { this.props.screenProps.showOptions }
                     onSingleItemSelected = { this.props.onSingleItemSelected }
                     enableSelectionMode = { this.props.enableSelectionMode }
@@ -82,12 +92,9 @@ class BucketsContainer extends Component {
                     isSingleItemSelected = { this.props.isSingleItemSelected }
                     deselectBucket = { this.props.deselectBucket }
                     selectBucket = { this.props.selectBucket }
-                    selectedBucketsCount = { this.getSelectedBucketsCount() }
-                    selectedFilesCount = { this.getSelectedFilesCount() }
                     buckets = { this.props.buckets }
                     selectedBucketId = { this.props.selectedBucketId }
                     files = { this.props.files }
-                    screenName = { this.props.screenName }
                     navigateBack = { () => { this.navigateBack(); } } /> 
             );
         }
