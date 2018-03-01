@@ -167,6 +167,8 @@ export default class ListComponent extends Component {
                                                     return(
                                                         <View style = { styles.itemContainer } key = { item.getId() }>
                                                             <GridItemComponent
+                                                                cancelUpload = { this.props.cancelUpload }
+                                                                cancelDownload = { this.props.cancelDownload }
                                                                 bucketId = { this.props.bucketId }
                                                                 item = { item } 
                                                                 selectItemId = { (itemId) => { this.setState({ selectedItemId: itemId }) }}
