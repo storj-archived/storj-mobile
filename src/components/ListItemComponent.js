@@ -66,7 +66,7 @@ export default class ListItemComponent extends Component {
                     
                     this.props.onPress({ bucketId: props.item.getId() });
                 }}
-                onLongPress = { () => { 
+                onLongPress = { () => {
                     props.onLongPress(props.item);
                 }}>
                     <View style = { listItemStyles.listItemContent }>

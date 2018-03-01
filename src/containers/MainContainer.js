@@ -83,11 +83,6 @@ class MainContainer extends Component {
         const index = this.props.mainNavReducer.index;
         const routes = this.props.mainNavReducer.routes;   
 
-        console.log("-----------------------------------------MainContainer");
-        console.log(routes[index].routeName, "routeName");
-        console.log(this.props.isSelectionMode, "selectionMode");
-        console.log(this.props.isActionBarShown, "isSingleItemSelected");
-
         if(this.props.isSelectionMode 
         || this.props.isSingleItemSelected 
         || this.props.isActionBarShown) {

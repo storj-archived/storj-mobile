@@ -119,7 +119,7 @@ export default class GridItemComponent extends Component {
                     
                     this.props.onPress({ bucketId: props.item.getId() });
                 }}
-                onLongPress = { () => { 
+                onLongPress = { () => {
                     props.onLongPress(props.item);
                 }}>
                     <View style = { gridItemStyles.listItemContent }>

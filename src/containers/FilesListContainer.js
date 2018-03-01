@@ -76,12 +76,6 @@ class FilesListContainer extends Component {
         const index = this.props.mainNavReducer.index;
         const routes = this.props.mainNavReducer.routes;
 
-        console.log("FileContainer-----------------------------------------");
-        console.log(routes[index].routeName, "routeName");
-        console.log(this.props.isSelectionMode, "selectionMode");
-        console.log(this.props.isActionBarShown, "isSingleItemSelected");
-        console.log(this.props.screenProps.defaultRoute, "defaultScreenrouteName");
-
         if(routes[index].routeName === "ImageViewerScreen") 
             return;
 
