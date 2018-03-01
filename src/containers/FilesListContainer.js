@@ -56,8 +56,6 @@ class FilesListContainer extends Component {
 
         let cancelDownloadResponse = await StorjModule.cancelDownload(file.fileRef);
 
-        console.log(cancelDownloadResponse);
-
         if(cancelDownloadResponse.isSuccess) {
             this.props.fileDownloadCanceled(this.bucketId, file.getId());
         }
@@ -74,6 +72,13 @@ class FilesListContainer extends Component {
     onHardwareBackPress() {
         if(this.props.isLoading)
             return;
+
+        if(this.props.isSelectionMode 
+        || this.props.isSingleItemSelected 
+        || this.props.isActionBarShown) {
+
+            return;
+        }
 
         this.props.closeBucket();
 
@@ -126,6 +131,7 @@ class FilesListContainer extends Component {
 
 function mapStateToProps(state) {
     return {
+        isActionBarShown: state.mainReducer.isActionBarShown,
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         fileListModels: state.filesReducer.fileListModels,

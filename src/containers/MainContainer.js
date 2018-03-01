@@ -1,4 +1,4 @@
-import { Keyboard, DeviceEventEmitter } from 'react-native';
+import { Keyboard, DeviceEventEmitter, BackHandler, Platform } from 'react-native';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -48,9 +48,15 @@ class MainContainer extends Component {
             let res = observablePropFactory.getObservable(fileParams.fileId);
             res.Property = fileParams;
         }
+
+        this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
     }
 
     componentWillMount () {
+        if(Platform.OS === "android") {
+            BackHandler.addEventListener("hardwareBackPress", this.onHardwareBackPress);
+        }
+
         DeviceEventEmitter.addListener("uploadFile", this.uploadListener);
         DeviceEventEmitter.addListener("downloadFile", this.downloadListener);
 
@@ -58,11 +64,28 @@ class MainContainer extends Component {
     }
     
     componentWillUnmount () {
+        if(Platform.OS === "android") {
+            BackHandler.removeEventListener("hardwareBackPress");
+        }
+
         DeviceEventEmitter.removeListener("uploadFile", this.uploadListener);
         DeviceEventEmitter.removeListener("downloadFile", this.downloadListener);
         observablePropFactory.clean();
 
         this.keyboardDidShowListener.remove();
+    }
+
+    onHardwareBackPress() {
+        if(this.props.isLoading)
+            return;
+
+        if(this.props.isSelectionMode 
+        || this.props.isSingleItemSelected 
+        || this.props.isActionBarShown) {
+
+            this.props.disableSelectionMode();
+            return;
+        }
     }
 
     onCreateBucketPress() {
