@@ -40,6 +40,10 @@ export function navigateToFilesScreen(bucketId) {
     return NavigationActions.navigate({ routeName: 'FilesScreen', params: { bucketId } });
 }
 
+export function openImageViewer(fileId, localPath, bucketId) {
+    return NavigationActions.navigate({ routeName: 'ImageViewerScreen', params: { fileId, localPath, bucketId } });
+}
+
 export function navigateBack() {
     return NavigationActions.back();
 }

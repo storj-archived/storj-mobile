@@ -59,6 +59,11 @@ class BucketsContainer extends Component {
         this.props.unsetLoading();
     }
 
+    navigateBack() {
+        this.props.bucketNavigateBack();
+        this.props.closeBucket();
+    }
+
     render() {
         if(this.props.isFirstSignIn) {
             return(
@@ -83,7 +88,7 @@ class BucketsContainer extends Component {
                     selectedBucketId = { this.props.selectedBucketId }
                     files = { this.props.files }
                     screenName = { this.props.screenName }
-                    navigateBack = { this.props.bucketNavigateBack } /> 
+                    navigateBack = { () => { this.navigateBack(); } } /> 
             );
         }
     }

@@ -27,16 +27,16 @@ class MainContainer extends Component {
 
         this.selectionModeActions = [
             //actions for bucket screen
-            TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 1', require('../images/ActionBar/FavoritesIcon.png')), 
-            TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 2', require('../images/ActionBar/DownloadIFileIcon.png')), 
-            TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 3', require('../images/ActionBar/CopyBucketIcon.png')), 
-            TabBarActionModelFactory.createNewAction(() => { this.deleteBuckets(); }, 'Action 3', require('../images/ActionBar/TrashBucketIcon.png'))
+            TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 4', require('../images/ActionBar/FavoritesIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 5', require('../images/ActionBar/DownloadIFileIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 6', require('../images/ActionBar/CopyBucketIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { this.deleteBuckets(); }, 'Action 7', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
         
         this.openedBucketActions = [
-            TabBarActionModelFactory.createNewAction(() => { this.uploadFile(); }, 'Action 1', require('../images/ActionBar/UploadFileIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { this.uploadFile(); }, 'Action 8', require('../images/ActionBar/UploadFileIcon.png')), 
             TabBarActionModelFactory.createNewAction(() => { this.downloadSelectedFiles(); }, '2', require('../images/ActionBar/DownloadIFileIcon.png')),
-            TabBarActionModelFactory.createNewAction(() => { this.deleteSelectedFiles(); }, 'Action 3', require('../images/ActionBar/TrashBucketIcon.png'))
+            TabBarActionModelFactory.createNewAction(() => { this.deleteSelectedFiles(); }, 'Action 9', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
 
 
@@ -120,8 +120,10 @@ class MainContainer extends Component {
 
         let response = await StorjLib.downloadFile(this.props.openedBucketId, fileId, localPath);
         
+        console.log(response);
+
         if(response.isSuccess) {
-            this.props.downloadFileSuccess(this.props.openedBucketId, fileId);
+            this.props.downloadFileSuccess(this.props.openedBucketId, fileId, localPath);
         } else {
             this.props.downloadFileError(this.props.openedBucketId, fileId);
         }
@@ -209,6 +211,14 @@ class MainContainer extends Component {
     render() {
         const index = this.props.bucketsScreenNavReducer.index;
         const routes = this.props.bucketsScreenNavReducer.routes;
+        let tapBarActions = this.tapBarActions;
+        
+        if(this.props.openedBucketId)
+            tapBarActions = this.openedBucketActions;
+        else if(this.props.isSelectionMode || this.props.isSingleItemSelected)
+            tapBarActions = this.selectionModeActions;
+        
+        console.log(tapBarActions);
 
         return(
             <MainComponent
@@ -216,12 +226,9 @@ class MainContainer extends Component {
                 setGridView = { this.props.setGridView }
                 setListView = { this.props.setListView }
                 bucketScreenRouteName = { routes[index].routeName }
-                openedBucketId = { this.props.openedBucketId }
                 createBucket = { this.createBucket.bind(this) }
                 hideCreateBucketInput = { this.props.hideCreateBucketInput }
-                tapBarActions = { this.tapBarActions } 
-                selectionModeActions = { this.selectionModeActions }
-                openedBucketActions = { this.openedBucketActions }
+                tapBarActions = { tapBarActions } 
                 isSelectionMode = { this.props.isSelectionMode }
                 isSingleItemSelected = { this.props.isSingleItemSelected }
                 onActionBarPress = { () => { this.onActionBarPress(); } }

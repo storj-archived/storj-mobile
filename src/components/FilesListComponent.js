@@ -12,6 +12,7 @@ export default class FilesListComponent extends Component {
     }
 
     render() {
+        console.log(this.props.data);
         return(
             <View style = { styles.mainContainer }>
                 <ListComponent

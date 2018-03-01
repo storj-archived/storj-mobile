@@ -25,6 +25,8 @@ export default class MainComponent extends Component {
     }
     
     render() {
+        const isSelectionMode = this.props.isSelectionMode || this.props.isSingleItemSelected; 
+
         return(
             <View style={ styles.mainContainer }>
                 <View style = { styles.navigationContainer }>
@@ -38,13 +40,10 @@ export default class MainComponent extends Component {
                 {
                     this.props.isActionBarShown || this.props.isSelectionMode ? 
                         <ActionBarComponent
+                            applyMargin = { !isSelectionMode }
+                            showTriangle = { !isSelectionMode }
                             bucketScreenRouteName = { this.props.bucketScreenRouteName }
-                            openedBucketId = { this.props.openedBucketId }
-                            isSingleItemSelected = { this.props.isSingleItemSelected }
-                            isSelectionMode = { this.props.isSelectionMode }
-                            selectionModeActions = { this.props.selectionModeActions }
-                            openedBucketActions = { this.props.openedBucketActions }
-                            tapBarActions = { this.props.tapBarActions } /> : null
+                            actions = { this.props.tapBarActions } /> : null
                 }
                 {
                     this.props.isCreateBucketInputShown ? 
