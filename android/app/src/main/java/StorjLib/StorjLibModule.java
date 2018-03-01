@@ -13,6 +13,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
+import java.net.URLConnection;
 import java.security.Key;
 
 import StorjLib.CallbackWrappers.CreateBucketCallbackWrapper;
@@ -176,7 +177,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
                 boolean isSuccess = mnemonic != null && !mnemonic.isEmpty();
 
                 if(!isSuccess){
-                    promise.resolve(new Response(false, "Mnemonic generation failed"));
+                    promise.resolve(new Response(false, "Mnemonic generation failed").toWritableMap());
                     return;
                 }
 
@@ -266,13 +267,21 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
         });
     }
 
+    public static void main(String... args){
+        try{
+            String a = URLConnection.guessContentTypeFromName("C# 6.0. Карманный справочник.pdf");
+            System.out.println(a);} catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     @ReactMethod
     public void cancelDownload(final double fileRef, final Promise promise) {
         new MethodHandler().invokeParallel(new BaseMethodParams(promise), new IMethodHandlerCallback() {
             @Override
             public void callback(IMethodParams param) {
                 boolean isSuccess = getStorj().cancelDownload((long)fileRef);
-                promise.resolve(new Response(isSuccess, "")) ;
+                promise.resolve(new Response(isSuccess, "").toWritableMap());
             }
         });
     }
@@ -283,7 +292,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
             @Override
             public void callback(IMethodParams param) {
                 boolean isSuccess = getStorj().cancelUpload((long)fileRef);
-                promise.resolve(new Response(isSuccess, "")) ;
+                promise.resolve(new Response(isSuccess, "").toWritableMap());
             }
         });
     }

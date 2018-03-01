@@ -28,7 +28,13 @@ const StorjLib = (() => {
          */
         async generateMnemonic() {
             try {
-                return await storjLib.generateMnemonic();
+                let response = await storjLib.generateMnemonic();
+
+                if(!response.isSuccess){
+                    console.log('generateMnemonic ', response.message);
+                }
+
+                return response;
             } catch(e) {
                 console.log(e);
             }
@@ -40,8 +46,13 @@ const StorjLib = (() => {
          * @returns {Promise<boolean>} 
          */
         async checkMnemonic(mnemonic) {    
-            let checkMnemonicResponse = await storjLib.checkMnemonic(mnemonic);
-            return checkMnemonicResponse.isSuccess;
+            let response = await storjLib.checkMnemonic(mnemonic);
+
+            if(!response.isSuccess){
+                console.log('checkMnemonic ', response.message);
+            }
+
+            return response.isSuccess;
         };
     
         /**
@@ -52,11 +63,13 @@ const StorjLib = (() => {
          * @param {function} errorCallback Callback for error handeling, returns error message
          */
         async register(email, password, errorCallback) {
-            try {
-                return await storjLib.register(email, password);
-            } catch(e) {
-                errorCallback(e);
+            let response = await storjLib.register(email, password);
+
+            if(!response.isSuccess){
+                console.log('register ', response.message);
             }
+
+            return response;
         };
     
         /**
@@ -66,8 +79,13 @@ const StorjLib = (() => {
          * @returns {Promise<boolean>}
          */
         async verifyKeys(email, password) {            
-            let verifyKeysPesponse = await storjLib.verifyKeys(email, password);
-            return verifyKeysPesponse.isSuccess;
+            let response = await storjLib.verifyKeys(email, password);
+
+            if(!response.isSuccess){
+                console.log('verifyKeys ', response.message);
+            }
+
+            return response.isSuccess;
         };
     
         /**
@@ -75,8 +93,13 @@ const StorjLib = (() => {
          * @returns {Promise<boolean>}
          */
         async keysExists() {   
-            let keysExistsReponse = await storjLib.keysExists();
-            return keysExistsReponse.isSuccess;
+            let response = await storjLib.keysExists();
+
+            if(!response.isSuccess){
+                console.log('keysExists ', response.message);
+            }
+
+            return response.isSuccess;
         };
     
         /**
@@ -89,8 +112,13 @@ const StorjLib = (() => {
          * @returns {Promise<boolean>}
          */
         async importKeys(email, password, mnemonic, passcode) {            
-            let importKeysResponse = await storjLib.importKeys(email, password, mnemonic, /*passcode*/"");
-            return importKeysResponse.isSuccess;
+            let response = await storjLib.importKeys(email, password, mnemonic, /*passcode*/"");
+
+            if(!response.isSuccess){
+                console.log('importKeys ', response.message);
+            }
+
+            return response.isSuccess;
         };
     
         /**
@@ -98,13 +126,13 @@ const StorjLib = (() => {
          * @param {string} passcode needed if user has protected your auth file with additional password
          */
         async getKeys(passcode) {
-            let getKeysResponse = await storjLib.getKeys(/*passcode*/"");
+            let response = await storjLib.getKeys(/*passcode*/"");
 
-            if(!getKeysResponse.isSuccess) {
-                //TODO: add some error handling logic here
+            if(!response.isSuccess) {
+                console.log('getKeys ', response.message);
             }
 
-            return getKeysResponse;
+            return response;
         };
     
         /**
@@ -113,11 +141,14 @@ const StorjLib = (() => {
          */
         async getBuckets() {
             let result = [];
-            let bucketResponse = await storjLib.getBuckets();
+            let response = await storjLib.getBuckets();
 
-            if(!bucketResponse.isSuccess) return result;
+            if(!response.isSuccess) {
+                console.log('getBuckets ', response.message);
+                return result;
+            }
 
-            result = JSON.parse(bucketResponse.result).map((bucket) => {
+            result = JSON.parse(response.result).map((bucket) => {
                 return new BucketModel(bucket);
             });
 
@@ -129,7 +160,13 @@ const StorjLib = (() => {
          * @param {string} bucketId 
          */
         async deleteBucket(bucketId) {
-            return await storjLib.deleteBucket(bucketId);
+            let response = await storjLib.deleteBucket(bucketId);
+
+            if(!response.isSuccess) {
+                console.log('deleteBucket ', response.message);
+            }
+
+            return response;
         }
 
         /**
@@ -137,9 +174,13 @@ const StorjLib = (() => {
          * @returns {Promise<any>}
          */
         async downloadFile(bucketId, fileId, localPath) {
-            let downloadFileResult = await storjLib.downloadFile(bucketId, fileId, localPath);
+            let response = await storjLib.downloadFile(bucketId, fileId, localPath);
 
-            return downloadFileResult;
+            if(!response.isSuccess) {
+                console.log('downloadFile ', response.message);
+            }
+
+            return response;
         }
 
         /**
@@ -147,7 +188,13 @@ const StorjLib = (() => {
          * @returns {Promise<any>}
          */
         async cancelDownload(fileRef) {
-            return await storjLib.cancelDownload(fileRef);
+            let response = await storjLib.cancelDownload(fileRef);
+
+            if(!response.isSuccess) {
+                console.log('cancelDownload ', response.message);
+            }
+
+            return response;
         }
 
         /**
@@ -155,7 +202,13 @@ const StorjLib = (() => {
          * @returns {Promise<any>}
          */
         async cancelUpload(fileRef) {
-            return await storjLib.cancelUpload(fileRef);
+            let response = await storjLib.cancelUpload(fileRef);
+
+            if(!response.isSuccess) {
+                console.log('cancelUpload ', response.message);
+            }
+
+            return response;
         }
 
         /**
@@ -163,13 +216,15 @@ const StorjLib = (() => {
          * @returns {Promise<any>}
          */
          async uploadFile(bucketId, localPath) {
-            let uploadFileResult = await storjLib.uploadFile(bucketId, localPath);
+            let response = await storjLib.uploadFile(bucketId, localPath);
 
-            if(uploadFileResult.isSuccess) {
-                uploadFileResult.result = new FileModel(JSON.parse(uploadFileResult.result));
+            if(response.isSuccess) {
+                response.result = new FileModel(JSON.parse(uploadFileResult.result));
+            } else {
+                console.log('uploadFile ', response.message);
             }
 
-            return uploadFileResult;
+            return response;
         };
 
         /**
@@ -177,15 +232,17 @@ const StorjLib = (() => {
          * @returns {Promise<FileModel[]>}
          */
         async listFiles(bucketId) {
-            let listFilesResult = await storjLib.listFiles(bucketId);
+            let response = await storjLib.listFiles(bucketId);
 
-            if(listFilesResult.isSuccess) {
-                listFilesResult.result = JSON.parse(listFilesResult.result).map(file => {
+            if(response.isSuccess) {
+                response.result = JSON.parse(response.result).map(file => {
                     return new FileModel(file);
                 });      
-            } 
+            } else {
+                console.log('listFiles ', response.message);
+            }
 
-            return listFilesResult;
+            return response;
         };
     
         /**
@@ -193,13 +250,15 @@ const StorjLib = (() => {
          * @returns {Promise<BucketModel>}
          */
         async createBucket(bucketName) {
-            let createBucketResponse = await storjLib.createBucket(bucketName);
+            let response = await storjLib.createBucket(bucketName);
             
-            if(createBucketResponse.isSuccess) {
-                createBucketResponse.result = new BucketModel(JSON.parse(createBucketResponse.result));
+            if(response.isSuccess) {
+                response.result = new BucketModel(JSON.parse(createBucketResponse.result));
+            } else {
+                console.log('createBucket ', response.message);
             }
 
-            return createBucketResponse;         
+            return response;         
         };
 
         /**
@@ -208,7 +267,13 @@ const StorjLib = (() => {
          * @param {string} fileId 
          */
         async deleteFile(bucketId, fileId) {
-            return await storjLib.deleteFile(bucketId, fileId);
+            let response = await storjLib.deleteFile(bucketId, fileId);
+
+            if(!response.isSuccess) {
+                console.log('deleteFile ', response.message);
+            } 
+
+            return response;
         }
     }
 

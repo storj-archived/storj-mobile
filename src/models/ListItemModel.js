@@ -13,6 +13,7 @@ export default class ListItemModel {
         this.isLoading = isLoading;
         this.sortOrder = 0;
         this.progress = 0;
+        this.fileRef = 0;
     };
 
     get Progress() {

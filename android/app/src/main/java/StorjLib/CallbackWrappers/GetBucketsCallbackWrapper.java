@@ -38,7 +38,7 @@ public class GetBucketsCallbackWrapper implements GetBucketsCallback {
 
     @Override
     public void onError(int code, String message) {
-        _promise.reject(E_GET_BUCKETS, message);
+        _promise.resolve(new Response(false, message).toWritableMap());
     }
 
     private BucketModel[] toBucketModelArray(Bucket[] buckets) {

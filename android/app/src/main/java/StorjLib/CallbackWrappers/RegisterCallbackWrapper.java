@@ -26,13 +26,13 @@ public class RegisterCallbackWrapper implements RegisterCallback {
     @Override
     public void onConfirmationPending(final String email) {
 
-        _promise.resolve(new Response(true, null));
+        _promise.resolve(new Response(true, null).toWritableMap());
     }
 
     @Override
     public void onError(int code, String message) {
 
 
-        _promise.resolve(new Response(false, "Mnemonic generation failed"));
+        _promise.resolve(new Response(false, "Mnemonic generation failed").toWritableMap());
     }
 }

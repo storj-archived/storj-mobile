@@ -54,13 +54,6 @@ export default class ListItemComponent extends Component {
             <TouchableOpacity 
                 style = { props.isItemActionsSelected ? [listItemStyles.listItemContainer, listItemStyles.itemSelected] : listItemStyles.listItemContainer }
                 onPress = { () => {                    
-                    // if(this.props.cancelDownload && props.item.isLoading){
-                    //     this.props.cancelDownload(props.item);
-                    // }
-                    if(this.props.cancelUpload && props.item.isLoading){
-                        this.props.cancelUpload(props.item);
-                    } 
- 
                     if(props.isSingleItemSelected) {
                         this.deselectAllItems();
                         return;
@@ -128,10 +121,18 @@ export default class ListItemComponent extends Component {
                                     }}>
                                     {
                                         props.item.isLoading ? 
-                                            <Image 
-                                                source = { require('../images/Icons/CancelDownload.png') } 
-                                                style = { listItemStyles.cancelDownloadImage } 
-                                                resizeMode = 'contain' /> :
+                                            <TouchableOpacity onPress = {() => {
+                                                if(props.cancelDownload && item.isLoading) {
+                                                    props.item.hmac
+                                                        ? props.cancelDownload(props.item)
+                                                        : props.cancelUpload(props.item); 
+                                                }
+                                            }}>
+                                                <Image 
+                                                    source = { require('../images/Icons/CancelDownload.png') } 
+                                                    style = { listItemStyles.cancelDownloadImage } 
+                                                    resizeMode = 'contain' />
+                                            </TouchableOpacity> :
                                             <Image style = { listItemStyles.listItemActionsIcon } source = { require('../images/Icons/listItemActions.png') } />
                                     }
                                 </TouchableOpacity> : null

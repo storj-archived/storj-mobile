@@ -1,5 +1,8 @@
 package StorjLib;
 
+import java.sql.SQLClientInfoException;
+
+import StorjLib.Responses.Response;
 import io.storj.libstorj.KeysNotFoundException;
 
 /**
@@ -13,11 +16,11 @@ public class MethodHandler  {
 
             callback.callback(param);
         }
-        catch (KeysNotFoundException error){
-            param.getPromise().reject("");
+        catch (KeysNotFoundException error) {
+            param.getPromise().resolve(new Response(false, error.getMessage()).toWritableMap());
         }
         catch(Exception error) {
-            param.getPromise().reject("");
+            param.getPromise().resolve(new Response(false, error.getMessage()).toWritableMap());
         }
     }
 

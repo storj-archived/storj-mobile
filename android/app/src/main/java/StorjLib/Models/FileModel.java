@@ -42,7 +42,7 @@ public class FileModel {
         _fileId = file.getId();
         _hmac = file.getHMAC();
         _index = file.getIndex();
-        _mimeType = file.getMimeType();
+//        _mimeType = file.getMimeType();
         _name = file.getName();
         _size = file.getSize();
     }

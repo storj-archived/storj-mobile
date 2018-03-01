@@ -46,5 +46,5 @@ public class ListFilesCallbackWrapper implements ListFilesCallback {
 
     private String toJson(FileModel[] convertible) {
         return GsonSingle.getInstanse().toJson(convertible);
-    }
+    }   
 }
