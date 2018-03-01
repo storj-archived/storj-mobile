@@ -219,7 +219,7 @@ const StorjLib = (() => {
             let response = await storjLib.uploadFile(bucketId, localPath);
 
             if(response.isSuccess) {
-                response.result = new FileModel(JSON.parse(uploadFileResult.result));
+                response.result = new FileModel(JSON.parse(response.result));
             } else {
                 console.log('uploadFile ', response.message);
             }
@@ -253,7 +253,7 @@ const StorjLib = (() => {
             let response = await storjLib.createBucket(bucketName);
             
             if(response.isSuccess) {
-                response.result = new BucketModel(JSON.parse(createBucketResponse.result));
+                response.result = new BucketModel(JSON.parse(response.result));
             } else {
                 console.log('createBucket ', response.message);
             }

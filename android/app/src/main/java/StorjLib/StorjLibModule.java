@@ -267,14 +267,6 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
         });
     }
 
-    public static void main(String... args){
-        try{
-            String a = URLConnection.guessContentTypeFromName("C# 6.0. Карманный справочник.pdf");
-            System.out.println(a);} catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
     @ReactMethod
     public void cancelDownload(final double fileRef, final Promise promise) {
         new MethodHandler().invokeParallel(new BaseMethodParams(promise), new IMethodHandlerCallback() {

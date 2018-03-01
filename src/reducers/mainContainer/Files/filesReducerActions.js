@@ -117,7 +117,9 @@ function enableSelectionMode() {
 export const filesListContainerFileActions = {
     listFiles,
     selectFile,
-    deselectFile
+    deselectFile,
+    fileDownloadCanceled,
+    fileUploadCanceled
 };
 
 export const mainContainerFileActions = {
@@ -128,7 +130,5 @@ export const mainContainerFileActions = {
     downloadFileSuccess,
     downloadFileError,
     updateFileDownloadProgress,
-    deleteFile,
-    fileDownloadCanceled,
-    fileUploadCanceled
+    deleteFile
 };
