@@ -56,24 +56,18 @@ class FilesListContainer extends Component {
 
         let cancelDownloadResponse = await StorjModule.cancelDownload(file.fileRef);
 
-        console.log(    cancelDownloadResponse);
+        console.log(cancelDownloadResponse);
 
         if(cancelDownloadResponse.isSuccess) {
             this.props.fileDownloadCanceled(this.bucketId, file.getId());
-        } else {
-
         }
     }
 
     async cancelUpload(file) {        
         let cancelUploadResponse = await StorjModule.cancelUpload(file.fileRef);
 
-        console.log('cancelUpload fileList ', cancelUploadResponse);
-
         if(cancelUploadResponse.isSuccess) {
             this.props.fileUploadCanceled(this.bucketId, file.getId());
-        } else {
-            
         }
     }
 
