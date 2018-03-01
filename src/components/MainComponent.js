@@ -115,6 +115,6 @@ const styles = StyleSheet.create({
 });
 
 //TODO: Add prop types
-/* MainComponent.PropTypes = {
+/* MainComponent.propTypes = {
 
 }; */

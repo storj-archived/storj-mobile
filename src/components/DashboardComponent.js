@@ -45,7 +45,7 @@ export default class DashboardComponent extends Component {
     }
 }
 
-DashboardComponent.PropTypes = {
+DashboardComponent.propTypes = {
     showOptions: PropTypes.func,
     files: PropTypes.array,
     buckets: PropTypes.array,
@@ -55,7 +55,7 @@ DashboardComponent.PropTypes = {
     navigateBack: PropTypes.func,
     deselectItem: PropTypes.func,
     isSelectionMode: PropTypes.bool,
-    selectedBucketId: PropTypes.number,
+    selectedBucketId: PropTypes.string,
     animatedScrollValue: PropTypes.number,
     selectedFilesCount: PropTypes.number,
     disableSelectionMode: PropTypes.func,
@@ -63,9 +63,8 @@ DashboardComponent.PropTypes = {
     onSingleItemSelected: PropTypes.func,
     isSingleItemSelected: PropTypes.bool,
     navigateToFilesScreen: PropTypes.func,
-    isGridViewShown: PropTypes.bool,
-    setListView: PropTypes.func,
-    setGridView: PropTypes.func
+    defaultRoute: PropTypes.string,
+    animatedScrollValue: PropTypes.number
 }
 
 const styles = StyleSheet.create({

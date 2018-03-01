@@ -55,7 +55,7 @@ export default class ViewOptionsComponent extends Component {
     }
 }
 
-ViewOptionsComponent.PropTypes = {
+ViewOptionsComponent.propTypes = {
     showOptions: PropTypes.func,
     isGridViewShown: PropTypes.bool,
     setGridView: PropTypes.func,

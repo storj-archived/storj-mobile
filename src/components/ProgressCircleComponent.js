@@ -128,7 +128,7 @@ export default class ProgressCircleComponent extends Component {
     }
 }
 
-ProgressCircleComponent.PropTypes = {
+ProgressCircleComponent.propTypes = {
     color: PropTypes.string,
     shadowColor: PropTypes.string,
     bgColor: PropTypes.string,
