@@ -161,8 +161,13 @@ export default class FileListManager {
 
     cancelDownload(bucketId, fileId) {
         this._isInArray(this.newFilesList, bucketId, (itemsList) => {
-            itemsList.files = itemsList.files.filter(fileEntry => {
-                return fileEntry.getId() !== fileId          
+            itemsList.files = itemsList.files.map(fileEntry => {
+                if(fileEntry.getId() !== fileId) {
+                    fileEntry.isLoading = false;
+                    fileEntry.progress = 0;
+                }          
+
+                return fileEntry;
             });
         });
        
