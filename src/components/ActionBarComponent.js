@@ -25,7 +25,6 @@ export default class ActionBarComponent extends Component {
     }
 
     shouldComponentUpdate(nextProps) {
-        console.log(this.props, nextProps);
         if(this.props.tapBarActions !== nextProps.tapBarActions)
             return true;
         if(this.props.applyMargin !== nextProps.applyMargin) 

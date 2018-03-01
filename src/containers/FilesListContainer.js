@@ -93,17 +93,12 @@ class FilesListContainer extends Component {
     onPress(params) {
         let downloadedFileListModel = this.props.downloadedFileListModels.find(item => item.bucketId === this.bucketId);
 
-        console.log(downloadedFileListModel, this.props.downloadedFileListModels);
-
         if(!downloadedFileListModel) 
             return;
         
         let downloadedFile = downloadedFileListModel.files.find(file => { 
-            console.log(file.id, params.bucketId);
             return file.id === params.bucketId 
         });
-
-        console.log(downloadedFile, params);
 
         if(downloadedFile) {
             this.props.openImageViewer(downloadedFile.id, downloadedFile.path, downloadedFileListModel.bucketId);
