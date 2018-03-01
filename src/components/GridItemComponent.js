@@ -137,10 +137,18 @@ export default class GridItemComponent extends Component {
                                             color = "#2794FF"
                                             shadowColor = "#FFFFFF"
                                             bgColor = "#A8CEFF" >
-                                            <Image 
-                                                source = { require('../images/Icons/CancelDownload.png') } 
-                                                style = { gridItemStyles.cancelDownloadImage } 
-                                                resizeMode = 'contain' /> 
+                                            <TouchableOpacity onPress = {() => {
+                                                if(props.cancelDownload && props.item.isLoading) {
+                                                    props.item.hmac
+                                                        ? props.cancelDownload(props.item)
+                                                        : props.cancelUpload(props.item); 
+                                                }
+                                            }}>
+                                                <Image 
+                                                    source = { require('../images/Icons/CancelDownload.png') } 
+                                                    style = { gridItemStyles.cancelDownloadImage } 
+                                                    resizeMode = 'contain' /> 
+                                            </TouchableOpacity>
                                         </ProgressCircleComponent>
                                     </View> 
                                     : null
