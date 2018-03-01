@@ -296,7 +296,6 @@ export default class ListComponent extends Component {
             <View>
                 <Animated.ScrollView style = { styles.listContainer }
                     scrollEventThrottle = { 16 }
-                    style = { styles.listContainer }
                     onScroll = {
                         Animated.event([{
                             nativeEvent: { 
@@ -311,7 +310,6 @@ export default class ListComponent extends Component {
                             enabled = { !this.props.isSelectionMode }
                             refreshing = { this.state.refreshing }
                             onRefresh = { this.onRefresh.bind(this) } /> }>
-
                             <View >
                                 {
                                     this.getItemsList()
@@ -325,7 +323,7 @@ export default class ListComponent extends Component {
 
 ListComponent.propTypes = {
     isExpanderDisabled: PropTypes.bool,
-    listItemIcon: PropTypes.number, //wtf?
+    listItemIcon: PropTypes.number,
     mainTitlePath: PropTypes.string,
     sortOptions: PropTypes.string,
     idPath: PropTypes.string,
@@ -349,7 +347,7 @@ const styles = StyleSheet.create({
     unitContainer: { 
         flexDirection: 'row',
         width: getWidth(333),  
-        height: getHeight(155)
+        height: getHeight(130)
     },
     itemContainer: {
         alignSelf: 'flex-start'

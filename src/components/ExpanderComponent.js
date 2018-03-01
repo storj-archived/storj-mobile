@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
         alignContent: 'center'
     },
     expanderTextView: {
+        marginHorizontal: getWidth(10),
         height: getHeight(55),
         width: getWidth(333),
         justifyContent: 'space-between',
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
         height: getHeight(10),
     },
     expanderContainer: {
-        marginHorizontal: getWidth(20)
+        marginHorizontal: getWidth(10)
     },
     expanderBorder: {
         borderBottomWidth: getHeight(0.5),

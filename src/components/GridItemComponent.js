@@ -203,7 +203,7 @@ GridItemComponent.propTypes = {
 const gridItemStyles = StyleSheet.create({
     listItemContainer: {
         flex: 1,
-        height: getHeight(150),
+        height: getHeight(130),
         width: getWidth(111)
     },
     itemSelected: {

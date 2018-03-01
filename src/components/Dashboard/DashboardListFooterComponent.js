@@ -35,7 +35,8 @@ export default class DashboardListFooterComponent extends Component {
 
 const footerLinkStyles = StyleSheet.create({
     container: {
-        height: getHeight(54)
+        height: getHeight(54),
+        marginHorizontal: getWidth(10)
     },
     contentContainer: { 
         marginTop: getHeight(20), 

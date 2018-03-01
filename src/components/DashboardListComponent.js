@@ -155,9 +155,10 @@ const styles = StyleSheet.create({
     },
     scrollViewContainer: { 
         marginTop: getHeight(80), 
-        marginHorizontal: getWidth(20) 
+        marginHorizontal: getWidth(10) 
     },
     topButtonsContainer: { 
+        marginHorizontal: getWidth(10),
         flexDirection: 'row', 
         justifyContent: 'space-between' 
     },
