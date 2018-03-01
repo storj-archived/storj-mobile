@@ -9,13 +9,11 @@ import io.storj.libstorj.DeleteBucketCallback;
  * Created by Crawter on 22.02.2018.
  */
 
-public class DeleteCallbackWrapper implements DeleteBucketCallback {
-
-    private Promise _promise;
+public class DeleteCallbackWrapper extends BaseCallbackWrapper implements DeleteBucketCallback {
     private String _bucketId;
 
     public DeleteCallbackWrapper(Promise promise, String bucketId) {
-        _promise = promise;
+        super(promise);
         _bucketId = bucketId;
     }
 

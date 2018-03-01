@@ -15,6 +15,7 @@ public class Response implements IConvertibleToJs, IResponse {
 
     private boolean _isSuccess = false;
     private String _errorMessage = null;
+    private Error _error = null;
 
     public Response(boolean isSuccess, String errorMessage) {
         _isSuccess = isSuccess;

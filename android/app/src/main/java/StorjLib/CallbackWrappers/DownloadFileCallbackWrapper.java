@@ -18,9 +18,7 @@ import io.storj.libstorj.DownloadFileCallback;
  * Created by Crawter on 27.02.2018.
  */
 
-public class DownloadFileCallbackWrapper implements DownloadFileCallback {
-
-    private Promise _promise;
+public class DownloadFileCallbackWrapper extends BaseCallbackWrapper<DownloadFileModel> implements DownloadFileCallback {
     private String _bucketId;
     private String _fileId;
     private String _localPath;
@@ -30,7 +28,7 @@ public class DownloadFileCallbackWrapper implements DownloadFileCallback {
     private double _lastPercent = 0;
 
     public DownloadFileCallbackWrapper(ReactApplicationContext context, Promise promise, String bucketId, String fileId, String localPath) {
-        _promise = promise;
+        super(promise);
         _bucketId = bucketId;
         _localPath = localPath;
         _context = context;
@@ -56,16 +54,11 @@ public class DownloadFileCallbackWrapper implements DownloadFileCallback {
     @Override
     public void onComplete(String fileId, String localPath) {
         DownloadFileModel model = new DownloadFileModel(fileId, localPath);
-
         _promise.resolve(new SingleResponse(true, toJson(model), null).toWritableMap());
     }
 
     @Override
     public void onError(String fileId, int code, String message) {
         _promise.resolve(new Response(false, message).toWritableMap());
-    }
-
-    private String toJson(DownloadFileModel convertible) {
-        return GsonSingle.getInstanse().toJson(convertible);
     }
 }

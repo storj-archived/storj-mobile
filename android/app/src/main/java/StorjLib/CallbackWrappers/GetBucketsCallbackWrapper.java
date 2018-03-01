@@ -21,14 +21,12 @@ import io.storj.libstorj.GetBucketsCallback;
  * Created by Crawter on 22.02.2018.
  */
 
-public class GetBucketsCallbackWrapper implements GetBucketsCallback {
+public class GetBucketsCallbackWrapper extends BaseCallbackWrapper<BucketModel[]> implements GetBucketsCallback {
     private static final String TAG = "GetBucketsCallbackWrapp";
-
     private static final String E_GET_BUCKETS = "E_GET_BUCKETS";
-    private Promise _promise;
 
     public GetBucketsCallbackWrapper(Promise promise) {
-        _promise = promise;
+        super(promise);
     }
 
     @Override
@@ -50,9 +48,5 @@ public class GetBucketsCallbackWrapper implements GetBucketsCallback {
         }
 
         return result;
-    }
-
-    private String toJson(BucketModel[] convertible) {
-        return GsonSingle.getInstanse().toJson(convertible);
     }
 }

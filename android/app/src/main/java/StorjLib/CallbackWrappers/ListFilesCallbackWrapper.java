@@ -14,11 +14,10 @@ import io.storj.libstorj.ListFilesCallback;
  * Created by Crawter on 26.02.2018.
  */
 
-public class ListFilesCallbackWrapper implements ListFilesCallback {
-    private Promise _promise;
+public class ListFilesCallbackWrapper extends BaseCallbackWrapper<FileModel[]> implements ListFilesCallback {
 
     public ListFilesCallbackWrapper(Promise promise) {
-        _promise = promise;
+        super(promise);
     }
 
     @Override
@@ -43,8 +42,4 @@ public class ListFilesCallbackWrapper implements ListFilesCallback {
 
         return result;
     }
-
-    private String toJson(FileModel[] convertible) {
-        return GsonSingle.getInstanse().toJson(convertible);
-    }   
 }

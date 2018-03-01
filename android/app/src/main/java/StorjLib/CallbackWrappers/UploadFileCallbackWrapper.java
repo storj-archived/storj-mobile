@@ -19,9 +19,7 @@ import io.storj.libstorj.UploadFileCallback;
  * Created by Crawter on 26.02.2018.
  */
 
-public class UploadFileCallbackWrapper implements UploadFileCallback {
-
-    private Promise _promise;
+public class UploadFileCallbackWrapper extends BaseCallbackWrapper<FileModel> implements UploadFileCallback {
     private String _bucketId;
     private ReactApplicationContext _context;
     private long _fileRef;
@@ -29,7 +27,7 @@ public class UploadFileCallbackWrapper implements UploadFileCallback {
     private double _lastPercent = 0;
 
     public UploadFileCallbackWrapper(ReactApplicationContext context, Promise promise, String bucketId) {
-        _promise = promise;
+        super(promise);
         _bucketId = bucketId;
         _context = context;
     }
@@ -60,9 +58,5 @@ public class UploadFileCallbackWrapper implements UploadFileCallback {
     @Override
     public void onError(String filePath, int code, String message) {
         _promise.resolve(new Response(false, message).toWritableMap());
-    }
-
-    private String toJson(FileModel convertible) {
-        return GsonSingle.getInstanse().toJson(convertible);
     }
 }

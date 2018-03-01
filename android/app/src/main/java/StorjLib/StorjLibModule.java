@@ -95,7 +95,6 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    @Deprecated
     public void generateMnemonic(Promise promise) {
         new MethodHandler().invokeParallel(new BaseMethodParams(promise), new IMethodHandlerCallback() {
             @Override
@@ -269,6 +268,13 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void cancelDownload(final double fileRef, final Promise promise) {
+
+        if(fileRef == 0)
+        {
+            promise.resolve(new Response(false, "File downloading is not started").toWritableMap());
+            return;
+        }
+
         new MethodHandler().invokeParallel(new BaseMethodParams(promise), new IMethodHandlerCallback() {
             @Override
             public void callback(IMethodParams param) {
@@ -280,6 +286,13 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void cancelUpload(final double fileRef, final Promise promise) {
+
+        if(fileRef == 0)
+        {
+            promise.resolve(new Response(false, "File uploading is not started").toWritableMap());
+            return;
+        }
+
         new MethodHandler().invokeParallel(new BaseMethodParams(promise), new IMethodHandlerCallback() {
             @Override
             public void callback(IMethodParams param) {

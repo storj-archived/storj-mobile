@@ -14,12 +14,10 @@ import io.storj.libstorj.CreateBucketCallback;
  * Created by Yaroslav-Note on 1/24/2018.
  */
 
-public class CreateBucketCallbackWrapper implements CreateBucketCallback {
-
-    private Promise _promise;
+public class CreateBucketCallbackWrapper extends BaseCallbackWrapper<BucketModel> implements CreateBucketCallback {
 
     public CreateBucketCallbackWrapper(Promise promise) {
-        _promise = promise;
+        super(promise);
     }
 
     @Override
@@ -31,9 +29,5 @@ public class CreateBucketCallbackWrapper implements CreateBucketCallback {
     public void onError(int code, String message) {
         //TODO: create error model to pass both message and error code
         _promise.resolve(new Response(false, message).toWritableMap());
-    }
-
-    private String toJson(BucketModel convertible) {
-        return GsonSingle.getInstanse().toJson(convertible);
     }
 }
