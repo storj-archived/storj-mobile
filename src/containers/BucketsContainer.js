@@ -83,6 +83,7 @@ class BucketsContainer extends Component {
         } else {
             return(
                 <BucketsComponent
+                    isFilesScreen = { this.props.screenName === "FilesScreen" }
                     selectedItemsCount = { this.getSelectedItemsCount() }
                     showOptions = { this.props.screenProps.showOptions }
                     onSingleItemSelected = { this.props.onSingleItemSelected }

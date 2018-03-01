@@ -30,7 +30,7 @@ export default class SearchComponent extends Component {
     }
 
     render() {
-        if(this.props.screenName == 'FilesScreen') {
+        if(this.props.isFilesScreen) {
             return(
                 <View style = { [ styles.rowContainer, this.props.styleContainer ] }>
                     <TouchableOpacity onPress = { () => { this.props.navigateBack(); } }>

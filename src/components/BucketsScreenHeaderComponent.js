@@ -18,7 +18,8 @@ export default class BucketsScreenHeaderComponent extends Component {
     render() {
         return(
             <View style = { styles.mainContainer }>
-                <AnimatedHeader 
+                <AnimatedHeader
+                    isFilesScreen = { this.props.isFilesScreen } 
                     selectedItemsCount = { this.props.selectedItemsCount }
                     showOptions = { this.props.showOptions }
                     buckets = { this.props.buckets }
@@ -123,6 +124,7 @@ class AnimatedHeader extends Component {
                 </TouchableOpacity> */}
                 <Animated.View style = { [ styles.searchWrapperInner, res[1] ] }>
                     <SearchComponent
+                        isFilesScreen = { this.props.isFilesScreen }
                         showOptions = { this.props.showOptions }
                         buckets = { this.props.buckets }
                         selectedBucketId = { this.props.selectedBucketId }
