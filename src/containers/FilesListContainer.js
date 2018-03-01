@@ -73,6 +73,18 @@ class FilesListContainer extends Component {
         if(this.props.isLoading)
             return;
 
+        const index = this.props.mainNavReducer.index;
+        const routes = this.props.mainNavReducer.routes;
+
+        console.log("FileContainer-----------------------------------------");
+        console.log(routes[index].routeName, "routeName");
+        console.log(this.props.isSelectionMode, "selectionMode");
+        console.log(this.props.isActionBarShown, "isSingleItemSelected");
+        console.log(this.props.screenProps.defaultRoute, "defaultScreenrouteName");
+
+        if(routes[index].routeName === "ImageViewerScreen") 
+            return;
+
         if(this.props.isSelectionMode 
         || this.props.isSingleItemSelected 
         || this.props.isActionBarShown) {
@@ -104,6 +116,8 @@ class FilesListContainer extends Component {
         }
     }
 
+    
+
     render() {
         let data = getFilesFormFileModelList(this.props.fileListModels, this.bucketId);
         let uploadingData = getFilesFormFileModelList(this.props.uploadingFileListModels, this.bucketId);
@@ -131,6 +145,7 @@ class FilesListContainer extends Component {
 
 function mapStateToProps(state) {
     return {
+        mainNavReducer: state.navReducer,
         isActionBarShown: state.mainReducer.isActionBarShown,
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,

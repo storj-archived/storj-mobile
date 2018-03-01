@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { mainContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import { mainContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
+import { redirectToMainScreen } from '../reducers/navigation/navigationActions';
 import FileModel from '../models/FileModel';
 import ListItemModel from '../models/ListItemModel';
 import StorjLib from '../utils/StorjModule';
@@ -79,11 +80,23 @@ class MainContainer extends Component {
         if(this.props.isLoading)
             return;
 
+        const index = this.props.mainNavReducer.index;
+        const routes = this.props.mainNavReducer.routes;   
+
+        console.log("-----------------------------------------MainContainer");
+        console.log(routes[index].routeName, "routeName");
+        console.log(this.props.isSelectionMode, "selectionMode");
+        console.log(this.props.isActionBarShown, "isSingleItemSelected");
+
         if(this.props.isSelectionMode 
         || this.props.isSingleItemSelected 
         || this.props.isActionBarShown) {
 
             this.props.disableSelectionMode();
+        }
+
+        if(routes[index].routeName === "ImageViewerScreen") {
+            this.props.redirectToMainScreen();
             return;
         }
     }
@@ -265,6 +278,7 @@ class MainContainer extends Component {
 function mapStateToProps(state) { 
     return {
         bucketsScreenNavReducer: state.bucketsScreenNavReducer,
+        mainNavReducer: state.navReducer,
         fileListModels: state.filesReducer.fileListModels,
         openedBucketId: state.mainReducer.openedBucketId,
         isSelectionMode: state.mainReducer.isSelectionMode, 
@@ -277,6 +291,6 @@ function mapStateToProps(state) {
         isGridViewShown: state.mainReducer.isGridViewShown
     };
 }
-function mapDispatchToProps(dispatch) { return bindActionCreators({ ...mainContainerActions, ...mainContainerFileActions }, dispatch); };
+function mapDispatchToProps(dispatch) { return bindActionCreators({ redirectToMainScreen, ...mainContainerActions, ...mainContainerFileActions }, dispatch); };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

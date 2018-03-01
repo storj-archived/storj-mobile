@@ -37,7 +37,7 @@ class Apps extends Component {
 			return true;
 		}
 
-		this.props.dispatch(NavigationActions.back());
+		//this.props.dispatch(NavigationActions.back());
 		return true;
 	}
 
