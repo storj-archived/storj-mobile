@@ -27,6 +27,7 @@ public class DownloadFileCallbackWrapper implements DownloadFileCallback {
     private ReactApplicationContext _context;
     private long _fileRef;
     private boolean _uploadStart = false;
+    private double _lastPercent = 0;
 
     public DownloadFileCallbackWrapper(ReactApplicationContext context, Promise promise, String bucketId, String fileId, String localPath) {
         _promise = promise;
@@ -43,9 +44,13 @@ public class DownloadFileCallbackWrapper implements DownloadFileCallback {
             _fileRef = StorjLibModule._downloadFileRef;
         }
 
-        DownloadFileProgressModel uploadModel = new DownloadFileProgressModel(_bucketId, fileId,_localPath, progress, downloadedBytes, totalBytes, _fileRef);
+        double current = Math.round(progress * 10);
 
-        _context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("downloadFile", uploadModel.toWritableMap());
+        if(_lastPercent != current) {
+            _lastPercent = current;
+            DownloadFileProgressModel uploadModel = new DownloadFileProgressModel(_bucketId, fileId,_localPath, progress, downloadedBytes, totalBytes, _fileRef);
+            _context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("downloadFile", uploadModel.toWritableMap());
+        }
     }
 
     @Override

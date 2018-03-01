@@ -1,5 +1,7 @@
 package StorjLib.CallbackWrappers;
 
+import android.util.Log;
+
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
@@ -24,6 +26,7 @@ public class UploadFileCallbackWrapper implements UploadFileCallback {
     private ReactApplicationContext _context;
     private long _fileRef;
     private boolean _uploadStart = false;
+    private double _lastPercent = 0;
 
     public UploadFileCallbackWrapper(ReactApplicationContext context, Promise promise, String bucketId) {
         _promise = promise;
@@ -38,9 +41,13 @@ public class UploadFileCallbackWrapper implements UploadFileCallback {
             _fileRef = StorjLibModule._uploadFileRef;
         }
 
-        UploadFileProgressModel uploadModel = new UploadFileProgressModel(_bucketId, filePath, progress, uploadedBytes, totalBytes, _fileRef);
+        double current = Math.round(progress * 10);
 
-        _context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("uploadFile", uploadModel.toWritableMap());
+        if(_lastPercent != current) {
+            _lastPercent = current;
+            UploadFileProgressModel uploadModel = new UploadFileProgressModel(_bucketId, filePath, progress, uploadedBytes, totalBytes, _fileRef);
+            _context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("uploadFile", uploadModel.toWritableMap());
+        }
     }
 
     @Override
