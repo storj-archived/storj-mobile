@@ -4,6 +4,7 @@ import com.facebook.react.bridge.Promise;
 
 import StorjLib.GsonSingle;
 import StorjLib.Models.FileDeleteModel;
+import StorjLib.Responses.Response;
 import StorjLib.Responses.SingleResponse;
 import io.storj.libstorj.DeleteFileCallback;
 
@@ -26,6 +27,6 @@ public class DeleteFileCallbackWrapper extends BaseCallbackWrapper<FileDeleteMod
 
     @Override
     public void onError(int code, String message) {
-        _promise.resolve(new SingleResponse(false, null, "Error during file deletion").toWritableMap());
+        _promise.resolve(new Response(false, "Error during file deletion", code).toWritableMap());
     }
 }

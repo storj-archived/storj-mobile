@@ -2,6 +2,7 @@ package StorjLib.CallbackWrappers;
 
 import com.facebook.react.bridge.Promise;
 
+import StorjLib.Responses.Response;
 import StorjLib.Responses.SingleResponse;
 import io.storj.libstorj.DeleteBucketCallback;
 
@@ -25,6 +26,6 @@ public class DeleteCallbackWrapper extends BaseCallbackWrapper implements Delete
     @Override
     public void onError(int code, String message) {
         //TODO: create error model to pass both message and error code
-        _promise.resolve(new SingleResponse(false, null, message).toWritableMap());
+        _promise.resolve(new Response(false, message, code).toWritableMap());
     }
 }

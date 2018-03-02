@@ -59,6 +59,6 @@ public class DownloadFileCallbackWrapper extends BaseCallbackWrapper<DownloadFil
 
     @Override
     public void onError(String fileId, int code, String message) {
-        _promise.resolve(new Response(false, message).toWritableMap());
+        _promise.resolve(new SingleResponse(false, fileId, message, code).toWritableMap());
     }
 }

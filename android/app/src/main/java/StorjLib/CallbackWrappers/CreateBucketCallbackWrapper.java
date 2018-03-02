@@ -28,6 +28,6 @@ public class CreateBucketCallbackWrapper extends BaseCallbackWrapper<BucketModel
     @Override
     public void onError(int code, String message) {
         //TODO: create error model to pass both message and error code
-        _promise.resolve(new Response(false, message).toWritableMap());
+        _promise.resolve(new Response(false, message, code).toWritableMap());
     }
 }

@@ -4,6 +4,7 @@ import com.facebook.react.bridge.Promise;
 
 import StorjLib.GsonSingle;
 import StorjLib.Models.FileModel;
+import StorjLib.Responses.Response;
 import StorjLib.Responses.SingleResponse;
 import StorjLib.StorjTypesWrappers.BucketWrapper;
 import io.storj.libstorj.Bucket;
@@ -28,8 +29,7 @@ public class ListFilesCallbackWrapper extends BaseCallbackWrapper<FileModel[]> i
 
     @Override
     public void onError(int code, String message) {
-        //TODO: create error model to pass both message and error code
-        _promise.resolve(new SingleResponse(false, null, message).toWritableMap());
+        _promise.resolve(new Response(false, message, code).toWritableMap());
     }
 
     private FileModel[] toBucketModelArray(File[] buckets) {
