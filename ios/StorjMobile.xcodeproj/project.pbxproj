@@ -51,6 +51,8 @@
 		C05D61CF12024121ADCF9706 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A820F35CDD6411E81E361D6 /* OpenSans-ExtraBold.ttf */; };
 		C2719E17360C41F0870EA216 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D57884CA17224EC589F7D3FA /* OpenSans-Light.ttf */; };
 		D68D4C0D19FC44AFA409AB73 /* Montserrat-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEF7D3FD619949DEBB4F5660 /* Montserrat-SemiBoldItalic.ttf */; };
+		DC2841E6204972FD0093183F /* StorjIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC2841E020496AEA0093183F /* StorjIOS.framework */; };
+		DC2841E7204972FD0093183F /* StorjIOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DC2841E020496AEA0093183F /* StorjIOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DCACD444201FDF630050921B /* StorjLibIos.m in Sources */ = {isa = PBXBuildFile; fileRef = DCACD443201FDF630050921B /* StorjLibIos.m */; };
 		DCCD2FD520459F610032D3F5 /* FilePickerLib.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCD2FD420459F600032D3F5 /* FilePickerLib.m */; };
 		DDD138767961421DB8C87363 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A51459F91D3420BBC6E2C58 /* Montserrat-ExtraLight.ttf */; };
@@ -270,6 +272,13 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNPhotoView;
 		};
+		DC2841E8204972FD0093183F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 935DE84D1F0E3DCA00B01D6D;
+			remoteInfo = StorjIOS;
+		};
 		DC68D1972044264100D8D05D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */;
@@ -356,6 +365,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				DC2841E7204972FD0093183F /* StorjIOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -449,6 +459,7 @@
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
+				DC2841E6204972FD0093183F /* StorjIOS.framework in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				1435D6A1901847E898646868 /* libRCTBarcode.a in Frameworks */,
@@ -771,6 +782,7 @@
 			);
 			dependencies = (
 				DC68D1AE2044437B00D8D05D /* PBXTargetDependency */,
+				DC2841E9204972FD0093183F /* PBXTargetDependency */,
 			);
 			name = StorjMobile;
 			productName = "Hello World";
@@ -1244,6 +1256,11 @@
 			isa = PBXTargetDependency;
 			target = 13B07F861A680F5B00A75B9A /* StorjMobile */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
+		};
+		DC2841E9204972FD0093183F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = StorjIOS;
+			targetProxy = DC2841E8204972FD0093183F /* PBXContainerItemProxy */;
 		};
 		DC68D1AE2044437B00D8D05D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
