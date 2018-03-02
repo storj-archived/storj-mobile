@@ -37,7 +37,7 @@ const StorjLib = (() => {
                 let response = await storjLib.generateMnemonic();
 
                 if(!response.isSuccess){
-                    console.log('generateMnemonic ', response.message);
+                    console.log('generateMnemonic ', response.error.message);
                 }
 
                 return response;
@@ -55,7 +55,7 @@ const StorjLib = (() => {
             let response = await storjLib.checkMnemonic(mnemonic);
 
             if(!response.isSuccess){
-                console.log('checkMnemonic ', response.message);
+                console.log('checkMnemonic ', response.error.message);
             }
 
             return response.isSuccess;
@@ -72,7 +72,7 @@ const StorjLib = (() => {
             let response = await storjLib.register(email, password);
 
             if(!response.isSuccess){
-                console.log('register ', response.message);
+                console.log('register ', response.error.message);
             }
 
             return response;
@@ -88,7 +88,7 @@ const StorjLib = (() => {
             let response = await storjLib.verifyKeys(email, password);
 
             if(!response.isSuccess){
-                console.log('verifyKeys ', response.message);
+                console.log('verifyKeys ', response.error.message);
             }
 
             return response.isSuccess;
@@ -102,7 +102,7 @@ const StorjLib = (() => {
             let response = await storjLib.keysExists();
 
             if(!response.isSuccess){
-                console.log('keysExists ', response.message);
+                console.log('keysExists ', response.error.message);
             }
 
             return response.isSuccess;
@@ -121,7 +121,7 @@ const StorjLib = (() => {
             let response = await storjLib.importKeys(email, password, mnemonic, /*passcode*/"");
 
             if(!response.isSuccess){
-                console.log('importKeys ', response.message);
+                console.log('importKeys ', response.error.message);
             }
 
             return response.isSuccess;
@@ -135,7 +135,7 @@ const StorjLib = (() => {
             let response = await storjLib.getKeys(/*passcode*/"");
 
             if(!response.isSuccess) {
-                console.log('getKeys ', response.message);
+                console.log('getKeys ', response.error.message);
             }
 
             return response;
@@ -150,7 +150,7 @@ const StorjLib = (() => {
             let response = await storjLib.getBuckets();
 
             if(!response.isSuccess) {
-                console.log('getBuckets ', response.message);
+                console.log('getBuckets ', response.error.message);
                 return result;
             }
 
@@ -169,7 +169,7 @@ const StorjLib = (() => {
             let response = await storjLib.deleteBucket(bucketId);
 
             if(!response.isSuccess) {
-                console.log('deleteBucket ', response.message);
+                console.log('deleteBucket ', response.error.message);
             }
 
             return response;
@@ -183,7 +183,7 @@ const StorjLib = (() => {
             let response = await storjLib.downloadFile(bucketId, fileId, localPath);
 
             if(!response.isSuccess) {
-                console.log('downloadFile ', response.message);
+                console.log('downloadFile ', response.error.message);
             }
 
             return response;
@@ -197,7 +197,7 @@ const StorjLib = (() => {
             let response = await storjLib.cancelDownload(fileRef);
 
             if(!response.isSuccess) {
-                console.log('cancelDownload ', response.message);
+                console.log('cancelDownload ', response.error.message);
             }
 
             return response;
@@ -211,7 +211,7 @@ const StorjLib = (() => {
             let response = await storjLib.cancelUpload(fileRef);
 
             if(!response.isSuccess) {
-                console.log('cancelUpload ', response.message);
+                console.log('cancelUpload ', response.error.message);
             }
 
             return response;
@@ -227,7 +227,7 @@ const StorjLib = (() => {
             if(response.isSuccess) {
                 response.result = new FileModel(JSON.parse(response.result));
             } else {
-                console.log('uploadFile ', response.message);
+                console.log('uploadFile ', response.error.message);
             }
 
             return response;
@@ -245,7 +245,7 @@ const StorjLib = (() => {
                     return new FileModel(file);
                 });      
             } else {
-                console.log('listFiles ', response.message);
+                console.log('listFiles ', response.error.message);
             }
 
             return response;
@@ -261,7 +261,7 @@ const StorjLib = (() => {
             if(response.isSuccess) {
                 response.result = new BucketModel(JSON.parse(response.result));
             } else {
-                console.log('createBucket ', response.message);
+                console.log('createBucket ', response.error.message);
             }
 
             return response;         
@@ -276,7 +276,7 @@ const StorjLib = (() => {
             let response = await storjLib.deleteFile(bucketId, fileId);
 
             if(!response.isSuccess) {
-                console.log('deleteFile ', response.message);
+                console.log('deleteFile ', response.error.message);
             } 
 
             return response;

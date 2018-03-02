@@ -10,25 +10,29 @@ import StorjLib.Interfaces.IConvertibleToJs;
 
 public class Response implements IConvertibleToJs, IResponse {
     private final String KEY_IS_SUCCESS = "isSuccess";
-    private final String KEY_ERROR_MESSAGE = "errorMessage";
+    private final String KEY_ERROR = "error";
+
     protected final String KEY_RESULT = "result";
 
     private boolean _isSuccess = false;
-    private String _errorMessage = null;
     private Error _error = null;
 
     public Response(boolean isSuccess, String errorMessage) {
         _isSuccess = isSuccess;
-        _errorMessage = errorMessage;
+        _error = new Error(errorMessage, 0);
+    }
+
+    public Response(boolean isSuccess, String errorMessage, int errorCode) {
+        _isSuccess = isSuccess;
+        _error = new Error(errorMessage, errorCode);
     }
 
     @Override
     public WritableMap toWritableMap() {
-
         WritableMap map = Arguments.createMap();
 
         map.putBoolean(KEY_IS_SUCCESS, _isSuccess);
-        map.putString(KEY_ERROR_MESSAGE, _errorMessage);
+        map.putMap(KEY_ERROR, _error.toWritableMap());
 
         return map;
     }
@@ -36,7 +40,6 @@ public class Response implements IConvertibleToJs, IResponse {
     public boolean isSuccess() {
         return _isSuccess;
     }
-    public String errorMessage() {
-        return _errorMessage;
-    }
+    public Error getError() { return _error; }
 }
+

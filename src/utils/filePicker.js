@@ -18,12 +18,9 @@ const FilePicker = (() => {
             var options = {
                 mimeType:'*/*',
                 pickerTitle:'Choose file to download'
-            }
-            let resp = await filePickerLib.show(options);
+            }            
 
-            console.log('PICKER PIDARAS ', resp);
-
-            return resp;
+            return await filePickerLib.show(options);
         }
     }
 
