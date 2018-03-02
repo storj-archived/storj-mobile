@@ -33,6 +33,9 @@ public class FileModel {
     @Expose
     @SerializedName("size")
     private long _size;
+    @Expose
+    @SerializedName("isDecrypted")
+    private boolean _isDecrypted;
 
 
     public FileModel(File file) {
@@ -42,6 +45,7 @@ public class FileModel {
         _fileId = file.getId();
         _hmac = file.getHMAC();
         _index = file.getIndex();
+        _isDecrypted = file.isDecrypted();
 //        _mimeType = file.getMimeType();
         _name = file.getName();
         _size = file.getSize();

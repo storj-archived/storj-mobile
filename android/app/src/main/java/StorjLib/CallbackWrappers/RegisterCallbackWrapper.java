@@ -25,12 +25,11 @@ public class RegisterCallbackWrapper extends BaseCallbackWrapper implements Regi
 
     @Override
     public void onConfirmationPending(final String email) {
-
         _promise.resolve(new SingleResponse(true, _mnemonic, null).toWritableMap());
     }
 
     @Override
     public void onError(int code, String message) {
-        _promise.resolve(new Response(false, "Mnemonic generation failed").toWritableMap());
+        _promise.resolve(new Response(false, message, code).toWritableMap());
     }
 }

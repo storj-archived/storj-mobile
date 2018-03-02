@@ -57,6 +57,6 @@ public class UploadFileCallbackWrapper extends BaseCallbackWrapper<FileModel> im
 
     @Override
     public void onError(String filePath, int code, String message) {
-        _promise.resolve(new Response(false, message).toWritableMap());
+        _promise.resolve(new Response(false, message, code).toWritableMap());
     }
 }
