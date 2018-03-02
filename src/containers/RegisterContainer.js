@@ -153,7 +153,6 @@ export class RegisterContainer extends Component {
             this.state.stateModel.password, 
             this.registerErrorCallback.bind(this));
 
-
         if(!registrationResult.isSuccess) {
             const errorMessage = registrationResult.errorMessage;
             this.props.registerError(errorMessage);
@@ -168,12 +167,14 @@ export class RegisterContainer extends Component {
             
             return;
         }
+
         await this.saveData(
-            registrationResult.mnemonic, 
+            registrationResult.result, 
             this.state.stateModel.email, 
             this.state.stateModel.password
         );
-        this.props.registerSuccess(registrationResult.mnemonic);
+
+        this.props.registerSuccess(registrationResult.result);
         this.handleFirstLaunch();
         this.props.redirectToRegisterSuccessScreen();    
     };

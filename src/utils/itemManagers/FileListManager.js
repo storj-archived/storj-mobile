@@ -120,6 +120,17 @@ export default class FileListManager {
         return this.newFilesList;
     }
 
+    listUploadingFiles(bucketId, files) {
+
+        let doesContainUpload = this._isInArray(this.newFileUploadingList, bucketId, (itemList) => {
+            files.forEach(newFile => {
+                itemList.files = itemList.files.filter(file => newFile.getName() !== file.getName());
+            });
+        });
+
+        return this.newFileUploadingList;
+    }
+
     updateFileUploadingProgress(bucketId, fileId, progress, fileRef) {
         this._isInArray(this.newFileUploadingList, bucketId, (itemsList) => {
             itemsList.files.forEach(fileEntry => {
