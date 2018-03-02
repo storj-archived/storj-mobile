@@ -12,8 +12,13 @@ public class SingleResponse extends Response {
     @SerializedName("result")
     private String _result;
 
-    public SingleResponse(boolean isSuccess, String result, String errorMessage)  {
+    public SingleResponse(boolean isSuccess, String result, String errorMessage) {
         super(isSuccess, errorMessage);
+        _result = result;
+    }
+
+    public SingleResponse(boolean isSuccess, String result, String errorMessage, int errorCode) {
+        super(isSuccess, errorMessage, errorCode);
         _result = result;
     }
 
@@ -26,7 +31,7 @@ public class SingleResponse extends Response {
         return map;
     }
 
-    public String result() {
+    public String getResult() {
         return _result;
     }
 }
