@@ -1,6 +1,7 @@
 package StorjLib.dataProvider.repositories;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -12,7 +13,6 @@ import javax.inject.Inject;
 import StorjLib.Models.BucketModel;
 import StorjLib.Responses.ListResponse;
 import StorjLib.Responses.Response;
-import StorjLib.dataProvider.DatabaseFactory;
 import StorjLib.dataProvider.contracts.BucketContract;
 
 /**
@@ -27,10 +27,45 @@ public class BucketRepository extends BaseRepository {
     }
 
     public ListResponse<BucketModel[]> get(String[] bucketIdList) {
+
+        String[] columns = {
+                BucketContract._ID,
+                BucketContract._CREATED,
+                BucketContract._NAME,
+                BucketContract._HASH,
+                BucketContract._DECRYPTED,
+                BucketContract._STARRED
+        };
+        String[] selectionArgs = bucketIdList;
+        String groupBy = null;
+        String having = null;
+        String orderBy = "column3 DESC";
+        String limit = "10";
+
+        Cursor cursor = _db.query(BucketContract.TABLE_NAME, columns, BucketContract._DEFAULT_WHERE_CLAUSE, selectionArgs, groupBy, having, orderBy, limit);
         return null;
     }
 
     public BucketModel get(String bucketId) {
+
+        String[] columns = {
+            BucketContract._ID,
+            BucketContract._CREATED,
+            BucketContract._NAME,
+            BucketContract._HASH,
+            BucketContract._DECRYPTED,
+            BucketContract._STARRED
+        };
+        String[] selectionArgs = {
+            bucketId
+        };
+        String groupBy = null;
+        String having = null;
+        String orderBy = "column3 DESC";
+        String limit = "10";
+
+        Cursor cursor = _db.query(BucketContract.TABLE_NAME, columns, BucketContract._DEFAULT_WHERE_CLAUSE, selectionArgs, groupBy, having, orderBy, limit);
+
         return null;
     }
 
