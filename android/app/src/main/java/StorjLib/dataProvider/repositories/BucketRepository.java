@@ -4,7 +4,13 @@ import android.content.ContentValues;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.Arrays;
+import java.util.List;
+
+import javax.inject.Inject;
+
 import StorjLib.Models.BucketModel;
+import StorjLib.Responses.ListResponse;
 import StorjLib.Responses.Response;
 import StorjLib.dataProvider.DatabaseFactory;
 import StorjLib.dataProvider.contracts.BucketContract;
@@ -13,16 +19,24 @@ import StorjLib.dataProvider.contracts.BucketContract;
  * Created by Crawter on 02.03.2018.
  */
 
-public class BucketRepository {
+public class BucketRepository extends BaseRepository {
 
-    private SQLiteDatabase _db;
-
+    @Inject
     public BucketRepository(SQLiteDatabase db) {
-        _db = db;
+        super(db);
+    }
+
+    public ListResponse<BucketModel[]> get(String[] bucketIdList) {
+        return null;
+    }
+
+    public BucketModel get(String bucketId) {
+        return null;
     }
 
     public Response insert(BucketModel model) {
-        if(!model.isValid()) return new Response(false, "Model is not valid!");
+        if(model == null || !model.isValid())
+            return new Response(false, "Model is not valid!");
 
         ContentValues map = new ContentValues();
 
@@ -31,13 +45,60 @@ public class BucketRepository {
         map.put(BucketContract._NAME, model.getName());
         map.put(BucketContract._HASH, model.getHashCode());
         map.put(BucketContract._DECRYPTED, model.isDecrypted());
+        map.put(BucketContract._STARRED, model.isStarred());
 
-        try {
-            _db.insertOrThrow(BucketContract.TABLE_NAME, null, map);
-        } catch(SQLException error) {
-            return new Response(false, error.getMessage());
-        }
+        return _executeInsert(BucketContract.TABLE_NAME, map);
+    }
 
-        return new Response(true, null);
+    public Response delete(BucketModel model) {
+        if(model == null || !model.isValid())
+            return new Response(false, "Model is not valid!");
+
+        return _executeDelete(new String[] { model.getId() }, BucketContract.TABLE_NAME, BucketContract._DEFAULT_WHERE_CLAUSE);
+    }
+
+    public Response delete(String bucketId) {
+        if(bucketId == null || bucketId.isEmpty())
+            return new Response(false, "Model id is not valid!");
+
+        return _executeDelete(new String[] { bucketId }, BucketContract.TABLE_NAME, BucketContract._DEFAULT_WHERE_CLAUSE);
+    }
+
+    public Response delete(String[] bucketIdList) {
+        if(bucketIdList == null || bucketIdList.length == 0)
+            return new Response(false, "Model list is not valid!");
+
+        return _executeDelete(bucketIdList, BucketContract.TABLE_NAME, BucketContract._DEFAULT_WHERE_CLAUSE);
+    }
+
+    public Response update(BucketModel model) {
+        if(model == null || !model.isValid())
+            return new Response(false, "Model is not valid!");
+
+        ContentValues map = new ContentValues();
+
+        map.put(BucketContract._CREATED, model.getCreated());
+        map.put(BucketContract._NAME, model.getName());
+        map.put(BucketContract._HASH, model.getHashCode());
+        map.put(BucketContract._DECRYPTED, model.isDecrypted());
+        map.put(BucketContract._STARRED, model.isStarred());
+
+        return _executeUpdate(BucketContract.TABLE_NAME, null,null, map);
+    }
+
+    //TODO: maybe it should be named updatedStarred or makeStarred?
+    public Response update(String bucketId, boolean isStarred) {
+        if(bucketId == null || bucketId.isEmpty())
+            return new Response(false, "Model id is not valid!");
+
+        String[] columnsToUpdate = new String[] {
+                BucketContract._STARRED
+        };
+
+        String[] columnValues = new String[] {
+                isStarred + ""
+        };
+
+        return _executeUpdate(BucketContract.TABLE_NAME, null,null, columnsToUpdate, columnValues);
     }
 }

@@ -1,12 +1,10 @@
 package StorjLib.dataProvider.contracts;
 
-import android.provider.BaseColumns;
-
 /**
  * Created by Crawter on 02.03.2018.
  */
 
-public class FileContract  implements BaseColumns {
+public final class FileContract extends BaseContract {
     public final static String TABLE_NAME = "files";
 
     public final static String _NAME = "name";
@@ -17,6 +15,7 @@ public class FileContract  implements BaseColumns {
     public final static String _CREATED = "created";
     public final static String _DECRYPTED = "isDecrypted";
     public final static String _SIZE = "size";
+    public final static String _STARRED = "isStarred";
 
     public final static String FILE_FK = "bucketId";
 
@@ -31,7 +30,8 @@ public class FileContract  implements BaseColumns {
                         "%s TEXT not null" +
                         "%s INTEGER" +
                         "%s INTEGER" +
+                        "%s INTEGER" +
                         "%s TEXT not null",
-                        TABLE_NAME, _ID, _NAME, _MIMETYPE, _INDEX, _HMAC, _ERASURE, _CREATED, _DECRYPTED, _SIZE );
+                        TABLE_NAME, _ID, _NAME, _MIMETYPE, _INDEX, _HMAC, _ERASURE, _CREATED, _DECRYPTED, _STARRED, _SIZE );
     }
 }
