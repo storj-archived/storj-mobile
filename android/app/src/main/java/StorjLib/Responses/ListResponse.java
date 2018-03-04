@@ -7,10 +7,10 @@ import com.facebook.react.bridge.WritableMap;
  * Created by Crawter on 22.02.2018.
  */
 
-public class ListResponse extends Response {
-    private String[] _result = null;
+public class ListResponse<T> extends Response {
+    private T _result = null;
 
-    public ListResponse(boolean isSuccess, String errorMessage, String[] result) {
+    public ListResponse(T result, boolean isSuccess, String errorMessage) {
         super(isSuccess, errorMessage);
         _result = result;
     }
@@ -24,7 +24,7 @@ public class ListResponse extends Response {
         return map;
     }
 
-    public String[] getResult() {
+    public T getResult() {
         return _result;
     }
 }

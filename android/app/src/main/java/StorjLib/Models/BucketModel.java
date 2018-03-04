@@ -32,12 +32,25 @@ public class BucketModel implements IStorjModel {
     @SerializedName("isDecrypted")
     private boolean _isDecrypted;
 
+    @Expose
+    @SerializedName("isStarred")
+    private boolean _isStarred;
+
     public BucketModel(String id, String name, String created, long hash, boolean isDecrypted) {
         _id = id;
         _name = name;
         _created = created;
         _hash = hash;
         _isDecrypted = isDecrypted;
+    }
+
+    public BucketModel(String id, String name, String created, long hash, boolean isDecrypted, boolean isStarred) {
+        _id = id;
+        _name = name;
+        _created = created;
+        _hash = hash;
+        _isDecrypted = isDecrypted;
+        _isStarred = isStarred;
     }
 
     public BucketModel(Bucket bucket) {
@@ -70,4 +83,5 @@ public class BucketModel implements IStorjModel {
     public boolean isDecrypted() {
         return _isDecrypted;
     }
+    public boolean isStarred() { return _isStarred; }
 }
