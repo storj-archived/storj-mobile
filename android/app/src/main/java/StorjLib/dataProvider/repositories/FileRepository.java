@@ -200,7 +200,7 @@ public class FileRepository extends BaseRepository {
                             break;
                     }
                 }
-            }while(cursor.moveToNext());
+            } while(cursor.moveToNext());
         }
 
         return model;

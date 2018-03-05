@@ -1,5 +1,6 @@
 package StorjLib;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
 import com.facebook.react.bridge.Arguments;
@@ -15,6 +16,7 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import java.net.URLConnection;
 import java.security.Key;
+import java.util.List;
 
 import StorjLib.CallbackWrappers.CreateBucketCallbackWrapper;
 import StorjLib.CallbackWrappers.DeleteFileCallbackWrapper;
@@ -24,9 +26,13 @@ import StorjLib.CallbackWrappers.RegisterCallbackWrapper;
 import StorjLib.CallbackWrappers.DeleteCallbackWrapper;
 import StorjLib.CallbackWrappers.GetBucketsCallbackWrapper;
 import StorjLib.CallbackWrappers.UploadFileCallbackWrapper;
+import StorjLib.Models.BucketModel;
 import StorjLib.Models.KeyModel;
 import StorjLib.Responses.Response;
 import StorjLib.Responses.SingleResponse;
+import StorjLib.dataProvider.DatabaseFactory;
+import StorjLib.dataProvider.Dbo.BucketDbo;
+import StorjLib.dataProvider.repositories.BucketRepository;
 import io.storj.libstorj.Bucket;
 import io.storj.libstorj.DeleteFileCallback;
 import io.storj.libstorj.DownloadFileCallback;
@@ -79,6 +85,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
 
     public StorjLibModule(ReactApplicationContext reactContext) {
         super(reactContext);
+        initDb();
     }
 
     @Override
@@ -92,6 +99,34 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
 
     private String toJson(Object convertible) {
         return GsonSingle.getInstanse().toJson(convertible);
+    }
+
+    @ReactMethod
+    public void initDb() {
+        DatabaseFactory factory = new DatabaseFactory(getReactApplicationContext(), null);
+        SQLiteDatabase db = factory.getWritableDatabase();
+
+        BucketRepository repo = new BucketRepository(db);
+
+        List<BucketDbo> getAll2 = repo.getAll();
+
+        Response insertResponse = repo.insert(new BucketModel("23232323232", "bucket228", "21/04/2228", 12312313, true, true));
+
+        List<BucketDbo> getAll = repo.getAll();
+
+        repo.delete("23232323232");
+
+        getAll = repo.getAll();
+
+        insertResponse = repo.insert(new BucketModel("23232323232", "bucket228", "21/04/2228", 12312313, true, true));
+
+        getAll = repo.getAll();
+
+        repo.delete(new BucketModel("23232323232", "bucket228", "21/04/2228", 12312313, true, true));
+
+        getAll = repo.getAll();
+
+        db.close();
     }
 
     @ReactMethod
