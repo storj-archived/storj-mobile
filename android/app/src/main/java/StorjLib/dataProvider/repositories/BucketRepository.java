@@ -40,11 +40,7 @@ public class BucketRepository extends BaseRepository {
         List<BucketDbo> result = new ArrayList();
         Cursor cursor = _db.query(BucketContract.TABLE_NAME, null, null, null, null, null, null, null);
 
-        if (cursor.moveToFirst()){
-            do{
-                result.add(_fillBucket(cursor));
-            } while(cursor.moveToNext());
-        }
+        result = _fillBucket(cursor, result);
 
         cursor.close();
 
@@ -185,9 +181,36 @@ public class BucketRepository extends BaseRepository {
                             break;
                     }
                 }
-            }while(cursor.moveToNext());
+            } while(cursor.moveToNext());
         }
 
         return model;
+    }
+
+    private List<BucketDbo> _fillBucket(Cursor cursor, List<BucketDbo> result) {
+        if (cursor.moveToFirst()){
+            do {
+                BucketDbo model = new BucketDbo();
+                for(int i = 0; i < _columns.length; i++) {
+                    switch(_columns[i]) {
+                        case BucketContract._CREATED :
+                        case BucketContract._NAME :
+                        case BucketContract._ID :
+                            model.setProp(_columns[i], cursor.getString(cursor.getColumnIndex(_columns[i])));
+                            break;
+                        case BucketContract._DECRYPTED :
+                        case BucketContract._STARRED :
+                            model.setProp(_columns[i], Boolean.getBoolean(cursor.getString(cursor.getColumnIndex(_columns[i]))));
+                            break;
+                        case BucketContract._HASH :
+                            model.setProp(_columns[i], cursor.getLong(cursor.getColumnIndex(_columns[i])));
+                            break;
+                    }
+                }
+                result.add(model);
+            } while(cursor.moveToNext());
+        }
+
+        return result;
     }
 }

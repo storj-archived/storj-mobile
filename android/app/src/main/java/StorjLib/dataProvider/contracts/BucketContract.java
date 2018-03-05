@@ -15,12 +15,12 @@ public final class BucketContract extends BaseContract {
 
     public static String createTalbe() {
         return String.format("create table if not exists %s (" +
-                "%s TEXT primary key not null" +
-                "%s TEXT not null" +
-                "%s TEXT not null" +
-                "%s INTEGER" +
-                "%s INTEGER" +
-                "%s TEXT not null",
+                "%s TEXT primary key not null, " +
+                "%s TEXT not null, " +
+                "%s TEXT not null, " +
+                "%s INTEGER, " +
+                "%s INTEGER, " +
+                "%s TEXT not null)",
                  TABLE_NAME, _ID, _CREATED, _NAME, _DECRYPTED, _STARRED, _HASH);
     }
 }
