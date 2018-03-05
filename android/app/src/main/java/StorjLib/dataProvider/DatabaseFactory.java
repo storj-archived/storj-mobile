@@ -22,6 +22,10 @@ public class DatabaseFactory extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
 
+//    public DatabaseFactory(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
+//        super(context, name, factory, version, errorHandler);
+//    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         createTables(db);
