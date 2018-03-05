@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import javax.inject.Inject;
 import StorjLib.Models.BucketModel;
 import StorjLib.Responses.ListResponse;
 import StorjLib.Responses.Response;
+import StorjLib.dataProvider.Dbo.BucketDbo;
 import StorjLib.dataProvider.contracts.BucketContract;
 
 /**
@@ -20,53 +22,79 @@ import StorjLib.dataProvider.contracts.BucketContract;
  */
 
 public class BucketRepository extends BaseRepository {
-
-    @Inject
-    public BucketRepository(SQLiteDatabase db) {
-        super(db);
-    }
-
-    public ListResponse<BucketModel[]> get(String[] bucketIdList) {
-
-        String[] columns = {
-                BucketContract._ID,
-                BucketContract._CREATED,
-                BucketContract._NAME,
-                BucketContract._HASH,
-                BucketContract._DECRYPTED,
-                BucketContract._STARRED
-        };
-        String[] selectionArgs = bucketIdList;
-        String groupBy = null;
-        String having = null;
-        String orderBy = "column3 DESC";
-        String limit = "10";
-
-        Cursor cursor = _db.query(BucketContract.TABLE_NAME, columns, BucketContract._DEFAULT_WHERE_CLAUSE, selectionArgs, groupBy, having, orderBy, limit);
-        return null;
-    }
-
-    public BucketModel get(String bucketId) {
-
-        String[] columns = {
+    private String[] _columns = {
             BucketContract._ID,
             BucketContract._CREATED,
             BucketContract._NAME,
             BucketContract._HASH,
             BucketContract._DECRYPTED,
             BucketContract._STARRED
-        };
+    };
+
+    @Inject
+    public BucketRepository(SQLiteDatabase db) {
+        super(db);
+    }
+
+    public List<BucketDbo> getAll() {
+        List<BucketDbo> result = new ArrayList();
+        Cursor cursor = _db.query(BucketContract.TABLE_NAME, null, null, null, null, null, null, null);
+
+        if (cursor.moveToFirst()){
+            do{
+                result.add(_fillBucket(cursor));
+            } while(cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return result;
+    }
+
+    public List<BucketDbo> getAll(String orderByColumn, boolean isDesc) {
+        List<BucketDbo> result = new ArrayList();
+        String column = orderByColumn;
+
+        if(orderByColumn != null && !orderByColumn.isEmpty()) {
+            column = BucketContract._CREATED;
+        }
+
+        String orderBy = isDesc ? column + " DESC" : orderByColumn + " ASC";
+
+        Cursor cursor = _db.query(BucketContract.TABLE_NAME, null, null, null, null, null, orderBy, null);
+
+        if (cursor.moveToFirst()){
+            do{
+                result.add(_fillBucket(cursor));
+            } while(cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return result;
+    }
+
+    public BucketDbo get(String bucketId) {
+        BucketDbo model = null;
         String[] selectionArgs = {
             bucketId
         };
-        String groupBy = null;
-        String having = null;
-        String orderBy = "column3 DESC";
-        String limit = "10";
+        String orderBy = BucketContract._CREATED + " DESC";
 
-        Cursor cursor = _db.query(BucketContract.TABLE_NAME, columns, BucketContract._DEFAULT_WHERE_CLAUSE, selectionArgs, groupBy, having, orderBy, limit);
+        Cursor cursor = _db.query(
+                BucketContract.TABLE_NAME,
+                _columns,
+                BucketContract._DEFAULT_WHERE_CLAUSE,
+                selectionArgs,
+                null, null, orderBy, null);
 
-        return null;
+        if (cursor.moveToFirst()){
+            model = _fillBucket(cursor);
+        }
+
+        cursor.close();
+
+        return model;
     }
 
     public Response insert(BucketModel model) {
@@ -131,9 +159,35 @@ public class BucketRepository extends BaseRepository {
         };
 
         String[] columnValues = new String[] {
-                isStarred + ""
+                Boolean.toString(isStarred)
         };
 
         return _executeUpdate(BucketContract.TABLE_NAME, null,null, columnsToUpdate, columnValues);
+    }
+
+    private BucketDbo _fillBucket(Cursor cursor) {
+        BucketDbo model = new BucketDbo();
+        if (cursor.moveToFirst()){
+            do {
+                for(int i = 0; i < _columns.length; i++) {
+                    switch(_columns[i]) {
+                        case BucketContract._CREATED :
+                        case BucketContract._NAME :
+                        case BucketContract._ID :
+                            model.setProp(_columns[i], cursor.getString(cursor.getColumnIndex(_columns[i])));
+                            break;
+                        case BucketContract._DECRYPTED :
+                        case BucketContract._STARRED :
+                            model.setProp(_columns[i], Boolean.getBoolean(cursor.getString(cursor.getColumnIndex(_columns[i]))));
+                            break;
+                        case BucketContract._HASH :
+                            model.setProp(_columns[i], cursor.getLong(cursor.getColumnIndex(_columns[i])));
+                            break;
+                    }
+                }
+            }while(cursor.moveToNext());
+        }
+
+        return model;
     }
 }
