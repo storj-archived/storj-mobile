@@ -16,10 +16,15 @@ export default class BucketsListComponent extends Component {
         return(
             <View style = { styles.mainContainer }>
                 <ListComponent
+<<<<<<< HEAD
                     onRefresh = { this.props.refresh }
+=======
+                    setSelectionId = { this.props.setSelectionId }
+>>>>>>> added favorites and initial MyAccount screen
                     isGridViewShown = { this.props.isGridViewShown }
                     onPress = { this.props.onPress }
                     itemType = { TYPES.REGULAR_BUCKET }
+                    selectedBucketId = { this.props.selectedBucketId }
                     onSingleItemSelected = { this.props.onSingleItemSelected }                    
                     animatedScrollValue = { this.props.animatedScrollValue }
                     enableSelectionMode = { this.props.enableSelectionMode }
@@ -27,6 +32,8 @@ export default class BucketsListComponent extends Component {
                     isSelectionMode = { this.props.isSelectionMode }
                     isSingleItemSelected = { this.props.isSingleItemSelected }
                     listItemIcon = { require('../images/Icons/BucketListItemIcon.png') }
+                    starredListItemIcon = { require('../images/Icons/ListStarredBucket.png') }
+                    starredGridItemIcon = { require('../images/Icons/GridStarredBucket.png') } 
                     deselectItem = { this.props.deselectBucket }
                     selectItem = { this.props.selectBucket }
                     data = { this.props.buckets } />              

@@ -29,7 +29,8 @@ export default class GridItemComponent extends Component {
             this.props.isItemActionsSelected !== nextProps.isItemActionsSelected ||
             this.props.isSingleItemSelected !== nextProps.isSingleItemSelected ||
             this.props.progress !== nextProps.progress ||
-            this.props.isLoading !== nextProps.isLoading) 
+            this.props.isLoading !== nextProps.isLoading ||
+            this.props.isStarred !== nextProps.isStarred) 
                 return true;
         
         //TODO: Optimize render performance
@@ -126,7 +127,8 @@ export default class GridItemComponent extends Component {
                         <View>
                             <Image 
                                 style = { props.bucketId ? gridItemStyles.fileTypeIcon : gridItemStyles.bucketTypeIcon } 
-                                source = { props.listItemIcon } />
+                                source = { props.isStarred ? props.starredGridItemIcon : props.listItemIcon }
+                                resizeMode = 'contain' />
                             {
                                 props.bucketId && props.item.isLoading ?
                                     <View style = { gridItemStyles.progressCircle }>

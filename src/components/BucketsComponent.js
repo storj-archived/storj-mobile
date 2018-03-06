@@ -18,7 +18,9 @@ export default class BucketsComponent extends Component {
         return(
             <View style={ styles.mainContainer }>
                 <BucketsScreenNavigation
-                    animatedScrollValue = { this.animatedScrollValue }  />
+                    animatedScrollValue = { this.animatedScrollValue }
+                    setSelectionId = { this.props.setSelectionId }
+                    selectedBucketId = { this.props.selectedBucketId }  />
                 <BucketsScreenHeaderComponent
                     isFilesScreen = { this.props.isFilesScreen }
                     selectedItemsCount = { this.props.selectedItemsCount }
@@ -28,7 +30,7 @@ export default class BucketsComponent extends Component {
                     animatedScrollValue = { this.animatedScrollValue }
                     navigateBack = { this.props.navigateBack }
                     buckets = { this.props.buckets }
-                    selectedBucketId = { this.props.selectedBucketId } />
+                    openedBucketId = { this.props.openedBucketId } />
             </View>
         );
     }

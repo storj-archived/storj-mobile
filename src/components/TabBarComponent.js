@@ -97,7 +97,7 @@ export default class TabBarComponent extends Component {
                         <TouchableOpacity style = { styles.tabItemContainer } onPress = { () => { } }>
                             <View><Image source = { require('../images/TabBar/TrashTabBar.png') } style = { navIndex === 2 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
-                        <TouchableOpacity style = { styles.tabItemContainer } onPress = { () => { } }>
+                        <TouchableOpacity style = { styles.tabItemContainer } onPress = { () => { this.props.navigation.navigate("MyAccountScreen"); } }>
                             <View><Image source = { require('../images/TabBar/UserTabBar.png') } style = { navIndex === 3 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
                     </View>
