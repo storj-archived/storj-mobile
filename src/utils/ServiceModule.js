@@ -17,6 +17,10 @@ const ServiceModule = (() => {
         getBuckets() {
             serviceModule.getBuckets();
         }
+
+        async listBuckets() {
+            return await serviceModule.listBuckets();
+        }
     }  
 
     return {
