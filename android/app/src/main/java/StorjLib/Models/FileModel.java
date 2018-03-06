@@ -110,6 +110,20 @@ public class FileModel {
         _fileUri = fileUri;
     }
 
+    public FileModel(String bucketId, String fileId, String created, String erasure, String hmac, String index, boolean isDecrypted, boolean isStarred, String mimeType, String name, long size) {
+        _bucketId = bucketId;
+        _created = created;
+        _erasure = erasure;
+        _fileId = fileId;
+        _hmac = hmac;
+        _index = index;
+        _isDecrypted = isDecrypted;
+        _mimeType = mimeType;
+        _name = name;
+        _size = size;
+        _isStarred = isStarred;
+    }
+
     public boolean isValid() {
         return  _fileId != null && !_fileId.isEmpty() &&
                 _bucketId != null && !_bucketId.isEmpty() &&
