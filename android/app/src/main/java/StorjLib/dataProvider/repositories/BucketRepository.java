@@ -2,17 +2,14 @@ package StorjLib.dataProvider.repositories;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import StorjLib.Models.BucketModel;
-import StorjLib.Responses.ListResponse;
 import StorjLib.Responses.Response;
 import StorjLib.dataProvider.Dbo.BucketDbo;
 import StorjLib.dataProvider.contracts.BucketContract;
@@ -38,9 +35,10 @@ public class BucketRepository extends BaseRepository {
 
     public List<BucketDbo> getAll() {
         List<BucketDbo> result = new ArrayList();
+
         Cursor cursor = _db.query(BucketContract.TABLE_NAME, null, null, null, null, null, null, null);
 
-        result = _fillBucket(cursor, result);
+        result = _getListFromCursor(cursor);
 
         cursor.close();
 
@@ -59,11 +57,7 @@ public class BucketRepository extends BaseRepository {
 
         Cursor cursor = _db.query(BucketContract.TABLE_NAME, null, null, null, null, null, orderBy, null);
 
-        if (cursor.moveToFirst()){
-            do{
-                result.add(_fillBucket(cursor));
-            } while(cursor.moveToNext());
-        }
+        result = _getListFromCursor(cursor);
 
         cursor.close();
 
@@ -103,8 +97,8 @@ public class BucketRepository extends BaseRepository {
         map.put(BucketContract._CREATED, model.getCreated());
         map.put(BucketContract._NAME, model.getName());
         map.put(BucketContract._HASH, model.getHashCode());
-        map.put(BucketContract._DECRYPTED, model.isDecrypted());
-        map.put(BucketContract._STARRED, model.isStarred());
+        map.put(BucketContract._DECRYPTED, model.isDecrypted() ? 1 : 0);
+        map.put(BucketContract._STARRED, model.isStarred() ? 1 : 0);
 
         return _executeInsert(BucketContract.TABLE_NAME, map);
     }
@@ -142,7 +136,7 @@ public class BucketRepository extends BaseRepository {
         map.put(BucketContract._DECRYPTED, model.isDecrypted());
         map.put(BucketContract._STARRED, model.isStarred());
 
-        return _executeUpdate(BucketContract.TABLE_NAME, null,null, map);
+        return _executeUpdate(BucketContract.TABLE_NAME, model.getId(), null,null, map);
     }
 
     //TODO: maybe it should be named updatedStarred or makeStarred?
@@ -158,59 +152,51 @@ public class BucketRepository extends BaseRepository {
                 Boolean.toString(isStarred)
         };
 
-        return _executeUpdate(BucketContract.TABLE_NAME, null,null, columnsToUpdate, columnValues);
+        return _executeUpdate(BucketContract.TABLE_NAME, bucketId, null,null, columnsToUpdate, columnValues);
     }
 
-    private BucketDbo _fillBucket(Cursor cursor) {
-        BucketDbo model = new BucketDbo();
+    private BucketDbo _getSingleFromCursor(Cursor cursor) {
+        BucketDbo model = null;
+
         if (cursor.moveToFirst()){
-            do {
-                for(int i = 0; i < _columns.length; i++) {
-                    switch(_columns[i]) {
-                        case BucketContract._CREATED :
-                        case BucketContract._NAME :
-                        case BucketContract._ID :
-                            model.setProp(_columns[i], cursor.getString(cursor.getColumnIndex(_columns[i])));
-                            break;
-                        case BucketContract._DECRYPTED :
-                        case BucketContract._STARRED :
-                            model.setProp(_columns[i], Boolean.getBoolean(cursor.getString(cursor.getColumnIndex(_columns[i]))));
-                            break;
-                        case BucketContract._HASH :
-                            model.setProp(_columns[i], cursor.getLong(cursor.getColumnIndex(_columns[i])));
-                            break;
-                    }
-                }
-            } while(cursor.moveToNext());
+            model = _fillBucket(cursor);
         }
 
         return model;
     }
 
-    private List<BucketDbo> _fillBucket(Cursor cursor, List<BucketDbo> result) {
+    private List<BucketDbo> _getListFromCursor(Cursor cursor) {
+        List<BucketDbo> result = new ArrayList();
+
         if (cursor.moveToFirst()){
             do {
-                BucketDbo model = new BucketDbo();
-                for(int i = 0; i < _columns.length; i++) {
-                    switch(_columns[i]) {
-                        case BucketContract._CREATED :
-                        case BucketContract._NAME :
-                        case BucketContract._ID :
-                            model.setProp(_columns[i], cursor.getString(cursor.getColumnIndex(_columns[i])));
-                            break;
-                        case BucketContract._DECRYPTED :
-                        case BucketContract._STARRED :
-                            model.setProp(_columns[i], Boolean.getBoolean(cursor.getString(cursor.getColumnIndex(_columns[i]))));
-                            break;
-                        case BucketContract._HASH :
-                            model.setProp(_columns[i], cursor.getLong(cursor.getColumnIndex(_columns[i])));
-                            break;
-                    }
-                }
-                result.add(model);
+                result.add(_fillBucket(cursor));
             } while(cursor.moveToNext());
         }
 
         return result;
+    }
+
+    private BucketDbo _fillBucket(Cursor cursor) {
+        BucketDbo model = new BucketDbo();
+
+        for(int i = 0; i < _columns.length; i++) {
+            switch (_columns[i]) {
+                case BucketContract._CREATED:
+                case BucketContract._NAME:
+                case BucketContract._ID:
+                    model.setProp(_columns[i], cursor.getString(cursor.getColumnIndex(_columns[i])));
+                    break;
+                case BucketContract._DECRYPTED:
+                case BucketContract._STARRED:
+                    model.setProp(_columns[i], cursor.getInt(cursor.getColumnIndex(_columns[i])) == 1 ? true : false);
+                    break;
+                case BucketContract._HASH:
+                    model.setProp(_columns[i], cursor.getLong(cursor.getColumnIndex(_columns[i])));
+                    break;
+            }
+        }
+
+        return model;
     }
 }

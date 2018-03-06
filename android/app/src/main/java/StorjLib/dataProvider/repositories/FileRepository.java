@@ -156,7 +156,7 @@ public class FileRepository extends BaseRepository {
         map.put(FileContract._SIZE, model.getSize());
         map.put(FileContract._NAME, model.getName());
 
-        return _executeUpdate(FileContract.TABLE_NAME, null,null, map);
+        return _executeUpdate(FileContract.TABLE_NAME, model.getFileId(), null,null, map);
     }
 
     //TODO: maybe it should be named updatedStarred or makeStarred?
@@ -172,7 +172,7 @@ public class FileRepository extends BaseRepository {
                 isStarred + ""
         };
 
-        return _executeUpdate(FileContract.TABLE_NAME, null,null, columnsToUpdate, columnValues);
+        return _executeUpdate(FileContract.TABLE_NAME, fileId,null,null, columnsToUpdate, columnValues);
     }
 
     private FileDbo _fillFile(Cursor cursor) {

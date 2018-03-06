@@ -57,28 +57,28 @@ public abstract class BaseRepository {
         return new Response(isSuccess, null);
     }
 
-    protected Response _executeUpdate(String tableName, String[] columnNames, String[] columnValues, String[] columnsToUpdate, String [] updatedValues) {
+    protected Response _executeUpdate(String tableName, String id, String[] columnNames, String[] columnValues, String[] columnsToUpdate, String [] updatedValues) {
         boolean isSuccess;
 
         ContentValues map = _getContentMap(columnsToUpdate, updatedValues);
 
-        String whereClause = _getWhereClause(columnNames, columnValues);
+        String whereClause = _getWhereClause(columnNames, columnValues, id);
 
         try {
-            _db.update(tableName, map, whereClause, null);
+            _db.update(tableName, map, whereClause, new String[] { id });
         } catch (Exception e) {
             return new Response(false, e.getMessage());
         }
         return new Response(true, null);
     }
 
-    protected Response _executeUpdate(String tableName, String[] columnNames, String[] columnValues, ContentValues map) {
+    protected Response _executeUpdate(String tableName, String id, String[] columnNames, String[] columnValues, ContentValues map) {
         boolean isSuccess;
-
-        String whereClause = _getWhereClause(columnNames, columnValues);
+        int result;
+        String whereClause = _getWhereClause(columnNames, columnValues, id);
 
         try {
-            _db.update(tableName, map, whereClause, null);
+            result = _db.update(tableName, map, whereClause, new String[] { id });
         } catch (Exception e) {
             return new Response(false, e.getMessage());
         }
@@ -86,7 +86,7 @@ public abstract class BaseRepository {
         return new Response(true, null);
     }
 
-    private static String _getWhereClause(String[] columnNames, String[] columnValues) {
+    protected static String _getWhereClause(String[] columnNames, String[] columnValues, String id) {
         boolean columnNamesAreValid = columnNames != null && columnNames.length != 0;
         boolean columnValuesAreValid = columnValues != null && columnValues.length != 0;
 
