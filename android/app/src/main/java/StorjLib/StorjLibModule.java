@@ -27,12 +27,15 @@ import StorjLib.CallbackWrappers.DeleteCallbackWrapper;
 import StorjLib.CallbackWrappers.GetBucketsCallbackWrapper;
 import StorjLib.CallbackWrappers.UploadFileCallbackWrapper;
 import StorjLib.Models.BucketModel;
+import StorjLib.Models.FileModel;
 import StorjLib.Models.KeyModel;
 import StorjLib.Responses.Response;
 import StorjLib.Responses.SingleResponse;
 import StorjLib.dataProvider.DatabaseFactory;
 import StorjLib.dataProvider.Dbo.BucketDbo;
+import StorjLib.dataProvider.Dbo.FileDbo;
 import StorjLib.dataProvider.repositories.BucketRepository;
+import StorjLib.dataProvider.repositories.FileRepository;
 import io.storj.libstorj.Bucket;
 import io.storj.libstorj.DeleteFileCallback;
 import io.storj.libstorj.DownloadFileCallback;
@@ -106,21 +109,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
         DatabaseFactory factory = new DatabaseFactory(getReactApplicationContext(), null);
         SQLiteDatabase db = factory.getWritableDatabase();
 
-        BucketRepository repo = new BucketRepository(db);
-
-        List<BucketDbo> getAll = repo.getAll();
-
-        Response insertResponse = repo.insert(new BucketModel("23232323232", "bucket228", "21/04/2228", 12312313, false, false));
-
-        Response resp2 = repo.update(new BucketModel("23232323232", "bucket229", "21/04/2229", 12312319, true, true));
-
-        getAll = repo.getAll();
-
-        repo.delete(new BucketModel("23232323232", "bucket228", "21/04/2228", 12312313, true, true));
-
-        getAll = repo.getAll();
-
-        db.close();
+        db.close(); 
     }
 
     @ReactMethod
