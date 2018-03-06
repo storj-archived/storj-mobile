@@ -41,11 +41,7 @@ public class FileRepository extends BaseRepository {
         List<FileDbo> result = new ArrayList();
         Cursor cursor = _db.query(FileContract.TABLE_NAME, null, null, null, null, null, null, null);
 
-        if (cursor.moveToFirst()){
-            do{
-                result.add(_fillFile(cursor));
-            } while(cursor.moveToNext());
-        }
+        result = _getListFromCursor(cursor);
 
         cursor.close();
 
@@ -64,11 +60,7 @@ public class FileRepository extends BaseRepository {
 
         Cursor cursor = _db.query(FileContract.TABLE_NAME, null, null, null, null, null, orderBy, null);
 
-        if (cursor.moveToFirst()){
-            do{
-                result.add(_fillFile(cursor));
-            } while(cursor.moveToNext());
-        }
+        result = _getListFromCursor(cursor);
 
         cursor.close();
 
@@ -89,9 +81,7 @@ public class FileRepository extends BaseRepository {
                 selectionArgs,
                 null, null, orderBy, null);
 
-        if (cursor.moveToFirst()){
-            model = _fillFile(cursor);
-        }
+        model = _getSingleFromCursor(cursor);
 
         cursor.close();
 
@@ -169,39 +159,58 @@ public class FileRepository extends BaseRepository {
         };
 
         String[] columnValues = new String[] {
-                isStarred + ""
+                Boolean.toString(isStarred)
         };
 
         return _executeUpdate(FileContract.TABLE_NAME, fileId,null,null, columnsToUpdate, columnValues);
     }
 
-    private FileDbo _fillFile(Cursor cursor) {
-        FileDbo model = new FileDbo();
+    private FileDbo _getSingleFromCursor(Cursor cursor) {
+        FileDbo model = null;
+
+        if (cursor.moveToFirst()){
+            model = _fillFile(cursor);
+        }
+
+        return model;
+    }
+
+    private List<FileDbo> _getListFromCursor(Cursor cursor) {
+        List<FileDbo> result = new ArrayList();
+
         if (cursor.moveToFirst()){
             do {
-                for(int i = 0; i < _columns.length; i++) {
-                    switch(_columns[i]) {
-                        case FileContract._CREATED :
-                        case FileContract._NAME :
-                        case FileContract._ID :
-                        case FileContract._ERASURE:
-                        case FileContract._HMAC:
-                        case FileContract._INDEX:
-                        case FileContract._MIMETYPE:
-                        case FileContract.FILE_FK:
-                            model.setProp(_columns[i], cursor.getString(cursor.getColumnIndex(_columns[i])));
-                            break;
-                        case FileContract._DECRYPTED :
-                        case FileContract._STARRED :
-                            model.setProp(_columns[i], Boolean.getBoolean(cursor.getString(cursor.getColumnIndex(_columns[i]))));
-                            break;
-                        case FileContract._SIZE :
-                            model.setProp(_columns[i], cursor.getLong(cursor.getColumnIndex(_columns[i])));
-                            break;
-                    }
-                }
-            } while(cursor.moveToNext());
+                result.add(_fillFile(cursor));
+            } while (cursor.moveToNext());
         }
+
+        return result;
+    }
+
+    private FileDbo _fillFile(Cursor cursor) {
+        FileDbo model = new FileDbo();
+
+            for(int i = 0; i < _columns.length; i++) {
+                switch(_columns[i]) {
+                    case FileContract._CREATED :
+                    case FileContract._NAME :
+                    case FileContract._ID :
+                    case FileContract._ERASURE:
+                    case FileContract._HMAC:
+                    case FileContract._INDEX:
+                    case FileContract._MIMETYPE:
+                    case FileContract.FILE_FK:
+                        model.setProp(_columns[i], cursor.getString(cursor.getColumnIndex(_columns[i])));
+                        break;
+                    case FileContract._DECRYPTED :
+                    case FileContract._STARRED :
+                        model.setProp(_columns[i], cursor.getInt(cursor.getColumnIndex(_columns[i])) == 1 ? true : false);
+                        break;
+                    case FileContract._SIZE :
+                        model.setProp(_columns[i], cursor.getLong(cursor.getColumnIndex(_columns[i])));
+                        break;
+                }
+            }
 
         return model;
     }

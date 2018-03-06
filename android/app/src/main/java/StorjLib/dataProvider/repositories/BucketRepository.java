@@ -78,9 +78,7 @@ public class BucketRepository extends BaseRepository {
                 selectionArgs,
                 null, null, orderBy, null);
 
-        if (cursor.moveToFirst()){
-            model = _fillBucket(cursor);
-        }
+        model = _getSingleFromCursor(cursor);
 
         cursor.close();
 
@@ -171,7 +169,7 @@ public class BucketRepository extends BaseRepository {
         if (cursor.moveToFirst()){
             do {
                 result.add(_fillBucket(cursor));
-            } while(cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
 
         return result;

@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import StorjLib.dataProvider.contracts.BucketContract;
+import StorjLib.dataProvider.contracts.FileContract;
 
 /**
  * Created by Crawter on 02.03.2018.
@@ -27,6 +28,7 @@ public class DatabaseFactory extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(BucketContract.createTalbe());
+        db.execSQL(FileContract.createTalbe());
     }
 
     @Override
