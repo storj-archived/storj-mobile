@@ -108,17 +108,11 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
 
         BucketRepository repo = new BucketRepository(db);
 
-        List<BucketDbo> getAll2 = repo.getAll();
-
-        Response insertResponse = repo.insert(new BucketModel("23232323232", "bucket228", "21/04/2228", 12312313, true, true));
-
         List<BucketDbo> getAll = repo.getAll();
 
-        repo.delete("23232323232");
+        Response insertResponse = repo.insert(new BucketModel("23232323232", "bucket228", "21/04/2228", 12312313, false, false));
 
-        getAll = repo.getAll();
-
-        insertResponse = repo.insert(new BucketModel("23232323232", "bucket228", "21/04/2228", 12312313, true, true));
+        Response resp2 = repo.update(new BucketModel("23232323232", "bucket229", "21/04/2229", 12312319, true, true));
 
         getAll = repo.getAll();
 
