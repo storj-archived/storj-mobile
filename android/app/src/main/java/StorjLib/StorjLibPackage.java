@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import StorjLib.Services.ServiceModule;
+
 /**
  * Created by Yaroslav-Note on 1/4/2018.
  */
@@ -27,6 +29,7 @@ public class StorjLibPackage implements ReactPackage {
 
         modules.add(new StorjLibModule(reactContext));
         modules.add(new FilePickerModule(reactContext));
+        modules.add(new ServiceModule(reactContext));
 
         return modules;
     }

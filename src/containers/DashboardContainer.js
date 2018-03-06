@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { DeviceEventEmitter } from 'react-native';
+import ServiceModule from '../utils/ServiceModule';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { dashboardContainerActions } from '../reducers/mainContainer/mainReducerActions';
@@ -10,6 +12,19 @@ import DashboardListComponent from '../components/DashboardListComponent';
 class DashboardContainer extends Component {
     constructor(props) {
         super(props);
+    }
+
+    async componentWillMount() {
+        await ServiceModule.bindService();
+        console.log("return");
+
+        DeviceEventEmitter.addListener("EVENT_BUCKETS_UPDATED", (result) => {
+            console.log("FromEvent", JSON.parse(result.result));
+        });
+    }
+
+    componentDidMount() {
+        ServiceModule.getBuckets();
     }
 
     render() {
