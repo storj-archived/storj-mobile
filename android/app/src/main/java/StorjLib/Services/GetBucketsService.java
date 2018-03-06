@@ -2,6 +2,7 @@ package StorjLib.Services;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -11,8 +12,14 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import StorjLib.GsonSingle;
 import StorjLib.Models.BucketModel;
+import StorjLib.dataProvider.DatabaseFactory;
+import StorjLib.dataProvider.Dbo.BucketDbo;
+import StorjLib.dataProvider.repositories.BucketRepository;
 import io.storj.libstorj.Bucket;
 import io.storj.libstorj.GetBucketsCallback;
 import io.storj.libstorj.android.StorjAndroid;
@@ -59,14 +66,61 @@ public class GetBucketsService extends IntentService {
             public void onBucketsReceived(Bucket[] buckets) {
                 _buckets = buckets;
 
+                if(buckets == null) {
+                    return;
+                }
+
+                SQLiteDatabase db = new DatabaseFactory(GetBucketsService.this, null).getWritableDatabase();
+                BucketRepository bucketRepository = new BucketRepository(db);
+
+                db.beginTransaction();
+
+                try {
+                    List<BucketDbo> bucketDbos = bucketRepository.getAll();
+
+                    int length = buckets.length;
+                    boolean[] isUpdate = new boolean[buckets.length];
+
+                    for(BucketDbo bucketDbo : bucketDbos) {
+                        int i = 0;
+                        String dboId = bucketDbo.getId();
+
+                        do {
+                            Bucket bucket = buckets[i];
+                            String id = bucket.getId();
+
+                            if(dboId == id) {
+                                isUpdate[i] = true;
+                                //bucketRepository.update(new BucketModel(bucket));
+                                break;
+                            }
+
+                            i++;
+                        } while(i < length);
+
+                        if(i == length - 1) {
+                            bucketRepository.delete(dboId);
+                        }
+                    }
+
+                    for(int i = 0; i < length; i++) {
+                        if(isUpdate[i]) {
+                            bucketRepository.update(new BucketModel(buckets[i]));
+                        } else {
+                            bucketRepository.insert(new BucketModel(buckets[i]));
+                        }
+                    }
+
+                    db.setTransactionSuccessful();
+                } catch (Exception e) {
+
+                } finally {
+                    db.endTransaction();
+                    db.close();
+                }
+
                 if(mContext != null) {
-                    WritableMap map = new WritableNativeMap();
-
-                    map.putBoolean("isSuccess", true);
-                    map.putString("errorMessage", null);
-                    map.putString("result", toJson(toBucketModelArray(buckets)));
-
-                    mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKETS_UPDATED, map);
+                    mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKETS_UPDATED, true);
                 }
             }
 
@@ -75,13 +129,7 @@ public class GetBucketsService extends IntentService {
                 _buckets = null;
 
                 if(mContext != null) {
-                    WritableMap map = new WritableNativeMap();
-
-                    map.putBoolean("isSuccess", false);
-                    map.putString("errorMessage", message);
-                    map.putString("result", null);
-
-                    mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKETS_UPDATED, map);
+                    mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKETS_UPDATED, false);
                 }
             }
         });
@@ -93,20 +141,5 @@ public class GetBucketsService extends IntentService {
 
     public void setReactContext(ReactContext context) {
         mContext = context;
-    }
-
-    private BucketModel[] toBucketModelArray(Bucket[] buckets) {
-        int length = buckets.length;
-        BucketModel[] result = new BucketModel[length];
-
-        for(int i = 0; i < length; i++) {
-            result[i] = new BucketModel(buckets[i]);
-        }
-
-        return result;
-    }
-
-    private String toJson(BucketModel[] convertible) {
-        return GsonSingle.getInstanse().toJson(convertible);
     }
 }

@@ -134,7 +134,7 @@ public class BucketRepository extends BaseRepository {
         map.put(BucketContract._NAME, model.getName());
         map.put(BucketContract._HASH, model.getHashCode());
         map.put(BucketContract._DECRYPTED, model.isDecrypted());
-        map.put(BucketContract._STARRED, model.isStarred());
+        //map.put(BucketContract._STARRED, model.isStarred());
 
         return _executeUpdate(BucketContract.TABLE_NAME, model.getId(), null,null, map);
     }

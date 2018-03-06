@@ -1,5 +1,6 @@
 package StorjLib.dataProvider.Dbo;
 
+import StorjLib.Models.BucketModel;
 import StorjLib.dataProvider.contracts.BucketContract;
 
 /**
@@ -13,6 +14,10 @@ public class BucketDbo {
     private long _hash;
     private boolean _isDecrypted;
     private boolean _isStarred;
+
+    public String getId() {
+        return _id;
+    }
 
     public void setProp(String propName, String value) {
         switch(propName) {
@@ -41,5 +46,9 @@ public class BucketDbo {
 
     public void setProp(String propName, long value) {
         _hash = value;
+    }
+
+    public BucketModel toBucketModel() {
+        return new BucketModel(_id, _name, _created, _hash, _isDecrypted, _isStarred);
     }
 }

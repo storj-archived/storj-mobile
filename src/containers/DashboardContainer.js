@@ -18,8 +18,11 @@ class DashboardContainer extends Component {
         await ServiceModule.bindService();
         console.log("return");
 
-        DeviceEventEmitter.addListener("EVENT_BUCKETS_UPDATED", (result) => {
-            console.log("FromEvent", JSON.parse(result.result));
+        DeviceEventEmitter.addListener("EVENT_BUCKETS_UPDATED", async (result) => {
+            console.log("FromEvent", result);
+            let result2 = await ServiceModule.listBuckets();
+
+            console.log(result2);
         });
     }
 
