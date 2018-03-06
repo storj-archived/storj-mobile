@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavigationAction, addNavigationHelpers } from 'react-navigation';
-import BucketsScreenNavigator from '../navigators/BucketsScreenNavigator';
+import MyAccountScreenNavigator from '../navigators/MyAccountScreenNavigator';
 
-class BucketsScreenNavContainer extends Component {
+class MyAccountNavContainer extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
         return(
-            <BucketsScreenNavigator
-                screenProps = { { 
-                    animatedScrollValue: this.props.animatedScrollValue,
-                    selectedBucketId: this.props.selectedBucketId,
-                    setSelectionId: this.props.setSelectionId } }
+            <MyAccountScreenNavigator
+                screenProps = { { animatedScrollValue: this.props.animatedScrollValue } }
                 navigation = { 
                     addNavigationHelpers({
                          dispatch: this.props.dispatch,
@@ -27,10 +24,10 @@ class BucketsScreenNavContainer extends Component {
 
 function mapStateToProps(state) {
     return {
-        nav: state.bucketsScreenNavReducer
+        nav: state.myAccountScreenNavReducer
     };
 }
 
 function mapDispatchToProps(dispatch) {}
 
-export default connect(mapStateToProps)(BucketsScreenNavContainer);
+export default connect(mapStateToProps)(MyAccountNavContainer);

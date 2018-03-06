@@ -2,6 +2,7 @@ import { Keyboard, DeviceEventEmitter, BackHandler, Platform, NativeEventEmitter
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { favouritesActions } from '../reducers/mainContainer/Favourites/favouritesReducerActions';
 import { mainContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import { mainContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { redirectToMainScreen } from '../reducers/navigation/navigationActions';
@@ -32,7 +33,11 @@ class MainContainer extends Component {
 
         this.selectionModeActions = [
             //actions for bucket screen
-            TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 4', require('../images/ActionBar/FavoritesIcon.png')), 
+            TabBarActionModelFactory.createNewAction(
+                () => { this.setFavourite(); }, 
+                'Action 4',    
+                require('../images/ActionBar/FavoritesIcon.png')
+            ),
             TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 5', require('../images/ActionBar/DownloadIFileIcon.png')), 
             TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 6', require('../images/ActionBar/CopyBucketIcon.png')), 
             TabBarActionModelFactory.createNewAction(() => { this.deleteBuckets(); }, 'Action 7', require('../images/ActionBar/TrashBucketIcon.png'))
@@ -231,6 +236,22 @@ class MainContainer extends Component {
         return selectedBuckets;
     }
 
+    changeFavourites(item) {
+        item.isStarred ?
+            this.props.removeFavourite(item) :
+            this.props.setFavourite(item)
+    }
+
+    setFavourite() {
+        this.getSelectedBuckets().forEach(item => {
+            this.changeFavourites(item);
+            item.isStarred ? item.isStarred = false : item.isStarred = true;
+        });  
+
+        this.props.clearSelection();
+        this.props.disableSelectionMode();
+    }
+
     deleteBuckets() {
         this.getSelectedBuckets().forEach(item => {
             this.deleteBucket(item);
@@ -286,9 +307,10 @@ function mapStateToProps(state) {
         isCreateBucketInputShown: state.mainReducer.isCreateBucketInputShown,
         isFirstSignIn: state.mainReducer.isFirstSignIn,
         isLoading: state.mainReducer.isLoading,
-        isGridViewShown: state.mainReducer.isGridViewShown
+        isGridViewShown: state.mainReducer.isGridViewShown,
+        favouritesBuckets: state.favouritesReducer.favouritesBuckets
     };
 }
-function mapDispatchToProps(dispatch) { return bindActionCreators({ redirectToMainScreen, ...mainContainerActions, ...mainContainerFileActions }, dispatch); };
+function mapDispatchToProps(dispatch) { return bindActionCreators({ redirectToMainScreen, ...favouritesActions, ...mainContainerActions, ...mainContainerFileActions }, dispatch); };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

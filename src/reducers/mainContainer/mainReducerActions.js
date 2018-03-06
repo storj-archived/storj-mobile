@@ -24,7 +24,9 @@ const {
     UPLOAD_FILE_START,
     UPLOAD_FILE_COMPLETE,
     SET_GRID_VIEW,
-    SET_LIST_VIEW
+    SET_LIST_VIEW,
+    CLEAR_SELECTION,
+    SET_SELECTION_ID
 } = MAIN_ACTIONS;
 
 function onSingleItemSelected() {
@@ -122,6 +124,14 @@ function setListView() {
     return { type: SET_LIST_VIEW }
 }
 
+function setSelectionId(id) {
+    return { type: SET_SELECTION_ID, payload: { id }}
+}
+
+function clearSelection() {
+    return { type: CLEAR_SELECTION }
+}
+
 //action creators for main container
 export const mainContainerActions = {
     getBuckets,
@@ -132,6 +142,7 @@ export const mainContainerActions = {
     disableSelectionMode,
     showCreateBucketInput,
     hideCreateBucketInput,
+    clearSelection,
     setFirstSignIn,
     removeFirstSignIn,
     setLoading,
@@ -155,18 +166,20 @@ export const bucketsContainerActions = {
     disableSelectionMode,
     onSingleItemSelected,
     createBucket,
-    removeFirstSignIn,
     setLoading,
     unsetLoading,
+    setSelectionId,
     closeBucket
 };
 
 export const dashboardContainerActions = {
     selectBucket,
     deselectBucket,
+    createBucket,
     enableSelectionMode,
     disableSelectionMode,
     onSingleItemSelected,
+    removeFirstSignIn,
     setLoading,
     unsetLoading,
     openBucket,

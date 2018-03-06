@@ -1,7 +1,7 @@
 import { MAIN_ACTIONS } from '../../utils/constants/actionConstants';
 import ListItemModel from '../../models/ListItemModel';
 import FileModel from '../../models/FileModel';
-import ItemManager from '../../utils/itemManagers/ItemManager'
+import ItemManager from '../../utils/itemManagers/ItemManager';
 
 const { 
     SELECT_BUCKET, 
@@ -23,7 +23,9 @@ const {
     OPEN_BUCKET,
     CLOSE_BUCKET,
     SET_GRID_VIEW,
-    SET_LIST_VIEW
+    SET_LIST_VIEW,
+    CLEAR_SELECTION,
+    SET_SELECTION_ID
  } = MAIN_ACTIONS;
                                                         
 const initialState = { 
@@ -35,7 +37,8 @@ const initialState = {
     isFirstSignIn: false,
     isGridViewShown: false,
     isLoading: false,
-    openedBucketId: null
+    openedBucketId: null,
+    selectedItemId: null
 };
 
 export default function mainReducer(state = initialState, action) {
@@ -110,6 +113,12 @@ export default function mainReducer(state = initialState, action) {
             return newState;
         case SET_LIST_VIEW: 
             newState.isGridViewShown = false;
+            return newState;
+        case SET_SELECTION_ID:
+            newState.selectedItemId = action.payload.id;
+            return newState;
+        case CLEAR_SELECTION:
+            newState.selectedItemId = null;
             return newState;
         default:
             return state || initialState;

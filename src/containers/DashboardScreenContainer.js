@@ -9,6 +9,7 @@ import { filesListContainerMainActions } from '../reducers/mainContainer/mainRed
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { dashboardNavigateBack, navigateToFilesScreen } from '../reducers/navigation/navigationActions';
 import DashboardComponent from '../components/DashboardComponent';
+import FirstSignInComponent from '../components/FirstSignInComponent';
 
 class DashboardScreenContainer extends Component {
     constructor(props) {
@@ -39,28 +40,53 @@ class DashboardScreenContainer extends Component {
         }
     }
 
+    async createBucket(name) {
+        this.props.setLoading();
+
+        try {
+            let createBucketResult = await StorjLib.createBucket(name);
+
+            if(createBucketResult.isSuccess) {
+                this.props.createBucket(new ListItemModel(createBucketResult.result));
+                this.props.removeFirstSignIn();
+            } 
+        } catch (e) {
+            console.log(e);
+        }
+
+        this.props.unsetLoading();
+    }
+
     render() {
-        return(
-            <DashboardComponent
-                showOptions = { this.props.screenProps.showOptions }
-                files = { this.props.files }
-                buckets = { this.props.buckets }
-                openBucket = { this.props.openBucket}
-                defaultRoute = { this.props.defaultRoute }
-                screenName = { this.props.screenName }
-                selectItem = { this.props.selectBucket }
-                navigateBack = { this.props.dashboardNavigateBack }
-                deselectItem = { this.props.deselectBucket }      
-                isSelectionMode = { this.props.isSelectionMode }
-                selectedBucketId = { this.props.selectedBucketId }
-                animatedScrollValue = { this.animatedScrollValue }
-                selectedFilesCount = { this.getSelectedFilesCount() }  
-                selectedBucketsCount = { this.getSelectedBucketsCount() }
-                disableSelectionMode = { this.props.disableSelectionMode }
-                onSingleItemSelected = { this.props.onSingleItemSelected }  
-                isSingleItemSelected = { this.props.isSingleItemSelected }
-                navigateToFilesScreen = { this.props.navigateToFilesScreen } />
-        )
+        if(this.props.isFirstSignIn) {
+            return(
+                <FirstSignInComponent
+                    removeFirstSignIn = { this.props.removeFirstSignIn }
+                    createBucket = { this.createBucket.bind(this)} />
+            );
+        } else {
+            return(
+                <DashboardComponent
+                    showOptions = { this.props.screenProps.showOptions }
+                    files = { this.props.files }
+                    buckets = { this.props.buckets }
+                    openBucket = { this.props.openBucket}
+                    defaultRoute = { this.props.defaultRoute }
+                    screenName = { this.props.screenName }
+                    selectItem = { this.props.selectBucket }
+                    navigateBack = { this.props.dashboardNavigateBack }
+                    deselectItem = { this.props.deselectBucket }      
+                    isSelectionMode = { this.props.isSelectionMode }
+                    selectedBucketId = { this.props.selectedBucketId }
+                    animatedScrollValue = { this.animatedScrollValue }
+                    selectedFilesCount = { this.getSelectedFilesCount() }  
+                    selectedBucketsCount = { this.getSelectedBucketsCount() }
+                    disableSelectionMode = { this.props.disableSelectionMode }
+                    onSingleItemSelected = { this.props.onSingleItemSelected }  
+                    isSingleItemSelected = { this.props.isSingleItemSelected }
+                    navigateToFilesScreen = { this.props.navigateToFilesScreen } />
+            )
+        }
     }
 }
 

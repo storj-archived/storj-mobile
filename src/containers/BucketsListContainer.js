@@ -23,8 +23,10 @@ class BucketsListContainer extends Component {
     render() {
         return(
             <BucketsListComponent
+                setSelectionId = { this.props.screenProps.setSelectionId }
                 isGridViewShown = { this.props.isGridViewShown }
                 onPress = { (params) => { this.onPress(params); } }
+                selectedBucketId = { this.props.screenProps.selectedBucketId }
                 animatedScrollValue = { this.props.screenProps.animatedScrollValue }
                 onSingleItemSelected = { this.props.onSingleItemSelected }
                 enableSelectionMode = { this.props.enableSelectionMode }

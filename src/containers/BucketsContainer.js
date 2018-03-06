@@ -3,11 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { bucketsContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import BucketsComponent from '../components/BucketsComponent';
-import FirstSignInComponent from '../components/FirstSignInComponent';
 import StorjLib from '../utils/StorjModule';
 import ServiceModule from '../utils/ServiceModule';
 import ListItemModel from '../models/ListItemModel';
-import { getFirstSignIn } from '../utils/AsyncStorageModule';
 import { bucketNavigateBack } from '../reducers/navigation/navigationActions';
 
 class BucketsContainer extends Component {
@@ -55,38 +53,32 @@ class BucketsContainer extends Component {
     async createBucket(name) {   
         ServiceModule.createBucket(name);        
     }
-
+    
     navigateBack() {
         this.props.bucketNavigateBack();
         this.props.closeBucket();
     }
 
     render() {
-        if(this.props.isFirstSignIn) {
-            return(
-                <FirstSignInComponent
-                    removeFirstSignIn = { this.props.removeFirstSignIn }
-                    createBucket = { this.createBucket.bind(this)} />
-            );
-        } else {
-            return(
-                <BucketsComponent
-                    isFilesScreen = { this.props.screenName === "FilesScreen" }
-                    selectedItemsCount = { this.getSelectedItemsCount() }
-                    showOptions = { this.props.screenProps.showOptions }
-                    onSingleItemSelected = { this.props.onSingleItemSelected }
-                    enableSelectionMode = { this.props.enableSelectionMode }
-                    disableSelectionMode = { this.props.disableSelectionMode }
-                    isSelectionMode = { this.props.isSelectionMode }
-                    isSingleItemSelected = { this.props.isSingleItemSelected }
-                    deselectBucket = { this.props.deselectBucket }
-                    selectBucket = { this.props.selectBucket }
-                    buckets = { this.props.buckets }
-                    selectedBucketId = { this.props.selectedBucketId }
-                    files = { this.props.files }
-                    navigateBack = { () => { this.navigateBack(); } } /> 
-            );
-        }
+        return(
+            <BucketsComponent
+                setSelectionId = { this.props.setSelectionId }
+                isFilesScreen = { this.props.screenName === "FilesScreen" }
+                selectedItemsCount = { this.getSelectedItemsCount() }
+                showOptions = { this.props.screenProps.showOptions }
+                onSingleItemSelected = { this.props.onSingleItemSelected }
+                enableSelectionMode = { this.props.enableSelectionMode }
+                disableSelectionMode = { this.props.disableSelectionMode }
+                isSelectionMode = { this.props.isSelectionMode }
+                isSingleItemSelected = { this.props.isSingleItemSelected }
+                deselectBucket = { this.props.deselectBucket }
+                selectBucket = { this.props.selectBucket }
+                buckets = { this.props.buckets }
+                openedBucketId = { this.props.openedBucketId }
+                selectedBucketId = { this.props.selectedBucketId }
+                files = { this.props.files }
+                navigateBack = { () => { this.navigateBack(); } } /> 
+        );
     }
 }
 
@@ -99,11 +91,11 @@ function mapStateToProps(state) {
         isSelectionMode: state.mainReducer.isSelectionMode,        
         buckets: state.mainReducer.buckets,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
-        isFirstSignIn: state.mainReducer.isFirstSignIn,
         files: state.filesReducer.fileListModels,
         screenName: currentBucketScreenName,
         isGridViewShown: state.mainReducer.isGridViewShown,
-        selectedBucketId: state.mainReducer.openedBucketId
+        openedBucketId: state.mainReducer.openedBucketId,
+        selectedBucketId: state.mainReducer.selectedItemId
     };
 }
     

@@ -27,13 +27,14 @@ export default class ListItemComponent extends Component {
     }
 
     shouldComponentUpdate(nextProps) {
-        if (this.props.item !== nextProps.item ||
+        if(this.props.item !== nextProps.item ||
             this.props.isSelectionModeEnabled !== nextProps.isSelectionModeEnabled ||
             this.props.isSelected !== nextProps.isSelected ||
             this.props.isItemActionsSelected !== nextProps.isItemActionsSelected ||
             this.props.isSingleItemSelected !== nextProps.isSingleItemSelected ||
             this.props.progress !== nextProps.progress ||
-            this.props.isLoading !== nextProps.isLoading) 
+            this.props.isLoading !== nextProps.isLoading ||
+            this.props.isStarred !== nextProps.isStarred) 
                 return true;
         
         //TODO: Optimize render performance
@@ -82,26 +83,29 @@ export default class ListItemComponent extends Component {
                             })()
                         }
                         <View>
-                            <Image style = { listItemStyles.itemTypeIcon } source = { props.listItemIcon } />
+                            <Image 
+                                style = { listItemStyles.itemTypeIcon } 
+                                source = { props.item.isStarred ? props.starredListItemIcon : props.listItemIcon }
+                                resizeMode = 'contain' />
                         </View>
                         <View style = { listItemStyles.textWrapper }>
                             <Text numberOfLines = {1} style = { listItemStyles.mainTitleText }>{ props.item.getName() }</Text>
                             {
                                 props.item.isLoading ? 
-                                        Platform.select({
-                                            ios: 
-                                                <ProgressViewIOS 
-                                                    progress = { props.item.progress }
-                                                    trackTintColor = { '#f2f2f2' }
-                                                    progressTintColor = { '#2794ff' } />,
-                                            android:
-                                                <ProgressBarAndroid    
-                                                    progress = { props.item.progress } 
-                                                    styleAttr = { 'Horizontal' } 
-                                                    color = { '#2794FF' } 
-                                                    animating = {true} 
-                                                    indeterminate = { false } />
-                                        })
+                                    Platform.select({
+                                        ios: 
+                                            <ProgressViewIOS 
+                                                progress = { props.item.progress }
+                                                trackTintColor = { '#f2f2f2' }
+                                                progressTintColor = { '#2794ff' } />,
+                                        android:
+                                            <ProgressBarAndroid    
+                                                progress = { props.item.progress } 
+                                                styleAttr = { 'Horizontal' } 
+                                                color = { '#2794FF' } 
+                                                animating = {true} 
+                                                indeterminate = { false } />
+                                    })
                                 : null
                             }
                         </View>
@@ -112,7 +116,7 @@ export default class ListItemComponent extends Component {
                                     onPress = { () => {                     
                                         if(props.isSingleItemSelected) {
                                             props.selectItemId(null);
-                                            this.deselectAllItems()
+                                            this.props.disableSelectionMode();
                                         } else {
                                             props.onSingleItemSelected();
                                             props.onSelectionPress(props.item);

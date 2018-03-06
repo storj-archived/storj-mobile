@@ -27,7 +27,7 @@ class DashboardContainer extends Component {
                 navigateBack = { this.props.navigateBack }
                 deselectItem = { this.props.deselectBucket }      
                 isSelectionMode = { this.props.isSelectionMode }
-                selectedBucketId = { this.props.selectedBucketId }
+                openedBucketId = { this.props.openedBucketId }
                 animatedScrollValue = { this.animatedScrollValue  }
                 enableSelectionMode = { this.props.enableSelectionMode }
                 disableSelectionMode = { this.props.disableSelectionMode }
@@ -50,7 +50,7 @@ function mapStateToProps(state) {
         fileListModels: state.filesReducer.fileListModels,
         files: state.filesReducer.fileListModels,
         screenName: currentBucketScreenName,
-        selectedBucketId: state.mainReducer.openedBucketId
+        openedBucketId: state.mainReducer.openedBucketId
     };
 }
     

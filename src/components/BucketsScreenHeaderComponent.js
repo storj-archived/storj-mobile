@@ -23,7 +23,7 @@ export default class BucketsScreenHeaderComponent extends Component {
                     selectedItemsCount = { this.props.selectedItemsCount }
                     showOptions = { this.props.showOptions }
                     buckets = { this.props.buckets }
-                    selectedBucketId = { this.props.selectedBucketId }
+                    openedBucketId = { this.props.openedBucketId }
                     navigateBack = { this.props.navigateBack }
                     isSelectionMode = { this.props.isSelectionMode }
                     disableSelectionMode = { this.props.disableSelectionMode }
@@ -127,7 +127,7 @@ class AnimatedHeader extends Component {
                         isFilesScreen = { this.props.isFilesScreen }
                         showOptions = { this.props.showOptions }
                         buckets = { this.props.buckets }
-                        selectedBucketId = { this.props.selectedBucketId }
+                        openedBucketId = { this.props.openedBucketId }
                         styleContainer = { styles.searchComponent }
                         navigateBack = { this.props.navigateBack } />
                 </Animated.View>

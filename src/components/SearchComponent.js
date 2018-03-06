@@ -22,7 +22,7 @@ export default class SearchComponent extends Component {
     getSelectedBucketName() {
         let buckets = this.props.buckets;
 
-        let openedBucket = buckets.find((bucket) => bucket.entity.id == this.props.selectedBucketId);
+        let openedBucket = buckets.find((bucket) => bucket.entity.id == this.props.openedBucketId);
 
         if(openedBucket) {
             return openedBucket.getName();
