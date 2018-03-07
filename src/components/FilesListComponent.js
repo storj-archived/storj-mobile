@@ -12,7 +12,6 @@ export default class FilesListComponent extends Component {
     }
 
     render() {
-        console.log(this.props.data);
         return(
             <View style = { styles.mainContainer }>
                 <ListComponent
@@ -20,6 +19,7 @@ export default class FilesListComponent extends Component {
                     cancelUpload = { this.props.cancelUpload }
                     isGridViewShown = { this.props.isGridViewShown }
                     onPress = { this.props.onPress }
+                    onRefresh = { this.props.renewFileList }
                     itemType = { TYPES.REGULAR_FILE }
                     bucketId = { this.props.bucketId }
                     onSingleItemSelected = { this.props.onSingleItemSelected }                    

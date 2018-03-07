@@ -9,10 +9,10 @@ const DashboardScreenNavigator = StackNavigator(
             screen: DashboardScreen,
             routeName: 'DashboardDefaultScreen'
         },
-        FilesScreen: {
-            screen: FilesScreen,
-            routeName: 'DashboardFilesScreen'
-        }
+        // FilesScreen: {
+        //     screen: FilesScreen,
+        //     routeName: 'DashboardFilesScreen'
+        // }
     }, 
     {
         initialRouteName: 'DashboardDefaultScreen',

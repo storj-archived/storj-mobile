@@ -252,8 +252,6 @@ class MainContainer extends Component {
         else if(this.props.isSelectionMode || this.props.isSingleItemSelected)
             tapBarActions = this.selectionModeActions;
         
-        console.log(tapBarActions);
-
         return(
             <MainComponent
                 isGridViewShown = { this.props.isGridViewShown }

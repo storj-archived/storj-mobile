@@ -53,7 +53,7 @@ export default class ListComponent extends Component {
     onRefresh() {
         this.setState({refreshing: true});
         
-        //TODO: call getData function
+        this.props.onRefresh();
 
         this.setState({refreshing: false});
     }
@@ -307,7 +307,7 @@ export default class ListComponent extends Component {
                                 }
                             }
                         ], { useNativeDriver: true }) }
-                    refreshControl={
+                    refreshControl = {
                         <RefreshControl
                             enabled = { !this.props.isSelectionMode }
                             refreshing = { this.state.refreshing }

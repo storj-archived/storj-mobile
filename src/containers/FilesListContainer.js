@@ -6,13 +6,16 @@ import { bucketNavigateBack, dashboardNavigateBack, openImageViewer } from '../r
 import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import StorjModule from '../utils/StorjModule';
+import ServiceModule from '../utils/ServiceModule';
 import ListItemModel from '../models/ListItemModel';
+import FileModel from '../models/FileModel';
 import FilesListComponent from '../components/FilesListComponent';
 
 class FilesListContainer extends Component {
     constructor(props) {
         super(props);
 
+        this.serviceListener = null;
         this.bucketId = props.navigation.state.params.bucketId;
         this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
     }
@@ -20,9 +23,7 @@ class FilesListContainer extends Component {
     componentWillMount() {
         if(Platform.OS === "android") {
             BackHandler.addEventListener("hardwarebackPress", this.onHardwareBackPress);
-        }
-
-        this.listFiles();
+        }        
 
         Animated.timing(
             this.props.screenProps.animatedScrollValue,
@@ -30,26 +31,33 @@ class FilesListContainer extends Component {
               toValue: 0,
               useNativeDriver: true
             }
-        ).start();
+        ).start();        
+
+        this.onGetData();
+
+        this.serviceListener = DeviceEventEmitter.addListener("EVENT_FILES_UPDATED", this.onGetData.bind(this));       
+        
+        ServiceModule.getFiles(this.bucketId);    
     }
 
     componentWillUnmount() {
         if(Platform.OS === "android") {
             BackHandler.removeEventListener("hardwarebackPress", this.onHardwareBackPress);
         }
+
+        if(this.serviceListener) this.serviceListener.remove();
     }
 
-    async listFiles() {
-        this.props.setLoading();
-        
-        let filesResponse = await StorjModule.listFiles(this.bucketId);
+    async onGetData() {
+        let filesResponse = await ServiceModule.listFiles(this.bucketId);
 
         if(filesResponse.isSuccess) {
-            let mappedResult = filesResponse.result.map((file => new ListItemModel(file)));
-            this.props.listFiles(this.bucketId, mappedResult);
-        }
+            let files = JSON.parse(filesResponse.result).map((file) => {
+                return new ListItemModel(new FileModel(file));
+            });                    
 
-        this.props.unsetLoading();
+            this.props.listFiles(this.bucketId, files);
+        }
     }
 
     async cancelDownload(file) {
@@ -132,7 +140,7 @@ class FilesListContainer extends Component {
                 isSingleItemSelected = { this.props.isSingleItemSelected }
                 deselectFile = { this.props.deselectFile }
                 selectFile = { this.props.selectFile }
-                listFiles = { async () => { await this.listFiles(); } } />
+                renewFileList = { () => ServiceModule.getFiles(this.bucketId) } />
         );
     }
 }
