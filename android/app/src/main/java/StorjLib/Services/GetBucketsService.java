@@ -1,6 +1,7 @@
 package StorjLib.Services;
 
 import android.app.IntentService;
+import android.app.usage.NetworkStats;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Binder;
@@ -81,6 +82,7 @@ public class GetBucketsService extends IntentService {
                     int length = buckets.length;
                     boolean[] isUpdate = new boolean[buckets.length];
 
+                    outer:
                     for(BucketDbo bucketDbo : bucketDbos) {
                         int i = 0;
                         String dboId = bucketDbo.getId();
@@ -90,26 +92,31 @@ public class GetBucketsService extends IntentService {
                             String id = bucket.getId();
 
                             if(dboId == id) {
-                                isUpdate[i] = true;
-                                //bucketRepository.update(new BucketModel(bucket));
-                                break;
+                                //isUpdate[i] = true;
+                                bucketRepository.update(new BucketModel(bucket));
+                                bucketArrayShift(buckets, i, length);
+                                length--;
+                                continue outer;
                             }
 
                             i++;
                         } while(i < length);
 
-                        if(i == length - 1) {
-                            bucketRepository.delete(dboId);
-                        }
+                        bucketRepository.delete(dboId);
                     }
 
-                    for(int i = 0; i < length; i++) {
+                    for(int i = 0; i < length; i ++) {
+                        bucketRepository.insert(new BucketModel(buckets[i]));
+                    }
+
+
+                    /*for(int i = 0; i < length; i++) {
                         if(isUpdate[i]) {
                             bucketRepository.update(new BucketModel(buckets[i]));
                         } else {
                             bucketRepository.insert(new BucketModel(buckets[i]));
                         }
-                    }
+                    }*/
 
                     db.setTransactionSuccessful();
                 } catch (Exception e) {
@@ -133,6 +140,14 @@ public class GetBucketsService extends IntentService {
                 }
             }
         });
+    }
+
+    private void bucketArrayShift(Bucket[] array, int pos, int length) {
+        do {
+            array[pos] = array[pos + 1];
+            pos++;
+        }
+        while(pos < length - 1);
     }
 
     public class GetBucketsServiceBinder extends Binder {

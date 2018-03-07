@@ -23,6 +23,7 @@ class DashboardContainer extends Component {
             let result2 = await ServiceModule.listBuckets();
 
             console.log(result2);
+            console.log(JSON.parse(result2.result));
         });
     }
 
