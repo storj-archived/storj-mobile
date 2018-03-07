@@ -7,6 +7,8 @@ import { dashboardContainerActions } from '../reducers/mainContainer/mainReducer
 import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { navigateBack, navigateToFilesScreen } from '../reducers/navigation/navigationActions';
+import BucketModel from '../models/BucketModel';
+import ListItemModel from '../models/ListItemModel';
 import DashboardListComponent from '../components/DashboardListComponent';
 
 class DashboardContainer extends Component {
@@ -23,7 +25,14 @@ class DashboardContainer extends Component {
             let result2 = await ServiceModule.listBuckets();
 
             console.log(result2);
-            console.log(JSON.parse(result2.result));
+
+            buckets = JSON.parse(result2.result).map((bucket) => {
+                return new BucketModel(bucket);
+            });
+
+            console.log(buckets);
+
+            this.props.getBuckets(buckets.map(bucket => new ListItemModel(bucket)));
         });
 
         DeviceEventEmitter.addListener("EVENT_FILES_UPDATED", async (result) => {

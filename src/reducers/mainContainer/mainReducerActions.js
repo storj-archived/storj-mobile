@@ -169,7 +169,8 @@ export const dashboardContainerActions = {
     onSingleItemSelected,
     setLoading,
     unsetLoading,
-    openBucket
+    openBucket,
+    getBuckets
 }
 
 export const initializeContainerActions = {

@@ -92,7 +92,6 @@ public class GetBucketsService extends IntentService {
                     List<BucketDbo> bucketDbos = bucketRepository.getAll();
 
                     int length = buckets.length;
-                    boolean[] isUpdate = new boolean[buckets.length];
 
                     outer:
                     for(BucketDbo bucketDbo : bucketDbos) {
@@ -104,7 +103,6 @@ public class GetBucketsService extends IntentService {
                             String id = bucket.getId();
 
                             if(dboId == id) {
-                                //isUpdate[i] = true;
                                 bucketRepository.update(new BucketModel(bucket));
                                 arrayShift(buckets, i, length);
                                 length--;
