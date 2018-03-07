@@ -1,6 +1,4 @@
-package StorjLib.Models;
-
-import android.provider.BaseColumns;
+package storjlib.Models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,4 +1,4 @@
-package StorjLib.Models;
+package storjlib.Models;
 
 /**
  * Created by Crawter on 22.02.2018.

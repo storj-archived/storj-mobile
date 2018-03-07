@@ -1,9 +1,9 @@
-package StorjLib.Responses;
+package storjlib.Responses;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 
-import StorjLib.Interfaces.IConvertibleToJs;
+import storjlib.Interfaces.IConvertibleToJs;
 
 /**
  * Created by Crawter on 01.03.2018.

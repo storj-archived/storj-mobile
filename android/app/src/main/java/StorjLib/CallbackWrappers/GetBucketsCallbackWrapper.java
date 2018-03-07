@@ -1,19 +1,10 @@
-package StorjLib.CallbackWrappers;
+package storjlib.CallbackWrappers;
 
-import android.util.Log;
-
-import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
-import com.facebook.react.bridge.WritableArray;
-import com.facebook.react.bridge.WritableMap;
 
-import java.util.Arrays;
-
-import StorjLib.GsonSingle;
-import StorjLib.Models.BucketModel;
-import StorjLib.Responses.Response;
-import StorjLib.Responses.SingleResponse;
-import StorjLib.StorjTypesWrappers.BucketWrapper;
+import storjlib.Models.BucketModel;
+import storjlib.Responses.Response;
+import storjlib.Responses.SingleResponse;
 import io.storj.libstorj.Bucket;
 import io.storj.libstorj.GetBucketsCallback;
 

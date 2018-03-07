@@ -1,4 +1,4 @@
-package StorjLib.Models;
+package storjlib.Models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

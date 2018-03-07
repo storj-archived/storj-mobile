@@ -13,7 +13,7 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
-import StorjLib.StorjLibPackage;
+import storjlib.StorjLibPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 

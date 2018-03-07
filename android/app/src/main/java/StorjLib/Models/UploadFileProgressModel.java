@@ -1,4 +1,4 @@
-package StorjLib.Models;
+package storjlib.Models;
 
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;

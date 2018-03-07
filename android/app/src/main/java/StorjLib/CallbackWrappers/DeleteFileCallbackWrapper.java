@@ -1,11 +1,10 @@
-package StorjLib.CallbackWrappers;
+package storjlib.CallbackWrappers;
 
 import com.facebook.react.bridge.Promise;
 
-import StorjLib.GsonSingle;
-import StorjLib.Models.FileDeleteModel;
-import StorjLib.Responses.Response;
-import StorjLib.Responses.SingleResponse;
+import storjlib.Models.FileDeleteModel;
+import storjlib.Responses.Response;
+import storjlib.Responses.SingleResponse;
 import io.storj.libstorj.DeleteFileCallback;
 
 /**

@@ -1,12 +1,11 @@
-package StorjLib.dataProvider;
+package storjlib.dataProvider;
 
 import android.content.Context;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import StorjLib.dataProvider.contracts.BucketContract;
-import StorjLib.dataProvider.contracts.FileContract;
+import storjlib.dataProvider.contracts.BucketContract;
+import storjlib.dataProvider.contracts.FileContract;
 
 /**
  * Created by Crawter on 02.03.2018.

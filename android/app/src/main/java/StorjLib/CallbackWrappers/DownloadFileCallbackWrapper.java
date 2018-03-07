@@ -1,17 +1,13 @@
-package StorjLib.CallbackWrappers;
+package storjlib.CallbackWrappers;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
-import StorjLib.GsonSingle;
-import StorjLib.Models.DownloadFileModel;
-import StorjLib.Models.DownloadFileProgressModel;
-import StorjLib.Models.FileModel;
-import StorjLib.Models.UploadFileProgressModel;
-import StorjLib.Responses.Response;
-import StorjLib.Responses.SingleResponse;
-import StorjLib.StorjLibModule;
+import storjlib.Models.DownloadFileModel;
+import storjlib.Models.DownloadFileProgressModel;
+import storjlib.Responses.SingleResponse;
+import storjlib.StorjLibModule;
 import io.storj.libstorj.DownloadFileCallback;
 
 /**

@@ -33,7 +33,7 @@
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-      <service android:name="StorjLib.Services.GetBucketsService" android:enabled="true" />
+      <service android:name="storjlib.services.GetBucketsService" android:enabled="true" />
     </application>
 
 </manifest>

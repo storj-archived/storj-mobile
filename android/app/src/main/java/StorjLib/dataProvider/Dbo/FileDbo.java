@@ -1,7 +1,7 @@
-package StorjLib.dataProvider.Dbo;
+package storjlib.dataProvider.Dbo;
 
-import StorjLib.Models.FileModel;
-import StorjLib.dataProvider.contracts.FileContract;
+import storjlib.Models.FileModel;
+import storjlib.dataProvider.contracts.FileContract;
 
 /**
  * Created by Crawter on 05.03.2018.

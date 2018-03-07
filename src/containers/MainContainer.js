@@ -6,8 +6,10 @@ import { mainContainerActions } from '../reducers/mainContainer/mainReducerActio
 import { mainContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { redirectToMainScreen } from '../reducers/navigation/navigationActions';
 import FileModel from '../models/FileModel';
+import BucketModel from '../models/BucketModel';
 import ListItemModel from '../models/ListItemModel';
 import StorjLib from '../utils/StorjModule';
+import ServiceModule from '../utils/ServiceModule';
 import FilePicker from '../utils/filePicker';
 import TabBarActionModelFactory from '../models/TabBarActionModel';
 import MainComponent from '../components/MainComponent';
@@ -17,6 +19,8 @@ import observablePropFactory from '../models/ObservableProperty';
 class MainContainer extends Component {
     constructor(props) {
         super(props);
+
+        this.serviceListener = null;
 
         //this.state = {
         this.tapBarActions = [
@@ -64,9 +68,15 @@ class MainContainer extends Component {
         }
 
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => { this.props.disableSelectionMode(); });
+
+        this.serviceListener = DeviceEventEmitter.addListener("EVENT_BUCKETS_UPDATED", this.onGetData.bind(this));       
+        
+        ServiceModule.getBuckets();    
     }
     
     componentWillUnmount () {
+        if(this.serviceListener) this.serviceListener.remove();
+
         if(Platform.OS === "android") {
             BackHandler.removeEventListener("hardwareBackPress");
             DeviceEventEmitter.removeListener("uploadFile", this.uploadListener);
@@ -76,6 +86,23 @@ class MainContainer extends Component {
         observablePropFactory.clean();
 
         this.keyboardDidShowListener.remove();
+    }
+
+    async onGetData() {
+        this.props.setLoading();
+        let bucketsResponse = await ServiceModule.listBuckets();
+
+        console.log("ON GET DATA BUCKET CALLBACK");
+
+        if(bucketsResponse.isSuccess) {
+            let buckets = JSON.parse(bucketsResponse.result).map((file) => {
+                return new ListItemModel(new BucketModel(file));
+            });                    
+
+            this.props.getBuckets(buckets);
+        }
+
+        this.props.unsetLoading();
     }
 
     onHardwareBackPress() {
@@ -225,17 +252,6 @@ class MainContainer extends Component {
 
         if(this.props.isSingleItemSelected)
             this.props.disableSelectionMode();
-    }
-
-    async getBuckets() {
-        try {
-            let buckets = await StorjLib.getBuckets();
-
-            this.props.getBuckets(buckets.map((bucket => new ListItemModel(bucket))));
-        } catch(e) {
-            //Eror callback
-            console.log('errorName: ' + e.name, "// errorMessage: " + e.message, "// errorCode: " + e.code);
-        }
     }
 
     static navigationOptions = {

@@ -1,4 +1,4 @@
-package StorjLib.Services;
+package storjlib.services;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -11,21 +11,19 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.WritableNativeMap;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import StorjLib.GsonSingle;
-import StorjLib.Models.BucketModel;
-import StorjLib.Models.FileModel;
-import StorjLib.Responses.SingleResponse;
-import StorjLib.dataProvider.DatabaseFactory;
-import StorjLib.dataProvider.Dbo.BucketDbo;
-import StorjLib.dataProvider.Dbo.FileDbo;
-import StorjLib.dataProvider.repositories.BucketRepository;
-import StorjLib.dataProvider.repositories.FileRepository;
+import storjlib.GsonSingle;
+import storjlib.Models.BucketModel;
+import storjlib.Models.FileModel;
+import storjlib.Responses.SingleResponse;
+import storjlib.dataProvider.DatabaseFactory;
+import storjlib.dataProvider.Dbo.BucketDbo;
+import storjlib.dataProvider.Dbo.FileDbo;
+import storjlib.dataProvider.repositories.BucketRepository;
+import storjlib.dataProvider.repositories.FileRepository;
 
 /**
  * Created by Yaroslav-Note on 3/6/2018.
@@ -92,7 +90,7 @@ public class ServiceModule extends ReactContextBaseJavaModule {
 
                     BucketRepository bucketRepository = new BucketRepository(db);
 
-                    ArrayList<BucketDbo> bucketDbos = (ArrayList)bucketRepository.getAll();
+                    List<BucketDbo> bucketDbos = bucketRepository.getAll();
 
                     int length = bucketDbos.size();
                     BucketModel[] bucketModels = new BucketModel[length];
@@ -119,7 +117,7 @@ public class ServiceModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void listFiles(String bucketId, final Promise promise) {
+    public void listFiles(final String bucketId, final Promise promise) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -128,7 +126,7 @@ public class ServiceModule extends ReactContextBaseJavaModule {
 
                     FileRepository fileRepository = new FileRepository(db);
 
-                    ArrayList<FileDbo> fileDbos = (ArrayList)fileRepository.getAll();
+                    ArrayList<FileDbo> fileDbos = (ArrayList)fileRepository.get(bucketId);
 
                     int length = fileDbos.size();
                     FileModel[] fileModels = new FileModel[length];

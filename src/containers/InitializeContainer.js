@@ -16,6 +16,7 @@ import { authConstants } from '../utils/constants/storageConstants';
 import { getMnemonicNotSaved, getFirstAction } from '../utils/AsyncStorageModule';
 import ListItemModel from '../models/ListItemModel';
 import { initializeContainerActions } from '../reducers/mainContainer/mainReducerActions';
+import ServiceModule from '../utils/ServiceModule';
 
 class InitializeContainer extends Component {
     constructor(props) {
@@ -28,7 +29,7 @@ class InitializeContainer extends Component {
         };
     };
 
-    async componentWillMount() {
+    async componentWillMount() {        
         try {
             if(!await getFirstAction()) {
                 this.props.redirectToOnBoardingScreen();
@@ -51,6 +52,10 @@ class InitializeContainer extends Component {
         }
     }
 
+    async componentDidMount() {
+        await ServiceModule.bindService();
+    }
+
     onChangePassode(value) {
         this.setState({ passcode: value });
     }
@@ -62,21 +67,8 @@ class InitializeContainer extends Component {
             this.setState({ enterPassCode: true });   
             return;
         }
-
-        //await this.getBuckets();
+        
         this.props.redirectToMainScreen();
-    }
-
-    async getBuckets() {
-        try {
-            let buckets = await StorjLib.getBuckets();
-            
-            if(buckets.length == 0)  this.props.setFirstSignIn();
-
-            this.props.getBuckets(buckets.map((bucket => new ListItemModel(bucket))));
-        } catch(e) {
-            console.log('errorName: ' + e.name, "// errorMessage: " + e.message, "// errorCode: " + e.code);
-        }
     }
 
     onSubmit() {

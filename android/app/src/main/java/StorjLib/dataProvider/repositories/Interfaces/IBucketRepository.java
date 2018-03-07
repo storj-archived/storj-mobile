@@ -1,7 +1,7 @@
-package StorjLib.dataProvider.repositories.Interfaces;
+package storjlib.dataProvider.repositories.Interfaces;
 
-import StorjLib.Models.BucketModel;
-import StorjLib.Responses.Response;
+import storjlib.Models.BucketModel;
+import storjlib.Responses.Response;
 
 /**
  * Created by crawt on 3/4/2018.

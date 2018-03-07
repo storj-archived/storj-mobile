@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { bucketsListContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import { navigateToFilesScreen, navigateBack } from '../reducers/navigation/navigationActions';
+import ServiceModule from '../utils/ServiceModule';
 import BucketsListComponent from '../components/BucketsListComponent';
 
 class BucketsListContainer extends Component {
@@ -32,6 +33,7 @@ class BucketsListContainer extends Component {
                 isSingleItemSelected = { this.props.isSingleItemSelected }
                 deselectBucket = { this.props.deselectBucket }
                 selectBucket = { this.props.selectBucket }
+                refresh = { () => ServiceModule.getBuckets() }
                 buckets = { this.props.buckets } />
         );
     }

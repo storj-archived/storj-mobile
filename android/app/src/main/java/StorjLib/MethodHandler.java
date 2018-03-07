@@ -1,8 +1,6 @@
-package StorjLib;
+package storjlib;
 
-import java.sql.SQLClientInfoException;
-
-import StorjLib.Responses.Response;
+import storjlib.Responses.Response;
 import io.storj.libstorj.KeysNotFoundException;
 
 /**

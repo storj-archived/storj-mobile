@@ -1,4 +1,4 @@
-package StorjLib.dataProvider.repositories.Interfaces;
+package storjlib.dataProvider.repositories.Interfaces;
 
 import android.content.ContentValues;
 
