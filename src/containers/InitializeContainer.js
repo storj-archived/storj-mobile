@@ -63,7 +63,7 @@ class InitializeContainer extends Component {
             return;
         }
 
-        await this.getBuckets();
+        //await this.getBuckets();
         this.props.redirectToMainScreen();
     }
 

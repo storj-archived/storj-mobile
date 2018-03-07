@@ -3,7 +3,7 @@ import MainScreenNavigator from '../../navigators/MainScreenNavigator';
 /**
  * Declaring initial route of program
  */
-export const initialState = MainScreenNavigator.router.getStateForAction(MainScreenNavigator.router.getActionForPathAndParams('DashboardScreen'));
+export const initialState = MainScreenNavigator.router.getStateForAction(MainScreenNavigator.router.getActionForPathAndParams('BucketsScreen'));
 
 /**
  * Creating navigation reducer
