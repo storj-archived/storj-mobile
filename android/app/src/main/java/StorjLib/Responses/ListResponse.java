@@ -1,4 +1,4 @@
-package StorjLib.Responses;
+package storjlib.Responses;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;

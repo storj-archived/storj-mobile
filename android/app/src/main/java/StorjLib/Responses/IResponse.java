@@ -1,4 +1,4 @@
-package StorjLib.Responses;
+package storjlib.Responses;
 
 /**
  * Created by Crawter on 21.02.2018.

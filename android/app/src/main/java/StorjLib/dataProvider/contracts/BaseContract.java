@@ -1,4 +1,4 @@
-package StorjLib.dataProvider.contracts;
+package storjlib.dataProvider.contracts;
 
 import android.provider.BaseColumns;
 

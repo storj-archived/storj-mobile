@@ -1,4 +1,4 @@
-package StorjLib.Interfaces;
+package storjlib.Interfaces;
 
 import com.facebook.react.bridge.WritableMap;
 

@@ -1,4 +1,4 @@
-package StorjLib.dataProvider.contracts;
+package storjlib.dataProvider.contracts;
 
 /**
  * Created by Crawter on 02.03.2018.

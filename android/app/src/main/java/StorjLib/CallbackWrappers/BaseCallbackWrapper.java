@@ -1,8 +1,8 @@
-package StorjLib.CallbackWrappers;
+package storjlib.CallbackWrappers;
 
 import com.facebook.react.bridge.Promise;
 
-import StorjLib.GsonSingle;
+import storjlib.GsonSingle;
 
 /**
  * Created by Crawter on 01.03.2018.

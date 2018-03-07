@@ -1,4 +1,4 @@
-package StorjLib;
+package storjlib;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import StorjLib.Services.ServiceModule;
+import storjlib.services.ServiceModule;
 
 /**
  * Created by Yaroslav-Note on 1/4/2018.

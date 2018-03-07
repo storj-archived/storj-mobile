@@ -1,4 +1,4 @@
-package StorjLib.Responses;
+package storjlib.Responses;
 
 import com.facebook.react.bridge.WritableMap;
 import com.google.gson.annotations.Expose;

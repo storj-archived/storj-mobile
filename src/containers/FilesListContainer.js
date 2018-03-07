@@ -33,8 +33,6 @@ class FilesListContainer extends Component {
             }
         ).start();        
 
-        this.onGetData();
-
         this.serviceListener = DeviceEventEmitter.addListener("EVENT_FILES_UPDATED", this.onGetData.bind(this));       
         
         ServiceModule.getFiles(this.bucketId);    
@@ -49,6 +47,8 @@ class FilesListContainer extends Component {
     }
 
     async onGetData() {
+        this.props.setLoading();
+
         let filesResponse = await ServiceModule.listFiles(this.bucketId);
 
         if(filesResponse.isSuccess) {
@@ -58,6 +58,8 @@ class FilesListContainer extends Component {
 
             this.props.listFiles(this.bucketId, files);
         }
+
+        this.props.unsetLoading();
     }
 
     async cancelDownload(file) {
@@ -152,7 +154,7 @@ function mapStateToProps(state) {
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         fileListModels: state.filesReducer.fileListModels,
-        uploadingFileListModels: state.filesReducer.uploadingFileListModels, //uploadingFileListModels
+        uploadingFileListModels: state.filesReducer.uploadingFileListModels,
         isLoading: state.mainReducer.isLoading,
         isGridViewShown: state.mainReducer.isGridViewShown,
         downloadedFileListModels: state.filesReducer.downloadedFileListModels

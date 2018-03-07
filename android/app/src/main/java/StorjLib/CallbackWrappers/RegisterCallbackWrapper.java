@@ -1,14 +1,10 @@
-package StorjLib.CallbackWrappers;
+package storjlib.CallbackWrappers;
 
-import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
-import com.facebook.react.bridge.WritableMap;
 
-import StorjLib.Responses.Response;
-import StorjLib.Responses.SingleResponse;
-import StorjLib.StorjLibModule;
+import storjlib.Responses.Response;
+import storjlib.Responses.SingleResponse;
 import io.storj.libstorj.RegisterCallback;
-import io.storj.libstorj.android.StorjAndroid;
 
 /**
  * Created by Crawter on 22.02.2018.

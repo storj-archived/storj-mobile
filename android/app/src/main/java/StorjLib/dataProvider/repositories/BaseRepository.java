@@ -1,13 +1,11 @@
-package StorjLib.dataProvider.repositories;
+package storjlib.dataProvider.repositories;
 
 import android.content.ContentValues;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import StorjLib.Models.IStorjModel;
-import StorjLib.Responses.Response;
-import StorjLib.dataProvider.contracts.BaseContract;
-import StorjLib.dataProvider.repositories.Interfaces.IInsertCallback;
+import storjlib.Responses.Response;
+import storjlib.dataProvider.contracts.BaseContract;
 
 /**
  * Created by crawt on 3/3/2018.

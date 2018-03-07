@@ -1,7 +1,7 @@
-package StorjLib.dataProvider.Dbo;
+package storjlib.dataProvider.Dbo;
 
-import StorjLib.Models.BucketModel;
-import StorjLib.dataProvider.contracts.BucketContract;
+import storjlib.Models.BucketModel;
+import storjlib.dataProvider.contracts.BucketContract;
 
 /**
  * Created by Crawter on 05.03.2018.

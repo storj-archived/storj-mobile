@@ -1,9 +1,9 @@
-package StorjLib.StorjTypesWrappers;
+package storjlib.StorjTypesWrappers;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 
-import StorjLib.Interfaces.IConvertibleToJs;
+import storjlib.Interfaces.IConvertibleToJs;
 
 /**
  * Created by Yaroslav-Note on 1/24/2018.

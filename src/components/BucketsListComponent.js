@@ -16,6 +16,7 @@ export default class BucketsListComponent extends Component {
         return(
             <View style = { styles.mainContainer }>
                 <ListComponent
+                    onRefresh = { this.props.refresh }
                     isGridViewShown = { this.props.isGridViewShown }
                     onPress = { this.props.onPress }
                     itemType = { TYPES.REGULAR_BUCKET }

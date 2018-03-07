@@ -1,13 +1,10 @@
-package StorjLib.CallbackWrappers;
+package storjlib.CallbackWrappers;
 
 import com.facebook.react.bridge.Promise;
 
-import StorjLib.GsonSingle;
-import StorjLib.Models.FileModel;
-import StorjLib.Responses.Response;
-import StorjLib.Responses.SingleResponse;
-import StorjLib.StorjTypesWrappers.BucketWrapper;
-import io.storj.libstorj.Bucket;
+import storjlib.Models.FileModel;
+import storjlib.Responses.Response;
+import storjlib.Responses.SingleResponse;
 import io.storj.libstorj.File;
 import io.storj.libstorj.ListFilesCallback;
 

@@ -1,4 +1,4 @@
-package StorjLib.dataProvider.repositories;
+package storjlib.dataProvider.repositories;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -9,10 +9,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import StorjLib.Models.BucketModel;
-import StorjLib.Responses.Response;
-import StorjLib.dataProvider.Dbo.BucketDbo;
-import StorjLib.dataProvider.contracts.BucketContract;
+import storjlib.Models.BucketModel;
+import storjlib.Responses.Response;
+import storjlib.dataProvider.Dbo.BucketDbo;
+import storjlib.dataProvider.contracts.BucketContract;
 
 /**
  * Created by Crawter on 02.03.2018.

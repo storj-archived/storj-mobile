@@ -1,7 +1,6 @@
-package StorjLib.Services;
+package storjlib.services;
 
 import android.app.IntentService;
-import android.app.usage.NetworkStats;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Binder;
@@ -9,30 +8,26 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import StorjLib.GsonSingle;
-import StorjLib.Models.BucketModel;
-import StorjLib.Models.FileModel;
-import StorjLib.Responses.Response;
-import StorjLib.dataProvider.DatabaseFactory;
-import StorjLib.dataProvider.Dbo.BucketDbo;
-import StorjLib.dataProvider.Dbo.FileDbo;
-import StorjLib.dataProvider.repositories.BucketRepository;
-import StorjLib.dataProvider.repositories.FileRepository;
+import storjlib.Models.BucketModel;
+import storjlib.Models.FileModel;
+import storjlib.Responses.Response;
+import storjlib.dataProvider.DatabaseFactory;
+import storjlib.dataProvider.Dbo.BucketDbo;
+import storjlib.dataProvider.Dbo.FileDbo;
+import storjlib.dataProvider.repositories.BucketRepository;
+import storjlib.dataProvider.repositories.FileRepository;
 import io.storj.libstorj.Bucket;
 import io.storj.libstorj.File;
 import io.storj.libstorj.GetBucketsCallback;
 import io.storj.libstorj.ListFilesCallback;
 import io.storj.libstorj.android.StorjAndroid;
 
-import static StorjLib.Services.ServiceModule.GET_BUCKETS;
-import static StorjLib.Services.ServiceModule.GET_FILES;
+import static storjlib.services.ServiceModule.GET_BUCKETS;
+import static storjlib.services.ServiceModule.GET_FILES;
 
 /**
  * Created by Yaroslav-Note on 3/6/2018.
@@ -143,7 +138,7 @@ public class GetBucketsService extends IntentService {
         });
     }
 
-    private void getFiles(String bucketId) {
+    private void getFiles(final String bucketId) {
         StorjAndroid.getInstance(this).listFiles(bucketId, new ListFilesCallback() {
             @Override
             public void onFilesReceived(File[] files) {
@@ -158,7 +153,7 @@ public class GetBucketsService extends IntentService {
                 db.beginTransaction();
 
                 try {
-                    List<FileDbo> fileDbos = fileRepository.getAll();
+                    List<FileDbo> fileDbos = fileRepository.get(bucketId);
 
                     int length = files.length;
                     boolean[] isUpdate = new boolean[files.length];

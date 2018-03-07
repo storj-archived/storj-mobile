@@ -1,19 +1,18 @@
-package StorjLib.dataProvider.repositories;
+package storjlib.dataProvider.repositories;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import StorjLib.Models.FileModel;
-import StorjLib.Responses.Response;
-import StorjLib.dataProvider.Dbo.FileDbo;
-import StorjLib.dataProvider.contracts.FileContract;
+import storjlib.Models.FileModel;
+import storjlib.Responses.Response;
+import storjlib.dataProvider.Dbo.FileDbo;
+import storjlib.dataProvider.contracts.FileContract;
 
 /**
  * Created by crawt on 3/4/2018.
@@ -67,8 +66,8 @@ public class FileRepository extends BaseRepository {
         return result;
     }
 
-    public FileDbo get(String bucketId) {
-        FileDbo model = null;
+    public List<FileDbo> get(String bucketId) {
+        List<FileDbo> result = new ArrayList();
         String[] selectionArgs = {
                 bucketId
         };
@@ -77,15 +76,15 @@ public class FileRepository extends BaseRepository {
         Cursor cursor = _db.query(
                 FileContract.TABLE_NAME,
                 _columns,
-                FileContract._DEFAULT_WHERE_CLAUSE,
+                FileContract.FILE_FK + " = ?",
                 selectionArgs,
                 null, null, orderBy, null);
 
-        model = _getSingleFromCursor(cursor);
+        result = _getListFromCursor(cursor);
 
         cursor.close();
 
-        return model;
+        return result;
     }
 
     public Response insert(FileModel model) {
