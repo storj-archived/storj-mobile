@@ -18,14 +18,21 @@ import java.util.List;
 
 import StorjLib.GsonSingle;
 import StorjLib.Models.BucketModel;
+import StorjLib.Models.FileModel;
+import StorjLib.Responses.Response;
 import StorjLib.dataProvider.DatabaseFactory;
 import StorjLib.dataProvider.Dbo.BucketDbo;
+import StorjLib.dataProvider.Dbo.FileDbo;
 import StorjLib.dataProvider.repositories.BucketRepository;
+import StorjLib.dataProvider.repositories.FileRepository;
 import io.storj.libstorj.Bucket;
+import io.storj.libstorj.File;
 import io.storj.libstorj.GetBucketsCallback;
+import io.storj.libstorj.ListFilesCallback;
 import io.storj.libstorj.android.StorjAndroid;
 
 import static StorjLib.Services.ServiceModule.GET_BUCKETS;
+import static StorjLib.Services.ServiceModule.GET_FILES;
 
 /**
  * Created by Yaroslav-Note on 3/6/2018.
@@ -34,8 +41,10 @@ import static StorjLib.Services.ServiceModule.GET_BUCKETS;
 public class GetBucketsService extends IntentService {
 
     private final static String EVENT_BUCKETS_UPDATED = "EVENT_BUCKETS_UPDATED";
+    private final static String EVENT_FILES_UPDATED = "EVENT_FILES_UPDATED";
 
     private Bucket[] _buckets;
+    private File[] _files;
     private ReactContext mContext;
     private IBinder mBinder = new GetBucketsServiceBinder();
     /**
@@ -52,6 +61,9 @@ public class GetBucketsService extends IntentService {
         switch(action) {
             case GET_BUCKETS:
                 getBuckets();
+                break;
+            case GET_FILES:
+                getFiles(intent.getStringExtra("bucketId"));
                 break;
         }
     }
@@ -94,7 +106,7 @@ public class GetBucketsService extends IntentService {
                             if(dboId == id) {
                                 //isUpdate[i] = true;
                                 bucketRepository.update(new BucketModel(bucket));
-                                bucketArrayShift(buckets, i, length);
+                                arrayShift(buckets, i, length);
                                 length--;
                                 continue outer;
                             }
@@ -108,15 +120,6 @@ public class GetBucketsService extends IntentService {
                     for(int i = 0; i < length; i ++) {
                         bucketRepository.insert(new BucketModel(buckets[i]));
                     }
-
-
-                    /*for(int i = 0; i < length; i++) {
-                        if(isUpdate[i]) {
-                            bucketRepository.update(new BucketModel(buckets[i]));
-                        } else {
-                            bucketRepository.insert(new BucketModel(buckets[i]));
-                        }
-                    }*/
 
                     db.setTransactionSuccessful();
                 } catch (Exception e) {
@@ -142,7 +145,77 @@ public class GetBucketsService extends IntentService {
         });
     }
 
-    private void bucketArrayShift(Bucket[] array, int pos, int length) {
+    private void getFiles(String bucketId) {
+        StorjAndroid.getInstance(this).listFiles(bucketId, new ListFilesCallback() {
+            @Override
+            public void onFilesReceived(File[] files) {
+                _files = files;
+
+                if(files == null) {
+                    return;
+                }
+
+                SQLiteDatabase db = new DatabaseFactory(GetBucketsService.this, null).getWritableDatabase();
+                FileRepository fileRepository = new FileRepository(db);
+                db.beginTransaction();
+
+                try {
+                    List<FileDbo> fileDbos = fileRepository.getAll();
+
+                    int length = files.length;
+                    boolean[] isUpdate = new boolean[files.length];
+
+                    outer:
+                    for(FileDbo fileDbo : fileDbos) {
+                        int i = 0;
+                        String dboId = fileDbo.getId();
+
+                        do {
+                            File file = files[i];
+                            String id = file.getId();
+
+                            if(dboId == id) {
+                                fileRepository.update(new FileModel(file));
+                                arrayShift(files, i, length);
+                                length--;
+                                continue outer;
+                            }
+
+                            i++;
+                        } while(i < length);
+
+                        fileRepository.delete(dboId);
+                    }
+
+                    for(int i = 0; i < length; i ++) {
+                        Response resp =  fileRepository.insert(new FileModel(files[i]));
+                    }
+
+                    db.setTransactionSuccessful();
+                } catch (Exception e) {
+                    String s = e.getMessage();
+                } finally {
+                    db.endTransaction();
+                    db.close();
+                }
+
+                if(mContext != null) {
+                    mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_FILES_UPDATED, true);
+                }
+            }
+
+            @Override
+            public void onError(int code, String message) {
+                _files = null;
+
+                if(mContext != null) {
+                    mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_FILES_UPDATED, false);
+                }
+            }
+        });
+    }
+
+    private <T> void arrayShift(T[] array, int pos, int length) {
         do {
             array[pos] = array[pos + 1];
             pos++;

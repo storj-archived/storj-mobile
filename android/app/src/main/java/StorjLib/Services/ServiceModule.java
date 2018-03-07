@@ -19,10 +19,13 @@ import java.util.List;
 
 import StorjLib.GsonSingle;
 import StorjLib.Models.BucketModel;
+import StorjLib.Models.FileModel;
 import StorjLib.Responses.SingleResponse;
 import StorjLib.dataProvider.DatabaseFactory;
 import StorjLib.dataProvider.Dbo.BucketDbo;
+import StorjLib.dataProvider.Dbo.FileDbo;
 import StorjLib.dataProvider.repositories.BucketRepository;
+import StorjLib.dataProvider.repositories.FileRepository;
 
 /**
  * Created by Yaroslav-Note on 3/6/2018.
@@ -95,7 +98,7 @@ public class ServiceModule extends ReactContextBaseJavaModule {
                     BucketModel[] bucketModels = new BucketModel[length];
 
                     for(int i = 0; i < length; i++) {
-                        bucketModels[i] = bucketDbos.get(i).toBucketModel();
+                        bucketModels[i] = bucketDbos.get(i).toModel();
                     }
 
                     promise.resolve(new SingleResponse(true, toJson(bucketModels), null).toWritableMap());
@@ -106,7 +109,43 @@ public class ServiceModule extends ReactContextBaseJavaModule {
         }).run();
     }
 
-    private String toJson(BucketModel[] convertible) {
+    @ReactMethod
+    public void getFiles(String bucketId) {
+        Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
+        serviceIntent.setAction(GET_FILES);
+        serviceIntent.putExtra("bucketId", bucketId);
+
+        getReactApplicationContext().startService(serviceIntent);
+    }
+
+    @ReactMethod
+    public void listFiles(String bucketId, final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase();
+
+                    FileRepository fileRepository = new FileRepository(db);
+
+                    ArrayList<FileDbo> fileDbos = (ArrayList)fileRepository.getAll();
+
+                    int length = fileDbos.size();
+                    FileModel[] fileModels = new FileModel[length];
+
+                    for(int i = 0; i < length; i++) {
+                        fileModels[i] = fileDbos.get(i).toModel();
+                    }
+
+                    promise.resolve(new SingleResponse(true, toJson(fileModels), null).toWritableMap());
+                } catch (Exception e) {
+                    promise.resolve(new SingleResponse(false, null, e.getMessage()).toWritableMap());
+                }
+            }
+        }).run();
+    }
+
+    private <T> String toJson(T[] convertible) {
         return GsonSingle.getInstanse().toJson(convertible);
     }
 }

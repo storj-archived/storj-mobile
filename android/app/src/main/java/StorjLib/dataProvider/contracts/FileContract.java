@@ -19,15 +19,15 @@ public final class FileContract extends BaseContract {
 
     public final static String FILE_FK = "bucketId";
 
-    public static String createTalbe() {
+    public static String createTable() {
         return String.format(
                 "create table if not exists %s (" +
                 "%s TEXT primary key not null, " +
                 "%s TEXT not null, " +
-                "%s TEXT not null, " +
-                "%s TEXT not null, " +
-                "%s TEXT not null, " +
-                "%s TEXT not null, " +
+                "%s TEXT, " +
+                "%s TEXT, " +
+                "%s TEXT, " +
+                "%s TEXT, " +
                 "%s TEXT not null, " +
                 "%s INTEGER, " +
                 "%s INTEGER, " +

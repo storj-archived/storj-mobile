@@ -1,5 +1,6 @@
 package StorjLib.dataProvider.Dbo;
 
+import StorjLib.Models.FileModel;
 import StorjLib.dataProvider.contracts.FileContract;
 
 /**
@@ -65,5 +66,9 @@ public class FileDbo {
 
     public void setProp(String propName, long value) {
         _size = value;
+    }
+
+    public FileModel toModel() {
+        return new FileModel(_bucketId, _fileId, _created, _erasure, _hmac, _index, _isDecrypted, _isStarred, _mimeType, _name, _size);
     }
 }

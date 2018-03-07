@@ -13,7 +13,7 @@ public final class BucketContract extends BaseContract {
     public final static String _HASH = "hashCode";
     public final static String _STARRED = "isStarred";
 
-    public static String createTalbe() {
+    public static String createTable() {
         return String.format("create table if not exists %s (" +
                 "%s TEXT primary key not null, " +
                 "%s TEXT not null, " +
