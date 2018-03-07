@@ -86,7 +86,6 @@ public class FileModel {
         return  _fileId != null && !_fileId.isEmpty() &&
                 _bucketId != null && !_bucketId.isEmpty() &&
                 _name != null && !_name.isEmpty() &&
-                _mimeType != null && !_mimeType.isEmpty() &&
                 _created != null && !_created.isEmpty() &&
                 _size > 0;
     }

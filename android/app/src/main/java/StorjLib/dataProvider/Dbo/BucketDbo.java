@@ -48,7 +48,7 @@ public class BucketDbo {
         _hash = value;
     }
 
-    public BucketModel toBucketModel() {
+    public BucketModel toModel() {
         return new BucketModel(_id, _name, _created, _hash, _isDecrypted, _isStarred);
     }
 }

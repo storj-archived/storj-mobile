@@ -22,12 +22,12 @@ const ServiceModule = (() => {
             return await serviceModule.listBuckets();
         }
 
-        getFiles() {
-            serviceModule.getBuckets();
+        getFiles(bucketId) {
+            serviceModule.getFiles(bucketId);
         }
 
-        async listFiles() {
-            return await serviceModule.listBuckets();
+        async listFiles(bucketId) {
+            return await serviceModule.listFiles(bucketId);
         }
     }  
 

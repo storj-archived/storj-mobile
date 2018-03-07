@@ -16,11 +16,19 @@ class DashboardContainer extends Component {
 
     async componentWillMount() {
         await ServiceModule.bindService();
-        console.log("return");
+        console.log("componentWillMount");
 
-        DeviceEventEmitter.addListener("EVENT_BUCKETS_UPDATED", async (result) => {
-            console.log("FromEvent", result);
+        DeviceEventEmitter.addListener("EVENT_BUCKETS_UPDATED", async (result) => {   
+            console.log("FromEvent", result);         
             let result2 = await ServiceModule.listBuckets();
+
+            console.log(result2);
+            console.log(JSON.parse(result2.result));
+        });
+
+        DeviceEventEmitter.addListener("EVENT_FILES_UPDATED", async (result) => {
+            console.log("FromEvent", result);
+            let result2 = await ServiceModule.listFiles("ea2c97f6d85f0b14c6f58de4");
 
             console.log(result2);
             console.log(JSON.parse(result2.result));
@@ -28,7 +36,10 @@ class DashboardContainer extends Component {
     }
 
     componentDidMount() {
+        console.log("asdasda");
         ServiceModule.getBuckets();
+        ServiceModule.getFiles("ea2c97f6d85f0b14c6f58de4");
+        
     }
 
     render() {

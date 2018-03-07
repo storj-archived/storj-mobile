@@ -88,7 +88,6 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
 
     public StorjLibModule(ReactApplicationContext reactContext) {
         super(reactContext);
-        initDb();
     }
 
     @Override
@@ -102,14 +101,6 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
 
     private String toJson(Object convertible) {
         return GsonSingle.getInstanse().toJson(convertible);
-    }
-
-    @ReactMethod
-    public void initDb() {
-        DatabaseFactory factory = new DatabaseFactory(getReactApplicationContext(), null);
-        SQLiteDatabase db = factory.getWritableDatabase();
-
-        db.close(); 
     }
 
     @ReactMethod

@@ -14,25 +14,31 @@ import StorjLib.dataProvider.contracts.FileContract;
 
 public class DatabaseFactory extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "storj.db";
 
     public DatabaseFactory(Context context, SQLiteDatabase.CursorFactory factory) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
 
-//    public DatabaseFactory(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
-//        super(context, name, factory, version, errorHandler);
-//    }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(BucketContract.createTalbe());
-        db.execSQL(FileContract.createTalbe());
+        createTables(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        this.getWritableDatabase();
+        dropTables(db);
+        createTables(db);
+    }
+
+    private void createTables(SQLiteDatabase db) {
+        db.execSQL(BucketContract.createTable());
+        db.execSQL(FileContract.createTable());
+    }
+
+    private void dropTables(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS " + BucketContract.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + FileContract.TABLE_NAME);
     }
 }
