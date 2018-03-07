@@ -19,6 +19,10 @@ public class FileDbo {
     private boolean _isDecrypted;
     private boolean _isStarred;
 
+    public String getId() {
+        return _fileId;
+    }
+
     public void setProp(String propName, String value) {
         switch(propName) {
             case FileContract._ID:

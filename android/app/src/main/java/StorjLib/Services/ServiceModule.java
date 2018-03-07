@@ -31,6 +31,7 @@ import StorjLib.dataProvider.repositories.BucketRepository;
 public class ServiceModule extends ReactContextBaseJavaModule {
 
     public final static String GET_BUCKETS = "GET_BUCKETS";
+    public final static String GET_FILES = "GET_FILES";
 
     private GetBucketsService mGetBucketsService;
     private Promise mPromise;
