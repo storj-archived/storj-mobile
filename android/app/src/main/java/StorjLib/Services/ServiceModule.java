@@ -67,7 +67,7 @@ public class ServiceModule extends ReactContextBaseJavaModule {
     public ServiceModule(ReactApplicationContext reactContext)
     {
         super(reactContext);
-        _db = new DatabaseFactory(reactContext, null).getWritableDatabase();
+        _db = new DatabaseFactory(getReactApplicationContext(), null).getWritableDatabase();
         _fRepository = new FileRepository(_db);
         _bRepository = new BucketRepository(_db);
     }

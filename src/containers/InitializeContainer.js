@@ -53,7 +53,7 @@ class InitializeContainer extends Component {
     }
 
     async componentDidMount() {
-        await ServiceModule.bindService();
+        
     }
 
     onChangePassode(value) {

@@ -6,6 +6,7 @@ import {
   DeviceEventEmitter
 } from 'react-native';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { addNavigationHelpers } from 'react-navigation';
 import StackNavigator from '../navigators/StackNavigator';
 import { NavigationActions } from 'react-navigation';
@@ -26,7 +27,9 @@ class Apps extends Component {
 		this.bucketCreatedListener = null;
     }
 
-	componentWillMount() {
+	async componentWillMount() {
+		await ServiceModule.bindService();
+
 		console.log("APP WILL MOUNT");
 
 		this.bucketCreatedListener = DeviceEventEmitter.addListener(eventNames.BUCKET_CREATED, this.onBucketCreated.bind(this));       
