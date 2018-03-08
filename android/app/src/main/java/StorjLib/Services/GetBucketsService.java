@@ -55,18 +55,38 @@ public class GetBucketsService extends IntentService {
     private ReactContext mContext;
     private IBinder mBinder = new GetBucketsServiceBinder();
 
-    private final SQLiteDatabase _db;
-    private final BucketRepository _bRepository;
-    private final FileRepository _fRepository;
+    private SQLiteDatabase _db;
+    private BucketRepository _bRepository;
+    private FileRepository _fRepository;
+
+    public SQLiteDatabase getDb() {
+        if(_db == null) {
+            _db = new DatabaseFactory(GetBucketsService.this, null).getWritableDatabase();
+        }
+
+        return _db;
+    }
+
+    public BucketRepository bRepository() {
+        if(_bRepository == null) {
+            _bRepository = new BucketRepository(getDb());
+        }
+
+        return _bRepository;
+    }
+
+    public FileRepository fRepository() {
+        if(_fRepository == null) {
+            _fRepository = new FileRepository(getDb());
+        }
+
+        return _fRepository;
+    }
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
      */
     public GetBucketsService() {
-
         super("GetBucketsService");
-        _db = new DatabaseFactory(GetBucketsService.this, null).getWritableDatabase();
-        _fRepository = new FileRepository(_db);
-        _bRepository = new BucketRepository(_db);
     }
 
     @Override
@@ -110,7 +130,7 @@ public class GetBucketsService extends IntentService {
                 _db.beginTransaction();
 
                 try {
-                    List<BucketDbo> bucketDbos = _bRepository.getAll();
+                    List<BucketDbo> bucketDbos = bRepository().getAll();
 
                     int length = buckets.length;
 
@@ -124,7 +144,7 @@ public class GetBucketsService extends IntentService {
                             String id = bucket.getId();
 
                             if(dboId == id) {
-                                _bRepository.update(new BucketModel(bucket));
+                                bRepository().update(new BucketModel(bucket));
                                 arrayShift(buckets, i, length);
                                 length--;
                                 continue outer;
@@ -133,11 +153,11 @@ public class GetBucketsService extends IntentService {
                             i++;
                         } while(i < length);
 
-                        _bRepository.delete(dboId);
+                        bRepository().delete(dboId);
                     }
 
                     for(int i = 0; i < length; i ++) {
-                        Response resp =_bRepository.insert(new BucketModel(buckets[i]));
+                        Response resp = bRepository().insert(new BucketModel(buckets[i]));
                         if(!resp.isSuccess()) {
                             throw new Exception("Bucket insertion failed");
                         }
@@ -180,7 +200,7 @@ public class GetBucketsService extends IntentService {
                 _db.beginTransaction();
 
                 try {
-                    List<FileDbo> fileDbos = _fRepository.get(bucketId);
+                    List<FileDbo> fileDbos = fRepository().get(bucketId);
 
                     int length = files.length;
                     boolean[] isUpdate = new boolean[files.length];
@@ -195,7 +215,7 @@ public class GetBucketsService extends IntentService {
                             String id = file.getId();
 
                             if(dboId == id) {
-                                _fRepository.update(new FileModel(file));
+                                fRepository().update(new FileModel(file));
                                 arrayShift(files, i, length);
                                 length--;
                                 continue outer;
@@ -204,11 +224,11 @@ public class GetBucketsService extends IntentService {
                             i++;
                         } while(i < length);
 
-                        _fRepository.delete(dboId);
+                        fRepository().delete(dboId);
                     }
 
                     for(int i = 0; i < length; i ++) {
-                        _fRepository.insert(new FileModel(files[i]));
+                        fRepository().insert(new FileModel(files[i]));
                     }
 
                     _db.setTransactionSuccessful();
@@ -239,7 +259,7 @@ public class GetBucketsService extends IntentService {
         getInstance().createBucket(bucketName, new CreateBucketCallback() {
             @Override
             public void onBucketCreated(Bucket bucket) {
-                Response insertionResponse = _bRepository.insert(new BucketModel(bucket));
+                Response insertionResponse = bRepository().insert(new BucketModel(bucket));
 
                 if(insertionResponse.isSuccess()){
                     mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKET_CREATED,
@@ -263,7 +283,7 @@ public class GetBucketsService extends IntentService {
         getInstance().deleteBucket(bucketId, new DeleteBucketCallback() {
             @Override
             public void onBucketDeleted() {
-                Response deletionResponse = _bRepository.delete(bucketId);
+                Response deletionResponse = bRepository().delete(bucketId);
 
                 if(deletionResponse.isSuccess()){
                     mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKET_DELETED,
@@ -287,7 +307,7 @@ public class GetBucketsService extends IntentService {
         getInstance().deleteFile(bucketId, fileId, new DeleteFileCallback() {
             @Override
             public void onFileDeleted() {
-                Response deletionResponse = _bRepository.delete(bucketId);
+                Response deletionResponse = bRepository().delete(bucketId);
 
                 if(deletionResponse.isSuccess()){
                     mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_FILE_DELETED,
