@@ -66,6 +66,20 @@ public class FileRepository extends BaseRepository {
         return result;
     }
 
+    public List<FileDbo> getStarred() {
+        List<FileDbo> result = new ArrayList();
+
+        String selection = FileContract._STARRED + " = 1 ";
+
+        Cursor cursor = _db.query(FileContract.TABLE_NAME, null, selection, null, null, null, null, null);
+
+        result = _getListFromCursor(cursor);
+
+        cursor.close();
+
+        return result;
+    }
+
     public List<FileDbo> get(String bucketId) {
         List<FileDbo> result = new ArrayList();
         String[] selectionArgs = {
@@ -141,7 +155,6 @@ public class FileRepository extends BaseRepository {
         map.put(FileContract._HMAC, model.getHmac());
         map.put(FileContract._INDEX, model.getIndex());
         map.put(FileContract._MIMETYPE, model.getMimeType());
-        map.put(FileContract._STARRED, model.getStarred());
         map.put(FileContract._SIZE, model.getSize());
         map.put(FileContract._NAME, model.getName());
 

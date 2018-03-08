@@ -90,8 +90,6 @@ class MainContainer extends Component {
         this.props.setLoading();
         let bucketsResponse = await ServiceModule.listBuckets();
 
-        console.log("ON GET DATA BUCKET CALLBACK");
-
         if(bucketsResponse.isSuccess) {
             let buckets = JSON.parse(bucketsResponse.result).map((file) => {
                 return new ListItemModel(new BucketModel(file));

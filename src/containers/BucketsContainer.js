@@ -5,6 +5,7 @@ import { bucketsContainerActions } from '../reducers/mainContainer/mainReducerAc
 import BucketsComponent from '../components/BucketsComponent';
 import FirstSignInComponent from '../components/FirstSignInComponent';
 import StorjLib from '../utils/StorjModule';
+import ServiceModule from '../utils/ServiceModule';
 import ListItemModel from '../models/ListItemModel';
 import { getFirstSignIn } from '../utils/AsyncStorageModule';
 import { bucketNavigateBack } from '../reducers/navigation/navigationActions';
@@ -51,21 +52,25 @@ class BucketsContainer extends Component {
         }
     }
 
-    async createBucket(name) {
-        this.props.setLoading();
+    // async createBucket(name) {
+    //     this.props.setLoading();
 
-        try {
-            let createBucketResult = await StorjLib.createBucket(name);
+    //     try {
+    //         let createBucketResult = await StorjLib.createBucket(name);     
 
-            if(createBucketResult.isSuccess) {
-                this.props.createBucket(new ListItemModel(createBucketResult.result));
-                this.props.removeFirstSignIn();
-            } 
-        } catch (e) {
-            console.log(e);
-        }
+    //         if(createBucketResult.isSuccess) {
+    //             this.props.createBucket(new ListItemModel(createBucketResult.result));
+    //             this.props.removeFirstSignIn();
+    //         } 
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
 
-        this.props.unsetLoading();
+    //     this.props.unsetLoading();
+    // }
+
+    async createBucket(name) {        
+        let createBucketResult = ServiceModule.createBucket(name);        
     }
 
     navigateBack() {

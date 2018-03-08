@@ -45,6 +45,20 @@ public class BucketRepository extends BaseRepository {
         return result;
     }
 
+    public List<BucketDbo> getStarred() {
+        List<BucketDbo> result = new ArrayList();
+
+        String selection = BucketContract._STARRED + " = 1 ";
+
+        Cursor cursor = _db.query(BucketContract.TABLE_NAME, null, selection, null, null, null, null, null);
+
+        result = _getListFromCursor(cursor);
+
+        cursor.close();
+
+        return result;
+    }
+
     public List<BucketDbo> getAll(String orderByColumn, boolean isDesc) {
         List<BucketDbo> result = new ArrayList();
         String column = orderByColumn;
@@ -132,7 +146,6 @@ public class BucketRepository extends BaseRepository {
         map.put(BucketContract._NAME, model.getName());
         map.put(BucketContract._HASH, model.getHashCode());
         map.put(BucketContract._DECRYPTED, model.isDecrypted());
-        //map.put(BucketContract._STARRED, model.isStarred());
 
         return _executeUpdate(BucketContract.TABLE_NAME, model.getId(), null,null, map);
     }
