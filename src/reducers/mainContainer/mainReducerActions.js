@@ -42,8 +42,8 @@ function createBucket(bucket) {
     return { type: CREATE_BUCKET, payload: { bucket } };
 }
 
-function deleteBucket(bucket) {
-    return { type: DELETE_BUCKET, payload: { bucket } };
+function deleteBucket(bucketId) {
+    return { type: DELETE_BUCKET, payload: { bucketId } };
 }
 
 function getBuckets(buckets) {

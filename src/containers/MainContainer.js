@@ -199,11 +199,7 @@ class MainContainer extends Component {
     }
 
     async deleteFile(bucketId, fileId) {
-        let response = await  StorjLib.deleteFile(bucketId, fileId);
-        
-        if(response.isSuccess) {
-            this.props.deleteFile(bucketId, fileId);
-        }
+        ServiceModule.deleteFile(bucketId, fileId);
     }
 
     deleteSelectedFiles() {
@@ -215,20 +211,12 @@ class MainContainer extends Component {
         });
     }
 
-    async createBucket(bucketName) {
-        let createBucketResponse = await StorjLib.createBucket(bucketName);
-    
-        if(createBucketResponse.isSuccess) {
-            this.props.createBucket(new ListItemModel(createBucketResponse.result)) ;
-        }
+    async createBucket(name) {   
+        ServiceModule.createBucket(name);        
     }
 
     async deleteBucket(bucket) {
-        let result = await StorjLib.deleteBucket(bucket.getId());
-
-        if(result.isSuccess) {
-            this.props.deleteBucket(bucket);
-        }
+        ServiceModule.deleteBucket(bucket.getId());
     }
 
     getSelectedBuckets() {
