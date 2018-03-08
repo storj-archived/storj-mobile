@@ -18,6 +18,7 @@ import java.util.List;
 import storjlib.GsonSingle;
 import storjlib.Models.BucketModel;
 import storjlib.Models.FileModel;
+import storjlib.Responses.Response;
 import storjlib.Responses.SingleResponse;
 import storjlib.dataProvider.DatabaseFactory;
 import storjlib.dataProvider.Dbo.BucketDbo;
@@ -33,6 +34,13 @@ public class ServiceModule extends ReactContextBaseJavaModule {
 
     public final static String GET_BUCKETS = "GET_BUCKETS";
     public final static String GET_FILES = "GET_FILES";
+    public final static String BUCKET_CREATED = "BUCKET_CREATED";
+    public final static String BUCKET_DELETED = "BUCKET_DELETED";
+    public final static String FILE_DELETED = "FILE_DELETED";
+
+    private final SQLiteDatabase _db;
+    private final BucketRepository _bRepository;
+    private final FileRepository _fRepository;
 
     private GetBucketsService mGetBucketsService;
     private Promise mPromise;
@@ -56,8 +64,12 @@ public class ServiceModule extends ReactContextBaseJavaModule {
         }
     };
 
-    public ServiceModule(ReactApplicationContext reactContext) {
+    public ServiceModule(ReactApplicationContext reactContext)
+    {
         super(reactContext);
+        _db = new DatabaseFactory(reactContext, null).getWritableDatabase();
+        _fRepository = new FileRepository(_db);
+        _bRepository = new BucketRepository(_db);
     }
 
     @Override
@@ -143,7 +155,121 @@ public class ServiceModule extends ReactContextBaseJavaModule {
         }).run();
     }
 
+    @ReactMethod
+    public void createBucket(final String bucketName) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+            try {
+                Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
+                serviceIntent.setAction(BUCKET_CREATED);
+
+                getReactApplicationContext().startService(serviceIntent);
+            } catch (Exception e) {
+            }
+            }
+        }).run();
+    }
+
+    @ReactMethod
+    public void deleteBucket(final String bucketId) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
+                    serviceIntent.setAction(BUCKET_DELETED);
+
+                    getReactApplicationContext().startService(serviceIntent);
+                } catch (Exception e) {
+                }
+            }
+        }).run();
+    }
+
+    @ReactMethod
+    public void deleteFile(final String bucketId, final String fileId) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
+                    serviceIntent.setAction(FILE_DELETED);
+
+                    getReactApplicationContext().startService(serviceIntent);
+                } catch (Exception e) {
+                }
+            }
+        }).run();
+    }
+
+    @ReactMethod
+    public void updateBucketStarred(final String bucketId, final boolean isStarred, final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Response updateResponse = _bRepository.update(bucketId, isStarred);
+
+                    promise.resolve(new Response(true, null).toWritableMap());
+                } catch (Exception e) {
+                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
+                }
+            }
+        }).run();
+    }
+
+    @ReactMethod
+    public void updateFileStarred(final String fileId, final boolean isStarred, final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Response updateResponse = _fRepository.update(fileId, isStarred);
+
+                    promise.resolve(_fRepository.update(fileId, isStarred).toWritableMap());
+                } catch (Exception e) {
+                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
+                }
+            }
+        }).run();
+    }
+
+    @ReactMethod
+    public void getStarredFiles(final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    SingleResponse response = new SingleResponse(true, toJson(_fRepository.getStarred()), null);
+                    promise.resolve(response.toWritableMap());
+                } catch (Exception e) {
+                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
+                }
+            }
+        }).run();
+    }
+
+    @ReactMethod
+    public void getStarredBuckets(final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    SingleResponse response = new SingleResponse(true, toJson(_bRepository.getStarred()), null);
+                    promise.resolve(response.toWritableMap());
+                } catch (Exception e) {
+                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
+                }
+            }
+        }).run();
+    }
+
     private <T> String toJson(T[] convertible) {
+        return GsonSingle.getInstanse().toJson(convertible);
+    }
+
+    private <T> String toJson(List<T> convertible) {
         return GsonSingle.getInstanse().toJson(convertible);
     }
 }

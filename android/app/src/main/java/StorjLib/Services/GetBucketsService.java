@@ -12,9 +12,15 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import java.util.List;
 
+import io.storj.libstorj.CreateBucketCallback;
+import io.storj.libstorj.DeleteBucketCallback;
+import io.storj.libstorj.DeleteFileCallback;
+import io.storj.libstorj.Storj;
+import storjlib.GsonSingle;
 import storjlib.Models.BucketModel;
 import storjlib.Models.FileModel;
 import storjlib.Responses.Response;
+import storjlib.Responses.SingleResponse;
 import storjlib.dataProvider.DatabaseFactory;
 import storjlib.dataProvider.Dbo.BucketDbo;
 import storjlib.dataProvider.Dbo.FileDbo;
@@ -28,6 +34,9 @@ import io.storj.libstorj.android.StorjAndroid;
 
 import static storjlib.services.ServiceModule.GET_BUCKETS;
 import static storjlib.services.ServiceModule.GET_FILES;
+import static storjlib.services.ServiceModule.BUCKET_CREATED;
+import static storjlib.services.ServiceModule.BUCKET_DELETED;
+import static storjlib.services.ServiceModule.FILE_DELETED;
 
 /**
  * Created by Yaroslav-Note on 3/6/2018.
@@ -37,16 +46,27 @@ public class GetBucketsService extends IntentService {
 
     private final static String EVENT_BUCKETS_UPDATED = "EVENT_BUCKETS_UPDATED";
     private final static String EVENT_FILES_UPDATED = "EVENT_FILES_UPDATED";
+    private final static String EVENT_BUCKET_CREATED = "EVENT_BUCKET_CREATED";
+    private final static String EVENT_BUCKET_DELETED = "EVENT_BUCKET_DELETED";
+    private final static String EVENT_FILE_DELETED = "EVENT_FILE_DELETED";
 
     private Bucket[] _buckets;
     private File[] _files;
     private ReactContext mContext;
     private IBinder mBinder = new GetBucketsServiceBinder();
+
+    private final SQLiteDatabase _db;
+    private final BucketRepository _bRepository;
+    private final FileRepository _fRepository;
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
      */
     public GetBucketsService() {
+
         super("GetBucketsService");
+        _db = new DatabaseFactory(GetBucketsService.this, null).getWritableDatabase();
+        _fRepository = new FileRepository(_db);
+        _bRepository = new BucketRepository(_db);
     }
 
     @Override
@@ -60,6 +80,15 @@ public class GetBucketsService extends IntentService {
             case GET_FILES:
                 getFiles(intent.getStringExtra("bucketId"));
                 break;
+            case BUCKET_CREATED:
+                createBucket(intent.getStringExtra("bucketName"));
+                break;
+            case BUCKET_DELETED:
+                deleteBucket(intent.getStringExtra("bucketId"));
+                break;
+            case FILE_DELETED:
+                deleteFile(intent.getStringExtra("bucketId"), intent.getStringExtra("fileId"));
+                break;
         }
     }
 
@@ -69,7 +98,7 @@ public class GetBucketsService extends IntentService {
     }
 
     private void getBuckets() {
-        StorjAndroid.getInstance(this).getBuckets(new GetBucketsCallback() {
+        getInstance().getBuckets(new GetBucketsCallback() {
             @Override
             public void onBucketsReceived(Bucket[] buckets) {
                 _buckets = buckets;
@@ -78,13 +107,10 @@ public class GetBucketsService extends IntentService {
                     return;
                 }
 
-                SQLiteDatabase db = new DatabaseFactory(GetBucketsService.this, null).getWritableDatabase();
-                BucketRepository bucketRepository = new BucketRepository(db);
-
-                db.beginTransaction();
+                _db.beginTransaction();
 
                 try {
-                    List<BucketDbo> bucketDbos = bucketRepository.getAll();
+                    List<BucketDbo> bucketDbos = _bRepository.getAll();
 
                     int length = buckets.length;
 
@@ -98,7 +124,7 @@ public class GetBucketsService extends IntentService {
                             String id = bucket.getId();
 
                             if(dboId == id) {
-                                bucketRepository.update(new BucketModel(bucket));
+                                _bRepository.update(new BucketModel(bucket));
                                 arrayShift(buckets, i, length);
                                 length--;
                                 continue outer;
@@ -107,19 +133,22 @@ public class GetBucketsService extends IntentService {
                             i++;
                         } while(i < length);
 
-                        bucketRepository.delete(dboId);
+                        _bRepository.delete(dboId);
                     }
 
                     for(int i = 0; i < length; i ++) {
-                        bucketRepository.insert(new BucketModel(buckets[i]));
+                        Response resp =_bRepository.insert(new BucketModel(buckets[i]));
+                        if(!resp.isSuccess()) {
+                            throw new Exception("Bucket insertion failed");
+                        }
                     }
 
-                    db.setTransactionSuccessful();
+                    _db.setTransactionSuccessful();
                 } catch (Exception e) {
 
                 } finally {
-                    db.endTransaction();
-                    db.close();
+                    _db.endTransaction();
+                    _db.close();
                 }
 
                 if(mContext != null) {
@@ -139,7 +168,7 @@ public class GetBucketsService extends IntentService {
     }
 
     private void getFiles(final String bucketId) {
-        StorjAndroid.getInstance(this).listFiles(bucketId, new ListFilesCallback() {
+        getInstance().listFiles(bucketId, new ListFilesCallback() {
             @Override
             public void onFilesReceived(File[] files) {
                 _files = files;
@@ -148,12 +177,10 @@ public class GetBucketsService extends IntentService {
                     return;
                 }
 
-                SQLiteDatabase db = new DatabaseFactory(GetBucketsService.this, null).getWritableDatabase();
-                FileRepository fileRepository = new FileRepository(db);
-                db.beginTransaction();
+                _db.beginTransaction();
 
                 try {
-                    List<FileDbo> fileDbos = fileRepository.get(bucketId);
+                    List<FileDbo> fileDbos = _fRepository.get(bucketId);
 
                     int length = files.length;
                     boolean[] isUpdate = new boolean[files.length];
@@ -168,7 +195,7 @@ public class GetBucketsService extends IntentService {
                             String id = file.getId();
 
                             if(dboId == id) {
-                                fileRepository.update(new FileModel(file));
+                                _fRepository.update(new FileModel(file));
                                 arrayShift(files, i, length);
                                 length--;
                                 continue outer;
@@ -177,19 +204,19 @@ public class GetBucketsService extends IntentService {
                             i++;
                         } while(i < length);
 
-                        fileRepository.delete(dboId);
+                        _fRepository.delete(dboId);
                     }
 
                     for(int i = 0; i < length; i ++) {
-                        Response resp =  fileRepository.insert(new FileModel(files[i]));
+                        _fRepository.insert(new FileModel(files[i]));
                     }
 
-                    db.setTransactionSuccessful();
+                    _db.setTransactionSuccessful();
                 } catch (Exception e) {
                     String s = e.getMessage();
                 } finally {
-                    db.endTransaction();
-                    db.close();
+                    _db.endTransaction();
+                    _db.close();
                 }
 
                 if(mContext != null) {
@@ -208,12 +235,92 @@ public class GetBucketsService extends IntentService {
         });
     }
 
+    private void createBucket(final String bucketName) {
+        getInstance().createBucket(bucketName, new CreateBucketCallback() {
+            @Override
+            public void onBucketCreated(Bucket bucket) {
+                Response insertionResponse = _bRepository.insert(new BucketModel(bucket));
+
+                if(insertionResponse.isSuccess()){
+                    mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKET_CREATED,
+                            new SingleResponse(true, toJson(new BucketModel(bucket)),  null).toWritableMap());
+                    return;
+                }
+
+                mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKET_CREATED,
+                        new Response(false, "Bucket insertion to db failed").toWritableMap());
+            }
+
+            @Override
+            public void onError(int code, String message) {
+                mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKET_CREATED,
+                        new Response(false, message, code).toWritableMap());
+            }
+        });
+    }
+
+    private void deleteBucket(final String bucketId) {
+        getInstance().deleteBucket(bucketId, new DeleteBucketCallback() {
+            @Override
+            public void onBucketDeleted() {
+                Response deletionResponse = _bRepository.delete(bucketId);
+
+                if(deletionResponse.isSuccess()){
+                    mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKET_DELETED,
+                            new Response(true, null).toWritableMap());
+                    return;
+                }
+
+                mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKET_DELETED,
+                        new Response(false, "Bucket deletion failed in db").toWritableMap());
+            }
+
+            @Override
+            public void onError(int code, String message) {
+                mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKET_DELETED,
+                        new Response(false, message, code).toWritableMap());
+            }
+        });
+    }
+
+    private void deleteFile(final String bucketId, final String fileId) {
+        getInstance().deleteFile(bucketId, fileId, new DeleteFileCallback() {
+            @Override
+            public void onFileDeleted() {
+                Response deletionResponse = _bRepository.delete(bucketId);
+
+                if(deletionResponse.isSuccess()){
+                    mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_FILE_DELETED,
+                            new Response(true, null).toWritableMap());
+                    return;
+                }
+
+                mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_FILE_DELETED,
+                        new Response(false, "File deletion failed in db").toWritableMap());
+            }
+
+            @Override
+            public void onError(int code, String message) {
+                mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_FILE_DELETED,
+                        new Response(false, message, code).toWritableMap());
+            }
+        });
+    }
+
     private <T> void arrayShift(T[] array, int pos, int length) {
         do {
             array[pos] = array[pos + 1];
             pos++;
         }
         while(pos < length - 1);
+    }
+
+    private <T> String toJson(T convertible) {
+        return GsonSingle.getInstanse().toJson(convertible);
+    }
+
+    private Storj getInstance() {
+        return StorjAndroid.getInstance(this);
     }
 
     public class GetBucketsServiceBinder extends Binder {
