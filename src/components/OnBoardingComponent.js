@@ -80,12 +80,9 @@ export default class OnBoardingComponent extends Component {
      * Navigation to LoginScreen
      */
     redirectToSingInScreen() {
-        this.props.navigation.dispatch(NavigationActions.reset({
-            index: 0,
-            actions: [
-              NavigationActions.navigate({ routeName: 'LoginScreen'})
-            ]
-        }));
+        console.log("this.props.navigation", this.props);
+
+        this.props.screenProps.redirectToLoginScreen();
     }
 
     /**

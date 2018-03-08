@@ -18,6 +18,7 @@ import io.storj.libstorj.DeleteFileCallback;
 import io.storj.libstorj.Storj;
 import storjlib.GsonSingle;
 import storjlib.Models.BucketModel;
+import storjlib.Models.FileDeleteModel;
 import storjlib.Models.FileModel;
 import storjlib.Responses.Response;
 import storjlib.Responses.SingleResponse;
@@ -55,32 +56,24 @@ public class GetBucketsService extends IntentService {
     private ReactContext mContext;
     private IBinder mBinder = new GetBucketsServiceBinder();
 
-    private SQLiteDatabase _db;
+    private DatabaseFactory _dbFactory;
     private BucketRepository _bRepository;
     private FileRepository _fRepository;
 
     public SQLiteDatabase getDb() {
-        if(_db == null) {
-            _db = new DatabaseFactory(GetBucketsService.this, null).getWritableDatabase();
+        if(_dbFactory == null) {
+            _dbFactory = new DatabaseFactory(GetBucketsService.this, null);
         }
 
-        return _db;
+        return _dbFactory.getWritableDatabase();
     }
 
     public BucketRepository bRepository() {
-        if(_bRepository == null) {
-            _bRepository = new BucketRepository(getDb());
-        }
-
-        return _bRepository;
+        return new BucketRepository(getDb());// _bRepository;
     }
 
     public FileRepository fRepository() {
-        if(_fRepository == null) {
-            _fRepository = new FileRepository(getDb());
-        }
-
-        return _fRepository;
+        return new FileRepository(getDb());
     }
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
@@ -127,9 +120,9 @@ public class GetBucketsService extends IntentService {
                     return;
                 }
 
-                _db.beginTransaction();
-
                 try {
+                    getDb().beginTransaction();
+
                     List<BucketDbo> bucketDbos = bRepository().getAll();
 
                     int length = buckets.length;
@@ -163,12 +156,12 @@ public class GetBucketsService extends IntentService {
                         }
                     }
 
-                    _db.setTransactionSuccessful();
+                    getDb().setTransactionSuccessful();
                 } catch (Exception e) {
 
                 } finally {
-                    _db.endTransaction();
-                    _db.close();
+                    getDb().endTransaction();
+                    getDb().close();
                 }
 
                 if(mContext != null) {
@@ -197,7 +190,7 @@ public class GetBucketsService extends IntentService {
                     return;
                 }
 
-                _db.beginTransaction();
+                getDb().beginTransaction();
 
                 try {
                     List<FileDbo> fileDbos = fRepository().get(bucketId);
@@ -231,12 +224,12 @@ public class GetBucketsService extends IntentService {
                         fRepository().insert(new FileModel(files[i]));
                     }
 
-                    _db.setTransactionSuccessful();
+                    getDb().setTransactionSuccessful();
                 } catch (Exception e) {
                     String s = e.getMessage();
                 } finally {
-                    _db.endTransaction();
-                    _db.close();
+                    getDb().endTransaction();
+                    getDb().close();
                 }
 
                 if(mContext != null) {
@@ -261,6 +254,10 @@ public class GetBucketsService extends IntentService {
             public void onBucketCreated(Bucket bucket) {
                 Response insertionResponse = bRepository().insert(new BucketModel(bucket));
 
+                if(mContext == null) {
+                    return;
+                }
+
                 if(insertionResponse.isSuccess()){
                     mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKET_CREATED,
                             new SingleResponse(true, toJson(new BucketModel(bucket)),  null).toWritableMap());
@@ -273,6 +270,10 @@ public class GetBucketsService extends IntentService {
 
             @Override
             public void onError(int code, String message) {
+                if(mContext == null) {
+                    return;
+                }
+
                 mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKET_CREATED,
                         new Response(false, message, code).toWritableMap());
             }
@@ -285,9 +286,13 @@ public class GetBucketsService extends IntentService {
             public void onBucketDeleted() {
                 Response deletionResponse = bRepository().delete(bucketId);
 
+                if(mContext == null) {
+                    return;
+                }
+
                 if(deletionResponse.isSuccess()){
                     mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKET_DELETED,
-                            new Response(true, null).toWritableMap());
+                            new SingleResponse(true, bucketId,null).toWritableMap());
                     return;
                 }
 
@@ -297,6 +302,10 @@ public class GetBucketsService extends IntentService {
 
             @Override
             public void onError(int code, String message) {
+                if(mContext == null) {
+                    return;
+                }
+
                 mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKET_DELETED,
                         new Response(false, message, code).toWritableMap());
             }
@@ -309,9 +318,13 @@ public class GetBucketsService extends IntentService {
             public void onFileDeleted() {
                 Response deletionResponse = bRepository().delete(bucketId);
 
+                if(mContext == null) {
+                    return;
+                }
+
                 if(deletionResponse.isSuccess()){
                     mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_FILE_DELETED,
-                            new Response(true, null).toWritableMap());
+                            new SingleResponse(true, toJson(new FileDeleteModel(bucketId, fileId)), null).toWritableMap());
                     return;
                 }
 
@@ -321,6 +334,10 @@ public class GetBucketsService extends IntentService {
 
             @Override
             public void onError(int code, String message) {
+                if(mContext == null) {
+                    return;
+                }
+
                 mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_FILE_DELETED,
                         new Response(false, message, code).toWritableMap());
             }

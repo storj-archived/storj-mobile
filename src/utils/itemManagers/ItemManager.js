@@ -57,8 +57,9 @@ export default class ItemManager {
      * @param {ListItemModel} item
      * @returns {ListItemModel[]} 
      */
-    deleteItem(item) {
-        let index = this.itemList.indexOf(item);
+    deleteItem(itemId) {
+        
+        let index = this.itemList.map(item => item.getId()).indexOf(itemId);
 
         if(index > -1) {
             this.itemList.splice(index, 1);

@@ -52,25 +52,8 @@ class BucketsContainer extends Component {
         }
     }
 
-    // async createBucket(name) {
-    //     this.props.setLoading();
-
-    //     try {
-    //         let createBucketResult = await StorjLib.createBucket(name);     
-
-    //         if(createBucketResult.isSuccess) {
-    //             this.props.createBucket(new ListItemModel(createBucketResult.result));
-    //             this.props.removeFirstSignIn();
-    //         } 
-    //     } catch (e) {
-    //         console.log(e);
-    //     }
-
-    //     this.props.unsetLoading();
-    // }
-
-    async createBucket(name) {        
-        let createBucketResult = ServiceModule.createBucket(name);        
+    async createBucket(name) {   
+        ServiceModule.createBucket(name);        
     }
 
     navigateBack() {

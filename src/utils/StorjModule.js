@@ -161,11 +161,7 @@ const StorjLib = (() => {
          */
         async deleteBucket(bucketId) {
             let response = await storjLib.deleteBucket(bucketId);
-
-            if(!response.isSuccess) {
-                console.log('deleteBucket ', response.error.message);
-            }
-
+            
             return response;
         }
 

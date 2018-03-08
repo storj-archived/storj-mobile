@@ -60,7 +60,7 @@ export default function mainReducer(state = initialState, action) {
             newState.buckets = bucketsManager.addItem(action.payload.bucket);
             return newState;
         case DELETE_BUCKET:
-            newState.buckets = bucketsManager.deleteItem(action.payload.bucket);
+            newState.buckets = bucketsManager.deleteItem(action.payload.bucketId);
             return newState;
         case GET_BUCKETS:
             newState.buckets = action.payload.buckets;

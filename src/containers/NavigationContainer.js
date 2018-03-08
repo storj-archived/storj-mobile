@@ -12,8 +12,16 @@ import StackNavigator from '../navigators/StackNavigator';
 import { NavigationActions } from 'react-navigation';
 import ServiceModule from '../utils/ServiceModule';
 import eventNames from '../utils/constants/eventNames';
-import { bucketsContainerActions } from '../reducers/mainContainer/mainReducerActions';
-import ListItemModel from '../models/ListItemModel'
+import {
+    bucketsContainerActions,
+	mainContainerActions
+} from '../reducers/mainContainer/mainReducerActions';
+import {
+	mainContainerFileActions 
+} from '../reducers/mainContainer/Files/filesReducerActions'
+import { redirectToLoginScreen } from '../reducers/navigation/navigationActions';
+import ListItemModel from '../models/ListItemModel';
+import BucketModel from '../models/BucketModel';
 
 /**
  * Component that contains main navigator
@@ -25,14 +33,18 @@ class Apps extends Component {
 
 		this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
 		this.bucketCreatedListener = null;
+		this.bucketDeletedListener = null;
+		this.fileDeletedListener = null;
     }
 
 	async componentWillMount() {
 		await ServiceModule.bindService();
 
-		console.log("APP WILL MOUNT");
+		console.log("APP WILL MOUNT ", eventNames);
 
-		this.bucketCreatedListener = DeviceEventEmitter.addListener(eventNames.BUCKET_CREATED, this.onBucketCreated.bind(this));       
+		this.bucketCreatedListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKET_CREATED, this.onBucketCreated.bind(this));       
+		this.bucketDeletedListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKET_DELETED, this.onBucketDeleted.bind(this));       
+		this.fileDeletedListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILE_DELETED, this.onFileDeleted.bind(this));       
 	}
 
 	componentDidMount() {
@@ -45,9 +57,10 @@ class Apps extends Component {
 		if(Platform.OS === 'android') {
 			BackHandler.removeEventListener("hardwareBackPress", this.onHardwareBackPress);
 		}
-
-		console.log("APP WILL UNMOUNT");
-		if(this.bucketCreatedListener) this.bucketCreatedListener.remove();
+		
+		this.bucketCreatedListener.remove();
+		this.bucketDeletedListener.remove();
+		this.fileDeletedListener.remove();
 	}
 
 	onHardwareBackPress() {
@@ -60,19 +73,35 @@ class Apps extends Component {
 	}
 
 	onBucketCreated(response) {
-		console.log("BUCKET CREATED RESPONSE");
-		console.log(response);
-		this.props.createBucket(new ListItemModel(createBucketResult.result));
+		if(response.isSuccess) {
+			this.props.createBucket(new ListItemModel(new BucketModel(JSON.parse(response.result))));	
+		}	
+	}
+
+	onBucketDeleted(response) {		
+		if(response.isSuccess) {
+			this.props.deleteBucket(response.result);
+		}
+	}
+	
+	onFileDeleted(response) {		
+		if(response.isSuccess) {
+			let result = JSON.parse(response.result);
+			this.props.deleteFile(result.bucketId, result.fileId);
+		}
 	}
 
 	render() {
 		return (
-			<StackNavigator navigation = { 
-				addNavigationHelpers({
+			<StackNavigator 
+				screenProps = {{
+					redirectToLoginScreen: this.props.redirectToLoginScreen
+				}}
+				navigation = { addNavigationHelpers({
 					dispatch: this.props.dispatch,
-					state: this.props.nav
-				})
-			} />
+					state: this.props.nav					
+				})}
+			 />
 		);
 	};
 }
@@ -80,15 +109,22 @@ class Apps extends Component {
 /**
  * connecting navigation reducer to component props
  */
-const mapStateToProps = (state) => ({
-	nav: state.navReducer
-});
+function mapStateToProps(state) {
+    return {
+        nav: state.navReducer
+    };
+}
  
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators( { ...bucketsContainerActions }, dispatch);
+	return bindActionCreators( {
+		...bucketsContainerActions, 
+		...mainContainerActions,
+		...mainContainerFileActions,
+		redirectToLoginScreen }, dispatch);
 }
 
 /**
  * Creating navigator container
  */
 export const AppWithNavigationState = connect(mapStateToProps, mapDispatchToProps)(Apps);
+ 

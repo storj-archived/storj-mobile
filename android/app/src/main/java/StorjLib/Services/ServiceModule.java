@@ -160,13 +160,14 @@ public class ServiceModule extends ReactContextBaseJavaModule {
         new Thread(new Runnable() {
             @Override
             public void run() {
-            try {
-                Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
-                serviceIntent.setAction(BUCKET_CREATED);
+                try {
+                    Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
+                    serviceIntent.setAction(BUCKET_CREATED);
+                    serviceIntent.putExtra("bucketName", bucketName);
 
-                getReactApplicationContext().startService(serviceIntent);
-            } catch (Exception e) {
-            }
+                    getReactApplicationContext().startService(serviceIntent);
+                } catch (Exception e) {
+                }
             }
         }).run();
     }
@@ -179,6 +180,7 @@ public class ServiceModule extends ReactContextBaseJavaModule {
                 try {
                     Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
                     serviceIntent.setAction(BUCKET_DELETED);
+                    serviceIntent.putExtra("bucketId", bucketId);
 
                     getReactApplicationContext().startService(serviceIntent);
                 } catch (Exception e) {
@@ -195,6 +197,9 @@ public class ServiceModule extends ReactContextBaseJavaModule {
                 try {
                     Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
                     serviceIntent.setAction(FILE_DELETED);
+                    serviceIntent.putExtra("bucketId", bucketId);
+                    serviceIntent.putExtra("fileId", fileId);
+
 
                     getReactApplicationContext().startService(serviceIntent);
                 } catch (Exception e) {
