@@ -2,7 +2,6 @@ import authReducer from './authentification/authReducer';
 import navReducer from './navigation/mainNavReducer';
 import mainScreenNavReducer from './navigation/mainScreenNavReducer';
 import mainReducer from './mainContainer/mainReducer';
-import favouritesReducer from './mainContainer/Favourites/favouritesReducer';
 import bucketsScreenNavReducer from '../reducers/navigation/bucketsScreenNavReducer';
 import dashboardScreenNavReducer from '../reducers/navigation/dashboardScreenNavReducer';
 import myAccountScreenNavReducer from '../reducers/navigation/myAccountScreenNavReducer';
@@ -20,7 +19,6 @@ const reducers = {
     bucketsScreenNavReducer,
     dashboardScreenNavReducer,
     myAccountScreenNavReducer,
-    favouritesReducer,
     filesReducer
 };
 

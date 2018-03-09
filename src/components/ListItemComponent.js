@@ -85,7 +85,7 @@ export default class ListItemComponent extends Component {
                         <View>
                             <Image 
                                 style = { listItemStyles.itemTypeIcon } 
-                                source = { props.item.isStarred ? props.starredListItemIcon : props.listItemIcon }
+                                source = { props.item.getStarred() ? props.starredListItemIcon : props.listItemIcon }
                                 resizeMode = 'contain' />
                         </View>
                         <View style = { listItemStyles.textWrapper }>

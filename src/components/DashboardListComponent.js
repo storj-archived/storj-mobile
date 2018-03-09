@@ -18,9 +18,9 @@ import { getHeight, getWidth } from '../utils/adaptive';
 
 export default class DashboardListComponent extends Component{
     constructor(props) {
-        super(props);
+        super(props);        
 
-        this.data = this.getTestListItems();
+        this.data = props.buckets.filter(item => item.getStarred());
     }
 
     //TODO: delete after getting actual data
@@ -118,8 +118,8 @@ export default class DashboardListComponent extends Component{
 const listComponent = (title, data, props) => {
 
     function onPress(params) {
-        props.openBucket(params.bucketId);
-        props.navigateToFilesScreen(params.bucketId);    
+        // props.openBucket(params.bucketId);
+        // props.navigateToFilesScreen(params.bucketId);    
     }
     
     return(

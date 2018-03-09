@@ -16,18 +16,6 @@ class DashboardContainer extends Component {
         super(props);
     }
 
-    async componentWillMount() {
-        await ServiceModule.bindService();
-
-        DeviceEventEmitter.addListener("EVENT_BUCKETS_UPDATED", async (result) => {
-            let result2 = await ServiceModule.listBuckets();
-        });
-    }
-
-    componentDidMount() {
-        ServiceModule.getBuckets();
-    }
-
     render() {
         return(
             <DashboardListComponent
