@@ -46,8 +46,8 @@ const ServiceModule = (() => {
             return await serviceModule.updateBucketStarred(bucketId, isStarred);
         }
 
-        async updateFileStarred(bucketId, isStarred) {
-            return await serviceModule.updateFileStarred(bucketId, isStarred);
+        async updateFileStarred(bucketId, fileId, isStarred) {
+            return await serviceModule.updateFileStarred(bucketId, fileId, isStarred);
         }
 
         async getStarredFiles() {

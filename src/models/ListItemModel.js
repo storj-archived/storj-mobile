@@ -47,4 +47,12 @@ export default class ListItemModel {
     getDate() {
         return this.entity.Date;
     };
+
+    /**
+     * Get entity date
+     * @returns {string}
+     */
+    getStarred() {
+        return this.entity.isStarred;
+    };
 }

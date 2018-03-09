@@ -13,11 +13,11 @@ export default class BucketModel extends ItemModel {
             && typeof(bucket.isDecrypted) === "boolean"
             && bucket.created) {
 
-            super(bucket.name, bucket.id, bucket.created);
+            super(bucket.name, bucket.id, bucket.created, bucket.isStarred);
             
             this.hash = bucket.hash;
             this.isDecrypted = bucket.isDecrypted;
-            this.created = bucket.created;
+            this.created = bucket.created;            
         } else {
             super();
 

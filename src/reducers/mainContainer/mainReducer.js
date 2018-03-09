@@ -25,7 +25,9 @@ const {
     SET_GRID_VIEW,
     SET_LIST_VIEW,
     CLEAR_SELECTION,
-    SET_SELECTION_ID
+    SET_SELECTION_ID,
+    SET_FAVOURITE,
+    REMOVE_FAVOURITE
  } = MAIN_ACTIONS;
                                                         
 const initialState = { 
@@ -120,6 +122,12 @@ export default function mainReducer(state = initialState, action) {
         case CLEAR_SELECTION:
             newState.selectedItemId = null;
             return newState;
+        case SET_FAVOURITE:
+            newState.buckets = bucketsManager.updateStarred(action.payload.bucket.getId(), true);
+            return newState; 
+        case REMOVE_FAVOURITE:
+            newState.buckets = bucketsManager.updateStarred(action.payload.bucket.getId(), false);
+            return newState; 
         default:
             return state || initialState;
     }

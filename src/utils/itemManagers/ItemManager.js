@@ -68,6 +68,20 @@ export default class ItemManager {
         return this.itemList;
     };
 
+    updateStarred(bucketId, isStarred) {
+        this.itemList = this.itemList.map(item => {
+            if(item.getId() === bucketId) {                               
+                item.entity.isStarred = isStarred;
+            }
+            
+            return item;
+        });
+
+        console.log(this.itemList);
+
+        return this.itemList;
+    }
+
     //TODO: delete, depreciated
     _selectBucket(bucketId) {
         let isBucketSelected = false;

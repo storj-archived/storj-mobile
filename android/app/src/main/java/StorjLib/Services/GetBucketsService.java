@@ -136,8 +136,8 @@ public class GetBucketsService extends IntentService {
                             Bucket bucket = buckets[i];
                             String id = bucket.getId();
 
-                            if(dboId == id) {
-                                bRepository().update(new BucketModel(bucket));
+                            if(dboId.equals(id)) {
+                                Response updateResponse = bRepository().update(new BucketModel(bucket));
                                 arrayShift(buckets, i, length);
                                 length--;
                                 continue outer;
@@ -146,14 +146,11 @@ public class GetBucketsService extends IntentService {
                             i++;
                         } while(i < length);
 
-                        bRepository().delete(dboId);
+                        Response deleteResponse = bRepository().delete(dboId);
                     }
 
                     for(int i = 0; i < length; i ++) {
-                        Response resp = bRepository().insert(new BucketModel(buckets[i]));
-                        if(!resp.isSuccess()) {
-                            throw new Exception("Bucket insertion failed");
-                        }
+                        Response bucketInsertResponse = bRepository().insert(new BucketModel(buckets[i]));
                     }
 
                     getDb().setTransactionSuccessful();
@@ -345,11 +342,10 @@ public class GetBucketsService extends IntentService {
     }
 
     private <T> void arrayShift(T[] array, int pos, int length) {
-        do {
+        while(pos < length - 1) {
             array[pos] = array[pos + 1];
             pos++;
         }
-        while(pos < length - 1);
     }
 
     private <T> String toJson(T convertible) {

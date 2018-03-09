@@ -32,6 +32,7 @@ class Apps extends Component {
         super(props);
 
 		this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
+		this.serviceListener = null;
 		this.bucketCreatedListener = null;
 		this.bucketDeletedListener = null;
 		this.fileDeletedListener = null;
@@ -40,11 +41,12 @@ class Apps extends Component {
 	async componentWillMount() {
 		await ServiceModule.bindService();
 
-		console.log("APP WILL MOUNT ", eventNames);
-
+		this.serviceListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKETS_UPDATED, this.onBucketsReceived.bind(this));       
 		this.bucketCreatedListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKET_CREATED, this.onBucketCreated.bind(this));       
 		this.bucketDeletedListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKET_DELETED, this.onBucketDeleted.bind(this));       
 		this.fileDeletedListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILE_DELETED, this.onFileDeleted.bind(this));       
+
+		ServiceModule.getBuckets();
 	}
 
 	componentDidMount() {
@@ -71,6 +73,21 @@ class Apps extends Component {
 		//this.props.dispatch(NavigationActions.back());
 		return true;
 	}
+
+	async onBucketsReceived() {
+        this.props.setLoading();
+		let bucketsResponse = await ServiceModule.listBuckets();
+
+        if(bucketsResponse.isSuccess) {
+            let buckets = JSON.parse(bucketsResponse.result).map((file) => {
+                return new ListItemModel(new BucketModel(file));
+            });                    
+
+            this.props.getBuckets(buckets);
+        }
+
+        this.props.unsetLoading();
+    }
 
 	onBucketCreated(response) {
 		if(response.isSuccess) {

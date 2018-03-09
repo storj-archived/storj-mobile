@@ -2,8 +2,7 @@ import { Keyboard, DeviceEventEmitter, BackHandler, Platform, NativeEventEmitter
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { favouritesActions } from '../reducers/mainContainer/Favourites/favouritesReducerActions';
-import { mainContainerActions } from '../reducers/mainContainer/mainReducerActions';
+import { mainContainerActions, favouritesActions } from '../reducers/mainContainer/mainReducerActions';
 import { mainContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { redirectToMainScreen } from '../reducers/navigation/navigationActions';
 import FileModel from '../models/FileModel';
@@ -20,8 +19,6 @@ import observablePropFactory from '../models/ObservableProperty';
 class MainContainer extends Component {
     constructor(props) {
         super(props);
-
-        this.serviceListener = null;
 
         //this.state = {
         this.tapBarActions = [
@@ -73,15 +70,9 @@ class MainContainer extends Component {
         }
 
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => { this.props.disableSelectionMode(); });
-
-        this.serviceListener = DeviceEventEmitter.addListener("EVENT_BUCKETS_UPDATED", this.onGetData.bind(this));       
-        
-        ServiceModule.getBuckets();    
     }
     
     componentWillUnmount () {
-        if(this.serviceListener) this.serviceListener.remove();
-
         if(Platform.OS === "android") {
             BackHandler.removeEventListener("hardwareBackPress");
             DeviceEventEmitter.removeListener("uploadFile", this.uploadListener);
@@ -91,21 +82,6 @@ class MainContainer extends Component {
         observablePropFactory.clean();
 
         this.keyboardDidShowListener.remove();
-    }
-
-    async onGetData() {
-        this.props.setLoading();
-        let bucketsResponse = await ServiceModule.listBuckets();
-
-        if(bucketsResponse.isSuccess) {
-            let buckets = JSON.parse(bucketsResponse.result).map((file) => {
-                return new ListItemModel(new BucketModel(file));
-            });                    
-
-            this.props.getBuckets(buckets);
-        }
-
-        this.props.unsetLoading();
     }
 
     onHardwareBackPress() {
@@ -183,8 +159,6 @@ class MainContainer extends Component {
         }});
 
         let response = await StorjLib.downloadFile(this.props.openedBucketId, fileId, localPath);
-        
-        console.log(response);
 
         if(response.isSuccess) {
             this.props.downloadFileSuccess(this.props.openedBucketId, fileId, localPath);
@@ -236,16 +210,19 @@ class MainContainer extends Component {
         return selectedBuckets;
     }
 
-    changeFavourites(item) {
-        item.isStarred ?
-            this.props.removeFavourite(item) :
-            this.props.setFavourite(item)
+    async changeFavourites(item) {
+        let updateStarredResponse = await ServiceModule.updateBucketStarred(item.getId(), !item.getStarred());
+        
+        if(updateStarredResponse.isSuccess) {
+            item.getStarred() 
+                ? this.props.removeFavourite(item) 
+                : this.props.setFavourite(item);
+        } 
     }
 
     setFavourite() {
-        this.getSelectedBuckets().forEach(item => {
-            this.changeFavourites(item);
-            item.isStarred ? item.isStarred = false : item.isStarred = true;
+        this.getSelectedBuckets().forEach(item => {            
+            this.changeFavourites(item);        
         });  
 
         this.props.clearSelection();
@@ -307,8 +284,7 @@ function mapStateToProps(state) {
         isCreateBucketInputShown: state.mainReducer.isCreateBucketInputShown,
         isFirstSignIn: state.mainReducer.isFirstSignIn,
         isLoading: state.mainReducer.isLoading,
-        isGridViewShown: state.mainReducer.isGridViewShown,
-        favouritesBuckets: state.favouritesReducer.favouritesBuckets
+        isGridViewShown: state.mainReducer.isGridViewShown
     };
 }
 function mapDispatchToProps(dispatch) { return bindActionCreators({ redirectToMainScreen, ...favouritesActions, ...mainContainerActions, ...mainContainerFileActions }, dispatch); };

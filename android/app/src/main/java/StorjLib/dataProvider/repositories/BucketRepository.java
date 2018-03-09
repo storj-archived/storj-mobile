@@ -155,15 +155,11 @@ public class BucketRepository extends BaseRepository {
         if(bucketId == null || bucketId.isEmpty())
             return new Response(false, "Model id is not valid!");
 
-        String[] columnsToUpdate = new String[] {
-                BucketContract._STARRED
-        };
+        ContentValues map = new ContentValues();
 
-        String[] columnValues = new String[] {
-                Boolean.toString(isStarred)
-        };
+        map.put(BucketContract._STARRED, isStarred ? 1 : 0);
 
-        return _executeUpdate(BucketContract.TABLE_NAME, bucketId, null,null, columnsToUpdate, columnValues);
+        return _executeUpdate(BucketContract.TABLE_NAME, bucketId, null,null, map);
     }
 
     private BucketDbo _getSingleFromCursor(Cursor cursor) {

@@ -7,11 +7,13 @@ export default class ItemModel {
      * @param {string} name 
      * @param {string} id 
      * @param {string} date
+     * @param {bool} isStarred
      */
-    constructor(name = null, id = null, date = null) {
+    constructor(name = null, id = null, date = null, isStarred = false) {
         this.name = name;
         this.id = id;
         this.date = date;
+        this.isStarred = isStarred;
     };
 
     /**
@@ -52,4 +54,16 @@ export default class ItemModel {
      * set public date property
      */
     set Date(value) {};
+
+    /**
+     * get public isStarred property
+     */
+    get IsStarred() {
+        return this.isStarred;
+    }
+
+    /**
+     * set public isStarred property
+     */
+    set IsStarred(value) {};
 }

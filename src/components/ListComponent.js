@@ -178,10 +178,10 @@ export default class ListComponent extends Component {
                                                                 onLongPress = { () => { this.onItemLongPress(item); } }
                                                                 isSelectionModeEnabled = { this.props.isSelectionMode }
                                                                 isSelected = { item.isSelected }
+                                                                isStarred = { item.getStarred() }
                                                                 isSingleItemSelected = { this.props.isSingleItemSelected }
                                                                 disableSelectionMode = { this.props.disableSelectionMode }
-                                                                progress = { item.progress }
-                                                                isStarred = { item.isStarred }
+                                                                progress = { item.progress }                                                                
                                                                 isLoading = { item.isLoading }
                                                                 itemType = { this.props.itemType }
                                                                 listItemIcon = { this.props.listItemIcon }
@@ -237,7 +237,7 @@ export default class ListComponent extends Component {
                                             disableSelectionMode = { this.props.disableSelectionMode }
                                             progress = { item.progress }
                                             isLoading = { item.isLoading }
-                                            isStarred = { item.isStarred } // will be from local db
+                                            isStarred = { item.getStarred() }
                                             listItemIcon = { this.props.listItemIcon }
                                             starredListItemIcon = { this.props.starredListItemIcon }
                                             onSelectionPress = { () => { this.selectItem(item); } }
@@ -274,9 +274,9 @@ export default class ListComponent extends Component {
                     isSelected = { item.isSelected }
                     isSingleItemSelected = { this.props.isSingleItemSelected }
                     disableSelectionMode = { this.props.disableSelectionMode }
+                    isStarred = { item.getStarred() }
                     progress = { item.progress }
                     isLoading = { item.isLoading }
-                    isStarred = { item.isStarred }
                     listItemIcon = { this.props.listItemIcon }
                     starredItemIcon = { this.props.starredItemIcon }
                     onSelectionPress = { () => { this.selectItem(item); } }
