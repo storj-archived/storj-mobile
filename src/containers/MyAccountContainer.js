@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import MyAccountNavComponent from '../components/MyAccount/MyAccountNavComponent';
+import { redirectToStorageScreen } from '../reducers/navigation/navigationActions';
 
 class MyAccountContainer extends Component {
     constructor(props) {
@@ -15,7 +16,10 @@ class MyAccountContainer extends Component {
 
     render() {
         return(
-            <MyAccountNavComponent /> 
+            <MyAccountNavComponent 
+                showQR = { this.props.screenProps.showQR }
+                showStorageInfo = { this.props.screenProps.showStorageInfo }
+                showCredits = { this.props.screenProps.showCredits } /> 
         );
     }
 }

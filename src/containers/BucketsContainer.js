@@ -75,7 +75,7 @@ class BucketsContainer extends Component {
                 selectBucket = { this.props.selectBucket }
                 buckets = { this.props.buckets }
                 openedBucketId = { this.props.openedBucketId }
-                selectedBucketId = { this.props.selectedBucketId }
+                selectedItemId = { this.props.selectedItemId }
                 files = { this.props.files }
                 navigateBack = { () => { this.navigateBack(); } } /> 
         );
@@ -95,7 +95,7 @@ function mapStateToProps(state) {
         screenName: currentBucketScreenName,
         isGridViewShown: state.mainReducer.isGridViewShown,
         openedBucketId: state.mainReducer.openedBucketId,
-        selectedBucketId: state.mainReducer.selectedItemId
+        selectedItemId: state.mainReducer.selectedItemId
     };
 }
     

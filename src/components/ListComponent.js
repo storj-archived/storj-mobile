@@ -63,7 +63,6 @@ export default class ListComponent extends Component {
     * @param {object} item type of ListItemModel
     */
     selectItem(selectedItem) {
-        /* if(!this.props.isSelectionMode) return; */
         if(selectedItem.isSelected)
             this.props.deselectItem(selectedItem);
         else
@@ -132,6 +131,8 @@ export default class ListComponent extends Component {
         return sortingObject;
     }
 
+    isItemActionsSelected = (item) => item.getId() === this.props.selectedItemId && item.getId() === this.state.selectedItemId;
+
     getGridItemsList() {
         let sorting = this.sort(this.props.data);
 
@@ -173,7 +174,7 @@ export default class ListComponent extends Component {
                                                                 item = { item } 
                                                                 selectItemId = { (itemId) => { this.props.setSelectionId(itemId); this.setState({ selectedItemId: itemId }) } }
                                                                 navigateToFilesScreen = { this.props.navigateToFilesScreen ? this.props.navigateToFilesScreen : () => {} }
-                                                                isItemActionsSelected = { item.getId() === this.props.selectedBucketId && item.getId() === this.state.selectedItemId }
+                                                                isItemActionsSelected = { this.isItemActionsSelected(item) }
                                                                 onLongPress = { () => { this.onItemLongPress(item); } }
                                                                 isSelectionModeEnabled = { this.props.isSelectionMode }
                                                                 isSelected = { item.isSelected }
@@ -228,7 +229,7 @@ export default class ListComponent extends Component {
                                             item = { item } 
                                             selectItemId = { (itemId) => { this.props.setSelectionId(itemId); this.setState({selectedItemId: itemId }) }}
                                             navigateToFilesScreen = { this.props.navigateToFilesScreen ? this.props.navigateToFilesScreen : () => {} }
-                                            isItemActionsSelected = { item.getId() === this.props.selectedBucketId && item.getId() === this.state.selectedItemId }
+                                            isItemActionsSelected = { this.isItemActionsSelected(item) }
                                             onLongPress = { () => { this.onItemLongPress(item); } }
                                             isSelectionModeEnabled = { this.props.isSelectionMode }
                                             isSelected = { item.isSelected }
@@ -267,7 +268,7 @@ export default class ListComponent extends Component {
                     item = { item } 
                     selectItemId = { (itemId) => { this.props.setSelectionId(itemId); this.setState({selectedItemId: itemId }) }}
                     navigateToFilesScreen = { this.props.navigateToFilesScreen ? this.props.navigateToFilesScreen : () => {} }
-                    isItemActionsSelected = { item.getId() === this.props.selectedBucketId && item.getId() === this.state.selectedItemId }
+                    isItemActionsSelected = { this.isItemActionsSelected(item) }
                     onLongPress = { () => { this.onItemLongPress(item); } }
                     isSelectionModeEnabled = { this.props.isSelectionMode }
                     isSelected = { item.isSelected }

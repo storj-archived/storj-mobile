@@ -16,6 +16,21 @@ class DashboardContainer extends Component {
         super(props);
     }
 
+<<<<<<< HEAD
+=======
+    async componentWillMount() {
+        await ServiceModule.bindService();
+
+        DeviceEventEmitter.addListener("EVENT_BUCKETS_UPDATED", async (result) => {
+            let result2 = await ServiceModule.listBuckets();
+        });
+    }
+
+    componentDidMount() {
+        ServiceModule.getBuckets();
+    }
+
+>>>>>>> added My Account UI and favorites logic
     render() {
         return(
             <DashboardListComponent
@@ -28,12 +43,14 @@ class DashboardContainer extends Component {
                 deselectItem = { this.props.deselectBucket }      
                 isSelectionMode = { this.props.isSelectionMode }
                 openedBucketId = { this.props.openedBucketId }
+                selectedItemId = { this.props.selectedItemId }
                 animatedScrollValue = { this.animatedScrollValue  }
                 enableSelectionMode = { this.props.enableSelectionMode }
                 disableSelectionMode = { this.props.disableSelectionMode }
                 onSingleItemSelected = { this.props.onSingleItemSelected }  
                 isSingleItemSelected = { this.props.isSingleItemSelected }
-                navigateToFilesScreen = { this.props.navigateToFilesScreen } />
+                navigateToFilesScreen = { this.props.navigateToFilesScreen }
+                setSelectionId = { this.props.setSelectionId } />
         )
     }
 }
@@ -50,6 +67,7 @@ function mapStateToProps(state) {
         fileListModels: state.filesReducer.fileListModels,
         files: state.filesReducer.fileListModels,
         screenName: currentBucketScreenName,
+        selectedItemId: state.mainReducer.selectedItemId,
         openedBucketId: state.mainReducer.openedBucketId
     };
 }

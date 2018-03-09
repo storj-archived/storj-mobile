@@ -1,5 +1,4 @@
 import { StackNavigator } from 'react-navigation';
-import BucketsScreen from '../containers/BucketsListContainer';
 import FilesScreen from '../containers/FilesListContainer';
 import DashboardScreen from '../containers/DashboardContainer';
 

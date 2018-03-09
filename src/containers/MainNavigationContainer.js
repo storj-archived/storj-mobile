@@ -16,7 +16,12 @@ class MainNavigationContainer extends Component {
     render() {
         return(
             <MainScreenTabNav
-                screenProps = { { showOptions: this.props.showOptions } }
+                screenProps = { { 
+                    showOptions: this.props.showOptions, 
+                    showQR: this.props.showQR,
+                    showStorageInfo: this.props.showStorageInfo,
+                    showCredits: this.props.showCredits
+                } }
                 navigation = { addNavigationHelpers({
                     isActionBarShown: this.props.isActionBarShown,
                     isSelectionMode: this.props.isSelectionMode,

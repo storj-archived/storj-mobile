@@ -17,6 +17,11 @@ export default class MyAccountNavComponent extends Component {
         return(
             <View style={ styles.mainContainer }>
                 <MyAccountScreenNavigator
+                    screenProps = { { 
+                        showQR: this.props.showQR,
+                        showStorageInfo: this.props.showStorageInfo,
+                        showCredits: this.props.showCredits
+                    } }
                     animatedScrollValue = { this.animatedScrollValue }  />
             </View>
         );

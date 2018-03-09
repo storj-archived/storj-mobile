@@ -15,6 +15,8 @@ export default class FilesListComponent extends Component {
         return(
             <View style = { styles.mainContainer }>
                 <ListComponent
+                    setSelectionId = { this.props.setSelectionId }
+                    selectedItemId = { this.props.selectedItemId }
                     cancelDownload = { this.props.cancelDownload }
                     cancelUpload = { this.props.cancelUpload }
                     isGridViewShown = { this.props.isGridViewShown }
