@@ -16,8 +16,6 @@ class DashboardContainer extends Component {
         super(props);
     }
 
-<<<<<<< HEAD
-=======
     async componentWillMount() {
         await ServiceModule.bindService();
 
@@ -30,7 +28,6 @@ class DashboardContainer extends Component {
         ServiceModule.getBuckets();
     }
 
->>>>>>> added My Account UI and favorites logic
     render() {
         return(
             <DashboardListComponent
