@@ -16,11 +16,8 @@ export default class BucketsListComponent extends Component {
         return(
             <View style = { styles.mainContainer }>
                 <ListComponent
-<<<<<<< HEAD
                     onRefresh = { this.props.refresh }
-=======
                     setSelectionId = { this.props.setSelectionId }
->>>>>>> added favorites and initial MyAccount screen
                     isGridViewShown = { this.props.isGridViewShown }
                     onPress = { this.props.onPress }
                     itemType = { TYPES.REGULAR_BUCKET }
