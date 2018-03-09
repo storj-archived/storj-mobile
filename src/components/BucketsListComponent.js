@@ -24,7 +24,7 @@ export default class BucketsListComponent extends Component {
                     isGridViewShown = { this.props.isGridViewShown }
                     onPress = { this.props.onPress }
                     itemType = { TYPES.REGULAR_BUCKET }
-                    selectedBucketId = { this.props.selectedBucketId }
+                    selectedItemId = { this.props.selectedItemId }
                     onSingleItemSelected = { this.props.onSingleItemSelected }                    
                     animatedScrollValue = { this.props.animatedScrollValue }
                     enableSelectionMode = { this.props.enableSelectionMode }

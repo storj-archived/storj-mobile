@@ -10,18 +10,36 @@ import MainNavigationContainer from '../containers/MainNavigationContainer';
 import ActionBarComponent from '../components/ActionBarComponent';
 import ViewOptionsComponent from '../components/ViewOptionsComponent';
 import CreateBucketPopUpComponent from '../components/InputPopUpComponent';
+import QRCodeComponent from '../components/MyAccount/QRCodeComponent';
+import StorageInfoComponent from '../components/MyAccount/StorageInfoComponent';
+import AddCreditComponent from '../components/MyAccount/AddCreditComponent';
 
 export default class MainComponent extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            showOptions: false
+            showOptions: false,
+            showQR: false,
+            showStorageInfo: false,
+            showCredits: false
         }
     };
 
     showOptions() {
-        this.setState({ showOptions: !this.state.showOptions })
+        this.setState({ showOptions: !this.state.showOptions });
+    }
+
+    showQR() {
+        this.setState({ showQR: !this.state.showQR });
+    }
+
+    showStorageInfo() {
+        this.setState({ showStorageInfo: !this.state.showStorageInfo });
+    }
+
+    showCredits() {
+        this.setState({ showCredits: !this.state.showCredits });
     }
     
     render() {
@@ -32,6 +50,9 @@ export default class MainComponent extends Component {
                 <View style = { styles.navigationContainer }>
                     <MainNavigationContainer
                         showOptions = { this.showOptions.bind(this) }
+                        showQR = { this.showQR.bind(this) }
+                        showCredits = { this.showCredits.bind(this) }
+                        showStorageInfo = { this.showStorageInfo.bind(this) }
                         isSingleItemSelected = { this.props.isSingleItemSelected }
                         isActionBarShown = { this.props.isActionBarShown }
                         isSelectionMode = { this.props.isSelectionMode }
@@ -73,6 +94,21 @@ export default class MainComponent extends Component {
                             setGridView = { this.props.setGridView }
                             setListView = { this.props.setListView }
                             showOptions = { this.showOptions.bind(this) } /> : null
+                }
+                {
+                    this.state.showQR ? 
+                        <QRCodeComponent 
+                            showQR = { this.showQR.bind(this) } /> : null
+                }
+                {
+                    this.state.showStorageInfo ?
+                        <StorageInfoComponent 
+                            showStorageInfo = { this.showStorageInfo.bind(this) } /> : null
+                }
+                {
+                    this.state.showCredits ?
+                        <AddCreditComponent
+                            showCredits = { this.showCredits.bind(this) } /> : null
                 }
             </View>
         );

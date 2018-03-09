@@ -128,6 +128,8 @@ const listComponent = (title, data, props) => {
                 onPress = { () => {} }
                 title = { title } />
             <ListComponent
+                setSelectionId = { props.setSelectionId }
+                selectedItemId = { props.selectedItemId }
                 verticalPaddingDisabled = { true }
                 isExpanderDisabled = { true }
                 onPress = { (params) => { onPress(params); } } 
@@ -192,8 +194,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFF' 
     },
     expandImage: { 
-        height: getHeight(12), 
-        width: getWidth(7), 
-        marginTop: getHeight(5) 
+        height: getHeight(24), 
+        width: getWidth(24)
     }
 });

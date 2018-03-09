@@ -183,7 +183,8 @@ export const dashboardContainerActions = {
     setLoading,
     unsetLoading,
     openBucket,
-    getBuckets
+    getBuckets,
+    setSelectionId
 }
 
 export const initializeContainerActions = {

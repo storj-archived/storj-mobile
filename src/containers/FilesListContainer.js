@@ -128,6 +128,8 @@ class FilesListContainer extends Component {
 
         return(
             <FilesListComponent
+                setSelectionId = { this.props.screenProps.setSelectionId }
+                selectedItemId = { this.props.selectedItemId }
                 isGridViewShown = { this.props.isGridViewShown }
                 onPress = { (params) => { this.onPress(params); } }
                 cancelDownload = { (params) => { this.cancelDownload(params); } }
@@ -157,7 +159,8 @@ function mapStateToProps(state) {
         uploadingFileListModels: state.filesReducer.uploadingFileListModels,
         isLoading: state.mainReducer.isLoading,
         isGridViewShown: state.mainReducer.isGridViewShown,
-        downloadedFileListModels: state.filesReducer.downloadedFileListModels
+        downloadedFileListModels: state.filesReducer.downloadedFileListModels,
+        selectedItemId: state.mainReducer.selectedItemId
     };
 }
 
