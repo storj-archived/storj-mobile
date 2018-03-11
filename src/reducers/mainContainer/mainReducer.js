@@ -26,8 +26,7 @@ const {
     SET_LIST_VIEW,
     CLEAR_SELECTION,
     SET_SELECTION_ID,
-    SET_FAVOURITE,
-    REMOVE_FAVOURITE
+    UPDATE_FAVOURITE
  } = MAIN_ACTIONS;
                                                         
 const initialState = { 
@@ -51,86 +50,86 @@ export default function mainReducer(state = initialState, action) {
     switch(action.type) {
         case SHOW_ACTION_BAR:
             newState.isActionBarShown = true; 
-            return newState; 
+            break;
         case HIDE_ACTION_BAR:
             newState.isActionBarShown = false;
-            return newState;
+            break;
         case SELECT_BUCKET:
             newState.buckets = bucketsManager.changeItemSelectionStatus(action.payload.bucket, true);            
-            return newState;
+            break;
         case DESELECT_BUCKET:
             newState.buckets = bucketsManager.changeItemSelectionStatus(action.payload.bucket, false);            
-            return newState;
+            break;
         case CREATE_BUCKET:
             newState.buckets = bucketsManager.addItem(action.payload.bucket);
-            return newState;
+            break;
         case DELETE_BUCKET:
             newState.buckets = bucketsManager.deleteItem(action.payload.bucketId);
-            return newState;
+            break;
         case GET_BUCKETS:
             newState.buckets = action.payload.buckets;
-            return newState;
+            break;
         case ENABLE_SELECTION_MODE:            
             newState.buckets = bucketsManager.clearSelection(); //???
             newState.isSelectionMode = true;
             newState.isSingleItemSelected = false;
-            return newState;
+            break;
         case DISABLE_SELECTION_MODE:
             newState.buckets = bucketsManager.clearSelection();
             newState.isSingleItemSelected = false;
             newState.isActionBarShown = false;
             newState.isSelectionMode = false;
-            return newState;
+            newState.selectedItemId = null;
+            break;
         case SINGLE_ITEM_ACTIONS_SELECTED:                
             newState.isSingleItemSelected = true;
             newState.isActionBarShown = true;
-            return newState;
+            break;
         case SHOW_CREATE_BUCKET_INPUT:
             newState.isCreateBucketInputShown = true;
             newState.isActionBarShown = false;                        
-            return newState;
+            break;
         case HIDE_CREATE_BUCKET_INPUT:
             newState.isCreateBucketInputShown = false;
-            return newState;
+            break;
         case SET_FIRST_SIGN_IN: 
             newState.isFirstSignIn = true;
-            return newState;
+            break;
         case REMOVE_FIRST_SIGN_IN: 
             newState.isFirstSignIn = false;
-            return newState;
+            break;
         case SET_LOADING: 
             newState.isLoading = true;
-            return newState;
+            break;
         case UNSET_LOADING:
             newState.isLoading = false;
-            return newState;
+            break;
         case OPEN_BUCKET: 
             newState.openedBucketId = action.payload.bucketId;
-            return newState;
+            break;
         case CLOSE_BUCKET:
             newState.openedBucketId = null;
-            return newState;
+            break;
         case SET_GRID_VIEW: 
             newState.isGridViewShown = true;
-            return newState;
+            break;
         case SET_LIST_VIEW: 
             newState.isGridViewShown = false;
-            return newState;
+            break;
         case SET_SELECTION_ID:
             newState.selectedItemId = action.payload.id;
-            return newState;
+            break;
         case CLEAR_SELECTION:
             newState.selectedItemId = null;
-            return newState;
-        case SET_FAVOURITE:
-            newState.buckets = bucketsManager.updateStarred(action.payload.bucket.getId(), true);
-            return newState; 
-        case REMOVE_FAVOURITE:
-            newState.buckets = bucketsManager.updateStarred(action.payload.bucket.getId(), false);
-            return newState; 
+            break;
+        case UPDATE_FAVOURITE:
+            newState.buckets = bucketsManager.updateStarred(action.payload.buckets, true);
+            break;  
         default:
             return state || initialState;
     }
+    
+    return newState; 
 };
 
 function listFiles(array, newItem) {

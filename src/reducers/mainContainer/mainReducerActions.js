@@ -27,8 +27,7 @@ const {
     SET_LIST_VIEW,
     CLEAR_SELECTION,
     SET_SELECTION_ID,
-    SET_FAVOURITE,
-    REMOVE_FAVOURITE
+    UPDATE_FAVOURITE
 } = MAIN_ACTIONS;
 
 function onSingleItemSelected() {
@@ -134,12 +133,8 @@ function clearSelection() {
     return { type: CLEAR_SELECTION }
 }
 
-function setFavourite(bucket) {
-    return { type: SET_FAVOURITE, payload: { bucket } } 
-}
-
-function removeFavourite(bucket) {
-    return { type: REMOVE_FAVOURITE, payload: { bucket } } 
+function updateFavourite(buckets) {
+    return { type: UPDATE_FAVOURITE, payload: { buckets } } 
 }
 
 //action creators for main container
@@ -222,6 +217,5 @@ export const filesListContainerMainActions = {
 };
 
 export const favouritesActions = {
-    setFavourite,
-    removeFavourite
+    updateFavourite
 };

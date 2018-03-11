@@ -68,16 +68,16 @@ export default class ItemManager {
         return this.itemList;
     };
 
-    updateStarred(bucketId, isStarred) {
+    updateStarred(buckets) {
+        let idList = buckets.map(bucket => bucket.getId());
+
         this.itemList = this.itemList.map(item => {
-            if(item.getId() === bucketId) {                               
-                item.entity.isStarred = isStarred;
+            if(idList.includes(item.getId())) {                           
+                item.entity.isStarred = !item.entity.isStarred;
             }
             
             return item;
         });
-
-        console.log(this.itemList);
 
         return this.itemList;
     }
