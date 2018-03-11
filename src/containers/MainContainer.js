@@ -228,7 +228,6 @@ class MainContainer extends Component {
         }
 
         this.props.updateFavourite(selectedBuckets);        
-        this.props.disableSelectionMode();
     }
 
     deleteBuckets() {

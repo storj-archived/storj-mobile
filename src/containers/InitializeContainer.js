@@ -45,7 +45,7 @@ class InitializeContainer extends Component {
                 this.props.redirectToLoginScreen();
                 return;
             }
-            
+
             await this.getKeys();
         } catch(e) {            
             this.props.redirectToOnBoardingScreen();
@@ -68,7 +68,9 @@ class InitializeContainer extends Component {
             return;
         }
         
-        this.props.redirectToMainScreen();
+        this.props.redirectToMainScreen();       
+
+		ServiceModule.getBuckets();
     }
 
     onSubmit() {

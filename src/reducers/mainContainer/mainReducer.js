@@ -70,6 +70,7 @@ export default function mainReducer(state = initialState, action) {
             newState.buckets = action.payload.buckets;
             break;
         case ENABLE_SELECTION_MODE:            
+            newState.selectedItemId = null;
             newState.buckets = bucketsManager.clearSelection(); //???
             newState.isSelectionMode = true;
             newState.isSingleItemSelected = false;

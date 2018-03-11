@@ -59,6 +59,7 @@ class FilesListContainer extends Component {
             this.props.listFiles(this.bucketId, files);
         }
 
+        ServiceModule.getFilesWorking = false;
         this.props.unsetLoading();
     }
 

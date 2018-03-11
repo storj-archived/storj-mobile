@@ -3,18 +3,21 @@ import { NativeModules } from 'react-native';
 const ServiceModule = (() => {
     let instance = null;
     const serviceModule = NativeModules.ServiceModule;
-    console.log(serviceModule);
 
     class ServiceModule {
         constructor() {
-
+            this.getBucketsWorking = false;
+            this.getFilesWorking = false;
         }
 
         async bindService() {
             await serviceModule.bindService();
         }
 
-        getBuckets() {
+        getBuckets() {            
+            if(this.getBucketsWorking) return;
+
+            this.getBucketsWorking = true;
             serviceModule.getBuckets();
         }
 
@@ -23,6 +26,9 @@ const ServiceModule = (() => {
         }
 
         getFiles(bucketId) {
+            if(this.getFilesWorking) return;
+
+            this.getFilesWorking = true;
             serviceModule.getFiles(bucketId);
         }
 
