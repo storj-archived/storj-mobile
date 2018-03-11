@@ -68,6 +68,14 @@ public class GetBucketsService extends IntentService {
         return _dbFactory.getWritableDatabase();
     }
 
+    public DeviceEventManagerModule.RCTDeviceEventEmitter getEmitter() {
+        if(mContext != null) {
+            return mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
+        }
+
+        return null;
+    }
+
     public BucketRepository bRepository() {
         return new BucketRepository(getDb());// _bRepository;
     }
@@ -162,7 +170,7 @@ public class GetBucketsService extends IntentService {
                 }
 
                 if(mContext != null) {
-                    mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKETS_UPDATED, true);
+                    getEmitter().emit(EVENT_BUCKETS_UPDATED, true);
                 }
             }
 
@@ -171,7 +179,7 @@ public class GetBucketsService extends IntentService {
                 _buckets = null;
 
                 if(mContext != null) {
-                    mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKETS_UPDATED, false);
+                    getEmitter().emit(EVENT_BUCKETS_UPDATED, false);
                 }
             }
         });
@@ -230,7 +238,7 @@ public class GetBucketsService extends IntentService {
                 }
 
                 if(mContext != null) {
-                    mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_FILES_UPDATED, true);
+                    getEmitter().emit(EVENT_FILES_UPDATED, true);
                 }
             }
 
@@ -239,7 +247,7 @@ public class GetBucketsService extends IntentService {
                 _files = null;
 
                 if(mContext != null) {
-                    mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_FILES_UPDATED, false);
+                    getEmitter().emit(EVENT_FILES_UPDATED, false);
                 }
             }
         });
@@ -256,12 +264,12 @@ public class GetBucketsService extends IntentService {
                 }
 
                 if(insertionResponse.isSuccess()){
-                    mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKET_CREATED,
+                    getEmitter().emit(EVENT_BUCKET_CREATED,
                             new SingleResponse(true, toJson(new BucketModel(bucket)),  null).toWritableMap());
                     return;
                 }
 
-                mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKET_CREATED,
+                getEmitter().emit(EVENT_BUCKET_CREATED,
                         new Response(false, "Bucket insertion to db failed").toWritableMap());
             }
 
@@ -271,7 +279,7 @@ public class GetBucketsService extends IntentService {
                     return;
                 }
 
-                mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKET_CREATED,
+                getEmitter().emit(EVENT_BUCKET_CREATED,
                         new Response(false, message, code).toWritableMap());
             }
         });
@@ -288,12 +296,12 @@ public class GetBucketsService extends IntentService {
                 }
 
                 if(deletionResponse.isSuccess()){
-                    mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKET_DELETED,
+                    getEmitter().emit(EVENT_BUCKET_DELETED,
                             new SingleResponse(true, bucketId,null).toWritableMap());
                     return;
                 }
 
-                mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKET_DELETED,
+                getEmitter().emit(EVENT_BUCKET_DELETED,
                         new Response(false, "Bucket deletion failed in db").toWritableMap());
             }
 
@@ -303,7 +311,7 @@ public class GetBucketsService extends IntentService {
                     return;
                 }
 
-                mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_BUCKET_DELETED,
+                getEmitter().emit(EVENT_BUCKET_DELETED,
                         new Response(false, message, code).toWritableMap());
             }
         });
@@ -320,12 +328,12 @@ public class GetBucketsService extends IntentService {
                 }
 
                 if(deletionResponse.isSuccess()){
-                    mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_FILE_DELETED,
+                    getEmitter().emit(EVENT_FILE_DELETED,
                             new SingleResponse(true, toJson(new FileDeleteModel(bucketId, fileId)), null).toWritableMap());
                     return;
                 }
 
-                mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_FILE_DELETED,
+                getEmitter().emit(EVENT_FILE_DELETED,
                         new Response(false, "File deletion failed in db").toWritableMap());
             }
 
@@ -335,7 +343,7 @@ public class GetBucketsService extends IntentService {
                     return;
                 }
 
-                mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(EVENT_FILE_DELETED,
+                getEmitter().emit(EVENT_FILE_DELETED,
                         new Response(false, message, code).toWritableMap());
             }
         });
