@@ -207,22 +207,24 @@ class MainContainer extends Component {
         return selectedBuckets;
     }
 
-    async changeFavourites(item) {
-        let updateStarredResponse = await ServiceModule.updateBucketStarred(item.getId(), !item.getStarred());
-        
-        if(updateStarredResponse.isSuccess) {
-            item.getStarred() 
-                ? this.props.removeFavourite(item) 
-                : this.props.setFavourite(item);
-        } 
-    }
+    async setFavourite() {
+        let selectedBuckets = this.getSelectedBuckets();
+        let length = selectedBuckets.length;
+        let itemsToStarred = [];
+        let itemsToUnstarred = [];
 
-    setFavourite() {
-        this.getSelectedBuckets().forEach(item => {            
-            this.changeFavourites(item);        
-        });  
+        for(var i = 0; i < length; i++) {
+            var item = selectedBuckets[i];
+            let updateStarredResponse = await ServiceModule.updateBucketStarred(item.getId(), !item.getStarred());
 
-        this.props.clearSelection();
+            if(updateStarredResponse.isSuccess) {
+                item.getStarred() 
+                    ? itemsToUnstarred.push(item) 
+                    : itemsToStarred.push(item);
+            }    
+        }
+
+        this.props.updateFavourite(selectedBuckets);        
         this.props.disableSelectionMode();
     }
 
