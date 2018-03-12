@@ -10,6 +10,7 @@ import ServiceModule from '../utils/ServiceModule';
 import ListItemModel from '../models/ListItemModel';
 import FileModel from '../models/FileModel';
 import FilesListComponent from '../components/FilesListComponent';
+import SyncModule from '../utils/SyncModule';
 
 class FilesListContainer extends Component {
     constructor(props) {
@@ -49,7 +50,7 @@ class FilesListContainer extends Component {
     async onGetData() {
         this.props.setLoading();
 
-        let filesResponse = await ServiceModule.listFiles(this.bucketId);
+        let filesResponse = await SyncModule.listFiles(this.bucketId);
 
         if(filesResponse.isSuccess) {
             let files = JSON.parse(filesResponse.result).map((file) => {

@@ -20,40 +20,8 @@ export default class DashboardListComponent extends Component{
     constructor(props) {
         super(props);        
 
-        this.data = props.buckets.filter(item => item.getStarred());
-    }
-
-    //TODO: delete after getting actual data
-    getTestListItems() {
-        let data = [new ListItemModel(
-                        new BucketModel( 
-                            {isDecrypted: true, 
-                            hash: 1343708071, 
-                            created: new Date().getDate(), 
-                            name: "name1", 
-                            id: "98eb1da07f47de06c6612999"}), 
-                        false, 
-                        false),
-                    new ListItemModel(
-                        new BucketModel( 
-                            {isDecrypted: true, 
-                            hash: 1333708071, 
-                            created: new Date().getDate(), 
-                            name: "name2", 
-                            id: "98eb1da07f47de06c6612991"}), 
-                        false, 
-                        false),
-                    new ListItemModel(
-                        new BucketModel( 
-                            {isDecrypted: true, 
-                            hash: 1243708071, 
-                            created: new Date(), 
-                            name: "name3", 
-                            id: "98eb1da07f47de06c6612929"}), 
-                        false, 
-                        false),
-        ];
-        return data;
+        this.starredBuckets = props.buckets.filter(item => item.getStarred());
+        this.starredCount = this.starredBuckets.length;
     }
 
     render() {
@@ -100,13 +68,13 @@ export default class DashboardListComponent extends Component{
                             </TouchableOpacity>
                         </View>
                         {
-                            listComponent('Favourites', this.data, this.props)
+                            listComponent('Favourites', this.starredBuckets.slice(0, 3), this.props, this.starredCount)
                         }
                         {
-                            listComponent('Recent sync', this.data, this.props)
+                            listComponent('Recent sync', this.starredBuckets.slice(0, 3), this.props, this.starredCount)
                         }     
                         {
-                            listComponent('Trash', this.data, this.props)
+                            listComponent('Trash', this.starredBuckets.slice(0, 3), this.props, this.starredCount)
                         }
                     </ScrollView>
                 </View>
@@ -115,7 +83,7 @@ export default class DashboardListComponent extends Component{
     }
 }
 
-const listComponent = (title, data, props) => {
+const listComponent = (title, data, props, count) => {
 
     function onPress(params) {
         // props.openBucket(params.bucketId);
@@ -145,6 +113,7 @@ const listComponent = (title, data, props) => {
                 selectItem = { props.selectItem }
                 data = { data } />
             <DashboardListFooterComponent
+                count = { count } 
                 onPress = { () => {} } />
         </View>
     )

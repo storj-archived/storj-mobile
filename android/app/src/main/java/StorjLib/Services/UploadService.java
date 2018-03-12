@@ -176,5 +176,13 @@ public final class UploadService extends BaseReactService {
 
             dbo.notifyAll();
         }
+
+        /*while(true) {
+            try {
+                Thread.currentThread().wait(2000);
+            } catch(Exception e) {
+                Log.d("SERVICE DEBUG", "alive");
+            }
+        }*/
     }
 }

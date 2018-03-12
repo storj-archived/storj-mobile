@@ -92,7 +92,7 @@ public abstract class BaseRepository {
         boolean columnValuesAreValid = columnValues != null && columnValues.length != 0;
 
         if (!(columnNamesAreValid && columnValuesAreValid))
-            return BaseContract._DEFAULT_WHERE_CLAUSE + id;
+            return BaseContract._DEFAULT_WHERE_CLAUSE;
 
         int length = columnNames.length < columnValues.length
                 ? columnNames.length : columnValues.length;

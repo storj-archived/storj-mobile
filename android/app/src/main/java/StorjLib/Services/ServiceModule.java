@@ -33,8 +33,8 @@ import storjlib.Models.PromiseHandler;
 
 public class ServiceModule extends ReactContextBaseJavaModule {
 
-    public final static String GET_SERVICE = "storjlib.Services.GetBucketsService";
-    public final static String UPLOAD_SERVICE = "storjlib.Services.UploadService";
+    public final static String GET_SERVICE = "storjlib.services.GetBucketsService";
+    public final static String UPLOAD_SERVICE = "storjlib.services.UploadService";
     public final static String GET_BUCKETS = "GET_BUCKETS";
     public final static String GET_FILES = "GET_FILES";
     public final static String BUCKET_CREATED = "BUCKET_CREATED";
@@ -148,19 +148,11 @@ public class ServiceModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void createBucket(final String bucketName) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
-                    serviceIntent.setAction(BUCKET_CREATED);
-                    serviceIntent.putExtra("bucketName", bucketName);
+        Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
+        serviceIntent.setAction(BUCKET_CREATED);
+        serviceIntent.putExtra("bucketName", bucketName);
 
-                    getReactApplicationContext().startService(serviceIntent);
-                } catch (Exception e) {
-                }
-            }
-        }).run();
+        getReactApplicationContext().startService(serviceIntent);
     }
 
     @ReactMethod
