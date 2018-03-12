@@ -184,7 +184,7 @@ public class GetBucketsService extends BaseReactService {
                 getDb().beginTransaction();
 
                 try {
-                    List<FileDbo> fileDbos = fRepository().get(bucketId);
+                    List<FileDbo> fileDbos = fRepository().getAll(bucketId);
 
                     int length = files.length;
                     boolean[] isUpdate = new boolean[files.length];

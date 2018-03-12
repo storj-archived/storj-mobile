@@ -18,6 +18,10 @@ const ServiceModule = (() => {
             return await serviceModule.bindUploadService();
         }
 
+        getBuckets() {
+            serviceModule.getBuckets();
+        }
+
         uploadFile(bucketId, uri) {
             serviceModule.uploadFile(bucketId, uri);
         }

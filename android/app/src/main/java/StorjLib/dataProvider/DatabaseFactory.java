@@ -4,12 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-<<<<<<< HEAD
 import storjlib.dataProvider.contracts.BucketContract;
 import storjlib.dataProvider.contracts.FileContract;
-=======
 import storjlib.dataProvider.contracts.UploadingFileContract;
->>>>>>> Uploading moved to separate thread
 
 /**
  * Created by Crawter on 02.03.2018.
