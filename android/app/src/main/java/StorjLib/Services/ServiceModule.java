@@ -15,7 +15,6 @@ import com.facebook.react.bridge.ReactMethod;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
 import storjlib.GsonSingle;
 import storjlib.Models.BucketModel;
 import storjlib.Models.FileModel;
@@ -26,9 +25,7 @@ import storjlib.dataProvider.Dbo.BucketDbo;
 import storjlib.dataProvider.Dbo.FileDbo;
 import storjlib.dataProvider.repositories.BucketRepository;
 import storjlib.dataProvider.repositories.FileRepository;
-=======
 import storjlib.Models.PromiseHandler;
->>>>>>> Uploading moved to separate thread
 
 /**
  * Created by Yaroslav-Note on 3/6/2018.
@@ -90,14 +87,11 @@ public class ServiceModule extends ReactContextBaseJavaModule {
     public ServiceModule(ReactApplicationContext reactContext)
     {
         super(reactContext);
-<<<<<<< HEAD
         _db = new DatabaseFactory(getReactApplicationContext(), null).getWritableDatabase();
         _fRepository = new FileRepository(_db);
         _bRepository = new BucketRepository(_db);
-=======
         mPromise = new PromiseHandler();
         mUploadServicePromise = new PromiseHandler();
->>>>>>> Uploading moved to separate thread
     }
 
     @Override
@@ -130,26 +124,10 @@ public class ServiceModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-<<<<<<< HEAD
-    public void listBuckets(final Promise promise) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase();
-
-                    BucketRepository bucketRepository = new BucketRepository(db);
-
-                    List<BucketDbo> bucketDbos = bucketRepository.getAll();
-
-                    int length = bucketDbos.size();
-                    BucketModel[] bucketModels = new BucketModel[length];
-=======
     public void uploadFile(String bucketId, String uri) {
         if(bucketId == null || uri == null) {
             return;
         }
->>>>>>> Uploading moved to separate thread
 
         Intent uploadIntent = new Intent(getReactApplicationContext(), UploadService.class);
         uploadIntent.setAction(UploadService.ACTION_UPLOAD_FILE);
@@ -166,34 +144,6 @@ public class ServiceModule extends ReactContextBaseJavaModule {
         serviceIntent.putExtra("bucketId", bucketId);
 
         getReactApplicationContext().startService(serviceIntent);
-    }
-
-<<<<<<< HEAD
-    @ReactMethod
-    public void listFiles(final String bucketId, final Promise promise) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase();
-
-                    FileRepository fileRepository = new FileRepository(db);
-
-                    ArrayList<FileDbo> fileDbos = (ArrayList)fileRepository.get(bucketId);
-
-                    int length = fileDbos.size();
-                    FileModel[] fileModels = new FileModel[length];
-
-                    for(int i = 0; i < length; i++) {
-                        fileModels[i] = fileDbos.get(i).toModel();
-                    }
-
-                    promise.resolve(new SingleResponse(true, toJson(fileModels), null).toWritableMap());
-                } catch (Exception e) {
-                    promise.resolve(new SingleResponse(false, null, e.getMessage()).toWritableMap());
-                }
-            }
-        }).run();
     }
 
     @ReactMethod
@@ -311,14 +261,7 @@ public class ServiceModule extends ReactContextBaseJavaModule {
         }).run();
     }
 
-    private <T> String toJson(T[] convertible) {
-=======
-    private <T> String toJson(T[] convertible) {
-        return GsonSingle.getInstanse().toJson(convertible);
-    }
-
     private <T> String toJson(T convertible) {
->>>>>>> Uploading moved to separate thread
         return GsonSingle.getInstanse().toJson(convertible);
     }
 

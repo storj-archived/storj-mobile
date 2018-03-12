@@ -47,6 +47,27 @@ public class FileRepository extends BaseRepository {
         return result;
     }
 
+    public List<FileDbo> getAll(String bucketId) {
+        List<FileDbo> result = new ArrayList();
+        String[] selectionArgs = {
+                bucketId
+        };
+        Cursor cursor = _db.query(FileContract.TABLE_NAME,
+                null,
+                FileContract.FILE_FK + " = ?",
+                selectionArgs,
+                null,
+                null,
+                null,
+                null);
+
+        result = _getListFromCursor(cursor);
+
+        cursor.close();
+
+        return result;
+    }
+
     public List<FileDbo> getAll(String orderByColumn, boolean isDesc) {
         List<FileDbo> result = new ArrayList();
         String column = orderByColumn;
@@ -89,8 +110,8 @@ public class FileRepository extends BaseRepository {
 
         Cursor cursor = _db.query(
                 FileContract.TABLE_NAME,
-                _columns,
-                FileContract.FILE_FK + " = ?",
+                null,
+                FileContract._ID + " = ?",
                 selectionArgs,
                 null, null, orderBy, null);
 
@@ -190,6 +211,7 @@ public class FileRepository extends BaseRepository {
 
         return model;
     }
+
 
     private List<FileDbo> _getListFromCursor(Cursor cursor) {
         List<FileDbo> result = new ArrayList();

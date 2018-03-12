@@ -3,20 +3,16 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { mainContainerActions, favouritesActions } from '../reducers/mainContainer/mainReducerActions';
-import { mainContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
-import { mainContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import fileActions, { mainContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { redirectToMainScreen } from '../reducers/navigation/navigationActions';
 import FileModel from '../models/FileModel';
 import BucketModel from '../models/BucketModel';
 import ListItemModel from '../models/ListItemModel';
 import StorjLib from '../utils/StorjModule';
-import ServiceModule from '../utils/ServiceModule';
 import FilePicker from '../utils/filePicker';
 import TabBarActionModelFactory from '../models/TabBarActionModel';
 import MainComponent from '../components/MainComponent';
 import filePicker from '../utils/filePicker';
-import observablePropFactory from '../models/ObservableProperty';
 
 import ServiceModule from '../utils/ServiceModule';
 import SyncModule from '../utils/SyncModule';
@@ -52,11 +48,6 @@ class MainContainer extends Component {
             TabBarActionModelFactory.createNewAction(() => { this.deleteSelectedFiles(); }, 'Action 9', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
 
-
-        this.uploadListener = (fileParams) => {
-            let res = observablePropFactory.getObservable(fileParams.filePath);
-            res.Property = fileParams;
-        }
         this.downloadListener = (fileParams) => {
             let res = observablePropFactory.getObservable(fileParams.fileId);
             res.Property = fileParams;
@@ -93,8 +84,6 @@ class MainContainer extends Component {
         });
 
         console.log("uploadingFiles", uploadingFiles);
-
-
 
         DeviceEventEmitter.addListener("EVENT_BUCKETS_UPDATED", async (result) => {   
             console.log("FromEvent", result);      
