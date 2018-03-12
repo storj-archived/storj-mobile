@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     mainContainer: {
         backgroundColor: 'white', 
         width: getWidth(355),
-        height: getHeight(547),
+        height: getHeight(530),
         paddingHorizontal: getWidth(10),
         paddingVertical: getHeight(10),
         marginTop: getHeight(90),

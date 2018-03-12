@@ -46,7 +46,7 @@ export default class AddCreditComponent extends Component {
                                 <View style = { styles.fourthTextBlockMargin }>
                                     <QRCode
                                         value = { 'BTC WALLET' }
-                                        size = { 150 }
+                                        size = { getHeight(150) }
                                         bgColor = { 'black' }
                                         fgColor = { 'white' } />
                                 </View>
@@ -85,7 +85,7 @@ export default class AddCreditComponent extends Component {
                                 <View style = { styles.fourthTextBlockMargin }>
                                     <QRCode
                                         value = { myAccountConstants.storjCredentials[2] }
-                                        size = { 150 }
+                                        size = { getHeight(150) }
                                         bgColor = { 'black' }
                                         fgColor = { 'white' } />
                                 </View>
