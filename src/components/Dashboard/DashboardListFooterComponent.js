@@ -12,13 +12,20 @@ export default class DashboardListFooterComponent extends Component {
     constructor(props) {
         super(props)
     }
+    
+    getCount() {
+        let count = this.props.count;
+        
+        if(count > 3) return count - 3;
+        if(count <= 3) return '';
+    }
 
     render() {
         return(
             <TouchableOpacity onPress = { this.props.onPress }>
                 <View style = { footerLinkStyles.container }>
                     <View style = { footerLinkStyles.contentContainer }>
-                        <Text style = { footerLinkStyles.titleText }>2 more...</Text>
+                        <Text style = { footerLinkStyles.titleText }>{ this.getCount() + " more..." } </Text>
                         <View style = { footerLinkStyles.flexRow } >
                             <Image 
                                 style = { footerLinkStyles.expandImage } 

@@ -104,21 +104,17 @@ public class GetBucketsService extends BaseReactService {
                 if(buckets == null) {
                     return;
                 }
-
-                SQLiteDatabase db = new DatabaseFactory(GetBucketsService.this, null).getWritableDatabase();
-                BucketRepository bucketRepository = new BucketRepository(db);
+                //SQLiteDatabase db = new DatabaseFactory(GetBucketsService.this, null).getWritableDatabase();
 
                 if(buckets.length == 0) {
-                    bucketRepository.deleteAll();
-                    db.close();
+                    bRepository().deleteAll();
+                    getDb().close();
                     return;
                 }
 
-                db.beginTransaction();
+                getDb().beginTransaction();
 
                 try {
-                    getDb().beginTransaction();
-
                     List<BucketDbo> bucketDbos = bRepository().getAll();
 
                     int length = buckets.length;
@@ -243,8 +239,9 @@ public class GetBucketsService extends BaseReactService {
                     return;
                 }
 
-                if(insertionResponse.isSuccess()){
-                    sendEvent(EVENT_FILES_UPDATED, true);
+                if(insertionResponse.isSuccess()) {
+                    sendEvent(EVENT_BUCKET_CREATED, new SingleResponse(true,
+                            toJson(new BucketModel(bucket)), null).toWritableMap());
                     return;
                 }
 

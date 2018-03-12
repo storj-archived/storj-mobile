@@ -10,7 +10,6 @@ import { bindActionCreators } from 'redux';
 import { addNavigationHelpers } from 'react-navigation';
 import StackNavigator from '../navigators/StackNavigator';
 import { NavigationActions } from 'react-navigation';
-import ServiceModule from '../utils/ServiceModule';
 import eventNames from '../utils/constants/eventNames';
 import {
     bucketsContainerActions,
@@ -23,6 +22,9 @@ import { redirectToLoginScreen } from '../reducers/navigation/navigationActions'
 import ListItemModel from '../models/ListItemModel';
 import BucketModel from '../models/BucketModel';
 
+import SyncModule from '../utils/SyncModule';
+import ServiceModule from '../utils/ServiceModule';
+
 /**
  * Component that contains main navigator
  */
@@ -32,16 +34,17 @@ class Apps extends Component {
         super(props);
 
 		this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
-		this.serviceListener = null;
+		this.getbucketsListener = null;
 		this.bucketCreatedListener = null;
 		this.bucketDeletedListener = null;
 		this.fileDeletedListener = null;
     }
 
 	async componentWillMount() {
-		await ServiceModule.bindService();
+		console.log(await ServiceModule.bindService());
+		console.log(await ServiceModule.bindUploadService());
 
-		this.serviceListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKETS_UPDATED, this.onBucketsReceived.bind(this));       
+		this.getbucketsListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKETS_UPDATED, this.onBucketsReceived.bind(this));       
 		this.bucketCreatedListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKET_CREATED, this.onBucketCreated.bind(this));       
 		this.bucketDeletedListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKET_DELETED, this.onBucketDeleted.bind(this));       
 		this.fileDeletedListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILE_DELETED, this.onFileDeleted.bind(this));       	
@@ -58,6 +61,7 @@ class Apps extends Component {
 			BackHandler.removeEventListener("hardwareBackPress", this.onHardwareBackPress);
 		}
 		
+		this.getbucketsListener.remove();
 		this.bucketCreatedListener.remove();
 		this.bucketDeletedListener.remove();
 		this.fileDeletedListener.remove();
@@ -74,7 +78,7 @@ class Apps extends Component {
 
 	async onBucketsReceived() {
         this.props.setLoading();
-		let bucketsResponse = await ServiceModule.listBuckets();
+		let bucketsResponse = await SyncModule.listBuckets();
 
         if(bucketsResponse.isSuccess) {
             let buckets = JSON.parse(bucketsResponse.result).map((file) => {

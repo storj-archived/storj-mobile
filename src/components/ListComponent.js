@@ -278,7 +278,7 @@ export default class ListComponent extends Component {
                     progress = { item.progress }
                     isLoading = { item.isLoading }
                     listItemIcon = { this.props.listItemIcon }
-                    starredItemIcon = { this.props.starredItemIcon }
+                    starredListItemIcon = { this.props.starredListItemIcon }
                     onSelectionPress = { () => { this.selectItem(item); } }
                     onPress = { this.props.onPress }
                     onSingleItemSelected = { this.props.onSingleItemSelected } />

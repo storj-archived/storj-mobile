@@ -109,32 +109,17 @@ class MainContainer extends Component {
         });
 
         DeviceEventEmitter.addListener("EVENT_FILE_UPLOAD_START", async (response) => {
-            console.log("EVENT_FILE_UPLOAD_START", response);
-
             this.props.getUploadingFile(response.fileHandle);
         });
 
         DeviceEventEmitter.addListener("EVENT_FILE_UPLOADED_PROGRESS", async (result) => {
-            console.log("EVENT_FILE_UPLOADED_PROGRESS", result);
-            //bucketId, filePath, progress, fileRef
             this.props.updateFileUploadProgress(result.fileHandle, result.progress, result.uploaded);
-            //let uploadingfile = JSON.parse(result.result);
-            //console.log(uploadingfile);
         });
         DeviceEventEmitter.addListener("EVENT_FILE_UPLOADED_SUCCESSFULLY", async (result) => {
-            console.log("EVENT_FILE_UPLOADED_SUCCESSFULLY", result);
-
-            console.log(result);
             this.props.uploadSuccess(result.fileHandle, result.fileId);
-            //let response = JSON.parse(result);
-            //console.log(response);
         });
         DeviceEventEmitter.addListener("EVENT_FILE_UPLOAD_ERROR", async (result) => {
-            console.log("EVENT_FILE_UPLOAD_ERROR", result);
-
             this.props.uploadFileError(result.fileHandle);
-            //let response = JSON.parse(result);
-            //console.log(response);
         });
     }
 
@@ -157,7 +142,7 @@ class MainContainer extends Component {
             BackHandler.removeEventListener("hardwareBackPress");
         }
 
-        observablePropFactory.clean();
+        DeviceEventEmitter.removeListener("downloadFile", this.downloadListener);
 
         this.keyboardDidShowListener.remove();
     }
