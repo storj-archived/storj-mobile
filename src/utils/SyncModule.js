@@ -11,6 +11,7 @@ const SyncModule = (() => {
         }
 
         async listBuckets() {
+            console.log("listBuckets");
             return await syncModule.listBuckets();
         }
 
