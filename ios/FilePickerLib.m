@@ -158,18 +158,15 @@ RCT_REMAP_METHOD(show, showWithOptions:(NSDictionary *) options
   [fileManager moveItemAtURL:videoURL toURL:videoDestinationURL error:&error];
   if (error) {
     self.resolve(@{@KEY_PATH:@"",
-                    @KEY_ERROR_MESSAGE:[error localizedDescription]
-                    });
+                    @KEY_ERROR_MESSAGE:[error localizedDescription]});
     return;
   }
   if(videoDestinationURL){
     self.resolve(@{@KEY_PATH:videoDestinationURL.absoluteString,
-                    @KEY_ERROR_MESSAGE:@""
-                    });
+                    @KEY_ERROR_MESSAGE:@""});
   } else{
     self.resolve(@{@KEY_PATH:@"",
-                    @KEY_ERROR_MESSAGE:[error localizedDescription]
-                    });
+                    @KEY_ERROR_MESSAGE:[error localizedDescription]});
   }
 }
 

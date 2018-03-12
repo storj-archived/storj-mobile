@@ -1,4 +1,4 @@
-import { Keyboard, DeviceEventEmitter, BackHandler, Platform } from 'react-native';
+import { Keyboard, DeviceEventEmitter, BackHandler, Platform, NativeEventEmitter } from 'react-native';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -56,10 +56,12 @@ class MainContainer extends Component {
     componentWillMount () {
         if(Platform.OS === "android") {
             BackHandler.addEventListener("hardwareBackPress", this.onHardwareBackPress);
+            DeviceEventEmitter.addListener("uploadFile", this.uploadListener);
+            DeviceEventEmitter.addListener("downloadFile", this.downloadListener);
+        } else {
+            const uploadEmitter = new NativeEventEmitter(StorjLib.getStorjLibNativeModule());
+            uploadEmitter.addListener('uploadFile', this.uploadListener);
         }
-
-        DeviceEventEmitter.addListener("uploadFile", this.uploadListener);
-        DeviceEventEmitter.addListener("downloadFile", this.downloadListener);
 
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => { this.props.disableSelectionMode(); });
     }
@@ -67,10 +69,10 @@ class MainContainer extends Component {
     componentWillUnmount () {
         if(Platform.OS === "android") {
             BackHandler.removeEventListener("hardwareBackPress");
+            DeviceEventEmitter.removeListener("uploadFile", this.uploadListener);
+            DeviceEventEmitter.removeListener("downloadFile", this.downloadListener);
         }
 
-        DeviceEventEmitter.removeListener("uploadFile", this.uploadListener);
-        DeviceEventEmitter.removeListener("downloadFile", this.downloadListener);
         observablePropFactory.clean();
 
         this.keyboardDidShowListener.remove();
@@ -126,6 +128,7 @@ class MainContainer extends Component {
             const observer = observablePropFactory.getObservable(filePickerResponse.path);
             observer.addListener({ id: filePickerResponse.path + this.props.openedBucketId, callback: (param) => { 
                 if(this.props.openedBucketId === param.bucketId)
+                    console.log("progress" + param.progress + ", filePointer: " + param.filePointer);
                     this.props.updateFileUploadProgress(param.bucketId, param.filePath, param.progress, param.filePointer);
             }});
 

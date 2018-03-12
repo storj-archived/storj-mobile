@@ -54,6 +54,7 @@
 		DC2841E6204972FD0093183F /* StorjIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC2841E020496AEA0093183F /* StorjIOS.framework */; };
 		DC2841E7204972FD0093183F /* StorjIOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DC2841E020496AEA0093183F /* StorjIOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DCACD444201FDF630050921B /* StorjLibIos.m in Sources */ = {isa = PBXBuildFile; fileRef = DCACD443201FDF630050921B /* StorjLibIos.m */; };
+		DCC368832056B6D4004813CD /* DatabaseFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC368822056B6D4004813CD /* DatabaseFactory.m */; };
 		DCCD2FD520459F610032D3F5 /* FilePickerLib.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCD2FD420459F600032D3F5 /* FilePickerLib.m */; };
 		DDD138767961421DB8C87363 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A51459F91D3420BBC6E2C58 /* Montserrat-ExtraLight.ttf */; };
 		E1B69957B9F74BD08F47F764 /* Montserrat-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA3A41C878E0424E92862DE9 /* Montserrat-ExtraLightItalic.ttf */; };
@@ -424,6 +425,8 @@
 		DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StorjIOS.xcodeproj; path = "../../iOS-libstorj/StorjIOS/StorjIOS.xcodeproj"; sourceTree = "<group>"; };
 		DCACD442201FDF630050921B /* StorjLibIos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StorjLibIos.h; path = StorjMobile/StorjLibIos.h; sourceTree = "<group>"; };
 		DCACD443201FDF630050921B /* StorjLibIos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StorjLibIos.m; path = StorjMobile/StorjLibIos.m; sourceTree = "<group>"; };
+		DCC368812056B6D4004813CD /* DatabaseFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseFactory.h; sourceTree = "<group>"; };
+		DCC368822056B6D4004813CD /* DatabaseFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatabaseFactory.m; sourceTree = "<group>"; };
 		DCCD2FD320459F600032D3F5 /* FilePickerLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilePickerLib.h; sourceTree = "<group>"; };
 		DCCD2FD420459F600032D3F5 /* FilePickerLib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilePickerLib.m; sourceTree = "<group>"; };
 		DEF7D3FD619949DEBB4F5660 /* Montserrat-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBoldItalic.ttf"; path = "../src/fonts/Montserrat/Montserrat-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
@@ -552,6 +555,7 @@
 		13B07FAE1A68108700A75B9A /* StorjMobile */ = {
 			isa = PBXGroup;
 			children = (
+				DCC368802056B6BB004813CD /* dataProvider */,
 				DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */,
 				DCACD442201FDF630050921B /* StorjLibIos.h */,
 				DCACD443201FDF630050921B /* StorjLibIos.m */,
@@ -745,6 +749,39 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DCC368802056B6BB004813CD /* dataProvider */ = {
+			isa = PBXGroup;
+			children = (
+				DCC368862056BD08004813CD /* contracts */,
+				DCC368852056BCF7004813CD /* dbo */,
+				DCC368842056BC9D004813CD /* repositories */,
+				DCC368812056B6D4004813CD /* DatabaseFactory.h */,
+				DCC368822056B6D4004813CD /* DatabaseFactory.m */,
+			);
+			path = dataProvider;
+			sourceTree = "<group>";
+		};
+		DCC368842056BC9D004813CD /* repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = repositories;
+			sourceTree = "<group>";
+		};
+		DCC368852056BCF7004813CD /* dbo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = dbo;
+			sourceTree = "<group>";
+		};
+		DCC368862056BD08004813CD /* contracts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = contracts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1242,6 +1279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCC368832056B6D4004813CD /* DatabaseFactory.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				DCACD444201FDF630050921B /* StorjLibIos.m in Sources */,

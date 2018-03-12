@@ -21,6 +21,11 @@
 @synthesize storjWrapper = _storjWrapper;
 RCT_EXPORT_MODULE();
 
+- (NSArray<NSString *> *)supportedEvents
+{
+  return @[@"uploadFile"];
+}
+
 -(StorjWrapper *)storjWrapper{
   if(!_storjWrapper){
     _storjWrapper = [[StorjWrapper alloc] init];
@@ -34,17 +39,15 @@ RCT_REMAP_METHOD(generateMnemonic,
                  rejecter:(RCTPromiseRejectBlock)reject){
   
   NSString *mnemonic = [self.storjWrapper generateMnemonic:256];
+  NSDictionary *result = nil;
   if(mnemonic){
-//    NSDictionary *object = @{@KEY_IS_SUCCESS : @YES,
-//                             @KEY_RESULT: @{@"mnemonic":mnemonic}
-//                             };
-//    resolve(object);
-    resolve(mnemonic);
+    result = @{@KEY_IS_SUCCESS : @YES,
+                @KEY_RESULT: mnemonic};
   } else {
-    resolve(@{@KEY_IS_SUCCESS:@NO,
-               @KEY_ERROR_MESSAGE: @"Unable to generate mnemonic",
-               });
+    result =@{@KEY_IS_SUCCESS:@NO,
+               @KEY_ERROR_MESSAGE: @"Unable to generate mnemonic"};
   }
+  resolve(result);
 }
 
 RCT_REMAP_METHOD(checkMnemonic,
@@ -52,10 +55,8 @@ RCT_REMAP_METHOD(checkMnemonic,
                  resolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-//  BOOL isMnemonicValid = [self.storjWrapper checkMnemonic];
-//  resolve(@{@KEY_IS_SUCCESS:@(isMnemonicValid)});
   BOOL isMnemonicValid = [self.storjWrapper checkMnemonic:mnemonic];
-  resolve(@(isMnemonicValid));
+  resolve(@{@KEY_IS_SUCCESS : @(isMnemonicValid)});
 }
 
 #pragma mark - Keys requsts
@@ -65,9 +66,8 @@ RCT_REMAP_METHOD(verifyKeys,
                  resolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject ){
   BOOL isVerificationSuccessfull =
-    [self.storjWrapper verifyKeysWithUserEmail:email andPassword:password];
-//  resolve(@{@KEY_IS_SUCCESS:@(isVerificationSuccessfull)});
-resolve(@(isVerificationSuccessfull));
+  [self.storjWrapper verifyKeysWithUserEmail:email andPassword:password];
+  resolve(@{@KEY_IS_SUCCESS:@(isVerificationSuccessfull)});
 }
 
 RCT_REMAP_METHOD(keysExists,
@@ -75,8 +75,14 @@ RCT_REMAP_METHOD(keysExists,
                  rejecter:(RCTPromiseRejectBlock)reject){
   
   BOOL areKeysExist = [self.storjWrapper authFileExist];
-  resolve(@(areKeysExist));
-//  resolve(@{@KEY_IS_SUCCESS: @(areKeysExist)});
+  NSDictionary *response = nil;
+  if(areKeysExist){
+    response = @{@KEY_IS_SUCCESS:@YES};
+  } else {
+    response = @{@KEY_IS_SUCCESS:@NO,
+                  @KEY_ERROR_MESSAGE:@"Unable to get keys"};
+  }
+  resolve(response);
 }
 
 RCT_REMAP_METHOD(importKeys,
@@ -91,23 +97,27 @@ RCT_REMAP_METHOD(importKeys,
                                               password:password
                                               mnemonic:mnemonic
                                            andPasscode:passcode];
-  //revrite using adequate response;
-  resolve(@(result));
+  resolve(@{@KEY_IS_SUCCESS:@(result)});
 }
 
+
 RCT_EXPORT_METHOD(getKeys: (NSString *) passcode
-                  successCallback:(RCTResponseSenderBlock) success
-                  errorCallback:(RCTResponseSenderBlock) error)
+                  successCallback:(RCTPromiseResolveBlock) resolve
+                  errorCallback:(RCTPromiseRejectBlock) reject)
 {
   NSDictionary * authCredentials = [self.storjWrapper getKeysWithPassCode:passcode];
   NSLog(@"%@", authCredentials);
+  NSDictionary *response = nil;
   if(!authCredentials || authCredentials.count != 3){
-    NSLog(@"Error with externing keys");
-    error(@[@{@"errorMessage":@"Error with getting keys. Entries.count ≠ 3"}]);
+    NSLog(@"Error externing keys");
+    response = @{@KEY_IS_SUCCESS:@(NO),
+                  @KEY_ERROR_MESSAGE:@"Error with getting keys. Entries.count ≠ 3"};
   } else{
     NSLog(@"Successfull keys extern");
-    success(@[authCredentials]);
+    response = @{@KEY_IS_SUCCESS:@(YES),
+                  @KEY_RESULT:authCredentials};
   }
+  resolve(response);
 }
 
 RCT_REMAP_METHOD(register,
@@ -120,16 +130,16 @@ RCT_REMAP_METHOD(register,
   callback.onSuccess = ^(NSString *email){
     NSString * mnemonic = [_storjWrapper generateMnemonic:256];
     resolve(@{@KEY_IS_SUCCESS : @YES,
-               @"mnemonic":mnemonic});
+                              @KEY_RESULT:mnemonic});
   };
   callback.onError = ^(int errorCode, NSString * _Nullable errorMessage) {
-    NSDictionary *object = @{@KEY_IS_SUCCESS : @NO,
-                             @KEY_ERROR_MESSAGE : errorMessage};
-    resolve(object);
+    resolve(@{@KEY_IS_SUCCESS : @NO,
+                              @KEY_ERROR_MESSAGE : errorMessage});
   };
+  
   [self.storjWrapper registerUser:login
-                     password:password
-                 withCallback:callback];
+                         password:password
+                     withCallback:callback];
 }
 
 #pragma mark - Bucket requests
@@ -140,22 +150,23 @@ RCT_REMAP_METHOD(createBucket,
 {
   BucketCreateCallback *callback = [[BucketCreateCallback alloc]init];
   callback.onSuccess = ^(NSDictionary * _Nullable bucketDictionary) {
+    NSDictionary *response = nil;
     if(bucketDictionary){
-      resolve(@{@KEY_IS_SUCCESS:@YES,
-                 @KEY_RESULT:bucketDictionary
-                 });
+      response = @{@KEY_IS_SUCCESS:@YES,
+                    @KEY_RESULT: [StorjLibIos convertToJsonWithDictionary: bucketDictionary]};
     } else {
-      resolve(@{@KEY_IS_SUCCESS:@(NO)
-                 });
-      }
+      response = @{@KEY_IS_SUCCESS:@NO,
+                    @KEY_ERROR_MESSAGE:@"Unable to create bucket."};
+    }
+    resolve(response);
   };
   callback.onError = ^(int errorCode, NSString * _Nullable errorMessage) {
     resolve(@{@KEY_IS_SUCCESS:@NO,
-              @KEY_ERROR_MESSAGE:errorMessage
-              });
-    
+                              @KEY_ERROR_MESSAGE:errorMessage});
   };
-  [self.storjWrapper createBucket:bucketName withCallback:callback];
+  
+  [self.storjWrapper createBucket:bucketName
+                     withCallback:callback];
 }
 
 RCT_REMAP_METHOD(deleteBucket,
@@ -166,13 +177,12 @@ RCT_REMAP_METHOD(deleteBucket,
   BucketDeleteCallback *callback = [[BucketDeleteCallback alloc] init];
   callback.onSuccess = ^{
     NSLog(@"Successfully deleted bucket %@",bucketId);
-    resolve(@{@KEY_IS_SUCCESS:@YES});
+    resolve(@{@KEY_IS_SUCCESS: @YES});
   };
   callback.onError = ^(int errorCode, NSString * _Nullable errorMessage) {
     NSLog(@"Error with deleting bucket. cause:%@", errorMessage);
     resolve(@{@KEY_IS_SUCCESS: @NO,
-               @KEY_ERROR_MESSAGE: errorMessage
-               });
+               @KEY_ERROR_MESSAGE: errorMessage});
   };
   
   [self.storjWrapper deleteBucket:bucketId withCompletion:callback];
@@ -185,16 +195,15 @@ RCT_REMAP_METHOD(getBuckets,
   BucketListCallback *callback = [[BucketListCallback alloc] init];
   callback.onSuccess = ^(NSArray<NSDictionary *> * _Nullable bucketsArray) {
     if(bucketsArray){
-//      resolve(@{@KEY_IS_SUCCESS: @YES,
-//                 @KEY_RESULT:bucketsArray
-//                 });
-      resolve(bucketsArray);
+      resolve(@{@KEY_IS_SUCCESS: @YES,
+                                @KEY_RESULT:[StorjLibIos convertToJsonWithArray: bucketsArray]});
     } else {
       resolve(@{@KEY_IS_SUCCESS: @NO});
     }
   };
   callback.onError = ^(int errorCode, NSString * _Nullable errorMessage) {
-    resolve(@{@KEY_IS_SUCCESS: @NO});
+    resolve(@{@KEY_IS_SUCCESS: @NO,
+               @KEY_ERROR_MESSAGE:errorMessage});
   };
   [self.storjWrapper getBucketListWithCompletion:callback];
 }
@@ -208,17 +217,17 @@ RCT_REMAP_METHOD(listFiles,
   NSLog(@"Listing files for bucketId: %@", bucketId);
   if(!bucketId || bucketId.length == 0){
     resolve(@{@KEY_IS_SUCCESS:@(NO),
-               @KEY_ERROR_MESSAGE:@"Invalid bucket id"});
+                              @KEY_ERROR_MESSAGE:@"Invalid bucket id"});
     return;
   }
   FileListCallback *callback = [[FileListCallback alloc]init];
   callback.onSuccess = ^(NSArray<NSDictionary *> * _Nullable fileArray) {
     resolve(@{@KEY_IS_SUCCESS:@(YES),
-              @KEY_RESULT:fileArray});
+                              @KEY_RESULT:[StorjLibIos convertToJsonWithArray: fileArray]});
   };
   callback.onError = ^(int errorCode, NSString * _Nullable errorMessage) {
     resolve(@{@KEY_IS_SUCCESS:@(NO),
-               @KEY_ERROR_MESSAGE:errorMessage});
+                              @KEY_ERROR_MESSAGE:errorMessage});
   };
   [self.storjWrapper listFiles:bucketId withCompletion:(callback)];
 }
@@ -231,35 +240,127 @@ RCT_REMAP_METHOD(deleteFile,
   NSLog(@"Deleting file %@", fileId);
   FileDeleteCallback *callback = [[FileDeleteCallback alloc] init];
   callback.onSuccess = ^{
-        NSLog(@"Successfully deleted file %@",fileId);
-        resolve(@{@KEY_IS_SUCCESS:@YES});
+    NSLog(@"Successfully deleted file %@",fileId);
+    resolve(@{@KEY_IS_SUCCESS:@YES});
   };
   callback.onError = ^(int errorCode, NSString * _Nullable errorMessage) {
     NSLog(@"Error with deleting bucket. cause:%@", errorMessage);
-        resolve(@{@KEY_IS_SUCCESS: @NO,
-                  @KEY_ERROR_MESSAGE: errorMessage});
+    resolve(@{@KEY_IS_SUCCESS: @NO,
+                              @KEY_ERROR_MESSAGE: errorMessage});
   };
   
   [self.storjWrapper deleteFile:fileId fromBucket:bucketId withCompletion:callback];
 }
 
 RCT_REMAP_METHOD(downloadFile,
-                  downloadFileWithBucketId:(NSString *) bucketId
-                  fileId:(NSString *) fileId
-                  localPath:(NSString *) localPath
-                  resolver:(RCTPromiseResolveBlock)resolve
-                  rejecter:(RCTPromiseRejectBlock)reject)
+                 downloadFileWithBucketId:(NSString *) bucketId
+                 fileId:(NSString *) fileId
+                 localPath:(NSString *) localPath
+                 resolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
 {
-//  FileDownloadCallback *callback = 
+//  NSLog(@"Downloading file ")
+  //TODO normal flow
+  FileDownloadCallback *callback = [[FileDownloadCallback alloc]init];
+  callback.onError = ^(int errorCode, NSString * _Nullable errorMessage) {
+    NSLog(@"File download error %d, %@", errorCode, errorMessage);
+  };
+  callback.onDownloadComplete = ^(NSString *fileId, NSString *localPath) {
+    NSLog(@"Download complete, %@, %@", fileId, localPath);
+  };
+  callback.onDownloadProgress = ^(NSString *fileId, double progress, double downloadedBytes, double totalBytes) {
+    NSLog(@"Download progress for %@, %f", fileId, progress);
+  };
+  [self.storjWrapper downloadFile:fileId fromBucket:bucketId withCompletion:callback];
+}
+
+RCT_REMAP_METHOD(cancelUpload,
+                 cancelUploadByFileRef:(long)fileRef
+                 resolver:(RCTPromiseResolveBlock) resolve
+                 rejecter:(RCTPromiseRejectBlock) reject){
+}
+
+RCT_REMAP_METHOD(cancelDownload,
+                 cancelDownloadByFileRef:(long)fileRef
+                 resolver:(RCTPromiseResolveBlock) resolve
+                 rejecter:(RCTPromiseRejectBlock) reject){
 }
 
 RCT_REMAP_METHOD(uploadFile,
-                 uploadFileWithBucketId:(NSString *)
-                 bucketId withLocalPath:(NSString *)
-                 localPath resolver:(RCTPromiseResolveBlock)resolve
+                 uploadFileWithBucketId:(NSString *)bucketId
+                 withLocalPath:(NSString *) localPath
+                 resolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject){
+  if(!bucketId || bucketId.length == 0){
+    resolve(@{@KEY_IS_SUCCESS:@(NO), @KEY_ERROR_MESSAGE:@"Invalid bucketId"});
+    return;
+  }
   
+  if(!localPath || localPath.length == 0){
+    resolve(@{@KEY_IS_SUCCESS:@(NO), @KEY_ERROR_MESSAGE:@"Invalid localPath"});
+    return;
+  }
+  
+  __block int uploadProgress = 0;
+  long fileRef = 0;
+  NSLog(@"Uploading file located at: %@ into bucket: %@", localPath, bucketId);
+  
+  FileUploadCallback *callback = [[FileUploadCallback alloc] init];
+  callback.onSuccess = ^{
+    //TODO Return RESULT as JSON STRING
+    NSLog(@"File ref: %ld", fileRef);
+    NSLog(@"File uploaded");
+  };
+  
+  callback.onProgress = ^(NSString *fileId, double progress, double uploadedBytes, double totalBytes) {
+    int currentProgress = round(progress * 10);
+    
+    if(uploadProgress != currentProgress){
+      uploadProgress = currentProgress;
+      NSLog(@"file upload progress: %@, %d", fileId, uploadProgress);
+      [self sendEventWithName:@"uploadFile" body:@{@"bucketId": bucketId,
+                                                   @"filePath": localPath,
+                                                   @"progress": @(progress),
+                                                   @"uploadedBytes": @(uploadProgress),
+                                                   @"totalBytes": @(totalBytes),
+                                                   @"filePointer":@(fileRef)}];
+    }
+  };
+  
+  callback.onError = ^(int errorCode, NSString * _Nullable errorMessage) {
+    NSLog(@"error uploading file: %d, %@", errorCode, errorMessage);
+  };
+  fileRef = [self.storjWrapper uploadFile:localPath toBucket:bucketId withCompletion:callback];
 }
+
++(NSString *) convertToJsonWithDictionary:(NSDictionary *)dictionary{
+  NSError * err;
+  NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:&err];
+  if(!jsonData){
+    NSLog(@"Error while serialization");
+    return @"";
+  }
+  NSString *resultString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+  NSLog(@"result: %@", resultString);
+  return resultString;
+}
+
++(NSString *) convertToJsonWithArray:(NSArray *)array{
+  NSError * err;
+  NSData * jsonData = [NSJSONSerialization dataWithJSONObject:array options:0 error:&err];
+  if(!jsonData){
+    NSLog(@"Error while serialization");
+    return @"";
+  }
+  NSString *resultString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+  NSLog(@"result: %@", resultString);
+  return resultString;
+}
+
+//-(void)resolveWithBlock:(RCTPromiseResolveBlock) resolve andDictionary:(NSDictionary *)response{
+//  resolve([StorjLibIos convertToJsonWithDictionary:response]);
+//}
+
 @end
 
 

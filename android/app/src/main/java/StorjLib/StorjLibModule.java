@@ -15,6 +15,8 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import java.net.URLConnection;
 import java.security.Key;
+import java.util.ArrayList;
+import java.util.List;
 
 import StorjLib.CallbackWrappers.CreateBucketCallbackWrapper;
 import StorjLib.CallbackWrappers.DeleteFileCallbackWrapper;
@@ -210,6 +212,7 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
         new MethodHandler().invokeParallel(new BaseMethodParams(promise), new IMethodHandlerCallback() {
             @Override
             public void callback(IMethodParams param) {
+                List f = new ArrayList();
                 getStorj().getBuckets(new GetBucketsCallbackWrapper(promise));
             }
         });
