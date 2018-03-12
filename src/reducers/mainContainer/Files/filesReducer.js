@@ -27,13 +27,13 @@ const {
 const initialState = {
     fileListModels: [],
     uploadingFileListModels: [],
-    downloadedFileListModels: []
+    downloadedFileListModels: [],
+    uploadingFiles: []
 };
 
 export default function filesReducer(state = initialState, action) {
     let newState = Object.assign({}, state);
     let filesManager = new FileListManager(newState.fileListModels, newState.uploadingFileListModels, newState.downloadedFileListModels);
-
     switch(action.type) {
         case LIST_FILES:
             newState.fileListModels = filesManager.listFiles(action.payload.bucketId, action.payload.files);
@@ -48,10 +48,10 @@ export default function filesReducer(state = initialState, action) {
             newState.downloadedFileListModels = filesManager.addFileEntryD(action.payload.bucketId, { id: action.payload.file.getId(), path: action.payload.filePath });
             break;
         case UPLOAD_FILE_ERROR:
-            newState.uploadingFileListModels = filesManager.deleteFileEntryU(action.payload.bucketId, action.payload.filePath);
+            newState.uploadingFileListModels = filesManager.testDelete(action.payload.fileHandle);
             break;
         case UPDATE_FILE_UPLOAD_PROGRESS: 
-            newState.uploadingFileListModels = filesManager.updateFileUploadingProgress(action.payload.bucketId, action.payload.filePath, action.payload.progress, action.payload.fileRef);
+            newState.uploadingFileListModels = filesManager.testUpdate(action.payload.fileHandle, action.payload.progress, action.payload.uploaded);
             break;
         case DOWNLOAD_FILE_SUCCESS:
             newState.fileListModels = filesManager.fileDownloaded(action.payload.bucketId, action.payload.fileId);

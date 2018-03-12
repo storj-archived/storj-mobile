@@ -6,7 +6,8 @@ import bucketsScreenNavReducer from '../reducers/navigation/bucketsScreenNavRedu
 import dashboardScreenNavReducer from '../reducers/navigation/dashboardScreenNavReducer';
 import myAccountScreenNavReducer from '../reducers/navigation/myAccountScreenNavReducer';
 import filesReducer from '../reducers/mainContainer/Files/filesReducer';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from "redux-thunk"
 
 /**
  * Declaration of redux store with combining all reducers
@@ -22,4 +23,4 @@ const reducers = {
     filesReducer
 };
 
-export const store = createStore(combineReducers({ ...reducers }));
+export const store = createStore(combineReducers({ ...reducers }), applyMiddleware(thunk));

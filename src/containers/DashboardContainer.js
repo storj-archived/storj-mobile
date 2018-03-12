@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { DeviceEventEmitter } from 'react-native';
 import ServiceModule from '../utils/ServiceModule';
+import SyncModule from '../utils/SyncModule';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { dashboardContainerActions } from '../reducers/mainContainer/mainReducerActions';
-import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
-import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
+import { dashboardContainerActions, filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
+import { filesListContainerFileActions, mainContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { navigateBack, navigateToFilesScreen } from '../reducers/navigation/navigationActions';
+import { uploadFileStart, uploadFileSuccess } from '../reducers/asyncActions/fileActionsAsync';
 import BucketModel from '../models/BucketModel';
+import FileModel from '../models/FileModel';
 import ListItemModel from '../models/ListItemModel';
 import DashboardListComponent from '../components/DashboardListComponent';
 
@@ -58,13 +60,17 @@ function mapStateToProps(state) {
 }
     
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators( { 
-        ...dashboardContainerActions, 
-        ...filesListContainerFileActions, 
-        ...filesListContainerMainActions, 
-        navigateBack,
-        navigateToFilesScreen
-    }, dispatch);
+    return {
+        ...bindActionCreators( { 
+            ...dashboardContainerActions, 
+            ...filesListContainerFileActions, 
+            ...filesListContainerMainActions, 
+            navigateBack,
+            navigateToFilesScreen
+        }, dispatch),
+        getUploadingFile: (fileHandle) => dispatch(uploadFileStart(fileHandle)),
+        uploadSuccess: (fileHandle, fileId) => dispatch(uploadFileSuccess(fileHandle, fileId))
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardContainer);

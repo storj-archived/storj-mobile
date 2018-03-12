@@ -80,10 +80,10 @@ public class FileRepository extends BaseRepository {
         return result;
     }
 
-    public List<FileDbo> get(String bucketId) {
-        List<FileDbo> result = new ArrayList();
+    public FileDbo get(String fileId) {
+        FileDbo model = null;
         String[] selectionArgs = {
-                bucketId
+                fileId
         };
         String orderBy = FileContract._CREATED + " DESC";
 
@@ -94,11 +94,11 @@ public class FileRepository extends BaseRepository {
                 selectionArgs,
                 null, null, orderBy, null);
 
-        result = _getListFromCursor(cursor);
+        model = _getSingleFromCursor(cursor);
 
         cursor.close();
 
-        return result;
+        return model;
     }
 
     public Response insert(FileModel model) {
@@ -141,6 +141,10 @@ public class FileRepository extends BaseRepository {
             return new Response(false, "Model list is not valid!");
 
         return _executeDelete(fileIdList, FileContract.TABLE_NAME, FileContract._DEFAULT_WHERE_CLAUSE);
+    }
+
+    public Response deleteAll(String bucketId) {
+        return _executeDelete(new String[] { bucketId }, FileContract.TABLE_NAME, FileContract.FILE_FK + " = ?s");
     }
 
     public Response update(FileModel model) {

@@ -11,29 +11,15 @@ const ServiceModule = (() => {
         }
 
         async bindService() {
-            await serviceModule.bindService();
+            return await serviceModule.bindService();
         }
 
-        getBuckets() {            
-            if(this.getBucketsWorking) return;
-
-            this.getBucketsWorking = true;
-            serviceModule.getBuckets();
+        async bindUploadService() {
+            return await serviceModule.bindUploadService();
         }
 
-        async listBuckets() {
-            return await serviceModule.listBuckets();
-        }
-
-        getFiles(bucketId) {
-            if(this.getFilesWorking) return;
-
-            this.getFilesWorking = true;
-            serviceModule.getFiles(bucketId);
-        }
-
-        async listFiles(bucketId) {
-            return await serviceModule.listFiles(bucketId);
+        uploadFile(bucketId, uri) {
+            serviceModule.uploadFile(bucketId, uri);
         }
 
         async createBucket(bucketName) {
@@ -54,14 +40,6 @@ const ServiceModule = (() => {
 
         async updateFileStarred(bucketId, fileId, isStarred) {
             return await serviceModule.updateFileStarred(bucketId, fileId, isStarred);
-        }
-
-        async getStarredFiles() {
-            return await serviceModule.getStarredFiles(fileId);
-        }
-
-        async getStarredBuckets() {
-            return await serviceModule.getStarredBuckets(fileId);
         }
     }  
 
