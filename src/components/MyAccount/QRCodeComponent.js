@@ -49,7 +49,7 @@ export default class QRCodeComponent extends Component {
                         <View style = { styles.qrContainer }>
                             <QRCode
                                 value = { this.getLoginCredentials() }
-                                size={ 200 }
+                                size={ getHeight(200) }
                                 bgColor = { 'black' }
                                 fgColor = { 'white' } />
                         </View>

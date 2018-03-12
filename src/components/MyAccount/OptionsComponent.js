@@ -15,7 +15,7 @@ export default class OptionsComponent extends Component{
 
     render() {
         return(
-            <TouchableOpacity onPress = { () => { this.props.onPress } }>
+            <TouchableOpacity onPress = { this.props.onPress }>
                 <View style = { styles.mainContainer }>
                     <View style = { styles.flexRow }>
                         <Image style = { styles.icon } source = { this.props.imageSource } />

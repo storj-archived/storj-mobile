@@ -2,6 +2,8 @@ import { StackNavigator } from 'react-navigation';
 import MyAccountMainPageScreen from '../components/MyAccount/MyAccountMainPageComponent';
 import StorageScreen from '../components/MyAccount/StorageComponent';
 import BalanceScreen from '../components/MyAccount/BalanceComponent';
+import SettingsScreen from '../components/MyAccount/SettingsComponent';
+import ChangePasswordScreen from '../components/MyAccount/ChangePasswordComponent';
 
 const MyAccountScreenNavigator = StackNavigator(
     {
@@ -16,6 +18,14 @@ const MyAccountScreenNavigator = StackNavigator(
         BalanceScreen: {
             screen: BalanceScreen,
             routeName: 'BalanceScreen'
+        },
+        SettingsScreen: {
+            screen : SettingsScreen,
+            routeName: 'SettingsScreen'
+        },
+        ChangePasswordScreen: {
+            screen : ChangePasswordScreen,
+            routeName: 'ChangePasswordScreen'
         }
     }, 
     {

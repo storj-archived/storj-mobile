@@ -97,7 +97,7 @@ export default class MyAccountMainPageComponent extends Component{
                             <OptionsComponent 
                                 title = { 'Settings' }
                                 imageSource = { require('../../images/MyAccount/Settings.png') }
-                                onPress = { () => {} } />
+                                onPress = { () => { this.props.navigation.navigate('SettingsScreen'); } } />
                         }
                         <View style = { styles.underline } />
                         {
