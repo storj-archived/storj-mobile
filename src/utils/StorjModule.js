@@ -23,6 +23,11 @@ const StorjLib = (() => {
      * We should implement more functionality to have more deep understanding of needed arcitecture
      */
     class StorjModule {
+
+        getStorjLibNativeModule(){
+            return storjLib;
+        }
+
         /**
          * Generate mnemonic
          * @returns {Promise<boolean>}

@@ -63,18 +63,23 @@ class MainContainer extends Component {
     }
 
     async bindServicesAndEvents() {
-        DeviceEventEmitter.addListener("EVENT_FILE_UPLOAD_START", async (response) => {
+        const eventEmmitter =
+        Platform.OS ==="android"
+        ? DeviceEventEmitter
+        : new NativeEventEmitter(ServiceModule.getServiceNativeModule());
+        
+        eventEmmitter.addListener("EVENT_FILE_UPLOAD_START", async (response) => {
             this.props.getUploadingFile(response.fileHandle);
         });
 
-        DeviceEventEmitter.addListener("EVENT_FILE_UPLOADED_PROGRESS", async (result) => {
+        eventEmmitter.addListener("EVENT_FILE_UPLOADED_PROGRESS", async (result) => {
             this.props.updateFileUploadProgress(result.fileHandle, result.progress, result.uploaded);
         });
-        DeviceEventEmitter.addListener("EVENT_FILE_UPLOADED_SUCCESSFULLY", async (result) => {
+        eventEmmitter.addListener("EVENT_FILE_UPLOADED_SUCCESSFULLY", async (result) => {
             console.log("EVENT_FILE_UPLOADED_SUCCESSFULLY", result);
             this.props.uploadSuccess(result.fileHandle, result.fileId);
         });
-        DeviceEventEmitter.addListener("EVENT_FILE_UPLOAD_ERROR", async (result) => {
+        eventEmmitter.addListener("EVENT_FILE_UPLOAD_ERROR", async (result) => {
             this.props.uploadFileError(result.fileHandle);
         });
     }

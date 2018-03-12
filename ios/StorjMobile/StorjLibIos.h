@@ -9,8 +9,9 @@
 
 
 #import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
 #import <React/RCTLog.h>
 
-@interface StorjLibIos : NSObject<RCTBridgeModule>
+@interface StorjLibIos : RCTEventEmitter<RCTBridgeModule>
 //@property (nonatomic) StorjWrapper *storjWrapper;
 @end
