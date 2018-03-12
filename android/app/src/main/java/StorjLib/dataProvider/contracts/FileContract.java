@@ -7,6 +7,7 @@ package storjlib.dataProvider.contracts;
 public final class FileContract extends BaseContract {
     public final static String TABLE_NAME = "files";
 
+    public final static String _FILE_ID = "fileId";
     public final static String _NAME = "name";
     public final static String _MIMETYPE = "mimeType";
     public final static String _INDEX = "_index";

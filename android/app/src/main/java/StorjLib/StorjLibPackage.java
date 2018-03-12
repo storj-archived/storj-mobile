@@ -30,6 +30,7 @@ public class StorjLibPackage implements ReactPackage {
         modules.add(new StorjLibModule(reactContext));
         modules.add(new FilePickerModule(reactContext));
         modules.add(new ServiceModule(reactContext));
+        modules.add(new SyncModule(reactContext));
 
         return modules;
     }

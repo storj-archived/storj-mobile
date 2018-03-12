@@ -48,12 +48,12 @@ function uploadFileSuccess(bucketId, file, filePath) {
  * @param {string} bucketId
  * @param {string} filePath
  */
-function uploadFileError(bucketId, filePath) {
-    return { type: UPLOAD_FILE_ERROR, payload: { bucketId, filePath } };
+function uploadFileError(fileHandle) {
+    return { type: UPLOAD_FILE_ERROR, payload: { fileHandle } };
 }
 
-function updateFileUploadProgress(bucketId, filePath, progress, fileRef) {
-    return { type: UPDATE_FILE_UPLOAD_PROGRESS, payload: { bucketId, filePath, progress, fileRef } }
+function updateFileUploadProgress(fileHandle, progress, uploaded) {
+    return { type: UPDATE_FILE_UPLOAD_PROGRESS, payload: { fileHandle, progress, uploaded } }
 }
 
 /**
@@ -137,3 +137,21 @@ export const mainContainerFileActions = {
 export const imageViewerActions = {
     deleteFile
 };
+
+const allFileActions = {
+    uploadFileStart,
+    uploadFileSuccess,
+    uploadFileError,
+    updateFileUploadProgress,
+    downloadFileSuccess,
+    downloadFileError,
+    updateFileDownloadProgress,
+    deleteFile,
+    listFiles,
+    selectFile,
+    deselectFile,
+    fileDownloadCanceled,
+    fileUploadCanceled
+};
+
+export default allFileActions;

@@ -15,6 +15,7 @@ import com.facebook.react.bridge.ReactMethod;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
 import storjlib.GsonSingle;
 import storjlib.Models.BucketModel;
 import storjlib.Models.FileModel;
@@ -25,6 +26,9 @@ import storjlib.dataProvider.Dbo.BucketDbo;
 import storjlib.dataProvider.Dbo.FileDbo;
 import storjlib.dataProvider.repositories.BucketRepository;
 import storjlib.dataProvider.repositories.FileRepository;
+=======
+import storjlib.Models.PromiseHandler;
+>>>>>>> Uploading moved to separate thread
 
 /**
  * Created by Yaroslav-Note on 3/6/2018.
@@ -32,6 +36,8 @@ import storjlib.dataProvider.repositories.FileRepository;
 
 public class ServiceModule extends ReactContextBaseJavaModule {
 
+    public final static String GET_SERVICE = "storjlib.Services.GetBucketsService";
+    public final static String UPLOAD_SERVICE = "storjlib.Services.UploadService";
     public final static String GET_BUCKETS = "GET_BUCKETS";
     public final static String GET_FILES = "GET_FILES";
     public final static String BUCKET_CREATED = "BUCKET_CREATED";
@@ -43,33 +49,55 @@ public class ServiceModule extends ReactContextBaseJavaModule {
     private final FileRepository _fRepository;
 
     private GetBucketsService mGetBucketsService;
-    private Promise mPromise;
+    private UploadService mUploadService;
+
+    private PromiseHandler mPromise;
+    private PromiseHandler mUploadServicePromise;
 
     private final ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            GetBucketsService.GetBucketsServiceBinder binder = (GetBucketsService.GetBucketsServiceBinder)service;
-            mGetBucketsService = binder.getService();
-            mGetBucketsService.setReactContext(getReactApplicationContext());
+            BaseReactService baseReactService = ((BaseReactService.BaseReactServiceBinder)service).getService();
+            baseReactService.setReactContext(getReactApplicationContext());
 
-            if(mPromise != null) {
-                mPromise.resolve(true);
-                mPromise = null;
+            String serviceName = name.getClassName();
+
+            switch (serviceName) {
+                case GET_SERVICE:
+                    mGetBucketsService = (GetBucketsService) baseReactService;
+                    mPromise.resolveString(serviceName);
+                    break;
+                case UPLOAD_SERVICE:
+                    mUploadService = (UploadService) baseReactService;
+                    mUploadServicePromise.resolveString(serviceName);
+                    break;
             }
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            mGetBucketsService = null;
+            switch (name.getClassName()) {
+                case GET_SERVICE:
+                    mGetBucketsService = null;
+                    break;
+                case UPLOAD_SERVICE:
+                    mUploadService = null;
+                    break;
+            }
         }
     };
 
     public ServiceModule(ReactApplicationContext reactContext)
     {
         super(reactContext);
+<<<<<<< HEAD
         _db = new DatabaseFactory(getReactApplicationContext(), null).getWritableDatabase();
         _fRepository = new FileRepository(_db);
         _bRepository = new BucketRepository(_db);
+=======
+        mPromise = new PromiseHandler();
+        mUploadServicePromise = new PromiseHandler();
+>>>>>>> Uploading moved to separate thread
     }
 
     @Override
@@ -79,9 +107,18 @@ public class ServiceModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void bindService(Promise promise) {
-        mPromise = promise;
+        mPromise.setPromise(promise);
+
         Intent testIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
         getReactApplicationContext().bindService(testIntent, mConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    @ReactMethod
+    public void bindUploadService(Promise promise) {
+        mUploadServicePromise.setPromise(promise);
+
+        Intent uploadServiceIntent = new Intent(getReactApplicationContext(), UploadService.class);
+        getReactApplicationContext().bindService(uploadServiceIntent, mConnection, Context.BIND_AUTO_CREATE);
     }
 
     @ReactMethod
@@ -93,6 +130,7 @@ public class ServiceModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+<<<<<<< HEAD
     public void listBuckets(final Promise promise) {
         new Thread(new Runnable() {
             @Override
@@ -106,17 +144,19 @@ public class ServiceModule extends ReactContextBaseJavaModule {
 
                     int length = bucketDbos.size();
                     BucketModel[] bucketModels = new BucketModel[length];
+=======
+    public void uploadFile(String bucketId, String uri) {
+        if(bucketId == null || uri == null) {
+            return;
+        }
+>>>>>>> Uploading moved to separate thread
 
-                    for(int i = 0; i < length; i++) {
-                        bucketModels[i] = bucketDbos.get(i).toModel();
-                    }
+        Intent uploadIntent = new Intent(getReactApplicationContext(), UploadService.class);
+        uploadIntent.setAction(UploadService.ACTION_UPLOAD_FILE);
+        uploadIntent.putExtra("bucketId", bucketId);
+        uploadIntent.putExtra("uri", uri);
 
-                    promise.resolve(new SingleResponse(true, toJson(bucketModels), null).toWritableMap());
-                } catch (Exception e) {
-                    promise.resolve(new SingleResponse(false, null, e.getMessage()).toWritableMap());
-                }
-            }
-        }).run();
+        getReactApplicationContext().startService(uploadIntent);
     }
 
     @ReactMethod
@@ -128,6 +168,7 @@ public class ServiceModule extends ReactContextBaseJavaModule {
         getReactApplicationContext().startService(serviceIntent);
     }
 
+<<<<<<< HEAD
     @ReactMethod
     public void listFiles(final String bucketId, final Promise promise) {
         new Thread(new Runnable() {
@@ -271,6 +312,13 @@ public class ServiceModule extends ReactContextBaseJavaModule {
     }
 
     private <T> String toJson(T[] convertible) {
+=======
+    private <T> String toJson(T[] convertible) {
+        return GsonSingle.getInstanse().toJson(convertible);
+    }
+
+    private <T> String toJson(T convertible) {
+>>>>>>> Uploading moved to separate thread
         return GsonSingle.getInstanse().toJson(convertible);
     }
 

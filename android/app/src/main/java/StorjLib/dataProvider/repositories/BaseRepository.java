@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import storjlib.Responses.Response;
 import storjlib.dataProvider.contracts.BaseContract;
+import storjlib.dataProvider.contracts.UploadingFileContract;
 
 /**
  * Created by crawt on 3/3/2018.
@@ -17,20 +18,6 @@ public abstract class BaseRepository {
     public BaseRepository(SQLiteDatabase db) {
         _db = db;
     }
-
-//    public Response executeInsert(T model, IInsertCallback<T> callback, String tableName)  {
-//        if(!model.isValid()) return new Response(false, "Model is not valid!");
-//
-//        ContentValues map = callback.callback();
-//
-//        try {
-//            _db.insertOrThrow(tableName, null, map);
-//        } catch(SQLException error) {
-//            return new Response(false, error.getMessage());
-//        }
-//
-//        return new Response(true, null);
-//    }
 
     protected Response _executeInsert(String tableName, ContentValues valuesMap)  {
 
@@ -48,6 +35,18 @@ public abstract class BaseRepository {
 
         try {
             isSuccess = _db.delete(tableName, whereClause, ids) > 0;
+        } catch(SQLException error) {
+            return new Response(false, error.getMessage());
+        }
+
+        return new Response(isSuccess, null);
+    }
+
+    protected Response _deleteAll(String tableName) {
+        boolean isSuccess;
+
+        try {
+            isSuccess = _db.delete(tableName, null, null) > 0;
         } catch(SQLException error) {
             return new Response(false, error.getMessage());
         }
@@ -77,6 +76,10 @@ public abstract class BaseRepository {
 
         try {
             result = _db.update(tableName, map, whereClause, new String[] { id });
+
+            if(result == 0) {
+                return new Response(false, "No entries found!", 535);
+            }
         } catch (Exception e) {
             return new Response(false, e.getMessage());
         }

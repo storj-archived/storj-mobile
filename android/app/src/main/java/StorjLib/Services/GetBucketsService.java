@@ -1,14 +1,9 @@
 package storjlib.services;
 
-import android.app.IntentService;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Binder;
-import android.os.IBinder;
 import android.support.annotation.Nullable;
-
-import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.modules.core.DeviceEventManagerModule;
+import android.util.Log;
 
 import java.util.List;
 
@@ -16,7 +11,6 @@ import io.storj.libstorj.CreateBucketCallback;
 import io.storj.libstorj.DeleteBucketCallback;
 import io.storj.libstorj.DeleteFileCallback;
 import io.storj.libstorj.Storj;
-import storjlib.GsonSingle;
 import storjlib.Models.BucketModel;
 import storjlib.Models.FileDeleteModel;
 import storjlib.Models.FileModel;
@@ -43,18 +37,13 @@ import static storjlib.services.ServiceModule.FILE_DELETED;
  * Created by Yaroslav-Note on 3/6/2018.
  */
 
-public class GetBucketsService extends IntentService {
+public class GetBucketsService extends BaseReactService {
 
     private final static String EVENT_BUCKETS_UPDATED = "EVENT_BUCKETS_UPDATED";
     private final static String EVENT_FILES_UPDATED = "EVENT_FILES_UPDATED";
     private final static String EVENT_BUCKET_CREATED = "EVENT_BUCKET_CREATED";
     private final static String EVENT_BUCKET_DELETED = "EVENT_BUCKET_DELETED";
     private final static String EVENT_FILE_DELETED = "EVENT_FILE_DELETED";
-
-    private Bucket[] _buckets;
-    private File[] _files;
-    private ReactContext mContext;
-    private IBinder mBinder = new GetBucketsServiceBinder();
 
     private DatabaseFactory _dbFactory;
     private BucketRepository _bRepository;
@@ -66,14 +55,6 @@ public class GetBucketsService extends IntentService {
         }
 
         return _dbFactory.getWritableDatabase();
-    }
-
-    public DeviceEventManagerModule.RCTDeviceEventEmitter getEmitter() {
-        if(mContext != null) {
-            return mContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class);
-        }
-
-        return null;
     }
 
     public BucketRepository bRepository() {
@@ -93,6 +74,7 @@ public class GetBucketsService extends IntentService {
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         String action = intent.getAction();
+        Log.d("INTENT SERVICE DEBUG", "onHandleIntent: " + action);
 
         switch(action) {
             case GET_BUCKETS:
@@ -111,22 +93,28 @@ public class GetBucketsService extends IntentService {
                 deleteFile(intent.getStringExtra("bucketId"), intent.getStringExtra("fileId"));
                 break;
         }
-    }
 
-    @Override
-    public IBinder onBind(Intent intent) {
-        return mBinder;
+        Log.d("INTENT SERVICE DEBUG", "onHandleIntentEND: " + action);
     }
 
     private void getBuckets() {
         getInstance().getBuckets(new GetBucketsCallback() {
             @Override
             public void onBucketsReceived(Bucket[] buckets) {
-                _buckets = buckets;
-
                 if(buckets == null) {
                     return;
                 }
+
+                SQLiteDatabase db = new DatabaseFactory(GetBucketsService.this, null).getWritableDatabase();
+                BucketRepository bucketRepository = new BucketRepository(db);
+
+                if(buckets.length == 0) {
+                    bucketRepository.deleteAll();
+                    db.close();
+                    return;
+                }
+
+                db.beginTransaction();
 
                 try {
                     getDb().beginTransaction();
@@ -163,24 +151,18 @@ public class GetBucketsService extends IntentService {
 
                     getDb().setTransactionSuccessful();
                 } catch (Exception e) {
-
+                    new String("sdasd").equals("dasd");
                 } finally {
                     getDb().endTransaction();
                     getDb().close();
                 }
 
-                if(mContext != null) {
-                    getEmitter().emit(EVENT_BUCKETS_UPDATED, true);
-                }
+                sendEvent(EVENT_BUCKETS_UPDATED, true);
             }
 
             @Override
             public void onError(int code, String message) {
-                _buckets = null;
-
-                if(mContext != null) {
-                    getEmitter().emit(EVENT_BUCKETS_UPDATED, false);
-                }
+                sendEvent(EVENT_BUCKETS_UPDATED, true);
             }
         });
     }
@@ -189,9 +171,13 @@ public class GetBucketsService extends IntentService {
         getInstance().listFiles(bucketId, new ListFilesCallback() {
             @Override
             public void onFilesReceived(File[] files) {
-                _files = files;
-
                 if(files == null) {
+                    return;
+                }
+
+                if(files.length == 0) {
+                    Response deleteAllResponse = fRepository().deleteAll(bucketId);
+                    getDb().close();
                     return;
                 }
 
@@ -212,7 +198,7 @@ public class GetBucketsService extends IntentService {
                             File file = files[i];
                             String id = file.getId();
 
-                            if(dboId == id) {
+                            if(dboId.equals(id)) {
                                 fRepository().update(new FileModel(file));
                                 arrayShift(files, i, length);
                                 length--;
@@ -237,18 +223,12 @@ public class GetBucketsService extends IntentService {
                     getDb().close();
                 }
 
-                if(mContext != null) {
-                    getEmitter().emit(EVENT_FILES_UPDATED, true);
-                }
+                sendEvent(EVENT_FILES_UPDATED, true);
             }
 
             @Override
             public void onError(int code, String message) {
-                _files = null;
-
-                if(mContext != null) {
-                    getEmitter().emit(EVENT_FILES_UPDATED, false);
-                }
+                sendEvent(EVENT_FILES_UPDATED, true);
             }
         });
     }
@@ -264,13 +244,11 @@ public class GetBucketsService extends IntentService {
                 }
 
                 if(insertionResponse.isSuccess()){
-                    getEmitter().emit(EVENT_BUCKET_CREATED,
-                            new SingleResponse(true, toJson(new BucketModel(bucket)),  null).toWritableMap());
+                    sendEvent(EVENT_FILES_UPDATED, true);
                     return;
                 }
 
-                getEmitter().emit(EVENT_BUCKET_CREATED,
-                        new Response(false, "Bucket insertion to db failed").toWritableMap());
+                sendEvent(EVENT_BUCKET_CREATED, new Response(false, "Bucket insertion to db failed").toWritableMap());
             }
 
             @Override
@@ -279,8 +257,7 @@ public class GetBucketsService extends IntentService {
                     return;
                 }
 
-                getEmitter().emit(EVENT_BUCKET_CREATED,
-                        new Response(false, message, code).toWritableMap());
+                sendEvent(EVENT_BUCKET_CREATED, new Response(false, message, code).toWritableMap());
             }
         });
     }
@@ -296,13 +273,11 @@ public class GetBucketsService extends IntentService {
                 }
 
                 if(deletionResponse.isSuccess()){
-                    getEmitter().emit(EVENT_BUCKET_DELETED,
-                            new SingleResponse(true, bucketId,null).toWritableMap());
+                    sendEvent(EVENT_BUCKET_DELETED, new SingleResponse(true, bucketId,null).toWritableMap());
                     return;
                 }
 
-                getEmitter().emit(EVENT_BUCKET_DELETED,
-                        new Response(false, "Bucket deletion failed in db").toWritableMap());
+                sendEvent(EVENT_BUCKET_DELETED, new Response(false, "Bucket deletion failed in db").toWritableMap());
             }
 
             @Override
@@ -311,8 +286,7 @@ public class GetBucketsService extends IntentService {
                     return;
                 }
 
-                getEmitter().emit(EVENT_BUCKET_DELETED,
-                        new Response(false, message, code).toWritableMap());
+                sendEvent(EVENT_BUCKET_DELETED, new Response(false, message, code).toWritableMap());
             }
         });
     }
@@ -328,13 +302,11 @@ public class GetBucketsService extends IntentService {
                 }
 
                 if(deletionResponse.isSuccess()){
-                    getEmitter().emit(EVENT_FILE_DELETED,
-                            new SingleResponse(true, toJson(new FileDeleteModel(bucketId, fileId)), null).toWritableMap());
+                    sendEvent(EVENT_FILE_DELETED, new SingleResponse(true, toJson(new FileDeleteModel(bucketId, fileId)), null).toWritableMap());
                     return;
                 }
 
-                getEmitter().emit(EVENT_FILE_DELETED,
-                        new Response(false, "File deletion failed in db").toWritableMap());
+                sendEvent(EVENT_FILE_DELETED, new Response(false, "File deletion failed in db").toWritableMap());
             }
 
             @Override
@@ -343,8 +315,7 @@ public class GetBucketsService extends IntentService {
                     return;
                 }
 
-                getEmitter().emit(EVENT_FILE_DELETED,
-                        new Response(false, message, code).toWritableMap());
+                sendEvent(EVENT_FILE_DELETED, new Response(false, message, code).toWritableMap());
             }
         });
     }
@@ -356,19 +327,7 @@ public class GetBucketsService extends IntentService {
         }
     }
 
-    private <T> String toJson(T convertible) {
-        return GsonSingle.getInstanse().toJson(convertible);
-    }
-
     private Storj getInstance() {
         return StorjAndroid.getInstance(this);
-    }
-
-    public class GetBucketsServiceBinder extends Binder {
-        public GetBucketsService getService() { return GetBucketsService.this; }
-    }
-
-    public void setReactContext(ReactContext context) {
-        mContext = context;
     }
 }

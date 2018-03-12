@@ -43,6 +43,17 @@ export default class FileListManager {
         return this._deleteFileEntry(this.newFileUploadingList, bucketId, fileId);
     }
 
+    testDelete(id) {
+        this.newFileUploadingList = this.newFileUploadingList.map(listModel => {
+            listModel.files = listModel.files.filter(file => file.getId() !== id);
+
+            return listModel;
+        });
+        console.log(id);
+        console.log(this.newFileUploadingList);
+        return this.newFileUploadingList;
+    }
+
     /**
      * @param {FileListModel[]} array
      * @param {string} bucketId 
@@ -140,6 +151,20 @@ export default class FileListManager {
             });
         });
 
+        return this.newFileUploadingList;
+    }
+
+    testUpdate(id, progress, uploaded) {
+        this.newFileUploadingList = this.newFileUploadingList.map(listModel => {
+            listModel.files.forEach(file => {
+                if(file.getId() === id) {
+                    file.progress = progress;//progress > file.progress ? progress : file.progress;
+                    file.fileRef = id;
+                }
+            });
+
+            return listModel;
+        });
         return this.newFileUploadingList;
     }
 

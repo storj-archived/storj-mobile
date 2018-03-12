@@ -36,7 +36,7 @@ public class BucketRepository extends BaseRepository {
     public List<BucketDbo> getAll() {
         List<BucketDbo> result = new ArrayList();
 
-        Cursor cursor = _db.query(BucketContract.TABLE_NAME, null, null, null, null, null, null, null);
+        Cursor cursor =  _db.query(BucketContract.TABLE_NAME, null, null, null, null, null, null, null);
 
         result = _getListFromCursor(cursor);
 
@@ -134,6 +134,10 @@ public class BucketRepository extends BaseRepository {
             return new Response(false, "Model list is not valid!");
 
         return _executeDelete(bucketIdList, BucketContract.TABLE_NAME, BucketContract._DEFAULT_WHERE_CLAUSE);
+    }
+
+    public Response deleteAll() {
+        return _deleteAll(BucketContract.TABLE_NAME);
     }
 
     public Response update(BucketModel model) {
