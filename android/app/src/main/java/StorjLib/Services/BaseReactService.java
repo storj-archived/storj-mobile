@@ -2,7 +2,6 @@ package storjlib.services;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.content.pm.ServiceInfo;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
@@ -68,30 +67,24 @@ public abstract class BaseReactService extends IntentService {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d(TAG, "onCreate: " + mServiceName);
+        Log.d("INTENT SERVICE DEBUG", "onCreate");
     }
 
     @Override
     public void onStart(Intent intent, int startId) {
         super.onStart(intent, startId);
-        Log.d(TAG, "onStart: " + mServiceName);
+        Log.d("INTENT SERVICE DEBUG", "onStart");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d(TAG, "onStartCommand: " + mServiceName);
+        Log.d("INTENT SERVICE DEBUG", "onStartCommand");
         return super.onStartCommand(intent, flags, startId);
-    }
-
-    private static final String TAG = "INTENT SERVICE DEBUG";
-    @Override
-    public void onTaskRemoved(Intent rootIntent) {
-        Log.d(TAG, "onTaskRemoved: " + mServiceName);
     }
 
     @Override
     public void onDestroy() {
-        Log.d(TAG, "onDestroy: " + mServiceName);
+        Log.d("INTENT SERVICE DEBUG", "onDestroy");
         super.onDestroy();
     }
 }
