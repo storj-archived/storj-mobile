@@ -1,5 +1,7 @@
 package storjlib;
 
+import android.os.Process;
+
 import storjlib.Responses.Response;
 import io.storj.libstorj.KeysNotFoundException;
 
@@ -26,6 +28,10 @@ public class MethodHandler  {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                if(Process.getThreadPriority(0) != Process.THREAD_PRIORITY_BACKGROUND) {
+                    Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+                }
+
                 invoke(param, callback);
             }
         }).start();

@@ -43,6 +43,7 @@ class Apps extends Component {
 	async componentWillMount() {
 		console.log(await ServiceModule.bindService());
 		console.log(await ServiceModule.bindUploadService());
+		ServiceModule.scheduleSync();
 
 		this.getbucketsListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKETS_UPDATED, this.onBucketsReceived.bind(this));       
 		this.bucketCreatedListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKET_CREATED, this.onBucketCreated.bind(this));       
@@ -84,6 +85,8 @@ class Apps extends Component {
             let buckets = JSON.parse(bucketsResponse.result).map((file) => {
                 return new ListItemModel(new BucketModel(file));
             });                    
+
+			console.log(buckets);
 
             this.props.getBuckets(buckets);
         }

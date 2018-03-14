@@ -17,7 +17,8 @@ const {
     UPDATE_FILE_UPLOAD_PROGRESS,
     UPDATE_FILE_DOWNLOAD_PROGRESS,
     FILE_DOWNLOAD_CANCELED,
-    FILE_UPLOAD_CANCELED
+    FILE_UPLOAD_CANCELED,
+    LIST_UPLOADING_FILES
 } = FILE_ACTIONS;
 
 /**
@@ -81,6 +82,9 @@ export default function filesReducer(state = initialState, action) {
             break;
         case DISABLE_SELECTION_MODE:
             newState.fileListModels = filesManager.clearSelection();
+            break;
+        case LIST_UPLOADING_FILES:
+            newState.uploadingFileListModels = filesManager.listUploadingFiles2(action.payload.uploadingFiles);
             break;
         default:
             return state || initialState;

@@ -16,10 +16,10 @@
         android:targetSdkVersion="22" />
 
     <application
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
       android:name=".MainApplication"
       android:allowBackup="true"
-      android:label="@string/app_name"
-      android:icon="@mipmap/ic_launcher"
       android:theme="@style/AppTheme">
       <activity
         android:name=".MainActivity"
@@ -35,8 +35,16 @@
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
 
       <service android:name="storjlib.services.GetBucketsService" android:enabled="true" />
-      <service android:name="storjlib.services.UploadService" android:enabled="true" />
+      <service
+          android:name="storjlib.services.UploadService"
+          android:exported="true"
+          android:enabled="true" />
+
+        <service android:name="storjlib.services.SynchronizationJobService" android:enabled="true">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
+            </intent-filter>
+        </service>
 
     </application>
-
 </manifest>
