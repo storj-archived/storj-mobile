@@ -177,9 +177,9 @@ const StorjLib = (() => {
          */
         async downloadFile(bucketId, fileId, localPath) {
             let response = await storjLib.downloadFile(bucketId, fileId, localPath);
-
+            
             if(!response.isSuccess) {
-                console.log('downloadFile ', response.error.message);
+                console.log('downloadFile ', response);
             }
 
             return response;

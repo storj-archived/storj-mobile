@@ -91,6 +91,32 @@ public class SyncModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void listAllFiles(final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
+
+                    FileRepository fileRepository = new FileRepository(db);
+
+                    ArrayList<FileDbo> fileDbos = (ArrayList)fileRepository.getAll();
+
+                    int length = fileDbos.size();
+                    FileModel[] fileModels = new FileModel[length];
+
+                    for(int i = 0; i < length; i++) {
+                        fileModels[i] = fileDbos.get(i).toModel();
+                    }
+
+                    promise.resolve(new SingleResponse(true, toJson(fileModels), null).toWritableMap());
+                } catch (Exception e) {
+                    promise.resolve(new SingleResponse(false, null, e.getMessage()).toWritableMap());
+                }
+            }
+        }).run();
+    }
+
+    @ReactMethod
     public void listUploadingFiles(String bucketId, final Promise promise) {
         new Thread(new Runnable() {
             @Override
@@ -168,6 +194,8 @@ public class SyncModule extends ReactContextBaseJavaModule {
             }
         }).run();
     }
+
+
 
     @ReactMethod
     public void updateBucketStarred(final String bucketId, final boolean isStarred, final Promise promise) {

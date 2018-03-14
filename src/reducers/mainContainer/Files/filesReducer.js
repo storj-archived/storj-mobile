@@ -50,10 +50,10 @@ export default function filesReducer(state = initialState, action) {
             newState.downloadedFileListModels = filesManager.addFileEntryD(action.payload.bucketId, { id: action.payload.file.getId(), path: action.payload.filePath });
             break;
         case UPLOAD_FILE_ERROR:
-            newState.uploadingFileListModels = filesManager.testDelete(action.payload.fileHandle);
+            newState.uploadingFileListModels = filesManager.delete(action.payload.fileHandle);
             break;
         case UPDATE_FILE_UPLOAD_PROGRESS: 
-            newState.uploadingFileListModels = filesManager.testUpdate(action.payload.fileHandle, action.payload.progress, action.payload.uploaded);
+            newState.uploadingFileListModels = filesManager.update(action.payload.fileHandle, action.payload.progress, action.payload.uploaded);
             break;
         case DOWNLOAD_FILE_SUCCESS:
             newState.fileListModels = filesManager.fileDownloaded(action.payload.bucketId, action.payload.fileId);
@@ -61,7 +61,6 @@ export default function filesReducer(state = initialState, action) {
             break;
         case DOWNLOAD_FILE_ERROR:
             newState.fileListModels = filesManager.fileDownloaded(action.payload.bucketId, action.payload.fileId);
-            //TODO: we should show some additional message here
             break;
         case UPDATE_FILE_DOWNLOAD_PROGRESS:             
             newState.fileListModels = filesManager.updateFileDownloadingProgress(action.payload.bucketId, action.payload.fileId, action.payload.progress, action.payload.fileRef);
@@ -88,7 +87,7 @@ export default function filesReducer(state = initialState, action) {
             newState.uploadingFileListModels = filesManager.listUploadingFiles2(action.payload.uploadingFiles);
             break;
         case FILE_UPDATE_FAVOURITE:
-            newState.buckets = filesManager.updateFileStarred(action.payload.files);
+            newState.fileListModels = filesManager.updateFileStarred(action.payload.files);
             break;  
         default:
             return state || initialState;

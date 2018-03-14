@@ -211,25 +211,21 @@ class MainContainer extends Component {
     }
 
     async downloadSelectedFiles() {
-        this.props.fileListModels.forEach(fileEntry => {
-            fileEntry.files.forEach(fileItem => {
-                if(fileItem.isSelected) {
-                    this.downloadFile(fileItem, '/storage/emulated/0/Download/' + fileItem.getName()); 
-                }
-            });
+        this.props.fileListModels.forEach(fileItem => {
+            if(fileItem.isSelected) {
+                this.downloadFile(fileItem, '/storage/emulated/0/Download/' + fileItem.getName()); 
+            }
         });
     }
 
-    async deleteFile(bucketId, fileId) {
+    deleteFile(bucketId, fileId) {        
         ServiceModule.deleteFile(bucketId, fileId);
     }
 
     deleteSelectedFiles() {
-        this.props.fileListModels.forEach(fileEntry => {
-            fileEntry.files.forEach(fileItem => {
-                if(fileItem.isSelected)
-                    this.deleteFile(fileEntry.bucketId, fileItem.getId());
-            });
+        this.props.fileListModels.forEach(fileItem => {            
+            if(fileItem.isSelected)
+                this.deleteFile(this.props.openedBucketId, fileItem.getId());
         });
     }
 
@@ -272,7 +268,7 @@ class MainContainer extends Component {
 
     async setFavouriteFiles() {        
         
-        let selectedFiles = this.props.fileListModels[0].files.filter(fileItem => {
+        let selectedFiles = this.props.fileListModels.filter(fileItem => {
             return fileItem.isSelected;
         });          
         let length = selectedFiles.length;          

@@ -18,6 +18,10 @@ const SyncModule = (() => {
             return await syncModule.listFiles(bucketId);
         }
 
+        async listAllFiles() {
+            return await syncModule.listAllFiles();
+        }
+
         async listUploadingFiles(bucketId) {
             return await syncModule.listUploadingFiles(bucketId);
         }
