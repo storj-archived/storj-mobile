@@ -3,6 +3,7 @@ package storjlib.services;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Process;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -15,6 +16,8 @@ import com.storjmobile.R;
 import storjlib.Models.FileModel;
 import storjlib.Models.UploadingFileModel;
 import storjlib.Responses.Response;
+import storjlib.Utils.ProgressResolver;
+import storjlib.Utils.UploadSyncObject;
 import storjlib.dataProvider.DatabaseFactory;
 import storjlib.dataProvider.Dbo.UploadingFileDbo;
 import storjlib.dataProvider.contracts.FileContract;
@@ -39,9 +42,13 @@ public final class UploadService extends BaseReactService {
     public final static String EVENT_FILE_UPLOADED_SUCCESSFULLY = "EVENT_FILE_UPLOADED_SUCCESSFULLY";
     public final static String EVENT_FILE_UPLOAD_ERROR = "EVENT_FILE_UPLOAD_ERROR";
 
+    public final static String PARAMS_BUCKET_ID = "bucketId";
+    public final static String PARAMS_URI = "uri";
+    public final static String PARAMS_FILE_HANDLE = "fileHandle";
+
     public final static int UPLOAD_CANCEL_REQUEST_CODE = 223132;
 
-    private NotificationService mNotificationService = new NotificationService(UploadService.this);
+    private final NotificationService mNotificationService = new NotificationService();
 
     public UploadService() {
         super("UploadService");
@@ -53,11 +60,11 @@ public final class UploadService extends BaseReactService {
 
         switch(action) {
             case ACTION_UPLOAD_FILE:
-                uploadFile(intent.getStringExtra("bucketId"),
-                        intent.getStringExtra("uri"));
+                uploadFile(intent.getStringExtra(PARAMS_BUCKET_ID),
+                        intent.getStringExtra(PARAMS_URI));
                 break;
             case ACTION_UPLOAD_FILE_CANCEL:
-                long fileHandle = intent.getLongExtra("fileHandle", -1);
+                long fileHandle = intent.getLongExtra(PARAMS_FILE_HANDLE, -1);
                 Log.d("UPLOAD DEBUG", "File upload cancel action: " + Thread.currentThread().getId() + ". Handle: " + fileHandle);
                 uploadFileCancel(fileHandle);
                 break;
@@ -73,6 +80,9 @@ public final class UploadService extends BaseReactService {
     }
 
     private void uploadFile(String bucketId, String uri) {
+        Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+        //Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
+
         java.io.File file = new java.io.File(uri);
 
         if(bucketId == null || !file.exists()) {
@@ -83,13 +93,21 @@ public final class UploadService extends BaseReactService {
 
         final UploadingFileDbo dbo = new UploadingFileDbo(0, 0, file.getTotalSpace(), 0, file.getName(), uri, bucketId);
 
-        Log.d("UPLOAD DEBUG", "File upload call: " + Thread.currentThread().getId() + ". Uri: " + uri);
+        final UploadSyncObject syncObj = new UploadSyncObject();
+        final ProgressResolver progressResolver = new ProgressResolver();
+
+        mNotificationService.init(this);
+
+        Log.d("HANDLER DEBUG", "File upload call: " + Thread.currentThread().getId() + " , name: " + Thread.currentThread().getName() + ". Uri: " + uri);
         final long fileHandle = StorjAndroid.getInstance(getApplicationContext()).uploadFile(bucketId, uri, new UploadFileCallback() {
             @Override
             public void onProgress(String filePath, double progress, long uploadedBytes, long totalBytes) {
+                if(Process.getThreadPriority(0) != Process.THREAD_PRIORITY_BACKGROUND)
+                    Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+
                 synchronized (dbo) {
                     try {
-                        long threadName = Thread.currentThread().getId();
+                        Thread threadName = Thread.currentThread();
                         if(!dbo.isIdSet())
                             wait();
                     } catch (Exception e) {
@@ -97,7 +115,18 @@ public final class UploadService extends BaseReactService {
                     }
                 }
 
-                dbo.setProp(UploadingFileContract._PROGRESS, progress);
+                double _progress;
+
+                synchronized (progressResolver) {
+                    progressResolver.setMProgress(progress);
+                    _progress = progressResolver.getMProgress();
+
+                    if(_progress != progress) {
+                        return;
+                    }
+                }
+
+                dbo.setProp(UploadingFileContract._PROGRESS, _progress);
                 dbo.setProp(UploadingFileContract._UPLOADED, uploadedBytes);
 
                 UploadingFileModel model = new UploadingFileModel(dbo);
@@ -105,21 +134,27 @@ public final class UploadService extends BaseReactService {
 
                 WritableMap map = new WritableNativeMap();
                 map.putDouble(UploadingFileContract._FILE_HANDLE, dbo.getId());
-                map.putDouble(UploadingFileContract._PROGRESS, progress);
+                map.putDouble(UploadingFileContract._PROGRESS, _progress);
                 map.putDouble(UploadingFileContract._UPLOADED, uploadedBytes);
 
                 sendEvent(EVENT_FILE_UPLOADED_PROGRESS, map);
 
-                Intent cancelIntent = new Intent(UploadService.this, UploadService.class);
+                /*Intent cancelIntent = new Intent(UploadService.this, UploadService.class);
                 cancelIntent.setAction(ACTION_UPLOAD_FILE_CANCEL);
                 cancelIntent.putExtra("fileHandle", dbo.getId());
 
                 PendingIntent cancelIntentPending = PendingIntent.getService(UploadService.this, (int)dbo.getId(), cancelIntent,PendingIntent.FLAG_UPDATE_CURRENT);
 
-                final NotificationCompat.Action cancelUploadAction = new NotificationCompat.Action(R.mipmap.ic_launcher, "Cancel", cancelIntentPending);
+                final NotificationCompat.Action cancelUploadAction = new NotificationCompat.Action(R.mipmap.ic_launcher, "Cancel", cancelIntentPending);*/
 
-                mNotificationService.notify((int)dbo.getId(), "Uploading " + dbo.getName(), (int)(progress * 10000), 10000, cancelUploadAction);
-                Log.d("UPLOAD DEBUG", "File upload progress: " + Thread.currentThread().getId() + ". Progress: " + progress);
+                mNotificationService.notify((int)dbo.getId(), "Uploading " + dbo.getName(), (int)(_progress * 10000), 10000/*, cancelUploadAction*/);
+                Log.d("UPLOAD DEBUG", "File upload progress: " + Thread.currentThread().getId() + " , name: " + Thread.currentThread().getName() + ". Progress: " + progress);
+
+                /*try {
+                    Thread.sleep((long)100);
+                } catch(Exception e) {
+
+                }*/
             }
 
             @Override
@@ -138,8 +173,12 @@ public final class UploadService extends BaseReactService {
                 map.putString(FileContract._FILE_ID, model.getFileId());
 
                 sendEvent(EVENT_FILE_UPLOADED_SUCCESSFULLY, map);
-                mNotificationService.notify((int)dbo.getId(), file.getName() + " uploaded succesfully", 0, 0, null);
+                mNotificationService.notify((int)dbo.getId(), file.getName() + " uploaded succesfully", 0, 0/*, null*/);
                 Log.d("UPLOAD DEBUG", "File upload completed: " + Thread.currentThread().getId());
+
+                synchronized (syncObj) {
+                    syncObj.setJobFinished();
+                }
             }
 
             @Override
@@ -154,8 +193,12 @@ public final class UploadService extends BaseReactService {
                 map.putDouble(UploadingFileContract._FILE_HANDLE, dbo.getId());
 
                 sendEvent(EVENT_FILE_UPLOAD_ERROR, map);
-                mNotificationService.notify((int)dbo.getId(), message, 0, 0, null);
+                mNotificationService.notify((int)dbo.getId(), message, 0, 0/*, null*/);
                 Log.d("UPLOAD DEBUG", "File upload error: " + Thread.currentThread().getId() + ". Error: " + message);
+
+                synchronized (syncObj) {
+                    syncObj.setJobFinished();
+                }
             }
         });
 
@@ -177,12 +220,21 @@ public final class UploadService extends BaseReactService {
             dbo.notifyAll();
         }
 
-        /*while(true) {
-            try {
-                Thread.currentThread().wait(2000);
-            } catch(Exception e) {
-                Log.d("SERVICE DEBUG", "alive");
-            }
-        }*/
+        synchronized (syncObj) {
+            syncObj.isJobFinished();
+        }
+    }
+
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        try(SQLiteDatabase db = new DatabaseFactory(this, null).getWritableDatabase()) {
+            UploadingFilesRepository uploadRepo = new UploadingFilesRepository(db);
+            Response deleteAllResponse = uploadRepo.deleteAll();
+            Log.d("APPLICATION DEBUG", "onTaskRemoved: isSuccess " + deleteAllResponse.isSuccess());
+        } catch(Exception e) {
+            Log.d("APPLICATION DEBUG", "onTaskRemoved: error" + e.getMessage());
+        }
+
+        super.onTaskRemoved(rootIntent);
     }
 }

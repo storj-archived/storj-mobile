@@ -9,6 +9,7 @@ import java.util.List;
 
 import storjlib.Models.UploadingFileModel;
 import storjlib.Responses.Response;
+import storjlib.dataProvider.Dbo.FileDbo;
 import storjlib.dataProvider.Dbo.UploadingFileDbo;
 import storjlib.dataProvider.contracts.UploadingFileContract;
 
@@ -46,17 +47,43 @@ public class UploadingFilesRepository extends BaseRepository {
 
     public UploadingFileModel get(String id) {
         UploadingFileModel model = null;
+        String[] selectionArgs = new String[] {
+                id
+        };
 
         Cursor cursor = _db.query(UploadingFileContract.TABLE_NAME,
                 null,
-                UploadingFileContract._ID + " = " + id,
-                null, null, null, null);
+                UploadingFileContract._ID + " = ?",
+                selectionArgs,
+                null, null, null);
 
-        List<UploadingFileDbo> dboList = _getListFromCursor(cursor);
+        UploadingFileDbo uploadingFileDbo = _getSingleFromCursor(cursor);
         cursor.close();
 
-        if(dboList.size() > 0) {
-            model = new UploadingFileModel(dboList.get(0));
+        if(uploadingFileDbo != null) {
+            model = new UploadingFileModel(uploadingFileDbo);
+        }
+
+        return model;
+    }
+
+    public UploadingFileModel get(String param, String columnName) {
+        UploadingFileModel model = null;
+        String[] selectionArgs = new String[] {
+                param
+        };
+
+        Cursor cursor = _db.query(UploadingFileContract.TABLE_NAME,
+                null,
+                columnName + " = ?",
+                selectionArgs,
+                null, null, null);
+
+        UploadingFileDbo uploadingFileDbo = _getSingleFromCursor(cursor);
+        cursor.close();
+
+        if(uploadingFileDbo != null) {
+            model = new UploadingFileModel(uploadingFileDbo);
         }
 
         return model;
@@ -98,6 +125,10 @@ public class UploadingFilesRepository extends BaseRepository {
         return _executeDelete(new String[] { String.valueOf(fileHandle) }, UploadingFileContract.TABLE_NAME, UploadingFileContract._DEFAULT_WHERE_CLAUSE);
     }
 
+    public Response deleteAll() {
+        return _deleteAll(UploadingFileContract.TABLE_NAME);
+    }
+
     private List<UploadingFileDbo> _getListFromCursor(Cursor cursor) {
         List<UploadingFileDbo> result = new ArrayList();
 
@@ -108,6 +139,16 @@ public class UploadingFilesRepository extends BaseRepository {
         }
 
         return result;
+    }
+
+    private UploadingFileDbo _getSingleFromCursor(Cursor cursor) {
+        UploadingFileDbo model = null;
+
+        if (cursor.moveToFirst()){
+            model = _fillUpFile(cursor);
+        }
+
+        return model;
     }
 
     private UploadingFileDbo _fillUpFile(Cursor cursor) {

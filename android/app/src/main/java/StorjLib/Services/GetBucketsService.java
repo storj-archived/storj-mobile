@@ -2,6 +2,7 @@ package storjlib.services;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Process;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -68,7 +69,7 @@ public class GetBucketsService extends BaseReactService {
      * Creates an IntentService.  Invoked by your subclass's constructor.
      */
     public GetBucketsService() {
-        super("GetBucketsService");
+        super("TestHello");
     }
 
     @Override
@@ -98,6 +99,10 @@ public class GetBucketsService extends BaseReactService {
     }
 
     private void getBuckets() {
+        if(Process.getThreadPriority(0) != Process.THREAD_PRIORITY_BACKGROUND) {
+            Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+        }
+
         getInstance().getBuckets(new GetBucketsCallback() {
             @Override
             public void onBucketsReceived(Bucket[] buckets) {
