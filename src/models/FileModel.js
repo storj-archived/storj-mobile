@@ -6,7 +6,7 @@ export default class FileModel extends ItemModel {
      * @param {object} file
      */
     constructor(file) {
-            super(file.name, file.fileId, file.created);
+            super(file.name, file.fileId, file.created, file.isStarred);
             
             this.erasure = file.erasure;
             this.hmac = file.hmac;

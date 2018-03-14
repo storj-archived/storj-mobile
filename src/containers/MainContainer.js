@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { mainContainerActions, favouritesActions } from '../reducers/mainContainer/mainReducerActions';
-import fileActions, { mainContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
+import fileActions, { mainContainerFileActions, favouritesFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { redirectToMainScreen } from '../reducers/navigation/navigationActions';
 import FileModel from '../models/FileModel';
 import BucketModel from '../models/BucketModel';
@@ -13,6 +13,7 @@ import FilePicker from '../utils/filePicker';
 import TabBarActionModelFactory from '../models/TabBarActionModel';
 import MainComponent from '../components/MainComponent';
 import filePicker from '../utils/filePicker';
+import observablePropFactory from '../models/ObservableProperty';
 
 import ServiceModule from '../utils/ServiceModule';
 import SyncModule from '../utils/SyncModule';
@@ -43,6 +44,7 @@ class MainContainer extends Component {
         ];
         
         this.openedBucketActions = [
+            TabBarActionModelFactory.createNewAction(() => { this.setFavouriteFiles(); }, 'Action 8', require('../images/ActionBar/FavoritesIcon.png')),
             TabBarActionModelFactory.createNewAction(() => { this.uploadFile(); }, 'Action 8', require('../images/ActionBar/UploadFileIcon.png')), 
             TabBarActionModelFactory.createNewAction(() => { this.downloadSelectedFiles(); }, '2', require('../images/ActionBar/DownloadIFileIcon.png')),
             TabBarActionModelFactory.createNewAction(() => { this.deleteSelectedFiles(); }, 'Action 9', require('../images/ActionBar/TrashBucketIcon.png'))
@@ -254,21 +256,39 @@ class MainContainer extends Component {
     async setFavourite() {
         let selectedBuckets = this.getSelectedBuckets();
         let length = selectedBuckets.length;
-        let itemsToStarred = [];
-        let itemsToUnstarred = [];
+        let updatedItems = [];        
 
         for(var i = 0; i < length; i++) {
             var item = selectedBuckets[i];
-            let updateStarredResponse = await ServiceModule.updateBucketStarred(item.getId(), !item.getStarred());
+            let updateStarredResponse = await SyncModule.updateBucketStarred(item.getId(), !item.getStarred());
 
             if(updateStarredResponse.isSuccess) {
-                item.getStarred() 
-                    ? itemsToUnstarred.push(item) 
-                    : itemsToStarred.push(item);
+                updatedItems.push(item);
             }    
         }
 
-        this.props.updateFavourite(selectedBuckets);        
+        this.props.updateFavourite(updatedItems);        
+    }
+
+    async setFavouriteFiles() {        
+        
+        let selectedFiles = this.props.fileListModels[0].files.filter(fileItem => {
+            return fileItem.isSelected;
+        });          
+        let length = selectedFiles.length;          
+
+        let updatedItems = [];        
+
+        for(var i = 0; i < length; i++) {
+            var item = selectedFiles[i];
+            let updateStarredResponse = await SyncModule.updateFileStarred(item.getId(), !item.getStarred());
+            
+            if(updateStarredResponse.isSuccess) {
+                updatedItems.push(item);
+            }    
+        }
+
+        this.props.updateFavouriteFiles(updatedItems);
     }
 
     deleteBuckets() {
@@ -331,7 +351,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) { 
     return {
-        ...bindActionCreators({ ...fileActions, redirectToMainScreen, ...mainContainerActions, ...mainContainerFileActions, ...favouritesActions }, dispatch),
+        ...bindActionCreators({ ...fileActions, redirectToMainScreen, ...mainContainerActions, ...mainContainerFileActions, ...favouritesActions, ...favouritesFileActions }, dispatch),
         getUploadingFile: (fileHandle) => dispatch(uploadFileStart(fileHandle)),
         uploadSuccess: (fileHandle, fileId) => dispatch(uploadFileSuccess(fileHandle, fileId)),
         listUploadingFiles: () => dispatch(listUploadingFiles("test"))

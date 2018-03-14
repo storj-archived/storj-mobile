@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import storjlib.Models.BucketModel;
 import storjlib.Models.FileModel;
 import storjlib.Models.UploadingFileModel;
+import storjlib.Responses.Response;
 import storjlib.Responses.SingleResponse;
 import storjlib.dataProvider.DatabaseFactory;
 import storjlib.dataProvider.Dbo.BucketDbo;
@@ -43,7 +44,6 @@ public class SyncModule extends ReactContextBaseJavaModule {
             @Override
             public void run() {
                 try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
-                    //SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase();
                     BucketRepository bucketRepository = new BucketRepository(db);
 
                     ArrayList<BucketDbo> bucketDbos = (ArrayList)bucketRepository.getAll();
@@ -70,7 +70,6 @@ public class SyncModule extends ReactContextBaseJavaModule {
             @Override
             public void run() {
                 try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
-                    //SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase();
 
                     FileRepository fileRepository = new FileRepository(db);
 
@@ -165,6 +164,38 @@ public class SyncModule extends ReactContextBaseJavaModule {
 
                 } catch (Exception e) {
                     promise.resolve(new SingleResponse(false, null, e.getMessage()).toWritableMap());
+                }
+            }
+        }).run();
+    }
+
+    @ReactMethod
+    public void updateBucketStarred(final String bucketId, final boolean isStarred, final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
+                    BucketRepository bucketRepository = new BucketRepository(db);
+                    promise.resolve(bucketRepository.update(bucketId, isStarred).toWritableMap());
+
+                } catch (Exception e) {
+                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
+                }
+            }
+        }).run();
+    }
+
+    @ReactMethod
+    public void updateFileStarred(final String fileId, final boolean isStarred, final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
+                    FileRepository fileRepository = new FileRepository(db);
+                    promise.resolve(fileRepository.update(fileId, isStarred).toWritableMap());
+
+                } catch (Exception e) {
+                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
                 }
             }
         }).run();

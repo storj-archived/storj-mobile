@@ -11,7 +11,6 @@ const SyncModule = (() => {
         }
 
         async listBuckets() {
-            console.log("listBuckets");
             return await syncModule.listBuckets();
         }
 
@@ -24,12 +23,19 @@ const SyncModule = (() => {
         }
 
         async getUploadingFile(fileHandle) {
-            console.log(String(fileHandle));
             return await syncModule.getUploadingFile(String(fileHandle));
         }
 
         async getFile(fileId) {
             return await syncModule.getFile(fileId);
+        }
+
+        async updateBucketStarred(bucketId, isStarred) {
+            return await syncModule.updateBucketStarred(bucketId, isStarred);
+        }
+
+        async updateFileStarred(fileId, isStarred) {
+            return await syncModule.updateFileStarred(fileId, isStarred);
         }
     }  
 
