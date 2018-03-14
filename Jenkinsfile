@@ -9,6 +9,7 @@ pipeline {
     stage('Test') {
       steps {
         sh 'npm test'
+        junit 'junit.xml'
       }
     }
     stage('Build Debug APK') {
