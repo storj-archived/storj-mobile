@@ -30,14 +30,10 @@ class DashboardScreenContainer extends Component {
 
     getSelectedFilesCount() {
         if(!this.props.selectedBucketId || !this.props.files || this.props.files.length === 0) return 0; 
-
-        let openedBucket = this.props.files.find(item => {
-            return item.bucketId === this.props.selectedBucketId;
-        });
-
-        if(openedBucket) {
-            return this.getArraySelectedCount(openedBucket.files);
-        }
+        
+        return this.props.files.filter(fileItem => {
+            return fileItem.isSelected;
+        }).length;          
     }
 
     async createBucket(name) {
@@ -100,7 +96,6 @@ function mapStateToProps(state) {
         buckets: state.mainReducer.buckets,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         isFirstSignIn: state.mainReducer.isFirstSignIn,
-        fileListModels: state.filesReducer.fileListModels,
         files: state.filesReducer.fileListModels,
         isGridViewShown: state.mainReducer.isGridViewShown,
         defaultRoute: routes[0].routeName,

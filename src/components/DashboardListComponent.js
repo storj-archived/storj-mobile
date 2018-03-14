@@ -21,7 +21,10 @@ export default class DashboardListComponent extends Component{
         super(props);        
 
         this.starredBuckets = props.buckets.filter(item => item.getStarred());
-        this.starredCount = this.starredBuckets.length;
+        this.starredBucketsCount = this.starredBuckets.length;
+
+        this.starredFiles = props.files.filter(item => item.getStarred());
+        this.starredFilesCount = this.starredFiles.length;
     }
 
     render() {
@@ -68,14 +71,14 @@ export default class DashboardListComponent extends Component{
                             </TouchableOpacity>
                         </View>
                         {
-                            listComponent('Favourites', this.starredBuckets.slice(0, 3), this.props, this.starredCount)
+                            listComponent('Favourite buckets', this.starredBuckets.slice(0, 3), this.props, this.starredBucketsCount, true)
                         }
                         {
-                            listComponent('Recent sync', this.starredBuckets.slice(0, 3), this.props, this.starredCount)
+                            listComponent('Favourite files', this.starredFiles.slice(0, 3), this.props, this.starredFilesCount, false)
+                        }
+                        {
+                            listComponent('Recent sync', this.starredBuckets.slice(0, 3), this.props, this.starredCount, false)
                         }     
-                        {
-                            listComponent('Trash', this.starredBuckets.slice(0, 3), this.props, this.starredCount)
-                        }
                     </ScrollView>
                 </View>
             </View>
@@ -83,7 +86,7 @@ export default class DashboardListComponent extends Component{
     }
 }
 
-const listComponent = (title, data, props, count) => {
+const listComponent = (title, data, props, count, isBucket) => {
 
     function onPress(params) {
         // props.openBucket(params.bucketId);
@@ -107,7 +110,8 @@ const listComponent = (title, data, props, count) => {
                 disableSelectionMode = { props.disableSelectionMode }
                 isSelectionMode = { props.isSelectionMode }
                 isSingleItemSelected = { props.isSingleItemSelected }
-                listItemIcon = { require('../images/Icons/BucketListItemIcon.png') }
+                listItemIcon = { isBucket ? require('../images/Icons/BucketListItemIcon.png') : require('../images/Icons/FileListItemIcon.png') }
+                starredListItemIcon = { isBucket ? require('../images/Icons/ListStarredBucket.png') : require('../images/Icons/FileListItemIcon.png') }
                 deselectItem = { props.deselectItem }
                 navigateToFilesScreen = { props.navigateToFilesScreen ? props.navigateToFilesScreen : () => {} }
                 selectItem = { props.selectItem }

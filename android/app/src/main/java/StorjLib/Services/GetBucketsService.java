@@ -297,7 +297,7 @@ public class GetBucketsService extends BaseReactService {
         getInstance().deleteFile(bucketId, fileId, new DeleteFileCallback() {
             @Override
             public void onFileDeleted() {
-                Response deletionResponse = bRepository().delete(bucketId);
+                Response deletionResponse = fRepository().delete(fileId);
 
                 if(mContext == null) {
                     return;

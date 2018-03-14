@@ -18,6 +18,7 @@ class FilesListContainer extends Component {
 
         this.bucketId = props.navigation.state.params.bucketId;
         this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
+        this.data = this.props.fileListModels.concat(this.props.uploadingFileListModels).filter(file => file.entity.bucketId == this.props.openedBucketId);
     }
 
     componentWillMount() {
@@ -86,13 +87,8 @@ class FilesListContainer extends Component {
     }
 
     onPress(params) {
-        let downloadedFileListModel = this.props.downloadedFileListModels.find(item => item.bucketId === this.bucketId);
-
-        if(!downloadedFileListModel) 
-            return;
-        
-        let downloadedFile = downloadedFileListModel.files.find(file => { 
-            return file.id === params.bucketId 
+        let downloadedFile = this.props.downloadedFileListModels.find(file => { 
+            return file.getId() === params.bucketId;
         });
 
         if(downloadedFile) {
@@ -101,9 +97,6 @@ class FilesListContainer extends Component {
     }
 
     render() {
-        let data = getFilesFormFileModelList(this.props.fileListModels, this.bucketId);
-        let uploadingData = getFilesFormFileModelList(this.props.uploadingFileListModels, this.bucketId);
-    
         return(
             <FilesListComponent
                 setSelectionId = { this.props.screenProps.setSelectionId }
@@ -113,7 +106,7 @@ class FilesListContainer extends Component {
                 cancelDownload = { (params) => { this.cancelDownload(params); } }
                 cancelUpload = { (params) => { this.cancelUpload(params); } }
                 bucketId = { this.bucketId }
-                data = { data.concat(uploadingData) }
+                data = { this.data }
                 onSingleItemSelected = { this.props.onSingleItemSelected }
                 animatedScrollValue = { this.props.screenProps.animatedScrollValue }
                 enableSelectionMode = { this.props.enableSelectionMode }
@@ -130,6 +123,7 @@ class FilesListContainer extends Component {
 function mapStateToProps(state) {
     return {
         mainNavReducer: state.navReducer,
+        openedBucketId: state.mainReducer.openedBucketId,
         isActionBarShown: state.mainReducer.isActionBarShown,
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
@@ -147,15 +141,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilesListContainer);
-
-function getFilesFormFileModelList(fileModelList, bucketId) {
-    let files = [];
-
-    fileModelList.forEach(element => {
-        if(element.bucketId === bucketId) {
-            files = element.files;
-        }
-    });
-
-    return files;
-}

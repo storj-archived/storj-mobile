@@ -53,7 +53,7 @@ class Apps extends Component {
 		this.bucketCreatedListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKET_CREATED, this.onBucketCreated.bind(this));       
 		this.bucketDeletedListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKET_DELETED, this.onBucketDeleted.bind(this));       
 		this.fileDeletedListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILE_DELETED, this.onFileDeleted.bind(this));       
-		this.getFilesListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILES_UPDATED, this.onFilesReceived.bind(this));	
+		this.getFilesListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILES_UPDATED, this.onFilesReceived.bind(this));		
 	}
 
 	componentDidMount() {
@@ -96,7 +96,6 @@ class Apps extends Component {
             this.props.listFiles(this.props.openedBucketId, files);
         }
 
-        ServiceModule.getFilesWorking = false;
         this.props.unsetLoading();
     }
 
@@ -114,7 +113,7 @@ class Apps extends Component {
 
             this.props.getBuckets(buckets);
         }
-		ServiceModule.getBucketsWorking = false;
+		
         this.props.unsetLoading();
     }
 
