@@ -24,6 +24,7 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "jest": "22.0.4",
+    "jest-junit": "^3.6.0",
     "mocha": "^4.1.0",
     "react": "^16.0.0",
     "react-addons-test-utils": "^15.6.2",
@@ -41,7 +42,8 @@
     "transform": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/utils/testingTools/fileTransformer.js",
       "^.+\\.js$": "babel-jest"
-    }
+    },
+    "testResultsProcessor": "jest-junit"
   },
   "rnpm": {
     "assets": [
