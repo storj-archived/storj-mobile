@@ -137,6 +137,20 @@ export default class FileListManager {
         return this.newFileUploadingList;
     }
 
+    listUploadingFiles2(files) {
+        files.forEach(file => {
+            let filterResult = this.newFileUploadingList.find(listModel => listModel.bucketId === file.entity.bucketId);
+
+            if(!filterResult) {
+                this.newFileUploadingList.push(new FileListModel(file.entity.bucketId, [ file ]));
+            } else {
+                filterResult.files.push(file);
+            }
+        });
+
+        return this.newFileUploadingList;
+    }
+
     updateFileUploadingProgress(bucketId, fileId, progress, fileRef) {
         this.newFileUploadingList.forEach(fileEntry => {
             if(fileEntry.getId() === fileId){

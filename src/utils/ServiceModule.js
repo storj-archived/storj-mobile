@@ -62,6 +62,10 @@ const ServiceModule = (() => {
                 this.createBucket(PICTURES);
             }
         }
+
+        scheduleSync() {
+            serviceModule.scheduleSync();
+        }
     }  
 
     return {

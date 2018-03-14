@@ -216,6 +216,39 @@ public class ServiceModule extends ReactContextBaseJavaModule {
         handler.resolveString(value);
     }
 
+    @ReactMethod
+    public void scheduleSync() {
+        Driver driver = new GooglePlayDriver(getReactApplicationContext());
+        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(driver);
+
+        dispatcher.cancelAll();
+
+        Job myJob = dispatcher.newJobBuilder()
+                // the JobService that will be called
+                .setService(SynchronizationJobService.class)
+                // uniquely identifies the job
+                .setTag("sync-job")
+                // one-off job
+                .setRecurring(false)
+                // don't persist past a device reboot
+                .setLifetime(Lifetime.UNTIL_NEXT_BOOT)
+                // start between 0 and 15 minutes (900 seconds)
+                .setTrigger(Trigger.executionWindow(60, 120))
+                // overwrite an existing job with the same tag
+                .setReplaceCurrent(true)
+                // retry with exponential backoff
+                .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
+                // constraints that need to be satisfied for the job to run
+                .setConstraints(
+                        // only run on an unmetered network
+                        Constraint.ON_UNMETERED_NETWORK,
+                        // only run when the device is charging
+                        Constraint.DEVICE_CHARGING
+                )
+                .build();
+        dispatcher.schedule(myJob);
+    }
+
     private <T> String toJson(T convertible) {
         return GsonSingle.getInstanse().toJson(convertible);
     }
