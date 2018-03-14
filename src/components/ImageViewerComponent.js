@@ -25,7 +25,6 @@ export default class ImageViewerComponent extends Component {
                     minimumZoomScale={ 1 }
                     maximumZoomScale={ 3 }
                     androidScaleType="fitCenter"
-                    onLoad={ () => console.log("Image loaded!") }
                     style = { styles.image } />
 
                 <View style = { [ styles.buttonWrapper, styles.topButtonsWrapper ] }>

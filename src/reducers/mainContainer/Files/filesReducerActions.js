@@ -14,7 +14,8 @@ const {
     UPDATE_FILE_DOWNLOAD_PROGRESS,
     FILE_DOWNLOAD_CANCELED,
     FILE_UPLOAD_CANCELED,
-    LIST_UPLOADING_FILES
+    LIST_UPLOADING_FILES,
+    FILE_UPDATE_FAVOURITE
 } = FILE_ACTIONS;
 
 /**
@@ -119,6 +120,10 @@ function listUploadingFiles(uploadingFiles) {
     return { type: LIST_UPLOADING_FILES, payload: { uploadingFiles } };
 }
 
+function updateFavouriteFiles(files) {
+    return { type: FILE_UPDATE_FAVOURITE, payload: { files } } 
+}
+
 export const filesListContainerFileActions = {
     listFiles,
     selectFile,
@@ -159,5 +164,9 @@ const allFileActions = {
     fileUploadCanceled,
     listUploadingFiles
 };
+
+export const favouritesFileActions = {
+    updateFavouriteFiles
+}
 
 export default allFileActions;

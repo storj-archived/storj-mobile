@@ -16,11 +16,14 @@ import {
 	mainContainerActions
 } from '../reducers/mainContainer/mainReducerActions';
 import {
-	mainContainerFileActions 
+	mainContainerFileActions,
+	filesListContainerFileActions
 } from '../reducers/mainContainer/Files/filesReducerActions'
 import { redirectToLoginScreen } from '../reducers/navigation/navigationActions';
 import ListItemModel from '../models/ListItemModel';
 import BucketModel from '../models/BucketModel';
+import FileModel from '../models/FileModel';
+
 
 import SyncModule from '../utils/SyncModule';
 import ServiceModule from '../utils/ServiceModule';
@@ -38,17 +41,19 @@ class Apps extends Component {
 		this.bucketCreatedListener = null;
 		this.bucketDeletedListener = null;
 		this.fileDeletedListener = null;
+		this.getFilesListener = null;
     }
 
 	async componentWillMount() {
-		console.log(await ServiceModule.bindService());
-		console.log(await ServiceModule.bindUploadService());
+		await ServiceModule.bindService();
+		await ServiceModule.bindUploadService();
 		ServiceModule.scheduleSync();
 
 		this.getbucketsListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKETS_UPDATED, this.onBucketsReceived.bind(this));       
 		this.bucketCreatedListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKET_CREATED, this.onBucketCreated.bind(this));       
 		this.bucketDeletedListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKET_DELETED, this.onBucketDeleted.bind(this));       
-		this.fileDeletedListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILE_DELETED, this.onFileDeleted.bind(this));       	
+		this.fileDeletedListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILE_DELETED, this.onFileDeleted.bind(this));       
+		this.getFilesListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILES_UPDATED, this.onFilesReceived.bind(this));	
 	}
 
 	componentDidMount() {
@@ -66,6 +71,7 @@ class Apps extends Component {
 		this.bucketCreatedListener.remove();
 		this.bucketDeletedListener.remove();
 		this.fileDeletedListener.remove();
+		this.getFilesListener.remove();
 	}
 
 	onHardwareBackPress() {
@@ -76,6 +82,24 @@ class Apps extends Component {
 		//this.props.dispatch(NavigationActions.back());
 		return true;
 	}
+
+	async onFilesReceived() {
+        this.props.setLoading();
+		
+        let filesResponse = await SyncModule.listFiles(this.props.openedBucketId);		
+
+        if(filesResponse.isSuccess) {
+            let files = JSON.parse(filesResponse.result).map((file) => {
+                return new ListItemModel(new FileModel(file));
+            });                    
+
+            this.props.listFiles(this.props.openedBucketId, files);
+        }
+
+        ServiceModule.getFilesWorking = false;
+        this.props.unsetLoading();
+    }
+
 
 	async onBucketsReceived() {
         this.props.setLoading();
@@ -133,7 +157,8 @@ class Apps extends Component {
  */
 function mapStateToProps(state) {
     return {
-        nav: state.navReducer
+		openedBucketId: state.mainReducer.openedBucketId,
+		nav: state.navReducer
     };
 }
  
@@ -142,6 +167,7 @@ function mapDispatchToProps(dispatch) {
 		...bucketsContainerActions, 
 		...mainContainerActions,
 		...mainContainerFileActions,
+		...filesListContainerFileActions,
 		redirectToLoginScreen }, dispatch);
 }
 

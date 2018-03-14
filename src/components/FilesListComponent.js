@@ -33,7 +33,9 @@ export default class FilesListComponent extends Component {
                     deselectItem = { this.props.deselectFile }
                     selectItem = { this.props.selectFile }
                     data = { this.props.data }   
-                    listItemIcon = { require('../images/Icons/FileListItemIcon.png') } />
+                    listItemIcon = { require('../images/Icons/FileListItemIcon.png') }
+                    starredGridItemIcon = { require('../images/Icons/ListStarredBucket.png') }
+                    starredListItemIcon = { require('../images/Icons/ListStarredBucket.png') } />
             </View>
         );
     }

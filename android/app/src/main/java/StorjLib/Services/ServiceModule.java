@@ -197,69 +197,7 @@ public class ServiceModule extends ReactContextBaseJavaModule {
                 }
             }
         }).run();
-    }
-
-    @ReactMethod
-    public void updateBucketStarred(final String bucketId, final boolean isStarred, final Promise promise) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Response updateResponse = _bRepository.update(bucketId, isStarred);
-
-                    promise.resolve(new Response(true, null).toWritableMap());
-                } catch (Exception e) {
-                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
-                }
-            }
-        }).run();
-    }
-
-    @ReactMethod
-    public void updateFileStarred(final String fileId, final boolean isStarred, final Promise promise) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Response updateResponse = _fRepository.update(fileId, isStarred);
-
-                    promise.resolve(_fRepository.update(fileId, isStarred).toWritableMap());
-                } catch (Exception e) {
-                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
-                }
-            }
-        }).run();
-    }
-
-    @ReactMethod
-    public void getStarredFiles(final Promise promise) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    SingleResponse response = new SingleResponse(true, toJson(_fRepository.getStarred()), null);
-                    promise.resolve(response.toWritableMap());
-                } catch (Exception e) {
-                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
-                }
-            }
-        }).run();
-    }
-
-    @ReactMethod
-    public void getStarredBuckets(final Promise promise) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    SingleResponse response = new SingleResponse(true, toJson(_bRepository.getStarred()), null);
-                    promise.resolve(response.toWritableMap());
-                } catch (Exception e) {
-                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
-                }
-            }
-        }).run();
-    }
+    }   
 
     @ReactMethod
     public void scheduleSync() {

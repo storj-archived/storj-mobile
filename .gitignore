@@ -56,3 +56,4 @@ buck-out/
 
 #JUnit
 junit.xml
+android/app/bin/*

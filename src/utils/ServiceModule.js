@@ -42,14 +42,6 @@ const ServiceModule = (() => {
             return await serviceModule.deleteFile(bucketId, fileId);
         }
 
-        async updateBucketStarred(bucketId, isStarred) {
-            return await serviceModule.updateBucketStarred(bucketId, isStarred);
-        }
-
-        async updateFileStarred(bucketId, fileId, isStarred) {
-            return await serviceModule.updateFileStarred(bucketId, fileId, isStarred);
-        }
-
         scheduleSync() {
             serviceModule.scheduleSync();
         }

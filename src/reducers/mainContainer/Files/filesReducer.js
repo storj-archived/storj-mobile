@@ -18,7 +18,8 @@ const {
     UPDATE_FILE_DOWNLOAD_PROGRESS,
     FILE_DOWNLOAD_CANCELED,
     FILE_UPLOAD_CANCELED,
-    LIST_UPLOADING_FILES
+    LIST_UPLOADING_FILES,
+    FILE_UPDATE_FAVOURITE
 } = FILE_ACTIONS;
 
 /**
@@ -86,6 +87,9 @@ export default function filesReducer(state = initialState, action) {
         case LIST_UPLOADING_FILES:
             newState.uploadingFileListModels = filesManager.listUploadingFiles2(action.payload.uploadingFiles);
             break;
+        case FILE_UPDATE_FAVOURITE:
+            newState.buckets = filesManager.updateFileStarred(action.payload.files);
+            break;  
         default:
             return state || initialState;
     }

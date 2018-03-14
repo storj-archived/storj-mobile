@@ -210,17 +210,13 @@ public class FileRepository extends BaseRepository {
     //TODO: maybe it should be named updatedStarred or makeStarred?
     public Response update(String fileId, boolean isStarred) {
         if(fileId == null || fileId.isEmpty())
-            return new Response(false, "Model id is not valid!");
+            return new Response(false, "File id is not valid!");
 
-        String[] columnsToUpdate = new String[] {
-                FileContract._STARRED
-        };
+        ContentValues map = new ContentValues();
 
-        String[] columnValues = new String[] {
-                Boolean.toString(isStarred)
-        };
+        map.put(FileContract._STARRED, isStarred ? 1 : 0);
 
-        return _executeUpdate(FileContract.TABLE_NAME, fileId,null,null, columnsToUpdate, columnValues);
+        return _executeUpdate(FileContract.TABLE_NAME, fileId, null,null, map);
     }
 
     private FileDbo _getSingleFromCursor(Cursor cursor) {

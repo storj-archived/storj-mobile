@@ -16,7 +16,6 @@ class FilesListContainer extends Component {
     constructor(props) {
         super(props);
 
-        this.serviceListener = null;
         this.bucketId = props.navigation.state.params.bucketId;
         this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
     }
@@ -32,9 +31,7 @@ class FilesListContainer extends Component {
               toValue: 0,
               useNativeDriver: true
             }
-        ).start();        
-
-        this.serviceListener = DeviceEventEmitter.addListener("EVENT_FILES_UPDATED", this.onGetData.bind(this));       
+        ).start();               
         
         ServiceModule.getFiles(this.bucketId);    
     }
@@ -43,25 +40,6 @@ class FilesListContainer extends Component {
         if(Platform.OS === "android") {
             BackHandler.removeEventListener("hardwarebackPress", this.onHardwareBackPress);
         }
-
-        if(this.serviceListener) this.serviceListener.remove();
-    }
-
-    async onGetData() {
-        this.props.setLoading();
-
-        let filesResponse = await SyncModule.listFiles(this.bucketId);
-
-        if(filesResponse.isSuccess) {
-            let files = JSON.parse(filesResponse.result).map((file) => {
-                return new ListItemModel(new FileModel(file));
-            });                    
-
-            this.props.listFiles(this.bucketId, files);
-        }
-
-        ServiceModule.getFilesWorking = false;
-        this.props.unsetLoading();
     }
 
     async cancelDownload(file) {
@@ -122,12 +100,10 @@ class FilesListContainer extends Component {
         }
     }
 
-    
-
     render() {
         let data = getFilesFormFileModelList(this.props.fileListModels, this.bucketId);
         let uploadingData = getFilesFormFileModelList(this.props.uploadingFileListModels, this.bucketId);
-
+    
         return(
             <FilesListComponent
                 setSelectionId = { this.props.screenProps.setSelectionId }
