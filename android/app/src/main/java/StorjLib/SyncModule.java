@@ -65,7 +65,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void listFiles(String bucketId, final Promise promise) {
+    public void listFiles(final String bucketId, final Promise promise) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -74,7 +74,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
 
                     FileRepository fileRepository = new FileRepository(db);
 
-                    ArrayList<FileDbo> fileDbos = (ArrayList)fileRepository.getAll();
+                    ArrayList<FileDbo> fileDbos = (ArrayList)fileRepository.getAll(bucketId);
 
                     int length = fileDbos.size();
                     FileModel[] fileModels = new FileModel[length];

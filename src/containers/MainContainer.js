@@ -16,7 +16,7 @@ import filePicker from '../utils/filePicker';
 
 import ServiceModule from '../utils/ServiceModule';
 import SyncModule from '../utils/SyncModule';
-import { uploadFileStart, uploadFileSuccess } from '../reducers/asyncActions/fileActionsAsync';
+import { uploadFileStart, uploadFileSuccess, listUploadingFiles } from '../reducers/asyncActions/fileActionsAsync';
 
 class MainContainer extends Component {
     constructor(props) {
@@ -82,6 +82,8 @@ class MainContainer extends Component {
         DeviceEventEmitter.addListener("downloadFile", this.downloadListener);
 
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => { this.props.disableSelectionMode(); });
+
+        this.props.listUploadingFiles();
     }
     
     componentWillUnmount () {
@@ -278,7 +280,8 @@ function mapDispatchToProps(dispatch) {
     return {
         ...bindActionCreators({ ...fileActions, redirectToMainScreen, ...mainContainerActions, ...mainContainerFileActions, ...favouritesActions }, dispatch),
         getUploadingFile: (fileHandle) => dispatch(uploadFileStart(fileHandle)),
-        uploadSuccess: (fileHandle, fileId) => dispatch(uploadFileSuccess(fileHandle, fileId)) 
+        uploadSuccess: (fileHandle, fileId) => dispatch(uploadFileSuccess(fileHandle, fileId)),
+        listUploadingFiles: () => dispatch(listUploadingFiles("test"))
     };
 }
 

@@ -13,7 +13,8 @@ const {
     UPDATE_FILE_UPLOAD_PROGRESS,
     UPDATE_FILE_DOWNLOAD_PROGRESS,
     FILE_DOWNLOAD_CANCELED,
-    FILE_UPLOAD_CANCELED
+    FILE_UPLOAD_CANCELED,
+    LIST_UPLOADING_FILES
 } = FILE_ACTIONS;
 
 /**
@@ -114,6 +115,10 @@ function enableSelectionMode() {
     return { type: ENABLE_SELECTION_MODE };
 }
 
+function listUploadingFiles(uploadingFiles) {
+    return { type: LIST_UPLOADING_FILES, payload: { uploadingFiles } };
+}
+
 export const filesListContainerFileActions = {
     listFiles,
     selectFile,
@@ -151,7 +156,8 @@ const allFileActions = {
     selectFile,
     deselectFile,
     fileDownloadCanceled,
-    fileUploadCanceled
+    fileUploadCanceled,
+    listUploadingFiles
 };
 
 export default allFileActions;

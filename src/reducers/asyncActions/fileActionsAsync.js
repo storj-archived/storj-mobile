@@ -37,3 +37,32 @@ export function uploadFileSuccess(fileHandle, fileId) {
         }
     };
 }
+
+export function listUploadingFiles(bucketId) {
+    return async (dispatch) => {
+        let listUploadingFilesResponse = await SyncModule.listUploadingFiles(bucketId);
+
+        if(listUploadingFilesResponse.isSuccess) {
+            let uploadingFiles = JSON.parse(listUploadingFilesResponse.result);
+            console.log(uploadingFiles);
+            uploadingFiles = uploadingFiles.map(uploadingFile => {
+
+                let fileModel = new FileModel({ 
+                    name: uploadingFile.name, 
+                    fileId: uploadingFile.fileHandle,
+                    created: new Date().toLocaleString(),
+                    erasure: null,
+                    hmac: null,
+                    index: null,
+                    mimeType: null,
+                    size: uploadingFile.size,
+                    bucketId: uploadingFile.bucketId
+                });
+
+                return new ListItemModel(fileModel, false, true);
+            });
+            console.log(uploadingFiles);
+            dispatch(fileActions.listUploadingFiles(uploadingFiles));
+        }
+    };
+}

@@ -122,6 +122,27 @@ public class FileRepository extends BaseRepository {
         return model;
     }
 
+    public FileDbo get(String param, String selection) {
+        FileDbo model = null;
+        String[] selectionArgs = {
+                param
+        };
+        String orderBy = FileContract._CREATED + " DESC";
+
+        Cursor cursor = _db.query(
+                FileContract.TABLE_NAME,
+                null,
+                selection + " = ?",
+                selectionArgs,
+                null, null, orderBy, null);
+
+        model = _getSingleFromCursor(cursor);
+
+        cursor.close();
+
+        return model;
+    }
+
     public Response insert(FileModel model) {
         if(model == null || !model.isValid())
             return new Response(false, "Model is not valid!");
