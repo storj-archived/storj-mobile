@@ -11,5 +11,12 @@ pipeline {
         sh 'npm test'
       }
     }
+    stage('Build Debug APK') {
+      steps {
+        sh '''cd android
+
+&& ./gradlew assembleDebug'''
+      }
+    }
   }
 }
