@@ -107,8 +107,6 @@ class Apps extends Component {
                 return new ListItemModel(new BucketModel(file));
             });                    
 
-			console.log(buckets);
-
             this.props.getBuckets(buckets);
         }
 		
@@ -121,15 +119,13 @@ class Apps extends Component {
 		}	
 	}
 
-	onBucketDeleted(response) {		
-		console.log(response);
+	onBucketDeleted(response) {				
 		if(response.isSuccess) {
 			this.props.deleteBucket(response.result);
 		}
 	}
 	
 	onFileDeleted(response) {		
-		console.log(response);
 		if(response.isSuccess) {
 			let result = JSON.parse(response.result);
 			this.props.deleteFile(result.bucketId, result.fileId);

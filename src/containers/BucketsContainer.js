@@ -18,7 +18,6 @@ class BucketsContainer extends Component {
     }
 
     getArraySelectedCount(array) {
-        console.log(array.filter(item => item.isSelected).length);
         return array.filter(item => item.isSelected).length;
     }
   

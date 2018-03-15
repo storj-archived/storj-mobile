@@ -91,11 +91,11 @@ class FilesListContainer extends Component {
 
     onPress(params) {
         let downloadedFile = this.props.downloadedFileListModels.find(file => { 
-            return file.getId() === params.bucketId;
+            return file.id === params.bucketId;
         });
 
         if(downloadedFile) {
-            this.props.openImageViewer(downloadedFile.id, downloadedFile.path, downloadedFileListModel.bucketId);
+            this.props.openImageViewer(downloadedFile.id, downloadedFile.path, downloadedFile.bucketId);
         }
     }
 
