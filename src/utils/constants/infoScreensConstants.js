@@ -10,7 +10,7 @@ const infoScreensConstants = {
     //register success infoScreens constans
     registerSuccessTitleBoldText: 'Success',
     registerSuccessTitleLightText: 'registration',
-    registerSuccessMainText: 'Registration went successfully! Notification was already sent to your email address',
+    registerSuccessMainText: ['Registration went successfully!', 'Notification was already sent to your email address']
    
 };
 

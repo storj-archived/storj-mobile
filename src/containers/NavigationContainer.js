@@ -19,7 +19,7 @@ import {
 	mainContainerFileActions,
 	filesListContainerFileActions
 } from '../reducers/mainContainer/Files/filesReducerActions'
-import { redirectToLoginScreen } from '../reducers/navigation/navigationActions';
+import { authNavigationActions } from '../reducers/navigation/navigationActions';
 import ListItemModel from '../models/ListItemModel';
 import BucketModel from '../models/BucketModel';
 import FileModel from '../models/FileModel';
@@ -136,7 +136,16 @@ class Apps extends Component {
 		return (
 			<StackNavigator 
 				screenProps = {{
-					redirectToLoginScreen: this.props.redirectToLoginScreen
+					redirectToLoginScreen: this.props.redirectToLoginScreen,
+					redirectToMainScreen: this.props.redirectToMainScreen,
+					redirectToMnemonicConfirmationScreen: this.props.redirectToMnemonicConfirmationScreen,
+					redirectToMnemonicConfirmedScreen: this.props.redirectToMnemonicConfirmedScreen,
+					redirectToMnemonicGenerationScreen: this.props.redirectToMnemonicGenerationScreen,
+					redirectToMnemonicInfoScreen: this.props.redirectToMnemonicInfoScreen,
+					redirectToMnemonicNotConfirmedScreen: this.props.redirectToMnemonicNotConfirmedScreen,
+					redirectToRegisterSuccessScreen: this.props.redirectToRegisterSuccessScreen,
+					redirectToRegisterScreen: this.props.redirectToRegisterScreen,
+					navigateBack : this.props.navigateBack
 				}}
 				navigation = { addNavigationHelpers({
 					dispatch: this.props.dispatch,
@@ -163,7 +172,7 @@ function mapDispatchToProps(dispatch) {
 		...mainContainerActions,
 		...mainContainerFileActions,
 		...filesListContainerFileActions,
-		redirectToLoginScreen }, dispatch);
+		...authNavigationActions }, dispatch);
 }
 
 /**
