@@ -47,7 +47,7 @@ class Apps extends Component {
 	async componentWillMount() {
 		await ServiceModule.bindService();
 		await ServiceModule.bindUploadService();
-		ServiceModule.scheduleSync();
+		//ServiceModule.scheduleSync();
 
 		this.getbucketsListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKETS_UPDATED, this.onBucketsReceived.bind(this));       
 		this.bucketCreatedListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKET_CREATED, this.onBucketCreated.bind(this));       
