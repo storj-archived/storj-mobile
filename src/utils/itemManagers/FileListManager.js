@@ -38,7 +38,7 @@ export default class FileListManager {
         let fileIds = files.map(file => file.getId());
         
         this.newFilesList = this.newFilesList.map(file => {
-            if(fileIds.includes(file.getId())){ 
+            if(fileIds.includes(file.getId())) { 
                 file.entity.isStarred = !file.entity.isStarred;
             }   
 
@@ -71,15 +71,19 @@ export default class FileListManager {
     _addFileEntry(array, bucketId, file) {
 
         let doesContain = false;
-
+        console.log("file ", file);
+        console.log("array ", array);
         array.forEach((item) => {
              if(item.getId() === file.getId()) doesContain = true;
         });
 
         if(!doesContain) {
+            console.log("added");
             array.push(file);
         }
 
+        array = array.map(file => file);
+        console.log("array ", array);
         return array;
     }
 
@@ -108,7 +112,9 @@ export default class FileListManager {
      * @param {string} fileId 
      */
     _deleteFileEntry(array, bucketId, fileId) {
+        console.log(array, fileId);
         array = array.filter(fileEntry => fileEntry.getId() !== fileId);
+        console.log(array, fileId);
         return array;
     }
 
@@ -118,13 +124,18 @@ export default class FileListManager {
      * @param {ListItemModel[]} files 
      */
     listFiles(bucketId, files) {
-        let ids = this.newFilesList.map(file => file.getId());
+        /* let ids = this.newFilesList.map(file => file.getId());
 
         files.forEach(file => {
             if(!ids.includes(file.getId())) {
                 this.newFilesList.push(file);
             }
-        })
+        }) */
+
+        let tempFilesArray = this.newFilesList.filter(file => file.entity.bucketId !== bucketId);
+        
+        this.newFilesList = tempFilesArray.concat(files);
+        console.log("listFiles", this.newFilesList, files);
 
         return this.newFilesList;
     }
@@ -136,16 +147,8 @@ export default class FileListManager {
         return this.newFileUploadingList;
     }
 
-    listUploadingFiles2(files) {
-        files.forEach(file => {
-            let filterResult = this.newFileUploadingList.find(listModel => listModel.bucketId === file.entity.bucketId);
-
-            if(!filterResult) {
-                this.newFileUploadingList.push(new FileListModel(file.entity.bucketId, [ file ]));
-            } else {
-                filterResult.files.push(file);
-            }
-        });
+    getUploadingFiles(files) {
+        this.newFileUploadingList = files.slice();
 
         return this.newFileUploadingList;
     }

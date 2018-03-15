@@ -18,7 +18,10 @@ class FilesListContainer extends Component {
 
         this.bucketId = props.navigation.state.params.bucketId;
         this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
-        this.data = this.props.fileListModels.concat(this.props.uploadingFileListModels).filter(file => file.entity.bucketId == this.props.openedBucketId);
+    }
+
+    getData() {
+        return this.props.fileListModels.concat(this.props.uploadingFileListModels).filter(file => file.entity.bucketId === this.props.openedBucketId);
     }
 
     componentWillMount() {
@@ -106,7 +109,7 @@ class FilesListContainer extends Component {
                 cancelDownload = { (params) => { this.cancelDownload(params); } }
                 cancelUpload = { (params) => { this.cancelUpload(params); } }
                 bucketId = { this.bucketId }
-                data = { this.data }
+                data = { this.getData() }
                 onSingleItemSelected = { this.props.onSingleItemSelected }
                 animatedScrollValue = { this.props.screenProps.animatedScrollValue }
                 enableSelectionMode = { this.props.enableSelectionMode }

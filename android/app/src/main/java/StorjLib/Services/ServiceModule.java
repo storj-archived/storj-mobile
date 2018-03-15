@@ -165,38 +165,22 @@ public class ServiceModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void deleteBucket(final String bucketId) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
-                    serviceIntent.setAction(BUCKET_DELETED);
-                    serviceIntent.putExtra("bucketId", bucketId);
+        Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
+        serviceIntent.setAction(BUCKET_DELETED);
+        serviceIntent.putExtra("bucketId", bucketId);
 
-                    getReactApplicationContext().startService(serviceIntent);
-                } catch (Exception e) {
-                }
-            }
-        }).run();
+        getReactApplicationContext().startService(serviceIntent);
     }
 
     @ReactMethod
     public void deleteFile(final String bucketId, final String fileId) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
-                    serviceIntent.setAction(FILE_DELETED);
-                    serviceIntent.putExtra("bucketId", bucketId);
-                    serviceIntent.putExtra("fileId", fileId);
+        Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
+        serviceIntent.setAction(FILE_DELETED);
+        serviceIntent.putExtra("bucketId", bucketId);
+        serviceIntent.putExtra("fileId", fileId);
 
 
-                    getReactApplicationContext().startService(serviceIntent);
-                } catch (Exception e) {
-                }
-            }
-        }).run();
+        getReactApplicationContext().startService(serviceIntent);
     }   
 
     @ReactMethod

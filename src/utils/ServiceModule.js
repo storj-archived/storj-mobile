@@ -6,8 +6,6 @@ const ServiceModule = (() => {
 
     class ServiceModule {
         constructor() {
-            this.getBucketsWorking = false;
-            this.getFilesWorking = false;
         }
 
         async bindService() {
