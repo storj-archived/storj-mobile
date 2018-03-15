@@ -7,103 +7,122 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import infoScreensConstants from '../utils/constants/infoScreensConstants';
-import { getWidth, getHeight, getDeviceWidth, getDeviceHeight } from '../utils/adaptive';
+import { getWidth, getHeight } from '../utils/adaptive';
 
 /**
 * RegisterSuccess component
 */
 export default class RegisterSuccessComponent extends Component {
-    
     constructor(props) {
         super(props);
     }
     
     render() {
         return(
-            <View style = { styles.screen }>
-                <View style = { styles.backgoundWrapper }>
-                    <Image 
-                        style = { styles.backgroundImage } 
-                        source = { require('../images/RegisterInfoScreens/RegSuccess.png') } />
+            <View style = { styles.mainContainer }>
+                <View style = { styles.contentContainer }>
+                    <View style = { styles.titleContainer }>
+                        <View style = { styles.titleTextContainer }>
+                            <Text style = { styles.titleText }>Verify your email</Text>
+                        </View>
+                        <TouchableOpacity 
+                            style = { styles.resendEmailButton }
+                            onPress = { () => {} } > 
+                            <Text style = { styles.resendEmailText } >Re-send email</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style = { styles.successImageContainer }>
+                        <Image
+                            source = { require('../images/RegisterInfoScreens/SuccessImage.png') }
+                            style = { styles.successImage }
+                            resizeMode = 'contain' />
+                    </View>
+                    <View style = { styles.infoContainer }>
+                        <Text style = { styles.infoText } >{ infoScreensConstants.registerSuccessMainText[0] }</Text>
+                        <Text style = { styles.infoText } >{ infoScreensConstants.registerSuccessMainText[1] }</Text>
+                    </View>
+                    <TouchableOpacity onPress = { () => { this.props.screenProps.redirectToMnemonicInfoScreen(); } }>
+                        <View style = { styles.nextButton }>
+                            <Text style = { styles.nextButtonText }>Next</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
-                <View style = { styles.titleBoldContainer }>
-                    <Text style = { styles.titleBold }>{ infoScreensConstants.registerSuccessTitleBoldText }</Text>
-                </View>
-                <View style = { styles.titleLightContainer }>
-                    <Text style = { styles.titleBold }>{ infoScreensConstants.registerSuccessTitleLightText }</Text>
-                </View>
-                <View style = { styles.mainTextContainer }>
-                    <Text style = { styles.mainText }>{ infoScreensConstants.registerSuccessMainText }</Text>
-                </View>
-                <TouchableOpacity style = { styles.nextButton }
-                     onPressOut = { () => { this.props.navigation.navigate('MnemonicGenerationScreen') } }>
-                    <Text style = { styles.nextButtonText }>NEXT</Text>
-                </TouchableOpacity>
             </View>
         );
     }   
 }
 
 const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        backgroundColor: 'white'
+    mainContainer: { 
+        flex: 1, 
+        backgroundColor: '#FFFFFF'
     },
-    backgroundImage: {
-        top: 0,
-        right: 0,
-        width: getDeviceWidth(),
-        height: getDeviceHeight()
+    contentContainer: {
+        paddingHorizontal: getWidth(20)
     },
-    backgoundWrapper: {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        position: 'absolute'
+    titleContainer: { 
+        marginTop: getHeight(30),
+        height: getHeight(70),  
+        justifyContent: 'space-between',
+        flexDirection: 'row' 
     },
-    titleBoldContainer: {
-        width: getWidth(200),
-        height: getHeight(42),
-        marginTop: getHeight(285),
-        marginLeft: getWidth(31)
+    titleText: { 
+        fontFamily: 'Montserrat-Bold', 
+        fontSize: getHeight(30), 
+        lineHeight: getHeight(33),
+        color: '#384B65' 
     },
-    titleBold: {
-        fontFamily: 'Montserrat-ExtraBold',
-        fontSize: getHeight(46),
-        color: '#2782ff'
+    titleTextContainer: {
+        width: getWidth(191)
     },
-    titleLightContainer: {
-        marginTop: getHeight(5),
-        width: getWidth(306),
-        height: getHeight(42),
-        marginLeft: getWidth(31)
-    },
-    mainTextContainer: {
-        marginTop: getHeight(13),
-        width: getWidth(310),
-        height: getHeight(120),
-        marginLeft: getWidth(31)
-    },
-    mainText: {
-        fontFamily: 'Montserrat-Regular',
-        fontSize: getHeight(16),
-        lineHeight: getHeight(24),
-        color: '#384b65'
-    },
-    nextButton: {
-        marginTop: getHeight(69),
-        alignSelf: 'center',
-        width: getWidth(343),
-        height: getHeight(44),
-        alignItems: 'center',
+    nextButton: { 
+        marginTop: getHeight(70),
+        width: getWidth(335),
+        height: getHeight(50),
+        borderRadius: 6,
+        borderWidth: getWidth(1.5),
+        borderColor: '#2794FF',
         justifyContent: 'center',
-        backgroundColor: '#2782ff',
-        borderRadius: getWidth(6)
+        alignItems: 'center'
     },
-    nextButtonText: {
-        fontFamily: 'Montserrat-Bold',
-        fontSize: getHeight(14),
-        color: 'white'
+    nextButtonText: { 
+        fontFamily: 'Montserrat-SemiBold', 
+        fontSize: getHeight(16), 
+        color: '#2794FF' 
+    },
+    resendEmailButton: { 
+        width: getWidth(125),
+        height: getHeight(30),
+        marginTop: getHeight(5),
+        borderRadius: 6,
+        borderWidth: getWidth(1.5),
+        borderColor: '#2794FF',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    resendEmailText: { 
+        fontFamily: 'Montserrat-SemiBold', 
+        fontSize: getHeight(14), 
+        lineHeight: getHeight(17),
+        color: '#2794FF' 
+    },
+    successImage: {
+        height: getHeight(250),
+        width: getWidth(375)
+    },
+    successImageContainer: {
+        height: getHeight(250),
+        marginTop: getHeight(45),
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    infoContainer: {
+        marginTop: getHeight(45)
+    },
+    infoText:{
+        fontFamily: 'Montserrat-Regular', 
+        fontSize: getHeight(16), 
+        lineHeight: getHeight(23),
+        color: '#384B65'
     }
 });

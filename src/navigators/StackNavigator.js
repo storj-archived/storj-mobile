@@ -8,9 +8,13 @@ import MainScreen from '../containers/MainContainer';
 import AuthFailureInfoScreen from '../components/AuthFailureComponent';
 import RegisterSuccessInfoScreen from '../components/RegisterSuccessComponent';
 import TermsOfUseScreen from '../components/TermsOfUseComponent';
-import MnemonicGenerationScreen from '../components/MnemonicGenerationComponent';
+import MnemonicGenerationScreen from '../components/Mnemonic/MnemonicGenerationComponent';
 import QRScannerScreen from '../containers/QRScannerContainer';
 import ImageViewerScreen from '../containers/ImageViewerContainer';
+import MnemonicInfoScreen from '../components/Mnemonic/MnemonicInfoComponent';
+import MnemonicConfirmationScreen from '../components/Mnemonic/MnemonicConfirmationComponent';
+import MnemonicConfirmedScreen from '../components/Mnemonic/MnemonicConfirmedComponent';
+import MnemonicNotConfirmedScreen from '../components/Mnemonic/MnemonicNotConfirmedComponent';
 
 /**
  * Creating program main navigator
@@ -49,6 +53,10 @@ const StackNav = StackNavigator(
             screen: TermsOfUseScreen,
             routeName: 'TermsOfUseScreen'
         },
+        MnemonicInfoScreen: {
+            screen: MnemonicInfoScreen,
+            routeName: 'MnemonicInfoScreen'
+        },
         MnemonicGenerationScreen: {
             screen: MnemonicGenerationScreen,
             routeName: 'MnemonicGenerationScreen'
@@ -60,6 +68,18 @@ const StackNav = StackNavigator(
         ImageViewerScreen: {
             screen: ImageViewerScreen,
             routeName: "ImageViewerScreen"
+        },
+        MnemonicConfirmationScreen: {
+            screen: MnemonicConfirmationScreen,
+            routeName: 'MnemonicConfirmationScreen'
+        },
+        MnemonicConfirmedScreen: {
+            screen: MnemonicConfirmedScreen,
+            routeName: 'MnemonicConfirmedScreen'
+        },
+        MnemonicNotConfirmedScreen: {
+            screen: MnemonicNotConfirmedScreen,
+            routeName: 'MnemonicNotConfirmedScreen'
         }
     },
     {

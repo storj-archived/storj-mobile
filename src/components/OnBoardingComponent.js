@@ -87,12 +87,7 @@ export default class OnBoardingComponent extends Component {
      * Navigation to RegisterScreen
      */
     redirectToSingUpScreen() {
-        this.props.navigation.dispatch(NavigationActions.reset({
-            index: 0,
-            actions: [
-              NavigationActions.navigate({ routeName: 'RegisterScreen'})
-            ]
-        }));
+        this.props.screenProps.redirectToRegisterScreen();
     }
 
     render() {
