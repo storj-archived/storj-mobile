@@ -142,7 +142,7 @@ class LoginContainer extends Component {
             this.state.stateModel.email, 
             this.state.stateModel.password);
 
-        if(!areCredentialsValid) {
+        if(!areCredentialsValid === 0) {
             this.setState({
                 errorModel: new LoginErrorModel(
                     this.state.errorModel.isEmailError,
@@ -152,10 +152,14 @@ class LoginContainer extends Component {
                 )
             });
 
+            if(areCredentialsValid === 403) {
+                this.props.setEmailNotConfirmed();
+            }
+
             this.props.loginError();
             this.props.redirectToAuthFailureScreen({
-                 mainText: infoScreensConstants.loginFailureMainText, 
-                 additionalText: infoScreensConstants.loginFailureAdditionalText 
+                mainText: infoScreensConstants.loginFailureMainText, 
+                additionalText: infoScreensConstants.loginFailureAdditionalText 
             });
 
             return;
@@ -169,6 +173,7 @@ class LoginContainer extends Component {
         
         if(areKeysImported) {
             await this.handleFirstLaunch();
+            this.props.setEmailConfirmed();
             this.props.loginSuccess();
             this.props.redirectToInitializeScreen();
         } else {

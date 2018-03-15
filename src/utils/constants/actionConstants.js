@@ -7,7 +7,10 @@ const ACTIONS = {
     //login constans
     LOGIN_SUCCESS: "LOGIN_SUCCESS",
     LOGIN_ERROR: "LOGIN_ERROR",
-    LOGIN: "LOGIN"
+    LOGIN: "LOGIN",
+    
+    SET_EMAIL_NOT_CONFIRMED: 'SET_EMAIL_NOT_CONFIRMED', 
+    SET_EMAIL_CONFIRMED: 'SET_EMAIL_CONFIRMED'
 };
 
 //main reducer action constants

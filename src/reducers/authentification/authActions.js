@@ -1,7 +1,7 @@
 import { NavigationActions } from 'react-navigation';
 import authActions from '../../utils/constants/actionConstants';
 
-const { LOGIN, LOGIN_SUCCESS, LOGIN_ERROR, REGISTER, REGISTER_SUCCESS, REGISTER_ERROR } = authActions;
+const { LOGIN, LOGIN_SUCCESS, LOGIN_ERROR, REGISTER, REGISTER_SUCCESS, REGISTER_ERROR, SET_EMAIL_NOT_CONFIRMED, SET_EMAIL_CONFIRMED } = authActions;
 
 /**
  * ActionCreator on login success 
@@ -141,8 +141,18 @@ function redirectToInitializeScreen() {
     return NavigationActions.navigate({ routeName: 'InitializationScreen' });
 }
 
+function setEmailNotConfirmed() {
+    return { type: SET_EMAIL_NOT_CONFIRMED }
+}
+
+function setEmailConfirmed() {
+    return { type: SET_EMAIL_CONFIRMED }
+}
+
 // ActionCreators for LoginContainer
 export const loginActionsCreators = {
+    setEmailNotConfirmed,
+    setEmailConfirmed,
     loginSuccess,
     loginError,
     login,

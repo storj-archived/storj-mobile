@@ -23,6 +23,7 @@ import { authNavigationActions } from '../reducers/navigation/navigationActions'
 import ListItemModel from '../models/ListItemModel';
 import BucketModel from '../models/BucketModel';
 import FileModel from '../models/FileModel';
+import WarningComponent from '../components/WarningComponent';
 
 
 import SyncModule from '../utils/SyncModule';
@@ -134,24 +135,33 @@ class Apps extends Component {
 
 	render() {
 		return (
-			<StackNavigator 
-				screenProps = {{
-					redirectToLoginScreen: this.props.redirectToLoginScreen,
-					redirectToMainScreen: this.props.redirectToMainScreen,
-					redirectToMnemonicConfirmationScreen: this.props.redirectToMnemonicConfirmationScreen,
-					redirectToMnemonicConfirmedScreen: this.props.redirectToMnemonicConfirmedScreen,
-					redirectToMnemonicGenerationScreen: this.props.redirectToMnemonicGenerationScreen,
-					redirectToMnemonicInfoScreen: this.props.redirectToMnemonicInfoScreen,
-					redirectToMnemonicNotConfirmedScreen: this.props.redirectToMnemonicNotConfirmedScreen,
-					redirectToRegisterSuccessScreen: this.props.redirectToRegisterSuccessScreen,
-					redirectToRegisterScreen: this.props.redirectToRegisterScreen,
-					navigateBack : this.props.navigateBack
-				}}
-				navigation = { addNavigationHelpers({
-					dispatch: this.props.dispatch,
-					state: this.props.nav					
-				})}
-			 />
+			<View style = { { flex: 1 } }>
+				<StackNavigator 
+					screenProps = {{
+						redirectToLoginScreen: this.props.redirectToLoginScreen,
+						redirectToMainScreen: this.props.redirectToMainScreen,
+						redirectToMnemonicConfirmationScreen: this.props.redirectToMnemonicConfirmationScreen,
+						redirectToMnemonicConfirmedScreen: this.props.redirectToMnemonicConfirmedScreen,
+						redirectToMnemonicGenerationScreen: this.props.redirectToMnemonicGenerationScreen,
+						redirectToMnemonicInfoScreen: this.props.redirectToMnemonicInfoScreen,
+						redirectToMnemonicNotConfirmedScreen: this.props.redirectToMnemonicNotConfirmedScreen,
+						redirectToRegisterSuccessScreen: this.props.redirectToRegisterSuccessScreen,
+						redirectToRegisterScreen: this.props.redirectToRegisterScreen,
+						navigateBack : this.props.navigateBack
+					}}
+					navigation = { addNavigationHelpers({
+						dispatch: this.props.dispatch,
+						state: this.props.nav					
+					})}
+				/>
+				{
+					this.props.isEmailConfirmed 
+						? <WarningComponent />
+						: <WarningComponent
+								message = { 'Please confirm your email' }
+								statusBarColor = '#EB5757' />
+				}	
+			</View>
 		);
 	};
 }
@@ -160,9 +170,11 @@ class Apps extends Component {
  * connecting navigation reducer to component props
  */
 function mapStateToProps(state) {
+	console.log(state)
     return {
 		openedBucketId: state.mainReducer.openedBucketId,
-		nav: state.navReducer
+		nav: state.navReducer,
+		isEmailConfirmed: state.authReducer.user.isEmailConfirmed
     };
 }
  
