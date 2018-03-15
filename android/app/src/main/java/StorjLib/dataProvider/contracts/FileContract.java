@@ -34,7 +34,7 @@ public final class FileContract extends BaseContract {
                 "%s INTEGER, " +
                 "%s INTEGER, " +
                 "%s TEXT not null, " +
-                "FOREIGN KEY(%s) REFERENCES buckets(%s))",
+                "FOREIGN KEY(%s) REFERENCES buckets(%s) ON DELETE CASCADE)",
                 TABLE_NAME, _ID, _NAME, _MIMETYPE, _INDEX, _HMAC, _ERASURE, _CREATED, _DECRYPTED, _STARRED, _SIZE, FILE_FK, FILE_FK, _ID );
     }
 }

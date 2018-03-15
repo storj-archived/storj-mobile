@@ -114,6 +114,7 @@ public class GetBucketsService extends BaseReactService {
                 if(buckets.length == 0) {
                     bRepository().deleteAll();
                     getDb().close();
+                    sendEvent(EVENT_BUCKETS_UPDATED, true);
                     return;
                 }
 
@@ -163,7 +164,7 @@ public class GetBucketsService extends BaseReactService {
 
             @Override
             public void onError(int code, String message) {
-                sendEvent(EVENT_BUCKETS_UPDATED, true);
+                sendEvent(EVENT_BUCKETS_UPDATED, false);
             }
         });
     }
@@ -179,6 +180,7 @@ public class GetBucketsService extends BaseReactService {
                 if(files.length == 0) {
                     Response deleteAllResponse = fRepository().deleteAll(bucketId);
                     getDb().close();
+                    sendEvent(EVENT_FILES_UPDATED, true);
                     return;
                 }
 
@@ -229,7 +231,7 @@ public class GetBucketsService extends BaseReactService {
 
             @Override
             public void onError(int code, String message) {
-                sendEvent(EVENT_FILES_UPDATED, true);
+                sendEvent(EVENT_FILES_UPDATED, false);
             }
         });
     }

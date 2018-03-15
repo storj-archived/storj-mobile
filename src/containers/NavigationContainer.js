@@ -85,14 +85,12 @@ class Apps extends Component {
 
 	async onFilesReceived() {
         this.props.setLoading();
-		
         let filesResponse = await SyncModule.listFiles(this.props.openedBucketId);		
 
         if(filesResponse.isSuccess) {
             let files = JSON.parse(filesResponse.result).map((file) => {
                 return new ListItemModel(new FileModel(file));
             });                    
-
             this.props.listFiles(this.props.openedBucketId, files);
         }
 
@@ -124,12 +122,14 @@ class Apps extends Component {
 	}
 
 	onBucketDeleted(response) {		
+		console.log(response);
 		if(response.isSuccess) {
 			this.props.deleteBucket(response.result);
 		}
 	}
 	
 	onFileDeleted(response) {		
+		console.log(response);
 		if(response.isSuccess) {
 			let result = JSON.parse(response.result);
 			this.props.deleteFile(result.bucketId, result.fileId);
