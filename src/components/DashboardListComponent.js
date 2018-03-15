@@ -87,11 +87,6 @@ export default class DashboardListComponent extends Component{
 }
 
 const listComponent = (title, data, props, count, isBucket) => {
-
-    function onPress(params) {
-        // props.openBucket(params.bucketId);
-        // props.navigateToFilesScreen(params.bucketId);    
-    }
     
     return(
         <View>  
@@ -103,7 +98,8 @@ const listComponent = (title, data, props, count, isBucket) => {
                 selectedItemId = { props.selectedItemId }
                 verticalPaddingDisabled = { true }
                 isExpanderDisabled = { true }
-                onPress = { (params) => { onPress(params); } } 
+                openBucket = { props.openBucket }
+                navigateToFilesScreen = { props.navigateToFilesScreen }
                 onSingleItemSelected = { props.onSingleItemSelected }                    
                 animatedScrollValue = { props.animatedScrollValue }
                 enableSelectionMode = { props.enableSelectionMode }
@@ -111,7 +107,7 @@ const listComponent = (title, data, props, count, isBucket) => {
                 isSelectionMode = { props.isSelectionMode }
                 isSingleItemSelected = { props.isSingleItemSelected }
                 listItemIcon = { isBucket ? require('../images/Icons/BucketListItemIcon.png') : require('../images/Icons/FileListItemIcon.png') }
-                starredListItemIcon = { isBucket ? require('../images/Icons/ListStarredBucket.png') : require('../images/Icons/FileListItemIcon.png') }
+                starredListItemIcon = { isBucket ? require('../images/Icons/ListStarredBucket.png') : require('../images/Icons/ListStarredFile.png') }
                 deselectItem = { props.deselectItem }
                 navigateToFilesScreen = { props.navigateToFilesScreen ? props.navigateToFilesScreen : () => {} }
                 selectItem = { props.selectItem }

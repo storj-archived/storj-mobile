@@ -20,6 +20,7 @@ export default class DashboardComponent extends Component {
         return(
             <View style={ styles.mainContainer }>
                 <DashboardScreenNavigation
+                    setSelectionId = { this.props.setSelectionId }
                     defaultRoute = { this.props.defaultRoute }
                     animatedScrollValue = { this.animatedScrollValue } />
                 <BucketsScreenHeaderComponent

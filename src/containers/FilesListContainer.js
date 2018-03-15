@@ -37,7 +37,9 @@ class FilesListContainer extends Component {
             }
         ).start();               
         
-        ServiceModule.getFiles(this.bucketId);    
+        if (this.props.screenProps.defaultRoute !== "DashboardScreen") {
+            ServiceModule.getFiles(this.bucketId);  
+        }   
     }
 
     componentWillUnmount() {

@@ -34,8 +34,8 @@ export default class FilesListComponent extends Component {
                     selectItem = { this.props.selectFile }
                     data = { this.props.data }   
                     listItemIcon = { require('../images/Icons/FileListItemIcon.png') }
-                    starredGridItemIcon = { require('../images/Icons/ListStarredBucket.png') }
-                    starredListItemIcon = { require('../images/Icons/ListStarredBucket.png') } />
+                    starredGridItemIcon = { require('../images/Icons/GridStarredFile.png') }
+                    starredListItemIcon = { require('../images/Icons/ListStarredFile.png') } />
             </View>
         );
     }
