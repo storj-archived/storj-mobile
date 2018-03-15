@@ -64,6 +64,7 @@ class DashboardScreenContainer extends Component {
             return(
                 <DashboardComponent
                     showOptions = { this.props.screenProps.showOptions }
+                    setSelectionId = { this.props.setSelectionId }
                     files = { this.props.files }
                     buckets = { this.props.buckets }
                     openBucket = { this.props.openBucket}
