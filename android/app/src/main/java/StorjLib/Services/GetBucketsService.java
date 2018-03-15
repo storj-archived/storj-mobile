@@ -72,10 +72,17 @@ public class GetBucketsService extends BaseReactService {
         super("TestHello");
     }
 
+    private static final String TAG = "INTENT GET BUCKETS";
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
+        Log.d(TAG, "onHandleIntent: pn begin");
+
+        if(intent == null) {
+            Log.d(TAG, "onHandleIntent: Intent is null");
+        }
+
         String action = intent.getAction();
-        Log.d("INTENT SERVICE DEBUG", "onHandleIntent: " + action);
+        Log.d(TAG, "onHandleIntent: " + action);
 
         switch(action) {
             case GET_BUCKETS:
@@ -95,7 +102,7 @@ public class GetBucketsService extends BaseReactService {
                 break;
         }
 
-        Log.d("INTENT SERVICE DEBUG", "onHandleIntentEND: " + action);
+        Log.d(TAG, "onHandleIntentEND: " + action);
     }
 
     private void getBuckets() {

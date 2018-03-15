@@ -178,23 +178,27 @@ export default class FileListManager {
     }
 
     fileDownloaded(bucketId, fileId) {
-        this.newFilesList.forEach(fileEntry => {
+        this.newFilesList = this.newFilesList.map(fileEntry => {
             if(fileEntry.getId() === fileId) {
                 fileEntry.isLoading = false;
                 fileEntry.progress = 0;
-            }                    
+            }
+            
+            return fileEntry;
         });
 
         return this.newFilesList;
     }
 
     updateFileDownloadingProgress(bucketId, fileId, progress, fileRef) {
-        this.newFilesList.forEach(fileEntry => {
+        this.newFilesList = this.newFilesList.forEach(fileEntry => {
             if(fileEntry.getId() === fileId) {
                 fileEntry.isLoading = true;
                 fileEntry.progress = progress;
                 fileEntry.fileRef = fileRef;
-            }                    
+            }
+            
+            return fileEntry;
         });
 
         return this.newFilesList;
