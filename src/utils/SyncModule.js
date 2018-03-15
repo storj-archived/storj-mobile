@@ -3,7 +3,6 @@ import { NativeModules } from 'react-native';
 const SyncModule = (() => {
     let instance = null;
     const syncModule = NativeModules.SyncModule;
-    console.log(syncModule);
 
     class SyncModule {
         constructor() {
