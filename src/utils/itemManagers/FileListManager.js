@@ -128,8 +128,10 @@ export default class FileListManager {
     }
 
     listUploadingFiles(bucketId, files) {
+        let names = files.map(file => file.getName());
+        let tempFilesArray = this.newFileUploadingList.filter(file => file.entity.bucketId === bucketId);        
 
-        this.newFileUploadingList = this.newFileUploadingList.filter(file => newFile.getName() !== file.getName());        
+        let newArray = tempFilesArray.filter(file => !names.includes(file.getName)).concat(this.newFileUploadingList.filter(file => file.entity.bucketId !== bucketId));
 
         return this.newFileUploadingList;
     }
