@@ -4,7 +4,7 @@ import DashboardScreen from '../containers/DashboardContainer';
 
 const DashboardScreenNavigator = StackNavigator(
     {
-        DashboardScreen: {
+        DashboardDefaultScreen: {
             screen: DashboardScreen,
             routeName: 'DashboardDefaultScreen'
         },
