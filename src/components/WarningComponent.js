@@ -19,10 +19,6 @@ export default class WarningComponent extends Component{
             <View style = { this.props.message ? styles.secretPhraseButton : styles.secretPhraseHide } >
                 <StatusBar backgroundColor = { this.props.statusBarColor }/>
                 <Text style = { styles.secretPhraseText }>{this.props.message}</Text> 
-                    <Image 
-                        style = { styles.expandImage }
-                        source = { require('../images/MyAccount/Expand.png') }
-                        resizeMode = 'contain' />
             </View>
         );
     }

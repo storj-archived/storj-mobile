@@ -20,11 +20,11 @@ export default class MnemonicNotConfirmedComponent extends Component {
             <View style = { styles.mainContainer }>
                 <View style = { styles.contentContainer }>
                     <View style = { styles.titleContainer } >
-                        <Text style = { styles.titleText } >Secret phrase backup error</Text>
+                        <Text style = { styles.titleText } >Secret phrase backup failed</Text>
                     </View>
                     <View style = { styles.errorImageContainer }>
                         <Image
-                            source = { require('../../images/RegisterInfoScreens/LockImage.png') }
+                            source = { require('../../images/RegisterInfoScreens/Error.png') }
                             style = { styles.errorImage }
                             resizeMode = 'contain' />
                     </View>
@@ -34,6 +34,11 @@ export default class MnemonicNotConfirmedComponent extends Component {
                         
                         <View style = { styles.backButton } >
                             <Text style = { styles.backButtonText }>Back</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress = { () => { this.props.screenProps.redirectToLoginScreen(); } } >
+                        <View style = { styles.nextButton }>
+                            <Text style = { styles.nextButtonText }>Skip</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -85,7 +90,7 @@ const styles = StyleSheet.create({
         color: '#384B65'
     },
     backButton: {
-        marginTop: getHeight(130),
+        marginTop: getHeight(60),
         alignSelf: 'center',
         width: getWidth(335),
         height: getHeight(50),
@@ -100,5 +105,20 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Bold',
         fontSize: getHeight(14),
         color: 'white'
+    },
+    nextButton: { 
+        marginTop: getHeight(20),
+        width: getWidth(335),
+        height: getHeight(50),
+        borderRadius: 6,
+        borderWidth: getWidth(1.5),
+        borderColor: '#2794FF',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    nextButtonText: { 
+        fontFamily: 'Montserrat-SemiBold', 
+        fontSize: getHeight(16), 
+        color: '#2794FF' 
     },
 });

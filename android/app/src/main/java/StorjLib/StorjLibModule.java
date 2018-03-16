@@ -126,9 +126,10 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
         new MethodHandler().invokeParallel(new BaseMethodParams(promise), new IMethodHandlerCallback() {
             @Override
             public void callback(IMethodParams param) throws Exception {
-                int errorCode = getStorj().verifyKeys(email, password);
+                int error = getStorj().verifyKeys(email, password);
+                boolean isSuccess = error == 0;
 
-                param.getPromise().resolve(new Response(errorCode == 0, E_VERIFY_KEYS, errorCode).toWritableMap());
+                param.getPromise().resolve(new Response(isSuccess, E_VERIFY_KEYS, error).toWritableMap());
             }
         });
     }

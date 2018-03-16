@@ -91,7 +91,7 @@ const StorjLib = (() => {
                 console.log('verifyKeys ', response.error.message);
             }
 
-            return response.isSuccess;
+            return response;
         };
     
         /**

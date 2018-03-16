@@ -1,7 +1,10 @@
 import { NavigationActions } from 'react-navigation';
 import authActions from '../../utils/constants/actionConstants';
 
-const { LOGIN, LOGIN_SUCCESS, LOGIN_ERROR, REGISTER, REGISTER_SUCCESS, REGISTER_ERROR, SET_EMAIL_NOT_CONFIRMED, SET_EMAIL_CONFIRMED } = authActions;
+const { LOGIN, LOGIN_SUCCESS, LOGIN_ERROR, 
+    REGISTER, REGISTER_SUCCESS, REGISTER_ERROR, 
+    SET_EMAIL_NOT_CONFIRMED, SET_EMAIL_CONFIRMED,
+    SET_ACCOUNT_NOT_EXIST, SET_ACCOUNT_EXIST } = authActions;
 
 /**
  * ActionCreator on login success 
@@ -149,8 +152,18 @@ function setEmailConfirmed() {
     return { type: SET_EMAIL_CONFIRMED }
 }
 
+function setAccountNotExist() {
+    return { type: SET_ACCOUNT_NOT_EXIST }
+}
+
+function setAccountExist() {
+    return { type: SET_ACCOUNT_EXIST }
+}
+
 // ActionCreators for LoginContainer
 export const loginActionsCreators = {
+    setAccountNotExist,
+    setAccountExist,
     setEmailNotConfirmed,
     setEmailConfirmed,
     loginSuccess,

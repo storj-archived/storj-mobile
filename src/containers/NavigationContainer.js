@@ -133,6 +133,26 @@ class Apps extends Component {
 		}
 	}
 
+	chooseWarning() {
+		if(!this.props.isEmailConfirmed) {
+			return(
+				<WarningComponent
+					message = { 'Please confirm your email' }
+					statusBarColor = '#EB5757' />
+			)
+		} else if(!this.props.isAccountExist) {
+			return(
+				<WarningComponent
+					message = { 'This acoound doesn`t exist' }
+					statusBarColor = '#EB5757' />
+			)
+		} else {
+			return(
+				<WarningComponent />
+			)
+		}
+	}
+
 	render() {
 		return (
 			<View style = { { flex: 1 } }>
@@ -155,11 +175,7 @@ class Apps extends Component {
 					})}
 				/>
 				{
-					this.props.isEmailConfirmed 
-						? <WarningComponent />
-						: <WarningComponent
-								message = { 'Please confirm your email' }
-								statusBarColor = '#EB5757' />
+					this.chooseWarning()
 				}	
 			</View>
 		);
@@ -174,7 +190,8 @@ function mapStateToProps(state) {
     return {
 		openedBucketId: state.mainReducer.openedBucketId,
 		nav: state.navReducer,
-		isEmailConfirmed: state.authReducer.user.isEmailConfirmed
+		isEmailConfirmed: state.authReducer.user.isEmailConfirmed,
+		isAccountExist: state.authReducer.user.isAccountExist
     };
 }
  
