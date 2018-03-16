@@ -22,7 +22,20 @@ export default class FileListManager {
     }
 
     addFileEntryD(bucketId, file) {
-        return this._addFileEntry(this.newFileDownloadedList, bucketId, file);
+        //return this._addFileEntry(this.newFileDownloadedList, bucketId, file);
+        let doesContain = false;
+
+        this.newFileDownloadedList.forEach((item) => {
+             if(item.id === file.id) doesContain = true;
+        });
+
+        if(!doesContain) {
+            this.newFileDownloadedList.push(file);
+        }
+
+        this.newFileDownloadedList = this.newFileDownloadedList.map(file => file);
+        
+        return this.newFileDownloadedList;
     }
 
     //--------------------------------------------------------------------------

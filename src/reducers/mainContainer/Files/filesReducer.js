@@ -45,6 +45,7 @@ export default function filesReducer(state = initialState, action) {
             newState.uploadingFileListModels = filesManager.addFileEntryU(action.payload.bucketId, action.payload.file);
             break;
         case UPLOAD_FILE_SUCCESS:
+        console.log(action);
             newState.uploadingFileListModels = filesManager.deleteFileEntryU(action.payload.bucketId, action.payload.filePath);
             newState.fileListModels = filesManager.addFileEntry(action.payload.bucketId, action.payload.file);
             newState.downloadedFileListModels = filesManager.addFileEntryD(action.payload.bucketId, { id: action.payload.file.getId(), path: action.payload.filePath });

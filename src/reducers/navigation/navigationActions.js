@@ -110,7 +110,7 @@ export function bucketNavigateBack() {
     return NavigationActions.reset({
         index: 0,
         actions: [
-          NavigationActions.navigate({ routeName: 'BucketsScreen'})
+          NavigationActions.navigate({ routeName: 'BucketsListScreen'})
         ]
     });
 }
