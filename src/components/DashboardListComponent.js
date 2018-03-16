@@ -20,14 +20,17 @@ export default class DashboardListComponent extends Component{
     constructor(props) {
         super(props);        
 
-        this.starredBuckets = props.buckets.filter(item => item.getStarred());
-        this.starredBucketsCount = this.starredBuckets.length;
-
-        this.starredFiles = props.files.filter(item => item.getStarred());
-        this.starredFilesCount = this.starredFiles.length;
+        
     }
 
     render() {
+        let props = this.props;
+        let starredBuckets = props.buckets.filter(item => item.getStarred());
+        let starredBucketsCount = starredBuckets.length;
+
+        let starredFiles = props.files.filter(item => item.getStarred());
+        let starredFilesCount = starredFiles.length;
+
         return(
             <View style = { styles.mainContainer }>
                 <View style = { styles.scrollViewContainer }>
@@ -71,13 +74,13 @@ export default class DashboardListComponent extends Component{
                             </TouchableOpacity>
                         </View>
                         {
-                            listComponent('Favourite buckets', this.starredBuckets.slice(0, 3), this.props, this.starredBucketsCount, true)
+                            listComponent('Favourite buckets', starredBuckets.slice(0, 3), this.props, starredBucketsCount, true)
                         }
                         {
-                            listComponent('Favourite files', this.starredFiles.slice(0, 3), this.props, this.starredFilesCount, false)
+                            listComponent('Favourite files', starredFiles.slice(0, 3), this.props, starredFilesCount, false)
                         }
                         {
-                            listComponent('Recent sync', this.starredBuckets.slice(0, 3), this.props, this.starredCount, false)
+                            listComponent('Recent sync', starredBuckets.slice(0, 3), this.props, starredBucketsCount, true)
                         }     
                     </ScrollView>
                 </View>
