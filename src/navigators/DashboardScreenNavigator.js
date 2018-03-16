@@ -8,7 +8,7 @@ const DashboardScreenNavigator = StackNavigator(
             screen: DashboardScreen,
             routeName: 'DashboardDefaultScreen'
         },
-        FilesScreen: {
+        DashboardFilesScreen: {
             screen: FilesScreen,
             routeName: 'DashboardFilesScreen'
         }
