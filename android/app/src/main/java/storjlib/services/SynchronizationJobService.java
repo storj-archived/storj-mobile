@@ -101,7 +101,7 @@ public class SynchronizationJobService extends JobService {
                     continue;
                 }
 
-                FileDbo fileDbo = fileRepo.get(file.getName(), FileContract._NAME);
+                FileDbo fileDbo = fileRepo.get(file.getName(), FileContract._NAME, bucketId);
                 UploadingFileModel uploadingFileModel = uploadFileRepo.get(file.getName(), UploadingFileContract._NAME);
 
                 if(fileDbo == null && uploadingFileModel == null) {
