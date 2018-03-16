@@ -141,27 +141,30 @@ class LoginContainer extends Component {
         let areCredentialsValid = await StorjLib.verifyKeys(
             this.state.stateModel.email, 
             this.state.stateModel.password);
-
-        if(!areCredentialsValid === 0) {
+            
+        if(!areCredentialsValid.isSuccess) {
             this.setState({
                 errorModel: new LoginErrorModel(
                     this.state.errorModel.isEmailError,
                     this.state.errorModel.isPasswordError,
                     this.state.errorModel.isMnemonicError,
-                    !areCredentialsValid
+                    !areCredentialsValid.isSuccess
                 )
             });
 
-            if(areCredentialsValid === 403) {
-                this.props.setEmailNotConfirmed();
+            switch (areCredentialsValid.error.errorCode) {
+                case 403: this.props.setEmailNotConfirmed();
+                break;
+                case 401: this.props.setAccountNotExist();
+                break;
+                default: this.props.redirectToAuthFailureScreen({ 
+                    mainText: infoScreensConstants.loginFailureMainText, 
+                    additionalText: infoScreensConstants.loginFailureAdditionalText 
+                });
             }
 
             this.props.loginError();
-            this.props.redirectToAuthFailureScreen({
-                mainText: infoScreensConstants.loginFailureMainText, 
-                additionalText: infoScreensConstants.loginFailureAdditionalText 
-            });
-
+            
             return;
         }
 
@@ -174,6 +177,7 @@ class LoginContainer extends Component {
         if(areKeysImported) {
             await this.handleFirstLaunch();
             this.props.setEmailConfirmed();
+            this.props.setAccountExist();
             this.props.loginSuccess();
             this.props.redirectToInitializeScreen();
         } else {
@@ -189,12 +193,16 @@ class LoginContainer extends Component {
      * invokes actionCreators that provides navigations
      */
     redirectToRegisterScreen() {
+        this.props.setAccountExist();
+        this.props.setEmailConfirmed();
 		this.props.navigateToRegisterScreen();
     };
     redirectToMainPageScreen() {
 		this.props.redirectToMainScreen();
     };
     redirectToQRScannerScreen() {
+        this.props.setAccountExist();
+        this.props.setEmailConfirmed();
         this.props.redirectToQRScannerScreen();
     };
 

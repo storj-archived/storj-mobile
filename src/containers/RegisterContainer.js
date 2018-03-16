@@ -10,7 +10,7 @@ import StorjModule from '../utils/StorjModule';
 import validator from '../utils/validator';
 import infoScreensConstants from '../utils/constants/infoScreensConstants';
 import { authConstants } from '../utils/constants/storageConstants';
-import { setEmail, setMnemonic, setMnemonicNotSaved, setPassword, getFirstAction, setFirstAction } from '../utils/AsyncStorageModule';
+import { setEmail, setMnemonic, setPassword, getFirstAction, setFirstAction } from '../utils/AsyncStorageModule';
 
 /**
  * Redux container for register component
@@ -110,7 +110,6 @@ export class RegisterContainer extends Component {
         await setMnemonic(mnemonic);
         await setEmail(email);
         await setPassword(password);
-        await setMnemonicNotSaved();
     }
 
     /**
@@ -228,7 +227,11 @@ export class RegisterContainer extends Component {
                     isEmailError = { this.state.errorModel.isEmailError }
                     isPasswordError = { this.state.errorModel.isPasswordError }
                     isPasswordMatchError = { this.state.errorModel.isPasswordMatchError }
-                    isTermsAcceptedError = { this.state.errorModel.isTermsAcceptedError } />
+                    isTermsAcceptedError = { this.state.errorModel.isTermsAcceptedError }
+                    isButtonDisabled = { !(this.state.stateModel.password && 
+                                            this.state.stateModel.passwordRepeat && 
+                                            this.state.stateModel.email && 
+                                            this.state.stateModel.areTermsAccepted) } />
 		);
 	};
 }
