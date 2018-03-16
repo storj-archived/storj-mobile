@@ -10,35 +10,23 @@ import PropTypes from 'prop-types';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import myAccountConstants from '../../utils/constants/myAccountConstants';
 import QRCode from 'react-native-qrcode';
-import { getEmail, getPassword, getMnemonic } from '../../utils/AsyncStorageModule';
+import StorjModule from '../../utils/StorjModule';
 
 export default class QRCodeComponent extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            email: null,
-            password: null,
-            mnemonic: null
+            qrCode: null
         }
     }
 
     async componentWillMount() {
-        this.setState({ 
-            email: await getEmail(),
-            password: await getPassword(),
-            mnemonic: await getMnemonic()
-        })
-    }
-
-    getLoginCredentials() {
-        result = { 
-            email: this.state.email, 
-            password: this.state.password, 
-            mnemonic: this.state.mnemonic 
-        };
-
-        return JSON.stringify(result);
+        StorjModule.getKeys("").then(result => {            
+            this.setState({
+                qrCode: result.result
+            });
+        });        
     }
 
     render() {
@@ -47,11 +35,14 @@ export default class QRCodeComponent extends Component {
                 <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { this.props.showQR } />
                     <View style = { styles.mainContainer } >
                         <View style = { styles.qrContainer }>
-                            <QRCode
-                                value = { this.getLoginCredentials() }
-                                size={ getHeight(200) }
-                                bgColor = { 'black' }
-                                fgColor = { 'white' } />
+                        {
+                            this.state.qrCode ?
+                                <QRCode
+                                    value = { this.state.qrCode }
+                                    size = { getHeight(200) }
+                                    bgColor = { 'black' }
+                                    fgColor = { 'white' } /> : null
+                        }
                         </View>
                         <View style = { styles.infoTextContainer }>
                             <Text style = { styles.infoText }>{ myAccountConstants.qrCodeInfoText[0] }</Text>
