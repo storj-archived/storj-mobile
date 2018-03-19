@@ -186,7 +186,6 @@ class Apps extends Component {
  * connecting navigation reducer to component props
  */
 function mapStateToProps(state) {
-	console.log(state)
     return {
 		openedBucketId: state.mainReducer.openedBucketId,
 		nav: state.navReducer,

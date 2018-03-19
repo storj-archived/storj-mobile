@@ -20,7 +20,7 @@ class FilesListContainer extends Component {
         this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
     }
 
-    getData() {
+    getData() { 
         return this.props.fileListModels.concat(this.props.uploadingFileListModels).filter(file => file.entity.bucketId === this.props.openedBucketId);
     }
 
@@ -111,6 +111,7 @@ class FilesListContainer extends Component {
                 cancelDownload = { (params) => { this.cancelDownload(params); } }
                 cancelUpload = { (params) => { this.cancelUpload(params); } }
                 bucketId = { this.bucketId }
+                openedBucketId = { this.props.openedBucketId }
                 data = { this.getData() }
                 onSingleItemSelected = { this.props.onSingleItemSelected }
                 animatedScrollValue = { this.props.screenProps.animatedScrollValue }
