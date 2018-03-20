@@ -54,6 +54,8 @@ class DashboardContainer extends Component {
 
             if(response.status === 200) {
                 let debits = await response.json();
+                
+                console.log(debits);
                 this.getDebits(debits);        
             }
         });
@@ -64,13 +66,16 @@ class DashboardContainer extends Component {
             this.setState({storage: "0.00", bandwidth: "0.00"});
         }
 
-        let stor = this.getSum(this.debits, 'storage');
+        let stor = this.getSum(debits, 'storage');
         let currentStor = stor / this.avgHoursPerMonth;
+        let roundStor = this.roundToGBAmount(currentStor);
 
-        let band = this.getSum(this.debits, 'bandwidth');
+        let band = this.getSum(debits, 'bandwidth');
         let roundBandwidth = this.roundToGBAmount(band, 'bytes');
 
-        this.setState({storage: this.roundToGBAmount(currentStor), bandwidth: roundBandwidth});
+        console.log(roundBandwidth);
+
+        this.setState({storage: roundStor, bandwidth: roundBandwidth});        
     }
 
     /**
@@ -80,13 +85,17 @@ class DashboardContainer extends Component {
      * @returns {Number}
      */
     getSum = function (arr, field) {
-        if (!arr || Array.isArray(arr) && arr.length <= 0) {
-        return 0;
+        console.log("arr", arr)
+        console.log("field", field)
+        if (!arr || (Array.isArray(arr) && arr.length <= 0)) {
+            return 0;
         }
-    
+        console.log(field)  
         const sum = arr.reduce((acc, i) => {
-        const add = typeof i[field] === 'undefined' ? 0 : i[field];
-        return acc + add;
+            console.log("acc", acc)
+            console.log("i", i)
+            const add = typeof i[field] === 'undefined' ? 0 : i[field];
+            return acc + add;
         }, 0);
     
         return sum;
