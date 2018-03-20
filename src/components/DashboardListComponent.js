@@ -45,7 +45,7 @@ export default class DashboardListComponent extends Component{
                                             resizeMode = 'contain' />
                                         <View >
                                             <Text style = { styles.buttonTextRegular }>Storage</Text>
-                                            <Text style = { styles.buttonTextBold }>{ this.props.storageAmount ? this.props.storageAmount : '00.00' }{ ' GB' }</Text>
+                                            <Text style = { styles.buttonTextBold }>{ this.props.storageAmount }{ ' GB' }</Text>
                                         </View>
                                         <Image 
                                             style = { styles.expandImage } 
@@ -63,7 +63,7 @@ export default class DashboardListComponent extends Component{
                                             resizeMode = 'contain' />
                                         <View >
                                             <Text style = { styles.buttonTextRegular }>Bandwidth</Text>
-                                            <Text style = { styles.buttonTextBold }>{ this.props.bandwidthAmount ? this.props.bandwidthAmount : '0.00' }{ ' GB' }</Text>
+                                            <Text style = { styles.buttonTextBold }>{ this.props.bandwidthAmount }{ ' GB' }</Text>
                                         </View>
                                         <Image 
                                             style = { styles.expandImage } 

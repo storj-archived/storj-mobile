@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import storjlib.Utils.Sha256Module;
 import storjlib.services.ServiceModule;
 
 /**
@@ -28,6 +29,7 @@ public class StorjLibPackage implements ReactPackage {
         List<NativeModule> modules = new ArrayList<>();
 
         modules.add(new StorjLibModule(reactContext));
+        modules.add(new Sha256Module(reactContext));
         modules.add(new FilePickerModule(reactContext));
         modules.add(new ServiceModule(reactContext));
         modules.add(new SyncModule(reactContext));
