@@ -19,8 +19,6 @@ import { getHeight, getWidth } from '../utils/adaptive';
 export default class DashboardListComponent extends Component{
     constructor(props) {
         super(props);        
-
-        
     }
 
     render() {
@@ -30,6 +28,9 @@ export default class DashboardListComponent extends Component{
 
         let starredFiles = props.files.filter(item => item.getStarred());
         let starredFilesCount = starredFiles.length;
+
+        let syncedFiles = props.files.filter(item => item.getSynced());
+        let syncedfilesCount = syncedFiles.length;
 
         return(
             <View style = { styles.mainContainer }>
@@ -80,7 +81,7 @@ export default class DashboardListComponent extends Component{
                             listComponent('Favourite files', starredFiles.slice(0, 3), this.props, starredFilesCount, false)
                         }
                         {
-                            listComponent('Recent sync', starredBuckets.slice(0, 3), this.props, starredBucketsCount, true)
+                            listComponent('Recent sync', syncedFiles.slice(0, 3), this.props, syncedfilesCount, false)
                         }     
                     </ScrollView>
                 </View>
@@ -102,7 +103,7 @@ const listComponent = (title, data, props, count, isBucket) => {
                 verticalPaddingDisabled = { true }
                 isExpanderDisabled = { true }
                 openBucket = { props.openBucket }
-                navigateToFilesScreen = { props.navigateToFilesScreen }
+                navigateToDashboardFilesScreen = { props.navigateToDashboardFilesScreen }
                 onSingleItemSelected = { props.onSingleItemSelected }                    
                 animatedScrollValue = { props.animatedScrollValue }
                 enableSelectionMode = { props.enableSelectionMode }

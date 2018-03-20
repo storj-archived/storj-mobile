@@ -10,8 +10,12 @@ import com.firebase.jobdispatcher.JobParameters;
 import com.firebase.jobdispatcher.JobService;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
+import storjlib.Models.SettingsModel;
 import storjlib.Models.UploadingFileModel;
 import storjlib.Responses.Response;
 import storjlib.dataProvider.DatabaseFactory;
@@ -22,6 +26,7 @@ import storjlib.dataProvider.contracts.FileContract;
 import storjlib.dataProvider.contracts.UploadingFileContract;
 import storjlib.dataProvider.repositories.BucketRepository;
 import storjlib.dataProvider.repositories.FileRepository;
+import storjlib.dataProvider.repositories.SettingsRepository;
 import storjlib.dataProvider.repositories.UploadingFilesRepository;
 
 /**
@@ -37,9 +42,20 @@ public class SynchronizationJobService extends JobService {
         mBackgroundTask = new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] objects) {
-                syncFolder("/storage/emulated/0/Download", "1f300c24ac1ed2d706c10bdb");
-                /*mNotificationService.init(SynchronizationJobService.this);
-                mNotificationService.notifyPriorityHigh(21321, "hello");*/
+                try(SQLiteDatabase db = new DatabaseFactory(SynchronizationJobService.this, null).getReadableDatabase()) {
+                    syncFolder("/storage/emulated/0/Download", "1f300c24ac1ed2d706c10bdb", db);
+
+                    SettingsRepository settingsRepo = new SettingsRepository(db);
+
+                    SettingsModel model = new SettingsModel("elvy.baila@arockee.com", getDateTime());
+
+                    if(!settingsRepo.update(model).isSuccess()) {
+                        settingsRepo.insert(model);
+                    }
+                } catch (Exception e) {
+                    Log.d(DEBUG_TAG, "sync error: " + e.getMessage());
+                }
+
                 return null;
             }
 
@@ -48,8 +64,7 @@ public class SynchronizationJobService extends JobService {
                 jobFinished(job, true);
             }
         };
-        //syncFolder("/storage/emulated/0/Movies", "12f19c568912d709e51feb2f");
-        //jobFinished(job, true);
+
         mBackgroundTask.execute();
         return true;
     }
@@ -67,49 +82,53 @@ public class SynchronizationJobService extends JobService {
         uploadIntent.setAction(UploadService.ACTION_UPLOAD_FILE);
         uploadIntent.putExtra(UploadService.PARAMS_BUCKET_ID, bucketId);
         uploadIntent.putExtra(UploadService.PARAMS_URI, uri);
+        uploadIntent.putExtra(FileContract._SYNCED, true);
 
         startService(uploadIntent);
     }
 
     private final static String DEBUG_TAG = "SYNCHRONIZATION DEBUG";
-    private void syncFolder(String folderUri, String bucketId) {
+    private void syncFolder(String folderUri, String bucketId, SQLiteDatabase db) {
         File folder = new File(folderUri);
 
         if(!folder.exists() || !folder.isDirectory()) {
-            Log.d(DEBUG_TAG, "sync: " + "File not exist or is directory");
+            Log.d(DEBUG_TAG, "sync: " + "File not exist or is not a directory");
             return;
         }
 
         File[] files = folder.listFiles();
 
-        try(SQLiteDatabase db = new DatabaseFactory(this, null).getReadableDatabase()) {
-            FileRepository fileRepo = new FileRepository(db);
-            UploadingFilesRepository uploadFileRepo = new UploadingFilesRepository(db);
-            BucketRepository bucketRepo = new BucketRepository(db);
+        FileRepository fileRepo = new FileRepository(db);
+        UploadingFilesRepository uploadFileRepo = new UploadingFilesRepository(db);
+        BucketRepository bucketRepo = new BucketRepository(db);
 
-            BucketDbo bucketDbo = bucketRepo.get(bucketId);
+        BucketDbo bucketDbo = bucketRepo.get(bucketId);
 
-            if(bucketDbo == null) {
-                Log.d(DEBUG_TAG, "sync: " + "No bucketDbo");
-                return;
-            }
-
-            for(File file : files) {
-                Log.d(DEBUG_TAG, "sync: " + "File, name: " + file.getName());
-                if(file.isDirectory()) {
-                    Log.d(DEBUG_TAG, "sync: " + "File is directory continue");
-                    continue;
-                }
-
-                FileDbo fileDbo = fileRepo.get(file.getName(), FileContract._NAME, bucketId);
-                UploadingFileModel uploadingFileModel = uploadFileRepo.get(file.getName(), UploadingFileContract._NAME);
-
-                if(fileDbo == null && uploadingFileModel == null) {
-                    uploadFile(bucketId, file.getPath());
-                }
-            }
-        } catch(Exception e) {
-            Log.d(DEBUG_TAG, "sync error: " + e.getMessage());
+        if(bucketDbo == null) {
+            Log.d(DEBUG_TAG, "sync: " + "No bucketDbo");
+            return;
         }
+
+        for(File file : files) {
+            Log.d(DEBUG_TAG, "sync: " + "File, name: " + file.getName());
+            if(file.isDirectory()) {
+                Log.d(DEBUG_TAG, "sync: " + "File is directory continue");
+                continue;
+            }
+
+            FileDbo fileDbo = fileRepo.get(file.getName(), FileContract._NAME, bucketId);
+            UploadingFileModel uploadingFileModel = uploadFileRepo.get(file.getName(), UploadingFileContract._NAME);
+
+            if(fileDbo == null && uploadingFileModel == null) {
+                uploadFile(bucketId, file.getPath());
+            }
+        }
+    }
+
+    private String getDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 }

@@ -29,6 +29,7 @@ public class FileRepository extends BaseRepository {
         FileContract._MIMETYPE,
         FileContract._STARRED,
         FileContract._SIZE,
+        FileContract._SYNCED,
         FileContract.FILE_FK,
         FileContract._NAME
     };
@@ -179,6 +180,7 @@ public class FileRepository extends BaseRepository {
         map.put(FileContract._INDEX, model.getIndex());
         map.put(FileContract._MIMETYPE, model.getMimeType());
         map.put(FileContract._STARRED, model.getStarred());
+        map.put(FileContract._SYNCED, model.isSynced());
         map.put(FileContract._SIZE, model.getSize());
         map.put(FileContract.FILE_FK, model.getBucketId());
         map.put(FileContract._NAME, model.getName());
@@ -281,6 +283,7 @@ public class FileRepository extends BaseRepository {
                         break;
                     case FileContract._DECRYPTED :
                     case FileContract._STARRED :
+                    case FileContract._SYNCED :
                         model.setProp(_columns[i], cursor.getInt(cursor.getColumnIndex(_columns[i])) == 1 ? true : false);
                         break;
                     case FileContract._SIZE :

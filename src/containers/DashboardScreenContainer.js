@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { dashboardContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
-import { dashboardNavigateBack, navigateToFilesScreen } from '../reducers/navigation/navigationActions';
+import { dashboardNavigateBack, navigateToDashboardFilesScreen, navigateBack } from '../reducers/navigation/navigationActions';
 import DashboardComponent from '../components/DashboardComponent';
 import FirstSignInComponent from '../components/FirstSignInComponent';
 
@@ -69,9 +69,10 @@ class DashboardScreenContainer extends Component {
                     buckets = { this.props.buckets }
                     openBucket = { this.props.openBucket}
                     defaultRoute = { this.props.defaultRoute }
+                    isFilesScreen = { this.props.screenName === 'DashboardFilesScreen' }
                     screenName = { this.props.screenName }
                     selectItem = { this.props.selectBucket }
-                    navigateBack = { this.props.dashboardNavigateBack }
+                    navigateBack = { this.props.navigateBack }
                     deselectItem = { this.props.deselectBucket }      
                     isSelectionMode = { this.props.isSelectionMode }
                     selectedBucketId = { this.props.selectedBucketId }
@@ -81,7 +82,7 @@ class DashboardScreenContainer extends Component {
                     disableSelectionMode = { this.props.disableSelectionMode }
                     onSingleItemSelected = { this.props.onSingleItemSelected }  
                     isSingleItemSelected = { this.props.isSingleItemSelected }
-                    navigateToFilesScreen = { this.props.navigateToFilesScreen } />
+                    navigateToDashboardFilesScreen = { this.props.navigateToDashboardFilesScreen } />
             )
         }
     }
@@ -111,7 +112,8 @@ function mapDispatchToProps(dispatch) {
         ...filesListContainerMainActions, 
         ...filesListContainerFileActions, 
         dashboardNavigateBack,
-        navigateToFilesScreen
+        navigateToDashboardFilesScreen,
+        navigateBack
     }, dispatch);
 }
 
