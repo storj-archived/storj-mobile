@@ -110,7 +110,7 @@ export function dashboardNavigateBack() {
     return NavigationActions.reset({
         index: 0,
         actions: [
-          NavigationActions.navigate({ routeName: 'DashboardScreen'})
+          NavigationActions.navigate({ routeName: 'DashboardDefaultScreen'})
         ]
     });
 }
@@ -123,6 +123,11 @@ export function bucketNavigateBack() {
         ]
     });
 }
+
+export function navigateToDashboardFilesScreen(bucketId) {
+    return NavigationActions.navigate({ routeName: 'DashboardFilesScreen', params: { bucketId } });
+}
+
 
 
 export const authNavigationActions = {

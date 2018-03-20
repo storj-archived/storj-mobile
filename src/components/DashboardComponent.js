@@ -13,6 +13,8 @@ export default class DashboardComponent extends Component {
     constructor(props) {
         super(props);
 
+        console.log(this.props);
+
         this.animatedScrollValue = new Animated.Value(0);
     }
 
@@ -24,6 +26,7 @@ export default class DashboardComponent extends Component {
                     defaultRoute = { this.props.defaultRoute }
                     animatedScrollValue = { this.animatedScrollValue } />
                 <BucketsScreenHeaderComponent
+                    isFilesScreen = { this.props.isFilesScreen}
                     files = { this.props.files }
                     buckets = { this.props.buckets }
                     openBucket = { this.props.openBucket}
@@ -40,7 +43,7 @@ export default class DashboardComponent extends Component {
                     selectedBucketsCount = { this.props.selectedBucketsCount }  
                     onSingleItemSelected = { this.props.onSingleItemSelected }  
                     isSingleItemSelected = { this.props.isSingleItemSelected }
-                    navigateToFilesScreen = { this.props.navigateToFilesScreen } />
+                    navigateToDashboardFilesScreen = { this.props.navigateToDashboardFilesScreen } />
             </View>
         )
     }

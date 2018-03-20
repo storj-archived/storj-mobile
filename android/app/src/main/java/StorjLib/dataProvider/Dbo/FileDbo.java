@@ -19,6 +19,7 @@ public class FileDbo {
     private long _size;
     private boolean _isDecrypted;
     private boolean _isStarred;
+    private boolean _isSynced;
 
     public String getId() {
         return _fileId;
@@ -61,6 +62,9 @@ public class FileDbo {
             case FileContract._STARRED :
                 _isStarred = value;
                 break;
+            case FileContract._SYNCED:
+                _isSynced = value;
+                break;
         }
     }
 
@@ -69,6 +73,6 @@ public class FileDbo {
     }
 
     public FileModel toModel() {
-        return new FileModel(_bucketId, _fileId, _created, _erasure, _hmac, _index, _isDecrypted, _isStarred, _mimeType, _name, _size);
+        return new FileModel(_bucketId, _fileId, _created, _erasure, _hmac, _index, _isDecrypted, _isStarred, _mimeType, _name, _size, _isSynced);
     }
 }

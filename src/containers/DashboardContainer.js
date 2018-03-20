@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { dashboardContainerActions, filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions, mainContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
-import { navigateBack, navigateToFilesScreen } from '../reducers/navigation/navigationActions';
+import { navigateBack, navigateToDashboardFilesScreen } from '../reducers/navigation/navigationActions';
 import { uploadFileStart, uploadFileSuccess } from '../reducers/asyncActions/fileActionsAsync';
 import DashboardListComponent from '../components/DashboardListComponent';
 
@@ -35,7 +35,9 @@ class DashboardContainer extends Component {
                 navigateToFilesScreen = { this.props.navigateToFilesScreen }
                 setSelectionId = { this.props.setSelectionId } 
                 storageAmount = { this.props.storage }
-                bandwidthAmount = { this.props.bandwidth } />
+                bandwidthAmount = { this.props.bandwidth } 
+                navigateToDashboardFilesScreen = { this.props.navigateToDashboardFilesScreen }
+                setSelectionId = { this.props.setSelectionId } />
         )
     }
 }
@@ -66,7 +68,7 @@ function mapDispatchToProps(dispatch) {
             ...filesListContainerFileActions, 
             ...filesListContainerMainActions, 
             navigateBack,
-            navigateToFilesScreen
+            navigateToDashboardFilesScreen
         }, dispatch),
         getUploadingFile: (fileHandle) => dispatch(uploadFileStart(fileHandle)),
         uploadSuccess: (fileHandle, fileId) => dispatch(uploadFileSuccess(fileHandle, fileId))

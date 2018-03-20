@@ -8,12 +8,14 @@ export default class ItemModel {
      * @param {string} id 
      * @param {string} date
      * @param {bool} isStarred
+     * @param {bool} isSynced
      */
-    constructor(name = null, id = null, date = null, isStarred = false) {
+    constructor(name = null, id = null, date = null, isStarred = false, isSynced = false) {
         this.name = name;
         this.id = id;
         this.date = date;
         this.isStarred = isStarred;
+        this.isSynced = isSynced;
     };
 
     /**
@@ -66,4 +68,16 @@ export default class ItemModel {
      * set public isStarred property
      */
     set IsStarred(value) {};
+
+    /**
+     * get public isSynced property
+     */
+    get IsSynced() {
+        return this.isSynced;
+    }
+
+    /**
+     * set public isSynced property
+     */
+    set IsSynced(value) {};
 }

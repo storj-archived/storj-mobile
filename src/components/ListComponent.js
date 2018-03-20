@@ -264,7 +264,7 @@ export default class ListComponent extends Component {
 
         function onPress(params) {     
             props.openBucket(params.bucketId);
-            props.navigateToFilesScreen(params.bucketId);              
+            props.navigateToDashboardFilesScreen(params.bucketId);              
         }
 
         return this.props.data.map((item) => {
@@ -275,7 +275,7 @@ export default class ListComponent extends Component {
                     key = { item.getId() }
                     item = { item } 
                     selectItemId = { (itemId) => { this.props.setSelectionId(itemId); this.setState({selectedItemId: itemId }) }}
-                    navigateToFilesScreen = { this.props.navigateToFilesScreen ? this.props.navigateToFilesScreen : () => {} }
+                    navigateToFilesScreen = { this.props.navigateToDashboardFilesScreen ? this.props.navigateToDashboardFilesScreen : () => {} }
                     isItemActionsSelected = { this.isItemActionsSelected(item) }
                     onLongPress = { () => { this.onItemLongPress(item); } }
                     isSelectionModeEnabled = { this.props.isSelectionMode }

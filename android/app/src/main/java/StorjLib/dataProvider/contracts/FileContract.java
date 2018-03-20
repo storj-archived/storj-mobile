@@ -17,6 +17,7 @@ public final class FileContract extends BaseContract {
     public final static String _DECRYPTED = "isDecrypted";
     public final static String _SIZE = "size";
     public final static String _STARRED = "isStarred";
+    public final static String _SYNCED = "isSynced";
 
     public final static String FILE_FK = "bucketId";
 
@@ -33,8 +34,9 @@ public final class FileContract extends BaseContract {
                 "%s INTEGER, " +
                 "%s INTEGER, " +
                 "%s INTEGER, " +
+                "%s INTEGER, " +
                 "%s TEXT not null, " +
                 "FOREIGN KEY(%s) REFERENCES buckets(%s) ON DELETE CASCADE)",
-                TABLE_NAME, _ID, _NAME, _MIMETYPE, _INDEX, _HMAC, _ERASURE, _CREATED, _DECRYPTED, _STARRED, _SIZE, FILE_FK, FILE_FK, _ID );
+                TABLE_NAME, _ID, _NAME, _MIMETYPE, _INDEX, _HMAC, _ERASURE, _CREATED, _DECRYPTED, _STARRED, _SIZE, _SYNCED, FILE_FK, FILE_FK, _ID );
     }
 }
