@@ -1,24 +1,162 @@
 import React, { Component } from 'react';
-import { DeviceEventEmitter } from 'react-native';
-import ServiceModule from '../utils/ServiceModule';
-import SyncModule from '../utils/SyncModule';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { dashboardContainerActions, filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions, mainContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { navigateBack, navigateToFilesScreen } from '../reducers/navigation/navigationActions';
 import { uploadFileStart, uploadFileSuccess } from '../reducers/asyncActions/fileActionsAsync';
-import BucketModel from '../models/BucketModel';
-import FileModel from '../models/FileModel';
-import ListItemModel from '../models/ListItemModel';
 import DashboardListComponent from '../components/DashboardListComponent';
+import { sha256 } from '../utils/sha256';
+import StorjModule from '../utils/StorjModule';
 
 class DashboardContainer extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            storage: "0.0",
+            bandwidth: "0.0"
+        }
+
+        this.avgHoursPerMonth = 730;
     }
 
-    render() {
+    async componentDidMount() {        
+
+        let keysResponse = await StorjModule.getKeys();
+        let keyResult = JSON.parse(keysResponse.result);
+
+        sha256(keyResult.password).then(async hash => {
+            
+            let authorization = 'Basic ' + btoa(keyResult.email + ":" + hash);
+            let params = {};
+
+            const dateRange = this.getFirstAndLastDayOfCurrentMonth();
+            params.user = keyResult.email;
+            params.startDate = dateRange.startDate;
+            params.endDate = dateRange.endDate;
+            params.__nonce = "1453222669376";
+
+            var url = "https://billing.prod.storj.io/debits?" + this.toQueryString(params);
+            
+            let myRequest = new Request(url, {
+                method: 'GET',
+                headers: {
+                  'Accept': 'application/json, text/plain, */*',
+                  'Content-Type': 'application/json',
+                  'Connection': 'keep-alive',
+                  'Host': 'billing.prod.storj.io',
+                  'Authorization': authorization
+                },
+            });
+
+            let response = await fetch(myRequest);
+
+            if(response.status === 200) {
+                let debits = await response.json();
+                this.getDebits(debits);        
+            }
+        });
+    }
+
+    getDebits(debits) {
+        if (debits.length <= 0) {
+            this.setState({storage: "0.00", bandwidth: "0.00"});
+        }
+
+        let stor = this.getSum(this.debits, 'storage');
+        let currentStor = stor / this.avgHoursPerMonth;
+
+        let band = this.getSum(this.debits, 'bandwidth');
+        let roundBandwidth = this.roundToGBAmount(band, 'bytes');
+
+        this.setState({storage: this.roundToGBAmount(currentStor), bandwidth: roundBandwidth});
+    }
+
+    /**
+     * Sums the values of specified field in collection array [{}, {}]
+     * @param {Array} arr - collection Array
+     * @param {string} field - field in arr to sum up
+     * @returns {Number}
+     */
+    getSum = function (arr, field) {
+        if (!arr || Array.isArray(arr) && arr.length <= 0) {
+        return 0;
+        }
+    
+        const sum = arr.reduce((acc, i) => {
+        const add = typeof i[field] === 'undefined' ? 0 : i[field];
+        return acc + add;
+        }, 0);
+    
+        return sum;
+    };
+
+    /**
+     * Prettifies the amount printed in billing history.
+     * Returns either a string that lets the user know that the amount that
+     * has been used is than 0.01 GB or rounds the amount to two decimal
+     * places.
+     * @param {Number} num - number in bytes or GB
+     * @param {String} type - optional - undefined or 'bytes'
+     */
+    roundToGBAmount (num, type) {
+        const GB = 1000000000;
+    
+        const numInGB = type === 'bytes' ? num / GB : num;
+        const modNum = this.setToTwoDecimalPlaces(numInGB);
+    
+        // Checks to see if the amount is less than one cent
+        if (modNum.indexOf('0.00') === 0) {
+            const lessThanOneCent = '< 0.01';
+            return lessThanOneCent;
+        }
+
+        return modNum + '';
+    };
+
+    getFirstAndLastDayOfCurrentMonth = function () {
+        const currentDate = new Date();
+        const currentYear = currentDate.getFullYear();
+        const currentMonth = currentDate.getMonth();
+      
+        let startDate = new Date(currentYear, currentMonth, 1);
+        let endDate = new Date(currentYear, currentMonth + 1, 1);
+      
+        startDate.setUTCHours(0, 0, 0);
+        endDate.setUTCHours(0, 0, 0);
+      
+        return {
+          startDate,
+          endDate
+        };
+    };
+
+    /**
+     * Rounds a number to two decimal places
+     * @param {Number} num
+     * @returns {String} num rounded and stringified to two decimal places
+     */
+    setToTwoDecimalPlaces (num) {
+        const roundedToTwoPlaces = Math.round(num * 100) / 100;
+        const setToTwoPlaces = roundedToTwoPlaces.toFixed(2);
+    
+        return setToTwoPlaces;
+    };
+
+    toQueryString(obj) {
+        var str = [];
+
+        for (var p in obj) {
+            if (obj.hasOwnProperty(p)) {
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            }
+        }       
+
+        return str.join("&");
+      }
+
+    render() {        
         return(
             <DashboardListComponent
                 files = { this.props.files }
@@ -37,7 +175,9 @@ class DashboardContainer extends Component {
                 onSingleItemSelected = { this.props.onSingleItemSelected }  
                 isSingleItemSelected = { this.props.isSingleItemSelected }
                 navigateToFilesScreen = { this.props.navigateToFilesScreen }
-                setSelectionId = { this.props.setSelectionId } />
+                setSelectionId = { this.props.setSelectionId } 
+                storageAmount = { this.state.storage }
+                bandwidthAmount = { this.state.bandwidth }/>
         )
     }
 }
