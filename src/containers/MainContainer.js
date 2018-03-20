@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { mainContainerActions, favouritesActions } from '../reducers/mainContainer/mainReducerActions';
 import fileActions, { mainContainerFileActions, favouritesFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
-import { redirectToMainScreen } from '../reducers/navigation/navigationActions';
+import { redirectToMainScreen, redirectToInitializationScreen } from '../reducers/navigation/navigationActions';
 import FileModel from '../models/FileModel';
 import BucketModel from '../models/BucketModel';
 import ListItemModel from '../models/ListItemModel';
@@ -260,6 +260,7 @@ class MainContainer extends Component {
         
         return(
             <MainComponent
+                redirectToInitializationScreen = { this.props.redirectToInitializationScreen.bind(this) }
                 isGridViewShown = { this.props.isGridViewShown }
                 setGridView = { this.props.setGridView }
                 setListView = { this.props.setListView }
@@ -295,7 +296,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) { 
     return {
-        ...bindActionCreators({ ...fileActions, redirectToMainScreen, ...mainContainerActions, ...mainContainerFileActions, ...favouritesActions, ...favouritesFileActions }, dispatch),
+        ...bindActionCreators({ ...fileActions, redirectToMainScreen, redirectToInitializationScreen, ...mainContainerActions, ...mainContainerFileActions, ...favouritesActions, ...favouritesFileActions }, dispatch),
         getUploadingFile: (fileHandle) => dispatch(uploadFileStart(fileHandle)),
         uploadSuccess: (fileHandle, fileId) => dispatch(uploadFileSuccess(fileHandle, fileId)),
         listUploadingFiles: () => dispatch(listUploadingFiles("test"))

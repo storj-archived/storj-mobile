@@ -135,6 +135,17 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void deleteKeys(Promise promise) {
+        new MethodHandler().invokeParallel(new BaseMethodParams(promise), new IMethodHandlerCallback() {
+            @Override
+            public void callback(IMethodParams param) throws Exception {
+                boolean isSuccess = getStorj().deleteKeys();
+                param.getPromise().resolve(new Response(isSuccess, null).toWritableMap());
+            }
+        });
+    }
+
+    @ReactMethod
     public void getKeys(final String passcode, Promise promise) {
 
         new MethodHandler().invokeParallel(new BaseMethodParams(promise), new IMethodHandlerCallback() {
