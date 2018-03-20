@@ -27,6 +27,15 @@ export function redirectToMainScreen() {
     });
 };
 
+export function redirectToInitializationScreen() {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'InitializationScreen'})
+        ]
+    });
+};
+
 export function redirectToMnemonicGenerationScreen() {
     return NavigationActions.reset({
         index: 0,

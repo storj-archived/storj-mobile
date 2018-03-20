@@ -20,7 +20,8 @@ class MainNavigationContainer extends Component {
                     showOptions: this.props.showOptions, 
                     showQR: this.props.showQR,
                     showStorageInfo: this.props.showStorageInfo,
-                    showCredits: this.props.showCredits
+                    showCredits: this.props.showCredits,
+                    redirectToInitializationScreen: this.props.redirectToInitializationScreen
                 }}
                 navigation = { addNavigationHelpers({
                     isActionBarShown: this.props.isActionBarShown,

@@ -49,6 +49,7 @@ export default class MainComponent extends Component {
             <View style={ styles.mainContainer }>
                 <View style = { styles.navigationContainer }>
                     <MainNavigationContainer
+                        redirectToInitializationScreen = { this.props.redirectToInitializationScreen }
                         showOptions = { this.showOptions.bind(this) }
                         showQR = { this.showQR.bind(this) }
                         showCredits = { this.showCredits.bind(this) }

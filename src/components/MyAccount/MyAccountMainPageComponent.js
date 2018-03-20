@@ -9,10 +9,16 @@ import {
 import React, { Component } from 'react';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import OptionsComponent from './OptionsComponent';
+import StorjModule from '../../utils/StorjModule';
 
 export default class MyAccountMainPageComponent extends Component{
     constructor(props) {
-        super(props);
+        super(props);     
+    }
+
+    async logOut() {
+        await StorjModule.deleteKeys();
+        this.props.screenProps.redirectToInitializationScreen();
     }
 
     render() {
@@ -114,7 +120,7 @@ export default class MyAccountMainPageComponent extends Component{
                                 onPress = { () => {} } />
                         }
                     </View>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress = { () => { this.logOut(); } }>
                         <View style = { styles.logOutButton }>
                             <Text style = { styles.logOutText }>Log out</Text>
                         </View>

@@ -126,6 +126,21 @@ const StorjLib = (() => {
 
             return response.isSuccess;
         };
+
+        
+        /**
+         * Delete auth file
+         * @returns {Promise<boolean>}
+         */
+        async deleteKeys() {            
+            let response = await storjLib.deleteKeys();
+
+            if(!response.isSuccess){
+                console.log('deleteKeys', response.error.message);
+            }
+
+            return response.isSuccess;
+        };
     
         /**
          * 
