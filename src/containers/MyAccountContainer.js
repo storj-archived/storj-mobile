@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import MyAccountNavComponent from '../components/MyAccount/MyAccountNavComponent';
 import { redirectToStorageScreen } from '../reducers/navigation/navigationActions';
+import moment from 'moment';
+import { roundToGBAmount, formatAmount } from '../utils/utils';
 
 class MyAccountContainer extends Component {
     constructor(props) {
@@ -14,13 +16,87 @@ class MyAccountContainer extends Component {
     //     this.props.closeBucket();
     // }
 
-    render() {
+
+    convertedCredits() {
+        return this.props.credits
+            .filter((c) => !c.promo_amount)
+            .map((credit) => {
+                const transaction = {...credit};
+                transaction.amount = -credit.paid_amount;
+                transaction.type = `${credit.type} payment`;
+                transaction.description = `- Thank you!`;
+                transaction.timestamp = moment.utc(credit.created).valueOf();
+                return transaction;
+            });
+    }
+
+    convertedDebits() {
+        return this.props.debits.map((debit) => {
+            const transaction = {...debit};
+            let amountUsed;
+            
+            switch(debit.type) {
+                case 'storage':
+                    amountUsed = `: ${roundToGBAmount(debit.storage)} GBh`;
+                    break;
+                case 'bandwidth':
+                    amountUsed = `: ${roundToGBAmount(debit.bandwidth, 'bytes')} GB`;
+                    break;                
+            }
+            
+            transaction.amount = debit.amount;
+            transaction.type = debit.type;
+
+            transaction.description = debit.type === 'adjustment'
+                ? `: ${formatAmount(debit.amount)}`
+                : amountUsed;
+
+            transaction.timestamp = Date.parse(debit.created);
+            return transaction;
+        });
+    }
+
+    convertedPromoCredits() {
+        return this.props.credits
+            .filter((c) => c.promo_amount) .map((credit) => {
+                const transaction = {...credit};
+                
+                transaction.amount = -credit.promo_amount;        
+                transaction.description = '';
+                transaction.timestamp = moment.utc(credit.created).valueOf();
+        
+                return transaction;
+            });
+    }
+
+    calculateTransactions() {
+        let temp = [];
+
+        const convertedCredits = this.convertedCredits();
+
+        const convertedDebits = this.convertedDebits();
+
+        const convertedPromoCredits = this.convertedPromoCredits();
+            
+        temp = [
+            ...convertedCredits,
+            ...convertedDebits,
+            ...convertedPromoCredits
+        ];
+
+        return temp.sort((t1, t2) => (t2.timestamp - t1.timestamp));
+    }
+
+    render() {        
         return(
             <MyAccountNavComponent 
                 redirectToInitializationScreen = { this.props.screenProps.redirectToInitializationScreen }
                 showQR = { this.props.screenProps.showQR }
                 showStorageInfo = { this.props.screenProps.showStorageInfo }
-                showCredits = { this.props.screenProps.showCredits } /> 
+                showCredits = { this.props.screenProps.showCredits } 
+                storageAmount = { this.props.storage }
+                bandwidthAmount = { this.props.bandwidth }
+                transactionList = { this.calculateTransactions() } /> 
         );
     }
 }
@@ -30,7 +106,12 @@ function mapStateToProps(state) {
     let index = state.myAccountScreenNavReducer.index;
     let currentScreenName = routes[index].routeName;
 
-    return {};
+    return {
+        storage: state.billingReducer.storage,
+        bandwidth: state.billingReducer.bandwidth,
+        debits: state.billingReducer.debits,
+        credits: state.billingReducer.credits,
+    };
 }
     
 function mapDispatchToProps(dispatch) {

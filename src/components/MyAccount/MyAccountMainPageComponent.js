@@ -21,7 +21,7 @@ export default class MyAccountMainPageComponent extends Component{
         this.props.screenProps.redirectToInitializationScreen();
     }
 
-    render() {
+    render() {        
         return(
             <View style = { styles.mainContainer }>
                 <View style = { styles.contentContainer }>
@@ -43,7 +43,7 @@ export default class MyAccountMainPageComponent extends Component{
                                         resizeMode = 'contain' />
                                     <View >
                                         <Text style = { [styles.buttonTextRegular, styles.topButtonTextMargin] }>Storage</Text>
-                                        <Text style = { [styles.buttonTextBold, styles.topButtonTextMargin] }>{ this.props.storageAmount ? this.props.storageAmount : '00.00' }{ ' GB' }</Text>
+                                        <Text style = { [styles.buttonTextBold, styles.topButtonTextMargin] }>{ this.props.screenProps.storageAmount }{ ' GB' }</Text>
                                     </View>
                                     <Image 
                                         style = { [ styles.expandImage, styles.topButtonTextMargin ] } 
@@ -61,7 +61,7 @@ export default class MyAccountMainPageComponent extends Component{
                                         resizeMode = 'contain' />
                                     <View >
                                         <Text style = { [styles.buttonTextRegular, styles.bandwidthMargin] }>Bandwidth</Text>
-                                        <Text style = { [styles.buttonTextBold, styles.bandwidthMargin] }>{ this.props.bandwidthAmount ? this.props.bandwidthAmount : '0.00' }{ ' GB' }</Text>
+                                        <Text style = { [styles.buttonTextBold, styles.bandwidthMargin] }>{ this.props.screenProps.bandwidthAmount }{ ' GB' }</Text>
                                     </View>
                                     <Image 
                                         style = { styles.expandImage } 
