@@ -9,6 +9,7 @@ import {
 import React, { Component } from 'react';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import BalanceReportComponent from './BalanceReportComponent';
+import moment from 'moment';
 
 export default class BalanceComponent extends Component{
     constructor(props) {
@@ -43,27 +44,14 @@ export default class BalanceComponent extends Component{
                 <View style = { styles.explanationContainer }>
                     <Text style = { styles.explanationText }>Billing history</Text>
                 </View>
-                <ScrollView style = { styles.scrollViewContainer }>
+                <ScrollView style = { styles.scrollViewContainer }>                    
                     {
-                        <BalanceReportComponent 
-                            date = { '25 Feb 2018' }
-                            amount = { 0.75 } />
-                    }
-                    {
-                        <BalanceReportComponent 
-                            date = { '25 Jan 2018' }
-                            amount = { 0.65 } />
-                    }
-                    {
-                        <BalanceReportComponent 
-                            date = { '25 Dec 2017' }
-                            amount = { 0.32 } />
-                    }
-                    {
-                        <BalanceReportComponent 
-                            date = { '25 Nov 2017' }
-                            amount = { 0.29 } />
-                    }
+                        this.props.screenProps.transactionList.map(transaction => {
+                            return <BalanceReportComponent 
+                                        date = { moment(transaction.timestamp).format('MMMM-DD-YYYY') }
+                                        amount = { transaction.amount } />
+                        })
+                    }                                                            
                 </ScrollView>
             </View>
         );

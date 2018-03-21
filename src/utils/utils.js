@@ -93,4 +93,19 @@ export function toQueryString(obj) {
     }       
 
     return str.join("&");
-  }
+}
+
+/**
+ * Formats from cents to dollars
+ * @param {Number} amount - amount in cents (1000, 2000, 150)
+ * @returns {String} prettified amount e.g. -$10.00, $12.00
+ */
+export const formatAmount = function (amount) {
+    const newAmount = Math.round(amount) / 100;
+  
+    if (amount < 0) {
+      return `-$${newAmount.toFixed(2).substr(1)}`;
+    }
+  
+    return `$${(newAmount).toFixed(2)}`;
+  };

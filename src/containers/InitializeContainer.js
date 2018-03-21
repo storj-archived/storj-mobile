@@ -10,7 +10,7 @@ import InputComponent from '../components/InputComponent';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as Actions from '../reducers/navigation/navigationActions';
-import { getDebits }  from '../reducers/billing/billingActions';
+import { getDebits, getCredits }  from '../reducers/billing/billingActions';
 import StorjLib from '../utils/StorjModule';
 import { getWidth, getHeight } from '../utils/adaptive';
 import { authConstants } from '../utils/constants/storageConstants';
@@ -78,6 +78,7 @@ class InitializeContainer extends Component {
         this.getAllFiles();
 
         this.props.getDebits(getKeysResult.email, getKeysResult.password);
+        this.props.getCredits(getKeysResult.email, getKeysResult.password);
 
         this.props.redirectToMainScreen();       
     }
@@ -189,7 +190,7 @@ const styles = StyleSheet.create({
  * connecting reducer to component props 
  */
 function mapStateToProps(state) { return { navigation: state.navReducer }; };
-function mapDispatchToProps(dispatch) { return bindActionCreators({...Actions, ...initializeContainerActions, ...allFileActions, getDebits}, dispatch); };
+function mapDispatchToProps(dispatch) { return bindActionCreators({...Actions, ...initializeContainerActions, ...allFileActions, getDebits, getCredits }, dispatch); };
 
 /**
  * Creating LoginScreen container
