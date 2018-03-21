@@ -14,6 +14,9 @@ public class SettingsModel {
     @SerializedName(SettingsContract._SETTINGS_ID)
     private String _id;
     @Expose
+    @SerializedName(SettingsContract._SYNC_SETTINGS)
+    private int _syncSettings;
+    @Expose
     @SerializedName(SettingsContract._LAST_SYNC)
     private String _lastSync;
 
@@ -22,14 +25,16 @@ public class SettingsModel {
     }
 
     public SettingsModel(String settingsId) {
-        this(settingsId,null);
+        this(settingsId, 0,null);
     }
 
-    public SettingsModel(String settingsId, String lastSync) {
+    public SettingsModel(String settingsId, int syncSettings, String lastSync) {
         _id = settingsId;
+        _syncSettings = syncSettings;
         _lastSync = lastSync;
     }
 
     public String getId() { return _id; }
+    public int getSyncSettings() { return _syncSettings; }
     public String lastSync() { return _lastSync; }
 }

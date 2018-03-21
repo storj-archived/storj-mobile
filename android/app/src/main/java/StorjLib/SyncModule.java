@@ -18,9 +18,11 @@ import storjlib.Responses.SingleResponse;
 import storjlib.dataProvider.DatabaseFactory;
 import storjlib.dataProvider.Dbo.BucketDbo;
 import storjlib.dataProvider.Dbo.FileDbo;
+import storjlib.dataProvider.Dbo.SettingsDbo;
 import storjlib.dataProvider.Dbo.UploadingFileDbo;
 import storjlib.dataProvider.repositories.BucketRepository;
 import storjlib.dataProvider.repositories.FileRepository;
+import storjlib.dataProvider.repositories.SettingsRepository;
 import storjlib.dataProvider.repositories.UploadingFilesRepository;
 
 /**
@@ -221,6 +223,40 @@ public class SyncModule extends ReactContextBaseJavaModule {
                 try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
                     FileRepository fileRepository = new FileRepository(db);
                     promise.resolve(fileRepository.update(fileId, isStarred).toWritableMap());
+
+                } catch (Exception e) {
+                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
+                }
+            }
+        }).run();
+    }
+
+    @ReactMethod
+    public void listSettings(final String id, final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
+                    SettingsRepository settingsRepo = new SettingsRepository(db);
+                    SettingsDbo settingsDbo = settingsRepo.get(id);
+
+                    promise.resolve(new SingleResponse(settingsDbo != null, toJson(settingsDbo.toModel()), null).toWritableMap());
+
+                } catch (Exception e) {
+                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
+                }
+            }
+        }).run();
+    }
+
+    @ReactMethod
+    public void updateSyncSettings(final String id, final int syncSettings, final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
+                    SettingsRepository settingsRepo = new SettingsRepository(db);
+                    promise.resolve(settingsRepo.update(id, syncSettings).toWritableMap());
 
                 } catch (Exception e) {
                     promise.resolve(new Response(false, e.getMessage()).toWritableMap());

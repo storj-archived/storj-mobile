@@ -1,5 +1,6 @@
 package storjlib.dataProvider.Dbo;
 
+import storjlib.Models.SettingsModel;
 import storjlib.dataProvider.contracts.SettingsContract;
 
 /**
@@ -8,6 +9,7 @@ import storjlib.dataProvider.contracts.SettingsContract;
 
 public class SettingsDbo {
     private String _id;
+    private int _syncSettings;
     private String _lastSync;
 
     public SettingsDbo() {}
@@ -19,12 +21,24 @@ public class SettingsDbo {
 
     public void setProp(String paramName, String paramValue) {
         switch (paramName) {
-            case SettingsContract._SETTINGS_ID:
+            case SettingsContract._ID:
                 _id = paramValue;
                 break;
             case SettingsContract._LAST_SYNC:
                 _lastSync = paramValue;
                 break;
         }
+    }
+
+    public void setProp(String paramName, int paramValue) {
+        switch(paramName) {
+            case SettingsContract._SYNC_SETTINGS:
+                _syncSettings = paramValue;
+                break;
+        }
+    }
+
+    public SettingsModel toModel() {
+        return new SettingsModel(_id, _syncSettings, _lastSync);
     }
 }

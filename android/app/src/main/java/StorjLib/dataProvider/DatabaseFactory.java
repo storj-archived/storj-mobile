@@ -15,7 +15,7 @@ import storjlib.dataProvider.contracts.UploadingFileContract;
 
 public class DatabaseFactory extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "storj.db";
 
     public DatabaseFactory(Context context, SQLiteDatabase.CursorFactory factory) {

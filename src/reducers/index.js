@@ -7,6 +7,7 @@ import dashboardScreenNavReducer from '../reducers/navigation/dashboardScreenNav
 import myAccountScreenNavReducer from '../reducers/navigation/myAccountScreenNavReducer';
 import filesReducer from '../reducers/mainContainer/Files/filesReducer';
 import billingReducer from '../reducers/billing/billingReducer';
+import settingsReducer from "../reducers/mainContainer/MyAccount/Settings/SettingsReducer";
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from "redux-thunk"
 
@@ -22,7 +23,8 @@ const reducers = {
     dashboardScreenNavReducer,
     myAccountScreenNavReducer,
     filesReducer,
-    billingReducer
+    billingReducer,
+    settingsReducer
 };
 
 export const store = createStore(combineReducers({ ...reducers }), applyMiddleware(thunk));

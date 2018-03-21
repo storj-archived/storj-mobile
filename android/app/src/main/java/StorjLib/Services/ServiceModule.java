@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.os.IBinder;
 
 import com.facebook.react.bridge.Promise;
@@ -31,6 +32,7 @@ import storjlib.Responses.SingleResponse;
 import storjlib.dataProvider.DatabaseFactory;
 import storjlib.dataProvider.Dbo.BucketDbo;
 import storjlib.dataProvider.Dbo.FileDbo;
+import storjlib.dataProvider.contracts.SettingsContract;
 import storjlib.dataProvider.repositories.BucketRepository;
 import storjlib.dataProvider.repositories.FileRepository;
 import storjlib.Models.PromiseHandler;
@@ -184,11 +186,14 @@ public class ServiceModule extends ReactContextBaseJavaModule {
     }   
 
     @ReactMethod
-    public void scheduleSync() {
+    public void scheduleSync(String settingsId) {
         Driver driver = new GooglePlayDriver(getReactApplicationContext());
         FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(driver);
 
         dispatcher.cancelAll();
+
+        Bundle bundle = new Bundle();
+        bundle.putString(SettingsContract._SETTINGS_ID, settingsId);
 
         Job myJob = dispatcher.newJobBuilder()
                 // the JobService that will be called
@@ -205,6 +210,7 @@ public class ServiceModule extends ReactContextBaseJavaModule {
                 .setReplaceCurrent(true)
                 // retry with exponential backoff
                 .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
+                .setExtras(bundle)
                 // constraints that need to be satisfied for the job to run
                 .setConstraints(
                         // only run on an unmetered network

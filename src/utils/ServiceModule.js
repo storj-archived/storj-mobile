@@ -40,8 +40,8 @@ const ServiceModule = (() => {
             return await serviceModule.deleteFile(bucketId, fileId);
         }
 
-        scheduleSync() {
-            serviceModule.scheduleSync();
+        scheduleSync(settingsId) {
+            serviceModule.scheduleSync(settingsId);
         }
     }  
 
