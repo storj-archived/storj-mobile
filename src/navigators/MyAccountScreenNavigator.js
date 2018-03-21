@@ -2,7 +2,7 @@ import { StackNavigator } from 'react-navigation';
 import MyAccountMainPageScreen from '../components/MyAccount/MyAccountMainPageComponent';
 import StorageScreen from '../components/MyAccount/StorageComponent';
 import BalanceScreen from '../components/MyAccount/BalanceComponent';
-import SettingsScreen from '../components/MyAccount/SettingsComponent';
+import SettingsScreen from '../containers/SettingsContainer';
 import ChangePasswordScreen from '../components/MyAccount/ChangePasswordComponent';
 
 const MyAccountScreenNavigator = StackNavigator(

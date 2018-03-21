@@ -40,6 +40,14 @@ const SyncModule = (() => {
         async updateFileStarred(fileId, isStarred) {
             return await syncModule.updateFileStarred(fileId, isStarred);
         }
+
+        async listSettings(settingsId) {
+            return await syncModule.listSettings(String(settingsId));
+        }
+
+        async updateSyncSettings(settingsId, syncSettings) {
+            return await syncModule.updateSyncSettings(String(settingsId), Number(syncSettings));
+        }
     }  
 
     return {

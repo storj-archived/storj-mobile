@@ -19,6 +19,7 @@ import storjlib.dataProvider.contracts.SettingsContract;
 public class SettingsRepository extends BaseRepository {
     private String[] _columns = new String[] {
             SettingsContract._ID,
+            SettingsContract._SYNC_SETTINGS,
             SettingsContract._LAST_SYNC
     };
 
@@ -31,24 +32,63 @@ public class SettingsRepository extends BaseRepository {
         List<SettingsDbo> result = _getListFromCursor(cursor);
 
         cursor.close();
-
         return result;
+    }
+
+    public SettingsDbo get(String id) {
+        String[] selectionArgs = new String[] {
+                id
+        };
+
+        Cursor cursor = _db.query(SettingsContract.TABLE_NAME, null, SettingsContract._ID + " = ?", selectionArgs, null, null, null);
+        SettingsDbo dbo = _getSingleFromCursor(cursor);
+
+        cursor.close();
+        return dbo;
     }
 
     public Response update(SettingsModel model) {
         ContentValues map = new ContentValues();
 
         map.put(SettingsContract._ID, model.getId());
+        map.put(SettingsContract._SYNC_SETTINGS, model.getSyncSettings());
         map.put(SettingsContract._LAST_SYNC, model.lastSync());
 
         return _executeUpdate(SettingsContract.TABLE_NAME, model.getId(), null, null, map);
+    }
+
+    public Response update(String id, String dateTime) {
+        ContentValues map = new ContentValues();
+
+        map.put(SettingsContract._ID, id);
+        map.put(SettingsContract._LAST_SYNC, dateTime);
+
+        return _executeUpdate(SettingsContract.TABLE_NAME, id, null, null, map);
+    }
+
+    public Response update(String id, int syncSettings) {
+        ContentValues map = new ContentValues();
+
+        map.put(SettingsContract._ID, id);
+        map.put(SettingsContract._SYNC_SETTINGS, syncSettings);
+
+        return _executeUpdate(SettingsContract.TABLE_NAME, id, null, null, map);
+    }
+
+    public Response insert(String id) {
+        ContentValues map = new ContentValues();
+
+        map.put(SettingsContract._ID, id);
+
+        return _executeInsert(SettingsContract.TABLE_NAME, map);
     }
 
     public Response insert(SettingsModel model) {
         ContentValues map = new ContentValues();
 
         map.put(SettingsContract._ID, model.getId());
-        //map.put(SettingsContract._LAST_SYNC, model.lastSync());
+        map.put(SettingsContract._SYNC_SETTINGS, model.getSyncSettings());
+        map.put(SettingsContract._LAST_SYNC, model.lastSync());
 
         return _executeInsert(SettingsContract.TABLE_NAME, map);
     }
@@ -84,6 +124,9 @@ public class SettingsRepository extends BaseRepository {
                 case SettingsContract._ID:
                 case SettingsContract._LAST_SYNC:
                     dbo.setProp(_columns[i], cursor.getString(cursor.getColumnIndex(_columns[i])));
+                    break;
+                case SettingsContract._SYNC_SETTINGS:
+                    dbo.setProp(_columns[i], cursor.getInt(cursor.getColumnIndex(_columns[i])));
                     break;
             }
         }

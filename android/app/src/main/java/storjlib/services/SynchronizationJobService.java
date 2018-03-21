@@ -4,6 +4,7 @@ package storjlib.services;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.firebase.jobdispatcher.JobParameters;
@@ -15,14 +16,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import storjlib.Enum.SyncSettingsEnum;
 import storjlib.Models.SettingsModel;
 import storjlib.Models.UploadingFileModel;
 import storjlib.Responses.Response;
 import storjlib.dataProvider.DatabaseFactory;
 import storjlib.dataProvider.Dbo.BucketDbo;
 import storjlib.dataProvider.Dbo.FileDbo;
+import storjlib.dataProvider.Dbo.SettingsDbo;
 import storjlib.dataProvider.Dbo.UploadingFileDbo;
+import storjlib.dataProvider.contracts.BucketContract;
 import storjlib.dataProvider.contracts.FileContract;
+import storjlib.dataProvider.contracts.SettingsContract;
 import storjlib.dataProvider.contracts.UploadingFileContract;
 import storjlib.dataProvider.repositories.BucketRepository;
 import storjlib.dataProvider.repositories.FileRepository;
@@ -42,16 +47,31 @@ public class SynchronizationJobService extends JobService {
         mBackgroundTask = new AsyncTask() {
             @Override
             protected Object doInBackground(Object[] objects) {
+                String settingsId = job.getExtras().getString(SettingsContract._SETTINGS_ID);
+
+                if(settingsId == null) {
+                    Log.d(DEBUG_TAG, "sync: " + "No settings Id! Aborting!");
+                    return null;
+                }
+
                 try(SQLiteDatabase db = new DatabaseFactory(SynchronizationJobService.this, null).getReadableDatabase()) {
-                    syncFolder("/storage/emulated/0/Download", "1f300c24ac1ed2d706c10bdb", db);
-
                     SettingsRepository settingsRepo = new SettingsRepository(db);
+                    SettingsDbo dbo = settingsRepo.get(settingsId);
 
-                    SettingsModel model = new SettingsModel("elvy.baila@arockee.com", getDateTime());
-
-                    if(!settingsRepo.update(model).isSuccess()) {
-                        settingsRepo.insert(model);
+                    if(dbo == null) {
+                        Log.d(DEBUG_TAG, "sync: " + "No settings settings found by specified id!");
+                        return null;
                     }
+
+                    BucketRepository bucketRepo = new BucketRepository(db);
+                    int syncSettings = dbo.toModel().getSyncSettings();
+
+                    syncFolder(syncSettings, SyncSettingsEnum.SYNC_PHOTOS, bucketRepo, db);
+                    syncFolder(syncSettings, SyncSettingsEnum.SYNC_MOVIES, bucketRepo, db);
+                    syncFolder(syncSettings, SyncSettingsEnum.SYNC_DOCUMENTS, bucketRepo, db);
+                    syncFolder(syncSettings, SyncSettingsEnum.SYNC_DOWNLOADS, bucketRepo, db);
+
+                    settingsRepo.update(settingsId, getDateTime());
                 } catch (Exception e) {
                     Log.d(DEBUG_TAG, "sync error: " + e.getMessage());
                 }
@@ -88,7 +108,29 @@ public class SynchronizationJobService extends JobService {
     }
 
     private final static String DEBUG_TAG = "SYNCHRONIZATION DEBUG";
-    private void syncFolder(String folderUri, String bucketId, SQLiteDatabase db) {
+
+    private void syncFolder(int syncSettings, SyncSettingsEnum syncEnum, BucketRepository bucketRepo, SQLiteDatabase db) {
+        if(syncEnum != SyncSettingsEnum.SYNC_DOCUMENTS
+                && syncEnum != SyncSettingsEnum.SYNC_DOWNLOADS
+                && syncEnum != SyncSettingsEnum.SYNC_MOVIES
+                && syncEnum != SyncSettingsEnum.SYNC_PHOTOS) {
+            return;
+        }
+
+        if(bucketRepo == null) {
+            return;
+        }
+
+        int syncValue = syncEnum.getValue();
+        String syncFolder = syncEnum.getFolderName();
+
+        BucketDbo dbo = bucketRepo.get(BucketContract._NAME, syncEnum.getFolderName());
+
+        if((syncSettings & syncValue) == syncValue && dbo != null)
+            _syncFolder("/storage/emulated/0/" + syncFolder, dbo.getId(), db);
+    }
+
+    private void _syncFolder(String folderUri, String bucketId, SQLiteDatabase db) {
         File folder = new File(folderUri);
 
         if(!folder.exists() || !folder.isDirectory()) {
@@ -100,14 +142,6 @@ public class SynchronizationJobService extends JobService {
 
         FileRepository fileRepo = new FileRepository(db);
         UploadingFilesRepository uploadFileRepo = new UploadingFilesRepository(db);
-        BucketRepository bucketRepo = new BucketRepository(db);
-
-        BucketDbo bucketDbo = bucketRepo.get(bucketId);
-
-        if(bucketDbo == null) {
-            Log.d(DEBUG_TAG, "sync: " + "No bucketDbo");
-            return;
-        }
 
         for(File file : files) {
             Log.d(DEBUG_TAG, "sync: " + "File, name: " + file.getName());
