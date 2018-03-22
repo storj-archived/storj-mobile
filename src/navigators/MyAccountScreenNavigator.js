@@ -4,6 +4,7 @@ import StorageScreen from '../components/MyAccount/StorageComponent';
 import BalanceScreen from '../components/MyAccount/BalanceComponent';
 import SettingsScreen from '../containers/SettingsContainer';
 import ChangePasswordScreen from '../components/MyAccount/ChangePasswordComponent';
+import PinCodeGenerationScreen from '../components/MyAccount/PinCodeGenerationComponent';
 
 const MyAccountScreenNavigator = StackNavigator(
     {
@@ -26,6 +27,10 @@ const MyAccountScreenNavigator = StackNavigator(
         ChangePasswordScreen: {
             screen : ChangePasswordScreen,
             routeName: 'ChangePasswordScreen'
+        },
+        PinCodeGenerationScreen: {
+            screen: PinCodeGenerationScreen,
+            routeName: 'PinCodeGenerationScreen'
         }
     }, 
     {

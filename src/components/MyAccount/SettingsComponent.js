@@ -155,7 +155,7 @@ export default class SettingsComponent extends Component{
                         </View>
                     </TouchableOpacity>
                     <View style = { styles.underline }/>
-                    <TouchableOpacity style = { styles.optionsContainer }>
+                    <TouchableOpacity style = { styles.optionsContainer } onPress = { () => { this.props.navigation.navigate('PinCodeGenerationScreen') } } >
                         <Text style = { styles.switchText }>Change PIN</Text>
                         <View style = { styles.expanderIconContainer }>
                             <Image

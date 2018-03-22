@@ -5,7 +5,10 @@ import { dashboardContainerActions, filesListContainerMainActions } from '../red
 import { filesListContainerFileActions, mainContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { navigateBack, navigateToDashboardFilesScreen } from '../reducers/navigation/navigationActions';
 import { uploadFileStart, uploadFileSuccess } from '../reducers/asyncActions/fileActionsAsync';
-import DashboardListComponent from '../components/DashboardListComponent';
+import BucketModel from '../models/BucketModel';
+import FileModel from '../models/FileModel';
+import ListItemModel from '../models/ListItemModel';
+import DashboardListComponent from '../components/Dashboard/DashboardListComponent';
 
 class DashboardContainer extends Component {
     constructor(props) {
