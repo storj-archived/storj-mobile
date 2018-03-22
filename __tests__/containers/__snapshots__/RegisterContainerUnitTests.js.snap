@@ -27,6 +27,7 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
+      "isButtonDisabled": true,
       "isEmailError": false,
       "isLoading": false,
       "isPasswordError": false,
@@ -51,6 +52,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
+        "isButtonDisabled": true,
         "isEmailError": false,
         "isLoading": false,
         "isPasswordError": false,

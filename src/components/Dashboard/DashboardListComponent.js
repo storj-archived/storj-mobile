@@ -8,13 +8,13 @@ import {
     Image
 } from 'react-native';
 import React, { Component } from 'react';
-import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderComponent';
-import ListComponent from '../components/ListComponent';
-import ListItemModel from '../models/ListItemModel';
-import BucketModel from '../models/BucketModel';
-import DashboardListFooterComponent from '../components/Dashboard/DashboardListFooterComponent';
-import DashboardListHeaderComponent from '../components/Dashboard/DashboardListHeaderComponent';
-import { getHeight, getWidth } from '../utils/adaptive';
+import BucketsScreenHeaderComponent from '../../components/BucketsScreenHeaderComponent';
+import ListComponent from '../../components/ListComponent';
+import ListItemModel from '../../models/ListItemModel';
+import BucketModel from '../../models/BucketModel';
+import DashboardListFooterComponent from '../../components/Dashboard/DashboardListFooterComponent';
+import DashboardListHeaderComponent from '../../components/Dashboard/DashboardListHeaderComponent';
+import { getHeight, getWidth } from '../../utils/adaptive';
 
 export default class DashboardListComponent extends Component{
     constructor(props) {
@@ -42,7 +42,7 @@ export default class DashboardListComponent extends Component{
                                     <View style = { styles.buttonContentContainer }>
                                         <Image 
                                             style = { styles.buttonImage } 
-                                            source = { require('../images/DashboardScreen/Storage.png') } 
+                                            source = { require('../../images/DashboardScreen/Storage.png') } 
                                             resizeMode = 'contain' />
                                         <View >
                                             <Text style = { styles.buttonTextRegular }>Storage</Text>
@@ -50,7 +50,7 @@ export default class DashboardListComponent extends Component{
                                         </View>
                                         <Image 
                                             style = { styles.expandImage } 
-                                            source = { require('../images/DashboardScreen/Vector.png') } 
+                                            source = { require('../../images/DashboardScreen/Vector.png') } 
                                             resizeMode = 'contain' />
                                     </View>
                                 </View>
@@ -60,7 +60,7 @@ export default class DashboardListComponent extends Component{
                                     <View style = { styles.buttonContentContainer }>
                                         <Image 
                                             style = { styles.buttonImage } 
-                                            source = { require('../images/DashboardScreen/Bandwidth.png') } 
+                                            source = { require('../../images/DashboardScreen/Bandwidth.png') } 
                                             resizeMode = 'contain' />
                                         <View >
                                             <Text style = { styles.buttonTextRegular }>Bandwidth</Text>
@@ -68,7 +68,7 @@ export default class DashboardListComponent extends Component{
                                         </View>
                                         <Image 
                                             style = { styles.expandImage } 
-                                            source = { require('../images/DashboardScreen/Vector.png') } 
+                                            source = { require('../../images/DashboardScreen/Vector.png') } 
                                             resizeMode = 'contain' />
                                     </View>
                                 </View>
@@ -110,8 +110,8 @@ const listComponent = (title, data, props, count, isBucket) => {
                 disableSelectionMode = { props.disableSelectionMode }
                 isSelectionMode = { props.isSelectionMode }
                 isSingleItemSelected = { props.isSingleItemSelected }
-                listItemIcon = { isBucket ? require('../images/Icons/BucketListItemIcon.png') : require('../images/Icons/FileListItemIcon.png') }
-                starredListItemIcon = { isBucket ? require('../images/Icons/ListStarredBucket.png') : require('../images/Icons/ListStarredFile.png') }
+                listItemIcon = { isBucket ? require('../../images/Icons/BucketListItemIcon.png') : require('../../images/Icons/FileListItemIcon.png') }
+                starredListItemIcon = { isBucket ? require('../../images/Icons/ListStarredBucket.png') : require('../../images/Icons/ListStarredFile.png') }
                 deselectItem = { props.deselectItem }
                 navigateToFilesScreen = { props.navigateToFilesScreen ? props.navigateToFilesScreen : () => {} }
                 selectItem = { props.selectItem }

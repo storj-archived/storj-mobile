@@ -95,8 +95,7 @@ export default class MnemonicGenerationComponent extends Component {
                                     style = { styles.icon } />
                             </TouchableOpacity>
                             <View>
-                                <Text style = { [styles.titleText, styles.titleMargin] }>Backup</Text>
-                                <Text style = { [styles.titleText, styles.titleMargin] }>secret phrase</Text>
+                                <Text style = { [styles.titleText, styles.titleMargin] }>Secret phrase</Text>
                             </View>
                         </View>
                         <TouchableOpacity 

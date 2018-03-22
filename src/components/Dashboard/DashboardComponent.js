@@ -5,9 +5,9 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderComponent';
-import DashboardScreenNavigation from '../containers/DashboardScreenNavContainer';
-import { getWidth, getHeight } from '../utils/adaptive';
+import BucketsScreenHeaderComponent from '../../components/BucketsScreenHeaderComponent';
+import DashboardScreenNavigation from '../../containers/DashboardScreenNavContainer';
+import { getWidth, getHeight } from '../../utils/adaptive';
 
 export default class DashboardComponent extends Component {
     constructor(props) {

@@ -9,6 +9,7 @@ import { filesListContainerMainActions } from '../reducers/mainContainer/mainRed
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { dashboardNavigateBack, navigateToDashboardFilesScreen, navigateBack } from '../reducers/navigation/navigationActions';
 import DashboardComponent from '../components/DashboardComponent';
+import DashboardComponent from '../components/Dashboard/DashboardComponent';
 import FirstSignInComponent from '../components/FirstSignInComponent';
 
 class DashboardScreenContainer extends Component {
