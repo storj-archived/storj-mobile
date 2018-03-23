@@ -1,16 +1,16 @@
 import { BILLING_CONSTANTS } from '../../utils/constants/actionConstants';
 import StorjModule from '../../utils/StorjModule';
 import { getSum, roundToGBAmount } from '../../utils/utils';
-import { createGetDebitsRequest, createGetCreditsRequest } from '../../utils/dataservice';
+import { getDebitsRequest, getCreditsRequest, createWalletRequest, getWalletRequest } from '../../utils/dataservice';
 
-const { SET_CREDITS, SET_DEBITS, GET_DEBITS_FAILED } = BILLING_CONSTANTS;
+const { SET_CREDITS, SET_DEBITS, SET_WALLETS, CREATE_WALLET, GET_DEBITS_FAILED } = BILLING_CONSTANTS;
 
 export function getDebits () {
     return async (dispatch) => {                
-        let request = await createGetDebitsRequest();
+        let request = await getDebitsRequest();
         let response = await fetch(request);
 
-        if(response.status === 200) {
+        if(response.ok) {
             let debits = await response.json();
             let usage = _getUsage(debits);                         
             dispatch(setDebits(debits, usage));
@@ -22,12 +22,40 @@ export function getDebits () {
 
 export function getCredits () {
     return async (dispatch) => {                            
-        let request = await createGetCreditsRequest();
+        let request = await getCreditsRequest();
         let response = await fetch(request);
 
-        if(response.status === 200) {
+        if(response.ok) {
             let credits = await response.json();                                
             dispatch(setCredits(credits));
+        } else {                
+            dispatch({ type: GET_DEBITS_FAILED });
+        }        
+    };
+}
+
+export function createWallet (currency) {
+    return async (dispatch) => {                            
+        let request = await createWalletRequest(currency);        
+        let response = await fetch(request);
+
+        if(response.ok) {
+            let wallet = await response.json();                                
+            dispatch({ type: CREATE_WALLET, payload: { wallet } });
+        } else {                
+            dispatch({ type: GET_DEBITS_FAILED });
+        }        
+    };
+}
+
+export function getWallets() {
+    return async (dispatch) => {                            
+        let request = await getWalletRequest();
+        let response = await fetch(request);
+
+        if(response.ok) {
+            let wallets = await response.json();                                
+            dispatch({ type: SET_WALLETS, payload: { wallets } });
         } else {                
             dispatch({ type: GET_DEBITS_FAILED });
         }        
