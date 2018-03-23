@@ -33,7 +33,7 @@ describe('ActionBarComponent', () => {
                 isSelectionMode = { false } 
                 isSingleItemSelected = { true }
                 selectionModeActions = { selectionModeActions }
-                tapBarActions = { tapBarActions } />
+                actions = { tapBarActions } />
         );
         
 		expect(wrapper).toMatchSnapshot();
@@ -60,7 +60,7 @@ describe('ActionBarComponent', () => {
                 isSelectionMode = { false } 
                 isSingleItemSelected = { false }
                 selectionModeActions = { selectionModeActions }
-                tapBarActions = { tapBarActions } />
+                actions = { tapBarActions } />
         );
         
 		expect(wrapper).toMatchSnapshot();
@@ -89,16 +89,16 @@ describe('ActionBarComponent', () => {
                 isSelectionMode = { true } 
                 isSingleItemSelected = { false }
                 selectionModeActions = { selectionModeActions }
-                tapBarActions = { tapBarActions } />
+                actions = { tapBarActions } />
         );
         
         wrapper.find('TouchableOpacity').forEach(child => {
             child.simulate('Press');
         });
 
-        expect(tabSpy.mock.calls.length).toBe(0);
-        expect(pressSpy.mock.calls.length).toBe(selectionModeActions.length - 1);
-        expect(deleteSpy.mock.calls.length).toBe(1);
+        expect(tabSpy.mock.calls.length).toBe(3);
+        expect(pressSpy.mock.calls.length).toBe(0);
+        expect(deleteSpy.mock.calls.length).toBe(0);
     });
 
     it('triggers onPress correctly with not SelectionMode and SingleItemSelected', () => {
@@ -124,16 +124,16 @@ describe('ActionBarComponent', () => {
                 isSelectionMode = { false } 
                 isSingleItemSelected = { true }
                 selectionModeActions = { selectionModeActions }
-                tapBarActions = { tapBarActions } />
+                actions = { tapBarActions } />
         );
         
         wrapper.find('TouchableOpacity').forEach(child => {
             child.simulate('Press');
         });
 
-		expect(tabSpy.mock.calls.length).toBe(0);
-        expect(pressSpy.mock.calls.length).toBe(selectionModeActions.length - 1);
-        expect(deleteSpy.mock.calls.length).toBe(1);
+		expect(tabSpy.mock.calls.length).toBe(3);
+        expect(pressSpy.mock.calls.length).toBe(0);
+        expect(deleteSpy.mock.calls.length).toBe(0);
     });
 
     it('triggers onPress correctly with not SelectionMode and not SingleItemSelected', () => {
@@ -159,7 +159,7 @@ describe('ActionBarComponent', () => {
                 isSelectionMode = { false } 
                 isSingleItemSelected = { false }
                 selectionModeActions = { selectionModeActions }
-                tapBarActions = { tapBarActions } />
+                actions = { tapBarActions } />
         );
         
         wrapper.find('TouchableOpacity').forEach(child => {

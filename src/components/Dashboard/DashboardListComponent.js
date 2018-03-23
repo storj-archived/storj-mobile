@@ -35,7 +35,7 @@ export default class DashboardListComponent extends Component{
         return(
             <View style = { styles.mainContainer }>
                 <View style = { styles.scrollViewContainer }>
-                    <ScrollView showsVerticalScrollIndicator = { false } >
+                    <ScrollView showsVerticalScrollIndicator = { false } decelerationRate = { 'normal' }>
                         <View style = { styles.topButtonsContainer }>
                             <TouchableOpacity onPress = { () => {} } >
                                 <View style = { styles.button }>

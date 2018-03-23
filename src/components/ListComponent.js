@@ -312,6 +312,7 @@ export default class ListComponent extends Component {
         return (
             <View>
                 <Animated.ScrollView style = { styles.listContainer }
+                    decelerationRate = { 'normal' }
                     scrollEventThrottle = { 16 }
                     onScroll = {
                         Animated.event([{

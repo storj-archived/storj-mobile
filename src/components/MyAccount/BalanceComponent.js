@@ -44,7 +44,7 @@ export default class BalanceComponent extends Component{
                 <View style = { styles.explanationContainer }>
                     <Text style = { styles.explanationText }>Billing history</Text>
                 </View>
-                <ScrollView style = { styles.scrollViewContainer }>                    
+                <ScrollView style = { styles.scrollViewContainer } decelerationRate = { 'normal' } >                    
                     {
                         this.props.screenProps.transactionList.map(transaction => {
                             return <BalanceReportComponent 
