@@ -4,7 +4,6 @@ import {
     StyleSheet,
     TouchableOpacity,
     Image,
-    ScrollView,
     Platform,
     ProgressViewIOS,
     ProgressBarAndroid

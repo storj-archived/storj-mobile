@@ -6,9 +6,6 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16'
 import ListItemComponent from '../../src/components/ListItemComponent';
-import configureStore from 'redux-mock-store';
-import { testUser } from 'jest-mock';
-import sinon from 'sinon';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -17,7 +14,7 @@ describe('ListItemComponent', ()=> {
 	it('renders correctly', () => {
 		const wrapper = shallow(
 			<ListItemComponent 
-                item = {{ getName: () => {}}} />	
+                item = {{ getName: () => {}, getStarred: () => {} }} />	
 		);
 
 		expect(wrapper).toMatchSnapshot();
@@ -28,8 +25,8 @@ describe('ListItemComponent', ()=> {
         const disableSelectionModeSpy = jest.fn();
 
 		const wrapper = shallow(
-			<ListItemComponent 
-                item = {{ getName: () => {}}}
+            <ListItemComponent 
+                item = {{ getName: () => {}, getStarred: () => {} }}
                 isSelectionModeEnabled = { true }
                 isSingleItemSelected = { true }
                 selectItemId = { selectItemIdSpy }
@@ -49,7 +46,7 @@ describe('ListItemComponent', ()=> {
 
 		const wrapper = shallow(
 			<ListItemComponent 
-                item = {{ getName: () => {}}}
+                item = {{ getName: () => {}, getStarred: () => {} }}
                 isSelectionModeEnabled = { false }
                 isSingleItemSelected = { true }
                 selectItemId = { selectItemIdSpy }
@@ -60,20 +57,22 @@ describe('ListItemComponent', ()=> {
             child.simulate('Press');
         });
 
-        expect(selectItemIdSpy.mock.calls.length).toBe(3);
+        expect(selectItemIdSpy.mock.calls.length).toBe(2);
 		expect(disableSelectionModeSpy.mock.calls.length).toBe(2);
 	}); 
 
     it('triggers onPress correctly with not SelectionModeEnabled and not SingleItemSelected', () => {
         const selectItemIdSpy = jest.fn();
         const onSingleItemSelectedSpy = jest.fn();
+        const onSelectionPressSpy = jest.fn();
         const pressSpy = jest.fn();
 
 		const wrapper = shallow(
 			<ListItemComponent 
-                item = {{ getName: () => {}, getId: () => {}}}
+                item = {{ getName: () => {}, getStarred: () => {}, getId: () => {}, entity: {bucketId: null} }}
                 isSelectionModeEnabled = { false }
                 isSingleItemSelected = { false }
+                onSelectionPress = { onSelectionPressSpy }
                 selectItemId = { selectItemIdSpy }
                 onSingleItemSelected = { onSingleItemSelectedSpy }
                 onPress = { pressSpy } />
@@ -84,6 +83,7 @@ describe('ListItemComponent', ()=> {
         });
 
         expect(selectItemIdSpy.mock.calls.length).toBe(1);
+        expect(onSelectionPressSpy.mock.calls.length).toBe(1);
         expect(onSingleItemSelectedSpy.mock.calls.length).toBe(1);
 		expect(pressSpy.mock.calls.length).toBe(1);
     });
@@ -93,7 +93,7 @@ describe('ListItemComponent', ()=> {
 
 		const wrapper = shallow(
             <ListItemComponent 
-                item = {{ getName: () => {}}}
+                item = {{ getName: () => {}, getStarred: () => {}, getId: () => {}, entity: {bucketId: null} }}
                 onLongPress = { longPressSpy } />
         );
 

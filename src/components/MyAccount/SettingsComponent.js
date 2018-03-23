@@ -34,7 +34,7 @@ export default class SettingsComponent extends Component{
                         <Text style = { [styles.titleText, styles.titleMargin] }>Settings</Text>
                     </View>
                 </View>
-                <ScrollView showsVerticalScrollIndicator = { false } >
+                <ScrollView showsVerticalScrollIndicator = { false } decelerationRate = { 'normal' } >
                     <View style = { styles.explanationContainer }>
                         <Text style = { styles.explanationText }>Sync options</Text>
                     </View>

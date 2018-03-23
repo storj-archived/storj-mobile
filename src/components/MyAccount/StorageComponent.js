@@ -55,7 +55,7 @@ export default class StorageComponent extends Component{
                 <View style = { styles.explanationContainer }>
                     <Text style = { styles.explanationText }>Storage using history</Text>
                 </View>
-                <ScrollView style = { styles.scrollViewContainer }>
+                <ScrollView style = { styles.scrollViewContainer } decelerationRate = { 'normal' } >
                     {
                         <StorageReportComponent 
                             date = { '25 Feb 2018' }
