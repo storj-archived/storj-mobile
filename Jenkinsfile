@@ -21,6 +21,7 @@ pipeline {
   post {
     always {
       junit 'junit.xml'
+      archiveArtifacts artifacts: 'android/app/build/outputs/apk/*.apk', allowEmptyArchive: true
     }
   } 
 }
