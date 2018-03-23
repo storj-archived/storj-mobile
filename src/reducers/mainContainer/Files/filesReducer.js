@@ -18,7 +18,8 @@ const {
     UPDATE_FILE_DOWNLOAD_PROGRESS,
     FILE_DOWNLOAD_CANCELED,
     FILE_UPLOAD_CANCELED,
-    LIST_UPLOADING_FILES
+    LIST_UPLOADING_FILES,
+    FILE_UPDATE_FAVOURITE
 } = FILE_ACTIONS;
 
 /**
@@ -44,15 +45,16 @@ export default function filesReducer(state = initialState, action) {
             newState.uploadingFileListModels = filesManager.addFileEntryU(action.payload.bucketId, action.payload.file);
             break;
         case UPLOAD_FILE_SUCCESS:
+        console.log(action);
             newState.uploadingFileListModels = filesManager.deleteFileEntryU(action.payload.bucketId, action.payload.filePath);
             newState.fileListModels = filesManager.addFileEntry(action.payload.bucketId, action.payload.file);
             newState.downloadedFileListModels = filesManager.addFileEntryD(action.payload.bucketId, { id: action.payload.file.getId(), path: action.payload.filePath });
             break;
         case UPLOAD_FILE_ERROR:
-            newState.uploadingFileListModels = filesManager.testDelete(action.payload.fileHandle);
+            newState.uploadingFileListModels = filesManager.delete(action.payload.fileHandle);
             break;
         case UPDATE_FILE_UPLOAD_PROGRESS: 
-            newState.uploadingFileListModels = filesManager.testUpdate(action.payload.fileHandle, action.payload.progress, action.payload.uploaded);
+            newState.uploadingFileListModels = filesManager.update(action.payload.fileHandle, action.payload.progress, action.payload.uploaded);
             break;
         case DOWNLOAD_FILE_SUCCESS:
             newState.fileListModels = filesManager.fileDownloaded(action.payload.bucketId, action.payload.fileId);
@@ -60,7 +62,6 @@ export default function filesReducer(state = initialState, action) {
             break;
         case DOWNLOAD_FILE_ERROR:
             newState.fileListModels = filesManager.fileDownloaded(action.payload.bucketId, action.payload.fileId);
-            //TODO: we should show some additional message here
             break;
         case UPDATE_FILE_DOWNLOAD_PROGRESS:             
             newState.fileListModels = filesManager.updateFileDownloadingProgress(action.payload.bucketId, action.payload.fileId, action.payload.progress, action.payload.fileRef);
@@ -84,8 +85,11 @@ export default function filesReducer(state = initialState, action) {
             newState.fileListModels = filesManager.clearSelection();
             break;
         case LIST_UPLOADING_FILES:
-            newState.uploadingFileListModels = filesManager.listUploadingFiles2(action.payload.uploadingFiles);
+            newState.uploadingFileListModels = filesManager.getUploadingFiles(action.payload.uploadingFiles);
             break;
+        case FILE_UPDATE_FAVOURITE:
+            newState.fileListModels = filesManager.updateFileStarred(action.payload.files);
+            break;  
         default:
             return state || initialState;
     }

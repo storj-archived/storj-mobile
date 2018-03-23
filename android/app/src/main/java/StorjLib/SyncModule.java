@@ -13,13 +13,16 @@ import java.util.ArrayList;
 import storjlib.Models.BucketModel;
 import storjlib.Models.FileModel;
 import storjlib.Models.UploadingFileModel;
+import storjlib.Responses.Response;
 import storjlib.Responses.SingleResponse;
 import storjlib.dataProvider.DatabaseFactory;
 import storjlib.dataProvider.Dbo.BucketDbo;
 import storjlib.dataProvider.Dbo.FileDbo;
+import storjlib.dataProvider.Dbo.SettingsDbo;
 import storjlib.dataProvider.Dbo.UploadingFileDbo;
 import storjlib.dataProvider.repositories.BucketRepository;
 import storjlib.dataProvider.repositories.FileRepository;
+import storjlib.dataProvider.repositories.SettingsRepository;
 import storjlib.dataProvider.repositories.UploadingFilesRepository;
 
 /**
@@ -43,7 +46,6 @@ public class SyncModule extends ReactContextBaseJavaModule {
             @Override
             public void run() {
                 try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
-                    //SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase();
                     BucketRepository bucketRepository = new BucketRepository(db);
 
                     ArrayList<BucketDbo> bucketDbos = (ArrayList)bucketRepository.getAll();
@@ -70,11 +72,36 @@ public class SyncModule extends ReactContextBaseJavaModule {
             @Override
             public void run() {
                 try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
-                    //SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase();
 
                     FileRepository fileRepository = new FileRepository(db);
 
                     ArrayList<FileDbo> fileDbos = (ArrayList)fileRepository.getAll(bucketId);
+
+                    int length = fileDbos.size();
+                    FileModel[] fileModels = new FileModel[length];
+
+                    for(int i = 0; i < length; i++) {
+                        fileModels[i] = fileDbos.get(i).toModel();
+                    }
+
+                    promise.resolve(new SingleResponse(true, toJson(fileModels), null).toWritableMap());
+                } catch (Exception e) {
+                    promise.resolve(new SingleResponse(false, null, e.getMessage()).toWritableMap());
+                }
+            }
+        }).run();
+    }
+
+    @ReactMethod
+    public void listAllFiles(final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
+
+                    FileRepository fileRepository = new FileRepository(db);
+
+                    ArrayList<FileDbo> fileDbos = (ArrayList)fileRepository.getAll();
 
                     int length = fileDbos.size();
                     FileModel[] fileModels = new FileModel[length];
@@ -165,6 +192,74 @@ public class SyncModule extends ReactContextBaseJavaModule {
 
                 } catch (Exception e) {
                     promise.resolve(new SingleResponse(false, null, e.getMessage()).toWritableMap());
+                }
+            }
+        }).run();
+    }
+
+
+
+    @ReactMethod
+    public void updateBucketStarred(final String bucketId, final boolean isStarred, final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
+                    BucketRepository bucketRepository = new BucketRepository(db);
+                    promise.resolve(bucketRepository.update(bucketId, isStarred).toWritableMap());
+
+                } catch (Exception e) {
+                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
+                }
+            }
+        }).run();
+    }
+
+    @ReactMethod
+    public void updateFileStarred(final String fileId, final boolean isStarred, final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
+                    FileRepository fileRepository = new FileRepository(db);
+                    promise.resolve(fileRepository.update(fileId, isStarred).toWritableMap());
+
+                } catch (Exception e) {
+                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
+                }
+            }
+        }).run();
+    }
+
+    @ReactMethod
+    public void listSettings(final String id, final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
+                    SettingsRepository settingsRepo = new SettingsRepository(db);
+                    SettingsDbo settingsDbo = settingsRepo.get(id);
+
+                    promise.resolve(new SingleResponse(settingsDbo != null, toJson(settingsDbo.toModel()), null).toWritableMap());
+
+                } catch (Exception e) {
+                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
+                }
+            }
+        }).run();
+    }
+
+    @ReactMethod
+    public void updateSyncSettings(final String id, final int syncSettings, final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
+                    SettingsRepository settingsRepo = new SettingsRepository(db);
+                    promise.resolve(settingsRepo.update(id, syncSettings).toWritableMap());
+
+                } catch (Exception e) {
+                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
                 }
             }
         }).run();

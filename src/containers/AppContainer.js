@@ -10,6 +10,8 @@ import { store } from '../reducers/index';
 export default class App extends Component {
 	constructor() {
 		super();
+				
+		global.btoa = require('base-64').encode;
 	};
 
 	render() {

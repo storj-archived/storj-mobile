@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import storjlib.dataProvider.contracts.BucketContract;
 import storjlib.dataProvider.contracts.FileContract;
+import storjlib.dataProvider.contracts.SettingsContract;
 import storjlib.dataProvider.contracts.UploadingFileContract;
 
 /**
@@ -14,7 +15,7 @@ import storjlib.dataProvider.contracts.UploadingFileContract;
 
 public class DatabaseFactory extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "storj.db";
 
     public DatabaseFactory(Context context, SQLiteDatabase.CursorFactory factory) {
@@ -42,11 +43,13 @@ public class DatabaseFactory extends SQLiteOpenHelper {
         db.execSQL(BucketContract.createTable());
         db.execSQL(FileContract.createTable());
         db.execSQL(UploadingFileContract.createTable());
+        db.execSQL(SettingsContract.createTable());
     }
 
     private void dropTables(SQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS " + BucketContract.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + FileContract.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + UploadingFileContract.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + SettingsContract.TABLE_NAME);
     }
 }

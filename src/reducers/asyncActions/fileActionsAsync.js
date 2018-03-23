@@ -44,7 +44,7 @@ export function listUploadingFiles(bucketId) {
 
         if(listUploadingFilesResponse.isSuccess) {
             let uploadingFiles = JSON.parse(listUploadingFilesResponse.result);
-            console.log(uploadingFiles);
+            
             uploadingFiles = uploadingFiles.map(uploadingFile => {
 
                 let fileModel = new FileModel({ 
@@ -61,7 +61,7 @@ export function listUploadingFiles(bucketId) {
 
                 return new ListItemModel(fileModel, false, true);
             });
-            console.log(uploadingFiles);
+            
             dispatch(fileActions.listUploadingFiles(uploadingFiles));
         }
     };

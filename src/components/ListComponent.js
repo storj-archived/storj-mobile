@@ -260,14 +260,22 @@ export default class ListComponent extends Component {
 
     //TODO: rework after getting actual data
     getItemsWithoutExpander() {
+        props = this.props;
+
+        function onPress(params) {     
+            props.openBucket(params.bucketId);
+            props.navigateToDashboardFilesScreen(params.bucketId);              
+        }
+
         return this.props.data.map((item) => {
+            
             return (
                 <ListItemComponent
                     bucketId = { this.props.bucketId }
                     key = { item.getId() }
                     item = { item } 
                     selectItemId = { (itemId) => { this.props.setSelectionId(itemId); this.setState({selectedItemId: itemId }) }}
-                    navigateToFilesScreen = { this.props.navigateToFilesScreen ? this.props.navigateToFilesScreen : () => {} }
+                    navigateToFilesScreen = { this.props.navigateToDashboardFilesScreen ? this.props.navigateToDashboardFilesScreen : () => {} }
                     isItemActionsSelected = { this.isItemActionsSelected(item) }
                     onLongPress = { () => { this.onItemLongPress(item); } }
                     isSelectionModeEnabled = { this.props.isSelectionMode }
@@ -280,7 +288,7 @@ export default class ListComponent extends Component {
                     listItemIcon = { this.props.listItemIcon }
                     starredListItemIcon = { this.props.starredListItemIcon }
                     onSelectionPress = { () => { this.selectItem(item); } }
-                    onPress = { this.props.onPress }
+                    onPress = { (params) => { onPress(params); } }
                     onSingleItemSelected = { this.props.onSingleItemSelected } />
             )
         })
@@ -304,6 +312,7 @@ export default class ListComponent extends Component {
         return (
             <View>
                 <Animated.ScrollView style = { styles.listContainer }
+                    decelerationRate = { 'normal' }
                     scrollEventThrottle = { 16 }
                     onScroll = {
                         Animated.event([{

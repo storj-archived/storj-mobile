@@ -53,6 +53,14 @@ export default class ListItemModel {
      * @returns {string}
      */
     getStarred() {
-        return this.entity.isStarred;
+        return this.entity.IsStarred;
+    };
+
+    /**
+     * Get entity date
+     * @returns {bool}
+     */
+    getSynced() {
+        return this.entity.IsSynced;
     };
 }

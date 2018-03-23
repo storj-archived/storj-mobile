@@ -8,42 +8,49 @@ import {
     Image
 } from 'react-native';
 import React, { Component } from 'react';
-import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderComponent';
-import ListComponent from '../components/ListComponent';
-import ListItemModel from '../models/ListItemModel';
-import BucketModel from '../models/BucketModel';
-import DashboardListFooterComponent from '../components/Dashboard/DashboardListFooterComponent';
-import DashboardListHeaderComponent from '../components/Dashboard/DashboardListHeaderComponent';
-import { getHeight, getWidth } from '../utils/adaptive';
+import BucketsScreenHeaderComponent from '../../components/BucketsScreenHeaderComponent';
+import ListComponent from '../../components/ListComponent';
+import ListItemModel from '../../models/ListItemModel';
+import BucketModel from '../../models/BucketModel';
+import DashboardListFooterComponent from '../../components/Dashboard/DashboardListFooterComponent';
+import DashboardListHeaderComponent from '../../components/Dashboard/DashboardListHeaderComponent';
+import { getHeight, getWidth } from '../../utils/adaptive';
 
 export default class DashboardListComponent extends Component{
     constructor(props) {
         super(props);        
-
-        this.starredBuckets = props.buckets.filter(item => item.getStarred());
-        this.starredCount = this.starredBuckets.length;
     }
 
     render() {
+        let props = this.props;
+        let starredBuckets = props.buckets.filter(item => item.getStarred());
+        let starredBucketsCount = starredBuckets.length;
+
+        let starredFiles = props.files.filter(item => item.getStarred());
+        let starredFilesCount = starredFiles.length;
+
+        let syncedFiles = props.files.filter(item => item.getSynced());
+        let syncedfilesCount = syncedFiles.length;
+
         return(
             <View style = { styles.mainContainer }>
                 <View style = { styles.scrollViewContainer }>
-                    <ScrollView showsVerticalScrollIndicator = { false } >
+                    <ScrollView showsVerticalScrollIndicator = { false } decelerationRate = { 'normal' }>
                         <View style = { styles.topButtonsContainer }>
                             <TouchableOpacity onPress = { () => {} } >
                                 <View style = { styles.button }>
                                     <View style = { styles.buttonContentContainer }>
                                         <Image 
                                             style = { styles.buttonImage } 
-                                            source = { require('../images/DashboardScreen/Storage.png') } 
+                                            source = { require('../../images/DashboardScreen/Storage.png') } 
                                             resizeMode = 'contain' />
                                         <View >
                                             <Text style = { styles.buttonTextRegular }>Storage</Text>
-                                            <Text style = { styles.buttonTextBold }>{ this.props.storageAmount ? this.props.storageAmount : '00.00' }{ ' GB' }</Text>
+                                            <Text style = { styles.buttonTextBold }>{ this.props.storageAmount }{ ' GB' }</Text>
                                         </View>
                                         <Image 
                                             style = { styles.expandImage } 
-                                            source = { require('../images/DashboardScreen/Vector.png') } 
+                                            source = { require('../../images/DashboardScreen/Vector.png') } 
                                             resizeMode = 'contain' />
                                     </View>
                                 </View>
@@ -53,29 +60,29 @@ export default class DashboardListComponent extends Component{
                                     <View style = { styles.buttonContentContainer }>
                                         <Image 
                                             style = { styles.buttonImage } 
-                                            source = { require('../images/DashboardScreen/Bandwidth.png') } 
+                                            source = { require('../../images/DashboardScreen/Bandwidth.png') } 
                                             resizeMode = 'contain' />
                                         <View >
                                             <Text style = { styles.buttonTextRegular }>Bandwidth</Text>
-                                            <Text style = { styles.buttonTextBold }>{ this.props.bandwidthAmount ? this.props.bandwidthAmount : '0.00' }{ ' GB' }</Text>
+                                            <Text style = { styles.buttonTextBold }>{ this.props.bandwidthAmount }{ ' GB' }</Text>
                                         </View>
                                         <Image 
                                             style = { styles.expandImage } 
-                                            source = { require('../images/DashboardScreen/Vector.png') } 
+                                            source = { require('../../images/DashboardScreen/Vector.png') } 
                                             resizeMode = 'contain' />
                                     </View>
                                 </View>
                             </TouchableOpacity>
                         </View>
                         {
-                            listComponent('Favourites', this.starredBuckets.slice(0, 3), this.props, this.starredCount)
+                            listComponent('Favourite buckets', starredBuckets.slice(0, 3), this.props, starredBucketsCount, true)
                         }
                         {
-                            listComponent('Recent sync', this.starredBuckets.slice(0, 3), this.props, this.starredCount)
+                            listComponent('Favourite files', starredFiles.slice(0, 3), this.props, starredFilesCount, false)
+                        }
+                        {
+                            listComponent('Recent sync', syncedFiles.slice(0, 3), this.props, syncedfilesCount, false)
                         }     
-                        {
-                            listComponent('Trash', this.starredBuckets.slice(0, 3), this.props, this.starredCount)
-                        }
                     </ScrollView>
                 </View>
             </View>
@@ -83,12 +90,7 @@ export default class DashboardListComponent extends Component{
     }
 }
 
-const listComponent = (title, data, props, count) => {
-
-    function onPress(params) {
-        // props.openBucket(params.bucketId);
-        // props.navigateToFilesScreen(params.bucketId);    
-    }
+const listComponent = (title, data, props, count, isBucket) => {
     
     return(
         <View>  
@@ -100,14 +102,16 @@ const listComponent = (title, data, props, count) => {
                 selectedItemId = { props.selectedItemId }
                 verticalPaddingDisabled = { true }
                 isExpanderDisabled = { true }
-                onPress = { (params) => { onPress(params); } } 
+                openBucket = { props.openBucket }
+                navigateToDashboardFilesScreen = { props.navigateToDashboardFilesScreen }
                 onSingleItemSelected = { props.onSingleItemSelected }                    
                 animatedScrollValue = { props.animatedScrollValue }
                 enableSelectionMode = { props.enableSelectionMode }
                 disableSelectionMode = { props.disableSelectionMode }
                 isSelectionMode = { props.isSelectionMode }
                 isSingleItemSelected = { props.isSingleItemSelected }
-                listItemIcon = { require('../images/Icons/BucketListItemIcon.png') }
+                listItemIcon = { isBucket ? require('../../images/Icons/BucketListItemIcon.png') : require('../../images/Icons/FileListItemIcon.png') }
+                starredListItemIcon = { isBucket ? require('../../images/Icons/ListStarredBucket.png') : require('../../images/Icons/ListStarredFile.png') }
                 deselectItem = { props.deselectItem }
                 navigateToFilesScreen = { props.navigateToFilesScreen ? props.navigateToFilesScreen : () => {} }
                 selectItem = { props.selectItem }

@@ -12,13 +12,9 @@ import { getHeight, getWidth } from '../../utils/adaptive';
 
 export default class SettingsComponent extends Component{
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
-            isSyncOn: false,
-            isWifiOnly: false,
-            isOnlyWhenCharging: false,
-            isPhotoSync: false,
             isFilesSync: false
         }
     }
@@ -38,7 +34,7 @@ export default class SettingsComponent extends Component{
                         <Text style = { [styles.titleText, styles.titleMargin] }>Settings</Text>
                     </View>
                 </View>
-                <ScrollView showsVerticalScrollIndicator = { false } >
+                <ScrollView showsVerticalScrollIndicator = { false } decelerationRate = { 'normal' } >
                     <View style = { styles.explanationContainer }>
                         <Text style = { styles.explanationText }>Sync options</Text>
                     </View>
@@ -48,8 +44,8 @@ export default class SettingsComponent extends Component{
                             onTintColor = { '#2794FF' } 
                             tintColor = { 'rgba(56, 75, 101, 0.2)' } 
                             thumbTintColor = { '#FFFFFF' }
-                            onValueChange = { () => { this.setState({isSyncOn: !this.state.isSyncOn}); } }
-                            value = { this.state.isSyncOn } />
+                            onValueChange = { () => { } }
+                            value = { this.props.syncStatus } />
                     </View>
                     <View style = { styles.underline }/>
                     <View style = { styles.optionsContainer }>
@@ -58,8 +54,8 @@ export default class SettingsComponent extends Component{
                             onTintColor = { '#2794FF' } 
                             tintColor = { 'rgba(56, 75, 101, 0.2)' } 
                             thumbTintColor = { '#FFFFFF' }
-                            onValueChange = { () => { this.setState({isWifiOnly: !this.state.isWifiOnly}); } }
-                            value = { this.state.isWifiOnly } />
+                            onValueChange = { () => { } }
+                            value = { this.props.onWifi } />
                     </View>
                     <View style = { styles.underline }/>
                     <View style = { styles.optionsContainer }>
@@ -68,20 +64,56 @@ export default class SettingsComponent extends Component{
                             onTintColor = { '#2794FF' } 
                             tintColor = { 'rgba(56, 75, 101, 0.2)' } 
                             thumbTintColor = { '#FFFFFF' }
-                            onValueChange = { () => { this.setState({isOnlyWhenCharging: !this.state.isOnlyWhenCharging}); } }
-                            value = { this.state.isOnlyWhenCharging } />
+                            onValueChange = { () => { } }
+                            value = { this.props.onCharging } />
                     </View>
                     <View style = { styles.underline }/>
                     <View style = { styles.checkboxPhotosContainer }>
-                        <TouchableOpacity onPress = { () => { this.setState({isPhotoSync: !this.state.isPhotoSync}); } } >
+                        <TouchableOpacity onPress = { () => { this.props.syncPhotosAction(!this.props.syncPhotos, this.props.getStateObject()); } } >
                             <Image 
                                 style = { styles.icon } 
                                 source = { 
-                                    this.state.isPhotoSync 
+                                    this.props.syncPhotos 
                                     ? require('../../images/Icons/ListItemSelected.png')
                                     : require('../../images/Icons/ListItemUnselected.png') } />
                         </TouchableOpacity>
-                        <Text style = { [styles.switchText, styles.checkboxTextMargin ] } >Sync photos</Text>
+                        <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync photos</Text>
+                    </View>
+                    <View style = { styles.underline }/>
+                    <View style = { styles.checkboxPhotosContainer }>
+                        <TouchableOpacity onPress = { () => { this.props.syncMoviesAction(!this.props.syncMovies, this.props.getStateObject()); } } >
+                            <Image 
+                                style = { styles.icon } 
+                                source = { 
+                                    this.props.syncMovies 
+                                    ? require('../../images/Icons/ListItemSelected.png')
+                                    : require('../../images/Icons/ListItemUnselected.png') } />
+                        </TouchableOpacity>
+                        <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync movies</Text>
+                    </View>
+                    <View style = { styles.underline }/>
+                    <View style = { styles.checkboxPhotosContainer }>
+                        <TouchableOpacity onPress = { () => { this.props.syncDocumentsAction(!this.props.syncDocuments, this.props.getStateObject()); } } >
+                            <Image 
+                                style = { styles.icon } 
+                                source = { 
+                                    this.props.syncDocuments 
+                                    ? require('../../images/Icons/ListItemSelected.png')
+                                    : require('../../images/Icons/ListItemUnselected.png') } />
+                        </TouchableOpacity>
+                        <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync documents</Text>
+                    </View>
+                    <View style = { styles.underline }/>
+                    <View style = { styles.checkboxPhotosContainer }>
+                        <TouchableOpacity onPress = { () => { this.props.syncDownloadsAction(!this.props.syncDownloads, this.props.getStateObject()); } } >
+                            <Image 
+                                style = { styles.icon } 
+                                source = { 
+                                    this.props.syncDownloads 
+                                    ? require('../../images/Icons/ListItemSelected.png')
+                                    : require('../../images/Icons/ListItemUnselected.png') } />
+                        </TouchableOpacity>
+                        <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync downloads</Text>
                     </View>
                     <View style = { styles.underline }/>
                     <View style = { styles.checkboxFilesContainer }>
@@ -123,7 +155,7 @@ export default class SettingsComponent extends Component{
                         </View>
                     </TouchableOpacity>
                     <View style = { styles.underline }/>
-                    <TouchableOpacity style = { styles.optionsContainer }>
+                    <TouchableOpacity style = { styles.optionsContainer } onPress = { () => { this.props.navigation.navigate('PinCodeGenerationScreen') } } >
                         <Text style = { styles.switchText }>Change PIN</Text>
                         <View style = { styles.expanderIconContainer }>
                             <Image

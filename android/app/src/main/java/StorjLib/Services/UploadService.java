@@ -61,7 +61,7 @@ public final class UploadService extends BaseReactService {
         switch(action) {
             case ACTION_UPLOAD_FILE:
                 uploadFile(intent.getStringExtra(PARAMS_BUCKET_ID),
-                        intent.getStringExtra(PARAMS_URI));
+                        intent.getStringExtra(PARAMS_URI), intent.getBooleanExtra(FileContract._SYNCED, false));
                 break;
             case ACTION_UPLOAD_FILE_CANCEL:
                 long fileHandle = intent.getLongExtra(PARAMS_FILE_HANDLE, -1);
@@ -79,7 +79,7 @@ public final class UploadService extends BaseReactService {
         StorjAndroid.getInstance(this).cancelUpload(fileHandle);
     }
 
-    private void uploadFile(String bucketId, String uri) {
+    private void uploadFile(String bucketId, String uri, final boolean isSynced) {
         Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
         //Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
 
@@ -160,7 +160,7 @@ public final class UploadService extends BaseReactService {
             @Override
             public void onComplete(String filePath, File file) {
                 FileRepository fileRepo = new FileRepository(db);
-                FileModel model = new FileModel(file);
+                FileModel model = new FileModel(file, false, isSynced);
 
                 long fileHandle = dbo.getId();
 

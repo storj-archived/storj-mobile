@@ -105,9 +105,10 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
         new MethodHandler().invokeParallel(new BaseMethodParams(promise), new IMethodHandlerCallback() {
             @Override
             public void callback(IMethodParams param) throws Exception {
-                boolean isSuccess = getStorj().verifyKeys(email, password) == 0;
+                int error = getStorj().verifyKeys(email, password);
+                boolean isSuccess = error == 0;
 
-                param.getPromise().resolve(new Response(isSuccess, E_VERIFY_KEYS).toWritableMap());
+                param.getPromise().resolve(new Response(isSuccess, E_VERIFY_KEYS, error).toWritableMap());
             }
         });
     }
@@ -129,6 +130,17 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
             public void callback(IMethodParams param) throws Exception {
                 boolean isSuccess = getStorj().importKeys(new Keys(email, password, mnemonic), passcode);
                 param.getPromise().resolve(new Response(isSuccess, E_VERIFY_KEYS).toWritableMap());
+            }
+        });
+    }
+
+    @ReactMethod
+    public void deleteKeys(Promise promise) {
+        new MethodHandler().invokeParallel(new BaseMethodParams(promise), new IMethodHandlerCallback() {
+            @Override
+            public void callback(IMethodParams param) throws Exception {
+                boolean isSuccess = getStorj().deleteKeys();
+                param.getPromise().resolve(new Response(isSuccess, null).toWritableMap());
             }
         });
     }

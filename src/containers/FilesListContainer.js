@@ -16,9 +16,12 @@ class FilesListContainer extends Component {
     constructor(props) {
         super(props);
 
-        this.serviceListener = null;
         this.bucketId = props.navigation.state.params.bucketId;
         this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
+    }
+
+    getData() { 
+        return this.props.fileListModels.concat(this.props.uploadingFileListModels).filter(file => file.entity.bucketId === this.props.openedBucketId);
     }
 
     componentWillMount() {
@@ -32,36 +35,17 @@ class FilesListContainer extends Component {
               toValue: 0,
               useNativeDriver: true
             }
-        ).start();        
-
-        this.serviceListener = DeviceEventEmitter.addListener("EVENT_FILES_UPDATED", this.onGetData.bind(this));       
+        ).start();               
         
-        ServiceModule.getFiles(this.bucketId);    
+        if (this.props.screenProps.defaultRoute !== "DashboardScreen") {
+            ServiceModule.getFiles(this.bucketId);  
+        }   
     }
 
     componentWillUnmount() {
         if(Platform.OS === "android") {
             BackHandler.removeEventListener("hardwarebackPress", this.onHardwareBackPress);
         }
-
-        if(this.serviceListener) this.serviceListener.remove();
-    }
-
-    async onGetData() {
-        this.props.setLoading();
-
-        let filesResponse = await SyncModule.listFiles(this.bucketId);
-
-        if(filesResponse.isSuccess) {
-            let files = JSON.parse(filesResponse.result).map((file) => {
-                return new ListItemModel(new FileModel(file));
-            });                    
-
-            this.props.listFiles(this.bucketId, files);
-        }
-
-        ServiceModule.getFilesWorking = false;
-        this.props.unsetLoading();
     }
 
     async cancelDownload(file) {
@@ -108,26 +92,16 @@ class FilesListContainer extends Component {
     }
 
     onPress(params) {
-        let downloadedFileListModel = this.props.downloadedFileListModels.find(item => item.bucketId === this.bucketId);
-
-        if(!downloadedFileListModel) 
-            return;
-        
-        let downloadedFile = downloadedFileListModel.files.find(file => { 
-            return file.id === params.bucketId 
+        let downloadedFile = this.props.downloadedFileListModels.find(file => { 
+            return file.id === params.bucketId;
         });
 
         if(downloadedFile) {
-            this.props.openImageViewer(downloadedFile.id, downloadedFile.path, downloadedFileListModel.bucketId);
+            this.props.openImageViewer(downloadedFile.id, downloadedFile.path, downloadedFile.bucketId);
         }
     }
 
-    
-
     render() {
-        let data = getFilesFormFileModelList(this.props.fileListModels, this.bucketId);
-        let uploadingData = getFilesFormFileModelList(this.props.uploadingFileListModels, this.bucketId);
-
         return(
             <FilesListComponent
                 setSelectionId = { this.props.screenProps.setSelectionId }
@@ -137,7 +111,8 @@ class FilesListContainer extends Component {
                 cancelDownload = { (params) => { this.cancelDownload(params); } }
                 cancelUpload = { (params) => { this.cancelUpload(params); } }
                 bucketId = { this.bucketId }
-                data = { data.concat(uploadingData) }
+                openedBucketId = { this.props.openedBucketId }
+                data = { this.getData() }
                 onSingleItemSelected = { this.props.onSingleItemSelected }
                 animatedScrollValue = { this.props.screenProps.animatedScrollValue }
                 enableSelectionMode = { this.props.enableSelectionMode }
@@ -154,6 +129,7 @@ class FilesListContainer extends Component {
 function mapStateToProps(state) {
     return {
         mainNavReducer: state.navReducer,
+        openedBucketId: state.mainReducer.openedBucketId,
         isActionBarShown: state.mainReducer.isActionBarShown,
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
@@ -171,15 +147,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilesListContainer);
-
-function getFilesFormFileModelList(fileModelList, bucketId) {
-    let files = [];
-
-    fileModelList.forEach(element => {
-        if(element.bucketId === bucketId) {
-            files = element.files;
-        }
-    });
-
-    return files;
-}

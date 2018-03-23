@@ -13,6 +13,10 @@ ShallowWrapper {
     redirectToInitializeScreen={[Function]}
     redirectToMainScreen={[Function]}
     redirectToQRScannerScreen={[Function]}
+    setAccountExist={[Function]}
+    setAccountNotExist={[Function]}
+    setEmailConfirmed={[Function]}
+    setEmailNotConfirmed={[Function]}
     user={
       Object {
         "email": null,

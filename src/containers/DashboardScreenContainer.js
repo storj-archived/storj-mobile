@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 import { dashboardContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
-import { dashboardNavigateBack, navigateToFilesScreen } from '../reducers/navigation/navigationActions';
-import DashboardComponent from '../components/DashboardComponent';
+import { dashboardNavigateBack, navigateToDashboardFilesScreen, navigateBack } from '../reducers/navigation/navigationActions';
+import DashboardComponent from '../components/Dashboard/DashboardComponent';
 import FirstSignInComponent from '../components/FirstSignInComponent';
 
 class DashboardScreenContainer extends Component {
@@ -30,14 +30,10 @@ class DashboardScreenContainer extends Component {
 
     getSelectedFilesCount() {
         if(!this.props.selectedBucketId || !this.props.files || this.props.files.length === 0) return 0; 
-
-        let openedBucket = this.props.files.find(item => {
-            return item.bucketId === this.props.selectedBucketId;
-        });
-
-        if(openedBucket) {
-            return this.getArraySelectedCount(openedBucket.files);
-        }
+        
+        return this.props.files.filter(fileItem => {
+            return fileItem.isSelected;
+        }).length;          
     }
 
     async createBucket(name) {
@@ -68,13 +64,15 @@ class DashboardScreenContainer extends Component {
             return(
                 <DashboardComponent
                     showOptions = { this.props.screenProps.showOptions }
+                    setSelectionId = { this.props.setSelectionId }
                     files = { this.props.files }
                     buckets = { this.props.buckets }
                     openBucket = { this.props.openBucket}
                     defaultRoute = { this.props.defaultRoute }
+                    isFilesScreen = { this.props.screenName === 'DashboardFilesScreen' }
                     screenName = { this.props.screenName }
                     selectItem = { this.props.selectBucket }
-                    navigateBack = { this.props.dashboardNavigateBack }
+                    navigateBack = { this.props.navigateBack }
                     deselectItem = { this.props.deselectBucket }      
                     isSelectionMode = { this.props.isSelectionMode }
                     selectedBucketId = { this.props.selectedBucketId }
@@ -84,7 +82,7 @@ class DashboardScreenContainer extends Component {
                     disableSelectionMode = { this.props.disableSelectionMode }
                     onSingleItemSelected = { this.props.onSingleItemSelected }  
                     isSingleItemSelected = { this.props.isSingleItemSelected }
-                    navigateToFilesScreen = { this.props.navigateToFilesScreen } />
+                    navigateToDashboardFilesScreen = { this.props.navigateToDashboardFilesScreen } />
             )
         }
     }
@@ -100,7 +98,6 @@ function mapStateToProps(state) {
         buckets: state.mainReducer.buckets,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         isFirstSignIn: state.mainReducer.isFirstSignIn,
-        fileListModels: state.filesReducer.fileListModels,
         files: state.filesReducer.fileListModels,
         isGridViewShown: state.mainReducer.isGridViewShown,
         defaultRoute: routes[0].routeName,
@@ -115,7 +112,8 @@ function mapDispatchToProps(dispatch) {
         ...filesListContainerMainActions, 
         ...filesListContainerFileActions, 
         dashboardNavigateBack,
-        navigateToFilesScreen
+        navigateToDashboardFilesScreen,
+        navigateBack
     }, dispatch);
 }
 

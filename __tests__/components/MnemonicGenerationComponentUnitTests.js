@@ -1,15 +1,12 @@
 import {
-    View,
     TouchableOpacity,
-    Text,
-    TextInput,
-    Alert
+    Text
 } from 'react-native';
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16'
 import Enzyme, { shallow } from 'enzyme'; 
 import sinon from 'sinon';
-import MnemonicGenerationComponent from '../../src/components/MnemonicGenerationComponent';
+import MnemonicGenerationComponent from '../../src/components/Mnemonic/MnemonicGenerationComponent';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -24,77 +21,40 @@ describe('MnemonicGenerationComponent', () => {
         expect(wrapper).toMatchSnapshot();
     });
 
-    it('renders correctly with pressOut', () => {
+    it('triggers actions correctly on TouchableOpacity press', () => {
+
+        const redirectToMnemonicInfoScreenSpy = jest.fn();
+        const redirectToLoginScreenSpy = jest.fn();
+        const redirectToMnemonicConfirmationScreenSpy = jest.fn();
 
         const wrapper = shallow(
-            <MnemonicGenerationComponent />
+            <MnemonicGenerationComponent
+                screenProps = { { 
+                    redirectToMnemonicInfoScreen: redirectToMnemonicInfoScreenSpy,
+                    redirectToLoginScreen: redirectToLoginScreenSpy,
+                    redirectToMnemonicConfirmationScreen: redirectToMnemonicConfirmationScreenSpy
+                } } />
         );
 
-        const expectedState = { mnemonic: null,
-            email: null,
-            isLoading: true,
-            showMnemonic: true,
-            showModal: false,
-            isMnemonicCopied: false,
-            showConfirmation: false };
-
-        wrapper.find('TouchableOpacity').forEach((child) =>{
-            child.simulate('PressOut')
+        wrapper.find('TouchableOpacity').forEach(child => {
+            child.simulate('Press');
         });
 
-        expect(wrapper.state()).toEqual(expectedState);
+        expect(redirectToMnemonicInfoScreenSpy.mock.calls.length).toBe(1);
+        expect(redirectToLoginScreenSpy.mock.calls.length).toBe(1);
+        expect(redirectToMnemonicConfirmationScreenSpy.mock.calls.length).toBe(1);
     });
 
-    it('renders correctly with default state', () => {
+    it('renders correctly with showCopyPopUp', () => {
 
-        const wrapper = shallow(
-            <MnemonicGenerationComponent />
+		const wrapper = shallow(
+			<MnemonicGenerationComponent />
         );
 
-        expect(wrapper.containsMatchingElement(<Text>GET MNEMONIC</Text>)).toBe(true);
+        wrapper.setState({ showCopyPopUp: true });
+        
+        expect(wrapper.find('TouchableOpacity').length).toBe(5);
+        expect(wrapper.containsMatchingElement(<Text>Copied to clipboard</Text>)).toBe(true);
     });
 
-    it('renders correctly with changing state to { isLoading: false, showMnemonic: true, mnemonic: someValue }', () => {
-
-        const wrapper = shallow(
-            <MnemonicGenerationComponent />
-        );
-
-        wrapper.setState({ isLoading: false, showMnemonic: true, mnemonic: 'someValue' });
-
-        expect(wrapper.containsMatchingElement(<TextInput value = { wrapper.state().mnemonic } />)).toBe(true);
-    });
-
-    it('renders correctly with changing state to { showModal: true }', () => {
-
-        const wrapper = shallow(
-            <MnemonicGenerationComponent />
-        );
-
-        wrapper.setState({ showModal: true });
-
-        expect(wrapper.containsMatchingElement(<Text>Copy to Clipboard</Text>)).toBe(true);
-    });
-
-    it('renders correctly with changing state to { showModal: false, isMnemonicCopied: true }', () => {
-
-        const wrapper = shallow(
-            <MnemonicGenerationComponent />
-        );
-
-        wrapper.setState({ showMnemonic : true, showModal: false, isMnemonicCopied: true, isLoading: false });
-
-        expect(wrapper.containsMatchingElement(<Text>CONTINUE</Text>)).toBe(true);
-    });
-
-    it('renders correctly with changing state to { showConfirmation: true }', () => {
-
-        const wrapper = shallow(
-            <MnemonicGenerationComponent />
-        );
-
-        wrapper.setState({ showConfirmation: true });
-
-        expect(wrapper.containsMatchingElement(Alert)).toBe(true);
-    });
 });

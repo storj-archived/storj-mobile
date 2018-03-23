@@ -72,10 +72,17 @@ public class GetBucketsService extends BaseReactService {
         super("TestHello");
     }
 
+    private static final String TAG = "INTENT GET BUCKETS";
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
+        Log.d(TAG, "onHandleIntent: pn begin");
+
+        if(intent == null) {
+            Log.d(TAG, "onHandleIntent: Intent is null");
+        }
+
         String action = intent.getAction();
-        Log.d("INTENT SERVICE DEBUG", "onHandleIntent: " + action);
+        Log.d(TAG, "onHandleIntent: " + action);
 
         switch(action) {
             case GET_BUCKETS:
@@ -95,7 +102,7 @@ public class GetBucketsService extends BaseReactService {
                 break;
         }
 
-        Log.d("INTENT SERVICE DEBUG", "onHandleIntentEND: " + action);
+        Log.d(TAG, "onHandleIntentEND: " + action);
     }
 
     private void getBuckets() {
@@ -114,6 +121,7 @@ public class GetBucketsService extends BaseReactService {
                 if(buckets.length == 0) {
                     bRepository().deleteAll();
                     getDb().close();
+                    sendEvent(EVENT_BUCKETS_UPDATED, true);
                     return;
                 }
 
@@ -163,7 +171,7 @@ public class GetBucketsService extends BaseReactService {
 
             @Override
             public void onError(int code, String message) {
-                sendEvent(EVENT_BUCKETS_UPDATED, true);
+                sendEvent(EVENT_BUCKETS_UPDATED, false);
             }
         });
     }
@@ -179,6 +187,7 @@ public class GetBucketsService extends BaseReactService {
                 if(files.length == 0) {
                     Response deleteAllResponse = fRepository().deleteAll(bucketId);
                     getDb().close();
+                    sendEvent(EVENT_FILES_UPDATED, true);
                     return;
                 }
 
@@ -229,7 +238,7 @@ public class GetBucketsService extends BaseReactService {
 
             @Override
             public void onError(int code, String message) {
-                sendEvent(EVENT_FILES_UPDATED, true);
+                sendEvent(EVENT_FILES_UPDATED, false);
             }
         });
     }
@@ -297,7 +306,7 @@ public class GetBucketsService extends BaseReactService {
         getInstance().deleteFile(bucketId, fileId, new DeleteFileCallback() {
             @Override
             public void onFileDeleted() {
-                Response deletionResponse = bRepository().delete(bucketId);
+                Response deletionResponse = fRepository().delete(fileId);
 
                 if(mContext == null) {
                     return;

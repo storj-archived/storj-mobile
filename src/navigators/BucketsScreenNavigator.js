@@ -5,9 +5,9 @@ import FilesScreen from '../containers/FilesListContainer';
 
 const BucketsScreenNavigator = StackNavigator(
     {
-        BucketsScreen: {
+        BucketsListScreen: {
             screen: BucketsScreen,
-            routeName: 'BucketsScreen'
+            routeName: 'BucketsListScreen'
         },
         FilesScreen: {
             screen: FilesScreen,
@@ -15,7 +15,7 @@ const BucketsScreenNavigator = StackNavigator(
         }
     }, 
     {
-        initialRouteName: 'BucketsScreen'
+        initialRouteName: 'BucketsListScreen'
     }
 );
 

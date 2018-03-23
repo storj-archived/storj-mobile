@@ -4,14 +4,14 @@ import DashboardScreen from '../containers/DashboardContainer';
 
 const DashboardScreenNavigator = StackNavigator(
     {
-        DashboardScreen: {
+        DashboardDefaultScreen: {
             screen: DashboardScreen,
             routeName: 'DashboardDefaultScreen'
         },
-        // FilesScreen: {
-        //     screen: FilesScreen,
-        //     routeName: 'DashboardFilesScreen'
-        // }
+        DashboardFilesScreen: {
+            screen: FilesScreen,
+            routeName: 'DashboardFilesScreen'
+        }
     }, 
     {
         initialRouteName: 'DashboardDefaultScreen',

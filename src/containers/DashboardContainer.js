@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
-import { DeviceEventEmitter } from 'react-native';
-import ServiceModule from '../utils/ServiceModule';
-import SyncModule from '../utils/SyncModule';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { dashboardContainerActions, filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions, mainContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
-import { navigateBack, navigateToFilesScreen } from '../reducers/navigation/navigationActions';
+import { navigateBack, navigateToDashboardFilesScreen } from '../reducers/navigation/navigationActions';
 import { uploadFileStart, uploadFileSuccess } from '../reducers/asyncActions/fileActionsAsync';
 import BucketModel from '../models/BucketModel';
 import FileModel from '../models/FileModel';
 import ListItemModel from '../models/ListItemModel';
-import DashboardListComponent from '../components/DashboardListComponent';
+import DashboardListComponent from '../components/Dashboard/DashboardListComponent';
 
 class DashboardContainer extends Component {
     constructor(props) {
         super(props);
     }
 
-    render() {
+    render() {        
+        console.log(this.props.storage);
+        console.log(this.props.bandwidth);
         return(
             <DashboardListComponent
                 files = { this.props.files }
@@ -37,6 +36,10 @@ class DashboardContainer extends Component {
                 onSingleItemSelected = { this.props.onSingleItemSelected }  
                 isSingleItemSelected = { this.props.isSingleItemSelected }
                 navigateToFilesScreen = { this.props.navigateToFilesScreen }
+                setSelectionId = { this.props.setSelectionId } 
+                storageAmount = { this.props.storage }
+                bandwidthAmount = { this.props.bandwidth } 
+                navigateToDashboardFilesScreen = { this.props.navigateToDashboardFilesScreen }
                 setSelectionId = { this.props.setSelectionId } />
         )
     }
@@ -55,7 +58,9 @@ function mapStateToProps(state) {
         files: state.filesReducer.fileListModels,
         screenName: currentBucketScreenName,
         selectedItemId: state.mainReducer.selectedItemId,
-        openedBucketId: state.mainReducer.openedBucketId
+        openedBucketId: state.mainReducer.openedBucketId,
+        storage: state.billingReducer.storage,
+        bandwidth: state.billingReducer.bandwidth
     };
 }
     
@@ -66,7 +71,7 @@ function mapDispatchToProps(dispatch) {
             ...filesListContainerFileActions, 
             ...filesListContainerMainActions, 
             navigateBack,
-            navigateToFilesScreen
+            navigateToDashboardFilesScreen
         }, dispatch),
         getUploadingFile: (fileHandle) => dispatch(uploadFileStart(fileHandle)),
         uploadSuccess: (fileHandle, fileId) => dispatch(uploadFileSuccess(fileHandle, fileId))

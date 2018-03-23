@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.os.IBinder;
 
 import com.facebook.react.bridge.Promise;
@@ -31,6 +32,7 @@ import storjlib.Responses.SingleResponse;
 import storjlib.dataProvider.DatabaseFactory;
 import storjlib.dataProvider.Dbo.BucketDbo;
 import storjlib.dataProvider.Dbo.FileDbo;
+import storjlib.dataProvider.contracts.SettingsContract;
 import storjlib.dataProvider.repositories.BucketRepository;
 import storjlib.dataProvider.repositories.FileRepository;
 import storjlib.Models.PromiseHandler;
@@ -165,108 +167,33 @@ public class ServiceModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void deleteBucket(final String bucketId) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
-                    serviceIntent.setAction(BUCKET_DELETED);
-                    serviceIntent.putExtra("bucketId", bucketId);
+        Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
+        serviceIntent.setAction(BUCKET_DELETED);
+        serviceIntent.putExtra("bucketId", bucketId);
 
-                    getReactApplicationContext().startService(serviceIntent);
-                } catch (Exception e) {
-                }
-            }
-        }).run();
+        getReactApplicationContext().startService(serviceIntent);
     }
 
     @ReactMethod
     public void deleteFile(final String bucketId, final String fileId) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
-                    serviceIntent.setAction(FILE_DELETED);
-                    serviceIntent.putExtra("bucketId", bucketId);
-                    serviceIntent.putExtra("fileId", fileId);
+        Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
+        serviceIntent.setAction(FILE_DELETED);
+        serviceIntent.putExtra("bucketId", bucketId);
+        serviceIntent.putExtra("fileId", fileId);
 
 
-                    getReactApplicationContext().startService(serviceIntent);
-                } catch (Exception e) {
-                }
-            }
-        }).run();
-    }
+        getReactApplicationContext().startService(serviceIntent);
+    }   
 
     @ReactMethod
-    public void updateBucketStarred(final String bucketId, final boolean isStarred, final Promise promise) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Response updateResponse = _bRepository.update(bucketId, isStarred);
-
-                    promise.resolve(new Response(true, null).toWritableMap());
-                } catch (Exception e) {
-                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
-                }
-            }
-        }).run();
-    }
-
-    @ReactMethod
-    public void updateFileStarred(final String fileId, final boolean isStarred, final Promise promise) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Response updateResponse = _fRepository.update(fileId, isStarred);
-
-                    promise.resolve(_fRepository.update(fileId, isStarred).toWritableMap());
-                } catch (Exception e) {
-                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
-                }
-            }
-        }).run();
-    }
-
-    @ReactMethod
-    public void getStarredFiles(final Promise promise) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    SingleResponse response = new SingleResponse(true, toJson(_fRepository.getStarred()), null);
-                    promise.resolve(response.toWritableMap());
-                } catch (Exception e) {
-                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
-                }
-            }
-        }).run();
-    }
-
-    @ReactMethod
-    public void getStarredBuckets(final Promise promise) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    SingleResponse response = new SingleResponse(true, toJson(_bRepository.getStarred()), null);
-                    promise.resolve(response.toWritableMap());
-                } catch (Exception e) {
-                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
-                }
-            }
-        }).run();
-    }
-
-    @ReactMethod
-    public void scheduleSync() {
+    public void scheduleSync(String settingsId) {
         Driver driver = new GooglePlayDriver(getReactApplicationContext());
         FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(driver);
 
         dispatcher.cancelAll();
+
+        Bundle bundle = new Bundle();
+        bundle.putString(SettingsContract._SETTINGS_ID, settingsId);
 
         Job myJob = dispatcher.newJobBuilder()
                 // the JobService that will be called
@@ -283,6 +210,7 @@ public class ServiceModule extends ReactContextBaseJavaModule {
                 .setReplaceCurrent(true)
                 // retry with exponential backoff
                 .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
+                .setExtras(bundle)
                 // constraints that need to be satisfied for the job to run
                 .setConstraints(
                         // only run on an unmetered network

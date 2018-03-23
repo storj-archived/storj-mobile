@@ -5,13 +5,15 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderComponent';
-import DashboardScreenNavigation from '../containers/DashboardScreenNavContainer';
-import { getWidth, getHeight } from '../utils/adaptive';
+import BucketsScreenHeaderComponent from '../../components/BucketsScreenHeaderComponent';
+import DashboardScreenNavigation from '../../containers/DashboardScreenNavContainer';
+import { getWidth, getHeight } from '../../utils/adaptive';
 
 export default class DashboardComponent extends Component {
     constructor(props) {
         super(props);
+
+        console.log(this.props);
 
         this.animatedScrollValue = new Animated.Value(0);
     }
@@ -20,9 +22,11 @@ export default class DashboardComponent extends Component {
         return(
             <View style={ styles.mainContainer }>
                 <DashboardScreenNavigation
+                    setSelectionId = { this.props.setSelectionId }
                     defaultRoute = { this.props.defaultRoute }
                     animatedScrollValue = { this.animatedScrollValue } />
                 <BucketsScreenHeaderComponent
+                    isFilesScreen = { this.props.isFilesScreen}
                     files = { this.props.files }
                     buckets = { this.props.buckets }
                     openBucket = { this.props.openBucket}
@@ -39,7 +43,7 @@ export default class DashboardComponent extends Component {
                     selectedBucketsCount = { this.props.selectedBucketsCount }  
                     onSingleItemSelected = { this.props.onSingleItemSelected }  
                     isSingleItemSelected = { this.props.isSingleItemSelected }
-                    navigateToFilesScreen = { this.props.navigateToFilesScreen } />
+                    navigateToDashboardFilesScreen = { this.props.navigateToDashboardFilesScreen } />
             </View>
         )
     }

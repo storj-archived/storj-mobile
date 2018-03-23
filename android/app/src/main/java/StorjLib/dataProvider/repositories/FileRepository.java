@@ -29,6 +29,7 @@ public class FileRepository extends BaseRepository {
         FileContract._MIMETYPE,
         FileContract._STARRED,
         FileContract._SIZE,
+        FileContract._SYNCED,
         FileContract.FILE_FK,
         FileContract._NAME
     };
@@ -143,6 +144,28 @@ public class FileRepository extends BaseRepository {
         return model;
     }
 
+    public FileDbo get(String param, String selection, String bucketId) {
+        FileDbo model = null;
+        String[] selectionArgs = {
+                param,
+                bucketId
+        };
+        String orderBy = FileContract._CREATED + " DESC";
+
+        Cursor cursor = _db.query(
+                FileContract.TABLE_NAME,
+                null,
+                selection + " = ? and " + FileContract.FILE_FK + " = ?",
+                selectionArgs,
+                null, null, orderBy, null);
+
+        model = _getSingleFromCursor(cursor);
+
+        cursor.close();
+
+        return model;
+    }
+
     public Response insert(FileModel model) {
         if(model == null || !model.isValid())
             return new Response(false, "Model is not valid!");
@@ -157,6 +180,7 @@ public class FileRepository extends BaseRepository {
         map.put(FileContract._INDEX, model.getIndex());
         map.put(FileContract._MIMETYPE, model.getMimeType());
         map.put(FileContract._STARRED, model.getStarred());
+        map.put(FileContract._SYNCED, model.isSynced());
         map.put(FileContract._SIZE, model.getSize());
         map.put(FileContract.FILE_FK, model.getBucketId());
         map.put(FileContract._NAME, model.getName());
@@ -210,17 +234,13 @@ public class FileRepository extends BaseRepository {
     //TODO: maybe it should be named updatedStarred or makeStarred?
     public Response update(String fileId, boolean isStarred) {
         if(fileId == null || fileId.isEmpty())
-            return new Response(false, "Model id is not valid!");
+            return new Response(false, "File id is not valid!");
 
-        String[] columnsToUpdate = new String[] {
-                FileContract._STARRED
-        };
+        ContentValues map = new ContentValues();
 
-        String[] columnValues = new String[] {
-                Boolean.toString(isStarred)
-        };
+        map.put(FileContract._STARRED, isStarred ? 1 : 0);
 
-        return _executeUpdate(FileContract.TABLE_NAME, fileId,null,null, columnsToUpdate, columnValues);
+        return _executeUpdate(FileContract.TABLE_NAME, fileId, null,null, map);
     }
 
     private FileDbo _getSingleFromCursor(Cursor cursor) {
@@ -263,6 +283,7 @@ public class FileRepository extends BaseRepository {
                         break;
                     case FileContract._DECRYPTED :
                     case FileContract._STARRED :
+                    case FileContract._SYNCED :
                         model.setProp(_columns[i], cursor.getInt(cursor.getColumnIndex(_columns[i])) == 1 ? true : false);
                         break;
                     case FileContract._SIZE :

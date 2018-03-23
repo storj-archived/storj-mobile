@@ -10,13 +10,17 @@ import InputComponent from '../components/InputComponent';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as Actions from '../reducers/navigation/navigationActions';
+import { getDebits, getCredits }  from '../reducers/billing/billingActions';
 import StorjLib from '../utils/StorjModule';
 import { getWidth, getHeight } from '../utils/adaptive';
 import { authConstants } from '../utils/constants/storageConstants';
 import { getMnemonicNotSaved, getFirstAction } from '../utils/AsyncStorageModule';
 import ListItemModel from '../models/ListItemModel';
+import FileModel from '../models/FileModel';
 import { initializeContainerActions } from '../reducers/mainContainer/mainReducerActions';
+import allFileActions from '../reducers/mainContainer/Files/filesReducerActions';
 import ServiceModule from '../utils/ServiceModule';
+import SyncModule from '../utils/SyncModule';
 
 class InitializeContainer extends Component {
     constructor(props) {
@@ -67,10 +71,28 @@ class InitializeContainer extends Component {
             this.setState({ enterPassCode: true });   
             return;
         }
-        
-        this.props.redirectToMainScreen();       
 
-		ServiceModule.getBuckets();
+        let getKeysResult = JSON.parse(getKeyResponse.result);
+        
+        ServiceModule.getBuckets();                
+        this.getAllFiles();
+
+        this.props.getDebits(getKeysResult.email, getKeysResult.password);
+        this.props.getCredits(getKeysResult.email, getKeysResult.password);
+
+        this.props.redirectToMainScreen();       
+    }
+
+    async getAllFiles() {
+        let filesResponse = await SyncModule.listAllFiles();		
+
+        if(filesResponse.isSuccess) {
+            let files = JSON.parse(filesResponse.result).map((file) => {
+                return new ListItemModel(new FileModel(file));
+            });                    
+
+            this.props.listFiles(this.props.openedBucketId, files);
+        }
     }
 
     onSubmit() {
@@ -168,7 +190,7 @@ const styles = StyleSheet.create({
  * connecting reducer to component props 
  */
 function mapStateToProps(state) { return { navigation: state.navReducer }; };
-function mapDispatchToProps(dispatch) { return bindActionCreators({...Actions, ...initializeContainerActions}, dispatch); };
+function mapDispatchToProps(dispatch) { return bindActionCreators({...Actions, ...initializeContainerActions, ...allFileActions, getDebits, getCredits }, dispatch); };
 
 /**
  * Creating LoginScreen container

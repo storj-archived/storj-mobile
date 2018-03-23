@@ -27,11 +27,69 @@ export function redirectToMainScreen() {
     });
 };
 
+export function redirectToInitializationScreen() {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'InitializationScreen'})
+        ]
+    });
+};
+
 export function redirectToMnemonicGenerationScreen() {
     return NavigationActions.reset({
         index: 0,
         actions: [
           NavigationActions.navigate({ routeName: 'MnemonicGenerationScreen'})
+        ]
+    });
+};
+
+export function redirectToMnemonicInfoScreen() {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'MnemonicInfoScreen'})
+        ]
+    });
+};
+
+export function redirectToMnemonicConfirmedScreen() {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'MnemonicConfirmedScreen'})
+        ]
+    });
+};
+
+export function redirectToMnemonicNotConfirmedScreen(setNewData) {
+    return NavigationActions.navigate({ routeName: 'MnemonicNotConfirmedScreen', params: { setNewData } })
+};
+
+export function redirectToMnemonicConfirmationScreen(mnemonic) {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+            NavigationActions.navigate({ routeName: 'MnemonicConfirmationScreen', params: { mnemonic } })
+        ]
+    });
+};
+
+export function redirectToRegisterSuccessScreen() {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'RegisterSuccessInfoScreen'})
+        ]
+    });
+};
+
+export function redirectToRegisterScreen() {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'RegisterScreen'})
         ]
     });
 };
@@ -52,7 +110,7 @@ export function dashboardNavigateBack() {
     return NavigationActions.reset({
         index: 0,
         actions: [
-          NavigationActions.navigate({ routeName: 'DashboardScreen'})
+          NavigationActions.navigate({ routeName: 'DashboardDefaultScreen'})
         ]
     });
 }
@@ -61,7 +119,26 @@ export function bucketNavigateBack() {
     return NavigationActions.reset({
         index: 0,
         actions: [
-          NavigationActions.navigate({ routeName: 'BucketsScreen'})
+          NavigationActions.navigate({ routeName: 'BucketsListScreen'})
         ]
     });
+}
+
+export function navigateToDashboardFilesScreen(bucketId) {
+    return NavigationActions.navigate({ routeName: 'DashboardFilesScreen', params: { bucketId } });
+}
+
+
+
+export const authNavigationActions = {
+    redirectToLoginScreen,
+    redirectToMainScreen,
+    redirectToMnemonicConfirmationScreen,
+    redirectToMnemonicConfirmedScreen,
+    redirectToMnemonicGenerationScreen,
+    redirectToMnemonicInfoScreen,
+    redirectToMnemonicNotConfirmedScreen,
+    redirectToRegisterScreen,
+    redirectToRegisterSuccessScreen,
+    navigateBack
 }

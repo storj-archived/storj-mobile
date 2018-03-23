@@ -6,13 +6,13 @@ export default class FileModel extends ItemModel {
      * @param {object} file
      */
     constructor(file) {
-            super(file.name, file.fileId, file.created);
-            
-            this.erasure = file.erasure;
-            this.hmac = file.hmac;
-            this.index = file.index;
-            this.mimeType = file.mimeType;
-            this.size = file.size;
-            this.bucketId = file.bucketId;
+        super(file.name, file.fileId, file.created, file.isStarred, file.isSynced);
+        
+        this.erasure = file.erasure;
+        this.hmac = file.hmac;
+        this.index = file.index;
+        this.mimeType = file.mimeType;
+        this.size = file.size;
+        this.bucketId = file.bucketId;
     }
 }

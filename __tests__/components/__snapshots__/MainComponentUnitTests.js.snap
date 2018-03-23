@@ -30,8 +30,17 @@ ShallowWrapper {
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            redirectToInitializationScreen={undefined}
+            showCredits={[Function]}
+            showOptions={[Function]}
+            showQR={[Function]}
+            showStorageInfo={[Function]}
           />
         </View>,
+        null,
+        null,
+        null,
+        null,
         null,
         null,
         null,
@@ -52,6 +61,11 @@ ShallowWrapper {
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            redirectToInitializationScreen={undefined}
+            showCredits={[Function]}
+            showOptions={[Function]}
+            showQR={[Function]}
+            showStorageInfo={[Function]}
           />,
           "style": Object {
             "flex": 1,
@@ -67,6 +81,11 @@ ShallowWrapper {
             "isSelectionMode": undefined,
             "isSingleItemSelected": undefined,
             "onActionBarPress": [Function],
+            "redirectToInitializationScreen": undefined,
+            "showCredits": [Function],
+            "showOptions": [Function],
+            "showQR": [Function],
+            "showStorageInfo": [Function],
           },
           "ref": null,
           "rendered": null,
@@ -74,6 +93,10 @@ ShallowWrapper {
         },
         "type": [Function],
       },
+      null,
+      null,
+      null,
+      null,
       null,
       null,
       null,
@@ -99,8 +122,17 @@ ShallowWrapper {
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              redirectToInitializationScreen={undefined}
+              showCredits={[Function]}
+              showOptions={[Function]}
+              showQR={[Function]}
+              showStorageInfo={[Function]}
             />
           </View>,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           null,
@@ -121,6 +153,11 @@ ShallowWrapper {
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              redirectToInitializationScreen={undefined}
+              showCredits={[Function]}
+              showOptions={[Function]}
+              showQR={[Function]}
+              showStorageInfo={[Function]}
             />,
             "style": Object {
               "flex": 1,
@@ -136,6 +173,11 @@ ShallowWrapper {
               "isSelectionMode": undefined,
               "isSingleItemSelected": undefined,
               "onActionBarPress": [Function],
+              "redirectToInitializationScreen": undefined,
+              "showCredits": [Function],
+              "showOptions": [Function],
+              "showQR": [Function],
+              "showStorageInfo": [Function],
             },
             "ref": null,
             "rendered": null,
@@ -143,6 +185,10 @@ ShallowWrapper {
           },
           "type": [Function],
         },
+        null,
+        null,
+        null,
+        null,
         null,
         null,
         null,
@@ -192,17 +238,23 @@ ShallowWrapper {
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            redirectToInitializationScreen={undefined}
+            showCredits={[Function]}
+            showOptions={[Function]}
+            showQR={[Function]}
+            showStorageInfo={[Function]}
           />
         </View>,
         <ActionBarComponent
+          actions={undefined}
+          applyMargin={true}
           bucketScreenRouteName={undefined}
-          isSelectionMode={undefined}
-          isSingleItemSelected={undefined}
-          openedBucketActions={undefined}
-          openedBucketId={undefined}
-          selectionModeActions={undefined}
-          tapBarActions={undefined}
+          showTriangle={true}
         />,
+        null,
+        null,
+        null,
+        null,
         null,
         null,
       ],
@@ -222,6 +274,11 @@ ShallowWrapper {
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            redirectToInitializationScreen={undefined}
+            showCredits={[Function]}
+            showOptions={[Function]}
+            showQR={[Function]}
+            showStorageInfo={[Function]}
           />,
           "style": Object {
             "flex": 1,
@@ -237,6 +294,11 @@ ShallowWrapper {
             "isSelectionMode": undefined,
             "isSingleItemSelected": undefined,
             "onActionBarPress": [Function],
+            "redirectToInitializationScreen": undefined,
+            "showCredits": [Function],
+            "showOptions": [Function],
+            "showQR": [Function],
+            "showStorageInfo": [Function],
           },
           "ref": null,
           "rendered": null,
@@ -249,18 +311,19 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
+          "actions": undefined,
+          "applyMargin": true,
           "bucketScreenRouteName": undefined,
-          "isSelectionMode": undefined,
-          "isSingleItemSelected": undefined,
-          "openedBucketActions": undefined,
-          "openedBucketId": undefined,
-          "selectionModeActions": undefined,
-          "tapBarActions": undefined,
+          "showTriangle": true,
         },
         "ref": null,
         "rendered": null,
         "type": [Function],
       },
+      null,
+      null,
+      null,
+      null,
       null,
       null,
     ],
@@ -285,17 +348,23 @@ ShallowWrapper {
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              redirectToInitializationScreen={undefined}
+              showCredits={[Function]}
+              showOptions={[Function]}
+              showQR={[Function]}
+              showStorageInfo={[Function]}
             />
           </View>,
           <ActionBarComponent
+            actions={undefined}
+            applyMargin={true}
             bucketScreenRouteName={undefined}
-            isSelectionMode={undefined}
-            isSingleItemSelected={undefined}
-            openedBucketActions={undefined}
-            openedBucketId={undefined}
-            selectionModeActions={undefined}
-            tapBarActions={undefined}
+            showTriangle={true}
           />,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
         ],
@@ -315,6 +384,11 @@ ShallowWrapper {
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              redirectToInitializationScreen={undefined}
+              showCredits={[Function]}
+              showOptions={[Function]}
+              showQR={[Function]}
+              showStorageInfo={[Function]}
             />,
             "style": Object {
               "flex": 1,
@@ -330,6 +404,11 @@ ShallowWrapper {
               "isSelectionMode": undefined,
               "isSingleItemSelected": undefined,
               "onActionBarPress": [Function],
+              "redirectToInitializationScreen": undefined,
+              "showCredits": [Function],
+              "showOptions": [Function],
+              "showQR": [Function],
+              "showStorageInfo": [Function],
             },
             "ref": null,
             "rendered": null,
@@ -342,18 +421,19 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
+            "actions": undefined,
+            "applyMargin": true,
             "bucketScreenRouteName": undefined,
-            "isSelectionMode": undefined,
-            "isSingleItemSelected": undefined,
-            "openedBucketActions": undefined,
-            "openedBucketId": undefined,
-            "selectionModeActions": undefined,
-            "tapBarActions": undefined,
+            "showTriangle": true,
           },
           "ref": null,
           "rendered": null,
           "type": [Function],
         },
+        null,
+        null,
+        null,
+        null,
         null,
         null,
       ],
@@ -402,17 +482,23 @@ ShallowWrapper {
             isSelectionMode={true}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            redirectToInitializationScreen={undefined}
+            showCredits={[Function]}
+            showOptions={[Function]}
+            showQR={[Function]}
+            showStorageInfo={[Function]}
           />
         </View>,
         <ActionBarComponent
+          actions={undefined}
+          applyMargin={false}
           bucketScreenRouteName={undefined}
-          isSelectionMode={true}
-          isSingleItemSelected={undefined}
-          openedBucketActions={undefined}
-          openedBucketId={undefined}
-          selectionModeActions={undefined}
-          tapBarActions={undefined}
+          showTriangle={false}
         />,
+        null,
+        null,
+        null,
+        null,
         null,
         null,
       ],
@@ -432,6 +518,11 @@ ShallowWrapper {
             isSelectionMode={true}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            redirectToInitializationScreen={undefined}
+            showCredits={[Function]}
+            showOptions={[Function]}
+            showQR={[Function]}
+            showStorageInfo={[Function]}
           />,
           "style": Object {
             "flex": 1,
@@ -447,6 +538,11 @@ ShallowWrapper {
             "isSelectionMode": true,
             "isSingleItemSelected": undefined,
             "onActionBarPress": [Function],
+            "redirectToInitializationScreen": undefined,
+            "showCredits": [Function],
+            "showOptions": [Function],
+            "showQR": [Function],
+            "showStorageInfo": [Function],
           },
           "ref": null,
           "rendered": null,
@@ -459,18 +555,19 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
+          "actions": undefined,
+          "applyMargin": false,
           "bucketScreenRouteName": undefined,
-          "isSelectionMode": true,
-          "isSingleItemSelected": undefined,
-          "openedBucketActions": undefined,
-          "openedBucketId": undefined,
-          "selectionModeActions": undefined,
-          "tapBarActions": undefined,
+          "showTriangle": false,
         },
         "ref": null,
         "rendered": null,
         "type": [Function],
       },
+      null,
+      null,
+      null,
+      null,
       null,
       null,
     ],
@@ -495,17 +592,23 @@ ShallowWrapper {
               isSelectionMode={true}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              redirectToInitializationScreen={undefined}
+              showCredits={[Function]}
+              showOptions={[Function]}
+              showQR={[Function]}
+              showStorageInfo={[Function]}
             />
           </View>,
           <ActionBarComponent
+            actions={undefined}
+            applyMargin={false}
             bucketScreenRouteName={undefined}
-            isSelectionMode={true}
-            isSingleItemSelected={undefined}
-            openedBucketActions={undefined}
-            openedBucketId={undefined}
-            selectionModeActions={undefined}
-            tapBarActions={undefined}
+            showTriangle={false}
           />,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
         ],
@@ -525,6 +628,11 @@ ShallowWrapper {
               isSelectionMode={true}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              redirectToInitializationScreen={undefined}
+              showCredits={[Function]}
+              showOptions={[Function]}
+              showQR={[Function]}
+              showStorageInfo={[Function]}
             />,
             "style": Object {
               "flex": 1,
@@ -540,6 +648,11 @@ ShallowWrapper {
               "isSelectionMode": true,
               "isSingleItemSelected": undefined,
               "onActionBarPress": [Function],
+              "redirectToInitializationScreen": undefined,
+              "showCredits": [Function],
+              "showOptions": [Function],
+              "showQR": [Function],
+              "showStorageInfo": [Function],
             },
             "ref": null,
             "rendered": null,
@@ -552,18 +665,19 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
+            "actions": undefined,
+            "applyMargin": false,
             "bucketScreenRouteName": undefined,
-            "isSelectionMode": true,
-            "isSingleItemSelected": undefined,
-            "openedBucketActions": undefined,
-            "openedBucketId": undefined,
-            "selectionModeActions": undefined,
-            "tapBarActions": undefined,
+            "showTriangle": false,
           },
           "ref": null,
           "rendered": null,
           "type": [Function],
         },
+        null,
+        null,
+        null,
+        null,
         null,
         null,
       ],
@@ -612,6 +726,11 @@ ShallowWrapper {
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            redirectToInitializationScreen={undefined}
+            showCredits={[Function]}
+            showOptions={[Function]}
+            showQR={[Function]}
+            showStorageInfo={[Function]}
           />
         </View>,
         null,
@@ -655,6 +774,10 @@ ShallowWrapper {
           />
         </View>,
         null,
+        null,
+        null,
+        null,
+        null,
       ],
       "style": Object {
         "flex": 1,
@@ -672,6 +795,11 @@ ShallowWrapper {
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            redirectToInitializationScreen={undefined}
+            showCredits={[Function]}
+            showOptions={[Function]}
+            showQR={[Function]}
+            showStorageInfo={[Function]}
           />,
           "style": Object {
             "flex": 1,
@@ -687,6 +815,11 @@ ShallowWrapper {
             "isSelectionMode": undefined,
             "isSingleItemSelected": undefined,
             "onActionBarPress": [Function],
+            "redirectToInitializationScreen": undefined,
+            "showCredits": [Function],
+            "showOptions": [Function],
+            "showQR": [Function],
+            "showStorageInfo": [Function],
           },
           "ref": null,
           "rendered": null,
@@ -781,6 +914,10 @@ ShallowWrapper {
         "type": [Function],
       },
       null,
+      null,
+      null,
+      null,
+      null,
     ],
     "type": [Function],
   },
@@ -803,6 +940,11 @@ ShallowWrapper {
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              redirectToInitializationScreen={undefined}
+              showCredits={[Function]}
+              showOptions={[Function]}
+              showQR={[Function]}
+              showStorageInfo={[Function]}
             />
           </View>,
           null,
@@ -846,6 +988,10 @@ ShallowWrapper {
             />
           </View>,
           null,
+          null,
+          null,
+          null,
+          null,
         ],
         "style": Object {
           "flex": 1,
@@ -863,6 +1009,11 @@ ShallowWrapper {
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              redirectToInitializationScreen={undefined}
+              showCredits={[Function]}
+              showOptions={[Function]}
+              showQR={[Function]}
+              showStorageInfo={[Function]}
             />,
             "style": Object {
               "flex": 1,
@@ -878,6 +1029,11 @@ ShallowWrapper {
               "isSelectionMode": undefined,
               "isSingleItemSelected": undefined,
               "onActionBarPress": [Function],
+              "redirectToInitializationScreen": undefined,
+              "showCredits": [Function],
+              "showOptions": [Function],
+              "showQR": [Function],
+              "showStorageInfo": [Function],
             },
             "ref": null,
             "rendered": null,
@@ -972,6 +1128,10 @@ ShallowWrapper {
           "type": [Function],
         },
         null,
+        null,
+        null,
+        null,
+        null,
       ],
       "type": [Function],
     },
@@ -1019,16 +1179,18 @@ ShallowWrapper {
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            redirectToInitializationScreen={undefined}
+            showCredits={[Function]}
+            showOptions={[Function]}
+            showQR={[Function]}
+            showStorageInfo={[Function]}
           />
         </View>,
         <ActionBarComponent
+          actions={undefined}
+          applyMargin={true}
           bucketScreenRouteName={undefined}
-          isSelectionMode={undefined}
-          isSingleItemSelected={undefined}
-          openedBucketActions={undefined}
-          openedBucketId={undefined}
-          selectionModeActions={undefined}
-          tapBarActions={undefined}
+          showTriangle={true}
         />,
         <View
           style={
@@ -1070,6 +1232,10 @@ ShallowWrapper {
           />
         </View>,
         null,
+        null,
+        null,
+        null,
+        null,
       ],
       "style": Object {
         "flex": 1,
@@ -1087,6 +1253,11 @@ ShallowWrapper {
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            redirectToInitializationScreen={undefined}
+            showCredits={[Function]}
+            showOptions={[Function]}
+            showQR={[Function]}
+            showStorageInfo={[Function]}
           />,
           "style": Object {
             "flex": 1,
@@ -1102,6 +1273,11 @@ ShallowWrapper {
             "isSelectionMode": undefined,
             "isSingleItemSelected": undefined,
             "onActionBarPress": [Function],
+            "redirectToInitializationScreen": undefined,
+            "showCredits": [Function],
+            "showOptions": [Function],
+            "showQR": [Function],
+            "showStorageInfo": [Function],
           },
           "ref": null,
           "rendered": null,
@@ -1114,13 +1290,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
+          "actions": undefined,
+          "applyMargin": true,
           "bucketScreenRouteName": undefined,
-          "isSelectionMode": undefined,
-          "isSingleItemSelected": undefined,
-          "openedBucketActions": undefined,
-          "openedBucketId": undefined,
-          "selectionModeActions": undefined,
-          "tapBarActions": undefined,
+          "showTriangle": true,
         },
         "ref": null,
         "rendered": null,
@@ -1212,6 +1385,10 @@ ShallowWrapper {
         "type": [Function],
       },
       null,
+      null,
+      null,
+      null,
+      null,
     ],
     "type": [Function],
   },
@@ -1234,16 +1411,18 @@ ShallowWrapper {
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              redirectToInitializationScreen={undefined}
+              showCredits={[Function]}
+              showOptions={[Function]}
+              showQR={[Function]}
+              showStorageInfo={[Function]}
             />
           </View>,
           <ActionBarComponent
+            actions={undefined}
+            applyMargin={true}
             bucketScreenRouteName={undefined}
-            isSelectionMode={undefined}
-            isSingleItemSelected={undefined}
-            openedBucketActions={undefined}
-            openedBucketId={undefined}
-            selectionModeActions={undefined}
-            tapBarActions={undefined}
+            showTriangle={true}
           />,
           <View
             style={
@@ -1285,6 +1464,10 @@ ShallowWrapper {
             />
           </View>,
           null,
+          null,
+          null,
+          null,
+          null,
         ],
         "style": Object {
           "flex": 1,
@@ -1302,6 +1485,11 @@ ShallowWrapper {
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              redirectToInitializationScreen={undefined}
+              showCredits={[Function]}
+              showOptions={[Function]}
+              showQR={[Function]}
+              showStorageInfo={[Function]}
             />,
             "style": Object {
               "flex": 1,
@@ -1317,6 +1505,11 @@ ShallowWrapper {
               "isSelectionMode": undefined,
               "isSingleItemSelected": undefined,
               "onActionBarPress": [Function],
+              "redirectToInitializationScreen": undefined,
+              "showCredits": [Function],
+              "showOptions": [Function],
+              "showQR": [Function],
+              "showStorageInfo": [Function],
             },
             "ref": null,
             "rendered": null,
@@ -1329,13 +1522,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
+            "actions": undefined,
+            "applyMargin": true,
             "bucketScreenRouteName": undefined,
-            "isSelectionMode": undefined,
-            "isSingleItemSelected": undefined,
-            "openedBucketActions": undefined,
-            "openedBucketId": undefined,
-            "selectionModeActions": undefined,
-            "tapBarActions": undefined,
+            "showTriangle": true,
           },
           "ref": null,
           "rendered": null,
@@ -1426,6 +1616,10 @@ ShallowWrapper {
           ],
           "type": [Function],
         },
+        null,
+        null,
+        null,
+        null,
         null,
       ],
       "type": [Function],

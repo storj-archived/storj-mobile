@@ -16,11 +16,15 @@ import {
 	mainContainerActions
 } from '../reducers/mainContainer/mainReducerActions';
 import {
-	mainContainerFileActions 
+	mainContainerFileActions,
+	filesListContainerFileActions
 } from '../reducers/mainContainer/Files/filesReducerActions'
-import { redirectToLoginScreen } from '../reducers/navigation/navigationActions';
+import { authNavigationActions } from '../reducers/navigation/navigationActions';
 import ListItemModel from '../models/ListItemModel';
 import BucketModel from '../models/BucketModel';
+import FileModel from '../models/FileModel';
+import WarningComponent from '../components/WarningComponent';
+
 
 import SyncModule from '../utils/SyncModule';
 import ServiceModule from '../utils/ServiceModule';
@@ -38,17 +42,19 @@ class Apps extends Component {
 		this.bucketCreatedListener = null;
 		this.bucketDeletedListener = null;
 		this.fileDeletedListener = null;
+		this.getFilesListener = null;
     }
 
 	async componentWillMount() {
-		console.log(await ServiceModule.bindService());
-		console.log(await ServiceModule.bindUploadService());
-		ServiceModule.scheduleSync();
+		await ServiceModule.bindService();
+		await ServiceModule.bindUploadService();
+		ServiceModule.scheduleSync("elvy.baila@arockee.com");
 
 		this.getbucketsListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKETS_UPDATED, this.onBucketsReceived.bind(this));       
 		this.bucketCreatedListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKET_CREATED, this.onBucketCreated.bind(this));       
 		this.bucketDeletedListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKET_DELETED, this.onBucketDeleted.bind(this));       
-		this.fileDeletedListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILE_DELETED, this.onFileDeleted.bind(this));       	
+		this.fileDeletedListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILE_DELETED, this.onFileDeleted.bind(this));       
+		this.getFilesListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILES_UPDATED, this.onFilesReceived.bind(this));		
 	}
 
 	componentDidMount() {
@@ -66,6 +72,7 @@ class Apps extends Component {
 		this.bucketCreatedListener.remove();
 		this.bucketDeletedListener.remove();
 		this.fileDeletedListener.remove();
+		this.getFilesListener.remove();
 	}
 
 	onHardwareBackPress() {
@@ -77,6 +84,21 @@ class Apps extends Component {
 		return true;
 	}
 
+	async onFilesReceived() {
+        this.props.setLoading();
+        let filesResponse = await SyncModule.listFiles(this.props.openedBucketId);		
+
+        if(filesResponse.isSuccess) {
+            let files = JSON.parse(filesResponse.result).map((file) => {
+                return new ListItemModel(new FileModel(file));
+            });                    
+            this.props.listFiles(this.props.openedBucketId, files);
+        }
+
+        this.props.unsetLoading();
+    }
+
+
 	async onBucketsReceived() {
         this.props.setLoading();
 		let bucketsResponse = await SyncModule.listBuckets();
@@ -86,11 +108,9 @@ class Apps extends Component {
                 return new ListItemModel(new BucketModel(file));
             });                    
 
-			console.log(buckets);
-
             this.props.getBuckets(buckets);
         }
-		ServiceModule.getBucketsWorking = false;
+		
         this.props.unsetLoading();
     }
 
@@ -100,7 +120,7 @@ class Apps extends Component {
 		}	
 	}
 
-	onBucketDeleted(response) {		
+	onBucketDeleted(response) {				
 		if(response.isSuccess) {
 			this.props.deleteBucket(response.result);
 		}
@@ -113,17 +133,51 @@ class Apps extends Component {
 		}
 	}
 
+	chooseWarning() {
+		if(!this.props.isEmailConfirmed) {
+			return(
+				<WarningComponent
+					message = { 'Please confirm your email' }
+					statusBarColor = '#EB5757' />
+			)
+		} else if(!this.props.isAccountExist) {
+			return(
+				<WarningComponent
+					message = { 'This acoound doesn`t exist' }
+					statusBarColor = '#EB5757' />
+			)
+		} else {
+			return(
+				<WarningComponent />
+			)
+		}
+	}
+
 	render() {
 		return (
-			<StackNavigator 
-				screenProps = {{
-					redirectToLoginScreen: this.props.redirectToLoginScreen
-				}}
-				navigation = { addNavigationHelpers({
-					dispatch: this.props.dispatch,
-					state: this.props.nav					
-				})}
-			 />
+			<View style = { { flex: 1 } }>
+				<StackNavigator 
+					screenProps = {{
+						redirectToLoginScreen: this.props.redirectToLoginScreen,
+						redirectToMainScreen: this.props.redirectToMainScreen,
+						redirectToMnemonicConfirmationScreen: this.props.redirectToMnemonicConfirmationScreen,
+						redirectToMnemonicConfirmedScreen: this.props.redirectToMnemonicConfirmedScreen,
+						redirectToMnemonicGenerationScreen: this.props.redirectToMnemonicGenerationScreen,
+						redirectToMnemonicInfoScreen: this.props.redirectToMnemonicInfoScreen,
+						redirectToMnemonicNotConfirmedScreen: this.props.redirectToMnemonicNotConfirmedScreen,
+						redirectToRegisterSuccessScreen: this.props.redirectToRegisterSuccessScreen,
+						redirectToRegisterScreen: this.props.redirectToRegisterScreen,
+						navigateBack : this.props.navigateBack
+					}}
+					navigation = { addNavigationHelpers({
+						dispatch: this.props.dispatch,
+						state: this.props.nav					
+					})}
+				/>
+				{
+					this.chooseWarning()
+				}	
+			</View>
 		);
 	};
 }
@@ -133,7 +187,10 @@ class Apps extends Component {
  */
 function mapStateToProps(state) {
     return {
-        nav: state.navReducer
+		openedBucketId: state.mainReducer.openedBucketId,
+		nav: state.navReducer,
+		isEmailConfirmed: state.authReducer.user.isEmailConfirmed,
+		isAccountExist: state.authReducer.user.isAccountExist
     };
 }
  
@@ -142,7 +199,8 @@ function mapDispatchToProps(dispatch) {
 		...bucketsContainerActions, 
 		...mainContainerActions,
 		...mainContainerFileActions,
-		redirectToLoginScreen }, dispatch);
+		...filesListContainerFileActions,
+		...authNavigationActions }, dispatch);
 }
 
 /**

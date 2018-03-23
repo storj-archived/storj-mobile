@@ -4,7 +4,6 @@ import {
     StyleSheet,
     TouchableOpacity,
     Image,
-    ScrollView,
     Platform,
     ProgressViewIOS,
     ProgressBarAndroid
@@ -65,7 +64,11 @@ export default class ListItemComponent extends Component {
                         return;
                     }
                     
-                    this.props.onPress({ bucketId: props.item.getId() });
+                    if(props.item.entity.bucketId) {
+                        this.props.onPress({ bucketId: props.item.entity.bucketId });
+                    } else {
+                        this.props.onPress({ bucketId: props.item.getId() });
+                    }
                 }}
                 onLongPress = { () => {
                     props.onLongPress(props.item);

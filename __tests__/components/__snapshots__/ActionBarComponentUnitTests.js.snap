@@ -5,6 +5,28 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <ActionBarComponent
+    actions={
+      Array [
+        TabBarActionModel {
+          "actionName": "Action 1",
+          "callback": [MockFunction],
+          "icon": "icon",
+          "id": 0,
+        },
+        TabBarActionModel {
+          "actionName": "Action 2",
+          "callback": [MockFunction],
+          "icon": "icon",
+          "id": 1,
+        },
+        TabBarActionModel {
+          "actionName": "Action 3",
+          "callback": [MockFunction],
+          "icon": "icon",
+          "id": 2,
+        },
+      ]
+    }
     isSelectionMode={false}
     isSingleItemSelected={true}
     selectionModeActions={
@@ -32,28 +54,6 @@ ShallowWrapper {
           "callback": [MockFunction],
           "icon": "icon",
           "id": 6,
-        },
-      ]
-    }
-    tapBarActions={
-      Array [
-        TabBarActionModel {
-          "actionName": "Action 1",
-          "callback": [MockFunction],
-          "icon": "icon",
-          "id": 0,
-        },
-        TabBarActionModel {
-          "actionName": "Action 2",
-          "callback": [MockFunction],
-          "icon": "icon",
-          "id": 1,
-        },
-        TabBarActionModel {
-          "actionName": "Action 3",
-          "callback": [MockFunction],
-          "icon": "icon",
-          "id": 2,
         },
       ]
     }
@@ -120,7 +120,7 @@ ShallowWrapper {
                   "paddingVertical": 20,
                 },
                 Object {
-                  "borderColor": "gray",
+                  "borderColor": "rgba(255, 255, 255, 0.4)",
                   "borderLeftWidth": 2,
                 },
               ]
@@ -152,39 +152,7 @@ ShallowWrapper {
                   "paddingVertical": 20,
                 },
                 Object {
-                  "borderColor": "gray",
-                  "borderLeftWidth": 2,
-                },
-              ]
-            }
-          >
-            <TouchableOpacity
-              activeOpacity={0.2}
-              onPress={[MockFunction]}
-            >
-              <Image
-                source="icon"
-                style={
-                  Object {
-                    "height": 60,
-                    "width": 60,
-                  }
-                }
-              />
-            </TouchableOpacity>
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "height": 100,
-                  "justifyContent": "center",
-                  "paddingVertical": 20,
-                },
-                Object {
-                  "borderColor": "gray",
+                  "borderColor": "rgba(255, 255, 255, 0.4)",
                   "borderLeftWidth": 2,
                 },
               ]
@@ -262,7 +230,7 @@ ShallowWrapper {
                     "paddingVertical": 20,
                   },
                   Object {
-                    "borderColor": "gray",
+                    "borderColor": "rgba(255, 255, 255, 0.4)",
                     "borderLeftWidth": 2,
                   },
                 ]
@@ -294,39 +262,7 @@ ShallowWrapper {
                     "paddingVertical": 20,
                   },
                   Object {
-                    "borderColor": "gray",
-                    "borderLeftWidth": 2,
-                  },
-                ]
-              }
-            >
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
-                <Image
-                  source="icon"
-                  style={
-                    Object {
-                      "height": 60,
-                      "width": 60,
-                    }
-                  }
-                />
-              </TouchableOpacity>
-            </View>,
-            <View
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "flex": 1,
-                    "height": 100,
-                    "justifyContent": "center",
-                    "paddingVertical": 20,
-                  },
-                  Object {
-                    "borderColor": "gray",
+                    "borderColor": "rgba(255, 255, 255, 0.4)",
                     "borderLeftWidth": 2,
                   },
                 ]
@@ -361,7 +297,7 @@ ShallowWrapper {
         "rendered": Array [
           Object {
             "instance": null,
-            "key": "3",
+            "key": "0",
             "nodeType": "class",
             "props": Object {
               "children": <TouchableOpacity
@@ -426,7 +362,7 @@ ShallowWrapper {
           },
           Object {
             "instance": null,
-            "key": "4",
+            "key": "1",
             "nodeType": "class",
             "props": Object {
               "children": <TouchableOpacity
@@ -452,7 +388,7 @@ ShallowWrapper {
                   "paddingVertical": 20,
                 },
                 Object {
-                  "borderColor": "gray",
+                  "borderColor": "rgba(255, 255, 255, 0.4)",
                   "borderLeftWidth": 2,
                 },
               ],
@@ -497,7 +433,7 @@ ShallowWrapper {
           },
           Object {
             "instance": null,
-            "key": "5",
+            "key": "2",
             "nodeType": "class",
             "props": Object {
               "children": <TouchableOpacity
@@ -523,78 +459,7 @@ ShallowWrapper {
                   "paddingVertical": 20,
                 },
                 Object {
-                  "borderColor": "gray",
-                  "borderLeftWidth": 2,
-                },
-              ],
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "activeOpacity": 0.2,
-                "children": <Image
-                  source="icon"
-                  style={
-                    Object {
-                      "height": 60,
-                      "width": 60,
-                    }
-                  }
-                />,
-                "onPress": [MockFunction],
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "source": "icon",
-                  "style": Object {
-                    "height": 60,
-                    "width": 60,
-                  },
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
-              "type": [Function],
-            },
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": "6",
-            "nodeType": "class",
-            "props": Object {
-              "children": <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
-                <Image
-                  source="icon"
-                  style={
-                    Object {
-                      "height": 60,
-                      "width": 60,
-                    }
-                  }
-                />
-              </TouchableOpacity>,
-              "style": Array [
-                Object {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "height": 100,
-                  "justifyContent": "center",
-                  "paddingVertical": 20,
-                },
-                Object {
-                  "borderColor": "gray",
+                  "borderColor": "rgba(255, 255, 255, 0.4)",
                   "borderLeftWidth": 2,
                 },
               ],
@@ -700,7 +565,7 @@ ShallowWrapper {
                     "paddingVertical": 20,
                   },
                   Object {
-                    "borderColor": "gray",
+                    "borderColor": "rgba(255, 255, 255, 0.4)",
                     "borderLeftWidth": 2,
                   },
                 ]
@@ -732,39 +597,7 @@ ShallowWrapper {
                     "paddingVertical": 20,
                   },
                   Object {
-                    "borderColor": "gray",
-                    "borderLeftWidth": 2,
-                  },
-                ]
-              }
-            >
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
-                <Image
-                  source="icon"
-                  style={
-                    Object {
-                      "height": 60,
-                      "width": 60,
-                    }
-                  }
-                />
-              </TouchableOpacity>
-            </View>
-            <View
-              style={
-                Array [
-                  Object {
-                    "alignItems": "center",
-                    "flex": 1,
-                    "height": 100,
-                    "justifyContent": "center",
-                    "paddingVertical": 20,
-                  },
-                  Object {
-                    "borderColor": "gray",
+                    "borderColor": "rgba(255, 255, 255, 0.4)",
                     "borderLeftWidth": 2,
                   },
                 ]
@@ -842,7 +675,7 @@ ShallowWrapper {
                       "paddingVertical": 20,
                     },
                     Object {
-                      "borderColor": "gray",
+                      "borderColor": "rgba(255, 255, 255, 0.4)",
                       "borderLeftWidth": 2,
                     },
                   ]
@@ -874,39 +707,7 @@ ShallowWrapper {
                       "paddingVertical": 20,
                     },
                     Object {
-                      "borderColor": "gray",
-                      "borderLeftWidth": 2,
-                    },
-                  ]
-                }
-              >
-                <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={[MockFunction]}
-                >
-                  <Image
-                    source="icon"
-                    style={
-                      Object {
-                        "height": 60,
-                        "width": 60,
-                      }
-                    }
-                  />
-                </TouchableOpacity>
-              </View>,
-              <View
-                style={
-                  Array [
-                    Object {
-                      "alignItems": "center",
-                      "flex": 1,
-                      "height": 100,
-                      "justifyContent": "center",
-                      "paddingVertical": 20,
-                    },
-                    Object {
-                      "borderColor": "gray",
+                      "borderColor": "rgba(255, 255, 255, 0.4)",
                       "borderLeftWidth": 2,
                     },
                   ]
@@ -941,7 +742,7 @@ ShallowWrapper {
           "rendered": Array [
             Object {
               "instance": null,
-              "key": "3",
+              "key": "0",
               "nodeType": "class",
               "props": Object {
                 "children": <TouchableOpacity
@@ -1006,7 +807,7 @@ ShallowWrapper {
             },
             Object {
               "instance": null,
-              "key": "4",
+              "key": "1",
               "nodeType": "class",
               "props": Object {
                 "children": <TouchableOpacity
@@ -1032,7 +833,7 @@ ShallowWrapper {
                     "paddingVertical": 20,
                   },
                   Object {
-                    "borderColor": "gray",
+                    "borderColor": "rgba(255, 255, 255, 0.4)",
                     "borderLeftWidth": 2,
                   },
                 ],
@@ -1077,7 +878,7 @@ ShallowWrapper {
             },
             Object {
               "instance": null,
-              "key": "5",
+              "key": "2",
               "nodeType": "class",
               "props": Object {
                 "children": <TouchableOpacity
@@ -1103,78 +904,7 @@ ShallowWrapper {
                     "paddingVertical": 20,
                   },
                   Object {
-                    "borderColor": "gray",
-                    "borderLeftWidth": 2,
-                  },
-                ],
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "activeOpacity": 0.2,
-                  "children": <Image
-                    source="icon"
-                    style={
-                      Object {
-                        "height": 60,
-                        "width": 60,
-                      }
-                    }
-                  />,
-                  "onPress": [MockFunction],
-                },
-                "ref": null,
-                "rendered": Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "source": "icon",
-                    "style": Object {
-                      "height": 60,
-                      "width": 60,
-                    },
-                  },
-                  "ref": null,
-                  "rendered": null,
-                  "type": [Function],
-                },
-                "type": [Function],
-              },
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": "6",
-              "nodeType": "class",
-              "props": Object {
-                "children": <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={[MockFunction]}
-                >
-                  <Image
-                    source="icon"
-                    style={
-                      Object {
-                        "height": 60,
-                        "width": 60,
-                      }
-                    }
-                  />
-                </TouchableOpacity>,
-                "style": Array [
-                  Object {
-                    "alignItems": "center",
-                    "flex": 1,
-                    "height": 100,
-                    "justifyContent": "center",
-                    "paddingVertical": 20,
-                  },
-                  Object {
-                    "borderColor": "gray",
+                    "borderColor": "rgba(255, 255, 255, 0.4)",
                     "borderLeftWidth": 2,
                   },
                 ],
@@ -1240,6 +970,28 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <ActionBarComponent
+    actions={
+      Array [
+        TabBarActionModel {
+          "actionName": "Action 1",
+          "callback": [MockFunction],
+          "icon": "icon",
+          "id": 7,
+        },
+        TabBarActionModel {
+          "actionName": "Action 2",
+          "callback": [MockFunction],
+          "icon": "icon",
+          "id": 8,
+        },
+        TabBarActionModel {
+          "actionName": "Action 3",
+          "callback": [MockFunction],
+          "icon": "icon",
+          "id": 9,
+        },
+      ]
+    }
     isSelectionMode={false}
     isSingleItemSelected={false}
     selectionModeActions={
@@ -1267,28 +1019,6 @@ ShallowWrapper {
           "callback": [MockFunction],
           "icon": "icon",
           "id": 13,
-        },
-      ]
-    }
-    tapBarActions={
-      Array [
-        TabBarActionModel {
-          "actionName": "Action 1",
-          "callback": [MockFunction],
-          "icon": "icon",
-          "id": 7,
-        },
-        TabBarActionModel {
-          "actionName": "Action 2",
-          "callback": [MockFunction],
-          "icon": "icon",
-          "id": 8,
-        },
-        TabBarActionModel {
-          "actionName": "Action 3",
-          "callback": [MockFunction],
-          "icon": "icon",
-          "id": 9,
         },
       ]
     }
@@ -1355,7 +1085,7 @@ ShallowWrapper {
                   "paddingVertical": 20,
                 },
                 Object {
-                  "borderColor": "gray",
+                  "borderColor": "rgba(255, 255, 255, 0.4)",
                   "borderLeftWidth": 2,
                 },
               ]
@@ -1387,7 +1117,7 @@ ShallowWrapper {
                   "paddingVertical": 20,
                 },
                 Object {
-                  "borderColor": "gray",
+                  "borderColor": "rgba(255, 255, 255, 0.4)",
                   "borderLeftWidth": 2,
                 },
               ]
@@ -1409,27 +1139,14 @@ ShallowWrapper {
             </TouchableOpacity>
           </View>
         </View>,
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "height": 24,
-            }
-          }
-        >
-          <Image
-            source="ActionBarBottomTriangle.png"
-            style={undefined}
-          />
-        </View>,
+        null,
       ],
       "style": Array [
         Object {
           "alignItems": "center",
-          "bottom": 132,
-          "left": 0,
+          "bottom": 14,
+          "marginHorizontal": 20,
           "position": "absolute",
-          "right": 0,
         },
       ],
     },
@@ -1478,7 +1195,7 @@ ShallowWrapper {
                     "paddingVertical": 20,
                   },
                   Object {
-                    "borderColor": "gray",
+                    "borderColor": "rgba(255, 255, 255, 0.4)",
                     "borderLeftWidth": 2,
                   },
                 ]
@@ -1510,7 +1227,7 @@ ShallowWrapper {
                     "paddingVertical": 20,
                   },
                   Object {
-                    "borderColor": "gray",
+                    "borderColor": "rgba(255, 255, 255, 0.4)",
                     "borderLeftWidth": 2,
                   },
                 ]
@@ -1636,7 +1353,7 @@ ShallowWrapper {
                   "paddingVertical": 20,
                 },
                 Object {
-                  "borderColor": "gray",
+                  "borderColor": "rgba(255, 255, 255, 0.4)",
                   "borderLeftWidth": 2,
                 },
               ],
@@ -1707,7 +1424,7 @@ ShallowWrapper {
                   "paddingVertical": 20,
                 },
                 Object {
-                  "borderColor": "gray",
+                  "borderColor": "rgba(255, 255, 255, 0.4)",
                   "borderLeftWidth": 2,
                 },
               ],
@@ -1753,35 +1470,7 @@ ShallowWrapper {
         ],
         "type": [Function],
       },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "children": <Image
-            source="ActionBarBottomTriangle.png"
-            style={undefined}
-          />,
-          "style": Object {
-            "alignItems": "center",
-            "height": 24,
-          },
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "source": "ActionBarBottomTriangle.png",
-            "style": undefined,
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        "type": [Function],
-      },
+      null,
     ],
     "type": [Function],
   },
@@ -1841,7 +1530,7 @@ ShallowWrapper {
                     "paddingVertical": 20,
                   },
                   Object {
-                    "borderColor": "gray",
+                    "borderColor": "rgba(255, 255, 255, 0.4)",
                     "borderLeftWidth": 2,
                   },
                 ]
@@ -1873,7 +1562,7 @@ ShallowWrapper {
                     "paddingVertical": 20,
                   },
                   Object {
-                    "borderColor": "gray",
+                    "borderColor": "rgba(255, 255, 255, 0.4)",
                     "borderLeftWidth": 2,
                   },
                 ]
@@ -1895,27 +1584,14 @@ ShallowWrapper {
               </TouchableOpacity>
             </View>
           </View>,
-          <View
-            style={
-              Object {
-                "alignItems": "center",
-                "height": 24,
-              }
-            }
-          >
-            <Image
-              source="ActionBarBottomTriangle.png"
-              style={undefined}
-            />
-          </View>,
+          null,
         ],
         "style": Array [
           Object {
             "alignItems": "center",
-            "bottom": 132,
-            "left": 0,
+            "bottom": 14,
+            "marginHorizontal": 20,
             "position": "absolute",
-            "right": 0,
           },
         ],
       },
@@ -1964,7 +1640,7 @@ ShallowWrapper {
                       "paddingVertical": 20,
                     },
                     Object {
-                      "borderColor": "gray",
+                      "borderColor": "rgba(255, 255, 255, 0.4)",
                       "borderLeftWidth": 2,
                     },
                   ]
@@ -1996,7 +1672,7 @@ ShallowWrapper {
                       "paddingVertical": 20,
                     },
                     Object {
-                      "borderColor": "gray",
+                      "borderColor": "rgba(255, 255, 255, 0.4)",
                       "borderLeftWidth": 2,
                     },
                   ]
@@ -2122,7 +1798,7 @@ ShallowWrapper {
                     "paddingVertical": 20,
                   },
                   Object {
-                    "borderColor": "gray",
+                    "borderColor": "rgba(255, 255, 255, 0.4)",
                     "borderLeftWidth": 2,
                   },
                 ],
@@ -2193,7 +1869,7 @@ ShallowWrapper {
                     "paddingVertical": 20,
                   },
                   Object {
-                    "borderColor": "gray",
+                    "borderColor": "rgba(255, 255, 255, 0.4)",
                     "borderLeftWidth": 2,
                   },
                 ],
@@ -2239,35 +1915,7 @@ ShallowWrapper {
           ],
           "type": [Function],
         },
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": <Image
-              source="ActionBarBottomTriangle.png"
-              style={undefined}
-            />,
-            "style": Object {
-              "alignItems": "center",
-              "height": 24,
-            },
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "source": "ActionBarBottomTriangle.png",
-              "style": undefined,
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          "type": [Function],
-        },
+        null,
       ],
       "type": [Function],
     },

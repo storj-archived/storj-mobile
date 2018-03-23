@@ -1,12 +1,12 @@
 import BucketsScreenNavigator from '../../navigators/BucketsScreenNavigator';
 
-const initialState = BucketsScreenNavigator.router.getStateForAction(BucketsScreenNavigator.router.getActionForPathAndParams('BucketsScreen'));
+const initialState = BucketsScreenNavigator.router.getStateForAction(BucketsScreenNavigator.router.getActionForPathAndParams('BucketsListScreen'));
 
 export default function bucketsScreenNavReducer(state = initialState, action) { 
     let nextState = BucketsScreenNavigator.router.getStateForAction(action, state);
 
     try {
-        BucketsScreenNavigator.router.getPathAndParamsForState(nextState);
+        let result = BucketsScreenNavigator.router.getPathAndParamsForState(nextState);
     } catch(e) {
         console.log(e.message);
         nextState = state;

@@ -85,7 +85,7 @@ const StorjLib = (() => {
                 console.log('verifyKeys ', response.error.message);
             }
 
-            return response.isSuccess;
+            return response;
         };
     
         /**
@@ -116,6 +116,21 @@ const StorjLib = (() => {
 
             if(!response.isSuccess){
                 console.log('importKeys ', response.error.message);
+            }
+
+            return response.isSuccess;
+        };
+
+        
+        /**
+         * Delete auth file
+         * @returns {Promise<boolean>}
+         */
+        async deleteKeys() {            
+            let response = await storjLib.deleteKeys();
+
+            if(!response.isSuccess){
+                console.log('deleteKeys', response.error.message);
             }
 
             return response.isSuccess;
@@ -171,9 +186,9 @@ const StorjLib = (() => {
          */
         async downloadFile(bucketId, fileId, localPath) {
             let response = await storjLib.downloadFile(bucketId, fileId, localPath);
-
+            
             if(!response.isSuccess) {
-                console.log('downloadFile ', response.error.message);
+                console.log('downloadFile ', response);
             }
 
             return response;

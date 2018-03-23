@@ -99,6 +99,24 @@ public class BucketRepository extends BaseRepository {
         return model;
     }
 
+    public BucketDbo get(String columnName, String columnValue) {
+        String[] selectionArgs = {
+            columnValue
+        };
+
+        Cursor cursor = _db.query(
+                BucketContract.TABLE_NAME,
+                null,
+                columnName + " = ?",
+                selectionArgs,
+                null, null, null, null);
+
+        BucketDbo model = _getSingleFromCursor(cursor);
+
+        cursor.close();
+        return model;
+    }
+
     public Response insert(BucketModel model) {
         if(model == null || !model.isValid())
             return new Response(false, "Model is not valid!");

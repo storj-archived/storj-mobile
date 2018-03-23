@@ -76,7 +76,9 @@ export default class RegisterComponent extends Component {
                     </View>
                 </View>
                 <View style = { styles.footer }>
-                    <TouchableOpacity style = { styles.createAccountButton } onPressOut = { this.onSubmit }>
+                    <TouchableOpacity 
+                    style = { this.props.isButtonDisabled ? [styles.createAccountButton, styles.blurredButton] : styles.createAccountButton } 
+                    onPressOut = { this.props.isButtonDisabled ? () => {} : this.onSubmit }>
                         <Text style = { styles.createAccountText }>Create account</Text>
                     </TouchableOpacity>
                     <Text 
@@ -200,5 +202,9 @@ const styles = StyleSheet.create({
         color: '#384b65',
         fontFamily: 'Montserrat-Regular',
         marginLeft: getWidth(11)
+    },
+    blurredButton: {
+        backgroundColor: 'rgba(38, 132, 255, 0.4)', 
+        borderColor: '#FFFFFF'
     }
 });

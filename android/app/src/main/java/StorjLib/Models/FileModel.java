@@ -39,22 +39,20 @@ public class FileModel {
     @Expose
     @SerializedName("isStarred")
     private boolean _isStarred;
+    @Expose
+    @SerializedName("isSynced")
+    private boolean _isSynced;
 
 
     public FileModel(File file) {
-        _bucketId = file.getBucketId();
-        _created = file.getCreated();
-        _erasure = file.getErasure();
-        _fileId = file.getId();
-        _hmac = file.getHMAC();
-        _index = file.getIndex();
-        _isDecrypted = file.isDecrypted();
-        //_mimeType = file.getMimeType();
-        _name = file.getName();
-        _size = file.getSize();
+        this(file, false, false);
     }
 
     public FileModel(File file, boolean isStarred) {
+        this(file, isStarred, false);
+    }
+
+    public FileModel(File file, boolean isStarred, boolean isSynced) {
         _bucketId = file.getBucketId();
         _created = file.getCreated();
         _erasure = file.getErasure();
@@ -66,6 +64,7 @@ public class FileModel {
         _name = file.getName();
         _size = file.getSize();
         _isStarred = isStarred;
+        _isSynced = isSynced;
     }
 
     public FileModel(String bucketId, String fileId, String created, String erasure, String hmac, String index, boolean isDecrypted, boolean isStarred, String mimeType, String name, long size) {
@@ -80,6 +79,21 @@ public class FileModel {
         _name = name;
         _size = size;
         _isStarred = isStarred;
+    }
+
+    public FileModel(String bucketId, String fileId, String created, String erasure, String hmac, String index, boolean isDecrypted, boolean isStarred, String mimeType, String name, long size, boolean isSynced) {
+        _bucketId = bucketId;
+        _created = created;
+        _erasure = erasure;
+        _fileId = fileId;
+        _hmac = hmac;
+        _index = index;
+        _isDecrypted = isDecrypted;
+        _mimeType = mimeType;
+        _name = name;
+        _size = size;
+        _isStarred = isStarred;
+        _isSynced = isSynced;
     }
 
     public boolean isValid() {
@@ -123,4 +137,5 @@ public class FileModel {
     public boolean getStarred() {
         return _isStarred;
     }
+    public boolean isSynced() { return _isSynced; }
 }

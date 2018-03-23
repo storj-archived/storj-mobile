@@ -1,0 +1,1127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MnemonicNotConfirmedComponent renders correctly 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <MnemonicNotConfirmedComponent />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": <View
+        style={
+          Object {
+            "paddingHorizontal": 40,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+              "height": 140,
+              "marginTop": 60,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#384B65",
+                "fontFamily": "Montserrat-Bold",
+                "fontSize": 54,
+                "lineHeight": 66,
+                "marginLeft": 30,
+              }
+            }
+          >
+            Secret phrase backup failed
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "height": 500,
+              "justifyContent": "center",
+              "marginTop": 150,
+            }
+          }
+        >
+          <Image
+            resizeMode="contain"
+            source="Error.png"
+            style={
+              Object {
+                "height": 500,
+                "width": 750,
+              }
+            }
+          />
+        </View>
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={[Function]}
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "alignSelf": "center",
+                "backgroundColor": "#2782ff",
+                "borderColor": "#2794FF",
+                "borderRadius": 12,
+                "borderWidth": 3,
+                "height": 100,
+                "justifyContent": "center",
+                "marginTop": 120,
+                "width": 670,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "white",
+                  "fontFamily": "Montserrat-Bold",
+                  "fontSize": 28,
+                }
+              }
+            >
+              Back
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={[Function]}
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderColor": "#2794FF",
+                "borderRadius": 6,
+                "borderWidth": 3,
+                "height": 100,
+                "justifyContent": "center",
+                "marginTop": 40,
+                "width": 670,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#2794FF",
+                  "fontFamily": "Montserrat-SemiBold",
+                  "fontSize": 32,
+                }
+              }
+            >
+              Skip
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </View>,
+      "style": Object {
+        "backgroundColor": "#FFFFFF",
+        "flex": 1,
+      },
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "height": 140,
+                "marginTop": 60,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#384B65",
+                  "fontFamily": "Montserrat-Bold",
+                  "fontSize": 54,
+                  "lineHeight": 66,
+                  "marginLeft": 30,
+                }
+              }
+            >
+              Secret phrase backup failed
+            </Text>
+          </View>,
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "height": 500,
+                "justifyContent": "center",
+                "marginTop": 150,
+              }
+            }
+          >
+            <Image
+              resizeMode="contain"
+              source="Error.png"
+              style={
+                Object {
+                  "height": 500,
+                  "width": 750,
+                }
+              }
+            />
+          </View>,
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[Function]}
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "backgroundColor": "#2782ff",
+                  "borderColor": "#2794FF",
+                  "borderRadius": 12,
+                  "borderWidth": 3,
+                  "height": 100,
+                  "justifyContent": "center",
+                  "marginTop": 120,
+                  "width": 670,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "white",
+                    "fontFamily": "Montserrat-Bold",
+                    "fontSize": 28,
+                  }
+                }
+              >
+                Back
+              </Text>
+            </View>
+          </TouchableOpacity>,
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[Function]}
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "borderColor": "#2794FF",
+                  "borderRadius": 6,
+                  "borderWidth": 3,
+                  "height": 100,
+                  "justifyContent": "center",
+                  "marginTop": 40,
+                  "width": 670,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-SemiBold",
+                    "fontSize": 32,
+                  }
+                }
+              >
+                Skip
+              </Text>
+            </View>
+          </TouchableOpacity>,
+        ],
+        "style": Object {
+          "paddingHorizontal": 40,
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#384B65",
+                  "fontFamily": "Montserrat-Bold",
+                  "fontSize": 54,
+                  "lineHeight": 66,
+                  "marginLeft": 30,
+                }
+              }
+            >
+              Secret phrase backup failed
+            </Text>,
+            "style": Object {
+              "flexDirection": "row",
+              "height": 140,
+              "marginTop": 60,
+            },
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "accessible": true,
+              "allowFontScaling": true,
+              "children": "Secret phrase backup failed",
+              "ellipsizeMode": "tail",
+              "style": Object {
+                "color": "#384B65",
+                "fontFamily": "Montserrat-Bold",
+                "fontSize": 54,
+                "lineHeight": 66,
+                "marginLeft": 30,
+              },
+            },
+            "ref": null,
+            "rendered": "Secret phrase backup failed",
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <Image
+              resizeMode="contain"
+              source="Error.png"
+              style={
+                Object {
+                  "height": 500,
+                  "width": 750,
+                }
+              }
+            />,
+            "style": Object {
+              "alignItems": "center",
+              "height": 500,
+              "justifyContent": "center",
+              "marginTop": 150,
+            },
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "resizeMode": "contain",
+              "source": "Error.png",
+              "style": Object {
+                "height": 500,
+                "width": 750,
+              },
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "activeOpacity": 0.2,
+            "children": <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "backgroundColor": "#2782ff",
+                  "borderColor": "#2794FF",
+                  "borderRadius": 12,
+                  "borderWidth": 3,
+                  "height": 100,
+                  "justifyContent": "center",
+                  "marginTop": 120,
+                  "width": 670,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "white",
+                    "fontFamily": "Montserrat-Bold",
+                    "fontSize": 28,
+                  }
+                }
+              >
+                Back
+              </Text>
+            </View>,
+            "onPress": [Function],
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "white",
+                    "fontFamily": "Montserrat-Bold",
+                    "fontSize": 28,
+                  }
+                }
+              >
+                Back
+              </Text>,
+              "style": Object {
+                "alignItems": "center",
+                "alignSelf": "center",
+                "backgroundColor": "#2782ff",
+                "borderColor": "#2794FF",
+                "borderRadius": 12,
+                "borderWidth": 3,
+                "height": 100,
+                "justifyContent": "center",
+                "marginTop": 120,
+                "width": 670,
+              },
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "accessible": true,
+                "allowFontScaling": true,
+                "children": "Back",
+                "ellipsizeMode": "tail",
+                "style": Object {
+                  "color": "white",
+                  "fontFamily": "Montserrat-Bold",
+                  "fontSize": 28,
+                },
+              },
+              "ref": null,
+              "rendered": "Back",
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "activeOpacity": 0.2,
+            "children": <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "borderColor": "#2794FF",
+                  "borderRadius": 6,
+                  "borderWidth": 3,
+                  "height": 100,
+                  "justifyContent": "center",
+                  "marginTop": 40,
+                  "width": 670,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-SemiBold",
+                    "fontSize": 32,
+                  }
+                }
+              >
+                Skip
+              </Text>
+            </View>,
+            "onPress": [Function],
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-SemiBold",
+                    "fontSize": 32,
+                  }
+                }
+              >
+                Skip
+              </Text>,
+              "style": Object {
+                "alignItems": "center",
+                "borderColor": "#2794FF",
+                "borderRadius": 6,
+                "borderWidth": 3,
+                "height": 100,
+                "justifyContent": "center",
+                "marginTop": 40,
+                "width": 670,
+              },
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "accessible": true,
+                "allowFontScaling": true,
+                "children": "Skip",
+                "ellipsizeMode": "tail",
+                "style": Object {
+                  "color": "#2794FF",
+                  "fontFamily": "Montserrat-SemiBold",
+                  "fontSize": 32,
+                },
+              },
+              "ref": null,
+              "rendered": "Skip",
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": <View
+          style={
+            Object {
+              "paddingHorizontal": 40,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+                "height": 140,
+                "marginTop": 60,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#384B65",
+                  "fontFamily": "Montserrat-Bold",
+                  "fontSize": 54,
+                  "lineHeight": 66,
+                  "marginLeft": 30,
+                }
+              }
+            >
+              Secret phrase backup failed
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "height": 500,
+                "justifyContent": "center",
+                "marginTop": 150,
+              }
+            }
+          >
+            <Image
+              resizeMode="contain"
+              source="Error.png"
+              style={
+                Object {
+                  "height": 500,
+                  "width": 750,
+                }
+              }
+            />
+          </View>
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[Function]}
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "backgroundColor": "#2782ff",
+                  "borderColor": "#2794FF",
+                  "borderRadius": 12,
+                  "borderWidth": 3,
+                  "height": 100,
+                  "justifyContent": "center",
+                  "marginTop": 120,
+                  "width": 670,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "white",
+                    "fontFamily": "Montserrat-Bold",
+                    "fontSize": 28,
+                  }
+                }
+              >
+                Back
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[Function]}
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "borderColor": "#2794FF",
+                  "borderRadius": 6,
+                  "borderWidth": 3,
+                  "height": 100,
+                  "justifyContent": "center",
+                  "marginTop": 40,
+                  "width": 670,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-SemiBold",
+                    "fontSize": 32,
+                  }
+                }
+              >
+                Skip
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>,
+        "style": Object {
+          "backgroundColor": "#FFFFFF",
+          "flex": 1,
+        },
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <View
+              style={
+                Object {
+                  "flexDirection": "row",
+                  "height": 140,
+                  "marginTop": 60,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#384B65",
+                    "fontFamily": "Montserrat-Bold",
+                    "fontSize": 54,
+                    "lineHeight": 66,
+                    "marginLeft": 30,
+                  }
+                }
+              >
+                Secret phrase backup failed
+              </Text>
+            </View>,
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "height": 500,
+                  "justifyContent": "center",
+                  "marginTop": 150,
+                }
+              }
+            >
+              <Image
+                resizeMode="contain"
+                source="Error.png"
+                style={
+                  Object {
+                    "height": 500,
+                    "width": 750,
+                  }
+                }
+              />
+            </View>,
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[Function]}
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "alignSelf": "center",
+                    "backgroundColor": "#2782ff",
+                    "borderColor": "#2794FF",
+                    "borderRadius": 12,
+                    "borderWidth": 3,
+                    "height": 100,
+                    "justifyContent": "center",
+                    "marginTop": 120,
+                    "width": 670,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "white",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 28,
+                    }
+                  }
+                >
+                  Back
+                </Text>
+              </View>
+            </TouchableOpacity>,
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[Function]}
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "borderColor": "#2794FF",
+                    "borderRadius": 6,
+                    "borderWidth": 3,
+                    "height": 100,
+                    "justifyContent": "center",
+                    "marginTop": 40,
+                    "width": 670,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-SemiBold",
+                      "fontSize": 32,
+                    }
+                  }
+                >
+                  Skip
+                </Text>
+              </View>
+            </TouchableOpacity>,
+          ],
+          "style": Object {
+            "paddingHorizontal": 40,
+          },
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#384B65",
+                    "fontFamily": "Montserrat-Bold",
+                    "fontSize": 54,
+                    "lineHeight": 66,
+                    "marginLeft": 30,
+                  }
+                }
+              >
+                Secret phrase backup failed
+              </Text>,
+              "style": Object {
+                "flexDirection": "row",
+                "height": 140,
+                "marginTop": 60,
+              },
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "accessible": true,
+                "allowFontScaling": true,
+                "children": "Secret phrase backup failed",
+                "ellipsizeMode": "tail",
+                "style": Object {
+                  "color": "#384B65",
+                  "fontFamily": "Montserrat-Bold",
+                  "fontSize": 54,
+                  "lineHeight": 66,
+                  "marginLeft": 30,
+                },
+              },
+              "ref": null,
+              "rendered": "Secret phrase backup failed",
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <Image
+                resizeMode="contain"
+                source="Error.png"
+                style={
+                  Object {
+                    "height": 500,
+                    "width": 750,
+                  }
+                }
+              />,
+              "style": Object {
+                "alignItems": "center",
+                "height": 500,
+                "justifyContent": "center",
+                "marginTop": 150,
+              },
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "resizeMode": "contain",
+                "source": "Error.png",
+                "style": Object {
+                  "height": 500,
+                  "width": 750,
+                },
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "activeOpacity": 0.2,
+              "children": <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "alignSelf": "center",
+                    "backgroundColor": "#2782ff",
+                    "borderColor": "#2794FF",
+                    "borderRadius": 12,
+                    "borderWidth": 3,
+                    "height": 100,
+                    "justifyContent": "center",
+                    "marginTop": 120,
+                    "width": 670,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "white",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 28,
+                    }
+                  }
+                >
+                  Back
+                </Text>
+              </View>,
+              "onPress": [Function],
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "white",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 28,
+                    }
+                  }
+                >
+                  Back
+                </Text>,
+                "style": Object {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "backgroundColor": "#2782ff",
+                  "borderColor": "#2794FF",
+                  "borderRadius": 12,
+                  "borderWidth": 3,
+                  "height": 100,
+                  "justifyContent": "center",
+                  "marginTop": 120,
+                  "width": 670,
+                },
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "accessible": true,
+                  "allowFontScaling": true,
+                  "children": "Back",
+                  "ellipsizeMode": "tail",
+                  "style": Object {
+                    "color": "white",
+                    "fontFamily": "Montserrat-Bold",
+                    "fontSize": 28,
+                  },
+                },
+                "ref": null,
+                "rendered": "Back",
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "activeOpacity": 0.2,
+              "children": <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "borderColor": "#2794FF",
+                    "borderRadius": 6,
+                    "borderWidth": 3,
+                    "height": 100,
+                    "justifyContent": "center",
+                    "marginTop": 40,
+                    "width": 670,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-SemiBold",
+                      "fontSize": 32,
+                    }
+                  }
+                >
+                  Skip
+                </Text>
+              </View>,
+              "onPress": [Function],
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-SemiBold",
+                      "fontSize": 32,
+                    }
+                  }
+                >
+                  Skip
+                </Text>,
+                "style": Object {
+                  "alignItems": "center",
+                  "borderColor": "#2794FF",
+                  "borderRadius": 6,
+                  "borderWidth": 3,
+                  "height": 100,
+                  "justifyContent": "center",
+                  "marginTop": 40,
+                  "width": 670,
+                },
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "accessible": true,
+                  "allowFontScaling": true,
+                  "children": "Skip",
+                  "ellipsizeMode": "tail",
+                  "style": Object {
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-SemiBold",
+                    "fontSize": 32,
+                  },
+                },
+                "ref": null,
+                "rendered": "Skip",
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;

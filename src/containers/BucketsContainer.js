@@ -18,9 +18,7 @@ class BucketsContainer extends Component {
     }
 
     getArraySelectedCount(array) {
-        return array.filter((item) => {
-            return item.isSelected;
-        }).length;
+        return array.filter(item => item.isSelected).length;
     }
   
     getSelectedBucketsCount() {
@@ -29,15 +27,13 @@ class BucketsContainer extends Component {
         return this.getArraySelectedCount(this.props.buckets);
     }
 
-    getSelectedFilesCount() {
-        if(!this.props.selectedBucketId || !this.props.files || this.props.files.length === 0) return 0; 
+    getSelectedFilesCount() {        
+        if(!this.props.openedBucketId || !this.props.files || this.props.files.length === 0) return 0; 
 
-        let openedBucket = this.props.files.find(item => {
-            return item.bucketId === this.props.selectedBucketId;
-        });
+        let openedBucket = this.props.files.filter(item => item.entity.bucketId === this.props.openedBucketId);
 
         if(openedBucket) {
-            return this.getArraySelectedCount(openedBucket.files);
+            return this.getArraySelectedCount(openedBucket);
         }
     } 
 

@@ -9,13 +9,19 @@ import {
 import React, { Component } from 'react';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import OptionsComponent from './OptionsComponent';
+import StorjModule from '../../utils/StorjModule';
 
 export default class MyAccountMainPageComponent extends Component{
     constructor(props) {
-        super(props);
+        super(props);     
     }
 
-    render() {
+    async logOut() {
+        await StorjModule.deleteKeys();
+        this.props.screenProps.redirectToInitializationScreen();
+    }
+
+    render() {        
         return(
             <View style = { styles.mainContainer }>
                 <View style = { styles.contentContainer }>
@@ -37,7 +43,7 @@ export default class MyAccountMainPageComponent extends Component{
                                         resizeMode = 'contain' />
                                     <View >
                                         <Text style = { [styles.buttonTextRegular, styles.topButtonTextMargin] }>Storage</Text>
-                                        <Text style = { [styles.buttonTextBold, styles.topButtonTextMargin] }>{ this.props.storageAmount ? this.props.storageAmount : '00.00' }{ ' GB' }</Text>
+                                        <Text style = { [styles.buttonTextBold, styles.topButtonTextMargin] }>{ this.props.screenProps.storageAmount }{ ' GB' }</Text>
                                     </View>
                                     <Image 
                                         style = { [ styles.expandImage, styles.topButtonTextMargin ] } 
@@ -55,7 +61,7 @@ export default class MyAccountMainPageComponent extends Component{
                                         resizeMode = 'contain' />
                                     <View >
                                         <Text style = { [styles.buttonTextRegular, styles.bandwidthMargin] }>Bandwidth</Text>
-                                        <Text style = { [styles.buttonTextBold, styles.bandwidthMargin] }>{ this.props.bandwidthAmount ? this.props.bandwidthAmount : '0.00' }{ ' GB' }</Text>
+                                        <Text style = { [styles.buttonTextBold, styles.bandwidthMargin] }>{ this.props.screenProps.bandwidthAmount }{ ' GB' }</Text>
                                     </View>
                                     <Image 
                                         style = { styles.expandImage } 
@@ -114,7 +120,7 @@ export default class MyAccountMainPageComponent extends Component{
                                 onPress = { () => {} } />
                         }
                     </View>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress = { () => { this.logOut(); } }>
                         <View style = { styles.logOutButton }>
                             <Text style = { styles.logOutText }>Log out</Text>
                         </View>
