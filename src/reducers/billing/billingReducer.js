@@ -1,12 +1,12 @@
 import { BILLING_CONSTANTS } from '../../utils/constants/actionConstants';
 
-const { SET_CREDITS, SET_DEBITS, GET_DEBITS_FAILED } = BILLING_CONSTANTS;
+const { SET_CREDITS, SET_DEBITS, CREATE_WALLET, GET_DEBITS_FAILED, SET_WALLETS } = BILLING_CONSTANTS;
 
 
 const initialState = {
     credits: [],    
     debits: [],
-    // wallets: {},
+    wallets: {},
     // defaultPaymentMethod: {},
     // defaultPPId: '',
     // billingDate: null,
@@ -33,8 +33,12 @@ export default function billingReducer(state, action) {
             newState.storage = action.payload.usage.storage;
             newState.bandwidth = action.payload.usage.bandwidth;
             break;
+        case CREATE_WALLET:
+            console.log("create wallet", action.payload)
         case GET_DEBITS_FAILED: //TODO: show error somehow
             break;
+        case SET_WALLETS:
+            console.log("get wallets", action.payload)
         default:
             return state || initialState;
     }

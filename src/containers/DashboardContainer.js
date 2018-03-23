@@ -16,8 +16,6 @@ class DashboardContainer extends Component {
     }
 
     render() {        
-        console.log(this.props.storage);
-        console.log(this.props.bandwidth);
         return(
             <DashboardListComponent
                 files = { this.props.files }
