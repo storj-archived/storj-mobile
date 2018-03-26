@@ -3,6 +3,7 @@ import {
     Text,
     StyleSheet,
     Image,
+    ScrollView,
     TouchableOpacity
 } from 'react-native';
 import React, { Component } from 'react';
@@ -26,86 +27,52 @@ export default class AddCreditComponent extends Component {
     }
 
     showDetailedInfo() {
-        switch(this.state.showCredits) {
-            case 'BTC':
-                return(
-                    <View style = { styles.creditsInfoContainer } >
-                        <View style = { styles.infoContainer } >
-                            <Text style = { styles.infoText }>
-                                { myAccountConstants.storjCredentials[0] }
-                            </Text>
-                            <View style = { styles.secondTextBlockMargin }>
-                                <Text style = { styles.infoText }>
-                                    { myAccountConstants.storjCredentials[1] }
-                                </Text>
-                            </View>
-                            <View style = { styles.underline } />
-                            <View style = { styles.thirdTextBlockMargin }>
-                                <Text style = { styles.boldTitle }>BTC</Text>
-                                <Text style = { styles.infoText }>{ 'BTC WALLET' }</Text>
-                                <View style = { styles.fourthTextBlockMargin }>
-                                    <QRCode
-                                        value = { 'BTC WALLET' }
-                                        size = { getHeight(150) }
-                                        bgColor = { 'black' }
-                                        fgColor = { 'white' } />
-                                </View>
-                                <View style = { styles.fifthTextBlockMargin }>
-                                    <Text style = { styles.infoAdditionalText }>{ myAccountConstants.storjCredentials[3] }</Text>
-                                </View>
-                            </View>
-                        </View>
-                        <View style = { styles.closeButton }>
-                            <TouchableOpacity 
-                                onPress = { this.props.showCredits } >
-                                    <Image 
-                                        style = { styles.icon }
-                                        source = { require('../../images/MyAccount/Close.png') }
-                                        resizeMode = 'contain' />
-                            </TouchableOpacity>
-                        </View>
+        return(
+            <View style = { styles.creditsInfoContainer } >
+                <View style = { styles.infoContainer } >
+                    <Text style = { styles.infoText }>
+                        { myAccountConstants.storjCredentials[0] }
+                    </Text>
+                    <View style = { styles.secondTextBlockMargin }>
+                        <Text style = { styles.infoText }>
+                            { myAccountConstants.storjCredentials[1] }
+                        </Text>
                     </View>
-                )
-            case 'Storj':
-                return(
-                    <View style = { styles.creditsInfoContainer } >
-                        <View style = { styles.infoContainer } >
-                            <Text style = { styles.infoText }>
-                                { myAccountConstants.storjCredentials[0] }
-                            </Text>
-                            <View style = { styles.secondTextBlockMargin }>
-                                <Text style = { styles.infoText }>
-                                    { myAccountConstants.storjCredentials[1] }
-                                </Text>
-                            </View>
-                            <View style = { styles.underline } />
-                            <View style = { styles.thirdTextBlockMargin }>
-                                <Text style = { styles.boldTitle }>STORJ</Text>
-                                <Text style = { styles.infoText }>{ myAccountConstants.storjCredentials[2] }</Text>
-                                <View style = { styles.fourthTextBlockMargin }>
-                                    <QRCode
-                                        value = { myAccountConstants.storjCredentials[2] }
-                                        size = { getHeight(150) }
-                                        bgColor = { 'black' }
-                                        fgColor = { 'white' } />
-                                </View>
-                                <View style = { styles.fifthTextBlockMargin }>
-                                    <Text style = { styles.infoAdditionalText }>{ myAccountConstants.storjCredentials[3] }</Text>
-                                </View>
-                            </View>
-                        </View>
-                        <View style = { styles.closeButton }>
-                            <TouchableOpacity 
-                                onPress = { this.props.showCredits } >
-                                    <Image 
-                                        style = { styles.icon }
-                                        source = { require('../../images/MyAccount/Close.png') }
-                                        resizeMode = 'contain' />
-                            </TouchableOpacity>
-                        </View>
+                    <View style = { styles.underline } />
+                    <ScrollView>
+                        {
+                            this.props.wallets.map(wallet => {
+                                return(
+                                    <View style = { styles.thirdTextBlockMargin } key = { wallet.address }>
+                                        <Text style = { styles.boldTitle }>{ wallet.token }</Text>
+                                        <Text style = { styles.infoText }>{ wallet.address }</Text>
+                                        <View style = { styles.fourthTextBlockMargin }>
+                                            <QRCode
+                                                value = { wallet.address }
+                                                size = { getHeight(150) }
+                                                bgColor = { 'black' }
+                                                fgColor = { 'white' } />
+                                        </View>
+                                    </View>
+                                )
+                            })
+                        }
+                    </ScrollView>
+                    <View style = { styles.fifthTextBlockMargin }>
+                                            <Text style = { styles.infoAdditionalText }>{ myAccountConstants.storjCredentials[2] }</Text>
                     </View>
-                ) 
-        }
+                </View>
+                <View style = { styles.closeButton }>
+                    <TouchableOpacity 
+                        onPress = { this.props.showCredits } >
+                            <Image 
+                                style = { styles.icon }
+                                source = { require('../../images/MyAccount/Close.png') }
+                                resizeMode = 'contain' />
+                    </TouchableOpacity>
+                </View>
+            </View>
+        ) 
     }
 
     render() {
@@ -136,6 +103,7 @@ export default class AddCreditComponent extends Component {
 
 AddCreditComponent.propTypes = {
     showCredits: PropTypes.func,
+    wallets: PropTypes.array
 }
 
 const styles = StyleSheet.create({

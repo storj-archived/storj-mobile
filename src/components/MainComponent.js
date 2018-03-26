@@ -109,6 +109,7 @@ export default class MainComponent extends Component {
                 {
                     this.state.showCredits ?
                         <AddCreditComponent
+                            wallets = { this.props.wallets }
                             showCredits = { this.showCredits.bind(this) } /> : null
                 }
             </View>

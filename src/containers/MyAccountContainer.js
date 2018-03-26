@@ -95,7 +95,7 @@ class MyAccountContainer extends Component {
                 showStorageInfo = { this.props.screenProps.showStorageInfo }
                 showCredits = { this.props.screenProps.showCredits } 
                 storageAmount = { this.props.storage }
-                bandwidthAmount = { this.props.bandwidth }
+                bandwidthAmount = { this.props.bandwidth }                
                 transactionList = { this.calculateTransactions() } /> 
         );
     }
@@ -110,7 +110,7 @@ function mapStateToProps(state) {
         storage: state.billingReducer.storage,
         bandwidth: state.billingReducer.bandwidth,
         debits: state.billingReducer.debits,
-        credits: state.billingReducer.credits,
+        credits: state.billingReducer.credits
     };
 }
     
