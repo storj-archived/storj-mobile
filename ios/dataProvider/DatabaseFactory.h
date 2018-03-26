@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <sqlite3.h>
+#import "FMDB.h"
+#import "BucketContract.h"
+#import "FileContract.h"
+#import "UploadFileContract.h"
 
 #define DATABASE_NAME "storj.db"
 
@@ -17,6 +20,6 @@
 
 +(DatabaseFactory *) getSharedDatabaseFactory;
 -(BOOL) createDatabase;
--(BOOL) saveData:(NSString *) tableName andDictionary:(NSDictionary *) data;
--(NSDictionary *) getData;
+
+-(FMDatabase *) getSharedDb;
 @end
