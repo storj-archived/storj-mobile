@@ -35,7 +35,7 @@ export default class QRScannerComponent extends Component {
     }
 
     /** 
-     * ErrorMessageView
+     * ErrorMessageView when login via qr isn`t successful
     */
     showErrorMessage() {
         return(
@@ -44,6 +44,20 @@ export default class QRScannerComponent extends Component {
                     style = { styles.errorMessage }
                     source = { require('../images/QRScannerScreen/ErrorMessage.png') } 
                     resizeMode = 'contain' />
+            </View>
+        )
+    }
+
+    /** 
+     * LoadingView when login via qr is successful
+    */
+    showLoadingView() {
+        return(
+            <View style = { [ styles.backgroundWrapper ] }>
+                <View style = { [ styles.backgroundWrapper, styles.dimBlack ] } />
+                <View style = { [ styles.backgroundWrapper, styles.setChildCenter ] }>
+                    <ActivityIndicator animating = { true } color = { "#2782ff" } size = { "large" }/>
+                </View>
             </View>
         )
     }
@@ -82,12 +96,7 @@ export default class QRScannerComponent extends Component {
                 }
                 {
                     this.state.borderColor === '#27AE60' ?
-                        <View style = { [ styles.backgroundWrapper ] }>
-                            <View style = { [ styles.backgroundWrapper, styles.dimBlack ] } />
-                            <View style = { [ styles.backgroundWrapper, styles.setChildCenter ] }>
-                                <ActivityIndicator animating = { true } color = { "#2782ff" } size = { "large" }/>
-                            </View>
-                        </View> : null
+                        this.showLoadingView() : null
                 }
             </View>
             

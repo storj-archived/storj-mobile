@@ -23,12 +23,12 @@ export default class TabBarComponent extends Component {
     componentWillMount () {
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.hideTabBar.bind(this));
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.showTabBar.bind(this));
-      }
+    }
     
-      componentWillUnmount () {
+    componentWillUnmount () {
         this.keyboardDidShowListener.remove();
         this.keyboardDidHideListener.remove();
-      }
+    }
 
     showTabBar() {
         Animated.timing(this.tabBarPositionAnimated, {
@@ -93,7 +93,7 @@ export default class TabBarComponent extends Component {
                         <TouchableOpacity style = { styles.tabItemContainer } onPress = { () => {  this.props.navigation.goToBucketsScreen(); } }>
                             <View><Image source = { require('../images/TabBar/BucketTabBar.png') } style = { navIndex === 1 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
-                        <View style = { styles.tabItemContainer } onPress = { () => { this.props.navigation.onActionBarPress(); } }></View>
+                        <View style = { styles.tabItemContainer } ></View>
                         <TouchableOpacity style = { styles.tabItemContainer } onPress = { () => { } }>
                             <View><Image source = { require('../images/TabBar/TrashTabBar.png') } style = { navIndex === 2 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>

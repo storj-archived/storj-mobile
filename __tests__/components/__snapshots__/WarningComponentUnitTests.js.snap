@@ -1,0 +1,173 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WarningComponent renders correctly 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <WarningComponent />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <StatusBar
+          animated={false}
+          backgroundColor={undefined}
+          showHideTransition="fade"
+        />,
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#FFFFFF",
+              "fontFamily": "Montserrat-Medium",
+              "fontSize": 24,
+            }
+          }
+        />,
+      ],
+      "style": Object {
+        "alignItems": "center",
+        "backgroundColor": "#EB5757",
+        "flexDirection": "row",
+        "height": 0,
+        "justifyContent": "space-between",
+        "left": 0,
+        "paddingHorizontal": 40,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      },
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "animated": false,
+          "backgroundColor": undefined,
+          "showHideTransition": "fade",
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "accessible": true,
+          "allowFontScaling": true,
+          "children": undefined,
+          "ellipsizeMode": "tail",
+          "style": Object {
+            "color": "#FFFFFF",
+            "fontFamily": "Montserrat-Medium",
+            "fontSize": 24,
+          },
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <StatusBar
+            animated={false}
+            backgroundColor={undefined}
+            showHideTransition="fade"
+          />,
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#FFFFFF",
+                "fontFamily": "Montserrat-Medium",
+                "fontSize": 24,
+              }
+            }
+          />,
+        ],
+        "style": Object {
+          "alignItems": "center",
+          "backgroundColor": "#EB5757",
+          "flexDirection": "row",
+          "height": 0,
+          "justifyContent": "space-between",
+          "left": 0,
+          "paddingHorizontal": 40,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "animated": false,
+            "backgroundColor": undefined,
+            "showHideTransition": "fade",
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "accessible": true,
+            "allowFontScaling": true,
+            "children": undefined,
+            "ellipsizeMode": "tail",
+            "style": Object {
+              "color": "#FFFFFF",
+              "fontFamily": "Montserrat-Medium",
+              "fontSize": 24,
+            },
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
