@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import BalanceReportComponent from './BalanceReportComponent';
 import moment from 'moment';
+import { uuidv4 } from '../../utils/utils';
 
 export default class BalanceComponent extends Component{
     constructor(props) {
@@ -48,6 +49,7 @@ export default class BalanceComponent extends Component{
                     {
                         this.props.screenProps.transactionList.map(transaction => {
                             return <BalanceReportComponent 
+                                        key = { uuidv4() }
                                         date = { moment(transaction.timestamp).format('MMMM-DD-YYYY') }
                                         amount = { transaction.amount } />
                         })

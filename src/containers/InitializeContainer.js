@@ -80,7 +80,7 @@ class InitializeContainer extends Component {
         this.props.getDebits();
         this.props.getCredits();
         this.props.getWallets();
-        this.props.createWallet("STORJ");
+        //this.props.createWallet("STORJ");
 
 
         this.props.redirectToMainScreen();       

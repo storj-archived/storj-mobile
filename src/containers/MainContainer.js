@@ -310,7 +310,7 @@ class MainContainer extends Component {
             tapBarActions = this.openedBucketActions;
         else if(this.props.isSelectionMode || this.props.isSingleItemSelected)
             tapBarActions = this.selectionModeActions;
-        
+        console.log("main ", this.props.wallets)
         return(
             <MainComponent
                 redirectToInitializationScreen = { this.props.redirectToInitializationScreen.bind(this) }
@@ -326,6 +326,7 @@ class MainContainer extends Component {
                 onActionBarPress = { () => { this.onActionBarPress(); } }
                 isActionBarShown = { this.props.isActionBarShown } 
                 isCreateBucketInputShown = { this.props.isCreateBucketInputShown }
+                wallets = { this.props.wallets }
                 isLoading = { this.props.isLoading } />
         );
     }
@@ -344,7 +345,8 @@ function mapStateToProps(state) {
         isCreateBucketInputShown: state.mainReducer.isCreateBucketInputShown,
         isFirstSignIn: state.mainReducer.isFirstSignIn,
         isLoading: state.mainReducer.isLoading,
-        isGridViewShown: state.mainReducer.isGridViewShown
+        isGridViewShown: state.mainReducer.isGridViewShown,
+        wallets: state.billingReducer.wallets
     };
 }
 function mapDispatchToProps(dispatch) { 

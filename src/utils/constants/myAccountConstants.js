@@ -5,7 +5,6 @@ const myAccountConstants = {
     storjCredentials: [
         'Please send your STORJ payments to the address below.',
         'Sending any other token to this address will result in a loss of funds.',
-        '0xd7571526743b4617f25ad89b6a42798e91cedf23',
         'Payments in STORJ may take up to an hour to to be confirmed and will show up in your Billing History once completed. You must refresh your billing page for new entries to appear.'
     ]
 };

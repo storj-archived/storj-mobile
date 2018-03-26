@@ -6,7 +6,7 @@ const { SET_CREDITS, SET_DEBITS, CREATE_WALLET, GET_DEBITS_FAILED, SET_WALLETS }
 const initialState = {
     credits: [],    
     debits: [],
-    wallets: {},
+    wallets: [],
     // defaultPaymentMethod: {},
     // defaultPPId: '',
     // billingDate: null,
@@ -34,11 +34,13 @@ export default function billingReducer(state, action) {
             newState.bandwidth = action.payload.usage.bandwidth;
             break;
         case CREATE_WALLET:
-            console.log("create wallet", action.payload)
+            console.log("create wallet", action.payload);
+            break;
         case GET_DEBITS_FAILED: //TODO: show error somehow
             break;
         case SET_WALLETS:
-            console.log("get wallets", action.payload)
+            newState.wallets = action.payload.wallets;
+            break;
         default:
             return state || initialState;
     }
