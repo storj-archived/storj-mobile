@@ -1,7 +1,7 @@
 import { uuidv4, toQueryString, getFirstAndLastDayOfCurrentMonth } from '../utils/utils';
 import { sha256 } from '../utils/sha256';
 import StorjModule from '../utils/StorjModule';
-import { DEBITS_URL, CREDITS_URL, WALLETS_URL } from '../utils/constants/urlConstants';
+import { DEBITS_URL, CREDITS_URL, WALLETS_URL, USERS_URL } from '../utils/constants/urlConstants';
 
 export async function getDebitsRequest() {
     let params = {};
@@ -30,6 +30,19 @@ export async function getWalletRequest() {
     let params = {};                            
     
     return await _getBillingRequest(WALLETS_URL, params);              
+}
+
+export function changePasswordRequest(email) {
+    let params = {
+        email: email,
+        url: "https://app.storj.io"
+    };
+
+    return _changePasswordRequest(USERS_URL + '/' + email, params);
+}
+
+function _changePasswordRequest(url, params) {    
+    return _createRequest(url, 'PATCH', null, params) ;
 }
 
 async function _postWalletRequest(url, params) {
@@ -61,15 +74,18 @@ function _createRequest(url, methodType, auth, data) {
         headers: {
           'Accept': 'application/json, text/plain, */*',
           'Content-Type': 'application/json',
-          'Connection': 'keep-alive',
-          'Host': 'billing.prod.storj.io',
-          'Authorization': auth
+          'Connection': 'keep-alive'        
         },
     };
 
-    if(methodType === 'POST') {
+    if(auth) {
+        params.headers['Authorization'] = auth;
+    }
+
+    if(['PATCH', 'POST'].includes(methodType)) {
         params.body = JSON.stringify(data);
     }
+
     return new Request(url, params);
 }
 
