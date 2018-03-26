@@ -1,7 +1,7 @@
 import { TabNavigator } from 'react-navigation';
 import TabBarComponent from '../components/TabBarComponent';
 import BucketsScreen from '../containers/BucketsContainer';
-import TestScreen from '../components/EmptyComponent';
+import MyPhotosScreen from '../containers/MyPhotosContainer';
 import DashboardScreen from '../containers/DashboardScreenContainer';
 import MyAccountScreen from '../containers/MyAccountContainer';
 
@@ -18,9 +18,9 @@ const MainScreenNavigator = TabNavigator(
             screen: BucketsScreen,
             routeName: 'BucketsScreen'
         },
-        TestScreen: {
-            screen: TestScreen,
-            routeName: 'TestScreen'
+        MyPhotosScreen: {
+            screen: MyPhotosScreen,
+            routeName: 'MyPhotosScreen'
         },
         MyAccountScreen: {
             screen: MyAccountScreen,

@@ -1,10 +1,25 @@
 import { NavigationActions } from 'react-navigation';
 import authActions from '../../utils/constants/actionConstants';
+import { changePasswordRequest } from '../../utils/dataservice';
 
 const { LOGIN, LOGIN_SUCCESS, LOGIN_ERROR, 
     REGISTER, REGISTER_SUCCESS, REGISTER_ERROR, 
     SET_EMAIL_NOT_CONFIRMED, SET_EMAIL_CONFIRMED,
     SET_ACCOUNT_NOT_EXIST, SET_ACCOUNT_EXIST } = authActions;
+
+
+/**
+ * sends email with link to reset password
+ * @param {string} email registered email
+ * @returns validity of request
+ */
+export async function resetPassword(email) {
+    let request = changePasswordRequest(email);
+
+    let response = await fetch(request);
+    
+    return response.ok;
+};
 
 /**
  * ActionCreator on login success 
