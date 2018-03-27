@@ -11,7 +11,15 @@
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventEmitter.h>
 #import <React/RCTLog.h>
+#import "DatabaseFactory.h"
+#import "BaseRepository.h"
+#import "BucketModel.h"
+#import "Response.h"
+#import "ListResponse.h"
+#import "SingleResponse.h"
+#import "MethodHandler.h"
+#import "DictionaryUtils.h"
 
-@interface StorjLibIos : RCTEventEmitter<RCTBridgeModule>
+@interface StorjLibIos : NSObject<RCTBridgeModule>
 //@property (nonatomic) StorjWrapper *storjWrapper;
 @end
