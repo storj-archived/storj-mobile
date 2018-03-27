@@ -32,7 +32,7 @@ export default class BalanceComponent extends Component{
                         </TouchableOpacity>
                         <View style = { styles.infoTextContainer }>
                             <Text style = { styles.storageText }>Balance</Text>
-                            <Text style = { styles.storageAmountText }>$100.50</Text>
+                            <Text style = { styles.storageAmountText }>{ this.props.screenProps.getBalance() }</Text>
                         </View>
                         <TouchableOpacity 
                             style = { styles.addCreditButton }

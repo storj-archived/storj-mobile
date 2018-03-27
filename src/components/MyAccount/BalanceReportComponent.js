@@ -18,7 +18,7 @@ export default class BalanceReportComponent extends Component{
         return(
             <View style = { styles.mainContainer }>
                 <View style = { styles.contentContainer }>
-                    <Text style = { styles.amountText }>{ '$' + this.props.amount }</Text>
+                    <Text style = { styles.amountText }>{ this.props.amount }</Text>
                     <View style = { styles.flexRow }>
                         <Text style = { styles.dateText }>{ this.props.date }</Text>
                         <TouchableOpacity style = { styles.expanderIconContainer }>
@@ -35,7 +35,7 @@ export default class BalanceReportComponent extends Component{
 }
 
 BalanceReportComponent.propTypes = {
-    amount: PropTypes.number,
+    amount: PropTypes.string,
     date: PropTypes.string
 }
 

@@ -33,6 +33,8 @@ export default function billingReducer(state, action) {
             newState.storage = action.payload.usage.storage;
             newState.bandwidth = action.payload.usage.bandwidth;
             break;
+        case CREATE_WALLET:
+            break;
         case GET_DEBITS_FAILED: //TODO: show error somehow
             break;
         case SET_WALLETS:

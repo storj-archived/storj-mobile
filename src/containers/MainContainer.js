@@ -243,7 +243,7 @@ class MainContainer extends Component {
             tapBarActions = this.openedBucketActions;
         else if(this.props.isSelectionMode || this.props.isSingleItemSelected)
             tapBarActions = this.selectionModeActions;
-        console.log("main ", this.props.wallets)
+        
         return(
             <MainComponent
                 redirectToInitializationScreen = { this.props.redirectToInitializationScreen.bind(this) }

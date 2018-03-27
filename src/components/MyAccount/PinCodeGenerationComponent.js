@@ -13,8 +13,6 @@ export default class PinCodeGenerationComponent extends Component {
     constructor(props) {
         super(props)
 
-        console.log(props)
-
         this.state = {
             isError: false,
             text: this.props.text,
