@@ -65,7 +65,7 @@
                        isStarred: (BOOL) isStarred
                         isSynced: (BOOL) isSynced;
 
-//-(instancetype) initWithSJFile: (SJFile *) sjFile;
+-(instancetype) initWithSJFile: (SJFile *) sjFile;
 
 -(BOOL)isValid;
 
