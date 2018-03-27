@@ -4,6 +4,8 @@ const {
     LIST_SETTINGS,
     SYNC_ON,
     SYNC_OFF,
+    SET_WIFI_CONSTRAINT,
+    SET_CHARGING_CONSTRAINT,
     PHOTOS_SYNC,
     MOVIES_SYNC,
     DOCUMENTS_SYNC,
@@ -36,6 +38,16 @@ export default function settingsReducer(state = initialState, action) {
             return {
                 ...state,
                 syncStatus: false
+            };
+        case SET_WIFI_CONSTRAINT:
+            return {
+                ...state,
+                onWifi: action.payload.value
+            };
+        case SET_CHARGING_CONSTRAINT:
+            return {
+                ...state,
+                onCharging: action.payload.value
             };
         case PHOTOS_SYNC:
             return {

@@ -57,9 +57,11 @@ public class ServiceModule extends ReactContextBaseJavaModule {
 
     private GetBucketsService mGetBucketsService;
     private UploadService mUploadService;
+    private DownloadService mDownloadService;
 
     private PromiseHandler mPromise;
     private PromiseHandler mUploadServicePromise;
+    private PromiseHandler mDownloadServicePromise;
 
     private final ServiceConnection mConnection = new ServiceConnection() {
         @Override
@@ -71,13 +73,13 @@ public class ServiceModule extends ReactContextBaseJavaModule {
 
             switch (serviceName) {
                 case GET_SERVICE:
-                    mGetBucketsService = (GetBucketsService) baseReactService;
-                    mPromise.resolveString(serviceName);
+                    connectService(mPromise, mGetBucketsService, baseReactService, serviceName);
                     break;
                 case UPLOAD_SERVICE:
-                    mUploadService = (UploadService) baseReactService;
-                    mUploadServicePromise.resolveString(serviceName);
+                    connectService(mUploadServicePromise, mUploadService, baseReactService, serviceName);
                     break;
+                case DownloadService.SERVICE_NAME:
+                    connectService(mDownloadServicePromise, mDownloadService, baseReactService, serviceName);
             }
         }
 
@@ -89,6 +91,9 @@ public class ServiceModule extends ReactContextBaseJavaModule {
                     break;
                 case UPLOAD_SERVICE:
                     mUploadService = null;
+                    break;
+                case DownloadService.SERVICE_NAME:
+                    mDownloadService = null;
                     break;
             }
         }
@@ -102,6 +107,7 @@ public class ServiceModule extends ReactContextBaseJavaModule {
         _bRepository = new BucketRepository(_db);
         mPromise = new PromiseHandler();
         mUploadServicePromise = new PromiseHandler();
+        mDownloadServicePromise = new PromiseHandler();
     }
 
     @Override
@@ -110,19 +116,18 @@ public class ServiceModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void bindService(Promise promise) {
-        mPromise.setPromise(promise);
-
-        Intent testIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
-        getReactApplicationContext().bindService(testIntent, mConnection, Context.BIND_AUTO_CREATE);
+    public void bindGetBucketsService(Promise promise) {
+        bindService(mPromise, GetBucketsService.class, promise);
     }
 
     @ReactMethod
     public void bindUploadService(Promise promise) {
-        mUploadServicePromise.setPromise(promise);
+        bindService(mUploadServicePromise, UploadService.class, promise);
+    }
 
-        Intent uploadServiceIntent = new Intent(getReactApplicationContext(), UploadService.class);
-        getReactApplicationContext().bindService(uploadServiceIntent, mConnection, Context.BIND_AUTO_CREATE);
+    @ReactMethod
+    public void bindDownloadService(Promise promise) {
+        bindService(mDownloadServicePromise, DownloadService.class, promise);
     }
 
     @ReactMethod
@@ -145,6 +150,21 @@ public class ServiceModule extends ReactContextBaseJavaModule {
         uploadIntent.putExtra(UploadService.PARAMS_URI, uri);
 
         getReactApplicationContext().startService(uploadIntent);
+    }
+
+    @ReactMethod
+    public void downloadFile(String bucketId, String fileId, String localPath) {
+        if(bucketId == null || localPath == null || fileId == null) {
+            return;
+        }
+
+        Intent downloadIntent = new Intent(getReactApplicationContext(), DownloadService.class);
+        downloadIntent.setAction(DownloadService.ACTION_DOWNLOAD_FILE);
+        downloadIntent.putExtra(DownloadService.PARAMS_BUCKET_ID, bucketId);
+        downloadIntent.putExtra(DownloadService.PARAMS_FILE_ID, fileId);
+        downloadIntent.putExtra(DownloadService.PARAMS_LOCAL_PATH, localPath);
+
+        getReactApplicationContext().startService(downloadIntent);
     }
 
     @ReactMethod
@@ -181,45 +201,19 @@ public class ServiceModule extends ReactContextBaseJavaModule {
         serviceIntent.putExtra("bucketId", bucketId);
         serviceIntent.putExtra("fileId", fileId);
 
-
         getReactApplicationContext().startService(serviceIntent);
-    }   
+    }
 
-    @ReactMethod
-    public void scheduleSync(String settingsId) {
-        Driver driver = new GooglePlayDriver(getReactApplicationContext());
-        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(driver);
+    private void bindService(PromiseHandler handler, Class<? extends BaseReactService> serviceClass, Promise promise) {
+        handler.setPromise(promise);
 
-        dispatcher.cancelAll();
+        Intent intent = new Intent(getReactApplicationContext(), serviceClass);
+        getReactApplicationContext().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+    }
 
-        Bundle bundle = new Bundle();
-        bundle.putString(SettingsContract._SETTINGS_ID, settingsId);
-
-        Job myJob = dispatcher.newJobBuilder()
-                // the JobService that will be called
-                .setService(SynchronizationJobService.class)
-                // uniquely identifies the job
-                .setTag("sync-job")
-                // one-off job
-                .setRecurring(false)
-                // don't persist past a device reboot
-                .setLifetime(Lifetime.UNTIL_NEXT_BOOT)
-                // start between 0 and 15 minutes (900 seconds)
-                .setTrigger(Trigger.executionWindow(60, 120))
-                // overwrite an existing job with the same tag
-                .setReplaceCurrent(true)
-                // retry with exponential backoff
-                .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
-                .setExtras(bundle)
-                // constraints that need to be satisfied for the job to run
-                .setConstraints(
-                        // only run on an unmetered network
-                        Constraint.ON_UNMETERED_NETWORK,
-                        // only run when the device is charging
-                        Constraint.DEVICE_CHARGING
-                )
-                .build();
-        dispatcher.schedule(myJob);
+    private <T extends  BaseReactService> void connectService(PromiseHandler handler, T service, BaseReactService baseService, String value) {
+        service = (T) baseService;
+        handler.resolveString(value);
     }
 
     private <T> String toJson(T convertible) {

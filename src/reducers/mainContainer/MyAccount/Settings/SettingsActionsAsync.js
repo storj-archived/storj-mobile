@@ -4,13 +4,53 @@ import settingsActions from './SettingsActions';
 export function listSettingsAsync(settingsId) {
     return async (dispatch) => {
         let getSettingsResponse = await SyncModule.listSettings(settingsId);
-
+        console.log(getSettingsResponse);
         if(getSettingsResponse.isSuccess) {
-            let settings = JSON.parse(getSettingsResponse.result).syncSettings;
-            const newSettings = getObjectFromInt(settings);
+            let settingsModel = JSON.parse(getSettingsResponse.result);
+            let syncSettings = settingsModel.syncSettings;
+
+            syncSettings = settingsModel.syncStatus ? syncSettings | SYNC_ENUM.SYNC_ON : syncSettings &(~SYNC_ENUM.SYNC_ON);
+
+            const newSettings = getObjectFromInt(syncSettings);
 
             dispatch(settingsActions.listSettings(newSettings));
         }
+    };
+}
+
+export function changeSyncStatusAsync(settingsId, value) {
+    return async (dispatch) => {
+        value ? dispatch(settingsActions.syncOn()) : dispatch(settingsActions.syncOff());
+
+        let changeSyncStatusResponse = await SyncModule.changeSyncStatus(settingsId, value);
+        
+        if(!changeSyncStatusResponse.isSuccess) {
+            dispatch(settingsActions.syncOff());
+        }
+    };
+}
+
+export function setWifiConstraintAsync(settingsId, value, prevSettingsState) {
+    return async (dispatch) => {
+        _sync(dispatch, 
+            settingsId,
+            value, 
+            prevSettingsState, 
+            settingsActions.setWifiConstraint, 
+            (settingsState) => settingsState.onWifi,
+            (settingsState) => settingsState.onWifi = value);
+    };
+}
+
+export function setChargingConstraintAsync(settingsId, value, prevSettingsState) {
+    return async (dispatch) => {
+        _sync(dispatch, 
+            settingsId,
+            value, 
+            prevSettingsState, 
+            settingsActions.setChargingConstraint, 
+            (settingsState) => settingsState.onCharging,
+            (settingsState) => settingsState.onCharging = value);
     };
 }
 

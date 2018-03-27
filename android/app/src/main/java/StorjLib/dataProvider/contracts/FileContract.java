@@ -18,6 +18,8 @@ public final class FileContract extends BaseContract {
     public final static String _SIZE = "size";
     public final static String _STARRED = "isStarred";
     public final static String _SYNCED = "isSynced";
+    public final static String _DOWNLOAD_STATE = "downloadState";
+    public final static String _FILE_HANDLE = "fileHandle";
 
     public final static String FILE_FK = "bucketId";
 
@@ -35,8 +37,10 @@ public final class FileContract extends BaseContract {
                 "%s INTEGER, " +
                 "%s INTEGER, " +
                 "%s INTEGER, " +
+                "%s INTEGER DEFAULT 0, " +
+                "%s INTEGER DEFAULT 0, " +
                 "%s TEXT not null, " +
                 "FOREIGN KEY(%s) REFERENCES buckets(%s) ON DELETE CASCADE)",
-                TABLE_NAME, _ID, _NAME, _MIMETYPE, _INDEX, _HMAC, _ERASURE, _CREATED, _DECRYPTED, _STARRED, _SIZE, _SYNCED, FILE_FK, FILE_FK, _ID );
+                TABLE_NAME, _ID, _NAME, _MIMETYPE, _INDEX, _HMAC, _ERASURE, _CREATED, _DECRYPTED, _STARRED, _SIZE, _SYNCED, _DOWNLOAD_STATE, _FILE_HANDLE, FILE_FK, FILE_FK, _ID );
     }
 }

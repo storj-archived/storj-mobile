@@ -30,6 +30,8 @@ public class FileRepository extends BaseRepository {
         FileContract._STARRED,
         FileContract._SIZE,
         FileContract._SYNCED,
+        FileContract._DOWNLOAD_STATE,
+        FileContract._FILE_HANDLE,
         FileContract.FILE_FK,
         FileContract._NAME
     };
@@ -181,6 +183,8 @@ public class FileRepository extends BaseRepository {
         map.put(FileContract._MIMETYPE, model.getMimeType());
         map.put(FileContract._STARRED, model.getStarred());
         map.put(FileContract._SYNCED, model.isSynced());
+        map.put(FileContract._DOWNLOAD_STATE, model.downloadState());
+        map.put(FileContract._FILE_HANDLE, model.getFileHandle());
         map.put(FileContract._SIZE, model.getSize());
         map.put(FileContract.FILE_FK, model.getBucketId());
         map.put(FileContract._NAME, model.getName());
@@ -225,7 +229,12 @@ public class FileRepository extends BaseRepository {
         map.put(FileContract._HMAC, model.getHmac());
         map.put(FileContract._INDEX, model.getIndex());
         map.put(FileContract._MIMETYPE, model.getMimeType());
+        map.put(FileContract._STARRED, model.getStarred());
+        map.put(FileContract._SYNCED, model.isSynced());
+        map.put(FileContract._DOWNLOAD_STATE, model.downloadState());
+        map.put(FileContract._FILE_HANDLE, model.getFileHandle());
         map.put(FileContract._SIZE, model.getSize());
+        map.put(FileContract.FILE_FK, model.getBucketId());
         map.put(FileContract._NAME, model.getName());
 
         return _executeUpdate(FileContract.TABLE_NAME, model.getFileId(), null,null, map);
@@ -239,6 +248,18 @@ public class FileRepository extends BaseRepository {
         ContentValues map = new ContentValues();
 
         map.put(FileContract._STARRED, isStarred ? 1 : 0);
+
+        return _executeUpdate(FileContract.TABLE_NAME, fileId, null,null, map);
+    }
+
+    public Response update(String fileId, int downloadState, long fileHandle) {
+        if(fileId == null || fileId.isEmpty())
+            return new Response(false, "File id is not valid!");
+
+        ContentValues map = new ContentValues();
+
+        map.put(FileContract._DOWNLOAD_STATE, downloadState);
+        map.put(FileContract._FILE_HANDLE, fileHandle);
 
         return _executeUpdate(FileContract.TABLE_NAME, fileId, null,null, map);
     }
@@ -286,7 +307,11 @@ public class FileRepository extends BaseRepository {
                     case FileContract._SYNCED :
                         model.setProp(_columns[i], cursor.getInt(cursor.getColumnIndex(_columns[i])) == 1 ? true : false);
                         break;
+                    case FileContract._DOWNLOAD_STATE:
+                        model.setProp(_columns[i], cursor.getInt(cursor.getColumnIndex(_columns[i])));
+                        break;
                     case FileContract._SIZE :
+                    case FileContract._FILE_HANDLE:
                         model.setProp(_columns[i], cursor.getLong(cursor.getColumnIndex(_columns[i])));
                         break;
                 }

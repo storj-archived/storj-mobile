@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import io.storj.libstorj.File;
+import storjlib.dataProvider.contracts.FileContract;
 
 public class FileModel {
     @Expose
@@ -42,17 +43,24 @@ public class FileModel {
     @Expose
     @SerializedName("isSynced")
     private boolean _isSynced;
-
+    @Expose
+    @SerializedName(FileContract._DOWNLOAD_STATE)
+    private int _downloadState;
+    @Expose
+    @SerializedName(FileContract._FILE_HANDLE)
+    private long _fileHandle;
 
     public FileModel(File file) {
-        this(file, false, false);
+        this(file, false, false, 0, 0);
     }
 
     public FileModel(File file, boolean isStarred) {
-        this(file, isStarred, false);
+        this(file, isStarred, false, 0, 0);
     }
 
-    public FileModel(File file, boolean isStarred, boolean isSynced) {
+    public FileModel(File file, boolean isStarred, boolean isSynced) { this(file, isStarred, isSynced, 0, 0); }
+
+    public FileModel(File file, boolean isStarred, boolean isSynced, int downloadState, long fileHandle) {
         _bucketId = file.getBucketId();
         _created = file.getCreated();
         _erasure = file.getErasure();
@@ -65,6 +73,8 @@ public class FileModel {
         _size = file.getSize();
         _isStarred = isStarred;
         _isSynced = isSynced;
+        _downloadState = downloadState;
+        _fileHandle = fileHandle;
     }
 
     public FileModel(String bucketId, String fileId, String created, String erasure, String hmac, String index, boolean isDecrypted, boolean isStarred, String mimeType, String name, long size) {
@@ -138,4 +148,6 @@ public class FileModel {
         return _isStarred;
     }
     public boolean isSynced() { return _isSynced; }
+    public int downloadState() { return _downloadState; }
+    public long getFileHandle() { return _fileHandle; }
 }

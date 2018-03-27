@@ -44,7 +44,7 @@ export default class SettingsComponent extends Component{
                             onTintColor = { '#2794FF' } 
                             tintColor = { 'rgba(56, 75, 101, 0.2)' } 
                             thumbTintColor = { '#FFFFFF' }
-                            onValueChange = { () => { } }
+                            onValueChange = { () => { this.props.changeSyncStatus(!this.props.syncStatus); } }
                             value = { this.props.syncStatus } />
                     </View>
                     <View style = { styles.underline }/>
@@ -54,7 +54,7 @@ export default class SettingsComponent extends Component{
                             onTintColor = { '#2794FF' } 
                             tintColor = { 'rgba(56, 75, 101, 0.2)' } 
                             thumbTintColor = { '#FFFFFF' }
-                            onValueChange = { () => { } }
+                            onValueChange = { () => { this.props.setWifiConstraint(!this.props.onWifi, this.props.getStateObject()); } }
                             value = { this.props.onWifi } />
                     </View>
                     <View style = { styles.underline }/>
@@ -64,7 +64,7 @@ export default class SettingsComponent extends Component{
                             onTintColor = { '#2794FF' } 
                             tintColor = { 'rgba(56, 75, 101, 0.2)' } 
                             thumbTintColor = { '#FFFFFF' }
-                            onValueChange = { () => { } }
+                            onValueChange = { () => { this.props.setChargingConstraint(!this.props.onCharging, this.props.getStateObject()); } }
                             value = { this.props.onCharging } />
                     </View>
                     <View style = { styles.underline }/>

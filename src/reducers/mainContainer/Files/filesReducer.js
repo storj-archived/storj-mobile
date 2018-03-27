@@ -69,9 +69,6 @@ export default function filesReducer(state = initialState, action) {
         case FILE_DOWNLOAD_CANCELED:
             newState.fileListModels = filesManager.cancelDownload(action.payload.bucketId, action.payload.fileId);
             break;
-        case FILE_DOWNLOAD_CANCELED:
-            newState.uploadingFileListModels = filesManager.cancelDownload(action.payload.bucketId, action.payload.fileId);
-            break;
         case DELETE_FILE:
             newState.fileListModels = filesManager.deleteFileEntry(action.payload.bucketId, action.payload.fileId);
             break;

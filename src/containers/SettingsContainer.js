@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import SettingsComponent from "../components/MyAccount/SettingsComponent";
 import { 
-    listSettingsAsync, 
+    listSettingsAsync,
+    changeSyncStatusAsync,
+    setWifiConstraintAsync,
+    setChargingConstraintAsync,
     syncDownloadsAsync, 
     syncPhotosAsync, 
     syncDocumentsAsync, 
@@ -39,6 +42,9 @@ class SettingsContainer extends Component {
             <SettingsComponent
                 navigation = { this.props.navigation }
                 listSettings = { this.props.listSettings }
+                changeSyncStatus = { this.props.changeSyncStatus }
+                setWifiConstraint = { this.props.setWifiConstraint }
+                setChargingConstraint = { this.props.setChargingConstraint }
                 syncPhotosAction = { this.props.syncPhotosAction }
                 syncMoviesAction = { this.props.syncMoviesAction }
                 syncDocumentsAction = { this.props.syncDocumentsAction }
@@ -64,6 +70,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         listSettings: () => dispatch(listSettingsAsync(settingsId)),
+        changeSyncStatus: (value) => dispatch(changeSyncStatusAsync(settingsId, value)),
+        setWifiConstraint: (value, prevSettingsState) => dispatch(setWifiConstraintAsync(settingsId, value, prevSettingsState)),
+        setChargingConstraint: (value, prevSettingsState) => dispatch(setChargingConstraintAsync(settingsId, value, prevSettingsState)),
         syncPhotosAction: (value, prevSettingsState) => dispatch(syncPhotosAsync(settingsId, value, prevSettingsState)),
         syncMoviesAction: (value, prevSettingsState) => dispatch(syncMoviesAsync(settingsId, value, prevSettingsState)),
         syncDocumentsAction: (value, prevSettingsState) => dispatch(syncDocumentsAsync(settingsId, value, prevSettingsState)),

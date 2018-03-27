@@ -13,6 +13,7 @@ public final class SettingsContract implements BaseColumns {
     public final static String TABLE_NAME = "settingsTable";
 
     public final static String _SETTINGS_ID = "settingsId";
+    public final static  String _SYNC_STATUS = "syncStatus";
     public final static String _SYNC_SETTINGS = "syncSettings";
     public final static String _LAST_SYNC = "lastSync";
 
@@ -23,7 +24,8 @@ public final class SettingsContract implements BaseColumns {
                 "create table if not exists %s (" +
                         "%s TEXT primary key not null, " +
                         "%s NUMBER DEFAULT 0, " +
+                        "%s NUMBER DEFAULT 0, " +
                         "%s TIMESTAMP DEFAULT CURRENT_TIMESTAMP)",
-                TABLE_NAME, _ID, _SYNC_SETTINGS, _LAST_SYNC);
+                TABLE_NAME, _ID, _SYNC_STATUS, _SYNC_SETTINGS, _LAST_SYNC);
     }
 }
