@@ -34,6 +34,12 @@
   return self;
 }
 
++(SingleResponse *) successSingleResponseWithResult:(NSString *)result{
+  return [[SingleResponse alloc] initWithSuccess:YES
+                                      withResult:result
+                                 andErrorMessage:nil];
+}
+
 -(NSDictionary *) toDictionary{
   NSMutableDictionary * resultDictionary = [[NSMutableDictionary alloc]
                                             initWithDictionary:[super toDictionary]];
