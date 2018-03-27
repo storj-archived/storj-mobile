@@ -4,6 +4,8 @@ const {
     LIST_SETTINGS,
     SYNC_ON,
     SYNC_OFF,
+    SET_WIFI_CONSTRAINT,
+    SET_CHARGING_CONSTRAINT,
     PHOTOS_SYNC,
     MOVIES_SYNC,
     DOCUMENTS_SYNC,
@@ -26,6 +28,20 @@ function syncOn() {
 function syncOff() {
     return {
         type: SYNC_OFF
+    };
+}
+
+function setWifiConstraint(value) {
+    return {
+        type: SET_WIFI_CONSTRAINT,
+        payload: { value: value ? value : false }
+    };
+}
+
+function setChargingConstraint(value) {
+    return {
+        type: SET_CHARGING_CONSTRAINT,
+        payload: { value: value ? value : false }
     };
 }
 
@@ -61,6 +77,8 @@ export default {
     listSettings,
     syncOn,
     syncOff,
+    setWifiConstraint,
+    setChargingConstraint,
     photosSync,
     moviesSync,
     documentsSync,

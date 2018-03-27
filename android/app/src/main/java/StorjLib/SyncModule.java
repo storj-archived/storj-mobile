@@ -1,17 +1,29 @@
 package storjlib;
 
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.firebase.jobdispatcher.Constraint;
+import com.firebase.jobdispatcher.Driver;
+import com.firebase.jobdispatcher.FirebaseJobDispatcher;
+import com.firebase.jobdispatcher.GooglePlayDriver;
+import com.firebase.jobdispatcher.Job;
+import com.firebase.jobdispatcher.Lifetime;
+import com.firebase.jobdispatcher.RetryStrategy;
+import com.firebase.jobdispatcher.Trigger;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import storjlib.Enum.SyncSettingsEnum;
 import storjlib.Models.BucketModel;
 import storjlib.Models.FileModel;
+import storjlib.Models.SettingsModel;
 import storjlib.Models.UploadingFileModel;
 import storjlib.Responses.Response;
 import storjlib.Responses.SingleResponse;
@@ -20,10 +32,12 @@ import storjlib.dataProvider.Dbo.BucketDbo;
 import storjlib.dataProvider.Dbo.FileDbo;
 import storjlib.dataProvider.Dbo.SettingsDbo;
 import storjlib.dataProvider.Dbo.UploadingFileDbo;
+import storjlib.dataProvider.contracts.SettingsContract;
 import storjlib.dataProvider.repositories.BucketRepository;
 import storjlib.dataProvider.repositories.FileRepository;
 import storjlib.dataProvider.repositories.SettingsRepository;
 import storjlib.dataProvider.repositories.UploadingFilesRepository;
+import storjlib.services.SynchronizationJobService;
 
 /**
  * Created by Yaroslav-Note on 3/9/2018.
@@ -263,6 +277,103 @@ public class SyncModule extends ReactContextBaseJavaModule {
                 }
             }
         }).run();
+    }
+
+    @ReactMethod
+    public void changeSyncStatus(final String id, final boolean value, final Promise promise) {
+        if(id == null) {
+            promise.resolve(new Response(false, "settingId is not specified!"));
+            return;
+        }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getWritableDatabase()){
+                    Driver driver = new GooglePlayDriver(getReactApplicationContext());
+                    FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(driver);
+                    dispatcher.cancelAll();
+
+                    SettingsRepository settingsRepo = new SettingsRepository(db);
+                    SettingsDbo settingsDbo = settingsRepo.get(id);
+
+                    if(settingsDbo == null) {
+                        promise.resolve(new Response(false, "No settings entry for current account!"));
+                        return;
+                    }
+
+                    SettingsModel settingsModel = settingsDbo.toModel();
+
+                    if(value) {
+                        scheduleSync(settingsModel, dispatcher);
+                    }
+
+                    promise.resolve(settingsRepo.update(id, value).toWritableMap());
+
+                } catch(Exception e) {
+                    promise.resolve(new Response(false, "Something went wrong!").toWritableMap());
+                }
+            }
+        }).run();
+    }
+
+    private void scheduleSync(SettingsModel settingsModel, FirebaseJobDispatcher dispatcher) {
+        //dispatcher.cancelAll();
+
+        Bundle bundle = new Bundle();
+        bundle.putString(SettingsContract._SETTINGS_ID, settingsModel.getId());
+
+        List<Integer> constraints = new ArrayList<Integer>();
+        int syncSettings = settingsModel.getSyncSettings();
+
+        if(checkSyncSettings(syncSettings, SyncSettingsEnum.ON_WIFI.getValue())) {
+            constraints.add(Constraint.ON_UNMETERED_NETWORK);
+        }
+
+        if(checkSyncSettings(syncSettings, SyncSettingsEnum.ON_CHARGING.getValue())) {
+            constraints.add(Constraint.DEVICE_CHARGING);
+        }
+
+        Job myJob = getJobBuilder(dispatcher, bundle, constraints).build();
+        dispatcher.schedule(myJob);
+    }
+
+    private boolean checkSyncSettings(int syncSettings, int syncValue) {
+        return (syncSettings & syncValue) == syncValue;
+    }
+
+    private Job.Builder getJobBuilder(FirebaseJobDispatcher dispatcher, Bundle bundle, List<Integer> constaraints) {
+        Job.Builder myJobBuilder = dispatcher.newJobBuilder()
+                // the JobService that will be called
+                .setService(SynchronizationJobService.class)
+                // uniquely identifies the job
+                .setTag("sync-job")
+                // one-off job
+                .setRecurring(false)
+                // don't persist past a device reboot
+                .setLifetime(Lifetime.UNTIL_NEXT_BOOT)
+                // start between 0 and 15 minutes (900 seconds)
+                .setTrigger(Trigger.executionWindow(60, 120))
+                // overwrite an existing job with the same tag
+                .setReplaceCurrent(true)
+                // retry with exponential backoff
+                .setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL)
+                .setExtras(bundle);
+
+        int constraintSize = constaraints.size();
+
+        if(constraintSize > 0) {
+            //Integer[] intArray = (Integer[])constaraints.toArray();
+            int[] constArray = new int[constraintSize];
+
+            for(int i = 0; i < constraintSize; i++) {
+                constArray[i] = constaraints.get(i);
+            }
+
+            myJobBuilder.setConstraints(constArray);
+        }
+
+        return myJobBuilder;
     }
 
     private <T> String toJson(T[] convertible) {

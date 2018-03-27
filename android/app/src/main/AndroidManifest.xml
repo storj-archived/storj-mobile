@@ -40,6 +40,11 @@
           android:exported="true"
           android:enabled="true" />
 
+        <service
+            android:name="storjlib.services.DownloadService"
+            android:exported="true"
+            android:enabled="true" />
+
         <service android:name="storjlib.services.SynchronizationJobService" android:enabled="true">
             <intent-filter>
                 <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />

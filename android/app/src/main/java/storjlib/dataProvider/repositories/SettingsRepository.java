@@ -20,6 +20,7 @@ public class SettingsRepository extends BaseRepository {
     private String[] _columns = new String[] {
             SettingsContract._ID,
             SettingsContract._SYNC_SETTINGS,
+            SettingsContract._SYNC_STATUS,
             SettingsContract._LAST_SYNC
     };
 
@@ -51,6 +52,7 @@ public class SettingsRepository extends BaseRepository {
         ContentValues map = new ContentValues();
 
         map.put(SettingsContract._ID, model.getId());
+        map.put(SettingsContract._SYNC_STATUS, model.syncStatus());
         map.put(SettingsContract._SYNC_SETTINGS, model.getSyncSettings());
         map.put(SettingsContract._LAST_SYNC, model.lastSync());
 
@@ -60,8 +62,17 @@ public class SettingsRepository extends BaseRepository {
     public Response update(String id, String dateTime) {
         ContentValues map = new ContentValues();
 
-        map.put(SettingsContract._ID, id);
+        //map.put(SettingsContract._ID, id);
         map.put(SettingsContract._LAST_SYNC, dateTime);
+
+        return _executeUpdate(SettingsContract.TABLE_NAME, id, null, null, map);
+    }
+
+    public Response update(String id, boolean syncStatus) {
+        ContentValues map = new ContentValues();
+
+        //map.put(SettingsContract._ID, id);
+        map.put(SettingsContract._SYNC_STATUS, syncStatus);
 
         return _executeUpdate(SettingsContract.TABLE_NAME, id, null, null, map);
     }
@@ -69,7 +80,7 @@ public class SettingsRepository extends BaseRepository {
     public Response update(String id, int syncSettings) {
         ContentValues map = new ContentValues();
 
-        map.put(SettingsContract._ID, id);
+        //map.put(SettingsContract._ID, id);
         map.put(SettingsContract._SYNC_SETTINGS, syncSettings);
 
         return _executeUpdate(SettingsContract.TABLE_NAME, id, null, null, map);
@@ -87,6 +98,7 @@ public class SettingsRepository extends BaseRepository {
         ContentValues map = new ContentValues();
 
         map.put(SettingsContract._ID, model.getId());
+        map.put(SettingsContract._SYNC_STATUS, model.syncStatus());
         map.put(SettingsContract._SYNC_SETTINGS, model.getSyncSettings());
         map.put(SettingsContract._LAST_SYNC, model.lastSync());
 
@@ -125,6 +137,8 @@ public class SettingsRepository extends BaseRepository {
                 case SettingsContract._LAST_SYNC:
                     dbo.setProp(_columns[i], cursor.getString(cursor.getColumnIndex(_columns[i])));
                     break;
+                case SettingsContract._SYNC_STATUS:
+                    dbo.setProp(_columns[i], cursor.getInt(cursor.getColumnIndex(_columns[i])) == 1 ? true : false);
                 case SettingsContract._SYNC_SETTINGS:
                     dbo.setProp(_columns[i], cursor.getInt(cursor.getColumnIndex(_columns[i])));
                     break;

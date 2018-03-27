@@ -20,10 +20,16 @@ public class FileDbo {
     private boolean _isDecrypted;
     private boolean _isStarred;
     private boolean _isSynced;
+    private int _downloadState;
+    private long _fileHandle;
+
+    private boolean _isFileHandleSet;
 
     public String getId() {
         return _fileId;
     }
+    public long getFileHandle() { return _fileHandle; }
+    public boolean isFileHandleSet() { return _isFileHandleSet; }
 
     public void setProp(String propName, String value) {
         switch(propName) {
@@ -69,7 +75,24 @@ public class FileDbo {
     }
 
     public void setProp(String propName, long value) {
-        _size = value;
+        switch(propName) {
+            case FileContract._SIZE:
+                _size = value;
+                break;
+            case FileContract._FILE_HANDLE:
+                _fileHandle = value;
+                _isFileHandleSet = true;
+                break;
+        }
+
+    }
+
+    public void setProp(String propName, int value) {
+        switch (propName) {
+            case FileContract._DOWNLOAD_STATE:
+                _downloadState = value;
+                break;
+        }
     }
 
     public FileModel toModel() {

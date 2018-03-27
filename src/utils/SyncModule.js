@@ -48,6 +48,10 @@ const SyncModule = (() => {
         async updateSyncSettings(settingsId, syncSettings) {
             return await syncModule.updateSyncSettings(String(settingsId), Number(syncSettings));
         }
+
+        async changeSyncStatus(settingsId, value) {
+            return await syncModule.changeSyncStatus(String(settingsId), Boolean(value));
+        }
     }  
 
     return {

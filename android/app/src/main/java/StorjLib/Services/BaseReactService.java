@@ -68,30 +68,30 @@ public abstract class BaseReactService extends IntentService {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d("INTENT SERVICE DEBUG", "onCreate");
+        Log.d(TAG, "onCreate: " + mServiceName);
     }
 
     @Override
     public void onStart(Intent intent, int startId) {
         super.onStart(intent, startId);
-        Log.d("INTENT SERVICE DEBUG", "onStart");
+        Log.d(TAG, "onStart: " + mServiceName);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d("INTENT SERVICE DEBUG", "onStartCommand");
+        Log.d(TAG, "onStartCommand: " + mServiceName);
         return super.onStartCommand(intent, flags, startId);
     }
 
     private static final String TAG = "INTENT SERVICE DEBUG";
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        Log.d(TAG, "onTaskRemoved: " );
+        Log.d(TAG, "onTaskRemoved: " + mServiceName);
     }
 
     @Override
     public void onDestroy() {
-        Log.d("INTENT SERVICE DEBUG", "onDestroy");
+        Log.d(TAG, "onDestroy: " + mServiceName);
         super.onDestroy();
     }
 }

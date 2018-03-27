@@ -8,12 +8,16 @@ const ServiceModule = (() => {
         constructor() {
         }
 
-        async bindService() {
-            return await serviceModule.bindService();
+        async bindGetBucketsService() {
+            return await serviceModule.bindGetBucketsService();
         }
 
         async bindUploadService() {
             return await serviceModule.bindUploadService();
+        }
+
+        async bindDownloadService() {
+            return await serviceModule.bindDownloadService();
         }
 
         getFiles(bucketId) {
@@ -25,7 +29,11 @@ const ServiceModule = (() => {
         }
 
         uploadFile(bucketId, uri) {
-            serviceModule.uploadFile(bucketId, uri);
+            serviceModule.uploadFile(String(bucketId), String(uri));
+        }
+
+        downloadFile(bucketId, fileId, localPath) {
+            serviceModule.downloadFile(String(bucketId), String(fileId), String(localPath));
         }
 
         async createBucket(bucketName) {
@@ -38,10 +46,6 @@ const ServiceModule = (() => {
 
         async deleteFile(bucketId, fileId) {
             return await serviceModule.deleteFile(bucketId, fileId);
-        }
-
-        scheduleSync(settingsId) {
-            serviceModule.scheduleSync(settingsId);
         }
     }  
 

@@ -82,7 +82,7 @@ class MainContainer extends Component {
             BackHandler.addEventListener("hardwareBackPress", this.onHardwareBackPress);
         }
 
-        DeviceEventEmitter.addListener("downloadFile", this.downloadListener);
+        //DeviceEventEmitter.addListener("downloadFile", this.downloadListener);
 
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => { this.props.disableSelectionMode(); });
 
@@ -94,7 +94,7 @@ class MainContainer extends Component {
             BackHandler.removeEventListener("hardwareBackPress");
         }
 
-        DeviceEventEmitter.removeListener("downloadFile", this.downloadListener);
+        //DeviceEventEmitter.removeListener("downloadFile", this.downloadListener);
 
         this.keyboardDidShowListener.remove();
     }
@@ -139,23 +139,8 @@ class MainContainer extends Component {
         }
     }
 
-    async downloadFile(file, localPath) {        
-        const fileId = file.getId();
-        const observer = observablePropFactory.getObservable(fileId);
-        
-
-        observer.addListener({ id: fileId, callback: (param) => { 
-            if(this.props.openedBucketId === param.bucketId)
-                this.props.updateFileDownloadProgress(param.bucketId, fileId, param.progress, param.filePointer);
-        }});
-
-        let response = await StorjLib.downloadFile(this.props.openedBucketId, fileId, localPath);
-
-        if(response.isSuccess) {
-            this.props.downloadFileSuccess(this.props.openedBucketId, fileId, localPath);
-        } else {
-            this.props.downloadFileError(this.props.openedBucketId, fileId);
-        }
+    async downloadFile(file, localPath) {    
+        ServiceModule.downloadFile(file.entity.bucketId, file.getId(), localPath);
     }
 
     async downloadSelectedFiles() {

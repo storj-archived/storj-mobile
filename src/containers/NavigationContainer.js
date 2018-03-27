@@ -43,24 +43,48 @@ class Apps extends Component {
 		this.bucketDeletedListener = null;
 		this.fileDeletedListener = null;
 		this.getFilesListener = null;
+		this.downloadFileStartListener = null;
+		this.downloadFileProgressListener = null;
+		this.downloadFileSuccessListener = null;
+		this.downloadFileErrorListener = null;
     }
 
 	async componentWillMount() {
-		await ServiceModule.bindService();
+		await ServiceModule.bindGetBucketsService();
 		await ServiceModule.bindUploadService();
-		ServiceModule.scheduleSync("elvy.baila@arockee.com");
+		await ServiceModule.bindDownloadService();
 
 		this.getbucketsListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKETS_UPDATED, this.onBucketsReceived.bind(this));       
 		this.bucketCreatedListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKET_CREATED, this.onBucketCreated.bind(this));       
 		this.bucketDeletedListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKET_DELETED, this.onBucketDeleted.bind(this));       
 		this.fileDeletedListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILE_DELETED, this.onFileDeleted.bind(this));       
-		this.getFilesListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILES_UPDATED, this.onFilesReceived.bind(this));		
+		this.getFilesListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILES_UPDATED, this.onFilesReceived.bind(this));
+		this.downloadFileStartListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_START, this.onFileDownloadStart.bind(this));	
+		this.downloadFileProgressListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_PROGRESS, this.onFileDownloadProgress.bind(this));
+		this.downloadFileSuccessListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_SUCCESS, this.onFileDownloadSuccess.bind(this));
+		this.downloadFileErrorListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_ERROR, this.onFileDownloadError.bind(this));
 	}
 
 	componentDidMount() {
 		if(Platform.OS === 'android') {
 			BackHandler.addEventListener("hardwareBackPress", this.onHardwareBackPress);
 		}
+	}
+
+	onFileDownloadStart(params) {
+		this.props.updateFileDownloadProgress(null, params.fileId, params.progress, params.fileHandle);
+	}
+
+	onFileDownloadProgress(params) {
+		this.props.updateFileDownloadProgress(null, params.fileId, params.progress, params.fileHandle);
+	}
+
+	onFileDownloadSuccess(params) {
+		this.props.downloadFileSuccess(null, params.fileId, params.localPath);
+	}
+
+	onFileDownloadError(params) {
+		this.props.downloadFileError(null, params.fileId);
 	}
 
 	componentWillUnmount() {
@@ -73,6 +97,10 @@ class Apps extends Component {
 		this.bucketDeletedListener.remove();
 		this.fileDeletedListener.remove();
 		this.getFilesListener.remove();
+		this.downloadFileStartListener.remove();
+		this.downloadFileProgressListener.remove();
+		this.downloadFileSuccessListener.remove();
+		this.downloadFileErrorListener.remove();
 	}
 
 	onHardwareBackPress() {
@@ -112,7 +140,9 @@ class Apps extends Component {
         }
 		
         this.props.unsetLoading();
-    }
+	}
+	
+
 
 	onBucketCreated(response) {
 		if(response.isSuccess) {

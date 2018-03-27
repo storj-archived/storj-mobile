@@ -109,7 +109,7 @@ public final class UploadService extends BaseReactService {
                     try {
                         Thread threadName = Thread.currentThread();
                         if(!dbo.isIdSet())
-                            wait();
+                            dbo.wait();
                     } catch (Exception e) {
                         return;
                     }
@@ -125,6 +125,8 @@ public final class UploadService extends BaseReactService {
                         return;
                     }
                 }
+
+                Log.d("UPLOAD DEBUG", "File upload progress: " + Thread.currentThread().getId() + " , name: " + Thread.currentThread().getName() + ". Progress: " + progress);
 
                 dbo.setProp(UploadingFileContract._PROGRESS, _progress);
                 dbo.setProp(UploadingFileContract._UPLOADED, uploadedBytes);
@@ -148,7 +150,6 @@ public final class UploadService extends BaseReactService {
                 final NotificationCompat.Action cancelUploadAction = new NotificationCompat.Action(R.mipmap.ic_launcher, "Cancel", cancelIntentPending);*/
 
                 mNotificationService.notify((int)dbo.getId(), "Uploading " + dbo.getName(), (int)(_progress * 10000), 10000/*, cancelUploadAction*/);
-                Log.d("UPLOAD DEBUG", "File upload progress: " + Thread.currentThread().getId() + " , name: " + Thread.currentThread().getName() + ". Progress: " + progress);
 
                 /*try {
                     Thread.sleep((long)100);
@@ -159,6 +160,8 @@ public final class UploadService extends BaseReactService {
 
             @Override
             public void onComplete(String filePath, File file) {
+                Log.d("UPLOAD DEBUG", "File upload completed: " + Thread.currentThread().getId());
+
                 FileRepository fileRepo = new FileRepository(db);
                 FileModel model = new FileModel(file, false, isSynced);
 
@@ -168,13 +171,20 @@ public final class UploadService extends BaseReactService {
                 Response insertResponse = fileRepo.insert(model);
                 db.close();
 
-                WritableMap map = new WritableNativeMap();
-                map.putDouble(UploadingFileContract._FILE_HANDLE, fileHandle);
-                map.putString(FileContract._FILE_ID, model.getFileId());
+                if(deleteResponse.isSuccess() && insertResponse.isSuccess()) {
+                    WritableMap map = new WritableNativeMap();
+                    map.putDouble(UploadingFileContract._FILE_HANDLE, fileHandle);
+                    map.putString(FileContract._FILE_ID, model.getFileId());
 
-                sendEvent(EVENT_FILE_UPLOADED_SUCCESSFULLY, map);
-                mNotificationService.notify((int)dbo.getId(), file.getName() + " uploaded succesfully", 0, 0/*, null*/);
-                Log.d("UPLOAD DEBUG", "File upload completed: " + Thread.currentThread().getId());
+                    sendEvent(EVENT_FILE_UPLOADED_SUCCESSFULLY, map);
+                    mNotificationService.notify((int)dbo.getId(), file.getName() + " uploaded succesfully", 0, 0/*, null*/);
+                } else {
+                    Log.d("UPLOAD DEBUG", "uploaded succesfully: " + Thread.currentThread().getId() +
+                            ". COULDN'T DELETE ENTRY, ERROR DELETE: " +
+                            deleteResponse.getError().getMessage() +
+                            ". ERROR INSERT: " +
+                            insertResponse.getError().getMessage());
+                }
 
                 synchronized (syncObj) {
                     syncObj.setJobFinished();
@@ -183,18 +193,25 @@ public final class UploadService extends BaseReactService {
 
             @Override
             public void onError(String filePath, int code, String message) {
+                Log.d("UPLOAD DEBUG", "File upload error: " + Thread.currentThread().getId() + ". Error: " + message);
+
                 Response deleteResponse = repo.delete(dbo.getId());
                 db.close();
 
-                WritableMap map = new WritableNativeMap();
+                if(deleteResponse.isSuccess()) {
+                    WritableMap map = new WritableNativeMap();
 
-                map.putString("errorMessage", message);
-                map.putInt("errorCode", code);
-                map.putDouble(UploadingFileContract._FILE_HANDLE, dbo.getId());
+                    map.putString("errorMessage", message);
+                    map.putInt("errorCode", code);
+                    map.putDouble(UploadingFileContract._FILE_HANDLE, dbo.getId());
 
-                sendEvent(EVENT_FILE_UPLOAD_ERROR, map);
-                mNotificationService.notify((int)dbo.getId(), message, 0, 0/*, null*/);
-                Log.d("UPLOAD DEBUG", "File upload error: " + Thread.currentThread().getId() + ". Error: " + message);
+                    sendEvent(EVENT_FILE_UPLOAD_ERROR, map);
+                    mNotificationService.notify((int)dbo.getId(), message, 0, 0/*, null*/);
+                } else {
+                    Log.d("UPLOAD DEBUG", "File upload error: " + Thread.currentThread().getId() +
+                            ". COULDN'T DELETE UPLOADDING FILE ENTRY, ERROR: " +
+                            deleteResponse.getError().getMessage());
+                }
 
                 synchronized (syncObj) {
                     syncObj.setJobFinished();
