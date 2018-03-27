@@ -20,4 +20,7 @@
                     withResult: (NSString *) result
                  withErrorCode: (int)errorCode
                andErrorMessage: (NSString *) errorMessage;
+
++(SingleResponse *) successSingleResponseWithResult:(NSString *) result;
+
 @end

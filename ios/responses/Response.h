@@ -30,4 +30,10 @@
 -(instancetype) initWithSuccess: (BOOL) isSuccess
             andWithErrorMessage:(NSString *) errorMessage;
 
++(Response *) successResponse;
+
++(Response *) errorResponseWithCode:(int) errorCode
+                     andWithMessage: (NSString *) errorMessage;
+
++(Response *) errorResponseWithMessage: (NSString *) errorMessage;
 @end
