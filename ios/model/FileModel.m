@@ -79,6 +79,21 @@
   return self;
 }
 
+-(instancetype) initWithSJFile:(SJFile *)sjFile{
+  return [self initWithBucketId:[sjFile _bucketId]
+                        created:[sjFile _created]
+                        erasure:[sjFile _erasure]
+                           hmac:[sjFile _hmac]
+                         fileId:[sjFile _fileId]
+                          index:[sjFile _index]
+                       mimeType:[sjFile _mimeType]
+                           name:[sjFile _name]
+                           size:[sjFile _size]
+                    isDecrypted:[sjFile _isDecrypted]
+                      isStarred:NO
+                       isSynced:NO];
+}
+
 -(BOOL) isValid{
   return NO;
 }
