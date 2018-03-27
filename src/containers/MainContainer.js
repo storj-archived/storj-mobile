@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { mainContainerActions, favouritesActions } from '../reducers/mainContainer/mainReducerActions';
 import fileActions, { mainContainerFileActions, favouritesFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { redirectToMainScreen, redirectToInitializationScreen } from '../reducers/navigation/navigationActions';
+import { createWallet, getWallets } from '../reducers/billing/billingActions';
 import FileModel from '../models/FileModel';
 import BucketModel from '../models/BucketModel';
 import ListItemModel from '../models/ListItemModel';
@@ -327,7 +328,9 @@ class MainContainer extends Component {
                 isActionBarShown = { this.props.isActionBarShown } 
                 isCreateBucketInputShown = { this.props.isCreateBucketInputShown }
                 wallets = { this.props.wallets }
-                isLoading = { this.props.isLoading } />
+                isLoading = { this.props.isLoading }
+                createWallet = { this.props.createWallet } 
+                getWallets = { this.props.getWallets } />
         );
     }
 }
@@ -351,7 +354,17 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) { 
     return {
-        ...bindActionCreators({ ...fileActions, redirectToMainScreen, redirectToInitializationScreen, ...mainContainerActions, ...mainContainerFileActions, ...favouritesActions, ...favouritesFileActions }, dispatch),
+        ...bindActionCreators({ 
+            ...fileActions, 
+            redirectToMainScreen, 
+            redirectToInitializationScreen, 
+            ...mainContainerActions, 
+            ...mainContainerFileActions, 
+            ...favouritesActions, 
+            ...favouritesFileActions,
+            createWallet,
+            getWallets
+        }, dispatch),
         getUploadingFile: (fileHandle) => dispatch(uploadFileStart(fileHandle)),
         uploadSuccess: (fileHandle, fileId) => dispatch(uploadFileSuccess(fileHandle, fileId)),
         listUploadingFiles: () => dispatch(listUploadingFiles("test"))
