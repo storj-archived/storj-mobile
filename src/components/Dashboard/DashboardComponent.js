@@ -13,8 +13,6 @@ export default class DashboardComponent extends Component {
     constructor(props) {
         super(props);
 
-        console.log(this.props);
-
         this.animatedScrollValue = new Animated.Value(0);
     }
 

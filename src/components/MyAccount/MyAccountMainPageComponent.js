@@ -82,7 +82,9 @@ export default class MyAccountMainPageComponent extends Component{
                                     <Text style = { [styles.buttonTextRegular, styles.mainText] }>Balance</Text>
                                 </View>
                                 <View style = { styles.balanceContent }>
-                                    <Text style = { [styles.buttonTextBold, styles.balanceCount] }>{ '$100.50' }</Text>
+                                    <Text style = { [styles.buttonTextBold, styles.balanceCount] }>
+                                        { this.props.screenProps.getBalance() }
+                                    </Text>
                                     <Image 
                                         style = { styles.expandImage } 
                                         source = { require('../../images/DashboardScreen/Vector.png') } 

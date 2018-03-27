@@ -3,6 +3,8 @@ import { sha256 } from '../utils/sha256';
 import StorjModule from '../utils/StorjModule';
 import { DEBITS_URL, CREDITS_URL, WALLETS_URL, USERS_URL } from '../utils/constants/urlConstants';
 
+
+
 export async function getDebitsRequest() {
     let params = {};
             
@@ -41,6 +43,8 @@ export function changePasswordRequest(email) {
     return _changePasswordRequest(USERS_URL + '/' + email, params);
 }
 
+
+
 function _changePasswordRequest(url, params) {    
     return _createRequest(url, 'PATCH', null, params) ;
 }
@@ -67,6 +71,8 @@ async function _getBillingRequest(url, params) {
 
     return request;
 }
+
+
 
 function _createRequest(url, methodType, auth, data) {
     let params = {

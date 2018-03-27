@@ -109,7 +109,7 @@ async function _sync(dispatch, settingsId, value, settingsState, actionCallback,
     setterCallback(settingsState, value);
 
     let updateSettingsResponse = await SyncModule.updateSyncSettings(settingsId, getIntFromObject(settingsState));
-    console.log("updateSettingsResponse", updateSettingsResponse);
+    
     if(!updateSettingsResponse.isSuccess) {
         dispatch(actionCallback(prevValue));
     }

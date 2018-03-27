@@ -24,6 +24,7 @@ export default class MyAccountNavComponent extends Component {
                         showCredits: this.props.showCredits,                         
                         storageAmount: this.props.storageAmount,
                         bandwidthAmount: this.props.bandwidthAmount,
+                        getBalance: this.props.getBalance,
                         transactionList: this.props.transactionList
                     } }
                     animatedScrollValue = { this.animatedScrollValue }  />

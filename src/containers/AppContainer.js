@@ -12,6 +12,7 @@ export default class App extends Component {
 		super();
 				
 		global.btoa = require('base-64').encode;
+		global.atob = require('base-64').decode;
 	};
 
 	render() {

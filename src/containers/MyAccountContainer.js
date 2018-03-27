@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import MyAccountNavComponent from '../components/MyAccount/MyAccountNavComponent';
 import { redirectToStorageScreen } from '../reducers/navigation/navigationActions';
 import moment from 'moment';
-import { roundToGBAmount, formatAmount } from '../utils/utils';
+import { roundToGBAmount, formatAmount, getSum } from '../utils/utils';
 
 class MyAccountContainer extends Component {
     constructor(props) {
@@ -22,7 +22,7 @@ class MyAccountContainer extends Component {
             .filter((c) => !c.promo_amount)
             .map((credit) => {
                 const transaction = {...credit};
-                transaction.amount = -credit.paid_amount;
+                transaction.amount = formatAmount(-credit.paid_amount);
                 transaction.type = `${credit.type} payment`;
                 transaction.description = `- Thank you!`;
                 transaction.timestamp = moment.utc(credit.created).valueOf();
@@ -44,7 +44,7 @@ class MyAccountContainer extends Component {
                     break;                
             }
             
-            transaction.amount = debit.amount;
+            transaction.amount = formatAmount(debit.amount);
             transaction.type = debit.type;
 
             transaction.description = debit.type === 'adjustment'
@@ -61,7 +61,7 @@ class MyAccountContainer extends Component {
             .filter((c) => c.promo_amount) .map((credit) => {
                 const transaction = {...credit};
                 
-                transaction.amount = -credit.promo_amount;        
+                transaction.amount = formatAmount(-credit.promo_amount);        
                 transaction.description = '';
                 transaction.timestamp = moment.utc(credit.created).valueOf();
         
@@ -87,6 +87,16 @@ class MyAccountContainer extends Component {
         return temp.sort((t1, t2) => (t2.timestamp - t1.timestamp));
     }
 
+    balance() {
+        const debitSum = getSum(this.props.debits, 'amount');
+        const promoCreditSum = getSum(this.props.credits, 'promo_amount');
+        const paidCreditSum = getSum(this.props.credits, 'paid_amount');
+        const creditSum = paidCreditSum + promoCreditSum;
+        const freeCredit = 167;
+        const balance = -creditSum + debitSum - Math.min(debitSum, freeCredit);
+        return formatAmount(balance);
+      }
+
     render() {        
         return(
             <MyAccountNavComponent 
@@ -96,6 +106,7 @@ class MyAccountContainer extends Component {
                 showCredits = { this.props.screenProps.showCredits } 
                 storageAmount = { this.props.storage }
                 bandwidthAmount = { this.props.bandwidth }                
+                getBalance = { this.balance.bind(this) }
                 transactionList = { this.calculateTransactions() } /> 
         );
     }
