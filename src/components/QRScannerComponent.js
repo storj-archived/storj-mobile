@@ -19,7 +19,7 @@ export default class QRScannerComponent extends Component {
         super(props);
 
         this.state = {
-            borderColor: 'white'
+            borderColor: '#FFFFFF'
         }
 
         this.navigateBack = this.props.navigateBack ? this.props.navigateBack : () => {};
@@ -80,10 +80,10 @@ export default class QRScannerComponent extends Component {
                                 <Image style = { styles.backButton } source = { require('../images/Icons/BackButton.png') }/>
                             </TouchableOpacity>
                             <View style = { styles.flexRow }>
-                                <TouchableOpacity onPress = { () => this._barCode.startFlash() } >
+                                <TouchableOpacity onPress = { () => {} } >
                                     <Image style = { styles.flashButton } source = { require('../images/Icons/Flash.png') } />
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress = { () => this._barCode.stopFlash() } >
+                                <TouchableOpacity onPress = { () => {} } >
                                     <Image style = { styles.reverseCameraButton } source = { require('../images/Icons/SwitchCamera.png') }/>
                                 </TouchableOpacity>
                             </View>

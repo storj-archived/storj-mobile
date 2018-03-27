@@ -5,7 +5,7 @@ import { getDebitsRequest, getCreditsRequest, createWalletRequest, getWalletRequ
 
 const { SET_CREDITS, SET_DEBITS, SET_WALLETS, CREATE_WALLET, GET_DEBITS_FAILED } = BILLING_CONSTANTS;
 
-export function getDebits () {
+export function getDebits() {
     return async (dispatch) => {                
         let request = await getDebitsRequest();
         let response = await fetch(request);
@@ -20,7 +20,7 @@ export function getDebits () {
     };
 }
 
-export function getCredits () {
+export function getCredits() {
     return async (dispatch) => {                            
         let request = await getCreditsRequest();
         let response = await fetch(request);
@@ -34,13 +34,13 @@ export function getCredits () {
     };
 }
 
-export function createWallet (currency) {
+export function createWallet(currency) {
     return async (dispatch) => {                            
         let request = await createWalletRequest(currency);        
         let response = await fetch(request);
 
         if(response.ok) {
-            let wallet = await response.json();                                
+            let wallet = await response.json();                               
             dispatch({ type: CREATE_WALLET, payload: { wallet } });
         } else {                
             dispatch({ type: GET_DEBITS_FAILED });

@@ -9,6 +9,9 @@ import {
 import React, { Component } from 'react';
 import { getHeight, getWidth } from '../utils/adaptive';
 
+/**
+ * Red warning on top of application with message 
+ */
 export default class WarningComponent extends Component{
     constructor(props) {
         super(props);
