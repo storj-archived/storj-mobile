@@ -65,7 +65,7 @@ export default class ListItemComponent extends Component {
                     }
                     
                     if(props.item.entity.bucketId) { 
-                        this.props.onPress({ id: props.item.getId(), bucketId: props.item.entity.bucketId }); 
+                        this.props.onPress(props.item); 
                     } else {
                         this.props.onPress({ bucketId: props.item.getId() });
                     }

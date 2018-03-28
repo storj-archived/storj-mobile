@@ -118,7 +118,11 @@ export default class GridItemComponent extends Component {
                         return;
                     }
                     
-                    this.props.onPress({ bucketId: props.item.getId() });
+                    if(props.item.entity.bucketId) { 
+                        this.props.onPress(props.item); 
+                    } else {
+                        this.props.onPress({ bucketId: props.item.getId() });
+                    }
                 }}
                 onLongPress = { () => {
                     props.onLongPress(props.item);

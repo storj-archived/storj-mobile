@@ -262,9 +262,9 @@ export default class ListComponent extends Component {
     getItemsWithoutExpander() {
         props = this.props;
 
-        function onPress(params) {     
-            props.openBucket(params.bucketId);
-            props.navigateToDashboardFilesScreen(params.bucketId);              
+        function onPress(file) {     
+            props.openBucket(file.entity.bucketId);
+            props.navigateToDashboardFilesScreen(file.entity.bucketId);              
         }
 
         return this.props.data.map((item) => {
@@ -288,7 +288,7 @@ export default class ListComponent extends Component {
                     listItemIcon = { this.props.listItemIcon }
                     starredListItemIcon = { this.props.starredListItemIcon }
                     onSelectionPress = { () => { this.selectItem(item); } }
-                    onPress = { (params) => { onPress(params); } }
+                    onPress = { (file) => { onPress(file); } }
                     onSingleItemSelected = { this.props.onSingleItemSelected } />
             )
         })

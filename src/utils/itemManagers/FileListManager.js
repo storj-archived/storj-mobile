@@ -7,10 +7,9 @@ export default class FileListManager {
      * @param {FileListModel[]} filesList 
      * @param {FileListModel[]} uploadingFileList 
      */
-    constructor(filesList, uploadingFileList, downloadedFileList) {
+    constructor(filesList, uploadingFileList) {
         this.newFilesList = filesList;
         this.newFileUploadingList = uploadingFileList;
-        this.newFileDownloadedList = downloadedFileList;
     }
 
     addFileEntry(bucketId, file) {
@@ -19,23 +18,6 @@ export default class FileListManager {
 
     addFileEntryU(bucketId, file) {
         return this._addFileEntry(this.newFileUploadingList, bucketId, file);
-    }
-
-    addFileEntryD(bucketId, file) {
-        //return this._addFileEntry(this.newFileDownloadedList, bucketId, file);
-        let doesContain = false;
-
-        this.newFileDownloadedList.forEach((item) => {
-             if(item.id === file.id) doesContain = true;
-        });
-
-        if(!doesContain) {
-            this.newFileDownloadedList.push(file);
-        }
-
-        this.newFileDownloadedList = this.newFileDownloadedList.map(file => file);
-        
-        return this.newFileDownloadedList;
     }
 
     //--------------------------------------------------------------------------

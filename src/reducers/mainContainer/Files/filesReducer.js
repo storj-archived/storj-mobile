@@ -29,16 +29,14 @@ const {
 const initialState = {
     fileListModels: [],
     uploadingFileListModels: [],
-    downloadedFileListModels: [],
     uploadingFiles: []
 };
 
 export default function filesReducer(state = initialState, action) {
     let newState = Object.assign({}, state);
-    let filesManager = new FileListManager(newState.fileListModels, newState.uploadingFileListModels, newState.downloadedFileListModels);
+    let filesManager = new FileListManager(newState.fileListModels, newState.uploadingFileListModels);
     switch(action.type) {
         case LIST_FILES:
-            console.log(action.payload.file);
             newState.fileListModels = filesManager.listFiles(action.payload.bucketId, action.payload.files);
             newState.uploadingFileListModels = filesManager.listUploadingFiles(action.payload.bucketId, action.payload.files);
             break;
@@ -48,7 +46,6 @@ export default function filesReducer(state = initialState, action) {
         case UPLOAD_FILE_SUCCESS:
             newState.uploadingFileListModels = filesManager.deleteFileEntryU(action.payload.bucketId, action.payload.filePath);
             newState.fileListModels = filesManager.addFileEntry(action.payload.bucketId, action.payload.file);
-            newState.downloadedFileListModels = filesManager.addFileEntryD(action.payload.bucketId, { id: action.payload.file.getId(), path: action.payload.filePath });
             break;
         case UPLOAD_FILE_ERROR:
             newState.uploadingFileListModels = filesManager.delete(action.payload.fileHandle);
@@ -57,8 +54,7 @@ export default function filesReducer(state = initialState, action) {
             newState.uploadingFileListModels = filesManager.update(action.payload.fileHandle, action.payload.progress, action.payload.uploaded);
             break;
         case DOWNLOAD_FILE_SUCCESS:
-            newState.fileListModels = filesManager.fileDownloaded(action.payload.bucketId, action.payload.fileId);
-            newState.downloadedFileListModels = filesManager.addFileEntryD(action.payload.bucketId, { id: action.payload.fileId, path: action.payload.filePath });
+            newState.fileListModels = filesManager.fileDownloaded(action.payload.bucketId, action.payload.fileId);            
             break;
         case DOWNLOAD_FILE_ERROR:
             newState.fileListModels = filesManager.fileDownloaded(action.payload.bucketId, action.payload.fileId);
