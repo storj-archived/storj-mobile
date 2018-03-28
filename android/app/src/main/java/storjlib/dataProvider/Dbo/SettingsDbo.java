@@ -9,6 +9,7 @@ import storjlib.dataProvider.contracts.SettingsContract;
 
 public class SettingsDbo {
     private String _id;
+    private boolean _isFirstSignIn;
     private boolean _syncStatus;
     private int _syncSettings;
     private String _lastSync;
@@ -43,10 +44,14 @@ public class SettingsDbo {
         switch(paramName) {
             case SettingsContract._SYNC_STATUS:
                 _syncStatus = paramValue;
+                break;
+            case SettingsContract._FIRST_SIGN_IN:
+                _isFirstSignIn = paramValue;
+                break;
         }
     }
 
     public SettingsModel toModel() {
-        return new SettingsModel(_id, _syncStatus, _syncSettings, _lastSync);
+        return new SettingsModel(_id, _isFirstSignIn, _syncStatus, _syncSettings, _lastSync);
     }
 }

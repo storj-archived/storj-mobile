@@ -22,6 +22,7 @@ public class FileDbo {
     private boolean _isSynced;
     private int _downloadState;
     private long _fileHandle;
+    private String _fileUri;
 
     private boolean _isFileHandleSet;
 
@@ -54,8 +55,11 @@ public class FileDbo {
             case FileContract.FILE_FK:
                 _bucketId = value;
                 break;
-            case FileContract._NAME :
+            case FileContract._NAME:
                 _name = value;
+                break;
+            case FileContract._FILE_URI:
+                _fileUri = value;
                 break;
         }
     }
@@ -96,6 +100,6 @@ public class FileDbo {
     }
 
     public FileModel toModel() {
-        return new FileModel(_bucketId, _fileId, _created, _erasure, _hmac, _index, _isDecrypted, _isStarred, _mimeType, _name, _size, _isSynced);
+        return new FileModel(_bucketId, _fileId, _created, _erasure, _hmac, _index, _isDecrypted, _isStarred, _mimeType, _name, _size, _isSynced, _downloadState, _fileUri);
     }
 }

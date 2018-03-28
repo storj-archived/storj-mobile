@@ -1,4 +1,5 @@
 import { NativeModules } from 'react-native';
+console.log(NativeModules);
 
 const SyncModule = (() => {
     let instance = null;
@@ -45,16 +46,20 @@ const SyncModule = (() => {
             return await syncModule.listSettings(String(settingsId));
         }
 
+        async insertSyncSetting(settingsId) {
+            return await syncModule.insertSyncSetting(String(settingsId));
+        }
+        
         async updateSyncSettings(settingsId, syncSettings) {
             return await syncModule.updateSyncSettings(String(settingsId), Number(syncSettings));
         }
 
-        async changeSyncStatus(settingsId, value) {
-            return await syncModule.changeSyncStatus(String(settingsId), Boolean(value));
+        async setFirstSignIn(settingsId, syncSettings) {
+            return await syncModule.setFirstSignIn(String(settingsId), Number(syncSettings));
         }
 
-        async insertSyncSetting(settingsId) {
-            return await syncModule.insertSyncSetting(String(settingsId));
+        async changeSyncStatus(settingsId, value) {
+            return await syncModule.changeSyncStatus(String(settingsId), Boolean(value));
         }
     }  
 

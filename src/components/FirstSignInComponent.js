@@ -47,7 +47,7 @@ export default class FirstSignInComponent extends Component {
             settings = settings | this.props.SYNC_ENUM.ON_WIFI;
             settings = settings | this.props.SYNC_ENUM.ON_CHARGING;
 
-            this.props.updateSyncSettings(settings, (result) => {
+            this.props.setFirstSignIn(settings, (result) => {
                 console.log(result);
                 this.props.changeSyncStatus(true);
             });
