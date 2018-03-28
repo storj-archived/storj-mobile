@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     },
     navContainer: {
         bottom: 0,
-        backgroundColor: 'white',
+        backgroundColor: 'transparent',
         opacity: 0.75,
         height:  getHeight(50),
         borderTopColor: 'gray',
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     tabItemContainer: {
-        backgroundColor: 'white',
+        backgroundColor: 'rgba(255,255,255,0.8)',
         flex: 20,
         alignItems: 'center',
         justifyContent: 'center'

@@ -1,4 +1,4 @@
-import { Keyboard, DeviceEventEmitter, BackHandler, Platform } from 'react-native';
+import { Keyboard, DeviceEventEmitter, BackHandler, Platform, Alert } from 'react-native';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -44,7 +44,7 @@ class MainContainer extends Component {
             ),
             TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 5', require('../images/ActionBar/DownloadIFileIcon.png')), 
             TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 6', require('../images/ActionBar/CopyBucketIcon.png')), 
-            TabBarActionModelFactory.createNewAction(() => { this.deleteBuckets(); }, 'Action 7', require('../images/ActionBar/TrashBucketIcon.png'))
+            TabBarActionModelFactory.createNewAction(() => { this.tryDeleteBuckets(); }, 'Action 7', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
         
         this.openedBucketActions = [
@@ -91,6 +91,18 @@ class MainContainer extends Component {
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => { this.props.disableSelectionMode(); });
 
         this.props.listUploadingFiles();
+    }
+
+    tryDeleteBuckets() {
+        Alert.alert(
+            'Delete permanently?',
+            'Are you sure to delete selected buckets permanently?',
+            [
+                { text: 'Cancel', onPress: () => { }, style: 'cancel' },
+                { text: 'Delete', onPress: () => { this.deleteBuckets(); } }
+            ],
+            { cancelable: false }
+        );
     }
     
     componentWillUnmount () {

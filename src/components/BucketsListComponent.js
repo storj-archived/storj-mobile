@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: 'white',
-        marginTop: getHeight(58),
-        paddingBottom: getHeight(60)
+        paddingTop: getHeight(58)
     }
 });

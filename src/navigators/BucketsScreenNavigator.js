@@ -15,7 +15,8 @@ const BucketsScreenNavigator = StackNavigator(
         }
     }, 
     {
-        initialRouteName: 'BucketsListScreen'
+        initialRouteName: 'BucketsListScreen',
+        headerMode: 'none'
     }
 );
 

@@ -174,11 +174,6 @@ export default class PinCodeGenerationComponent extends Component {
                                 <Text style = { [styles.titleText, styles.titleMargin] }>Secret phrase</Text>
                             </View>
                         </View>
-                        <TouchableOpacity 
-                            onPress = { () => { this.props.navigation.goBack(); } }
-                            style = { styles.backButtonContainer } >
-                            <Text style = { [styles.cancelText, styles.titleMargin] }>Cancel</Text>
-                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={[styles.container, containerStyle]}>
@@ -224,7 +219,7 @@ const styles = StyleSheet.create({
     },
     topContentContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         marginTop: getHeight(15)
     },

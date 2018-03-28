@@ -93,8 +93,7 @@ function rotateTransform(xOffset) {
         {
             transform: [
                 { translateY: mainContainerMoveY }
-            ],
-            //backgroundColor: color
+            ]
         },
         {
             transform: [
@@ -165,7 +164,7 @@ class AnimatedHeader extends Component {
 
 const styles = StyleSheet.create({
     mainContainer: {
-        backgroundColor: 'transparent',
+        backgroundColor: 'rgba(255,255,255,0.8)',
         justifyContent: 'center',
         position: 'absolute',
         height: getHeight(80),
@@ -175,7 +174,7 @@ const styles = StyleSheet.create({
     },
     headerContainer: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: 'transparent',
         justifyContent: 'flex-end',
         borderBottomWidth: 0,
         paddingBottom: getHeight(10),

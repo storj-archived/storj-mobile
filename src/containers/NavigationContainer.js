@@ -196,7 +196,7 @@ class Apps extends Component {
 
 	render() {
 		return (
-			<View style = { { flex: 1 } }>
+			<View style = { { flex: 1, backgroundColor: 'white' } }>
 				<StackNavigator 
 					screenProps = {{
 						redirectToLoginScreen: this.props.redirectToLoginScreen,

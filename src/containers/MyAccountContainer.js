@@ -5,6 +5,7 @@ import MyAccountNavComponent from '../components/MyAccount/MyAccountNavComponent
 import { redirectToStorageScreen } from '../reducers/navigation/navigationActions';
 import moment from 'moment';
 import { roundToGBAmount, formatAmount, getSum } from '../utils/utils';
+import { resetPassword } from '../reducers/authentification/authActions';
 
 class MyAccountContainer extends Component {
     constructor(props) {
@@ -104,10 +105,16 @@ class MyAccountContainer extends Component {
                 showQR = { this.props.screenProps.showQR }
                 showStorageInfo = { this.props.screenProps.showStorageInfo }
                 showCredits = { this.props.screenProps.showCredits } 
+                showPopUp = { this.props.screenProps.showPopUp }
                 storageAmount = { this.props.storage }
                 bandwidthAmount = { this.props.bandwidth }                
+<<<<<<< HEAD
                 getBalance = { this.balance.bind(this) }
                 transactionList = { this.calculateTransactions() } /> 
+=======
+                transactionList = { this.calculateTransactions() }
+                resetPassword = { this.props.resetPassword } /> 
+>>>>>>> [ADDED] change password and delete buckets confirmation
         );
     }
 }
@@ -126,7 +133,7 @@ function mapStateToProps(state) {
 }
     
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators( { }, dispatch);
+    return bindActionCreators( { resetPassword }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyAccountContainer);

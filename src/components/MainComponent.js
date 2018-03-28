@@ -13,6 +13,7 @@ import CreateBucketPopUpComponent from '../components/InputPopUpComponent';
 import QRCodeComponent from '../components/MyAccount/QRCodeComponent';
 import StorageInfoComponent from '../components/MyAccount/StorageInfoComponent';
 import AddCreditComponent from '../components/MyAccount/AddCreditComponent';
+import PopUpComponent from '../components/PopUpComponent';
 
 export default class MainComponent extends Component {
     constructor(props) {
@@ -22,7 +23,8 @@ export default class MainComponent extends Component {
             showOptions: false,
             showQR: false,
             showStorageInfo: false,
-            showCredits: false
+            showCredits: false,
+            showPopUp: false
         }
     };
 
@@ -41,6 +43,10 @@ export default class MainComponent extends Component {
     showCredits() {
         this.setState({ showCredits: !this.state.showCredits });
     }
+
+    showPopUp() {
+        this.setState({ showPopUp: !this.state.showPopUp });
+    }
     
     render() {
         const isSelectionMode = this.props.isSelectionMode || this.props.isSingleItemSelected; 
@@ -54,6 +60,7 @@ export default class MainComponent extends Component {
                         showQR = { this.showQR.bind(this) }
                         showCredits = { this.showCredits.bind(this) }
                         showStorageInfo = { this.showStorageInfo.bind(this) }
+                        showPopUp = { this.showPopUp.bind(this) }
                         isSingleItemSelected = { this.props.isSingleItemSelected }
                         isActionBarShown = { this.props.isActionBarShown }
                         isSelectionMode = { this.props.isSelectionMode }
@@ -113,6 +120,12 @@ export default class MainComponent extends Component {
                             createWallet = { this.props.createWallet }
                             getWallets = { this.props.getWallets }
                             showCredits = { this.showCredits.bind(this) } /> : null
+                }
+                {
+                    this.state.showPopUp ? 
+                        <PopUpComponent
+                            showPopUp = { this.showPopUp.bind(this) }
+                            message = 'Email sent' /> : null
                 }
             </View>
         );
