@@ -16,6 +16,7 @@ export default class BucketsListComponent extends Component {
         return(
             <View style = { styles.mainContainer }>
                 <ListComponent
+                    contentWrapperStyle = { styles.contentWrapper }
                     onRefresh = { this.props.refresh }
                     setSelectionId = { this.props.setSelectionId }
                     isGridViewShown = { this.props.isGridViewShown }
@@ -43,6 +44,10 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: 'white',
-        paddingTop: getHeight(58)
+        //paddingTop: getHeight(58)
+    },
+    contentWrapper: {
+        paddingTop: getHeight(58),
+        paddingBottom: getHeight(60)
     }
 });
