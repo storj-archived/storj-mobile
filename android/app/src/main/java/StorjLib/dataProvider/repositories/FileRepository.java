@@ -33,7 +33,8 @@ public class FileRepository extends BaseRepository {
         FileContract._DOWNLOAD_STATE,
         FileContract._FILE_HANDLE,
         FileContract.FILE_FK,
-        FileContract._NAME
+        FileContract._NAME,
+        FileContract._FILE_URI
     };
 
     @Inject
@@ -185,6 +186,7 @@ public class FileRepository extends BaseRepository {
         map.put(FileContract._SYNCED, model.isSynced());
         map.put(FileContract._DOWNLOAD_STATE, model.downloadState());
         map.put(FileContract._FILE_HANDLE, model.getFileHandle());
+        map.put(FileContract._FILE_URI, model.getUri());
         map.put(FileContract._SIZE, model.getSize());
         map.put(FileContract.FILE_FK, model.getBucketId());
         map.put(FileContract._NAME, model.getName());
@@ -230,9 +232,10 @@ public class FileRepository extends BaseRepository {
         map.put(FileContract._INDEX, model.getIndex());
         map.put(FileContract._MIMETYPE, model.getMimeType());
         //map.put(FileContract._STARRED, model.getStarred());
-        map.put(FileContract._SYNCED, model.isSynced());
-        map.put(FileContract._DOWNLOAD_STATE, model.downloadState());
-        map.put(FileContract._FILE_HANDLE, model.getFileHandle());
+        //map.put(FileContract._SYNCED, model.isSynced());
+        //map.put(FileContract._DOWNLOAD_STATE, model.downloadState());
+        //map.put(FileContract._FILE_HANDLE, model.getFileHandle());
+        //map.put(FileContract._FILE_URI, model.getUri());
         map.put(FileContract._SIZE, model.getSize());
         map.put(FileContract.FILE_FK, model.getBucketId());
         map.put(FileContract._NAME, model.getName());
@@ -252,7 +255,7 @@ public class FileRepository extends BaseRepository {
         return _executeUpdate(FileContract.TABLE_NAME, fileId, null,null, map);
     }
 
-    public Response update(String fileId, int downloadState, long fileHandle) {
+    public Response update(String fileId, int downloadState, long fileHandle, String fileUri) {
         if(fileId == null || fileId.isEmpty())
             return new Response(false, "File id is not valid!");
 
@@ -260,6 +263,7 @@ public class FileRepository extends BaseRepository {
 
         map.put(FileContract._DOWNLOAD_STATE, downloadState);
         map.put(FileContract._FILE_HANDLE, fileHandle);
+        map.put(FileContract._FILE_URI, fileUri);
 
         return _executeUpdate(FileContract.TABLE_NAME, fileId, null,null, map);
     }
@@ -300,6 +304,7 @@ public class FileRepository extends BaseRepository {
                     case FileContract._INDEX:
                     case FileContract._MIMETYPE:
                     case FileContract.FILE_FK:
+                    case FileContract._FILE_URI:
                         model.setProp(_columns[i], cursor.getString(cursor.getColumnIndex(_columns[i])));
                         break;
                     case FileContract._DECRYPTED :

@@ -104,6 +104,7 @@ class InitializeContainer extends Component {
     async getAllFiles() {
         let filesResponse = await SyncModule.listAllFiles();		
 
+        console.log(filesResponse);
         if(filesResponse.isSuccess) {
             let files = JSON.parse(filesResponse.result).map((file) => {
                 return new ListItemModel(new FileModel(file));

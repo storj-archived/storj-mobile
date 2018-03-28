@@ -19,6 +19,7 @@ import storjlib.dataProvider.contracts.SettingsContract;
 public class SettingsRepository extends BaseRepository {
     private String[] _columns = new String[] {
             SettingsContract._ID,
+            SettingsContract._FIRST_SIGN_IN,
             SettingsContract._SYNC_SETTINGS,
             SettingsContract._SYNC_STATUS,
             SettingsContract._LAST_SYNC
@@ -51,7 +52,8 @@ public class SettingsRepository extends BaseRepository {
     public Response update(SettingsModel model) {
         ContentValues map = new ContentValues();
 
-        map.put(SettingsContract._ID, model.getId());
+        //map.put(SettingsContract._ID, model.getId());
+        map.put(SettingsContract._FIRST_SIGN_IN, model.isFirstSignIn());
         map.put(SettingsContract._SYNC_STATUS, model.syncStatus());
         map.put(SettingsContract._SYNC_SETTINGS, model.getSyncSettings());
         map.put(SettingsContract._LAST_SYNC, model.lastSync());
@@ -86,6 +88,16 @@ public class SettingsRepository extends BaseRepository {
         return _executeUpdate(SettingsContract.TABLE_NAME, id, null, null, map);
     }
 
+    public Response update(String id, int syncSettings, boolean isFirstSingIn) {
+        ContentValues map = new ContentValues();
+
+        //map.put(SettingsContract._ID, id);
+        map.put(SettingsContract._SYNC_SETTINGS, syncSettings);
+        map.put(SettingsContract._FIRST_SIGN_IN, isFirstSingIn);
+
+        return _executeUpdate(SettingsContract.TABLE_NAME, id, null, null, map);
+    }
+
     public Response insert(String id) {
         ContentValues map = new ContentValues();
 
@@ -98,6 +110,7 @@ public class SettingsRepository extends BaseRepository {
         ContentValues map = new ContentValues();
 
         map.put(SettingsContract._ID, model.getId());
+        map.put(SettingsContract._FIRST_SIGN_IN, model.isFirstSignIn());
         map.put(SettingsContract._SYNC_STATUS, model.syncStatus());
         map.put(SettingsContract._SYNC_SETTINGS, model.getSyncSettings());
         map.put(SettingsContract._LAST_SYNC, model.lastSync());
@@ -138,6 +151,7 @@ public class SettingsRepository extends BaseRepository {
                     dbo.setProp(_columns[i], cursor.getString(cursor.getColumnIndex(_columns[i])));
                     break;
                 case SettingsContract._SYNC_STATUS:
+                case SettingsContract._FIRST_SIGN_IN:
                     dbo.setProp(_columns[i], cursor.getInt(cursor.getColumnIndex(_columns[i])) == 1 ? true : false);
                 case SettingsContract._SYNC_SETTINGS:
                     dbo.setProp(_columns[i], cursor.getInt(cursor.getColumnIndex(_columns[i])));

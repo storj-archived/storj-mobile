@@ -264,6 +264,22 @@ public class SyncModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void insertSyncSetting(final String id, final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
+                    SettingsRepository settingsRepo = new SettingsRepository(db);
+                    promise.resolve(settingsRepo.insert(id).toWritableMap());
+
+                } catch (Exception e) {
+                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
+                }
+            }
+        }).run();
+    }
+
+    @ReactMethod
     public void updateSyncSettings(final String id, final int syncSettings, final Promise promise) {
         new Thread(new Runnable() {
             @Override
@@ -280,13 +296,13 @@ public class SyncModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void insertSyncSetting(final String id, final Promise promise) {
+    public void setFirstSignIn(final String id, final int syncSettings, final Promise promise) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
                     SettingsRepository settingsRepo = new SettingsRepository(db);
-                    promise.resolve(settingsRepo.insert(id).toWritableMap());
+                    promise.resolve(settingsRepo.update(id, syncSettings, false).toWritableMap());
 
                 } catch (Exception e) {
                     promise.resolve(new Response(false, e.getMessage()).toWritableMap());

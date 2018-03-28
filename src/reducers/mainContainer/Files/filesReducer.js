@@ -38,6 +38,7 @@ export default function filesReducer(state = initialState, action) {
     let filesManager = new FileListManager(newState.fileListModels, newState.uploadingFileListModels, newState.downloadedFileListModels);
     switch(action.type) {
         case LIST_FILES:
+            console.log(action.payload.file);
             newState.fileListModels = filesManager.listFiles(action.payload.bucketId, action.payload.files);
             newState.uploadingFileListModels = filesManager.listUploadingFiles(action.payload.bucketId, action.payload.files);
             break;

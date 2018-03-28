@@ -8,7 +8,7 @@ import { dashboardContainerActions } from '../reducers/mainContainer/mainReducer
 import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { dashboardNavigateBack, navigateToDashboardFilesScreen, navigateBack } from '../reducers/navigation/navigationActions';
-import { changeSyncStatusAsync, updateSyncSettingsAsync, SYNC_ENUM } from "../reducers/mainContainer/MyAccount/Settings/SettingsActionsAsync";
+import { changeSyncStatusAsync, setFirstSignInAsync, SYNC_ENUM } from "../reducers/mainContainer/MyAccount/Settings/SettingsActionsAsync";
 import DashboardComponent from '../components/Dashboard/DashboardComponent';
 import FirstSignInComponent from '../components/FirstSignInComponent';
 import SerivceModule from "../utils/ServiceModule";
@@ -20,7 +20,7 @@ class DashboardScreenContainer extends Component {
         this.email = props.email;
         console.log(this.email);
 
-        this.updateSyncSettings = this.updateSyncSettings.bind(this);
+        this.setFirstSignIn = this.setFirstSignIn.bind(this);
         this.changeSyncStatus = this.changeSyncStatus.bind(this);
     }
 
@@ -50,19 +50,19 @@ class DashboardScreenContainer extends Component {
         //this.props.unsetLoading();
     }
 
-    updateSyncSettings(value, callback) {
-        this.props.updateSyncSettings(this.email, value, callback);
+    setFirstSignIn(value, callback) {
+        this.props.setFirstSignIn(this.email, value, callback);
     }
     changeSyncStatus(value) {
         this.props.changeSyncStatus(this.email, value);
     }
 
     render() {
-        if(this.props.isFirstSignIn) {
+        if(/* this.props.isFirstSignIn */true) {
             return(
                 <FirstSignInComponent
                     removeFirstSignIn = { this.props.removeFirstSignIn }
-                    updateSyncSettings = { this.updateSyncSettings }
+                    setFirstSignIn = { this.setFirstSignIn }
                     changeSyncStatus = { this.changeSyncStatus }
                     SYNC_ENUM = { SYNC_ENUM }
                     createBucket = { this.createBucket.bind(this)} />
@@ -125,7 +125,7 @@ function mapDispatchToProps(dispatch) {
             navigateToDashboardFilesScreen,
             navigateBack
         }, dispatch),
-        updateSyncSettings: (settingsId, value, callback) => { dispatch(updateSyncSettingsAsync(settingsId ,value, callback)); },
+        setFirstSignIn: (settingsId, value, callback) => { dispatch(setFirstSignInAsync(settingsId ,value, callback)); },
         changeSyncStatus: (settingsId, value) => { dispatch(changeSyncStatusAsync(settingsId ,value)); },
     };
 }

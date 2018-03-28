@@ -4,9 +4,10 @@ import settingsActions from './SettingsActions';
 export function listSettingsAsync(settingsId) {
     return async (dispatch) => {
         let getSettingsResponse = await SyncModule.listSettings(settingsId);
-                
+        
         if(getSettingsResponse.isSuccess) {
             let settingsModel = JSON.parse(getSettingsResponse.result);
+            console.log(settingsModel);
             let syncSettings = settingsModel.syncSettings;
 
             syncSettings = settingsModel.syncStatus ? syncSettings | SYNC_ENUM.SYNC_ON : syncSettings &(~SYNC_ENUM.SYNC_ON);
@@ -115,9 +116,9 @@ async function _sync(dispatch, settingsId, value, settingsState, actionCallback,
     }
 }
 
-export function updateSyncSettingsAsync(settingsId, value, callback) {
+export function setFirstSignInAsync(settingsId, value, callback) {
     return async (dispatch) => {
-        let updateSettingsResponse = await SyncModule.updateSyncSettings(settingsId, value);
+        let updateSettingsResponse = await SyncModule.setFirstSignIn(settingsId, value);
 
         if(updateSettingsResponse.isSuccess) {
             dispatch(settingsActions.listSettings(getObjectFromInt(value)));
