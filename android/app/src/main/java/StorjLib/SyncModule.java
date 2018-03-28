@@ -17,6 +17,7 @@ import com.firebase.jobdispatcher.Lifetime;
 import com.firebase.jobdispatcher.RetryStrategy;
 import com.firebase.jobdispatcher.Trigger;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -350,6 +351,21 @@ public class SyncModule extends ReactContextBaseJavaModule {
                 }
             }
         }).run();
+    }
+
+    @ReactMethod
+    private void checkImage(String localPath, Promise promise) {
+        if(localPath == null) {
+            promise.resolve(new Response(false, "localPath is null!").toWritableMap());
+        }
+
+        File file = new File(localPath);
+
+        if(!file.exists() || file.isDirectory()) {
+            promise.resolve(promise.resolve(new Response(false, "localPath is null").toWritableMap()););
+        }
+
+        promise.resolve(new Response(true, null).toWritableMap());
     }
 
     private void scheduleSync(SettingsModel settingsModel, FirebaseJobDispatcher dispatcher) {
