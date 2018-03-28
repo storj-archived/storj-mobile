@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { loginActionsCreators } from '../reducers/authentification/authActions';
 import StorjLib from '../utils/StorjModule';
+import SyncModule from "../utils/SyncModule";
 import LoginComponent from '../components/LoginComponent';
 import validator from '../utils/validator';
 import { LoginStateModel } from '../models/LoginStateModel';
@@ -98,10 +99,12 @@ class LoginContainer extends Component {
     /**
      * Handle if was allready in use
      */
-    async handleFirstLaunch() {
+    async handleFirstLaunch(email) {
         if(!await getFirstAction()) {
             await setFirstAction();
         }
+
+        SyncModule.insertSyncSetting(email);
     };
 
     /**
@@ -175,7 +178,7 @@ class LoginContainer extends Component {
         );
         
         if(areKeysImported) {
-            await this.handleFirstLaunch();
+            await this.handleFirstLaunch(this.state.stateModel.email);
             this.props.setEmailConfirmed();
             this.props.setAccountExist();
             this.props.loginSuccess();

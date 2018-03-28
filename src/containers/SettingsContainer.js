@@ -7,21 +7,27 @@ import {
     changeSyncStatusAsync,
     setWifiConstraintAsync,
     setChargingConstraintAsync,
-    syncDownloadsAsync, 
+    syncMusicAsync, 
     syncPhotosAsync, 
     syncDocumentsAsync, 
     syncMoviesAsync 
 } from "../reducers/mainContainer/MyAccount/Settings/SettingsActionsAsync";
-
-const settingsId = "elvy.baila@arockee.com";
 
 class SettingsContainer extends Component {
     constructor(props) {
         super(props);
 
         //Move to initialization screen or something similar
-        props.listSettings(settingsId);
+        props.listSettings(props.email);
+        this.email = props.email;
 
+        this.changeSyncStatus = this.changeSyncStatus.bind(this);
+        this.setWifiConstraint = this.setWifiConstraint.bind(this);
+        this.setChargingConstraint = this.setChargingConstraint.bind(this);
+        this.syncPhotosAction = this.syncPhotosAction.bind(this);
+        this.syncMoviesAction = this.syncMoviesAction.bind(this);
+        this.syncDocumentsAction = this.syncDocumentsAction.bind(this);
+        this.syncMusicAction = this.syncMusicAction.bind(this);
         this.getStateObject = this.getStateObject.bind(this);
     }
 
@@ -33,22 +39,45 @@ class SettingsContainer extends Component {
             syncPhotos: this.props.syncPhotos,
             syncMovies: this.props.syncMovies,
             syncDocuments: this.props.syncDocuments,
-            syncDownloads: this.props.syncDownloads
+            syncMusic: this.props.syncMusic
         };
     }
+
+    changeSyncStatus(value) {
+        this.props.changeSyncStatus(this.email, value);
+    }
+    setWifiConstraint(value, prevSettingsState) {
+        this.props.setWifiConstraint(this.email, value, prevSettingsState);
+    }
+    setChargingConstraint(value, prevSettingsState) {
+        this.props.setChargingConstraint(this.email, value, prevSettingsState);
+    }
+    syncPhotosAction(value, prevSettingsState) {
+        this.props.syncPhotosAction(this.email, value, prevSettingsState);
+    }
+    syncMoviesAction(value, prevSettingsState) {
+        this.props.syncMoviesAction(this.email, value, prevSettingsState);
+    }
+    syncDocumentsAction(value, prevSettingsState) {
+        this.props.syncDocumentsAction(this.email, value, prevSettingsState);
+    }
+    syncMusicAction(value, prevSettingsState) {
+        this.props.syncMusicAction(this.email, value, prevSettingsState);
+    }
+    
 
     render() {
         return(
             <SettingsComponent
+                email = { this.props.email }
                 navigation = { this.props.navigation }
-                listSettings = { this.props.listSettings }
-                changeSyncStatus = { this.props.changeSyncStatus }
-                setWifiConstraint = { this.props.setWifiConstraint }
-                setChargingConstraint = { this.props.setChargingConstraint }
-                syncPhotosAction = { this.props.syncPhotosAction }
-                syncMoviesAction = { this.props.syncMoviesAction }
-                syncDocumentsAction = { this.props.syncDocumentsAction }
-                syncDownloadsAction = { this.props.syncDownloadsAction }
+                changeSyncStatus = { this.changeSyncStatus }
+                setWifiConstraint = { this.setWifiConstraint }
+                setChargingConstraint = { this.setChargingConstraint }
+                syncPhotosAction = { this.syncPhotosAction }
+                syncMoviesAction = { this.syncMoviesAction }
+                syncDocumentsAction = { this.syncDocumentsAction }
+                syncMusicAction = { this.syncMusicAction }
                 getStateObject = { this.getStateObject }
                 syncStatus = { this.props.syncStatus }
                 onWifi = { this.props.onWifi } 
@@ -56,27 +85,28 @@ class SettingsContainer extends Component {
                 syncPhotos = { this.props.syncPhotos }
                 syncMovies = { this.props.syncMovies }
                 syncDocuments = { this.props.syncDocuments } 
-                syncDownloads = { this.props.syncDownloads } />
+                syncMusic = { this.props.syncMusic } />
         );
     }
 } 
 
 function mapStateToProps(state) {
     return {
-        ...state.settingsReducer
+        ...state.settingsReducer,
+        email: state.mainReducer.email
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        listSettings: () => dispatch(listSettingsAsync(settingsId)),
-        changeSyncStatus: (value) => dispatch(changeSyncStatusAsync(settingsId, value)),
-        setWifiConstraint: (value, prevSettingsState) => dispatch(setWifiConstraintAsync(settingsId, value, prevSettingsState)),
-        setChargingConstraint: (value, prevSettingsState) => dispatch(setChargingConstraintAsync(settingsId, value, prevSettingsState)),
-        syncPhotosAction: (value, prevSettingsState) => dispatch(syncPhotosAsync(settingsId, value, prevSettingsState)),
-        syncMoviesAction: (value, prevSettingsState) => dispatch(syncMoviesAsync(settingsId, value, prevSettingsState)),
-        syncDocumentsAction: (value, prevSettingsState) => dispatch(syncDocumentsAsync(settingsId, value, prevSettingsState)),
-        syncDownloadsAction: (value, prevSettingsState) => dispatch(syncDownloadsAsync(settingsId, value, prevSettingsState))
+        listSettings: (settingsId) => dispatch(listSettingsAsync(settingsId)),
+        changeSyncStatus: (settingsId, value) => dispatch(changeSyncStatusAsync(settingsId, value)),
+        setWifiConstraint: (settingsId, value, prevSettingsState) => dispatch(setWifiConstraintAsync(settingsId, value, prevSettingsState)),
+        setChargingConstraint: (settingsId, value, prevSettingsState) => dispatch(setChargingConstraintAsync(settingsId, value, prevSettingsState)),
+        syncPhotosAction: (settingsId, value, prevSettingsState) => dispatch(syncPhotosAsync(settingsId, value, prevSettingsState)),
+        syncMoviesAction: (settingsId, value, prevSettingsState) => dispatch(syncMoviesAsync(settingsId, value, prevSettingsState)),
+        syncDocumentsAction: (settingsId, value, prevSettingsState) => dispatch(syncDocumentsAsync(settingsId, value, prevSettingsState)),
+        syncMusicAction: (settingsId, value, prevSettingsState) => dispatch(syncMusicAsync(settingsId, value, prevSettingsState))
     };
 }
 

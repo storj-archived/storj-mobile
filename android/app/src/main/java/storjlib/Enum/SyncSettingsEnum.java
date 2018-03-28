@@ -11,7 +11,7 @@ public enum SyncSettingsEnum {
     SYNC_PHOTOS    (0b00010000, "Pictures"),
     SYNC_MOVIES    (0b00001000, "Movies"),
     SYNC_DOCUMENTS (0b00000100, "Documents"),
-    SYNC_DOWNLOADS (0b00000010, "Download");
+    SYNC_MUSIC     (0b00000010, "Music");
 
     private int _value;
     private String _folderName;

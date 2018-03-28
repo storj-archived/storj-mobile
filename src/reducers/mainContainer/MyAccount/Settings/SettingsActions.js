@@ -9,7 +9,7 @@ const {
     PHOTOS_SYNC,
     MOVIES_SYNC,
     DOCUMENTS_SYNC,
-    DOWNLOADS_SYNC
+    MUSIC_SYNC,
 } = SETTINGS_ACTIONS;
 
 function listSettings(settings) {
@@ -66,9 +66,9 @@ function documentsSync(value) {
     };
 }
 
-function downloadsSync(value) {
+function musicSync(value) {
     return {
-        type: DOWNLOADS_SYNC,
+        type: MUSIC_SYNC,
         payload: { value: value ? value : false }
     };
 }
@@ -82,5 +82,5 @@ export default {
     photosSync,
     moviesSync,
     documentsSync,
-    downloadsSync
+    musicSync
 };

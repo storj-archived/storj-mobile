@@ -15,10 +15,10 @@ export default class FirstSignInComponent extends Component {
 
         this.state = {
             androidOptions: [
-                { type: 'photos', isSelected: false, title: 'My photos' },
-                { type: 'videos', isSelected: false, title: 'My videos' },
-                { type: 'music', isSelected: false, title: 'My music' },
-                { type: 'files', isSelected: false, title: 'Files' }
+                { type: 'Pictures', isSelected: false, title: 'My photos', mask: this.props.SYNC_ENUM.SYNC_PHOTOS },
+                { type: 'Movies', isSelected: false, title: 'My movies', mask: this.props.SYNC_ENUM.SYNC_MOVIES },
+                { type: 'Documents', isSelected: false, title: 'My documents', mask: this.props.SYNC_ENUM.SYNC_DOCUMENTS },
+                { type: 'Music', isSelected: false, title: 'My music', mask: this.props.SYNC_ENUM.SYNC_MUSIC }
             ],
             showModal: false
         }
@@ -33,11 +33,25 @@ export default class FirstSignInComponent extends Component {
             showModal: false
         });
 
+        let settings = 0;
+        let count = 0;
         this.state.androidOptions.forEach(option => {
             if (option.isSelected) {
                 this.props.createBucket(option.type);
+                settings = settings | option.mask;
+                count++;
             }
         });
+
+        if(count > 0) {
+            settings = settings | this.props.SYNC_ENUM.ON_WIFI;
+            settings = settings | this.props.SYNC_ENUM.ON_CHARGING;
+
+            this.props.updateSyncSettings(settings, (result) => {
+                console.log(result);
+                this.props.changeSyncStatus(true);
+            });
+        }
     }
 
     changeOptions = (type) => {
@@ -51,28 +65,28 @@ export default class FirstSignInComponent extends Component {
 
     getCallback = (type) => {
         switch(type) {
-            case 'photos': this.photosSelection();
+            case 'Pictures': this.photosSelection();
             break;
-            case 'videos': this.videosSelection();
+            case 'Movies': this.videosSelection();
             break;
-            case 'music': this.musicSelection();
+            case 'Documents': this.musicSelection();
             break;
-            case 'files': this.filesSelection();
+            case 'Music': this.filesSelection();
             break;
         }
     }
 
     photosSelection = () => {
-        this.changeOptions('photos');
+        this.changeOptions('Pictures');
     }
     videosSelection = () => {
-        this.changeOptions('videos');
+        this.changeOptions('Movies');
     }
     musicSelection = () => {
-        this.changeOptions('music');
+        this.changeOptions('Documents');
     }
     filesSelection = () => {
-        this.changeOptions('files');
+        this.changeOptions('Music');
     }
 
     showModalView = () => {

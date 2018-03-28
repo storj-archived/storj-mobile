@@ -105,15 +105,15 @@ export default class SettingsComponent extends Component{
                     </View>
                     <View style = { styles.underline }/>
                     <View style = { styles.checkboxPhotosContainer }>
-                        <TouchableOpacity onPress = { () => { this.props.syncDownloadsAction(!this.props.syncDownloads, this.props.getStateObject()); } } >
+                        <TouchableOpacity onPress = { () => { this.props.syncMusicAction(!this.props.syncMusic, this.props.getStateObject()); } } >
                             <Image 
                                 style = { styles.icon } 
                                 source = { 
-                                    this.props.syncDownloads 
+                                    this.props.syncMusic 
                                     ? require('../../images/Icons/ListItemSelected.png')
                                     : require('../../images/Icons/ListItemUnselected.png') } />
                         </TouchableOpacity>
-                        <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync downloads</Text>
+                        <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync music</Text>
                     </View>
                     <View style = { styles.underline }/>
                     {/* <View style = { styles.checkboxFilesContainer }>

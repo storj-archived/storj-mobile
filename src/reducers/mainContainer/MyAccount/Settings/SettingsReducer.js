@@ -9,7 +9,7 @@ const {
     PHOTOS_SYNC,
     MOVIES_SYNC,
     DOCUMENTS_SYNC,
-    DOWNLOADS_SYNC
+    MUSIC_SYNC
 } = SETTINGS_ACTIONS;
 
 const initialState = { 
@@ -19,10 +19,11 @@ const initialState = {
     syncPhotos: false, 
     syncMovies: false,
     syncDocuments: false,
-    syncDownloads: false    
+    syncMusic: false    
 };
 
 export default function settingsReducer(state = initialState, action) {
+    console.log(action);
     switch(action.type) {
         case LIST_SETTINGS:
             return {
@@ -64,10 +65,10 @@ export default function settingsReducer(state = initialState, action) {
                 ...state,
                 syncDocuments: action.payload.value
             };
-        case DOWNLOADS_SYNC:
+        case MUSIC_SYNC:
             return {
                 ...state,
-                syncDownloads: action.payload.value
+                syncMusic: action.payload.value
             };
         default:
             return state || initialState;

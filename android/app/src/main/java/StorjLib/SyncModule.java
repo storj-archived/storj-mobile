@@ -280,6 +280,22 @@ public class SyncModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void insertSyncSetting(final String id, final Promise promise) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
+                    SettingsRepository settingsRepo = new SettingsRepository(db);
+                    promise.resolve(settingsRepo.insert(id).toWritableMap());
+
+                } catch (Exception e) {
+                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
+                }
+            }
+        }).run();
+    }
+
+    @ReactMethod
     public void changeSyncStatus(final String id, final boolean value, final Promise promise) {
         if(id == null) {
             promise.resolve(new Response(false, "settingId is not specified!"));

@@ -90,15 +90,15 @@ export function syncDocumentsAsync(settingsId, value, prevSettingsState) {
     };
 }
 
-export function syncDownloadsAsync(settingsId, value, prevSettingsState) {
+export function syncMusicAsync(settingsId, value, prevSettingsState) {
     return async (dispatch) => {
         _sync(dispatch, 
             settingsId,
             value, 
             prevSettingsState, 
-            settingsActions.downloadsSync, 
-            (settingsState) => settingsState.syncDownloads,
-            (settingsState) => settingsState.syncDownloads = value);
+            settingsActions.musicSync, 
+            (settingsState) => settingsState.syncMusic,
+            (settingsState) => settingsState.syncMusic = value);
     };
 }
 
@@ -115,6 +115,18 @@ async function _sync(dispatch, settingsId, value, settingsState, actionCallback,
     }
 }
 
+export function updateSyncSettingsAsync(settingsId, value, callback) {
+    return async (dispatch) => {
+        let updateSettingsResponse = await SyncModule.updateSyncSettings(settingsId, value);
+
+        if(updateSettingsResponse.isSuccess) {
+            dispatch(settingsActions.listSettings(getObjectFromInt(value)));
+        }
+
+        callback(updateSettingsResponse);
+    }    
+}
+
 function getObjectFromInt(settings) {
     return {
         syncStatus: settings & SYNC_ENUM.SYNC_ON ? true : false, 
@@ -123,7 +135,7 @@ function getObjectFromInt(settings) {
         syncPhotos: settings & SYNC_ENUM.SYNC_PHOTOS ? true : false,
         syncMovies: settings & SYNC_ENUM.SYNC_MOVIES ? true : false,
         syncDocuments: settings & SYNC_ENUM.SYNC_DOCUMENTS ? true : false,
-        syncDownloads: settings & SYNC_ENUM.SYNC_DOWNLOADS ? true : false,
+        syncMusic: settings & SYNC_ENUM.SYNC_MUSIC ? true : false
     };
 }
 
@@ -136,7 +148,7 @@ function getIntFromObject(settings) {
     settingsInt = settings.syncPhotos ? settingsInt | SYNC_ENUM.SYNC_PHOTOS : settingsInt;
     settingsInt = settings.syncMovies ? settingsInt | SYNC_ENUM.SYNC_MOVIES : settingsInt;
     settingsInt = settings.syncDocuments ? settingsInt | SYNC_ENUM.SYNC_DOCUMENTS : settingsInt;
-    settingsInt = settings.syncDownloads ? settingsInt | SYNC_ENUM.SYNC_DOWNLOADS : settingsInt;
+    settingsInt = settings.syncMusic ? settingsInt | SYNC_ENUM.SYNC_MUSIC : settingsInt;
 
     return settingsInt;
 }
@@ -148,5 +160,5 @@ export const SYNC_ENUM = {
     SYNC_PHOTOS:    0b00010000,
     SYNC_MOVIES:    0b00001000,
     SYNC_DOCUMENTS: 0b00000100,
-    SYNC_DOWNLOADS: 0b00000010,
+    SYNC_MUSIC:     0b00000010
 };
