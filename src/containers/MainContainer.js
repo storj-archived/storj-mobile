@@ -1,4 +1,4 @@
-import { Keyboard, DeviceEventEmitter, BackHandler, Platform } from 'react-native';
+import { Keyboard, DeviceEventEmitter, BackHandler, Platform, Alert } from 'react-native';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -44,7 +44,7 @@ class MainContainer extends Component {
             ),
             TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 5', require('../images/ActionBar/DownloadIFileIcon.png')), 
             TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 6', require('../images/ActionBar/CopyBucketIcon.png')), 
-            TabBarActionModelFactory.createNewAction(() => { this.deleteBuckets(); }, 'Action 7', require('../images/ActionBar/TrashBucketIcon.png'))
+            TabBarActionModelFactory.createNewAction(() => { this.tryDeleteBuckets(); }, 'Action 7', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
         
         this.openedBucketActions = [
@@ -142,8 +142,16 @@ class MainContainer extends Component {
         this.props.listUploadingFiles();
     }
 
-    async componentDidMount() {
-        ServiceModule.getBuckets();
+    tryDeleteBuckets() {
+        Alert.alert(
+            'Delete permanently?',
+            'Are you sure to delete selected buckets permanently?',
+            [
+                { text: 'Cancel', onPress: () => { }, style: 'cancel' },
+                { text: 'Delete', onPress: () => { this.deleteBuckets(); } }
+            ],
+            { cancelable: false }
+        );
     }
     
     componentWillUnmount () {
@@ -196,23 +204,8 @@ class MainContainer extends Component {
         }
     }
 
-    async downloadFile(file, localPath) {        
-        const fileId = file.getId();
-        const observer = observablePropFactory.getObservable(fileId);
-        
-
-        observer.addListener({ id: fileId, callback: (param) => { 
-            if(this.props.openedBucketId === param.bucketId)
-                this.props.updateFileDownloadProgress(param.bucketId, fileId, param.progress, param.filePointer);
-        }});
-
-        let response = await StorjLib.downloadFile(this.props.openedBucketId, fileId, localPath);
-
-        if(response.isSuccess) {
-            this.props.downloadFileSuccess(this.props.openedBucketId, fileId, localPath);
-        } else {
-            this.props.downloadFileError(this.props.openedBucketId, fileId);
-        }
+    async downloadFile(file, localPath) {    
+        ServiceModule.downloadFile(file.entity.bucketId, file.getId(), localPath);
     }
 
     async downloadSelectedFiles() {

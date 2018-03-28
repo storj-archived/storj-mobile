@@ -13,12 +13,14 @@ const { LOGIN, LOGIN_SUCCESS, LOGIN_ERROR,
  * @param {string} email registered email
  * @returns validity of request
  */
-export async function resetPassword(email) {
-    let request = changePasswordRequest(email);
+export function resetPassword(email) {
+    return async (dispatch) => {  
+        let request = changePasswordRequest(email);
 
-    let response = await fetch(request);
-    
-    return response.ok;
+        let response = await fetch(request);
+        
+        return response.ok;
+    };
 };
 
 /**

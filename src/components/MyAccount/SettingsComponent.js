@@ -163,15 +163,6 @@ export default class SettingsComponent extends Component{
                                 style = { styles.expanderIcon } />
                         </View>
                     </TouchableOpacity>
-                    <View style = { styles.underline }/>
-                    <TouchableOpacity style = { styles.optionsContainer }>
-                        <Text style = { styles.switchText }>Change email</Text>
-                        <View style = { styles.expanderIconContainer }>
-                            <Image
-                                source = { require('../../images/DashboardScreen/BlueVector.png') }
-                                style = { styles.expanderIcon } />
-                        </View>
-                    </TouchableOpacity>
                     <TouchableOpacity>
                         <View style = { styles.deleteAccountButton }>
                             <Text style = { styles.deleteAccountText }>Delete account</Text>
@@ -275,6 +266,7 @@ const styles = StyleSheet.create({
         width: getWidth(335),
         height: getHeight(50),
         borderRadius: 6,
+        marginTop: getHeight(35),
         borderWidth: getWidth(1.5),
         borderColor: '#EB5757',
         justifyContent: 'center',

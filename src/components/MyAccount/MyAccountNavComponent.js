@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import MyAccountScreenNavigator from '../../navigators/MyAccountScreenNavigator';
+import { resetPassword } from '../../reducers/authentification/authActions';
 
 export default class MyAccountNavComponent extends Component {
     constructor(props) {
@@ -21,11 +22,13 @@ export default class MyAccountNavComponent extends Component {
                         redirectToInitializationScreen: this.props.redirectToInitializationScreen,
                         showQR: this.props.showQR,
                         showStorageInfo: this.props.showStorageInfo,
-                        showCredits: this.props.showCredits,                         
+                        showCredits: this.props.showCredits,
+                        showPopUp: this.props.showPopUp,                         
                         storageAmount: this.props.storageAmount,
                         bandwidthAmount: this.props.bandwidthAmount,
                         getBalance: this.props.getBalance,
-                        transactionList: this.props.transactionList
+                        transactionList: this.props.transactionList,
+                        resetPassword: this.props.resetPassword
                     } }
                     animatedScrollValue = { this.animatedScrollValue }  />
             </View>

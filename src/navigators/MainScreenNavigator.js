@@ -31,7 +31,8 @@ const MainScreenNavigator = TabNavigator(
         initialRouteName: 'DashboardScreen',
         tabBarPosition: 'bottom',
         tabBarComponent: TabBarComponent,
-        swipeEnabled: false
+        swipeEnabled: false,
+        headerMode: 'none'
     }
 );
 

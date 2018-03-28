@@ -15,6 +15,17 @@ export default class SettingsComponent extends Component{
     constructor(props) {
         super(props)
 
+        this.state = {
+            email: null
+        }
+    }
+
+    async sendEmail() {
+        let result = await this.props.screenProps.resetPassword(this.state.email);
+        
+        if(result) {
+            this.props.screenProps.showPopUp();
+        }
     }
 
     render() {
@@ -35,40 +46,20 @@ export default class SettingsComponent extends Component{
                                 <Text style = { [styles.titleText, styles.titleMargin] }>password</Text>
                             </View>
                         </View>
-                        <TouchableOpacity 
-                            onPress = { () => { this.props.navigation.goBack(); } }
-                            style = { styles.backButtonContainer } >
-                            <Text style = { [styles.cancelText, styles.titleMargin] }>Cancel</Text>
-                        </TouchableOpacity>
                     </View>
                 </View>
+                <Text style = { styles.infoText }>We’ll send you a link to change password</Text>
                 <InputComponent 
-                        style = { styles.inputHeight }
-                        onChangeText = { () => {} } 
-                        isPassword = { true } 
-                        placeholder = {'Enter your password'}
-                        value = { '' }
+                        style = { styles.emailInput }
+                        onChangeText = { (value) => { this.setState({ email: value }) } }  
+                        placeholder = {'Enter your email'}
                         isError = { this.props.isPasswordError }
-                        errorMessage = { 'Invalid password' }
-                        regularMessage = { 'Current password' } />
-                <InputComponent 
-                        style = { styles.inputHeight }
-                        onChangeText = { () => {} } 
-                        isPassword = { true } 
-                        placeholder = {'New password'}
-                        value = { '' }
-                        isError = { false }
-                        errorMessage = { 'Invalid password' }
-                        regularMessage = { 'New password' } />
-                <InputComponent 
-                        style = { styles.inputHeight }
-                        onChangeText = { () => {} } 
-                        isPassword = { true } 
-                        placeholder = {'Confirm password'}
-                        value = { '' }
-                        isError = { false }
-                        errorMessage = { 'Password does not match' }
-                        regularMessage = { 'Confirm password' } />
+                        regularMessage = { 'Your email' } />
+                <TouchableOpacity onPress = { () => { this.sendEmail() } }>
+                    <View style = { styles.sendLinkButton } >
+                        <Text style = { styles.sendLinkButtonText }>Send me a link</Text>
+                    </View>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -85,7 +76,7 @@ const styles = StyleSheet.create({
     },
     topContentContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         marginTop: getHeight(15)
     },
@@ -107,14 +98,35 @@ const styles = StyleSheet.create({
     titleMargin: {
         marginLeft: getWidth(20),
     },
+    infoText: {
+        fontFamily: 'Montserrat-Regular', 
+        fontSize: getHeight(16), 
+        lineHeight: getHeight(20),
+        color: '#384B65' 
+    },
     icon: {
         height: getHeight(24),
         width: getWidth(24)
     },
-    cancelText: {
-        fontFamily: 'Montserrat-Medium', 
-        fontSize: getHeight(18), 
-        lineHeight: getHeight(22),
-        color: '#2794FF'
+    emailInput: {
+        marginTop: getHeight(24),
+        height: getHeight(50)
+    },
+    sendLinkButton: {
+        marginTop: getHeight(300),
+        alignSelf: 'center',
+        width: getWidth(335),
+        height: getHeight(50),
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#2794FF',
+        borderColor: '#2794FF',
+        borderRadius: getWidth(6),
+        borderWidth: getWidth(1.5)
+    },
+    sendLinkButtonText: {
+        fontFamily: 'Montserrat-Bold',
+        fontSize: getHeight(14),
+        color: 'white'
     }
 });
