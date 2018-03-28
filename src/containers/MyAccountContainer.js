@@ -108,13 +108,9 @@ class MyAccountContainer extends Component {
                 showPopUp = { this.props.screenProps.showPopUp }
                 storageAmount = { this.props.storage }
                 bandwidthAmount = { this.props.bandwidth }                
-<<<<<<< HEAD
                 getBalance = { this.balance.bind(this) }
-                transactionList = { this.calculateTransactions() } /> 
-=======
                 transactionList = { this.calculateTransactions() }
                 resetPassword = { this.props.resetPassword } /> 
->>>>>>> [ADDED] change password and delete buckets confirmation
         );
     }
 }
