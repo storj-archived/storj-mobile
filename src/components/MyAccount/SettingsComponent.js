@@ -116,7 +116,7 @@ export default class SettingsComponent extends Component{
                         <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync downloads</Text>
                     </View>
                     <View style = { styles.underline }/>
-                    <View style = { styles.checkboxFilesContainer }>
+                    {/* <View style = { styles.checkboxFilesContainer }>
                         <View style = { styles.flexRow }>
                             <TouchableOpacity onPress = { () => { this.setState({isFilesSync: !this.state.isFilesSync}); } } >
                                 <Image 
@@ -133,7 +133,7 @@ export default class SettingsComponent extends Component{
                                 source = { require('../../images/DashboardScreen/BlueVector.png') }
                                 style = { styles.expanderIcon } />
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
                     <View style = { styles.explanationContainer }>
                         <Text style = { styles.explanationText }>Security</Text>
                     </View>
