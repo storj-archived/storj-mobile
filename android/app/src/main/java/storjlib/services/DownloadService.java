@@ -123,7 +123,7 @@ public class DownloadService extends BaseReactService {
                 if(fileRepo.update(fileId, DownloadStateEnum.DOWNLOADED.getValue(), 0, localPath).isSuccess()) {
                     WritableMap map = new WritableNativeMap();
                     map.putString(FileContract._FILE_ID, fileId);
-                    map.putString("loclaPath", localPath);
+                    map.putString("localPath", localPath);
 
                     sendEvent(EVENT_FILE_DOWNLOAD_SUCCESS, map);
                 }
