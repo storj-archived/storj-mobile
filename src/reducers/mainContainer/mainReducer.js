@@ -26,10 +26,12 @@ const {
     SET_LIST_VIEW,
     CLEAR_SELECTION,
     SET_SELECTION_ID,
-    UPDATE_FAVOURITE
+    UPDATE_FAVOURITE,
+    SET_EMAIL
  } = MAIN_ACTIONS;
                                                         
-const initialState = { 
+const initialState = {
+    email: null,
     isCreateBucketInputShown: false,
     isActionBarShown: false,
     buckets: [],
@@ -48,6 +50,10 @@ export default function mainReducer(state = initialState, action) {
 
     //TODO: we can call return after switch, and reduce lines of code
     switch(action.type) {
+        case SET_EMAIL:
+            console.log(action);
+            newState.email = action.payload.email;
+            break;
         case SHOW_ACTION_BAR:
             newState.isActionBarShown = true; 
             break;

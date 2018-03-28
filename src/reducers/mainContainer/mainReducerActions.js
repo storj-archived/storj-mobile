@@ -27,8 +27,13 @@ const {
     SET_LIST_VIEW,
     CLEAR_SELECTION,
     SET_SELECTION_ID,
-    UPDATE_FAVOURITE
+    UPDATE_FAVOURITE,
+    SET_EMAIL
 } = MAIN_ACTIONS;
+
+function setEmail(email) {
+    return { type: SET_EMAIL, payload: { email } };
+}
 
 function onSingleItemSelected() {
     return { type: SINGLE_ITEM_ACTIONS_SELECTED };
@@ -194,7 +199,8 @@ export const dashboardContainerActions = {
 
 export const initializeContainerActions = {
     getBuckets, 
-    setFirstSignIn
+    setFirstSignIn,
+    setEmail
 };
 
 export const bucketsListContainerActions = {

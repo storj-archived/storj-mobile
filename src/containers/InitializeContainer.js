@@ -73,10 +73,12 @@ class InitializeContainer extends Component {
         }
 
         let getKeysResult = JSON.parse(getKeyResponse.result);
+        console.log("getKeysResult", getKeysResult);
         
         ServiceModule.getBuckets();                
-        this.getAllFiles();
+        this.getAllFiles(getKeysResult.email);
 
+        this.props.setEmail(getKeysResult.email);
         this.props.getDebits();
         this.props.getCredits();
         this.props.getWallets(); 

@@ -229,7 +229,7 @@ public class FileRepository extends BaseRepository {
         map.put(FileContract._HMAC, model.getHmac());
         map.put(FileContract._INDEX, model.getIndex());
         map.put(FileContract._MIMETYPE, model.getMimeType());
-        map.put(FileContract._STARRED, model.getStarred());
+        //map.put(FileContract._STARRED, model.getStarred());
         map.put(FileContract._SYNCED, model.isSynced());
         map.put(FileContract._DOWNLOAD_STATE, model.downloadState());
         map.put(FileContract._FILE_HANDLE, model.getFileHandle());

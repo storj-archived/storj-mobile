@@ -52,6 +52,10 @@ const SyncModule = (() => {
         async changeSyncStatus(settingsId, value) {
             return await syncModule.changeSyncStatus(String(settingsId), Boolean(value));
         }
+
+        async insertSyncSetting(settingsId) {
+            return await syncModule.insertSyncSetting(String(settingsId));
+        }
     }  
 
     return {

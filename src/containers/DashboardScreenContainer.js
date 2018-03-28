@@ -8,12 +8,20 @@ import { dashboardContainerActions } from '../reducers/mainContainer/mainReducer
 import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { dashboardNavigateBack, navigateToDashboardFilesScreen, navigateBack } from '../reducers/navigation/navigationActions';
+import { changeSyncStatusAsync, updateSyncSettingsAsync, SYNC_ENUM } from "../reducers/mainContainer/MyAccount/Settings/SettingsActionsAsync";
 import DashboardComponent from '../components/Dashboard/DashboardComponent';
 import FirstSignInComponent from '../components/FirstSignInComponent';
+import SerivceModule from "../utils/ServiceModule";
 
 class DashboardScreenContainer extends Component {
     constructor(props) {
         super(props);
+
+        this.email = props.email;
+        console.log(this.email);
+
+        this.updateSyncSettings = this.updateSyncSettings.bind(this);
+        this.changeSyncStatus = this.changeSyncStatus.bind(this);
     }
 
     getArraySelectedCount(array) {
@@ -37,20 +45,16 @@ class DashboardScreenContainer extends Component {
     }
 
     async createBucket(name) {
-        this.props.setLoading();
+        //this.props.setLoading();
+        SerivceModule.createBucket(name);
+        //this.props.unsetLoading();
+    }
 
-        try {
-            let createBucketResult = await StorjLib.createBucket(name);
-
-            if(createBucketResult.isSuccess) {
-                this.props.createBucket(new ListItemModel(createBucketResult.result));
-                this.props.removeFirstSignIn();
-            } 
-        } catch (e) {
-            console.log(e);
-        }
-
-        this.props.unsetLoading();
+    updateSyncSettings(value, callback) {
+        this.props.updateSyncSettings(this.email, value, callback);
+    }
+    changeSyncStatus(value) {
+        this.props.changeSyncStatus(this.email, value);
     }
 
     render() {
@@ -58,6 +62,9 @@ class DashboardScreenContainer extends Component {
             return(
                 <FirstSignInComponent
                     removeFirstSignIn = { this.props.removeFirstSignIn }
+                    updateSyncSettings = { this.updateSyncSettings }
+                    changeSyncStatus = { this.changeSyncStatus }
+                    SYNC_ENUM = { SYNC_ENUM }
                     createBucket = { this.createBucket.bind(this)} />
             );
         } else {
@@ -102,19 +109,25 @@ function mapStateToProps(state) {
         isGridViewShown: state.mainReducer.isGridViewShown,
         defaultRoute: routes[0].routeName,
         screenName: currentScreenName,
-        selectedBucketId: state.mainReducer.openedBucketId
+        selectedBucketId: state.mainReducer.openedBucketId,
+        email: state.mainReducer.email
     };
 }
     
+const settingsId = "elvy.baila@arockee.com";
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators( { 
-        ...dashboardContainerActions, 
-        ...filesListContainerMainActions, 
-        ...filesListContainerFileActions, 
-        dashboardNavigateBack,
-        navigateToDashboardFilesScreen,
-        navigateBack
-    }, dispatch);
+    return { 
+        ...bindActionCreators( { 
+            ...dashboardContainerActions, 
+            ...filesListContainerMainActions, 
+            ...filesListContainerFileActions, 
+            dashboardNavigateBack,
+            navigateToDashboardFilesScreen,
+            navigateBack
+        }, dispatch),
+        updateSyncSettings: (settingsId, value, callback) => { dispatch(updateSyncSettingsAsync(settingsId ,value, callback)); },
+        changeSyncStatus: (settingsId, value) => { dispatch(changeSyncStatusAsync(settingsId ,value)); },
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardScreenContainer);;

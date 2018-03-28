@@ -69,7 +69,7 @@ public class SynchronizationJobService extends JobService {
                     syncFolder(syncSettings, SyncSettingsEnum.SYNC_PHOTOS, bucketRepo, db);
                     syncFolder(syncSettings, SyncSettingsEnum.SYNC_MOVIES, bucketRepo, db);
                     syncFolder(syncSettings, SyncSettingsEnum.SYNC_DOCUMENTS, bucketRepo, db);
-                    syncFolder(syncSettings, SyncSettingsEnum.SYNC_DOWNLOADS, bucketRepo, db);
+                    syncFolder(syncSettings, SyncSettingsEnum.SYNC_MOVIES, bucketRepo, db);
 
                     settingsRepo.update(settingsId, getDateTime());
                 } catch (Exception e) {
@@ -111,7 +111,7 @@ public class SynchronizationJobService extends JobService {
 
     private void syncFolder(int syncSettings, SyncSettingsEnum syncEnum, BucketRepository bucketRepo, SQLiteDatabase db) {
         if(syncEnum != SyncSettingsEnum.SYNC_DOCUMENTS
-                && syncEnum != SyncSettingsEnum.SYNC_DOWNLOADS
+                && syncEnum != SyncSettingsEnum.SYNC_MUSIC
                 && syncEnum != SyncSettingsEnum.SYNC_MOVIES
                 && syncEnum != SyncSettingsEnum.SYNC_PHOTOS) {
             return;
