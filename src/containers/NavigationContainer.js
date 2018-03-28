@@ -24,6 +24,9 @@ import ListItemModel from '../models/ListItemModel';
 import BucketModel from '../models/BucketModel';
 import FileModel from '../models/FileModel';
 import WarningComponent from '../components/WarningComponent';
+import { SYNC_BUCKETS } from '../utils/constants/SyncBuckets';
+
+const { PICTURES } = SYNC_BUCKETS;
 
 
 import SyncModule from '../utils/SyncModule';
@@ -136,13 +139,21 @@ class Apps extends Component {
                 return new ListItemModel(new BucketModel(file));
             });                    
 
+			this.createBaseBuckets(buckets);
+
             this.props.getBuckets(buckets);
         }
 		
         this.props.unsetLoading();
 	}
 	
+	createBaseBuckets(buckets) {
+		let doesExist = buckets.find(bucket => bucket.getName() === 'Pictures');
 
+		if(!doesExist) {
+			ServiceModule.createBucket(PICTURES);
+		}
+	}
 
 	onBucketCreated(response) {
 		if(response.isSuccess) {
