@@ -1,4 +1,7 @@
 import { NativeModules } from 'react-native';
+import { SYNC_BUCKETS } from '../utils/constants/SyncBuckets';
+
+const { PICTURES } = SYNC_BUCKETS;
 
 const ServiceModule = (() => {
     let instance = null;
@@ -53,7 +56,7 @@ const ServiceModule = (() => {
          * @param {ListIteModel[]} buckets 
          */
         createBaseBuckets(buckets) {
-            let doesExist = buckets.find(bucket => bucket.getName() === 'Pictures');
+            let doesExist = buckets.find(bucket => bucket.getName() === PICTURES);
 
             if(!doesExist) {
                 this.createBucket(PICTURES);
