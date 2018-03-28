@@ -43,15 +43,18 @@ export default class FirstSignInComponent extends Component {
             }
         });
 
-        if(count > 0) {
+        let shouldActivateSync = count > 0;
+
+        if(shouldActivateSync) {
             settings = settings | this.props.SYNC_ENUM.ON_WIFI;
             settings = settings | this.props.SYNC_ENUM.ON_CHARGING;
-
-            this.props.setFirstSignIn(settings, (result) => {
-                console.log(result);
-                this.props.changeSyncStatus(true);
-            });
         }
+
+        this.props.setFirstSignIn(settings, (result) => {
+            console.log(result);
+            shouldActivateSync ? this.props.changeSyncStatus(true) : null;
+            this.props.removeFirstSignIn();
+        });
     }
 
     changeOptions = (type) => {
