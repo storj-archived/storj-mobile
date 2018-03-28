@@ -21,6 +21,7 @@ export default class FilesListComponent extends Component {
                     && this.props.openedBucketId !== null
                         ? <EmpyBucketComponent />
                         : <ListComponent
+                            contentWrapperStyle = { styles.contentWrapper }
                             setSelectionId = { this.props.setSelectionId }
                             selectedItemId = { this.props.selectedItemId }
                             cancelDownload = { this.props.cancelDownload }
@@ -52,6 +53,10 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: 'white',
+        //paddingBottom: getHeight(60)
+    },
+    contentWrapper: {
+        paddingTop: getHeight(58),
         paddingBottom: getHeight(60)
     }
 });

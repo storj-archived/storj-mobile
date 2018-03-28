@@ -310,7 +310,6 @@ export default class ListComponent extends Component {
 
     render() {     
         return (
-            <View>
                 <Animated.ScrollView style = { styles.listContainer }
                     decelerationRate = { 'normal' }
                     scrollEventThrottle = { 16 }
@@ -328,13 +327,12 @@ export default class ListComponent extends Component {
                             enabled = { !this.props.isSelectionMode }
                             refreshing = { this.state.refreshing }
                             onRefresh = { this.onRefresh.bind(this) } /> }>
-                            <View >
+                            <View style = { this.props.contentWrapperStyle ? this.props.contentWrapperStyle : null }>
                                 {
                                     this.getItemsList()
                                 }
                             </View>
-                </Animated.ScrollView>
-            </View>            
+                </Animated.ScrollView>       
         );
     }
 }
