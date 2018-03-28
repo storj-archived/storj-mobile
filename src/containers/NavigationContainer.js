@@ -139,20 +139,12 @@ class Apps extends Component {
                 return new ListItemModel(new BucketModel(file));
             });                    
 
-			this.createBaseBuckets(buckets);
+			ServiceModule.createBaseBuckets(buckets);
 
             this.props.getBuckets(buckets);
         }
 		
         this.props.unsetLoading();
-	}
-	
-	createBaseBuckets(buckets) {
-		let doesExist = buckets.find(bucket => bucket.getName() === 'Pictures');
-
-		if(!doesExist) {
-			ServiceModule.createBucket(PICTURES);
-		}
 	}
 
 	onBucketCreated(response) {

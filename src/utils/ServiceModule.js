@@ -47,6 +47,18 @@ const ServiceModule = (() => {
         async deleteFile(bucketId, fileId) {
             return await serviceModule.deleteFile(bucketId, fileId);
         }
+
+        /**
+         * Creates base buckets if they are absent
+         * @param {ListIteModel[]} buckets 
+         */
+        createBaseBuckets(buckets) {
+            let doesExist = buckets.find(bucket => bucket.getName() === 'Pictures');
+
+            if(!doesExist) {
+                this.createBucket(PICTURES);
+            }
+        }
     }  
 
     return {
