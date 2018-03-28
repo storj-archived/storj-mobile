@@ -17,8 +17,8 @@
 
 @interface Response : NSObject<IConvertibleToJS>
 
-@property BOOL _isSuccess;
-@property (nonatomic, strong) Error * _error;
+@property (getter=isSuccess)BOOL _isSuccess;
+@property (nonatomic, strong, getter=getError) Error * _error;
 
 -(instancetype) initWithSuccess: (BOOL) isSuccess
                    andWithError: (Error *) error;

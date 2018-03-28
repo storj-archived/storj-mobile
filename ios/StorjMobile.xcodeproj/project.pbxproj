@@ -56,6 +56,39 @@
 		DCACD444201FDF630050921B /* StorjLibIos.m in Sources */ = {isa = PBXBuildFile; fileRef = DCACD443201FDF630050921B /* StorjLibIos.m */; };
 		DCC368832056B6D4004813CD /* DatabaseFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC368822056B6D4004813CD /* DatabaseFactory.m */; };
 		DCCD2FD520459F610032D3F5 /* FilePickerLib.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCD2FD420459F600032D3F5 /* FilePickerLib.m */; };
+		DCDF6FC5205ADA04001B2F95 /* BucketContract.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FC4205ADA04001B2F95 /* BucketContract.m */; };
+		DCDF6FC8205AE94C001B2F95 /* FileContract.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FC7205AE94C001B2F95 /* FileContract.m */; };
+		DCDF6FCB205AED17001B2F95 /* UploadFileContract.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FCA205AED17001B2F95 /* UploadFileContract.m */; };
+		DCDF6FD1205FE9CC001B2F95 /* BaseRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FD0205FE9CC001B2F95 /* BaseRepository.m */; };
+		DCDF6FD9205FF0A7001B2F95 /* Response.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FD8205FF0A7001B2F95 /* Response.m */; };
+		DCDF6FDC205FF88A001B2F95 /* Error.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FDB205FF88A001B2F95 /* Error.m */; };
+		DCDF6FDF2060073F001B2F95 /* SingleResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FDE2060073F001B2F95 /* SingleResponse.m */; };
+		DCDF6FE2206022EC001B2F95 /* ListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FE1206022EC001B2F95 /* ListResponse.m */; };
+		DCDF6FE620603015001B2F95 /* BucketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FE520603015001B2F95 /* BucketModel.m */; };
+		DCDF6FEA2062BE39001B2F95 /* DictionaryUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FE92062BE39001B2F95 /* DictionaryUtils.m */; };
+		DCDF6FED2062C2AD001B2F95 /* DownloadFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FEC2062C2AD001B2F95 /* DownloadFileModel.m */; };
+		DCDF6FF02062CC74001B2F95 /* DownloadFileProgressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FEF2062CC74001B2F95 /* DownloadFileProgressModel.m */; };
+		DCDF6FF32062D423001B2F95 /* FileDeleteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FF22062D423001B2F95 /* FileDeleteModel.m */; };
+		DCDF6FF62062D5C4001B2F95 /* FileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FF52062D5C4001B2F95 /* FileModel.m */; };
+		DCDF6FF92062E223001B2F95 /* UploadFileProgressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FF82062E223001B2F95 /* UploadFileProgressModel.m */; };
+		DCDF6FFC20631C73001B2F95 /* UploadFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FFB20631C73001B2F95 /* UploadFileModel.m */; };
+		DCDF705D20643850001B2F95 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF70512064384F001B2F95 /* FMDatabase.m */; };
+		DCDF705E20643850001B2F95 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF70532064384F001B2F95 /* FMDatabasePool.m */; };
+		DCDF705F20643850001B2F95 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF705920643850001B2F95 /* FMDatabaseAdditions.m */; };
+		DCDF706020643850001B2F95 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF705A20643850001B2F95 /* FMResultSet.m */; };
+		DCDF706120643850001B2F95 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF705B20643850001B2F95 /* FMDatabaseQueue.m */; };
+		DCDF706220643850001B2F95 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DCDF705C20643850001B2F95 /* Info.plist */; };
+		DCDF70652064732C001B2F95 /* BucketDbo.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF70642064732C001B2F95 /* BucketDbo.m */; };
+		DCDF706820649821001B2F95 /* FileDbo.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF706720649821001B2F95 /* FileDbo.m */; };
+		DCDF706B2064A15A001B2F95 /* UploadFileDbo.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF706A2064A15A001B2F95 /* UploadFileDbo.m */; };
+		DCDF706E2064ACEC001B2F95 /* BucketRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF706D2064ACEC001B2F95 /* BucketRepository.m */; };
+		DCDF70712064C7A2001B2F95 /* FileRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF70702064C7A2001B2F95 /* FileRepository.m */; };
+		DCDF70742064D348001B2F95 /* UploadFileRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF70732064D348001B2F95 /* UploadFileRepository.m */; };
+		DCDF7077206895DF001B2F95 /* MethodHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF7076206895DF001B2F95 /* MethodHandler.m */; };
+		DCDF707A2068B337001B2F95 /* StorjBackgroundServices.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF70792068B337001B2F95 /* StorjBackgroundServices.m */; };
+		DCEB535020697A55006B0624 /* EventNames.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEB534F20697A55006B0624 /* EventNames.m */; };
+		DCEB5379206AA77A006B0624 /* PromiseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEB5378206AA77A006B0624 /* PromiseHandler.m */; };
+		DCEB539A206BA643006B0624 /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEB5399206BA643006B0624 /* FileUtils.m */; };
 		DDD138767961421DB8C87363 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A51459F91D3420BBC6E2C58 /* Montserrat-ExtraLight.ttf */; };
 		E1B69957B9F74BD08F47F764 /* Montserrat-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA3A41C878E0424E92862DE9 /* Montserrat-ExtraLightItalic.ttf */; };
 		E6A2862F2CF54CA4A398C3EB /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6614E0B481304028A1D06F8A /* Montserrat-Black.ttf */; };
@@ -423,12 +456,80 @@
 		CC74FFF11A4D422EA4F02E08 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../src/fonts/Montserrat/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		D57884CA17224EC589F7D3FA /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../src/fonts/OpenSans/OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StorjIOS.xcodeproj; path = "../../iOS-libstorj/StorjIOS/StorjIOS.xcodeproj"; sourceTree = "<group>"; };
-		DCACD442201FDF630050921B /* StorjLibIos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StorjLibIos.h; path = StorjMobile/StorjLibIos.h; sourceTree = "<group>"; };
-		DCACD443201FDF630050921B /* StorjLibIos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StorjLibIos.m; path = StorjMobile/StorjLibIos.m; sourceTree = "<group>"; };
+		DCACD442201FDF630050921B /* StorjLibIos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorjLibIos.h; sourceTree = "<group>"; };
+		DCACD443201FDF630050921B /* StorjLibIos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorjLibIos.m; sourceTree = "<group>"; };
 		DCC368812056B6D4004813CD /* DatabaseFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseFactory.h; sourceTree = "<group>"; };
 		DCC368822056B6D4004813CD /* DatabaseFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatabaseFactory.m; sourceTree = "<group>"; };
 		DCCD2FD320459F600032D3F5 /* FilePickerLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilePickerLib.h; sourceTree = "<group>"; };
 		DCCD2FD420459F600032D3F5 /* FilePickerLib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilePickerLib.m; sourceTree = "<group>"; };
+		DCDF6FC3205ADA04001B2F95 /* BucketContract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BucketContract.h; sourceTree = "<group>"; };
+		DCDF6FC4205ADA04001B2F95 /* BucketContract.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BucketContract.m; sourceTree = "<group>"; };
+		DCDF6FC6205AE94C001B2F95 /* FileContract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileContract.h; sourceTree = "<group>"; };
+		DCDF6FC7205AE94C001B2F95 /* FileContract.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileContract.m; sourceTree = "<group>"; };
+		DCDF6FC9205AED17001B2F95 /* UploadFileContract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadFileContract.h; sourceTree = "<group>"; };
+		DCDF6FCA205AED17001B2F95 /* UploadFileContract.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadFileContract.m; sourceTree = "<group>"; };
+		DCDF6FCF205FE9CC001B2F95 /* BaseRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseRepository.h; sourceTree = "<group>"; };
+		DCDF6FD0205FE9CC001B2F95 /* BaseRepository.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseRepository.m; sourceTree = "<group>"; };
+		DCDF6FD3205FEF6D001B2F95 /* IConvertibleToJS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IConvertibleToJS.h; sourceTree = "<group>"; };
+		DCDF6FD4205FF083001B2F95 /* IResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IResponse.h; sourceTree = "<group>"; };
+		DCDF6FD7205FF0A7001B2F95 /* Response.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Response.h; sourceTree = "<group>"; };
+		DCDF6FD8205FF0A7001B2F95 /* Response.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Response.m; sourceTree = "<group>"; };
+		DCDF6FDA205FF88A001B2F95 /* Error.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Error.h; sourceTree = "<group>"; };
+		DCDF6FDB205FF88A001B2F95 /* Error.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Error.m; sourceTree = "<group>"; };
+		DCDF6FDD2060073F001B2F95 /* SingleResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleResponse.h; sourceTree = "<group>"; };
+		DCDF6FDE2060073F001B2F95 /* SingleResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingleResponse.m; sourceTree = "<group>"; };
+		DCDF6FE0206022EC001B2F95 /* ListResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListResponse.h; sourceTree = "<group>"; };
+		DCDF6FE1206022EC001B2F95 /* ListResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListResponse.m; sourceTree = "<group>"; };
+		DCDF6FE420603015001B2F95 /* BucketModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BucketModel.h; sourceTree = "<group>"; };
+		DCDF6FE520603015001B2F95 /* BucketModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BucketModel.m; sourceTree = "<group>"; };
+		DCDF6FE82062BE39001B2F95 /* DictionaryUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DictionaryUtils.h; sourceTree = "<group>"; };
+		DCDF6FE92062BE39001B2F95 /* DictionaryUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DictionaryUtils.m; sourceTree = "<group>"; };
+		DCDF6FEB2062C2AD001B2F95 /* DownloadFileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadFileModel.h; sourceTree = "<group>"; };
+		DCDF6FEC2062C2AD001B2F95 /* DownloadFileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadFileModel.m; sourceTree = "<group>"; };
+		DCDF6FEE2062CC74001B2F95 /* DownloadFileProgressModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadFileProgressModel.h; sourceTree = "<group>"; };
+		DCDF6FEF2062CC74001B2F95 /* DownloadFileProgressModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadFileProgressModel.m; sourceTree = "<group>"; };
+		DCDF6FF12062D423001B2F95 /* FileDeleteModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileDeleteModel.h; sourceTree = "<group>"; };
+		DCDF6FF22062D423001B2F95 /* FileDeleteModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileDeleteModel.m; sourceTree = "<group>"; };
+		DCDF6FF42062D5C4001B2F95 /* FileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileModel.h; sourceTree = "<group>"; };
+		DCDF6FF52062D5C4001B2F95 /* FileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileModel.m; sourceTree = "<group>"; };
+		DCDF6FF72062E223001B2F95 /* UploadFileProgressModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadFileProgressModel.h; sourceTree = "<group>"; };
+		DCDF6FF82062E223001B2F95 /* UploadFileProgressModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadFileProgressModel.m; sourceTree = "<group>"; };
+		DCDF6FFA20631C73001B2F95 /* UploadFileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadFileModel.h; sourceTree = "<group>"; };
+		DCDF6FFB20631C73001B2F95 /* UploadFileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadFileModel.m; sourceTree = "<group>"; };
+		DCDF70512064384F001B2F95 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		DCDF70522064384F001B2F95 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		DCDF70532064384F001B2F95 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		DCDF70542064384F001B2F95 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		DCDF70552064384F001B2F95 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		DCDF70562064384F001B2F95 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		DCDF70572064384F001B2F95 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		DCDF70582064384F001B2F95 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		DCDF705920643850001B2F95 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		DCDF705A20643850001B2F95 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		DCDF705B20643850001B2F95 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		DCDF705C20643850001B2F95 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCDF70632064732C001B2F95 /* BucketDbo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BucketDbo.h; sourceTree = "<group>"; };
+		DCDF70642064732C001B2F95 /* BucketDbo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BucketDbo.m; sourceTree = "<group>"; };
+		DCDF706620649821001B2F95 /* FileDbo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileDbo.h; sourceTree = "<group>"; };
+		DCDF706720649821001B2F95 /* FileDbo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileDbo.m; sourceTree = "<group>"; };
+		DCDF70692064A15A001B2F95 /* UploadFileDbo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadFileDbo.h; sourceTree = "<group>"; };
+		DCDF706A2064A15A001B2F95 /* UploadFileDbo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadFileDbo.m; sourceTree = "<group>"; };
+		DCDF706C2064ACEC001B2F95 /* BucketRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BucketRepository.h; sourceTree = "<group>"; };
+		DCDF706D2064ACEC001B2F95 /* BucketRepository.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BucketRepository.m; sourceTree = "<group>"; };
+		DCDF706F2064C7A2001B2F95 /* FileRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileRepository.h; sourceTree = "<group>"; };
+		DCDF70702064C7A2001B2F95 /* FileRepository.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileRepository.m; sourceTree = "<group>"; };
+		DCDF70722064D348001B2F95 /* UploadFileRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadFileRepository.h; sourceTree = "<group>"; };
+		DCDF70732064D348001B2F95 /* UploadFileRepository.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadFileRepository.m; sourceTree = "<group>"; };
+		DCDF7075206895DF001B2F95 /* MethodHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MethodHandler.h; sourceTree = "<group>"; };
+		DCDF7076206895DF001B2F95 /* MethodHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MethodHandler.m; sourceTree = "<group>"; };
+		DCDF70782068B337001B2F95 /* StorjBackgroundServices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorjBackgroundServices.h; sourceTree = "<group>"; };
+		DCDF70792068B337001B2F95 /* StorjBackgroundServices.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StorjBackgroundServices.m; sourceTree = "<group>"; };
+		DCEB534E20697A55006B0624 /* EventNames.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventNames.h; sourceTree = "<group>"; };
+		DCEB534F20697A55006B0624 /* EventNames.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventNames.m; sourceTree = "<group>"; };
+		DCEB5377206AA77A006B0624 /* PromiseHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PromiseHandler.h; sourceTree = "<group>"; };
+		DCEB5378206AA77A006B0624 /* PromiseHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PromiseHandler.m; sourceTree = "<group>"; };
+		DCEB5398206BA643006B0624 /* FileUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileUtils.h; sourceTree = "<group>"; };
+		DCEB5399206BA643006B0624 /* FileUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileUtils.m; sourceTree = "<group>"; };
 		DEF7D3FD619949DEBB4F5660 /* Montserrat-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBoldItalic.ttf"; path = "../src/fonts/Montserrat/Montserrat-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		E8B379A61F534A10BAAA4E4B /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-LightItalic.ttf"; path = "../src/fonts/OpenSans/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
 		EDC564F35292492DA53A5EBD /* Montserrat-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-BoldItalic.ttf"; path = "../src/fonts/Montserrat/Montserrat-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -555,12 +656,13 @@
 		13B07FAE1A68108700A75B9A /* StorjMobile */ = {
 			isa = PBXGroup;
 			children = (
-				DCC368802056B6BB004813CD /* dataProvider */,
+				DCDF702A206437E9001B2F95 /* FMDB */,
 				DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */,
-				DCACD442201FDF630050921B /* StorjLibIos.h */,
-				DCACD443201FDF630050921B /* StorjLibIos.m */,
-				DCCD2FD320459F600032D3F5 /* FilePickerLib.h */,
-				DCCD2FD420459F600032D3F5 /* FilePickerLib.m */,
+				DCDF6FE72062BE1F001B2F95 /* utils */,
+				DCDF6FE320602F91001B2F95 /* model */,
+				DCDF6FD2205FED68001B2F95 /* responses */,
+				DCC368802056B6BB004813CD /* dataProvider */,
+				DCDF6FC22059423F001B2F95 /* ReactModules */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -568,6 +670,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				DCDF7075206895DF001B2F95 /* MethodHandler.h */,
+				DCDF7076206895DF001B2F95 /* MethodHandler.m */,
 			);
 			name = StorjMobile;
 			sourceTree = "<group>";
@@ -766,6 +870,14 @@
 		DCC368842056BC9D004813CD /* repositories */ = {
 			isa = PBXGroup;
 			children = (
+				DCDF6FCF205FE9CC001B2F95 /* BaseRepository.h */,
+				DCDF6FD0205FE9CC001B2F95 /* BaseRepository.m */,
+				DCDF706C2064ACEC001B2F95 /* BucketRepository.h */,
+				DCDF706D2064ACEC001B2F95 /* BucketRepository.m */,
+				DCDF706F2064C7A2001B2F95 /* FileRepository.h */,
+				DCDF70702064C7A2001B2F95 /* FileRepository.m */,
+				DCDF70722064D348001B2F95 /* UploadFileRepository.h */,
+				DCDF70732064D348001B2F95 /* UploadFileRepository.m */,
 			);
 			path = repositories;
 			sourceTree = "<group>";
@@ -773,6 +885,12 @@
 		DCC368852056BCF7004813CD /* dbo */ = {
 			isa = PBXGroup;
 			children = (
+				DCDF70632064732C001B2F95 /* BucketDbo.h */,
+				DCDF70642064732C001B2F95 /* BucketDbo.m */,
+				DCDF706620649821001B2F95 /* FileDbo.h */,
+				DCDF706720649821001B2F95 /* FileDbo.m */,
+				DCDF70692064A15A001B2F95 /* UploadFileDbo.h */,
+				DCDF706A2064A15A001B2F95 /* UploadFileDbo.m */,
 			);
 			path = dbo;
 			sourceTree = "<group>";
@@ -780,8 +898,99 @@
 		DCC368862056BD08004813CD /* contracts */ = {
 			isa = PBXGroup;
 			children = (
+				DCDF6FC3205ADA04001B2F95 /* BucketContract.h */,
+				DCDF6FC4205ADA04001B2F95 /* BucketContract.m */,
+				DCDF6FC6205AE94C001B2F95 /* FileContract.h */,
+				DCDF6FC7205AE94C001B2F95 /* FileContract.m */,
+				DCDF6FC9205AED17001B2F95 /* UploadFileContract.h */,
+				DCDF6FCA205AED17001B2F95 /* UploadFileContract.m */,
 			);
 			path = contracts;
+			sourceTree = "<group>";
+		};
+		DCDF6FC22059423F001B2F95 /* ReactModules */ = {
+			isa = PBXGroup;
+			children = (
+				DCACD442201FDF630050921B /* StorjLibIos.h */,
+				DCACD443201FDF630050921B /* StorjLibIos.m */,
+				DCCD2FD320459F600032D3F5 /* FilePickerLib.h */,
+				DCCD2FD420459F600032D3F5 /* FilePickerLib.m */,
+				DCDF70782068B337001B2F95 /* StorjBackgroundServices.h */,
+				DCDF70792068B337001B2F95 /* StorjBackgroundServices.m */,
+				DCEB534E20697A55006B0624 /* EventNames.h */,
+				DCEB534F20697A55006B0624 /* EventNames.m */,
+			);
+			path = ReactModules;
+			sourceTree = "<group>";
+		};
+		DCDF6FD2205FED68001B2F95 /* responses */ = {
+			isa = PBXGroup;
+			children = (
+				DCDF6FD3205FEF6D001B2F95 /* IConvertibleToJS.h */,
+				DCDF6FD4205FF083001B2F95 /* IResponse.h */,
+				DCDF6FD7205FF0A7001B2F95 /* Response.h */,
+				DCDF6FD8205FF0A7001B2F95 /* Response.m */,
+				DCDF6FDA205FF88A001B2F95 /* Error.h */,
+				DCDF6FDB205FF88A001B2F95 /* Error.m */,
+				DCDF6FDD2060073F001B2F95 /* SingleResponse.h */,
+				DCDF6FDE2060073F001B2F95 /* SingleResponse.m */,
+				DCDF6FE0206022EC001B2F95 /* ListResponse.h */,
+				DCDF6FE1206022EC001B2F95 /* ListResponse.m */,
+			);
+			path = responses;
+			sourceTree = "<group>";
+		};
+		DCDF6FE320602F91001B2F95 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				DCDF6FE420603015001B2F95 /* BucketModel.h */,
+				DCDF6FE520603015001B2F95 /* BucketModel.m */,
+				DCDF6FEB2062C2AD001B2F95 /* DownloadFileModel.h */,
+				DCDF6FEC2062C2AD001B2F95 /* DownloadFileModel.m */,
+				DCDF6FEE2062CC74001B2F95 /* DownloadFileProgressModel.h */,
+				DCDF6FEF2062CC74001B2F95 /* DownloadFileProgressModel.m */,
+				DCDF6FF12062D423001B2F95 /* FileDeleteModel.h */,
+				DCDF6FF22062D423001B2F95 /* FileDeleteModel.m */,
+				DCDF6FF42062D5C4001B2F95 /* FileModel.h */,
+				DCDF6FF52062D5C4001B2F95 /* FileModel.m */,
+				DCDF6FF72062E223001B2F95 /* UploadFileProgressModel.h */,
+				DCDF6FF82062E223001B2F95 /* UploadFileProgressModel.m */,
+				DCDF6FFA20631C73001B2F95 /* UploadFileModel.h */,
+				DCDF6FFB20631C73001B2F95 /* UploadFileModel.m */,
+				DCEB5377206AA77A006B0624 /* PromiseHandler.h */,
+				DCEB5378206AA77A006B0624 /* PromiseHandler.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		DCDF6FE72062BE1F001B2F95 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				DCDF6FE82062BE39001B2F95 /* DictionaryUtils.h */,
+				DCDF6FE92062BE39001B2F95 /* DictionaryUtils.m */,
+				DCEB5398206BA643006B0624 /* FileUtils.h */,
+				DCEB5399206BA643006B0624 /* FileUtils.m */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		DCDF702A206437E9001B2F95 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				DCDF70552064384F001B2F95 /* FMDatabase.h */,
+				DCDF70512064384F001B2F95 /* FMDatabase.m */,
+				DCDF70582064384F001B2F95 /* FMDatabaseAdditions.h */,
+				DCDF705920643850001B2F95 /* FMDatabaseAdditions.m */,
+				DCDF70542064384F001B2F95 /* FMDatabasePool.h */,
+				DCDF70532064384F001B2F95 /* FMDatabasePool.m */,
+				DCDF70562064384F001B2F95 /* FMDatabaseQueue.h */,
+				DCDF705B20643850001B2F95 /* FMDatabaseQueue.m */,
+				DCDF70522064384F001B2F95 /* FMDB.h */,
+				DCDF70572064384F001B2F95 /* FMResultSet.h */,
+				DCDF705A20643850001B2F95 /* FMResultSet.m */,
+				DCDF705C20643850001B2F95 /* Info.plist */,
+			);
+			path = FMDB;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1244,6 +1453,7 @@
 				D68D4C0D19FC44AFA409AB73 /* Montserrat-SemiBoldItalic.ttf in Resources */,
 				30AF66717D3040C7BD16F0A8 /* Montserrat-Thin.ttf in Resources */,
 				69B808A04C894F0B8B510355 /* Montserrat-ThinItalic.ttf in Resources */,
+				DCDF706220643850001B2F95 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1280,10 +1490,42 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCC368832056B6D4004813CD /* DatabaseFactory.m in Sources */,
+				DCDF70652064732C001B2F95 /* BucketDbo.m in Sources */,
+				DCDF6FF62062D5C4001B2F95 /* FileModel.m in Sources */,
+				DCEB535020697A55006B0624 /* EventNames.m in Sources */,
+				DCDF706E2064ACEC001B2F95 /* BucketRepository.m in Sources */,
+				DCDF707A2068B337001B2F95 /* StorjBackgroundServices.m in Sources */,
+				DCDF6FE620603015001B2F95 /* BucketModel.m in Sources */,
+				DCDF705E20643850001B2F95 /* FMDatabasePool.m in Sources */,
+				DCEB5379206AA77A006B0624 /* PromiseHandler.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				DCDF6FEA2062BE39001B2F95 /* DictionaryUtils.m in Sources */,
+				DCDF7077206895DF001B2F95 /* MethodHandler.m in Sources */,
+				DCDF706B2064A15A001B2F95 /* UploadFileDbo.m in Sources */,
+				DCDF6FE2206022EC001B2F95 /* ListResponse.m in Sources */,
+				DCDF6FD9205FF0A7001B2F95 /* Response.m in Sources */,
+				DCDF706820649821001B2F95 /* FileDbo.m in Sources */,
+				DCDF6FCB205AED17001B2F95 /* UploadFileContract.m in Sources */,
+				DCDF6FFC20631C73001B2F95 /* UploadFileModel.m in Sources */,
+				DCDF705D20643850001B2F95 /* FMDatabase.m in Sources */,
+				DCDF6FED2062C2AD001B2F95 /* DownloadFileModel.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				DCDF6FC5205ADA04001B2F95 /* BucketContract.m in Sources */,
+				DCDF6FD1205FE9CC001B2F95 /* BaseRepository.m in Sources */,
+				DCDF6FF92062E223001B2F95 /* UploadFileProgressModel.m in Sources */,
+				DCDF70712064C7A2001B2F95 /* FileRepository.m in Sources */,
+				DCEB539A206BA643006B0624 /* FileUtils.m in Sources */,
+				DCDF6FF02062CC74001B2F95 /* DownloadFileProgressModel.m in Sources */,
+				DCDF70742064D348001B2F95 /* UploadFileRepository.m in Sources */,
+				DCDF706120643850001B2F95 /* FMDatabaseQueue.m in Sources */,
 				DCACD444201FDF630050921B /* StorjLibIos.m in Sources */,
+				DCDF6FDF2060073F001B2F95 /* SingleResponse.m in Sources */,
+				DCDF706020643850001B2F95 /* FMResultSet.m in Sources */,
+				DCDF6FDC205FF88A001B2F95 /* Error.m in Sources */,
 				DCCD2FD520459F610032D3F5 /* FilePickerLib.m in Sources */,
+				DCDF6FF32062D423001B2F95 /* FileDeleteModel.m in Sources */,
+				DCDF6FC8205AE94C001B2F95 /* FileContract.m in Sources */,
+				DCDF705F20643850001B2F95 /* FMDatabaseAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
