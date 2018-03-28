@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import { getWidth, getHeight } from '../utils/adaptive';
+import { getPicturesBucketId } from '../reducers/mainContainer/mainReducerActions';
 
 /**
 * Footer component in main page 
@@ -87,17 +88,42 @@ export default class TabBarComponent extends Component {
             <Animated.View style = { [ styles.mainContainer, this.getTabBarTrasformProperties() ] }>       
                 <View style = { styles.navContainer }>
                     <View style = { styles.tabContainer }>
-                        <TouchableOpacity style = { styles.tabItemContainer } onPress = { () => { this.props.navigation.navigate("DashboardScreen"); } }>
+                        <TouchableOpacity 
+                            style = { styles.tabItemContainer } 
+                            onPress = { () => { 
+                                this.props.navigation.openBucket(null);
+                                this.props.navigation.navigate("DashboardScreen"); 
+                            } }>
                             <View><Image source = { require('../images/TabBar/HomeTabBar.png') } style = { navIndex === 0 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
-                        <TouchableOpacity style = { styles.tabItemContainer } onPress = { () => {  this.props.navigation.goToBucketsScreen(); } }>
+                        <TouchableOpacity 
+                            style = { styles.tabItemContainer } 
+                            onPress = { () => {  
+                                this.props.navigation.openBucket(null);
+                                this.props.navigation.goToBucketsScreen();
+                                this.props.navigation.bucketNavigateBack();
+                            } }>
                             <View><Image source = { require('../images/TabBar/BucketTabBar.png') } style = { navIndex === 1 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
                         <View style = { styles.tabItemContainer } ></View>
-                        <TouchableOpacity style = { styles.tabItemContainer } onPress = { () => { this.props.navigation.navigate("MyPhotosScreen"); } }>
+                        <TouchableOpacity 
+                            style = { styles.tabItemContainer } 
+                            onPress = { () => { 
+                                let picturesBucketId = getPicturesBucketId(this.props.navigation.buckets);
+
+                                if(!picturesBucketId) return;
+
+                                this.props.navigation.openBucket(picturesBucketId);
+                                this.props.navigation.navigate("MyPhotosScreen");
+                            } }>
                             <View><Image source = { require('../images/TabBar/MyPhotos.png') } style = { navIndex === 2 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
-                        <TouchableOpacity style = { styles.tabItemContainer } onPress = { () => { this.props.navigation.navigate("MyAccountScreen"); } }>
+                        <TouchableOpacity 
+                            style = { styles.tabItemContainer } 
+                            onPress = { () => { 
+                                this.props.navigation.openBucket(null);
+                                this.props.navigation.navigate("MyAccountScreen");
+                            } }>
                             <View><Image source = { require('../images/TabBar/UserTabBar.png') } style = { navIndex === 3 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
                     </View>

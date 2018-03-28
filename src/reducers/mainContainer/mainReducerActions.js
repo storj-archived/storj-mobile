@@ -1,4 +1,8 @@
 import { MAIN_ACTIONS } from '../../utils/constants/actionConstants';
+import { SYNC_BUCKETS } from '../../utils/constants/SyncBuckets';
+import ServiceModule from '../../utils/ServiceModule';
+
+const { PICTURES } = SYNC_BUCKETS;
 
 const { 
     SELECT_BUCKET, 
@@ -142,6 +146,21 @@ function updateFavourite(buckets) {
     return { type: UPDATE_FAVOURITE, payload: { buckets } } 
 }
 
+export function getPicturesBucketId(buckets) {
+    ServiceModule.createBaseBuckets(buckets);
+
+    let picturesBucket;
+
+    picturesBucket = buckets.find(element=>{
+
+        return element.getName() === PICTURES;
+    });
+
+    if(picturesBucket) {
+        return picturesBucket.entity.id;
+    } 
+}
+
 //action creators for main container
 export const mainContainerActions = {
     getBuckets,
@@ -158,7 +177,8 @@ export const mainContainerActions = {
     setLoading,
     unsetLoading,
     setGridView,
-    setListView
+    setListView,
+    openBucket
 };
 
 //action creators for main screen navigation container
@@ -220,6 +240,18 @@ export const filesListContainerMainActions = {
     enableSelectionMode,
     disableSelectionMode, 
     unsetLoading
+};
+
+export const myPicturesListContainerMainActions = {
+    disableSelectionMode,
+    onSingleItemSelected,
+    closeBucket,
+    setLoading,
+    enableSelectionMode,
+    disableSelectionMode, 
+    unsetLoading,
+    openBucket,
+    setSelectionId
 };
 
 export const favouritesActions = {

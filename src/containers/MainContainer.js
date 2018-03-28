@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { mainContainerActions, favouritesActions } from '../reducers/mainContainer/mainReducerActions';
 import fileActions, { mainContainerFileActions, favouritesFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
-import { redirectToMainScreen, redirectToInitializationScreen } from '../reducers/navigation/navigationActions';
+import { redirectToMainScreen, redirectToInitializationScreen, bucketNavigateBack } from '../reducers/navigation/navigationActions';
 import { createWallet, getWallets } from '../reducers/billing/billingActions';
 import FileModel from '../models/FileModel';
 import BucketModel from '../models/BucketModel';
@@ -15,10 +15,12 @@ import TabBarActionModelFactory from '../models/TabBarActionModel';
 import MainComponent from '../components/MainComponent';
 import filePicker from '../utils/filePicker';
 import observablePropFactory from '../models/ObservableProperty';
-
 import ServiceModule from '../utils/ServiceModule';
 import SyncModule from '../utils/SyncModule';
 import { uploadFileStart, uploadFileSuccess, listUploadingFiles } from '../reducers/asyncActions/fileActionsAsync';
+import { SYNC_BUCKETS } from '../utils/constants/SyncBuckets';
+
+const { PICTURES } = SYNC_BUCKETS;
 
 class MainContainer extends Component {
     constructor(props) {
@@ -169,7 +171,8 @@ class MainContainer extends Component {
     }
 
     deleteSelectedFiles() {
-        this.props.fileListModels.forEach(fileItem => {            
+        this.props.fileListModels.forEach(fileItem => { 
+
             if(fileItem.isSelected)
                 this.deleteFile(this.props.openedBucketId, fileItem.getId());
         });
@@ -276,7 +279,10 @@ class MainContainer extends Component {
                 wallets = { this.props.wallets }
                 isLoading = { this.props.isLoading }
                 createWallet = { this.props.createWallet } 
-                getWallets = { this.props.getWallets } />
+                getWallets = { this.props.getWallets }
+                buckets = { this.props.buckets }
+                openBucket = { this.props.openBucket }
+                bucketNavigateBack = { this.props.bucketNavigateBack } />
         );
     }
 }
@@ -303,7 +309,8 @@ function mapDispatchToProps(dispatch) {
         ...bindActionCreators({ 
             ...fileActions, 
             redirectToMainScreen, 
-            redirectToInitializationScreen, 
+            redirectToInitializationScreen,
+            bucketNavigateBack, 
             ...mainContainerActions, 
             ...mainContainerFileActions, 
             ...favouritesActions, 
