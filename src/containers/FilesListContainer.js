@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { bucketNavigateBack, dashboardNavigateBack, openImageViewer } from '../reducers/navigation/navigationActions';
 import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
+import { listUploadingFiles } from "../reducers/asyncActions/fileActionsAsync";
 import StorjModule from '../utils/StorjModule';
 import ServiceModule from '../utils/ServiceModule';
 import ListItemModel from '../models/ListItemModel';
@@ -118,7 +119,7 @@ class FilesListContainer extends Component {
                 isSingleItemSelected = { this.props.isSingleItemSelected }
                 deselectFile = { this.props.deselectFile }
                 selectFile = { this.props.selectFile }
-                renewFileList = { () => ServiceModule.getFiles(this.bucketId) } />
+                renewFileList = { () => { ServiceModule.getFiles(this.bucketId); this.props.listUploadingFiles(this.bucketId); } }/>
         );
     }
 }
@@ -140,7 +141,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ bucketNavigateBack, dashboardNavigateBack, openImageViewer, ...filesListContainerMainActions, ...filesListContainerFileActions }, dispatch);
+    return {
+        ...bindActionCreators({ bucketNavigateBack, dashboardNavigateBack, openImageViewer, ...filesListContainerMainActions, ...filesListContainerFileActions }, dispatch),
+        listUploadingFiles: (bucketId) => { dispatch(listUploadingFiles(bucketId)); }
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilesListContainer);

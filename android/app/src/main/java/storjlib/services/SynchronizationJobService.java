@@ -69,7 +69,7 @@ public class SynchronizationJobService extends JobService {
                     syncFolder(syncSettings, SyncSettingsEnum.SYNC_PHOTOS, bucketRepo, db);
                     syncFolder(syncSettings, SyncSettingsEnum.SYNC_MOVIES, bucketRepo, db);
                     syncFolder(syncSettings, SyncSettingsEnum.SYNC_DOCUMENTS, bucketRepo, db);
-                    syncFolder(syncSettings, SyncSettingsEnum.SYNC_MOVIES, bucketRepo, db);
+                    syncFolder(syncSettings, SyncSettingsEnum.SYNC_MUSIC, bucketRepo, db);
 
                     settingsRepo.update(settingsId, getDateTime());
                 } catch (Exception e) {
@@ -122,15 +122,20 @@ public class SynchronizationJobService extends JobService {
         }
 
         int syncValue = syncEnum.getValue();
-        String syncFolder = syncEnum.getFolderName();
+        String bucketName = syncEnum.getBucketName();
 
-        BucketDbo dbo = bucketRepo.get(BucketContract._NAME, syncEnum.getFolderName());
+        BucketDbo dbo = bucketRepo.get(BucketContract._NAME, bucketName);
+        boolean dboIsNotNull = dbo != null;
+        boolean isSyncOn = (syncSettings & syncValue) == syncValue;
 
-        if((syncSettings & syncValue) == syncValue && dbo != null)
-            _syncFolder("/storage/emulated/0/" + syncFolder, dbo.getId(), db);
+        if(isSyncOn && dboIsNotNull)
+            _syncFolder(syncEnum.geetFolderUri(), dbo.getId(), db);
+        else
+            Log.d(DEBUG_TAG, "sync: " + "Settings for " + bucketName + " - " + " Dbo: " + dboIsNotNull + ", Sync settings" + isSyncOn);
     }
 
     private void _syncFolder(String folderUri, String bucketId, SQLiteDatabase db) {
+        Log.d(DEBUG_TAG, "sync: " + "Start sync of " + folderUri + " and " + bucketId);
         File folder = new File(folderUri);
 
         if(!folder.exists() || !folder.isDirectory()) {
