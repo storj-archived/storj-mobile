@@ -33,7 +33,10 @@ class MainNavigationContainer extends Component {
                     test: this.props.testAction,
                     goToBucketsScreen: this.props.goToBucketsScreen,
                     onActionBarPress: this.props.onActionBarPress,
-                    currentRouteIndex: this.props.nav.index
+                    currentRouteIndex: this.props.nav.index,
+                    buckets: this.props.buckets,
+                    openBucket: this.props.openBucket, 
+                    bucketNavigateBack: this.props.bucketNavigateBack
                 })} />
         );
     };

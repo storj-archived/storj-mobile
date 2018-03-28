@@ -64,7 +64,10 @@ export default class MainComponent extends Component {
                         isSingleItemSelected = { this.props.isSingleItemSelected }
                         isActionBarShown = { this.props.isActionBarShown }
                         isSelectionMode = { this.props.isSelectionMode }
-                        onActionBarPress = { () => { this.props.onActionBarPress(); } } />
+                        onActionBarPress = { () => { this.props.onActionBarPress(); } }
+                        buckets = { this.props.buckets }
+                        openBucket = { this.props.openBucket } 
+                        bucketNavigateBack = { this.props.bucketNavigateBack } />
                 </View>
                 {
                     this.props.isActionBarShown || this.props.isSelectionMode ? 
