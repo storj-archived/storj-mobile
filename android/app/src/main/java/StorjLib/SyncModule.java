@@ -338,12 +338,15 @@ public class SyncModule extends ReactContextBaseJavaModule {
 
                     if(value) {
                         scheduleSync(settingsModel, dispatcher);
+                        Log.d("SYNC MODULE", "changeSyncStatus: Scheduled succesfully!");
                     }
 
                     promise.resolve(settingsRepo.update(id, value).toWritableMap());
+                    Log.d("SYNC MODULE", "changeSyncStatus: settings entry updated successfully!");
 
                 } catch(Exception e) {
-                    promise.resolve(new Response(false, "Something went wrong!").toWritableMap());
+                    promise.resolve(new Response(false, "Something went wrong! " + e.getMessage()).toWritableMap());
+                    Log.d("SYNC MODULE", "changeSyncStatus: Error " + e.getMessage());
                 }
             }
         }).run();

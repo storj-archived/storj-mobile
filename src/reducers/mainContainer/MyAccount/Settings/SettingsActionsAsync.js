@@ -4,7 +4,7 @@ import settingsActions from './SettingsActions';
 export function listSettingsAsync(settingsId) {
     return async (dispatch) => {
         let getSettingsResponse = await SyncModule.listSettings(settingsId);
-        
+
         if(getSettingsResponse.isSuccess) {
             let settingsModel = JSON.parse(getSettingsResponse.result);
             console.log(settingsModel);
@@ -19,15 +19,26 @@ export function listSettingsAsync(settingsId) {
     };
 }
 
+async function _changeSyncStatusAsync(dispatch, settingsId, value) {
+    value ? dispatch(settingsActions.syncOn()) : dispatch(settingsActions.syncOff());
+
+    let changeSyncStatusResponse = await SyncModule.changeSyncStatus(settingsId, value);
+    
+    if(!changeSyncStatusResponse.isSuccess) {
+        dispatch(settingsActions.syncOff());
+    }
+}
+
 export function changeSyncStatusAsync(settingsId, value) {
     return async (dispatch) => {
-        value ? dispatch(settingsActions.syncOn()) : dispatch(settingsActions.syncOff());
+        /* value ? dispatch(settingsActions.syncOn()) : dispatch(settingsActions.syncOff());
 
         let changeSyncStatusResponse = await SyncModule.changeSyncStatus(settingsId, value);
         
         if(!changeSyncStatusResponse.isSuccess) {
             dispatch(settingsActions.syncOff());
-        }
+        } */
+        _changeSyncStatusAsync(dispatch, settingsId, value);
     };
 }
 
@@ -40,6 +51,10 @@ export function setWifiConstraintAsync(settingsId, value, prevSettingsState) {
             settingsActions.setWifiConstraint, 
             (settingsState) => settingsState.onWifi,
             (settingsState) => settingsState.onWifi = value);
+
+        if(prevSettingsState.syncStatus) {
+            _changeSyncStatusAsync(dispatch, settingsId, true);
+        }
     };
 }
 
@@ -52,6 +67,11 @@ export function setChargingConstraintAsync(settingsId, value, prevSettingsState)
             settingsActions.setChargingConstraint, 
             (settingsState) => settingsState.onCharging,
             (settingsState) => settingsState.onCharging = value);
+
+        console.log("ON charging", prevSettingsState, value);
+        if(prevSettingsState.syncStatus) {
+            _changeSyncStatusAsync(dispatch, settingsId, true);
+        }
     };
 }
 

@@ -75,9 +75,18 @@ class InitializeContainer extends Component {
 
         let getKeysResult = JSON.parse(getKeyResponse.result);
 
+        let getSettingsResponse = await SyncModule.listSettings(getKeysResult.email);
+
+        if(getSettingsResponse.isSuccess) {
+            let settingsModel = JSON.parse(getSettingsResponse.result);
+
+            if(settingsModel.isFirstSignIn) 
+                this.props.setFirstSignIn();
+        }
+
         this.getAllBuckets();
         ServiceModule.getBuckets();                
-        this.getAllFiles(getKeysResult.email);
+        this.getAllFiles();
 
         this.props.setEmail(getKeysResult.email);
         this.props.getDebits();

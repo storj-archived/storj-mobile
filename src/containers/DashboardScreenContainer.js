@@ -45,9 +45,7 @@ class DashboardScreenContainer extends Component {
     }
 
     async createBucket(name) {
-        //this.props.setLoading();
         SerivceModule.createBucket(name);
-        //this.props.unsetLoading();
     }
 
     setFirstSignIn(value, callback) {
@@ -58,7 +56,7 @@ class DashboardScreenContainer extends Component {
     }
 
     render() {
-        if(/* this.props.isFirstSignIn */true) {
+        if(this.props.isFirstSignIn) {
             return(
                 <FirstSignInComponent
                     removeFirstSignIn = { this.props.removeFirstSignIn }
