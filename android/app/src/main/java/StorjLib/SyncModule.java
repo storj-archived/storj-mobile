@@ -21,6 +21,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import storjlib.Enum.DownloadStateEnum;
 import storjlib.Enum.SyncSettingsEnum;
 import storjlib.Models.BucketModel;
 import storjlib.Models.FileModel;
@@ -354,15 +355,38 @@ public class SyncModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    private void checkImage(String localPath, Promise promise) {
+    private void checkImage(final String fileId, final String localPath, final Promise promise) {
         if(localPath == null) {
             promise.resolve(new Response(false, "localPath is null!").toWritableMap());
+            Log.d("SYNC MODULE", "checkImage: Error local path is null!");
+            return;
         }
 
         File file = new File(localPath);
 
         if(!file.exists() || file.isDirectory()) {
-            promise.resolve(promise.resolve(new Response(false, "localPath is null").toWritableMap()););
+            Log.d("SYNC MODULE", "checkImage: File has been remoced from file System!");
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getWritableDatabase()) {
+                        FileRepository fileRepo = new FileRepository(db);
+
+                        Response updateResponse = fileRepo.update(fileId, DownloadStateEnum.DEFAULT.getValue(), 0, null);
+
+                        if(!updateResponse.isSuccess()) {
+                            Log.d("SYNC MODULE", "checkImage: Error while updating file entry");
+                        } else {
+                            Log.d("SYNC MODULE", "checkImage: File entry updated successfully");
+                        }
+                    } catch(Exception e) {
+                        Log.d("SYNC MODULE", "checkImage: Error while updating file entry, exception: " + e.getMessage());
+                    }
+                }
+            }).run();
+
+            promise.resolve(new Response(false, "File has been remoced from file System!").toWritableMap());
+            return;
         }
 
         promise.resolve(new Response(true, null).toWritableMap());
