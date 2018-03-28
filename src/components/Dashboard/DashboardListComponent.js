@@ -74,6 +74,7 @@ export default class DashboardListComponent extends Component{
                                 </View>
                             </TouchableOpacity>
                         </View>
+                        <View style = { styles.contentWrapper }>
                         {
                             listComponent('Favourite buckets', starredBuckets.slice(0, 3), this.props, starredBucketsCount, true)
                         }
@@ -83,6 +84,7 @@ export default class DashboardListComponent extends Component{
                         {
                             listComponent('Recent sync', syncedFiles.slice(0, 3), this.props, syncedfilesCount, false)
                         }     
+                        </View>
                     </ScrollView>
                 </View>
             </View>
@@ -169,5 +171,8 @@ const styles = StyleSheet.create({
     expandImage: { 
         height: getHeight(24), 
         width: getWidth(24)
+    },
+    contentWrapper: {
+        paddingBottom: getHeight(60)
     }
 });
