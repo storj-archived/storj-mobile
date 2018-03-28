@@ -69,7 +69,7 @@ public class GetBucketsService extends BaseReactService {
      * Creates an IntentService.  Invoked by your subclass's constructor.
      */
     public GetBucketsService() {
-        super("TestHello");
+        super("GetBucketsService");
     }
 
     private static final String TAG = "INTENT GET BUCKETS";
