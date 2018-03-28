@@ -18,7 +18,6 @@ class DashboardScreenContainer extends Component {
         super(props);
 
         this.email = props.email;
-        console.log(this.email);
 
         this.setFirstSignIn = this.setFirstSignIn.bind(this);
         this.changeSyncStatus = this.changeSyncStatus.bind(this);

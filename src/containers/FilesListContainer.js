@@ -24,7 +24,7 @@ class FilesListContainer extends Component {
         return this.props.fileListModels.concat(this.props.uploadingFileListModels).filter(file => file.entity.bucketId === this.props.openedBucketId);
     }
 
-    componentWillMount() {
+    componentWillMount() {        
         if(Platform.OS === "android") {
             BackHandler.addEventListener("hardwarebackPress", this.onHardwareBackPress);
         }        
@@ -91,13 +91,10 @@ class FilesListContainer extends Component {
         }
     }
 
-    onPress(params) {
-        let downloadedFile = this.props.downloadedFileListModels.find(file => { 
-            return file.id === params.id;
-        });
-
-        if(downloadedFile) {
-            this.props.openImageViewer(downloadedFile.id, downloadedFile.path, downloadedFile.bucketId);
+    onPress(file) {
+        console.log(file);
+        if(file.entity.isDownloaded) {
+            this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId);
         }
     }
 
