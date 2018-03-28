@@ -16,22 +16,31 @@ import ListItemModel from '../models/ListItemModel';
 import FileModel from '../models/FileModel';
 import ServiceModule from '../utils/ServiceModule';
 import { TYPES } from '../utils/constants/typesConstants';
+import { getHeight } from '../utils/adaptive';
+import PropTypes from 'prop-types';
 import EmpyBucketComponent from '../components/EmpyBucketComponent';
 
 class MyPhotosContainer extends Component {
     constructor(props) {
         super(props);
 
+        console.log(this.props)
+
         this.data = [];
         this.animatedScrollValue = new Animated.Value(0);
+        this.shouldRenew = false;
     }
 
     getData() {
         let picturesBucketId = getPicturesBucketId(this.props.buckets);
-
-        if(picturesBucketId) {
+        
+        
+        if(this.props.openedBucketId === picturesBucketId && !this.shouldRenew) {
+            ServiceModule.getFiles(picturesBucketId); 
             this.data = this.props.files.filter(element => element.entity.bucketId === picturesBucketId);
         }
+
+        this.shouldRenew = this.props.openedBucketId === picturesBucketId;
 
         return this.data;
     }
@@ -54,10 +63,11 @@ class MyPhotosContainer extends Component {
         let data = this.getData();
 
         return (
-            <View style = { { flex: 1, backgroundColor: '#FFFFFF' } }>
+            <View style = { styles.mainContainer }>
             {
                 data.length !== 0 ? 
                     <ListComponent
+                        contentWrapperStyle = { styles.contentWrapper }
                         setSelectionId = { this.props.setSelectionId }
                         selectedItemId = { this.props.selectedItemId }
                         cancelDownload = { this.props.cancelDownload }
@@ -82,13 +92,11 @@ class MyPhotosContainer extends Component {
                     : <EmpyBucketComponent />
             }
                 <BucketsScreenHeaderComponent
-                    isFilesScreen = { this.props.isFilesScreen }
                     selectedItemsCount = { this.getSelectedFilesCount() }
                     showOptions = { this.props.screenProps.showOptions }
                     isSelectionMode = { this.props.isSelectionMode }
                     disableSelectionMode = { this.props.disableSelectionMode }
                     animatedScrollValue = { this.animatedScrollValue }
-                    navigateBack = { this.props.navigateBack }
                     openedBucketId = { this.props.openedBucketId } />
             </View>
         )
@@ -123,4 +131,33 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPhotosContainer);
-//TODO: Add prop types
+
+MyPhotosContainer.propTypes = {
+    setSelectionId: PropTypes.func,
+    selectedItemId: PropTypes.bool,
+    cancelDownload: PropTypes.bool,
+    cancelUpload: PropTypes.bool,
+    isGridViewShown: PropTypes.bool,
+    openedBucketId: PropTypes.string,
+    bucketId: PropTypes.bool,
+    onSingleItemSelected: PropTypes.func,
+    animatedScrollValue: PropTypes.bool,
+    enableSelectionMode: PropTypes.func,
+    disableSelectionMode: PropTypes.func,
+    isSelectionMode: PropTypes.bool,
+    isSingleItemSelected: PropTypes.bool,
+    deselectFile: PropTypes.func,
+    selectFile: PropTypes.func
+};
+
+
+const styles = StyleSheet.create({
+    mainContainer: {
+        flex: 1,
+        backgroundColor: 'white'
+    },
+    contentWrapper: {
+        paddingTop: getHeight(58),
+        paddingBottom: getHeight(60)
+    }
+});
