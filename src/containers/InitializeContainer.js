@@ -57,10 +57,6 @@ class InitializeContainer extends Component {
         }
     }
 
-    async componentDidMount() {
-        
-    }
-
     onChangePassode(value) {
         this.setState({ passcode: value });
     }
@@ -79,7 +75,7 @@ class InitializeContainer extends Component {
 
         if(getSettingsResponse.isSuccess) {
             let settingsModel = JSON.parse(getSettingsResponse.result);
-
+            console.log(settingsModel);
             if(settingsModel.isFirstSignIn) 
                 this.props.setFirstSignIn();
         }

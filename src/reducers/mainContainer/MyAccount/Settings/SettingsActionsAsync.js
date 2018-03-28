@@ -136,6 +136,7 @@ async function _sync(dispatch, settingsId, value, settingsState, actionCallback,
     }
 }
 
+//Only for initial set of sync settings that also set isFirstSingnIn to false 
 export function setFirstSignInAsync(settingsId, value, callback) {
     return async (dispatch) => {
         let updateSettingsResponse = await SyncModule.setFirstSignIn(settingsId, value);
