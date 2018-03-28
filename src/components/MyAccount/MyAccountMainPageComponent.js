@@ -34,7 +34,7 @@ export default class MyAccountMainPageComponent extends Component{
                         </TouchableOpacity>
                     </View>
                     <View style = { styles.topButtonsContainer }>
-                        <TouchableOpacity onPress = { () => { this.props.navigation.navigate('StorageScreen'); } } >
+                        <TouchableOpacity onPress = {  () => { {/*this.props.navigation.navigate('StorageScreen'); */}} } > 
                             <View style = { styles.button }>
                                 <View style = { styles.buttonContentContainer }>
                                     <Image 

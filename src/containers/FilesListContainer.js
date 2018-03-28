@@ -93,7 +93,7 @@ class FilesListContainer extends Component {
 
     onPress(params) {
         let downloadedFile = this.props.downloadedFileListModels.find(file => { 
-            return file.id === params.bucketId;
+            return file.id === params.id;
         });
 
         if(downloadedFile) {
