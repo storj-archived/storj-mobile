@@ -15,10 +15,13 @@ import TabBarActionModelFactory from '../models/TabBarActionModel';
 import MainComponent from '../components/MainComponent';
 import filePicker from '../utils/filePicker';
 import observablePropFactory from '../models/ObservableProperty';
+import { SYNC_BUCKETS } from '../utils/constants/SyncBuckets';
 
 import ServiceModule from '../utils/ServiceModule';
 import SyncModule from '../utils/SyncModule';
 import { uploadFileStart, uploadFileSuccess, listUploadingFiles } from '../reducers/asyncActions/fileActionsAsync';
+
+const { PICTURES } = SYNC_BUCKETS;
 
 class MainContainer extends Component {
     constructor(props) {
@@ -291,6 +294,8 @@ class MainContainer extends Component {
 
     deleteBuckets() {
         this.getSelectedBuckets().forEach(item => {
+            if(item.getName() === PICTURES) return; //we shoul add some notification here
+
             this.deleteBucket(item);
         });
 
