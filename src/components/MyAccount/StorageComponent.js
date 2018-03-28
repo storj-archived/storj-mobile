@@ -9,6 +9,8 @@ import {
 import React, { Component } from 'react';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import StorageReportComponent from './StorageReportComponent';
+import { uuidv4 } from '../../utils/utils';
+import moment from 'moment';
 
 export default class StorageComponent extends Component{
     constructor(props) {
@@ -56,26 +58,15 @@ export default class StorageComponent extends Component{
                     <Text style = { styles.explanationText }>Storage using history</Text>
                 </View>
                 <ScrollView style = { styles.scrollViewContainer } decelerationRate = { 'normal' } >
-                    {
-                        <StorageReportComponent 
-                            date = { '25 Feb 2018' }
-                            amount = { 5.81 } />
-                    }
-                    {
-                        <StorageReportComponent 
-                            date = { '25 Jan 2018' }
-                            amount = { 4.20 } />
-                    }
-                    {
-                        <StorageReportComponent 
-                            date = { '25 Dec 2017' }
-                            amount = { 2.37 } />
-                    }
-                    {
-                        <StorageReportComponent 
-                            date = { '25 Nov 2017' }
-                            amount = { 1.39 } />
-                    }
+                {
+                        this.props.screenProps.transactionList.map(transaction => {                            
+                            return <StorageReportComponent 
+                                        key = { uuidv4() }
+                                        date = { moment(transaction.timestamp).format('MMMM-DD-YYYY') }
+                                        amount = { transaction.amount } />
+                        })
+                }            
+                    
                 </ScrollView>
             </View>
         );

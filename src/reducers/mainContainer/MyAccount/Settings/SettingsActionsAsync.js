@@ -4,7 +4,7 @@ import settingsActions from './SettingsActions';
 export function listSettingsAsync(settingsId) {
     return async (dispatch) => {
         let getSettingsResponse = await SyncModule.listSettings(settingsId);
-        console.log(getSettingsResponse);
+                
         if(getSettingsResponse.isSuccess) {
             let settingsModel = JSON.parse(getSettingsResponse.result);
             let syncSettings = settingsModel.syncSettings;
