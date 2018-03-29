@@ -16,4 +16,6 @@
 
 +(NSString *) convertToJsonWithArray:(NSArray *)array;
 
++(BOOL) isNSStringValid :(NSString *) stringToCheck;
+
 @end
