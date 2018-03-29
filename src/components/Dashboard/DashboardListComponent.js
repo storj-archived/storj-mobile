@@ -21,6 +21,11 @@ export default class DashboardListComponent extends Component{
         super(props);        
     }
 
+    getThreeLast(array) {
+        let length = array.length >= 3 ? array.length - 3 : 0;
+        return array.slice(length).reverse();
+    }
+
     render() {
         let props = this.props;
         let starredBuckets = props.buckets.filter(item => item.getStarred());
@@ -76,13 +81,13 @@ export default class DashboardListComponent extends Component{
                         </View>
                         <View style = { styles.contentWrapper }>
                         {
-                            listComponent('Favourite buckets', starredBuckets.slice(0, 3), this.props, starredBucketsCount, true)
+                            listComponent('Favourite buckets', this.getThreeLast(starredBuckets), this.props, starredBucketsCount, true)
                         }
                         {
-                            listComponent('Favourite files', starredFiles.slice(0, 3), this.props, starredFilesCount, false)
+                            listComponent('Favourite files', this.getThreeLast(starredFiles), this.props, starredFilesCount, false)
                         }
                         {
-                            listComponent('Recent sync', syncedFiles.slice(0, 3), this.props, syncedfilesCount, false)
+                            listComponent('Recent sync', this.getThreeLast(syncedFiles), this.props, syncedfilesCount, false)
                         }     
                         </View>
                     </ScrollView>
