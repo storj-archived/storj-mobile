@@ -1,8 +1,14 @@
 package storjlib.services;
 
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Process;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
@@ -13,6 +19,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.storjmobile.R;
 
+import storjlib.Enum.SyncSettingsEnum;
 import storjlib.Models.FileModel;
 import storjlib.Models.UploadingFileModel;
 import storjlib.Responses.Response;
@@ -21,8 +28,10 @@ import storjlib.Utils.UploadSyncObject;
 import storjlib.dataProvider.DatabaseFactory;
 import storjlib.dataProvider.Dbo.UploadingFileDbo;
 import storjlib.dataProvider.contracts.FileContract;
+import storjlib.dataProvider.contracts.SettingsContract;
 import storjlib.dataProvider.contracts.UploadingFileContract;
 import storjlib.dataProvider.repositories.FileRepository;
+import storjlib.dataProvider.repositories.SettingsRepository;
 import storjlib.dataProvider.repositories.UploadingFilesRepository;
 import io.storj.libstorj.File;
 import io.storj.libstorj.UploadFileCallback;
@@ -60,8 +69,18 @@ public final class UploadService extends BaseReactService {
 
         switch(action) {
             case ACTION_UPLOAD_FILE:
+                boolean isSync = intent.getBooleanExtra(FileContract._SYNCED, false);
+                int syncSettings = intent.getIntExtra(SettingsContract._SYNC_SETTINGS, 0);
+
+                boolean onWifi = (syncSettings & SyncSettingsEnum.ON_WIFI.getValue()) == SyncSettingsEnum.ON_WIFI.getValue();
+                boolean onCharging = (syncSettings & SyncSettingsEnum.ON_CHARGING.getValue()) == SyncSettingsEnum.ON_CHARGING.getValue();;
+
+                if(!checkConstraints(isSync, onWifi, onCharging)) {
+                    return;
+                }
+
                 uploadFile(intent.getStringExtra(PARAMS_BUCKET_ID),
-                        intent.getStringExtra(PARAMS_URI), intent.getBooleanExtra(FileContract._SYNCED, false));
+                        intent.getStringExtra(PARAMS_URI), isSync);
                 break;
             case ACTION_UPLOAD_FILE_CANCEL:
                 long fileHandle = intent.getLongExtra(PARAMS_FILE_HANDLE, -1);
@@ -69,6 +88,27 @@ public final class UploadService extends BaseReactService {
                 uploadFileCancel(fileHandle);
                 break;
         }
+    }
+
+    private boolean checkConstraints(boolean isSync, boolean onWifi, boolean onCharging) {
+        if(!isSync) {
+            return true;
+        }
+
+        ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+        if(onWifi && !mWifi.isConnected()) {
+            Log.d("UPLOAD DEBUG", "ABORTING SYNC file uploading due to failing of ON_WIFI constraint");
+            return false;
+        }
+
+        if(onCharging && !isCharging(this)) {
+            Log.d("UPLOAD DEBUG", "ABORTING SYNC file uploading due to failing of ON_CHARGING constraint");
+            return false;
+        }
+
+        return true;
     }
 
     private void uploadFileCancel(long fileHandle) {
@@ -88,6 +128,7 @@ public final class UploadService extends BaseReactService {
         if(bucketId == null || !file.exists()) {
             return;
         }
+
         final SQLiteDatabase db = new DatabaseFactory(UploadService.this, null).getWritableDatabase();
         final UploadingFilesRepository repo = new UploadingFilesRepository(db);
 
@@ -240,6 +281,22 @@ public final class UploadService extends BaseReactService {
         synchronized (syncObj) {
             syncObj.isJobFinished();
         }
+    }
+
+    private boolean isCharging(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            BatteryManager batteryManager = (BatteryManager) context.getSystemService(Context.BATTERY_SERVICE);
+            return batteryManager.isCharging();
+        } else {
+            IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+            Intent intent = context.registerReceiver(null, filter);
+            int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+
+            if (status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

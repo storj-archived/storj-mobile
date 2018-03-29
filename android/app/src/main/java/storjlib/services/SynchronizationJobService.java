@@ -96,13 +96,14 @@ public class SynchronizationJobService extends JobService {
         return true;
     }
 
-    private void uploadFile(String bucketId, String uri) {
+    private void uploadFile(String bucketId, String uri, int syncSettings) {
         Log.d(DEBUG_TAG, "sync: " + "sending new intent for " + uri);
         Intent uploadIntent = new Intent(this, UploadService.class);
         uploadIntent.setAction(UploadService.ACTION_UPLOAD_FILE);
         uploadIntent.putExtra(UploadService.PARAMS_BUCKET_ID, bucketId);
         uploadIntent.putExtra(UploadService.PARAMS_URI, uri);
         uploadIntent.putExtra(FileContract._SYNCED, true);
+        uploadIntent.putExtra(SettingsContract._SYNC_SETTINGS, syncSettings);
 
         startService(uploadIntent);
     }
@@ -129,12 +130,12 @@ public class SynchronizationJobService extends JobService {
         boolean isSyncOn = (syncSettings & syncValue) == syncValue;
 
         if(isSyncOn && dboIsNotNull)
-            _syncFolder(syncEnum.geetFolderUri(), dbo.getId(), db);
+            _syncFolder(syncEnum.geetFolderUri(), dbo.getId(), syncSettings, db);
         else
-            Log.d(DEBUG_TAG, "sync: " + "Settings for " + bucketName + " - " + " Dbo: " + dboIsNotNull + ", Sync settings" + isSyncOn);
+            Log.d(DEBUG_TAG, "sync: " + "Settings for " + bucketName + " - " + " Dbo: " + dboIsNotNull + ", Sync settings: " + isSyncOn);
     }
 
-    private void _syncFolder(String folderUri, String bucketId, SQLiteDatabase db) {
+    private void _syncFolder(String folderUri, String bucketId, int syncSettings, SQLiteDatabase db) {
         Log.d(DEBUG_TAG, "sync: " + "Start sync of " + folderUri + " and " + bucketId);
         File folder = new File(folderUri);
 
@@ -159,7 +160,7 @@ public class SynchronizationJobService extends JobService {
             UploadingFileModel uploadingFileModel = uploadFileRepo.get(file.getName(), UploadingFileContract._NAME);
 
             if(fileDbo == null && uploadingFileModel == null) {
-                uploadFile(bucketId, file.getPath());
+                uploadFile(bucketId, file.getPath(), syncSettings);
             }
         }
     }
