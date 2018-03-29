@@ -43,7 +43,7 @@
 -(NSDictionary *) toDictionary{
   NSMutableDictionary * resultDictionary = [[NSMutableDictionary alloc]
                                             initWithDictionary:[super toDictionary]];
-  [resultDictionary setObject:@RESPONSE_KEY_RESULT forKey:_result];
+  [resultDictionary setObject: _result forKey:@RESPONSE_KEY_RESULT];
   return resultDictionary;
 }
 
