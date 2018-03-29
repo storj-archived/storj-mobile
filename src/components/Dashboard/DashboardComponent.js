@@ -34,7 +34,7 @@ export default class DashboardComponent extends Component {
                     navigateBack = { this.props.navigateBack }
                     deselectItem = { this.props.deselectBucket }      
                     isSelectionMode = { this.props.isSelectionMode }
-                    selectedBucketId = { this.props.selectedBucketId }
+                    openedBucketId = { this.props.selectedBucketId }
                     animatedScrollValue = { this.animatedScrollValue  }
                     selectedFilesCount = { this.props.selectedFilesCount }
                     disableSelectionMode = { this.props.disableSelectionMode }
