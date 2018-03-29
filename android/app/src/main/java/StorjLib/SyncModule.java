@@ -332,7 +332,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
                     SettingsDbo settingsDbo = settingsRepo.get(id);
 
                     if(settingsDbo == null) {
-                        promise.resolve(new Response(false, "No settings entry for current account!"));
+                        promise.resolve(new Response(false, "No settings entry for current account!").toWritableMap());
                         return;
                     }
 
