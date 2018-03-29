@@ -53,6 +53,7 @@ class BucketsContainer extends Component {
     
     navigateBack() {
         this.props.bucketNavigateBack();
+        this.props.disableSelectionMode();
         this.props.closeBucket();
     }
 

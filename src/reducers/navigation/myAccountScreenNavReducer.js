@@ -3,7 +3,8 @@ import checkMultipleNav from '../../utils/navigationUtils';
 
 const initialState = MyAccountScreenNavigator.router.getStateForAction(MyAccountScreenNavigator.router.getActionForPathAndParams('MyAccountMainPageScreen'));
 
-export default function bucketsScreenNavReducer(state = initialState, action) { 
+export default function bucketsScreenNavReducer(state = initialState, action) {
+    console.log(action);
     let nextState = MyAccountScreenNavigator.router.getStateForAction(action, state);
 
     try {       
@@ -13,6 +14,6 @@ export default function bucketsScreenNavReducer(state = initialState, action) {
         console.log(e.message);
         nextState = state;
     }
-    
+    console.log(nextState);
 	return nextState || state;
 }

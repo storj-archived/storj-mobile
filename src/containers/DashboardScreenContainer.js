@@ -22,6 +22,7 @@ class DashboardScreenContainer extends Component {
 
         this.setFirstSignIn = this.setFirstSignIn.bind(this);
         this.changeSyncStatus = this.changeSyncStatus.bind(this);
+        this.navigateBack = this.navigateBack.bind(this);
     }
 
     getArraySelectedCount(array) {
@@ -49,6 +50,11 @@ class DashboardScreenContainer extends Component {
         this.props.changeSyncStatus(this.email, value);
     }
 
+    navigateBack() {
+        this.props.disableSelectionMode();
+        this.props.navigateBack();
+    }
+
     render() {
         if(this.props.isFirstSignIn) {
             return(
@@ -71,7 +77,7 @@ class DashboardScreenContainer extends Component {
                     isFilesScreen = { this.props.screenName === 'DashboardFilesScreen' }
                     screenName = { this.props.screenName }
                     selectItem = { this.props.selectBucket }
-                    navigateBack = { this.props.navigateBack }
+                    navigateBack = { this.navigateBack }
                     deselectItem = { this.props.deselectBucket }      
                     isSelectionMode = { this.props.isSelectionMode }
                     selectedBucketId = { this.props.selectedBucketId }

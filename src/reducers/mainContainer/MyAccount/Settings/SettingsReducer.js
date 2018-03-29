@@ -23,7 +23,6 @@ const initialState = {
 };
 
 export default function settingsReducer(state = initialState, action) {
-    console.log(action);
     switch(action.type) {
         case LIST_SETTINGS:
             return {
