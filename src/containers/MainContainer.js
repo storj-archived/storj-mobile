@@ -1,4 +1,4 @@
-import { Keyboard, DeviceEventEmitter, BackHandler, Platform, Alert, NativeEventEmmitter } from 'react-native';
+import { Keyboard, DeviceEventEmitter, BackHandler, Platform, Alert, NativeEventEmitter } from 'react-native';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
