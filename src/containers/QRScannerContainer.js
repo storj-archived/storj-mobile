@@ -30,10 +30,12 @@ class QRScannerContainer extends Component {
     /**
      * Handle if was already in use
      */
-    handleFirstLaunch = async () => {
+    handleFirstLaunch = async (email) => {
         if(!await AsyncStorage.getItem(FIRST_ACTION)) {
             await AsyncStorage.setItem(FIRST_ACTION, 'true');
         }
+
+        SyncModule.insertSyncSetting(email);
     };
 
     /**
@@ -83,7 +85,7 @@ class QRScannerContainer extends Component {
         );
         
         if(areKeysImported) {
-            await this.handleFirstLaunch();
+            await this.handleFirstLaunch(this.stateModel.email);
             this.props.loginSuccess();
             this.props.redirectToInitializeScreen();
         } else {
