@@ -94,20 +94,37 @@
                        isSynced:NO];
 }
 
+-(instancetype) initWithFileDbo: (FileDbo *) dbo{
+  return[self initWithBucketId:[dbo _bucketId]
+                       created:[dbo _created]
+                       erasure:[dbo _erasure]
+                          hmac:[dbo _hmac]
+                        fileId:[dbo _fileId]
+                         index:[dbo _index]
+                      mimeType:[dbo _mimeType]
+                          name:[dbo _name]
+                          size:[dbo _size]
+                   isDecrypted:[dbo _isDecrypted]
+                     isStarred:[dbo _isStarred]
+                      isSynced:[dbo _isSynced]];
+}
+
 -(BOOL) isValid{
-  return NO;
+  return [DictionaryUtils isNSStringValid:_bucketId] && [DictionaryUtils isNSStringValid:_created]
+   && [DictionaryUtils isNSStringValid:_hmac]  && [DictionaryUtils isNSStringValid:_fileId]
+  && [DictionaryUtils isNSStringValid:_mimeType] && [DictionaryUtils isNSStringValid:_name];
 }
 
 - (NSDictionary *)toDictionary {
   NSMutableDictionary *object = [[NSMutableDictionary alloc] init];
-  [object setObject:_bucketId forKey:@FILE_MODEL_BUCKET_ID];
-  [object setObject:_created forKey:@FILE_MODEL_CREATED];
-  [object setObject:_erasure forKey:@FILE_MODEL_ERASURE];
-  [object setObject:_hmac forKey:@FILE_MODEL_HMAC];
-  [object setObject:_fileId forKey:@FILE_MODEL_FILE_ID];
-  [object setObject:_index forKey:@FILE_MODEL_INDEX];
-  [object setObject:_mimeType forKey:@FILE_MODEL_MIME_TYPE];
-  [object setObject:_name forKey:@FILE_MODEL_NAME];
+  [object setObject:[DictionaryUtils checkAndReturnNSString:_bucketId] forKey:@FILE_MODEL_BUCKET_ID];
+  [object setObject:[DictionaryUtils checkAndReturnNSString:_created] forKey:@FILE_MODEL_CREATED];
+  [object setObject:[DictionaryUtils checkAndReturnNSString:_erasure] forKey:@FILE_MODEL_ERASURE];
+  [object setObject:[DictionaryUtils checkAndReturnNSString:_hmac] forKey:@FILE_MODEL_HMAC];
+  [object setObject:[DictionaryUtils checkAndReturnNSString:_fileId] forKey:@FILE_MODEL_FILE_ID];
+  [object setObject:[DictionaryUtils checkAndReturnNSString:_index] forKey:@FILE_MODEL_INDEX];
+  [object setObject:[DictionaryUtils checkAndReturnNSString:_mimeType] forKey:@FILE_MODEL_MIME_TYPE];
+  [object setObject:[DictionaryUtils checkAndReturnNSString:_name] forKey:@FILE_MODEL_NAME];
   [object setObject:@(_size) forKey:@FILE_MODEL_SIZE];
   [object setObject:@(_isDecrypted) forKey:@FILE_MODEL_IS_DECRYPTED];
   [object setObject:@(_isStarred) forKey:@FILE_MODEL_IS_STARRED];
