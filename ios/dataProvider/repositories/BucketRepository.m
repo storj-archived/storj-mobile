@@ -14,17 +14,20 @@ static NSArray *columns;
 
 -(instancetype) initWithDB:(FMDatabase *)database{
   if (self = [super initWithDB:database]){
-    //additional options
+    _database = database;
   }
   return self;
 }
 
 -(NSArray <BucketDbo *> *) getAll{
+  NSLog(@"getAllBuckets");
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@",
                        [[BucketRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        BucketContract.TABLE_NAME];
-  FMResultSet * resultSet = [_database executeQuery:request];
+  FMResultSet * resultSet = [[self _database] executeQuery:request];
+//  [[self _database] ]
   if(!resultSet){
+    NSLog( @"NO RESULT SET RETURNED");
     return nil;
   }
   NSMutableArray<BucketDbo *> * bucketDboArray = [NSMutableArray<BucketDbo *> array];
@@ -50,7 +53,7 @@ static NSArray *columns;
                        BucketContract.TABLE_NAME,
                        orderByColumn,
                        isDescending ? @"DESC" : @"ASC"];
-  FMResultSet * resultSet = [_database executeQuery:request];
+  FMResultSet * resultSet = [[self _database] executeQuery:request];
   if(!resultSet){
     return nil;
   }
@@ -71,7 +74,7 @@ static NSArray *columns;
                        [[BucketRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        BucketContract.TABLE_NAME,
                        BucketContract.STARRED];
-  FMResultSet * resultSet = [_database executeQuery:request, 1];
+  FMResultSet * resultSet = [[self _database] executeQuery:request, 1];
   if(!resultSet){
     return nil;
   }
@@ -88,11 +91,11 @@ static NSArray *columns;
 }
 
 -(BucketDbo *) getByBucketId:(NSString *) bucketId{
-  NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ?",
+  NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = '?'",
                        [[BucketRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        BucketContract.TABLE_NAME,
                        BucketContract.ID];
-  FMResultSet * resultSet = [_database executeQuery:request, bucketId];
+  FMResultSet * resultSet = [[self _database] executeQuery:request, bucketId];
   if(!resultSet){
     return nil;
   }
@@ -108,7 +111,7 @@ static NSArray *columns;
                        columnName,
                        BucketContract.TABLE_NAME,
                        columnName];
-  FMResultSet * resultSet = [_database executeQuery:request, columnValue];
+  FMResultSet * resultSet = [[self _database] executeQuery:request, columnValue];
   if(!resultSet){
     return nil;
   }
@@ -119,9 +122,11 @@ static NSArray *columns;
 }
 
 -(Response *) insertWithModel: (BucketModel *) model{
+//  NSLog(@"Model: %@", [model toDictionary]);
   if(!model || ![model isValid]){
     return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is not valid"];
   }
+  
   return [super executeInsertIntoTable:BucketContract.TABLE_NAME
                               fromDict:[[BucketDbo bucketDboFromBucketModel:model] toDictionary]];
 }
@@ -180,17 +185,15 @@ static NSArray *columns;
 }
 
 +(BucketDbo *) getBucketDboFromResultSet:(FMResultSet *) resultSet{
-  BucketDbo * dbo = [[BucketDbo alloc]init];
   if(!resultSet){
-    return dbo;
+    return nil;
   }
-  [dbo setProp:BucketContract.ID fromString:[resultSet stringForColumn:BucketContract.ID]];
-  [dbo setProp:BucketContract.NAME fromString:[resultSet stringForColumn:BucketContract.NAME]];
-  [dbo setProp:BucketContract.CREATED fromString:[resultSet stringForColumn:BucketContract.CREATED]];
-  [dbo setProp:BucketContract.HASH_CODE fromLong:[resultSet longForColumn:BucketContract.HASH_CODE]];
-  [dbo setProp:BucketContract.DECRYPTED fromBool:[resultSet boolForColumn:BucketContract.DECRYPTED]];
-  [dbo setProp:BucketContract.STARRED fromBool:[resultSet boolForColumn:BucketContract.STARRED]];
-  return dbo;
+  return [[BucketDbo alloc] initWithId:[resultSet stringForColumn:BucketContract.ID]
+                                  name:[resultSet stringForColumn:BucketContract.NAME]
+                               created:[resultSet stringForColumn:BucketContract.CREATED]
+                                  hash:[resultSet longForColumn:BucketContract.HASH_CODE]
+                           isDecrypted:[resultSet boolForColumn:BucketContract.DECRYPTED]
+                             isStarred:[resultSet boolForColumn:BucketContract.STARRED]];
 }
 
 +(NSArray *) getSelectionColumnsString{

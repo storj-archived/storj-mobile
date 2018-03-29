@@ -7,8 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-@class UploadFileModel;
-@interface UploadFileDbo : NSObject
+#import "UploadFileModel.h"
+#import "UploadFileContract.h"
+#import "IConvertibleToJS.h"
+@interface UploadFileDbo : NSObject<IConvertibleToJS, NSCopying>{
+  long _fileHandle;
+  double _progress;
+  long _size;
+  long _uploaded;
+  NSString * _name;
+  NSString * _uri;
+  NSString * _bucketId;
+}
 
 @property (nonatomic, strong, getter=name) NSString *_name;
 @property (nonatomic, strong, getter=bucketId) NSString *_bucketId;
@@ -17,6 +27,8 @@
 @property (nonatomic, getter=uploaded) long _uploaded;
 @property (nonatomic, getter=size) long _size;
 @property (nonatomic, getter=progress) double _progress;
+
++(UploadFileDbo *)uploadFileDboFromUploadFileModel: (UploadFileModel *)model;
 
 -(instancetype)initWithFileHandle:(long) fileHandle
                          progress:(double)progress
@@ -27,16 +39,5 @@
                          bucketId:(NSString *)bucketId;
 
 -(UploadFileModel *) toModel;
-
--(long) getId;
-
--(void) setProp: (NSString *) propName
-     fromString: (NSString *) propValue;
-
--(void) setProp: (NSString *) propName
-       fromDouble: (double) propValue;
-
--(void) setProp: (NSString *) propName
-       fromLong: (long) propValue;
 
 @end

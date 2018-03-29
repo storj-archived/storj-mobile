@@ -12,7 +12,7 @@
 
 static NSString * const _TABLE_NAME = @"files";
 
-static NSString * const _ID = @"id";
+//static NSString * const _ID = @"id";
 static NSString * const _FILE_ID = @"fileId";
 static NSString * const _NAME = @"name";
 static NSString * const _MIME_TYPE = @"mimeType";
@@ -24,7 +24,7 @@ static NSString * const _DECRYPTED = @"isDecrypted";
 static NSString * const _SIZE = @"size";
 static NSString * const _STARRED = @"isStarred";
 static NSString * const _FILE_FK = @"bucketId";
-
+static NSString * const _SYNCED = @"isSynced";
 +(NSString *) createTable{
   return [NSString stringWithFormat:@"create table if not exists %@ (\
 %@ TEXT primary key not null, \
@@ -38,17 +38,17 @@ static NSString * const _FILE_FK = @"bucketId";
 %@ INTEGER, \
 %@ INTEGER, \
 %@ TEXT not null, \
-FOREIGN KEY(%@) REFERENCES buckets(%@) ON DELETE CASCADE)", _TABLE_NAME, _ID, _NAME, _MIME_TYPE,
-          _INDEX, _HMAC, _ERASURE, _CREATED, _DECRYPTED, _STARRED, _SIZE, _FILE_FK, _FILE_FK, _ID];
+FOREIGN KEY(%@) REFERENCES buckets(%@) ON DELETE CASCADE)", _TABLE_NAME, _FILE_ID, _NAME, _MIME_TYPE,
+          _INDEX, _HMAC, _ERASURE, _CREATED, _DECRYPTED, _STARRED, _SIZE, _FILE_FK, _FILE_FK, _FILE_ID];
 }
 
 +(NSString *) TABLE_NAME{
   return _TABLE_NAME;
 }
 
-+(NSString *) ID{
-  return _ID;
-}
+//+(NSString *) ID{
+//  return _ID;
+//}
 
 +(NSString *) FILE_ID{
   return _FILE_ID;
@@ -92,5 +92,9 @@ FOREIGN KEY(%@) REFERENCES buckets(%@) ON DELETE CASCADE)", _TABLE_NAME, _ID, _N
 
 +(NSString *) FILE_FK{
   return _FILE_FK;
+}
+
++(NSString *) SYNCED{
+  return _SYNCED;
 }
 @end

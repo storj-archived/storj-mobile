@@ -17,7 +17,7 @@ static NSArray * columns;
 
 -(instancetype) initWithDB:(FMDatabase *)database{
   if (self = [super initWithDB:database]){
-    //additional options
+    _database = database;
   }
   return self;
 }
@@ -26,7 +26,7 @@ static NSArray * columns;
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@",
                        [[FileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        FileContract.TABLE_NAME];
-  FMResultSet * resultSet = [_database executeQuery:request];
+  FMResultSet * resultSet = [[self _database] executeQuery:request];
   if(!resultSet){
     return nil;
   }
@@ -43,11 +43,11 @@ static NSArray * columns;
 }
 
 -(NSArray *) getAllFromBucket:(NSString *)bucketId{
-  NSString *request = [NSString stringWithFormat:@"SELECTE %@ FROM %@ WHERE %@ = '?'",
+  NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ?",
                        [[FileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        FileContract.TABLE_NAME,
                        FileContract.FILE_FK];
-  FMResultSet *resultSet = [_database executeQuery:request, bucketId];
+  FMResultSet *resultSet = [[self _database] executeQuery:request, bucketId];
   if(!resultSet) {
     return nil;
   }
@@ -74,7 +74,7 @@ static NSArray * columns;
                        FileContract.TABLE_NAME,
                        orderByColumn,
                        isDescending ? @"DESC" : @"ASC"];
-  FMResultSet * resultSet = [_database executeQuery:request];
+  FMResultSet * resultSet = [[self _database] executeQuery:request];
   if(!resultSet){
     return nil;
   }
@@ -95,7 +95,7 @@ static NSArray * columns;
                        [[FileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        FileContract.TABLE_NAME,
                        FileContract.STARRED];
-  FMResultSet * resultSet = [_database executeQuery:request, 1];
+  FMResultSet * resultSet = [[self _database] executeQuery:request, 1];
   if(!resultSet){
     return nil;
   }
@@ -115,8 +115,8 @@ static NSArray * columns;
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ?",
                        [[FileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        FileContract.TABLE_NAME,
-                       FileContract.ID];
-  FMResultSet * resultSet = [_database executeQuery:request, fileId];
+                       FileContract.FILE_ID];
+  FMResultSet * resultSet = [[self _database] executeQuery:request, fileId];
   if(!resultSet){
     return nil;
   }
@@ -132,7 +132,7 @@ static NSArray * columns;
                        columnName,
                        FileContract.TABLE_NAME,
                        columnName];
-  FMResultSet * resultSet = [_database executeQuery:request, columnValue];
+  FMResultSet * resultSet = [[self _database] executeQuery:request, columnValue];
   if(!resultSet){
     return nil;
   }
@@ -155,7 +155,7 @@ static NSArray * columns;
     return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@""];
   }
   return [super executeDeleteFromTable:FileContract.TABLE_NAME
-                         withObjectKey:FileContract.ID
+                         withObjectKey:FileContract.FILE_ID
                       withObjecktValue:[model _fileId]];
 }
 
@@ -164,7 +164,7 @@ static NSArray * columns;
     return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@""];
   }
   return [super executeDeleteFromTable:FileContract.TABLE_NAME
-                         withObjectKey:FileContract.ID
+                         withObjectKey:FileContract.FILE_ID
                       withObjecktValue:fileId];
 }
 
@@ -173,7 +173,7 @@ static NSArray * columns;
     return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@""];
   }
   return [super executeDeleteFromTable:FileContract.TABLE_NAME
-                         withObjectKey:FileContract.ID
+                         withObjectKey:FileContract.FILE_ID
                         withObjecktIds:fileIds];
 }
 
@@ -205,35 +205,30 @@ static NSArray * columns;
     return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@""];
   }
   return [super executeUpdateAtTable:FileContract.TABLE_NAME
-                           objectKey:FileContract.ID
+                           objectKey:FileContract.FILE_ID
                             objectId:fileId
                     updateDictionary:@{FileContract.STARRED:@(isStarred)}];
 }
 
 +(FileDbo *) getFileDboFromResultSet:(FMResultSet *) resultSet{
-  FileDbo * dbo = [[FileDbo alloc]init];
-  if(!resultSet){
-    return dbo;
-  }
-  [dbo setProp:FileContract.ID fromString:[resultSet stringForColumn:FileContract.ID]];
-  [dbo setProp:FileContract.FILE_ID fromString:[resultSet stringForColumn:FileContract.FILE_ID]];
-  [dbo setProp:FileContract.NAME fromString:[resultSet stringForColumn:FileContract.NAME]];
-  [dbo setProp:FileContract.CREATED fromString:[resultSet stringForColumn:FileContract.CREATED]];
-  [dbo setProp:FileContract.HMAC fromString:[resultSet stringForColumn:FileContract.HMAC]];
-  [dbo setProp:FileContract.MIME_TYPE fromString:[resultSet stringForColumn:FileContract.MIME_TYPE]];
-  [dbo setProp:FileContract.INDEX fromString:[resultSet stringForColumn:FileContract.INDEX]];
-  [dbo setProp:FileContract.ERASURE fromString:[resultSet stringForColumn:FileContract.ERASURE]];
-  [dbo setProp:FileContract.FILE_FK fromString:[resultSet stringForColumn:FileContract.FILE_FK]];
-  [dbo setProp:FileContract.DECRYPTED fromBool:[resultSet boolForColumn:FileContract.DECRYPTED]];
-  [dbo setProp:FileContract.STARRED fromBool:[resultSet boolForColumn:FileContract.STARRED]];
-  [dbo setProp:FileContract.SIZE fromLong:[resultSet longForColumn:FileContract.SIZE]];
-  return dbo;
+  return [[FileDbo alloc] initWithBucketId:[resultSet stringForColumn:FileContract.FILE_FK]
+                                   created:[resultSet stringForColumn:FileContract.CREATED]
+                                   erasure:[resultSet stringForColumn:FileContract.ERASURE]
+                                      hmac:[resultSet stringForColumn:FileContract.HMAC]
+                                    fileId:[resultSet stringForColumn:FileContract.FILE_ID]
+                                     index:[resultSet stringForColumn:FileContract.INDEX]
+                                  mimeType:[resultSet stringForColumn:FileContract.MIME_TYPE]
+                                      name:[resultSet stringForColumn:FileContract.NAME]
+                                      size:[resultSet longForColumn:FileContract.SIZE]
+                               isDecrypted:[resultSet boolForColumn:FileContract.DECRYPTED]
+                                 isStarred:[resultSet boolForColumn:FileContract.STARRED]
+                                  isSynced:NO];
 }
 
 +(NSArray *)getSelectionColumnsString{
   if(!columns){
     NSMutableArray *colArray = [NSMutableArray array];
-    [colArray addObject:FileContract.ID];
+//    [colArray addObject:FileContract.ID];
     [colArray addObject:FileContract.FILE_ID];
     [colArray addObject:FileContract.NAME];
     [colArray addObject:FileContract.MIME_TYPE];

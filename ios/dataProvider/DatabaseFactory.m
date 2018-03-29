@@ -21,6 +21,7 @@ static FMDatabase * _database;
 
 -(id)init{
   if((self = [super init])){
+    NSLog(@"Initializing Database Factory");
     NSString *docsDir;
     NSArray *dirPaths;
     
@@ -39,7 +40,6 @@ static FMDatabase * _database;
     
     if(!_database){
       NSLog(@"DB can't be initialized");
-      _database = nil;
       return nil;
     }
     if(![_database open]){
@@ -48,9 +48,11 @@ static FMDatabase * _database;
     }
     
     if(!isDbExisted){
+      NSLog(@"Creating tables");
       [self createTables];
     }
   }
+  NSLog(@"DB Initialized");
   return self;
 }
 

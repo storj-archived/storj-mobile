@@ -28,8 +28,8 @@
                         [columns componentsJoinedByString:@","],
                         [[BaseRepository getDoubleDottedParametersArray:columns]
                          componentsJoinedByString:@","]];
-  NSLog(@"SQL Insert Request: %@ for %@", request, dictionary);
-  if(![_database executeUpdate:request withParameterDictionary:dictionary]){
+//  NSLog(@"SQL Insert Request: %@ for %@", request, dictionary);
+  if(![[self _database] executeUpdate:request withParameterDictionary:dictionary]){
     return [self getResponseFromDatabaseError];
   }
   return [[Response alloc] initWithSuccess:YES andWithError:nil];
@@ -42,7 +42,7 @@
   NSString *request = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@ = '%@'",
                        tableName, objectKey, objectValue];
   NSLog(@"SQL Delete Request: %@", request);
-  if(![_database executeUpdate:request]){
+  if(![[self _database] executeUpdate:request]){
     return [self getResponseFromDatabaseError];
   }
   
@@ -57,7 +57,7 @@
                        tableName, objectKey, [[BaseRepository getEscapedValuesArray:objectIds]
                                               componentsJoinedByString:@","]];
   NSLog(@"SQL Delete Request: %@", request);
-  if(![_database executeUpdate:request]){
+  if(![[self _database] executeUpdate:request]){
     return [self getResponseFromDatabaseError];
   }
   
@@ -67,7 +67,7 @@
 -(Response *) executeDeleteAllFromTable:(NSString *)tableName
 {
   NSString *request = [NSString stringWithFormat:@"DELETE FROM %@", tableName];
-  if(![_database executeUpdate:request]){
+  if(![[self _database] executeUpdate:request]){
     return [self getResponseFromDatabaseError];
   }
   return [[Response alloc] initWithSuccess:YES andWithError:nil];
@@ -87,7 +87,7 @@
                        objectKey,
                        objectId];
   NSLog(@"SQL Update Request: %@", request);
-  if(![_database executeUpdate:request withParameterDictionary:updateDictionary]){
+  if(![[self _database] executeUpdate:request withParameterDictionary:updateDictionary]){
     return [self getResponseFromDatabaseError];
   }
   return [[Response alloc] initWithSuccess:YES andWithError:nil];

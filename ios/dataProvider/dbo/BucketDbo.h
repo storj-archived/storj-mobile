@@ -11,20 +11,31 @@
 #import "BucketModel.h"
 #import "BucketContract.h"
 
-@interface BucketDbo : NSObject<IConvertibleToJS>
+@interface BucketDbo : NSObject<IConvertibleToJS, NSCopying> {
+  NSString *_id;
+  NSString * _name;
+  NSString * _created;
+  long _hash;
+  BOOL _isDecrypted;
+  BOOL _isStarred;
+}
+@property (nonatomic, strong, getter=getId) NSString *_id;
+@property (nonatomic, strong, getter=name)NSString * _name;
+@property (nonatomic, strong, getter=created)NSString * _created;
+@property long _hash;
+@property BOOL _isDecrypted;
+@property BOOL _isStarred;
 
 +(BucketDbo *) bucketDboFromBucketModel: (BucketModel *) model;
 
--(void) setProp: (NSString *) propName
-     fromString: (NSString *) propValue;
+-(instancetype) initWithId: (NSString *) modelId
+                      name: (NSString *) name
+                   created: (NSString *) created
+                      hash: (long) hash
+               isDecrypted: (BOOL) isDecrypted
+                 isStarred: (BOOL) isStarred;
 
--(void) setProp: (NSString *) propName
-       fromBool: (BOOL) propValue;
-
--(void) setProp: (NSString *) propName
-       fromLong: (long) propValue;
-
--(NSString *) getId;
+-(instancetype) initWithBucketModel: (BucketModel *) model;
 
 -(BucketModel *) toModel;
 @end

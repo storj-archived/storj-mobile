@@ -11,7 +11,7 @@
 @interface FileContract : NSObject
 
 @property (readonly, class) NSString *const TABLE_NAME;
-@property (readonly, class) NSString *const ID;
+//@property (readonly, class) NSString *const ID;
 @property (readonly, class) NSString *const FILE_ID;
 @property (readonly, class) NSString *const NAME;
 @property (readonly, class) NSString *const MIME_TYPE;
@@ -23,6 +23,7 @@
 @property (readonly, class) NSString *const SIZE;
 @property (readonly, class) NSString *const STARRED;
 @property (readonly, class) NSString *const FILE_FK;
+@property (readonly, class) NSString *const SYNCED;
 
 +(NSString *) createTable;
 
