@@ -193,8 +193,7 @@ export const filesListContainerMainActions = {
     unsetLoading
 };
 
-export const myPicturesListContainerMainActions = {
-    disableSelectionMode,
+export const myPicturesListContainerMainActions = {    
     onSingleItemSelected,
     closeBucket,
     setLoading,
