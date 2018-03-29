@@ -1,13 +1,20 @@
-import { NativeModules } from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 import { SYNC_BUCKETS } from '../utils/constants/SyncBuckets';
 
 const { PICTURES } = SYNC_BUCKETS;
 
 const ServiceModule = (() => {
     let instance = null;
-    const serviceModule = NativeModules.ServiceModule;
+
+
+    const isAndroid = Platform.OS === 'android';
+    const serviceModule = isAndroid ? NativeModules.ServiceModule : NativeModules.ServiceModuleIOS;
 
     class ServiceModule {
+        getServiceNativeModule(){
+            return serviceModule;
+        }
+
         constructor() {
         }
 
