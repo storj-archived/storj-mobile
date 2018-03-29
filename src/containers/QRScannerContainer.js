@@ -6,6 +6,7 @@ import validator from '../utils/validator';
 import { qrScannerActionCreators } from '../reducers/authentification/authActions';
 import QRScannerComponent from '../components/QRScannerComponent';
 import StorjLib from '../utils/StorjModule';
+import SyncModule from '../utils/SyncModule';
 import { LoginStateModel } from '../models/LoginStateModel';
 import infoScreensConstants from '../utils/constants/infoScreensConstants';
  

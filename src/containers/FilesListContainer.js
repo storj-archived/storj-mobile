@@ -93,7 +93,6 @@ class FilesListContainer extends Component {
     }
 
     onPress(file) {
-        console.log(file);
         if(file.entity.isDownloaded) {
             this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId);
         }

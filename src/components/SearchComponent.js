@@ -33,7 +33,7 @@ export default class SearchComponent extends Component {
         if(this.props.isFilesScreen) {
             return(
                 <View style = { [ styles.rowContainer, this.props.styleContainer ] }>
-                    <TouchableOpacity onPress = { () => { this.props.navigateBack(); } }>
+                    <TouchableOpacity onPress = { () => { this.props.navigateBack ? this.props.navigateBack() : () => {} } }>
                         <Image style = { styles.backButton } source = { require("../images/Icons/BackButton.png") } resizeMode = { 'contain' } />
                     </TouchableOpacity>
                     <View style = { [ styles.rowContainer, styles.mainContainer, styles.fileHeader ] }>

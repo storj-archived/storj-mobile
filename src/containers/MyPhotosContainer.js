@@ -59,6 +59,12 @@ class MyPhotosContainer extends Component {
         }
     }
 
+    onPress(file) {        
+        if(file.entity.isDownloaded) {
+            this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId);
+        }
+    }
+
     render() {
         let data = this.getData();
 
@@ -73,7 +79,7 @@ class MyPhotosContainer extends Component {
                         cancelDownload = { this.props.cancelDownload }
                         cancelUpload = { this.props.cancelUpload }
                         isGridViewShown = { this.props.isGridViewShown }
-                        onPress = { () => {} }
+                        onPress = { (params) => { this.onPress(params); } }
                         onRefresh = { () => ServiceModule.getFiles(this.props.openedBucketId) }
                         itemType = { TYPES.REGULAR_FILE }
                         bucketId = { this.props.bucketId }

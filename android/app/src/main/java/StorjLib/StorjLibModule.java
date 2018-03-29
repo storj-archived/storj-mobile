@@ -4,7 +4,6 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-<<<<<<< HEAD
 
 import storjlib.CallbackWrappers.CreateBucketCallbackWrapper;
 import storjlib.CallbackWrappers.DeleteFileCallbackWrapper;
@@ -17,34 +16,8 @@ import storjlib.CallbackWrappers.UploadFileCallbackWrapper;
 import storjlib.Models.KeyModel;
 import storjlib.Responses.Response;
 import storjlib.Responses.SingleResponse;
-=======
-import com.facebook.react.bridge.WritableArray;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.WritableNativeMap;
-import com.facebook.react.modules.core.DeviceEventManagerModule;
-
-import java.net.URLConnection;
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
-
-import StorjLib.CallbackWrappers.CreateBucketCallbackWrapper;
-import StorjLib.CallbackWrappers.DeleteFileCallbackWrapper;
-import StorjLib.CallbackWrappers.DownloadFileCallbackWrapper;
-import StorjLib.CallbackWrappers.ListFilesCallbackWrapper;
-import StorjLib.CallbackWrappers.RegisterCallbackWrapper;
-import StorjLib.CallbackWrappers.DeleteCallbackWrapper;
-import StorjLib.CallbackWrappers.GetBucketsCallbackWrapper;
-import StorjLib.CallbackWrappers.UploadFileCallbackWrapper;
-import StorjLib.Models.KeyModel;
-import StorjLib.Responses.Response;
-import StorjLib.Responses.SingleResponse;
-import io.storj.libstorj.Bucket;
-import io.storj.libstorj.DeleteFileCallback;
-import io.storj.libstorj.DownloadFileCallback;
-import io.storj.libstorj.File;
-import io.storj.libstorj.GetBucketsCallback;
->>>>>>> Database initial commit. Straight database creation and base operations
 import io.storj.libstorj.Keys;
 import io.storj.libstorj.Storj;
 import io.storj.libstorj.android.StorjAndroid;
