@@ -19,7 +19,16 @@
 #import "SingleResponse.h"
 #import "MethodHandler.h"
 #import "DictionaryUtils.h"
+#import "StorjWrapperSingletone.h"
+#import "UploadFileRepository.h"
+#import "FileRepository.h"
+#import "FileUtils.h"
+#import "FileModel.h"
+#import "UploadFileProgressModel.h"
 
-@interface StorjLibIos : NSObject<RCTBridgeModule>
+@interface StorjLibIos : RCTEventEmitter<RCTBridgeModule>
+@property (nonatomic, strong) FMDatabase *_database;
+@property (nonatomic, strong) UploadFileRepository *_uploadFileRepository;
+@property (nonatomic, strong) FileRepository *_fileRepository;
 //@property (nonatomic) StorjWrapper *storjWrapper;
 @end
