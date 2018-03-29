@@ -38,7 +38,7 @@ class FilesListContainer extends Component {
             }
         ).start();               
         
-        if (this.props.screenProps.defaultRoute !== "DashboardScreen") {
+        if (this.props.screenProps.defaultRoute !== "DashboardDefaultScreen") {
             ServiceModule.getFiles(this.bucketId);  
         }   
     }
@@ -85,7 +85,7 @@ class FilesListContainer extends Component {
 
         this.props.closeBucket();
 
-        if(this.props.screenProps.defaultRoute == 'DashboardScreen') {
+        if(this.props.screenProps.defaultRoute == 'DashboardDefaultScreen') {
             this.props.dashboardNavigateBack();
         } else {
             this.props.bucketNavigateBack();
