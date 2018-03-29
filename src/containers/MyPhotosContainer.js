@@ -134,7 +134,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(MyPhotosContainer);
 
 MyPhotosContainer.propTypes = {
     setSelectionId: PropTypes.func,
-    selectedItemId: PropTypes.bool,
+    selectedItemId: PropTypes.string,
     cancelDownload: PropTypes.bool,
     cancelUpload: PropTypes.bool,
     isGridViewShown: PropTypes.bool,
