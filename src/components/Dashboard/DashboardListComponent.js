@@ -93,30 +93,29 @@ export default class DashboardListComponent extends Component{
 }
 
 const listComponent = (title, data, props, count, isBucket) => {
-    
     return(
         <View>  
             <DashboardListHeaderComponent
                 onPress = { () => {} }
                 title = { title } />
             <ListComponent
-                setSelectionId = { props.setSelectionId }
-                selectedItemId = { props.selectedItemId }
+                setSelectionId = { () => {} }
+                selectedItemId = { null }
                 verticalPaddingDisabled = { true }
                 isExpanderDisabled = { true }
                 openBucket = { props.openBucket }
                 navigateToDashboardFilesScreen = { props.navigateToDashboardFilesScreen }
-                onSingleItemSelected = { props.onSingleItemSelected }                    
+                onSingleItemSelected = { () => {} }
                 animatedScrollValue = { props.animatedScrollValue }
-                enableSelectionMode = { props.enableSelectionMode }
-                disableSelectionMode = { props.disableSelectionMode }
-                isSelectionMode = { props.isSelectionMode }
-                isSingleItemSelected = { props.isSingleItemSelected }
+                enableSelectionMode = { () => {} }
+                disableSelectionMode = { () => {} }
+                isSelectionMode = { false }
+                isSingleItemSelected = { false }
                 listItemIcon = { isBucket ? require('../../images/Icons/BucketListItemIcon.png') : require('../../images/Icons/FileListItemIcon.png') }
                 starredListItemIcon = { isBucket ? require('../../images/Icons/ListStarredBucket.png') : require('../../images/Icons/ListStarredFile.png') }
-                deselectItem = { props.deselectItem }
+                deselectItem = { () => {} }
                 navigateToFilesScreen = { props.navigateToFilesScreen ? props.navigateToFilesScreen : () => {} }
-                selectItem = { props.selectItem }
+                selectItem = { () => {} }
                 data = { data } />
             <DashboardListFooterComponent
                 count = { count } 
