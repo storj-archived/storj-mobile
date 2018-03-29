@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { NavigationActions, addNavigationHelpers } from 'react-navigation';
 import { connect } from 'react-redux';
-import { mainNavContainerActions, mainContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import MainScreenTabNav from '../navigators/MainScreenNavigator';
 
 /**

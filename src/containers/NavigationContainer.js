@@ -15,6 +15,7 @@ import {
     bucketsContainerActions,
 	mainContainerActions
 } from '../reducers/mainContainer/mainReducerActions';
+import { mainContainerBucketActions, bucketsContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
 import {
 	mainContainerFileActions,
 	filesListContainerFileActions
@@ -230,7 +231,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators( {
 		...bucketsContainerActions, 
+		...bucketsContainerBucketActions,
 		...mainContainerActions,
+		...mainContainerBucketActions, 
 		...mainContainerFileActions,
 		...filesListContainerFileActions,
 		...authNavigationActions }, dispatch);

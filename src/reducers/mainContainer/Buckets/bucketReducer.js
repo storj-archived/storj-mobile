@@ -1,4 +1,4 @@
-import { BUCKET_ACTIONS } from '../../../utils/constants/actionConstants';
+import { BUCKET_ACTIONS, MAIN_ACTIONS } from '../../../utils/constants/actionConstants';
 import ItemManager from '../../../utils/itemManagers/ItemManager';
 
 const { 
@@ -7,14 +7,16 @@ const {
     CREATE_BUCKET,
     DELETE_BUCKET,
     GET_BUCKETS, 
-    OPEN_BUCKET,
-    CLOSE_BUCKET,
     UPDATE_FAVOURITE
+ } = BUCKET_ACTIONS;
+
+ const { 
+    ENABLE_SELECTION_MODE, 
+    DISABLE_SELECTION_MODE
  } = MAIN_ACTIONS;
                                                         
 const initialState = {
-    buckets: [],
-    openedBucketId: null //?????
+    buckets: []
 };
 
 export default function mainReducer(state = initialState, action) {
@@ -42,12 +44,6 @@ export default function mainReducer(state = initialState, action) {
             break;
         case DISABLE_SELECTION_MODE:
             newState.buckets = bucketsManager.clearSelection();//???
-            break;
-        case OPEN_BUCKET: //?????
-            newState.openedBucketId = action.payload.bucketId;
-            break;
-        case CLOSE_BUCKET://?????
-            newState.openedBucketId = null;
             break;
         case UPDATE_FAVOURITE:
             newState.buckets = bucketsManager.updateStarred(action.payload.buckets, true);

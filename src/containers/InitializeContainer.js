@@ -19,6 +19,7 @@ import ListItemModel from '../models/ListItemModel';
 import FileModel from '../models/FileModel';
 import BucketModel from '../models/BucketModel';
 import { initializeContainerActions } from '../reducers/mainContainer/mainReducerActions';
+import { initializeContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
 import allFileActions from '../reducers/mainContainer/Files/filesReducerActions';
 import ServiceModule from '../utils/ServiceModule';
 import SyncModule from '../utils/SyncModule';
@@ -214,7 +215,11 @@ const styles = StyleSheet.create({
  * connecting reducer to component props 
  */
 function mapStateToProps(state) { return { navigation: state.navReducer }; };
-function mapDispatchToProps(dispatch) { return bindActionCreators({...Actions, ...initializeContainerActions, ...allFileActions, getDebits, getCredits, getWallets }, dispatch); };
+function mapDispatchToProps(dispatch) { return bindActionCreators({
+        ...Actions,
+        ...initializeContainerActions, 
+        ...initializeContainerBucketActions,
+        ...allFileActions, getDebits, getCredits, getWallets }, dispatch); };
 
 /**
  * Creating LoginScreen container

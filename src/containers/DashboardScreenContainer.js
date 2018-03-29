@@ -5,6 +5,7 @@ import {
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { dashboardContainerActions } from '../reducers/mainContainer/mainReducerActions';
+import { dashboardContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
 import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { dashboardNavigateBack, navigateToDashboardFilesScreen, navigateBack } from '../reducers/navigation/navigationActions';
@@ -99,7 +100,7 @@ function mapStateToProps(state) {
 
     return {
         isSelectionMode: state.mainReducer.isSelectionMode,        
-        buckets: state.mainReducer.buckets,
+        buckets: state.bucketReducer.buckets,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         isFirstSignIn: state.mainReducer.isFirstSignIn,
         files: state.filesReducer.fileListModels,
@@ -116,6 +117,7 @@ function mapDispatchToProps(dispatch) {
     return { 
         ...bindActionCreators( { 
             ...dashboardContainerActions, 
+            ...dashboardContainerBucketActions,
             ...filesListContainerMainActions, 
             ...filesListContainerFileActions, 
             dashboardNavigateBack,

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { dashboardContainerActions, filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
+import { dashboardContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
 import { filesListContainerFileActions, mainContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { navigateBack, navigateToDashboardFilesScreen } from '../reducers/navigation/navigationActions';
 import { uploadFileStart, uploadFileSuccess } from '../reducers/asyncActions/fileActionsAsync';
@@ -50,7 +51,7 @@ function mapStateToProps(state) {
 
     return {
         isSelectionMode: state.mainReducer.isSelectionMode,        
-        buckets: state.mainReducer.buckets,
+        buckets: state.bucketReducer.buckets,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         fileListModels: state.filesReducer.fileListModels,
         files: state.filesReducer.fileListModels,
@@ -66,6 +67,7 @@ function mapDispatchToProps(dispatch) {
     return {
         ...bindActionCreators( { 
             ...dashboardContainerActions, 
+            ...dashboardContainerBucketActions,
             ...filesListContainerFileActions, 
             ...filesListContainerMainActions, 
             navigateBack,
