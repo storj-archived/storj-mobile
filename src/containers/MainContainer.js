@@ -63,69 +63,23 @@ class MainContainer extends Component {
     }
 
     async bindServicesAndEvents() {
-        await ServiceModule.bindService();
-        let uploadServiceBindResult = await ServiceModule.bindUploadService();
-        //console.log("uploadServiceBindResult", uploadServiceBindResult);
+         const eventEmmiter =
+            Platform.OS ==="android"
+            ? DeviceEventEmitter
+            : new NativeEventEmitter(ServiceModule.getServiceNativeModule());
 
-        let result2 = await SyncModule.listBuckets();
-
-        //console.log(result2);
-
-        buckets = JSON.parse(result2.result).map((bucket) => {
-            return new BucketModel(bucket);
-        });
-
-        console.log(buckets);
-
-        this.props.getBuckets(buckets.map(bucket => new ListItemModel(bucket)));
-
-        let uploadingFiles = [];
-
-        buckets.forEach(async bucket => {
-            result = await SyncModule.listUploadingFiles(bucket.Id);
-            console.log(result);
-            if(result.isSuccess) {
-                uploadingFiles = uploadingFiles.concat(JSON.parse(result.result));
-            }
-        });
-
-        console.log("uploadingFiles", uploadingFiles);
-
-        DeviceEventEmitter.addListener("EVENT_BUCKETS_UPDATED", async (result) => {   
-            console.log("FromEvent", result);      
-            let result2 = await SyncModule.listBuckets();
-
-            //console.log(result2);
-
-            buckets = JSON.parse(result2.result).map((bucket) => {
-                return new BucketModel(bucket);
-            });
-
-            console.log(buckets);
-
-            this.props.getBuckets(buckets.map(bucket => new ListItemModel(bucket)));
-        });
-
-        DeviceEventEmitter.addListener("EVENT_FILES_UPDATED", async (result) => {
-            console.log("FromEvent", result);
-            let result2 = await SyncModule.listFiles("ea2c97f6d85f0b14c6f58de4");
-
-            console.log(result2);
-            console.log(JSON.parse(result2.result));
-        });
-
-        DeviceEventEmitter.addListener("EVENT_FILE_UPLOAD_START", async (response) => {
+        eventEmmiter.addListener("EVENT_FILE_UPLOAD_START", async (response) => {
             this.props.getUploadingFile(response.fileHandle);
         });
 
-        DeviceEventEmitter.addListener("EVENT_FILE_UPLOADED_PROGRESS", async (result) => {
+        eventEmmiter.addListener("EVENT_FILE_UPLOADED_PROGRESS", async (result) => {
             this.props.updateFileUploadProgress(result.fileHandle, result.progress, result.uploaded);
         });
-        DeviceEventEmitter.addListener("EVENT_FILE_UPLOADED_SUCCESSFULLY", async (result) => {
+        eventEmmiter.addListener("EVENT_FILE_UPLOADED_SUCCESSFULLY", async (result) => {
             console.log("EVENT_FILE_UPLOADED_SUCCESSFULLY", result);
             this.props.uploadSuccess(result.fileHandle, result.fileId);
         });
-        DeviceEventEmitter.addListener("EVENT_FILE_UPLOAD_ERROR", async (result) => {
+        eventEmmiter.addListener("EVENT_FILE_UPLOAD_ERROR", async (result) => {
             this.props.uploadFileError(result.fileHandle);
         });
     }
@@ -159,7 +113,7 @@ class MainContainer extends Component {
             BackHandler.removeEventListener("hardwareBackPress");
         }
 
-        DeviceEventEmitter.removeListener("downloadFile", this.downloadListener);
+        //DeviceEventEmitter.removeListener("downloadFile", this.downloadListener);
 
         this.keyboardDidShowListener.remove();
     }
