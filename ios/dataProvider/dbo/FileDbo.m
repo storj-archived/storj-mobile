@@ -11,7 +11,8 @@
 #import "FileContract.h"
 
 @implementation FileDbo
-
+@synthesize _bucketId, _created, _erasure, _fileId, _hmac, _index, _isDecrypted, _isStarred,
+  _isSynced, _mimeType, _name, _size;
 NSString *_bucketId;
 NSString *_created;
 NSString *_erasure;
@@ -23,60 +24,50 @@ NSString *_name;
 long _size;
 BOOL _isDecrypted;
 BOOL _isStarred;
-#pragma mark TODO ADD synced property
 BOOL _isSynced;
 
--(void) setProp: (NSString *) propName
-     fromString: (NSString *) propValue
-{
-  if([FileContract.FILE_FK isEqualToString : propName]){
-     _bucketId = propValue;
-  }
-  if([FileContract.CREATED isEqualToString : propName]){
-    _created = propValue;
-  }
-  if([FileContract.ERASURE isEqualToString : propName]){
-    _erasure = propValue;
-  }
-  if([FileContract.HMAC isEqualToString : propName]){
-   _hmac = propValue;
-  }
-  if([FileContract.INDEX isEqualToString : propName]){
-    _index = propValue;
-  }
-  if([FileContract.MIME_TYPE isEqualToString : propName]){
-    _mimeType = propValue;
-  }
-  if([FileContract.NAME isEqualToString : propName]){
-    _name = propValue;
-  }
-  if([FileContract.FILE_ID isEqualToString:propName]){
-    _fileId = propValue;
-  }
+-(instancetype) initWithFileModel: (FileModel *) model{
+  return [self initWithBucketId:[model _bucketId]
+                        created:[model _created]
+                        erasure:[model _erasure]
+                           hmac:[model _hmac]
+                         fileId:[model _fileId]
+                          index:[model _index]
+                       mimeType:[model _mimeType]
+                           name:[model _name]
+                           size:[model _size]
+                    isDecrypted:[model _isDecrypted]
+                      isStarred:[model _isStarred]
+                       isSynced:[model _isSynced]];
 }
 
--(void) setProp: (NSString *) propName
-       fromBool: (BOOL) propValue
-{
-  if([FileContract.DECRYPTED isEqualToString : propName]){
-    _isDecrypted = propValue;
+-(instancetype) initWithBucketId: (NSString *) bucketId
+                         created: (NSString *) created
+                         erasure: (NSString *) erasure
+                           hmac : (NSString *) hmac
+                          fileId: (NSString *) fileId
+                           index: (NSString *) index
+                        mimeType: (NSString *)mimeType
+                            name: (NSString *) name
+                           size :(long) size
+                     isDecrypted: (BOOL) isDecrypted
+                       isStarred: (BOOL) isStarred
+                        isSynced: (BOOL) isSynced{
+  if(self = [super init]){
+    _bucketId = bucketId;
+    _created = created;
+    _erasure = erasure;
+    _hmac = hmac;
+    _fileId = fileId;
+    _index = index;
+    _mimeType = mimeType;
+    _name = name;
+    _size = size;
+    _isDecrypted = isDecrypted;
+    _isStarred = isStarred;
+    _isSynced = isSynced;
   }
-  if([FileContract.STARRED isEqualToString : propName]){
-    _isStarred = propValue;
-  }
-}
-
--(void) setProp: (NSString *) propName
-       fromLong: (long) propValue
-{
-  if([FileContract.SIZE isEqualToString : propName]){
-    _size = propValue;
-  }
-}
-
--(NSString *) getId
-{
-  return _fileId;
+  return self;
 }
 
 - (NSDictionary *)toDictionary {
@@ -96,20 +87,7 @@ BOOL _isSynced;
 }
 
 +(FileDbo *)fileDboFromFileModel:(FileModel *)model{
-  FileDbo *dbo = [[FileDbo alloc] init];
-  [dbo setProp : FileContract.FILE_FK fromString:[model _bucketId]];
-  [dbo setProp : FileContract.CREATED fromString : [model _created]];
-  [dbo setProp : FileContract.ERASURE fromString : [model _erasure]];
-  [dbo setProp : FileContract.HMAC fromString : [model _hmac]];
-  [dbo setProp : FileContract.FILE_ID fromString : [model _fileId]];
-  [dbo setProp : FileContract.INDEX fromString : [model _index]];
-  [dbo setProp : FileContract.MIME_TYPE fromString : [model _mimeType]];
-  [dbo setProp : FileContract.NAME fromString : [model _name]];
-//  [dbo setProp : FileContract. fromString : [model _]];
-  [dbo setProp : FileContract.SIZE fromLong : [model _size]];
-  [dbo setProp : FileContract.DECRYPTED fromBool : [model _isDecrypted]];
-  [dbo setProp : FileContract.STARRED fromBool : [model _isStarred]];
-  return dbo;
+  return [[FileDbo alloc] initWithFileModel:model];
 }
 
 -(FileModel *) toModel{
@@ -124,6 +102,25 @@ BOOL _isSynced;
                                         size:_size
                                  isDecrypted:_isDecrypted
                                    isStarred:_isStarred];
+}
+
+- (nonnull id)copyWithZone:(nullable NSZone *)zone {
+  id copy = [[[self class]alloc]init];
+  if(copy){
+    [copy set_bucketId:[self._bucketId copyWithZone:zone]];
+    [copy set_created:[self._created copyWithZone:zone]];
+    [copy set_erasure:[self._erasure copyWithZone:zone]];
+    [copy set_hmac:[self._hmac copyWithZone:zone]];
+    [copy set_fileId:[self._fileId copyWithZone:zone]];
+    [copy set_index:[self._index copyWithZone:zone]];
+    [copy set_mimeType:[self._mimeType copyWithZone:zone]];
+    [copy set_name:[self._name copyWithZone:zone]];
+    [copy set_size:self._size];
+    [copy set_isDecrypted:self._isDecrypted];
+    [copy set_isStarred:self._isStarred];
+    [copy set_isSynced:self._isSynced];
+  }
+  return copy;
 }
 
 @end

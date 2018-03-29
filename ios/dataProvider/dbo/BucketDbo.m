@@ -10,69 +10,46 @@
 #import "DictionaryUtils.h"
 
 @implementation BucketDbo
-NSString * _id;
-NSString * _name;
-NSString * _created;
-long _hash;
-BOOL _isDecrypted;
-BOOL _isStarred;
+
+@synthesize _id, _created, _hash, _isDecrypted, _isStarred, _name;
+
+
 
 +(BucketDbo *)bucketDboFromBucketModel:(BucketModel *)model{
-  BucketDbo *dbo = [[BucketDbo alloc] init];
-  [dbo setProp : BucketContract.ID fromString : [model _id]];
-  [dbo setProp : BucketContract.NAME fromString : [model _name]];
-  [dbo setProp : BucketContract.CREATED fromString : [model _created]];
-  [dbo setProp : BucketContract.HASH_CODE fromLong : [model _hash]];
-  [dbo setProp : BucketContract.DECRYPTED fromBool : [model _isDecrypted]];
-  [dbo setProp : BucketContract.STARRED fromBool : [model _isStarred]];
-  return dbo;
+  return [[BucketDbo alloc] initWithBucketModel:model];
 }
 
--(void) setProp: (NSString *) propName
-     fromString: (NSString *) propValue
-{
-  if(!propName) {
-    return;
-  }
-  if([propName isEqualToString:BucketContract.CREATED]){
-    _created = propValue;
-  }
-  if([propName isEqualToString:BucketContract.NAME]){
-    _name = propValue;
-  }
-  if([propName isEqualToString:BucketContract.ID]){
-    _id = propValue;
-  }
+-(instancetype) initWithBucketModel: (BucketModel *) model{
+  return [self initWithId:[model _id]
+                     name:[model _name]
+                  created:[model _created]
+                     hash:[model _hash]
+              isDecrypted:[model _isDecrypted]
+                isStarred:[model _isStarred]];
 }
 
--(void) setProp: (NSString *) propName
-       fromBool: (BOOL) propValue
-{
-  if(!propName) {
-    return;
+-(instancetype) initWithId: (NSString *) modelId
+                      name: (NSString *) name
+                   created: (NSString *) created
+                      hash: (long) hash
+               isDecrypted: (BOOL) isDecrypted
+                 isStarred: (BOOL) isStarred{
+  if(self = [super init]){
+    _id = modelId;
+    _name = name;
+    _created = created;
+    _hash = hash;
+    _isDecrypted = isDecrypted;
+    _isStarred = isStarred;
   }
-  if([propName isEqualToString:BucketContract.DECRYPTED]){
-    _isDecrypted = propValue;
-  }
-  if([propName isEqualToString:BucketContract.STARRED]){
-    _isStarred = propValue;
-  }
+  return self;
 }
 
--(void) setProp: (NSString *) propName
-       fromLong: (long) propValue
-{
-  if(!propName) {
-    return;
+-(instancetype) init{
+  if(self = [super init]){
+    
   }
-  if([propName isEqualToString:BucketContract.HASH_CODE]){
-    _hash = propValue;
-  }
-}
-
--(NSString *) getId
-{
-  return _id;
+  return self;
 }
 
 -(BucketModel *)toModel{
@@ -82,6 +59,19 @@ BOOL _isStarred;
                              hash:_hash
                       isDecrypted:_isDecrypted
                         isStarred:_isStarred];
+}
+
+-(id)copyWithZone:(NSZone *)zone{
+  id copy = [[[self class]alloc]init];
+  if(copy){
+    [copy set_id:[self._id copyWithZone:zone]];
+    [copy set_name:[self._name copyWithZone:zone]];
+    [copy set_created:[self._created copyWithZone:zone]];
+    [copy set_hash:self._hash];
+    [copy set_isDecrypted:self._isDecrypted];
+    [copy set_isStarred:self._isStarred];
+  }
+  return copy;
 }
 
 - (NSDictionary *)toDictionary {

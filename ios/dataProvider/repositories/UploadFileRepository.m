@@ -7,8 +7,7 @@
 //
 
 #import "UploadFileRepository.h"
-#import "UploadFileDbo.h"
-#import "UploadFileModel.h"
+
 #import "UploadFileContract.h"
 
 
@@ -18,7 +17,7 @@ static NSArray * columns;
 
 -(instancetype) initWithDB:(FMDatabase *)database{
   if (self = [super initWithDB:database]){
-    //additional options
+    _database = database;
   }
   return self;
 }
@@ -27,7 +26,7 @@ static NSArray * columns;
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@",
                        [[UploadFileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        UploadFileContract.TABLE_NAME];
-  FMResultSet * resultSet = [_database executeQuery:request];
+  FMResultSet * resultSet = [[self _database] executeQuery:request];
   if(!resultSet){
     return nil;
   }
@@ -51,7 +50,7 @@ static NSArray * columns;
                        UploadFileContract.TABLE_NAME,
                        orderByColumn,
                        isDescending ? @"DESC" : @"ASC"];
-  FMResultSet * resultSet = [_database executeQuery:request];
+  FMResultSet * resultSet = [[self _database] executeQuery:request];
   if(!resultSet){
     return nil;
   }
@@ -72,7 +71,7 @@ static NSArray * columns;
                        [[UploadFileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        UploadFileContract.TABLE_NAME,
                        UploadFileContract.ID];
-  FMResultSet * resultSet = [_database executeQuery:request, fileId];
+  FMResultSet * resultSet = [[self _database] executeQuery:request, fileId];
   if(!resultSet){
     return nil;
   }
@@ -88,7 +87,7 @@ static NSArray * columns;
                        columnName,
                        UploadFileContract.TABLE_NAME,
                        columnName];
-  FMResultSet * resultSet = [_database executeQuery:request, columnValue];
+  FMResultSet * resultSet = [[self _database] executeQuery:request, columnValue];
   if(!resultSet){
     return nil;
   }

@@ -7,8 +7,8 @@
 //
 
 #import "BaseRepository.h"
-@class UploadFileDbo;
-@class UploadFileModel;
+#import "UploadFileDbo.h"
+#import "UploadFileModel.h"
 
 @interface UploadFileRepository : BaseRepository
 
