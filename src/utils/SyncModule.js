@@ -1,9 +1,8 @@
-import { NativeModules } from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 
 const SyncModule = (() => {
     let instance = null;
-    const syncModule = NativeModules.SyncModule;
-    console.log(syncModule);
+    const syncModule = Platform.OS ==="android" ? NativeModules.SyncModule : NativeModules.SyncModuleIOS;
 
     class SyncModule {
         constructor() {
