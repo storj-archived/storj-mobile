@@ -120,10 +120,10 @@ public class DownloadService extends BaseReactService {
 
             @Override
             public void onComplete(String fileId, String localPath) {
-                if(fileRepo.update(fileId, DownloadStateEnum.DOWNLOADED.getValue(), 0).isSuccess()) {
+                if(fileRepo.update(fileId, DownloadStateEnum.DOWNLOADED.getValue(), 0, localPath).isSuccess()) {
                     WritableMap map = new WritableNativeMap();
                     map.putString(FileContract._FILE_ID, fileId);
-                    map.putString("loclaPath", localPath);
+                    map.putString("localPath", localPath);
 
                     sendEvent(EVENT_FILE_DOWNLOAD_SUCCESS, map);
                 }
@@ -136,7 +136,7 @@ public class DownloadService extends BaseReactService {
 
             @Override
             public void onError(String fileId, int code, String message) {
-                if(fileRepo.update(fileId, DownloadStateEnum.DEFAULT.getValue(), 0).isSuccess()) {
+                if(fileRepo.update(fileId, DownloadStateEnum.DEFAULT.getValue(), 0, null).isSuccess()) {
                     WritableMap map = new WritableNativeMap();
                     map.putString(FileContract._FILE_ID, fileId);
                     map.putString("errorMessage", message);
@@ -155,7 +155,7 @@ public class DownloadService extends BaseReactService {
         synchronized(fileDbo) {
             fileDbo.setProp(FileContract._FILE_HANDLE, fileHandle);
 
-            if(fileRepo.update(fileId, DownloadStateEnum.DOWNLOADING.getValue(), fileHandle).isSuccess()) {
+            if(fileRepo.update(fileId, DownloadStateEnum.DOWNLOADING.getValue(), fileHandle, null).isSuccess()) {
                 WritableMap map = new WritableNativeMap();
                 map.putString(FileContract._FILE_ID, fileId);
                 map.putDouble(FileContract._FILE_HANDLE, fileHandle);

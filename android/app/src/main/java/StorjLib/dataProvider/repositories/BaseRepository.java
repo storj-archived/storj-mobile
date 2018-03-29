@@ -22,7 +22,7 @@ public abstract class BaseRepository {
     protected Response _executeInsert(String tableName, ContentValues valuesMap)  {
 
         try {
-            long result = _db.insertOrThrow(tableName, null, valuesMap);
+            _db.insertOrThrow(tableName, null, valuesMap);
         } catch(SQLException error) {
             return new Response(false, error.getMessage());
         }

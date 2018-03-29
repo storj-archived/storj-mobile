@@ -91,8 +91,6 @@ class MainContainer extends Component {
             BackHandler.addEventListener("hardwareBackPress", this.onHardwareBackPress);
         }
 
-        //DeviceEventEmitter.addListener("downloadFile", this.downloadListener);
-
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => { this.props.disableSelectionMode(); });
 
         this.props.listUploadingFiles();
