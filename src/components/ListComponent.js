@@ -258,13 +258,14 @@ export default class ListComponent extends Component {
         });
     }
 
-    //TODO: rework after getting actual data
     getItemsWithoutExpander() {
         props = this.props;
 
-        function onPress(file) {     
-            props.openBucket(file.entity.bucketId);
-            props.navigateToDashboardFilesScreen(file.entity.bucketId);              
+        function onPress(file) {  
+            let bucketId =  file.bucketId ? file.bucketId : file.entity.bucketId;
+            
+            props.openBucket(bucketId);
+            props.navigateToDashboardFilesScreen(bucketId);              
         }
 
         return this.props.data.map((item) => {
