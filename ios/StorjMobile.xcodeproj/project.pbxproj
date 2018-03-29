@@ -53,6 +53,9 @@
 		D68D4C0D19FC44AFA409AB73 /* Montserrat-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEF7D3FD619949DEBB4F5660 /* Montserrat-SemiBoldItalic.ttf */; };
 		DC2841E6204972FD0093183F /* StorjIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC2841E020496AEA0093183F /* StorjIOS.framework */; };
 		DC2841E7204972FD0093183F /* StorjIOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DC2841E020496AEA0093183F /* StorjIOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DC914C47206BD55000F0C4FF /* StorjWrapperSingletone.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C46206BD55000F0C4FF /* StorjWrapperSingletone.m */; };
+		DC914C4A206BE5D400F0C4FF /* SyncModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C49206BE5D400F0C4FF /* SyncModule.m */; };
+		DC914C5C206BFBF200F0C4FF /* Sha256Module.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C5B206BFBF200F0C4FF /* Sha256Module.m */; };
 		DCACD444201FDF630050921B /* StorjLibIos.m in Sources */ = {isa = PBXBuildFile; fileRef = DCACD443201FDF630050921B /* StorjLibIos.m */; };
 		DCC368832056B6D4004813CD /* DatabaseFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC368822056B6D4004813CD /* DatabaseFactory.m */; };
 		DCCD2FD520459F610032D3F5 /* FilePickerLib.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCD2FD420459F600032D3F5 /* FilePickerLib.m */; };
@@ -456,6 +459,12 @@
 		CC74FFF11A4D422EA4F02E08 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../src/fonts/Montserrat/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		D57884CA17224EC589F7D3FA /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../src/fonts/OpenSans/OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StorjIOS.xcodeproj; path = "../../iOS-libstorj/StorjIOS/StorjIOS.xcodeproj"; sourceTree = "<group>"; };
+		DC914C45206BD55000F0C4FF /* StorjWrapperSingletone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorjWrapperSingletone.h; sourceTree = "<group>"; };
+		DC914C46206BD55000F0C4FF /* StorjWrapperSingletone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StorjWrapperSingletone.m; sourceTree = "<group>"; };
+		DC914C48206BE5D400F0C4FF /* SyncModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncModule.h; sourceTree = "<group>"; };
+		DC914C49206BE5D400F0C4FF /* SyncModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyncModule.m; sourceTree = "<group>"; };
+		DC914C5A206BFBF200F0C4FF /* Sha256Module.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sha256Module.h; sourceTree = "<group>"; };
+		DC914C5B206BFBF200F0C4FF /* Sha256Module.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Sha256Module.m; sourceTree = "<group>"; };
 		DCACD442201FDF630050921B /* StorjLibIos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorjLibIos.h; sourceTree = "<group>"; };
 		DCACD443201FDF630050921B /* StorjLibIos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorjLibIos.m; sourceTree = "<group>"; };
 		DCC368812056B6D4004813CD /* DatabaseFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseFactory.h; sourceTree = "<group>"; };
@@ -656,8 +665,8 @@
 		13B07FAE1A68108700A75B9A /* StorjMobile */ = {
 			isa = PBXGroup;
 			children = (
-				DCDF702A206437E9001B2F95 /* FMDB */,
 				DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */,
+				DCDF702A206437E9001B2F95 /* FMDB */,
 				DCDF6FE72062BE1F001B2F95 /* utils */,
 				DCDF6FE320602F91001B2F95 /* model */,
 				DCDF6FD2205FED68001B2F95 /* responses */,
@@ -919,6 +928,12 @@
 				DCDF70792068B337001B2F95 /* StorjBackgroundServices.m */,
 				DCEB534E20697A55006B0624 /* EventNames.h */,
 				DCEB534F20697A55006B0624 /* EventNames.m */,
+				DC914C45206BD55000F0C4FF /* StorjWrapperSingletone.h */,
+				DC914C46206BD55000F0C4FF /* StorjWrapperSingletone.m */,
+				DC914C48206BE5D400F0C4FF /* SyncModule.h */,
+				DC914C49206BE5D400F0C4FF /* SyncModule.m */,
+				DC914C5A206BFBF200F0C4FF /* Sha256Module.h */,
+				DC914C5B206BFBF200F0C4FF /* Sha256Module.m */,
 			);
 			path = ReactModules;
 			sourceTree = "<group>";
@@ -1495,12 +1510,14 @@
 				DCEB535020697A55006B0624 /* EventNames.m in Sources */,
 				DCDF706E2064ACEC001B2F95 /* BucketRepository.m in Sources */,
 				DCDF707A2068B337001B2F95 /* StorjBackgroundServices.m in Sources */,
+				DC914C4A206BE5D400F0C4FF /* SyncModule.m in Sources */,
 				DCDF6FE620603015001B2F95 /* BucketModel.m in Sources */,
 				DCDF705E20643850001B2F95 /* FMDatabasePool.m in Sources */,
 				DCEB5379206AA77A006B0624 /* PromiseHandler.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				DCDF6FEA2062BE39001B2F95 /* DictionaryUtils.m in Sources */,
 				DCDF7077206895DF001B2F95 /* MethodHandler.m in Sources */,
+				DC914C47206BD55000F0C4FF /* StorjWrapperSingletone.m in Sources */,
 				DCDF706B2064A15A001B2F95 /* UploadFileDbo.m in Sources */,
 				DCDF6FE2206022EC001B2F95 /* ListResponse.m in Sources */,
 				DCDF6FD9205FF0A7001B2F95 /* Response.m in Sources */,
@@ -1519,6 +1536,7 @@
 				DCDF70742064D348001B2F95 /* UploadFileRepository.m in Sources */,
 				DCDF706120643850001B2F95 /* FMDatabaseQueue.m in Sources */,
 				DCACD444201FDF630050921B /* StorjLibIos.m in Sources */,
+				DC914C5C206BFBF200F0C4FF /* Sha256Module.m in Sources */,
 				DCDF6FDF2060073F001B2F95 /* SingleResponse.m in Sources */,
 				DCDF706020643850001B2F95 /* FMResultSet.m in Sources */,
 				DCDF6FDC205FF88A001B2F95 /* Error.m in Sources */,
