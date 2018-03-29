@@ -38,7 +38,7 @@ export default class DashboardComponent extends Component {
                     animatedScrollValue = { this.animatedScrollValue  }
                     selectedFilesCount = { this.props.selectedFilesCount }
                     disableSelectionMode = { this.props.disableSelectionMode }
-                    selectedBucketsCount = { this.props.selectedBucketsCount }  
+                    selectedItemsCount = { this.props.selectedItemsCount }  
                     onSingleItemSelected = { this.props.onSingleItemSelected }  
                     isSingleItemSelected = { this.props.isSingleItemSelected }
                     navigateToDashboardFilesScreen = { this.props.navigateToDashboardFilesScreen } />

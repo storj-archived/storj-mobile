@@ -25,23 +25,17 @@ class DashboardScreenContainer extends Component {
     }
 
     getArraySelectedCount(array) {
-        return array.filter((item) => {
-            return item.isSelected;
-        }).length;
-    }
-  
-    getSelectedBucketsCount() {
-        if(!this.props.buckets) return 0;
-
-        return this.getArraySelectedCount(this.props.buckets);
+        return array.filter(item => item.isSelected).length;
     }
 
-    getSelectedFilesCount() {
-        if(!this.props.selectedBucketId || !this.props.files || this.props.files.length === 0) return 0; 
-        
-        return this.props.files.filter(fileItem => {
-            return fileItem.isSelected;
-        }).length;          
+    getSelectedFilesCount() {        
+        if(!this.props.openedBucketId || !this.props.files || this.props.files.length === 0) return 0; 
+
+        let openedBucket = this.props.files.filter(item => item.entity.bucketId === this.props.openedBucketId);
+
+        if(openedBucket) {
+            return this.getArraySelectedCount(openedBucket);
+        }
     }
 
     async createBucket(name) {
@@ -82,8 +76,7 @@ class DashboardScreenContainer extends Component {
                     isSelectionMode = { this.props.isSelectionMode }
                     selectedBucketId = { this.props.selectedBucketId }
                     animatedScrollValue = { this.animatedScrollValue }
-                    selectedFilesCount = { this.getSelectedFilesCount() }  
-                    selectedBucketsCount = { this.getSelectedBucketsCount() }
+                    selectedItemsCount = { this.getSelectedFilesCount() }
                     disableSelectionMode = { this.props.disableSelectionMode }
                     onSingleItemSelected = { this.props.onSingleItemSelected }  
                     isSingleItemSelected = { this.props.isSingleItemSelected }
@@ -107,7 +100,8 @@ function mapStateToProps(state) {
         isGridViewShown: state.mainReducer.isGridViewShown,
         defaultRoute: routes[0].routeName,
         screenName: currentScreenName,
-        selectedBucketId: state.mainReducer.openedBucketId,
+        openedBucketId: state.mainReducer.openedBucketId,
+        selectedBucketId: state.mainReducer.selectedBucketId,
         email: state.mainReducer.email
     };
 }
