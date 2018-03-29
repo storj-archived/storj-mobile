@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "IConvertibleToJS.h"
 #import "DictionaryUtils.h"
-#import "UploadFileDbo.h"
 #import "UploadFileContract.h"
+@class UploadFileDbo;
 @class UploadFileContract;
 
 @interface UploadFileModel : NSObject<IConvertibleToJS>

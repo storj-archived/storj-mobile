@@ -59,7 +59,9 @@
 }
 
 -(BOOL) isValid{
-  return NO;
+  return [DictionaryUtils isNSStringValid:_id] &&
+    [DictionaryUtils isNSStringValid:_name] &&
+    [DictionaryUtils isNSStringValid:_created];
 }
 
 -(NSDictionary *)toDictionary{

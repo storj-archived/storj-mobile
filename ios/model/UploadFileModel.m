@@ -7,6 +7,8 @@
 //
 
 #import "UploadFileModel.h"
+#import "UploadFileDbo.h"
+#import "UploadFileContract.h"
 
 @implementation UploadFileModel
 @synthesize _bucketId, _fileHandle, _name, _progress, _size, _uploaded, _uri;
@@ -46,6 +48,7 @@
 }
 
 -(instancetype)initWithUploadFileDbo:(UploadFileDbo *)fileDbo{
+  
   return [self initWithFileHandle:[fileDbo fileHandle]
                          progress:[fileDbo progress]
                              size:[fileDbo size]
