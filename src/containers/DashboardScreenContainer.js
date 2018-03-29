@@ -106,8 +106,7 @@ function mapStateToProps(state) {
         isGridViewShown: state.mainReducer.isGridViewShown,
         defaultRoute: routes[0].routeName,
         screenName: currentScreenName,
-        openedBucketId: state.mainReducer.openedBucketId,
-        selectedBucketId: state.mainReducer.selectedBucketId,
+        selectedBucketId: state.mainReducer.openedBucketId,
         email: state.mainReducer.email
     };
 }

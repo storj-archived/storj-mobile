@@ -67,7 +67,8 @@ export default class MainComponent extends Component {
                         onActionBarPress = { () => { this.props.onActionBarPress(); } }
                         buckets = { this.props.buckets }
                         openBucket = { this.props.openBucket } 
-                        bucketNavigateBack = { this.props.bucketNavigateBack } />
+                        bucketNavigateBack = { this.props.bucketNavigateBack } 
+                        dashboardNavigateBack = { this.props.dashboardNavigateBack } />
                 </View>
                 {
                     this.props.isActionBarShown || this.props.isSelectionMode ? 

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { mainContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import { mainContainerBucketActions, favouritesActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
 import fileActions, { mainContainerFileActions, favouritesFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
-import { redirectToMainScreen, redirectToInitializationScreen, bucketNavigateBack } from '../reducers/navigation/navigationActions';
+import { redirectToMainScreen, redirectToInitializationScreen, bucketNavigateBack, dashboardNavigateBack } from '../reducers/navigation/navigationActions';
 import { createWallet, getWallets } from '../reducers/billing/billingActions';
 import FileModel from '../models/FileModel';
 import BucketModel from '../models/BucketModel';
@@ -286,7 +286,8 @@ class MainContainer extends Component {
                 getWallets = { this.props.getWallets }
                 buckets = { this.props.buckets }
                 openBucket = { this.props.openBucket }
-                bucketNavigateBack = { this.props.bucketNavigateBack } />
+                bucketNavigateBack = { this.props.bucketNavigateBack }
+                dashboardNavigateBack = { this.props.dashboardNavigateBack }/>
         );
     }
 }
@@ -315,6 +316,7 @@ function mapDispatchToProps(dispatch) {
             redirectToMainScreen, 
             redirectToInitializationScreen,
             bucketNavigateBack, 
+            dashboardNavigateBack,
             ...mainContainerActions,
             ...mainContainerBucketActions, 
             ...mainContainerFileActions, 

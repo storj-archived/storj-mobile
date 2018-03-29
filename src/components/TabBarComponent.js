@@ -92,7 +92,8 @@ export default class TabBarComponent extends Component {
                             style = { styles.tabItemContainer } 
                             onPress = { () => { 
                                 this.props.navigation.openBucket(null);
-                                this.props.navigation.navigate("DashboardScreen"); 
+                                this.props.navigation.navigate("DashboardScreen");
+                                this.props.navigation.dashboardNavigateBack(); 
                             } }>
                             <View><Image source = { require('../images/TabBar/HomeTabBar.png') } style = { navIndex === 0 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>

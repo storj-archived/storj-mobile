@@ -35,7 +35,8 @@ class MainNavigationContainer extends Component {
                     currentRouteIndex: this.props.nav.index,
                     buckets: this.props.buckets,
                     openBucket: this.props.openBucket, 
-                    bucketNavigateBack: this.props.bucketNavigateBack
+                    bucketNavigateBack: this.props.bucketNavigateBack,
+                    dashboardNavigateBack: this.props.dashboardNavigateBack
                 })} />
         );
     };
