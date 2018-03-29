@@ -10,22 +10,27 @@ import {
 import React, { Component } from 'react';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import InputComponent from '../InputComponent';
+import validator from '../../utils/validator';
 
 export default class SettingsComponent extends Component{
     constructor(props) {
         super(props)
 
         this.state = {
-            email: null
+            email: null,
+            isError: false
         }
     }
 
     async sendEmail() {
-        let result = await this.props.screenProps.resetPassword(this.state.email);
-        
-        if(result) {
-            this.props.screenProps.showPopUp();
-        }
+
+        if(validator.isEmail(this.state.email)) {
+            let result = await this.props.screenProps.resetPassword(this.state.email);
+            
+            if(result) {
+                this.props.screenProps.showPopUp();
+            } else this.setState({isError: true});
+        } else this.setState({isError: true}); 
     }
 
     render() {
@@ -51,12 +56,14 @@ export default class SettingsComponent extends Component{
                 <Text style = { styles.infoText }>We’ll send you a link to change password</Text>
                 <InputComponent 
                         style = { styles.emailInput }
-                        onChangeText = { (value) => { this.setState({ email: value }) } }  
+                        onChangeText = { (value) => { this.setState({ email: value, isError: false }) } }  
                         placeholder = {'Enter your email'}
                         isError = { this.props.isPasswordError }
-                        regularMessage = { 'Your email' } />
-                <TouchableOpacity onPress = { () => { this.sendEmail() } }>
-                    <View style = { styles.sendLinkButton } >
+                        regularMessage = { 'Your email' }
+                        errorMessage = { 'There is no such email in our system' }
+                        isError = { this.state.isError } />
+                <TouchableOpacity onPress = { this.state.email ? () => { this.sendEmail() } : () => {} }>
+                    <View style = { this.state.email ? styles.sendLinkButton : [ styles.sendLinkButton ,styles.blurredButton ] } >
                         <Text style = { styles.sendLinkButtonText }>Send me a link</Text>
                     </View>
                 </TouchableOpacity>
@@ -128,5 +135,9 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Bold',
         fontSize: getHeight(14),
         color: 'white'
+    },
+    blurredButton: {
+        backgroundColor: 'rgba(38, 132, 255, 0.4)', 
+        borderColor: '#FFFFFF'
     }
 });

@@ -69,53 +69,63 @@ export default class SettingsComponent extends Component{
                     </View>
                     <View style = { styles.underline }/>
                     <View style = { styles.checkboxPhotosContainer }>
-                        <TouchableOpacity onPress = { () => { this.props.syncPhotosAction(!this.props.syncPhotos, this.props.getStateObject()); } } >
+                        <TouchableOpacity 
+                            onPress = { () => { this.props.syncPhotosAction(!this.props.syncPhotos, this.props.getStateObject()); } }
+                            style = { styles.flexRow } >
                             <Image 
                                 style = { styles.icon } 
                                 source = { 
                                     this.props.syncPhotos 
                                     ? require('../../images/Icons/ListItemSelected.png')
                                     : require('../../images/Icons/ListItemUnselected.png') } />
+                        
+                            <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync photos</Text>
                         </TouchableOpacity>
-                        <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync photos</Text>
                     </View>
                     <View style = { styles.underline }/>
                     <View style = { styles.checkboxPhotosContainer }>
-                        <TouchableOpacity onPress = { () => { this.props.syncMoviesAction(!this.props.syncMovies, this.props.getStateObject()); } } >
+                        <TouchableOpacity 
+                            onPress = { () => { this.props.syncMoviesAction(!this.props.syncMovies, this.props.getStateObject()); } }
+                            style = { styles.flexRow } >
                             <Image 
                                 style = { styles.icon } 
                                 source = { 
                                     this.props.syncMovies 
                                     ? require('../../images/Icons/ListItemSelected.png')
                                     : require('../../images/Icons/ListItemUnselected.png') } />
+                            <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync movies</Text>
                         </TouchableOpacity>
-                        <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync movies</Text>
                     </View>
                     <View style = { styles.underline }/>
                     <View style = { styles.checkboxPhotosContainer }>
-                        <TouchableOpacity onPress = { () => { this.props.syncDocumentsAction(!this.props.syncDocuments, this.props.getStateObject()); } } >
+                        <TouchableOpacity 
+                            onPress = { () => { this.props.syncDocumentsAction(!this.props.syncDocuments, this.props.getStateObject()); } }
+                            style = { styles.flexRow } >
                             <Image 
                                 style = { styles.icon } 
                                 source = { 
                                     this.props.syncDocuments 
                                     ? require('../../images/Icons/ListItemSelected.png')
                                     : require('../../images/Icons/ListItemUnselected.png') } />
+                        
+                            <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync documents</Text>
                         </TouchableOpacity>
-                        <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync documents</Text>
                     </View>
                     <View style = { styles.underline }/>
                     <View style = { styles.checkboxPhotosContainer }>
-                        <TouchableOpacity onPress = { () => { this.props.syncMusicAction(!this.props.syncMusic, this.props.getStateObject()); } } >
+                        <TouchableOpacity 
+                            onPress = { () => { this.props.syncMusicAction(!this.props.syncMusic, this.props.getStateObject()); } }
+                            style = { styles.flexRow } >
                             <Image 
                                 style = { styles.icon } 
                                 source = { 
                                     this.props.syncMusic 
                                     ? require('../../images/Icons/ListItemSelected.png')
                                     : require('../../images/Icons/ListItemUnselected.png') } />
+                        
+                            <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync music</Text>
                         </TouchableOpacity>
-                        <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync music</Text>
                     </View>
-                    <View style = { styles.underline }/>
                     {/* <View style = { styles.checkboxFilesContainer }>
                         <View style = { styles.flexRow }>
                             <TouchableOpacity onPress = { () => { this.setState({isFilesSync: !this.state.isFilesSync}); } } >
@@ -188,15 +198,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        marginTop: getHeight(15)
+        marginTop: getHeight(10),
+        height: getHeight(40)
     },
     backButtonContainer: {
         justifyContent: 'center',
         alignItems: 'center'
     },
     titleText: { 
-        fontFamily: 'Montserrat-Bold', 
-        fontSize: getHeight(30), 
+        fontFamily: 'Montserrat-Bold',
+        fontSize: getHeight(28), 
         lineHeight: getHeight(33),
         color: '#384B65' 
     },
