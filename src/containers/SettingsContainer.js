@@ -69,6 +69,7 @@ class SettingsContainer extends Component {
     render() {
         return(
             <SettingsComponent
+                screenProps = { this.props.screenProps }
                 email = { this.props.email }
                 navigation = { this.props.navigation }
                 changeSyncStatus = { this.changeSyncStatus }

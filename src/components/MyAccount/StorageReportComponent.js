@@ -26,7 +26,7 @@ export default class StorageReportComponent extends Component{
 }
 
 StorageReportComponent.propTypes = {
-    amount: PropTypes.number,
+    amount: PropTypes.string,
     date: PropTypes.string
 }
 

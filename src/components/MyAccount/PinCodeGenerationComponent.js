@@ -164,7 +164,7 @@ export default class PinCodeGenerationComponent extends Component {
                     <View style = { styles.topContentContainer } >
                         <View style = { styles.flexRow }>
                             <TouchableOpacity 
-                                onPress = { () => { this.props.navigation.goBack(); } }
+                                onPress = { this.props.screenProps.redirectToSettingsScreen }
                                 style = { styles.backButtonContainer } >
                                 <Image 
                                     source = { require('../../images/MyAccount/BlueBackButton.png') }

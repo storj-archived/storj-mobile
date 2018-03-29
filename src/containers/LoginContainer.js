@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Linking } from 'react-native';
 import { loginActionsCreators } from '../reducers/authentification/authActions';
 import StorjLib from '../utils/StorjModule';
 import SyncModule from "../utils/SyncModule";
@@ -209,6 +210,16 @@ class LoginContainer extends Component {
         this.props.redirectToQRScannerScreen();
     };
 
+    redirectToForgotPassword() {
+        let forgotPasswordURL = 'https://app.storj.io/password-reset';
+        Linking.openURL(forgotPasswordURL);
+    }
+
+    redirectToMnemonicInfo() {
+        // let mnemonicInfoURL = '';
+        // Linking.openURL(mnemonicInfoURL);
+    }
+
 	render() {
 		return(
                 <LoginComponent
@@ -224,6 +235,8 @@ class LoginContainer extends Component {
                     onChangeLogin = { this.onChangeEmailInput.bind(this) }
                     onChangePassword = { this.onChangePasswordInput.bind(this) }
                     onChangeMnemonic = { this.onChangeMnemonicInput.bind(this) }
+                    redirectToForgotPassword = { this.redirectToForgotPassword.bind(this) }
+                    redirectToMnemonicInfo = { this.redirectToMnemonicInfo.bind(this) }
                     onSubmit = { this.tryLogin.bind(this) }
                     redirectToQRScannerScreen = { this.redirectToQRScannerScreen.bind(this) }
                     registerButtonOnPress = { this.redirectToRegisterScreen.bind(this) }

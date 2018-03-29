@@ -1,19 +1,15 @@
 import DashboardScreenNavigator from '../../navigators/DashboardScreenNavigator';
+import checkMultipleNav from '../../utils/navigationUtils';
 
 const initialState = DashboardScreenNavigator.router.getStateForAction(DashboardScreenNavigator.router.getActionForPathAndParams('DashboardDefaultScreen'));
 
-export default function bucketsScreenNavReducer(state = initialState, action) { 
+export default function dashboardScreenNavReducer(state = initialState, action) { 
 
     let nextState = DashboardScreenNavigator.router.getStateForAction(action, state);
-    
-    try {
-        let length = nextState.routes.length;
-        if(length > 2 && nextState.routes[length-1].routeName === nextState.routes[length-2].routeName) 
-        {
-            nextState = state;
-        }
 
+    try {
         DashboardScreenNavigator.router.getPathAndParamsForState(nextState);
+        nextState = checkMultipleNav(nextState, state);
     } catch(e) {
         console.log(e.message);
         nextState = state;

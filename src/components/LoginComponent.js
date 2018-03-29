@@ -69,8 +69,12 @@ export default class LoginComponent extends Component {
                         errorMessage = { 'Invalid mnemonic' }
                         regularMessage = { 'Mnemonic' } />
                     <View style = { styles.agreementWrapper }>
-                        <Text style = { styles.agreementText }>Forgot password?</Text>
-                        <Text style = { styles.mnemonicInfoLinkText }>What is Mnemonic?</Text>
+                        <TouchableOpacity onPress = { this.props.redirectToForgotPassword }>
+                            <Text style = { styles.agreementText }>Forgot password?</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress = { this.props.redirectToMnemonicInfo } >
+                            <Text style = { styles.mnemonicInfoLinkText }>What is Mnemonic?</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style = { styles.footer }>

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Linking } from 'react-native';
 import { registerActionsCreators } from '../reducers/authentification/authActions';
 import { RegisterStateModel } from '../models/RegisterStateModel';
 import { RegisterErrorModel } from '../models/RegisterErrorModel';
@@ -202,7 +203,8 @@ export class RegisterContainer extends Component {
      * Navigate to TermsOfUseScreen
      */
     redirectToTermsOfUse() {
-        this.props.redirectToTermsOfUse();
+        let termsOfUseURL = 'https://storj.io/terms-of-use.html';
+        Linking.openURL(termsOfUseURL);
     }
 
     /**

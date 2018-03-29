@@ -11,12 +11,6 @@ class MyAccountContainer extends Component {
     constructor(props) {
         super(props);
     }
-    
-    // navigateBack() {
-    //     this.props.bucketNavigateBack();
-    //     this.props.closeBucket();
-    // }
-
 
     convertedCredits() {
         return this.props.credits

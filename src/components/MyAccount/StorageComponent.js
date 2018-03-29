@@ -24,7 +24,7 @@ export default class StorageComponent extends Component{
                     <View style = { styles.contentContainer } >
                         <TouchableOpacity 
                             style = { styles.backButton }
-                            onPress = { () => { this.props.navigation.goBack(); } } >
+                            onPress = { this.props.screenProps.redirectToMyAccountScreen } >
                             <Image 
                                 source = { require('../../images/MyAccount/BackButton.png') }
                                 style = { styles.icon }

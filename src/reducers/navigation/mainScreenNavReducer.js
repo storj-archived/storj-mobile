@@ -1,4 +1,5 @@
 import MainScreenNavigator from '../../navigators/MainScreenNavigator';
+import checkMultipleNav from '../../utils/navigationUtils';
 
 /**
  * Declaring initial route of program
@@ -12,7 +13,15 @@ export const initialState = MainScreenNavigator.router.getStateForAction(MainScr
  * @returns new state 
  */
 export default function navReducer (state = initialState, action) {
-	const nextState = MainScreenNavigator.router.getStateForAction(action, state);
+	let nextState = MainScreenNavigator.router.getStateForAction(action, state);
+
+	try {
+		MainScreenNavigator.router.getPathAndParamsForState(nextState);
+		nextState = checkMultipleNav(nextState, state);
+    } catch(e) {
+        console.log(e.message);
+        nextState = state;
+    }
 
 	return nextState || state;
 }

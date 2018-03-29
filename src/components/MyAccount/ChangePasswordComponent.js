@@ -40,7 +40,7 @@ export default class SettingsComponent extends Component{
                     <View style = { styles.topContentContainer } >
                         <View style = { styles.flexRow }>
                             <TouchableOpacity 
-                                onPress = { () => { this.props.navigation.goBack(); } }
+                                onPress = { this.props.screenProps.redirectToSettingsScreen }
                                 style = { styles.backButtonContainer } >
                                 <Image 
                                     source = { require('../../images/MyAccount/BlueBackButton.png') }
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
         height: getHeight(50)
     },
     sendLinkButton: {
-        marginTop: getHeight(300),
+        marginTop: getHeight(290),
         alignSelf: 'center',
         width: getWidth(335),
         height: getHeight(50),

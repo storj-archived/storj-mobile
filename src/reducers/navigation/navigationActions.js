@@ -128,7 +128,59 @@ export function navigateToDashboardFilesScreen(bucketId) {
     return NavigationActions.navigate({ routeName: 'DashboardFilesScreen', params: { bucketId } });
 }
 
+export function redirectToBalanceScreen() {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'BalanceScreen'})
+        ]
+    });
+}
 
+export function redirectToChangePasswordScreen() {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'ChangePasswordScreen'})
+        ]
+    });
+}
+
+export function redirectToSettingsScreen() {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'SettingsScreen'})
+        ]
+    });
+}
+
+export function redirectToPinCodeGenerationScreen() {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'PinCodeGenerationScreen'})
+        ]
+    });
+}
+
+export function redirectToStorageScreen() {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'StorageScreen'})
+        ]
+    });
+}
+
+export function redirectToMyAccountScreen() {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'MyAccountMainPageScreen'})
+        ]
+    });
+}
 
 export const authNavigationActions = {
     redirectToLoginScreen,
@@ -140,5 +192,15 @@ export const authNavigationActions = {
     redirectToMnemonicNotConfirmedScreen,
     redirectToRegisterScreen,
     redirectToRegisterSuccessScreen,
+    navigateBack
+}
+
+export const myAccountNavigationActions = {
+    redirectToMyAccountScreen,
+    redirectToBalanceScreen,
+    redirectToChangePasswordScreen,
+    redirectToPinCodeGenerationScreen,
+    redirectToSettingsScreen,
+    redirectToStorageScreen,
     navigateBack
 }

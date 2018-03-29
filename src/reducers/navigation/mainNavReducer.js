@@ -1,4 +1,5 @@
 import StackNavigator from '../../navigators/StackNavigator';
+import checkMultipleNav from '../../utils/navigationUtils';
 
 /**
  * Declaring initial route of program
@@ -16,6 +17,7 @@ export default function navReducer (state = initialState, action) {
 
 	try {
         StackNavigator.router.getPathAndParamsForState(nextState);
+        nextState = checkMultipleNav(nextState, state);
     } catch(e) {
         console.log(e.message);
         nextState = state;

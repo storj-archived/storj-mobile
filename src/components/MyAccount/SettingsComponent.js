@@ -25,7 +25,7 @@ export default class SettingsComponent extends Component{
                 <View style = { styles.topContainer } >
                     <View style = { styles.topContentContainer } >
                         <TouchableOpacity 
-                            onPress = { () => { this.props.navigation.goBack(); } }
+                            onPress = { this.props.screenProps.redirectToMyAccountScreen }
                             style = { styles.backButtonContainer } >
                             <Image 
                                 source = { require('../../images/MyAccount/BlueBackButton.png') }
@@ -156,7 +156,7 @@ export default class SettingsComponent extends Component{
                         </View>
                     </TouchableOpacity>
                     <View style = { styles.underline }/>
-                    <TouchableOpacity style = { styles.optionsContainer } onPress = { () => { this.props.navigation.navigate('ChangePasswordScreen') } } >
+                    <TouchableOpacity style = { styles.optionsContainer } onPress = { this.props.screenProps.redirectToChangePasswordScreen } >
                         <Text style = { styles.switchText }>Change password</Text>
                         <View style = { styles.expanderIconContainer }>
                             <Image
@@ -165,7 +165,7 @@ export default class SettingsComponent extends Component{
                         </View>
                     </TouchableOpacity>
                     <View style = { styles.underline }/>
-                    <TouchableOpacity style = { styles.optionsContainer } onPress = { () => { this.props.navigation.navigate('PinCodeGenerationScreen') } } >
+                    <TouchableOpacity style = { styles.optionsContainer } onPress = { this.props.screenProps.redirectToPinCodeGenerationScreen } >
                         <Text style = { styles.switchText }>Change PIN</Text>
                         <View style = { styles.expanderIconContainer }>
                             <Image

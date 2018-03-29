@@ -34,7 +34,7 @@ export default class MyAccountMainPageComponent extends Component{
                         </TouchableOpacity>
                     </View>
                     <View style = { styles.topButtonsContainer }>
-                        <TouchableOpacity onPress = {  () => { {/*this.props.navigation.navigate('StorageScreen'); */}} } > 
+                        <TouchableOpacity onPress = { this.props.screenProps.redirectToStorageScreen } > 
                             <View style = { styles.button }>
                                 <View style = { styles.buttonContentContainer }>
                                     <Image 
@@ -71,7 +71,7 @@ export default class MyAccountMainPageComponent extends Component{
                             </View>
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress = { () => { this.props.navigation.navigate('BalanceScreen'); } } >
+                    <TouchableOpacity onPress = { this.props.screenProps.redirectToBalanceScreen } >
                         <View style = { styles.balanceButton }>
                             <View style = { styles.balanceContentContainer }>  
                                 <View style = { styles.balanceContent }>
@@ -105,7 +105,7 @@ export default class MyAccountMainPageComponent extends Component{
                             <OptionsComponent 
                                 title = { 'Settings' }
                                 imageSource = { require('../../images/MyAccount/Settings.png') }
-                                onPress = { () => { this.props.navigation.navigate('SettingsScreen'); } } />
+                                onPress = { this.props.screenProps.redirectToSettingsScreen } />
                         }
                         <View style = { styles.underline } />
                         {
