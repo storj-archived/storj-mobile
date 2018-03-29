@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { bucketsListContainerActions } from '../reducers/mainContainer/mainReducerActions';
+import { bucketsListContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
 import { navigateToFilesScreen, navigateBack } from '../reducers/navigation/navigationActions';
 import ServiceModule from '../utils/ServiceModule';
 import BucketsListComponent from '../components/BucketsListComponent';
@@ -45,13 +46,13 @@ function mapStateToProps(state) {
     return {
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
-        buckets: state.mainReducer.buckets,
+        buckets: state.bucketReducer.buckets,
         isGridViewShown: state.mainReducer.isGridViewShown
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ ...bucketsListContainerActions, navigateToFilesScreen }, dispatch);
+    return bindActionCreators({ ...bucketsListContainerActions, ...bucketsListContainerBucketActions, navigateToFilesScreen }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BucketsListContainer);

@@ -2,7 +2,8 @@ import { Keyboard, DeviceEventEmitter, BackHandler, Platform, Alert } from 'reac
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { mainContainerActions, favouritesActions } from '../reducers/mainContainer/mainReducerActions';
+import { mainContainerActions } from '../reducers/mainContainer/mainReducerActions';
+import { mainContainerBucketActions, favouritesActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
 import fileActions, { mainContainerFileActions, favouritesFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { redirectToMainScreen, redirectToInitializationScreen, bucketNavigateBack } from '../reducers/navigation/navigationActions';
 import { createWallet, getWallets } from '../reducers/billing/billingActions';
@@ -345,7 +346,7 @@ function mapStateToProps(state) {
         isSelectionMode: state.mainReducer.isSelectionMode, 
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         isActionBarShown: state.mainReducer.isActionBarShown,
-        buckets: state.mainReducer.buckets,
+        buckets: state.bucketReducer.buckets,
         isCreateBucketInputShown: state.mainReducer.isCreateBucketInputShown,
         isFirstSignIn: state.mainReducer.isFirstSignIn,
         isLoading: state.mainReducer.isLoading,
@@ -360,7 +361,8 @@ function mapDispatchToProps(dispatch) {
             redirectToMainScreen, 
             redirectToInitializationScreen,
             bucketNavigateBack, 
-            ...mainContainerActions, 
+            ...mainContainerActions,
+            ...mainContainerBucketActions, 
             ...mainContainerFileActions, 
             ...favouritesActions, 
             ...favouritesFileActions,

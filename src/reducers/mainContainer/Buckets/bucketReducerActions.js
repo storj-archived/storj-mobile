@@ -10,8 +10,6 @@ const {
     CREATE_BUCKET,
     DELETE_BUCKET,
     GET_BUCKETS, 
-    OPEN_BUCKET,
-    CLOSE_BUCKET,
     UPDATE_FAVOURITE
 } = BUCKET_ACTIONS;
 
@@ -32,14 +30,6 @@ function deleteBucket(bucketId) {
 
 function getBuckets(buckets) {
     return { type: GET_BUCKETS, payload: { buckets } };
-}
-
-function openBucket(bucketId) {
-    return { type: OPEN_BUCKET, payload: { bucketId } };
-}
-
-function closeBucket() {
-    return { type: CLOSE_BUCKET };
 }
 
 function updateFavourite(buckets) {
@@ -65,29 +55,20 @@ export function getPicturesBucketId(buckets) {
 export const mainContainerBucketActions = {
     getBuckets,    
     createBucket,
-    deleteBucket,
-    openBucket
-};
-
-//action creators for main screen navigation container
-export const mainNavContainerBucketActions = {
-    selectBucket,
-    deselectBucket
+    deleteBucket
 };
 
 //action creators for bucket screen
 export const bucketsContainerBucketActions = {
     selectBucket,
     deselectBucket,
-    createBucket,
-    closeBucket
+    createBucket
 };
 
 export const dashboardContainerBucketActions = {
     selectBucket,
     deselectBucket,
     createBucket,
-    openBucket,
     getBuckets    
 }
 
@@ -97,17 +78,7 @@ export const initializeContainerBucketActions = {
 
 export const bucketsListContainerBucketActions = {
     selectBucket,
-    deselectBucket,
-    openBucket
-};
-
-export const filesListContainerBucketActions = {
-    closeBucket
-};
-
-export const myPicturesListContainerBucketActions = {
-    closeBucket,
-    openBucket
+    deselectBucket
 };
 
 export const favouritesActions = {

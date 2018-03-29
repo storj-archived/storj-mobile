@@ -6,6 +6,7 @@ import bucketsScreenNavReducer from '../reducers/navigation/bucketsScreenNavRedu
 import dashboardScreenNavReducer from '../reducers/navigation/dashboardScreenNavReducer';
 import myAccountScreenNavReducer from '../reducers/navigation/myAccountScreenNavReducer';
 import filesReducer from '../reducers/mainContainer/Files/filesReducer';
+import bucketReducer from '../reducers/mainContainer/Buckets/bucketReducer';
 import billingReducer from '../reducers/billing/billingReducer';
 import settingsReducer from "../reducers/mainContainer/MyAccount/Settings/SettingsReducer";
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -23,6 +24,7 @@ const reducers = {
     dashboardScreenNavReducer,
     myAccountScreenNavReducer,
     filesReducer,
+    bucketReducer,
     billingReducer,
     settingsReducer
 };

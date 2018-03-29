@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { bucketsContainerActions } from '../reducers/mainContainer/mainReducerActions';
+import { bucketsContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
 import BucketsComponent from '../components/BucketsComponent';
 import StorjLib from '../utils/StorjModule';
 import ServiceModule from '../utils/ServiceModule';
@@ -85,7 +86,7 @@ function mapStateToProps(state) {
 
     return {
         isSelectionMode: state.mainReducer.isSelectionMode,        
-        buckets: state.mainReducer.buckets,
+        buckets: state.bucketReducer.buckets,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         files: state.filesReducer.fileListModels,
         screenName: currentBucketScreenName,
@@ -96,7 +97,7 @@ function mapStateToProps(state) {
 }
     
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators( { ...bucketsContainerActions, bucketNavigateBack }, dispatch);
+    return bindActionCreators( { ...bucketsContainerActions, ...bucketsContainerBucketActions, bucketNavigateBack }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BucketsContainer);

@@ -105,7 +105,7 @@ class MyPhotosContainer extends Component {
 
 function mapStateToProps(state) {
     return {
-        buckets: state.mainReducer.buckets,
+        buckets: state.bucketReducer.buckets,
         files: state.filesReducer.fileListModels,
         selectedItemId: state.mainReducer.selectedItemId,
         mainNavReducer: state.navReducer,

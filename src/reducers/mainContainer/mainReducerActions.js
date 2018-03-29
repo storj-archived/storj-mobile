@@ -5,11 +5,6 @@ import ServiceModule from '../../utils/ServiceModule';
 const { PICTURES } = SYNC_BUCKETS;
 
 const { 
-    SELECT_BUCKET, 
-    DESELECT_BUCKET, 
-    CREATE_BUCKET,
-    DELETE_BUCKET,
-    GET_BUCKETS, 
     SHOW_ACTION_BAR, 
     HIDE_ACTION_BAR, 
     ENABLE_SELECTION_MODE,
@@ -30,8 +25,7 @@ const {
     SET_GRID_VIEW,
     SET_LIST_VIEW,
     CLEAR_SELECTION,
-    SET_SELECTION_ID,
-    UPDATE_FAVOURITE,
+    SET_SELECTION_ID,    
     SET_EMAIL
 } = MAIN_ACTIONS;
 
@@ -41,25 +35,6 @@ function setEmail(email) {
 
 function onSingleItemSelected() {
     return { type: SINGLE_ITEM_ACTIONS_SELECTED };
-}
-
-function selectBucket(bucket) {
-    return { type: SELECT_BUCKET, payload: { bucket } };
-}
-
-function deselectBucket(bucket) {
-    return { type: DESELECT_BUCKET, payload: { bucket } };
-}
-function createBucket(bucket) {
-    return { type: CREATE_BUCKET, payload: { bucket } };
-}
-
-function deleteBucket(bucketId) {
-    return { type: DELETE_BUCKET, payload: { bucketId } };
-}
-
-function getBuckets(buckets) {
-    return { type: GET_BUCKETS, payload: { buckets } };
 }
 
 function showActionBar() {
@@ -142,10 +117,6 @@ function clearSelection() {
     return { type: CLEAR_SELECTION }
 }
 
-function updateFavourite(buckets) {
-    return { type: UPDATE_FAVOURITE, payload: { buckets } } 
-}
-
 export function getPicturesBucketId(buckets) {
     ServiceModule.createBaseBuckets(buckets);
 
@@ -163,11 +134,8 @@ export function getPicturesBucketId(buckets) {
 
 //action creators for main container
 export const mainContainerActions = {
-    getBuckets,
     showActionBar,
     hideActionBar,
-    createBucket,
-    deleteBucket,
     disableSelectionMode,
     showCreateBucketInput,
     hideCreateBucketInput,
@@ -181,21 +149,11 @@ export const mainContainerActions = {
     openBucket
 };
 
-//action creators for main screen navigation container
-export const mainNavContainerActions = {
-    selectBucket,
-    deselectBucket,
-    enableSelectionMode
-};
-
 //action creators for bucket screen
 export const bucketsContainerActions = {
-    selectBucket,
-    deselectBucket,
     enableSelectionMode,
     disableSelectionMode,
     onSingleItemSelected,
-    createBucket,
     setLoading,
     unsetLoading,
     setSelectionId,
@@ -203,9 +161,6 @@ export const bucketsContainerActions = {
 };
 
 export const dashboardContainerActions = {
-    selectBucket,
-    deselectBucket,
-    createBucket,
     enableSelectionMode,
     disableSelectionMode,
     onSingleItemSelected,
@@ -213,12 +168,10 @@ export const dashboardContainerActions = {
     setLoading,
     unsetLoading,
     openBucket,
-    getBuckets,
     setSelectionId
 }
 
 export const initializeContainerActions = {
-    getBuckets, 
     setFirstSignIn,
     setEmail
 };
@@ -227,8 +180,6 @@ export const bucketsListContainerActions = {
     onSingleItemSelected,
     enableSelectionMode,
     disableSelectionMode,
-    selectBucket,
-    deselectBucket,
     openBucket
 };
 
@@ -252,8 +203,4 @@ export const myPicturesListContainerMainActions = {
     unsetLoading,
     openBucket,
     setSelectionId
-};
-
-export const favouritesActions = {
-    updateFavourite
 };
