@@ -36,10 +36,10 @@ class MyPhotosContainer extends Component {
         
         
         if(this.props.openedBucketId === picturesBucketId && !this.shouldRenew) {
-            ServiceModule.getFiles(picturesBucketId); 
-            this.data = this.props.files.filter(element => element.entity.bucketId === picturesBucketId);
+            ServiceModule.getFiles(picturesBucketId);             
         }
-
+        
+        this.data = this.props.files.filter(element => element.entity.bucketId === picturesBucketId);
         this.shouldRenew = this.props.openedBucketId === picturesBucketId;
 
         return this.data;
