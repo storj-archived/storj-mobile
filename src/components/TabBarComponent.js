@@ -8,7 +8,7 @@ import {
     Easing
 } from 'react-native';
 import React, { Component } from 'react';
-import { getWidth, getHeight } from '../utils/adaptive';
+import { getWidth, getHeight, getDeviceWidth} from '../utils/adaptive';
 import { getPicturesBucketId } from '../reducers/mainContainer/mainReducerActions';
 
 /**
@@ -146,7 +146,7 @@ export default class TabBarComponent extends Component {
 const styles = StyleSheet.create({
     actionButtonWrapper: {
         position: 'absolute',
-        top: 0, left: 0, bottom: 0, right: 0,
+        bottom: 10, right: getDeviceWidth()/2-28,
         alignItems: 'center',
         justifyContent: 'center'
     },
