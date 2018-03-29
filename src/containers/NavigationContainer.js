@@ -3,7 +3,8 @@ import {
   BackHandler,
   Platform,
   View,
-  DeviceEventEmitter
+   DeviceEventEmitter,
+	NativeEventEmitter
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -54,19 +55,24 @@ class Apps extends Component {
     }
 
 	async componentWillMount() {
-		await ServiceModule.bindGetBucketsService();
-		await ServiceModule.bindUploadService();
-		await ServiceModule.bindDownloadService();
-
-		this.getbucketsListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKETS_UPDATED, this.onBucketsReceived.bind(this));       
-		this.bucketCreatedListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKET_CREATED, this.onBucketCreated.bind(this));       
-		this.bucketDeletedListener = DeviceEventEmitter.addListener(eventNames.EVENT_BUCKET_DELETED, this.onBucketDeleted.bind(this));       
-		this.fileDeletedListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILE_DELETED, this.onFileDeleted.bind(this));       
-		this.getFilesListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILES_UPDATED, this.onFilesReceived.bind(this));
-		this.downloadFileStartListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_START, this.onFileDownloadStart.bind(this));	
-		this.downloadFileProgressListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_PROGRESS, this.onFileDownloadProgress.bind(this));
-		this.downloadFileSuccessListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_SUCCESS, this.onFileDownloadSuccess.bind(this));
-		this.downloadFileErrorListener = DeviceEventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_ERROR, this.onFileDownloadError.bind(this));
+		if(Platform.OS === "android"){
+			await ServiceModule.bindGetBucketsService();
+			await ServiceModule.bindUploadService();
+			await ServiceModule.bindDownloadService();
+		}
+		let eventEmmiter = Platform.OS === "android" ? DeviceEventEmitter : new NativeEventEmitter(ServiceModule.getServiceNativeModule());
+        console.log(eventEmmiter);
+		this.getbucketsListener = eventEmmiter.addListener(eventNames.EVENT_BUCKETS_UPDATED, this.onBucketsReceived.bind(this));
+		this.bucketCreatedListener = eventEmmiter.addListener(eventNames.EVENT_BUCKET_CREATED, this.onBucketCreated.bind(this));
+		this.bucketDeletedListener = eventEmmiter.addListener(eventNames.EVENT_BUCKET_DELETED, this.onBucketDeleted.bind(this));
+		this.fileDeletedListener = eventEmmiter.addListener(eventNames.EVENT_FILE_DELETED, this.onFileDeleted.bind(this));
+		this.getFilesListener = eventEmmiter.addListener(eventNames.EVENT_FILES_UPDATED, this.onFilesReceived.bind(this));
+		if(Platform.OS === "android") {
+            this.downloadFileStartListener = eventEmmiter.addListener(eventNames.EVENT_FILE_DOWNLOAD_START, this.onFileDownloadStart.bind(this));
+            this.downloadFileProgressListener = eventEmmiter.addListener(eventNames.EVENT_FILE_DOWNLOAD_PROGRESS, this.onFileDownloadProgress.bind(this));
+            this.downloadFileSuccessListener = eventEmmiter.addListener(eventNames.EVENT_FILE_DOWNLOAD_SUCCESS, this.onFileDownloadSuccess.bind(this));
+            this.downloadFileErrorListener = eventEmmiter.addListener(eventNames.EVENT_FILE_DOWNLOAD_ERROR, this.onFileDownloadError.bind(this));
+        }
 	}
 
 	componentDidMount() {

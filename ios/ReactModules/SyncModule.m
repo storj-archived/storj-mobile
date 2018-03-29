@@ -83,7 +83,6 @@ RCT_REMAP_METHOD(listFiles,
      NSMutableArray <FileModel *> * fileModels = [NSMutableArray arrayWithCapacity:length];
      for(int i = 0; i < length; i++){
        fileModels[i] = [[FileModel alloc] initWithFileDbo:fileDbos[i]];
-       NSLog(@"adding fileModel: %@", [fileModels[i] toDictionary]);
      }
      
      SingleResponse *response = [SingleResponse
@@ -116,7 +115,12 @@ RCT_REMAP_METHOD(listUploadingFiles,
    }];
 }
 
-//RCT_REMAP_METHOD(<#js_name#>, <#method#>)
+RCT_REMAP_METHOD(listSettings,
+                 listSettingsWithSettingsId: (NSString *) settingsId
+                 withResolver: (RCTPromiseResolveBlock) resolver
+                 andRejecter: (RCTPromiseRejectBlock) rejecter){
+  resolver(@[@{}]);
+}
 
 
 

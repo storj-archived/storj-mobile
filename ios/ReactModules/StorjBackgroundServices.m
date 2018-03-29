@@ -15,7 +15,7 @@
 @synthesize _storjWrapper;
 @synthesize _mainOperationsPromise, _uploadOperationsPromise, _downloadOperationsPromise;
 
-RCT_EXPORT_MODULE(@"ServiceModule");
+RCT_EXPORT_MODULE(ServiceModuleIOS);
 
 - (NSArray<NSString *> *)supportedEvents
 {
@@ -31,28 +31,28 @@ RCT_EXPORT_MODULE(@"ServiceModule");
 
 -(BucketRepository *)bucketRepository{
   if(!_bucketRepository){
-    _bucketRepository = [[BucketRepository alloc] initWithDB:_database];
+    _bucketRepository = [[BucketRepository alloc] initWithDB:[self database]];
   }
   return _bucketRepository;
 }
 
 -(FileRepository *) fileRepository{
   if(!_fileRepository){
-    _fileRepository = [[FileRepository alloc] initWithDB:_database];
+    _fileRepository = [[FileRepository alloc] initWithDB:[self database]];
   }
   return _fileRepository;
 }
 
 -(UploadFileRepository *) uploadFileRepository{
-  if(!_fileRepository){
-    _uploadFileRepository = [[UploadFileRepository alloc] initWithDB:_database];
+  if(!_uploadFileRepository){
+    _uploadFileRepository = [[UploadFileRepository alloc] initWithDB:[self database]];
   }
   return _uploadFileRepository;
 }
 
 -(StorjWrapper *)storjWrapper{
   if(!_storjWrapper){
-    _storjWrapper = [[StorjWrapper alloc] init];
+    _storjWrapper = [[StorjWrapperSingletone sharedStorjWrapper]storjWrapper];
   }
   return _storjWrapper;
 }
@@ -80,6 +80,7 @@ RCT_REMAP_METHOD(bindDownloadService,
 
 RCT_REMAP_METHOD(getBuckets,
                  getBuckets){
+  NSLog(@"BGService: getBuckets");
   [MethodHandler
    invokeBackgroundRemainWithParams:@{@KEY_TASK_NAME:@"getBuckets"}
    methodHandlerBlock:^(NSDictionary *params,
@@ -91,46 +92,45 @@ RCT_REMAP_METHOD(getBuckets,
          return;
        }
        if([buckets count] == 0){
-         [self.bucketRepository deleteAll];
+         [[self bucketRepository] deleteAll];
          //db close
          [self sendEventWithName:EventNames.EVENT_BUCKETS_UPDATED
                             body:@(YES)];
          return;
        }
-       [_database beginTransaction];
+//       [[self database] beginTransaction];
        
-       NSMutableArray <BucketDbo *> * bucketDbos = [[NSMutableArray alloc] initWithArray:[self._bucketRepository getAll] copyItems:YES];
-       int length = [buckets count];
+       NSMutableArray <BucketDbo *> * bucketDbos = [NSMutableArray arrayWithArray:
+                                                    [[self bucketRepository] getAll]];
+       NSMutableArray <BucketDbo *> * copyBucketDbos;
+       NSMutableArray <SJBucket *> *copyBuckets;
      outer:
-       for (BucketDbo* bucketDbo in bucketDbos) {
-         int i = 0;
-         NSString *dboId = [bucketDbo getId];
-         
-         do{
-           BucketModel *bucketModel = [[BucketModel alloc] initWithStorjBucketModel:bucketsArray[i]];
-           NSString * modelId = [bucketModel _id];
-           if([dboId isEqualToString:modelId]){
-             [_bucketRepository updateByModel:bucketModel];
-             
-             [self arrayShift:buckets position:i length:length];
-             
-             length--;
+       copyBucketDbos = [NSMutableArray arrayWithArray:bucketDbos];
+       copyBuckets = [NSMutableArray arrayWithArray:buckets];
+       for (SJBucket *bucketModel in copyBuckets) {
+         NSString *sjBucketId = [bucketModel _id];
+         for (BucketDbo* bucketDbo in copyBucketDbos) {
+          NSString *dboId = [bucketDbo getId];
+           if([dboId isEqualToString:sjBucketId]){
+             [[self bucketRepository] updateByModel:[[BucketModel alloc ]
+                                                     initWithStorjBucketModel:bucketModel]];
+             [buckets removeObject:bucketModel];
+             [bucketDbos removeObject:bucketDbo];
              goto outer;
            }
-           i++;
-         } while (i < length);
-         
-         [_bucketRepository deleteById:dboId];
+         }
        }
-       
-       for (int i = 0; i < length; i++){
-         [_bucketRepository insertWithModel:[[BucketModel alloc]
-                                             initWithStorjBucketModel:buckets[i]]];
+       for (BucketDbo *dbo in bucketDbos) {
+         [[self bucketRepository] deleteById:[dbo getId]];
        }
-       [_database commit];
-       
+       for (SJBucket *sjModel in buckets){
+         [[self bucketRepository] insertWithModel:[[BucketModel alloc]
+                                                   initWithStorjBucketModel:sjModel]];
+       }
+//       [[self database] commit];
        [self sendEventWithName:EventNames.EVENT_BUCKETS_UPDATED
                           body:@(YES)];
+       NSLog(@"Sending success event for bucket updated");
        [[UIApplication sharedApplication] endBackgroundTask:taskId];
        
      };
@@ -157,12 +157,12 @@ RCT_REMAP_METHOD(getFiles,
      
      FileListCallback *callback = [[FileListCallback alloc]init];
      callback.onSuccess = ^(NSArray<SJFile *> * _Nullable fileArray) {
-       NSMutableArray *files = [NSMutableArray arrayWithArray:fileArray];
+       NSMutableArray <SJFile *> *files = [NSMutableArray arrayWithArray:fileArray];
        if(!files){
          return;
        }
        if([files count] == 0){
-         [_fileRepository deleteAllFromBucket:bucketId];
+         [[self fileRepository] deleteAllFromBucket:bucketId];
          //dbClose???
          [self sendEventWithName:EventNames.EVENT_FILES_UPDATED
                      body:@(YES)];
@@ -170,35 +170,33 @@ RCT_REMAP_METHOD(getFiles,
        }
        
        [_database beginTransaction];
-       NSMutableArray <FileDbo *> *fileDbos = [NSMutableArray arrayWithArray
-                                               :[_fileRepository getAllFromBucket:bucketId]];
-       
-       int length = [files count];
-       
+       NSMutableArray <FileDbo *> *fileDbos = [NSMutableArray arrayWithArray:
+                                               [[self fileRepository] getAllFromBucket:bucketId]];
+       NSMutableArray <FileDbo *> *copyFileDbos;
+       NSMutableArray <SJFile *> *copyFiles;
      outer:
-       for (FileDbo *dbo in fileDbos) {
-         int i = 0;
-         NSString *dboId = [dbo getId];
-         
-         do {
-           FileModel *fileModel = [[FileModel alloc] initWithSJFile:files[i]];
-           NSString *fileId = [fileModel _fileId];
-           
-           if([dboId isEqualToString:fileId]){
-             [_fileRepository updateByModel:fileModel];
-             [self arrayShift:files
-                     position:i
-                       length:length];
+       copyFileDbos = [NSMutableArray arrayWithArray:fileDbos];
+       copyFiles = [NSMutableArray arrayWithArray:files];
+       for (SJFile * sjFile in copyFiles) {
+         NSString *sjFileId = [sjFile _fileId];
+         for (FileDbo * fileDbo in copyFileDbos) {
+           if([[fileDbo _fileId] isEqualToString:sjFileId]){
+             [[self fileRepository] updateByModel:[[FileModel alloc] initWithSJFile:sjFile]];
+             [files removeObject:sjFile];
+             [fileDbos removeObject:fileDbo];
+             goto outer;
            }
-         } while(i < length);
-         [_fileRepository deleteById:dboId];
+         }
        }
-       for(int i = 0; i < length; i++){
-         [_fileRepository insertWithModel:[[FileModel alloc] initWithSJFile:files[i]]];
+       for (SJFile *sjFile in files) {
+         [[self fileRepository] insertWithModel:[[FileModel alloc] initWithSJFile:sjFile]];
        }
-       [_database commit];
+       for (FileDbo * fileDbo in fileDbos) {
+         [[self fileRepository] deleteById:[fileDbo _fileId]];
+       }
+       [[self database] commit];
        // close??
-       
+       NSLog(@"Sending success event for files updated");
        [self sendEventWithName:EventNames.EVENT_FILES_UPDATED
                    body:@(YES)];
      };
@@ -214,7 +212,7 @@ RCT_REMAP_METHOD(getFiles,
 
 RCT_REMAP_METHOD(createBucket,
                  createBucket:(NSString *)bucketName){
-  
+  NSLog(@"Creating bucket: %@", bucketName);
   [MethodHandler
    invokeBackgroundRemainWithParams:@{@KEY_TASK_NAME:@"createBucket"}
    methodHandlerBlock:^(NSDictionary * dictionary, UIBackgroundTaskIdentifier taskId){
@@ -224,14 +222,14 @@ RCT_REMAP_METHOD(createBucket,
        SingleResponse *response = nil;
        BucketModel *bucketModel = [[BucketModel alloc] initWithStorjBucketModel:sjBucket];
        
-       Response *insertionResponse = [_bucketRepository insertWithModel:bucketModel];
+       Response *insertionResponse = [[self bucketRepository] insertWithModel:bucketModel];
        if(insertionResponse._isSuccess){
-         //send event success with::
          [self sendEventWithName: EventNames.EVENT_BUCKET_CREATED
-                            body:[SingleResponse
+                            body:[[SingleResponse
                                   successSingleResponseWithResult:[DictionaryUtils
                                                                    convertToJsonWithDictionary:
-                                                                   [bucketModel toDictionary]]]];
+                                                                   [bucketModel toDictionary]]]
+                                  toDictionary]];
          
          return;
        }
@@ -265,7 +263,7 @@ RCT_REMAP_METHOD(deleteBucket,
      NSLog(@"Deleting bucket %@", bucketId);
      BucketDeleteCallback *callback = [[BucketDeleteCallback alloc] init];
      callback.onSuccess = ^{
-       if([[_bucketRepository deleteById:bucketId] isSuccess]){
+       if([[[self bucketRepository] deleteById:bucketId] isSuccess]){
          [self sendEventWithName:EventNames.EVENT_BUCKET_DELETED
                             body:[[SingleResponse successSingleResponseWithResult:bucketId]
                                   toDictionary]];
@@ -391,15 +389,14 @@ RCT_REMAP_METHOD(uploadFile,
     
     if(uploadProgress != currentProgress){
       uploadProgress = currentProgress;
-      
-      [dbo setProp:UploadFileContract.PROGRESS fromDouble:uploadProgress];
-      [dbo setProp:UploadFileContract.UPLOADED fromDouble:uploadedBytes];
+      [dbo set_progress: uploadProgress];
+      [dbo set_uploaded:uploadedBytes];
       
       UploadFileModel * fileModel =[[UploadFileModel alloc] initWithUploadFileDbo:dbo];
       Response * updateResponse = [_uploadFileRepository updateByModel:fileModel];
       
       [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_PROGRESS
-                         body:@{UploadFileContract.FILE_HANDLE : @(dbo.getId),
+                         body:@{UploadFileContract.FILE_HANDLE : @([dbo fileHandle]),
                                 UploadFileContract.PROGRESS : @(uploadProgress),
                                 UploadFileContract.UPLOADED : @(uploadedBytes)}];
       
@@ -432,7 +429,7 @@ RCT_REMAP_METHOD(uploadFile,
   
   
   callback.onError = ^(int errorCode, NSString * _Nullable errorMessage) {
-    NSString *dboId = [NSString stringWithFormat:@"%ld", [dbo getId]];
+    NSString *dboId = [NSString stringWithFormat:@"%ld", [dbo fileHandle]];
     Response *deleteResponse = [_uploadFileRepository deleteById:dboId];
     
     [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_ERROR
@@ -444,12 +441,13 @@ RCT_REMAP_METHOD(uploadFile,
   };
   [self.storjWrapper uploadFile:localPath toBucket:bucketId withCompletion:callback fileRef:fileRef];
   @synchronized (dbo) {
-    [dbo setProp:UploadFileContract.FILE_HANDLE fromLong:fileRef];
+    [dbo set_fileHandle:[fileRef longValue]];
+//    [dbo setProp:UploadFileContract.FILE_HANDLE fromLong:fileRef];
     UploadFileModel *fileModel = [[UploadFileModel alloc] initWithUploadFileDbo:dbo];
     Response *insertResponse = [_uploadFileRepository insertWithModel:fileModel];
     if([insertResponse isSuccess]){
       [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_START
-                         body:@{@"fileHandle": @([dbo getId])}];
+                         body:@{@"fileHandle": @([dbo fileHandle])}];
     }
   }
 }
