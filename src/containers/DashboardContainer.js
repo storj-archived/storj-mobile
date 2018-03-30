@@ -34,7 +34,6 @@ class DashboardContainer extends Component {
                 disableSelectionMode = { this.props.disableSelectionMode }
                 onSingleItemSelected = { this.props.onSingleItemSelected }  
                 isSingleItemSelected = { this.props.isSingleItemSelected }
-                navigateToFilesScreen = { this.props.navigateToFilesScreen }
                 setSelectionId = { this.props.setSelectionId } 
                 storageAmount = { this.props.storage }
                 bandwidthAmount = { this.props.bandwidth } 

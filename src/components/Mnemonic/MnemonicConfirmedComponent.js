@@ -9,10 +9,11 @@ import {
 import React, { Component } from 'react';
 import mnemonicScreenConstants from '../../utils/constants/mnemonicScreenConstants';
 import { getWidth, getHeight } from '../../utils/adaptive';
+import PropTypes from 'prop-types';
 
 export default class MnemonicConfirmedComponent extends Component {
     constructor(props) {
-        super(props);
+        super(props)
     }
     
     render() {
@@ -99,3 +100,8 @@ const styles = StyleSheet.create({
         color: 'white'
     },
 });
+
+MnemonicConfirmedComponent.propTypes = {
+    navigation: PropTypes.object,
+    screenProps: PropTypes.object
+}

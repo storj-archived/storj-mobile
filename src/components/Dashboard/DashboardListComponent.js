@@ -15,10 +15,11 @@ import BucketModel from '../../models/BucketModel';
 import DashboardListFooterComponent from '../../components/Dashboard/DashboardListFooterComponent';
 import DashboardListHeaderComponent from '../../components/Dashboard/DashboardListHeaderComponent';
 import { getHeight, getWidth } from '../../utils/adaptive';
+import PropTypes from 'prop-types';
 
 export default class DashboardListComponent extends Component{
     constructor(props) {
-        super(props);        
+        super(props);     
     }
 
     getThreeLast(array) {
@@ -180,3 +181,25 @@ const styles = StyleSheet.create({
         paddingBottom: getHeight(60)
     }
 });
+
+DashboardListComponent.propTypes = {
+    animatedScrollValue: PropTypes.object,
+    bandwidthAmount: PropTypes.string,
+    buckets: PropTypes.array,
+    deselectItem: PropTypes.func,
+    disableSelectionMode: PropTypes.func,
+    enableSelectionMode: PropTypes.func,
+    files: PropTypes.array,
+    isSelectionMode: PropTypes.bool,
+    isSingleItemSelected: PropTypes.bool,
+    navigateBack: PropTypes.func,
+    navigateToDashboardFilesScreen: PropTypes.func,
+    onSingleItemSelected: PropTypes.func,
+    openBucket: PropTypes.func,
+    openedBucketId: PropTypes.string,
+    screenName: PropTypes.string,
+    selectItem: PropTypes.func,
+    selectedItemId: PropTypes.string,
+    setSelectionId: PropTypes.func,
+    storageAmount: PropTypes.string
+}

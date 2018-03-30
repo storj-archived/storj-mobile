@@ -10,6 +10,7 @@ import {
 import React, { Component } from 'react';
 import { getWidth, getHeight, getDeviceWidth} from '../utils/adaptive';
 import { getPicturesBucketId } from '../reducers/mainContainer/mainReducerActions';
+import PropTypes from 'prop-types';
 
 /**
 * Footer component in main page 
@@ -191,4 +192,20 @@ const styles = StyleSheet.create({
     }
 });
 
-//TODO: add prop types
+TabBarComponent.propTypes = {
+    animationEnabled: PropTypes.bool,
+    getLabel: PropTypes.func,
+    getOnPress: PropTypes.func,
+    getTestIDProps: PropTypes.func,
+    jumpToIndex: PropTypes.func,
+    layout: PropTypes.object,
+    navigation: PropTypes.object,
+    navigationState: PropTypes.object,
+    offsetX: PropTypes.object,
+    panX: PropTypes.object,
+    position: PropTypes.object,
+    renderIcon: PropTypes.func,
+    screenProps: PropTypes.object,
+    tabBarPosition: PropTypes.string,
+    useNativeDriver: PropTypes.bool,
+}; 

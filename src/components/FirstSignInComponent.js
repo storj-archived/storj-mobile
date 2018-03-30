@@ -134,21 +134,26 @@ export default class FirstSignInComponent extends Component {
             <View style={ styles.mainContainer }>
                 <View style = { styles.contentContainer }>
                     <View style = { styles.titleContainer }>
-                        <Text style = { styles.titleText }>Your storage is empty</Text>
+                        <Text style = { styles.titleText }>Let’s get started!</Text>
                     </View>
                     <View style = { styles.titleLightContainer }>
-                        <Text style = { styles.titleLightRegularText }>Start with syncing
+                        <Text style = { styles.titleLightRegularText }>You have 
+                            <Text style = { styles.titleLightBoldText }> 25GB of free storage</Text>
+                        </Text>
+                    </View>
+                    <View >
+                        <Image style = { styles.imageContainer } source = { require('../images/MainScreen/Folder.png') } resizeMode = 'contain' ></Image>
+                    </View>
+                    <View style = { styles.aditionalTextContainer }>
+                        <Text style = { styles.titleLightRegularText }>Automatically sync your
                             <Text style = { styles.titleLightBoldText }> photos, videos,</Text>
                         </Text>
                         <View style = { styles.flexRow }>
                             <Text style = { styles.titleLightBoldText }>music</Text>
                             <Text style = { styles.titleLightRegularText }> or</Text>
                             <Text style = { styles.titleLightBoldText }> files</Text>
-                            <Text style = { styles.titleLightRegularText }> on your device</Text> 
+                            <Text style = { styles.titleLightRegularText }> or add them manually.</Text> 
                         </View>
-                    </View>
-                    <View >
-                        <Image style = { styles.imageContainer } source = { require('../images/MainScreen/Folder.png') } resizeMode = 'contain' ></Image>
                     </View>
                     <TouchableOpacity style = { styles.syncMyDeviceButton } onPressOut = { this.showModal.bind(this) }>
                         <Text style = { styles.syncMyDeviceText }>Sync my device</Text>
@@ -184,7 +189,7 @@ const styles = StyleSheet.create({
         color: '#384B65'
     },
     titleLightContainer: {
-        marginTop: getHeight(9)
+        marginTop: getHeight(19)
     },
     titleLightRegularText: {
         fontFamily: 'Montserrat-Regular',
@@ -200,14 +205,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     imageContainer: {
-        marginTop: getHeight(79),
+        marginTop: getHeight(38),
         marginLeft: getWidth(-20),
         height: getHeight(250),
         width: getDeviceWidth(),
         alignSelf: 'center'
     },
     syncMyDeviceButton: {
-        marginTop: getHeight(76),
+        marginTop: getHeight(29),
         width: getWidth(335),
         height: getHeight(50),
         alignItems: 'center',
@@ -277,5 +282,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#2794FF',
         borderRadius: getWidth(6),
         alignSelf: 'center'
+    },
+    aditionalTextContainer: {
+        marginTop: getHeight(64)
     }
 });

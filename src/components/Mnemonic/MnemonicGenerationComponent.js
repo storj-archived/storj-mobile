@@ -11,6 +11,7 @@ import React, { Component } from 'react';
 import mnemonicScreenConstants from '../../utils/constants/mnemonicScreenConstants';
 import { getWidth, getHeight } from '../../utils/adaptive';
 import { getMnemonic } from '../../utils/AsyncStorageModule';
+import PropTypes from 'prop-types';
 
 /**
 * MnemonicGeneration component
@@ -269,3 +270,8 @@ const styles = StyleSheet.create({
         color: '#2794FF'
     }
 });
+
+MnemonicGenerationComponent.propTypes = {
+    navigation: PropTypes.object,
+    screenProps: PropTypes.object
+}
