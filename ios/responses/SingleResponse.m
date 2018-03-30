@@ -7,6 +7,7 @@
 //
 
 #import "SingleResponse.h"
+#import "DictionaryUtils.h"
 
 @implementation SingleResponse
 
@@ -17,7 +18,7 @@
                andErrorMessage:(NSString *)errorMessage{
   if(self = [super initWithSuccess:isSuccess
                andWithErrorMessage:errorMessage]){
-    _result = result;
+    _result = [DictionaryUtils checkAndReturnNSString:result];
   }
   return self;
 }
@@ -29,7 +30,7 @@
   if(self = [super initWithSuccess:isSuccess
                      withErrorCode:errorCode
                andWithErrorMessage:errorMessage]){
-    _result = result;
+    _result = [DictionaryUtils checkAndReturnNSString:result];
   }
   return self;
 }
