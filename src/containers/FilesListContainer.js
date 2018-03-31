@@ -101,6 +101,7 @@ class FilesListContainer extends Component {
     render() {
         return(
             <FilesListComponent
+                screen = { this.props.screenProps.screen }  
                 setSelectionId = { this.props.screenProps.setSelectionId }
                 selectedItemId = { this.props.selectedItemId }
                 isGridViewShown = { this.props.isGridViewShown }

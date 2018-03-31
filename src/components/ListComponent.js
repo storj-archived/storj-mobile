@@ -37,6 +37,10 @@ export default class ListComponent extends Component {
         this.keyboardDidShowListener.remove();
     }
 
+    shouldComponentUpdate(nextProps) {
+        return this.props.isActiveScreen;
+    }
+
     /**
      * Fires on long press
      * @param {object} item type of ListItemModel
@@ -334,6 +338,7 @@ export default class ListComponent extends Component {
 }
 
 ListComponent.propTypes = {
+    isActiveScreen: PropTypes.bool,
     isExpanderDisabled: PropTypes.bool,
     listItemIcon: PropTypes.number,
     mainTitlePath: PropTypes.string,

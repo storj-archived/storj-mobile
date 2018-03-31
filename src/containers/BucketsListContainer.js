@@ -22,8 +22,10 @@ class BucketsListContainer extends Component {
     }
 
     render() {
+        console.log("BUCKET LIST SCREEN PROPS", this.props);
         return(
             <BucketsListComponent
+                screen = { this.props.screenProps.screen }
                 setSelectionId = { this.props.screenProps.setSelectionId }
                 isGridViewShown = { this.props.isGridViewShown }
                 onPress = { (params) => { this.onPress(params); } }

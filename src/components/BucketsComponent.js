@@ -18,6 +18,7 @@ export default class BucketsComponent extends Component {
         return(
             <View style={ styles.mainContainer }>
                 <BucketsScreenNavigation
+                    screen = { this.props.screen }
                     animatedScrollValue = { this.animatedScrollValue }
                     setSelectionId = { this.props.setSelectionId }
                     selectedItemId = { this.props.selectedItemId }  />

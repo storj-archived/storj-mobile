@@ -105,6 +105,7 @@ const listComponent = (title, data, props, count, isBucket) => {
                 onPress = { () => {} }
                 title = { title } />
             <ListComponent
+                isActiveScreen = { props.screen === "DashboardScreen" }     
                 setSelectionId = { () => {} }
                 selectedItemId = { null }
                 verticalPaddingDisabled = { true }

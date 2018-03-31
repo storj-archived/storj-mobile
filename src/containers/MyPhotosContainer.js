@@ -65,12 +65,12 @@ class MyPhotosContainer extends Component {
 
     render() {
         let data = this.getData();
-
         return (
             <View style = { styles.mainContainer }>
             {
                 data.length !== 0 ? 
                     <ListComponent
+                        isActiveScreen = { this.props.navigation.state.routeName === "MyPhotosScreen" }                        
                         contentWrapperStyle = { styles.contentWrapper }
                         setSelectionId = { this.props.setSelectionId }
                         selectedItemId = { this.props.selectedItemId }

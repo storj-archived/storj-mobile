@@ -19,6 +19,7 @@ class DashboardContainer extends Component {
     render() {        
         return(
             <DashboardListComponent
+                screen = { this.props.navigation.state.routeName }
                 files = { this.props.files }
                 buckets = { this.props.buckets }
                 openBucket = { this.props.openBucket}

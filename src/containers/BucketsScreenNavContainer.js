@@ -12,6 +12,7 @@ class BucketsScreenNavContainer extends Component {
         return(
             <BucketsScreenNavigator
                 screenProps = { { 
+                    screen: this.props.screen,
                     animatedScrollValue: this.props.animatedScrollValue,
                     selectedItemId: this.props.selectedItemId,
                     setSelectionId: this.props.setSelectionId
