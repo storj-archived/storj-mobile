@@ -76,7 +76,6 @@ class MainContainer extends Component {
             this.props.updateFileUploadProgress(result.fileHandle, result.progress, result.uploaded);
         });
         eventEmmitter.addListener("EVENT_FILE_UPLOADED_SUCCESSFULLY", async (result) => {
-            console.log("EVENT_FILE_UPLOADED_SUCCESSFULLY", result);
             this.props.uploadSuccess(result.fileHandle, result.fileId);
         });
         eventEmmitter.addListener("EVENT_FILE_UPLOAD_ERROR", async (result) => {

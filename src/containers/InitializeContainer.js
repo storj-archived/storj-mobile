@@ -77,7 +77,6 @@ class InitializeContainer extends Component {
 
         if(getSettingsResponse.isSuccess) {
             let settingsModel = JSON.parse(getSettingsResponse.result);
-            console.log(settingsModel);
             if(settingsModel.isFirstSignIn) 
                 this.props.setFirstSignIn();
         }
@@ -111,7 +110,6 @@ class InitializeContainer extends Component {
     async getAllFiles() {
         let filesResponse = await SyncModule.listAllFiles();		
 
-        console.log(filesResponse);
         if(filesResponse.isSuccess) {
             let files = JSON.parse(filesResponse.result).map((file) => {
                 return new ListItemModel(new FileModel(file));

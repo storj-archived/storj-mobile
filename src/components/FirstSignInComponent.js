@@ -51,7 +51,6 @@ export default class FirstSignInComponent extends Component {
         }
 
         this.props.setFirstSignIn(settings, (result) => {
-            console.log(result);
             shouldActivateSync ? this.props.changeSyncStatus(true) : null;
             this.props.removeFirstSignIn();
         });

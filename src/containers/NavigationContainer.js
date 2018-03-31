@@ -61,7 +61,7 @@ class Apps extends Component {
 			await ServiceModule.bindDownloadService();
 		}
 		let eventEmmiter = Platform.OS === "android" ? DeviceEventEmitter : new NativeEventEmitter(ServiceModule.getServiceNativeModule());
-        console.log(eventEmmiter);
+
 		this.getbucketsListener = eventEmmiter.addListener(eventNames.EVENT_BUCKETS_UPDATED, this.onBucketsReceived.bind(this));
 		this.bucketCreatedListener = eventEmmiter.addListener(eventNames.EVENT_BUCKET_CREATED, this.onBucketCreated.bind(this));
 		this.bucketDeletedListener = eventEmmiter.addListener(eventNames.EVENT_BUCKET_DELETED, this.onBucketDeleted.bind(this));

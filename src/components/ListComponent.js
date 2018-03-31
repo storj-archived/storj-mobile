@@ -25,13 +25,12 @@ export default class ListComponent extends Component {
         super(props); 
 
         this.state = {
-            refreshing: false,
-            selectedItemId: null       
+            refreshing: false
         };
     }
 
     componentWillMount () {
-        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => { this.setState({ selectedItemId: null }); });
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {  });
     }
     
     componentWillUnmount () {
@@ -77,7 +76,7 @@ export default class ListComponent extends Component {
             "November", "December"
         ];
 
-          items.forEach((item) => {
+        items.forEach((item) => {
             var date = new Date(item.getDate());
             
             var day = date.getDate();
@@ -114,7 +113,7 @@ export default class ListComponent extends Component {
             sortingObject[prop].push(item);
         });
     }
-    //TODO: IF NO DATA OR/AND NAME USE TODAY DATE
+   
     sort(items) {
         let sortingObject = {};
         let sortingCallback;
@@ -131,7 +130,7 @@ export default class ListComponent extends Component {
         return sortingObject;
     }
 
-    isItemActionsSelected = (item) => item.getId() === this.props.selectedItemId && item.getId() === this.state.selectedItemId;
+    isItemActionsSelected = (item) => item.getId() === this.props.selectedItemId;
 
     getGridItemsList() {
         let sorting = this.sort(this.props.data);
@@ -172,7 +171,7 @@ export default class ListComponent extends Component {
                                                                 cancelDownload = { this.props.cancelDownload }
                                                                 bucketId = { this.props.bucketId }
                                                                 item = { item } 
-                                                                selectItemId = { (itemId) => { this.props.setSelectionId(itemId); this.setState({ selectedItemId: itemId }) } }
+                                                                selectItemId = { (itemId) => { this.props.setSelectionId(itemId); } }
                                                                 navigateToFilesScreen = { this.props.navigateToFilesScreen ? this.props.navigateToFilesScreen : () => {} }
                                                                 isItemActionsSelected = { this.isItemActionsSelected(item) }
                                                                 onLongPress = { () => { this.onItemLongPress(item); } }
@@ -227,7 +226,7 @@ export default class ListComponent extends Component {
                                             bucketId = { this.props.bucketId }
                                             key = { item.getId() }
                                             item = { item } 
-                                            selectItemId = { (itemId) => { this.props.setSelectionId(itemId); this.setState({selectedItemId: itemId }) }}
+                                            selectItemId = { (itemId) => { this.props.setSelectionId(itemId); }}
                                             navigateToFilesScreen = { this.props.navigateToFilesScreen ? this.props.navigateToFilesScreen : () => {} }
                                             isItemActionsSelected = { this.isItemActionsSelected(item) }
                                             onLongPress = { () => { this.onItemLongPress(item); } }
@@ -275,7 +274,7 @@ export default class ListComponent extends Component {
                     bucketId = { this.props.bucketId }
                     key = { item.getId() }
                     item = { item } 
-                    selectItemId = { (itemId) => { this.props.setSelectionId(itemId); this.setState({selectedItemId: itemId }) }}
+                    selectItemId = { (itemId) => { this.props.setSelectionId(itemId); }}
                     navigateToFilesScreen = { this.props.navigateToDashboardFilesScreen ? this.props.navigateToDashboardFilesScreen : () => {} }
                     isItemActionsSelected = { this.isItemActionsSelected(item) }
                     onLongPress = { () => { this.onItemLongPress(item); } }
@@ -296,20 +295,16 @@ export default class ListComponent extends Component {
     }
 
     getItemsList() {
-        if(!this.props.isExpanderDisabled) {
+        if(this.props.isExpanderDisabled)
+            return this.getItemsWithoutExpander();
 
-            if(this.props.isGridViewShown) {
-                return this.getGridItemsList()
-            } else {
-                return this.getListItemsList()
-            }
-
-        } else {
-            return this.getItemsWithoutExpander()
-        }
+        return this.props.isGridViewShown 
+                    ? this.getGridItemsList() 
+                    : this.getListItemsList();
     }
 
     render() {     
+        console.log("List rendered");
         return (
                 <Animated.ScrollView style = { styles.listContainer }
                     decelerationRate = { 'normal' }

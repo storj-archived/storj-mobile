@@ -24,8 +24,6 @@ class MyPhotosContainer extends Component {
     constructor(props) {
         super(props);
 
-        console.log(this.props)
-
         this.data = [];
         this.animatedScrollValue = new Animated.Value(0);
         this.shouldRenew = false;

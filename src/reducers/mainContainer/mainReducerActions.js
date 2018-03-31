@@ -177,6 +177,7 @@ export const initializeContainerActions = {
 };
 
 export const bucketsListContainerActions = {
+    removeFirstSignIn,
     onSingleItemSelected,
     enableSelectionMode,
     disableSelectionMode,
