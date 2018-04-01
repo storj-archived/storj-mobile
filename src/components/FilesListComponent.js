@@ -21,7 +21,7 @@ export default class FilesListComponent extends Component {
                     && this.props.openedBucketId !== null
                         ? <EmpyBucketComponent />
                         : <ListComponent
-                            isActiveScreen = { this.props.screen === "BucketsScreen" }
+                            isActiveScreen = { ["BucketsScreen", "DashboardScreen"].includes(this.props.activeScreen) }
                             contentWrapperStyle = { styles.contentWrapper }
                             setSelectionId = { this.props.setSelectionId }
                             selectedItemId = { this.props.selectedItemId }

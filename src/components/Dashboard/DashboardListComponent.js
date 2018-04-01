@@ -82,13 +82,13 @@ export default class DashboardListComponent extends Component{
                         </View>
                         <View style = { styles.contentWrapper }>
                         {
-                            listComponent('Favourite buckets', this.getThreeLast(starredBuckets), this.props, starredBucketsCount, true)
+                            listComponent('Favourite buckets', this.getThreeLast(starredBuckets), this.props, starredBucketsCount, true, this.props.activeScreen)
                         }
                         {
-                            listComponent('Favourite files', this.getThreeLast(starredFiles), this.props, starredFilesCount, false)
+                            listComponent('Favourite files', this.getThreeLast(starredFiles), this.props, starredFilesCount, false, this.props.activeScreen)
                         }
                         {
-                            listComponent('Recent sync', this.getThreeLast(syncedFiles), this.props, syncedfilesCount, false)
+                            listComponent('Recent sync', this.getThreeLast(syncedFiles), this.props, syncedfilesCount, false, this.props.activeScreen)
                         }     
                         </View>
                     </ScrollView>
@@ -98,14 +98,15 @@ export default class DashboardListComponent extends Component{
     }
 }
 
-const listComponent = (title, data, props, count, isBucket) => {
+const listComponent = (title, data, props, count, isBucket, screen) => {
+    console.log("SCREEN DASH", screen)    
     return(
         <View>  
             <DashboardListHeaderComponent
                 onPress = { () => {} }
                 title = { title } />
             <ListComponent
-                isActiveScreen = { props.screen === "DashboardScreen" }     
+                isActiveScreen = { screen === "DashboardScreen" }     
                 setSelectionId = { () => {} }
                 selectedItemId = { null }
                 verticalPaddingDisabled = { true }

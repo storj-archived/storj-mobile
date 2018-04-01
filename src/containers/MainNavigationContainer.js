@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { NavigationActions, addNavigationHelpers } from 'react-navigation';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import MainScreenTabNav from '../navigators/MainScreenNavigator';
 import PropTypes from 'prop-types';
+import { setCurrentMainScreenActions } from '../reducers/mainContainer/mainReducerActions'
 
 /**
 * Container for main screen navigation
@@ -16,6 +18,7 @@ class MainNavigationContainer extends Component {
         return(
             <MainScreenTabNav
                 screenProps = {{ 
+                    setCurrentMainScreen: this.props.setCurrentMainScreen,                    
                     showOptions: this.props.showOptions, 
                     showQR: this.props.showQR,
                     showStorageInfo: this.props.showStorageInfo,
@@ -51,6 +54,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        ...bindActionCreators({ ...setCurrentMainScreenActions }, dispatch),
         testAction: () => { dispatch(NavigationActions.navigate({ routeName: 'TestScreen'})); },
         goToBucketsScreen: () => { dispatch(NavigationActions.navigate({ routeName: 'BucketsScreen'})); },
         dispatch

@@ -18,7 +18,8 @@ const {
     SET_LIST_VIEW,
     CLEAR_SELECTION,
     SET_SELECTION_ID,
-    SET_EMAIL
+    SET_EMAIL,
+    SET_MAIN_SCREEN
  } = MAIN_ACTIONS;
                                                         
 const initialState = {
@@ -31,7 +32,8 @@ const initialState = {
     isGridViewShown: false,
     isLoading: false,
     openedBucketId: null,
-    selectedItemId: null
+    selectedItemId: null,
+    activeScreen: "DashboardScreen"
 };
 
 export default function mainReducer(state = initialState, action) {
@@ -99,6 +101,10 @@ export default function mainReducer(state = initialState, action) {
             break;
         case CLEAR_SELECTION:
             newState.selectedItemId = null;
+            break;
+        case SET_MAIN_SCREEN:
+            console.log("REDUCER", action);
+            newState.activeScreen = action.payload.screenName
             break;
         default:
             return state || initialState;

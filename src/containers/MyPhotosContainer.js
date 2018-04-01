@@ -70,7 +70,7 @@ class MyPhotosContainer extends Component {
             {
                 data.length !== 0 ? 
                     <ListComponent
-                        isActiveScreen = { this.props.navigation.state.routeName === "MyPhotosScreen" }                        
+                        isActiveScreen = { this.props.activeScreen === "MyPhotosScreen" }                        
                         contentWrapperStyle = { styles.contentWrapper }
                         setSelectionId = { this.props.setSelectionId }
                         selectedItemId = { this.props.selectedItemId }
@@ -124,7 +124,8 @@ function mapStateToProps(state) {
         isLoading: state.mainReducer.isLoading,
         isGridViewShown: state.mainReducer.isGridViewShown,
         downloadedFileListModels: state.filesReducer.downloadedFileListModels,
-        selectedItemId: state.mainReducer.selectedItemId
+        selectedItemId: state.mainReducer.selectedItemId,
+        activeScreen: state.mainReducer.activeScreen
     };
 }
 

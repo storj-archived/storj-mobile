@@ -101,7 +101,7 @@ class FilesListContainer extends Component {
     render() {
         return(
             <FilesListComponent
-                screen = { this.props.screenProps.screen }  
+                activeScreen = { this.props.activeScreen }  
                 setSelectionId = { this.props.screenProps.setSelectionId }
                 selectedItemId = { this.props.selectedItemId }
                 isGridViewShown = { this.props.isGridViewShown }
@@ -136,7 +136,8 @@ function mapStateToProps(state) {
         isLoading: state.mainReducer.isLoading,
         isGridViewShown: state.mainReducer.isGridViewShown,
         downloadedFileListModels: state.filesReducer.downloadedFileListModels,
-        selectedItemId: state.mainReducer.selectedItemId
+        selectedItemId: state.mainReducer.selectedItemId,
+        activeScreen: state.mainReducer.activeScreen
     };
 }
 

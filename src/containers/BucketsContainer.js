@@ -73,7 +73,6 @@ class BucketsContainer extends Component {
     }
 
     render() {
-        console.log("BUCKET SCREEN PROPS", this.props);
         if(this.props.isFirstSignIn) {
             return(
                 <FirstSignInComponent
@@ -85,8 +84,7 @@ class BucketsContainer extends Component {
             );
         } else {
             return(
-                <BucketsComponent
-                    screen = { this.props.navigation.state.routeName }
+                <BucketsComponent                    
                     setSelectionId = { this.props.setSelectionId }
                     isFilesScreen = { this.props.screenName === "FilesScreen" }
                     selectedItemsCount = { this.getSelectedItemsCount() }

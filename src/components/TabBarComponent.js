@@ -92,6 +92,7 @@ export default class TabBarComponent extends Component {
                         <TouchableOpacity 
                             style = { styles.tabItemContainer } 
                             onPress = { () => { 
+                                this.props.screenProps.setCurrentMainScreen("DashboardScreen");
                                 this.props.navigation.openBucket(null);
                                 this.props.navigation.navigate("DashboardScreen");
                                 this.props.navigation.dashboardNavigateBack(); 
@@ -101,6 +102,7 @@ export default class TabBarComponent extends Component {
                         <TouchableOpacity 
                             style = { styles.tabItemContainer } 
                             onPress = { () => {  
+                                this.props.screenProps.setCurrentMainScreen("BucketsScreen");
                                 this.props.navigation.openBucket(null);
                                 this.props.navigation.goToBucketsScreen();
                                 this.props.navigation.bucketNavigateBack();
@@ -114,7 +116,7 @@ export default class TabBarComponent extends Component {
                                 let picturesBucketId = getPicturesBucketId(this.props.navigation.buckets);
 
                                 if(!picturesBucketId) return;
-
+                                this.props.screenProps.setCurrentMainScreen("MyPhotosScreen");
                                 this.props.navigation.openBucket(picturesBucketId);
                                 this.props.navigation.navigate("MyPhotosScreen");
                             } }>
@@ -123,6 +125,7 @@ export default class TabBarComponent extends Component {
                         <TouchableOpacity 
                             style = { styles.tabItemContainer } 
                             onPress = { () => { 
+                                this.props.screenProps.setCurrentMainScreen("MyAccountScreen");
                                 this.props.navigation.openBucket(null);
                                 this.props.navigation.navigate("MyAccountScreen");
                             } }>

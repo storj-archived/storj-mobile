@@ -26,8 +26,13 @@ const {
     SET_LIST_VIEW,
     CLEAR_SELECTION,
     SET_SELECTION_ID,    
-    SET_EMAIL
+    SET_EMAIL,
+    SET_MAIN_SCREEN
 } = MAIN_ACTIONS;
+
+export function setCurrentMainScreen(screenName) {
+    return { type: SET_MAIN_SCREEN, payload: {screenName}}
+}
 
 function setEmail(email) {
     return { type: SET_EMAIL, payload: { email } };
@@ -204,3 +209,7 @@ export const myPicturesListContainerMainActions = {
     openBucket,
     setSelectionId
 };
+
+export const setCurrentMainScreenActions = {
+    setCurrentMainScreen
+}

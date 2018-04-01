@@ -18,8 +18,8 @@ class DashboardContainer extends Component {
 
     render() {        
         return(
-            <DashboardListComponent
-                screen = { this.props.navigation.state.routeName }
+            <DashboardListComponent                
+                activeScreen = { this.props.activeScreen }
                 files = { this.props.files }
                 buckets = { this.props.buckets }
                 openBucket = { this.props.openBucket}
@@ -59,7 +59,8 @@ function mapStateToProps(state) {
         selectedItemId: state.mainReducer.selectedItemId,
         openedBucketId: state.mainReducer.openedBucketId,
         storage: state.billingReducer.storage,
-        bandwidth: state.billingReducer.bandwidth
+        bandwidth: state.billingReducer.bandwidth,
+        activeScreen: state.mainReducer.activeScreen
     };
 }
     
