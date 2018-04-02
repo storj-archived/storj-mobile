@@ -17,11 +17,11 @@
 @interface BucketModel : NSObject<IConvertibleToJS>
 
 @property (nonatomic, strong) NSString * _id;
-@property (nonatomic, strong) NSString * _name;
-@property (nonatomic, strong) NSString * _created;
-@property long _hash;
-@property BOOL _isDecrypted;
-@property BOOL _isStarred;
+@property (nonatomic, strong, getter=name) NSString * _name;
+@property (nonatomic, strong, getter=created) NSString * _created;
+@property (getter=hash)long _hash;
+@property (getter=isDecrypted) BOOL _isDecrypted;
+@property (getter=isStarred) BOOL _isStarred;
 
 -(instancetype) initWithStorjBucketModel: (SJBucket *) sjBucket;
 

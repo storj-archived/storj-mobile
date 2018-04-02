@@ -15,8 +15,8 @@
 
 @interface DownloadFileModel : NSObject<IConvertibleToJS>
 
-@property (nonatomic, strong) NSString *_fileId;
-@property (nonatomic, strong) NSString *_localPath;
+@property (nonatomic, strong, getter=fileId) NSString *_fileId;
+@property (nonatomic, strong, getter=localPath) NSString *_localPath;
 
 -(instancetype) initWithFileId: (NSString *) fileId localPath: (NSString *) localPath;
 

@@ -21,11 +21,11 @@
 
 -(instancetype) initWithBucketModel: (BucketModel *) model{
   return [self initWithId:[model _id]
-                     name:[model _name]
-                  created:[model _created]
-                     hash:[model _hash]
-              isDecrypted:[model _isDecrypted]
-                isStarred:[model _isStarred]];
+                     name:[model name]
+                  created:[model created]
+                     hash:[model hash]
+              isDecrypted:[model isDecrypted]
+                isStarred:[model isStarred]];
 }
 
 -(instancetype) initWithId: (NSString *) modelId
