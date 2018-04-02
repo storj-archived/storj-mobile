@@ -93,7 +93,7 @@ ActionBarComponent.propTypes = {
 const styles = StyleSheet.create({
     popUpRectangleWrapper: {
         position: 'absolute',
-        bottom: getHeight(66),
+        bottom: getHeight(76),
         alignItems: 'center',
         left: 0, 
         right: 0

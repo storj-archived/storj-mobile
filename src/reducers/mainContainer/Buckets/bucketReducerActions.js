@@ -1,6 +1,8 @@
 import { BUCKET_ACTIONS } from '../../../utils/constants/actionConstants';
 import { SYNC_BUCKETS } from '../../../utils/constants/SyncBuckets';
 import ServiceModule from '../../../utils/ServiceModule';
+import ListItemModel from '../../../models/ListItemModel';
+import BucketModel from '../../../models/BucketModel';
 
 const { PICTURES } = SYNC_BUCKETS;
 
@@ -20,6 +22,7 @@ function selectBucket(bucket) {
 function deselectBucket(bucket) {
     return { type: DESELECT_BUCKET, payload: { bucket } };
 }
+
 function createBucket(bucket) {
     return { type: CREATE_BUCKET, payload: { bucket } };
 }
@@ -49,6 +52,10 @@ export function getPicturesBucketId(buckets) {
     if(picturesBucket) {
         return picturesBucket.entity.id;
     } 
+}
+
+export const navigationContainerBucketActions = {
+    createBucket
 }
 
 //action creators for main container

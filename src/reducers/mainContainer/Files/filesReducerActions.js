@@ -111,7 +111,6 @@ function deselectFile(file) {
     return { type: DESELECT_FILE, payload: { file } };
 }
 
-//list component
 function enableSelectionMode() {
     return { type: ENABLE_SELECTION_MODE };
 }

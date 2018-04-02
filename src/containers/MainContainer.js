@@ -18,7 +18,6 @@ import filePicker from '../utils/filePicker';
 import observablePropFactory from '../models/ObservableProperty';
 import ServiceModule from '../utils/ServiceModule';
 import SyncModule from '../utils/SyncModule';
-import { uploadFileStart, uploadFileSuccess, listUploadingFiles } from '../reducers/asyncActions/fileActionsAsync';
 import { SYNC_BUCKETS } from '../utils/constants/SyncBuckets';
 
 const { PICTURES } = SYNC_BUCKETS;
@@ -31,27 +30,23 @@ class MainContainer extends Component {
         this.tapBarActions = [
             //actions for bucket screen
             TabBarActionModelFactory.createNewAction(() => { this.props.showCreateBucketInput(); }, 'Action 1', require('../images/ActionBar/NewBucketIcon.png')), 
-            TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 2', require('../images/ActionBar/UploadFileIcon.png')),
-            TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 3', require('../images/ActionBar/UploadPhotoIcon.png'))
+            TabBarActionModelFactory.createNewAction(() => { }, 'Action 2', require('../images/ActionBar/UploadFileIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { }, 'Action 3', require('../images/ActionBar/UploadPhotoIcon.png'))
         ];
 
         this.selectionModeActions = [
             //actions for bucket screen
-            TabBarActionModelFactory.createNewAction(
-                () => { this.setFavourite(); }, 
-                'Action 4',    
-                require('../images/ActionBar/FavoritesIcon.png')
-            ),
-            TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 5', require('../images/ActionBar/DownloadIFileIcon.png')), 
-            TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 6', require('../images/ActionBar/CopyBucketIcon.png')), 
-            TabBarActionModelFactory.createNewAction(() => { this.tryDeleteBuckets(); }, 'Action 7', require('../images/ActionBar/TrashBucketIcon.png'))
+            TabBarActionModelFactory.createNewAction(() => { this.setFavourite(); }, 'Action 4', require('../images/ActionBar/FavoritesIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { }, 'Action 5', require('../images/ActionBar/DownloadIFileIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { }, 'Action 6', require('../images/ActionBar/CopyBucketIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { }, 'Action 7', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
         
         this.openedBucketActions = [
             TabBarActionModelFactory.createNewAction(() => { this.setFavouriteFiles(); }, 'Action 8', require('../images/ActionBar/FavoritesIcon.png')),
             TabBarActionModelFactory.createNewAction(() => { this.uploadFile(); }, 'Action 8', require('../images/ActionBar/UploadFileIcon.png')), 
             TabBarActionModelFactory.createNewAction(() => { this.downloadSelectedFiles(); }, '2', require('../images/ActionBar/DownloadIFileIcon.png')),
-            TabBarActionModelFactory.createNewAction(() => { this.deleteSelectedFiles(); }, 'Action 9', require('../images/ActionBar/TrashBucketIcon.png'))
+            TabBarActionModelFactory.createNewAction(() => { this.tryDeleteFiles(); }, 'Action 9', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
 
         this.downloadListener = (fileParams) => {
@@ -60,40 +55,16 @@ class MainContainer extends Component {
         }
 
         this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
-    }
-
-    async bindServicesAndEvents() {
-        const eventEmmitter =
-        Platform.OS ==="android"
-        ? DeviceEventEmitter
-        : new NativeEventEmitter(ServiceModule.getServiceNativeModule());
-        
-        eventEmmitter.addListener("EVENT_FILE_UPLOAD_START", async (response) => {
-            this.props.getUploadingFile(response.fileHandle);
-        });
-
-        eventEmmitter.addListener("EVENT_FILE_UPLOADED_PROGRESS", async (result) => {
-            this.props.updateFileUploadProgress(result.fileHandle, result.progress, result.uploaded);
-        });
-        eventEmmitter.addListener("EVENT_FILE_UPLOADED_SUCCESSFULLY", async (result) => {
-            console.log("EVENT_FILE_UPLOADED_SUCCESSFULLY", result);
-            this.props.uploadSuccess(result.fileHandle, result.fileId);
-        });
-        eventEmmitter.addListener("EVENT_FILE_UPLOAD_ERROR", async (result) => {
-            this.props.uploadFileError(result.fileHandle);
-        });
-    }
+    }    
 
     async componentWillMount () {
-        this.bindServicesAndEvents();
-
         if(Platform.OS === "android") {
             BackHandler.addEventListener("hardwareBackPress", this.onHardwareBackPress);
         }
 
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => { this.props.disableSelectionMode(); });
 
-        this.props.listUploadingFiles();
+        //this.props.listUploadingFiles();
     }
 
     tryDeleteBuckets() {
@@ -107,13 +78,23 @@ class MainContainer extends Component {
             { cancelable: false }
         );
     }
+
+    tryDeleteFiles() {
+        Alert.alert(
+            'Delete permanently?',
+            'Are you sure to delete selected files permanently?',
+            [
+                { text: 'Cancel', onPress: () => { }, style: 'cancel' },
+                { text: 'Delete', onPress: () => { this.deleteSelectedFiles(); } }
+            ],
+            { cancelable: false }
+        );
+    }
     
     componentWillUnmount () {
         if(Platform.OS === "android") {
             BackHandler.removeEventListener("hardwareBackPress");
         }
-
-        //DeviceEventEmitter.removeListener("downloadFile", this.downloadListener);
 
         this.keyboardDidShowListener.remove();
     }
@@ -322,10 +303,7 @@ function mapDispatchToProps(dispatch) {
             ...favouritesFileActions,
             createWallet,
             getWallets
-        }, dispatch),
-        getUploadingFile: (fileHandle) => dispatch(uploadFileStart(fileHandle)),
-        uploadSuccess: (fileHandle, fileId) => dispatch(uploadFileSuccess(fileHandle, fileId)),
-        listUploadingFiles: () => dispatch(listUploadingFiles("test"))
+        }, dispatch)        
     };
 }
 

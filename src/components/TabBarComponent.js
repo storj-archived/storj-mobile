@@ -146,9 +146,8 @@ export default class TabBarComponent extends Component {
 const styles = StyleSheet.create({
     actionButtonWrapper: {
         position: 'absolute',
-        bottom: 10, right: getDeviceWidth()/2-28,
-        alignItems: 'center',
-        justifyContent: 'center'
+        bottom: getHeight(5), 
+        alignSelf: 'center'
     },
     mainContainer: {
         position: 'absolute',

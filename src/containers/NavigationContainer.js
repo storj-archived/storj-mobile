@@ -16,7 +16,7 @@ import {
     bucketsContainerActions,
 	mainContainerActions
 } from '../reducers/mainContainer/mainReducerActions';
-import { mainContainerBucketActions, bucketsContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
+import { navigationContainerBucketActions, mainContainerBucketActions, bucketsContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
 import {
 	mainContainerFileActions,
 	filesListContainerFileActions
@@ -27,6 +27,7 @@ import BucketModel from '../models/BucketModel';
 import FileModel from '../models/FileModel';
 import WarningComponent from '../components/WarningComponent';
 import { SYNC_BUCKETS } from '../utils/constants/SyncBuckets';
+import { uploadFileStart, uploadFileSuccess } from '../reducers/asyncActions/fileActionsAsync';
 
 const { PICTURES } = SYNC_BUCKETS;
 
@@ -52,27 +53,53 @@ class Apps extends Component {
 		this.downloadFileProgressListener = null;
 		this.downloadFileSuccessListener = null;
 		this.downloadFileErrorListener = null;
+
+		this.isAndoird = Platform.OS === "android";
     }
 
 	async componentWillMount() {
-		if(Platform.OS === "android"){
+		if(this.isAndoird) {
 			await ServiceModule.bindGetBucketsService();
 			await ServiceModule.bindUploadService();
 			await ServiceModule.bindDownloadService();
 		}
-		let eventEmmiter = Platform.OS === "android" ? DeviceEventEmitter : new NativeEventEmitter(ServiceModule.getServiceNativeModule());
-        console.log(eventEmmiter);
-		this.getbucketsListener = eventEmmiter.addListener(eventNames.EVENT_BUCKETS_UPDATED, this.onBucketsReceived.bind(this));
-		this.bucketCreatedListener = eventEmmiter.addListener(eventNames.EVENT_BUCKET_CREATED, this.onBucketCreated.bind(this));
-		this.bucketDeletedListener = eventEmmiter.addListener(eventNames.EVENT_BUCKET_DELETED, this.onBucketDeleted.bind(this));
-		this.fileDeletedListener = eventEmmiter.addListener(eventNames.EVENT_FILE_DELETED, this.onFileDeleted.bind(this));
-		this.getFilesListener = eventEmmiter.addListener(eventNames.EVENT_FILES_UPDATED, this.onFilesReceived.bind(this));
-		if(Platform.OS === "android") {
-            this.downloadFileStartListener = eventEmmiter.addListener(eventNames.EVENT_FILE_DOWNLOAD_START, this.onFileDownloadStart.bind(this));
-            this.downloadFileProgressListener = eventEmmiter.addListener(eventNames.EVENT_FILE_DOWNLOAD_PROGRESS, this.onFileDownloadProgress.bind(this));
-            this.downloadFileSuccessListener = eventEmmiter.addListener(eventNames.EVENT_FILE_DOWNLOAD_SUCCESS, this.onFileDownloadSuccess.bind(this));
-            this.downloadFileErrorListener = eventEmmiter.addListener(eventNames.EVENT_FILE_DOWNLOAD_ERROR, this.onFileDownloadError.bind(this));
-        }
+
+		let eventEmitter = this.isAndoird ? DeviceEventEmitter : new NativeEventEmitter(ServiceModule.getServiceNativeModule());
+        
+		this.getbucketsListener = eventEmitter.addListener(eventNames.EVENT_BUCKETS_UPDATED, this.onBucketsReceived.bind(this));
+		this.bucketCreatedListener = eventEmitter.addListener(eventNames.EVENT_BUCKET_CREATED, this.onBucketCreated.bind(this));
+		this.bucketDeletedListener = eventEmitter.addListener(eventNames.EVENT_BUCKET_DELETED, this.onBucketDeleted.bind(this));
+		
+		this.fileDeletedListener = eventEmitter.addListener(eventNames.EVENT_FILE_DELETED, this.onFileDeleted.bind(this));
+		this.getFilesListener = eventEmitter.addListener(eventNames.EVENT_FILES_UPDATED, this.onFilesReceived.bind(this));
+		
+		this.fileUploadStartedListener = eventEmitter.addListener(eventNames.EVENT_FILE_UPLOAD_START, this.onFileUploadStart.bind(this));
+		this.fileUploadProgressListener = eventEmitter.addListener(eventNames.EVENT_FILE_UPLOADED_PROGRESS, this.onFileUploadStart.bind(this));
+		this.fileUploadSuccessListener = eventEmitter.addListener(eventNames.EVENT_FILE_UPLOADED_SUCCESSFULLY, this.fileUploadSuccess.bind(this));
+		this.fileUploadErrorListener = eventEmitter.addListener(eventNames.EVENT_FILE_UPLOAD_ERROR, this.fileUploadError.bind(this));
+
+		if(this.isAndoird) {
+            this.downloadFileStartListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_START, this.onFileDownloadStart.bind(this));
+            this.downloadFileProgressListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_PROGRESS, this.onFileDownloadProgress.bind(this));
+            this.downloadFileSuccessListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_SUCCESS, this.onFileDownloadSuccess.bind(this));
+            this.downloadFileErrorListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_ERROR, this.onFileDownloadError.bind(this));
+		}
+	}
+
+	async fileUploadError(result) {
+		this.props.uploadFileError(result.fileHandle);
+	}
+
+	async fileUploadSuccess(result) {
+		this.props.uploadSuccess(result.fileHandle, result.fileId);
+	}
+
+	async fileUploadProgress(result) {
+		this.props.updateFileUploadProgress(result.fileHandle, result.progress, result.uploaded);
+	}
+
+	async onFileUploadStart(response) {
+		this.props.getUploadingFile(response.fileHandle);
 	}
 
 	componentDidMount() {
@@ -136,11 +163,16 @@ class Apps extends Component {
         this.props.unsetLoading();
     }
 
+	onBucketCreated(response) {
+		if(response.isSuccess) {
+			createBucket(new ListItemModel(new BucketModel(JSON.parse(response.result))));	
+		}	
+	}
 
 	async onBucketsReceived() {
         this.props.setLoading();
 		let bucketsResponse = await SyncModule.listBuckets();
-
+		
         if(bucketsResponse.isSuccess) {
             let buckets = JSON.parse(bucketsResponse.result).map((file) => {
                 return new ListItemModel(new BucketModel(file));
@@ -152,12 +184,6 @@ class Apps extends Component {
         }
 		
         this.props.unsetLoading();
-	}
-
-	onBucketCreated(response) {
-		if(response.isSuccess) {
-			this.props.createBucket(new ListItemModel(new BucketModel(JSON.parse(response.result))));	
-		}	
 	}
 
 	onBucketDeleted(response) {				
@@ -233,16 +259,20 @@ function mapStateToProps(state) {
 		isAccountExist: state.authReducer.user.isAccountExist
     };
 }
- 
+
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators( {
+	return {
+		...bindActionCreators( {
 		...bucketsContainerActions, 
 		...bucketsContainerBucketActions,
 		...mainContainerActions,
 		...mainContainerBucketActions, 
+		...navigationContainerBucketActions,
 		...mainContainerFileActions,
 		...filesListContainerFileActions,
-		...authNavigationActions }, dispatch);
+		...authNavigationActions }, dispatch),
+		uploadSuccess: (fileHandle, fileId) => dispatch(uploadFileSuccess(fileHandle, fileId)),		
+		getUploadingFile: (fileHandle) => dispatch(uploadFileStart(fileHandle))};
 }
 
 /**
