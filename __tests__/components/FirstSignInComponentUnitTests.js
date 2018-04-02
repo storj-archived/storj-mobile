@@ -15,7 +15,13 @@ describe('FirstSignInComponent', () => {
     it('renders correctly', () => {
 
         const wrapper = shallow(
-            <FirstSignInComponent />
+            <FirstSignInComponent
+                SYNC_ENUM = { {
+                    SYNC_PHOTOS: () => {},
+                    SYNC_MOVIES: () => {},
+                    SYNC_DOCUMENTS: () => {},
+                    SYNC_MUSIC: () => {},
+                } } />
         );
 
         expect(wrapper).toMatchSnapshot();
@@ -23,7 +29,13 @@ describe('FirstSignInComponent', () => {
 
     it('correct state when showModal is false', () => {
         const wrapper = shallow(
-            <FirstSignInComponent />
+            <FirstSignInComponent
+                SYNC_ENUM = { {
+                    SYNC_PHOTOS: 16,
+                    SYNC_MOVIES: 8,
+                    SYNC_DOCUMENTS: 4,
+                    SYNC_MUSIC: 2,
+                } } />
         );
 
         wrapper.find('TouchableOpacity').forEach(child => {
@@ -32,10 +44,10 @@ describe('FirstSignInComponent', () => {
 
         expectedState = { 
             androidOptions: [ 
-                { type: 'photos', isSelected: false, title: 'My photos' },
-                { type: 'videos', isSelected: false, title: 'My videos' },
-                { type: 'music', isSelected: false, title: 'My music' },
-                { type: 'files', isSelected: false, title: 'Files' } ],
+                { type: 'Pictures', isSelected: false, title: 'My photos', mask: 16 },
+                { type: 'Movies', isSelected: false, title: 'My movies', mask: 8 },
+                { type: 'Documents', isSelected: false, title: 'My documents', mask: 4 },
+                { type: 'Music', isSelected: false, title: 'My music', mask: 2 } ],
             showModal: true
         }
 
@@ -45,7 +57,13 @@ describe('FirstSignInComponent', () => {
     it('correct rendering showModal is false', () => {
 
         const wrapper = shallow(
-            <FirstSignInComponent />
+            <FirstSignInComponent
+                SYNC_ENUM = { {
+                    SYNC_PHOTOS: () => {},
+                    SYNC_MOVIES: () => {},
+                    SYNC_DOCUMENTS: () => {},
+                    SYNC_MUSIC: () => {},
+                } } />
         );
 
         wrapper.find('TouchableOpacity').forEach(child => {
@@ -60,7 +78,13 @@ describe('FirstSignInComponent', () => {
 
         const wrapper = shallow(
             <FirstSignInComponent 
-                createBucket = { creationSpy } />
+                createBucket = { creationSpy }
+                SYNC_ENUM = { {
+                    SYNC_PHOTOS: () => {},
+                    SYNC_MOVIES: () => {},
+                    SYNC_DOCUMENTS: () => {},
+                    SYNC_MUSIC: () => {},
+                } } />
         );
 
         wrapper.find('TouchableOpacity').forEach(child => {
@@ -73,7 +97,13 @@ describe('FirstSignInComponent', () => {
     it('correct rendering when showModal is true', () => {
 
         const wrapper = shallow(
-            <FirstSignInComponent />
+            <FirstSignInComponent
+                SYNC_ENUM = { {
+                    SYNC_PHOTOS: () => {},
+                    SYNC_MOVIES: () => {},
+                    SYNC_DOCUMENTS: () => {},
+                    SYNC_MUSIC: () => {},
+                } } />
         );
 
         wrapper.setState({ showModal: true });
@@ -84,7 +114,13 @@ describe('FirstSignInComponent', () => {
     it('correct state when showModal is true and sync option pressed', () => {
 
         const wrapper = shallow(
-            <FirstSignInComponent />
+            <FirstSignInComponent
+                SYNC_ENUM = { {
+                    SYNC_PHOTOS: 16,
+                    SYNC_MOVIES: 8,
+                    SYNC_DOCUMENTS: 4,
+                    SYNC_MUSIC: 2,
+                } } />
         );
 
         wrapper.setState({ showModal: true });
@@ -95,10 +131,10 @@ describe('FirstSignInComponent', () => {
 
         expectedState = { 
             androidOptions: [ 
-                { type: 'photos', isSelected: true, title: 'My photos' },
-                { type: 'videos', isSelected: true, title: 'My videos' },
-                { type: 'music', isSelected: true, title: 'My music' },
-                { type: 'files', isSelected: true, title: 'Files' } ],
+                { type: 'Pictures', isSelected: true, title: 'My photos', mask: 16 },
+                { type: 'Movies', isSelected: true, title: 'My movies', mask: 8 },
+                { type: 'Documents', isSelected: true, title: 'My documents', mask: 4 },
+                { type: 'Music', isSelected: true, title: 'My music', mask: 2 } ],
             showModal: false
         }
 
@@ -110,7 +146,13 @@ describe('FirstSignInComponent', () => {
 
         const wrapper = shallow(
             <FirstSignInComponent 
-                createBucket = { creationSpy } />
+                createBucket = { creationSpy }
+                SYNC_ENUM = { {
+                    SYNC_PHOTOS: () => {},
+                    SYNC_MOVIES: () => {},
+                    SYNC_DOCUMENTS: () => {},
+                    SYNC_MUSIC: () => {},
+                } } />
         );
 
         wrapper.setState({ showModal: true });

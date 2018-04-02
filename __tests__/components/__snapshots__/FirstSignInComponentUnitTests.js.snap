@@ -4,7 +4,16 @@ exports[`FirstSignInComponent renders correctly 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <FirstSignInComponent />,
+  Symbol(enzyme.__unrendered__): <FirstSignInComponent
+    SYNC_ENUM={
+      Object {
+        "SYNC_DOCUMENTS": [Function],
+        "SYNC_MOVIES": [Function],
+        "SYNC_MUSIC": [Function],
+        "SYNC_PHOTOS": [Function],
+      }
+    }
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -45,13 +54,13 @@ ShallowWrapper {
                 }
               }
             >
-              Your storage is empty
+              Let’s get started!
             </Text>
           </View>
           <View
             style={
               Object {
-                "marginTop": 18,
+                "marginTop": 38,
               }
             }
           >
@@ -67,7 +76,58 @@ ShallowWrapper {
                 }
               }
             >
-              Start with syncing
+              You have
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#384B65",
+                    "fontFamily": "Montserrat-Bold",
+                    "fontSize": 32,
+                  }
+                }
+              >
+                 25GB of free storage
+              </Text>
+            </Text>
+          </View>
+          <View>
+            <Image
+              resizeMode="contain"
+              source="Folder.png"
+              style={
+                Object {
+                  "alignSelf": "center",
+                  "height": 500,
+                  "marginLeft": -40,
+                  "marginTop": 76,
+                  "width": 750,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "marginTop": 128,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#384B65",
+                  "fontFamily": "Montserrat-Regular",
+                  "fontSize": 32,
+                }
+              }
+            >
+              Automatically sync your
               <Text
                 accessible={true}
                 allowFontScaling={true}
@@ -144,24 +204,9 @@ ShallowWrapper {
                   }
                 }
               >
-                 on your device
+                 or add them manually.
               </Text>
             </View>
-          </View>
-          <View>
-            <Image
-              resizeMode="contain"
-              source="Folder.png"
-              style={
-                Object {
-                  "alignSelf": "center",
-                  "height": 500,
-                  "marginLeft": -40,
-                  "marginTop": 158,
-                  "width": 750,
-                }
-              }
-            />
           </View>
           <TouchableOpacity
             activeOpacity={0.2}
@@ -173,7 +218,7 @@ ShallowWrapper {
                 "borderRadius": 12,
                 "height": 100,
                 "justifyContent": "center",
-                "marginTop": 152,
+                "marginTop": 58,
                 "width": 670,
               }
             }
@@ -229,13 +274,13 @@ ShallowWrapper {
                   }
                 }
               >
-                Your storage is empty
+                Let’s get started!
               </Text>
             </View>,
             <View
               style={
                 Object {
-                  "marginTop": 18,
+                  "marginTop": 38,
                 }
               }
             >
@@ -251,7 +296,58 @@ ShallowWrapper {
                   }
                 }
               >
-                Start with syncing
+                You have
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#384B65",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 32,
+                    }
+                  }
+                >
+                   25GB of free storage
+                </Text>
+              </Text>
+            </View>,
+            <View>
+              <Image
+                resizeMode="contain"
+                source="Folder.png"
+                style={
+                  Object {
+                    "alignSelf": "center",
+                    "height": 500,
+                    "marginLeft": -40,
+                    "marginTop": 76,
+                    "width": 750,
+                  }
+                }
+              />
+            </View>,
+            <View
+              style={
+                Object {
+                  "marginTop": 128,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#384B65",
+                    "fontFamily": "Montserrat-Regular",
+                    "fontSize": 32,
+                  }
+                }
+              >
+                Automatically sync your
                 <Text
                   accessible={true}
                   allowFontScaling={true}
@@ -328,24 +424,9 @@ ShallowWrapper {
                     }
                   }
                 >
-                   on your device
+                   or add them manually.
                 </Text>
               </View>
-            </View>,
-            <View>
-              <Image
-                resizeMode="contain"
-                source="Folder.png"
-                style={
-                  Object {
-                    "alignSelf": "center",
-                    "height": 500,
-                    "marginLeft": -40,
-                    "marginTop": 158,
-                    "width": 750,
-                  }
-                }
-              />
             </View>,
             <TouchableOpacity
               activeOpacity={0.2}
@@ -357,7 +438,7 @@ ShallowWrapper {
                   "borderRadius": 12,
                   "height": 100,
                   "justifyContent": "center",
-                  "marginTop": 152,
+                  "marginTop": 58,
                   "width": 670,
                 }
               }
@@ -402,7 +483,7 @@ ShallowWrapper {
                   }
                 }
               >
-                Your storage is empty
+                Let’s get started!
               </Text>,
               "style": Object {
                 "marginTop": 30,
@@ -416,7 +497,7 @@ ShallowWrapper {
               "props": Object {
                 "accessible": true,
                 "allowFontScaling": true,
-                "children": "Your storage is empty",
+                "children": "Let’s get started!",
                 "ellipsizeMode": "tail",
                 "style": Object {
                   "alignSelf": "flex-start",
@@ -426,7 +507,144 @@ ShallowWrapper {
                 },
               },
               "ref": null,
-              "rendered": "Your storage is empty",
+              "rendered": "Let’s get started!",
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#384B65",
+                    "fontFamily": "Montserrat-Regular",
+                    "fontSize": 32,
+                  }
+                }
+              >
+                You have
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#384B65",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 32,
+                    }
+                  }
+                >
+                   25GB of free storage
+                </Text>
+              </Text>,
+              "style": Object {
+                "marginTop": 38,
+              },
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "accessible": true,
+                "allowFontScaling": true,
+                "children": Array [
+                  "You have",
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#384B65",
+                        "fontFamily": "Montserrat-Bold",
+                        "fontSize": 32,
+                      }
+                    }
+                  >
+                     25GB of free storage
+                  </Text>,
+                ],
+                "ellipsizeMode": "tail",
+                "style": Object {
+                  "color": "#384B65",
+                  "fontFamily": "Montserrat-Regular",
+                  "fontSize": 32,
+                },
+              },
+              "ref": null,
+              "rendered": Array [
+                "You have",
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "accessible": true,
+                    "allowFontScaling": true,
+                    "children": " 25GB of free storage",
+                    "ellipsizeMode": "tail",
+                    "style": Object {
+                      "color": "#384B65",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 32,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": " 25GB of free storage",
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <Image
+                resizeMode="contain"
+                source="Folder.png"
+                style={
+                  Object {
+                    "alignSelf": "center",
+                    "height": 500,
+                    "marginLeft": -40,
+                    "marginTop": 76,
+                    "width": 750,
+                  }
+                }
+              />,
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "resizeMode": "contain",
+                "source": "Folder.png",
+                "style": Object {
+                  "alignSelf": "center",
+                  "height": 500,
+                  "marginLeft": -40,
+                  "marginTop": 76,
+                  "width": 750,
+                },
+              },
+              "ref": null,
+              "rendered": null,
               "type": [Function],
             },
             "type": [Function],
@@ -449,7 +667,7 @@ ShallowWrapper {
                     }
                   }
                 >
-                  Start with syncing
+                  Automatically sync your
                   <Text
                     accessible={true}
                     allowFontScaling={true}
@@ -526,12 +744,12 @@ ShallowWrapper {
                       }
                     }
                   >
-                     on your device
+                     or add them manually.
                   </Text>
                 </View>,
               ],
               "style": Object {
-                "marginTop": 18,
+                "marginTop": 128,
               },
             },
             "ref": null,
@@ -544,7 +762,7 @@ ShallowWrapper {
                   "accessible": true,
                   "allowFontScaling": true,
                   "children": Array [
-                    "Start with syncing",
+                    "Automatically sync your",
                     <Text
                       accessible={true}
                       allowFontScaling={true}
@@ -569,7 +787,7 @@ ShallowWrapper {
                 },
                 "ref": null,
                 "rendered": Array [
-                  "Start with syncing",
+                  "Automatically sync your",
                   Object {
                     "instance": null,
                     "key": undefined,
@@ -652,7 +870,7 @@ ShallowWrapper {
                         }
                       }
                     >
-                       on your device
+                       or add them manually.
                     </Text>,
                   ],
                   "style": Object {
@@ -725,7 +943,7 @@ ShallowWrapper {
                     "props": Object {
                       "accessible": true,
                       "allowFontScaling": true,
-                      "children": " on your device",
+                      "children": " or add them manually.",
                       "ellipsizeMode": "tail",
                       "style": Object {
                         "color": "#384B65",
@@ -734,54 +952,13 @@ ShallowWrapper {
                       },
                     },
                     "ref": null,
-                    "rendered": " on your device",
+                    "rendered": " or add them manually.",
                     "type": [Function],
                   },
                 ],
                 "type": [Function],
               },
             ],
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "children": <Image
-                resizeMode="contain"
-                source="Folder.png"
-                style={
-                  Object {
-                    "alignSelf": "center",
-                    "height": 500,
-                    "marginLeft": -40,
-                    "marginTop": 158,
-                    "width": 750,
-                  }
-                }
-              />,
-            },
-            "ref": null,
-            "rendered": Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "resizeMode": "contain",
-                "source": "Folder.png",
-                "style": Object {
-                  "alignSelf": "center",
-                  "height": 500,
-                  "marginLeft": -40,
-                  "marginTop": 158,
-                  "width": 750,
-                },
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
             "type": [Function],
           },
           Object {
@@ -811,7 +988,7 @@ ShallowWrapper {
                 "borderRadius": 12,
                 "height": 100,
                 "justifyContent": "center",
-                "marginTop": 152,
+                "marginTop": 58,
                 "width": 670,
               },
             },
@@ -878,13 +1055,13 @@ ShallowWrapper {
                   }
                 }
               >
-                Your storage is empty
+                Let’s get started!
               </Text>
             </View>
             <View
               style={
                 Object {
-                  "marginTop": 18,
+                  "marginTop": 38,
                 }
               }
             >
@@ -900,7 +1077,58 @@ ShallowWrapper {
                   }
                 }
               >
-                Start with syncing
+                You have
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#384B65",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 32,
+                    }
+                  }
+                >
+                   25GB of free storage
+                </Text>
+              </Text>
+            </View>
+            <View>
+              <Image
+                resizeMode="contain"
+                source="Folder.png"
+                style={
+                  Object {
+                    "alignSelf": "center",
+                    "height": 500,
+                    "marginLeft": -40,
+                    "marginTop": 76,
+                    "width": 750,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                Object {
+                  "marginTop": 128,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#384B65",
+                    "fontFamily": "Montserrat-Regular",
+                    "fontSize": 32,
+                  }
+                }
+              >
+                Automatically sync your
                 <Text
                   accessible={true}
                   allowFontScaling={true}
@@ -977,24 +1205,9 @@ ShallowWrapper {
                     }
                   }
                 >
-                   on your device
+                   or add them manually.
                 </Text>
               </View>
-            </View>
-            <View>
-              <Image
-                resizeMode="contain"
-                source="Folder.png"
-                style={
-                  Object {
-                    "alignSelf": "center",
-                    "height": 500,
-                    "marginLeft": -40,
-                    "marginTop": 158,
-                    "width": 750,
-                  }
-                }
-              />
             </View>
             <TouchableOpacity
               activeOpacity={0.2}
@@ -1006,7 +1219,7 @@ ShallowWrapper {
                   "borderRadius": 12,
                   "height": 100,
                   "justifyContent": "center",
-                  "marginTop": 152,
+                  "marginTop": 58,
                   "width": 670,
                 }
               }
@@ -1062,13 +1275,13 @@ ShallowWrapper {
                     }
                   }
                 >
-                  Your storage is empty
+                  Let’s get started!
                 </Text>
               </View>,
               <View
                 style={
                   Object {
-                    "marginTop": 18,
+                    "marginTop": 38,
                   }
                 }
               >
@@ -1084,7 +1297,58 @@ ShallowWrapper {
                     }
                   }
                 >
-                  Start with syncing
+                  You have
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#384B65",
+                        "fontFamily": "Montserrat-Bold",
+                        "fontSize": 32,
+                      }
+                    }
+                  >
+                     25GB of free storage
+                  </Text>
+                </Text>
+              </View>,
+              <View>
+                <Image
+                  resizeMode="contain"
+                  source="Folder.png"
+                  style={
+                    Object {
+                      "alignSelf": "center",
+                      "height": 500,
+                      "marginLeft": -40,
+                      "marginTop": 76,
+                      "width": 750,
+                    }
+                  }
+                />
+              </View>,
+              <View
+                style={
+                  Object {
+                    "marginTop": 128,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#384B65",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                    }
+                  }
+                >
+                  Automatically sync your
                   <Text
                     accessible={true}
                     allowFontScaling={true}
@@ -1161,24 +1425,9 @@ ShallowWrapper {
                       }
                     }
                   >
-                     on your device
+                     or add them manually.
                   </Text>
                 </View>
-              </View>,
-              <View>
-                <Image
-                  resizeMode="contain"
-                  source="Folder.png"
-                  style={
-                    Object {
-                      "alignSelf": "center",
-                      "height": 500,
-                      "marginLeft": -40,
-                      "marginTop": 158,
-                      "width": 750,
-                    }
-                  }
-                />
               </View>,
               <TouchableOpacity
                 activeOpacity={0.2}
@@ -1190,7 +1439,7 @@ ShallowWrapper {
                     "borderRadius": 12,
                     "height": 100,
                     "justifyContent": "center",
-                    "marginTop": 152,
+                    "marginTop": 58,
                     "width": 670,
                   }
                 }
@@ -1235,7 +1484,7 @@ ShallowWrapper {
                     }
                   }
                 >
-                  Your storage is empty
+                  Let’s get started!
                 </Text>,
                 "style": Object {
                   "marginTop": 30,
@@ -1249,7 +1498,7 @@ ShallowWrapper {
                 "props": Object {
                   "accessible": true,
                   "allowFontScaling": true,
-                  "children": "Your storage is empty",
+                  "children": "Let’s get started!",
                   "ellipsizeMode": "tail",
                   "style": Object {
                     "alignSelf": "flex-start",
@@ -1259,7 +1508,144 @@ ShallowWrapper {
                   },
                 },
                 "ref": null,
-                "rendered": "Your storage is empty",
+                "rendered": "Let’s get started!",
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#384B65",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                    }
+                  }
+                >
+                  You have
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#384B65",
+                        "fontFamily": "Montserrat-Bold",
+                        "fontSize": 32,
+                      }
+                    }
+                  >
+                     25GB of free storage
+                  </Text>
+                </Text>,
+                "style": Object {
+                  "marginTop": 38,
+                },
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "accessible": true,
+                  "allowFontScaling": true,
+                  "children": Array [
+                    "You have",
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "color": "#384B65",
+                          "fontFamily": "Montserrat-Bold",
+                          "fontSize": 32,
+                        }
+                      }
+                    >
+                       25GB of free storage
+                    </Text>,
+                  ],
+                  "ellipsizeMode": "tail",
+                  "style": Object {
+                    "color": "#384B65",
+                    "fontFamily": "Montserrat-Regular",
+                    "fontSize": 32,
+                  },
+                },
+                "ref": null,
+                "rendered": Array [
+                  "You have",
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "accessible": true,
+                      "allowFontScaling": true,
+                      "children": " 25GB of free storage",
+                      "ellipsizeMode": "tail",
+                      "style": Object {
+                        "color": "#384B65",
+                        "fontFamily": "Montserrat-Bold",
+                        "fontSize": 32,
+                      },
+                    },
+                    "ref": null,
+                    "rendered": " 25GB of free storage",
+                    "type": [Function],
+                  },
+                ],
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <Image
+                  resizeMode="contain"
+                  source="Folder.png"
+                  style={
+                    Object {
+                      "alignSelf": "center",
+                      "height": 500,
+                      "marginLeft": -40,
+                      "marginTop": 76,
+                      "width": 750,
+                    }
+                  }
+                />,
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "resizeMode": "contain",
+                  "source": "Folder.png",
+                  "style": Object {
+                    "alignSelf": "center",
+                    "height": 500,
+                    "marginLeft": -40,
+                    "marginTop": 76,
+                    "width": 750,
+                  },
+                },
+                "ref": null,
+                "rendered": null,
                 "type": [Function],
               },
               "type": [Function],
@@ -1282,7 +1668,7 @@ ShallowWrapper {
                       }
                     }
                   >
-                    Start with syncing
+                    Automatically sync your
                     <Text
                       accessible={true}
                       allowFontScaling={true}
@@ -1359,12 +1745,12 @@ ShallowWrapper {
                         }
                       }
                     >
-                       on your device
+                       or add them manually.
                     </Text>
                   </View>,
                 ],
                 "style": Object {
-                  "marginTop": 18,
+                  "marginTop": 128,
                 },
               },
               "ref": null,
@@ -1377,7 +1763,7 @@ ShallowWrapper {
                     "accessible": true,
                     "allowFontScaling": true,
                     "children": Array [
-                      "Start with syncing",
+                      "Automatically sync your",
                       <Text
                         accessible={true}
                         allowFontScaling={true}
@@ -1402,7 +1788,7 @@ ShallowWrapper {
                   },
                   "ref": null,
                   "rendered": Array [
-                    "Start with syncing",
+                    "Automatically sync your",
                     Object {
                       "instance": null,
                       "key": undefined,
@@ -1485,7 +1871,7 @@ ShallowWrapper {
                           }
                         }
                       >
-                         on your device
+                         or add them manually.
                       </Text>,
                     ],
                     "style": Object {
@@ -1558,7 +1944,7 @@ ShallowWrapper {
                       "props": Object {
                         "accessible": true,
                         "allowFontScaling": true,
-                        "children": " on your device",
+                        "children": " or add them manually.",
                         "ellipsizeMode": "tail",
                         "style": Object {
                           "color": "#384B65",
@@ -1567,54 +1953,13 @@ ShallowWrapper {
                         },
                       },
                       "ref": null,
-                      "rendered": " on your device",
+                      "rendered": " or add them manually.",
                       "type": [Function],
                     },
                   ],
                   "type": [Function],
                 },
               ],
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": <Image
-                  resizeMode="contain"
-                  source="Folder.png"
-                  style={
-                    Object {
-                      "alignSelf": "center",
-                      "height": 500,
-                      "marginLeft": -40,
-                      "marginTop": 158,
-                      "width": 750,
-                    }
-                  }
-                />,
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "resizeMode": "contain",
-                  "source": "Folder.png",
-                  "style": Object {
-                    "alignSelf": "center",
-                    "height": 500,
-                    "marginLeft": -40,
-                    "marginTop": 158,
-                    "width": 750,
-                  },
-                },
-                "ref": null,
-                "rendered": null,
-                "type": [Function],
-              },
               "type": [Function],
             },
             Object {
@@ -1644,7 +1989,7 @@ ShallowWrapper {
                   "borderRadius": 12,
                   "height": 100,
                   "justifyContent": "center",
-                  "marginTop": 152,
+                  "marginTop": 58,
                   "width": 670,
                 },
               },

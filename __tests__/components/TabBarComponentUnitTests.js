@@ -19,7 +19,10 @@ describe('TabBarComponent', () => {
                     isSelectionMode: false,
                     isSingleItemSelected: false,
                     isActionBarShown: false
-                } } />
+                } }
+                screenProps = {{
+                    setCurrentMainScreen: () => {}
+                }} />
         );
 
         expect(wrapper).toMatchSnapshot();
@@ -71,6 +74,10 @@ describe('TabBarComponent', () => {
         const navigateSpy = jest.fn();
         const goToBucketScreenSpy = jest.fn();
         const onActionBarPressSpy = jest.fn();
+        const setMainScreenSpy = jest.fn();
+        const openBucketSpy = jest.fn();
+        const dashboardNavigateBackSpy = jest.fn();
+        const bucketNavigateBackSpy = jest.fn();
 
         const wrapper = shallow(
             <TabBarComponent
@@ -79,9 +86,16 @@ describe('TabBarComponent', () => {
                     navigate: navigateSpy, 
                     goToBucketsScreen: goToBucketScreenSpy,
                     onActionBarPress: onActionBarPressSpy,
+                    openBucket: openBucketSpy,
+                    dashboardNavigateBack: dashboardNavigateBackSpy,
+                    bucketNavigateBack: bucketNavigateBackSpy,
+                    buckets: [],
                     isSelectionMode: false,
                     isSingleItemSelected: false
-                } } />
+                } }
+                screenProps = {{
+                    setCurrentMainScreen: setMainScreenSpy
+                }} />
         );
 
         wrapper.find('TouchableOpacity').forEach(child => {
@@ -90,6 +104,10 @@ describe('TabBarComponent', () => {
 
         expect(navigateSpy.mock.calls.length).toBe(2);
         expect(goToBucketScreenSpy.mock.calls.length).toBe(1);
+        expect(openBucketSpy.mock.calls.length).toBe(3);
+        expect(setMainScreenSpy.mock.calls.length).toBe(3);
         expect(onActionBarPressSpy.mock.calls.length).toBe(1);
+        expect(dashboardNavigateBackSpy.mock.calls.length).toBe(1);
+        expect(bucketNavigateBackSpy.mock.calls.length).toBe(1);
     });
 });

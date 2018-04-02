@@ -26,17 +26,23 @@ ShallowWrapper {
           }
         >
           <Connect(MainNavigationContainer)
+            bucketNavigateBack={undefined}
+            buckets={undefined}
+            dashboardNavigateBack={undefined}
             isActionBarShown={undefined}
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            openBucket={undefined}
             redirectToInitializationScreen={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
+            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
           />
         </View>,
+        null,
         null,
         null,
         null,
@@ -57,13 +63,18 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": <Connect(MainNavigationContainer)
+            bucketNavigateBack={undefined}
+            buckets={undefined}
+            dashboardNavigateBack={undefined}
             isActionBarShown={undefined}
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            openBucket={undefined}
             redirectToInitializationScreen={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
+            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
           />,
@@ -77,13 +88,18 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
+            "bucketNavigateBack": undefined,
+            "buckets": undefined,
+            "dashboardNavigateBack": undefined,
             "isActionBarShown": undefined,
             "isSelectionMode": undefined,
             "isSingleItemSelected": undefined,
             "onActionBarPress": [Function],
+            "openBucket": undefined,
             "redirectToInitializationScreen": undefined,
             "showCredits": [Function],
             "showOptions": [Function],
+            "showPopUp": [Function],
             "showQR": [Function],
             "showStorageInfo": [Function],
           },
@@ -93,6 +109,7 @@ ShallowWrapper {
         },
         "type": [Function],
       },
+      null,
       null,
       null,
       null,
@@ -118,17 +135,23 @@ ShallowWrapper {
             }
           >
             <Connect(MainNavigationContainer)
+              bucketNavigateBack={undefined}
+              buckets={undefined}
+              dashboardNavigateBack={undefined}
               isActionBarShown={undefined}
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              openBucket={undefined}
               redirectToInitializationScreen={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
+              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
             />
           </View>,
+          null,
           null,
           null,
           null,
@@ -149,13 +172,18 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": <Connect(MainNavigationContainer)
+              bucketNavigateBack={undefined}
+              buckets={undefined}
+              dashboardNavigateBack={undefined}
               isActionBarShown={undefined}
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              openBucket={undefined}
               redirectToInitializationScreen={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
+              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
             />,
@@ -169,13 +197,18 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
+              "bucketNavigateBack": undefined,
+              "buckets": undefined,
+              "dashboardNavigateBack": undefined,
               "isActionBarShown": undefined,
               "isSelectionMode": undefined,
               "isSingleItemSelected": undefined,
               "onActionBarPress": [Function],
+              "openBucket": undefined,
               "redirectToInitializationScreen": undefined,
               "showCredits": [Function],
               "showOptions": [Function],
+              "showPopUp": [Function],
               "showQR": [Function],
               "showStorageInfo": [Function],
             },
@@ -185,6 +218,7 @@ ShallowWrapper {
           },
           "type": [Function],
         },
+        null,
         null,
         null,
         null,
@@ -234,13 +268,18 @@ ShallowWrapper {
           }
         >
           <Connect(MainNavigationContainer)
+            bucketNavigateBack={undefined}
+            buckets={undefined}
+            dashboardNavigateBack={undefined}
             isActionBarShown={true}
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            openBucket={undefined}
             redirectToInitializationScreen={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
+            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
           />
@@ -251,6 +290,7 @@ ShallowWrapper {
           bucketScreenRouteName={undefined}
           showTriangle={true}
         />,
+        null,
         null,
         null,
         null,
@@ -270,13 +310,18 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": <Connect(MainNavigationContainer)
+            bucketNavigateBack={undefined}
+            buckets={undefined}
+            dashboardNavigateBack={undefined}
             isActionBarShown={true}
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            openBucket={undefined}
             redirectToInitializationScreen={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
+            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
           />,
@@ -290,13 +335,18 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
+            "bucketNavigateBack": undefined,
+            "buckets": undefined,
+            "dashboardNavigateBack": undefined,
             "isActionBarShown": true,
             "isSelectionMode": undefined,
             "isSingleItemSelected": undefined,
             "onActionBarPress": [Function],
+            "openBucket": undefined,
             "redirectToInitializationScreen": undefined,
             "showCredits": [Function],
             "showOptions": [Function],
+            "showPopUp": [Function],
             "showQR": [Function],
             "showStorageInfo": [Function],
           },
@@ -326,6 +376,7 @@ ShallowWrapper {
       null,
       null,
       null,
+      null,
     ],
     "type": [Function],
   },
@@ -344,13 +395,18 @@ ShallowWrapper {
             }
           >
             <Connect(MainNavigationContainer)
+              bucketNavigateBack={undefined}
+              buckets={undefined}
+              dashboardNavigateBack={undefined}
               isActionBarShown={true}
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              openBucket={undefined}
               redirectToInitializationScreen={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
+              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
             />
@@ -361,6 +417,7 @@ ShallowWrapper {
             bucketScreenRouteName={undefined}
             showTriangle={true}
           />,
+          null,
           null,
           null,
           null,
@@ -380,13 +437,18 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": <Connect(MainNavigationContainer)
+              bucketNavigateBack={undefined}
+              buckets={undefined}
+              dashboardNavigateBack={undefined}
               isActionBarShown={true}
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              openBucket={undefined}
               redirectToInitializationScreen={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
+              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
             />,
@@ -400,13 +462,18 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
+              "bucketNavigateBack": undefined,
+              "buckets": undefined,
+              "dashboardNavigateBack": undefined,
               "isActionBarShown": true,
               "isSelectionMode": undefined,
               "isSingleItemSelected": undefined,
               "onActionBarPress": [Function],
+              "openBucket": undefined,
               "redirectToInitializationScreen": undefined,
               "showCredits": [Function],
               "showOptions": [Function],
+              "showPopUp": [Function],
               "showQR": [Function],
               "showStorageInfo": [Function],
             },
@@ -430,6 +497,7 @@ ShallowWrapper {
           "rendered": null,
           "type": [Function],
         },
+        null,
         null,
         null,
         null,
@@ -478,13 +546,18 @@ ShallowWrapper {
           }
         >
           <Connect(MainNavigationContainer)
+            bucketNavigateBack={undefined}
+            buckets={undefined}
+            dashboardNavigateBack={undefined}
             isActionBarShown={undefined}
             isSelectionMode={true}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            openBucket={undefined}
             redirectToInitializationScreen={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
+            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
           />
@@ -495,6 +568,7 @@ ShallowWrapper {
           bucketScreenRouteName={undefined}
           showTriangle={false}
         />,
+        null,
         null,
         null,
         null,
@@ -514,13 +588,18 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": <Connect(MainNavigationContainer)
+            bucketNavigateBack={undefined}
+            buckets={undefined}
+            dashboardNavigateBack={undefined}
             isActionBarShown={undefined}
             isSelectionMode={true}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            openBucket={undefined}
             redirectToInitializationScreen={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
+            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
           />,
@@ -534,13 +613,18 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
+            "bucketNavigateBack": undefined,
+            "buckets": undefined,
+            "dashboardNavigateBack": undefined,
             "isActionBarShown": undefined,
             "isSelectionMode": true,
             "isSingleItemSelected": undefined,
             "onActionBarPress": [Function],
+            "openBucket": undefined,
             "redirectToInitializationScreen": undefined,
             "showCredits": [Function],
             "showOptions": [Function],
+            "showPopUp": [Function],
             "showQR": [Function],
             "showStorageInfo": [Function],
           },
@@ -570,6 +654,7 @@ ShallowWrapper {
       null,
       null,
       null,
+      null,
     ],
     "type": [Function],
   },
@@ -588,13 +673,18 @@ ShallowWrapper {
             }
           >
             <Connect(MainNavigationContainer)
+              bucketNavigateBack={undefined}
+              buckets={undefined}
+              dashboardNavigateBack={undefined}
               isActionBarShown={undefined}
               isSelectionMode={true}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              openBucket={undefined}
               redirectToInitializationScreen={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
+              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
             />
@@ -605,6 +695,7 @@ ShallowWrapper {
             bucketScreenRouteName={undefined}
             showTriangle={false}
           />,
+          null,
           null,
           null,
           null,
@@ -624,13 +715,18 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": <Connect(MainNavigationContainer)
+              bucketNavigateBack={undefined}
+              buckets={undefined}
+              dashboardNavigateBack={undefined}
               isActionBarShown={undefined}
               isSelectionMode={true}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              openBucket={undefined}
               redirectToInitializationScreen={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
+              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
             />,
@@ -644,13 +740,18 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
+              "bucketNavigateBack": undefined,
+              "buckets": undefined,
+              "dashboardNavigateBack": undefined,
               "isActionBarShown": undefined,
               "isSelectionMode": true,
               "isSingleItemSelected": undefined,
               "onActionBarPress": [Function],
+              "openBucket": undefined,
               "redirectToInitializationScreen": undefined,
               "showCredits": [Function],
               "showOptions": [Function],
+              "showPopUp": [Function],
               "showQR": [Function],
               "showStorageInfo": [Function],
             },
@@ -674,6 +775,7 @@ ShallowWrapper {
           "rendered": null,
           "type": [Function],
         },
+        null,
         null,
         null,
         null,
@@ -722,13 +824,18 @@ ShallowWrapper {
           }
         >
           <Connect(MainNavigationContainer)
+            bucketNavigateBack={undefined}
+            buckets={undefined}
+            dashboardNavigateBack={undefined}
             isActionBarShown={undefined}
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            openBucket={undefined}
             redirectToInitializationScreen={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
+            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
           />
@@ -778,6 +885,7 @@ ShallowWrapper {
         null,
         null,
         null,
+        null,
       ],
       "style": Object {
         "flex": 1,
@@ -791,13 +899,18 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": <Connect(MainNavigationContainer)
+            bucketNavigateBack={undefined}
+            buckets={undefined}
+            dashboardNavigateBack={undefined}
             isActionBarShown={undefined}
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            openBucket={undefined}
             redirectToInitializationScreen={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
+            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
           />,
@@ -811,13 +924,18 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
+            "bucketNavigateBack": undefined,
+            "buckets": undefined,
+            "dashboardNavigateBack": undefined,
             "isActionBarShown": undefined,
             "isSelectionMode": undefined,
             "isSingleItemSelected": undefined,
             "onActionBarPress": [Function],
+            "openBucket": undefined,
             "redirectToInitializationScreen": undefined,
             "showCredits": [Function],
             "showOptions": [Function],
+            "showPopUp": [Function],
             "showQR": [Function],
             "showStorageInfo": [Function],
           },
@@ -918,6 +1036,7 @@ ShallowWrapper {
       null,
       null,
       null,
+      null,
     ],
     "type": [Function],
   },
@@ -936,13 +1055,18 @@ ShallowWrapper {
             }
           >
             <Connect(MainNavigationContainer)
+              bucketNavigateBack={undefined}
+              buckets={undefined}
+              dashboardNavigateBack={undefined}
               isActionBarShown={undefined}
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              openBucket={undefined}
               redirectToInitializationScreen={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
+              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
             />
@@ -992,6 +1116,7 @@ ShallowWrapper {
           null,
           null,
           null,
+          null,
         ],
         "style": Object {
           "flex": 1,
@@ -1005,13 +1130,18 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": <Connect(MainNavigationContainer)
+              bucketNavigateBack={undefined}
+              buckets={undefined}
+              dashboardNavigateBack={undefined}
               isActionBarShown={undefined}
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              openBucket={undefined}
               redirectToInitializationScreen={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
+              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
             />,
@@ -1025,13 +1155,18 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
+              "bucketNavigateBack": undefined,
+              "buckets": undefined,
+              "dashboardNavigateBack": undefined,
               "isActionBarShown": undefined,
               "isSelectionMode": undefined,
               "isSingleItemSelected": undefined,
               "onActionBarPress": [Function],
+              "openBucket": undefined,
               "redirectToInitializationScreen": undefined,
               "showCredits": [Function],
               "showOptions": [Function],
+              "showPopUp": [Function],
               "showQR": [Function],
               "showStorageInfo": [Function],
             },
@@ -1132,6 +1267,7 @@ ShallowWrapper {
         null,
         null,
         null,
+        null,
       ],
       "type": [Function],
     },
@@ -1175,13 +1311,18 @@ ShallowWrapper {
           }
         >
           <Connect(MainNavigationContainer)
+            bucketNavigateBack={undefined}
+            buckets={undefined}
+            dashboardNavigateBack={undefined}
             isActionBarShown={true}
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            openBucket={undefined}
             redirectToInitializationScreen={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
+            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
           />
@@ -1236,6 +1377,7 @@ ShallowWrapper {
         null,
         null,
         null,
+        null,
       ],
       "style": Object {
         "flex": 1,
@@ -1249,13 +1391,18 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": <Connect(MainNavigationContainer)
+            bucketNavigateBack={undefined}
+            buckets={undefined}
+            dashboardNavigateBack={undefined}
             isActionBarShown={true}
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
+            openBucket={undefined}
             redirectToInitializationScreen={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
+            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
           />,
@@ -1269,13 +1416,18 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
+            "bucketNavigateBack": undefined,
+            "buckets": undefined,
+            "dashboardNavigateBack": undefined,
             "isActionBarShown": true,
             "isSelectionMode": undefined,
             "isSingleItemSelected": undefined,
             "onActionBarPress": [Function],
+            "openBucket": undefined,
             "redirectToInitializationScreen": undefined,
             "showCredits": [Function],
             "showOptions": [Function],
+            "showPopUp": [Function],
             "showQR": [Function],
             "showStorageInfo": [Function],
           },
@@ -1389,6 +1541,7 @@ ShallowWrapper {
       null,
       null,
       null,
+      null,
     ],
     "type": [Function],
   },
@@ -1407,13 +1560,18 @@ ShallowWrapper {
             }
           >
             <Connect(MainNavigationContainer)
+              bucketNavigateBack={undefined}
+              buckets={undefined}
+              dashboardNavigateBack={undefined}
               isActionBarShown={true}
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              openBucket={undefined}
               redirectToInitializationScreen={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
+              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
             />
@@ -1468,6 +1626,7 @@ ShallowWrapper {
           null,
           null,
           null,
+          null,
         ],
         "style": Object {
           "flex": 1,
@@ -1481,13 +1640,18 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": <Connect(MainNavigationContainer)
+              bucketNavigateBack={undefined}
+              buckets={undefined}
+              dashboardNavigateBack={undefined}
               isActionBarShown={true}
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
+              openBucket={undefined}
               redirectToInitializationScreen={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
+              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
             />,
@@ -1501,13 +1665,18 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
+              "bucketNavigateBack": undefined,
+              "buckets": undefined,
+              "dashboardNavigateBack": undefined,
               "isActionBarShown": true,
               "isSelectionMode": undefined,
               "isSingleItemSelected": undefined,
               "onActionBarPress": [Function],
+              "openBucket": undefined,
               "redirectToInitializationScreen": undefined,
               "showCredits": [Function],
               "showOptions": [Function],
+              "showPopUp": [Function],
               "showQR": [Function],
               "showStorageInfo": [Function],
             },
@@ -1616,6 +1785,7 @@ ShallowWrapper {
           ],
           "type": [Function],
         },
+        null,
         null,
         null,
         null,
