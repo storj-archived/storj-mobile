@@ -99,7 +99,6 @@ export default class DashboardListComponent extends Component{
 }
 
 const listComponent = (title, data, props, count, isBucket, screen) => {
-    console.log("SCREEN DASH", screen)    
     return(
         <View>  
             <DashboardListHeaderComponent

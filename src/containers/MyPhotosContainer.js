@@ -37,9 +37,11 @@ class MyPhotosContainer extends Component {
             ServiceModule.getFiles(picturesBucketId);             
         }
         
-        this.data = this.props.files.filter(element => element.entity.bucketId === picturesBucketId);
-        this.shouldRenew = this.props.openedBucketId === picturesBucketId;
+        this.data = this.props.files.
+                        concat(this.props.uploadingFileListModels).
+                        filter(file => file.entity.bucketId === picturesBucketId);
 
+        this.shouldRenew = this.props.openedBucketId === picturesBucketId;
         return this.data;
     }
 
@@ -65,6 +67,7 @@ class MyPhotosContainer extends Component {
 
     render() {
         let data = this.getData();
+        console.log(this.props.activeScreen === "MyPhotosScreen");
         return (
             <View style = { styles.mainContainer }>
             {

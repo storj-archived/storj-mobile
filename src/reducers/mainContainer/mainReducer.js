@@ -102,8 +102,7 @@ export default function mainReducer(state = initialState, action) {
         case CLEAR_SELECTION:
             newState.selectedItemId = null;
             break;
-        case SET_MAIN_SCREEN:
-            console.log("REDUCER", action);
+        case SET_MAIN_SCREEN:            
             newState.activeScreen = action.payload.screenName
             break;
         default:
