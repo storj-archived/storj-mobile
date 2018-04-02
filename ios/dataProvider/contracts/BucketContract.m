@@ -14,7 +14,7 @@ static NSString * const _ID = @"id";
 static NSString * const _NAME = @"name";
 static NSString * const _CREATED = @"created";
 static NSString * const _DECRYPTED = @"isDecrypted";
-static NSString * const _HASH_CODE = @"hashCode";
+static NSString * const _HASH_CODE = @"hash";
 static NSString * const _STARRED = @"isStarred";
 
 +(NSString *)createTable{

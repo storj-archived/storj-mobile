@@ -32,10 +32,9 @@ static FMDatabase * _database;
     databasePath = [[NSString alloc] initWithString:
                     [docsDir stringByAppendingPathComponent: @DATABASE_NAME]];
     NSFileManager *filemgr = [NSFileManager defaultManager];
-    
+    BOOL isDbExisted = [filemgr fileExistsAtPath: databasePath];
     _database = [FMDatabase databaseWithPath:databasePath];
     
-    BOOL isDbExisted = [filemgr fileExistsAtPath: databasePath];
       
     
     if(!_database){
@@ -73,6 +72,7 @@ static FMDatabase * _database;
     isSuccess = NO;
     NSLog(@"Failed to create table \'%@\'", UploadFileContract.TABLE_NAME);
   }
+  NSLog(@"TablesCreated: %d", isSuccess);
   return isSuccess;
 }
 
