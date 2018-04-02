@@ -15,10 +15,10 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
-import storjlib.Responses.Response;
+import storjlib.responses.Response;
 import storjlib.StorjLibPackage;
-import storjlib.dataProvider.DatabaseFactory;
-import storjlib.dataProvider.repositories.UploadingFilesRepository;
+import storjlib.dataprovider.DatabaseFactory;
+import storjlib.dataprovider.repositories.UploadingFilesRepository;
 
 public class MainApplication extends Application implements ReactApplication {
 

@@ -1,10 +1,8 @@
 package storjlib.services;
 
-
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.firebase.jobdispatcher.JobParameters;
@@ -13,26 +11,22 @@ import com.firebase.jobdispatcher.JobService;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
-import storjlib.Enum.SyncSettingsEnum;
-import storjlib.Models.SettingsModel;
-import storjlib.Models.UploadingFileModel;
-import storjlib.Responses.Response;
-import storjlib.dataProvider.DatabaseFactory;
-import storjlib.dataProvider.Dbo.BucketDbo;
-import storjlib.dataProvider.Dbo.FileDbo;
-import storjlib.dataProvider.Dbo.SettingsDbo;
-import storjlib.dataProvider.Dbo.UploadingFileDbo;
-import storjlib.dataProvider.contracts.BucketContract;
-import storjlib.dataProvider.contracts.FileContract;
-import storjlib.dataProvider.contracts.SettingsContract;
-import storjlib.dataProvider.contracts.UploadingFileContract;
-import storjlib.dataProvider.repositories.BucketRepository;
-import storjlib.dataProvider.repositories.FileRepository;
-import storjlib.dataProvider.repositories.SettingsRepository;
-import storjlib.dataProvider.repositories.UploadingFilesRepository;
+import storjlib.dataprovider.DatabaseFactory;
+import storjlib.dataprovider.contracts.BucketContract;
+import storjlib.dataprovider.contracts.FileContract;
+import storjlib.dataprovider.contracts.SettingsContract;
+import storjlib.dataprovider.contracts.UploadingFileContract;
+import storjlib.dataprovider.dbo.BucketDbo;
+import storjlib.dataprovider.dbo.FileDbo;
+import storjlib.dataprovider.dbo.SettingsDbo;
+import storjlib.dataprovider.repositories.BucketRepository;
+import storjlib.dataprovider.repositories.FileRepository;
+import storjlib.dataprovider.repositories.SettingsRepository;
+import storjlib.dataprovider.repositories.UploadingFilesRepository;
+import storjlib.enums.SyncSettingsEnum;
+import storjlib.models.UploadingFileModel;
 
 /**
  * Created by Yaroslav-Note on 3/13/2018.

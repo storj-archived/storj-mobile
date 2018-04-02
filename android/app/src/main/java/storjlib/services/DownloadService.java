@@ -11,13 +11,13 @@ import com.facebook.react.bridge.WritableNativeMap;
 
 import io.storj.libstorj.DownloadFileCallback;
 import io.storj.libstorj.android.StorjAndroid;
-import storjlib.Enum.DownloadStateEnum;
-import storjlib.Utils.ProgressResolver;
-import storjlib.Utils.UploadSyncObject;
-import storjlib.dataProvider.DatabaseFactory;
-import storjlib.dataProvider.Dbo.FileDbo;
-import storjlib.dataProvider.contracts.FileContract;
-import storjlib.dataProvider.repositories.FileRepository;
+import storjlib.dataprovider.DatabaseFactory;
+import storjlib.dataprovider.contracts.FileContract;
+import storjlib.dataprovider.dbo.FileDbo;
+import storjlib.dataprovider.repositories.FileRepository;
+import storjlib.enums.DownloadStateEnum;
+import storjlib.utils.ProgressResolver;
+import storjlib.utils.UploadSyncObject;
 
 /**
  * Created by Yaroslav-Note on 3/13/2018.
