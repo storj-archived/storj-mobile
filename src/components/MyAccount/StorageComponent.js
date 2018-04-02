@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import StorageReportComponent from './StorageReportComponent';
 import { uuidv4 } from '../../utils/utils';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 
 export default class StorageComponent extends Component{
@@ -179,3 +180,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: getWidth(20)
     }
 });
+
+StorageComponent.propTypes = {
+    navigation: PropTypes.object,
+    screenProps: PropTypes.object
+}

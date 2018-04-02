@@ -157,6 +157,7 @@ export const mainContainerActions = {
 //action creators for bucket screen
 export const bucketsContainerActions = {
     enableSelectionMode,
+    removeFirstSignIn,
     disableSelectionMode,
     onSingleItemSelected,
     setLoading,
