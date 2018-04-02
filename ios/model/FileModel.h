@@ -14,17 +14,7 @@
 
 
 #define FILE_MODEL_BUCKET_ID "bucketId"
-#define FILE_MODEL_CREATED "created"
-#define FILE_MODEL_ERASURE "erasure"
-#define FILE_MODEL_HMAC "hmac"
-#define FILE_MODEL_FILE_ID "fileId"
 #define FILE_MODEL_INDEX "index"
-#define FILE_MODEL_MIME_TYPE "mimeType"
-#define FILE_MODEL_NAME "name"
-#define FILE_MODEL_SIZE "size"
-#define FILE_MODEL_IS_DECRYPTED "isDecrypted"
-#define FILE_MODEL_IS_STARRED "isStarred"
-#define FILE_MODEL_IS_SYNCED "isSynced"
 
 @interface FileModel : NSObject<IConvertibleToJS>
 

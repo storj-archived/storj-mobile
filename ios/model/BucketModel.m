@@ -66,12 +66,12 @@
 
 -(NSDictionary *)toDictionary{
   NSMutableDictionary *object = [[NSMutableDictionary alloc] init];
-  [object setObject: [DictionaryUtils checkAndReturnNSString:_id] forKey:@BUCKET_MODEL_ID];
-  [object setObject: [DictionaryUtils checkAndReturnNSString:_name] forKey:@BUCKET_MODEL_NAME];
-  [object setObject: [DictionaryUtils checkAndReturnNSString:_created] forKey:@BUCKET_MODEL_CREATED];
-  [object setObject: @(_hash) forKey:@BUCKET_MODEL_HASH];
-  [object setObject: @(_isDecrypted) forKey:@BUCKET_MODEL_IS_DECRYPTED];
-  [object setObject: @(_isStarred) forKey:@BUCKET_MODEL_IS_STARRED];
+  [object setObject: [DictionaryUtils checkAndReturnNSString:_id] forKey:BucketContract.ID];
+  [object setObject: [DictionaryUtils checkAndReturnNSString:_name] forKey:BucketContract.NAME];
+  [object setObject: [DictionaryUtils checkAndReturnNSString:_created] forKey:BucketContract.CREATED];
+  [object setObject: @(_hash) forKey:BucketContract.HASH_CODE];
+  [object setObject: @(_isDecrypted) forKey:BucketContract.DECRYPTED];
+  [object setObject: @(_isStarred) forKey:BucketContract.STARRED];
   return object;
 }
 

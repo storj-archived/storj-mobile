@@ -7,6 +7,7 @@
 //
 
 #import "FileModel.h"
+#import "FileContract.h"
 
 @implementation FileModel
 
@@ -118,16 +119,16 @@
 - (NSDictionary *)toDictionary {
   NSMutableDictionary *object = [[NSMutableDictionary alloc] init];
   [object setObject:[DictionaryUtils checkAndReturnNSString:_bucketId] forKey:@FILE_MODEL_BUCKET_ID];
-  [object setObject:[DictionaryUtils checkAndReturnNSString:_created] forKey:@FILE_MODEL_CREATED];
-  [object setObject:[DictionaryUtils checkAndReturnNSString:_erasure] forKey:@FILE_MODEL_ERASURE];
-  [object setObject:[DictionaryUtils checkAndReturnNSString:_hmac] forKey:@FILE_MODEL_HMAC];
-  [object setObject:[DictionaryUtils checkAndReturnNSString:_fileId] forKey:@FILE_MODEL_FILE_ID];
+  [object setObject:[DictionaryUtils checkAndReturnNSString:_created] forKey:FileContract.CREATED];
+  [object setObject:[DictionaryUtils checkAndReturnNSString:_erasure] forKey:FileContract.ERASURE];
+  [object setObject:[DictionaryUtils checkAndReturnNSString:_hmac] forKey:FileContract.HMAC];
+  [object setObject:[DictionaryUtils checkAndReturnNSString:_fileId] forKey:FileContract.FILE_ID];
   [object setObject:[DictionaryUtils checkAndReturnNSString:_index] forKey:@FILE_MODEL_INDEX];
-  [object setObject:[DictionaryUtils checkAndReturnNSString:_mimeType] forKey:@FILE_MODEL_MIME_TYPE];
-  [object setObject:[DictionaryUtils checkAndReturnNSString:_name] forKey:@FILE_MODEL_NAME];
-  [object setObject:@(_size) forKey:@FILE_MODEL_SIZE];
-  [object setObject:@(_isDecrypted) forKey:@FILE_MODEL_IS_DECRYPTED];
-  [object setObject:@(_isStarred) forKey:@FILE_MODEL_IS_STARRED];
+  [object setObject:[DictionaryUtils checkAndReturnNSString:_mimeType] forKey:FileContract.MIME_TYPE];
+  [object setObject:[DictionaryUtils checkAndReturnNSString:_name] forKey:FileContract.NAME];
+  [object setObject:@(_size) forKey:FileContract.SIZE];
+  [object setObject:@(_isDecrypted) forKey:FileContract.DECRYPTED];
+  [object setObject:@(_isStarred) forKey:FileContract.STARRED];
   return object;
 }
 
