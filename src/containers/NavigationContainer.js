@@ -54,17 +54,17 @@ class Apps extends Component {
 		this.downloadFileSuccessListener = null;
 		this.downloadFileErrorListener = null;
 
-		this.isAndoird = Platform.OS === "android";
+		this.isAndroid = Platform.OS === "android";
     }
 
 	async componentWillMount() {
-		if(this.isAndoird) {
+		if(this.isAndroid) {
 			await ServiceModule.bindGetBucketsService();
 			await ServiceModule.bindUploadService();
 			await ServiceModule.bindDownloadService();
 		}
 
-		let eventEmitter = this.isAndoird ? DeviceEventEmitter : new NativeEventEmitter(ServiceModule.getServiceNativeModule());
+		let eventEmitter = this.isAndroid ? DeviceEventEmitter : new NativeEventEmitter(ServiceModule.getServiceNativeModule());
         
 		this.getbucketsListener = eventEmitter.addListener(eventNames.EVENT_BUCKETS_UPDATED, this.onBucketsReceived.bind(this));
 		this.bucketCreatedListener = eventEmitter.addListener(eventNames.EVENT_BUCKET_CREATED, this.onBucketCreated.bind(this));
@@ -74,11 +74,11 @@ class Apps extends Component {
 		this.getFilesListener = eventEmitter.addListener(eventNames.EVENT_FILES_UPDATED, this.onFilesReceived.bind(this));
 		
 		this.fileUploadStartedListener = eventEmitter.addListener(eventNames.EVENT_FILE_UPLOAD_START, this.onFileUploadStart.bind(this));
-		this.fileUploadProgressListener = eventEmitter.addListener(eventNames.EVENT_FILE_UPLOADED_PROGRESS, this.onFileUploadStart.bind(this));
+		this.fileUploadProgressListener = eventEmitter.addListener(eventNames.EVENT_FILE_UPLOADED_PROGRESS, this.fileUploadProgress.bind(this));
 		this.fileUploadSuccessListener = eventEmitter.addListener(eventNames.EVENT_FILE_UPLOADED_SUCCESSFULLY, this.fileUploadSuccess.bind(this));
 		this.fileUploadErrorListener = eventEmitter.addListener(eventNames.EVENT_FILE_UPLOAD_ERROR, this.fileUploadError.bind(this));
 
-		if(this.isAndoird) {
+		if(this.isAndroid) {
             this.downloadFileStartListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_START, this.onFileDownloadStart.bind(this));
             this.downloadFileProgressListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_PROGRESS, this.onFileDownloadProgress.bind(this));
             this.downloadFileSuccessListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_SUCCESS, this.onFileDownloadSuccess.bind(this));
@@ -165,7 +165,7 @@ class Apps extends Component {
 
 	onBucketCreated(response) {
 		if(response.isSuccess) {
-			createBucket(new ListItemModel(new BucketModel(JSON.parse(response.result))));	
+			this.props.createBucket(new ListItemModel(new BucketModel(JSON.parse(response.result))));	
 		}	
 	}
 
@@ -186,7 +186,7 @@ class Apps extends Component {
         this.props.unsetLoading();
 	}
 
-	onBucketDeleted(response) {				
+	onBucketDeleted(response) {	
 		if(response.isSuccess) {
 			this.props.deleteBucket(response.result);
 		}

@@ -39,7 +39,7 @@ class MainContainer extends Component {
             TabBarActionModelFactory.createNewAction(() => { this.setFavourite(); }, 'Action 4', require('../images/ActionBar/FavoritesIcon.png')),
             TabBarActionModelFactory.createNewAction(() => { }, 'Action 5', require('../images/ActionBar/DownloadIFileIcon.png')), 
             TabBarActionModelFactory.createNewAction(() => { }, 'Action 6', require('../images/ActionBar/CopyBucketIcon.png')), 
-            TabBarActionModelFactory.createNewAction(() => { }, 'Action 7', require('../images/ActionBar/TrashBucketIcon.png'))
+            TabBarActionModelFactory.createNewAction(() => { this.tryDeleteBuckets(); }, 'Action 7', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
         
         this.openedBucketActions = [

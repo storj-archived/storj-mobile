@@ -7,6 +7,7 @@ import ListComponent from '../components/ListComponent';
 import { getHeight } from '../utils/adaptive';
 import { TYPES } from '../utils/constants/typesConstants';
 import EmpyBucketComponent from '../components/EmpyBucketComponent';
+import PropTypes from 'prop-types';
 
 export default class FilesListComponent extends Component {
     constructor(props) {
@@ -53,11 +54,32 @@ export default class FilesListComponent extends Component {
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor: 'white',
-        //paddingBottom: getHeight(60)
+        backgroundColor: 'white'
     },
     contentWrapper: {
         paddingTop: getHeight(58),
         paddingBottom: getHeight(60)
     }
 });
+
+FilesListComponent.propTypes = {
+    activeScreen: PropTypes.string,
+    animatedScrollValue: PropTypes.object,
+    bucketId: PropTypes.string,
+    cancelDownload: PropTypes.func,
+    cancelUpload: PropTypes.func,
+    data: PropTypes.array,
+    deselectFile: PropTypes.func,
+    disableSelectionMode: PropTypes.func,
+    enableSelectionMode: PropTypes.func,
+    isGridViewShown: PropTypes.bool,
+    isSelectionMode: PropTypes.bool,
+    isSingleItemSelected: PropTypes.bool,
+    onPress: PropTypes.func,
+    onSingleItemSelected: PropTypes.func,
+    openedBucketId: PropTypes.string,
+    renewFileList: PropTypes.func,
+    selectFile: PropTypes.func,
+    selectedItemId: PropTypes.string,
+    setSelectionId: PropTypes.func
+};

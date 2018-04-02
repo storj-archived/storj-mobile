@@ -6,6 +6,7 @@ import {
 import React, { Component } from 'react';
 import BucketsScreenNavigation from '../containers/BucketsScreenNavContainer';
 import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderComponent';
+import PropTypes from 'prop-types';
 
 export default class BucketsComponent extends Component {
     constructor(props) {
@@ -42,3 +43,22 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     }
 });
+
+BucketsComponent.propTypes = {
+    buckets: PropTypes.array,
+    deselectBucket: PropTypes.func,
+    disableSelectionMode: PropTypes.func,
+    enableSelectionMode: PropTypes.func,
+    files: PropTypes.array,
+    isFilesScreen: PropTypes.bool,
+    isSelectionMode: PropTypes.bool,
+    isSingleItemSelected: PropTypes.bool,
+    navigateBack: PropTypes.func,
+    onSingleItemSelected: PropTypes.func,
+    openedBucketId: PropTypes.string,
+    selectBucket: PropTypes.func,
+    selectedItemId: PropTypes.string,
+    selectedItemsCount: PropTypes.number,
+    setSelectionId: PropTypes.func,
+    showOptions: PropTypes.func
+}
