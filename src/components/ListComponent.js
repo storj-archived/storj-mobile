@@ -37,8 +37,8 @@ export default class ListComponent extends Component {
         this.keyboardDidShowListener.remove();
     }
 
-    shouldComponentUpdate(nextProps) {
-        return this.props.isActiveScreen;
+    shouldComponentUpdate(nextProps) {    
+        return this.props.screens === nextProps.activeScreen;
     }
 
     /**
@@ -307,8 +307,7 @@ export default class ListComponent extends Component {
                     : this.getListItemsList();
     }
 
-    render() {     
-        console.log("List rendered");
+    render() {             
         return (
                 <Animated.ScrollView style = { styles.listContainer }
                     decelerationRate = { 'normal' }
@@ -338,7 +337,6 @@ export default class ListComponent extends Component {
 }
 
 ListComponent.propTypes = {
-    isActiveScreen: PropTypes.bool,
     isExpanderDisabled: PropTypes.bool,
     listItemIcon: PropTypes.number,
     mainTitlePath: PropTypes.string,

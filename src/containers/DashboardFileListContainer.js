@@ -20,28 +20,19 @@ import { getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 import EmpyBucketComponent from '../components/EmpyBucketComponent';
 
-class MyPhotosContainer extends Component {
+class DashboardFileListContainer extends Component {
     constructor(props) {
         super(props);
 
         this.data = [];
         this.animatedScrollValue = new Animated.Value(0);
-        this.shouldRenew = false;
     }
 
-    getData() {
-        let picturesBucketId = getPicturesBucketId(this.props.buckets);
-        
-        
-        if(this.props.myPhotosBucketId === picturesBucketId && !this.shouldRenew) {
-            ServiceModule.getFiles(picturesBucketId);             
-        }
-        
+    getData() {        
         this.data = this.props.files.
                         concat(this.props.uploadingFileListModels).
-                        filter(file => file.entity.bucketId === picturesBucketId);
+                        filter(file => file.entity.bucketId === this.props.dashboardBucketId);
 
-        this.shouldRenew = this.props.myPhotosBucketId === picturesBucketId;
         return this.data;
     }
 
@@ -50,9 +41,9 @@ class MyPhotosContainer extends Component {
     }
 
     getSelectedFilesCount() {        
-        if(!this.props.myPhotosBucketId || !this.props.files || this.props.files.length === 0) return 0; 
+        if(!this.props.dashboardBucketId || !this.props.files || this.props.files.length === 0) return 0; 
 
-        let openedBucket = this.props.files.filter(item => item.entity.bucketId === this.props.myPhotosBucketId);
+        let openedBucket = this.props.files.filter(item => item.entity.bucketId === this.props.dashboardBucketId);
 
         if(openedBucket) {
             return this.getArraySelectedCount(openedBucket);
@@ -74,8 +65,7 @@ class MyPhotosContainer extends Component {
                 data.length !== 0 ? 
                     <ListComponent
                         activeScreen = { this.props.activeScreen }
-                        screens = { "MyPhotosScreen" }
-                        isActiveScreen = { this.props.activeScreen === "MyPhotosScreen" }                        
+                        screens = { "DashboardScreen" }                    
                         contentWrapperStyle = { styles.contentWrapper }
                         setSelectionId = { this.props.setSelectionId }
                         selectedItemId = { this.props.selectedItemId }
@@ -83,7 +73,7 @@ class MyPhotosContainer extends Component {
                         cancelUpload = { this.props.cancelUpload }
                         isGridViewShown = { this.props.isGridViewShown }
                         onPress = { (params) => { this.onPress(params); } }
-                        onRefresh = { () => ServiceModule.getFiles(this.props.myPhotosBucketId) }
+                        onRefresh = { () => ServiceModule.getFiles(this.props.dashboardBucketId) }
                         itemType = { TYPES.REGULAR_FILE }
                         bucketId = { this.props.bucketId }
                         onSingleItemSelected = { this.props.onSingleItemSelected }                    
@@ -108,7 +98,7 @@ class MyPhotosContainer extends Component {
                     isSelectionMode = { this.props.isSelectionMode }
                     disableSelectionMode = { this.props.disableSelectionMode }
                     animatedScrollValue = { this.animatedScrollValue }
-                    openedBucketId = { this.props.myPhotosBucketId } />
+                    openedBucketId = { this.props.dashboardBucketId } />
             </View>
         )
     }
@@ -120,7 +110,7 @@ function mapStateToProps(state) {
         files: state.filesReducer.fileListModels,
         selectedItemId: state.mainReducer.selectedItemId,
         mainNavReducer: state.navReducer,
-        myPhotosBucketId: state.mainReducer.myPhotosBucketId,
+        dashboardBucketId: state.mainReducer.dashboardBucketId,
         isActionBarShown: state.mainReducer.isActionBarShown,
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
@@ -142,15 +132,15 @@ function mapDispatchToProps(dispatch) {
     }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyPhotosContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardFileListContainer);
 
-MyPhotosContainer.propTypes = {
+DashboardFileListContainer.propTypes = {
     setSelectionId: PropTypes.func,
     selectedItemId: PropTypes.string,
     cancelDownload: PropTypes.bool,
     cancelUpload: PropTypes.bool,
     isGridViewShown: PropTypes.bool,
-    myPhotosBucketId: PropTypes.string,
+    dashboardBucketId: PropTypes.string,
     bucketId: PropTypes.bool,
     onSingleItemSelected: PropTypes.func,
     animatedScrollValue: PropTypes.bool,

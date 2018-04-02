@@ -28,7 +28,7 @@ export default function billingReducer(state, action) {
         case SET_CREDITS:
             newState.credits = action.payload.credits;
             break;
-        case SET_DEBITS:            
+        case SET_DEBITS:      
             newState.debits = action.payload.debits;
             newState.storage = action.payload.usage.storage;
             newState.bandwidth = action.payload.usage.bandwidth;

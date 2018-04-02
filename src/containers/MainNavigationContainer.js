@@ -39,7 +39,8 @@ class MainNavigationContainer extends Component {
                     buckets: this.props.buckets,
                     openBucket: this.props.openBucket, 
                     bucketNavigateBack: this.props.bucketNavigateBack,
-                    dashboardNavigateBack: this.props.dashboardNavigateBack
+                    dashboardNavigateBack: this.props.dashboardNavigateBack,
+                    setPhotosBucketId: this.props.setPhotosBucketId
                 })} />
         );
     };

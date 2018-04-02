@@ -1,5 +1,5 @@
 import { StackNavigator } from 'react-navigation';
-import FilesScreen from '../containers/FilesListContainer';
+import FilesScreen from '../containers/DashboardFileListContainer';
 import DashboardScreen from '../containers/DashboardContainer';
 
 const DashboardScreenNavigator = StackNavigator(

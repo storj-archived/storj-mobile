@@ -17,7 +17,8 @@ export default class BucketsListComponent extends Component {
         return(
             <View style = { styles.mainContainer }>
                 <ListComponent
-                    isActiveScreen = { this.props.activeScreen === "BucketsScreen" }
+                    activeScreen = { this.props.activeScreen }
+                    screens = { "BucketsScreen" }                    
                     contentWrapperStyle = { styles.contentWrapper }
                     onRefresh = { this.props.refresh }
                     setSelectionId = { this.props.setSelectionId }

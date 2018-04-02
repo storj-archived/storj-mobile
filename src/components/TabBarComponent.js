@@ -92,10 +92,8 @@ export default class TabBarComponent extends Component {
                         <TouchableOpacity 
                             style = { styles.tabItemContainer } 
                             onPress = { () => { 
-                                this.props.screenProps.setCurrentMainScreen("DashboardScreen");
-                                this.props.navigation.openBucket(null);
-                                this.props.navigation.navigate("DashboardScreen");
-                                this.props.navigation.dashboardNavigateBack(); 
+                                this.props.screenProps.setCurrentMainScreen("DashboardScreen");                                
+                                this.props.navigation.navigate("DashboardScreen");                                
                             } }>
                             <View><Image source = { require('../images/TabBar/HomeTabBar.png') } style = { navIndex === 0 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
@@ -103,9 +101,7 @@ export default class TabBarComponent extends Component {
                             style = { styles.tabItemContainer } 
                             onPress = { () => {  
                                 this.props.screenProps.setCurrentMainScreen("BucketsScreen");
-                                this.props.navigation.openBucket(null);
-                                this.props.navigation.goToBucketsScreen();
-                                this.props.navigation.bucketNavigateBack();
+                                this.props.navigation.navigate("BucketsScreen");                                
                             } }>
                             <View><Image source = { require('../images/TabBar/BucketTabBar.png') } style = { navIndex === 1 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
@@ -116,8 +112,9 @@ export default class TabBarComponent extends Component {
                                 let picturesBucketId = getPicturesBucketId(this.props.navigation.buckets);
 
                                 if(!picturesBucketId) return;
+
+                                this.props.navigation.setPhotosBucketId(picturesBucketId);                     
                                 this.props.screenProps.setCurrentMainScreen("MyPhotosScreen");
-                                this.props.navigation.openBucket(picturesBucketId);
                                 this.props.navigation.navigate("MyPhotosScreen");
                             } }>
                             <View><Image source = { require('../images/TabBar/MyPhotos.png') } style = { navIndex === 2 ? styleIconSelected : styleIcon }/></View>
@@ -125,8 +122,7 @@ export default class TabBarComponent extends Component {
                         <TouchableOpacity 
                             style = { styles.tabItemContainer } 
                             onPress = { () => { 
-                                this.props.screenProps.setCurrentMainScreen("MyAccountScreen");
-                                this.props.navigation.openBucket(null);
+                                this.props.screenProps.setCurrentMainScreen("MyAccountScreen");                                
                                 this.props.navigation.navigate("MyAccountScreen");
                             } }>
                             <View><Image source = { require('../images/TabBar/UserTabBar.png') } style = { navIndex === 3 ? styleIconSelected : styleIcon }/></View>

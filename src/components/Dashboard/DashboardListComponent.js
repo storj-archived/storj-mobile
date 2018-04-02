@@ -105,12 +105,13 @@ const listComponent = (title, data, props, count, isBucket, screen) => {
                 onPress = { () => {} }
                 title = { title } />
             <ListComponent
-                isActiveScreen = { screen === "DashboardScreen" }     
+                activeScreen = { screen }
+                screens = { "DashboardScreen" }                
                 setSelectionId = { () => {} }
                 selectedItemId = { null }
                 verticalPaddingDisabled = { true }
                 isExpanderDisabled = { true }
-                openBucket = { props.openBucket }
+                openBucket = { props.setDashboardBucketId }
                 navigateToDashboardFilesScreen = { props.navigateToDashboardFilesScreen }
                 onSingleItemSelected = { () => {} }
                 animatedScrollValue = { props.animatedScrollValue }
@@ -196,8 +197,8 @@ DashboardListComponent.propTypes = {
     navigateBack: PropTypes.func,
     navigateToDashboardFilesScreen: PropTypes.func,
     onSingleItemSelected: PropTypes.func,
-    openBucket: PropTypes.func,
-    openedBucketId: PropTypes.string,
+    setDashboardBucketId: PropTypes.func,
+    dashboardBucketId: PropTypes.string,
     screenName: PropTypes.string,
     selectItem: PropTypes.func,
     selectedItemId: PropTypes.string,

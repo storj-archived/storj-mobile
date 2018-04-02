@@ -27,7 +27,9 @@ const {
     CLEAR_SELECTION,
     SET_SELECTION_ID,    
     SET_EMAIL,
-    SET_MAIN_SCREEN
+    SET_MAIN_SCREEN,
+    SET_PHOTOS_BUCKET_ID,
+    SET_DASHBOARD_BUCKET_ID
 } = MAIN_ACTIONS;
 
 export function setCurrentMainScreen(screenName) {
@@ -122,6 +124,14 @@ function clearSelection() {
     return { type: CLEAR_SELECTION }
 }
 
+function setPhotosBucketId(id) {
+    return { type: SET_PHOTOS_BUCKET_ID, payload: { myPhotosBucketId: id } }
+}
+
+function setDashboardBucketId(id) {
+    return { type: SET_DASHBOARD_BUCKET_ID, payload: { dashboardBucketId: id } }
+}
+
 export function getPicturesBucketId(buckets) {
     ServiceModule.createBaseBuckets(buckets);
 
@@ -173,8 +183,8 @@ export const dashboardContainerActions = {
     removeFirstSignIn,
     setLoading,
     unsetLoading,
-    openBucket,
-    setSelectionId
+    setSelectionId,
+    setDashboardBucketId
 }
 
 export const initializeContainerActions = {
@@ -212,5 +222,6 @@ export const myPicturesListContainerMainActions = {
 };
 
 export const setCurrentMainScreenActions = {
-    setCurrentMainScreen
+    setCurrentMainScreen,
+    setPhotosBucketId
 }

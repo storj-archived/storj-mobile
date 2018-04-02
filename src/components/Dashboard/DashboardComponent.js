@@ -27,7 +27,6 @@ export default class DashboardComponent extends Component {
                     isFilesScreen = { this.props.isFilesScreen}
                     files = { this.props.files }
                     buckets = { this.props.buckets }
-                    openBucket = { this.props.openBucket}
                     screenName = { this.props.screenName }
                     selectItem = { this.props.selectBucket }
                     showOptions = { this.props.showOptions }
@@ -40,8 +39,7 @@ export default class DashboardComponent extends Component {
                     disableSelectionMode = { this.props.disableSelectionMode }
                     selectedItemsCount = { this.props.selectedItemsCount }  
                     onSingleItemSelected = { this.props.onSingleItemSelected }  
-                    isSingleItemSelected = { this.props.isSingleItemSelected }
-                    navigateToDashboardFilesScreen = { this.props.navigateToDashboardFilesScreen } />
+                    isSingleItemSelected = { this.props.isSingleItemSelected } />
             </View>
         )
     }
@@ -50,8 +48,7 @@ export default class DashboardComponent extends Component {
 DashboardComponent.propTypes = {
     showOptions: PropTypes.func,
     files: PropTypes.array,
-    buckets: PropTypes.array,
-    openBucket: PropTypes.func,
+    buckets: PropTypes.array,    
     screenName: PropTypes.string,
     selectItem: PropTypes.func,
     navigateBack: PropTypes.func,

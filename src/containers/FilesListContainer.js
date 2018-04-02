@@ -110,6 +110,7 @@ class FilesListContainer extends Component {
                 cancelUpload = { (params) => { this.cancelUpload(params); } }
                 bucketId = { this.bucketId }
                 openedBucketId = { this.props.openedBucketId }
+                dashboardBucketId = { this.props.dashboardBucketId }
                 data = { this.getData() }
                 onSingleItemSelected = { this.props.onSingleItemSelected }
                 animatedScrollValue = { this.props.screenProps.animatedScrollValue }
@@ -128,6 +129,7 @@ function mapStateToProps(state) {
     return {
         mainNavReducer: state.navReducer,
         openedBucketId: state.mainReducer.openedBucketId,
+        dashboardBucketId: state.mainReducer.dashboardBucketId,
         isActionBarShown: state.mainReducer.isActionBarShown,
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,

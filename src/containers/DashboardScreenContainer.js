@@ -24,9 +24,9 @@ class DashboardScreenContainer extends Component {
     }
 
     getSelectedFilesCount() {        
-        if(!this.props.openedBucketId || !this.props.files || this.props.files.length === 0) return 0; 
+        if(!this.props.dashboardBucketId || !this.props.files || this.props.files.length === 0) return 0; 
 
-        let openedBucket = this.props.files.filter(item => item.entity.bucketId === this.props.openedBucketId);
+        let openedBucket = this.props.files.filter(item => item.entity.bucketId === this.props.dashboardBucketId);
 
         if(openedBucket) {
             return this.getArraySelectedCount(openedBucket);
@@ -45,12 +45,11 @@ class DashboardScreenContainer extends Component {
                 setSelectionId = { this.props.setSelectionId }
                 files = { this.props.files }
                 buckets = { this.props.buckets }
-                openBucket = { this.props.openBucket}
                 defaultRoute = { this.props.defaultRoute }
                 isFilesScreen = { this.props.screenName === 'DashboardFilesScreen' }
                 screenName = { this.props.screenName }
                 selectItem = { this.props.selectBucket }
-                navigateBack = { this.navigateBack }
+                navigateBack = { this.props.dashboardNavigateBack }
                 deselectItem = { this.props.deselectBucket }      
                 isSelectionMode = { this.props.isSelectionMode }
                 selectedBucketId = { this.props.selectedBucketId }
@@ -58,8 +57,7 @@ class DashboardScreenContainer extends Component {
                 selectedItemsCount = { this.getSelectedFilesCount() }
                 disableSelectionMode = { this.props.disableSelectionMode }
                 onSingleItemSelected = { this.props.onSingleItemSelected }  
-                isSingleItemSelected = { this.props.isSingleItemSelected }
-                navigateToDashboardFilesScreen = { this.props.navigateToDashboardFilesScreen } />
+                isSingleItemSelected = { this.props.isSingleItemSelected } />
         ) 
     }
 }
@@ -78,7 +76,7 @@ function mapStateToProps(state) {
         isGridViewShown: state.mainReducer.isGridViewShown,
         defaultRoute: routes[0].routeName,
         screenName: currentScreenName,
-        selectedBucketId: state.mainReducer.openedBucketId
+        selectedBucketId: state.mainReducer.dashboardBucketId
     };
 }
     

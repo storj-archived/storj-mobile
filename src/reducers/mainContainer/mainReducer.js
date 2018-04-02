@@ -19,7 +19,9 @@ const {
     CLEAR_SELECTION,
     SET_SELECTION_ID,
     SET_EMAIL,
-    SET_MAIN_SCREEN
+    SET_MAIN_SCREEN,
+    SET_PHOTOS_BUCKET_ID,
+    SET_DASHBOARD_BUCKET_ID
  } = MAIN_ACTIONS;
                                                         
 const initialState = {
@@ -32,6 +34,8 @@ const initialState = {
     isGridViewShown: false,
     isLoading: false,
     openedBucketId: null,
+    myPhotosBucketId: null,
+    dashboardBucketId: null,
     selectedItemId: null,
     activeScreen: "DashboardScreen"
 };
@@ -104,6 +108,12 @@ export default function mainReducer(state = initialState, action) {
             break;
         case SET_MAIN_SCREEN:            
             newState.activeScreen = action.payload.screenName
+            break;
+        case SET_PHOTOS_BUCKET_ID:            
+            newState.myPhotosBucketId = action.payload.myPhotosBucketId
+            break;
+        case SET_DASHBOARD_BUCKET_ID:            
+            newState.dashboardBucketId = action.payload.dashboardBucketId
             break;
         default:
             return state || initialState;

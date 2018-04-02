@@ -22,13 +22,13 @@ class DashboardContainer extends Component {
                 activeScreen = { this.props.activeScreen }
                 files = { this.props.files }
                 buckets = { this.props.buckets }
-                openBucket = { this.props.openBucket}
+                setDashboardBucketId = { this.props.setDashboardBucketId }
                 screenName = { this.props.screenName }
                 selectItem = { this.props.selectBucket }
                 navigateBack = { this.props.navigateBack }
                 deselectItem = { this.props.deselectBucket }      
                 isSelectionMode = { this.props.isSelectionMode }
-                openedBucketId = { this.props.openedBucketId }
+                dashboardBucketId = { this.props.dashboardBucketId }
                 selectedItemId = { this.props.selectedItemId }
                 animatedScrollValue = { this.animatedScrollValue  }
                 enableSelectionMode = { this.props.enableSelectionMode }
@@ -57,7 +57,7 @@ function mapStateToProps(state) {
         files: state.filesReducer.fileListModels,
         screenName: currentBucketScreenName,
         selectedItemId: state.mainReducer.selectedItemId,
-        openedBucketId: state.mainReducer.openedBucketId,
+        dashboardBucketId: state.mainReducer.dashboardBucketId,
         storage: state.billingReducer.storage,
         bandwidth: state.billingReducer.bandwidth,
         activeScreen: state.mainReducer.activeScreen
