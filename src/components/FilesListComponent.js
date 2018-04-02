@@ -13,7 +13,7 @@ export default class FilesListComponent extends Component {
         super(props);
     }
 
-    render() {
+    render() {        
         return(
             <View style = { styles.mainContainer }>
                 {
@@ -21,6 +21,7 @@ export default class FilesListComponent extends Component {
                     && this.props.openedBucketId !== null
                         ? <EmpyBucketComponent />
                         : <ListComponent
+                            isActiveScreen = { ["BucketsScreen", "DashboardScreen"].includes(this.props.activeScreen) }
                             contentWrapperStyle = { styles.contentWrapper }
                             setSelectionId = { this.props.setSelectionId }
                             selectedItemId = { this.props.selectedItemId }

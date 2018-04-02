@@ -18,7 +18,8 @@ class DashboardContainer extends Component {
 
     render() {        
         return(
-            <DashboardListComponent
+            <DashboardListComponent                
+                activeScreen = { this.props.activeScreen }
                 files = { this.props.files }
                 buckets = { this.props.buckets }
                 openBucket = { this.props.openBucket}
@@ -34,7 +35,6 @@ class DashboardContainer extends Component {
                 disableSelectionMode = { this.props.disableSelectionMode }
                 onSingleItemSelected = { this.props.onSingleItemSelected }  
                 isSingleItemSelected = { this.props.isSingleItemSelected }
-                navigateToFilesScreen = { this.props.navigateToFilesScreen }
                 setSelectionId = { this.props.setSelectionId } 
                 storageAmount = { this.props.storage }
                 bandwidthAmount = { this.props.bandwidth } 
@@ -59,7 +59,8 @@ function mapStateToProps(state) {
         selectedItemId: state.mainReducer.selectedItemId,
         openedBucketId: state.mainReducer.openedBucketId,
         storage: state.billingReducer.storage,
-        bandwidth: state.billingReducer.bandwidth
+        bandwidth: state.billingReducer.bandwidth,
+        activeScreen: state.mainReducer.activeScreen
     };
 }
     

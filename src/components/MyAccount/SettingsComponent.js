@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import { getHeight, getWidth } from '../../utils/adaptive';
+import PropTypes from 'prop-types';
 
 export default class SettingsComponent extends Component{
     constructor(props) {
@@ -292,3 +293,24 @@ const styles = StyleSheet.create({
         height: getHeight(70)
     }
 });
+
+SettingsComponent.propTypes = {
+    changeSyncStatus: PropTypes.func,
+    email: PropTypes.string,
+    getStateObject: PropTypes.func,
+    navigation: PropTypes.object,
+    onCharging: PropTypes.bool,
+    onWifi: PropTypes.bool,
+    screenProps: PropTypes.object,
+    setChargingConstraint: PropTypes.func,
+    setWifiConstraint: PropTypes.func,
+    syncDocuments: PropTypes.bool,
+    syncDocumentsAction: PropTypes.func,
+    syncMovies: PropTypes.bool,
+    syncMoviesAction: PropTypes.func,
+    syncMusic: PropTypes.bool,
+    syncMusicAction: PropTypes.func,
+    syncPhotos: PropTypes.bool,
+    syncPhotosAction: PropTypes.func,
+    syncStatus: PropTypes.bool
+};

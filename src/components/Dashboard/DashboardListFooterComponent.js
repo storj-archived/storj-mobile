@@ -7,6 +7,7 @@ import {
     Image
 } from 'react-native';
 import { getHeight, getWidth } from '../../utils/adaptive';
+import PropTypes from 'prop-types';
 
 export default class DashboardListFooterComponent extends Component {
     constructor(props) {
@@ -68,4 +69,9 @@ const footerLinkStyles = StyleSheet.create({
         height: 1, 
         backgroundColor: 'rgba(56, 75, 101, 0.2)' 
     }
-})
+});
+
+DashboardListFooterComponent.propTypes = {
+    count: PropTypes.number,
+    onPress: PropTypes.func
+}

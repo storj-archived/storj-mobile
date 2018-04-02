@@ -15,10 +15,11 @@ import BucketModel from '../../models/BucketModel';
 import DashboardListFooterComponent from '../../components/Dashboard/DashboardListFooterComponent';
 import DashboardListHeaderComponent from '../../components/Dashboard/DashboardListHeaderComponent';
 import { getHeight, getWidth } from '../../utils/adaptive';
+import PropTypes from 'prop-types';
 
 export default class DashboardListComponent extends Component{
     constructor(props) {
-        super(props);        
+        super(props);     
     }
 
     getThreeLast(array) {
@@ -81,13 +82,13 @@ export default class DashboardListComponent extends Component{
                         </View>
                         <View style = { styles.contentWrapper }>
                         {
-                            listComponent('Favourite buckets', this.getThreeLast(starredBuckets), this.props, starredBucketsCount, true)
+                            listComponent('Favourite buckets', this.getThreeLast(starredBuckets), this.props, starredBucketsCount, true, this.props.activeScreen)
                         }
                         {
-                            listComponent('Favourite files', this.getThreeLast(starredFiles), this.props, starredFilesCount, false)
+                            listComponent('Favourite files', this.getThreeLast(starredFiles), this.props, starredFilesCount, false, this.props.activeScreen)
                         }
                         {
-                            listComponent('Recent sync', this.getThreeLast(syncedFiles), this.props, syncedfilesCount, false)
+                            listComponent('Recent sync', this.getThreeLast(syncedFiles), this.props, syncedfilesCount, false, this.props.activeScreen)
                         }     
                         </View>
                     </ScrollView>
@@ -97,13 +98,15 @@ export default class DashboardListComponent extends Component{
     }
 }
 
-const listComponent = (title, data, props, count, isBucket) => {
+const listComponent = (title, data, props, count, isBucket, screen) => {
+    console.log("SCREEN DASH", screen)    
     return(
         <View>  
             <DashboardListHeaderComponent
                 onPress = { () => {} }
                 title = { title } />
             <ListComponent
+                isActiveScreen = { screen === "DashboardScreen" }     
                 setSelectionId = { () => {} }
                 selectedItemId = { null }
                 verticalPaddingDisabled = { true }
@@ -180,3 +183,25 @@ const styles = StyleSheet.create({
         paddingBottom: getHeight(60)
     }
 });
+
+DashboardListComponent.propTypes = {
+    animatedScrollValue: PropTypes.object,
+    bandwidthAmount: PropTypes.string,
+    buckets: PropTypes.array,
+    deselectItem: PropTypes.func,
+    disableSelectionMode: PropTypes.func,
+    enableSelectionMode: PropTypes.func,
+    files: PropTypes.array,
+    isSelectionMode: PropTypes.bool,
+    isSingleItemSelected: PropTypes.bool,
+    navigateBack: PropTypes.func,
+    navigateToDashboardFilesScreen: PropTypes.func,
+    onSingleItemSelected: PropTypes.func,
+    openBucket: PropTypes.func,
+    openedBucketId: PropTypes.string,
+    screenName: PropTypes.string,
+    selectItem: PropTypes.func,
+    selectedItemId: PropTypes.string,
+    setSelectionId: PropTypes.func,
+    storageAmount: PropTypes.string
+}

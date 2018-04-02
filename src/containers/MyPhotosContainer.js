@@ -24,8 +24,6 @@ class MyPhotosContainer extends Component {
     constructor(props) {
         super(props);
 
-        console.log(this.props)
-
         this.data = [];
         this.animatedScrollValue = new Animated.Value(0);
         this.shouldRenew = false;
@@ -67,12 +65,12 @@ class MyPhotosContainer extends Component {
 
     render() {
         let data = this.getData();
-
         return (
             <View style = { styles.mainContainer }>
             {
                 data.length !== 0 ? 
                     <ListComponent
+                        isActiveScreen = { this.props.activeScreen === "MyPhotosScreen" }                        
                         contentWrapperStyle = { styles.contentWrapper }
                         setSelectionId = { this.props.setSelectionId }
                         selectedItemId = { this.props.selectedItemId }
@@ -126,7 +124,8 @@ function mapStateToProps(state) {
         isLoading: state.mainReducer.isLoading,
         isGridViewShown: state.mainReducer.isGridViewShown,
         downloadedFileListModels: state.filesReducer.downloadedFileListModels,
-        selectedItemId: state.mainReducer.selectedItemId
+        selectedItemId: state.mainReducer.selectedItemId,
+        activeScreen: state.mainReducer.activeScreen
     };
 }
 

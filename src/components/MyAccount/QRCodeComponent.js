@@ -14,7 +14,7 @@ import StorjModule from '../../utils/StorjModule';
 
 export default class QRCodeComponent extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             qrCode: null

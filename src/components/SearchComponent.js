@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import { getHeight, getWidth } from '../utils/adaptive';
+import PropTypes from 'prop-types';
  
 export default class SearchComponent extends Component {
     constructor(props) {
@@ -131,4 +132,11 @@ const styles = StyleSheet.create({
     }
 });
 
-//TODO: Add prop types
+SearchComponent.propTypes = {
+    buckets: PropTypes.array,
+    isFilesScreen: PropTypes.bool,
+    navigateBack: PropTypes.func,
+    openedBucketId: PropTypes.string,
+    showOptions: PropTypes.func,
+    styleContainer: PropTypes.number
+}; 

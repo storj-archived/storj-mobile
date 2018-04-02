@@ -11,6 +11,7 @@ import { getHeight, getWidth } from '../../utils/adaptive';
 import BalanceReportComponent from './BalanceReportComponent';
 import moment from 'moment';
 import { uuidv4 } from '../../utils/utils';
+import PropTypes from 'prop-types';
 
 export default class BalanceComponent extends Component{
     constructor(props) {
@@ -182,3 +183,8 @@ const styles = StyleSheet.create({
         color: 'white'
     }
 });
+
+BalanceComponent.propTypes = {
+    navigation: PropTypes.object,
+    screenProps: PropTypes.object
+}

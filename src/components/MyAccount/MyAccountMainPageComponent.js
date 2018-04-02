@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import OptionsComponent from './OptionsComponent';
 import StorjModule from '../../utils/StorjModule';
+import PropTypes from 'prop-types';
 
 export default class MyAccountMainPageComponent extends Component{
     constructor(props) {
@@ -258,3 +259,8 @@ const styles = StyleSheet.create({
         color: '#EB5757' 
     }
 });
+
+MyAccountMainPageComponent.propTypes = {
+    navigation: PropTypes.object,
+    screenProps: PropTypes.object
+}

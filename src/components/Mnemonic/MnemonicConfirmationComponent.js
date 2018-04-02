@@ -14,6 +14,7 @@ import { WORDLIST } from '../../utils/constants/wordList';
 import mnemonicScreenConstants from '../../utils/constants/mnemonicScreenConstants';
 import { getWidth, getHeight } from '../../utils/adaptive';
 import { getMnemonic } from '../../utils/AsyncStorageModule';
+import PropTypes from 'prop-types';
 
 export default class MnemonicConfirmationComponent extends Component {
     constructor(props) {
@@ -370,4 +371,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(38, 132, 255, 0.4)', 
         borderColor: '#FFFFFF'
     }
-})
+});
+
+MnemonicConfirmationComponent.propTypes = {
+    navigation: PropTypes.object,
+    screenProps: PropTypes.object
+}

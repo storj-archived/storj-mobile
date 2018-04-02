@@ -8,7 +8,7 @@
 
 #import "Response.h"
 
-@interface DictionaryUtils : Response
+@interface DictionaryUtils : NSObject
 
 +(NSString *) checkAndReturnNSString:(NSString *)checkedString;
 

@@ -33,7 +33,6 @@ export default class GridItemComponent extends Component {
             this.props.isStarred !== nextProps.isStarred) 
                 return true;
         
-        //TODO: Optimize render performance
         return false;
     }
 

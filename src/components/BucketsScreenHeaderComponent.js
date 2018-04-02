@@ -9,6 +9,7 @@ import {
 import React, { Component } from 'react';
 import SearchComponent from '../components/SearchComponent';
 import { getWidth, getHeight } from '../utils/adaptive';
+import PropTypes from 'prop-types';
 
 export default class BucketsScreenHeaderComponent extends Component {
     constructor(props) {
@@ -227,4 +228,14 @@ const styles = StyleSheet.create({
     }
 });
 
-//TODO: Add prop types
+BucketsScreenHeaderComponent.propTypes = {
+    animatedScrollValue: PropTypes.object,
+    buckets: PropTypes.array,
+    disableSelectionMode: PropTypes.func,
+    isFilesScreen: PropTypes.bool,
+    isSelectionMode: PropTypes.bool,
+    navigateBack: PropTypes.func,
+    openedBucketId: PropTypes.string,
+    selectedItemsCount: PropTypes.number,
+    showOptions: PropTypes.func
+};

@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { NavigationActions, addNavigationHelpers } from 'react-navigation';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import MainScreenTabNav from '../navigators/MainScreenNavigator';
+import PropTypes from 'prop-types';
+import { setCurrentMainScreenActions } from '../reducers/mainContainer/mainReducerActions'
 
 /**
 * Container for main screen navigation
 */
 class MainNavigationContainer extends Component {
-
     constructor(props) {
         super(props);
     }
@@ -16,6 +18,7 @@ class MainNavigationContainer extends Component {
         return(
             <MainScreenTabNav
                 screenProps = {{ 
+                    setCurrentMainScreen: this.props.setCurrentMainScreen,                    
                     showOptions: this.props.showOptions, 
                     showQR: this.props.showQR,
                     showStorageInfo: this.props.showStorageInfo,
@@ -35,7 +38,8 @@ class MainNavigationContainer extends Component {
                     currentRouteIndex: this.props.nav.index,
                     buckets: this.props.buckets,
                     openBucket: this.props.openBucket, 
-                    bucketNavigateBack: this.props.bucketNavigateBack
+                    bucketNavigateBack: this.props.bucketNavigateBack,
+                    dashboardNavigateBack: this.props.dashboardNavigateBack
                 })} />
         );
     };
@@ -50,6 +54,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        ...bindActionCreators({ ...setCurrentMainScreenActions }, dispatch),
         testAction: () => { dispatch(NavigationActions.navigate({ routeName: 'TestScreen'})); },
         goToBucketsScreen: () => { dispatch(NavigationActions.navigate({ routeName: 'BucketsScreen'})); },
         dispatch
@@ -60,4 +65,23 @@ const TabNavigatorWithRedux = connect(mapStateToProps, mapDispatchToProps)(MainN
 
 export default TabNavigatorWithRedux; 
 
-//TODO: Add prop types
+MainNavigationContainer.propTypes = {
+    bucketNavigateBack: PropTypes.func,
+    buckets: PropTypes.array,
+    dashboardNavigateBack: PropTypes.func,
+    dispatch: PropTypes.func,
+    goToBucketsScreen: PropTypes.func,
+    isActionBarShown: PropTypes.bool,
+    isSelectionMode: PropTypes.bool,
+    isSingleItemSelected: PropTypes.bool,
+    nav: PropTypes.object,
+    onActionBarPress: PropTypes.func,
+    openBucket: PropTypes.func,
+    redirectToInitializationScreen: PropTypes.func,
+    showCredits: PropTypes.func,
+    showOptions: PropTypes.func,
+    showPopUp: PropTypes.func,
+    showQR: PropTypes.func,
+    showStorageInfo: PropTypes.func,
+    testAction: PropTypes.func
+};

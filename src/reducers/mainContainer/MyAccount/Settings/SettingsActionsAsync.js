@@ -7,7 +7,7 @@ export function listSettingsAsync(settingsId) {
 
         if(getSettingsResponse.isSuccess) {
             let settingsModel = JSON.parse(getSettingsResponse.result);
-            console.log(settingsModel);
+
             let syncSettings = settingsModel.syncSettings;
 
             syncSettings = settingsModel.syncStatus ? syncSettings | SYNC_ENUM.SYNC_ON : syncSettings &(~SYNC_ENUM.SYNC_ON);
@@ -68,7 +68,6 @@ export function setChargingConstraintAsync(settingsId, value, prevSettingsState)
             (settingsState) => settingsState.onCharging,
             (settingsState) => settingsState.onCharging = value);
 
-        console.log("ON charging", prevSettingsState, value);
         if(prevSettingsState.syncStatus) {
             _changeSyncStatusAsync(dispatch, settingsId, true);
         }

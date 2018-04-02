@@ -67,7 +67,8 @@ export default class MainComponent extends Component {
                         onActionBarPress = { () => { this.props.onActionBarPress(); } }
                         buckets = { this.props.buckets }
                         openBucket = { this.props.openBucket } 
-                        bucketNavigateBack = { this.props.bucketNavigateBack } />
+                        bucketNavigateBack = { this.props.bucketNavigateBack } 
+                        dashboardNavigateBack = { this.props.dashboardNavigateBack } />
                 </View>
                 {
                     this.props.isActionBarShown || this.props.isSelectionMode ? 
@@ -170,7 +171,27 @@ const styles = StyleSheet.create({
     },
 });
 
-//TODO: Add prop types
-/* MainComponent.propTypes = {
 
-}; */
+MainComponent.propTypes = {
+    bucketNavigateBack: PropTypes.func,
+    bucketScreenRouteName: PropTypes.string,
+    buckets: PropTypes.array,
+    createBucket: PropTypes.func,
+    createWallet: PropTypes.func,
+    dashboardNavigateBack: PropTypes.func,
+    getWallets: PropTypes.func,
+    hideCreateBucketInput: PropTypes.func,
+    isActionBarShown: PropTypes.bool,
+    isCreateBucketInputShown: PropTypes.bool,
+    isGridViewShown: PropTypes.bool,
+    isLoading: PropTypes.bool,
+    isSelectionMode: PropTypes.bool,
+    isSingleItemSelected: PropTypes.bool,
+    onActionBarPress: PropTypes.func,
+    openBucket: PropTypes.func,
+    redirectToInitializationScreen: PropTypes.func,
+    setGridView: PropTypes.func,
+    setListView: PropTypes.func,
+    tapBarActions: PropTypes.array,
+    wallets: PropTypes.array
+}; 

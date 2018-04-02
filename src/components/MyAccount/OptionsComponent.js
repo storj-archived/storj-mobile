@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import { getHeight, getWidth } from '../../utils/adaptive';
+import PropTypes from 'prop-types';
 
 export default class OptionsComponent extends Component{
     constructor(props) {
@@ -53,3 +54,9 @@ const styles = StyleSheet.create({
         marginLeft: getWidth(20)
     }
 });
+
+OptionsComponent.propTypes = {
+    imageSource: PropTypes.number,
+    onPress: PropTypes.func,
+    title: PropTypes.string
+}

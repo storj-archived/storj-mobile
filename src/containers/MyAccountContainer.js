@@ -6,6 +6,7 @@ import { redirectToStorageScreen } from '../reducers/navigation/navigationAction
 import moment from 'moment';
 import { roundToGBAmount, formatAmount, getSum } from '../utils/utils';
 import { resetPassword } from '../reducers/authentification/authActions';
+import PropTypes from 'prop-types';
 
 class MyAccountContainer extends Component {
     constructor(props) {
@@ -128,4 +129,12 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyAccountContainer);
 
-//TODO: Add prop types
+MyAccountContainer.propTypes = {
+    bandwidth: PropTypes.string,
+    credits: PropTypes.array,
+    debits: PropTypes.array,
+    navigation: PropTypes.object,
+    resetPassword: PropTypes.func,
+    screenProps: PropTypes.object,
+    storage: PropTypes.string
+};

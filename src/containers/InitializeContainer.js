@@ -23,6 +23,7 @@ import { initializeContainerBucketActions } from '../reducers/mainContainer/Buck
 import allFileActions from '../reducers/mainContainer/Files/filesReducerActions';
 import ServiceModule from '../utils/ServiceModule';
 import SyncModule from '../utils/SyncModule';
+import PropTypes from 'prop-types';
 
 class InitializeContainer extends Component {
     constructor(props) {
@@ -76,7 +77,6 @@ class InitializeContainer extends Component {
 
         if(getSettingsResponse.isSuccess) {
             let settingsModel = JSON.parse(getSettingsResponse.result);
-            console.log(settingsModel);
             if(settingsModel.isFirstSignIn) 
                 this.props.setFirstSignIn();
         }
@@ -110,7 +110,6 @@ class InitializeContainer extends Component {
     async getAllFiles() {
         let filesResponse = await SyncModule.listAllFiles();		
 
-        console.log(filesResponse);
         if(filesResponse.isSuccess) {
             let files = JSON.parse(filesResponse.result).map((file) => {
                 return new ListItemModel(new FileModel(file));
@@ -226,4 +225,50 @@ function mapDispatchToProps(dispatch) { return bindActionCreators({
  */
 export default connect(mapStateToProps, mapDispatchToProps)(InitializeContainer);
 
-//TODO: add PropTypes
+InitializeContainer.propTypes = {
+    bucketNavigateBack: PropTypes.func,
+    dashboardNavigateBack: PropTypes.func,
+    deleteFile: PropTypes.func,
+    deselectFile: PropTypes.func,
+    downloadFileError: PropTypes.func,
+    downloadFileSuccess: PropTypes.func,
+    fileDownloadCanceled: PropTypes.func,
+    fileUploadCanceled: PropTypes.func,
+    getBuckets: PropTypes.func,
+    getCredits: PropTypes.func,
+    getDebits: PropTypes.func,
+    getWallets: PropTypes.func,
+    listFiles: PropTypes.func,
+    listUploadingFiles: PropTypes.func,
+    navigateBack: PropTypes.func,
+    navigateToDashboardFilesScreen: PropTypes.func,
+    navigateToFilesScreen: PropTypes.func,
+    navigation: PropTypes.object,
+    openImageViewer: PropTypes.func,
+    redirectToBalanceScreen: PropTypes.func,
+    redirectToChangePasswordScreen: PropTypes.func,
+    redirectToInitializationScreen: PropTypes.func,
+    redirectToLoginScreen: PropTypes.func,
+    redirectToMainScreen: PropTypes.func,
+    redirectToMnemonicConfirmationScreen: PropTypes.func,
+    redirectToMnemonicConfirmedScreen: PropTypes.func,
+    redirectToMnemonicGenerationScreen: PropTypes.func,
+    redirectToMnemonicInfoScreen: PropTypes.func,
+    redirectToMnemonicNotConfirmedScreen: PropTypes.func,
+    redirectToMyAccountScreen: PropTypes.func,
+    redirectToOnBoardingScreen: PropTypes.func,
+    redirectToPinCodeGenerationScreen: PropTypes.func,
+    redirectToRegisterScreen: PropTypes.func,
+    redirectToRegisterSuccessScreen: PropTypes.func,
+    redirectToSettingsScreen: PropTypes.func,
+    redirectToStorageScreen: PropTypes.func,
+    screenProps: PropTypes.object,
+    selectFile: PropTypes.func,
+    setEmail: PropTypes.func,
+    setFirstSignIn: PropTypes.func,
+    updateFileDownloadProgress: PropTypes.func,
+    updateFileUploadProgress: PropTypes.func,
+    uploadFileError: PropTypes.func,
+    uploadFileStart: PropTypes.func,
+    uploadFileSuccess: PropTypes.func
+};

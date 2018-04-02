@@ -11,8 +11,9 @@ import React, { Component } from 'react';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import InputComponent from '../InputComponent';
 import validator from '../../utils/validator';
+import PropTypes from 'prop-types';
 
-export default class SettingsComponent extends Component{
+export default class ChangePasswordComponent extends Component{
     constructor(props) {
         super(props)
 
@@ -141,3 +142,8 @@ const styles = StyleSheet.create({
         borderColor: '#FFFFFF'
     }
 });
+
+ChangePasswordComponent.propTypes = {
+    navigation: PropTypes.object,
+    screenProps: PropTypes.object
+}

@@ -9,19 +9,13 @@ import { dashboardContainerBucketActions } from '../reducers/mainContainer/Bucke
 import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { dashboardNavigateBack, navigateToDashboardFilesScreen, navigateBack } from '../reducers/navigation/navigationActions';
-import { changeSyncStatusAsync, setFirstSignInAsync, SYNC_ENUM } from "../reducers/mainContainer/MyAccount/Settings/SettingsActionsAsync";
 import DashboardComponent from '../components/Dashboard/DashboardComponent';
-import FirstSignInComponent from '../components/FirstSignInComponent';
-import SerivceModule from "../utils/ServiceModule";
+
 
 class DashboardScreenContainer extends Component {
     constructor(props) {
         super(props);
 
-        this.email = props.email;
-
-        this.setFirstSignIn = this.setFirstSignIn.bind(this);
-        this.changeSyncStatus = this.changeSyncStatus.bind(this);
         this.navigateBack = this.navigateBack.bind(this);
     }
 
@@ -39,56 +33,34 @@ class DashboardScreenContainer extends Component {
         }
     }
 
-    async createBucket(name) {
-        SerivceModule.createBucket(name);
-    }
-
-    setFirstSignIn(value, callback) {
-        this.props.setFirstSignIn(this.email, value, callback);
-    }
-    changeSyncStatus(value) {
-        this.props.changeSyncStatus(this.email, value);
-    }
-
     navigateBack() {
         this.props.disableSelectionMode();
         this.props.navigateBack();
     }
 
     render() {
-        if(this.props.isFirstSignIn) {
-            return(
-                <FirstSignInComponent
-                    removeFirstSignIn = { this.props.removeFirstSignIn }
-                    setFirstSignIn = { this.setFirstSignIn }
-                    changeSyncStatus = { this.changeSyncStatus }
-                    SYNC_ENUM = { SYNC_ENUM }
-                    createBucket = { this.createBucket.bind(this)} />
-            );
-        } else {
-            return(
-                <DashboardComponent
-                    showOptions = { this.props.screenProps.showOptions }
-                    setSelectionId = { this.props.setSelectionId }
-                    files = { this.props.files }
-                    buckets = { this.props.buckets }
-                    openBucket = { this.props.openBucket}
-                    defaultRoute = { this.props.defaultRoute }
-                    isFilesScreen = { this.props.screenName === 'DashboardFilesScreen' }
-                    screenName = { this.props.screenName }
-                    selectItem = { this.props.selectBucket }
-                    navigateBack = { this.navigateBack }
-                    deselectItem = { this.props.deselectBucket }      
-                    isSelectionMode = { this.props.isSelectionMode }
-                    selectedBucketId = { this.props.selectedBucketId }
-                    animatedScrollValue = { this.animatedScrollValue }
-                    selectedItemsCount = { this.getSelectedFilesCount() }
-                    disableSelectionMode = { this.props.disableSelectionMode }
-                    onSingleItemSelected = { this.props.onSingleItemSelected }  
-                    isSingleItemSelected = { this.props.isSingleItemSelected }
-                    navigateToDashboardFilesScreen = { this.props.navigateToDashboardFilesScreen } />
-            )
-        }
+        return(
+            <DashboardComponent
+                showOptions = { this.props.screenProps.showOptions }
+                setSelectionId = { this.props.setSelectionId }
+                files = { this.props.files }
+                buckets = { this.props.buckets }
+                openBucket = { this.props.openBucket}
+                defaultRoute = { this.props.defaultRoute }
+                isFilesScreen = { this.props.screenName === 'DashboardFilesScreen' }
+                screenName = { this.props.screenName }
+                selectItem = { this.props.selectBucket }
+                navigateBack = { this.navigateBack }
+                deselectItem = { this.props.deselectBucket }      
+                isSelectionMode = { this.props.isSelectionMode }
+                selectedBucketId = { this.props.selectedBucketId }
+                animatedScrollValue = { this.animatedScrollValue }
+                selectedItemsCount = { this.getSelectedFilesCount() }
+                disableSelectionMode = { this.props.disableSelectionMode }
+                onSingleItemSelected = { this.props.onSingleItemSelected }  
+                isSingleItemSelected = { this.props.isSingleItemSelected }
+                navigateToDashboardFilesScreen = { this.props.navigateToDashboardFilesScreen } />
+        ) 
     }
 }
 
@@ -106,15 +78,12 @@ function mapStateToProps(state) {
         isGridViewShown: state.mainReducer.isGridViewShown,
         defaultRoute: routes[0].routeName,
         screenName: currentScreenName,
-        openedBucketId: state.mainReducer.openedBucketId,
-        selectedBucketId: state.mainReducer.selectedBucketId,
-        email: state.mainReducer.email
+        selectedBucketId: state.mainReducer.openedBucketId
     };
 }
     
-const settingsId = "elvy.baila@arockee.com";
 function mapDispatchToProps(dispatch) {
-    return { 
+    return {
         ...bindActionCreators( { 
             ...dashboardContainerActions, 
             ...dashboardContainerBucketActions,
@@ -123,10 +92,8 @@ function mapDispatchToProps(dispatch) {
             dashboardNavigateBack,
             navigateToDashboardFilesScreen,
             navigateBack
-        }, dispatch),
-        setFirstSignIn: (settingsId, value, callback) => { dispatch(setFirstSignInAsync(settingsId ,value, callback)); },
-        changeSyncStatus: (settingsId, value) => { dispatch(changeSyncStatusAsync(settingsId ,value)); },
-    };
+        }, dispatch)
+    }    
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardScreenContainer);;

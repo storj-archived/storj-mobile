@@ -6,6 +6,7 @@ import {
 import React, { Component } from 'react';
 import MyAccountNavContainer from '../../containers/MyAccountNavContainer';
 import { resetPassword } from '../../reducers/authentification/authActions';
+import PropTypes from 'prop-types';
 
 export default class MyAccountNavComponent extends Component {
     constructor(props) {
@@ -37,3 +38,16 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     }
 });
+
+MyAccountNavComponent.propTypes = {
+    bandwidthAmount: PropTypes.string,
+    getBalance: PropTypes.func,
+    redirectToInitializationScreen: PropTypes.func,
+    resetPassword: PropTypes.func,
+    showCredits: PropTypes.func,
+    showPopUp: PropTypes.func,
+    showQR: PropTypes.func,
+    showStorageInfo: PropTypes.func,
+    storageAmount: PropTypes.string,
+    transactionList: PropTypes.array
+}

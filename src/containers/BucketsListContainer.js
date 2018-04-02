@@ -24,6 +24,7 @@ class BucketsListContainer extends Component {
     render() {
         return(
             <BucketsListComponent
+                activeScreen = { this.props.activeScreen }
                 setSelectionId = { this.props.screenProps.setSelectionId }
                 isGridViewShown = { this.props.isGridViewShown }
                 onPress = { (params) => { this.onPress(params); } }
@@ -44,6 +45,7 @@ class BucketsListContainer extends Component {
 
 function mapStateToProps(state) {
     return {
+        activeScreen: state.mainReducer.activeScreen,
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         buckets: state.bucketReducer.buckets,

@@ -7,6 +7,7 @@ import {
     Image
 } from 'react-native';
 import { getHeight, getWidth } from '../../utils/adaptive';
+import PropTypes from 'prop-types';
 
 export default class DashboardListHeaderComponent extends Component {
     constructor(props) {
@@ -63,3 +64,8 @@ const titleLinkStyles = StyleSheet.create({
         marginLeft: getWidth(10)
     }
 });
+
+DashboardListHeaderComponent.propTypes = {
+    onPress: PropTypes.func,
+    title: PropTypes.string
+}

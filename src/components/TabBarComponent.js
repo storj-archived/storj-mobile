@@ -10,6 +10,7 @@ import {
 import React, { Component } from 'react';
 import { getWidth, getHeight, getDeviceWidth} from '../utils/adaptive';
 import { getPicturesBucketId } from '../reducers/mainContainer/mainReducerActions';
+import PropTypes from 'prop-types';
 
 /**
 * Footer component in main page 
@@ -91,14 +92,17 @@ export default class TabBarComponent extends Component {
                         <TouchableOpacity 
                             style = { styles.tabItemContainer } 
                             onPress = { () => { 
+                                this.props.screenProps.setCurrentMainScreen("DashboardScreen");
                                 this.props.navigation.openBucket(null);
-                                this.props.navigation.navigate("DashboardScreen"); 
+                                this.props.navigation.navigate("DashboardScreen");
+                                this.props.navigation.dashboardNavigateBack(); 
                             } }>
                             <View><Image source = { require('../images/TabBar/HomeTabBar.png') } style = { navIndex === 0 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
                         <TouchableOpacity 
                             style = { styles.tabItemContainer } 
                             onPress = { () => {  
+                                this.props.screenProps.setCurrentMainScreen("BucketsScreen");
                                 this.props.navigation.openBucket(null);
                                 this.props.navigation.goToBucketsScreen();
                                 this.props.navigation.bucketNavigateBack();
@@ -112,7 +116,7 @@ export default class TabBarComponent extends Component {
                                 let picturesBucketId = getPicturesBucketId(this.props.navigation.buckets);
 
                                 if(!picturesBucketId) return;
-
+                                this.props.screenProps.setCurrentMainScreen("MyPhotosScreen");
                                 this.props.navigation.openBucket(picturesBucketId);
                                 this.props.navigation.navigate("MyPhotosScreen");
                             } }>
@@ -121,6 +125,7 @@ export default class TabBarComponent extends Component {
                         <TouchableOpacity 
                             style = { styles.tabItemContainer } 
                             onPress = { () => { 
+                                this.props.screenProps.setCurrentMainScreen("MyAccountScreen");
                                 this.props.navigation.openBucket(null);
                                 this.props.navigation.navigate("MyAccountScreen");
                             } }>
@@ -189,4 +194,20 @@ const styles = StyleSheet.create({
     }
 });
 
-//TODO: add prop types
+TabBarComponent.propTypes = {
+    animationEnabled: PropTypes.bool,
+    getLabel: PropTypes.func,
+    getOnPress: PropTypes.func,
+    getTestIDProps: PropTypes.func,
+    jumpToIndex: PropTypes.func,
+    layout: PropTypes.object,
+    navigation: PropTypes.object,
+    navigationState: PropTypes.object,
+    offsetX: PropTypes.object,
+    panX: PropTypes.object,
+    position: PropTypes.object,
+    renderIcon: PropTypes.func,
+    screenProps: PropTypes.object,
+    tabBarPosition: PropTypes.string,
+    useNativeDriver: PropTypes.bool,
+}; 
