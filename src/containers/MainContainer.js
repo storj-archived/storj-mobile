@@ -288,13 +288,14 @@ class MainContainer extends Component {
 
         switch(currentScreen) {
             case "DashboardScreen":
-                if(this.props.dashboardBucketId) {
-                    if(isSelectionMode) {
-                        return this.selectionDashboardModeActions;
-                    } else {
-                        return this.dashboardBucketActions;
-                    }
-                }
+                const dashboardActions = handleScreenActions(this.props.dashboardBucketId, 
+                    isSelectionMode, 
+                    this.dashboardBucketActions, 
+                    this.selectionDashboardModeActions);
+
+                if(dashboardActions)
+                    return dashboardActions;
+
                 break;
             case "BucketsScreen":
                 const actions = handleScreenActions(this.props.openedBucketId, 
@@ -305,22 +306,16 @@ class MainContainer extends Component {
                 if(actions)
                     return actions;
 
-                /* if(this.props.openedBucketId) {
-                    if(isSelectionMode) {
-                        return this.selectionBucketModeActions;
-                    } else {
-                        return this.openedBucketActions;
-                    }
-                } */
                 break;
             case "MyPhotosScreen":
-                if(this.props.myPhotosBucketId) {
-                    if(isSelectionMode) {
-                        return this.selectionPicturesModeActions;
-                    } else {
-                        return this.picturesBucketActions;
-                    }
-                }
+                const picturesActions = handleScreenActions(this.props.myPhotosBucketId, 
+                    isSelectionMode, 
+                    this.picturesBucketActions, 
+                    this.selectionPicturesModeActions);
+
+                if(picturesActions)
+                    return picturesActions;
+
                 break;
         }
         
