@@ -34,6 +34,7 @@ class MainNavigationContainer extends Component {
                     test: this.props.testAction,
                     goToBucketsScreen: this.props.goToBucketsScreen,
                     onActionBarPress: this.props.onActionBarPress,
+                    hideActionBar: this.props.hideActionBar,
                     currentRouteIndex: this.props.nav.index,
                     buckets: this.props.buckets,
                     openBucket: this.props.openBucket, 

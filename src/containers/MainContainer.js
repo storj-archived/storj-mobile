@@ -44,7 +44,21 @@ class MainContainer extends Component {
         
         this.openedBucketActions = [
             TabBarActionModelFactory.createNewAction(() => { this.setFavouriteFiles(); }, 'Action 8', require('../images/ActionBar/FavoritesIcon.png')),
-            TabBarActionModelFactory.createNewAction(() => { this.uploadFile(); }, 'Action 8', require('../images/ActionBar/UploadFileIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { this.uploadFile(this.props.openedBucketId); }, 'Action 8', require('../images/ActionBar/UploadFileIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { this.downloadSelectedFiles(); }, '2', require('../images/ActionBar/DownloadIFileIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { this.tryDeleteFiles(); }, 'Action 9', require('../images/ActionBar/TrashBucketIcon.png'))
+        ];
+
+        this.dashboardBucketActions = [
+            TabBarActionModelFactory.createNewAction(() => { this.setFavouriteFiles(); }, 'Action 8', require('../images/ActionBar/FavoritesIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { this.uploadFile(this.props.dashboardBucketId); }, 'Action 8', require('../images/ActionBar/UploadFileIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { this.downloadSelectedFiles(); }, '2', require('../images/ActionBar/DownloadIFileIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { this.tryDeleteFiles(); }, 'Action 9', require('../images/ActionBar/TrashBucketIcon.png'))
+        ];
+
+        this.picturesBucketActions = [
+            TabBarActionModelFactory.createNewAction(() => { this.setFavouriteFiles(); }, 'Action 8', require('../images/ActionBar/FavoritesIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { this.uploadFile(this.props.myPhotosBucketId); }, 'Action 8', require('../images/ActionBar/UploadFileIcon.png')), 
             TabBarActionModelFactory.createNewAction(() => { this.downloadSelectedFiles(); }, '2', require('../images/ActionBar/DownloadIFileIcon.png')),
             TabBarActionModelFactory.createNewAction(() => { this.tryDeleteFiles(); }, 'Action 9', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
@@ -124,18 +138,24 @@ class MainContainer extends Component {
     }
 
     onActionBarPress() {
-        this.props.isActionBarShown ? 
-            this.props.hideActionBar() : this.props.showActionBar();
+        const index = this.props.mainScreenNavReducer.index;      
+        const routes = this.props.mainScreenNavReducer.routes;
+        const currentScreen = routes[index].routeName;
+
+        if(currentScreen != "MyAccountScreen") {
+            this.props.isActionBarShown ? 
+                this.props.hideActionBar() : this.props.showActionBar();
+        }
     }
 
-    async uploadFile() {
+    async uploadFile(bucketId) {
         let filePickerResponse = await filePicker.show();
         this.props.hideActionBar();
 
         if(filePickerResponse.path) {
             const path = filePickerResponse.path;
 
-            ServiceModule.uploadFile(this.props.openedBucketId, path);
+            ServiceModule.uploadFile(bucketId, path);
         }
     }
 
@@ -236,16 +256,40 @@ class MainContainer extends Component {
         header: null
     };
 
+    getTapBarActions() {  
+        if(this.props.isSelectionMode || this.props.isSingleItemSelected) {
+            return this.selectionModeActions;
+        }
+
+        const index = this.props.mainScreenNavReducer.index;      
+        const routes = this.props.mainScreenNavReducer.routes;
+        const currentScreen = routes[index].routeName;
+
+        switch(currentScreen) {
+            case "DashboardScreen":
+                if(this.props.dashboardBucketId) {
+                    return this.dashboardBucketActions;
+                }
+                break;
+            case "BucketsScreen":
+                if(this.props.openedBucketId) {
+                    return this.openedBucketActions;
+                }
+                break;
+            case "MyPhotosScreen":
+                if(this.props.myPhotosBucketId) {
+                    return this.picturesBucketActions;
+                }
+                break;
+        }
+        
+        return this.tapBarActions;
+    };
+
     render() {
-        const index = this.props.bucketsScreenNavReducer.index;
+        const index = this.props.bucketsScreenNavReducer.index;      
         const routes = this.props.bucketsScreenNavReducer.routes;
-        let tapBarActions = this.tapBarActions;
-        
-        if(this.props.openedBucketId)
-            tapBarActions = this.openedBucketActions;
-        else if(this.props.isSelectionMode || this.props.isSingleItemSelected)
-            tapBarActions = this.selectionModeActions;
-        
+
         return(
             <MainComponent
                 redirectToInitializationScreen = { this.props.redirectToInitializationScreen.bind(this) }
@@ -255,7 +299,7 @@ class MainContainer extends Component {
                 bucketScreenRouteName = { routes[index].routeName }
                 createBucket = { this.createBucket.bind(this) }
                 hideCreateBucketInput = { this.props.hideCreateBucketInput }
-                tapBarActions = { tapBarActions } 
+                tapBarActions = { this.getTapBarActions() } 
                 isSelectionMode = { this.props.isSelectionMode }
                 isSingleItemSelected = { this.props.isSingleItemSelected }
                 onActionBarPress = { () => { this.onActionBarPress(); } }
@@ -277,8 +321,11 @@ function mapStateToProps(state) {
     return {
         bucketsScreenNavReducer: state.bucketsScreenNavReducer,
         mainNavReducer: state.navReducer,
+        mainScreenNavReducer: state.mainScreenNavReducer,
         fileListModels: state.filesReducer.fileListModels,
         openedBucketId: state.mainReducer.openedBucketId,
+        dashboardBucketId: state.mainReducer.dashboardBucketId,
+        myPhotosBucketId: state.mainReducer.myPhotosBucketId,
         isSelectionMode: state.mainReducer.isSelectionMode, 
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         isActionBarShown: state.mainReducer.isActionBarShown,

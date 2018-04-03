@@ -217,5 +217,6 @@ export const myPicturesListContainerMainActions = {
 };
 
 export const setCurrentMainScreenActions = {
-    setPhotosBucketId
+    setPhotosBucketId,
+    hideActionBar
 }

@@ -109,7 +109,7 @@ export default class MainComponent extends Component {
                 }
                 {
                     this.state.showQR ? 
-                        <QRCodeComponent 
+                        <QRCodeComponent hideActionBar
                             showQR = { this.showQR.bind(this) } /> : null
                 }
                 {
