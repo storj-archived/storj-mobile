@@ -41,26 +41,50 @@ class MainContainer extends Component {
             TabBarActionModelFactory.createNewAction(() => { }, 'Action 6', require('../images/ActionBar/CopyBucketIcon.png')), 
             TabBarActionModelFactory.createNewAction(() => { this.tryDeleteBuckets(); }, 'Action 7', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
+
+        this.selectionDashboardModeActions = [
+            //actions for bucket screen
+            TabBarActionModelFactory.createNewAction(() => { this.setFavouriteFiles(); }, 'Action 4', require('../images/ActionBar/FavoritesIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { this.downloadSelectedFiles(); }, 'Action 5', require('../images/ActionBar/DownloadIFileIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { }, 'Action 6', require('../images/ActionBar/CopyBucketIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { this.tryDeleteFiles(this.props.dashboardBucketId); }, 'Action 7', require('../images/ActionBar/TrashBucketIcon.png'))
+        ];
+
+        this.selectionBucketModeActions = [
+            //actions for bucket screen
+            TabBarActionModelFactory.createNewAction(() => { this.setFavouriteFiles(); }, 'Action 4', require('../images/ActionBar/FavoritesIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { this.downloadSelectedFiles(); }, 'Action 5', require('../images/ActionBar/DownloadIFileIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { }, 'Action 6', require('../images/ActionBar/CopyBucketIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { this.tryDeleteFiles(this.props.openedBucketId); }, 'Action 7', require('../images/ActionBar/TrashBucketIcon.png'))
+        ];
+
+        this.selectionPicturesModeActions = [
+            //actions for bucket screen
+            TabBarActionModelFactory.createNewAction(() => { this.setFavouriteFiles(); }, 'Action 4', require('../images/ActionBar/FavoritesIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { this.downloadSelectedFiles(); }, 'Action 5', require('../images/ActionBar/DownloadIFileIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { }, 'Action 6', require('../images/ActionBar/CopyBucketIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { this.tryDeleteFiles(this.props.myPhotosBucketId); }, 'Action 7', require('../images/ActionBar/TrashBucketIcon.png'))
+        ];
         
         this.openedBucketActions = [
-            TabBarActionModelFactory.createNewAction(() => { this.setFavouriteFiles(); }, 'Action 8', require('../images/ActionBar/FavoritesIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { }, 'Action 8', require('../images/ActionBar/FavoritesIcon.png')),
             TabBarActionModelFactory.createNewAction(() => { this.uploadFile(this.props.openedBucketId); }, 'Action 8', require('../images/ActionBar/UploadFileIcon.png')), 
-            TabBarActionModelFactory.createNewAction(() => { this.downloadSelectedFiles(); }, '2', require('../images/ActionBar/DownloadIFileIcon.png')),
-            TabBarActionModelFactory.createNewAction(() => { this.tryDeleteFiles(); }, 'Action 9', require('../images/ActionBar/TrashBucketIcon.png'))
+            TabBarActionModelFactory.createNewAction(() => { }, '2', require('../images/ActionBar/DownloadIFileIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { }, 'Action 9', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
 
         this.dashboardBucketActions = [
-            TabBarActionModelFactory.createNewAction(() => { this.setFavouriteFiles(); }, 'Action 8', require('../images/ActionBar/FavoritesIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { }, 'Action 8', require('../images/ActionBar/FavoritesIcon.png')),
             TabBarActionModelFactory.createNewAction(() => { this.uploadFile(this.props.dashboardBucketId); }, 'Action 8', require('../images/ActionBar/UploadFileIcon.png')), 
-            TabBarActionModelFactory.createNewAction(() => { this.downloadSelectedFiles(); }, '2', require('../images/ActionBar/DownloadIFileIcon.png')),
-            TabBarActionModelFactory.createNewAction(() => { this.tryDeleteFiles(); }, 'Action 9', require('../images/ActionBar/TrashBucketIcon.png'))
+            TabBarActionModelFactory.createNewAction(() => { }, '2', require('../images/ActionBar/DownloadIFileIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { }, 'Action 9', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
 
         this.picturesBucketActions = [
-            TabBarActionModelFactory.createNewAction(() => { this.setFavouriteFiles(); }, 'Action 8', require('../images/ActionBar/FavoritesIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { }, 'Action 8', require('../images/ActionBar/FavoritesIcon.png')),
             TabBarActionModelFactory.createNewAction(() => { this.uploadFile(this.props.myPhotosBucketId); }, 'Action 8', require('../images/ActionBar/UploadFileIcon.png')), 
-            TabBarActionModelFactory.createNewAction(() => { this.downloadSelectedFiles(); }, '2', require('../images/ActionBar/DownloadIFileIcon.png')),
-            TabBarActionModelFactory.createNewAction(() => { this.tryDeleteFiles(); }, 'Action 9', require('../images/ActionBar/TrashBucketIcon.png'))
+            TabBarActionModelFactory.createNewAction(() => { }, '2', require('../images/ActionBar/DownloadIFileIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { }, 'Action 9', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
 
         this.downloadListener = (fileParams) => {
@@ -93,13 +117,13 @@ class MainContainer extends Component {
         );
     }
 
-    tryDeleteFiles() {
+    tryDeleteFiles(bucketId) {
         Alert.alert(
             'Delete permanently?',
             'Are you sure to delete selected files permanently?',
             [
                 { text: 'Cancel', onPress: () => { }, style: 'cancel' },
-                { text: 'Delete', onPress: () => { this.deleteSelectedFiles(); } }
+                { text: 'Delete', onPress: () => { this.deleteSelectedFiles(bucketId); } }
             ],
             { cancelable: false }
         );
@@ -175,11 +199,11 @@ class MainContainer extends Component {
         ServiceModule.deleteFile(bucketId, fileId);
     }
 
-    deleteSelectedFiles() {
+    deleteSelectedFiles(bucketId) {
         this.props.fileListModels.forEach(fileItem => { 
 
             if(fileItem.isSelected)
-                this.deleteFile(this.props.openedBucketId, fileItem.getId());
+                this.deleteFile(bucketId, fileItem.getId());
         });
     }
 
@@ -221,10 +245,10 @@ class MainContainer extends Component {
     }
 
     async setFavouriteFiles() {        
-        
         let selectedFiles = this.props.fileListModels.filter(fileItem => {
             return fileItem.isSelected;
-        });          
+        });
+        
         let length = selectedFiles.length;          
 
         let updatedItems = [];        
@@ -232,7 +256,7 @@ class MainContainer extends Component {
         for(var i = 0; i < length; i++) {
             var item = selectedFiles[i];
             let updateStarredResponse = await SyncModule.updateFileStarred(item.getId(), !item.getStarred());
-            
+
             if(updateStarredResponse.isSuccess) {
                 updatedItems.push(item);
             }    
@@ -257,10 +281,7 @@ class MainContainer extends Component {
     };
 
     getTapBarActions() {  
-        if(this.props.isSelectionMode || this.props.isSingleItemSelected) {
-            return this.selectionModeActions;
-        }
-
+        const isSelectionMode = this.props.isSelectionMode || this.props.isSingleItemSelected;
         const index = this.props.mainScreenNavReducer.index;      
         const routes = this.props.mainScreenNavReducer.routes;
         const currentScreen = routes[index].routeName;
@@ -268,21 +289,45 @@ class MainContainer extends Component {
         switch(currentScreen) {
             case "DashboardScreen":
                 if(this.props.dashboardBucketId) {
-                    return this.dashboardBucketActions;
+                    if(isSelectionMode) {
+                        return this.selectionDashboardModeActions;
+                    } else {
+                        return this.dashboardBucketActions;
+                    }
                 }
                 break;
             case "BucketsScreen":
-                if(this.props.openedBucketId) {
-                    return this.openedBucketActions;
-                }
+                const actions = handleScreenActions(this.props.openedBucketId, 
+                    isSelectionMode, 
+                    this.openedBucketActions, 
+                    this.selectionBucketModeActions);
+
+                if(actions)
+                    return actions;
+
+                /* if(this.props.openedBucketId) {
+                    if(isSelectionMode) {
+                        return this.selectionBucketModeActions;
+                    } else {
+                        return this.openedBucketActions;
+                    }
+                } */
                 break;
             case "MyPhotosScreen":
                 if(this.props.myPhotosBucketId) {
-                    return this.picturesBucketActions;
+                    if(isSelectionMode) {
+                        return this.selectionPicturesModeActions;
+                    } else {
+                        return this.picturesBucketActions;
+                    }
                 }
                 break;
         }
         
+        if(this.props.isSelectionMode || this.props.isSingleItemSelected) {
+            return this.selectionModeActions;
+        }
+
         return this.tapBarActions;
     };
 
@@ -315,6 +360,22 @@ class MainContainer extends Component {
                 dashboardNavigateBack = { this.props.dashboardNavigateBack }/>
         );
     }
+}
+
+function handleScreenActions(bucketId, isSelection, actions, selectionModeActions) {
+    if(!bucketId) {
+        return null;
+    }
+
+    let result = null;
+
+    if(isSelection) {
+        result = selectionModeActions;
+    } else {
+        result = actions;
+    }
+
+    return result;
 }
 
 function mapStateToProps(state) { 
