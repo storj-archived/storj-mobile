@@ -39,8 +39,8 @@ class FilesListContainer extends Component {
         ).start();               
         
         this.props.setLoading();
-        await this.props.listFilesAsync(this.bucketId);
-        ServiceModule.getFiles(this.bucketId);  
+        await this.props.listFilesAsync(this.props.openedBucketId);
+        ServiceModule.getFiles(this.props.openedBucketId);  
     }
 
     componentWillUnmount() {
@@ -117,7 +117,7 @@ class FilesListContainer extends Component {
                 renewFileList = { () => { 
                     ServiceModule.getFiles(this.props.openedBucketId); 
                     this.props.listUploadingFilesAsync(this.props.openedBucketId); 
-                } }/>
+                } } />
         );
     }
 }

@@ -29,38 +29,44 @@ export default class SearchComponent extends Component {
         }
     }
 
-    render() {
-        if(this.props.isFilesScreen) {
-            return(
-                <View style = { [ styles.rowContainer, this.props.styleContainer ] }>
-                    <TouchableOpacity onPress = { () => { this.props.navigateBack ? this.props.navigateBack() : () => {} } }>
-                        <Image style = { styles.backButton } source = { require("../images/Icons/BackButton.png") } resizeMode = { 'contain' } />
-                    </TouchableOpacity>
-                    <View style = { [ styles.rowContainer, styles.mainContainer, styles.fileHeader ] }>
-                        <View style = {[ styles.rowContainer, { height: getHeight(50) } ]}>
-                            <TextInput
-                                onFocus = { () => { this.setState({ isSearchIconShown: false }); } }
-                                onBlur = { () => { 
-                                    if(!this.state.searchValue) {
-                                        this.setState({ isSearchIconShown: true }); 
-                                    }
-                                }}
-                                placeholder = { this.getSelectedBucketName() }
-                                underlineColorAndroid = { 'transparent' } 
-                                style = { styles.textInput }
-                                onChangeText = { (value) => { this.setState({ searchValue: value }); } } 
-                                value = { this.state.searchValue } />
-                        </View>
-                        <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>
-                            <Text style = { styles.updateStatus }>Just now</Text>
-                            <TouchableOpacity onPress = { this.props.showOptions }>
-                                <Image style = { styles.image } source = { require("../images/Icons/SearchOptions.png") } resizeMode = { 'contain' } />
-                            </TouchableOpacity>
-                        </View>
+
+    fileScreenHeader() {
+        return(
+            <View style = { [ styles.rowContainer, this.props.styleContainer ] }>
+                <TouchableOpacity onPress = { () => { this.props.navigateBack ? this.props.navigateBack() : () => {} } }>
+                    <Image style = { styles.backButton } source = { require("../images/Icons/BackButton.png") } resizeMode = { 'contain' } />
+                </TouchableOpacity>
+                <View style = { [ styles.rowContainer, styles.mainContainer, styles.fileHeader ] }>
+                    <View style = {[ styles.rowContainer, { height: getHeight(50) } ]}>
+                        <TextInput
+                            onFocus = { () => { this.setState({ isSearchIconShown: false }); } }
+                            onBlur = { () => { 
+                                if(!this.state.searchValue) {
+                                    this.setState({ isSearchIconShown: true }); 
+                                }
+                            }}
+                            placeholder = { this.getSelectedBucketName() }
+                            underlineColorAndroid = { 'transparent' } 
+                            style = { styles.textInput }
+                            onChangeText = { (value) => { this.setState({ searchValue: value }); } } 
+                            value = { this.state.searchValue } />
+                    </View>
+                    <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>
+                        <Text style = { styles.updateStatus }>Just now</Text>
+                        <TouchableOpacity onPress = { this.props.showOptions }>
+                            <Image style = { styles.image } source = { require("../images/Icons/SearchOptions.png") } resizeMode = { 'contain' } />
+                        </TouchableOpacity>
                     </View>
                 </View>
-            );
+            </View>
+        );
+    }
+
+    render() {
+        if(this.props.isFilesScreen) {
+            return this.fileScreenHeader();
         }
+        
         return(
             <View style = { [ styles.rowContainer, styles.mainContainer, this.props.styleContainer ] }>
                     <View style = { styles.rowContainer }>
