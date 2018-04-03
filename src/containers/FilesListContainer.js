@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { bucketNavigateBack, dashboardNavigateBack, openImageViewer } from '../reducers/navigation/navigationActions';
 import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
-import { listUploadingFiles } from "../reducers/asyncActions/fileActionsAsync";
+import { listUploadingFiles, listFiles } from "../reducers/asyncActions/fileActionsAsync";
 import StorjModule from '../utils/StorjModule';
 import ServiceModule from '../utils/ServiceModule';
 import ListItemModel from '../models/ListItemModel';
@@ -25,7 +25,7 @@ class FilesListContainer extends Component {
         return this.props.fileListModels.concat(this.props.uploadingFileListModels).filter(file => file.entity.bucketId === this.props.openedBucketId);
     }
 
-    componentWillMount() {        
+    async componentWillMount() {        
         if(Platform.OS === "android") {
             BackHandler.addEventListener("hardwarebackPress", this.onHardwareBackPress);
         }        
@@ -38,7 +38,9 @@ class FilesListContainer extends Component {
             }
         ).start();               
         
-        if (this.props.screenProps.defaultRoute !== "DashboardDefaultScreen") {
+        if(this.props.screenProps.defaultRoute !== "DashboardDefaultScreen") {
+            this.props.setLoading();
+            await this.props.listFilesAsync(this.bucketId);
             ServiceModule.getFiles(this.bucketId);  
         }   
     }
@@ -120,7 +122,7 @@ class FilesListContainer extends Component {
                 isSingleItemSelected = { this.props.isSingleItemSelected }
                 deselectFile = { this.props.deselectFile }
                 selectFile = { this.props.selectFile }
-                renewFileList = { () => { ServiceModule.getFiles(this.bucketId); this.props.listUploadingFiles(this.bucketId); } }/>
+                renewFileList = { () => { ServiceModule.getFiles(this.bucketId); this.props.listUploadingFilesAsync(this.bucketId); } }/>
         );
     }
 }
@@ -149,7 +151,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         ...bindActionCreators({ bucketNavigateBack, dashboardNavigateBack, openImageViewer, ...filesListContainerMainActions, ...filesListContainerFileActions }, dispatch),
-        listUploadingFiles: (bucketId) => { dispatch(listUploadingFiles(bucketId)); }
+        listUploadingFilesAsync: (bucketId) => { dispatch(listUploadingFiles(bucketId)); },
+        listFilesAsync: async (bucketId) => { return await dispatch(listFiles(bucketId)); }
     };
 }
 

@@ -66,3 +66,18 @@ export function listUploadingFiles(bucketId) {
         }
     };
 }
+
+export function listFiles(bucketId) {
+    return async (dispatch) => {
+        let listFilesResponse = await SyncModule.listFiles(bucketId);
+
+        if(listFilesResponse.isSuccess) {
+            let files = JSON.parse(listFilesResponse.result);
+            files = files.map(file => new ListItemModel(new FileModel(file)));
+
+            dispatch(fileActions.listFiles(bucketId, files));
+        }
+
+        return listFilesResponse; 
+    }
+}
