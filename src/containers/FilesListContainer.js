@@ -17,12 +17,12 @@ class FilesListContainer extends Component {
     constructor(props) {
         super(props);
 
-        this.bucketId = props.navigation.state.params.bucketId;
         this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
     }
 
     getData() { 
-        return this.props.fileListModels.concat(this.props.uploadingFileListModels).filter(file => file.entity.bucketId === this.props.openedBucketId);
+        return this.props.fileListModels.concat(this.props.uploadingFileListModels)
+                                        .filter(file => file.entity.bucketId === this.props.openedBucketId);
     }
 
     async componentWillMount() {        
@@ -38,11 +38,9 @@ class FilesListContainer extends Component {
             }
         ).start();               
         
-        if(this.props.screenProps.defaultRoute !== "DashboardDefaultScreen") {
-            this.props.setLoading();
-            await this.props.listFilesAsync(this.bucketId);
-            ServiceModule.getFiles(this.bucketId);  
-        }   
+        this.props.setLoading();
+        await this.props.listFilesAsync(this.bucketId);
+        ServiceModule.getFiles(this.bucketId);  
     }
 
     componentWillUnmount() {
@@ -56,7 +54,7 @@ class FilesListContainer extends Component {
         let cancelDownloadResponse = await StorjModule.cancelDownload(file.fileRef);
 
         if(cancelDownloadResponse.isSuccess) {
-            this.props.fileDownloadCanceled(this.bucketId, file.getId());
+            this.props.fileDownloadCanceled(this.props.openedBucketId, file.getId());
         }
     }
 
@@ -64,7 +62,7 @@ class FilesListContainer extends Component {
         let cancelUploadResponse = await StorjModule.cancelUpload(file.fileRef);
 
         if(cancelUploadResponse.isSuccess) {
-            this.props.fileUploadCanceled(this.bucketId, file.getId());
+            this.props.fileUploadCanceled(this.props.openedBucketId, file.getId());
         }
     }
 
@@ -78,20 +76,14 @@ class FilesListContainer extends Component {
         if(routes[index].routeName === "ImageViewerScreen") 
             return;
 
-        if(this.props.isSelectionMode 
-        || this.props.isSingleItemSelected 
-        || this.props.isActionBarShown) {
-
-            return;
-        }
+        if (this.props.isSelectionMode || 
+            this.props.isSingleItemSelected || 
+            this.props.isActionBarShown) 
+                return;        
 
         this.props.closeBucket();
-
-        if(this.props.screenProps.defaultRoute == 'DashboardDefaultScreen') {
-            this.props.dashboardNavigateBack();
-        } else {
-            this.props.bucketNavigateBack();
-        }
+        
+        this.props.bucketNavigateBack();
     }
 
     onPress(file) {
@@ -110,7 +102,7 @@ class FilesListContainer extends Component {
                 onPress = { (params) => { this.onPress(params); } }
                 cancelDownload = { (params) => { this.cancelDownload(params); } }
                 cancelUpload = { (params) => { this.cancelUpload(params); } }
-                bucketId = { this.bucketId }
+                bucketId = { this.props.openedBucketId }
                 openedBucketId = { this.props.openedBucketId }
                 dashboardBucketId = { this.props.dashboardBucketId }
                 data = { this.getData() }
@@ -122,7 +114,10 @@ class FilesListContainer extends Component {
                 isSingleItemSelected = { this.props.isSingleItemSelected }
                 deselectFile = { this.props.deselectFile }
                 selectFile = { this.props.selectFile }
-                renewFileList = { () => { ServiceModule.getFiles(this.bucketId); this.props.listUploadingFilesAsync(this.bucketId); } }/>
+                renewFileList = { () => { 
+                    ServiceModule.getFiles(this.props.openedBucketId); 
+                    this.props.listUploadingFilesAsync(this.props.openedBucketId); 
+                } }/>
         );
     }
 }
