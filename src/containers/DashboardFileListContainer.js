@@ -105,6 +105,9 @@ class DashboardFileListContainer extends Component {
 }
 
 function mapStateToProps(state) {
+    let screenIndex = state.mainScreenNavReducer.index;
+    let currentScreenName = state.mainScreenNavReducer.routes[screenIndex].routeName;
+
     return {
         buckets: state.bucketReducer.buckets,
         files: state.filesReducer.fileListModels,
@@ -120,7 +123,7 @@ function mapStateToProps(state) {
         isGridViewShown: state.mainReducer.isGridViewShown,
         downloadedFileListModels: state.filesReducer.downloadedFileListModels,
         selectedItemId: state.mainReducer.selectedItemId,
-        activeScreen: state.mainReducer.activeScreen
+        activeScreen: currentScreenName
     };
 }
 

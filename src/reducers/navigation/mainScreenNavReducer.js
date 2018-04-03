@@ -19,7 +19,6 @@ export default function navReducer (state = initialState, action) {
 		MainScreenNavigator.router.getPathAndParamsForState(nextState);
 		nextState = checkMultipleNav(nextState, state);
     } catch(e) {
-        console.log(e.message);
         nextState = state;
     }
 

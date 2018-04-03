@@ -36,8 +36,7 @@ const initialState = {
     openedBucketId: null,
     myPhotosBucketId: null,
     dashboardBucketId: null,
-    selectedItemId: null,
-    activeScreen: "DashboardScreen"
+    selectedItemId: null
 };
 
 export default function mainReducer(state = initialState, action) {
@@ -105,9 +104,6 @@ export default function mainReducer(state = initialState, action) {
             break;
         case CLEAR_SELECTION:
             newState.selectedItemId = null;
-            break;
-        case SET_MAIN_SCREEN:            
-            newState.activeScreen = action.payload.screenName
             break;
         case SET_PHOTOS_BUCKET_ID:            
             newState.myPhotosBucketId = action.payload.myPhotosBucketId

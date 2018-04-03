@@ -74,8 +74,7 @@ class MyPhotosContainer extends Component {
                 data.length !== 0 ? 
                     <ListComponent
                         activeScreen = { this.props.activeScreen }
-                        screens = { "MyPhotosScreen" }
-                        isActiveScreen = { this.props.activeScreen === "MyPhotosScreen" }                        
+                        screens = { "MyPhotosScreen" }              
                         contentWrapperStyle = { styles.contentWrapper }
                         setSelectionId = { this.props.setSelectionId }
                         selectedItemId = { this.props.selectedItemId }
@@ -85,7 +84,7 @@ class MyPhotosContainer extends Component {
                         onPress = { (params) => { this.onPress(params); } }
                         onRefresh = { () => ServiceModule.getFiles(this.props.myPhotosBucketId) }
                         itemType = { TYPES.REGULAR_FILE }
-                        bucketId = { this.props.bucketId }
+                        bucketId = { this.props.myPhotosBucketId }
                         onSingleItemSelected = { this.props.onSingleItemSelected }                    
                         animatedScrollValue = { this.props.animatedScrollValue }
                         enableSelectionMode = { this.props.enableSelectionMode }
@@ -115,6 +114,9 @@ class MyPhotosContainer extends Component {
 }
 
 function mapStateToProps(state) {
+    let screenIndex = state.mainScreenNavReducer.index;
+    let currentScreenName = state.mainScreenNavReducer.routes[screenIndex].routeName;
+
     return {
         buckets: state.bucketReducer.buckets,
         files: state.filesReducer.fileListModels,
@@ -130,7 +132,7 @@ function mapStateToProps(state) {
         isGridViewShown: state.mainReducer.isGridViewShown,
         downloadedFileListModels: state.filesReducer.downloadedFileListModels,
         selectedItemId: state.mainReducer.selectedItemId,
-        activeScreen: state.mainReducer.activeScreen
+        activeScreen: currentScreenName
     };
 }
 

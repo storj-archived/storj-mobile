@@ -23,7 +23,6 @@ class DashboardContainer extends Component {
                 files = { this.props.files }
                 buckets = { this.props.buckets }
                 setDashboardBucketId = { this.props.setDashboardBucketId }
-                screenName = { this.props.screenName }
                 selectItem = { this.props.selectBucket }
                 navigateBack = { this.props.navigateBack }
                 deselectItem = { this.props.deselectBucket }      
@@ -45,9 +44,8 @@ class DashboardContainer extends Component {
 }
 
 function mapStateToProps(state) {
-    let routes = state.dashboardScreenNavReducer.routes;
-    let index = state.dashboardScreenNavReducer.index;
-    let currentBucketScreenName = routes[index].routeName;
+    let screenIndex = state.mainScreenNavReducer.index;
+    let currentScreenName = state.mainScreenNavReducer.routes[screenIndex].routeName;
 
     return {
         isSelectionMode: state.mainReducer.isSelectionMode,        
@@ -55,12 +53,11 @@ function mapStateToProps(state) {
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         fileListModels: state.filesReducer.fileListModels,
         files: state.filesReducer.fileListModels,
-        screenName: currentBucketScreenName,
         selectedItemId: state.mainReducer.selectedItemId,
         dashboardBucketId: state.mainReducer.dashboardBucketId,
         storage: state.billingReducer.storage,
         bandwidth: state.billingReducer.bandwidth,
-        activeScreen: state.mainReducer.activeScreen
+        activeScreen: currentScreenName
     };
 }
     

@@ -17,8 +17,7 @@ class MainNavigationContainer extends Component {
     render() {
         return(
             <MainScreenTabNav
-                screenProps = {{ 
-                    setCurrentMainScreen: this.props.setCurrentMainScreen,                    
+                screenProps = {{                                    
                     showOptions: this.props.showOptions, 
                     showQR: this.props.showQR,
                     showStorageInfo: this.props.showStorageInfo,

@@ -44,8 +44,11 @@ class BucketsListContainer extends Component {
 }
 
 function mapStateToProps(state) {
+    let screenIndex = state.mainScreenNavReducer.index;
+    let currentScreenName = state.mainScreenNavReducer.routes[screenIndex].routeName;
+    
     return {
-        activeScreen: state.mainReducer.activeScreen,
+        activeScreen: currentScreenName,
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         buckets: state.bucketReducer.buckets,

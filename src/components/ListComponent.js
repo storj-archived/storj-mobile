@@ -307,7 +307,7 @@ export default class ListComponent extends Component {
                     : this.getListItemsList();
     }
 
-    render() {             
+    render() {                     
         return (
                 <Animated.ScrollView style = { styles.listContainer }
                     decelerationRate = { 'normal' }
