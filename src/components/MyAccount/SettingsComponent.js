@@ -74,11 +74,12 @@ export default class SettingsComponent extends Component{
                             onPress = { () => { this.props.syncPhotosAction(!this.props.syncPhotos, this.props.getStateObject()); } }
                             style = { styles.flexRow } >
                             <Image 
-                                style = { styles.icon } 
+                                style = { styles.icon }
+                                resizeMode = 'contain'
                                 source = { 
                                     this.props.syncPhotos 
                                     ? require('../../images/Icons/ListItemSelected.png')
-                                    : require('../../images/Icons/ListItemUnselected.png') } />
+                                    : require('../../images/Icons/ListItemUnselected.png') }/>
                         
                             <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync photos</Text>
                         </TouchableOpacity>
@@ -90,6 +91,7 @@ export default class SettingsComponent extends Component{
                             style = { styles.flexRow } >
                             <Image 
                                 style = { styles.icon } 
+                                resizeMode = 'contain'
                                 source = { 
                                     this.props.syncMovies 
                                     ? require('../../images/Icons/ListItemSelected.png')
@@ -104,6 +106,7 @@ export default class SettingsComponent extends Component{
                             style = { styles.flexRow } >
                             <Image 
                                 style = { styles.icon } 
+                                resizeMode = 'contain'
                                 source = { 
                                     this.props.syncDocuments 
                                     ? require('../../images/Icons/ListItemSelected.png')
@@ -119,6 +122,7 @@ export default class SettingsComponent extends Component{
                             style = { styles.flexRow } >
                             <Image 
                                 style = { styles.icon } 
+                                resizeMode = 'contain'
                                 source = { 
                                     this.props.syncMusic 
                                     ? require('../../images/Icons/ListItemSelected.png')

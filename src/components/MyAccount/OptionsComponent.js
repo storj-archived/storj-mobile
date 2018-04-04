@@ -19,7 +19,7 @@ export default class OptionsComponent extends Component{
             <TouchableOpacity onPress = { this.props.onPress }>
                 <View style = { styles.mainContainer }>
                     <View style = { styles.flexRow }>
-                        <Image style = { styles.icon } source = { this.props.imageSource } />
+                        <Image style = { styles.icon } source = { this.props.imageSource } resizeMode = 'contain' />
                         <Text style = { styles.titleText }>{ this.props.title }</Text>
                     </View>
                     <Image style = { styles.expanderIcon } source = { require('../../images/DashboardScreen/BlueVector.png') }/>
@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     icon: {
-        height: getHeight(24),
-        width: getWidth(24)
+        height: getHeight(22),
+        width: getWidth(22)
     },
     expanderIcon: {
         height: getHeight(12),
