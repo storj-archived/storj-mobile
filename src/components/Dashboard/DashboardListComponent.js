@@ -8,7 +8,6 @@ import {
     Image
 } from 'react-native';
 import React, { Component } from 'react';
-import BucketsScreenHeaderComponent from '../../components/BucketsScreenHeaderComponent';
 import ListComponent from '../../components/ListComponent';
 import ListItemModel from '../../models/ListItemModel';
 import BucketModel from '../../models/BucketModel';
@@ -82,13 +81,37 @@ export default class DashboardListComponent extends Component{
                         </View>
                         <View style = { styles.contentWrapper }>
                         {
-                            listComponent('Favourite buckets', this.getThreeLast(starredBuckets), this.props, starredBucketsCount, true, this.props.activeScreen)
+                            listComponent(
+                                'Favourite buckets', 
+                                this.getThreeLast(starredBuckets), 
+                                this.props, 
+                                starredBucketsCount, 
+                                true, 
+                                this.props.activeScreen,
+                                'buckets'
+                            )
                         }
                         {
-                            listComponent('Favourite files', this.getThreeLast(starredFiles), this.props, starredFilesCount, false, this.props.activeScreen)
+                            listComponent(
+                                'Favourite files',
+                                this.getThreeLast(starredFiles), 
+                                this.props, 
+                                starredFilesCount, 
+                                false, 
+                                this.props.activeScreen,
+                                'files'
+                            )
                         }
                         {
-                            listComponent('Recent sync', this.getThreeLast(syncedFiles), this.props, syncedfilesCount, false, this.props.activeScreen)
+                            listComponent(
+                                'Recent sync', 
+                                this.getThreeLast(syncedFiles), 
+                                this.props, 
+                                syncedfilesCount, 
+                                false, 
+                                this.props.activeScreen,
+                                'synced'
+                            )
                         }     
                         </View>
                     </ScrollView>
@@ -98,11 +121,11 @@ export default class DashboardListComponent extends Component{
     }
 }
 
-const listComponent = (title, data, props, count, isBucket, screen) => {
+const listComponent = (title, data, props, count, isBucket, screen, itemType) => {
     return(
         <View>  
             <DashboardListHeaderComponent
-                onPress = { () => {} }
+                onPress = { () => { props.redirectToFavoritesItemsScreen(itemType) } }
                 title = { title } />
             <ListComponent
                 activeScreen = { screen }
@@ -127,7 +150,7 @@ const listComponent = (title, data, props, count, isBucket, screen) => {
                 data = { data } />
             <DashboardListFooterComponent
                 count = { count } 
-                onPress = { () => {} } />
+                onPress = { () => { props.redirectToFavoritesItemsScreen(itemType) } } />
         </View>
     )
 }

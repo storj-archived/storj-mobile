@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux';
 import ListComponent from '../components/ListComponent';
 import { openImageViewer } from '../reducers/navigation/navigationActions';
 import { myPicturesListContainerMainActions, getPicturesBucketId } from '../reducers/mainContainer/mainReducerActions';
+import { dashboardContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions'
 import filesActions from '../reducers/mainContainer/Files/filesReducerActions';
 import StorjModule from '../utils/StorjModule';
 import ListItemModel from '../models/ListItemModel';
@@ -19,7 +20,7 @@ import { getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 import EmpyBucketComponent from '../components/EmpyBucketComponent';
 
-class DashboardFileListContainer extends Component {
+class FavoritesItemsContainer extends Component {
     constructor(props) {
         super(props);
 
@@ -27,10 +28,25 @@ class DashboardFileListContainer extends Component {
         this.animatedScrollValue = new Animated.Value(0);
     }
 
-    getData() {        
-        this.data = this.props.files.
-                        concat(this.props.uploadingFileListModels).
-                        filter(file => file.entity.bucketId === this.props.dashboardBucketId);
+    getData() {
+        switch (this.props.navigation.state.params.itemType) {
+            case 'files': {
+                this.data = this.props.files.filter((element) => {
+                    return element.entity.isStarred === true;
+                });
+            } break;
+            case 'buckets': {
+                this.data = this.props.buckets.filter((element) => {
+                    return element.entity.isStarred === true;
+                }); 
+            } break;
+            case 'synced': {        
+                this.data = this.props.files.filter((element) => {
+                    return element.entity.isSynced === true;
+                });
+            } break;
+            default : this.data = [];
+        }
 
         return this.data;
     }
@@ -41,17 +57,18 @@ class DashboardFileListContainer extends Component {
         }
     }
 
+    isBuckets() {
+        return this.props.navigation.state.params.itemType === 'buckets';
+    }
+
     render() {
         let data = this.getData();
 
         return (
             <View style = { styles.mainContainer }>
             {
-                data.length === 0 && this.props.dashboardBucketId !== null ? 
-                    <EmpyBucketComponent />
-                    : <ListComponent
-                        activeScreen = { this.props.activeScreen }
-                        screens = { "DashboardScreen" }                    
+                data.length !== 0 ? 
+                    <ListComponent                   
                         contentWrapperStyle = { styles.contentWrapper }
                         setSelectionId = { this.props.setSelectionId }
                         selectedItemId = { this.props.selectedItemId }
@@ -59,21 +76,35 @@ class DashboardFileListContainer extends Component {
                         cancelUpload = { this.props.cancelUpload }
                         isGridViewShown = { this.props.isGridViewShown }
                         onPress = { (params) => { this.onPress(params); } }
-                        onRefresh = { () => ServiceModule.getFiles(this.props.dashboardBucketId) }
-                        itemType = { TYPES.REGULAR_FILE }
+                        onRefresh = { () => {} }
+                        itemType = { this.isBuckets() ? TYPES.REGULAR_BUCKET : TYPES.REGULAR_FILE }
                         bucketId = { this.props.bucketId }
+                        isGridViewShown = { this.props.isGridViewShown }
                         onSingleItemSelected = { this.props.onSingleItemSelected }                    
                         animatedScrollValue = { this.props.animatedScrollValue }
                         enableSelectionMode = { this.props.enableSelectionMode }
                         disableSelectionMode = { this.props.disableSelectionMode }
                         isSelectionMode = { this.props.isSelectionMode }
                         isSingleItemSelected = { this.props.isSingleItemSelected }
-                        deselectItem = { this.props.deselectFile }
-                        selectItem = { this.props.selectFile }
+                        deselectItem = { this.isBuckets() ? this.props.deselectBucket : this.props.deselectFile }
+                        selectItem = { this.isBuckets() ? this.props.selectBucket : this.props.selectFile } 
                         data = { data }   
-                        listItemIcon = { require('../images/Icons/FileListItemIcon.png') }
-                        starredGridItemIcon = { require('../images/Icons/GridStarredFile.png') }
-                        starredListItemIcon = { require('../images/Icons/ListStarredFile.png') } />
+                        listItemIcon = { 
+                            this.isBuckets() 
+                            ? require('../images/Icons/BucketListItemIcon.png')
+                            : require('../images/Icons/FileListItemIcon.png')
+                        }
+                        starredGridItemIcon = { 
+                            this.isBuckets() 
+                            ? require('../images/Icons/GridStarredBucket.png') 
+                            : require('../images/Icons/GridStarredFile.png') 
+                        }
+                        starredListItemIcon = { 
+                            this.isBuckets() 
+                            ? require('../images/Icons/ListStarredBucket.png') 
+                            : require('../images/Icons/ListStarredFile.png') 
+                        } />
+                        : <EmpyBucketComponent />
             }
             </View>
         )
@@ -81,9 +112,6 @@ class DashboardFileListContainer extends Component {
 }
 
 function mapStateToProps(state) {
-    let screenIndex = state.mainScreenNavReducer.index;
-    let currentScreenName = state.mainScreenNavReducer.routes[screenIndex].routeName;
-
     return {
         buckets: state.bucketReducer.buckets,
         files: state.filesReducer.fileListModels,
@@ -93,70 +121,22 @@ function mapStateToProps(state) {
         isActionBarShown: state.mainReducer.isActionBarShown,
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
-        uploadingFileListModels: state.filesReducer.uploadingFileListModels,
         isLoading: state.mainReducer.isLoading,
         isGridViewShown: state.mainReducer.isGridViewShown,
-        downloadedFileListModels: state.filesReducer.downloadedFileListModels,
-        activeScreen: currentScreenName
+        activeScreen: state.mainReducer.activeScreen
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({  
         openImageViewer, 
+        ...dashboardContainerBucketActions,
         ...myPicturesListContainerMainActions, 
         ...filesActions 
     }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardFileListContainer);
-
-DashboardFileListContainer.propTypes = {
-    setSelectionId: PropTypes.func,
-    selectedItemId: PropTypes.string,
-    cancelDownload: PropTypes.bool,
-    cancelUpload: PropTypes.bool,
-    isGridViewShown: PropTypes.bool,
-    dashboardBucketId: PropTypes.string,
-    bucketId: PropTypes.bool,
-    onSingleItemSelected: PropTypes.func,
-    animatedScrollValue: PropTypes.bool,
-    enableSelectionMode: PropTypes.func,
-    disableSelectionMode: PropTypes.func,
-    isSelectionMode: PropTypes.bool,
-    isSingleItemSelected: PropTypes.bool,
-    deselectFile: PropTypes.func,
-    selectFile: PropTypes.func,
-    closeBucket: PropTypes.func,
-    deleteFile: PropTypes.func,
-    downloadFileError: PropTypes.func,
-    downloadFileSuccess: PropTypes.func,
-    downloadedFileListModels: PropTypes.array,
-    fileDownloadCanceled: PropTypes.func,
-    fileListModels: PropTypes.array,
-    fileUploadCanceled: PropTypes.func,
-    files: PropTypes.array,
-    isActionBarShown: PropTypes.bool,
-    isLoading: PropTypes.bool,
-    isSelectionMode: PropTypes.bool,
-    isSingleItemSelected: PropTypes.bool,
-    listFiles: PropTypes.func,
-    mainNavReducer: PropTypes.object,
-    navigation: PropTypes.object,
-    openBucket: PropTypes.func,
-    openImageViewer: PropTypes.func,
-    screenProps: PropTypes.object,
-    setLoading: PropTypes.func,
-    listUploadingFiles: PropTypes.func,
-    unsetLoading: PropTypes.func,
-    updateFileDownloadProgress: PropTypes.func,
-    updateFileUploadProgress: PropTypes.func,
-    uploadFileError: PropTypes.func,
-    uploadFileStart: PropTypes.func,
-    uploadFileSuccess: PropTypes.func,
-    uploadingFileListModels: PropTypes.array
-};
-
+export default connect(mapStateToProps, mapDispatchToProps)(FavoritesItemsContainer);
 
 const styles = StyleSheet.create({
     mainContainer: {

@@ -23,39 +23,37 @@ class DashboardScreenContainer extends Component {
         return array.filter(item => item.isSelected).length;
     }
 
-    getSelectedFilesCount() {        
-        if(!this.props.dashboardBucketId || !this.props.files || this.props.files.length === 0) return 0; 
+    getSelectedItemsCount() {        
 
-        let openedBucket = this.props.files.filter(item => item.entity.bucketId === this.props.dashboardBucketId);
-
-        if(openedBucket) {
-            return this.getArraySelectedCount(openedBucket);
-        }
+            return this.getArraySelectedCount(this.props.buckets.concat(this.props.files));
     }
 
     navigateBack() {
+        this.props.dashboardNavigateBack();
         this.props.disableSelectionMode();
-        this.props.navigateBack();
+        this.props.setDashboardBucketId(null);
     }
 
     render() {
         return(
-            <DashboardComponent
+            <DashboardComponent 
                 showOptions = { this.props.screenProps.showOptions }
                 setSelectionId = { this.props.setSelectionId }
                 files = { this.props.files }
                 buckets = { this.props.buckets }
                 defaultRoute = { this.props.defaultRoute }
-                isFilesScreen = { this.props.screenName === 'DashboardFilesScreen' }
+                isFilesScreen = { this.props.screenName !== 'DashboardDefaultScreen' }
                 screenName = { this.props.screenName }
-                selectItem = { this.props.selectBucket }
-                navigateBack = { this.props.dashboardNavigateBack }
-                deselectItem = { this.props.deselectBucket }      
+                selectItem = { this.props.selectFile }
+                navigateBack = { () => { this.navigateBack() } }
+                deselectItem = { this.props.deselectFile }      
                 isSelectionMode = { this.props.isSelectionMode }
+                dashboardBucketId = { this.props.dashboardBucketId }
                 selectedBucketId = { this.props.selectedBucketId }
                 animatedScrollValue = { this.animatedScrollValue }
-                selectedItemsCount = { this.getSelectedFilesCount() }
+                selectedItemsCount = { this.getSelectedItemsCount() }
                 disableSelectionMode = { this.props.disableSelectionMode }
+                enableSelectionMode = { this.props.enableSelectionMode }
                 onSingleItemSelected = { this.props.onSingleItemSelected }  
                 isSingleItemSelected = { this.props.isSingleItemSelected } />
         ) 
@@ -73,6 +71,7 @@ function mapStateToProps(state) {
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         isFirstSignIn: state.mainReducer.isFirstSignIn,
         files: state.filesReducer.fileListModels,
+        dashboardBucketId: state.mainReducer.dashboardBucketId,
         isGridViewShown: state.mainReducer.isGridViewShown,
         defaultRoute: routes[0].routeName,
         screenName: currentScreenName,

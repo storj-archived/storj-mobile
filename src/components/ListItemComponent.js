@@ -160,7 +160,7 @@ ListItemComponent.propTypes = {
     selectItemId: PropTypes.func,
     onPress: PropTypes.func,
     progress: PropTypes.number,
-    listItemIcon: PropTypes.number, //wtf?
+    listItemIcon: PropTypes.number, 
     isFileLoading: PropTypes.bool,
     isSelected: PropTypes.bool,
     disableSelectionMode: PropTypes.func,

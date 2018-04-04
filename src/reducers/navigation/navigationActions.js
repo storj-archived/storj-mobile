@@ -182,6 +182,15 @@ export function redirectToMyAccountScreen() {
     });
 }
 
+export function redirectToFavoritesItemsScreen(itemType) {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'FavoritesItemsScreen', params: {itemType}})
+        ]
+    });
+}
+
 export const authNavigationActions = {
     redirectToLoginScreen,
     redirectToMainScreen,
@@ -192,6 +201,7 @@ export const authNavigationActions = {
     redirectToMnemonicNotConfirmedScreen,
     redirectToRegisterScreen,
     redirectToRegisterSuccessScreen,
+    redirectToFavoritesItemsScreen,
     navigateBack
 }
 

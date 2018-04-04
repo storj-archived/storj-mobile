@@ -24,18 +24,18 @@ export default class DashboardComponent extends Component {
                     defaultRoute = { this.props.defaultRoute }
                     animatedScrollValue = { this.animatedScrollValue } />
                 <BucketsScreenHeaderComponent
-                    isFilesScreen = { this.props.isFilesScreen}
-                    files = { this.props.files }
+                    setDashboardBucketId = { this.props.setDashboardBucketId }
+                    isFilesScreen = { this.props.isFilesScreen }
                     buckets = { this.props.buckets }
                     screenName = { this.props.screenName }
-                    selectItem = { this.props.selectBucket }
+                    selectItem = { this.props.selectItem }
                     showOptions = { this.props.showOptions }
                     navigateBack = { this.props.navigateBack }
-                    deselectItem = { this.props.deselectBucket }      
+                    deselectItem = { this.props.deselectItem }     
                     isSelectionMode = { this.props.isSelectionMode }
                     openedBucketId = { this.props.selectedBucketId }
-                    animatedScrollValue = { this.animatedScrollValue  }
-                    selectedFilesCount = { this.props.selectedFilesCount }
+                    animatedScrollValue = { this.animatedScrollValue }
+                    enableSelectionMode = { this.props.enableSelectionMode }
                     disableSelectionMode = { this.props.disableSelectionMode }
                     selectedItemsCount = { this.props.selectedItemsCount }  
                     onSingleItemSelected = { this.props.onSingleItemSelected }  
