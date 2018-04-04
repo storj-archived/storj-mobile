@@ -1,6 +1,7 @@
 import {
     View,
-    StyleSheet
+    StyleSheet,
+    ActivityIndicator
 } from 'react-native';
 import React, { Component } from 'react';
 import ListComponent from '../components/ListComponent';
@@ -14,12 +15,13 @@ export default class FilesListComponent extends Component {
         super(props);
     }
 
-    render() {        
+    render() {
+        (null)        
         return(
             <View style = { styles.mainContainer }>
                 {
                     this.props.data.length === 0 
-                    && this.props.openedBucketId !== null
+                    && this.props.openedBucketId !== null && !this.props.isLoading
                         ? <EmpyBucketComponent />
                         : <ListComponent
                             activeScreen = { this.props.activeScreen }
@@ -46,11 +48,18 @@ export default class FilesListComponent extends Component {
                             listItemIcon = { require('../images/Icons/FileListItemIcon.png') }
                             starredGridItemIcon = { require('../images/Icons/GridStarredFile.png') }
                             starredListItemIcon = { require('../images/Icons/ListStarredFile.png') } />                       
-                }               
+                }
+                <LoadingComponent isLoading = { this.props.isLoading } />
             </View>
         );
     }
 }
+
+const LoadingComponent = (props) => (
+    <View style={ styles.loadingComponentContainer }>
+        <ActivityIndicator animating = { props.isLoading ? true : false } size = { 'large' } color = { 'blue' } />
+    </View>
+); 
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -60,6 +69,13 @@ const styles = StyleSheet.create({
     contentWrapper: {
         paddingTop: getHeight(58),
         paddingBottom: getHeight(60)
+    },
+    loadingComponentContainer: {
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: getHeight(70),
+        height: getHeight(60)
     }
 });
 

@@ -1,4 +1,5 @@
 import { MAIN_ACTIONS } from '../../utils/constants/actionConstants';
+import LoadingStack from "../../utils/loadingStack";
 
 const { 
     SHOW_ACTION_BAR, 
@@ -21,7 +22,10 @@ const {
     SET_EMAIL,
     SET_MAIN_SCREEN,
     SET_PHOTOS_BUCKET_ID,
-    SET_DASHBOARD_BUCKET_ID
+    SET_DASHBOARD_BUCKET_ID,
+
+    PUSH_LOADING,
+    POP_LOADING
  } = MAIN_ACTIONS;
                                                         
 const initialState = {
@@ -36,11 +40,13 @@ const initialState = {
     openedBucketId: null,
     myPhotosBucketId: null,
     dashboardBucketId: null,
-    selectedItemId: null
+    selectedItemId: null,
+    loadingStack: []
 };
 
 export default function mainReducer(state = initialState, action) {
     let newState = Object.assign({}, state);
+    const loadingStack = new LoadingStack(newState.loadingStack);
 
     //TODO: we can call return after switch, and reduce lines of code
     switch(action.type) {
@@ -110,6 +116,13 @@ export default function mainReducer(state = initialState, action) {
             break;
         case SET_DASHBOARD_BUCKET_ID:            
             newState.dashboardBucketId = action.payload.dashboardBucketId
+            break;
+        case PUSH_LOADING:
+            newState.loadingStack = loadingStack.setLoading(action.payload.value);
+            break;
+        case POP_LOADING:
+            newState.loadingStack = loadingStack.unsetLoading(action.payload.value);
+            console.log("POP", newState.loadingStack);
             break;
         default:
             return state || initialState;

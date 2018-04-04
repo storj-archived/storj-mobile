@@ -187,7 +187,7 @@ public class GetBucketsService extends BaseReactService {
                 if(files.length == 0) {
                     Response deleteAllResponse = fRepository().deleteAll(bucketId);
                     getDb().close();
-                    sendEvent(EVENT_FILES_UPDATED, true);
+                    sendEvent(EVENT_FILES_UPDATED, new SingleResponse(true, bucketId, null).toWritableMap());
                     return;
                 }
 
@@ -233,12 +233,12 @@ public class GetBucketsService extends BaseReactService {
                     getDb().close();
                 }
 
-                sendEvent(EVENT_FILES_UPDATED, true);
+                sendEvent(EVENT_FILES_UPDATED, new SingleResponse(true, bucketId, null).toWritableMap());
             }
 
             @Override
             public void onError(int code, String message) {
-                sendEvent(EVENT_FILES_UPDATED, false);
+                sendEvent(EVENT_FILES_UPDATED, new SingleResponse(false, bucketId, message).toWritableMap());
             }
         });
     }

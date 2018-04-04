@@ -149,18 +149,19 @@ class Apps extends Component {
 		return true;
 	}
 
-	async onFilesReceived() {
-        this.props.setLoading();
-        let filesResponse = await SyncModule.listFiles(this.props.openedBucketId);		
+	async onFilesReceived(response) {
+		if(response.isSuccess) {
+			let filesResponse = await SyncModule.listFiles(response.result);		
 
-        if(filesResponse.isSuccess) {
-            let files = JSON.parse(filesResponse.result).map((file) => {
-                return new ListItemModel(new FileModel(file));
-            });                    
-            this.props.listFiles(this.props.openedBucketId, files);
-        }
-
-        this.props.unsetLoading();
+			if(filesResponse.isSuccess) {
+				let files = JSON.parse(filesResponse.result).map((file) => {
+					return new ListItemModel(new FileModel(file));
+				});                    
+				this.props.listFiles(response.result, files);
+			}
+		}
+        
+		this.props.popLoading(response.result);
     }
 
 	onBucketCreated(response) {

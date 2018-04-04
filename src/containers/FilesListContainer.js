@@ -38,8 +38,10 @@ class FilesListContainer extends Component {
             }
         ).start();               
         
-        this.props.setLoading();
+        //this.props.setLoading();
+        this.props.pushLoading(this.props.openedBucketId);
         await this.props.listFilesAsync(this.props.openedBucketId);
+        await this.props.listUploadingFilesAsync(this.props.openedBucketId);
         ServiceModule.getFiles(this.props.openedBucketId);  
     }
 
@@ -93,8 +95,10 @@ class FilesListContainer extends Component {
     }
 
     render() {
+        console.log(this.props.loadingStack);
         return(
             <FilesListComponent
+                isLoading = { this.props.loadingStack.includes(this.props.openedBucketId) }
                 activeScreen = { this.props.activeScreen }  
                 setSelectionId = { this.props.screenProps.setSelectionId }
                 selectedItemId = { this.props.selectedItemId }
@@ -114,7 +118,8 @@ class FilesListContainer extends Component {
                 isSingleItemSelected = { this.props.isSingleItemSelected }
                 deselectFile = { this.props.deselectFile }
                 selectFile = { this.props.selectFile }
-                renewFileList = { () => { 
+                renewFileList = { () => {
+                    this.props.pushLoading(this.props.openedBucketId); 
                     ServiceModule.getFiles(this.props.openedBucketId); 
                     this.props.listUploadingFilesAsync(this.props.openedBucketId); 
                 } } />
@@ -127,6 +132,7 @@ function mapStateToProps(state) {
     let currentScreenName = state.mainScreenNavReducer.routes[screenIndex].routeName;
 
     return {
+        loadingStack: state.mainReducer.loadingStack,
         mainNavReducer: state.navReducer,
         openedBucketId: state.mainReducer.openedBucketId,
         dashboardBucketId: state.mainReducer.dashboardBucketId,
@@ -146,7 +152,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         ...bindActionCreators({ bucketNavigateBack, dashboardNavigateBack, openImageViewer, ...filesListContainerMainActions, ...filesListContainerFileActions }, dispatch),
-        listUploadingFilesAsync: (bucketId) => { dispatch(listUploadingFiles(bucketId)); },
+        listUploadingFilesAsync: async (bucketId) => { await dispatch(listUploadingFiles(bucketId)); },
         listFilesAsync: async (bucketId) => { return await dispatch(listFiles(bucketId)); }
     };
 }

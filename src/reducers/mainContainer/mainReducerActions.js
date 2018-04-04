@@ -28,7 +28,9 @@ const {
     SET_SELECTION_ID,    
     SET_EMAIL,    
     SET_PHOTOS_BUCKET_ID,
-    SET_DASHBOARD_BUCKET_ID
+    SET_DASHBOARD_BUCKET_ID,
+    PUSH_LOADING,
+    POP_LOADING
 } = MAIN_ACTIONS;
 
 function setEmail(email) {
@@ -127,6 +129,14 @@ function setDashboardBucketId(id) {
     return { type: SET_DASHBOARD_BUCKET_ID, payload: { dashboardBucketId: id } }
 }
 
+function pushLoading(value) {
+    return { type: PUSH_LOADING, payload: { value } };
+}
+
+function popLoading(value) {
+    return { type: POP_LOADING, payload: { value } };
+}
+
 export function getPicturesBucketId(buckets) {
     ServiceModule.createBaseBuckets(buckets);
 
@@ -156,7 +166,9 @@ export const mainContainerActions = {
     unsetLoading,
     setGridView,
     setListView,
-    openBucket
+    openBucket,
+    pushLoading,
+    popLoading
 };
 
 //action creators for bucket screen
@@ -202,7 +214,9 @@ export const filesListContainerMainActions = {
     setLoading,
     enableSelectionMode,
     disableSelectionMode, 
-    unsetLoading
+    unsetLoading,
+    pushLoading,
+    popLoading
 };
 
 export const myPicturesListContainerMainActions = {    
