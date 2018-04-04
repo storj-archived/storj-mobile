@@ -77,19 +77,29 @@ export default class ListItemComponent extends Component {
                         {
                             (() => {
                                 if(props.isSelectionModeEnabled) {
-                                    if(isSelected) {
-                                        return(<Image style = { listItemStyles.selectedIcon } source = { require('../images/Icons/ListItemSelected.png') } />);    
-                                    } else {
-                                        return(<Image style = { listItemStyles.selectedIcon } source = { require('../images/Icons/ListItemUnselected.png') } />);
-                                    }
+
+                                    return isSelected 
+                                    ? <Image style = { listItemStyles.selectedIcon } source = { require('../images/Icons/ListItemSelected.png') } />    
+                                    : <Image style = { listItemStyles.selectedIcon } source = { require('../images/Icons/ListItemUnselected.png') } />
                                 }
+                                    
                             })()
                         }
                         <View>
-                            <Image 
-                                style = { listItemStyles.itemTypeIcon } 
-                                source = { props.item.getStarred() ? props.starredListItemIcon : props.listItemIcon }
-                                resizeMode = 'contain' />
+                            {
+                                (()=>{
+                                    if(props.item.entity.thumbnail){
+                                        let uri = 'data:image/png;base64,' + props.item.entity.thumbnail;
+                                        return <Image style = { listItemStyles.selectedIcon } 
+                                                      source = {{ uri: uri }} />    
+                                    } else {
+                                        return <Image 
+                                                    style = { listItemStyles.itemTypeIcon } 
+                                                    source = { props.item.getStarred() ? props.starredListItemIcon : props.listItemIcon }
+                                                    resizeMode = 'contain' />
+                                    }
+                                })()
+                            }
                         </View>
                         <View style = { listItemStyles.textWrapper }>
                             <Text numberOfLines = {1} style = { listItemStyles.mainTitleText }>{ props.item.getName() }</Text>

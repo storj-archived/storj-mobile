@@ -52,30 +52,33 @@ public class FileModel {
     @Expose
     @SerializedName(FileContract._FILE_URI)
     private String _fileUri;
+    @Expose
+    @SerializedName(FileContract._FILE_THUMBNAIL)
+    private String _thumbnail;
 
     public FileModel(File file) {
-        this(file, false, false, 0, 0, null);
+        this(file, false, false, 0, 0, null, null);
     }
 
     public FileModel(File file, boolean isStarred) {
-        this(file, isStarred, false, 0, 0, null);
+        this(file, isStarred, false, 0, 0, null, null);
     }
 
-    public FileModel(File file, boolean isStarred, boolean isSynced) { this(file, isStarred, isSynced, 0, 0, null); }
+    public FileModel(File file, boolean isStarred, boolean isSynced) { this(file, isStarred, isSynced, 0, 0, null, null); }
 
     public FileModel(String bucketId, String fileId, String created, String erasure, String hmac, String index, boolean isDecrypted, boolean isStarred, String mimeType, String name, long size) {
-        this(bucketId, fileId, created, erasure, hmac, index, isDecrypted, isStarred, mimeType, name, size, false, 0, null);
+        this(bucketId, fileId, created, erasure, hmac, index, isDecrypted, isStarred, mimeType, name, size, false, 0, null, null);
     }
 
     public FileModel(String bucketId, String fileId, String created, String erasure, String hmac, String index, boolean isDecrypted, boolean isStarred, String mimeType, String name, long size, boolean isSynced) {
-        this(bucketId, fileId, created, erasure, hmac, index, isDecrypted, isStarred, mimeType, name, size, isSynced, 0, null);
+        this(bucketId, fileId, created, erasure, hmac, index, isDecrypted, isStarred, mimeType, name, size, isSynced, 0, null, null);
     }
 
     public FileModel(String bucketId, String fileId, String created, String erasure, String hmac, String index, boolean isDecrypted, boolean isStarred, String mimeType, String name, long size, boolean isSynced, int downloadState) {
-        this(bucketId, fileId, created, erasure, hmac, index, isDecrypted, isStarred, mimeType, name, size, isSynced, downloadState, null);
+        this(bucketId, fileId, created, erasure, hmac, index, isDecrypted, isStarred, mimeType, name, size, isSynced, downloadState, null, null);
     }
 
-    public FileModel(File file, boolean isStarred, boolean isSynced, int downloadState, long fileHandle, String fileUri) {
+    public FileModel(File file, boolean isStarred, boolean isSynced, int downloadState, long fileHandle, String fileUri, String thumbnail) {
         _bucketId = file.getBucketId();
         _created = file.getCreated();
         _erasure = file.getErasure();
@@ -91,9 +94,24 @@ public class FileModel {
         _downloadState = downloadState;
         _fileHandle = fileHandle;
         _fileUri = fileUri;
+        _thumbnail = thumbnail;
     }
 
-    public FileModel(String bucketId, String fileId, String created, String erasure, String hmac, String index, boolean isDecrypted, boolean isStarred, String mimeType, String name, long size, boolean isSynced, int downloadState, String fileUri) {
+    public FileModel(String bucketId,
+                     String fileId,
+                     String created,
+                     String erasure,
+                     String hmac,
+                     String index,
+                     boolean isDecrypted,
+                     boolean isStarred,
+                     String mimeType,
+                     String name,
+                     long size,
+                     boolean isSynced,
+                     int downloadState,
+                     String fileUri,
+                     String thumbnail) {
         _bucketId = bucketId;
         _created = created;
         _erasure = erasure;
@@ -108,6 +126,7 @@ public class FileModel {
         _isSynced = isSynced;
         _downloadState = downloadState;
         _fileUri = fileUri;
+        _thumbnail = thumbnail;
     }
     
     public boolean isValid() {
@@ -155,4 +174,5 @@ public class FileModel {
     public int downloadState() { return _downloadState; }
     public long getFileHandle() { return _fileHandle; }
     public String getUri() { return _fileUri; }
+    public String getThumbnail() { return _thumbnail; }
 }

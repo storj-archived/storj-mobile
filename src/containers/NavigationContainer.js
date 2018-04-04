@@ -116,8 +116,8 @@ class Apps extends Component {
 		this.props.updateFileDownloadProgress(null, params.fileId, params.progress, params.fileHandle);
 	}
 
-	onFileDownloadSuccess(params) {
-		this.props.downloadFileSuccess(null, params.fileId, params.localPath);
+	onFileDownloadSuccess(params) {		
+		this.props.downloadFileSuccess(null, params.fileId, params.localPath, params.thumbnail);
 	}
 
 	onFileDownloadError(params) {

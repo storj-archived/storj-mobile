@@ -16,5 +16,6 @@ export default class FileModel extends ItemModel {
         this.bucketId = file.bucketId;
         this.localPath = file.fileUri;
         this.isDownloaded = file.downloadState == 2 ? true : false;
+        this.thumbnail = file.thumbnail;
     }
 }

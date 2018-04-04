@@ -63,8 +63,8 @@ function updateFileUploadProgress(fileHandle, progress, uploaded) {
  * @param {string} bucketId
  * @param {string} fileId
  */
-function downloadFileSuccess(bucketId, fileId, filePath) {
-    return { type: DOWNLOAD_FILE_SUCCESS, payload: { bucketId, fileId, filePath } };
+function downloadFileSuccess(bucketId, fileId, filePath, thumbnail) {
+    return { type: DOWNLOAD_FILE_SUCCESS, payload: { bucketId, fileId, filePath, thumbnail } };
 }
 
 /**

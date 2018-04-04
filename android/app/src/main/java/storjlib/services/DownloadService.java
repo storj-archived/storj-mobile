@@ -16,7 +16,9 @@ import storjlib.dataprovider.contracts.FileContract;
 import storjlib.dataprovider.dbo.FileDbo;
 import storjlib.dataprovider.repositories.FileRepository;
 import storjlib.enums.DownloadStateEnum;
+import storjlib.responses.SingleResponse;
 import storjlib.utils.ProgressResolver;
+import storjlib.utils.ThumbnailProcessor;
 import storjlib.utils.UploadSyncObject;
 
 /**
@@ -77,6 +79,7 @@ public class DownloadService extends BaseReactService {
 
         final SQLiteDatabase db = new DatabaseFactory(this, null).getWritableDatabase();
         final FileRepository fileRepo = new FileRepository(db);
+        final ThumbnailProcessor tProc = new ThumbnailProcessor(fileRepo);
 
         final FileDbo fileDbo = fileRepo.get(fileId);
 
@@ -124,6 +127,12 @@ public class DownloadService extends BaseReactService {
                     WritableMap map = new WritableNativeMap();
                     map.putString(FileContract._FILE_ID, fileId);
                     map.putString("localPath", localPath);
+
+                    SingleResponse resp = tProc.getThumbbnail(fileId, localPath);
+
+                    if(resp.isSuccess()) {
+                        map.putString(FileContract._FILE_THUMBNAIL, resp.getResult());
+                    }
 
                     sendEvent(EVENT_FILE_DOWNLOAD_SUCCESS, map);
                 }

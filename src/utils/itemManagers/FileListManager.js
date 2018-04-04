@@ -161,13 +161,14 @@ export default class FileListManager {
         return this.newFileUploadingList;
     }
 
-    fileDownloaded(bucketId, fileId, localPath) {
+    fileDownloaded(bucketId, fileId, localPath, thumbnail) {
         this.newFilesList = this.newFilesList.map(fileEntry => {
             if(fileEntry.getId() === fileId) {
                 fileEntry.isLoading = false;
                 fileEntry.progress = 0;
                 fileEntry.entity.localPath = localPath;
                 fileEntry.entity.isDownloaded = true;
+                fileEntry.entity.thumbnail = thumbnail;
             }
             
             return fileEntry;

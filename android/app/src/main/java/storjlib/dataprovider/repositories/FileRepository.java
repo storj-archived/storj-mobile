@@ -34,7 +34,8 @@ public class FileRepository extends BaseRepository {
         FileContract._FILE_HANDLE,
         FileContract.FILE_FK,
         FileContract._NAME,
-        FileContract._FILE_URI
+        FileContract._FILE_URI,
+        FileContract._FILE_THUMBNAIL
     };
 
     @Inject
@@ -64,39 +65,6 @@ public class FileRepository extends BaseRepository {
                 null,
                 null,
                 null);
-
-        result = _getListFromCursor(cursor);
-
-        cursor.close();
-
-        return result;
-    }
-
-    public List<FileDbo> getAll(String orderByColumn, boolean isDesc) {
-        List<FileDbo> result = new ArrayList();
-        String column = orderByColumn;
-
-        if(orderByColumn != null && !orderByColumn.isEmpty()) {
-            column = FileContract._CREATED;
-        }
-
-        String orderBy = isDesc ? column + " DESC" : orderByColumn + " ASC";
-
-        Cursor cursor = _db.query(FileContract.TABLE_NAME, null, null, null, null, null, orderBy, null);
-
-        result = _getListFromCursor(cursor);
-
-        cursor.close();
-
-        return result;
-    }
-
-    public List<FileDbo> getStarred() {
-        List<FileDbo> result = new ArrayList();
-
-        String selection = FileContract._STARRED + " = 1 ";
-
-        Cursor cursor = _db.query(FileContract.TABLE_NAME, null, selection, null, null, null, null, null);
 
         result = _getListFromCursor(cursor);
 
@@ -190,6 +158,7 @@ public class FileRepository extends BaseRepository {
         map.put(FileContract._SIZE, model.getSize());
         map.put(FileContract.FILE_FK, model.getBucketId());
         map.put(FileContract._NAME, model.getName());
+        map.put(FileContract._FILE_THUMBNAIL, model.getThumbnail());
 
         return _executeInsert(FileContract.TABLE_NAME, map);
     }
@@ -231,11 +200,6 @@ public class FileRepository extends BaseRepository {
         map.put(FileContract._HMAC, model.getHmac());
         map.put(FileContract._INDEX, model.getIndex());
         map.put(FileContract._MIMETYPE, model.getMimeType());
-        //map.put(FileContract._STARRED, model.getStarred());
-        //map.put(FileContract._SYNCED, model.isSynced());
-        //map.put(FileContract._DOWNLOAD_STATE, model.downloadState());
-        //map.put(FileContract._FILE_HANDLE, model.getFileHandle());
-        //map.put(FileContract._FILE_URI, model.getUri());
         map.put(FileContract._SIZE, model.getSize());
         map.put(FileContract.FILE_FK, model.getBucketId());
         map.put(FileContract._NAME, model.getName());
@@ -243,7 +207,11 @@ public class FileRepository extends BaseRepository {
         return _executeUpdate(FileContract.TABLE_NAME, model.getFileId(), null,null, map);
     }
 
-    //TODO: maybe it should be named updatedStarred or makeStarred?
+    /**
+     * Updates isStarred field
+     * @param fileId id of the file to update
+     * @param isStarred indicates state of isStarred filed
+     */
     public Response update(String fileId, boolean isStarred) {
         if(fileId == null || fileId.isEmpty())
             return new Response(false, "File id is not valid!");
@@ -264,6 +232,22 @@ public class FileRepository extends BaseRepository {
         map.put(FileContract._DOWNLOAD_STATE, downloadState);
         map.put(FileContract._FILE_HANDLE, fileHandle);
         map.put(FileContract._FILE_URI, fileUri);
+
+        return _executeUpdate(FileContract.TABLE_NAME, fileId, null,null, map);
+    }
+
+    /**
+     * Updates thumbnail
+     * @param fileId id of the file to update
+     * @param thumbnailBase64String converted to base64 string thumbnail
+     */
+    public Response updateThumbnail(String fileId, String thumbnailBase64String) {
+        if(fileId == null || fileId.isEmpty())
+            return new Response(false, "File id is not valid!");
+
+        ContentValues map = new ContentValues();
+
+        map.put(FileContract._FILE_THUMBNAIL, thumbnailBase64String);
 
         return _executeUpdate(FileContract.TABLE_NAME, fileId, null,null, map);
     }
@@ -305,6 +289,7 @@ public class FileRepository extends BaseRepository {
                     case FileContract._MIMETYPE:
                     case FileContract.FILE_FK:
                     case FileContract._FILE_URI:
+                    case FileContract._FILE_THUMBNAIL:
                         model.setProp(_columns[i], cursor.getString(cursor.getColumnIndex(_columns[i])));
                         break;
                     case FileContract._DECRYPTED :

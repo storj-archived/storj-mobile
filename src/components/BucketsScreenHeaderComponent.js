@@ -97,10 +97,7 @@ function rotateTransform(xOffset) {
             ]
         },
         {
-            transform: [
-                /* { scaleX:  searchX },
-                { scaleY: searchY }, */
-                /* { translateY: searchMoveY } */
+            transform: [                
             ]
         },
         {
@@ -119,9 +116,6 @@ class AnimatedHeader extends Component {
     renderSearchComponent(res) {
         return(
             <View style = { [ styles.searchWrapper ] }>
-                {/* <TouchableOpacity style={ styles.backButtonWrapper }>
-                    <Image style = { styles.backButton } source = { require("../images/Icons/BackButton.png") } />
-                </TouchableOpacity> */}
                 <Animated.View style = { [ styles.searchWrapperInner, res[1] ] }>
                     <SearchComponent
                         isFilesScreen = { this.props.isFilesScreen }
