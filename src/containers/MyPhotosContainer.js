@@ -68,8 +68,7 @@ class MyPhotosContainer extends Component {
 
     render() {
         let data = this.getData();
-        console.log(this.props.loadingStack);
-        console.log(this.props.loadingStack.includes(this.props.myPhotosBucketId));
+
         return (
             <View style = { styles.mainContainer }>
             {
@@ -122,8 +121,7 @@ class MyPhotosContainer extends Component {
 }
 
 const LoadingComponent = (props) => {
-    console.log(props);
-    console.log(props.isLoading ? true : false);
+
     return (
         <View style={ styles.loadingComponentContainer }>
             <ActivityIndicator animating = { props.isLoading ? true : false } size = { 'large' } color = { 'blue' } />

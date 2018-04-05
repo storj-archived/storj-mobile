@@ -20,12 +20,12 @@ public class DeleteFileCallbackWrapper extends BaseCallbackWrapper<FileDeleteMod
     }
 
     @Override
-    public void onFileDeleted() {
+    public void onFileDeleted(String fileId) {
         _promise.resolve(new SingleResponse(_model.isValid(), toJson(_model), "").toWritableMap());
     }
 
     @Override
-    public void onError(int code, String message) {
+    public void onError(String fileId, int code, String message) {
         _promise.resolve(new Response(false, "Error during file deletion", code).toWritableMap());
     }
 }

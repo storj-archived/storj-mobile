@@ -204,7 +204,14 @@ public final class UploadService extends BaseReactService {
 
                 FileRepository fileRepo = new FileRepository(db);
                 ThumbnailProcessor tProc = new ThumbnailProcessor(fileRepo);
-                SingleResponse resp = tProc.getThumbbnail(uri);
+
+                String thumbnail = null;
+
+                if(file.getMimeType().contains("image/")) {
+                    SingleResponse resp = tProc.getThumbbnail(uri);
+
+                    if(resp.isSuccess()) thumbnail = resp.getResult();
+                }
 
                 FileModel model = new FileModel(file,
                         false,
@@ -212,7 +219,7 @@ public final class UploadService extends BaseReactService {
                         DownloadStateEnum.DOWNLOADED.getValue(),
                         0,
                         uri,
-                        resp.isSuccess() ? resp.getResult() : null);
+                        thumbnail);
 
                 long fileHandle = dbo.getId();
 

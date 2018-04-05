@@ -122,7 +122,6 @@ export default function mainReducer(state = initialState, action) {
             break;
         case POP_LOADING:
             newState.loadingStack = loadingStack.unsetLoading(action.payload.value);
-            console.log("POP", newState.loadingStack);
             break;
         default:
             return state || initialState;

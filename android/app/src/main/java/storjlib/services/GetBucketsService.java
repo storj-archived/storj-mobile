@@ -179,7 +179,7 @@ public class GetBucketsService extends BaseReactService {
     private void getFiles(final String bucketId) {
         getInstance().listFiles(bucketId, new ListFilesCallback() {
             @Override
-            public void onFilesReceived(File[] files) {
+            public void onFilesReceived(String bucketId, File[] files) {
                 if(files == null) {
                     return;
                 }
@@ -237,7 +237,7 @@ public class GetBucketsService extends BaseReactService {
             }
 
             @Override
-            public void onError(int code, String message) {
+            public void onError(String bucketId, int code, String message) {
                 sendEvent(EVENT_FILES_UPDATED, new SingleResponse(false, bucketId, message).toWritableMap());
             }
         });
@@ -263,7 +263,7 @@ public class GetBucketsService extends BaseReactService {
             }
 
             @Override
-            public void onError(int code, String message) {
+            public void onError(String bucketName, int code, String message) {
                 if(mContext == null) {
                     return;
                 }
@@ -276,7 +276,7 @@ public class GetBucketsService extends BaseReactService {
     private void deleteBucket(final String bucketId) {
         getInstance().deleteBucket(bucketId, new DeleteBucketCallback() {
             @Override
-            public void onBucketDeleted() {
+            public void onBucketDeleted(String bucketId) {
                 Response deletionResponse = bRepository().delete(bucketId);
 
                 if(mContext == null) {
@@ -292,7 +292,7 @@ public class GetBucketsService extends BaseReactService {
             }
 
             @Override
-            public void onError(int code, String message) {
+            public void onError(String bucketId, int code, String message) {
                 if(mContext == null) {
                     return;
                 }
@@ -305,7 +305,7 @@ public class GetBucketsService extends BaseReactService {
     private void deleteFile(final String bucketId, final String fileId) {
         getInstance().deleteFile(bucketId, fileId, new DeleteFileCallback() {
             @Override
-            public void onFileDeleted() {
+            public void onFileDeleted(String fileId) {
                 Response deletionResponse = fRepository().delete(fileId);
 
                 if(mContext == null) {
@@ -321,7 +321,7 @@ public class GetBucketsService extends BaseReactService {
             }
 
             @Override
-            public void onError(int code, String message) {
+            public void onError(String fileId, int code, String message) {
                 if(mContext == null) {
                     return;
                 }

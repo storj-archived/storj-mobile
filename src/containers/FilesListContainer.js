@@ -89,13 +89,12 @@ class FilesListContainer extends Component {
     }
 
     onPress(file) {
-        if(file.entity.isDownloaded) {
+        if(file.entity.isDownloaded && file.entity.mimeType.includes('image/')) {
             this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId);
         }
     }
 
     render() {
-        console.log(this.props.loadingStack);
         return(
             <FilesListComponent
                 isLoading = { this.props.loadingStack.includes(this.props.openedBucketId) }

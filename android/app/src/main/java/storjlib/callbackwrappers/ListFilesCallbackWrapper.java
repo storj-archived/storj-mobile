@@ -19,13 +19,12 @@ public class ListFilesCallbackWrapper extends BaseCallbackWrapper<FileModel[]> i
     }
 
     @Override
-    public void onFilesReceived(File[] files) {
-
+    public void onFilesReceived(String s, File[] files) {
         _promise.resolve(new SingleResponse(true, toJson(toBucketModelArray(files)), null).toWritableMap());
     }
 
     @Override
-    public void onError(int code, String message) {
+    public void onError(String bucketId, int code, String message) {
         _promise.resolve(new Response(false, message, code).toWritableMap());
     }
 

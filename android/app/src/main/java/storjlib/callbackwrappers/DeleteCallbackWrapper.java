@@ -19,13 +19,12 @@ public class DeleteCallbackWrapper extends BaseCallbackWrapper implements Delete
     }
 
     @Override
-    public void onBucketDeleted() {
+    public void onBucketDeleted(String bucketId) {
         _promise.resolve(new SingleResponse(true, _bucketId, null).toWritableMap());
     }
 
     @Override
-    public void onError(int code, String message) {
-        //TODO: create error model to pass both message and error code
+    public void onError(String bucketId, int code, String message) {
         _promise.resolve(new Response(false, message, code).toWritableMap());
     }
 }

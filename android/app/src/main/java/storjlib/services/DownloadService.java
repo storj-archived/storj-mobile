@@ -128,10 +128,12 @@ public class DownloadService extends BaseReactService {
                     map.putString(FileContract._FILE_ID, fileId);
                     map.putString("localPath", localPath);
 
-                    SingleResponse resp = tProc.getThumbbnail(fileId, localPath);
+                    if(fileDbo.toModel().getMimeType().contains("image/")) {
+                        SingleResponse resp = tProc.getThumbbnail(fileId, localPath);
 
-                    if(resp.isSuccess()) {
-                        map.putString(FileContract._FILE_THUMBNAIL, resp.getResult());
+                        if(resp.isSuccess()) {
+                            map.putString(FileContract._FILE_THUMBNAIL, resp.getResult());
+                        }
                     }
 
                     sendEvent(EVENT_FILE_DOWNLOAD_SUCCESS, map);

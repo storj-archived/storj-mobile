@@ -88,7 +88,7 @@ public class FileModel {
         _hmac = file.getHMAC();
         _index = file.getIndex();
         _isDecrypted = file.isDecrypted();
-        //_mimeType = file.getMimeType();
+        _mimeType = file.getMimeType();
         _name = file.getName();
         _size = file.getSize();
         _isStarred = isStarred;
