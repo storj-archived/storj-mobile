@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {
-    View
+    View,
+    BackHandler,
+    Platform
 } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -17,7 +19,24 @@ class DashboardScreenContainer extends Component {
         super(props);
 
         this.navigateBack = this.navigateBack.bind(this);
+        this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
     }
+
+    componentDidMount() {
+		if(Platform.OS === 'android') {
+			BackHandler.addEventListener("hardwareBackPress", this.onHardwareBackPress);
+		}
+    }
+    
+    componentWillUnmount() {
+		if(Platform.OS === 'android') {
+			BackHandler.removeEventListener("hardwareBackPress", this.onHardwareBackPress);
+		}
+	}
+
+    onHardwareBackPress() {
+		this.navigateBack();
+	}
 
     getArraySelectedCount(array) {
         return array.filter(item => item.isSelected).length;
