@@ -91,7 +91,7 @@ static NSArray *columns;
 }
 
 -(BucketDbo *) getByBucketId:(NSString *) bucketId{
-  NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = '?'",
+  NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ?",
                        [[BucketRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        BucketContract.TABLE_NAME,
                        BucketContract.ID];

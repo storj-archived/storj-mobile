@@ -65,7 +65,7 @@ static NSString *const _BUCKET_ID = @"bucketId";
 %@ INTEGER default 0, \
 %@ INTEGER default 0, \
 %@ TEXT not null, \
-FOREIGN KEY(%@) REFERENCES buckets(%@))", _TABLE_NAME, _ID, _NAME, _URI, _PROGRESS, _SIZE,
+FOREIGN KEY(%@) REFERENCES buckets(%@));", _TABLE_NAME, _ID, _NAME, _URI, _PROGRESS, _SIZE,
           _UPLOADED, _BUCKET_ID, _BUCKET_ID, _ID];
 }
 

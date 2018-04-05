@@ -60,6 +60,7 @@ static NSArray * columns;
     }
   }
   [resultSet close];
+  NSLog(@"getAllFromBucket.Count: %lu", (unsigned long)fileDboArray.count);
   return fileDboArray;
 }
 
@@ -120,8 +121,10 @@ static NSArray * columns;
   if(!resultSet){
     return nil;
   }
-  [resultSet next];
-  FileDbo * dbo = [FileRepository getFileDboFromResultSet:resultSet];
+  FileDbo * dbo = nil;
+  if([resultSet next]){
+    dbo = [FileRepository getFileDboFromResultSet:resultSet];
+  }
   [resultSet close];
   return dbo;
 }

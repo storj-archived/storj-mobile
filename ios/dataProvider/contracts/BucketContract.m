@@ -24,7 +24,7 @@ static NSString * const _STARRED = @"isStarred";
 %@ TEXT not null, \
 %@ INTEGER, \
 %@ INTEGER, \
-%@ TEXT not null)", _TABLE_NAME, _ID, _CREATED, _NAME, _DECRYPTED, _STARRED, _HASH_CODE];
+%@ TEXT not null);", _TABLE_NAME, _ID, _CREATED, _NAME, _DECRYPTED, _STARRED, _HASH_CODE];
 }
 
 +(NSString *) TABLE_NAME{

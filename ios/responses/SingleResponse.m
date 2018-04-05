@@ -41,10 +41,24 @@
                                  andErrorMessage:nil];
 }
 
++(SingleResponse *) errorResponseWithCode:(int) errorCode
+                     andWithMessage: (NSString *) errorMessage{
+  
+  
+  return [[SingleResponse alloc] initWithSuccess:NO
+                                      withResult:nil
+                                   withErrorCode:errorCode
+                                 andErrorMessage:errorMessage];
+}
+
++(SingleResponse *) errorResponseWithMessage: (NSString *) errorMessage{
+  return [[SingleResponse alloc] initWithSuccess:NO withResult:nil andErrorMessage:errorMessage];
+}
+
 -(NSDictionary *) toDictionary{
   NSMutableDictionary * resultDictionary = [[NSMutableDictionary alloc]
                                             initWithDictionary:[super toDictionary]];
-  [resultDictionary setObject: _result forKey:@RESPONSE_KEY_RESULT];
+  [resultDictionary setObject: [DictionaryUtils checkAndReturnNSString:_result] forKey:@RESPONSE_KEY_RESULT];
   return resultDictionary;
 }
 

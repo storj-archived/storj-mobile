@@ -13,9 +13,13 @@ static FMDatabase * _database;
 
 @implementation DatabaseFactory
 +(DatabaseFactory *)getSharedDatabaseFactory{
-  if(!_sharedInstance){
-    _sharedInstance = [[DatabaseFactory alloc] init];
-  }
+  NSLog(@"%@", NSStringFromSelector(_cmd));
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    NSLog(@"Calling DB Init");
+    _sharedInstance = [[self alloc] init];
+  });
+  NSLog(@"Returning shared instance of DB");
   return _sharedInstance;
 }
 
@@ -35,11 +39,14 @@ static FMDatabase * _database;
     BOOL isDbExisted = [filemgr fileExistsAtPath: databasePath];
     _database = [FMDatabase databaseWithPath:databasePath];
     
-      
-    
     if(!_database){
       NSLog(@"DB can't be initialized");
       return nil;
+    }
+    if([_database isOpen]){
+      NSLog(@"DB already oppened");
+      NSLog(@"DB Initialized");
+      return self;
     }
     if(![_database open]){
       NSLog(@"DB can't be openned");
@@ -49,31 +56,36 @@ static FMDatabase * _database;
     if(!isDbExisted){
       NSLog(@"Creating tables");
       [self createTables];
+    } else {
+      if(![_database tableExists:BucketContract.TABLE_NAME]
+         || ![_database tableExists:FileContract.TABLE_NAME]
+         || ![_database tableExists:UploadFileContract.TABLE_NAME])
+      {
+        NSLog(@"Updating DB. Drop and Create");
+      }
     }
+    
   }
   NSLog(@"DB Initialized");
   return self;
 }
 
 -(BOOL)createTables{
-  BOOL isSuccess = YES;
-  
   if(![_database executeUpdate:[BucketContract createTable]]){
-    isSuccess = NO;
     NSLog(@"Failed to create table \'%@\'", BucketContract.TABLE_NAME);
+    return NO;
   }
   
   if(![_database executeUpdate:[FileContract createTable]]){
-    isSuccess = NO;
     NSLog(@"Failed to create table \'%@\'", FileContract.TABLE_NAME);
+    return NO;
   }
   
   if(![_database executeUpdate:[UploadFileContract createTable]]){
-    isSuccess = NO;
     NSLog(@"Failed to create table \'%@\'", UploadFileContract.TABLE_NAME);
   }
-  NSLog(@"TablesCreated: %d", isSuccess);
-  return isSuccess;
+  NSLog(@"TablesCreated");
+  return YES;
 }
 
 -(void) upgradeDatabase{
@@ -82,6 +94,7 @@ static FMDatabase * _database;
 }
 
 -(void) dropTables {
+
   [_database executeUpdate:@"DROP TABLE IF EXISTS ?", BucketContract.TABLE_NAME];
   [_database executeUpdate:@"DROP TABLE IF EXISTS ?", FileContract.TABLE_NAME];
   [_database executeUpdate:@"DROP TABLE IF EXISTS ?", UploadFileContract.TABLE_NAME];

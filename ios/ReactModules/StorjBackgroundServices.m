@@ -162,6 +162,7 @@ RCT_REMAP_METHOD(getFiles,
          return;
        }
        if([files count] == 0){
+//         [_fileRepository deleteAllFromBucket:bucketId];
          [[self fileRepository] deleteAllFromBucket:bucketId];
          //dbClose???
          [self sendEventWithName:EventNames.EVENT_FILES_UPDATED
@@ -222,7 +223,7 @@ RCT_REMAP_METHOD(createBucket,
        SingleResponse *response = nil;
        BucketModel *bucketModel = [[BucketModel alloc] initWithStorjBucketModel:sjBucket];
        
-       Response *insertionResponse = [[self bucketRepository] insertWithModel:bucketModel];
+       Response *insertionResponse = [_bucketRepository insertWithModel:bucketModel];
        if(insertionResponse._isSuccess){
          [self sendEventWithName: EventNames.EVENT_BUCKET_CREATED
                             body:[[SingleResponse
@@ -357,8 +358,7 @@ RCT_REMAP_METHOD(cancelDownload,
 
 RCT_REMAP_METHOD(uploadFile,
                   uploadFileWithBucketId:(NSString *)bucketId
-                  withLocalPath:(NSString *) localPath
-                  isSynced: (BOOL) isSynced){
+                  withLocalPath:(NSString *) localPath){
   if(!bucketId || bucketId.length == 0){
     return;
   }
@@ -367,8 +367,8 @@ RCT_REMAP_METHOD(uploadFile,
     return;
   }
   
-  __block int uploadProgress = 0;
-  NSNumber *fileRef;
+  __block double uploadProgress = 0;
+  long fileRef = 0;
   NSLog(@"Uploading file located at: %@ into bucket: %@", localPath, bucketId);
   
   NSNumber *fileSize = [FileUtils getFileSizeWithPath:localPath];
@@ -385,26 +385,36 @@ RCT_REMAP_METHOD(uploadFile,
   FileUploadCallback *callback = [[FileUploadCallback alloc] init];
   
   callback.onProgress = ^(NSString *fileId, double progress, double uploadedBytes, double totalBytes) {
-    int currentProgress = round(progress * 10);
-    
-    if(uploadProgress != currentProgress){
-      uploadProgress = currentProgress;
+    if([dbo fileHandle] != 0){
+      
+      if(progress - uploadProgress > 0.02){
+        uploadProgress = progress;
+      }
+      
+      if(uploadProgress != progress){
+        return;
+      }
       [dbo set_progress: uploadProgress];
-      [dbo set_uploaded:uploadedBytes];
+      [dbo set_uploaded: uploadedBytes];
       
       UploadFileModel * fileModel =[[UploadFileModel alloc] initWithUploadFileDbo:dbo];
       Response * updateResponse = [_uploadFileRepository updateByModel:fileModel];
+      NSLog(@"Update uploadFileDBO response: %@", [updateResponse isSuccess] ? @"TRUE" :@"FALSE");
       
+      NSDictionary *body = @{UploadFileContract.FILE_HANDLE : @([dbo fileHandle]),
+                             UploadFileContract.PROGRESS : @(uploadProgress),
+                             UploadFileContract.UPLOADED : @(uploadedBytes)};
+      NSLog(@"Event Body: %@", body);
       [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_PROGRESS
-                         body:@{UploadFileContract.FILE_HANDLE : @([dbo fileHandle]),
-                                UploadFileContract.PROGRESS : @(uploadProgress),
-                                UploadFileContract.UPLOADED : @(uploadedBytes)}];
+                         body: body];
       
       //NOTIFY IN NOTIFICATION CENTER
     }
   };
   
   callback.onSuccess = ^(NSString * fileId){
+    
+    NSLog(@"File Uploaded: %@", fileId);
     FileModel *fileModel = [[FileModel alloc] initWithBucketId:bucketId
                                                        created:@""
                                                        erasure:@""
@@ -417,20 +427,23 @@ RCT_REMAP_METHOD(uploadFile,
                                                    isDecrypted:YES
                                                      isStarred:NO
                                                       isSynced:NO];
-    Response *deleteResponse = [_uploadFileRepository deleteById:fileId];
-    Response *insertResponse = [_fileRepository insertWithModel:fileModel];
+    NSLog(@"FileUploaded MODEL: %@", [fileModel toDictionary]);
+    Response *deleteResponse = [[self uploadFileRepository] deleteById:fileId];
+    Response *insertResponse = [[self fileRepository] insertWithModel:fileModel];
     
+    NSDictionary *bodyDict = @{UploadFileContract.FILE_HANDLE:@([dbo fileHandle]),
+                               FileContract.FILE_ID : [DictionaryUtils checkAndReturnNSString:
+                                                       [fileModel _fileId]]};
+    NSLog(@"event dict: %@", bodyDict);
     [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_SUCCESSFULLY
-                       body:@{UploadFileContract.FILE_HANDLE:@([dbo fileHandle]),
-                              FileContract.FILE_ID : [fileModel _fileId]}];
+                       body:bodyDict];
     
     //NOTIFY IN NOTIFICATION CENTER
   };
   
-  
   callback.onError = ^(int errorCode, NSString * _Nullable errorMessage) {
     NSString *dboId = [NSString stringWithFormat:@"%ld", [dbo fileHandle]];
-    Response *deleteResponse = [_uploadFileRepository deleteById:dboId];
+    Response *deleteResponse = [[self uploadFileRepository] deleteById:dboId];
     
     [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_ERROR
                        body:@{@"errorMessage":errorMessage,
@@ -439,15 +452,19 @@ RCT_REMAP_METHOD(uploadFile,
     
     //NOTIFY IN NOTIFICATION CENTER
   };
-  [self.storjWrapper uploadFile:localPath toBucket:bucketId withCompletion:callback fileRef:fileRef];
+  fileRef = [self.storjWrapper uploadFile:localPath toBucket:bucketId withCompletion:callback];
   @synchronized (dbo) {
-    [dbo set_fileHandle:[fileRef longValue]];
+    [dbo set_fileHandle:fileRef];
 //    [dbo setProp:UploadFileContract.FILE_HANDLE fromLong:fileRef];
+    NSLog(@"FILE HANDLE APPEARS: %ld", [dbo fileHandle]);
     UploadFileModel *fileModel = [[UploadFileModel alloc] initWithUploadFileDbo:dbo];
-    Response *insertResponse = [_uploadFileRepository insertWithModel:fileModel];
+    Response *insertResponse = [[self uploadFileRepository] insertWithModel:fileModel];
+    NSLog(@"Update uploadFileDBO response: %@", [insertResponse isSuccess] ? @"TRUE" :@"FALSE");
     if([insertResponse isSuccess]){
+      NSDictionary *eventDict =@{@"fileHandle": @([dbo fileHandle])};
+      NSLog(@"sending event FILE_UPLOAD_START with: %@", eventDict);
       [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_START
-                         body:@{@"fileHandle": @([dbo fileHandle])}];
+                         body:eventDict];
     }
   }
 }

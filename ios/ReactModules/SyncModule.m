@@ -111,7 +111,42 @@ RCT_REMAP_METHOD(listUploadingFiles,
    invokeParallelWithParams:@{@RESOLVER: resolver,
                                @REJECTER : rejecter}
    andMethodHandlerBlock:^(NSDictionary * _Nonnull param) {
-     
+     NSArray <UploadFileDbo *> *ufileDbos = [NSArray arrayWithArray:[[self uploadFileRepository]
+                                                                     getAll]];
+     int length = ufileDbos.count;
+     NSMutableArray <UploadFileModel *> *fileModels = [NSMutableArray arrayWithCapacity:length];
+     for (int i = 0; i < length; i++) {
+       fileModels[i] = [[UploadFileModel alloc] initWithUploadFileDbo:ufileDbos[i]];
+     }
+     SingleResponse *response = [SingleResponse successSingleResponseWithResult:
+                                 [DictionaryUtils convertToJsonWithArray:fileModels]];
+     RCTPromiseResolveBlock resolve = param[@RESOLVER];
+     resolve([response toDictionary]);
+   }];
+}
+
+RCT_REMAP_METHOD(getUploadingFile, getUploadingFileWithFileHandle: (NSString *) fileHandle
+                 WithResolver: (RCTPromiseResolveBlock) resolver
+                 andRejecter: (RCTPromiseRejectBlock) rejecter){
+  [MethodHandler
+   invokeParallelWithParams:@{@RESOLVER: resolver,
+                               @REJECTER : rejecter}
+   andMethodHandlerBlock:^(NSDictionary * _Nonnull param) {
+     RCTPromiseResolveBlock resolve = param[@RESOLVER];
+     if(!fileHandle){
+       SingleResponse *response = [SingleResponse errorResponseWithMessage:@"invalid file handle"];
+       resolve([response toDictionary]);
+       return;
+     }
+     UploadFileModel *uploadingFileModel = [[self uploadFileRepository] getByFileId:fileHandle];
+     SingleResponse *response;
+     if(!uploadingFileModel){
+       response = [SingleResponse errorResponseWithMessage:@"Uploading file not found"];
+     } else {
+       response = [SingleResponse successSingleResponseWithResult:
+                   [DictionaryUtils convertToJsonWithDictionary:[uploadingFileModel toDictionary]]];
+     }
+     resolve([response toDictionary]);
    }];
 }
 
@@ -122,6 +157,32 @@ RCT_REMAP_METHOD(listSettings,
   resolver(@[@{}]);
 }
 
+RCT_REMAP_METHOD(getFile,
+                 getFileWithFileId: (NSString *) fileId
+                 WithResolver: (RCTPromiseResolveBlock) resolver
+                 andRejecter: (RCTPromiseRejectBlock) rejecter){
+  [MethodHandler
+   invokeParallelWithParams:@{@RESOLVER: resolver,
+                               @REJECTER : rejecter}
+   andMethodHandlerBlock:^(NSDictionary * _Nonnull param) {
+     RCTPromiseResolveBlock resolve = param[@RESOLVER];
+     if(!fileId){
+       SingleResponse *errorResponse = [SingleResponse errorResponseWithMessage:@"Invalid fileId"];
+       resolve([errorResponse toDictionary]);
+       return;
+     }
+     FileDbo *fileDbo = [[self fileRepository] getByFileId:fileId];
+     SingleResponse *response;
+     if(!fileDbo){
+       response = [SingleResponse errorResponseWithMessage:@"File Not Found"];
+     } else {
+       response = [SingleResponse successSingleResponseWithResult:[DictionaryUtils
+                                                                   convertToJsonWithDictionary:
+                                                                   [[fileDbo toModel] toDictionary]]];
+     }
+     resolve([response toDictionary]);
+   }];
+}
 
 
 //WithResolver: (RCTPromiseResolveBlock) resolver

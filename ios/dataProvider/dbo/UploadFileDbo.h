@@ -28,7 +28,7 @@
 @property (nonatomic, getter=size) long _size;
 @property (nonatomic, getter=progress) double _progress;
 
-+(UploadFileDbo *)uploadFileDboFromUploadFileModel: (UploadFileModel *)model;
+//+(UploadFileDbo *)uploadFileDboFromUploadFileModel: (UploadFileModel *)model;
 
 -(instancetype)initWithFileHandle:(long) fileHandle
                          progress:(double)progress

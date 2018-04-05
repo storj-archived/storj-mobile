@@ -226,7 +226,7 @@ RCT_REMAP_METHOD(uploadFile,
   }
   
   __block int uploadProgress = 0;
-  NSNumber *fileRef;
+  long fileRef;
   NSLog(@"Uploading file located at: %@ into bucket: %@", localPath, bucketId);
   
   NSNumber *fileSize = [FileUtils getFileSizeWithPath:localPath];
@@ -253,7 +253,13 @@ RCT_REMAP_METHOD(uploadFile,
       UploadFileModel * fileModel =[[UploadFileModel alloc] initWithUploadFileDbo:dbo];
       Response * updateResponse = [_uploadFileRepository updateByModel:fileModel];
       
-      UploadFileProgressModel *ufileProgress = [[UploadFileProgressModel alloc] initWithBucketId:bucketId filePath:localPath progress:uploadProgress uploadedBytes:uploadedBytes totalBytes:totalBytes filePointer:fileRef];
+      UploadFileProgressModel *ufileProgress = [[UploadFileProgressModel alloc]
+                                                initWithBucketId:bucketId
+                                                filePath:localPath
+                                                progress:uploadProgress
+                                                uploadedBytes:uploadedBytes
+                                                totalBytes:totalBytes
+                                                filePointer:fileRef];
       
       [self sendEventWithName:@"uploadFile"
                          body:[ufileProgress toDictionary]];
@@ -295,9 +301,9 @@ RCT_REMAP_METHOD(uploadFile,
     
     //NOTIFY IN NOTIFICATION CENTER
   };
-  [self.storjWrapper uploadFile:localPath toBucket:bucketId withCompletion:callback fileRef:fileRef];
+  [self.storjWrapper uploadFile:localPath toBucket:bucketId withCompletion:callback];
   @synchronized (dbo) {
-    [dbo set_fileHandle:[fileRef longValue]];
+    [dbo set_fileHandle:fileRef];
     //    [dbo setProp:UploadFileContract.FILE_HANDLE fromLong:fileRef];
     UploadFileModel *fileModel = [[UploadFileModel alloc] initWithUploadFileDbo:dbo];
     Response *insertResponse = [_uploadFileRepository insertWithModel:fileModel];

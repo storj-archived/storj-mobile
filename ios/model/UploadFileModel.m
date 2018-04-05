@@ -48,7 +48,9 @@
 }
 
 -(instancetype)initWithUploadFileDbo:(UploadFileDbo *)fileDbo{
-  
+  if(!fileDbo){
+    return nil;
+  }
   return [self initWithFileHandle:[fileDbo fileHandle]
                          progress:[fileDbo progress]
                              size:[fileDbo size]
@@ -59,20 +61,20 @@
 }
 
 -(BOOL)isValid{
-  return _size > 0 && _name && [_name length] > 0
+  return /*_size > 0 &&*/ _name && [_name length] > 0
   && _uri && [_uri length] > 0
   && _bucketId && [_bucketId length] > 0;
 }
 
 - (NSDictionary *)toDictionary {
   NSMutableDictionary *resultDictionary = [NSMutableDictionary dictionary];
-  [resultDictionary setObject:@(_fileHandle) forKey:UploadFileContract.FILE_HANDLE];
+  [resultDictionary setObject:@(_fileHandle) forKey:UploadFileContract.ID];
   [resultDictionary setObject:@(_progress) forKey:UploadFileContract.PROGRESS];
   [resultDictionary setObject:@(_size) forKey:UploadFileContract.SIZE];
   [resultDictionary setObject:@(_uploaded) forKey:UploadFileContract.UPLOADED];
-  [resultDictionary setObject:_name forKey:UploadFileContract.NAME];
-  [resultDictionary setObject:_uri forKey:UploadFileContract.URI];
-  [resultDictionary setObject:_bucketId forKey:UploadFileContract.BUCKET_ID];
+  [resultDictionary setObject:[DictionaryUtils checkAndReturnNSString:_name] forKey:UploadFileContract.NAME];
+  [resultDictionary setObject:[DictionaryUtils checkAndReturnNSString:_uri] forKey:UploadFileContract.URI];
+  [resultDictionary setObject:[DictionaryUtils checkAndReturnNSString:_bucketId] forKey:UploadFileContract.BUCKET_ID];
   return resultDictionary;
 }
 

@@ -21,7 +21,7 @@
 
 -(NSArray *) getStarred;
 
--(UploadFileDbo *) getByFileId:(NSString *) fileId;
+-(UploadFileModel *) getByFileId:(NSString *) fileId;
 
 -(UploadFileDbo *) getByColumnName:(NSString *) columnName
                  columnValue:(NSString *) columnValue;

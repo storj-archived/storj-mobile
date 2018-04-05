@@ -66,19 +66,23 @@ static NSArray * columns;
   return fileDboArray;
 }
 
--(UploadFileDbo *) getByFileId:(NSString *) fileId{
+-(UploadFileModel *) getByFileId:(NSString *) fileId{
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ?",
                        [[UploadFileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        UploadFileContract.TABLE_NAME,
                        UploadFileContract.ID];
+  NSLog(@"UploadFileDBRequest: %@", request);
   FMResultSet * resultSet = [[self _database] executeQuery:request, fileId];
   if(!resultSet){
     return nil;
   }
-  [resultSet next];
-  UploadFileDbo * dbo = [UploadFileRepository getFileDboFromResultSet:resultSet];
+  UploadFileDbo * dbo = nil;
+  if([resultSet next]){
+    dbo = [UploadFileRepository getFileDboFromResultSet:resultSet];
+  }
   [resultSet close];
-  return dbo;
+  
+  return [[UploadFileModel alloc] initWithUploadFileDbo:dbo];
 }
 
 -(UploadFileDbo *) getByColumnName:(NSString *) columnName
@@ -94,6 +98,7 @@ static NSArray * columns;
   [resultSet next];
   UploadFileDbo * dbo = [UploadFileRepository getFileDboFromResultSet:resultSet];
   [resultSet close];
+  
   return dbo;
 }
 
@@ -140,7 +145,7 @@ static NSArray * columns;
 
 -(Response *) updateByModel: (UploadFileModel *) model{
   if(!model || ![model isValid]){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@""];
+    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is Not VALID"];
   }
   
   return [super executeUpdateAtTable:UploadFileContract.TABLE_NAME

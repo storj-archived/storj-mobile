@@ -23,4 +23,9 @@
 
 +(SingleResponse *) successSingleResponseWithResult:(NSString *) result;
 
++(SingleResponse *) errorResponseWithCode:(int) errorCode
+                     andWithMessage: (NSString *) errorMessage;
+
++(SingleResponse *) errorResponseWithMessage: (NSString *) errorMessage;
+
 @end
