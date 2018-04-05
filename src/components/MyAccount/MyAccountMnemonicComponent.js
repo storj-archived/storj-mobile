@@ -4,9 +4,8 @@ import {
     Image,
     TouchableOpacity,
     StyleSheet,
-    Clipboard,
     ScrollView,
-    Alert
+    Clipboard
 } from 'react-native';
 import React, { Component } from 'react';
 import mnemonicScreenConstants from '../../utils/constants/mnemonicScreenConstants';
@@ -14,10 +13,8 @@ import { getWidth, getHeight } from '../../utils/adaptive';
 import { getMnemonic } from '../../utils/AsyncStorageModule';
 import PropTypes from 'prop-types';
 
-/**
-* MnemonicGeneration component
-*/
-export default class MnemonicGenerationComponent extends Component {
+
+export default class MyAccountMnemonicComponent extends Component {
     constructor(props) {
         super(props);
 
@@ -33,7 +30,7 @@ export default class MnemonicGenerationComponent extends Component {
     }
 
     async componentDidMount() {
-
+        
         getMnemonic().then((res)=>{
             this.setState({mnemonic: res});
         })
@@ -91,21 +88,16 @@ export default class MnemonicGenerationComponent extends Component {
                         <View style = { styles.topContentContainer } >
                             <View style = { styles.flexRow }>
                                 <TouchableOpacity 
-                                    onPress = { () => { this.props.screenProps.redirectToMnemonicInfoScreen(); } }
+                                    onPress = { () => { this.props.screenProps.redirectToSettingsScreen(); } }
                                     style = { styles.backButtonContainer } >
                                     <Image 
                                         source = { require('../../images/MyAccount/BlueBackButton.png') }
                                         style = { styles.icon } />
                                 </TouchableOpacity>
                                 <View style = { styles.titleContainer }>
-                                    <Text style = { styles.titleText }>Safeguard your secret phrase</Text>
+                                    <Text style = { styles.titleText }>Your secret phrase</Text>
                                 </View>
                             </View>
-                            <TouchableOpacity 
-                                onPress = { () => { this.props.screenProps.redirectToLoginScreen(); } }
-                                style = { styles.backButtonContainer } >
-                                <Text style = { [styles.cancelText, styles.titleMargin] }>Skip</Text>
-                            </TouchableOpacity>
                         </View>
                     </View>
                     <View style = { styles.additionalTextMargin }>
@@ -132,11 +124,6 @@ export default class MnemonicGenerationComponent extends Component {
                             <Text style = { styles.clipboardText }>Copy to clipboard</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress = { () => { this.props.screenProps.redirectToMnemonicConfirmationScreen(this.state.mnemonic); } } >
-                        <View style = { styles.nextButton } >
-                            <Text style = { styles.nextButtonText }>Next</Text>
-                        </View>
-                    </TouchableOpacity>
                     {
                         this.state.showCopyPopUp 
                         ? <View style = { styles.popUpContainer } >
@@ -159,7 +146,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: getWidth(20)
     },
     topContainer: {
-        height: getHeight(115)
+        height: getHeight(80)
     },
     topContentContainer: {
         flexDirection: 'row',
@@ -292,7 +279,7 @@ const styles = StyleSheet.create({
         color: '#2794FF'
     },
     scrollContainer: {
-        paddingBottom: getHeight(60)
+        marginBottom: getHeight(60)
     },
     additionalTextMargin: {
         marginTop: getHeight(24)
@@ -308,7 +295,7 @@ const styles = StyleSheet.create({
     }
 });
 
-MnemonicGenerationComponent.propTypes = {
+MyAccountMnemonicComponent.propTypes = {
     navigation: PropTypes.object,
     screenProps: PropTypes.object
 }

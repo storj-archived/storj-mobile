@@ -191,6 +191,15 @@ export function redirectToFavoritesItemsScreen(itemType) {
     });
 }
 
+export function redirectToMyAccountMnemonicScreen() {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'MyAccountMnemonicScreen' })
+        ]
+    });
+}
+
 export const authNavigationActions = {
     redirectToLoginScreen,
     redirectToMainScreen,
@@ -212,5 +221,6 @@ export const myAccountNavigationActions = {
     redirectToPinCodeGenerationScreen,
     redirectToSettingsScreen,
     redirectToStorageScreen,
+    redirectToMyAccountMnemonicScreen,
     navigateBack
 }

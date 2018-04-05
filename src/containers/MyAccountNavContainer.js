@@ -34,7 +34,8 @@ class MyAccountNavContainer extends Component {
                         redirectToPinCodeGenerationScreen: this.props.redirectToPinCodeGenerationScreen,
                         redirectToSettingsScreen: this.props.redirectToSettingsScreen, 
                         redirectToStorageScreen: this.props.redirectToStorageScreen, 
-                        redirectToMyAccountScreen: this.props.redirectToMyAccountScreen
+                        redirectToMyAccountScreen: this.props.redirectToMyAccountScreen,
+                        redirectToMyAccountMnemonicScreen: this.props.redirectToMyAccountMnemonicScreen
                     } }
                     navigation = { addNavigationHelpers({ 
                         dispatch: this.props.dispatch,

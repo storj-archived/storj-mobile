@@ -152,7 +152,7 @@ export default class SettingsComponent extends Component{
                     <View style = { styles.explanationContainer }>
                         <Text style = { styles.explanationText }>Security</Text>
                     </View>
-                    <TouchableOpacity style = { styles.optionsContainer }>
+                    <TouchableOpacity style = { styles.optionsContainer } onPress = { this.props.screenProps.redirectToMyAccountMnemonicScreen }>
                         <Text style = { styles.switchText }>Secret phrase</Text>
                         <View style = { styles.expanderIconContainer }>
                             <Image
