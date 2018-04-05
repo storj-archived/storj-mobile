@@ -10,7 +10,7 @@ import {
 import React, { Component } from 'react';
 import mnemonicScreenConstants from '../../utils/constants/mnemonicScreenConstants';
 import { getWidth, getHeight } from '../../utils/adaptive';
-import { getMnemonic } from '../../utils/AsyncStorageModule';
+import StorjModule from '../../utils/StorjModule';
 import PropTypes from 'prop-types';
 
 
@@ -31,8 +31,8 @@ export default class MyAccountMnemonicComponent extends Component {
 
     async componentDidMount() {
         
-        getMnemonic().then((res)=>{
-            this.setState({mnemonic: res});
+        StorjModule.getKeys().then((res)=>{
+            this.setState({mnemonic: JSON.parse(res.result).mnemonic});
         })
     }
 
@@ -142,7 +142,7 @@ export default class MyAccountMnemonicComponent extends Component {
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1, 
-        backgroundColor: '#FFFFFF',
+        backgroundColor: 'transparent',
         paddingHorizontal: getWidth(20)
     },
     topContainer: {
@@ -164,13 +164,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     titleContainer: {
-        height: getHeight(100),
-        width: getWidth(240),
+        height: getHeight(65),
+        width: getWidth(305),
         marginLeft: getWidth(15)
     },
     titleText: { 
         fontFamily: 'Montserrat-Bold', 
-        fontSize: getHeight(30),
+        fontSize: getHeight(28),
         color: '#384B65' 
     },
     infoContainer: {
@@ -219,7 +219,6 @@ const styles = StyleSheet.create({
         color: '#384B65'
     },
     copyToClipboardContainer: {
-        marginTop: getHeight(45),
         height: getHeight(55),
         flexDirection: 'row',
         alignItems: 'center'
@@ -279,10 +278,11 @@ const styles = StyleSheet.create({
         color: '#2794FF'
     },
     scrollContainer: {
-        marginBottom: getHeight(60)
+        marginBottom: getHeight(60),
+        backgroundColor: 'transparent'
     },
     additionalTextMargin: {
-        marginTop: getHeight(24)
+        marginTop: getHeight(0)
     },
     yourMnemonicTextContainer: {
         marginTop: getHeight(17)
