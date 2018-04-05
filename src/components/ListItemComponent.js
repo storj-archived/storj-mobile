@@ -45,6 +45,21 @@ export default class ListItemComponent extends Component {
         this.props.disableSelectionMode();
     }
 
+    getFullFileName() {
+        let fullName = this.props.item.getName();
+        let dotIndex = fullName.lastIndexOf('.');
+        let name = dotIndex !== -1 ? fullName.slice(0, dotIndex) : fullName;
+        let extention = dotIndex !== -1 ? fullName.slice(dotIndex) : '';
+
+        return { name, extention }
+    }
+
+    getFileSize() {
+        let mbSize = this.props.item.entity.size / 8338608;
+
+        return mbSize.toString().slice(0, 5);
+    }
+
     render() {
         let name = this.props.item ? this.props.item.getName() : "name";
         let isSelected = this.props.item ? this.props.item.isSelected: false;
@@ -90,7 +105,7 @@ export default class ListItemComponent extends Component {
                                 (()=>{
                                     if(props.item.entity.thumbnail){
                                         let uri = 'data:image/png;base64,' + props.item.entity.thumbnail;
-                                        return <Image style = { listItemStyles.selectedIcon } 
+                                        return <Image style = { listItemStyles.itemTypeIcon } 
                                                       source = {{ uri: uri }} />    
                                     } else {
                                         return <Image 
@@ -102,7 +117,14 @@ export default class ListItemComponent extends Component {
                             }
                         </View>
                         <View style = { listItemStyles.textWrapper }>
-                            <Text numberOfLines = {1} style = { listItemStyles.mainTitleText }>{ props.item.getName() }</Text>
+                            {
+                                props.item.entity.bucketId ?
+                                <Text numberOfLines = {1} style = { listItemStyles.mainTitleText }>{ this.getFullFileName().name }
+                                    <Text style = { listItemStyles.extentionText }>{ this.getFullFileName().extention }</Text> 
+                                </Text>
+                                : <Text numberOfLines = {1} style = { listItemStyles.mainTitleText }>{ props.item.getName() }</Text>
+                            }
+                            
                             {
                                 props.item.isLoading ? 
                                     Platform.select({
@@ -119,7 +141,9 @@ export default class ListItemComponent extends Component {
                                                 animating = {true} 
                                                 indeterminate = { false } />
                                     })
-                                : null
+                                : props.item.entity.size ? 
+                                    <Text style = { listItemStyles.fileSizeText }>{ this.getFileSize() } Mb</Text>
+                                    : null
                             }
                         </View>
                         {
@@ -225,5 +249,17 @@ const listItemStyles = StyleSheet.create({
     cancelDownloadImage: { 
         height: getHeight(24), 
         width: getWidth(24) 
+    },
+    extentionText: {
+        fontFamily: 'Montserrat-Regular',
+        lineHeight: getHeight(18),
+        fontSize: getHeight(16),
+        color: 'rgba(56, 75, 101, 0.4)'
+    },
+    fileSizeText: {
+        fontFamily: 'Montserrat-Regular',
+        lineHeight: getHeight(15),
+        fontSize: getHeight(12),
+        color: 'rgba(56, 75, 101, 0.4)'
     }
 });

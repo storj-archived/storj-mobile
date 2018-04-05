@@ -15,6 +15,7 @@ import DashboardListFooterComponent from '../../components/Dashboard/DashboardLi
 import DashboardListHeaderComponent from '../../components/Dashboard/DashboardListHeaderComponent';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import PropTypes from 'prop-types';
+import { TYPES } from '../../utils/constants/typesConstants';
 
 export default class DashboardListComponent extends Component{
     constructor(props) {
@@ -88,7 +89,7 @@ export default class DashboardListComponent extends Component{
                                 starredBucketsCount, 
                                 true, 
                                 this.props.activeScreen,
-                                'buckets'
+                                TYPES.BUCKETS
                             )
                         }
                         {
@@ -99,7 +100,7 @@ export default class DashboardListComponent extends Component{
                                 starredFilesCount, 
                                 false, 
                                 this.props.activeScreen,
-                                'files'
+                                TYPES.FILES
                             )
                         }
                         {
@@ -110,7 +111,7 @@ export default class DashboardListComponent extends Component{
                                 syncedfilesCount, 
                                 false, 
                                 this.props.activeScreen,
-                                'synced'
+                                TYPES.SYNCED
                             )
                         }     
                         </View>

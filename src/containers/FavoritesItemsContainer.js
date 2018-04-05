@@ -30,17 +30,17 @@ class FavoritesItemsContainer extends Component {
 
     getData() {
         switch (this.props.navigation.state.params.itemType) {
-            case 'files': {
+            case TYPES.FILES: {
                 this.data = this.props.files.filter((element) => {
                     return element.entity.isStarred === true;
                 });
             } break;
-            case 'buckets': {
+            case TYPES.BUCKETS: {
                 this.data = this.props.buckets.filter((element) => {
                     return element.entity.isStarred === true;
                 }); 
             } break;
-            case 'synced': {        
+            case TYPES.SYNCED: {        
                 this.data = this.props.files.filter((element) => {
                     return element.entity.isSynced === true;
                 });
@@ -58,7 +58,7 @@ class FavoritesItemsContainer extends Component {
     }
 
     isBuckets() {
-        return this.props.navigation.state.params.itemType === 'buckets';
+        return this.props.navigation.state.params.itemType === TYPES.BUCKETS;
     }
 
     render() {

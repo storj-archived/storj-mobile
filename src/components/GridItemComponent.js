@@ -128,10 +128,20 @@ export default class GridItemComponent extends Component {
                 }}>
                     <View style = { gridItemStyles.listItemContent }>
                         <View>
-                            <Image 
-                                style = { props.bucketId ? gridItemStyles.fileTypeIcon : gridItemStyles.bucketTypeIcon } 
-                                source = { props.isStarred ? props.starredGridItemIcon : props.listItemIcon }
-                                resizeMode = 'contain' />
+                            {
+                                (()=>{
+                                    if(props.item.entity.thumbnail){
+                                        let uri = 'data:image/png;base64,' + props.item.entity.thumbnail;
+                                        return <Image style = { gridItemStyles.fileTypeIcon } 
+                                                      source = {{ uri: uri }} />    
+                                    } else {
+                                        return <Image 
+                                                    style = { props.bucketId ? gridItemStyles.fileTypeIcon : gridItemStyles.bucketTypeIcon } 
+                                                    source = { props.isStarred ? props.starredGridItemIcon : props.listItemIcon }
+                                                    resizeMode = 'contain' />
+                                    }
+                                })()
+                            }
                             {
                                 props.bucketId && props.item.isLoading ?
                                     <View style = { gridItemStyles.progressCircle }>
