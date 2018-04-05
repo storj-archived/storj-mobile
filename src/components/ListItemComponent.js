@@ -55,9 +55,13 @@ export default class ListItemComponent extends Component {
     }
 
     getFileSize() {
-        let mbSize = this.props.item.entity.size / 8338608;
+        let mbSize = (this.props.item.entity.size / 1042326).toString().slice(0, 5).split('');
 
-        return mbSize.toString().slice(0, 5);
+        if(mbSize[mbSize.length - 1] == 0) {
+            mbSize.splice(mbSize.length - 1, 1, 1);
+        }
+
+        return mbSize;
     }
 
     render() {
