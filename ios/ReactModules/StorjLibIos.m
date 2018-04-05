@@ -160,7 +160,7 @@ RCT_EXPORT_METHOD(getKeys: (NSString *) passcode
                   successCallback:(RCTPromiseResolveBlock) resolver
                   errorCallback:(RCTPromiseRejectBlock) rejecter)
 {
-  
+
   [MethodHandler
    invokeParallelWithParams:@{@RESOLVER: resolver,
                                @REJECTER : rejecter}
@@ -312,6 +312,24 @@ RCT_REMAP_METHOD(uploadFile,
                          body:@{@"fileHandle": @([dbo fileHandle])}];
     }
   }
+}
+
+RCT_REMAP_METHOD(getDownloadFolderPath,
+                 getDownloadFolderPathWithResolver: (RCTPromiseResolveBlock) resolver
+                 andRejecter: (RCTPromiseRejectBlock) rejecter){
+  [MethodHandler invokeWithParams:@{@RESOLVER: resolver,
+                                     @REJECTER : rejecter}
+            andMethodHandlerBlock:^(NSDictionary * _Nonnull param) {
+              RCTPromiseResolveBlock resolve = param[@RESOLVER];
+              NSString * downloadsDir = [NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES) lastObject];
+              SingleResponse *response;
+              if(downloadsDir || downloadsDir.length > 0){
+                response = [SingleResponse successSingleResponseWithResult:downloadsDir];
+              } else {
+                response = [SingleResponse errorResponseWithMessage:@"Unable to retrieve downloads folder"];
+              }
+              resolve([response toDictionary]);
+            }];
 }
 
 -(void) arrayShift:(NSMutableArray *) array position:(int)position length:(int) length{

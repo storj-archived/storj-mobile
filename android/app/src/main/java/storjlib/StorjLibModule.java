@@ -1,5 +1,7 @@
 package storjlib;
 
+import android.os.Environment;
+
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -16,6 +18,8 @@ import storjlib.callbackwrappers.UploadFileCallbackWrapper;
 import storjlib.models.KeyModel;
 import storjlib.responses.Response;
 import storjlib.responses.SingleResponse;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import io.storj.libstorj.Keys;
@@ -296,5 +300,19 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
                 promise.resolve(new Response(isSuccess, "").toWritableMap());
             }
         });
+    }
+
+    @ReactMethod
+    public void getDownloadFolderPath(Promise promise){
+        File downloadDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOWNLOADS);
+        SingleResponse response = null;
+        if(downloadDir == null || !downloadDir.exists() ||!downloadDir.isDirectory()){
+            response = new SingleResponse(false, null,
+                    "Unable to retrieve downloads folder path.");
+        } else {
+            response = new SingleResponse(true, downloadDir.getAbsolutePath(), null);
+        }
+        promise.resolve(response.toWritableMap());
     }
 }

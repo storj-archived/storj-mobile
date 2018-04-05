@@ -275,8 +275,17 @@ const StorjLib = (() => {
                 console.log('createBucket ', response.error.message);
             }
 
-            return response;         
+            return response;
         };
+
+        async getDownloadFolderPath(){
+            let response =  await storjLib.getDownloadFolderPath();
+
+            if(!response.isSuccess){
+                console.log("getDownloadFolderPath ", response.error.message);
+            }
+            return response.result;
+        }
 
         /**
          * 

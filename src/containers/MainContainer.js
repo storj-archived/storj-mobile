@@ -18,6 +18,7 @@ import filePicker from '../utils/filePicker';
 import observablePropFactory from '../models/ObservableProperty';
 import ServiceModule from '../utils/ServiceModule';
 import SyncModule from '../utils/SyncModule';
+import StorjModule from '../utils/StorjModule';
 import { SYNC_BUCKETS } from '../utils/constants/SyncBuckets';
 
 const { PICTURES } = SYNC_BUCKETS;
@@ -188,9 +189,11 @@ class MainContainer extends Component {
     }
 
     async downloadSelectedFiles() {
-        this.props.fileListModels.forEach(fileItem => {
+        this.props.fileListModels.forEach(async fileItem => {
             if(fileItem.isSelected) {
-                this.downloadFile(fileItem, '/storage/emulated/0/Download/' + fileItem.getName()); 
+                let result = await StorjModule.getDownloadFolderPath();
+
+                this.downloadFile(fileItem, result + "/" + fileItem.getName());
             }
         });
     }
