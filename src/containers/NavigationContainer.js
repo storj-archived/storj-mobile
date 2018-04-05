@@ -38,6 +38,7 @@ import ServiceModule from '../utils/ServiceModule';
 /**
  * Component that contains main navigator
  */
+
 class Apps extends Component {
 
 	constructor(props) {

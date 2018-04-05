@@ -227,10 +227,14 @@ export const myPicturesListContainerMainActions = {
     disableSelectionMode, 
     unsetLoading,
     openBucket,
-    setSelectionId
+    setSelectionId,
+    pushLoading,
+    popLoading
 };
 
 export const setCurrentMainScreenActions = {
     setPhotosBucketId,
-    hideActionBar
+    hideActionBar,
+    pushLoading,
+    popLoading
 }

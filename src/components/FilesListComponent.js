@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         left: 0,
         right: 0,
-        top: getHeight(70),
+        top: getHeight(80),
         height: getHeight(60)
     }
 });

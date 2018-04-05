@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     View,
     StyleSheet,
-    Animated
+    Animated,
+    ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -67,7 +68,8 @@ class MyPhotosContainer extends Component {
 
     render() {
         let data = this.getData();
-
+        console.log(this.props.loadingStack);
+        console.log(this.props.loadingStack.includes(this.props.myPhotosBucketId));
         return (
             <View style = { styles.mainContainer }>
             {
@@ -82,7 +84,10 @@ class MyPhotosContainer extends Component {
                         cancelUpload = { this.props.cancelUpload }
                         isGridViewShown = { this.props.isGridViewShown }
                         onPress = { (params) => { this.onPress(params); } }
-                        onRefresh = { () => ServiceModule.getFiles(this.props.myPhotosBucketId) }
+                        onRefresh = { () => {  
+                            this.props.pushLoading(this.props.myPhotosBucketId);
+                            ServiceModule.getFiles(this.props.myPhotosBucketId); 
+                        } }
                         itemType = { TYPES.REGULAR_FILE }
                         bucketId = { this.props.myPhotosBucketId }
                         onSingleItemSelected = { this.props.onSingleItemSelected }                    
@@ -99,6 +104,8 @@ class MyPhotosContainer extends Component {
                         starredListItemIcon = { require('../images/Icons/ListStarredFile.png') } />
                     : <EmpyBucketComponent />
             }
+                <LoadingComponent isLoading = { this.props.loadingStack.includes(this.props.myPhotosBucketId) } />
+                
                 <BucketsScreenHeaderComponent
                     buckets = { this.props.buckets }
                     isFilesScreen = { true }
@@ -108,16 +115,32 @@ class MyPhotosContainer extends Component {
                     disableSelectionMode = { this.props.disableSelectionMode }
                     animatedScrollValue = { this.animatedScrollValue }
                     openedBucketId = { this.props.myPhotosBucketId } />
+
             </View>
         )
     }
 }
+
+const LoadingComponent = (props) => {
+    console.log(props);
+    console.log(props.isLoading ? true : false);
+    return (
+        <View style={ styles.loadingComponentContainer }>
+            <ActivityIndicator animating = { props.isLoading ? true : false } size = { 'large' } color = { 'blue' } />
+        </View>
+    ); 
+}/* (
+    <View style={ styles.loadingComponentContainer }>
+        <ActivityIndicator animating = { props.isLoading ? true : false } size = { 'large' } color = { 'blue' } />
+    </View>
+);  */
 
 function mapStateToProps(state) {
     let screenIndex = state.mainScreenNavReducer.index;
     let currentScreenName = state.mainScreenNavReducer.routes[screenIndex].routeName;
 
     return {
+        loadingStack: state.mainReducer.loadingStack,
         buckets: state.bucketReducer.buckets,
         files: state.filesReducer.fileListModels,
         selectedItemId: state.mainReducer.selectedItemId,
@@ -201,5 +224,12 @@ const styles = StyleSheet.create({
     contentWrapper: {
         paddingTop: getHeight(58),
         paddingBottom: getHeight(60)
+    },
+    loadingComponentContainer: {
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: getHeight(80),
+        height: getHeight(60)
     }
 });

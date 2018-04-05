@@ -53,4 +53,32 @@ public class ThumbnailProcessor {
 
         return errorResult;
     }
+
+    public SingleResponse getThumbbnail(String filePath) {
+        byte[] imageData = null;
+        SingleResponse errorResult = new SingleResponse(false, "", "Unable to process thumbnail");
+
+        try
+        {
+            final int THUMBNAIL_SIZE = 64;
+
+            FileInputStream fis = new FileInputStream(filePath);
+            Bitmap imageBitmap = BitmapFactory.decodeStream(fis);
+
+            imageBitmap = Bitmap.createScaledBitmap(imageBitmap, THUMBNAIL_SIZE, THUMBNAIL_SIZE, false);
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            imageData = baos.toByteArray();
+
+            String encoded = Base64.encodeToString(imageData, Base64.DEFAULT);
+
+            return new SingleResponse(true, encoded, null);
+        }
+        catch(Exception ex) {
+
+        }
+
+        return errorResult;
+    }
 }

@@ -19,11 +19,14 @@ import com.facebook.react.bridge.WritableNativeMap;
 import io.storj.libstorj.File;
 import io.storj.libstorj.UploadFileCallback;
 import io.storj.libstorj.android.StorjAndroid;
+import storjlib.enums.DownloadStateEnum;
 import storjlib.enums.SyncSettingsEnum;
 import storjlib.models.FileModel;
 import storjlib.models.UploadingFileModel;
 import storjlib.responses.Response;
+import storjlib.responses.SingleResponse;
 import storjlib.utils.ProgressResolver;
+import storjlib.utils.ThumbnailProcessor;
 import storjlib.utils.UploadSyncObject;
 import storjlib.dataprovider.DatabaseFactory;
 import storjlib.dataprovider.dbo.UploadingFileDbo;
@@ -115,7 +118,7 @@ public final class UploadService extends BaseReactService {
         StorjAndroid.getInstance(this).cancelUpload(fileHandle);
     }
 
-    private void uploadFile(String bucketId, String uri, final boolean isSynced) {
+    private void uploadFile(String bucketId, final String uri, final boolean isSynced) {
         Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
         //Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
 
@@ -200,7 +203,16 @@ public final class UploadService extends BaseReactService {
                 Log.d("UPLOAD DEBUG", "File upload completed: " + Thread.currentThread().getId());
 
                 FileRepository fileRepo = new FileRepository(db);
-                FileModel model = new FileModel(file, false, isSynced);
+                ThumbnailProcessor tProc = new ThumbnailProcessor(fileRepo);
+                SingleResponse resp = tProc.getThumbbnail(uri);
+
+                FileModel model = new FileModel(file,
+                        false,
+                        isSynced,
+                        DownloadStateEnum.DOWNLOADED.getValue(),
+                        0,
+                        uri,
+                        resp.isSuccess() ? resp.getResult() : null);
 
                 long fileHandle = dbo.getId();
 

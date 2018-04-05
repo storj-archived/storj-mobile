@@ -64,7 +64,9 @@ public class FileModel {
         this(file, isStarred, false, 0, 0, null, null);
     }
 
-    public FileModel(File file, boolean isStarred, boolean isSynced) { this(file, isStarred, isSynced, 0, 0, null, null); }
+    public FileModel(File file, boolean isStarred, boolean isSynced) {
+        this(file, isStarred, isSynced, 0, 0, null, null);
+    }
 
     public FileModel(String bucketId, String fileId, String created, String erasure, String hmac, String index, boolean isDecrypted, boolean isStarred, String mimeType, String name, long size) {
         this(bucketId, fileId, created, erasure, hmac, index, isDecrypted, isStarred, mimeType, name, size, false, 0, null, null);
