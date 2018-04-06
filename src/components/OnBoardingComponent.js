@@ -17,19 +17,15 @@ import { NavigationActions } from 'react-navigation';
  */
 SafetyOnBoardingScreen = () => {
     return(
-        <View style={ styles.contentContainer }>
-            <View style={ styles.imageContainer }>
-                <Image style={ styles.image } source={ onBoardingScreensConstants.safetyImagePath } />
-            </View>
-            <View >
-                <Text style={ styles.titleBold }>{ onBoardingScreensConstants.safetyBoldTitle[0] }</Text>
-                <Text style={ styles.titleBold }>{ onBoardingScreensConstants.safetyBoldTitle[1] }</Text>
+        <View style = { styles.contentContainer }>
+            <View style = { styles.imageContainer }>
+                <Image style = { styles.image } source = { onBoardingScreensConstants.safetyImagePath } resizeMode = { 'contain' } />
             </View>
             <View style={ styles.textContainer }>
                 {
                     onBoardingScreensConstants.safetyMainText.map((element, index) => {
                         return <Text 
-                        key = {index} style={ styles.textInfo }>{ element }</Text>
+                        key = {index} style = { styles.textInfo }>{ element }</Text>
                     })
                 }
             </View>
@@ -42,18 +38,34 @@ SafetyOnBoardingScreen = () => {
  */
 IncomeOnBoardingScreen = () =>  {
     return(
-        <View style={ styles.contentContainer }>
-            <View style={ styles.imageContainer }>
-                <Image style={ styles.image } source={ onBoardingScreensConstants.incomeImagePath } />
-            </View>
-            <View>
-                <Text style={ styles.titleBold }>{ onBoardingScreensConstants.incomeBoldTitle[0] }</Text>
-                <Text style={ styles.titleBold }>{ onBoardingScreensConstants.incomeBoldTitle[1] }</Text>
+        <View style = { styles.contentContainer }>
+            <View style = { styles.imageContainer }>
+                <Image style = { styles.image } source = { onBoardingScreensConstants.incomeImagePath } resizeMode = { 'contain' } />
             </View>
             <View style={ styles.textContainer }>
                 {
                     onBoardingScreensConstants.incomeMainText.map((element, index) => {
-                        return <Text key = {index} style={ styles.textInfo }>{ element }</Text>
+                        return <Text key = {index} style = { styles.textInfo }>{ element }</Text>
+                    })
+                }
+            </View>
+        </View>
+    );
+};
+
+/**
+ * Content of 3 onBoarding screen
+ */
+SpaceOnBoardingScreen = () =>  {
+    return(
+        <View style = { styles.contentContainer }>
+            <View style = { styles.imageContainer }>
+                <Image style = { styles.image } source = { onBoardingScreensConstants.spaceImagePath } resizeMode = { 'contain' } />
+            </View>
+            <View style={ styles.textContainer }>
+                {
+                    onBoardingScreensConstants.spaceMainText.map((element, index) => {
+                        return <Text key = {index} style = { styles.textInfo }>{ element }</Text>
                     })
                 }
             </View>
@@ -93,9 +105,12 @@ export default class OnBoardingComponent extends Component {
     render() {
         return(
             <View style={ styles.screen }>
+                <View style = { styles.titleContainer }>
+                    <Text style = { styles.titleText }>Welcome to Storj!</Text>
+                </View>
                 <View style={ styles.content }>
                     <ContentSlider
-                        content = {[ SafetyOnBoardingScreen(), IncomeOnBoardingScreen() ]}
+                        content = {[ SafetyOnBoardingScreen(), IncomeOnBoardingScreen(), SpaceOnBoardingScreen() ]}
                         width = { getDeviceWidth() }
                         position = { 0 } />  
                 </View>
@@ -103,12 +118,12 @@ export default class OnBoardingComponent extends Component {
                     <TouchableOpacity 
                         style={ [ styles.button, styles.buttonLogin ] } 
                         onPress = { this.redirectToSingInScreen.bind(this) }>
-                            <Text style={ styles.loginText }>Login</Text>
+                            <Text style={ styles.loginText }>Log in</Text>
                     </TouchableOpacity>
                     <TouchableOpacity 
                         style={ [ styles.button, styles.buttonSignUp ] } 
                         onPress = { this.redirectToSingUpScreen.bind(this) }>
-                            <Text style={ styles.signUpText }>Sign Up</Text>
+                            <Text style={ styles.signUpText }>Create account</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -134,6 +149,7 @@ const params = {
 
 const styles = StyleSheet.create({
     screen: {
+        paddingHorizontal: getWidth(20),
         flex: 1,
         backgroundColor: 'white'
     },
@@ -142,12 +158,18 @@ const styles = StyleSheet.create({
         flex: 1
     },
     titleContainer: {
+        marginTop: getHeight(30),
         justifyContent: 'flex-start'
+    },
+    titleText: {
+        fontFamily: 'Montserrat-Bold', 
+        fontSize: getHeight(30), 
+        lineHeight: getHeight(33),
+        color: '#384B65'
     },
     footer: {
         justifyContent: 'center',
         flexDirection: 'row',
-        paddingHorizontal: getWidth(20),
         paddingVertical: getHeight(25),
         height: getHeight(94)
     },
@@ -178,23 +200,19 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         flex: 1,
-        paddingVertical: params.contentPaddingVertical,
-        paddingHorizontal: params.contentPadding
+        paddingVertical: params.contentPaddingVertical
     },
     imageContainer: {
-        position: 'absolute',
-        top: 0, 
-        left: 0, 
-        right: 0, 
-        bottom: 0, 
-        justifyContent: 'center', 
-        alignItems: 'center'
+        marginTop: getHeight(25),
+        marginRight: getWidth(10),
+        justifyContent: 'center'
     },
     textContainer: {
         backgroundColor: 'transparent',
-        flex: 1,
-        alignItems: 'flex-start',
-        justifyContent: 'flex-end'
+        marginTop: getHeight(20),
+        height: getHeight(80),
+        width: getWidth(335),
+        alignItems: 'flex-start'
     },
     titleBold: {
         fontFamily: 'Montserrat-ExtraBold',   
@@ -215,7 +233,8 @@ const styles = StyleSheet.create({
         color: params.colorDarkBlue
     },
     image: {
-        marginTop: params.imageTopPadding
+        height: getHeight(250),
+        width: getWidth(335)
     }
 });
 

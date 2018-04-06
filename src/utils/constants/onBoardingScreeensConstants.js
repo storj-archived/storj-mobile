@@ -1,13 +1,15 @@
 const onBoardingScreensConstants = {
     //safety onBoardingScreens constans
-    safetyBoldTitle: ['Keep your', 'files safe'],
-    safetyImagePath: require('../../images/OnBoardingScreens/illustrationOnboarding2.png'),
-    safetyMainText: ['While Users store files in Boxdrive, the other', 'people – Keepers, earn money by renting', 'out their hard disk space to Users and', 'supplying our cloud network.'],
+    safetyImagePath: require('../../images/OnBoardingScreens/CloudImage.png'),
+    safetyMainText: ['Storj is decentralized cloud data storage', 'that’s inherently private—you decide who to', 'share your data with'],
 
     //income onBoardingScreens constans
-    incomeBoldTitle: ['Get passive','income'],
-    incomeImagePath: require('../../images/OnBoardingScreens/illustrationOnboarding2.png'),
-    incomeMainText: ['While Users store files in Boxdrive, the other', 'people – Keepers, earn money by renting', 'out their hard disk space to Users and', 'supplying our cloud network.'],
+    incomeImagePath: require('../../images/OnBoardingScreens/LockImage.png'),
+    incomeMainText: ['Storj encrypts and shards your files and', 'stores them across the Storj network'],
+
+    //space onBoardingScreens constans
+    spaceImagePath: require('../../images/OnBoardingScreens/25Image.png'),
+    spaceMainText: ['Safely sync your files between devices and', 'get 25GB for free!'],
 };
 
 export default onBoardingScreensConstants;
