@@ -122,7 +122,8 @@ class MyPhotosContainer extends Component {
 }
 
 const LoadingComponent = (props) => {
-
+    /* console.log(props);
+    console.log(props.isLoading ? true : false); */
     return (
         <View style={ styles.loadingComponentContainer }>
             <ActivityIndicator animating = { props.isLoading ? true : false } size = { 'large' } color = { 'blue' } />

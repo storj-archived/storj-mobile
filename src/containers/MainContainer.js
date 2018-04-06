@@ -45,7 +45,7 @@ class MainContainer extends Component {
 
         this.selectionDashboardModeActions = [
             //actions for bucket screen
-            TabBarActionModelFactory.createNewAction(() => { this.setFavouriteFiles(); }, 'Action 4', require('../images/ActionBar/FavoritesIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { console.log("hello"); this.setFavouriteFiles(); }, 'Action 4', require('../images/ActionBar/FavoritesIcon.png')),
             TabBarActionModelFactory.createNewAction(() => { this.downloadSelectedFiles(); }, 'Action 5', require('../images/ActionBar/DownloadIFileIcon.png')), 
             TabBarActionModelFactory.createNewAction(() => { }, 'Action 6', require('../images/ActionBar/CopyBucketIcon.png')), 
             TabBarActionModelFactory.createNewAction(() => { this.tryDeleteFiles(this.props.dashboardBucketId); }, 'Action 7', require('../images/ActionBar/TrashBucketIcon.png'))
@@ -227,7 +227,7 @@ class MainContainer extends Component {
         this.props.fileListModels.forEach(fileItem => { 
 
             if(fileItem.isSelected)
-                this.deleteFile(bucketId, fileItem.getId());
+                this.deleteFile(fileItem.entity.bucketId, fileItem.getId());
         });
     }
 
@@ -279,6 +279,7 @@ class MainContainer extends Component {
 
         for(var i = 0; i < length; i++) {
             var item = selectedFiles[i];
+            console.log(item);
             let updateStarredResponse = await SyncModule.updateFileStarred(item.getId(), !item.getStarred());
 
             if(updateStarredResponse.isSuccess) {
@@ -312,7 +313,7 @@ class MainContainer extends Component {
 
         switch(currentScreen) {
             case "DashboardScreen":
-                const dashboardActions = handleScreenActions(this.props.dashboardBucketId, 
+                const dashboardActions = handleDashboardScreenActions(this.props.dashboardBucketId, 
                     isSelectionMode, 
                     this.dashboardBucketActions, 
                     this.selectionDashboardModeActions);
@@ -342,7 +343,7 @@ class MainContainer extends Component {
 
                 break;
         }
-        
+
         if(this.props.isSelectionMode || this.props.isSingleItemSelected) {
             return this.selectionModeActions;
         }
@@ -385,6 +386,8 @@ class MainContainer extends Component {
 }
 
 function handleScreenActions(bucketId, isSelection, actions, selectionModeActions) {
+    console.log(bucketId);
+
     if(!bucketId) {
         return null;
     }
@@ -394,6 +397,20 @@ function handleScreenActions(bucketId, isSelection, actions, selectionModeAction
     if(isSelection) {
         result = selectionModeActions;
     } else {
+        result = actions;
+    }
+
+    return result;
+}
+
+function handleDashboardScreenActions(bucketId, isSelection, actions, selectionModeActions) {
+    console.log(bucketId);
+
+    let result = null;
+
+    if(isSelection) {
+        result = selectionModeActions;
+    } else if(bucketId) {
         result = actions;
     }
 
