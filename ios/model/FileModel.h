@@ -31,7 +31,16 @@
 @property BOOL _isStarred;
 @property BOOL _isSynced;
 
-//TODO add constructor for Storj model;
+-(instancetype) initWithBucketId: (NSString *) bucketId
+                         created: (NSString *) created
+                         erasure: (NSString *) erasure
+                            hmac: (NSString *) hmac
+                          fileId: (NSString *) fileId
+                           index: (NSString *) index
+                        mimeType: (NSString *) mimeType
+                            name: (NSString *) name
+                            size: (long) size
+                     isDecrypted: (BOOL) isDecrypted;
 
 -(instancetype) initWithBucketId: (NSString *) bucketId
                          created: (NSString *) created

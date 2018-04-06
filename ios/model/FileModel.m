@@ -24,6 +24,31 @@
 @synthesize _isStarred;
 @synthesize _isSynced;
 
+-(instancetype) initWithBucketId: (NSString *) bucketId
+                         created: (NSString *) created
+                         erasure: (NSString *) erasure
+                            hmac: (NSString *) hmac
+                          fileId: (NSString *) fileId
+                           index: (NSString *) index
+                        mimeType: (NSString *) mimeType
+                            name: (NSString *) name
+                            size: (long) size
+                     isDecrypted: (BOOL) isDecrypted{
+  if(self = [super init]){
+    _bucketId = bucketId;
+    _created = created;
+    _erasure = erasure;
+    _hmac = hmac;
+    _fileId = fileId;
+    _index = index;
+    _mimeType = mimeType;
+    _name = name;
+    _size = size;
+    _isDecrypted = isDecrypted;
+  }
+  return self;
+}
+
 -(instancetype)initWithBucketId:(NSString *)bucketId
                         created:(NSString *)created
                         erasure:(NSString *)erasure
@@ -90,9 +115,7 @@
                        mimeType:[sjFile _mimeType]
                            name:[sjFile _name]
                            size:[sjFile _size]
-                    isDecrypted:[sjFile _isDecrypted]
-                      isStarred:NO
-                       isSynced:NO];
+                    isDecrypted:[sjFile _isDecrypted]];
 }
 
 -(instancetype) initWithFileDbo: (FileDbo *) dbo{
@@ -128,7 +151,6 @@
   [object setObject:[DictionaryUtils checkAndReturnNSString:_name] forKey:FileContract.NAME];
   [object setObject:@(_size) forKey:FileContract.SIZE];
   [object setObject:@(_isDecrypted) forKey:FileContract.DECRYPTED];
-  [object setObject:@(_isStarred) forKey:FileContract.STARRED];
   return object;
 }
 

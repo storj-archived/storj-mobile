@@ -184,6 +184,34 @@ RCT_REMAP_METHOD(getFile,
    }];
 }
 
+RCT_REMAP_METHOD(updateBucketStarred,
+                 updateBucketStarredWithBucketId: (NSString *) bucketId
+                 starredFlag:(BOOL) isStarred
+                 WithResolver: (RCTPromiseResolveBlock) resolver
+                 andRejecter: (RCTPromiseRejectBlock) rejecter){
+  [MethodHandler
+   invokeParallelWithParams:@{@RESOLVER: resolver,
+                               @REJECTER : rejecter}
+   andMethodHandlerBlock:^(NSDictionary * _Nonnull param) {
+     RCTPromiseResolveBlock resolve = param[@RESOLVER];
+     resolve([[[self bucketRepository] updateById:bucketId starred:isStarred] toDictionary]);
+   }];
+}
+
+RCT_REMAP_METHOD(updateFileStarred,
+                 updateFileStarredWithBucketId: (NSString *) fileId
+                 starredFlag:(BOOL) isStarred
+                 WithResolver: (RCTPromiseResolveBlock) resolver
+                 andRejecter: (RCTPromiseRejectBlock) rejecter){
+  [MethodHandler
+   invokeParallelWithParams:@{@RESOLVER: resolver,
+                               @REJECTER : rejecter}
+   andMethodHandlerBlock:^(NSDictionary * _Nonnull param) {
+     RCTPromiseResolveBlock resolve = param[@RESOLVER];
+     resolve([[[self fileRepository] updateById:fileId starred:isStarred] toDictionary]);
+   }];
+}
+
 
 //WithResolver: (RCTPromiseResolveBlock) resolver
 //andRejecter: (RCTPromiseRejectBlock) rejecter){
