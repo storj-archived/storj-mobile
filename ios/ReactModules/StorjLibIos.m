@@ -321,7 +321,14 @@ RCT_REMAP_METHOD(getDownloadFolderPath,
                                      @REJECTER : rejecter}
             andMethodHandlerBlock:^(NSDictionary * _Nonnull param) {
               RCTPromiseResolveBlock resolve = param[@RESOLVER];
-              NSString * downloadsDir = [NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES) lastObject];
+              NSString * downloadsDir = [NSSearchPathForDirectoriesInDomains(/*NSDocumentDirectory*/NSDownloadsDirectory, NSUserDomainMask, YES) lastObject];
+//              downloadsDir = [downloadsDir stringByAppendingString:@"/Downloads"];
+              if(![[NSFileManager defaultManager]fileExistsAtPath:downloadsDir isDirectory:NULL]){
+                NSError *error = nil;
+                if (![[NSFileManager defaultManager] createDirectoryAtPath:downloadsDir withIntermediateDirectories:YES attributes:nil error:&error]) {
+                  NSLog(@"%@", error.localizedDescription);
+                }
+              }
               SingleResponse *response;
               if(downloadsDir || downloadsDir.length > 0){
                 response = [SingleResponse successSingleResponseWithResult:downloadsDir];

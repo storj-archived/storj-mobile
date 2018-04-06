@@ -163,7 +163,7 @@ RCT_REMAP_METHOD(getFiles,
        }
        if([files count] == 0){
 //         [_fileRepository deleteAllFromBucket:bucketId];
-         [[self fileRepository] deleteAllFromBucket:bucketId];
+         NSLog(@"Delete all from bucketResponse: %@",[[[self fileRepository] deleteAllFromBucket:bucketId] toDictionary]);
          //dbClose???
          [self sendEventWithName:EventNames.EVENT_FILES_UPDATED
                      body:@(YES)];
@@ -329,8 +329,21 @@ RCT_REMAP_METHOD(downloadFile,
                  resolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-  //  NSLog(@"Downloading file ")
+//    NSLog(@"Downloading \nfile %@ \nfrom %@ \nto %@", fileId, bucketId, localPath)
   //TODO normal flow
+  
+  if(!fileId || fileId.length == 0){
+    return;
+  }
+  
+  if(!localPath || localPath.length == 0){
+    return;
+  }
+  
+  __block double downloadProgress = 0;
+  long fileRef = 0;
+  NSLog(@"Downloading file %@ to %@", fileId, localPath);
+  
   FileDownloadCallback *callback = [[FileDownloadCallback alloc]init];
   callback.onError = ^(int errorCode, NSString * _Nullable errorMessage) {
     NSLog(@"File download error %d, %@", errorCode, errorMessage);
@@ -341,19 +354,30 @@ RCT_REMAP_METHOD(downloadFile,
   callback.onDownloadProgress = ^(NSString *fileId, double progress, double downloadedBytes, double totalBytes) {
     NSLog(@"Download progress for %@, %f", fileId, progress);
   };
-  [self.storjWrapper downloadFile:fileId fromBucket:bucketId withCompletion:callback];
+  [self.storjWrapper downloadFile:fileId
+                       fromBucket:bucketId
+                        localPath:localPath
+                   withCompletion:callback];
 }
 
 RCT_REMAP_METHOD(cancelUpload,
                  cancelUploadByFileRef:(long)fileRef
                  resolver:(RCTPromiseResolveBlock) resolve
                  rejecter:(RCTPromiseRejectBlock) reject){
+  if(fileRef == 0 || fileRef == -1){
+    return;
+  }
+  [[self storjWrapper] cancelUpload:fileRef];
 }
 
 RCT_REMAP_METHOD(cancelDownload,
                  cancelDownloadByFileRef:(long)fileRef
                  resolver:(RCTPromiseResolveBlock) resolve
                  rejecter:(RCTPromiseRejectBlock) reject){
+  if(fileRef == 0 || fileRef == -1){
+    return;
+  }
+  [[self storjWrapper] cancelDownload:fileRef];
 }
 
 RCT_REMAP_METHOD(uploadFile,
@@ -468,6 +492,9 @@ RCT_REMAP_METHOD(uploadFile,
     }
   }
 }
+
+//resolver:(RCTPromiseResolveBlock) resolve
+//rejecter:(RCTPromiseRejectBlock) reject){
 
 -(void) arrayShift:(NSMutableArray *) array position:(int)position length:(int) length{
   while(position < length -1){
