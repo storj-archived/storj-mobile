@@ -54,8 +54,7 @@
                      name: [sjBucket name]
                   created: [sjBucket created]
                      hash: [sjBucket _hash]
-              isDecrypted: [sjBucket _isDecrypted]
-                isStarred: NO];
+              isDecrypted: [sjBucket _isDecrypted]];
 }
 
 -(BOOL) isValid{

@@ -84,7 +84,6 @@
                        forKey:BucketContract.CREATED];
   [resultDictionary setObject: @(_hash) forKey:BucketContract.HASH_CODE];
   [resultDictionary setObject: @(_isDecrypted) forKey:BucketContract.DECRYPTED];
-  [resultDictionary setObject: @(_isStarred) forKey:BucketContract.STARRED];
   return resultDictionary;
 }
 
