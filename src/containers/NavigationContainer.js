@@ -56,6 +56,7 @@ class Apps extends Component {
 		this.downloadFileErrorListener = null;
 
 		this.isAndroid = Platform.OS === "android";
+		this.timer = null;
     }
 
 	async componentWillMount() {
@@ -163,12 +164,20 @@ class Apps extends Component {
 		}
         
 		this.props.popLoading(response.result);
-    }
+	}
+	
+	unsetNameAlreadyExistException() {
+		this.props.unsetNameAlreadyExistException();
+		clearTimeout(this.timer);
+	}
 
 	onBucketCreated(response) {
 		if(response.isSuccess) {
 			this.props.createBucket(new ListItemModel(new BucketModel(JSON.parse(response.result))));	
-		}	
+		} else {
+			this.props.setNameAlreadyExistException();
+			this.timer = setTimeout(this.unsetNameAlreadyExistException.bind(this), 3000);
+		}
 	}
 
 	async onBucketsReceived() {
@@ -212,6 +221,12 @@ class Apps extends Component {
 			return(
 				<WarningComponent
 					message = { 'This acoound doesn`t exist' }
+					statusBarColor = '#EB5757' />
+			)
+		} else if(this.props.isNameExistException) {
+			return(
+				<WarningComponent
+					message = { 'Name already used by another bucket' }
 					statusBarColor = '#EB5757' />
 			)
 		} else {
@@ -258,7 +273,8 @@ function mapStateToProps(state) {
 		openedBucketId: state.mainReducer.openedBucketId,
 		nav: state.navReducer,
 		isEmailConfirmed: state.authReducer.user.isEmailConfirmed,
-		isAccountExist: state.authReducer.user.isAccountExist
+		isAccountExist: state.authReducer.user.isAccountExist,
+		isNameExistException: state.bucketReducer.isNameExistException
     };
 }
 

@@ -12,7 +12,9 @@ const {
     CREATE_BUCKET,
     DELETE_BUCKET,
     GET_BUCKETS, 
-    UPDATE_FAVOURITE
+    UPDATE_FAVOURITE,
+    SET_NAME_ALREADY_EXIST_EXCEPTION,
+    UNSET_NAME_ALREADY_EXIST_EXCEPTION
 } = BUCKET_ACTIONS;
 
 function selectBucket(bucket) {
@@ -37,6 +39,14 @@ function getBuckets(buckets) {
 
 function updateFavourite(buckets) {
     return { type: UPDATE_FAVOURITE, payload: { buckets } } 
+}
+
+function setNameAlreadyExistException() {
+    return { type: SET_NAME_ALREADY_EXIST_EXCEPTION } 
+}
+
+function unsetNameAlreadyExistException() {
+    return { type: UNSET_NAME_ALREADY_EXIST_EXCEPTION } 
 }
 
 export function getPicturesBucketId(buckets) {
@@ -69,6 +79,8 @@ export const mainContainerBucketActions = {
 export const bucketsContainerBucketActions = {
     selectBucket,
     deselectBucket,
+    setNameAlreadyExistException,
+    unsetNameAlreadyExistException,
     createBucket
 };
 

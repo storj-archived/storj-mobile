@@ -7,7 +7,9 @@ const {
     CREATE_BUCKET,
     DELETE_BUCKET,
     GET_BUCKETS, 
-    UPDATE_FAVOURITE
+    UPDATE_FAVOURITE,
+    SET_NAME_ALREADY_EXIST_EXCEPTION,
+    UNSET_NAME_ALREADY_EXIST_EXCEPTION
  } = BUCKET_ACTIONS;
 
  const { 
@@ -16,7 +18,8 @@ const {
  } = MAIN_ACTIONS;
                                                         
 const initialState = {
-    buckets: []
+    buckets: [],
+    isNameExistException: false
 };
 
 export default function mainReducer(state = initialState, action) {
@@ -48,6 +51,12 @@ export default function mainReducer(state = initialState, action) {
         case UPDATE_FAVOURITE:
             newState.buckets = bucketsManager.updateStarred(action.payload.buckets, true);
             break;  
+        case SET_NAME_ALREADY_EXIST_EXCEPTION:
+            newState.isNameExistException = true;
+            break;
+        case UNSET_NAME_ALREADY_EXIST_EXCEPTION:
+            newState.isNameExistException = false;
+            break;
         default:
             return state || initialState;
     }
