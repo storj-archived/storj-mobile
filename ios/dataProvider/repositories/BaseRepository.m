@@ -39,10 +39,10 @@
                        withObjectKey: (NSString *) objectKey
                     withObjecktValue: (NSString *) objectValue
 {
-  NSString *request = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@ = '%@'",
-                       tableName, objectKey, objectValue];
+  NSString *request = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@ = ?",
+                       tableName, objectKey];
   NSLog(@"SQL Delete Request: %@", request);
-  if(![[self _database] executeUpdate:request]){
+  if(![[self _database] executeUpdate:request, objectValue]){
     return [self getResponseFromDatabaseError];
   }
   
