@@ -36,9 +36,32 @@ BOOL _isSynced;
                        mimeType:[model _mimeType]
                            name:[model _name]
                            size:[model _size]
-                    isDecrypted:[model _isDecrypted]
-                      isStarred:[model _isStarred]
-                       isSynced:[model _isSynced]];
+                    isDecrypted:[model _isDecrypted]];
+}
+
+-(instancetype) initWithBucketId: (NSString *) bucketId
+                         created: (NSString *) created
+                         erasure: (NSString *) erasure
+                           hmac : (NSString *) hmac
+                          fileId: (NSString *) fileId
+                           index: (NSString *) index
+                        mimeType: (NSString *)mimeType
+                            name: (NSString *) name
+                           size :(long) size
+                     isDecrypted: (BOOL) isDecrypted{
+  if(self = [super init]){
+    _bucketId = bucketId;
+    _created = created;
+    _erasure = erasure;
+    _hmac = hmac;
+    _fileId = fileId;
+    _index = index;
+    _mimeType = mimeType;
+    _name = name;
+    _size = size;
+    _isDecrypted = isDecrypted;
+  }
+  return self;
 }
 
 -(instancetype) initWithBucketId: (NSString *) bucketId

@@ -99,7 +99,18 @@ RCT_REMAP_METHOD(listAllFiles, listAllFilesWithResolver: (RCTPromiseResolveBlock
    invokeParallelWithParams:@{@RESOLVER: resolver,
                                @REJECTER : rejecter}
    andMethodHandlerBlock:^(NSDictionary * _Nonnull param) {
-     
+     NSArray<FileDbo *> *fileDbos = [[self fileRepository] getAll];
+     int length = fileDbos.count;
+     NSMutableArray *fileModels = [NSMutableArray arrayWithCapacity: length];
+     for(int i = 0; i < length; i++){
+       fileModels[i] = [[FileModel alloc] initWithFileDbo:fileDbos[i]];
+       if([fileModels[i] _isStarred]){
+         NSLog(@"STARRED FILE: %@", [fileModels[i] toDictionary]);
+       }
+     }
+     RCTPromiseResolveBlock resolve = param[@RESOLVER];
+     resolve([[SingleResponse successSingleResponseWithResult:
+               [DictionaryUtils convertToJsonWithArray:fileModels]]toDictionary] );
    }];
 }
 

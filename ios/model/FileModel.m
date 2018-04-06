@@ -151,6 +151,9 @@
   [object setObject:[DictionaryUtils checkAndReturnNSString:_name] forKey:FileContract.NAME];
   [object setObject:@(_size) forKey:FileContract.SIZE];
   [object setObject:@(_isDecrypted) forKey:FileContract.DECRYPTED];
+  if(_isStarred){
+    [object setObject:@(_isStarred) forKey:FileContract.STARRED];
+  }
   return object;
 }
 
