@@ -56,6 +56,8 @@ public final class UploadService extends BaseReactService {
 
     public final static int UPLOAD_CANCEL_REQUEST_CODE = 223132;
 
+    private volatile boolean mCancelationToken = false;
+
     private final NotificationService mNotificationService = new NotificationService();
 
     public UploadService() {
@@ -64,6 +66,11 @@ public final class UploadService extends BaseReactService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
+        Log.d("UPLOAD DEBUG", "onHandleIntent: START");
+        if(intent == null) {
+            return;
+        }
+
         String action = intent.getAction();
 
         switch(action) {
@@ -87,6 +94,7 @@ public final class UploadService extends BaseReactService {
                 uploadFileCancel(fileHandle);
                 break;
         }
+        Log.d("UPLOAD DEBUG", "onHandleIntent: END, " + intent.getStringExtra(PARAMS_URI));
     }
 
     private boolean checkConstraints(boolean isSync, boolean onWifi, boolean onCharging) {
@@ -132,6 +140,10 @@ public final class UploadService extends BaseReactService {
         final UploadingFilesRepository repo = new UploadingFilesRepository(db);
 
         final UploadingFileDbo dbo = new UploadingFileDbo(0, 0, file.getTotalSpace(), 0, file.getName(), uri, bucketId);
+
+        if(dbo == null) {
+            return;
+        }
 
         final UploadSyncObject syncObj = new UploadSyncObject();
         final ProgressResolver progressResolver = new ProgressResolver();
@@ -190,12 +202,6 @@ public final class UploadService extends BaseReactService {
                 final NotificationCompat.Action cancelUploadAction = new NotificationCompat.Action(R.mipmap.ic_launcher, "Cancel", cancelIntentPending);*/
 
                 mNotificationService.notify((int)dbo.getId(), "Uploading " + dbo.getName(), (int)(_progress * 10000), 10000/*, cancelUploadAction*/);
-
-                /*try {
-                    Thread.sleep((long)100);
-                } catch(Exception e) {
-
-                }*/
             }
 
             @Override

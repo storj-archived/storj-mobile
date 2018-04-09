@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import storjlib.utils.CameraModule;
 import storjlib.utils.Sha256Module;
 import storjlib.services.ServiceModule;
 
@@ -33,6 +34,7 @@ public class StorjLibPackage implements ReactPackage {
         modules.add(new FilePickerModule(reactContext));
         modules.add(new ServiceModule(reactContext));
         modules.add(new SyncModule(reactContext));
+        modules.add(new CameraModule(reactContext));
 
         return modules;
     }

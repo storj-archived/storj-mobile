@@ -31,6 +31,7 @@ public class DownloadService extends BaseReactService {
     public final static String SERVICE_NAME = "storjlib.services.DownloadService";
 
     public final static String ACTION_DOWNLOAD_FILE = "ACTION_DOWNLOAD_FILE";
+    public final static String ACTION_COPY_FILE = "ACTION_COPY_FILE";
     public final static String ACTION_DOWNLOAD_FILE_CANCEL = "ACTION_DOWNLOAD_FILE_CANCEL";
 
     public final static String EVENT_FILE_DOWNLOAD_START = "EVENT_FILE_DOWNLOAD_START";
@@ -39,6 +40,7 @@ public class DownloadService extends BaseReactService {
     public final static String EVENT_FILE_DOWNLOAD_ERROR = "EVENT_FILE_DOWNLOAD_ERROR";
 
     public final static String PARAMS_BUCKET_ID = "bucketId";
+    public final static String PARAMS_TARGET_BUCKET_ID = "targetBucketId";
     public final static String PARAMS_FILE_ID = "fileId";
     public final static String PARAMS_LOCAL_PATH = "localPath";
 
@@ -56,25 +58,43 @@ public class DownloadService extends BaseReactService {
         }
 
         String action = intent.getAction();
+        String bucketId = intent.getStringExtra(PARAMS_BUCKET_ID);
+        String fileId = intent.getStringExtra(PARAMS_FILE_ID);
+        String localPath = intent.getStringExtra(PARAMS_LOCAL_PATH);
+
         switch (action) {
             case ACTION_DOWNLOAD_FILE:
-                String bucketId = intent.getStringExtra(PARAMS_BUCKET_ID);
-                String fileId = intent.getStringExtra(PARAMS_FILE_ID);
-                String localPath = intent.getStringExtra(PARAMS_LOCAL_PATH);
                 downloadFile(bucketId, fileId, localPath);
+                break;
+            case ACTION_COPY_FILE:
+                String targetBucketId = intent.getStringExtra(PARAMS_TARGET_BUCKET_ID);
+
+                if(downloadFile(bucketId, fileId, localPath)) {
+                    uploadFile(targetBucketId, localPath);
+                }
+
                 break;
         }
         Log.d(DEBUG_TAG, "onHandleIntent: END, " + intent.getStringExtra(PARAMS_FILE_ID));
     }
 
-    private void downloadFile(String bucketId, final String fileId, String localPath) {
+    private void uploadFile(String bucketId, String localPath) {
+        Intent uploadIntent = new Intent(this, UploadService.class);
+        uploadIntent.setAction(UploadService.ACTION_UPLOAD_FILE);
+        uploadIntent.putExtra(UploadService.PARAMS_BUCKET_ID, bucketId);
+        uploadIntent.putExtra(UploadService.PARAMS_URI, localPath);
+
+        this.startService(uploadIntent);
+    }
+
+    private boolean downloadFile(String bucketId, final String fileId, String localPath) {
         Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
         //Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
 
         java.io.File file = new java.io.File(localPath);
 
         if(bucketId == null || fileId == null /*|| !file.exists() || */|| file.isDirectory()) {
-            return;
+            return false;
         }
 
         final SQLiteDatabase db = new DatabaseFactory(this, null).getWritableDatabase();
@@ -87,7 +107,7 @@ public class DownloadService extends BaseReactService {
         final ProgressResolver progressResolver = new ProgressResolver();
 
         if(fileDbo == null) {
-            return;
+            return false;
         }
 
         final long fileHandle = StorjAndroid.getInstance(DownloadService.this).downloadFile(bucketId, fileId, localPath, new DownloadFileCallback() {
@@ -141,7 +161,7 @@ public class DownloadService extends BaseReactService {
 
                 db.close();
                 synchronized(uploadSyncObject) {
-                    uploadSyncObject.setJobFinished();
+                    uploadSyncObject.setJobFinishedSuccess();
                 }
             }
 
@@ -179,6 +199,7 @@ public class DownloadService extends BaseReactService {
 
         synchronized(uploadSyncObject) {
             uploadSyncObject.isJobFinished();
+            return uploadSyncObject.isSuccess();
         }
     }
 }

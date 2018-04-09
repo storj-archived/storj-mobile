@@ -150,6 +150,23 @@ public class ServiceModule extends ReactContextBaseJavaModule {
         getReactApplicationContext().startService(downloadIntent);
     }
 
+
+    @ReactMethod
+    public void copyFile(String bucketId, String fileId, String localPath, String targetBucketId) {
+        if(bucketId == null || localPath == null || fileId == null || targetBucketId == null) {
+            return;
+        }
+
+        Intent downloadIntent = new Intent(getReactApplicationContext(), DownloadService.class);
+        downloadIntent.setAction(DownloadService.ACTION_COPY_FILE);
+        downloadIntent.putExtra(DownloadService.PARAMS_BUCKET_ID, bucketId);
+        downloadIntent.putExtra(DownloadService.PARAMS_TARGET_BUCKET_ID, targetBucketId);
+        downloadIntent.putExtra(DownloadService.PARAMS_FILE_ID, fileId);
+        downloadIntent.putExtra(DownloadService.PARAMS_LOCAL_PATH, localPath);
+
+        getReactApplicationContext().startService(downloadIntent);
+    }
+
     @ReactMethod
     public void getFiles(String bucketId) {
         Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);

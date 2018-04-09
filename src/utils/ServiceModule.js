@@ -46,6 +46,10 @@ const ServiceModule = (() => {
             serviceModule.downloadFile(String(bucketId), String(fileId), String(localPath));
         }
 
+        copyFile(bucketId, fileId, localPath, targetBucketId) {
+            serviceModule.copyFile(String(bucketId), String(fileId), String(localPath), String(targetBucketId));
+        }
+
         async createBucket(bucketName) {
             return await serviceModule.createBucket(bucketName);
         }

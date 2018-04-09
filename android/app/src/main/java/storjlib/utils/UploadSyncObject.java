@@ -6,9 +6,16 @@ package storjlib.utils;
 
 public class UploadSyncObject {
     private boolean isJobFinished;
+    private boolean isSuccess;
 
     public void setJobFinished() {
         isJobFinished = true;
+        notify();
+    }
+
+    public void setJobFinishedSuccess() {
+        isJobFinished = true;
+        isSuccess = true;
         notify();
     }
 
@@ -22,5 +29,9 @@ public class UploadSyncObject {
         }
 
         return isJobFinished;
+    }
+
+    public boolean isSuccess() {
+        return isSuccess;
     }
 }
