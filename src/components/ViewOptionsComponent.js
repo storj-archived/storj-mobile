@@ -12,6 +12,14 @@ import { getHeight, getWidth } from '../utils/adaptive';
 export default class ViewOptionsComponent extends Component {
     constructor(props) {
         super(props)
+
+        this.state = {
+            isSortingShown: false
+        }
+    }
+
+    closeView() {
+        this.props.showOptions();
     }
 
     renderOptionItem(imageSource, title, onPress) {
@@ -27,29 +35,70 @@ export default class ViewOptionsComponent extends Component {
         )
     }
 
+    renderMainOptions() {
+        return(
+            <View style = { styles.mainContainer } >
+                {
+                    this.renderOptionItem( require('../images/Icons/SortIcon.png'), "Sort items...", () => { this.setState({isSortingShown: true}) })
+                }
+                {
+                    this.props.isGridViewShown ?
+                        this.renderOptionItem( 
+                            require('../images/Icons/ListIcon.png'), 
+                            "List view", 
+                            () => this.props.setListView()) :
+                        this.renderOptionItem( 
+                            require('../images/Icons/GridIcon.png'), 
+                            "Grid view", 
+                            () => this.props.setGridView())   
+                }
+                {
+                    this.renderOptionItem( require('../images/Icons/SelectItems.png'), "Select items", () => {})
+                }
+            </View>
+        )
+    }
+
+    renderSorting() {
+        return(
+            <View style = { styles.mainContainer } >
+                {
+                    this.renderOptionItem( 
+                        null, 
+                        "Sort by date", 
+                        () => { 
+                            this.closeView();
+                        }
+                    )
+                }
+                {
+                    this.renderOptionItem( 
+                        null, 
+                        "Sort by name", 
+                        () => { 
+                            this.closeView();
+                        }
+                    )
+                }
+            </View>
+        )
+    }
+
+    mainRender() {
+        if(this.state.isSortingShown) {
+            return this.renderSorting();
+        }
+
+        return this.renderMainOptions();
+    }
+
     render() {
         return(
             <View style = { [ styles.backgroundWrapper ] }>  
-                <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { this.props.showOptions } />
-                    <View style = { styles.mainContainer } >
-                        {
-                            this.renderOptionItem( require('../images/Icons/SortIcon.png'), "Sort items...", () => {})
-                        }
-                        {
-                            this.props.isGridViewShown ?
-                                this.renderOptionItem( 
-                                    require('../images/Icons/ListIcon.png'), 
-                                    "List view", 
-                                    () => this.props.setListView()) :
-                                this.renderOptionItem( 
-                                    require('../images/Icons/GridIcon.png'), 
-                                    "Grid view", 
-                                    () => this.props.setGridView())   
-                        }
-                        {
-                            this.renderOptionItem( require('../images/Icons/SelectItems.png'), "Select items", () => {})
-                        }
-                    </View>
+                <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { () => this.closeView() } />
+                {
+                    this.mainRender()
+                }
             </View>
         )
     }
