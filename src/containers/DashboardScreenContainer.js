@@ -43,8 +43,7 @@ class DashboardScreenContainer extends Component {
     }
 
     getSelectedItemsCount() {        
-
-            return this.getArraySelectedCount(this.props.buckets.concat(this.props.files));
+        return this.getArraySelectedCount(this.props.buckets.concat(this.props.files));
     }
 
     navigateBack() {

@@ -14,6 +14,7 @@ import QRCodeComponent from '../components/MyAccount/QRCodeComponent';
 import StorageInfoComponent from '../components/MyAccount/StorageInfoComponent';
 import AddCreditComponent from '../components/MyAccount/AddCreditComponent';
 import PopUpComponent from '../components/PopUpComponent';
+import SelectBucketComponent from '../components/SelectBucketComponent';
 
 export default class MainComponent extends Component {
     constructor(props) {
@@ -24,7 +25,8 @@ export default class MainComponent extends Component {
             showQR: false,
             showStorageInfo: false,
             showCredits: false,
-            showPopUp: false
+            showPopUp: false,
+            isSelectBucketShown: false
         }
     };
 
@@ -46,6 +48,10 @@ export default class MainComponent extends Component {
 
     showPopUp() {
         this.setState({ showPopUp: !this.state.showPopUp });
+    }
+
+    showSelectBuckets() {
+        this.setState({ isSelectBucketShown: !this.state.isSelectBucketShown })
     }
     
     render() {
@@ -89,6 +95,16 @@ export default class MainComponent extends Component {
                                     this.props.hideCreateBucketInput(); 
                                 }} />
                         </View> : null
+                }
+                {
+                    this.state.isSelectBucketShown  
+                        ? <SelectBucketComponent
+                            getBucketId = { this.props.getBucketId }
+                            buckets = { this.props.buckets }
+                            isGridViewShown = { this.props.isGridViewShown }
+                            showOptions = { this.showOptions.bind(this) }
+                            navigateBack = { this.showSelectBuckets.bind(this) } />
+                        : null
                 }
                 {
                     this.props.isLoading ?

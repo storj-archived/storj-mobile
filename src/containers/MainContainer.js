@@ -31,7 +31,7 @@ class MainContainer extends Component {
         this.tapBarActions = [
             //actions for bucket screen
             TabBarActionModelFactory.createNewAction(() => { this.props.showCreateBucketInput(); }, 'Action 1', require('../images/ActionBar/NewBucketIcon.png')), 
-            TabBarActionModelFactory.createNewAction(() => { }, 'Action 2', require('../images/ActionBar/UploadFileIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { this.bucketScreenUploadFile() }, 'Action 2', require('../images/ActionBar/UploadFileIcon.png')),
             TabBarActionModelFactory.createNewAction(() => { }, 'Action 3', require('../images/ActionBar/UploadPhotoIcon.png'))
         ];
 
@@ -94,6 +94,8 @@ class MainContainer extends Component {
         }
 
         this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
+
+        this.filePickerResponsePath = null;
     }    
 
     async componentWillMount () {
@@ -171,6 +173,25 @@ class MainContainer extends Component {
             this.props.isActionBarShown ? 
                 this.props.hideActionBar() : this.props.showActionBar();
         }
+    }
+
+    async bucketScreenUploadFile() {
+        let filePickerResponse = await filePicker.show();
+        this.props.hideActionBar();
+
+        if(filePickerResponse.path) {
+            this.filePickerResponsePath = filePickerResponse.path;
+            this._mainComponent.showSelectBuckets();
+        }
+    }
+
+    getBucketId(params) {
+        if(params.bucketId) {
+            ServiceModule.uploadFile(params.bucketId, this.filePickerResponsePath);
+        }
+
+        this.filePickerResponsePath = null;
+        this._mainComponent.showSelectBuckets();
     }
 
     async uploadFile(bucketId) {
@@ -335,6 +356,8 @@ class MainContainer extends Component {
 
         return(
             <MainComponent
+                ref = { component => this._mainComponent = component }
+                getBucketId = { this.getBucketId.bind(this) }
                 redirectToInitializationScreen = { this.props.redirectToInitializationScreen.bind(this) }
                 isGridViewShown = { this.props.isGridViewShown }
                 setGridView = { this.props.setGridView }

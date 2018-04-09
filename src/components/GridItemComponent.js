@@ -174,7 +174,7 @@ export default class GridItemComponent extends Component {
                                 this.renderItemName()
                             }
                             {
-                                !props.isSelectionModeEnabled ? 
+                                !props.isSelectionModeEnabled && !props.isSelectDisabled ? 
                                     <TouchableOpacity 
                                         style = { gridItemStyles.listItemActionsIconContainer } 
                                         onPress = { () => {                     
@@ -211,6 +211,7 @@ GridItemComponent.propTypes = {
     item: PropTypes.object,
     onLongPress: PropTypes.func,
     isSelectionModeEnabled: PropTypes.bool,
+    isSelectDisabled: PropTypes.bool,
     isSingleItemSelected: PropTypes.bool,
     isItemActionsSelected: PropTypes.bool,
     selectItemId: PropTypes.func,

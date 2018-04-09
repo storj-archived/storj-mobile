@@ -171,6 +171,7 @@ export default class ListComponent extends Component {
                                                     return(
                                                         <View style = { styles.itemContainer } key = { item.getId() }>
                                                             <GridItemComponent
+                                                                isSelectDisabled = { this.props.isSelectDisabled }
                                                                 cancelUpload = { this.props.cancelUpload }
                                                                 cancelDownload = { this.props.cancelDownload }
                                                                 bucketId = { this.props.bucketId }
@@ -225,6 +226,7 @@ export default class ListComponent extends Component {
                                 var listItems = prop.map((item, indexInner) => { 
                                     return(
                                         <ListItemComponent
+                                            isSelectDisabled = { this.props.isSelectDisabled }
                                             cancelUpload = { this.props.cancelUpload }
                                             cancelDownload = { this.props.cancelDownload }
                                             bucketId = { this.props.bucketId }
@@ -275,6 +277,7 @@ export default class ListComponent extends Component {
             
             return (
                 <ListItemComponent
+                    isSelectDisabled = { true }
                     bucketId = { this.props.bucketId }
                     key = { item.getId() }
                     item = { item } 
@@ -347,6 +350,7 @@ ListComponent.propTypes = {
     animatedScrollValue: PropTypes.object,
     enableSelectionMode: PropTypes.func,
     disableSelectionMode: PropTypes.func,
+    isSelectDisabled: PropTypes.bool,
     isSelectionMode: PropTypes.bool,
     isSingleItemSelected: PropTypes.bool,
     deselectItem: PropTypes.func,

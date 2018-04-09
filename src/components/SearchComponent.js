@@ -61,9 +61,42 @@ export default class SearchComponent extends Component {
         );
     }
 
+    selectBucketScreenHeader() {
+        return(
+            <View style = { [ styles.rowContainer, this.props.styleContainer ] }>
+                <TouchableOpacity onPress = { () => { this.props.navigateBack ? this.props.navigateBack() : () => {} } }>
+                    <Image style = { styles.backButton } source = { require("../images/Icons/BlueCross.png") } resizeMode = { 'contain' } />
+                </TouchableOpacity>
+                <View style = { [ styles.rowContainer, styles.mainContainer, styles.fileHeader ] }>
+                    <View style = {[ styles.rowContainer, { height: getHeight(50) } ]}>
+                        <TextInput
+                            onFocus = { () => { this.setState({ isSearchIconShown: false }); } }
+                            onBlur = { () => { 
+                                if(!this.state.searchValue) {
+                                    this.setState({ isSearchIconShown: true }); 
+                                }
+                            }}
+                            placeholder = { 'Select bucket' }
+                            underlineColorAndroid = { 'transparent' } 
+                            style = { styles.textInput }
+                            onChangeText = { (value) => { this.setState({ searchValue: value }); } } 
+                            value = { this.state.searchValue } />
+                    </View>
+                    <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>
+                        <TouchableOpacity onPress = { this.props.showOptions }>
+                            <Image style = { styles.image } source = { require("../images/Icons/SearchOptions.png") } resizeMode = { 'contain' } />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </View>
+        );
+    }
+
     render() {
         if(this.props.isFilesScreen) {
             return this.fileScreenHeader();
+        } else if (this.props.isSelectBucketScreen) {
+            return this.selectBucketScreenHeader();
         }
         
         return(
@@ -139,6 +172,7 @@ const styles = StyleSheet.create({
 
 SearchComponent.propTypes = {
     buckets: PropTypes.array,
+    isSelectBucketScreen: PropTypes.bool,
     isFilesScreen: PropTypes.bool,
     navigateBack: PropTypes.func,
     openedBucketId: PropTypes.string,

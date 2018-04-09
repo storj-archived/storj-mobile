@@ -211,29 +211,27 @@ class Apps extends Component {
 	}
 
 	chooseWarning() {
+		let warningMessage, statusBarColor = null;
+
+
 		if(!this.props.isEmailConfirmed) {
-			return(
-				<WarningComponent
-					message = { 'Please confirm your email' }
-					statusBarColor = '#EB5757' />
-			)
+			warningMessage = 'Please confirm your email';
+			statusBarColor = '#EB5757';
 		} else if(!this.props.isAccountExist) {
-			return(
-				<WarningComponent
-					message = { 'This acoound doesn`t exist' }
-					statusBarColor = '#EB5757' />
-			)
+			warningMessage =  'This acoound doesn`t exist';
+			statusBarColor = '#EB5757';
 		} else if(this.props.isNameExistException) {
-			return(
-				<WarningComponent
-					message = { 'Name already used by another bucket' }
-					statusBarColor = '#EB5757' />
-			)
+			warningMessage = 'Name already used by another bucket';
+			statusBarColor = '#EB5757';
 		} else {
-			return(
-				<WarningComponent />
-			)
+			warningMessage, statusBarColor = null;
 		}
+
+		return(
+			<WarningComponent
+				message = { warningMessage }
+				statusBarColor = { statusBarColor } />
+		)
 	}
 
 	render() {

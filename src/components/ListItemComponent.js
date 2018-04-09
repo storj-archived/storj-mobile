@@ -177,8 +177,9 @@ export default class ListItemComponent extends Component {
                                                     source = { require('../images/Icons/CancelDownload.png') } 
                                                     style = { listItemStyles.cancelDownloadImage } 
                                                     resizeMode = 'contain' />
-                                            </TouchableOpacity> :
-                                            <Image style = { listItemStyles.listItemActionsIcon } source = { require('../images/Icons/listItemActions.png') } />
+                                            </TouchableOpacity> : !props.isSelectDisabled
+                                                ? <Image style = { listItemStyles.listItemActionsIcon } source = { require('../images/Icons/listItemActions.png') } />
+                                                : null
                                     }
                                 </TouchableOpacity> : null
                         }

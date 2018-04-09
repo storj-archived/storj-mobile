@@ -20,6 +20,7 @@ export default class BucketsScreenHeaderComponent extends Component {
         return(
             <View style = { styles.mainContainer }>
                 <AnimatedHeader
+                    isSelectBucketScreen = { this.props.isSelectBucketScreen } 
                     isFilesScreen = { this.props.isFilesScreen } 
                     selectedItemsCount = { this.props.selectedItemsCount }
                     showOptions = { this.props.showOptions }
@@ -118,6 +119,7 @@ class AnimatedHeader extends Component {
             <View style = { [ styles.searchWrapper ] }>
                 <Animated.View style = { [ styles.searchWrapperInner, res[1] ] }>
                     <SearchComponent
+                        isSelectBucketScreen = { this.props.isSelectBucketScreen }
                         isFilesScreen = { this.props.isFilesScreen }
                         showOptions = { this.props.showOptions }
                         buckets = { this.props.buckets }
@@ -226,6 +228,7 @@ BucketsScreenHeaderComponent.propTypes = {
     animatedScrollValue: PropTypes.object,
     buckets: PropTypes.array,
     disableSelectionMode: PropTypes.func,
+    isSelectBucketScreen: PropTypes.bool,
     isFilesScreen: PropTypes.bool,
     isSelectionMode: PropTypes.bool,
     navigateBack: PropTypes.func,
