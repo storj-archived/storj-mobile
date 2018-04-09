@@ -61,7 +61,7 @@ class MyPhotosContainer extends Component {
     }
 
     onPress(file) {        
-        if(file.entity.isDownloaded) {
+        if(file.entity.isDownloaded && file.entity.mimeType.includes('image/')) {
             this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId);
         }
     }
@@ -127,11 +127,7 @@ const LoadingComponent = (props) => {
             <ActivityIndicator animating = { props.isLoading ? true : false } size = { 'large' } color = { 'blue' } />
         </View>
     ); 
-}/* (
-    <View style={ styles.loadingComponentContainer }>
-        <ActivityIndicator animating = { props.isLoading ? true : false } size = { 'large' } color = { 'blue' } />
-    </View>
-);  */
+}
 
 function mapStateToProps(state) {
     let screenIndex = state.mainScreenNavReducer.index;
