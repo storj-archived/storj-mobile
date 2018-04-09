@@ -13,106 +13,82 @@ export default class PinCodeGenerationComponent extends Component {
     constructor(props) {
         super(props)
 
+        this.letterCount = 4;
+        this.HEADER_CHANGE = 'Change PIN';
+        this.HEADER_CONFIRM = 'Confirm PIN';
+        this.TEXT_ERROR = 'Wrong PIN, try again';
+        this.TEXT_REPEAT = 'Repeat new PIN';
+        this.TEXT_ENTER = 'Enter new PIN';
+
         this.state = {
-            isError: false,
-            text: this.props.text,
-            number: 4,
-            code: new Array(4),
-            edit: 0,
-            areInputsBlocked: false
+            header: this.HEADER_CHANGE,
+            text: this.HEADER_CHANGE,            
+            code: [],
+            repeatCode: [],
+            isValid: true,
+            isFinished: false
         };
 
         this.textInputsRefs = [];
         this.pinCodes = [];
-
-        this.clean = this.clean.bind(this);
-        this.focus = this.focus.bind(this);
-        this.isFocus = this.isFocus.bind(this);
-        this.handleEdit = this.handleEdit.bind(this);
-        this.onKeyPress = this.onKeyPress.bind(this);
     }
 
-    submit() {
-        this.props.navigation.navigate('MyAccountMainPageScreen');
-    }
-
-    clean() {
-        this.setState(prevState => {
-            return {
-                code: new Array(prevState.number),
-                edit: 0
-            };
-        });
-        this.focus(0);
-    }
-
-    focus(id) {
-        this.textInputsRefs[id].focus();
-    }
-
-    isFocus(id) {
-        let newCode = this.state.code.slice();
-
-        for (let i = 0; i < newCode.length; i++) if (i >= id) newCode[i] = '';
-
+    setErrorState() {
         this.setState({
-            code: newCode,
-            edit: id
+            isValid: false,
+            text: this.TEXT_ERROR,
+            code: [],
+            repeatCode: [],
+            header: this.HEADER_CHANGE
         });
-    }
+    }    
 
-    handleEdit(number, id) {
-        let newCode = this.state.code.slice();
-        newCode[id] = number;
-
-        // User filling the last pin ?
-        if(id === this.state.number - 1) {
-
-            if(newCode[3] != "") {
-                this.setState({text: 'Confirm new PIN'})
-    
-                if(this.pinCodes.length < 2 ) {
-                    this.pinCodes.push(newCode);
-    
-                    if(this.pinCodes.length === 2) {
-                        let arePinCodesMatches = this.pinCodes[0].join('') === this.pinCodes[1].join('');
-    
-                        if(arePinCodesMatches) {
-                            this.setState({areInputsBlocked: true, text: 'Success!'});
-                        } else {
-                            this.setState({text: 'PIN doesn`t match, try again', isError: true})
-                            this.pinCodes = [];
-                        }
-                    }
-                }
+    checkCodes(newVal) {
+        let result;
+        
+        for(let i = 0; i < this.letterCount - 1; i++) {
+            if(this.state.code[i] !== this.state.repeatCode[i]) {                                
+                this.setErrorState();
+                return;
             }
-            this.focus(0);
-            
+        }
+
+        if(this.state.code[this.letterCount - 1] !== newVal) {
+            this.setErrorState();
             return;
         }
 
-        if(this.state.text === 'PIN doesn`t match, try again') {
-            this.setState({text: 'Enter new PIN', isError: false})
-        }
-
-        this.focus(this.state.edit + 1);
-
-        this.setState(prevState => {
-            return {
-                code: newCode,
-                edit: prevState.edit + 1
-            };
-        });
+        this.setState(prevState => ({ repeatCode: [...prevState.repeatCode, newVal], isFinished: true }));
     }
 
-    onKeyPress(e) {
-        if (e.nativeEvent.key === 'Backspace') {
-            const edit = this.state.edit;
-            const toFocus = edit > 0 ? edit - 1 : 0;
-            this.focus(toFocus);
+    handleEdit(newValue) {        
+        let codeFull = this.state.code.length === 4;
+        let repeatCodeFull = this.state.repeatCode.length === 4;
+
+        if(codeFull && repeatCodeFull) return;
+
+        if(this.state.code.length === 0) {
+            this.setState({ header: this.HEADER_CHANGE, text: this.TEXT_ENTER, isValid: true });
         }
+
+        if(this.state.repeatCode.length === 3) {         
+            this.checkCodes(newValue);               
+            return;
+        }
+
+        if(this.state.code.length === 3 && this.state.header !== this.HEADER_CONFIRM) {
+            this.setState({ header: this.HEADER_CONFIRM, text: this.TEXT_REPEAT, isValid: true });
+        }
+
+        codeFull
+            ? this.setState(prevState => ({ repeatCode: [...prevState.repeatCode, newValue] })) 
+            : this.setState(prevState => ({ code: [...prevState.code, newValue] }));
     }
 
+    submit() {        
+        this.props.navigation.navigate('MyAccountMainPageScreen');
+    }
+    
     render() {
         const {
             text,
@@ -120,44 +96,42 @@ export default class PinCodeGenerationComponent extends Component {
             pinStyle,
             textStyle,
             errorStyle,
-            obfuscation,
             containerStyle,
             containerPinStyle,
             ...props
         } = this.props;
 
-        pins = [];
+        let pins = [];
 
-        for (let index = 0; index < this.state.number; index++) {
-        const id = index;
-        const value = this.state.code[id]
-            ? obfuscation ? '*' : this.state.code[id]
-            : '';
-        pins.push(
-            <View key={id} style={styles.pin} >
-                <TextInput
-                    style = { this.state.code[id] !== '' || this.pinCodes.length === 2
-                        ? styles.inputFilled 
-                        : null }
-                    caretHidden = { true }
-                    editable = { !this.state.areInputsBlocked }
-                    keyboardType = { 'numeric' }
-                    ref={ref => (this.textInputsRefs[id] = ref)}
-                    onChangeText={(text) => { this.handleEdit(text, id);}}
-                    onFocus={() => this.isFocus(id)}
-                    value={value}
-                    returnKeyType={ 'done' }
-                    autoCapitalize={ 'sentences' }
-                    underlineColorAndroid = { 'transparent' }
-                    autoCorrect={false}
-                    autoFocus={id === 0 && this.props.autoFocusFirst}
-                    onKeyPress={this.onKeyPress}
-                {...props}
-                />
-            </View>
-        );
+        let currentCodeArray = this.state.code.length === 4 ? this.state.repeatCode : this.state.code;
+        
+        for (let id = 0; id < this.letterCount; id++) {
+
+            const value = currentCodeArray[id] ? currentCodeArray[id] : '';
+
+            pins.push(
+                <View key = { id } style = { styles.pin } >
+                    <TextInput
+                        style = { value ? styles.inputFilled : null }
+                        caretHidden = { true }
+                        editable = { !this.state.areInputsBlocked }
+                        keyboardType = { 'numeric' }
+                        ref = { ref => (this.textInputsRefs[id] = ref) }
+                        onChangeText = { this.handleEdit.bind(this) }
+                        onFocus = { () => {} }
+                        value = { value }
+                        returnKeyType = { 'done' }
+                        autoCapitalize = { 'sentences' }
+                        underlineColorAndroid = { 'transparent' }
+                        autoCorrect = { false }
+                        autoFocus = { id === 0 && this.props.autoFocusFirst }
+                        onKeyPress = { this.onKeyPress }
+                    {...props}
+                    />
+                </View>
+            );
         }
-
+        
         return (
             <View style = { styles.mainContainer }>
                 <View style = { styles.topContainer } >
@@ -171,21 +145,19 @@ export default class PinCodeGenerationComponent extends Component {
                                     style = { styles.icon } />
                             </TouchableOpacity>
                             <View>
-                                <Text style = { [styles.titleText, styles.titleMargin] }>Secret phrase</Text>
+                                <Text style = { [styles.titleText, styles.titleMargin] }>{ this.state.header }</Text>
                             </View>
                         </View>
                     </View>
                 </View>
                 <View style={[styles.container, containerStyle]}>
-                    <Text style={!this.state.isError ? [styles.text, textStyle] : styles.errorText}>{this.state.text}</Text>
-                    <View style={styles.containerPin}>
-                        {pins}
+                    <Text style = { this.state.isValid ? [styles.text, textStyle] : styles.errorText }>{ this.state.text }</Text>
+                    <View style = { styles.containerPin }>
+                        { pins }
                     </View>
                 </View>
                 <TouchableOpacity onPress = { () => {} }>
-                    <View style = { 
-                            [ styles.saveButton, styles.blurredButton ] 
-                        } >
+                    <View style = { [ styles.saveButton, styles.blurredButton ] } >
                         <Text style = { styles.saveButtonText }>Save</Text>
                     </View>
                 </TouchableOpacity>
@@ -193,20 +165,6 @@ export default class PinCodeGenerationComponent extends Component {
         );
     }
 }
-
-PinCodeGenerationComponent.defaultProps = {
-    code: '',
-    number: 4,
-    checkPinCode: null,
-    autoFocusFirst: true,
-    obfuscation: false,
-    text: 'Enter new PIN',
-    pinStyle: {},
-    containerPinStyle: {},
-    containerStyle: {},
-    textStyle: {},
-    errorStyle: {}
-};
 
 const styles = StyleSheet.create({
     mainContainer: {
