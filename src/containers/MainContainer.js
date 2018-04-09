@@ -291,7 +291,7 @@ class MainContainer extends Component {
 
     deleteBuckets() {
         this.getSelectedBuckets().forEach(item => {
-            if(item.getName() === PICTURES) return; //we shoul add some notification here
+            if(item.getName() === PICTURES) return; //TODO: we shoul add some notification here
 
             this.deleteBucket(item);
         });
@@ -378,6 +378,7 @@ class MainContainer extends Component {
                 buckets = { this.props.buckets }
                 openBucket = { this.props.openBucket }
                 bucketNavigateBack = { this.props.bucketNavigateBack }
+                setSorting = { this.props.setSorting }
                 dashboardNavigateBack = { this.props.dashboardNavigateBack }/>
         );
     }

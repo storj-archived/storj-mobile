@@ -98,6 +98,7 @@ class MyPhotosContainer extends Component {
                         deselectItem = { this.props.deselectFile }
                         selectItem = { this.props.selectFile }
                         data = { data }   
+                        sortingMode = { this.props.sortingMode }
                         listItemIcon = { require('../images/Icons/FileListItemIcon.png') }
                         starredGridItemIcon = { require('../images/Icons/GridStarredFile.png') }
                         starredListItemIcon = { require('../images/Icons/ListStarredFile.png') } />
@@ -149,7 +150,8 @@ function mapStateToProps(state) {
         isGridViewShown: state.mainReducer.isGridViewShown,
         downloadedFileListModels: state.filesReducer.downloadedFileListModels,
         selectedItemId: state.mainReducer.selectedItemId,
-        activeScreen: currentScreenName
+        activeScreen: currentScreenName,
+        sortingMode: state.mainReducer.sortingMode
     };
 }
 

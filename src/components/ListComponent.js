@@ -122,11 +122,12 @@ export default class ListComponent extends Component {
         let sortingObject = {};
         let sortingCallback;
 
-        switch('name') {
+        switch(this.props.sortingMode) {
             case 'date': sortingCallback = this.sortByDate;
                 break;
             case 'name': sortingCallback = this.sortByName;
                 break;
+            default: sortingCallback = this.sortByDate;
         }
         
         sortingCallback(items, sortingObject);

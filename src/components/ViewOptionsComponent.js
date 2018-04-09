@@ -67,6 +67,7 @@ export default class ViewOptionsComponent extends Component {
                         null, 
                         "Sort by date", 
                         () => { 
+                            this.props.setSorting('date');
                             this.closeView();
                         }
                     )
@@ -76,6 +77,7 @@ export default class ViewOptionsComponent extends Component {
                         null, 
                         "Sort by name", 
                         () => { 
+                            this.props.setSorting('name');
                             this.closeView();
                         }
                     )

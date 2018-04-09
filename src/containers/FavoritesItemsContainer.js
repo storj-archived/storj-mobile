@@ -89,6 +89,7 @@ class FavoritesItemsContainer extends Component {
                         deselectItem = { this.isBuckets() ? this.props.deselectBucket : this.props.deselectFile }
                         selectItem = { this.isBuckets() ? this.props.selectBucket : this.props.selectFile } 
                         data = { data }   
+                        sortingMode = { this.props.sortingMode }
                         listItemIcon = { 
                             this.isBuckets() 
                             ? require('../images/Icons/BucketListItemIcon.png')
@@ -123,7 +124,8 @@ function mapStateToProps(state) {
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         isLoading: state.mainReducer.isLoading,
         isGridViewShown: state.mainReducer.isGridViewShown,
-        activeScreen: state.mainReducer.activeScreen
+        activeScreen: state.mainReducer.activeScreen,
+        sortingMode: state.mainReducer.sortingMode
     };
 }
 

@@ -23,7 +23,7 @@ const {
     SET_MAIN_SCREEN,
     SET_PHOTOS_BUCKET_ID,
     SET_DASHBOARD_BUCKET_ID,
-
+    SET_SORTING,
     PUSH_LOADING,
     POP_LOADING
  } = MAIN_ACTIONS;
@@ -41,6 +41,7 @@ const initialState = {
     myPhotosBucketId: null,
     dashboardBucketId: null,
     selectedItemId: null,
+    sortingMode: 'date',
     loadingStack: []
 };
 
@@ -122,6 +123,9 @@ export default function mainReducer(state = initialState, action) {
             break;
         case POP_LOADING:
             newState.loadingStack = loadingStack.unsetLoading(action.payload.value);
+            break;
+        case SET_SORTING:            
+            newState.sortingMode = action.payload.sortingMode;
             break;
         default:
             return state || initialState;

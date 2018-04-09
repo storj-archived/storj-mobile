@@ -118,6 +118,7 @@ export default class MainComponent extends Component {
                 {
                     this.state.showOptions ? 
                         <ViewOptionsComponent 
+                            setSorting = { this.props.setSorting }
                             isGridViewShown = { this.props.isGridViewShown }
                             setGridView = { this.props.setGridView }
                             setListView = { this.props.setListView }

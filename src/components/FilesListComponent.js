@@ -24,6 +24,7 @@ export default class FilesListComponent extends Component {
                     && this.props.openedBucketId !== null && !this.props.isLoading
                         ? <EmpyBucketComponent />
                         : <ListComponent
+                            sortingMode = { this.props.sortingMode }
                             activeScreen = { this.props.activeScreen }
                             screens = { "BucketsScreen" }
                             contentWrapperStyle = { styles.contentWrapper }

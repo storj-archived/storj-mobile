@@ -38,6 +38,7 @@ class BucketsListContainer extends Component {
                 deselectBucket = { this.props.deselectBucket }
                 selectBucket = { this.props.selectBucket }
                 refresh = { () => ServiceModule.getBuckets() }
+                sortingMode = { this.props.sortingMode }
                 buckets = { this.props.buckets } />
         );
     }
@@ -52,7 +53,8 @@ function mapStateToProps(state) {
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         buckets: state.bucketReducer.buckets,
-        isGridViewShown: state.mainReducer.isGridViewShown
+        isGridViewShown: state.mainReducer.isGridViewShown,
+        sortingMode: state.mainReducer.sortingMode
     };
 }
 

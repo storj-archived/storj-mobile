@@ -17,6 +17,7 @@ export default class BucketsListComponent extends Component {
         return(
             <View style = { styles.mainContainer }>
                 <ListComponent
+                    sortingMode = { this.props.sortingMode }
                     activeScreen = { this.props.activeScreen }
                     screens = { "BucketsScreen" }                    
                     contentWrapperStyle = { styles.contentWrapper }

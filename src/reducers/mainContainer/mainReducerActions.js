@@ -28,6 +28,7 @@ const {
     SET_SELECTION_ID,    
     SET_EMAIL,    
     SET_PHOTOS_BUCKET_ID,
+    SET_SORTING,
     SET_DASHBOARD_BUCKET_ID,
     PUSH_LOADING,
     POP_LOADING
@@ -137,6 +138,10 @@ function popLoading(value) {
     return { type: POP_LOADING, payload: { value } };
 }
 
+function setSorting(sortingMode) {
+    return { type: SET_SORTING, payload: { sortingMode } }
+}
+
 export function getPicturesBucketId(buckets) {
     if(!buckets || buckets.length === 0) return;
     
@@ -170,7 +175,8 @@ export const mainContainerActions = {
     setListView,
     openBucket,
     pushLoading,
-    popLoading
+    popLoading,
+    setSorting
 };
 
 //action creators for bucket screen

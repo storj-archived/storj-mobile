@@ -71,6 +71,7 @@ class DashboardFileListContainer extends Component {
                         deselectItem = { this.props.deselectFile }
                         selectItem = { this.props.selectFile }
                         data = { data }   
+                        sortingMode = { this.props.sortingMode }
                         listItemIcon = { require('../images/Icons/FileListItemIcon.png') }
                         starredGridItemIcon = { require('../images/Icons/GridStarredFile.png') }
                         starredListItemIcon = { require('../images/Icons/ListStarredFile.png') } />
@@ -97,7 +98,8 @@ function mapStateToProps(state) {
         isLoading: state.mainReducer.isLoading,
         isGridViewShown: state.mainReducer.isGridViewShown,
         downloadedFileListModels: state.filesReducer.downloadedFileListModels,
-        activeScreen: currentScreenName
+        activeScreen: currentScreenName,
+        sortingMode: state.mainReducer.sortingMode
     };
 }
 

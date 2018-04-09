@@ -117,6 +117,7 @@ class FilesListContainer extends Component {
                 isSingleItemSelected = { this.props.isSingleItemSelected }
                 deselectFile = { this.props.deselectFile }
                 selectFile = { this.props.selectFile }
+                sortingMode = { this.props.sortingMode }
                 renewFileList = { () => {
                     this.props.pushLoading(this.props.openedBucketId); 
                     ServiceModule.getFiles(this.props.openedBucketId); 
@@ -144,7 +145,8 @@ function mapStateToProps(state) {
         isGridViewShown: state.mainReducer.isGridViewShown,
         downloadedFileListModels: state.filesReducer.downloadedFileListModels,
         selectedItemId: state.mainReducer.selectedItemId,
-        activeScreen: currentScreenName
+        activeScreen: currentScreenName,
+        sortingMode: state.mainReducer.sortingMode
     };
 }
 
