@@ -8,6 +8,7 @@ import {
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getHeight, getWidth } from '../utils/adaptive';
+import SORTING from '../utils/constants/sortingConstants';
 
 export default class ViewOptionsComponent extends Component {
     constructor(props) {
@@ -67,7 +68,7 @@ export default class ViewOptionsComponent extends Component {
                         null, 
                         "Sort by date", 
                         () => { 
-                            this.props.setSorting('date');
+                            this.props.setSorting(SORTING.BY_DATE);
                             this.closeView();
                         }
                     )
@@ -77,7 +78,7 @@ export default class ViewOptionsComponent extends Component {
                         null, 
                         "Sort by name", 
                         () => { 
-                            this.props.setSorting('name');
+                            this.props.setSorting(SORTING.BY_NAME);
                             this.closeView();
                         }
                     )

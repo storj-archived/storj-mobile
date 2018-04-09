@@ -16,6 +16,7 @@ import ExpanderComponent from '../components/ExpanderComponent';
 import ListItemModel from '../models/ListItemModel';
 import PropTypes from 'prop-types';
 import { getWidth, getHeight } from '../utils/adaptive';
+import SORTING from '../utils/constants/sortingConstants';
 
 /**
 * Custom List component
@@ -123,9 +124,9 @@ export default class ListComponent extends Component {
         let sortingCallback;
 
         switch(this.props.sortingMode) {
-            case 'date': sortingCallback = this.sortByDate;
+            case SORTING.BY_DATE: sortingCallback = this.sortByDate;
                 break;
-            case 'name': sortingCallback = this.sortByName;
+            case SORTING.BY_NAME: sortingCallback = this.sortByName;
                 break;
             default: sortingCallback = this.sortByDate;
         }

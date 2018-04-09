@@ -1,5 +1,6 @@
 import { MAIN_ACTIONS } from '../../utils/constants/actionConstants';
 import LoadingStack from "../../utils/loadingStack";
+import SORTING from '../../utils/constants/sortingConstants';
 
 const { 
     SHOW_ACTION_BAR, 
@@ -27,7 +28,9 @@ const {
     PUSH_LOADING,
     POP_LOADING
  } = MAIN_ACTIONS;
-                                                        
+                                                       
+ console.log(SORTING);
+
 const initialState = {
     email: null,
     isCreateBucketInputShown: false,
@@ -41,7 +44,7 @@ const initialState = {
     myPhotosBucketId: null,
     dashboardBucketId: null,
     selectedItemId: null,
-    sortingMode: 'date',
+    sortingMode: SORTING.BY_DATE,
     loadingStack: []
 };
 
