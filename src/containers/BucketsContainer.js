@@ -124,14 +124,12 @@ function mapStateToProps(state) {
         email: state.mainReducer.email
     };
 }
-
-const settingsId = "elvy.baila@arockee.com";
     
 function mapDispatchToProps(dispatch) {
     return {
         ...bindActionCreators( { ...bucketsContainerActions, ...bucketsContainerBucketActions, bucketNavigateBack }, dispatch),
-        setFirstSignIn: (settingsId, value, callback) => { dispatch(setFirstSignInAsync(settingsId ,value, callback)); },
-        changeSyncStatus: (settingsId, value) => { dispatch(changeSyncStatusAsync(settingsId ,value));}
+        setFirstSignIn: (settingsId, value, callback) => { dispatch(setFirstSignInAsync(settingsId, value, callback)); },
+        changeSyncStatus: (settingsId, value) => { dispatch(changeSyncStatusAsync(settingsId, value));}
     }
 }
 

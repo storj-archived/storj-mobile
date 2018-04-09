@@ -29,7 +29,6 @@ export default class SearchComponent extends Component {
         }
     }
 
-
     fileScreenHeader() {
         return(
             <View style = { [ styles.rowContainer, this.props.styleContainer ] }>

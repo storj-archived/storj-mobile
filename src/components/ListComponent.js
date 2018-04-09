@@ -99,9 +99,9 @@ export default class ListComponent extends Component {
 
     sortByName(items, sortingObject) {        
         let rows = [];
-        rows = [...new Set(items.map((item) => {
-            let firstChar = item.getName().charAt(0);
-            if(rows.exists(firstChar.toUpperCase()))
+        rows = [...new Set(items.map((item) => {            
+            let firstChar = item.getName().charAt(0);            
+            if(rows.includes(firstChar.toUpperCase()))
                 return ;
         }))];      
 
@@ -122,7 +122,7 @@ export default class ListComponent extends Component {
         let sortingObject = {};
         let sortingCallback;
 
-        switch('date') {
+        switch('name') {
             case 'date': sortingCallback = this.sortByDate;
                 break;
             case 'name': sortingCallback = this.sortByName;

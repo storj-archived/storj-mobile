@@ -138,6 +138,8 @@ function popLoading(value) {
 }
 
 export function getPicturesBucketId(buckets) {
+    if(!buckets || buckets.length === 0) return;
+    
     ServiceModule.createBaseBuckets(buckets);
 
     let picturesBucket;
