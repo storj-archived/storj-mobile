@@ -3,6 +3,7 @@ package storjlib.utils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -17,6 +18,7 @@ import storjlib.responses.SingleResponse;
 
 public class ThumbnailProcessor {
     private final FileRepository _fileRepo;
+    private final int THUMBNAIL_SIZE = 64;
 
     public ThumbnailProcessor(FileRepository fRepository) {
         _fileRepo = fRepository;
@@ -26,16 +28,12 @@ public class ThumbnailProcessor {
         byte[] imageData = null;
         SingleResponse errorResult = new SingleResponse(false, "", "Unable to process thumbnail");
 
-        try
-        {
-            final int THUMBNAIL_SIZE = 64;
+        try(ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            FileInputStream fis = new FileInputStream(filePath)) {
 
-            FileInputStream fis = new FileInputStream(filePath);
             Bitmap imageBitmap = BitmapFactory.decodeStream(fis);
 
             imageBitmap = Bitmap.createScaledBitmap(imageBitmap, THUMBNAIL_SIZE, THUMBNAIL_SIZE, false);
-
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             imageData = baos.toByteArray();
 
@@ -48,7 +46,7 @@ public class ThumbnailProcessor {
             }
         }
         catch(Exception ex) {
-
+            Log.d("THUMBNAIL_PROCESS_ERROR", ex.getMessage());
         }
 
         return errorResult;
@@ -58,16 +56,13 @@ public class ThumbnailProcessor {
         byte[] imageData = null;
         SingleResponse errorResult = new SingleResponse(false, "", "Unable to process thumbnail");
 
-        try
+        try(FileInputStream fis = new FileInputStream(filePath);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream())
         {
-            final int THUMBNAIL_SIZE = 64;
-
-            FileInputStream fis = new FileInputStream(filePath);
             Bitmap imageBitmap = BitmapFactory.decodeStream(fis);
 
             imageBitmap = Bitmap.createScaledBitmap(imageBitmap, THUMBNAIL_SIZE, THUMBNAIL_SIZE, false);
 
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
             imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             imageData = baos.toByteArray();
 
@@ -76,7 +71,7 @@ public class ThumbnailProcessor {
             return new SingleResponse(true, encoded, null);
         }
         catch(Exception ex) {
-
+            Log.d("THUMBNAIL_PROCESS_ERROR", ex.getMessage());
         }
 
         return errorResult;
