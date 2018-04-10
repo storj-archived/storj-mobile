@@ -109,7 +109,8 @@ class MyPhotosContainer extends Component {
                 
                 <BucketsScreenHeaderComponent
                     buckets = { this.props.buckets }
-                    isFilesScreen = { true }
+                    isFilesScreen = { false }
+                    placeholder = { 'Pictures' }
                     selectedItemsCount = { this.getSelectedFilesCount() }
                     showOptions = { this.props.screenProps.showOptions }
                     isSelectionMode = { this.props.isSelectionMode }

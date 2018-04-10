@@ -9,9 +9,14 @@ import { bindActionCreators } from 'redux';
 import ListComponent from '../components/ListComponent';
 import { openImageViewer } from '../reducers/navigation/navigationActions';
 import { myPicturesListContainerMainActions, getPicturesBucketId } from '../reducers/mainContainer/mainReducerActions';
-import { dashboardContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions'
+import { dashboardContainerActions } from '../reducers/mainContainer/mainReducerActions';
+import { dashboardContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
+import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
+import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
+import { dashboardNavigateBack, navigateToDashboardFilesScreen, navigateBack } from '../reducers/navigation/navigationActions';
 import filesActions from '../reducers/mainContainer/Files/filesReducerActions';
 import StorjModule from '../utils/StorjModule';
+import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderComponent';
 import ListItemModel from '../models/ListItemModel';
 import FileModel from '../models/FileModel';
 import ServiceModule from '../utils/ServiceModule';
@@ -51,6 +56,14 @@ class FavoritesItemsContainer extends Component {
         return this.data;
     }
 
+    getArraySelectedCount(array) {
+        return array.filter(item => item.isSelected).length;
+    }
+
+    getSelectedItemsCount() {        
+        return this.getArraySelectedCount(this.props.buckets.concat(this.props.files));
+    }
+
     onPress(file) {        
         if(file.entity.isDownloaded) {
             this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId);
@@ -61,58 +74,85 @@ class FavoritesItemsContainer extends Component {
         return this.props.navigation.state.params.itemType === TYPES.BUCKETS;
     }
 
+    navigateBack() {
+        this.props.dashboardNavigateBack();
+        this.props.disableSelectionMode();
+        this.props.setDashboardBucketId(null);
+    }
+
     render() {
         let data = this.getData();
 
         return (
             <View style = { styles.mainContainer }>
-            {
-                data.length !== 0 ? 
-                    <ListComponent                   
-                        contentWrapperStyle = { styles.contentWrapper }
-                        setSelectionId = { this.props.setSelectionId }
-                        selectedItemId = { this.props.selectedItemId }
-                        cancelDownload = { this.props.cancelDownload }
-                        cancelUpload = { this.props.cancelUpload }
-                        isGridViewShown = { this.props.isGridViewShown }
-                        onPress = { (params) => { this.onPress(params); } }
-                        onRefresh = { () => {} }
-                        itemType = { this.isBuckets() ? TYPES.REGULAR_BUCKET : TYPES.REGULAR_FILE }
-                        bucketId = { this.props.bucketId }
-                        isGridViewShown = { this.props.isGridViewShown }
-                        onSingleItemSelected = { this.props.onSingleItemSelected }                    
-                        animatedScrollValue = { this.props.animatedScrollValue }
-                        enableSelectionMode = { this.props.enableSelectionMode }
-                        disableSelectionMode = { this.props.disableSelectionMode }
-                        isSelectionMode = { this.props.isSelectionMode }
-                        isSingleItemSelected = { this.props.isSingleItemSelected }
-                        deselectItem = { this.isBuckets() ? this.props.deselectBucket : this.props.deselectFile }
-                        selectItem = { this.isBuckets() ? this.props.selectBucket : this.props.selectFile } 
-                        data = { data }   
-                        sortingMode = { this.props.sortingMode }
-                        listItemIcon = { 
-                            this.isBuckets() 
-                            ? require('../images/Icons/BucketListItemIcon.png')
-                            : require('../images/Icons/FileListItemIcon.png')
-                        }
-                        starredGridItemIcon = { 
-                            this.isBuckets() 
-                            ? require('../images/Icons/GridStarredBucket.png') 
-                            : require('../images/Icons/GridStarredFile.png') 
-                        }
-                        starredListItemIcon = { 
-                            this.isBuckets() 
-                            ? require('../images/Icons/ListStarredBucket.png') 
-                            : require('../images/Icons/ListStarredFile.png') 
-                        } />
-                        : <EmpyBucketComponent />
-            }
+                {
+                    data.length !== 0 ? 
+                        <ListComponent                   
+                            contentWrapperStyle = { styles.contentWrapper }
+                            setSelectionId = { this.props.setSelectionId }
+                            selectedItemId = { this.props.selectedItemId }
+                            cancelDownload = { this.props.cancelDownload }
+                            cancelUpload = { this.props.cancelUpload }
+                            isGridViewShown = { this.props.isGridViewShown }
+                            onPress = { (params) => { this.onPress(params); } }
+                            onRefresh = { () => {} }
+                            itemType = { this.isBuckets() ? TYPES.REGULAR_BUCKET : TYPES.REGULAR_FILE }
+                            bucketId = { this.props.bucketId }
+                            isGridViewShown = { this.props.isGridViewShown }
+                            onSingleItemSelected = { this.props.onSingleItemSelected }                    
+                            animatedScrollValue = { this.props.animatedScrollValue }
+                            enableSelectionMode = { this.props.enableSelectionMode }
+                            disableSelectionMode = { this.props.disableSelectionMode }
+                            isSelectionMode = { this.props.isSelectionMode }
+                            isSingleItemSelected = { this.props.isSingleItemSelected }
+                            deselectItem = { this.isBuckets() ? this.props.deselectBucket : this.props.deselectFile }
+                            selectItem = { this.isBuckets() ? this.props.selectBucket : this.props.selectFile } 
+                            data = { data }   
+                            sortingMode = { this.props.sortingMode }
+                            listItemIcon = { 
+                                this.isBuckets() 
+                                ? require('../images/Icons/BucketListItemIcon.png')
+                                : require('../images/Icons/FileListItemIcon.png')
+                            }
+                            starredGridItemIcon = { 
+                                this.isBuckets() 
+                                ? require('../images/Icons/GridStarredBucket.png') 
+                                : require('../images/Icons/GridStarredFile.png') 
+                            }
+                            starredListItemIcon = { 
+                                this.isBuckets() 
+                                ? require('../images/Icons/ListStarredBucket.png') 
+                                : require('../images/Icons/ListStarredFile.png') 
+                            } />
+                            : <EmpyBucketComponent />
+                }
+                <BucketsScreenHeaderComponent
+                    setDashboardBucketId = { this.props.setDashboardBucketId }
+                    isFilesScreen = { true }
+                    buckets = { this.props.buckets }
+                    screenName = { this.props.screenName }
+                    selectItem = { this.props.selectItem }
+                    showOptions = { this.props.screenProps.showOptions }
+                    navigateBack = { () => { this.navigateBack() } }
+                    deselectItem = { this.props.deselectItem }     
+                    isSelectionMode = { this.props.isSelectionMode }
+                    openedBucketId = { this.props.selectedBucketId }
+                    animatedScrollValue = { this.animatedScrollValue }
+                    enableSelectionMode = { this.props.enableSelectionMode }
+                    disableSelectionMode = { this.props.disableSelectionMode }
+                    selectedItemsCount = { this.getSelectedItemsCount() }  
+                    onSingleItemSelected = { this.props.onSingleItemSelected }  
+                    isSingleItemSelected = { this.props.isSingleItemSelected } />
             </View>
         )
     }
 }
 
 function mapStateToProps(state) {
+    let routes = state.dashboardScreenNavReducer.routes;
+    let index = state.dashboardScreenNavReducer.index;
+    let currentScreenName = routes[index].routeName;  
+
     return {
         buckets: state.bucketReducer.buckets,
         files: state.filesReducer.fileListModels,
@@ -125,16 +165,25 @@ function mapStateToProps(state) {
         isLoading: state.mainReducer.isLoading,
         isGridViewShown: state.mainReducer.isGridViewShown,
         activeScreen: state.mainReducer.activeScreen,
-        sortingMode: state.mainReducer.sortingMode
+        sortingMode: state.mainReducer.sortingMode,
+        isFirstSignIn: state.mainReducer.isFirstSignIn,
+        defaultRoute: routes[0].routeName,
+        screenName: currentScreenName,
+        selectedBucketId: state.mainReducer.dashboardBucketId
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({  
-        openImageViewer, 
-        ...dashboardContainerBucketActions,
+        openImageViewer,
         ...myPicturesListContainerMainActions, 
-        ...filesActions 
+        ...filesActions,...dashboardContainerActions, 
+        ...dashboardContainerBucketActions,
+        ...filesListContainerMainActions, 
+        ...filesListContainerFileActions, 
+        dashboardNavigateBack,
+        navigateToDashboardFilesScreen,
+        navigateBack
     }, dispatch);
 }
 

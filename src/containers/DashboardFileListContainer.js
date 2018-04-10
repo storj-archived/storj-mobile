@@ -7,8 +7,14 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ListComponent from '../components/ListComponent';
+import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderComponent';
 import { openImageViewer } from '../reducers/navigation/navigationActions';
 import { myPicturesListContainerMainActions, getPicturesBucketId } from '../reducers/mainContainer/mainReducerActions';
+import { dashboardContainerActions } from '../reducers/mainContainer/mainReducerActions';
+import { dashboardContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
+import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
+import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
+import { dashboardNavigateBack, navigateToDashboardFilesScreen, navigateBack } from '../reducers/navigation/navigationActions';
 import filesActions from '../reducers/mainContainer/Files/filesReducerActions';
 import StorjModule from '../utils/StorjModule';
 import ListItemModel from '../models/ListItemModel';
@@ -35,10 +41,24 @@ class DashboardFileListContainer extends Component {
         return this.data;
     }
 
+    getArraySelectedCount(array) {
+        return array.filter(item => item.isSelected).length;
+    }
+
+    getSelectedItemsCount() {        
+        return this.getArraySelectedCount(this.props.buckets.concat(this.props.files));
+    }
+
     onPress(file) {        
         if(file.entity.isDownloaded) {
             this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId);
         }
+    }
+
+    navigateBack() {
+        this.props.dashboardNavigateBack();
+        this.props.disableSelectionMode();
+        this.props.setDashboardBucketId(null);
     }
 
     render() {
@@ -46,44 +66,62 @@ class DashboardFileListContainer extends Component {
 
         return (
             <View style = { styles.mainContainer }>
-            {
-                data.length === 0 && this.props.dashboardBucketId !== null ? 
-                    <EmpyBucketComponent />
-                    : <ListComponent
-                        activeScreen = { this.props.activeScreen }
-                        screens = { "DashboardScreen" }                    
-                        contentWrapperStyle = { styles.contentWrapper }
-                        setSelectionId = { this.props.setSelectionId }
-                        selectedItemId = { this.props.selectedItemId }
-                        cancelDownload = { this.props.cancelDownload }
-                        cancelUpload = { this.props.cancelUpload }
-                        isGridViewShown = { this.props.isGridViewShown }
-                        onPress = { (params) => { this.onPress(params); } }
-                        onRefresh = { () => ServiceModule.getFiles(this.props.dashboardBucketId) }
-                        itemType = { TYPES.REGULAR_FILE }
-                        bucketId = { this.props.bucketId }
-                        onSingleItemSelected = { this.props.onSingleItemSelected }                    
-                        animatedScrollValue = { this.props.animatedScrollValue }
-                        enableSelectionMode = { this.props.enableSelectionMode }
-                        disableSelectionMode = { this.props.disableSelectionMode }
-                        isSelectionMode = { this.props.isSelectionMode }
-                        isSingleItemSelected = { this.props.isSingleItemSelected }
-                        deselectItem = { this.props.deselectFile }
-                        selectItem = { this.props.selectFile }
-                        data = { data }   
-                        sortingMode = { this.props.sortingMode }
-                        listItemIcon = { require('../images/Icons/FileListItemIcon.png') }
-                        starredGridItemIcon = { require('../images/Icons/GridStarredFile.png') }
-                        starredListItemIcon = { require('../images/Icons/ListStarredFile.png') } />
-            }
+                {
+                    data.length === 0 && this.props.dashboardBucketId !== null ? 
+                        <EmpyBucketComponent />
+                        : <ListComponent
+                            activeScreen = { this.props.activeScreen }
+                            screens = { "DashboardScreen" }                    
+                            contentWrapperStyle = { styles.contentWrapper }
+                            setSelectionId = { this.props.setSelectionId }
+                            selectedItemId = { this.props.selectedItemId }
+                            cancelDownload = { this.props.cancelDownload }
+                            cancelUpload = { this.props.cancelUpload }
+                            isGridViewShown = { this.props.isGridViewShown }
+                            onPress = { (params) => { this.onPress(params); } }
+                            onRefresh = { () => ServiceModule.getFiles(this.props.dashboardBucketId) }
+                            itemType = { TYPES.REGULAR_FILE }
+                            bucketId = { this.props.bucketId }
+                            onSingleItemSelected = { this.props.onSingleItemSelected }                    
+                            animatedScrollValue = { this.props.animatedScrollValue }
+                            enableSelectionMode = { this.props.enableSelectionMode }
+                            disableSelectionMode = { this.props.disableSelectionMode }
+                            isSelectionMode = { this.props.isSelectionMode }
+                            isSingleItemSelected = { this.props.isSingleItemSelected }
+                            deselectItem = { this.props.deselectFile }
+                            selectItem = { this.props.selectFile }
+                            data = { data }   
+                            sortingMode = { this.props.sortingMode }
+                            listItemIcon = { require('../images/Icons/FileListItemIcon.png') }
+                            starredGridItemIcon = { require('../images/Icons/GridStarredFile.png') }
+                            starredListItemIcon = { require('../images/Icons/ListStarredFile.png') } />
+                }
+                <BucketsScreenHeaderComponent
+                    setDashboardBucketId = { this.props.setDashboardBucketId }
+                    isFilesScreen = { true }
+                    buckets = { this.props.buckets }
+                    screenName = { this.props.screenName }
+                    selectItem = { this.props.selectItem }
+                    showOptions = { this.props.screenProps.showOptions }
+                    navigateBack = { () => { this.navigateBack() } }
+                    deselectItem = { this.props.deselectItem }     
+                    isSelectionMode = { this.props.isSelectionMode }
+                    openedBucketId = { this.props.selectedBucketId }
+                    animatedScrollValue = { this.animatedScrollValue }
+                    enableSelectionMode = { this.props.enableSelectionMode }
+                    disableSelectionMode = { this.props.disableSelectionMode }
+                    selectedItemsCount = { this.getSelectedItemsCount() }  
+                    onSingleItemSelected = { this.props.onSingleItemSelected }  
+                    isSingleItemSelected = { this.props.isSingleItemSelected } />
             </View>
         )
     }
 }
 
 function mapStateToProps(state) {
-    let screenIndex = state.mainScreenNavReducer.index;
-    let currentScreenName = state.mainScreenNavReducer.routes[screenIndex].routeName;
+    let routes = state.dashboardScreenNavReducer.routes;
+    let index = state.dashboardScreenNavReducer.index;
+    let currentScreenName = routes[index].routeName;  
 
     return {
         buckets: state.bucketReducer.buckets,
@@ -98,8 +136,13 @@ function mapStateToProps(state) {
         isLoading: state.mainReducer.isLoading,
         isGridViewShown: state.mainReducer.isGridViewShown,
         downloadedFileListModels: state.filesReducer.downloadedFileListModels,
-        activeScreen: currentScreenName,
-        sortingMode: state.mainReducer.sortingMode
+        sortingMode: state.mainReducer.sortingMode,
+        activeScreen: state.mainReducer.activeScreen,
+        sortingMode: state.mainReducer.sortingMode,
+        isFirstSignIn: state.mainReducer.isFirstSignIn,
+        defaultRoute: routes[0].routeName,
+        screenName: currentScreenName,
+        selectedBucketId: state.mainReducer.dashboardBucketId
     };
 }
 
@@ -107,7 +150,14 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({  
         openImageViewer, 
         ...myPicturesListContainerMainActions, 
-        ...filesActions 
+        ...filesActions,
+        ...dashboardContainerActions, 
+        ...dashboardContainerBucketActions,
+        ...filesListContainerMainActions, 
+        ...filesListContainerFileActions, 
+        dashboardNavigateBack,
+        navigateToDashboardFilesScreen,
+        navigateBack
     }, dispatch);
 }
 

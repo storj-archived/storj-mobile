@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF'
     },
     scrollViewContainer: { 
-        marginTop: getHeight(80), 
+        marginTop: getHeight(20), 
         marginHorizontal: getWidth(10) 
     },
     topButtonsContainer: { 

@@ -125,6 +125,7 @@ export default class SearchComponent extends Component {
                                     this.setState({ isSearchIconShown: true }); 
                                 }
                             }}
+                            placeholder = { this.props.placeholder }
                             underlineColorAndroid = { 'transparent' } 
                             style = { styles.textInput }
                             onChangeText = { (value) => { 
