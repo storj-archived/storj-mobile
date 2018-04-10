@@ -101,8 +101,6 @@ class InitializeContainer extends Component {
                 return new ListItemModel(new BucketModel(file));
             });                    
 
-			ServiceModule.createBaseBuckets(buckets);
-
             this.props.getBuckets(buckets);
         }
     }

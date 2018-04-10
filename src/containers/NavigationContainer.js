@@ -171,12 +171,29 @@ class Apps extends Component {
 		clearTimeout(this.timer);
 	}
 
+	unsetInternetConnectionException() {
+		this.props.unsetNameAlreadyExistException();
+		clearTimeout(this.timer);
+	}
+
 	onBucketCreated(response) {
 		if(response.isSuccess) {
 			this.props.createBucket(new ListItemModel(new BucketModel(JSON.parse(response.result))));	
 		} else {
-			this.props.setNameAlreadyExistException();
-			this.timer = setTimeout(this.unsetNameAlreadyExistException.bind(this), 3000);
+			switch(response.error.errorCode === 409) {				
+				case 409:
+					this.props.setNameAlreadyExistException();
+					this.timer = setTimeout(this.unsetNameAlreadyExistException.bind(this), 3000);
+					break;
+				case 10006:
+					this.props.setNameAlreadyExistException(); //TODO: add internet exc
+					this.timer = setTimeout(this.unsetNameAlreadyExistException.bind(this), 3000);
+					break;
+				default:
+					this.props.setNameAlreadyExistException(); //TODO: add default exc
+					this.timer = setTimeout(this.unsetNameAlreadyExistException.bind(this), 3000);
+					break;
+			}
 		}
 	}
 
