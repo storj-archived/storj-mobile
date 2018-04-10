@@ -55,9 +55,6 @@ class DashboardScreenContainer extends Component {
     render() {
         return(
             <DashboardComponent 
-                setSearch = { this.props.setSearch }
-                clearSearch = { this.props.clearSearch }
-                searchIndex = { this.props.searchIndex }         
                 showOptions = { this.props.screenProps.showOptions }
                 setSelectionId = { this.props.setSelectionId }
                 files = { this.props.files }

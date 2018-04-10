@@ -71,6 +71,7 @@ class DashboardFileListContainer extends Component {
                         <EmpyBucketComponent />
                         : <ListComponent
                             activeScreen = { this.props.activeScreen }
+                            searchSubSequence = { this.props.searchSubSequence }
                             screens = { "DashboardScreen" }                    
                             contentWrapperStyle = { styles.contentWrapper }
                             setSelectionId = { this.props.setSelectionId }
@@ -97,6 +98,9 @@ class DashboardFileListContainer extends Component {
                             starredListItemIcon = { require('../images/Icons/ListStarredFile.png') } />
                 }
                 <BucketsScreenHeaderComponent
+                    setSearch = { this.props.setSearch }
+                    clearSearch = { this.props.clearSearch }
+                    searchIndex = { 4 }  
                     setDashboardBucketId = { this.props.setDashboardBucketId }
                     isFilesScreen = { true }
                     buckets = { this.props.buckets }
@@ -142,7 +146,8 @@ function mapStateToProps(state) {
         isFirstSignIn: state.mainReducer.isFirstSignIn,
         defaultRoute: routes[0].routeName,
         screenName: currentScreenName,
-        selectedBucketId: state.mainReducer.dashboardBucketId
+        selectedBucketId: state.mainReducer.dashboardBucketId,
+        searchSubSequence: state.mainReducer.dashboardFilesSearchSubSequence
     };
 }
 

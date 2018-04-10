@@ -89,6 +89,7 @@ class FavoritesItemsContainer extends Component {
                     data.length !== 0 ? 
                         <ListComponent                   
                             contentWrapperStyle = { styles.contentWrapper }
+                            searchSubSequence = { this.props.searchSubSequence }
                             setSelectionId = { this.props.setSelectionId }
                             selectedItemId = { this.props.selectedItemId }
                             cancelDownload = { this.props.cancelDownload }
@@ -128,6 +129,9 @@ class FavoritesItemsContainer extends Component {
                 }
                 <BucketsScreenHeaderComponent
                     setDashboardBucketId = { this.props.setDashboardBucketId }
+                    setSearch = { this.props.setSearch }
+                    clearSearch = { this.props.clearSearch }
+                    searchIndex = { 3 }  
                     isFilesScreen = { true }
                     buckets = { this.props.buckets }
                     screenName = { this.props.screenName }
@@ -169,7 +173,8 @@ function mapStateToProps(state) {
         isFirstSignIn: state.mainReducer.isFirstSignIn,
         defaultRoute: routes[0].routeName,
         screenName: currentScreenName,
-        selectedBucketId: state.mainReducer.dashboardBucketId
+        selectedBucketId: state.mainReducer.dashboardBucketId,
+        searchSubSequence: state.mainReducer.starredSearchSubSequence
     };
 }
 
