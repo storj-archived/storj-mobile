@@ -229,7 +229,6 @@ const listItemStyles = StyleSheet.create({
     },
     mainTitleText: {
         fontFamily: 'Montserrat-Regular',
-        lineHeight: getHeight(20),
         fontSize: getHeight(16),
         color: '#384B65'
     },

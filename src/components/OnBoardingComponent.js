@@ -163,8 +163,7 @@ const styles = StyleSheet.create({
     },
     titleText: {
         fontFamily: 'Montserrat-Bold', 
-        fontSize: getHeight(30), 
-        lineHeight: getHeight(33),
+        fontSize: getHeight(30),
         color: '#384B65'
     },
     footer: {
