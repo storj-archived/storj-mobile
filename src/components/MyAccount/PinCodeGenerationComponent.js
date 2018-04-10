@@ -5,9 +5,11 @@ import {
     StyleSheet,
     TouchableOpacity,
     Image,
+    Keyboard,
     TextInput
 } from 'react-native';
 import { getHeight, getWidth } from '../../utils/adaptive';
+import { BUCKET_ACTIONS } from '../../utils/constants/actionConstants';
 
 export default class PinCodeGenerationComponent extends Component {
     constructor(props) {
@@ -19,6 +21,7 @@ export default class PinCodeGenerationComponent extends Component {
         this.TEXT_ERROR = 'Wrong PIN, try again';
         this.TEXT_REPEAT = 'Repeat new PIN';
         this.TEXT_ENTER = 'Enter new PIN';
+        this.SUCCESS = 'Success!';
 
         this.state = {
             header: this.HEADER_CHANGE,
@@ -31,6 +34,24 @@ export default class PinCodeGenerationComponent extends Component {
 
         this.textInputsRefs = [];
         this.pinCodes = [];
+
+        this.isKeyboardShown = false;
+    }
+
+    componentWillMount() {
+        this.keyboardListenerShow = Keyboard.addListener('keyboardDidShow', () => {
+            this.isKeyboardShown = true;
+        });
+
+        this.keyboardListenerHide = Keyboard.addListener('keyboardDidHide', () => {
+            this._textInput.blur();
+            this.isKeyboardShown = false;
+        });
+    }
+
+    componentWillUnmount() {
+        if(this.keyboardListenerShow) this.keyboardListenerShow.remove();
+        if(this.keyboardListenerHide) this.keyboardListenerHide.remove();
     }
 
     setErrorState() {
@@ -58,12 +79,14 @@ export default class PinCodeGenerationComponent extends Component {
             return;
         }
 
-        this.setState(prevState => ({ repeatCode: [...prevState.repeatCode, newVal], isFinished: true }));
+        this.setState(prevState => ({ repeatCode: [...prevState.repeatCode, newVal], isFinished: true, text: this.SUCCESS }));
+        Keyboard.dismiss();
     }
 
-    handleEdit(newValue) {        
-        let codeFull = this.state.code.length === 4;
-        let repeatCodeFull = this.state.repeatCode.length === 4;
+    handleEdit(newValue) {   
+        newValue = newValue[newValue.length - 1]     
+        let codeFull = this.state.code.length === this.letterCount;
+        let repeatCodeFull = this.state.repeatCode.length === this.letterCount;
 
         if(codeFull && repeatCodeFull) return;
 
@@ -71,12 +94,12 @@ export default class PinCodeGenerationComponent extends Component {
             this.setState({ header: this.HEADER_CHANGE, text: this.TEXT_ENTER, isValid: true });
         }
 
-        if(this.state.repeatCode.length === 3) {         
+        if(this.state.repeatCode.length === this.letterCount - 1) {         
             this.checkCodes(newValue);               
             return;
         }
 
-        if(this.state.code.length === 3 && this.state.header !== this.HEADER_CONFIRM) {
+        if(this.state.code.length === this.letterCount - 1 && this.state.header !== this.HEADER_CONFIRM) {
             this.setState({ header: this.HEADER_CONFIRM, text: this.TEXT_REPEAT, isValid: true });
         }
 
@@ -100,37 +123,6 @@ export default class PinCodeGenerationComponent extends Component {
             containerPinStyle,
             ...props
         } = this.props;
-
-        let pins = [];
-
-        let currentCodeArray = this.state.code.length === 4 ? this.state.repeatCode : this.state.code;
-        
-        for (let id = 0; id < this.letterCount; id++) {
-
-            const value = currentCodeArray[id] ? currentCodeArray[id] : '';
-
-            pins.push(
-                <View key = { id } style = { styles.pin } >
-                    <TextInput
-                        style = { value ? styles.inputFilled : null }
-                        caretHidden = { true }
-                        editable = { !this.state.areInputsBlocked }
-                        keyboardType = { 'numeric' }
-                        ref = { ref => (this.textInputsRefs[id] = ref) }
-                        onChangeText = { this.handleEdit.bind(this) }
-                        onFocus = { () => {} }
-                        value = { value }
-                        returnKeyType = { 'done' }
-                        autoCapitalize = { 'sentences' }
-                        underlineColorAndroid = { 'transparent' }
-                        autoCorrect = { false }
-                        autoFocus = { id === 0 && this.props.autoFocusFirst }
-                        onKeyPress = { this.onKeyPress }
-                    {...props}
-                    />
-                </View>
-            );
-        }
         
         return (
             <View style = { styles.mainContainer }>
@@ -152,15 +144,56 @@ export default class PinCodeGenerationComponent extends Component {
                 </View>
                 <View style={[styles.container, containerStyle]}>
                     <Text style = { this.state.isValid ? [styles.text, textStyle] : styles.errorText }>{ this.state.text }</Text>
-                    <View style = { styles.containerPin }>
-                        { pins }
-                    </View>
+                    <TouchableOpacity 
+                        onPress = { () => {
+                                if(!this.isKeyboardShown) {
+                                    this._textInput.blur();
+                                    this._textInput.focus();
+                                }
+                            } }>
+                        <View style = { styles.containerPin }>
+                            {
+                                (
+                                    () => {
+                                        let currentCodeArray = this.state.code.length === 4 ? this.state.repeatCode : this.state.code;
+                                        return new Array(this.letterCount).fill(' ').map((element, index) => {
+                                            return(
+                                                element !== '' && currentCodeArray[index] ?
+                                                    <View 
+                                                        key = { index } 
+                                                        style = { styles.pin }>
+                                                        <View style = { styles.inputFilled } />
+                                                    </View> :
+                                                    <View 
+                                                        key = { index } 
+                                                        style = { styles.pin } /> 
+                                                    
+                                            )
+                                        })
+                                    }
+                                )()
+                            }
+                        </View>
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity onPress = { () => {} }>
-                    <View style = { [ styles.saveButton, styles.blurredButton ] } >
+                <TouchableOpacity onPress = { this.state.isFinished ? () => {} : () => {} }>
+                    <View style = { this.state.isFinished ? styles.saveButton : [ styles.saveButton, styles.blurredButton ] } >
                         <Text style = { styles.saveButtonText }>Save</Text>
                     </View>
                 </TouchableOpacity>
+                <TextInput 
+                    ref = { component => this._textInput = component }
+                    style = { { position: 'absolute', right: 0, top: 0, height: 1, width:1 } }
+                    caretHidden = { true }
+                    onChangeText = { this.handleEdit.bind(this) }
+                    returnKeyType = { 'done' }
+                    autoCapitalize = { 'sentences' }
+                    underlineColorAndroid = { 'transparent' }
+                    blurOnSubmit = {false}
+                    autoCorrect = { false }
+                    autoFocus = { true }
+                    keyboardType = { 'numeric' }
+                    withRef  />
             </View>
         );
     }
@@ -258,7 +291,7 @@ const styles = StyleSheet.create({
         width: getWidth(18)
     },
     saveButton: {
-        marginTop: getHeight(350),
+        marginTop: getHeight(325),
         alignSelf: 'center',
         width: getWidth(335),
         height: getHeight(50),
