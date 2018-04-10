@@ -26,10 +26,10 @@ const {
     SET_DASHBOARD_BUCKET_ID,
     SET_SORTING,
     PUSH_LOADING,
-    POP_LOADING
- } = MAIN_ACTIONS;
-                                                       
- console.log(SORTING);
+    POP_LOADING,
+    SET_SEARCH,
+    CLEAR_SEARCH  
+ } = MAIN_ACTIONS; 
 
 const initialState = {
     email: null,
@@ -45,6 +45,11 @@ const initialState = {
     dashboardBucketId: null,
     selectedItemId: null,
     sortingMode: SORTING.BY_DATE,
+    myPhotosSearchSubSequence: null,
+    bucketSearchSubSequence: null,
+    filesSearchSubSequence: null,
+    starredSearchSubSequence: null,
+    dashboardFilesSearchSubSequence: null,
     loadingStack: []
 };
 
@@ -130,9 +135,25 @@ export default function mainReducer(state = initialState, action) {
         case SET_SORTING:            
             newState.sortingMode = action.payload.sortingMode;
             break;
+        case SET_SEARCH:
+            setSearch(newState, action.payload.index, action.payload.searchSubSequence);                        
+            break;
+        case CLEAR_SEARCH:
+            setSearch(newState, action.payload.index, null);
+            break;
         default:
             return state || initialState;
     }
     
     return newState; 
 };
+
+function setSearch(newState, index, value) {
+    switch(index) {
+        case 0 : newState.myPhotosSearchSubSequence = value; break;
+        case 1 : newState.bucketSearchSubSequence = value; break;
+        case 2 : newState.filesSearchSubSequence = value; break;
+        case 3 : newState.starredSearchSubSequence = value; break;
+        case 4 : newState.dashboardFilesSearchSubSequence = value; break;
+    }
+}

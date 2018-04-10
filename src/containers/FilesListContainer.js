@@ -118,6 +118,7 @@ class FilesListContainer extends Component {
                 deselectFile = { this.props.deselectFile }
                 selectFile = { this.props.selectFile }
                 sortingMode = { this.props.sortingMode }
+                searchSubSequence = { this.props.searchSubSequence }
                 renewFileList = { () => {
                     this.props.pushLoading(this.props.openedBucketId); 
                     ServiceModule.getFiles(this.props.openedBucketId); 
@@ -146,7 +147,8 @@ function mapStateToProps(state) {
         downloadedFileListModels: state.filesReducer.downloadedFileListModels,
         selectedItemId: state.mainReducer.selectedItemId,
         activeScreen: currentScreenName,
-        sortingMode: state.mainReducer.sortingMode
+        sortingMode: state.mainReducer.sortingMode,
+        searchSubSequence: state.mainReducer.filesSearchSubSequence
     };
 }
 

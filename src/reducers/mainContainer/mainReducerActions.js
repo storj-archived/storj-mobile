@@ -31,7 +31,9 @@ const {
     SET_SORTING,
     SET_DASHBOARD_BUCKET_ID,
     PUSH_LOADING,
-    POP_LOADING
+    POP_LOADING,
+    SET_SEARCH,
+    CLEAR_SEARCH  
 } = MAIN_ACTIONS;
 
 function setEmail(email) {
@@ -142,6 +144,14 @@ function setSorting(sortingMode) {
     return { type: SET_SORTING, payload: { sortingMode } }
 }
 
+function setSearch(index, searchSubSequence) {
+    return { type: SET_SEARCH, payload: { index, searchSubSequence }}
+}
+
+function clearSearch(index) {
+    return { type: CLEAR_SEARCH, payload: { index }}
+} 
+
 export function getPicturesBucketId(buckets) {
     if(!buckets || buckets.length === 0) return;
     
@@ -188,7 +198,9 @@ export const bucketsContainerActions = {
     setLoading,
     unsetLoading,
     setSelectionId,
-    closeBucket
+    closeBucket,
+    setSearch,
+    clearSearch
 };
 
 export const dashboardContainerActions = {
@@ -237,7 +249,9 @@ export const myPicturesListContainerMainActions = {
     openBucket,
     setSelectionId,
     pushLoading,
-    popLoading
+    popLoading,
+    setSearch,
+    clearSearch
 };
 
 export const setCurrentMainScreenActions = {

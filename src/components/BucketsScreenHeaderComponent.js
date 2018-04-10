@@ -20,6 +20,9 @@ export default class BucketsScreenHeaderComponent extends Component {
         return(
             <View style = { styles.mainContainer }>
                 <AnimatedHeader
+                    setSearch = { this.props.setSearch }
+                    clearSearch = { this.props.clearSearch }
+                    searchIndex = { this.props.searchIndex }
                     isSelectBucketScreen = { this.props.isSelectBucketScreen } 
                     isFilesScreen = { this.props.isFilesScreen } 
                     selectedItemsCount = { this.props.selectedItemsCount }
@@ -119,6 +122,9 @@ class AnimatedHeader extends Component {
             <View style = { [ styles.searchWrapper ] }>
                 <Animated.View style = { [ styles.searchWrapperInner, res[1] ] }>
                     <SearchComponent
+                        searchIndex = { this.props.searchIndex }
+                        setSearch = { this.props.setSearch }
+                        clearSearch = { this.props.clearSearch }                    
                         isSelectBucketScreen = { this.props.isSelectBucketScreen }
                         isFilesScreen = { this.props.isFilesScreen }
                         showOptions = { this.props.showOptions }

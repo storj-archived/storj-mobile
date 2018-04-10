@@ -84,7 +84,10 @@ class BucketsContainer extends Component {
             );
         } else {
             return(
-                <BucketsComponent                    
+                <BucketsComponent 
+                    setSearch = { this.props.setSearch }
+                    clearSearch = { this.props.clearSearch }
+                    searchIndex = { this.props.searchIndex }                   
                     setSelectionId = { this.props.setSelectionId }
                     isFilesScreen = { this.props.screenName === "FilesScreen" }
                     selectedItemsCount = { this.getSelectedItemsCount() }
@@ -110,7 +113,7 @@ function mapStateToProps(state) {
     let routes = state.bucketsScreenNavReducer.routes;
     let index = state.bucketsScreenNavReducer.index;
     let currentBucketScreenName = routes[index].routeName;
-
+    
     return {
         isFirstSignIn: state.mainReducer.isFirstSignIn,
         isSelectionMode: state.mainReducer.isSelectionMode,        
@@ -121,7 +124,8 @@ function mapStateToProps(state) {
         isGridViewShown: state.mainReducer.isGridViewShown,
         openedBucketId: state.mainReducer.openedBucketId,
         selectedItemId: state.mainReducer.selectedItemId,
-        email: state.mainReducer.email
+        email: state.mainReducer.email,
+        searchIndex: currentBucketScreenName === "BucketsListScreen" ? 1 : 2
     };
 }
     

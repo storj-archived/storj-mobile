@@ -55,6 +55,9 @@ class DashboardScreenContainer extends Component {
     render() {
         return(
             <DashboardComponent 
+                setSearch = { this.props.setSearch }
+                clearSearch = { this.props.clearSearch }
+                searchIndex = { this.props.searchIndex }         
                 showOptions = { this.props.screenProps.showOptions }
                 setSelectionId = { this.props.setSelectionId }
                 files = { this.props.files }
@@ -81,7 +84,7 @@ class DashboardScreenContainer extends Component {
 function mapStateToProps(state) {
     let routes = state.dashboardScreenNavReducer.routes;
     let index = state.dashboardScreenNavReducer.index;
-    let currentScreenName = routes[index].routeName;
+    let currentScreenName = routes[index].routeName;    
 
     return {
         isSelectionMode: state.mainReducer.isSelectionMode,        

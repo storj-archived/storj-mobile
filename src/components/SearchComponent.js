@@ -20,6 +20,15 @@ export default class SearchComponent extends Component {
         };
     }
 
+    shouldComponentUpdate(nextProps) {
+        if(this.props.searchIndex !== nextProps.searchIndex) {
+            this.setState({searchValue : ''})
+            this.props.clearSearch(this.props.searchIndex);
+        }
+
+        return true;
+    }
+
     getSelectedBucketName() {
         let buckets = this.props.buckets;
         let openedBucket = buckets.find((bucket) => bucket.entity.id == this.props.openedBucketId);
@@ -47,7 +56,10 @@ export default class SearchComponent extends Component {
                             placeholder = { this.getSelectedBucketName() }
                             underlineColorAndroid = { 'transparent' } 
                             style = { styles.textInput }
-                            onChangeText = { (value) => { this.setState({ searchValue: value }); } } 
+                            onChangeText = { (value) => { 
+                                this.props.setSearch(this.props.searchIndex, value); 
+                                this.setState({ searchValue: value }); 
+                            }} 
                             value = { this.state.searchValue } />
                     </View>
                     <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>
@@ -79,7 +91,10 @@ export default class SearchComponent extends Component {
                             placeholder = { 'Select bucket' }
                             underlineColorAndroid = { 'transparent' } 
                             style = { styles.textInput }
-                            onChangeText = { (value) => { this.setState({ searchValue: value }); } } 
+                            onChangeText = { (value) => { 
+                                this.props.setSearch(this.props.searchIndex, value); 
+                                this.setState({ searchValue: value }); 
+                            }} 
                             value = { this.state.searchValue } />
                     </View>
                     <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>
@@ -112,7 +127,10 @@ export default class SearchComponent extends Component {
                             }}
                             underlineColorAndroid = { 'transparent' } 
                             style = { styles.textInput }
-                            onChangeText = { (value) => { this.setState({ searchValue: value }); } } 
+                            onChangeText = { (value) => { 
+                                this.props.setSearch(this.props.searchIndex, value); 
+                                this.setState({ searchValue: value }); 
+                            }} 
                             value = { this.state.searchValue } />
                     </View>
                     <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>

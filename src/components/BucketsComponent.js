@@ -23,6 +23,9 @@ export default class BucketsComponent extends Component {
                     setSelectionId = { this.props.setSelectionId }
                     selectedItemId = { this.props.selectedItemId }  />
                 <BucketsScreenHeaderComponent
+                    setSearch = { this.props.setSearch }
+                    clearSearch = { this.props.clearSearch }
+                    searchIndex = { this.props.searchIndex } 
                     isFilesScreen = { this.props.isFilesScreen }
                     selectedItemsCount = { this.props.selectedItemsCount }
                     showOptions = { this.props.showOptions }

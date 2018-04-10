@@ -99,6 +99,7 @@ class MyPhotosContainer extends Component {
                         selectItem = { this.props.selectFile }
                         data = { data }   
                         sortingMode = { this.props.sortingMode }
+                        searchSubSequence = { this.props.searchSubSequence }
                         listItemIcon = { require('../images/Icons/FileListItemIcon.png') }
                         starredGridItemIcon = { require('../images/Icons/GridStarredFile.png') }
                         starredListItemIcon = { require('../images/Icons/ListStarredFile.png') } />
@@ -114,8 +115,10 @@ class MyPhotosContainer extends Component {
                     isSelectionMode = { this.props.isSelectionMode }
                     disableSelectionMode = { this.props.disableSelectionMode }
                     animatedScrollValue = { this.animatedScrollValue }
+                    setSearch = { this.props.setSearch }
+                    clearSearch = { this.props.clearSearch }
+                    searchIndex = { 0 }
                     openedBucketId = { this.props.myPhotosBucketId } />
-
             </View>
         )
     }
@@ -152,7 +155,8 @@ function mapStateToProps(state) {
         downloadedFileListModels: state.filesReducer.downloadedFileListModels,
         selectedItemId: state.mainReducer.selectedItemId,
         activeScreen: currentScreenName,
-        sortingMode: state.mainReducer.sortingMode
+        sortingMode: state.mainReducer.sortingMode,
+        searchSubSequence: state.mainReducer.myPhotosSearchSubSequence
     };
 }
 

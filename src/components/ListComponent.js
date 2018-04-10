@@ -119,7 +119,19 @@ export default class ListComponent extends Component {
         });
     }
    
+    searchFilter(data) {
+        if(!this.props.searchSubSequence) return data;
+
+        return data.filter(item => 
+            item.getName()
+                .toLowerCase()
+                .includes(this.props.searchSubSequence.toLowerCase()));
+
+    }
+
     sort(items) {
+        let data = this.searchFilter(items);
+
         let sortingObject = {};
         let sortingCallback;
 
@@ -131,7 +143,7 @@ export default class ListComponent extends Component {
             default: sortingCallback = this.sortByDate;
         }
         
-        sortingCallback(items, sortingObject);
+        sortingCallback(data, sortingObject);
         
         return sortingObject;
     }
