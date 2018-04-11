@@ -59,7 +59,6 @@ public class CameraModule extends ReactContextBaseJavaModule implements Activity
         }
 
         String imageName = DateFormat.getDateTimeInstance().format(new Date()) + (System.currentTimeMillis() << 8 * 4);
-
         File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 
         try {
@@ -72,12 +71,17 @@ public class CameraModule extends ReactContextBaseJavaModule implements Activity
                     "com.example.android.fileprovider",
                     image);
 
-            if(photoURI != null) return;
+            if(photoURI == null) {
+                return;
+            }
 
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
 
-            getReactApplicationContext().startActivityForResult(intent, 2132132, null);
+            if(intent.resolveActivity(mReactContext.getPackageManager()) != null) {
+                getReactApplicationContext().startActivityForResult(intent, 2132132, null);
+                Log.d("CAMERA DEBUG", "Success!!");
+            }
         } catch (Exception e) {
             Log.d("CAMERA DEBUG", e.getMessage());
         }
