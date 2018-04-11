@@ -22,6 +22,7 @@ import { getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 import EmpyBucketComponent from '../components/EmpyBucketComponent';
 import SyncModule from '../utils/SyncModule';
+import { listUploadingFiles } from "../reducers/asyncActions/fileActionsAsync";
 
 class MyPhotosContainer extends Component {
     constructor(props) {
@@ -32,12 +33,13 @@ class MyPhotosContainer extends Component {
         this.shouldRenew = false;
     }
 
-    getData() {
+    shouldComponentUpdate() {
         let picturesBucketId = getPicturesBucketId(this.props.buckets);
         
         
         if(this.props.myPhotosBucketId === picturesBucketId && !this.shouldRenew) {
-            ServiceModule.getFiles(picturesBucketId);             
+            ServiceModule.getFiles(picturesBucketId);         
+            this.props.pushLoading(picturesBucketId);
         }
         
         this.data = this.props.files.
@@ -45,7 +47,8 @@ class MyPhotosContainer extends Component {
                         filter(file => file.entity.bucketId === picturesBucketId);
 
         this.shouldRenew = this.props.myPhotosBucketId === picturesBucketId;
-        return this.data;
+
+        return true;
     }
 
     getArraySelectedCount(array) {
@@ -68,26 +71,17 @@ class MyPhotosContainer extends Component {
         }
     }
 
-    // async onPress(file) {        
-    //     if(file.entity.isDownloaded && file.entity.mimeType.includes('image/')) {
-    //         let checkImageResponse = await SyncModule.checkImage(file.getId(), file.entity.localPath);
-
-    //         if(checkImageResponse.isSuccess) {
-    //             this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId, file.isSta);
-    //         } else {
-    //             this.props.downloadFileError(file.entity.bucketId, file.getId());
-    //         }
-    //     }
-    // }
-
     render() {
-        let data = this.getData();
+        let data = this.data;
+        let isLoading = this.props.loadingStack.includes(this.props.myPhotosBucketId);
 
         return (
             <View style = { styles.mainContainer }>
             {
-                data.length !== 0 ? 
-                    <ListComponent
+               data.length === 0 
+               && this.props.myPhotosBucketId !== null && !isLoading
+                   ? <EmpyBucketComponent />
+                   : <ListComponent
                         activeScreen = { this.props.activeScreen }
                         screens = { "MyPhotosScreen" }              
                         contentWrapperStyle = { styles.contentWrapper }
@@ -100,6 +94,7 @@ class MyPhotosContainer extends Component {
                         onRefresh = { () => {  
                             this.props.pushLoading(this.props.myPhotosBucketId);
                             ServiceModule.getFiles(this.props.myPhotosBucketId); 
+                            this.props.listUploadingFilesAsync(this.props.myPhotosBucketId); 
                         } }
                         itemType = { TYPES.REGULAR_FILE }
                         bucketId = { this.props.myPhotosBucketId }
@@ -117,9 +112,8 @@ class MyPhotosContainer extends Component {
                         listItemIcon = { require('../images/Icons/FileListItemIcon.png') }
                         starredGridItemIcon = { require('../images/Icons/GridStarredFile.png') }
                         starredListItemIcon = { require('../images/Icons/ListStarredFile.png') } />
-                    : <EmpyBucketComponent />
             }
-                <LoadingComponent isLoading = { this.props.loadingStack.includes(this.props.myPhotosBucketId) } />
+                <LoadingComponent isLoading = { isLoading } /> 
                 
                 <BucketsScreenHeaderComponent
                     buckets = { this.props.buckets }
@@ -141,8 +135,8 @@ class MyPhotosContainer extends Component {
 
 const LoadingComponent = (props) => {
     return (
-        <View style={ styles.loadingComponentContainer }>
-            <ActivityIndicator animating = { props.isLoading ? true : false } size = { 'large' } color = { 'blue' } />
+        <View style = { styles.loadingComponentContainer }>
+            <ActivityIndicator animating = { true } size = { 'large' } color = { 'blue' } style={{ opacity: props.isLoading ? 1.0 : 0.0 }} />
         </View>
     ); 
 }
@@ -174,11 +168,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({  
-        openImageViewer, 
-        ...myPicturesListContainerMainActions, 
-        ...filesActions 
-    }, dispatch);
+    return{
+        ...bindActionCreators({ openImageViewer, ...myPicturesListContainerMainActions, ...filesActions }, dispatch),
+        listUploadingFilesAsync: async (bucketId) => { await dispatch(listUploadingFiles(bucketId)); }
+    } 
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPhotosContainer);

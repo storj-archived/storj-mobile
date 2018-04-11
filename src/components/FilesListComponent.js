@@ -58,7 +58,7 @@ export default class FilesListComponent extends Component {
 }
 
 const LoadingComponent = (props) => (
-    <View style={ styles.loadingComponentContainer }>
+    <View style = { styles.loadingComponentContainer }>
         <ActivityIndicator animating = { props.isLoading ? true : false } size = { 'large' } color = { 'blue' } />
     </View>
 ); 
