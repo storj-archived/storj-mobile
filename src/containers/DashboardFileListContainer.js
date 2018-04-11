@@ -70,7 +70,7 @@ class DashboardFileListContainer extends Component {
                     data.length === 0 && this.props.dashboardBucketId !== null ? 
                         <EmpyBucketComponent />
                         : <ListComponent
-                            activeScreen = { this.props.activeScreen }
+                            activeScreen = { this.props.screenName }
                             searchSubSequence = { this.props.searchSubSequence }
                             screens = { "DashboardScreen" }                    
                             contentWrapperStyle = { styles.contentWrapper }
@@ -123,9 +123,9 @@ class DashboardFileListContainer extends Component {
 }
 
 function mapStateToProps(state) {
+    let screenIndex = state.mainScreenNavReducer.index;
+    let currentScreenName = state.mainScreenNavReducer.routes[screenIndex].routeName; 
     let routes = state.dashboardScreenNavReducer.routes;
-    let index = state.dashboardScreenNavReducer.index;
-    let currentScreenName = routes[index].routeName;  
 
     return {
         buckets: state.bucketReducer.buckets,
@@ -140,8 +140,6 @@ function mapStateToProps(state) {
         isLoading: state.mainReducer.isLoading,
         isGridViewShown: state.mainReducer.isGridViewShown,
         downloadedFileListModels: state.filesReducer.downloadedFileListModels,
-        sortingMode: state.mainReducer.sortingMode,
-        activeScreen: state.mainReducer.activeScreen,
         sortingMode: state.mainReducer.sortingMode,
         isFirstSignIn: state.mainReducer.isFirstSignIn,
         defaultRoute: routes[0].routeName,
