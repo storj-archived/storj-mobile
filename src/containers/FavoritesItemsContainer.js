@@ -63,11 +63,15 @@ class FavoritesItemsContainer extends Component {
     getSelectedItemsCount() {        
         return this.getArraySelectedCount(this.props.buckets.concat(this.props.files));
     }
-
-    onPress(file) {        
+  
+    onFilePress(file) {        
         if(file.entity.isDownloaded) {
             this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId);
         }
+    }
+
+    onBucketPress(bucket) {
+
     }
 
     isBuckets() {
@@ -95,7 +99,7 @@ class FavoritesItemsContainer extends Component {
                             cancelDownload = { this.props.cancelDownload }
                             cancelUpload = { this.props.cancelUpload }
                             isGridViewShown = { this.props.isGridViewShown }
-                            onPress = { (params) => { this.onPress(params); } }
+                            onPress = { (params) => { this.isBuckets() ? this.onBucketPress(params) : this.onFilePress(params); } }
                             onRefresh = { () => {} }
                             itemType = { this.isBuckets() ? TYPES.REGULAR_BUCKET : TYPES.REGULAR_FILE }
                             bucketId = { this.props.bucketId }

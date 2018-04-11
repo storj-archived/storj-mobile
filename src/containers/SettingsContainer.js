@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import SettingsComponent from "../components/MyAccount/SettingsComponent";
+import { SYNC_BUCKETS } from "../utils/constants/SyncBuckets";
 import { 
     listSettingsAsync,
     changeSyncStatusAsync,
@@ -12,6 +13,7 @@ import {
     syncDocumentsAsync, 
     syncMoviesAsync 
 } from "../reducers/mainContainer/MyAccount/Settings/SettingsActionsAsync";
+import ServiceModule from '../utils/ServiceModule';
 
 class SettingsContainer extends Component {
     constructor(props) {
@@ -44,6 +46,7 @@ class SettingsContainer extends Component {
     }
 
     changeSyncStatus(value) {
+        value ? this.checkSyncBucketsExistance() : null;
         this.props.changeSyncStatus(this.email, value);
     }
     setWifiConstraint(value, prevSettingsState) {
@@ -64,7 +67,22 @@ class SettingsContainer extends Component {
     syncMusicAction(value, prevSettingsState) {
         this.props.syncMusicAction(this.email, value, prevSettingsState);
     }
-    
+
+    checkSyncBucketsExistance() {
+        let syncSettings = this.getStateObject();
+
+        syncSettings.syncPhotos ? this.createBucketIfNotExists(SYNC_BUCKETS.PICTURES) : null;
+        syncSettings.syncMovies ? this.createBucketIfNotExists(SYNC_BUCKETS.MOVIES) : null;
+        syncSettings.syncDocuments ? this.createBucketIfNotExists(SYNC_BUCKETS.DOCUMENTS) : null;
+        syncSettings.syncMusic ? this.createBucketIfNotExists(SYNC_BUCKETS.MUSIC) : null;
+    }
+    createBucketIfNotExists(bucketName) {
+        let bucket = this.props.buckets.find(bucketItem => bucketItem.getName() === bucketName);
+
+        if(!bucket) {
+            ServiceModule.createBucket(bucketName);
+        }
+    }
 
     render() {
         return(
@@ -94,7 +112,8 @@ class SettingsContainer extends Component {
 function mapStateToProps(state) {
     return {
         ...state.settingsReducer,
-        email: state.mainReducer.email
+        email: state.mainReducer.email,
+        buckets: state.bucketReducer.buckets
     };
 }
 

@@ -90,7 +90,7 @@ class FilesListContainer extends Component {
 
     onPress(file) {
         if(file.entity.isDownloaded && file.entity.mimeType.includes('image/')) {
-            this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId);
+            this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId, file.getStarred());
         }
     }
 

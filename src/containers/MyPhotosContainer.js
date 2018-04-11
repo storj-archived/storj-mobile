@@ -3,7 +3,8 @@ import {
     View,
     StyleSheet,
     Animated,
-    ActivityIndicator
+    ActivityIndicator,
+    Keyboard
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -20,6 +21,7 @@ import { TYPES } from '../utils/constants/typesConstants';
 import { getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 import EmpyBucketComponent from '../components/EmpyBucketComponent';
+import SyncModule from '../utils/SyncModule';
 
 class MyPhotosContainer extends Component {
     constructor(props) {
@@ -62,9 +64,21 @@ class MyPhotosContainer extends Component {
 
     onPress(file) {        
         if(file.entity.isDownloaded && file.entity.mimeType.includes('image/')) {
-            this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId);
+            this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId, file.getStarred());
         }
     }
+
+    // async onPress(file) {        
+    //     if(file.entity.isDownloaded && file.entity.mimeType.includes('image/')) {
+    //         let checkImageResponse = await SyncModule.checkImage(file.getId(), file.entity.localPath);
+
+    //         if(checkImageResponse.isSuccess) {
+    //             this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId, file.isSta);
+    //         } else {
+    //             this.props.downloadFileError(file.entity.bucketId, file.getId());
+    //         }
+    //     }
+    // }
 
     render() {
         let data = this.getData();
@@ -126,8 +140,6 @@ class MyPhotosContainer extends Component {
 }
 
 const LoadingComponent = (props) => {
-    /* console.log(props);
-    console.log(props.isLoading ? true : false); */
     return (
         <View style={ styles.loadingComponentContainer }>
             <ActivityIndicator animating = { props.isLoading ? true : false } size = { 'large' } color = { 'blue' } />

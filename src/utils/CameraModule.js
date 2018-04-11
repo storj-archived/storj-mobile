@@ -9,8 +9,8 @@ const cameraModule = (() => {
 
         }
 
-        openCamera() {
-            cameraModule.openCamera();
+        openCamera(bucketId) {
+            cameraModule.openCamera(String(bucketId));
         }
     }
 

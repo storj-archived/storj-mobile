@@ -33,7 +33,7 @@ class MainContainer extends Component {
             //actions for bucket screen
             TabBarActionModelFactory.createNewAction(() => { this.props.showCreateBucketInput(); }, 'Action 1', require('../images/ActionBar/NewBucketIcon.png')), 
             TabBarActionModelFactory.createNewAction(() => { this.bucketScreenUploadFile() }, 'Action 2', require('../images/ActionBar/UploadFileIcon.png')),
-            TabBarActionModelFactory.createNewAction(() => { CameraModule.openCamera(); }, 'Action 3', require('../images/ActionBar/UploadPhotoIcon.png'))
+            TabBarActionModelFactory.createNewAction(() => { CameraModule.openCamera(this.props.myPhotosBucketId); }, 'Action 3', require('../images/ActionBar/UploadPhotoIcon.png'))
         ];
 
         this.selectionBucketModeActions = [
@@ -49,26 +49,28 @@ class MainContainer extends Component {
             TabBarActionModelFactory.createNewAction(() => { this.setFavouriteFiles(); }, 'Action 4', require('../images/ActionBar/FavoritesIcon.png')),
             TabBarActionModelFactory.createNewAction(() => { this.downloadSelectedFiles(); }, 'Action 5', require('../images/ActionBar/DownloadIFileIcon.png')), 
             TabBarActionModelFactory.createNewAction(() => { this.copySelectedFiles("c4ff624fc96fa10ef2fa7007"); }, 'Action 6', require('../images/ActionBar/CopyBucketIcon.png')), 
-            TabBarActionModelFactory.createNewAction(() => { this.tryDeleteFiles(this.props.dashboardBucketId); }, 'Action 7', require('../images/ActionBar/TrashBucketIcon.png'))
+            TabBarActionModelFactory.createNewAction(() => { this.tryDeleteFiles(); }, 'Action 7', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
         
         this.openedBucketActions = [
             //TabBarActionModelFactory.createNewAction(() => { }, 'Action 8', require('../images/ActionBar/FavoritesIcon.png')),
-            TabBarActionModelFactory.createNewAction(() => { this.uploadFile(this.props.openedBucketId); }, 'Action 8', require('../images/ActionBar/UploadFileIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { this.uploadFile(this.props.openedBucketId); }, 'Action 8', require('../images/ActionBar/UploadFileIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { CameraModule.openCamera(this.props.openedBucketId); }, 'Action 3', require('../images/ActionBar/UploadPhotoIcon.png')) 
             //TabBarActionModelFactory.createNewAction(() => { }, '2', require('../images/ActionBar/DownloadIFileIcon.png')),
             //TabBarActionModelFactory.createNewAction(() => { }, 'Action 9', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
 
         this.dashboardBucketActions = [
             //TabBarActionModelFactory.createNewAction(() => { }, 'Action 8', require('../images/ActionBar/FavoritesIcon.png')),
-            TabBarActionModelFactory.createNewAction(() => { this.uploadFile(this.props.dashboardBucketId); }, 'Action 8', require('../images/ActionBar/UploadFileIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { this.uploadFile(this.props.dashboardBucketId); }, 'Action 8', require('../images/ActionBar/UploadFileIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { CameraModule.openCamera(this.props.dashboardBucketId); }, 'Action 3', require('../images/ActionBar/UploadPhotoIcon.png'))
             //TabBarActionModelFactory.createNewAction(() => { }, '2', require('../images/ActionBar/DownloadIFileIcon.png')),
             //TabBarActionModelFactory.createNewAction(() => { }, 'Action 9', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
 
         this.picturesBucketActions = [
             TabBarActionModelFactory.createNewAction(() => { this.uploadFile(this.props.myPhotosBucketId); }, 'Action 8', require('../images/ActionBar/UploadFileIcon.png')), 
-            TabBarActionModelFactory.createNewAction(() => { CameraModule.openCamera(); }, 'Action 3', require('../images/ActionBar/UploadPhotoIcon.png'))
+            TabBarActionModelFactory.createNewAction(() => { CameraModule.openCamera(this.props.myPhotosBucketId); }, 'Action 3', require('../images/ActionBar/UploadPhotoIcon.png'))
         ];
 
         this.downloadListener = (fileParams) => {
@@ -319,12 +321,18 @@ class MainContainer extends Component {
         const routes = this.props.mainScreenNavReducer.routes;
         const currentScreen = routes[index].routeName;
 
+        const dashboardIndex = this.props.dashboardNavReducer.index;
+        const dashboardRoutes = this.props.dashboardNavReducer.routes;
+        const currentDashboardScreen = dashboardRoutes[dashboardIndex].routeName;
+
         switch(currentScreen) {
             case "DashboardScreen":
                 const dashboardActions = handleDashboardScreenActions(this.props.dashboardBucketId, 
                     isSelectionMode, 
                     this.dashboardBucketActions, 
-                    this.selectionFileModeActions);
+                    this.selectionFileModeActions,
+                    this.selectionBucketModeActions,
+                    currentDashboardScreen);
 
                 if(dashboardActions)
                     return dashboardActions;
@@ -409,11 +417,11 @@ function handleScreenActions(bucketId, isSelection, actions, selectionModeAction
     return result;
 }
 
-function handleDashboardScreenActions(bucketId, isSelection, actions, selectionModeActions) {
+function handleDashboardScreenActions(bucketId, isSelection, actions, selectionModeActions, selectionModeBucketActions, currentScreen) {
     let result = null;
 
     if(isSelection) {
-        result = selectionModeActions;
+        result = currentScreen === "FavoriteBucketsScreen" ? selectionModeBucketActions : selectionModeActions;
     } else if(bucketId) {
         result = actions;
     }

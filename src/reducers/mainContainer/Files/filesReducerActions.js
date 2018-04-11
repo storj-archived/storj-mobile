@@ -144,7 +144,9 @@ export const mainContainerFileActions = {
 };
 
 export const imageViewerActions = {
-    deleteFile
+    deleteFile,
+    downloadFileError,
+    updateFavouriteFiles
 };
 
 const allFileActions = {

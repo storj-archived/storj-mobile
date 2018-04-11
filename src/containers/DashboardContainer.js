@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { dashboardContainerActions, filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { dashboardContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
 import { filesListContainerFileActions, mainContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
-import { navigateBack, navigateToDashboardFilesScreen, redirectToFavoritesItemsScreen } from '../reducers/navigation/navigationActions';
+import { navigateBack, navigateToDashboardFilesScreen, redirectToFavoriteBucketsScreen, redirectToFavoriteFilesScreen } from '../reducers/navigation/navigationActions';
 import { uploadFileStart, uploadFileSuccess } from '../reducers/asyncActions/fileActionsAsync';
 import BucketModel from '../models/BucketModel';
 import FileModel from '../models/FileModel';
@@ -39,7 +39,8 @@ class DashboardContainer extends Component {
                 bandwidthAmount = { this.props.bandwidth } 
                 navigateToDashboardFilesScreen = { this.props.navigateToDashboardFilesScreen }
                 setSelectionId = { this.props.setSelectionId }
-                redirectToFavoritesItemsScreen = { this.props.redirectToFavoritesItemsScreen } />
+                redirectToFavoriteBucketsScreen = { this.props.redirectToFavoriteBucketsScreen }
+                redirectToFavoriteFilesScreen = { this.props.redirectToFavoriteFilesScreen } />
         )
     }
 }
@@ -69,7 +70,8 @@ function mapDispatchToProps(dispatch) {
             ...dashboardContainerBucketActions,
             ...filesListContainerFileActions, 
             ...filesListContainerMainActions, 
-            redirectToFavoritesItemsScreen,
+            redirectToFavoriteBucketsScreen,
+            redirectToFavoriteFilesScreen,
             navigateBack,
             navigateToDashboardFilesScreen
         }, dispatch),

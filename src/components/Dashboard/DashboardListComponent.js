@@ -89,7 +89,8 @@ export default class DashboardListComponent extends Component{
                                 starredBucketsCount, 
                                 true, 
                                 this.props.activeScreen,
-                                TYPES.BUCKETS
+                                TYPES.BUCKETS,
+                                this.props.redirectToFavoriteBucketsScreen
                             )
                         }
                         {
@@ -100,7 +101,8 @@ export default class DashboardListComponent extends Component{
                                 starredFilesCount, 
                                 false, 
                                 this.props.activeScreen,
-                                TYPES.FILES
+                                TYPES.FILES,
+                                this.props.redirectToFavoriteFilesScreen
                             )
                         }
                         {
@@ -111,7 +113,8 @@ export default class DashboardListComponent extends Component{
                                 syncedfilesCount, 
                                 false, 
                                 this.props.activeScreen,
-                                TYPES.SYNCED
+                                TYPES.SYNCED,
+                                this.props.redirectToFavoriteFilesScreen
                             )
                         }     
                         </View>
@@ -122,11 +125,11 @@ export default class DashboardListComponent extends Component{
     }
 }
 
-const listComponent = (title, data, props, count, isBucket, screen, itemType) => {
+const listComponent = (title, data, props, count, isBucket, screen, itemType, navigationAction) => {
     return(
         <View>  
             <DashboardListHeaderComponent
-                onPress = { () => { props.redirectToFavoritesItemsScreen(itemType) } }
+                onPress = { () => { navigationAction(itemType) } }
                 title = { title } />
             <ListComponent
                 activeScreen = { screen }
@@ -151,7 +154,7 @@ const listComponent = (title, data, props, count, isBucket, screen, itemType) =>
                 data = { data } />
             <DashboardListFooterComponent
                 count = { count } 
-                onPress = { () => { props.redirectToFavoritesItemsScreen(itemType) } } />
+                onPress = { () => { navigationAction(itemType) } } />
         </View>
     )
 }

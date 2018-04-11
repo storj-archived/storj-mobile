@@ -35,6 +35,7 @@ const initialState = {
 export default function filesReducer(state = initialState, action) {
     let newState = Object.assign({}, state);
     let filesManager = new FileListManager(newState.fileListModels, newState.uploadingFileListModels);
+
     switch(action.type) {
         case LIST_FILES:
             newState.fileListModels = filesManager.listFiles(action.payload.bucketId, action.payload.files);

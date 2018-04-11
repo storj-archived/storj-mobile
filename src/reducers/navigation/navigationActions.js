@@ -98,8 +98,8 @@ export function navigateToFilesScreen(bucketId) {
     return NavigationActions.navigate({ routeName: 'FilesScreen', params: { bucketId } });
 }
 
-export function openImageViewer(fileId, localPath, bucketId) {
-    return NavigationActions.navigate({ routeName: 'ImageViewerScreen', params: { fileId, localPath, bucketId } });
+export function openImageViewer(fileId, localPath, bucketId, isStarred) {
+    return NavigationActions.navigate({ routeName: 'ImageViewerScreen', params: { fileId, localPath, bucketId, isStarred } });
 }
 
 export function navigateBack() {
@@ -182,11 +182,20 @@ export function redirectToMyAccountScreen() {
     });
 }
 
-export function redirectToFavoritesItemsScreen(itemType) {
+export function redirectToFavoriteBucketsScreen(itemType) {
     return NavigationActions.reset({
         index: 0,
         actions: [
-          NavigationActions.navigate({ routeName: 'FavoritesItemsScreen', params: {itemType}})
+          NavigationActions.navigate({ routeName: 'FavoriteBucketsScreen', params: { itemType }})
+        ]
+    });
+}
+
+export function redirectToFavoriteFilesScreen(itemType) {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'FavoriteFilesScreen', params: { itemType }})
         ]
     });
 }
@@ -210,7 +219,8 @@ export const authNavigationActions = {
     redirectToMnemonicNotConfirmedScreen,
     redirectToRegisterScreen,
     redirectToRegisterSuccessScreen,
-    redirectToFavoritesItemsScreen,
+    redirectToFavoriteBucketsScreen,
+    redirectToFavoriteFilesScreen,
     navigateBack
 }
 

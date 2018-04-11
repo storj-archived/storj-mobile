@@ -365,7 +365,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
         File file = new File(localPath);
 
         if(!file.exists() || file.isDirectory()) {
-            Log.d("SYNC MODULE", "checkImage: File has been remoced from file System!");
+            Log.d("SYNC MODULE", "checkImage: File has been removed from file System!");
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -385,7 +385,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
                 }
             }).run();
 
-            promise.resolve(new Response(false, "File has been remoced from file System!").toWritableMap());
+            promise.resolve(new Response(false, "File has been removed from file System!").toWritableMap());
             return;
         }
 

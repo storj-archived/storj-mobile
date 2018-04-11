@@ -3,5 +3,5 @@ export const SYNC_BUCKETS = {
     PICTURES: "Pictures",
     MOVIES: "Movies",
     DOCUMENTS: "Documents",
-    DOWNLOAD: "Download"
+    MUSIC: "Music"
 };

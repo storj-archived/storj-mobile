@@ -167,7 +167,7 @@ export default class FileListManager {
                 fileEntry.isLoading = false;
                 fileEntry.progress = 0;
                 fileEntry.entity.localPath = localPath;
-                fileEntry.entity.isDownloaded = true;
+                fileEntry.entity.isDownloaded = localPath ? true : false;
                 fileEntry.entity.thumbnail = thumbnail;
             }
             

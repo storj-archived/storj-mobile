@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 
 import com.facebook.react.bridge.ActivityEventListener;
@@ -36,7 +37,9 @@ public class CameraModule extends ReactContextBaseJavaModule implements Activity
 
     public final static String MODULE_NAME = "CameraModule";
 
-    ReactContext mReactContext;
+    private ReactContext mReactContext;
+    private String mCurrentPhotoPath;
+    private String mCurrentBucketId;
 
     public CameraModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -50,58 +53,69 @@ public class CameraModule extends ReactContextBaseJavaModule implements Activity
     }
 
     @ReactMethod
-    public void openCamera() {
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        getReactApplicationContext().startActivityForResult(intent, 2132132, null);
+    public void openCamera(String bucketId) {
+        if(bucketId == null) {
+            return;
+        }
+
+        String imageName = DateFormat.getDateTimeInstance().format(new Date()) + (System.currentTimeMillis() << 8 * 4);
+
+        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+
+        try {
+            File image = File.createTempFile(imageName, ".jpg", storageDir);
+
+            mCurrentPhotoPath = image.getAbsolutePath();
+            mCurrentBucketId = bucketId;
+
+            Uri photoURI = FileProvider.getUriForFile(mReactContext,
+                    "com.example.android.fileprovider",
+                    image);
+
+            if(photoURI != null) return;
+
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+
+            getReactApplicationContext().startActivityForResult(intent, 2132132, null);
+        } catch (Exception e) {
+            Log.d("CAMERA DEBUG", e.getMessage());
+        }
     }
 
     @Override
     public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
         if(requestCode == 2132132 && resultCode == Activity.RESULT_OK) {
-            Bitmap image = (Bitmap) data.getExtras().get("data");
-            String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-            long timeInMillis = System.currentTimeMillis() << 8 * 4;
-
-            addFileToCameraRoll(image, currentDateTimeString + timeInMillis);
+            galleryAddPic(mCurrentPhotoPath);
+            uploadFile(mCurrentPhotoPath, mCurrentBucketId);
         }
+
+        mCurrentPhotoPath = null;
+        mCurrentBucketId = null;
     }
 
-    private void addFileToCameraRoll(Bitmap bitmap, String name) {
-        if(bitmap == null) {
-            return;
-        }
-
-        File root = Environment.getExternalStorageDirectory();
-        File file = new File(root.getAbsolutePath()+"/DCIM/Camera/" + name +".jpg");
-
-        try {
-            file.createNewFile();
-
-            FileOutputStream stream = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-            stream.close();
-
-            uploadFile(file);
-
-        } catch (Exception e) {
-
-        }
+    private void galleryAddPic(String photoPath) {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(photoPath);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        mReactContext.sendBroadcast(mediaScanIntent);
     }
 
-    private void uploadFile(File file) {
-        if(file == null) {
+    private void uploadFile(String filePath, String bucketId) {
+        if(filePath == null || bucketId == null) {
             return;
         }
 
         try(SQLiteDatabase db = new DatabaseFactory(mReactContext, null).getWritableDatabase()) {
             BucketRepository bucketRepo = new BucketRepository(db);
-            BucketDbo bucketDbo = bucketRepo.get(BucketContract._NAME, SyncSettingsEnum.SYNC_PHOTOS.getBucketName());
+            BucketDbo bucketDbo = bucketRepo.get(bucketId);
 
             if(bucketDbo == null) {
                 return;
             }
 
-            startUpload(bucketDbo.getId(), file.getPath());
+            startUpload(bucketDbo.getId(), filePath);
         } catch(Exception e) {}
     }
 

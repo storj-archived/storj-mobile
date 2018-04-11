@@ -13,9 +13,13 @@ const DashboardScreenNavigator = StackNavigator(
             screen: FilesScreen,
             routeName: 'DashboardFilesScreen'
         },
-        FavoritesItemsScreen: {
+        FavoriteBucketsScreen: {
             screen: FavoritesItemsScreen,
-            routeName: 'FavoritesItemsScreen'
+            routeName: 'FavoritesBucketsScreen'
+        },
+        FavoriteFilesScreen: {
+            screen: FavoritesItemsScreen,
+            routeName: 'FavoritesFilesScreen'
         }
     }, 
     {
