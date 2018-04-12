@@ -3,7 +3,7 @@ import loginActions from '../../utils/constants/actionConstants';
 const { LOGIN, LOGIN_SUCCESS, LOGIN_ERROR, 
     REGISTER, REGISTER_SUCCESS, REGISTER_ERROR, 
     SET_EMAIL_NOT_CONFIRMED, SET_EMAIL_CONFIRMED,
-    SET_ACCOUNT_NOT_EXIST, SET_ACCOUNT_EXIST } = loginActions;
+    SET_ACCOUNT_NOT_EXIST, SET_ACCOUNT_EXIST, CLEAR } = loginActions;
 
 const initialState = {
     user: {  
@@ -89,6 +89,18 @@ export default function authReducer(state, action) {
 
         case SET_ACCOUNT_EXIST:
             newState.user.isAccountExist = true;
+
+            return newState;
+        case CLEAR: 
+            newState.user.isLoggedIn = false, 
+            newState.user.email = null, 
+            newState.user.password = null, 
+            newState.user.mnemonic = null,
+            newState.user.error = null, 
+            newState.user.isLoading = false, 
+            newState.user.isRedirectedFromRegister = false,
+            newState.user.isEmailConfirmed = true,
+            newState.user.isAccountExist = true
 
             return newState;
 

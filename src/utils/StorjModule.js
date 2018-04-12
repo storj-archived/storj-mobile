@@ -118,7 +118,7 @@ const StorjLib = (() => {
          * @returns {Promise<boolean>}
          */
         async importKeys(email, password, mnemonic, passcode) {            
-            let response = await storjLib.importKeys(email, password, mnemonic, /*passcode*/"");
+            let response = await storjLib.importKeys(email, password, mnemonic, passcode);
 
             if(!response.isSuccess){
                 console.log('importKeys ', response.error.message);
@@ -147,7 +147,7 @@ const StorjLib = (() => {
          * @param {string} passcode needed if user has protected your auth file with additional password
          */
         async getKeys(passcode) {
-            let response = await storjLib.getKeys(/*passcode*/"");
+            let response = await storjLib.getKeys(passcode);
 
             if(!response.isSuccess) {
                 console.log('getKeys ', response.error.message);

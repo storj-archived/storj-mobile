@@ -17,9 +17,13 @@ export default class MyAccountMainPageComponent extends Component{
         super(props);     
     }
 
-    async logOut() {
-        await StorjModule.deleteKeys();
-        this.props.screenProps.redirectToInitializationScreen();
+    logOut() {
+        StorjModule.deleteKeys().then(() => {
+            this.props.screenProps.clearAuthReducer();
+            this.props.screenProps.redirectToInitializationScreen();
+        }, (e) => {
+            console.log(e);
+        });
     }
 
     render() {        

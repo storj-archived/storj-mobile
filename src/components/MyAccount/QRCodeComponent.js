@@ -15,18 +15,10 @@ import StorjModule from '../../utils/StorjModule';
 export default class QRCodeComponent extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            qrCode: null
-        }
     }
 
-    async componentWillMount() {
-        StorjModule.getKeys("").then(result => {            
-            this.setState({
-                qrCode: result.result
-            });
-        });        
+    getCredentials() {
+        return JSON.stringify({email: this.props.email, password: this.props.password, mnemonic: this.props.mnemonic})
     }
 
     render() {
@@ -36,9 +28,9 @@ export default class QRCodeComponent extends Component {
                     <View style = { styles.mainContainer } >
                         <View style = { styles.qrContainer }>
                         {
-                            this.state.qrCode ?
+                            this.getCredentials() ?
                                 <QRCode
-                                    value = { this.state.qrCode }
+                                    value = { this.getCredentials() }
                                     size = { getHeight(200) }
                                     bgColor = { 'black' }
                                     fgColor = { 'white' } /> : null

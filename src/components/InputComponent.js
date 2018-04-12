@@ -52,6 +52,8 @@ export default class InputComponent extends Component {
                         multiline = { this.props.multiline }
                         underlineColorAndroid = 'transparent'
                         autoCorrect={ false }
+                        autoFocus = { this.props.autoFocus }
+                        keyboardType = { this.props.keyboardType ? this.props.keyboardType : 'default' }
                         onChangeText={ this.props.onChangeText }
                         value={ this.props.value } />
                         {

@@ -29,11 +29,8 @@ export default class MyAccountMnemonicComponent extends Component {
         this.secondWordsRowIndexCorrection = 13;
     }
 
-    async componentDidMount() {
-        
-        StorjModule.getKeys().then((res)=>{
-            this.setState({mnemonic: JSON.parse(res.result).mnemonic});
-        })
+    async componentDidMount() { 
+        this.setState({mnemonic: this.props.screenProps.mnemonic});
     }
 
     copyToClipboard() {
@@ -142,7 +139,7 @@ export default class MyAccountMnemonicComponent extends Component {
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1, 
-        backgroundColor: 'transparent',
+        backgroundColor: '#FFFFFF',
         paddingHorizontal: getWidth(20)
     },
     topContainer: {

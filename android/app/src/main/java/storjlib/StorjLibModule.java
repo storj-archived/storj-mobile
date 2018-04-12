@@ -158,6 +158,11 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
             @Override
             public void callback(IMethodParams param) throws Exception {
                 Keys keys = getStorj().getKeys(passcode);
+                if(keys == null) {
+                    param.getPromise().resolve(new Response(
+                        false,  "keys are null").toWritableMap());
+                    return;
+                }
                 KeyModel result = new KeyModel(keys);
 
                 param.getPromise().resolve(new SingleResponse(

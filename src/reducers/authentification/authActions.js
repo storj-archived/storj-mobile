@@ -5,7 +5,7 @@ import { changePasswordRequest } from '../../utils/dataservice';
 const { LOGIN, LOGIN_SUCCESS, LOGIN_ERROR, 
     REGISTER, REGISTER_SUCCESS, REGISTER_ERROR, 
     SET_EMAIL_NOT_CONFIRMED, SET_EMAIL_CONFIRMED,
-    SET_ACCOUNT_NOT_EXIST, SET_ACCOUNT_EXIST } = authActions;
+    SET_ACCOUNT_NOT_EXIST, SET_ACCOUNT_EXIST, CLEAR } = authActions;
 
 
 /**
@@ -49,6 +49,14 @@ function loginError() {
 function login(email, password, mnemonic) {
     return { type: LOGIN, payload: { email, password, mnemonic } };
 };
+
+/**
+ * ActionCreator for setting authReducer to default state
+ * @returns action 
+ */
+function clear() {
+    return { type: CLEAR };
+}
 
 /**
  * ActionCreator that provides redux navigation to RegisterScreen
@@ -213,4 +221,12 @@ export const qrScannerActionCreators = {
     redirectToMainScreen,
     navigateBack,
     redirectToInitializeScreen
+}
+
+export const initializeActionCreators = {
+    login
+}
+
+export const pincodeActionCreators = {
+    clear
 }

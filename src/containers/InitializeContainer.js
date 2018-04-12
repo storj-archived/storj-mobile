@@ -20,6 +20,7 @@ import FileModel from '../models/FileModel';
 import BucketModel from '../models/BucketModel';
 import { initializeContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import { initializeContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
+import { initializeActionCreators } from '../reducers/authentification/authActions';
 import allFileActions from '../reducers/mainContainer/Files/filesReducerActions';
 import ServiceModule from '../utils/ServiceModule';
 import SyncModule from '../utils/SyncModule';
@@ -42,11 +43,6 @@ class InitializeContainer extends Component {
                 this.props.redirectToOnBoardingScreen();
                 return;
             }
-
-            if(await getMnemonicNotSaved() === 'false') {
-                this.props.redirectToMnemonicGenerationScreen();
-                return;
-            }
             
             if(!await StorjLib.keysExists()) {
                 this.props.redirectToLoginScreen();
@@ -59,19 +55,20 @@ class InitializeContainer extends Component {
         }
     }
 
-    onChangePassode(value) {
+    onChangePasscode(value) {
         this.setState({ passcode: value });
     }
 
     async getKeys() {        
         let getKeyResponse = await StorjLib.getKeys(this.state.passcode);
         
-        if(!getKeyResponse.isSuccess) { 
+        if(!getKeyResponse.isSuccess) {
             this.setState({ enterPassCode: true });   
             return;
         }
 
         let getKeysResult = JSON.parse(getKeyResponse.result);
+        this.props.login(getKeysResult.email, getKeysResult.password, getKeysResult.mnemonic);
 
         let getSettingsResponse = await SyncModule.listSettings(getKeysResult.email);
 
@@ -136,12 +133,14 @@ class InitializeContainer extends Component {
                                     return(
                                         <View style = { styles.contentWrapper }>
                                         <InputComponent 
-                                                onChangeText = { this.onChangePassode.bind(this) }
-                                                isPassword = { true } 
-                                                placeholder = {'Passcode'} 
-                                                value = { this.state.passcode }
-                                                isError = { this.state.isPasscodeWrong }
-                                                errorMessage = {'Invalid passcode'} />
+                                            onChangeText = { this.onChangePasscode.bind(this) }
+                                            isPassword = { true } 
+                                            autoFocus = { true }
+                                            keyboardType = { 'numeric' }
+                                            placeholder = {'Passcode'} 
+                                            value = { this.state.passcode }
+                                            isError = { this.state.isPasscodeWrong }
+                                            errorMessage = {'Invalid passcode'} />
                                         <TouchableOpacity 
                                             style = { styles.createAccountButton } 
                                             onPressOut = { this.onSubmit.bind(this) }>
@@ -214,7 +213,8 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) { return { navigation: state.navReducer }; };
 function mapDispatchToProps(dispatch) { return bindActionCreators({
         ...Actions,
-        ...initializeContainerActions, 
+        ...initializeContainerActions,
+        ...initializeActionCreators, 
         ...initializeContainerBucketActions,
         ...allFileActions, getDebits, getCredits, getWallets }, dispatch); };
 

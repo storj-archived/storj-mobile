@@ -127,6 +127,9 @@ export default class MainComponent extends Component {
                 {
                     this.state.showQR ? 
                         <QRCodeComponent hideActionBar
+                            email = { this.props.email }
+                            password = { this.props.password }
+                            mnemonic = { this.props.mnemonic }
                             showQR = { this.showQR.bind(this) } /> : null
                 }
                 {
@@ -210,5 +213,8 @@ MainComponent.propTypes = {
     setGridView: PropTypes.func,
     setListView: PropTypes.func,
     tapBarActions: PropTypes.array,
-    wallets: PropTypes.array
+    wallets: PropTypes.array,
+    email: PropTypes.string,
+    password: PropTypes.string,
+    mnemonic: PropTypes.string
 }; 

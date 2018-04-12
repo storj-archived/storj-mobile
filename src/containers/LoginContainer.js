@@ -175,7 +175,8 @@ class LoginContainer extends Component {
         let areKeysImported = await StorjLib.importKeys(
             this.state.stateModel.email,
             this.state.stateModel.password,
-            this.state.stateModel.mnemonic
+            this.state.stateModel.mnemonic,
+            ''
         );
         
         if(areKeysImported) {

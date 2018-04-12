@@ -82,7 +82,8 @@ class QRScannerContainer extends Component {
         let areKeysImported = await StorjLib.importKeys(
             this.stateModel.email,
             this.stateModel.password,
-            this.stateModel.mnemonic
+            this.stateModel.mnemonic,
+            ''
         );
         
         if(areKeysImported) {

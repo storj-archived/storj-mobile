@@ -396,7 +396,10 @@ class MainContainer extends Component {
                 openBucket = { this.props.openBucket }
                 bucketNavigateBack = { this.props.bucketNavigateBack }
                 setSorting = { this.props.setSorting }
-                dashboardNavigateBack = { this.props.dashboardNavigateBack }/>
+                dashboardNavigateBack = { this.props.dashboardNavigateBack }
+                email = { this.props.email }
+                password = { this.props.password }
+                mnemonic = { this.props.mnemonic } />
         );
     }
 }
@@ -431,6 +434,9 @@ function handleDashboardScreenActions(bucketId, isSelection, actions, selectionM
 
 function mapStateToProps(state) { 
     return {
+        email: state.authReducer.user.email,
+        password: state.authReducer.user.password,
+        mnemonic: state.authReducer.user.mnemonic,
         dashboardNavReducer: state.dashboardScreenNavReducer,
         bucketsScreenNavReducer: state.bucketsScreenNavReducer,
         mainNavReducer: state.navReducer,

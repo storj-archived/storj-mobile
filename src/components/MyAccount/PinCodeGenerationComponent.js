@@ -8,6 +8,7 @@ import {
     Keyboard,
     TextInput
 } from 'react-native';
+import StorjModule from '../../utils/StorjModule';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import { BUCKET_ACTIONS } from '../../utils/constants/actionConstants';
 
@@ -32,6 +33,8 @@ export default class PinCodeGenerationComponent extends Component {
             isFinished: false
         };
 
+        this.isCleared = false;
+
         this.textInputsRefs = [];
         this.pinCodes = [];
 
@@ -55,9 +58,20 @@ export default class PinCodeGenerationComponent extends Component {
     }
 
     setErrorState() {
+        this._textInput.clear();
         this.setState({
             isValid: false,
             text: this.TEXT_ERROR,
+            code: [],
+            repeatCode: [],
+            header: this.HEADER_CHANGE
+        });
+    }    
+
+    setEmptyState() {
+        this.setState({
+            isValid: true,
+            text: this.TEXT_ENTER,
             code: [],
             repeatCode: [],
             header: this.HEADER_CHANGE
@@ -69,26 +83,44 @@ export default class PinCodeGenerationComponent extends Component {
         
         for(let i = 0; i < this.letterCount - 1; i++) {
             if(this.state.code[i] !== this.state.repeatCode[i]) {                                
-                this.setErrorState();
+                this.setErrorState(); 
                 return;
             }
         }
 
         if(this.state.code[this.letterCount - 1] !== newVal) {
-            this.setErrorState();
+            this.setErrorState(); 
             return;
         }
 
         this.setState(prevState => ({ repeatCode: [...prevState.repeatCode, newVal], isFinished: true, text: this.SUCCESS }));
         Keyboard.dismiss();
+        this.onSubmit();
     }
 
-    handleEdit(newValue) {   
-        newValue = newValue[newValue.length - 1]     
+    handleEdit(newValue) { 
+        if((!this.isCleared && newValue === '') || !['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].includes(newValue[newValue.length - 1])) return;
+       
+        this.isCleared = this.isCleared ? false : true;
+
         let codeFull = this.state.code.length === this.letterCount;
         let repeatCodeFull = this.state.repeatCode.length === this.letterCount;
+        let newCodeArray = codeFull ? this.state.repeatCode : this.state.code;
 
         if(codeFull && repeatCodeFull) return;
+
+        if(this.state.code.length === 3 && newValue.length === 4) {
+            this._textInput.clear();
+        }
+
+        if(newValue.length === newCodeArray.length - 1) {
+            this.isCleared = true;
+            this._textInput.clear();
+            this.setEmptyState();
+            return;
+        };
+
+        newValue = newValue[newValue.length - 1]     
 
         if(this.state.code.length === 0) {
             this.setState({ header: this.HEADER_CHANGE, text: this.TEXT_ENTER, isValid: true });
@@ -108,8 +140,21 @@ export default class PinCodeGenerationComponent extends Component {
             : this.setState(prevState => ({ code: [...prevState.code, newValue] }));
     }
 
-    submit() {        
-        this.props.navigation.navigate('MyAccountMainPageScreen');
+    onSubmit() {    
+        let email = this.props.screenProps.email;
+        let password = this.props.screenProps.password;
+        let mnemonic = this.props.screenProps.mnemonic;
+
+        this.props.screenProps.clearAuthReducer();
+
+        StorjModule.importKeys(
+            email,
+            password,
+            mnemonic,
+            this.state.code.join('')
+        ).then(() => {
+            this.props.screenProps.redirectToSettingsScreen();
+        });
     }
     
     render() {
@@ -158,7 +203,7 @@ export default class PinCodeGenerationComponent extends Component {
                                         let currentCodeArray = this.state.code.length === 4 ? this.state.repeatCode : this.state.code;
                                         return new Array(this.letterCount).fill(' ').map((element, index) => {
                                             return(
-                                                element !== '' && currentCodeArray[index] ?
+                                                currentCodeArray[index] ?
                                                     <View 
                                                         key = { index } 
                                                         style = { styles.pin }>
@@ -176,11 +221,6 @@ export default class PinCodeGenerationComponent extends Component {
                         </View>
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity onPress = { this.state.isFinished ? () => {} : () => {} }>
-                    <View style = { this.state.isFinished ? styles.saveButton : [ styles.saveButton, styles.blurredButton ] } >
-                        <Text style = { styles.saveButtonText }>Save</Text>
-                    </View>
-                </TouchableOpacity>
                 <TextInput 
                     ref = { component => this._textInput = component }
                     style = { { position: 'absolute', right: 0, top: 0, height: 1, width:1 } }
@@ -289,26 +329,5 @@ const styles = StyleSheet.create({
         borderRadius: 50, 
         height: getHeight(18), 
         width: getWidth(18)
-    },
-    saveButton: {
-        marginTop: getHeight(325),
-        alignSelf: 'center',
-        width: getWidth(335),
-        height: getHeight(50),
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#2782ff',
-        borderColor: '#2794FF',
-        borderRadius: getWidth(6),
-        borderWidth: getWidth(1.5)
-    },
-    saveButtonText: {
-        fontFamily: 'Montserrat-Bold',
-        fontSize: getHeight(14),
-        color: 'white'
-    },
-    blurredButton: {
-        backgroundColor: 'rgba(38, 132, 255, 0.4)', 
-        borderColor: '#FFFFFF'
     }
 });

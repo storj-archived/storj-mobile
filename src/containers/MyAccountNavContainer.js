@@ -10,6 +10,7 @@ import { addNavigationHelpers } from 'react-navigation';
 import React, { Component } from 'react';
 import MyAccountScreenNavigator from '../navigators/MyAccountScreenNavigator';
 import { myAccountNavigationActions } from '../reducers/navigation/navigationActions';
+import { pincodeActionCreators } from '../reducers/authentification/authActions';
 
 class MyAccountNavContainer extends Component {
     constructor(props) {
@@ -54,6 +55,10 @@ class MyAccountNavContainer extends Component {
                 <MyAccountScreenNavigator
                     screenProps = { { 
                         redirectToInitializationScreen: this.props.redirectToInitializationScreen,
+                        clearAuthReducer: this.props.clear,
+                        email: this.props.email,
+                        password: this.props.password,
+                        mnemonic: this.props.mnemonic,
                         showQR: this.props.showQR,
                         showStorageInfo: this.props.showStorageInfo,
                         showCredits: this.props.showCredits,
@@ -82,6 +87,9 @@ class MyAccountNavContainer extends Component {
 
 function mapStateToProps(state) {
     return {
+        email: state.authReducer.user.email,
+        password: state.authReducer.user.password,
+        mnemonic: state.authReducer.user.mnemonic,
         nav: state.myAccountScreenNavReducer
     };
 }
@@ -89,7 +97,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         ...bindActionCreators( { 
-            ...myAccountNavigationActions
+            ...myAccountNavigationActions,
+            ...pincodeActionCreators
         }, dispatch)
     }
 }
