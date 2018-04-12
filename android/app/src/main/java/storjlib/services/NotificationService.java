@@ -7,7 +7,7 @@ import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.storjmobile.R;
+import io.storj.R;
 
 public class NotificationService {
 

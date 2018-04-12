@@ -98,7 +98,7 @@ android {
     buildToolsVersion '25.0.0'
 
     defaultConfig {
-        applicationId "com.storjmobile"
+        applicationId "io.storj"
         minSdkVersion 21
         targetSdkVersion 22
         versionCode 1
@@ -126,7 +126,12 @@ android {
         }
     }
     buildTypes {
+        debug {
+            versionNameSuffix ".debug"
+        }
+
         release {
+            applicationIdSuffix ".release" // delete on publishing
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release

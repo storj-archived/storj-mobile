@@ -1,4 +1,4 @@
-package com.storjmobile;
+package io.storj;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,6 +11,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import io.storj.BuildConfig;
 
 import java.util.Arrays;
 import java.util.List;
