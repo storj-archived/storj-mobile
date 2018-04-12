@@ -55,13 +55,37 @@ export default class ListItemComponent extends Component {
     }
 
     getFileSize() {
-        let mbSize = (this.props.item.entity.size / 1042326).toString().slice(0, 5).split('');
+        let itemSize = this.props.item.entity.size;
 
-        if(mbSize[mbSize.length - 1] == 0) {
-            mbSize.splice(mbSize.length - 1, 1, 1);
+        if(!itemSize) return '0 bytes';
+
+        if(itemSize < 1024) return itemSize.toString() + ' bytes';
+        
+        if(itemSize < 1048576) {
+            let kbSize = (itemSize / 1024).toString().slice(0, 5).split(' ');
+
+            if(kbSize[kbSize.length - 1] === 0) {
+                kbSize.splice(kbSize.length - 1, 1, 1);
+            }
+            return kbSize + ' Kb'
+        } 
+        
+        if(itemSize < 1073741824) {
+            let mbSize = (itemSize / 1048576).toString().slice(0, 5).split(' ');
+
+            if(mbSize[mbSize.length - 1] === 0) {
+                mbSize.splice(mbSize.length - 1, 1, 1);
+            }
+            return mbSize + ' Mb'
+        } 
+        
+        let gbSize = (itemSize / 1048576*1024).toString().slice(0, 5).split(' ');
+
+        if(gbSize[gbSize.length - 1] === 0) {
+            gbSize.splice(gbSize.length - 1, 1, 1);
         }
 
-        return mbSize;
+        return gbSize + ' Gb'     
     }
 
     render() {
@@ -146,7 +170,7 @@ export default class ListItemComponent extends Component {
                                                 indeterminate = { false } />
                                     })
                                 : props.item.entity.size ? 
-                                    <Text style = { listItemStyles.fileSizeText }>{ this.getFileSize() } Mb</Text>
+                                    <Text style = { listItemStyles.fileSizeText }>{ this.getFileSize() }</Text>
                                     : null
                             }
                         </View>
@@ -256,13 +280,11 @@ const listItemStyles = StyleSheet.create({
     },
     extentionText: {
         fontFamily: 'Montserrat-Regular',
-        lineHeight: getHeight(18),
         fontSize: getHeight(16),
         color: 'rgba(56, 75, 101, 0.4)'
     },
     fileSizeText: {
         fontFamily: 'Montserrat-Regular',
-        lineHeight: getHeight(15),
         fontSize: getHeight(12),
         color: 'rgba(56, 75, 101, 0.4)'
     }
