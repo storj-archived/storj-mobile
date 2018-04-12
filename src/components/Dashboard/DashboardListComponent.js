@@ -82,6 +82,22 @@ export default class DashboardListComponent extends Component{
                         </View>
                         <View style = { styles.contentWrapper }>
                         {
+                            starredBucketsCount + starredFilesCount + syncedfilesCount === 0 
+                            ? <View style = { styles.emptyStateContainer }>
+                                <View style = { styles.explanationTextContainer }>
+                                    <Text style = { styles.explanationTextBold }>Nothing to show yet.</Text>
+                                    <Text style = { styles.explanationTextRegular }>Your favourite items and recent sync will be show here.</Text>
+                                </View>
+                                <View style = { styles.imageContainer }>
+                                    <Image
+                                        resizeMode = 'contain'
+                                        source = { require('../../images/MainScreen/Folder.png') }
+                                        style = { styles.image } />
+                                </View>
+                            </View>
+                            : null
+                        }
+                        {
                             listComponent(
                                 'Favourite buckets', 
                                 this.getThreeLast(starredBuckets), 
@@ -126,36 +142,38 @@ export default class DashboardListComponent extends Component{
 }
 
 const listComponent = (title, data, props, count, isBucket, screen, itemType, navigationAction) => {
-    return(
-        <View>  
-            <DashboardListHeaderComponent
-                onPress = { () => { navigationAction(itemType) } }
-                title = { title } />
-            <ListComponent
-                activeScreen = { screen }
-                screens = { "DashboardScreen" }                
-                setSelectionId = { () => {} }
-                selectedItemId = { null }
-                verticalPaddingDisabled = { true }
-                isExpanderDisabled = { true }
-                openBucket = { props.setDashboardBucketId }
-                navigateToDashboardFilesScreen = { props.navigateToDashboardFilesScreen }
-                onSingleItemSelected = { () => {} }
-                animatedScrollValue = { props.animatedScrollValue }
-                enableSelectionMode = { () => {} }
-                disableSelectionMode = { () => {} }
-                isSelectionMode = { false }
-                isSingleItemSelected = { false }
-                listItemIcon = { isBucket ? require('../../images/Icons/BucketListItemIcon.png') : require('../../images/Icons/FileListItemIcon.png') }
-                starredListItemIcon = { isBucket ? require('../../images/Icons/ListStarredBucket.png') : require('../../images/Icons/ListStarredFile.png') }
-                deselectItem = { () => {} }
-                navigateToFilesScreen = { props.navigateToFilesScreen ? props.navigateToFilesScreen : () => {} }
-                selectItem = { () => {} }
-                data = { data } />
-            <DashboardListFooterComponent
-                count = { count } 
-                onPress = { () => { navigationAction(itemType) } } />
-        </View>
+    if(data.length === 0) return null;
+
+        return(
+            <View>  
+                <DashboardListHeaderComponent
+                    onPress = { () => { navigationAction(itemType) } }
+                    title = { title } />
+                <ListComponent
+                    activeScreen = { screen }
+                    screens = { "DashboardScreen" }                
+                    setSelectionId = { () => {} }
+                    selectedItemId = { null }
+                    verticalPaddingDisabled = { true }
+                    isExpanderDisabled = { true }
+                    openBucket = { props.setDashboardBucketId }
+                    navigateToDashboardFilesScreen = { props.navigateToDashboardFilesScreen }
+                    onSingleItemSelected = { () => {} }
+                    animatedScrollValue = { props.animatedScrollValue }
+                    enableSelectionMode = { () => {} }
+                    disableSelectionMode = { () => {} }
+                    isSelectionMode = { false }
+                    isSingleItemSelected = { false }
+                    listItemIcon = { isBucket ? require('../../images/Icons/BucketListItemIcon.png') : require('../../images/Icons/FileListItemIcon.png') }
+                    starredListItemIcon = { isBucket ? require('../../images/Icons/ListStarredBucket.png') : require('../../images/Icons/ListStarredFile.png') }
+                    deselectItem = { () => {} }
+                    navigateToFilesScreen = { props.navigateToFilesScreen ? props.navigateToFilesScreen : () => {} }
+                    selectItem = { () => {} }
+                    data = { data } />
+                <DashboardListFooterComponent
+                    count = { count } 
+                    onPress = { () => { navigationAction(itemType) } } />
+            </View>
     )
 }
 
@@ -208,6 +226,34 @@ const styles = StyleSheet.create({
     },
     contentWrapper: {
         paddingBottom: getHeight(60)
+    },
+    explanationTextContainer: { 
+        marginTop: getHeight(30),
+        marginLeft: getWidth(10),
+        alignItems: 'flex-start',
+        height: getHeight(70),
+        width: getWidth(320)
+    },
+    explanationTextRegular: { 
+        fontFamily: 'Montserrat-Regular', 
+        fontSize: getHeight(16), 
+        color: '#384B65' 
+    },
+    explanationTextBold: { 
+        fontFamily: 'Montserrat-Bold', 
+        fontSize: getHeight(16), 
+        color: '#384B65' 
+    },
+    imageContainer: {
+        marginTop: getHeight(28),
+        alignItems: 'center',
+        justifyContent: 'center'
+    }, 
+    image: {
+        height: getHeight(250)
+    },
+    emptyStateContainer: {
+        flex: 1
     }
 });
 
