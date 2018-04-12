@@ -211,7 +211,8 @@ export const dashboardContainerActions = {
     setLoading,
     unsetLoading,
     setSelectionId,
-    setDashboardBucketId
+    setDashboardBucketId,
+    clearSearch
 }
 
 export const initializeContainerActions = {

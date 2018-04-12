@@ -71,7 +71,7 @@ class FavoritesItemsContainer extends Component {
     }
 
     onBucketPress(bucket) {
-
+        
     }
 
     isBuckets() {
@@ -79,6 +79,7 @@ class FavoritesItemsContainer extends Component {
     }
 
     navigateBack() {
+        this.props.clearSearch(3);
         this.props.dashboardNavigateBack();
         this.props.disableSelectionMode();
         this.props.setDashboardBucketId(null);
