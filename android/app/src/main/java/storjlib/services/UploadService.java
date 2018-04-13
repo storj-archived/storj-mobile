@@ -19,9 +19,12 @@ import com.facebook.react.bridge.WritableNativeMap;
 import io.storj.libstorj.File;
 import io.storj.libstorj.UploadFileCallback;
 import io.storj.libstorj.android.StorjAndroid;
+import storjlib.dataprovider.dbo.SettingsDbo;
+import storjlib.dataprovider.repositories.SettingsRepository;
 import storjlib.enums.DownloadStateEnum;
 import storjlib.enums.SyncSettingsEnum;
 import storjlib.models.FileModel;
+import storjlib.models.SettingsModel;
 import storjlib.models.UploadingFileModel;
 import storjlib.responses.Response;
 import storjlib.responses.SingleResponse;
@@ -76,12 +79,25 @@ public final class UploadService extends BaseReactService {
         switch(action) {
             case ACTION_UPLOAD_FILE:
                 boolean isSync = intent.getBooleanExtra(FileContract._SYNCED, false);
-                int syncSettings = intent.getIntExtra(SettingsContract._SYNC_SETTINGS, 0);
+                //int syncSettings = intent.getIntExtra(SettingsContract._SYNC_SETTINGS, 0);
+                String settingsId = intent.getStringExtra(SettingsContract._SETTINGS_ID);
+
+                SQLiteDatabase db = new DatabaseFactory(this, null).getWritableDatabase();
+                SettingsRepository settingsRepo = new SettingsRepository(db);
+                SettingsDbo settingsDbo = settingsRepo.get(settingsId);
+                int syncSettings = 0;
+                boolean isSyncOn = isSync;
+
+                if(settingsDbo != null) {
+                    SettingsModel settingsModel = settingsDbo.toModel();
+                    syncSettings = settingsModel.getSyncSettings();
+                    isSyncOn = settingsModel.syncStatus();
+                }
 
                 boolean onWifi = (syncSettings & SyncSettingsEnum.ON_WIFI.getValue()) == SyncSettingsEnum.ON_WIFI.getValue();
                 boolean onCharging = (syncSettings & SyncSettingsEnum.ON_CHARGING.getValue()) == SyncSettingsEnum.ON_CHARGING.getValue();;
 
-                if(!checkConstraints(isSync, onWifi, onCharging)) {
+                if(!checkConstraints(isSync, onWifi, onCharging, isSyncOn)) {
                     return;
                 }
 
@@ -97,9 +113,14 @@ public final class UploadService extends BaseReactService {
         Log.d("UPLOAD DEBUG", "onHandleIntent: END, " + intent.getStringExtra(PARAMS_URI));
     }
 
-    private boolean checkConstraints(boolean isSync, boolean onWifi, boolean onCharging) {
+    private boolean checkConstraints(boolean isSync, boolean onWifi, boolean onCharging, boolean isSyncOn) {
         if(!isSync) {
             return true;
+        }
+
+        if(!isSyncOn) {
+            Log.d("UPLOAD DEBUG", "ABORTING SYNC file uploading due to failing of SYNC_STATUS constraint");
+            return false;
         }
 
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

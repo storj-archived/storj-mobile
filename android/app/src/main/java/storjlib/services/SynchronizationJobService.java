@@ -60,10 +60,10 @@ public class SynchronizationJobService extends JobService {
                     BucketRepository bucketRepo = new BucketRepository(db);
                     int syncSettings = dbo.toModel().getSyncSettings();
 
-                    syncFolder(syncSettings, SyncSettingsEnum.SYNC_PHOTOS, bucketRepo, db);
-                    syncFolder(syncSettings, SyncSettingsEnum.SYNC_MOVIES, bucketRepo, db);
-                    syncFolder(syncSettings, SyncSettingsEnum.SYNC_DOCUMENTS, bucketRepo, db);
-                    syncFolder(syncSettings, SyncSettingsEnum.SYNC_MUSIC, bucketRepo, db);
+                    syncFolder(settingsId, syncSettings, SyncSettingsEnum.SYNC_PHOTOS, bucketRepo, db);
+                    syncFolder(settingsId, syncSettings, SyncSettingsEnum.SYNC_MOVIES, bucketRepo, db);
+                    syncFolder(settingsId, syncSettings, SyncSettingsEnum.SYNC_DOCUMENTS, bucketRepo, db);
+                    syncFolder(settingsId, syncSettings, SyncSettingsEnum.SYNC_MUSIC, bucketRepo, db);
 
                     settingsRepo.update(settingsId, getDateTime());
                 } catch (Exception e) {
@@ -90,7 +90,7 @@ public class SynchronizationJobService extends JobService {
         return true;
     }
 
-    private void uploadFile(String bucketId, String uri, int syncSettings) {
+    private void uploadFile(String bucketId, String uri, String settingsId, int syncSettings) {
         Log.d(DEBUG_TAG, "sync: " + "sending new intent for " + uri);
         Intent uploadIntent = new Intent(this, UploadService.class);
         uploadIntent.setAction(UploadService.ACTION_UPLOAD_FILE);
@@ -98,13 +98,14 @@ public class SynchronizationJobService extends JobService {
         uploadIntent.putExtra(UploadService.PARAMS_URI, uri);
         uploadIntent.putExtra(FileContract._SYNCED, true);
         uploadIntent.putExtra(SettingsContract._SYNC_SETTINGS, syncSettings);
+        uploadIntent.putExtra(SettingsContract._SETTINGS_ID, settingsId);
 
         startService(uploadIntent);
     }
 
     private final static String DEBUG_TAG = "SYNCHRONIZATION DEBUG";
 
-    private void syncFolder(int syncSettings, SyncSettingsEnum syncEnum, BucketRepository bucketRepo, SQLiteDatabase db) {
+    private void syncFolder(String settingsId, int syncSettings, SyncSettingsEnum syncEnum, BucketRepository bucketRepo, SQLiteDatabase db) {
         if(syncEnum != SyncSettingsEnum.SYNC_DOCUMENTS
                 && syncEnum != SyncSettingsEnum.SYNC_MUSIC
                 && syncEnum != SyncSettingsEnum.SYNC_MOVIES
@@ -124,12 +125,12 @@ public class SynchronizationJobService extends JobService {
         boolean isSyncOn = (syncSettings & syncValue) == syncValue;
 
         if(isSyncOn && dboIsNotNull)
-            _syncFolder(syncEnum.geetFolderUri(), dbo.getId(), syncSettings, db);
+            _syncFolder(syncEnum.geetFolderUri(), dbo.getId(), settingsId, syncSettings, db);
         else
             Log.d(DEBUG_TAG, "sync: " + "Settings for " + bucketName + " - " + " Dbo: " + dboIsNotNull + ", Sync settings: " + isSyncOn);
     }
 
-    private void _syncFolder(String folderUri, String bucketId, int syncSettings, SQLiteDatabase db) {
+    private void _syncFolder(String folderUri, String bucketId, String settingsId, int syncSettings, SQLiteDatabase db) {
         Log.d(DEBUG_TAG, "sync: " + "Start sync of " + folderUri + " and " + bucketId);
         File folder = new File(folderUri);
 
@@ -154,7 +155,7 @@ public class SynchronizationJobService extends JobService {
             UploadingFileModel uploadingFileModel = uploadFileRepo.get(file.getName(), UploadingFileContract._NAME);
 
             if(fileDbo == null && uploadingFileModel == null) {
-                uploadFile(bucketId, file.getPath(), syncSettings);
+                uploadFile(bucketId, file.getPath(), settingsId, syncSettings);
             }
         }
     }
