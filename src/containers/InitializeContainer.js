@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
     View,
     Text,
@@ -6,14 +7,14 @@ import {
     TouchableOpacity,
     Keyboard
 } from 'react-native';
+=======
+>>>>>>> [REWORKED] Initialize screen
 import React, { Component } from 'react';
-import InputComponent from '../components/InputComponent';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as Actions from '../reducers/navigation/navigationActions';
 import { getDebits, getCredits, getWallets }  from '../reducers/billing/billingActions';
 import StorjLib from '../utils/StorjModule';
-import { getWidth, getHeight } from '../utils/adaptive';
 import { authConstants } from '../utils/constants/storageConstants';
 import { getMnemonicNotSaved, getFirstAction } from '../utils/AsyncStorageModule';
 import ListItemModel from '../models/ListItemModel';
@@ -26,21 +27,25 @@ import allFileActions from '../reducers/mainContainer/Files/filesReducerActions'
 import ServiceModule from '../utils/ServiceModule';
 import SyncModule from '../utils/SyncModule';
 import PropTypes from 'prop-types';
+import InitializeComponent from '../components/InitializeComponent';
 
 class InitializeContainer extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            passcode: "",
+            filledPins: "",
             enterPassCode: false,
             isPasscodeWrong: false,
-            isKeyboardShown: false
+            infoText: 'Enter PIN',
+            isError: false,
+            isLoading: false,
+            isFinished: false
         };
 
-        this.inputComponent = null;
-        this.keyboardShowListener = null;
-        this.keyboardHideListener = null;
+        this.REGULAR_MESSAGE = "Enter PIN";
+        this.ERROR_MESSAGE = 'Wrong PIN, try again';
+        this.pincode = '';
     };
 
     async componentWillMount() {
@@ -66,6 +71,8 @@ class InitializeContainer extends Component {
         } catch(e) {            
             this.props.redirectToOnBoardingScreen();
         }
+
+        this.setState({ isError: false, infoText: this.REGULAR_MESSAGE });
     }
 
     componentWillUnmount() {
@@ -74,14 +81,23 @@ class InitializeContainer extends Component {
     }
 
     onChangePasscode(value) {
-        this.setState({ passcode: value });
+        if(this.state.isFinished) return;
+        if(this.state.isError) this.setState({ isError: false, infoText: this.REGULAR_MESSAGE })
+        this.setState({ filledPins: value });
+        this.pincode = value;
+
+        if(this.pincode.length === 4) {
+            this.onSubmit();
+        }
     }
 
     async getKeys() {        
-        let getKeyResponse = await StorjLib.getKeys(this.state.passcode);
+        let getKeyResponse = await StorjLib.getKeys(this.pincode);
+        this.pincode = '';
         
         if(!getKeyResponse.isSuccess) {
-            this.setState({ enterPassCode: true });   
+            this.setState({ isFinished: false });
+            this.setState({ enterPassCode: true, isLoading: false, infoText: this.ERROR_MESSAGE, isError: true });   
             return;
         }
 
@@ -105,7 +121,7 @@ class InitializeContainer extends Component {
         this.props.getCredits();
         this.props.getWallets(); 
 
-        this.props.redirectToMainScreen();       
+        this.props.redirectToMainScreen();    
     }
 
     async getAllBuckets() {
@@ -133,113 +149,29 @@ class InitializeContainer extends Component {
     }
 
     onSubmit() {
+        this.setState({ isFinished: true });
+        this.setState({isLoading: true, filledPins: ''});
+        this._initializeComponent._inputComponent._textInput.clear();
         this.getKeys();
     }
 
     render() {
         return(
-                <View style = { styles.mainContainer }>
-                    <View style = { styles.backgroundWrapper }>
-                        <Image 
-                            style = { styles.logo } 
-                            source = { require('../images/Icons/LogoBlue.png') } 
-                            resizeMode = 'contain' />
-                    </View>
-                        {
-                            (()=>{
-                                if(this.state.enterPassCode){
-                                    return(
-                                        <View style = { styles.contentWrapper }>
-                                            <InputComponent
-                                                onChangeText = { this.onChangePasscode.bind(this) }
-                                                isPassword = { true } 
-                                                autoFocus = { true }
-                                                keyboardType = { 'numeric' }
-                                                placeholder = {'Passcode'} 
-                                                value = { this.state.passcode }
-                                                isError = { this.state.isPasscodeWrong }
-                                                errorMessage = {'Invalid passcode'} />
-                                            <TouchableOpacity 
-                                                style = { styles.createAccountButton } 
-                                                onPressOut = { this.onSubmit.bind(this) }>
-                                                    <Text style = { styles.createAccountText }>SIGN IN</Text>
-                                            </TouchableOpacity>
-                                            {
-                                                this.state.isKeyboardShown ? 
-                                                    <TouchableOpacity
-                                                        onPress = { () =>  { Keyboard.dismiss(); } }
-                                                        style = { styles.hideKeyboardArea } />
-                                                    : null
-                                            }
-                                        </View>
-                                    );
-                                }
-                            })()
-                        }                 
-                    </View> 
+            <InitializeComponent
+                ref = { component => this._initializeComponent = component }
+                enterPassCode = { this.state.enterPassCode }
+                isError = { this.state.isError }
+                filledPins = { this.state.filledPins }
+                onChangePasscode = { this.onChangePasscode.bind(this) }
+                isPasscodeWrong = { this.state.isPasscodeWrong }
+                isLoading = { this.state.isLoading }
+                infoText = { this.state.infoText }
+                redirectToLoginScreen = { this.props.redirectToLoginScreen }
+                redirectToQRScannerScreen = { this.props.redirectToQRScannerScreen }
+                redirectToRegisterScreen = { this.props.navigateToRegisterScreen } />
         );
     }
 }
-
-const styles = StyleSheet.create({
-    mainContainer: {
-        flex: 1,
-        backgroundColor: 'white'
-    },
-    backgroundWrapper: {
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: 'transparent',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    logo: {
-        height: getHeight(100),
-        marginBottom: getHeight(160)
-    },
-    splash: {
-        height: getHeight(667),
-        width: getWidth(375)
-    },
-    splashLogo: {
-        marginTop: getHeight(268),
-        marginBottom: getHeight(321),
-        marginLeft: getWidth(114),
-        marginRight: getWidth(87),
-        height: getHeight(78),
-        width: getWidth(174)
-    },
-    contentWrapper: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: getHeight(100)
-    },
-    createAccountButton: {
-        width: getWidth(343),
-        height: getHeight(55),
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#2782ff',
-        borderRadius: getWidth(8)
-     },
-     createAccountText: {
-         fontFamily: 'Montserrat-Bold',
-         fontSize: getHeight(14),
-         color: 'white'
-     },
-     hideKeyboardArea: {
-         position: 'absolute',
-         top: 0,
-         bottom: 0,
-         left: 0,
-         right: 0,
-         backgroundColor: 'transparent'
-     }
-});
 
 /**
  * connecting reducer to component props 

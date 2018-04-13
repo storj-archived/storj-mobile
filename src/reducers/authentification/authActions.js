@@ -224,7 +224,10 @@ export const qrScannerActionCreators = {
 }
 
 export const initializeActionCreators = {
-    login
+    login,
+    redirectToQRScannerScreen,
+    redirectToLoginScreen,
+    navigateToRegisterScreen
 }
 
 export const pincodeActionCreators = {

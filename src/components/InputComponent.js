@@ -44,6 +44,7 @@ export default class InputComponent extends Component {
                 <Text style = { placeholderStyle }> { message } </Text>
                 <View style = { styles.textInputWrapper }>
                     <TextInput 
+                        ref = { component => this._textInput = component }
                         placeholderTextColor = 'grey'
                         placeholder = { this.props.placeholder }
                         editable = { this.props.editable}
