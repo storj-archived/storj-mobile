@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-import {
-    View,
-    Text,
-    StyleSheet,
-    Image,
-    TouchableOpacity,
-    Keyboard
-} from 'react-native';
-=======
->>>>>>> [REWORKED] Initialize screen
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -49,13 +38,6 @@ class InitializeContainer extends Component {
     };
 
     async componentWillMount() {
-        this.keyboardHideListener = Keyboard.addListener("keyboardDidHide", () => {
-            this.setState({ isKeyboardShown: false });
-        });
-        this.keyboardShowListener = Keyboard.addListener("keyboardDidShow", () => {
-            this.setState({ isKeyboardShown: true });
-        });
-        
         try {
             if(!await getFirstAction()) {
                 this.props.redirectToOnBoardingScreen();
@@ -73,11 +55,6 @@ class InitializeContainer extends Component {
         }
 
         this.setState({ isError: false, infoText: this.REGULAR_MESSAGE });
-    }
-
-    componentWillUnmount() {
-        this.keyboardHideListener.remove();
-        this.keyboardShowListener.remove();
     }
 
     onChangePasscode(value) {
