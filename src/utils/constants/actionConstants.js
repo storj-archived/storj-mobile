@@ -19,6 +19,7 @@ const ACTIONS = {
 
 //main reducer action constants
 export const MAIN_ACTIONS = {
+    SET_IS_CONNECTED: "SET_IS_CONNECTED",
     SET_EMAIL: "SET_EMAIL",
     SHOW_ACTION_BAR: 'SHOW_ACTION_BAR',
     HIDE_ACTION_BAR: 'HIDE_ACTION_BAR',

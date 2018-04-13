@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {
-  BackHandler,
-  Platform,
-  View,
-   DeviceEventEmitter,
+	BackHandler,
+	Platform,
+	View,
+	DeviceEventEmitter,
 	NativeEventEmitter,
 	StyleSheet,
-	StatusBar
+	StatusBar,
+	NetInfo
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -16,7 +17,8 @@ import { NavigationActions } from 'react-navigation';
 import eventNames from '../utils/constants/eventNames';
 import {
     bucketsContainerActions,
-	mainContainerActions
+	mainContainerActions,
+	navigationContainerMainActions
 } from '../reducers/mainContainer/mainReducerActions';
 import { navigationContainerBucketActions, mainContainerBucketActions, bucketsContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
 import {
@@ -88,6 +90,20 @@ class Apps extends Component {
             this.downloadFileProgressListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_PROGRESS, this.onFileDownloadProgress.bind(this));
             this.downloadFileSuccessListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_SUCCESS, this.onFileDownloadSuccess.bind(this));
             this.downloadFileErrorListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_ERROR, this.onFileDownloadError.bind(this));
+		}
+
+		NetInfo.isConnected.fetch().then(isConnected => {
+			this.props.setIsConnected(isConnected);
+		});
+
+		NetInfo.isConnected.addEventListener('connectionChange', this.onConnectionChange.bind(this));
+	}
+	
+	onConnectionChange(isConnected) {
+		this.props.setIsConnected(isConnected);
+
+		if(!isConnected) {
+
 		}
 	}
 
@@ -183,7 +199,7 @@ class Apps extends Component {
 		if(response.isSuccess) {
 			this.props.createBucket(new ListItemModel(new BucketModel(JSON.parse(response.result))));	
 		} else {
-			switch(response.error.errorCode === 409) {				
+			switch(response.error.errorCode) {				
 				case 409:
 					this.props.setNameAlreadyExistException();
 					this.timer = setTimeout(this.unsetNameAlreadyExistException.bind(this), 3000);
@@ -231,27 +247,26 @@ class Apps extends Component {
 	}
 
 	chooseWarning() {
-		let warningMessage, statusBarColor = null;
+		let warningColor = '#EB5757';
+		let color = warningColor;
+		let message;
 
-
-		if(!this.props.isEmailConfirmed) {
-			warningMessage = 'Please confirm your email';
-			statusBarColor = '#EB5757';
-		} else if(!this.props.isAccountExist) {
-			warningMessage =  'This acoound doesn`t exist';
-			statusBarColor = '#EB5757';
-		} else if(this.props.isNameExistException) {
-			warningMessage = 'Name already used by another bucket';
-			statusBarColor = '#EB5757';
+		if(!this.props.isEmailConfirmed) {			
+			message = 'Please confirm your email';
+		} else if(!this.props.isAccountExist) {			
+			message = 'This account doesn`t exist';
+		} else if(this.props.isNameExistException) {			
+			message = 'Name already used by another bucket';
+		} if(!this.props.isConnected) {			
+			message = 'No internet connection';
 		} else {
-			warningMessage, statusBarColor = null;
-		}
+			color = null;
+			message = null;
+		}	
 
-		return(
-			<WarningComponent
-				message = { warningMessage }
-				statusBarColor = { statusBarColor } />
-		)
+		return <WarningComponent
+						message = { message }
+						statusBarColor = { color } />;
 	}
 
 	render() {
@@ -303,7 +318,8 @@ function mapStateToProps(state) {
 		nav: state.navReducer,
 		isEmailConfirmed: state.authReducer.user.isEmailConfirmed,
 		isAccountExist: state.authReducer.user.isAccountExist,
-		isNameExistException: state.bucketReducer.isNameExistException
+		isNameExistException: state.bucketReducer.isNameExistException,
+		isConnected: state.mainReducer.isConnected
     };
 }
 
@@ -317,6 +333,7 @@ function mapDispatchToProps(dispatch) {
 		...navigationContainerBucketActions,
 		...mainContainerFileActions,
 		...filesListContainerFileActions,
+		...navigationContainerMainActions,
 		...authNavigationActions }, dispatch),
 		uploadSuccess: (fileHandle, fileId) => dispatch(uploadFileSuccess(fileHandle, fileId)),		
 		getUploadingFile: (fileHandle) => dispatch(uploadFileStart(fileHandle))};

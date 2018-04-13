@@ -33,8 +33,17 @@ const {
     PUSH_LOADING,
     POP_LOADING,
     SET_SEARCH,
-    CLEAR_SEARCH  
+    CLEAR_SEARCH,
+    SET_IS_CONNECTED
 } = MAIN_ACTIONS;
+
+/**
+ * Action for changing isConnected to interted state
+ * @param {bool} isConnected - indicates state of internet conection
+ */
+function setIsConnected(isConnected) {
+    return { type: SET_IS_CONNECTED, payload: { isConnected } };
+}
 
 function setEmail(email) {
     return { type: SET_EMAIL, payload: { email } };
@@ -259,4 +268,8 @@ export const setCurrentMainScreenActions = {
     hideActionBar,
     pushLoading,
     popLoading
+}
+
+export const navigationContainerMainActions = {
+    setIsConnected
 }

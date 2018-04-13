@@ -28,7 +28,8 @@ const {
     PUSH_LOADING,
     POP_LOADING,
     SET_SEARCH,
-    CLEAR_SEARCH  
+    CLEAR_SEARCH,
+    SET_IS_CONNECTED
  } = MAIN_ACTIONS; 
 
 const initialState = {
@@ -50,7 +51,8 @@ const initialState = {
     filesSearchSubSequence: null,
     starredSearchSubSequence: null,
     dashboardFilesSearchSubSequence: null,
-    loadingStack: []
+    loadingStack: [],
+    isConnected: true
 };
 
 export default function mainReducer(state = initialState, action) {
@@ -59,6 +61,9 @@ export default function mainReducer(state = initialState, action) {
 
     //TODO: we can call return after switch, and reduce lines of code
     switch(action.type) {
+        case SET_IS_CONNECTED:
+            newState.isConnected = action.payload.isConnected;
+            break;
         case SET_EMAIL:
             newState.email = action.payload.email;
             break;
