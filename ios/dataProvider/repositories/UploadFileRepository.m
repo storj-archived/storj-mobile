@@ -15,104 +15,141 @@
 @synthesize _database;
 static NSArray * columns;
 
--(instancetype) initWithDB:(FMDatabase *)database{
-  if (self = [super initWithDB:database]){
+-(instancetype) initWithDB:(FMDatabase *)database {
+  if (self = [super initWithDB:database]) {
     _database = database;
   }
+  
   return self;
 }
 
--(NSArray *) getAll{
+-(NSArray *) getAll {
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@",
                        [[UploadFileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        UploadFileContract.TABLE_NAME];
+  if(![[self _database] open]) {
+    NSLog(@"Database cannot be oppened");
+    
+    return nil;
+  }
   FMResultSet * resultSet = [[self _database] executeQuery:request];
-  if(!resultSet){
+  if(!resultSet) {
+    NSLog(@"No result set returned");
+    
     return nil;
   }
   NSMutableArray<UploadFileDbo *> * fileDboArray = [NSMutableArray<UploadFileDbo *> array];
   
-  while ([resultSet next]){
+  while ([resultSet next]) {
     UploadFileDbo * dbo = [UploadFileRepository getFileDboFromResultSet:resultSet];
-    if(dbo){
+    if(dbo) {
       [fileDboArray addObject:dbo];
     }
   }
   [resultSet close];
+  [[self _database] close];
+  
   return fileDboArray;
 }
 
 -(NSArray *) getAllWithOrderByColumn: (NSString *) columnName
-                               order:(BOOL) isDescending{
+                               order:(BOOL) isDescending {
   NSString *orderByColumn = columnName;
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ ORDER BY %@ %@",
                        [[UploadFileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        UploadFileContract.TABLE_NAME,
                        orderByColumn,
                        isDescending ? @"DESC" : @"ASC"];
+  if(![[self _database] open]) {
+    NSLog(@"Database cannot be oppened");
+    
+    return nil;
+  }
   FMResultSet * resultSet = [[self _database] executeQuery:request];
   if(!resultSet){
+    NSLog(@"No result set returned");
+    
     return nil;
   }
   NSMutableArray<UploadFileDbo *> * fileDboArray = [NSMutableArray<UploadFileDbo *> array];
   
-  while ([resultSet next]){
+  while ([resultSet next]) {
     UploadFileDbo * dbo = [UploadFileRepository getFileDboFromResultSet:resultSet];
-    if(dbo){
+    if(dbo) {
       [fileDboArray addObject:dbo];
     }
   }
   [resultSet close];
+  [[self _database] close];
+  
   return fileDboArray;
 }
 
--(UploadFileModel *) getByFileId:(NSString *) fileId{
+-(UploadFileModel *) getByFileId:(NSString *) fileId {
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ?",
                        [[UploadFileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        UploadFileContract.TABLE_NAME,
                        UploadFileContract.ID];
-  NSLog(@"UploadFileDBRequest: %@", request);
+  if(![[self _database] open]) {
+    NSLog(@"Database cannot be oppened");
+    
+    return nil;
+  }
   FMResultSet * resultSet = [[self _database] executeQuery:request, fileId];
-  if(!resultSet){
+  if(!resultSet) {
+    NSLog(@"No result set returned");
+    
     return nil;
   }
   UploadFileDbo * dbo = nil;
-  if([resultSet next]){
+  if([resultSet next]) {
     dbo = [UploadFileRepository getFileDboFromResultSet:resultSet];
   }
   [resultSet close];
+  [[self _database] close];
   
   return [[UploadFileModel alloc] initWithUploadFileDbo:dbo];
 }
 
 -(UploadFileDbo *) getByColumnName:(NSString *) columnName
-                 columnValue:(NSString *) columnValue{
+                 columnValue:(NSString *) columnValue {
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ?",
                        columnName,
                        UploadFileContract.TABLE_NAME,
                        columnName];
-  FMResultSet * resultSet = [[self _database] executeQuery:request, columnValue];
-  if(!resultSet){
+  if(![[self _database] open]) {
+    NSLog(@"Database cannot be oppened");
+    
     return nil;
   }
-  [resultSet next];
-  UploadFileDbo * dbo = [UploadFileRepository getFileDboFromResultSet:resultSet];
+  FMResultSet * resultSet = [[self _database] executeQuery:request, columnValue];
+  if(!resultSet) {
+    NSLog(@"No result set returned");
+    
+    return nil;
+  }
+  UploadFileDbo *dbo = nil;
+  if([resultSet next]){
+    dbo = [UploadFileRepository getFileDboFromResultSet:resultSet];
+  }
   [resultSet close];
+  [[self _database] close];
   
   return dbo;
 }
 
--(Response *) insertWithModel: (UploadFileModel *) model{
-  if(!model || ![model isValid]){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is not valid"];
+-(Response *) insertWithModel: (UploadFileModel *) model {
+  if(!model || ![model isValid]) {
+    return [Response errorResponseWithMessage:@"Model is not valid"];
   }
+  
   return [super executeInsertIntoTable:UploadFileContract.TABLE_NAME
                               fromDict: [model toDictionary]];
 }
 
--(Response *) deleteByModel: (UploadFileModel *) model{
-  if(!model || ![model isValid]){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@""];
+-(Response *) deleteByModel: (UploadFileModel *) model {
+  if(!model || ![model isValid]) {
+    return [Response errorResponseWithMessage:@"Model is not valid"];
   }
   
   return [super executeDeleteFromTable:UploadFileContract.TABLE_NAME
@@ -120,32 +157,37 @@ static NSArray * columns;
                       withObjecktValue:[NSString stringWithFormat:@"%ld", [model fileHandle]]];
 }
 
--(Response *) deleteById: (NSString *) fileId{
+-(Response *) deleteById: (NSString *) fileId {
   if(!fileId || [fileId length] == 0){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@""];
+    
+    return [Response errorResponseWithMessage:@"Model is not valid"];
   }
+  
   return [super executeDeleteFromTable:UploadFileContract.TABLE_NAME
                          withObjectKey:UploadFileContract.ID
                       withObjecktValue:fileId];
 }
 
--(Response *) deleteByIds: (NSArray *) fileIds{
-  if(!fileIds || [fileIds count] == 0){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@""];
+-(Response *) deleteByIds: (NSArray *) fileIds {
+  if(!fileIds || [fileIds count] == 0) {
+    
+    return [Response errorResponseWithMessage:@"Model is not valid"];
   }
+  
   return [super executeDeleteFromTable:UploadFileContract.TABLE_NAME
                          withObjectKey:UploadFileContract.ID
                         withObjecktIds:fileIds];
 }
 
--(Response *) deleteAll{
+-(Response *) deleteAll {
+  
   return [super executeDeleteAllFromTable:UploadFileContract.TABLE_NAME];
 }
 
-
--(Response *) updateByModel: (UploadFileModel *) model{
-  if(!model || ![model isValid]){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is Not VALID"];
+-(Response *) updateByModel: (UploadFileModel *) model {
+  if(!model || ![model isValid]) {
+    
+    return [Response errorResponseWithMessage:@"Model is not valid"];
   }
   
   return [super executeUpdateAtTable:UploadFileContract.TABLE_NAME
@@ -154,7 +196,7 @@ static NSArray * columns;
                     updateDictionary:[model toDictionary]];
 }
 
-+(UploadFileDbo *) getFileDboFromResultSet:(FMResultSet *) resultSet{
++(UploadFileDbo *) getFileDboFromResultSet:(FMResultSet *) resultSet {
   UploadFileDbo * dbo = [[UploadFileDbo alloc]
                          initWithFileHandle:[resultSet longForColumn:UploadFileContract.ID]
                          progress:[resultSet doubleForColumn:UploadFileContract.PROGRESS]
@@ -163,11 +205,12 @@ static NSArray * columns;
                          name:[resultSet stringForColumn:UploadFileContract.NAME]
                          uri:[resultSet stringForColumn:UploadFileContract.URI]
                          bucketId:[resultSet stringForColumn:UploadFileContract.BUCKET_ID]] ;
+  
   return dbo;
 }
 
-+(NSArray *)getSelectionColumnsString{
-  if(!columns){
++(NSArray *)getSelectionColumnsString {
+  if(!columns) {
     NSMutableArray *colArray = [NSMutableArray array];
     [colArray addObject:UploadFileContract.ID];
     [colArray addObject:UploadFileContract.NAME];
@@ -179,6 +222,7 @@ static NSArray * columns;
     
     columns = [NSArray arrayWithArray:colArray];
   }
+  
   return columns;
 }
 

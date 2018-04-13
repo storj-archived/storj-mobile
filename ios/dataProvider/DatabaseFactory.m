@@ -12,7 +12,8 @@ static DatabaseFactory *_sharedInstance = nil;
 static FMDatabase * _database;
 
 @implementation DatabaseFactory
-+(DatabaseFactory *)getSharedDatabaseFactory{
+
++(DatabaseFactory *)getSharedDatabaseFactory {
   NSLog(@"%@", NSStringFromSelector(_cmd));
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
@@ -20,11 +21,12 @@ static FMDatabase * _database;
     _sharedInstance = [[self alloc] init];
   });
   NSLog(@"Returning shared instance of DB");
+  
   return _sharedInstance;
 }
 
--(id)init{
-  if((self = [super init])){
+-(id)init {
+  if((self = [super init])) {
     NSLog(@"Initializing Database Factory");
     NSString *docsDir;
     NSArray *dirPaths;
@@ -39,68 +41,89 @@ static FMDatabase * _database;
     BOOL isDbExisted = [filemgr fileExistsAtPath: databasePath];
     _database = [FMDatabase databaseWithPath:databasePath];
     
-    if(!_database){
+    if(!_database) {
       NSLog(@"DB can't be initialized");
-      return nil;
-    }
-    if([_database isOpen]){
-      NSLog(@"DB already oppened");
-      NSLog(@"DB Initialized");
-      return self;
-    }
-    if(![_database open]){
-      NSLog(@"DB can't be openned");
+      
       return nil;
     }
     
-    if(!isDbExisted){
+    if(!isDbExisted) {
       NSLog(@"Creating tables");
       [self createTables];
     } else {
-      if(![_database tableExists:BucketContract.TABLE_NAME]
-         || ![_database tableExists:FileContract.TABLE_NAME]
-         || ![_database tableExists:UploadFileContract.TABLE_NAME])
-      {
+      if(![self checkTablesExist]) {
+        [self upgradeDatabase];
         NSLog(@"Updating DB. Drop and Create");
       }
     }
-    
   }
   NSLog(@"DB Initialized");
+  
   return self;
 }
 
--(BOOL)createTables{
-  if(![_database executeUpdate:[BucketContract createTable]]){
+-(BOOL)createTables {
+  if(![_database open]) {
+    NSLog(@"Database cannot be opened");
+    
+    return NO;
+  }
+  if(![_database executeUpdate:[BucketContract createTable]]) {
     NSLog(@"Failed to create table \'%@\'", BucketContract.TABLE_NAME);
+    
     return NO;
   }
   
-  if(![_database executeUpdate:[FileContract createTable]]){
+  if(![_database executeUpdate:[FileContract createTable]]) {
     NSLog(@"Failed to create table \'%@\'", FileContract.TABLE_NAME);
+    
     return NO;
   }
   
-  if(![_database executeUpdate:[UploadFileContract createTable]]){
+  if(![_database executeUpdate:[UploadFileContract createTable]]) {
     NSLog(@"Failed to create table \'%@\'", UploadFileContract.TABLE_NAME);
   }
-  NSLog(@"TablesCreated");
+  NSLog(@"Tables Created");
+  [_database close];
+  
   return YES;
 }
 
--(void) upgradeDatabase{
+-(BOOL) checkTablesExist {
+  if(![_database open]) {
+    NSLog(@"Database cannot be opened");
+    
+    return NO;
+  }
+  BOOL tablesExist =[_database tableExists:BucketContract.TABLE_NAME]
+  || [_database tableExists:FileContract.TABLE_NAME]
+  || [_database tableExists:UploadFileContract.TABLE_NAME];
+  
+  [_database close];
+  
+  return tablesExist;
+}
+
+-(void) upgradeDatabase {
   [self dropTables];
   [self createTables];
 }
 
 -(void) dropTables {
-
+  if(![_database open]) {
+    NSLog(@"Database cannot be opened");
+    
+    return;
+  }
   [_database executeUpdate:@"DROP TABLE IF EXISTS ?", BucketContract.TABLE_NAME];
   [_database executeUpdate:@"DROP TABLE IF EXISTS ?", FileContract.TABLE_NAME];
   [_database executeUpdate:@"DROP TABLE IF EXISTS ?", UploadFileContract.TABLE_NAME];
+  
+  [_database close];
 }
 
--(FMDatabase *) getSharedDb{
+-(FMDatabase *) getSharedDb {
+  
   return _database;
 }
 

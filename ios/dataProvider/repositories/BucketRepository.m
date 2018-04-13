@@ -12,40 +12,48 @@
 @synthesize _database;
 static NSArray *columns;
 
--(instancetype) initWithDB:(FMDatabase *)database{
-  if (self = [super initWithDB:database]){
+-(instancetype) initWithDB:(FMDatabase *)database {
+  if (self = [super initWithDB:database]) {
     _database = database;
   }
+  
   return self;
 }
 
--(NSArray <BucketDbo *> *) getAll{
+-(NSArray <BucketDbo *> *) getAll {
   NSLog(@"getAllBuckets");
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@",
                        [[BucketRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        BucketContract.TABLE_NAME];
+  if(![[self _database] open]) {
+    NSLog(@"Database cannot be oppened");
+    
+    return nil;
+  }
   FMResultSet * resultSet = [[self _database] executeQuery:request];
-//  [[self _database] ]
-  if(!resultSet){
-    NSLog( @"NO RESULT SET RETURNED");
+
+  if(!resultSet) {
+    NSLog( @"No result set returned");
+    
     return nil;
   }
   NSMutableArray<BucketDbo *> * bucketDboArray = [NSMutableArray<BucketDbo *> array];
   
-  while ([resultSet next]){
+  while ([resultSet next]) {
     BucketDbo * dbo = [BucketRepository getBucketDboFromResultSet:resultSet];
-    if(dbo){
+    if(dbo) {
       [bucketDboArray addObject:dbo];
     }
   }
   [resultSet close];
+  [[self _database] close];
   return bucketDboArray;
 }
 
 -(NSArray *) getAllWithOrderByColumn: (NSString *) columnName
-                               order:(BOOL) isDescending{
+                               order:(BOOL) isDescending {
   NSString *orderByColumn = columnName;
-  if(!columnName || [columnName length] == 0){
+  if(!columnName || [columnName length] == 0) {
     orderByColumn = BucketContract.CREATED;
   }
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ ORDER BY %@ %@",
@@ -53,77 +61,117 @@ static NSArray *columns;
                        BucketContract.TABLE_NAME,
                        orderByColumn,
                        isDescending ? @"DESC" : @"ASC"];
+  if(![[self _database] open]) {
+    NSLog(@"Database cannot be oppened");
+    
+    return nil;
+  }
   FMResultSet * resultSet = [[self _database] executeQuery:request];
-  if(!resultSet){
+  if(!resultSet) {
+    NSLog( @"No result set returned");
+    
     return nil;
   }
   NSMutableArray<BucketDbo *> * bucketDboArray = [NSMutableArray<BucketDbo *> array];
   
-  while ([resultSet next]){
+  while ([resultSet next]) {
     BucketDbo * dbo = [BucketRepository getBucketDboFromResultSet:resultSet];
-    if(dbo){
+    if(dbo) {
       [bucketDboArray addObject:dbo];
     }
   }
   [resultSet close];
+  [[self _database] close];
+  
   return bucketDboArray;
 }
 
--(NSArray *) getStarred{
+-(NSArray *) getStarred {
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ?",
                        [[BucketRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        BucketContract.TABLE_NAME,
                        BucketContract.STARRED];
+  if(![[self _database] open]) {
+    NSLog(@"Database cannot be oppened");
+    
+    return nil;
+  }
   FMResultSet * resultSet = [[self _database] executeQuery:request, 1];
-  if(!resultSet){
+  if(!resultSet) {
+    NSLog(@"No resultSet returned");
+    
     return nil;
   }
   NSMutableArray<BucketDbo *> * bucketDboArray = [NSMutableArray<BucketDbo *> array];
   
-  while ([resultSet next]){
+  while ([resultSet next]) {
     BucketDbo * dbo = [BucketRepository getBucketDboFromResultSet:resultSet];
-    if(dbo){
+    if(dbo) {
       [bucketDboArray addObject:dbo];
     }
   }
   [resultSet close];
+  [[self _database] close];
+  
   return bucketDboArray;
 }
 
--(BucketDbo *) getByBucketId:(NSString *) bucketId{
+-(BucketDbo *) getByBucketId:(NSString *) bucketId {
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ?",
                        [[BucketRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        BucketContract.TABLE_NAME,
                        BucketContract.ID];
-  FMResultSet * resultSet = [[self _database] executeQuery:request, bucketId];
-  if(!resultSet){
+  if(![[self _database] open]) {
+    NSLog(@"Database cannot be oppened");
+    
     return nil;
   }
-  [resultSet next];
-  BucketDbo * dbo = [BucketRepository getBucketDboFromResultSet:resultSet];
+  FMResultSet * resultSet = [[self _database] executeQuery:request, bucketId];
+  if(!resultSet) {
+    NSLog(@"No resultSet returned");
+    
+    return nil;
+  }
+  BucketDbo *dbo = nil;
+  if([resultSet next]) {
+    dbo = [BucketRepository getBucketDboFromResultSet:resultSet];
+  }
   [resultSet close];
+  [[self _database] close];
+  
   return dbo;
 }
 
 -(BucketDbo *) getByColumnName:(NSString *) columnName
-                   columnValue:(NSString *) columnValue{
+                   columnValue:(NSString *) columnValue {
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ?",
                        columnName,
                        BucketContract.TABLE_NAME,
                        columnName];
-  FMResultSet * resultSet = [[self _database] executeQuery:request, columnValue];
-  if(!resultSet){
+  if(![[self _database] open]) {
+    NSLog(@"Database cannot be oppened");
+    
     return nil;
   }
-  [resultSet next];
-  BucketDbo * dbo = [BucketRepository getBucketDboFromResultSet:resultSet];
+  FMResultSet *resultSet = [[self _database] executeQuery:request, columnValue];
+  if(!resultSet) {
+    NSLog(@"No resultSet returned");
+    
+    return nil;
+  }
+  BucketDbo *dbo = nil;
+  if([resultSet next]) {
+    dbo = [BucketRepository getBucketDboFromResultSet:resultSet];
+  }
   [resultSet close];
+  [[self _database] close];
+  
   return dbo;
 }
 
--(Response *) insertWithModel: (BucketModel *) model{
-//  NSLog(@"Model: %@", [model toDictionary]);
-  if(!model || ![model isValid]){
+-(Response *) insertWithModel: (BucketModel *) model {
+  if(!model || ![model isValid]) {
+    
     return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is not valid"];
   }
   
@@ -131,40 +179,47 @@ static NSArray *columns;
                               fromDict:[[BucketDbo bucketDboFromBucketModel:model] toDictionary]];
 }
 
--(Response *) deleteByModel: (BucketModel *) model{
-  if(!model || ![model isValid]){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@""];
+-(Response *) deleteByModel: (BucketModel *) model {
+  if(!model || ![model isValid]) {
+    
+    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is not valid"];
   }
   return [super executeDeleteFromTable:BucketContract.TABLE_NAME
                          withObjectKey:BucketContract.ID
                       withObjecktValue:[model _id]];
 }
 
--(Response *) deleteById: (NSString *) bucketId{
-  if(!bucketId || [bucketId length] == 0){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@""];
+-(Response *) deleteById: (NSString *) bucketId {
+  
+  if(!bucketId || [bucketId length] == 0) {
+    
+    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is not valid"];
   }
+  
   return [super executeDeleteFromTable:BucketContract.TABLE_NAME
                          withObjectKey:BucketContract.ID
                       withObjecktValue:bucketId];
 }
 
--(Response *) deleteByIds: (NSArray *) bucketIds{
-  if(!bucketIds || [bucketIds count] == 0){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@""];
+-(Response *) deleteByIds: (NSArray *) bucketIds {
+  if(!bucketIds || [bucketIds count] == 0) {
+    
+    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is not valid"];
   }
   return [super executeDeleteFromTable:BucketContract.TABLE_NAME
                          withObjectKey:BucketContract.ID
                         withObjecktIds:bucketIds];
 }
 
--(Response *) deleteAll{
+-(Response *) deleteAll {
+  
   return [super executeDeleteAllFromTable:BucketContract.TABLE_NAME];
 }
 
--(Response *) updateByModel: (BucketModel *) model{
-  if(!model || ![model isValid]){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@""];
+-(Response *) updateByModel: (BucketModel *) model {
+  if(!model || ![model isValid]) {
+    
+    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is not valid"];
   }
   
   return [super executeUpdateAtTable:BucketContract.TABLE_NAME
@@ -174,20 +229,25 @@ static NSArray *columns;
 }
 
 -(Response *) updateById:(NSString *)bucketId
-                 starred:(BOOL) isStarred{
-  if(!bucketId || [bucketId length] == 0){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@""];
+                 starred:(BOOL) isStarred {
+  
+  if(!bucketId || [bucketId length] == 0) {
+    
+    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is not valid"];
   }
+  
   return [super executeUpdateAtTable:BucketContract.TABLE_NAME
                            objectKey:BucketContract.ID
                             objectId:bucketId
                     updateDictionary:@{BucketContract.STARRED:@(isStarred)}];
 }
 
-+(BucketDbo *) getBucketDboFromResultSet:(FMResultSet *) resultSet{
-  if(!resultSet){
++(BucketDbo *) getBucketDboFromResultSet:(FMResultSet *) resultSet {
+  if(!resultSet) {
+    
     return nil;
   }
+  
   return [[BucketDbo alloc] initWithId:[resultSet stringForColumn:BucketContract.ID]
                                   name:[resultSet stringForColumn:BucketContract.NAME]
                                created:[resultSet stringForColumn:BucketContract.CREATED]
@@ -196,8 +256,8 @@ static NSArray *columns;
                              isStarred:[resultSet boolForColumn:BucketContract.STARRED]];
 }
 
-+(NSArray *) getSelectionColumnsString{
-  if(columns == nil){
++(NSArray *) getSelectionColumnsString {
+  if(columns == nil) {
     NSMutableArray *colArray = [NSMutableArray array];
     [colArray addObject:BucketContract.ID];
     [colArray addObject:BucketContract.NAME];
@@ -207,6 +267,7 @@ static NSArray *columns;
     [colArray addObject:BucketContract.STARRED];
     columns = [NSArray arrayWithArray:colArray];
   }
+  
   return columns;
 }
 @end

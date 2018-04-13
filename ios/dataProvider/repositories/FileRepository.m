@@ -15,59 +15,77 @@
 @synthesize _database;
 static NSArray * columns;
 
--(instancetype) initWithDB:(FMDatabase *)database{
-  if (self = [super initWithDB:database]){
+-(instancetype) initWithDB:(FMDatabase *)database {
+  if (self = [super initWithDB:database]) {
     _database = database;
   }
+  
   return self;
 }
 
--(NSArray *) getAll{
+-(NSArray *) getAll {
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@",
                        [[FileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        FileContract.TABLE_NAME];
+  if(![[self _database] open]) {
+    NSLog(@"Database cannot be oppened");
+    
+    return nil;
+  }
   FMResultSet * resultSet = [[self _database] executeQuery:request];
-  if(!resultSet){
+  if(!resultSet) {
+    NSLog(@"No result set returned");
+    
     return nil;
   }
   NSMutableArray<FileDbo *> * fileDboArray = [NSMutableArray<FileDbo *> array];
   
-  while ([resultSet next]){
+  while ([resultSet next]) {
     FileDbo * dbo = [FileRepository getFileDboFromResultSet:resultSet];
-    if(dbo){
+    if(dbo) {
       [fileDboArray addObject:dbo];
     }
   }
   [resultSet close];
+  [[self _database] close];
+  
   return fileDboArray;
 }
 
--(NSArray *) getAllFromBucket:(NSString *)bucketId{
+-(NSArray *) getAllFromBucket:(NSString *)bucketId {
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ?",
                        [[FileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        FileContract.TABLE_NAME,
                        FileContract.FILE_FK];
+  if(![[self _database] open]) {
+    NSLog(@"Database cannot be oppened");
+    
+    return nil;
+  }
   FMResultSet *resultSet = [[self _database] executeQuery:request, bucketId];
   if(!resultSet) {
+    NSLog(@"No result set returned");
+    
     return nil;
   }
   NSMutableArray <FileDbo *> * fileDboArray = [NSMutableArray <FileDbo *> array];
   
-  while([resultSet next]){
+  while([resultSet next]) {
     FileDbo *dbo = [FileRepository getFileDboFromResultSet:resultSet];
     if(dbo){
       [fileDboArray addObject:dbo];
     }
   }
   [resultSet close];
-  NSLog(@"getAllFromBucket.Count: %lu", (unsigned long)fileDboArray.count);
+  [[self _database] close];
+  
   return fileDboArray;
 }
 
 -(NSArray *) getAllWithOrderByColumn: (NSString *) columnName
-                               order:(BOOL) isDescending{
+                               order:(BOOL) isDescending {
   NSString *orderByColumn = columnName;
-  if(!columnName || [columnName length] == 0){
+  if(!columnName || [columnName length] == 0) {
     orderByColumn = FileContract.CREATED;
   }
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ ORDER BY %@ %@",
@@ -75,124 +93,170 @@ static NSArray * columns;
                        FileContract.TABLE_NAME,
                        orderByColumn,
                        isDescending ? @"DESC" : @"ASC"];
+  if(![[self _database] open]) {
+    NSLog(@"Database cannot be oppened");
+    
+    return nil;
+  }
   FMResultSet * resultSet = [[self _database] executeQuery:request];
-  if(!resultSet){
+  if(!resultSet) {
+    NSLog(@"No result set returned");
+    
     return nil;
   }
   NSMutableArray<FileDbo *> * fileDboArray = [NSMutableArray<FileDbo *> array];
   
-  while ([resultSet next]){
+  while ([resultSet next]) {
     FileDbo * dbo = [FileRepository getFileDboFromResultSet:resultSet];
-    if(dbo){
+    if(dbo) {
       [fileDboArray addObject:dbo];
     }
   }
   [resultSet close];
+  [[self _database] close];
+  
   return fileDboArray;
 }
 
--(NSArray *) getStarred{
+-(NSArray *) getStarred {
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ?",
                        [[FileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        FileContract.TABLE_NAME,
                        FileContract.STARRED];
+  if(![[self _database] open]) {
+    NSLog(@"Database cannot be oppened");
+    
+    return nil;
+  }
   FMResultSet * resultSet = [[self _database] executeQuery:request, 1];
-  if(!resultSet){
+  if(!resultSet) {
+    NSLog(@"No result set returned");
+    
     return nil;
   }
   NSMutableArray<FileDbo *> * fileDboArray = [NSMutableArray<FileDbo *> array];
   
-  while ([resultSet next]){
+  while ([resultSet next]) {
     FileDbo * dbo = [FileRepository getFileDboFromResultSet:resultSet];
-    if(dbo){
+    if(dbo) {
       [fileDboArray addObject:dbo];
     }
   }
   [resultSet close];
+  [[self _database] close];
+  
   return fileDboArray;
 }
 
--(FileDbo *) getByFileId:(NSString *) fileId{
+-(FileDbo *) getByFileId:(NSString *) fileId {
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ?",
                        [[FileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        FileContract.TABLE_NAME,
                        FileContract.FILE_ID];
+  if(![[self _database] open]) {
+    NSLog(@"Database cannot be oppened");
+    
+    return nil;
+  }
   FMResultSet * resultSet = [[self _database] executeQuery:request, fileId];
-  if(!resultSet){
+  if(!resultSet) {
+    NSLog(@"No result set returned");
     return nil;
   }
   FileDbo * dbo = nil;
-  if([resultSet next]){
+  if([resultSet next]) {
     dbo = [FileRepository getFileDboFromResultSet:resultSet];
   }
   [resultSet close];
+  [[self _database] close];
+  
   return dbo;
 }
 
 -(FileDbo *) getByColumnName:(NSString *) columnName
-                 columnValue:(NSString *) columnValue{
+                 columnValue:(NSString *) columnValue {
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ?",
                        columnName,
                        FileContract.TABLE_NAME,
                        columnName];
-  FMResultSet * resultSet = [[self _database] executeQuery:request, columnValue];
-  if(!resultSet){
+  if(![[self _database] open]) {
+    NSLog(@"Database cannot be oppened");
+    
     return nil;
   }
-  [resultSet next];
-  FileDbo * dbo = [FileRepository getFileDboFromResultSet:resultSet];
+  FMResultSet * resultSet = [[self _database] executeQuery:request, columnValue];
+  if(!resultSet) {
+    NSLog(@"No result set returned");
+    return nil;
+  }
+  FileDbo *dbo = nil;
+  if([resultSet next]){
+    dbo = [FileRepository getFileDboFromResultSet:resultSet];
+  }
   [resultSet close];
+  [[self _database] close];
+  
   return dbo;
 }
 
--(Response *) insertWithModel: (FileModel *) model{
-  if(!model || ![model isValid]){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is not valid"];
+-(Response *) insertWithModel: (FileModel *) model {
+  if(!model || ![model isValid]) {
+    
+    return [Response errorResponseWithMessage:@"Model is not valid"];
   }
+  
   return [super executeInsertIntoTable:FileContract.TABLE_NAME
                               fromDict:[[FileDbo fileDboFromFileModel:model] toDictionary]];
 }
 
--(Response *) deleteByModel: (FileModel *) model{
-  if(!model || ![model isValid]){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is not valid"];
+-(Response *) deleteByModel: (FileModel *) model {
+  if(!model || ![model isValid]) {
+    
+    return [Response errorResponseWithMessage:@"Model is not valid"];
   }
+  
   return [super executeDeleteFromTable:FileContract.TABLE_NAME
                          withObjectKey:FileContract.FILE_ID
                       withObjecktValue:[model _fileId]];
 }
 
--(Response *) deleteById: (NSString *) fileId{
-  if(!fileId || [fileId length] == 0){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is not valid"];
+-(Response *) deleteById: (NSString *) fileId {
+  if(!fileId || [fileId length] == 0) {
+    
+    return [Response errorResponseWithMessage:@"Model is not valid"];
   }
+  
   return [super executeDeleteFromTable:FileContract.TABLE_NAME
                          withObjectKey:FileContract.FILE_ID
                       withObjecktValue:fileId];
 }
 
--(Response *) deleteByIds: (NSArray *) fileIds{
-  if(!fileIds || [fileIds count] == 0){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is not valid"];
+-(Response *) deleteByIds: (NSArray *) fileIds {
+  if(!fileIds || [fileIds count] == 0) {
+    return [Response errorResponseWithMessage:@"Model is not valid"];
   }
+  
   return [super executeDeleteFromTable:FileContract.TABLE_NAME
                          withObjectKey:FileContract.FILE_ID
                         withObjecktIds:fileIds];
 }
 
--(Response *) deleteAll{
+-(Response *) deleteAll {
+  
    return [super executeDeleteAllFromTable:FileContract.TABLE_NAME];
 }
 
--(Response *) deleteAllFromBucket:(NSString *) bucketId{
+-(Response *) deleteAllFromBucket:(NSString *) bucketId {
+  
   return [super executeDeleteFromTable:FileContract.TABLE_NAME
                          withObjectKey:FileContract.FILE_FK
                          withObjecktValue:bucketId];
 }
 
--(Response *) updateByModel: (FileModel *) model{
-  if(!model || ![model isValid]){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is not valid"];
+-(Response *) updateByModel: (FileModel *) model {
+  if(!model || ![model isValid]) {
+    
+    return [Response errorResponseWithMessage:@"Model is not valid"];
   }
   
   return [super executeUpdateAtTable:FileContract.TABLE_NAME
@@ -202,18 +266,21 @@ static NSArray * columns;
 }
 
 -(Response *) updateById:(NSString *)fileId
-                 starred:(BOOL) isStarred{
+                 starred:(BOOL) isStarred {
   
-  if(!fileId || [fileId length] == 0){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is not valid"];
+  if(!fileId || [fileId length] == 0) {
+    
+    return [Response errorResponseWithMessage:@"Model is not valid"];
   }
+  
   return [super executeUpdateAtTable:FileContract.TABLE_NAME
                            objectKey:FileContract.FILE_ID
                             objectId:fileId
                     updateDictionary:@{FileContract.STARRED:@(isStarred)}];
 }
 
-+(FileDbo *) getFileDboFromResultSet:(FMResultSet *) resultSet{
++(FileDbo *) getFileDboFromResultSet:(FMResultSet *) resultSet {
+  
   return [[FileDbo alloc] initWithBucketId:[resultSet stringForColumn:FileContract.FILE_FK]
                                    created:[resultSet stringForColumn:FileContract.CREATED]
                                    erasure:[resultSet stringForColumn:FileContract.ERASURE]
@@ -228,8 +295,8 @@ static NSArray * columns;
                                   isSynced:NO];
 }
 
-+(NSArray *)getSelectionColumnsString{
-  if(!columns){
++(NSArray *)getSelectionColumnsString {
+  if(!columns) {
     NSMutableArray *colArray = [NSMutableArray array];
 //    [colArray addObject:FileContract.ID];
     [colArray addObject:FileContract.FILE_ID];
@@ -245,6 +312,7 @@ static NSArray * columns;
     [colArray addObject:FileContract.FILE_FK];
     columns = [NSArray arrayWithArray:colArray];
   }
+  
   return columns;
 }
 
