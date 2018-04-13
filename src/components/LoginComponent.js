@@ -5,7 +5,9 @@ import {
     TouchableOpacity,
     Image,
     Text,
-    ActivityIndicator
+    ActivityIndicator,
+    Keyboard,
+    ScrollView
 } from 'react-native';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -29,7 +31,7 @@ export default class LoginComponent extends Component {
 
 	render() {
 		return(
-			<View style={ styles.mainContainer }>
+			<ScrollView style={ styles.mainContainer } keyboardDismissMode = { "interactive" }>
                 <View style={ styles.backgoundWrapper }>
                     <Image 
                         style = { styles.logo } 
@@ -95,7 +97,7 @@ export default class LoginComponent extends Component {
                             </View>
                         </View> : null
                 }
-			</View>
+			</ScrollView>
 		);
 	};
 }

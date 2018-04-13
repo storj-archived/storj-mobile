@@ -4,7 +4,7 @@ import {
     TouchableOpacity,
     Image,
     StyleSheet,
-    KeyboardAvoidingView,
+    ScrollView,
     ActivityIndicator
 } from 'react-native';
 import React, { Component } from 'react';
@@ -35,7 +35,7 @@ export default class RegisterComponent extends Component {
 
 	render() {
 		return(
-            <KeyboardAvoidingView style = { styles.mainContainer } keyboardVerticalOffset = { getHeight(30) } resetScrollToCoords = { { x: 0, y: 0 } } scrollEnabled = { true } >
+            <ScrollView style={ styles.mainContainer } keyboardDismissMode = { "interactive" }>
                 <View style = { styles.backgoundWrapper }>
                     <Image 
                         style = { styles.logo } 
@@ -96,7 +96,7 @@ export default class RegisterComponent extends Component {
                             </View>
                         </View> : null
                 }
-            </KeyboardAvoidingView>
+            </ScrollView>
 		);
 	};
 }

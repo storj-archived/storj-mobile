@@ -5,7 +5,8 @@ import {
     Keyboard,
     Image,
     ActivityIndicator,
-    TouchableOpacity
+    TouchableOpacity,
+    ScrollView
 } from 'react-native';
 import React, { Component } from 'react';
 import InputComponent from '../components/InputComponent';
@@ -40,7 +41,7 @@ export default class InitializeComponent extends Component {
 
     render() {
         return(
-            <View style = { styles.mainContainer }>
+            <ScrollView style={ styles.mainContainer } keyboardDismissMode = { "interactive" }>
                     <View style = { styles.backgroundWrapper }>
                         <Image 
                             style = { styles.logo } 
@@ -127,7 +128,7 @@ export default class InitializeComponent extends Component {
                                 </View>
                             </View> : null
                     }               
-                </View>
+                </ScrollView>
         ) 
     }
 }
