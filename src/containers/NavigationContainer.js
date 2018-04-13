@@ -4,7 +4,9 @@ import {
   Platform,
   View,
    DeviceEventEmitter,
-	NativeEventEmitter
+	NativeEventEmitter,
+	StyleSheet,
+	StatusBar
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -31,9 +33,10 @@ import { uploadFileStart, uploadFileSuccess } from '../reducers/asyncActions/fil
 
 const { PICTURES } = SYNC_BUCKETS;
 
-
 import SyncModule from '../utils/SyncModule';
 import ServiceModule from '../utils/ServiceModule';
+
+import { getHeight, statusBarHeightIos } from "../utils/adaptive";
 
 /**
  * Component that contains main navigator
@@ -253,7 +256,7 @@ class Apps extends Component {
 
 	render() {
 		return (
-			<View style = { { flex: 1, backgroundColor: 'white' } }>
+			<View style = { styles.mainContainer }>
 				<StackNavigator 
 					screenProps = {{
 						redirectToLoginScreen: this.props.redirectToLoginScreen,
@@ -279,6 +282,17 @@ class Apps extends Component {
 		);
 	};
 }
+
+const styles = StyleSheet.create({
+	mainContainer: {
+		flex: 1,
+		backgroundColor: 'white',
+		paddingTop: Platform.select({
+			ios: statusBarHeightIos,
+			android: 0
+		})
+	}
+});
 
 /**
  * connecting navigation reducer to component props

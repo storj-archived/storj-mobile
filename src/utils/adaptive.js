@@ -7,6 +7,8 @@ const design = {
     deviceWidth: Dimensions.get('window').width,
 }
 
+export const statusBarHeightIos = 20;
+
 export function getDeviceWidth() {
     return design.deviceWidth;
 }
