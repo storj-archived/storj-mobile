@@ -22,7 +22,7 @@ import { getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 import EmpyBucketComponent from '../components/EmpyBucketComponent';
 import SyncModule from '../utils/SyncModule';
-import { listUploadingFiles } from "../reducers/asyncActions/fileActionsAsync";
+import { listUploadingFiles, listFiles } from "../reducers/asyncActions/fileActionsAsync";
 
 class MyPhotosContainer extends Component {
     constructor(props) {
@@ -30,26 +30,23 @@ class MyPhotosContainer extends Component {
 
         this.data = [];
         this.animatedScrollValue = new Animated.Value(0);
-        this.shouldRenew = false;
+        this.shouldRenew = true;
     }
 
     shouldComponentUpdate() {
-        let picturesBucketId = getPicturesBucketId(this.props.buckets);
+        if(!this.shouldRenew) return true;
+        if(!this.props.myPhotosBucketId) return true;
         
-        
-        if(this.props.myPhotosBucketId === picturesBucketId && !this.shouldRenew) {
-            ServiceModule.getFiles(picturesBucketId);         
-            this.props.pushLoading(picturesBucketId);
-        }
-        
-        this.data = this.props.files.
-                        concat(this.props.uploadingFileListModels).
-                        filter(file => file.entity.bucketId === picturesBucketId);
+        ServiceModule.getFiles(this.props.myPhotosBucketId);         
+        this.props.pushLoading(this.props.myPhotosBucketId);        
+    
+        this.props.listUploadingFilesAsync(this.props.myPhotosBucketId);
+        this.props.listFilesAsync(this.props.myPhotosBucketId);
 
-        this.shouldRenew = this.props.myPhotosBucketId === picturesBucketId;
+        this.shouldRenew = false;        
 
         return true;
-    }
+    }    
 
     getArraySelectedCount(array) {
         return array.filter(item => item.isSelected).length;
@@ -72,9 +69,12 @@ class MyPhotosContainer extends Component {
     }
 
     render() {
-        let data = this.data;
-        let isLoading = this.props.loadingStack.includes(this.props.myPhotosBucketId);
+        let data = this.props.files.
+                                concat(this.props.uploadingFileListModels).
+                                filter(file => file.entity.bucketId === this.props.myPhotosBucketId);
 
+        let isLoading = this.props.loadingStack.includes(this.props.myPhotosBucketId);
+ 
         return (
             <View style = { styles.mainContainer }>
             {
@@ -170,7 +170,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return{
         ...bindActionCreators({ openImageViewer, ...myPicturesListContainerMainActions, ...filesActions }, dispatch),
-        listUploadingFilesAsync: async (bucketId) => { await dispatch(listUploadingFiles(bucketId)); }
+        listUploadingFilesAsync: async (bucketId) => { await dispatch(listUploadingFiles(bucketId)); },
+        listFilesAsync: async (bucketId) => { return await dispatch(listFiles(bucketId)); }
     } 
 }
 

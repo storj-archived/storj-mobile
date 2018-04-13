@@ -38,7 +38,6 @@ class FilesListContainer extends Component {
             }
         ).start();               
         
-        //this.props.setLoading();
         this.props.pushLoading(this.props.openedBucketId);
         await this.props.listFilesAsync(this.props.openedBucketId);
         await this.props.listUploadingFilesAsync(this.props.openedBucketId);

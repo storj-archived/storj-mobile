@@ -159,8 +159,7 @@ export function getPicturesBucketId(buckets) {
 
     let picturesBucket;
 
-    picturesBucket = buckets.find(element=>{
-
+    picturesBucket = buckets.find(element => {
         return element.getName() === PICTURES;
     });
 

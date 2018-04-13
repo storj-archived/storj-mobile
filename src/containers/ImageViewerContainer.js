@@ -35,7 +35,7 @@ class ImageViewerContainer extends Component {
 
     async componentWillMount() {
         let checkImageResponse = await SyncModule.checkImage(this.fileId, this.props.navigation.state.params.localPath);
-        console.log(checkImageResponse);
+        
         if(!checkImageResponse.isSuccess) {
             this.props.downloadFileError(this.bucketId, this.fileId);
             this.props.redirectToMainScreen();
@@ -50,7 +50,7 @@ class ImageViewerContainer extends Component {
 
     async setFavourite() {
         let updateStarredResponse = await SyncModule.updateFileStarred(this.fileId, !this.isStarred);
-        console.log(updateStarredResponse, this.fileId, this.isStarred);
+        
         if(updateStarredResponse.isSuccess) {
             this.props.updateFavouriteFiles([new ListItemModel(new FileModel({ fileId: this.fileId }))]);
         }    
