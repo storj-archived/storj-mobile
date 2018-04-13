@@ -51,7 +51,6 @@ class FilesListContainer extends Component {
     }
 
     async cancelDownload(file) {
-
         let cancelDownloadResponse = await StorjModule.cancelDownload(file.fileRef);
 
         if(cancelDownloadResponse.isSuccess) {

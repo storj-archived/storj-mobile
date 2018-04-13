@@ -38,6 +38,10 @@ public class SettingsRepository extends BaseRepository {
     }
 
     public SettingsDbo get(String id) {
+        if(id == null) {
+            return null;
+        }
+
         String[] selectionArgs = new String[] {
                 id
         };

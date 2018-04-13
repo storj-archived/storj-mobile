@@ -192,7 +192,7 @@ export default class ListItemComponent extends Component {
                                         props.item.isLoading ? 
                                             <TouchableOpacity onPress = {() => {
                                                 if(props.cancelDownload && props.item.isLoading) {
-                                                    props.item.hmac
+                                                    props.item.entity.hmac
                                                         ? props.cancelDownload(props.item)
                                                         : props.cancelUpload(props.item); 
                                                 }

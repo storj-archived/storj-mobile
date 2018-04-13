@@ -154,7 +154,7 @@ export default class GridItemComponent extends Component {
                                             bgColor = "#A8CEFF" >
                                             <TouchableOpacity onPress = {() => {
                                                 if(props.cancelDownload && props.item.isLoading) {
-                                                    props.item.hmac
+                                                    props.item.entity.hmac
                                                         ? props.cancelDownload(props.item)
                                                         : props.cancelUpload(props.item); 
                                                 }
