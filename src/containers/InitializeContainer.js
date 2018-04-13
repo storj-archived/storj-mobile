@@ -3,7 +3,8 @@ import {
     Text,
     StyleSheet,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    Keyboard
 } from 'react-native';
 import React, { Component } from 'react';
 import InputComponent from '../components/InputComponent';
@@ -33,11 +34,23 @@ class InitializeContainer extends Component {
         this.state = {
             passcode: "",
             enterPassCode: false,
-            isPasscodeWrong: false
+            isPasscodeWrong: false,
+            isKeyboardShown: false
         };
+
+        this.inputComponent = null;
+        this.keyboardShowListener = null;
+        this.keyboardHideListener = null;
     };
 
-    async componentWillMount() {        
+    async componentWillMount() {
+        this.keyboardHideListener = Keyboard.addListener("keyboardDidHide", () => {
+            this.setState({ isKeyboardShown: false });
+        });
+        this.keyboardShowListener = Keyboard.addListener("keyboardDidShow", () => {
+            this.setState({ isKeyboardShown: true });
+        });
+        
         try {
             if(!await getFirstAction()) {
                 this.props.redirectToOnBoardingScreen();
@@ -53,6 +66,11 @@ class InitializeContainer extends Component {
         } catch(e) {            
             this.props.redirectToOnBoardingScreen();
         }
+    }
+
+    componentWillUnmount() {
+        this.keyboardHideListener.remove();
+        this.keyboardShowListener.remove();
     }
 
     onChangePasscode(value) {
@@ -132,21 +150,29 @@ class InitializeContainer extends Component {
                                 if(this.state.enterPassCode){
                                     return(
                                         <View style = { styles.contentWrapper }>
-                                        <InputComponent 
-                                            onChangeText = { this.onChangePasscode.bind(this) }
-                                            isPassword = { true } 
-                                            autoFocus = { true }
-                                            keyboardType = { 'numeric' }
-                                            placeholder = {'Passcode'} 
-                                            value = { this.state.passcode }
-                                            isError = { this.state.isPasscodeWrong }
-                                            errorMessage = {'Invalid passcode'} />
-                                        <TouchableOpacity 
-                                            style = { styles.createAccountButton } 
-                                            onPressOut = { this.onSubmit.bind(this) }>
-                                                <Text style = { styles.createAccountText }>SIGN IN</Text>
-                                        </TouchableOpacity>
-                                    </View>);
+                                            <InputComponent
+                                                onChangeText = { this.onChangePasscode.bind(this) }
+                                                isPassword = { true } 
+                                                autoFocus = { true }
+                                                keyboardType = { 'numeric' }
+                                                placeholder = {'Passcode'} 
+                                                value = { this.state.passcode }
+                                                isError = { this.state.isPasscodeWrong }
+                                                errorMessage = {'Invalid passcode'} />
+                                            <TouchableOpacity 
+                                                style = { styles.createAccountButton } 
+                                                onPressOut = { this.onSubmit.bind(this) }>
+                                                    <Text style = { styles.createAccountText }>SIGN IN</Text>
+                                            </TouchableOpacity>
+                                            {
+                                                this.state.isKeyboardShown ? 
+                                                    <TouchableOpacity
+                                                        onPress = { () =>  { Keyboard.dismiss(); } }
+                                                        style = { styles.hideKeyboardArea } />
+                                                    : null
+                                            }
+                                        </View>
+                                    );
                                 }
                             })()
                         }                 
@@ -204,6 +230,14 @@ const styles = StyleSheet.create({
          fontFamily: 'Montserrat-Bold',
          fontSize: getHeight(14),
          color: 'white'
+     },
+     hideKeyboardArea: {
+         position: 'absolute',
+         top: 0,
+         bottom: 0,
+         left: 0,
+         right: 0,
+         backgroundColor: 'transparent'
      }
 });
 
