@@ -165,7 +165,8 @@ RCT_REMAP_METHOD(getFiles,
          [[self fileRepository] deleteAllFromBucket:bucketId];
          //dbClose???
          [self sendEventWithName:EventNames.EVENT_FILES_UPDATED
-                     body:@(YES)];
+                            body:[[SingleResponse successSingleResponseWithResult:bucketId]
+                                  toDictionary]];
          return;
        }
        
@@ -198,7 +199,7 @@ RCT_REMAP_METHOD(getFiles,
        // close??
        NSLog(@"Sending success event for files updated");
        [self sendEventWithName:EventNames.EVENT_FILES_UPDATED
-                   body:@(YES)];
+                          body:[[SingleResponse successSingleResponseWithResult:bucketId]toDictionary]];
      };
      callback.onError = ^(int errorCode, NSString * _Nullable errorMessage) {
        [self sendEventWithName:EventNames.EVENT_FILES_UPDATED
@@ -291,7 +292,8 @@ RCT_REMAP_METHOD(deleteFile,
      
      FileDeleteCallback *callback = [[FileDeleteCallback alloc] init];
      callback.onSuccess = ^{
-       if([_fileRepository deleteById:fileId]){
+       NSLog(@"Success deletion");
+       if([[self fileRepository] deleteById:fileId]){
          FileDeleteModel *fileDeleteModel = [[FileDeleteModel alloc] initWithBucketId:bucketId
                                                                                fileId:fileId];
          NSString *result = [DictionaryUtils
@@ -315,6 +317,7 @@ RCT_REMAP_METHOD(deleteFile,
        [self sendEventWithName:EventNames.EVENT_FILE_DELETED
                           body:result];
      };
+     [[self storjWrapper] deleteFile:fileId fromBucket:bucketId withCompletion:callback];
    } expirationHandler:^{
      
    }];

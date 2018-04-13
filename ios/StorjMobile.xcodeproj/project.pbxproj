@@ -1658,6 +1658,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.storj.app;
 				PRODUCT_NAME = StorjMobile;
 				VALID_ARCHS = "x86_64 i386 armv7 arm64 armv7s";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1686,6 +1687,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.storj.app;
 				PRODUCT_NAME = StorjMobile;
 				VALID_ARCHS = "x86_64 i386 armv7 arm64 armv7s";
 				VERSIONING_SYSTEM = "apple-generic";

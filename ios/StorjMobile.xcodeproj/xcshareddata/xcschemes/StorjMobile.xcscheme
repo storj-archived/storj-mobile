@@ -108,6 +108,11 @@
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
+            key = "OS_ACTIVITY_MODE"
+            value = "default"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
             key = "MallocStackLogging"
             value = "YES"
             isEnabled = "YES">

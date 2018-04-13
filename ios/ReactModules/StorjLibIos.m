@@ -314,6 +314,18 @@ RCT_REMAP_METHOD(uploadFile,
   }
 }
 
+RCT_REMAP_METHOD(deleteKeys,
+                 deleteKeysWithResolver: (RCTPromiseResolveBlock) resolver
+                 rejecter: (RCTPromiseRejectBlock) rejecter){
+  [MethodHandler invokeParallelWithParams:@{@RESOLVER: resolver,
+                                             @REJECTER : rejecter}
+                    andMethodHandlerBlock:^(NSDictionary * _Nonnull param) {
+                      RCTPromiseResolveBlock resolve = param[@RESOLVER];
+                      resolve([[[Response alloc] initWithSuccess:[[self storjWrapper] deleteAuthFile]
+                                            andWithErrorMessage:@""]toDictionary]);
+                    }];
+}
+
 RCT_REMAP_METHOD(getDownloadFolderPath,
                  getDownloadFolderPathWithResolver: (RCTPromiseResolveBlock) resolver
                  andRejecter: (RCTPromiseRejectBlock) rejecter){
@@ -321,8 +333,9 @@ RCT_REMAP_METHOD(getDownloadFolderPath,
                                      @REJECTER : rejecter}
             andMethodHandlerBlock:^(NSDictionary * _Nonnull param) {
               RCTPromiseResolveBlock resolve = param[@RESOLVER];
-              NSString * downloadsDir = [NSSearchPathForDirectoriesInDomains(/*NSDocumentDirectory*/NSDownloadsDirectory, NSUserDomainMask, YES) lastObject];
-//              downloadsDir = [downloadsDir stringByAppendingString:@"/Downloads"];
+              NSString * downloadsDir = [NSSearchPathForDirectoriesInDomains(/*NSDocumentDirectory*/NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+              downloadsDir = [downloadsDir stringByAppendingString:@"/Downloads"];
+              NSLog(@"DonwloadsDir: %@", downloadsDir);
               if(![[NSFileManager defaultManager]fileExistsAtPath:downloadsDir isDirectory:NULL]){
                 NSError *error = nil;
                 if (![[NSFileManager defaultManager] createDirectoryAtPath:downloadsDir withIntermediateDirectories:YES attributes:nil error:&error]) {

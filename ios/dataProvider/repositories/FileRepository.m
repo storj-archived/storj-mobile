@@ -155,7 +155,7 @@ static NSArray * columns;
 
 -(Response *) deleteByModel: (FileModel *) model{
   if(!model || ![model isValid]){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@""];
+    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is not valid"];
   }
   return [super executeDeleteFromTable:FileContract.TABLE_NAME
                          withObjectKey:FileContract.FILE_ID
@@ -164,7 +164,7 @@ static NSArray * columns;
 
 -(Response *) deleteById: (NSString *) fileId{
   if(!fileId || [fileId length] == 0){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@""];
+    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is not valid"];
   }
   return [super executeDeleteFromTable:FileContract.TABLE_NAME
                          withObjectKey:FileContract.FILE_ID
@@ -173,7 +173,7 @@ static NSArray * columns;
 
 -(Response *) deleteByIds: (NSArray *) fileIds{
   if(!fileIds || [fileIds count] == 0){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@""];
+    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is not valid"];
   }
   return [super executeDeleteFromTable:FileContract.TABLE_NAME
                          withObjectKey:FileContract.FILE_ID
@@ -192,7 +192,7 @@ static NSArray * columns;
 
 -(Response *) updateByModel: (FileModel *) model{
   if(!model || ![model isValid]){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@""];
+    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is not valid"];
   }
   
   return [super executeUpdateAtTable:FileContract.TABLE_NAME
@@ -205,7 +205,7 @@ static NSArray * columns;
                  starred:(BOOL) isStarred{
   
   if(!fileId || [fileId length] == 0){
-    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@""];
+    return [[Response alloc]initWithSuccess:NO andWithErrorMessage:@"Model is not valid"];
   }
   return [super executeUpdateAtTable:FileContract.TABLE_NAME
                            objectKey:FileContract.FILE_ID
