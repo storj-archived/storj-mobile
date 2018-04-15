@@ -164,11 +164,21 @@ class MainContainer extends Component {
         let filePickerResponse = await filePicker.show();
         this.props.hideActionBar();
 
+        // if(filePickerResponse.isSuccess) {
+        //     filePickerResponse.result.forEach(file => {
+
+        //      });
+            
+        // }
+
         if(filePickerResponse.path) {
             this.filePickerResponsePath = filePickerResponse.path;
             this._mainComponent.showSelectBuckets();
         }
     }
+
+        
+    
 
     getBucketId(params) {
         if(params.bucketId) {
@@ -183,12 +193,12 @@ class MainContainer extends Component {
         let filePickerResponse = await filePicker.show();
         this.props.hideActionBar();
 
-        if(filePickerResponse.path) {
-            const path = filePickerResponse.path;
-
-            this.getSelectedBuckets().forEach(item => {
-                ServiceModule.uploadFile(item.getId(), path);
-            });
+        if(filePickerResponse.isSuccess) {
+            filePickerResponse.result.forEach(file =>{
+                this.getSelectedBuckets().forEach(item => {
+                    ServiceModule.uploadFile(item.getId(), file.path);
+                });
+            })
         }
     }
 
@@ -196,10 +206,8 @@ class MainContainer extends Component {
         let filePickerResponse = await filePicker.show();
         this.props.hideActionBar();
 
-        if(filePickerResponse.path) {
-            const path = filePickerResponse.path;
-
-            ServiceModule.uploadFile(bucketId, path);
+        if(filePickerResponse.isSuccess) {
+            filePickerResponse.result.forEach(file => ServiceModule.uploadFile(bucketId, file.path));
         }
     }
 

@@ -136,7 +136,6 @@ class LoginContainer extends Component {
         this.setState({ isLoading: false });
     };
 
-
     async login() {
         this.props.login(this.state.stateModel.email, 
                          this.state.stateModel.password,

@@ -3,19 +3,27 @@ package storjlib;
 import android.Manifest;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 
 import com.facebook.react.bridge.ActivityEventListener;
+import com.facebook.react.bridge.Dynamic;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableType;
+import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.bridge.WritableNativeMap;
+
+import java.util.ArrayList;
 
 import storjlib.utils.FileUtils;
 /**
@@ -27,7 +35,9 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
     public static final String MODULE_NAME = "FilePickerAndroid";
 
     public static final String KEY_PATH = "path";
+    public static final String KEY_RESULT = "result";
     public static final String KEY_ERROR_MESSAGE = "errorMessage";
+    public static final String KEY_SUCCESS = "isSuccess";
 
     public static final String OPTIONS_KEY_MIME_TYPE = "mimeType";
     public static final String OPTIONS_KEY_FILE_PICKER_TITLE = "pickerTitle";
@@ -122,38 +132,60 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
         }
 
         WritableMap responseMap = new WritableNativeMap();
+        WritableArray resultMap = new WritableNativeArray();
+
         if (Activity.RESULT_OK != resultCode) {
-            responseMap.putNull(KEY_PATH);
             responseMap.putString(KEY_ERROR_MESSAGE, "Canceled by user");
+            responseMap.putBoolean(KEY_SUCCESS, false);
             mPromise.resolve(responseMap);
             return;
         }
 
-        Uri uri = data.getData();
-        if (uri == null) {
-            responseMap.putNull(KEY_PATH);
-            responseMap.putString(KEY_ERROR_MESSAGE, "Cannot retrieve chosen file URI");
+        ClipData clipData = data.getClipData();
+
+        if (clipData.getItemCount() == 0) {
+            responseMap.putString(KEY_ERROR_MESSAGE, "no files selected");
+            responseMap.putBoolean(KEY_SUCCESS, false);
             mPromise.resolve(responseMap);
             return;
         }
 
-        if (!FileUtils.isLocal(uri.toString())) {
-            responseMap.putString(KEY_ERROR_MESSAGE, "Selected file is not located locally");
-            responseMap.putNull(KEY_PATH);
-            mPromise.resolve(responseMap);
-            return;
+        for(int i = 0; i < clipData.getItemCount(); i++) {
+            WritableMap uriMap = new WritableNativeMap();
+            ClipData.Item item = clipData.getItemAt(i);
+            Uri uri = item.getUri();
+
+            if (uri == null) {
+                uriMap.putNull(KEY_PATH);
+                uriMap.putString(KEY_ERROR_MESSAGE, "Cannot retrieve chosen file URI");
+                resultMap.pushMap(uriMap);
+                continue;
+            }
+
+            if (!FileUtils.isLocal(uri.toString())) {
+                uriMap.putString(KEY_ERROR_MESSAGE, "Selected file is not located locally");
+                uriMap.putNull(KEY_PATH);
+                resultMap.pushMap(uriMap);
+                continue;
+            }
+
+            String path = FileUtils.getPath(mReactContext, uri);
+
+            if (path == null) {
+                uriMap.putString(KEY_ERROR_MESSAGE, "Cannot retrieve chosen file path");
+                uriMap.putNull(KEY_PATH);
+                resultMap.pushMap(uriMap);
+                continue;
+            }
+
+            uriMap.putString(KEY_PATH, path);
+            resultMap.pushMap(uriMap);
         }
 
-        String path = FileUtils.getPath(mReactContext, uri);
-        if (path == null) {
-            responseMap.putString(KEY_ERROR_MESSAGE, "Cannot retrieve chosen file path");
-            responseMap.putNull(KEY_PATH);
-            mPromise.resolve(responseMap);
-            return;
-        }
 
-        responseMap.putString(KEY_PATH, path);
         responseMap.putNull(KEY_ERROR_MESSAGE);
+        responseMap.putBoolean(KEY_SUCCESS, true);
+        responseMap.putArray(KEY_RESULT, resultMap);
         mPromise.resolve(responseMap);
     }
 

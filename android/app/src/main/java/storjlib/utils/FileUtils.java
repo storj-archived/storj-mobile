@@ -255,6 +255,7 @@ public class FileUtils {
         intent.setType(mimeType);
         // Only return URIs that can be opened with ContentResolver
         intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
 
         return intent;
     }
