@@ -32,6 +32,8 @@ export default class TabBarComponent extends Component {
     }
 
     componentDidUpdate() {
+        if(this.props.navigation.state.index === 3) return;
+
         if(!this.props.screenProps.isFirstSignIn) {
             this.showTabBar();
         }
