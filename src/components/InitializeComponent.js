@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import InputComponent from '../components/InputComponent';
-import { getWidth, getHeight } from '../utils/adaptive';
+import { getWidth, getHeight, getDeviceWidth, getDeviceHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 
 export default class InitializeComponent extends Component {
@@ -41,7 +41,7 @@ export default class InitializeComponent extends Component {
 
     render() {
         return(
-            <ScrollView style={ styles.mainContainer } keyboardDismissMode = { "interactive" }>
+            <ScrollView contentContainerStyle={ styles.mainContainer } keyboardDismissMode = { "interactive" }>
                     <View style = { styles.backgroundWrapper }>
                         <Image 
                             style = { styles.logo } 
@@ -136,6 +136,8 @@ export default class InitializeComponent extends Component {
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
+        /* height: getDeviceHeight(),
+        width: getDeviceWidth(), */
         backgroundColor: '#FFFFFF'
     },
     backgroundWrapper: {
