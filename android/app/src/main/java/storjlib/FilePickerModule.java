@@ -143,30 +143,59 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
 
         ClipData clipData = data.getClipData();
 
-        if (clipData.getItemCount() == 0) {
-            responseMap.putString(KEY_ERROR_MESSAGE, "no files selected");
-            responseMap.putBoolean(KEY_SUCCESS, false);
-            mPromise.resolve(responseMap);
-            return;
-        }
+        if(clipData != null) {
+            if (clipData.getItemCount() == 0) {
+                responseMap.putString(KEY_ERROR_MESSAGE, "no files selected");
+                responseMap.putBoolean(KEY_SUCCESS, false);
+                mPromise.resolve(responseMap);
+                return;
+            }
 
-        for(int i = 0; i < clipData.getItemCount(); i++) {
+            for(int i = 0; i < clipData.getItemCount(); i++) {
+                WritableMap uriMap = new WritableNativeMap();
+                ClipData.Item item = clipData.getItemAt(i);
+                Uri uri = item.getUri();
+
+                if (uri == null) {
+                    uriMap.putNull(KEY_PATH);
+                    uriMap.putString(KEY_ERROR_MESSAGE, "Cannot retrieve chosen file URI");
+                    resultMap.pushMap(uriMap);
+                    continue;
+                }
+
+                if (!FileUtils.isLocal(uri.toString())) {
+                    uriMap.putString(KEY_ERROR_MESSAGE, "Selected file is not located locally");
+                    uriMap.putNull(KEY_PATH);
+                    resultMap.pushMap(uriMap);
+                    continue;
+                }
+
+                String path = FileUtils.getPath(mReactContext, uri);
+
+                if (path == null) {
+                    uriMap.putString(KEY_ERROR_MESSAGE, "Cannot retrieve chosen file path");
+                    uriMap.putNull(KEY_PATH);
+                    resultMap.pushMap(uriMap);
+                    continue;
+                }
+
+                uriMap.putString(KEY_PATH, path);
+                resultMap.pushMap(uriMap);
+            }
+        } else {
             WritableMap uriMap = new WritableNativeMap();
-            ClipData.Item item = clipData.getItemAt(i);
-            Uri uri = item.getUri();
+            Uri uri = data.getData();
 
             if (uri == null) {
                 uriMap.putNull(KEY_PATH);
                 uriMap.putString(KEY_ERROR_MESSAGE, "Cannot retrieve chosen file URI");
                 resultMap.pushMap(uriMap);
-                continue;
             }
 
             if (!FileUtils.isLocal(uri.toString())) {
                 uriMap.putString(KEY_ERROR_MESSAGE, "Selected file is not located locally");
                 uriMap.putNull(KEY_PATH);
                 resultMap.pushMap(uriMap);
-                continue;
             }
 
             String path = FileUtils.getPath(mReactContext, uri);
@@ -175,13 +204,11 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
                 uriMap.putString(KEY_ERROR_MESSAGE, "Cannot retrieve chosen file path");
                 uriMap.putNull(KEY_PATH);
                 resultMap.pushMap(uriMap);
-                continue;
             }
 
             uriMap.putString(KEY_PATH, path);
             resultMap.pushMap(uriMap);
         }
-
 
         responseMap.putNull(KEY_ERROR_MESSAGE);
         responseMap.putBoolean(KEY_SUCCESS, true);

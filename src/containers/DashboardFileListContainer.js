@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     View,
     StyleSheet,
-    Animated
+    Animated,
+    ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -24,6 +25,7 @@ import { TYPES } from '../utils/constants/typesConstants';
 import { getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 import EmpyBucketComponent from '../components/EmpyBucketComponent';
+import { listUploadingFiles, listFiles } from "../reducers/asyncActions/fileActionsAsync";
 
 class DashboardFileListContainer extends Component {
     constructor(props) {
@@ -31,6 +33,11 @@ class DashboardFileListContainer extends Component {
 
         this.data = [];
         this.animatedScrollValue = new Animated.Value(0);
+    }
+
+    componentWillMount() {            
+        this.props.pushLoading(this.props.dashboardBucketId);
+        ServiceModule.getFiles(this.props.dashboardBucketId);  
     }
 
     getData() {        
@@ -64,11 +71,12 @@ class DashboardFileListContainer extends Component {
 
     render() {
         let data = this.getData();
-
+        let isLoading = this.props.loadingStack.includes(this.props.dashboardBucketId);
+        
         return (
             <View style = { styles.mainContainer }>
                 {
-                    data.length === 0 && this.props.dashboardBucketId !== null ? 
+                    data.length === 0 && this.props.dashboardBucketId !== null && !isLoading ?
                         <EmpyBucketComponent />
                         : <ListComponent
                             activeScreen = { this.props.screenName }
@@ -98,6 +106,9 @@ class DashboardFileListContainer extends Component {
                             starredGridItemIcon = { require('../images/Icons/GridStarredFile.png') }
                             starredListItemIcon = { require('../images/Icons/ListStarredFile.png') } />
                 }
+
+                <LoadingComponent isLoading = { isLoading } /> 
+
                 <BucketsScreenHeaderComponent
                     setSearch = { this.props.setSearch }
                     clearSearch = { this.props.clearSearch }
@@ -123,12 +134,21 @@ class DashboardFileListContainer extends Component {
     }
 }
 
+const LoadingComponent = (props) => {
+    return (
+        <View style = { styles.loadingComponentContainer }>
+            <ActivityIndicator animating = { props.isLoading } size = { 'large' } color = { 'blue' } />
+        </View>
+    ); 
+}
+
 function mapStateToProps(state) {
     let screenIndex = state.mainScreenNavReducer.index;
     let currentScreenName = state.mainScreenNavReducer.routes[screenIndex].routeName; 
     let routes = state.dashboardScreenNavReducer.routes;
 
     return {
+        loadingStack: state.mainReducer.loadingStack,
         buckets: state.bucketReducer.buckets,
         files: state.filesReducer.fileListModels,
         selectedItemId: state.mainReducer.selectedItemId,
@@ -151,18 +171,22 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({  
-        openImageViewer, 
-        ...myPicturesListContainerMainActions, 
-        ...filesActions,
-        ...dashboardContainerActions, 
-        ...dashboardContainerBucketActions,
-        ...filesListContainerMainActions, 
-        ...filesListContainerFileActions, 
-        dashboardNavigateBack,
-        navigateToDashboardFilesScreen,
-        navigateBack
-    }, dispatch);
+    return {
+        ...bindActionCreators({  
+            openImageViewer, 
+            ...myPicturesListContainerMainActions, 
+            ...filesActions,
+            ...dashboardContainerActions, 
+            ...dashboardContainerBucketActions,
+            ...filesListContainerMainActions, 
+            ...filesListContainerFileActions, 
+            dashboardNavigateBack,
+            navigateToDashboardFilesScreen,
+            navigateBack
+        }, dispatch),
+        listUploadingFilesAsync: async (bucketId) => { await dispatch(listUploadingFiles(bucketId)); },
+        listFilesAsync: async (bucketId) => { return await dispatch(listFiles(bucketId)); }
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardFileListContainer);
@@ -222,5 +246,12 @@ const styles = StyleSheet.create({
     contentWrapper: {
         paddingTop: getHeight(58),
         paddingBottom: getHeight(60)
+    },
+    loadingComponentContainer: {
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: getHeight(80),
+        height: getHeight(60)
     }
 });
