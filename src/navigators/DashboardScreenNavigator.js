@@ -24,7 +24,12 @@ const DashboardScreenNavigator = StackNavigator(
     }, 
     {
         initialRouteName: 'DashboardDefaultScreen',
-        headerMode : 'none'
+        headerMode : 'none',
+        navigationOptions: {
+            header:null,
+            gesturesEnabled: false
+        }
+
     }
 );
 

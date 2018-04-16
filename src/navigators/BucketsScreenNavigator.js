@@ -16,7 +16,11 @@ const BucketsScreenNavigator = StackNavigator(
     }, 
     {
         initialRouteName: 'BucketsListScreen',
-        headerMode: 'none'
+        headerMode: 'none',
+        navigationOptions: {
+            header:null,
+            gesturesEnabled: false
+        }
     }
 );
 

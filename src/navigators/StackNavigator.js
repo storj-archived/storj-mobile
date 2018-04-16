@@ -84,7 +84,11 @@ const StackNav = StackNavigator(
     },
     {
         headerMode: 'none',
-        initialRouteName: 'InitializationScreen'
+        initialRouteName: 'InitializationScreen',
+        navigationOptions: {
+            header:null,
+            gesturesEnabled: false
+        }
     }
 );
 

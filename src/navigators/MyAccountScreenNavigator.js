@@ -40,7 +40,11 @@ const MyAccountScreenNavigator = StackNavigator(
     }, 
     {
         initialRouteName: 'MyAccountMainPageScreen',
-        headerMode : 'none'
+        headerMode : 'none',
+        navigationOptions: {
+            header:null,
+            gesturesEnabled: false
+        }
     }
 );
 
