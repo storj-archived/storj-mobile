@@ -24,6 +24,7 @@ import java.io.OutputStream;
 import java.text.DateFormat;
 import java.util.Date;
 
+import io.storj.BuildConfig;
 import storjlib.dataprovider.DatabaseFactory;
 import storjlib.dataprovider.contracts.BucketContract;
 import storjlib.dataprovider.contracts.FileContract;
@@ -68,7 +69,7 @@ public class CameraModule extends ReactContextBaseJavaModule implements Activity
             mCurrentBucketId = bucketId;
 
             Uri photoURI = FileProvider.getUriForFile(mReactContext,
-                    "com.example.android.fileprovider",
+                    BuildConfig.APPLICATION_ID,
                     image);
 
             if(photoURI == null) {
@@ -89,10 +90,14 @@ public class CameraModule extends ReactContextBaseJavaModule implements Activity
 
     @Override
     public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
-        if(requestCode == 2132132 && resultCode == Activity.RESULT_OK) {
+        if(requestCode != 2132132) {
+            return;
+        }
+
+        if(resultCode == Activity.RESULT_OK) {
             galleryAddPic(mCurrentPhotoPath);
             uploadFile(mCurrentPhotoPath, mCurrentBucketId);
-        }
+        } 
 
         mCurrentPhotoPath = null;
         mCurrentBucketId = null;

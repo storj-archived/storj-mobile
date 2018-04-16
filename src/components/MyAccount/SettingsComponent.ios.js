@@ -85,7 +85,7 @@ export default class SettingsComponent extends Component{
                                     ? require('../../images/Icons/ListItemSelected.png')
                                     : require('../../images/Icons/ListItemUnselected.png') }/>
                         
-                            <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync photos</Text>
+                            <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync photos and videos</Text>
                         </TouchableOpacity>
                     </View>
                     <View style = { styles.underline }/>
@@ -99,7 +99,7 @@ export default class SettingsComponent extends Component{
                                         ? require('../../images/Icons/ListItemSelected.png')
                                         : require('../../images/Icons/ListItemUnselected.png') } />
                             </TouchableOpacity>
-                            <Text style = { [styles.switchText, styles.checkboxTextMargin ] } >Sync files</Text>
+                            <Text style = { [styles.switchText, styles.checkboxTextMargin ] } >Sync documents</Text>
                         </View>
                         <TouchableOpacity style = { styles.expanderIconContainer }>
                             <Image
