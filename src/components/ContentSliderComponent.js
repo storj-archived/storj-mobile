@@ -43,7 +43,7 @@ export default class ContentSlider extends Component {
     */
     move(nextPosition) {        
         nextPosition += this.state.position;
-        if(nextPosition > 1 || nextPosition < 0 || !this.ref) return;
+        if(nextPosition > 2 || nextPosition < 0 || !this.ref) return;
         
         this.ref.scrollTo({x: this.state.width * nextPosition, y: 0, animated: true});
         this.setState({
@@ -64,9 +64,10 @@ export default class ContentSlider extends Component {
     onButtonClick(index) {
         if(this.state.position === index) return;
         
-        let nextPosition = this.state.position === 1 ? -1 : 1;
+        let mult = this.state.position - index > 0 ? -1 : 1;
+        let nextPosition = Math.abs(this.state.position - index);
         
-        this.move(nextPosition);
+        this.move(mult * nextPosition);
     }
 
     /**
