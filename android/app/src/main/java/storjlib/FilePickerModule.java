@@ -144,76 +144,93 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
         ClipData clipData = data.getClipData();
 
         if(clipData != null) {
-            if (clipData.getItemCount() == 0) {
-                responseMap.putString(KEY_ERROR_MESSAGE, "no files selected");
-                responseMap.putBoolean(KEY_SUCCESS, false);
-                mPromise.resolve(responseMap);
-                return;
-            }
-
-            for(int i = 0; i < clipData.getItemCount(); i++) {
-                WritableMap uriMap = new WritableNativeMap();
-                ClipData.Item item = clipData.getItemAt(i);
-                Uri uri = item.getUri();
-
-                if (uri == null) {
-                    uriMap.putNull(KEY_PATH);
-                    uriMap.putString(KEY_ERROR_MESSAGE, "Cannot retrieve chosen file URI");
-                    resultMap.pushMap(uriMap);
-                    continue;
-                }
-
-                if (!FileUtils.isLocal(uri.toString())) {
-                    uriMap.putString(KEY_ERROR_MESSAGE, "Selected file is not located locally");
-                    uriMap.putNull(KEY_PATH);
-                    resultMap.pushMap(uriMap);
-                    continue;
-                }
-
-                String path = FileUtils.getPath(mReactContext, uri);
-
-                if (path == null) {
-                    uriMap.putString(KEY_ERROR_MESSAGE, "Cannot retrieve chosen file path");
-                    uriMap.putNull(KEY_PATH);
-                    resultMap.pushMap(uriMap);
-                    continue;
-                }
-
-                uriMap.putString(KEY_PATH, path);
-                resultMap.pushMap(uriMap);
-            }
+            _handleClipData(clipData, responseMap, resultMap);
         } else {
-            WritableMap uriMap = new WritableNativeMap();
-            Uri uri = data.getData();
-
-            if (uri == null) {
-                uriMap.putNull(KEY_PATH);
-                uriMap.putString(KEY_ERROR_MESSAGE, "Cannot retrieve chosen file URI");
-                resultMap.pushMap(uriMap);
-            }
-
-            if (!FileUtils.isLocal(uri.toString())) {
-                uriMap.putString(KEY_ERROR_MESSAGE, "Selected file is not located locally");
-                uriMap.putNull(KEY_PATH);
-                resultMap.pushMap(uriMap);
-            }
-
-            String path = FileUtils.getPath(mReactContext, uri);
-
-            if (path == null) {
-                uriMap.putString(KEY_ERROR_MESSAGE, "Cannot retrieve chosen file path");
-                uriMap.putNull(KEY_PATH);
-                resultMap.pushMap(uriMap);
-            }
-
-            uriMap.putString(KEY_PATH, path);
-            resultMap.pushMap(uriMap);
+            _handleSingleFile(data, resultMap);
         }
 
         responseMap.putNull(KEY_ERROR_MESSAGE);
         responseMap.putBoolean(KEY_SUCCESS, true);
         responseMap.putArray(KEY_RESULT, resultMap);
         mPromise.resolve(responseMap);
+    }
+
+    private void _handleClipData(ClipData clipData, WritableMap responseMap, WritableArray resultMap) {
+        if (clipData.getItemCount() == 0) {
+            responseMap.putString(KEY_ERROR_MESSAGE, "no files selected");
+            responseMap.putBoolean(KEY_SUCCESS, false);
+            mPromise.resolve(responseMap);
+            return;
+        }
+
+        for(int i = 0; i < clipData.getItemCount(); i++) {
+            WritableMap uriMap = new WritableNativeMap();
+            ClipData.Item item = clipData.getItemAt(i);
+            Uri uri = item.getUri();
+
+            if(_checkNullUri(uri, uriMap, resultMap)) continue;
+
+            if(_checkIsLocal(uri, uriMap, resultMap)) continue;
+
+            String path = FileUtils.getPath(mReactContext, uri);
+
+            if (_checkPath(path, uriMap, resultMap)) continue;
+
+            uriMap.putString(KEY_PATH, path);
+            resultMap.pushMap(uriMap);
+        }
+    }
+
+    private void _handleSingleFile(Intent data, WritableArray resultMap) {
+        WritableMap uriMap = new WritableNativeMap();
+        Uri uri = data.getData();
+
+        if(_checkNullUri(uri, uriMap, resultMap)) return;
+
+        if(_checkIsLocal(uri, uriMap, resultMap)) return;
+
+        String path = FileUtils.getPath(mReactContext, uri);
+
+        if (_checkPath(path, uriMap, resultMap)) return;
+
+        uriMap.putString(KEY_PATH, path);
+        resultMap.pushMap(uriMap);
+    }
+
+    private boolean _checkNullUri(Uri uri, WritableMap uriMap, WritableArray resultMap) {
+        boolean isNull = uri == null;
+
+        if (isNull) {
+            uriMap.putNull(KEY_PATH);
+            uriMap.putString(KEY_ERROR_MESSAGE, "Cannot retrieve chosen file URI");
+            resultMap.pushMap(uriMap);
+        }
+
+        return isNull;
+    }
+
+    private boolean _checkIsLocal(Uri uri, WritableMap uriMap, WritableArray resultMap) {
+        boolean isNotLocal = !FileUtils.isLocal(uri.toString());
+
+        if (isNotLocal) {
+            uriMap.putString(KEY_ERROR_MESSAGE, "Selected file is not located locally");
+            uriMap.putNull(KEY_PATH);
+            resultMap.pushMap(uriMap);
+        }
+
+        return isNotLocal;
+    }
+
+    private boolean _checkPath(String path, WritableMap uriMap, WritableArray resultMap) {
+        boolean isNull = path == null;
+
+        if (isNull) {
+            uriMap.putString(KEY_ERROR_MESSAGE, "Cannot retrieve chosen file path");
+            uriMap.putNull(KEY_PATH);
+            resultMap.pushMap(uriMap);
+        }
+
+        return isNull;
     }
 
     @Override
