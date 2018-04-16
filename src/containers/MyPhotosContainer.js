@@ -99,7 +99,7 @@ class MyPhotosContainer extends Component {
                         itemType = { TYPES.REGULAR_FILE }
                         bucketId = { this.props.myPhotosBucketId }
                         onSingleItemSelected = { this.props.onSingleItemSelected }                    
-                        animatedScrollValue = { this.props.animatedScrollValue }
+                        animatedScrollValue = { this.animatedScrollValue }
                         enableSelectionMode = { this.props.enableSelectionMode }
                         disableSelectionMode = { this.props.disableSelectionMode }
                         isSelectionMode = { this.props.isSelectionMode }

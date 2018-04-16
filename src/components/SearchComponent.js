@@ -41,7 +41,7 @@ export default class SearchComponent extends Component {
     fileScreenHeader() {
         return(
             <View style = { [ styles.rowContainer, this.props.styleContainer ] }>
-                <TouchableOpacity onPress = { () => { this.props.navigateBack ? this.props.navigateBack() : () => {} } }>
+                <TouchableOpacity style = { styles.backButtonWrapper } onPress = { () => { this.props.navigateBack ? this.props.navigateBack() : () => {} } }>
                     <Image style = { styles.backButton } source = { require("../images/Icons/BackButton.png") } resizeMode = { 'contain' } />
                 </TouchableOpacity>
                 <View style = { [ styles.rowContainer, styles.mainContainer, styles.fileHeader ] }>
@@ -76,7 +76,7 @@ export default class SearchComponent extends Component {
     selectBucketScreenHeader() {
         return(
             <View style = { [ styles.rowContainer, this.props.styleContainer ] }>
-                <TouchableOpacity onPress = { () => { this.props.navigateBack ? this.props.navigateBack() : () => {} } }>
+                <TouchableOpacity style = { styles.backButtonWrapper } onPress = { () => { this.props.navigateBack ? this.props.navigateBack() : () => {} } }>
                     <Image style = { styles.backButton } source = { require("../images/Icons/BlueCross.png") } resizeMode = { 'contain' } />
                 </TouchableOpacity>
                 <View style = { [ styles.rowContainer, styles.mainContainer, styles.fileHeader ] }>
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     fileHeader: {
-        marginLeft: getWidth(16)
+        marginLeft: getWidth(5)
     },
     updateStatusContainer: {
         justifyContent: 'flex-end',
@@ -173,6 +173,11 @@ const styles = StyleSheet.create({
     backButton: {
         width: getHeight(24),
         height: getHeight(24)
+    },
+    backButtonWrapper: {
+        paddingVertical: getHeight(16),
+        paddingRight: getWidth(10),
+        paddingLeft: getWidth(6)
     },
     textInput: {
         paddingVertical: 0,

@@ -4,7 +4,7 @@ import checkMultipleNav from '../../utils/navigationUtils';
 /**
  * Declaring initial route of program
  */
-export const initialState = MainScreenNavigator.router.getStateForAction(MainScreenNavigator.router.getActionForPathAndParams('DashboardScreen'));
+export const initialState = MainScreenNavigator.router.getStateForAction(MainScreenNavigator.router.getActionForPathAndParams('BucketsScreen'));
 
 /**
  * Creating navigation reducer
