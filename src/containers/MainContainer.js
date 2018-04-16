@@ -80,7 +80,7 @@ class MainContainer extends Component {
 
         this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
 
-        this.filePickerResponsePath = null;
+        this.filePickerResponsePathes = [];
     }    
 
     async componentWillMount () {
@@ -164,28 +164,23 @@ class MainContainer extends Component {
         let filePickerResponse = await filePicker.show();
         this.props.hideActionBar();
 
-        // if(filePickerResponse.isSuccess) {
-        //     filePickerResponse.result.forEach(file => {
+        if(filePickerResponse.isSuccess) {
+            filePickerResponse.result.forEach(file => {
+                this.filePickerResponsePathes.push(file.path);
+            });
 
-        //      });
-            
-        // }
-
-        if(filePickerResponse.path) {
-            this.filePickerResponsePath = filePickerResponse.path;
             this._mainComponent.showSelectBuckets();
         }
-    }
-
-        
-    
+    }  
 
     getBucketId(params) {
         if(params.bucketId) {
-            ServiceModule.uploadFile(params.bucketId, this.filePickerResponsePath);
+            this.filePickerResponsePathes.forEach(element => {
+                ServiceModule.uploadFile(params.bucketId, element);
+            });  
         }
 
-        this.filePickerResponsePath = null;
+        this.filePickerResponsePathes = [];
         this._mainComponent.showSelectBuckets();
     }
 

@@ -3,6 +3,7 @@ import {
     Text,
     TouchableOpacity,
     StyleSheet,
+    Platform,
     Image
 } from 'react-native';
 import React, { Component } from 'react';
@@ -14,11 +15,14 @@ export default class FirstSignInComponent extends Component {
         super(props);
 
         this.state = {
-            androidOptions: [
+            options: Platform.OS === 'android' ? [
                 { type: 'Pictures', isSelected: false, title: 'My photos', mask: this.props.SYNC_ENUM.SYNC_PHOTOS },
                 { type: 'Movies', isSelected: false, title: 'My movies', mask: this.props.SYNC_ENUM.SYNC_MOVIES },
                 { type: 'Documents', isSelected: false, title: 'My documents', mask: this.props.SYNC_ENUM.SYNC_DOCUMENTS },
                 { type: 'Music', isSelected: false, title: 'My music', mask: this.props.SYNC_ENUM.SYNC_MUSIC }
+            ] : [
+                { type: 'Pictures', isSelected: false, title: 'My photos' },
+                { type: 'Documents', isSelected: false, title: 'My documents' },
             ],
             showModal: false
         }
@@ -35,7 +39,7 @@ export default class FirstSignInComponent extends Component {
 
         let settings = 0;
         let count = 0;
-        this.state.androidOptions.forEach(option => {
+        this.state.options.forEach(option => {
             if (option.isSelected) {
                 this.props.createBucket(option.type);
                 settings = settings | option.mask;
@@ -57,9 +61,9 @@ export default class FirstSignInComponent extends Component {
     }
 
     changeOptions = (type) => {
-        let oldValues = this.state.androidOptions;
+        let oldValues = this.state.options;
         
-        this.setState({ androidOptions: oldValues.map(value => {
+        this.setState({ options: oldValues.map(value => {
             if(value.type === type) value.isSelected = !value.isSelected;
             return value;
         })});
@@ -101,7 +105,7 @@ export default class FirstSignInComponent extends Component {
                             <Text style = { styles.titleLightBoldText }>What do you want to sync?</Text>
                         </View>
                         {
-                            this.state.androidOptions.map(option => {
+                            this.state.options.map(option => {
                                 return (
                                     <TouchableOpacity 
                                         key = { option.type }
@@ -176,7 +180,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     contentContainer: {
-        marginLeft: getWidth(20)
+        paddingHorizontal: getWidth(20)
     },
     titleContainer: {
         marginTop: getHeight(15),
@@ -211,7 +215,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     syncMyDeviceButton: {
-        marginTop: getHeight(29),
+        marginTop: getHeight(85),
         width: getWidth(335),
         height: getHeight(50),
         alignItems: 'center',

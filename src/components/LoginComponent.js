@@ -32,7 +32,7 @@ export default class LoginComponent extends Component {
 	render() {
 		return(
 			<ScrollView style={ styles.mainContainer } keyboardDismissMode = { "interactive" }>
-                <View style={ styles.backgoundWrapper }>
+                <View style={ styles.backgroundWrapper }>
                     <Image 
                         style = { styles.logo } 
                         source = { require('../images/Icons/LogoBlue.png') } 
@@ -171,9 +171,8 @@ const styles = StyleSheet.create({
     },
     footer: {
         marginTop: getHeight(10),
-        height: getHeight(113),
         alignItems: 'center'
-     },
+    },
     createAccountButton: {
         width: getWidth(343),
         height: getHeight(50),

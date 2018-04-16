@@ -23,7 +23,8 @@ class MainNavigationContainer extends Component {
                     showStorageInfo: this.props.showStorageInfo,
                     showCredits: this.props.showCredits,
                     showPopUp: this.props.showPopUp,
-                    redirectToInitializationScreen: this.props.redirectToInitializationScreen
+                    redirectToInitializationScreen: this.props.redirectToInitializationScreen,
+                    isFirstSignIn: this.props.isFirstSignIn
                 }}
                 navigation = { addNavigationHelpers({
                     isActionBarShown: this.props.isActionBarShown,
@@ -49,7 +50,8 @@ class MainNavigationContainer extends Component {
 function mapStateToProps(state) {
     return {
         nav: state.mainScreenNavReducer,
-        isSelectionMode: state.mainReducer.isSelectionMode
+        isSelectionMode: state.mainReducer.isSelectionMode,
+        isFirstSignIn: state.mainReducer.isFirstSignIn,
     };
 };
 

@@ -23,8 +23,18 @@ export default class TabBarComponent extends Component {
     }
 
     componentWillMount () {
+        if(this.props.screenProps.isFirstSignIn) {
+            this.hideTabBar();
+        }
+
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.hideTabBar.bind(this));
         this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.showTabBar.bind(this));
+    }
+
+    componentDidUpdate() {
+        if(!this.props.screenProps.isFirstSignIn) {
+            this.showTabBar();
+        }
     }
     
     componentWillUnmount () {
@@ -202,5 +212,5 @@ TabBarComponent.propTypes = {
     renderIcon: PropTypes.func,
     screenProps: PropTypes.object,
     tabBarPosition: PropTypes.string,
-    useNativeDriver: PropTypes.bool,
+    useNativeDriver: PropTypes.bool
 }; 
