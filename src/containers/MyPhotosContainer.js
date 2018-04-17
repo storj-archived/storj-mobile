@@ -62,6 +62,22 @@ class MyPhotosContainer extends Component {
         }
     }
 
+    async cancelDownload(file) {
+        let cancelDownloadResponse = await StorjModule.cancelDownload(file.fileRef);
+
+        if(cancelDownloadResponse.isSuccess) {
+            this.props.fileDownloadCanceled(this.props.openedBucketId, file.getId());
+        }
+    }
+
+    async cancelUpload(file) {        
+        let cancelUploadResponse = await StorjModule.cancelUpload(file.fileRef);
+
+        if(cancelUploadResponse.isSuccess) {
+            this.props.fileUploadCanceled(this.props.openedBucketId, file.getId());
+        }
+    }
+
     onPress(file) {        
         if(file.entity.isDownloaded && file.entity.mimeType.includes('image/')) {
             this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId, file.getStarred());
@@ -87,8 +103,8 @@ class MyPhotosContainer extends Component {
                         contentWrapperStyle = { styles.contentWrapper }
                         setSelectionId = { this.props.setSelectionId }
                         selectedItemId = { this.props.selectedItemId }
-                        cancelDownload = { this.props.cancelDownload }
-                        cancelUpload = { this.props.cancelUpload }
+                        cancelDownload = { (params) => { this.cancelDownload(params); }}
+                        cancelUpload = { (params) => { this.cancelUpload(params); }}
                         isGridViewShown = { this.props.isGridViewShown }
                         onPress = { (params) => { this.onPress(params); } }
                         onRefresh = { () => {  
