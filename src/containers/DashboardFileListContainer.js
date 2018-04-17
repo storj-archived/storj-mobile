@@ -25,6 +25,9 @@ import EmpyBucketComponent from '../components/EmpyBucketComponent';
 import { listUploadingFiles, listFiles } from "../reducers/asyncActions/fileActionsAsync";
 import BaseFileListContainer from '../containers/BaseFileListContainer';
 
+/** 
+ * Appears after clicking on favorite item in dashboard
+*/
 class DashboardFileListContainer extends BaseFileListContainer {
     constructor(props) {
         super(props);
@@ -32,6 +35,9 @@ class DashboardFileListContainer extends BaseFileListContainer {
         this.animatedScrollValue = new Animated.Value(0);
     }
 
+    /** 
+     * Set initial data upload from Storj Network when screen is loaded
+    */
     componentWillMount() {            
         this.props.pushLoading(this.props.bucketId);
         ServiceModule.getFiles(this.props.bucketId);  
@@ -45,6 +51,10 @@ class DashboardFileListContainer extends BaseFileListContainer {
         return this.getArraySelectedCount(this.props.buckets.concat(this.props.fileListModels));
     }    
 
+    /**      
+     * Navigate Back callback. Cleaning search state in header, 
+     * disables selecion mode and closes opened in dashboard screen bucket.
+    */
     navigateBack() {
         this.props.clearSearch(4);
         this.props.dashboardNavigateBack();

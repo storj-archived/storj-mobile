@@ -10,6 +10,9 @@ import ServiceModule from '../utils/ServiceModule';
 import FilesListComponent from '../components/FilesListComponent';
 import BaseFileListContainer from '../containers/BaseFileListContainer';
 
+/** 
+ * Files screen, base screen, appears after opening bucket on bucket screen
+*/
 class FilesListContainer extends BaseFileListContainer {
     constructor(props) {
         super(props);
@@ -17,6 +20,10 @@ class FilesListContainer extends BaseFileListContainer {
         this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
     }    
 
+    /** 
+     * Set initial data upload from Storj Network when screen is loaded, 
+     * resets header animation and handling hardware back button click on Android devices
+    */
     async componentWillMount() {        
         if(Platform.OS === "android") {
             BackHandler.addEventListener("hardwarebackPress", this.onHardwareBackPress);
@@ -36,12 +43,18 @@ class FilesListContainer extends BaseFileListContainer {
         ServiceModule.getFiles(this.props.bucketId);  
     }
 
+    /**      
+     * Cleaning all event listeners
+    */
     componentWillUnmount() {
         if(Platform.OS === "android") {
             BackHandler.removeEventListener("hardwarebackPress", this.onHardwareBackPress);
         }
     }
 
+    /**      
+     * Hardware Back Press callback. Closes bucket and navigating to bucket screen
+    */
     onHardwareBackPress() {
         if(this.props.isLoading)
             return;

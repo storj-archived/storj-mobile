@@ -21,6 +21,9 @@ import EmpyBucketComponent from '../components/EmpyBucketComponent';
 import { listUploadingFiles, listFiles } from "../reducers/asyncActions/fileActionsAsync";
 import BaseFileListContainer from '../containers/BaseFileListContainer';
 
+/** 
+ * My photos screen, base screen, could be found in tab bar
+*/
 class MyPhotosContainer extends BaseFileListContainer {
     constructor(props) {
         super(props);
@@ -29,6 +32,9 @@ class MyPhotosContainer extends BaseFileListContainer {
         this.shouldRenew = true;
     }    
 
+    /** 
+     * Set initial data upload from Storj Network when screen is loaded
+    */
     shouldComponentUpdate() {
         if(!this.shouldRenew) return true;
         if(!this.props.bucketId) return true;
