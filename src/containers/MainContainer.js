@@ -1,17 +1,34 @@
-import { Keyboard, DeviceEventEmitter, BackHandler, Platform, Alert, NativeEventEmitter } from 'react-native';
+import { Keyboard, BackHandler, Platform, Alert } from 'react-native';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { mainContainerActions } from '../reducers/mainContainer/mainReducerActions';
-import { mainContainerBucketActions, favouritesActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
-import fileActions, { mainContainerFileActions, favouritesFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
-import { redirectToMainScreen, redirectToInitializationScreen, bucketNavigateBack, dashboardNavigateBack } from '../reducers/navigation/navigationActions';
+import { 
+    showActionBar,
+    hideActionBar,
+    disableSelectionMode,
+    showCreateBucketInput,
+    hideCreateBucketInput,
+    setGridView,
+    setListView,
+    openBucket,
+    setSorting 
+} from '../reducers/mainContainer/mainReducerActions';
+import {    
+    createBucket,
+    deleteBucket, 
+    updateFavourite 
+} from '../reducers/mainContainer/Buckets/bucketReducerActions';
+import { 
+    deleteFile, 
+    updateFavouriteFiles 
+} from '../reducers/mainContainer/Files/filesReducerActions';
+import { 
+    redirectToMainScreen, 
+    redirectToInitializationScreen, 
+    bucketNavigateBack, 
+    dashboardNavigateBack 
+} from '../reducers/navigation/navigationActions';
 import { createWallet, getWallets } from '../reducers/billing/billingActions';
-import FileModel from '../models/FileModel';
-import BucketModel from '../models/BucketModel';
-import ListItemModel from '../models/ListItemModel';
-import StorjLib from '../utils/StorjModule';
-import FilePicker from '../utils/filePicker';
 import TabBarActionModelFactory from '../models/TabBarActionModel';
 import MainComponent from '../components/MainComponent';
 import filePicker from '../utils/filePicker';
@@ -89,8 +106,6 @@ class MainContainer extends Component {
         }
 
         this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => { this.props.disableSelectionMode(); });
-
-        //this.props.listUploadingFiles();
     }
 
     tryDeleteBuckets() {
@@ -462,20 +477,28 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) { 
     return {
         ...bindActionCreators({ 
-            ...fileActions, 
             redirectToMainScreen, 
             redirectToInitializationScreen,
             bucketNavigateBack, 
             dashboardNavigateBack,
-            ...mainContainerActions,
-            ...mainContainerBucketActions, 
-            ...mainContainerFileActions, 
-            ...favouritesActions, 
-            ...favouritesFileActions,
+            showActionBar,
+            hideActionBar,
+            disableSelectionMode,
+            showCreateBucketInput,
+            hideCreateBucketInput,
+            setGridView,
+            setListView,
+            openBucket,
+            setSorting,
+            createBucket,
+            deleteBucket, 
+            deleteFile, 
+            updateFavourite, 
+            updateFavouriteFiles,
             createWallet,
             getWallets
-        }, dispatch)        
-    };
+        }, dispatch)    
+    };    
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

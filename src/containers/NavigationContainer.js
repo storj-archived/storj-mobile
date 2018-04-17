@@ -6,7 +6,6 @@ import {
 	DeviceEventEmitter,
 	NativeEventEmitter,
 	StyleSheet,
-	StatusBar,
 	NetInfo
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -16,16 +15,39 @@ import StackNavigator from '../navigators/StackNavigator';
 import { NavigationActions } from 'react-navigation';
 import eventNames from '../utils/constants/eventNames';
 import {
-    bucketsContainerActions,
-	mainContainerActions,
-	navigationContainerMainActions
+	setLoading,
+	unsetLoading,
+	popLoading,
+	setIsConnected
 } from '../reducers/mainContainer/mainReducerActions';
-import { navigationContainerBucketActions, mainContainerBucketActions, bucketsContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
+import { 
+	setNameAlreadyExistException,
+	unsetNameAlreadyExistException,
+	createBucket,
+	getBuckets,
+    deleteBucket 
+} from '../reducers/mainContainer/Buckets/bucketReducerActions';
 import {
-	mainContainerFileActions,
-	filesListContainerFileActions
+    uploadFileError,
+    updateFileUploadProgress,
+    downloadFileSuccess,
+    downloadFileError,
+    updateFileDownloadProgress,
+	deleteFile,
+	listFiles
 } from '../reducers/mainContainer/Files/filesReducerActions'
-import { authNavigationActions } from '../reducers/navigation/navigationActions';
+import { 
+	redirectToLoginScreen,
+    redirectToMainScreen,
+    redirectToMnemonicConfirmationScreen,
+    redirectToMnemonicConfirmedScreen,
+    redirectToMnemonicGenerationScreen,
+    redirectToMnemonicInfoScreen,
+    redirectToMnemonicNotConfirmedScreen,
+    redirectToRegisterScreen,
+    redirectToRegisterSuccessScreen,
+	navigateBack 
+} from '../reducers/navigation/navigationActions';
 import ListItemModel from '../models/ListItemModel';
 import BucketModel from '../models/BucketModel';
 import FileModel from '../models/FileModel';
@@ -314,7 +336,6 @@ const styles = StyleSheet.create({
  */
 function mapStateToProps(state) {
     return {
-		openedBucketId: state.mainReducer.openedBucketId,
 		nav: state.navReducer,
 		isEmailConfirmed: state.authReducer.user.isEmailConfirmed,
 		isAccountExist: state.authReducer.user.isAccountExist,
@@ -323,18 +344,39 @@ function mapStateToProps(state) {
     };
 }
 
+    
+    
+
 function mapDispatchToProps(dispatch) {
 	return {
 		...bindActionCreators( {
-		...bucketsContainerActions, 
-		...bucketsContainerBucketActions,
-		...mainContainerActions,
-		...mainContainerBucketActions, 
-		...navigationContainerBucketActions,
-		...mainContainerFileActions,
-		...filesListContainerFileActions,
-		...navigationContainerMainActions,
-		...authNavigationActions }, dispatch),
+		setLoading,
+		unsetLoading, 
+		setNameAlreadyExistException,
+		unsetNameAlreadyExistException,
+		createBucket,
+		getBuckets,    
+		createBucket,
+		popLoading,
+		deleteBucket,
+		uploadFileError,
+		updateFileUploadProgress,
+		downloadFileSuccess,
+		downloadFileError,
+		updateFileDownloadProgress,
+		deleteFile,
+		listFiles,
+		setIsConnected,
+		redirectToLoginScreen,
+		redirectToMainScreen,
+		redirectToMnemonicConfirmationScreen,
+		redirectToMnemonicConfirmedScreen,
+		redirectToMnemonicGenerationScreen,
+		redirectToMnemonicInfoScreen,
+		redirectToMnemonicNotConfirmedScreen,
+		redirectToRegisterScreen,
+		redirectToRegisterSuccessScreen,
+		navigateBack  }, dispatch),
 		uploadSuccess: (fileHandle, fileId) => dispatch(uploadFileSuccess(fileHandle, fileId)),		
 		getUploadingFile: (fileHandle) => dispatch(uploadFileStart(fileHandle))};
 }

@@ -1,18 +1,31 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as Actions from '../reducers/navigation/navigationActions';
+import {
+    redirectToMainScreen,
+    redirectToRegisterScreen,
+    redirectToOnBoardingScreen
+} from '../reducers/navigation/navigationActions';
 import { getDebits, getCredits, getWallets }  from '../reducers/billing/billingActions';
 import StorjLib from '../utils/StorjModule';
-import { authConstants } from '../utils/constants/storageConstants';
-import { getMnemonicNotSaved, getFirstAction } from '../utils/AsyncStorageModule';
+import { getFirstAction } from '../utils/AsyncStorageModule';
 import ListItemModel from '../models/ListItemModel';
 import FileModel from '../models/FileModel';
 import BucketModel from '../models/BucketModel';
-import { initializeContainerActions } from '../reducers/mainContainer/mainReducerActions';
-import { initializeContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
-import { initializeActionCreators } from '../reducers/authentification/authActions';
-import allFileActions from '../reducers/mainContainer/Files/filesReducerActions';
+import { 
+    setFirstSignIn,
+    setEmail 
+} from '../reducers/mainContainer/mainReducerActions';
+import { getBuckets } from '../reducers/mainContainer/Buckets/bucketReducerActions';
+import { 
+    login,
+    redirectToQRScannerScreen,
+    redirectToLoginScreen,
+    navigateToRegisterScreen 
+} from '../reducers/authentification/authActions';
+import {
+    listFiles
+} from '../reducers/mainContainer/Files/filesReducerActions';
 import ServiceModule from '../utils/ServiceModule';
 import SyncModule from '../utils/SyncModule';
 import PropTypes from 'prop-types';
@@ -154,12 +167,25 @@ class InitializeContainer extends Component {
  * connecting reducer to component props 
  */
 function mapStateToProps(state) { return { navigation: state.navReducer }; };
-function mapDispatchToProps(dispatch) { return bindActionCreators({
-        ...Actions,
-        ...initializeContainerActions,
-        ...initializeActionCreators, 
-        ...initializeContainerBucketActions,
-        ...allFileActions, getDebits, getCredits, getWallets }, dispatch); };
+function mapDispatchToProps(dispatch) { 
+    return {
+        ...bindActionCreators({
+            redirectToLoginScreen,
+            redirectToMainScreen,
+            redirectToRegisterScreen,
+            setFirstSignIn,
+            setEmail,
+            login,
+            redirectToQRScannerScreen,
+            navigateToRegisterScreen, 
+            redirectToOnBoardingScreen,
+            getBuckets,
+            listFiles, 
+            getDebits, 
+            getCredits, 
+            getWallets }, dispatch)
+    };
+};
 
 /**
  * Creating LoginScreen container
@@ -169,47 +195,21 @@ export default connect(mapStateToProps, mapDispatchToProps)(InitializeContainer)
 InitializeContainer.propTypes = {
     bucketNavigateBack: PropTypes.func,
     dashboardNavigateBack: PropTypes.func,
-    deleteFile: PropTypes.func,
-    deselectFile: PropTypes.func,
-    downloadFileError: PropTypes.func,
-    downloadFileSuccess: PropTypes.func,
-    fileDownloadCanceled: PropTypes.func,
-    fileUploadCanceled: PropTypes.func,
     getBuckets: PropTypes.func,
     getCredits: PropTypes.func,
     getDebits: PropTypes.func,
     getWallets: PropTypes.func,
     listFiles: PropTypes.func,
-    listUploadingFiles: PropTypes.func,
-    navigateBack: PropTypes.func,
     navigateToDashboardFilesScreen: PropTypes.func,
     navigateToFilesScreen: PropTypes.func,
     navigation: PropTypes.object,
     openImageViewer: PropTypes.func,
-    redirectToBalanceScreen: PropTypes.func,
-    redirectToChangePasswordScreen: PropTypes.func,
     redirectToInitializationScreen: PropTypes.func,
     redirectToLoginScreen: PropTypes.func,
     redirectToMainScreen: PropTypes.func,
-    redirectToMnemonicConfirmationScreen: PropTypes.func,
-    redirectToMnemonicConfirmedScreen: PropTypes.func,
-    redirectToMnemonicGenerationScreen: PropTypes.func,
-    redirectToMnemonicInfoScreen: PropTypes.func,
-    redirectToMnemonicNotConfirmedScreen: PropTypes.func,
-    redirectToMyAccountScreen: PropTypes.func,
     redirectToOnBoardingScreen: PropTypes.func,
-    redirectToPinCodeGenerationScreen: PropTypes.func,
     redirectToRegisterScreen: PropTypes.func,
-    redirectToRegisterSuccessScreen: PropTypes.func,
-    redirectToSettingsScreen: PropTypes.func,
-    redirectToStorageScreen: PropTypes.func,
     screenProps: PropTypes.object,
-    selectFile: PropTypes.func,
     setEmail: PropTypes.func,
-    setFirstSignIn: PropTypes.func,
-    updateFileDownloadProgress: PropTypes.func,
-    updateFileUploadProgress: PropTypes.func,
-    uploadFileError: PropTypes.func,
-    uploadFileStart: PropTypes.func,
-    uploadFileSuccess: PropTypes.func
+    setFirstSignIn: PropTypes.func
 };

@@ -1,9 +1,21 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Linking } from 'react-native';
-import { loginActionsCreators } from '../reducers/authentification/authActions';
+import { 
+    setAccountNotExist,
+    setAccountExist,
+    setEmailNotConfirmed,
+    setEmailConfirmed,
+    loginSuccess,
+    loginError,
+    login,
+    navigateToRegisterScreen,
+    redirectToAuthFailureScreen,
+    redirectToMainScreen,
+    redirectToInitializeScreen,
+    redirectToQRScannerScreen 
+} from '../reducers/authentification/authActions';
 import StorjLib from '../utils/StorjModule';
 import SyncModule from "../utils/SyncModule";
 import LoginComponent from '../components/LoginComponent';
@@ -11,8 +23,8 @@ import validator from '../utils/validator';
 import { LoginStateModel } from '../models/LoginStateModel';
 import { LoginErrorModel } from '../models/LoginErrorModel';
 import infoScreensConstants from '../utils/constants/infoScreensConstants';
-import { authConstants } from '../utils/constants/storageConstants';
 import { getEmail, getMnemonic, getPassword, getFirstAction, setFirstAction } from '../utils/AsyncStorageModule';
+import PropTypes from 'prop-types';
 
 /**
  * Container for LoginComponent
@@ -20,7 +32,7 @@ import { getEmail, getMnemonic, getPassword, getFirstAction, setFirstAction } fr
 class LoginContainer extends Component {
 	constructor(props) {
         super(props);
-        
+
         this.state = {
             stateModel: new LoginStateModel(),
             errorModel: new LoginErrorModel(),
@@ -137,9 +149,10 @@ class LoginContainer extends Component {
     };
 
     async login() {
-        this.props.login(this.state.stateModel.email, 
-                         this.state.stateModel.password,
-                         this.state.stateModel.mnemonic);
+        this.props.login(
+            this.state.stateModel.email, 
+            this.state.stateModel.password,
+            this.state.stateModel.mnemonic);
 
         let areCredentialsValid = await StorjLib.verifyKeys(
             this.state.stateModel.email, 
@@ -222,25 +235,24 @@ class LoginContainer extends Component {
 
 	render() {
 		return(
-                <LoginComponent
-                    isLoading = { this.state.isLoading }
-                    email = { this.state.stateModel.email }
-                    password = { this.state.stateModel.password }
-                    mnemonic = { this.state.stateModel.mnemonic }
-                    isRedirectedFromRegister = { this.props.user.isRedirectedFromRegister }
-                    isEmailError = { this.state.errorModel.isEmailError }
-                    isPasswordError = { this.state.errorModel.isPasswordError }
-                    isMnemonicError = { this.state.errorModel.isMnemonicError }
-                    areCredentialsValid = { this.state.errorModel.areCredentialsValid }
-                    onChangeLogin = { this.onChangeEmailInput.bind(this) }
-                    onChangePassword = { this.onChangePasswordInput.bind(this) }
-                    onChangeMnemonic = { this.onChangeMnemonicInput.bind(this) }
-                    redirectToForgotPassword = { this.redirectToForgotPassword.bind(this) }
-                    redirectToMnemonicInfo = { this.redirectToMnemonicInfo.bind(this) }
-                    onSubmit = { this.tryLogin.bind(this) }
-                    redirectToQRScannerScreen = { this.redirectToQRScannerScreen.bind(this) }
-                    registerButtonOnPress = { this.redirectToRegisterScreen.bind(this) }
-                />
+            <LoginComponent
+                isLoading = { this.state.isLoading }
+                email = { this.state.stateModel.email }
+                password = { this.state.stateModel.password }
+                mnemonic = { this.state.stateModel.mnemonic }
+                isRedirectedFromRegister = { this.props.user.isRedirectedFromRegister }
+                isEmailError = { this.state.errorModel.isEmailError }
+                isPasswordError = { this.state.errorModel.isPasswordError }
+                isMnemonicError = { this.state.errorModel.isMnemonicError }
+                onChangeLogin = { this.onChangeEmailInput.bind(this) }
+                onChangePassword = { this.onChangePasswordInput.bind(this) }
+                onChangeMnemonic = { this.onChangeMnemonicInput.bind(this) }
+                redirectToForgotPassword = { this.redirectToForgotPassword.bind(this) }
+                redirectToMnemonicInfo = { this.redirectToMnemonicInfo.bind(this) }
+                onSubmit = { this.tryLogin.bind(this) }
+                redirectToQRScannerScreen = { this.redirectToQRScannerScreen.bind(this) }
+                registerButtonOnPress = { this.redirectToRegisterScreen.bind(this) }
+            />
 		);
 	};
 }
@@ -249,7 +261,21 @@ class LoginContainer extends Component {
  * connecting reducer to component props 
  */
 function mapStateToProps(state) { return { user: state.authReducer.user }; };
-function mapDispatchToProps(dispatch) { return bindActionCreators(loginActionsCreators, dispatch); };
+function mapDispatchToProps(dispatch) { 
+    return bindActionCreators({
+            setAccountNotExist,
+            setAccountExist,
+            setEmailNotConfirmed,
+            setEmailConfirmed,
+            loginSuccess,
+            loginError,
+            login,
+            navigateToRegisterScreen,
+            redirectToAuthFailureScreen,
+            redirectToMainScreen,
+            redirectToInitializeScreen,
+            redirectToQRScannerScreen}, dispatch);
+};
 
 /**
  * Creating LoginScreen container

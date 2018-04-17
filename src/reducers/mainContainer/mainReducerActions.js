@@ -41,123 +41,123 @@ const {
  * Action for changing isConnected to interted state
  * @param {bool} isConnected - indicates state of internet conection
  */
-function setIsConnected(isConnected) {
+export function setIsConnected(isConnected) {
     return { type: SET_IS_CONNECTED, payload: { isConnected } };
 }
 
-function setEmail(email) {
+export function setEmail(email) {
     return { type: SET_EMAIL, payload: { email } };
 }
 
-function onSingleItemSelected() {
+export function onSingleItemSelected() {
     return { type: SINGLE_ITEM_ACTIONS_SELECTED };
 }
 
-function showActionBar() {
+export function showActionBar() {
     return { type: SHOW_ACTION_BAR };
 }
 
-function hideActionBar() {
+export function hideActionBar() {
     return { type: HIDE_ACTION_BAR };
 }
 
-function enableSelectionMode() {
+export function enableSelectionMode() {
     return { type: ENABLE_SELECTION_MODE };
 }
 
-function disableSelectionMode() {
+export function disableSelectionMode() {
     return { type: DISABLE_SELECTION_MODE };
 }
 
-function showCreateBucketInput() {
+export function showCreateBucketInput() {
     return { type: SHOW_CREATE_BUCKET_INPUT };
 }
 
-function hideCreateBucketInput() {
+export function hideCreateBucketInput() {
     return { type: HIDE_CREATE_BUCKET_INPUT };
 }
 
-function setFirstSignIn() {
+export function setFirstSignIn() {
     return { type: SET_FIRST_SIGN_IN };
 }
 
-function removeFirstSignIn() {
+export function removeFirstSignIn() {
     return { type: REMOVE_FIRST_SIGN_IN };
 }
 
-function setLoading() {
+export function setLoading() {
     return { type: SET_LOADING };
 }
 
-function unsetLoading() {
+export function unsetLoading() {
     return { type: UNSET_LOADING };
 }
 
-function openBucket(bucketId) {
+export function openBucket(bucketId) {
     return { type: OPEN_BUCKET, payload: { bucketId } };
 }
 
-function closeBucket() {
+export function closeBucket() {
     return { type: CLOSE_BUCKET };
 }
 
-function listFiles(filesHandler) {
+export function listFiles(filesHandler) {
     return { type: LIST_FILES, payload: { filesHandler } };
 }
 
-function uploadFile(file) {
+export function uploadFile(file) {
     return { type: UPLOAD_FILE, payload: { file } }
 }
 
-function uploadFileStart(bucketId, filePath) {
+export function uploadFileStart(bucketId, filePath) {
     return { type: UPLOAD_FILE_START, payload: { bucketId, filePath } }
 }
 
-function completeFileUploading(uploadResponse) {
+export function completeFileUploading(uploadResponse) {
     return { type: UPLOAD_FILE_COMPLETE, payload: { uploadResponse } };
 }
 
-function setGridView() {
+export function setGridView() {
     return { type: SET_GRID_VIEW }
 }
 
-function setListView() {
+export function setListView() {
     return { type: SET_LIST_VIEW }
 }
 
-function setSelectionId(id) {
+export function setSelectionId(id) {
     return { type: SET_SELECTION_ID, payload: { id }}
 }
 
-function clearSelection() {
+export function clearSelection() {
     return { type: CLEAR_SELECTION }
 }
 
-function setPhotosBucketId(id) {
+export function setPhotosBucketId(id) {
     return { type: SET_PHOTOS_BUCKET_ID, payload: { myPhotosBucketId: id } }
 }
 
-function setDashboardBucketId(id) {
+export function setDashboardBucketId(id) {
     return { type: SET_DASHBOARD_BUCKET_ID, payload: { dashboardBucketId: id } }
 }
 
-function pushLoading(value) {
+export function pushLoading(value) {
     return { type: PUSH_LOADING, payload: { value } };
 }
 
-function popLoading(value) {
+export function popLoading(value) {
     return { type: POP_LOADING, payload: { value } };
 }
 
-function setSorting(sortingMode) {
+export function setSorting(sortingMode) {
     return { type: SET_SORTING, payload: { sortingMode } }
 }
 
-function setSearch(index, searchSubSequence) {
+export function setSearch(index, searchSubSequence) {
     return { type: SET_SEARCH, payload: { index, searchSubSequence }}
 }
 
-function clearSearch(index) {
+export function clearSearch(index) {
     return { type: CLEAR_SEARCH, payload: { index }}
 } 
 

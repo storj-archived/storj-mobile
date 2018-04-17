@@ -57,7 +57,6 @@ BucketsComponent.propTypes = {
     isSelectionMode: PropTypes.bool,
     isSingleItemSelected: PropTypes.bool,
     navigateBack: PropTypes.func,
-    onSingleItemSelected: PropTypes.func,
     openedBucketId: PropTypes.string,
     selectBucket: PropTypes.func,
     selectedItemId: PropTypes.string,

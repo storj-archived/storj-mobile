@@ -29,6 +29,7 @@ export default class DashboardComponent extends Component {
 
 DashboardComponent.propTypes = {
     setSelectionId: PropTypes.func,
+    showOptions: PropTypes.func,
     defaultRoute: PropTypes.string,
     animatedScrollValue: PropTypes.number
 }

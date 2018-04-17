@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import MyAccountNavComponent from '../components/MyAccount/MyAccountNavComponent';
-import { redirectToStorageScreen } from '../reducers/navigation/navigationActions';
 import moment from 'moment';
 import { roundToGBAmount, formatAmount, getSum } from '../utils/utils';
 import { resetPassword } from '../reducers/authentification/authActions';
@@ -124,7 +123,11 @@ function mapStateToProps(state) {
 }
     
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators( { resetPassword }, dispatch);
+    return {
+        ...bindActionCreators( { 
+            resetPassword 
+        }, dispatch)
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyAccountContainer);

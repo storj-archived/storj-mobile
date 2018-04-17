@@ -1,17 +1,25 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Linking } from 'react-native';
-import { registerActionsCreators } from '../reducers/authentification/authActions';
+import { 
+    registerSuccess,
+    registerError,
+    register,
+    navigateBack,
+    redirectToTermsOfUse,
+    redirectToLoginScreen,
+    redirectToAuthFailureScreen,
+    redirectToRegisterSuccessScreen 
+} from '../reducers/authentification/authActions';
 import { RegisterStateModel } from '../models/RegisterStateModel';
 import { RegisterErrorModel } from '../models/RegisterErrorModel';
 import RegisterComponent from '../components/RegisterComponent';
 import StorjModule from '../utils/StorjModule';
 import validator from '../utils/validator';
 import infoScreensConstants from '../utils/constants/infoScreensConstants';
-import { authConstants } from '../utils/constants/storageConstants';
 import { setEmail, setMnemonic, setPassword, getFirstAction, setFirstAction } from '../utils/AsyncStorageModule';
+import PropTypes from 'prop-types';
 
 /**
  * Redux container for register component
@@ -217,7 +225,6 @@ export class RegisterContainer extends Component {
 	render() {
 		return(
                 <RegisterComponent
-                    isLoading = { this.state.isLoading }
                     onSubmit = { this.onSubmit.bind(this) }
                     onChangeEmail = { this.onChangeEmail.bind(this) }
                     onChangePassword = { this.onChangePassword.bind(this) }
@@ -242,7 +249,19 @@ export class RegisterContainer extends Component {
 * connecting state and action creators to component props 
 */
 function mapStateToProps(state) { return { user: state.authReducer.user }; };
-function mapDispatchToProps(dispatch) { return bindActionCreators(registerActionsCreators, dispatch); };
+function mapDispatchToProps(dispatch) { 
+    return {
+        ...bindActionCreators( {
+            registerSuccess,
+            registerError,
+            register,
+            navigateBack,
+            redirectToTermsOfUse,
+            redirectToLoginScreen,
+            redirectToAuthFailureScreen,
+            redirectToRegisterSuccessScreen}, dispatch)
+    }
+};
 
 /**
 * Creating RegisterContainer mappings

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-    View,
     BackHandler,
     Platform
 } from 'react-native';
@@ -38,14 +37,6 @@ class DashboardScreenContainer extends Component {
 		this.navigateBack();
 	}
 
-    getArraySelectedCount(array) {
-        return array.filter(item => item.isSelected).length;
-    }
-
-    getSelectedItemsCount() {        
-        return this.getArraySelectedCount(this.props.buckets.concat(this.props.files));
-    }
-
     navigateBack() {
         this.props.clearSearch(3);
         this.props.clearSearch(4);
@@ -59,23 +50,8 @@ class DashboardScreenContainer extends Component {
             <DashboardComponent 
                 showOptions = { this.props.screenProps.showOptions }
                 setSelectionId = { this.props.setSelectionId }
-                files = { this.props.files }
-                buckets = { this.props.buckets }
-                defaultRoute = { this.props.defaultRoute }
-                isFilesScreen = { this.props.screenName !== 'DashboardDefaultScreen' }
-                screenName = { this.props.screenName }
-                selectItem = { this.props.selectFile }
-                navigateBack = { () => { this.navigateBack() } }
-                deselectItem = { this.props.deselectFile }      
-                isSelectionMode = { this.props.isSelectionMode }
-                dashboardBucketId = { this.props.dashboardBucketId }
-                selectedBucketId = { this.props.selectedBucketId }
-                animatedScrollValue = { this.animatedScrollValue }
-                selectedItemsCount = { this.getSelectedItemsCount() }
-                disableSelectionMode = { this.props.disableSelectionMode }
-                enableSelectionMode = { this.props.enableSelectionMode }
-                onSingleItemSelected = { this.props.onSingleItemSelected }  
-                isSingleItemSelected = { this.props.isSingleItemSelected } />
+                defaultRoute = { this.props.defaultRoute }    
+                animatedScrollValue = { this.animatedScrollValue } />
         ) 
     }
 }
@@ -85,17 +61,9 @@ function mapStateToProps(state) {
     let index = state.dashboardScreenNavReducer.index;
     let currentScreenName = routes[index].routeName;    
 
-    return {
-        isSelectionMode: state.mainReducer.isSelectionMode,        
+    return {      
         buckets: state.bucketReducer.buckets,
-        isSingleItemSelected: state.mainReducer.isSingleItemSelected,
-        isFirstSignIn: state.mainReducer.isFirstSignIn,
-        files: state.filesReducer.fileListModels,
-        dashboardBucketId: state.mainReducer.dashboardBucketId,
-        isGridViewShown: state.mainReducer.isGridViewShown,
-        defaultRoute: routes[0].routeName,
-        screenName: currentScreenName,
-        selectedBucketId: state.mainReducer.dashboardBucketId
+        defaultRoute: routes[0].routeName
     };
 }
     
@@ -109,8 +77,8 @@ function mapDispatchToProps(dispatch) {
             dashboardNavigateBack,
             navigateToDashboardFilesScreen,
             navigateBack
-        }, dispatch)
-    }    
+        }, dispatch)  
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardScreenContainer);;

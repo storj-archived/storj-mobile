@@ -23,7 +23,7 @@ const {
  * @param {string} bucketId 
  * @param {ListItemModel[]} files 
  */
-function listFiles(bucketId, files) {
+export function listFiles(bucketId, files) {
     return { type: LIST_FILES, payload: { bucketId, files } };
 }
 
@@ -31,7 +31,7 @@ function listFiles(bucketId, files) {
  * @param {string} bucketId 
  * @param {ListItemModel} file
  */
-function uploadFileStart(bucketId, file) {
+export function uploadFileStart(bucketId, file) {
     return { type: UPLOAD_FILE_START, payload: { bucketId, file } };
 }
 
@@ -41,7 +41,7 @@ function uploadFileStart(bucketId, file) {
  * @param {ListItemModel} file
  * @param {ListItemModel} filePath
  */
-function uploadFileSuccess(bucketId, file, filePath) {
+export function uploadFileSuccess(bucketId, file, filePath) {
     return { type: UPLOAD_FILE_SUCCESS, payload: { bucketId, file, filePath } };
 }
 
@@ -50,11 +50,11 @@ function uploadFileSuccess(bucketId, file, filePath) {
  * @param {string} bucketId
  * @param {string} filePath
  */
-function uploadFileError(fileHandle) {
+export function uploadFileError(fileHandle) {
     return { type: UPLOAD_FILE_ERROR, payload: { fileHandle } };
 }
 
-function updateFileUploadProgress(fileHandle, progress, uploaded) {
+export function updateFileUploadProgress(fileHandle, progress, uploaded) {
     return { type: UPDATE_FILE_UPLOAD_PROGRESS, payload: { fileHandle, progress, uploaded } }
 }
 
@@ -63,7 +63,7 @@ function updateFileUploadProgress(fileHandle, progress, uploaded) {
  * @param {string} bucketId
  * @param {string} fileId
  */
-function downloadFileSuccess(bucketId, fileId, filePath, thumbnail) {
+export function downloadFileSuccess(bucketId, fileId, filePath, thumbnail) {
     return { type: DOWNLOAD_FILE_SUCCESS, payload: { bucketId, fileId, filePath, thumbnail } };
 }
 
@@ -72,7 +72,7 @@ function downloadFileSuccess(bucketId, fileId, filePath, thumbnail) {
  * @param {string} bucketId
  * @param {string} fileId
  */
-function downloadFileError(bucketId, fileId) {
+export function downloadFileError(bucketId, fileId) {
     return { type: DOWNLOAD_FILE_ERROR, payload: { bucketId, fileId } };
 }
 
@@ -83,7 +83,7 @@ function downloadFileError(bucketId, fileId) {
  * @param {string} progress - current progress of downloading
  * @param {string} fileRef - reference of file downloading state. Needed for canceling download
  */
-function updateFileDownloadProgress(bucketId, fileId, progress, fileRef) {
+export function updateFileDownloadProgress(bucketId, fileId, progress, fileRef) {
     return { type: UPDATE_FILE_DOWNLOAD_PROGRESS, payload: { bucketId, fileId, progress, fileRef } }
 }
 
@@ -91,35 +91,35 @@ function updateFileDownloadProgress(bucketId, fileId, progress, fileRef) {
  * Occurs when file downloading canceled
  * @param {string} fileRef - reference of file downloading state. Needed for canceling download
  */
-function fileDownloadCanceled(bucketId, fileId) {
+export function fileDownloadCanceled(bucketId, fileId) {
     return { type: FILE_DOWNLOAD_CANCELED, payload: { bucketId, fileId } }
 }
 
-function fileUploadCanceled(bucketId, fileId) {
+export function fileUploadCanceled(bucketId, fileId) {
     return { type: FILE_UPLOAD_CANCELED, payload: { bucketId, fileId } }
 }
 
-function deleteFile(bucketId, fileId) {
+export function deleteFile(bucketId, fileId) {
     return { type: DELETE_FILE, payload: { bucketId, fileId } };
 }
 
-function selectFile(file) {
+export function selectFile(file) {
     return { type: SELECT_FILE, payload: { file } };
 }
 
-function deselectFile(file) {
+export function deselectFile(file) {
     return { type: DESELECT_FILE, payload: { file } };
 }
 
-function enableSelectionMode() {
+export function enableSelectionMode() {
     return { type: ENABLE_SELECTION_MODE };
 }
 
-function listUploadingFiles(uploadingFiles) {
+export function listUploadingFiles(uploadingFiles) {
     return { type: LIST_UPLOADING_FILES, payload: { uploadingFiles } };
 }
 
-function updateFavouriteFiles(files) {
+export function updateFavouriteFiles(files) {
     return { type: FILE_UPDATE_FAVOURITE, payload: { files } } 
 }
 

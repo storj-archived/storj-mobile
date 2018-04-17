@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { bucketsContainerActions } from '../reducers/mainContainer/mainReducerActions';
-import { bucketsContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
+import { 
+    enableSelectionMode,
+    removeFirstSignIn,
+    disableSelectionMode,
+    setLoading,
+    setSelectionId,
+    closeBucket,
+    setSearch,
+    clearSearch
+} from '../reducers/mainContainer/mainReducerActions';
 import BucketsComponent from '../components/BucketsComponent';
 import FirstSignInComponent from '../components/FirstSignInComponent';
-import StorjLib from '../utils/StorjModule';
 import ServiceModule from '../utils/ServiceModule';
-import ListItemModel from '../models/ListItemModel';
 import { bucketNavigateBack } from '../reducers/navigation/navigationActions';
 import { changeSyncStatusAsync, setFirstSignInAsync, SYNC_ENUM } from "../reducers/mainContainer/MyAccount/Settings/SettingsActionsAsync";
 import PropTypes from 'prop-types';
@@ -92,13 +98,9 @@ class BucketsContainer extends Component {
                     isFilesScreen = { this.props.screenName === "FilesScreen" }
                     selectedItemsCount = { this.getSelectedItemsCount() }
                     showOptions = { this.props.screenProps.showOptions }
-                    onSingleItemSelected = { this.props.onSingleItemSelected }
                     enableSelectionMode = { this.props.enableSelectionMode }
                     disableSelectionMode = { this.props.disableSelectionMode }
                     isSelectionMode = { this.props.isSelectionMode }
-                    isSingleItemSelected = { this.props.isSingleItemSelected }
-                    deselectBucket = { this.props.deselectBucket }
-                    selectBucket = { this.props.selectBucket }
                     buckets = { this.props.buckets }
                     openedBucketId = { this.props.openedBucketId }
                     selectedItemId = { this.props.selectedItemId }
@@ -118,10 +120,8 @@ function mapStateToProps(state) {
         isFirstSignIn: state.mainReducer.isFirstSignIn,
         isSelectionMode: state.mainReducer.isSelectionMode,        
         buckets: state.bucketReducer.buckets,
-        isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         files: state.filesReducer.fileListModels,
         screenName: currentBucketScreenName,
-        isGridViewShown: state.mainReducer.isGridViewShown,
         openedBucketId: state.mainReducer.openedBucketId,
         selectedItemId: state.mainReducer.selectedItemId,
         email: state.mainReducer.email,
@@ -129,9 +129,19 @@ function mapStateToProps(state) {
     };
 }
     
+    
 function mapDispatchToProps(dispatch) {
     return {
-        ...bindActionCreators( { ...bucketsContainerActions, ...bucketsContainerBucketActions, bucketNavigateBack }, dispatch),
+        ...bindActionCreators( { 
+            enableSelectionMode,
+            removeFirstSignIn,
+            disableSelectionMode,
+            setLoading,
+            setSelectionId,
+            closeBucket,
+            setSearch,
+            clearSearch, 
+            bucketNavigateBack }, dispatch),
         setFirstSignIn: (settingsId, value, callback) => { dispatch(setFirstSignInAsync(settingsId, value, callback)); },
         changeSyncStatus: (settingsId, value) => { dispatch(changeSyncStatusAsync(settingsId, value));}
     }
@@ -144,14 +154,12 @@ BucketsContainer.propTypes = {
     buckets: PropTypes.array,
     changeSyncStatus: PropTypes.func,
     closeBucket: PropTypes.func,
-    createBucket: PropTypes.func,
     deselectBucket: PropTypes.func,
     disableSelectionMode: PropTypes.func,
     email: PropTypes.string,
     enableSelectionMode: PropTypes.func,
     files: PropTypes.array,
     isFirstSignIn: PropTypes.bool,
-    isGridViewShown: PropTypes.bool,
     isSelectionMode: PropTypes.bool,
     isSingleItemSelected: PropTypes.bool,
     navigation: PropTypes.object,
@@ -163,6 +171,5 @@ BucketsContainer.propTypes = {
     selectedItemId: PropTypes.string,
     setFirstSignIn: PropTypes.func,
     setLoading: PropTypes.func,
-    setSelectionId: PropTypes.func,
-    unsetLoading: PropTypes.func
+    setSelectionId: PropTypes.func
 }; 

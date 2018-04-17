@@ -131,24 +131,6 @@ export default class SettingsComponent extends Component{
                             <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync music</Text>
                         </TouchableOpacity>
                     </View>
-                    {/* <View style = { styles.checkboxFilesContainer }>
-                        <View style = { styles.flexRow }>
-                            <TouchableOpacity onPress = { () => { this.setState({isFilesSync: !this.state.isFilesSync}); } } >
-                                <Image 
-                                    style = { styles.icon } 
-                                    source = { 
-                                        this.state.isFilesSync 
-                                        ? require('../../images/Icons/ListItemSelected.png')
-                                        : require('../../images/Icons/ListItemUnselected.png') } />
-                            </TouchableOpacity>
-                            <Text style = { [styles.switchText, styles.checkboxTextMargin ] } >Sync files</Text>
-                        </View>
-                        <TouchableOpacity style = { styles.expanderIconContainer }>
-                            <Image
-                                source = { require('../../images/DashboardScreen/BlueVector.png') }
-                                style = { styles.expanderIcon } />
-                        </TouchableOpacity>
-                    </View> */}
                     <View style = { styles.explanationContainer }>
                         <Text style = { styles.explanationText }>Security</Text>
                     </View>

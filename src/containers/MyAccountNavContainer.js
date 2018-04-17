@@ -9,8 +9,16 @@ import { bindActionCreators } from 'redux';
 import { addNavigationHelpers } from 'react-navigation';
 import React, { Component } from 'react';
 import MyAccountScreenNavigator from '../navigators/MyAccountScreenNavigator';
-import { myAccountNavigationActions } from '../reducers/navigation/navigationActions';
-import { pincodeActionCreators } from '../reducers/authentification/authActions';
+import { 
+    redirectToMyAccountScreen,
+    redirectToBalanceScreen,
+    redirectToChangePasswordScreen,
+    redirectToPinCodeGenerationScreen,
+    redirectToSettingsScreen,
+    redirectToStorageScreen,
+    redirectToMyAccountMnemonicScreen 
+} from '../reducers/navigation/navigationActions';
+import { clear } from '../reducers/authentification/authActions';
 
 class MyAccountNavContainer extends Component {
     constructor(props) {
@@ -97,8 +105,14 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         ...bindActionCreators( { 
-            ...myAccountNavigationActions,
-            ...pincodeActionCreators
+            redirectToMyAccountScreen,
+            redirectToBalanceScreen,
+            redirectToChangePasswordScreen,
+            redirectToPinCodeGenerationScreen,
+            redirectToSettingsScreen,
+            redirectToStorageScreen,
+            redirectToMyAccountMnemonicScreen,
+            clear
         }, dispatch)
     }
 }

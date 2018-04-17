@@ -145,8 +145,6 @@ export default class PinCodeGenerationComponent extends Component {
         let password = this.props.screenProps.password;
         let mnemonic = this.props.screenProps.mnemonic;
 
-        this.props.screenProps.clearAuthReducer();
-
         StorjModule.importKeys(
             email,
             password,

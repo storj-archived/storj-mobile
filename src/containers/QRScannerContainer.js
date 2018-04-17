@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { Alert, AsyncStorage } from 'react-native';
+import { getFirstAction, setFirstAction } from '../utils/AsyncStorageModule';
 import { connect } from 'react-redux';
 import validator from '../utils/validator';
-import { qrScannerActionCreators } from '../reducers/authentification/authActions';
+import { 
+    loginSuccess,
+    loginError,
+    login,
+    redirectToAuthFailureScreen,
+    navigateBack,
+    redirectToInitializeScreen 
+} from '../reducers/authentification/authActions';
 import QRScannerComponent from '../components/QRScannerComponent';
 import StorjLib from '../utils/StorjModule';
 import SyncModule from '../utils/SyncModule';
@@ -32,8 +39,8 @@ class QRScannerContainer extends Component {
      * Handle if was already in use
      */
     handleFirstLaunch = async (email) => {
-        if(!await AsyncStorage.getItem(FIRST_ACTION)) {
-            await AsyncStorage.setItem(FIRST_ACTION, 'true');
+        if(!await getFirstAction()) {
+            await setFirstAction();
         }
 
         SyncModule.insertSyncSetting(email);
@@ -152,18 +159,29 @@ class QRScannerContainer extends Component {
             <QRScannerComponent
                 ref = { component => this._barComponent = component }
                 viewAppear = { this.state.viewAppear }
-                navigateBack = { this.navigateBack }
-                onBarCodeRead = { this._onBarCodeRead }
-                isLoading = { this.state.isLoading } />
+                navigateBack = { this.navigateBack.bind(this) }
+                onBarCodeRead = { this._onBarCodeRead } />
         )
     }  
 }
+
+    
 
 /**
  * connecting reducer to component props 
  */
 function mapStateToProps(state) { return { user: state.authReducer.user }; };
-function mapDispatchToProps(dispatch) { return bindActionCreators(qrScannerActionCreators, dispatch); };
+function mapDispatchToProps(dispatch) { 
+    return {
+        ...bindActionCreators({
+            loginSuccess,
+            loginError,
+            login,
+            redirectToAuthFailureScreen,
+            navigateBack,
+            redirectToInitializeScreen}, dispatch) 
+    }
+};
 
 /**
  * Creating QRCodeScannerScreen container

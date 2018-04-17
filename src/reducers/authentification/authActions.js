@@ -27,7 +27,7 @@ export function resetPassword(email) {
  * ActionCreator on login success 
  * @returns action
  */
-function loginSuccess() {
+export function loginSuccess() {
     return { type: LOGIN_SUCCESS };
 };
 
@@ -35,7 +35,7 @@ function loginSuccess() {
  * ActionCreator on login error
  * @returns action 
  */
-function loginError() {
+export function loginError() {
     return { type: LOGIN_ERROR };
 };
 
@@ -46,7 +46,7 @@ function loginError() {
  * @param {string} mnemonic registered mnemonic
  * @returns action
  */
-function login(email, password, mnemonic) {
+export function login(email, password, mnemonic) {
     return { type: LOGIN, payload: { email, password, mnemonic } };
 };
 
@@ -54,7 +54,7 @@ function login(email, password, mnemonic) {
  * ActionCreator for setting authReducer to default state
  * @returns action 
  */
-function clear() {
+export function clear() {
     return { type: CLEAR };
 }
 
@@ -62,7 +62,7 @@ function clear() {
  * ActionCreator that provides redux navigation to RegisterScreen
  * @returns action
  */
-function navigateToRegisterScreen() {
+export function navigateToRegisterScreen() {
     return NavigationActions.navigate({ routeName: 'RegisterScreen'});
 };
 
@@ -73,7 +73,7 @@ function navigateToRegisterScreen() {
  * @param {string} mnemonic 
  * @returns action
  */
-function register(email, password) {
+export function register(email, password) {
     return { type: REGISTER, payload: { email, password } };
 };
 
@@ -81,7 +81,7 @@ function register(email, password) {
  * ActionCreator on register success 
  * @returns action
  */
-function registerSuccess(mnemonic) {
+export function registerSuccess(mnemonic) {
     return { type: REGISTER_SUCCESS, payload: { mnemonic }};
 };
 
@@ -90,7 +90,7 @@ function registerSuccess(mnemonic) {
  * @param {string} error error massage 
  * @returns action
  */
-function registerError(error) {
+export function registerError(error) {
     return { type: REGISTER_ERROR, error };
 };
 
@@ -98,7 +98,7 @@ function registerError(error) {
  * ActionCreator that provides redux back navigation
  * @returns action
  */
-function navigateBack() {
+export function navigateBack() {
     return NavigationActions.back();
 };
 
@@ -106,7 +106,7 @@ function navigateBack() {
  * ActionCreator that provides redux navigation to LoginScreen
  * @returns action
  */
-function redirectToLoginScreen() {
+export function redirectToLoginScreen() {
     return NavigationActions.reset({
         index: 0,
         actions: [
@@ -119,7 +119,7 @@ function redirectToLoginScreen() {
  * ActionCreator that provides redux navigation to MainScreen
  * @returns action
  */
-function redirectToMainScreen() {
+export function redirectToMainScreen() {
     return NavigationActions.reset({
         index: 0,
         actions: [
@@ -132,7 +132,7 @@ function redirectToMainScreen() {
  * ActionCreator that provides redux navigation to QRScannerScreen
  * @returns action
  */
-function redirectToQRScannerScreen() {
+export function redirectToQRScannerScreen() {
     return NavigationActions.navigate({ routeName: 'QRScannerScreen' })
 };
 
@@ -140,7 +140,7 @@ function redirectToQRScannerScreen() {
  * ActionCreator that provides redux navigation to TermsOfUseScreen
  * @returns action
  */
-function redirectToTermsOfUse() {
+export function redirectToTermsOfUse() {
     return NavigationActions.navigate({ routeName: 'TermsOfUseScreen' })
 };
 
@@ -149,7 +149,7 @@ function redirectToTermsOfUse() {
  * @param {string} error
  * @returns action
  */
-function redirectToAuthFailureScreen(params) {
+export function redirectToAuthFailureScreen(params) {
     return NavigationActions.navigate({ routeName: 'AuthFailureInfoScreen', params });
 };
 
@@ -157,7 +157,7 @@ function redirectToAuthFailureScreen(params) {
  * ActionCreator that provides redux navigation to RegisterSuccessInfoScreen
  * @returns action
  */
-function redirectToRegisterSuccessScreen() {
+export function redirectToRegisterSuccessScreen() {
     return NavigationActions.navigate({ routeName: 'RegisterSuccessInfoScreen' });
 };
 
@@ -165,23 +165,23 @@ function redirectToRegisterSuccessScreen() {
  * ActionCreator that provides redux navigation to InitializationScreen
  * @returns action
  */
-function redirectToInitializeScreen() {
+export function redirectToInitializeScreen() {
     return NavigationActions.navigate({ routeName: 'InitializationScreen' });
 }
 
-function setEmailNotConfirmed() {
+export function setEmailNotConfirmed() {
     return { type: SET_EMAIL_NOT_CONFIRMED }
 }
 
-function setEmailConfirmed() {
+export function setEmailConfirmed() {
     return { type: SET_EMAIL_CONFIRMED }
 }
 
-function setAccountNotExist() {
+export function setAccountNotExist() {
     return { type: SET_ACCOUNT_NOT_EXIST }
 }
 
-function setAccountExist() {
+export function setAccountExist() {
     return { type: SET_ACCOUNT_EXIST }
 }
 

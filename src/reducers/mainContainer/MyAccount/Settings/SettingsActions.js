@@ -12,61 +12,61 @@ const {
     MUSIC_SYNC,
 } = SETTINGS_ACTIONS;
 
-function listSettings(settings) {
+export function listSettings(settings) {
     return {
         type: LIST_SETTINGS,
         payload: { settings }
     };
 }
 
-function syncOn() {
+export function syncOn() {
     return {
         type: SYNC_ON
     };
 }
 
-function syncOff() {
+export function syncOff() {
     return {
         type: SYNC_OFF
     };
 }
 
-function setWifiConstraint(value) {
+export function setWifiConstraint(value) {
     return {
         type: SET_WIFI_CONSTRAINT,
         payload: { value: value ? value : false }
     };
 }
 
-function setChargingConstraint(value) {
+export function setChargingConstraint(value) {
     return {
         type: SET_CHARGING_CONSTRAINT,
         payload: { value: value ? value : false }
     };
 }
 
-function photosSync(value) {
+export function photosSync(value) {
     return {
         type: PHOTOS_SYNC,
         payload: { value: value ? value : false }
     };
 }
 
-function moviesSync(value) {
+export function moviesSync(value) {
     return {
         type: MOVIES_SYNC,
         payload: { value: value ? value : false }
     };
 }
 
-function documentsSync(value) {
+export function documentsSync(value) {
     return {
         type: DOCUMENTS_SYNC,
         payload: { value: value ? value : false }
     };
 }
 
-function musicSync(value) {
+export function musicSync(value) {
     return {
         type: MUSIC_SYNC,
         payload: { value: value ? value : false }

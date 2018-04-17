@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { bucketsListContainerActions } from '../reducers/mainContainer/mainReducerActions';
-import { bucketsListContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
-import { navigateToFilesScreen, navigateBack } from '../reducers/navigation/navigationActions';
+import { 
+    onSingleItemSelected,
+    enableSelectionMode,
+    disableSelectionMode,
+    openBucket
+} from '../reducers/mainContainer/mainReducerActions';
+import { 
+    selectBucket,
+    deselectBucket
+} from '../reducers/mainContainer/Buckets/bucketReducerActions';
+import { navigateToFilesScreen } from '../reducers/navigation/navigationActions';
 import ServiceModule from '../utils/ServiceModule';
 import BucketsListComponent from '../components/BucketsListComponent';
 
@@ -19,7 +27,7 @@ class BucketsListContainer extends Component {
     onPress(params) {
         this.props.openBucket(params.bucketId);
         this.props.navigateToFilesScreen(params.bucketId);    
-    }
+    } 
 
     render() {
         return(
@@ -61,7 +69,16 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ ...bucketsListContainerActions, ...bucketsListContainerBucketActions, navigateToFilesScreen }, dispatch);
+    return {...bindActionCreators({ 
+            onSingleItemSelected,
+            enableSelectionMode,
+            disableSelectionMode, 
+            selectBucket,
+            deselectBucket, 
+            openBucket,
+            navigateToFilesScreen 
+        }, dispatch)
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BucketsListContainer);

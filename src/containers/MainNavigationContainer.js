@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import MainScreenTabNav from '../navigators/MainScreenNavigator';
 import PropTypes from 'prop-types';
-import { setCurrentMainScreenActions } from '../reducers/mainContainer/mainReducerActions'
+import { 
+    setPhotosBucketId,
+    hideActionBar
+} from '../reducers/mainContainer/mainReducerActions'
 
 /**
 * Container for main screen navigation
@@ -57,7 +60,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        ...bindActionCreators({ ...setCurrentMainScreenActions }, dispatch),
+        ...bindActionCreators({ 
+            setPhotosBucketId,
+            hideActionBar 
+        }, dispatch),
         testAction: () => { dispatch(NavigationActions.navigate({ routeName: 'TestScreen'})); },
         goToBucketsScreen: () => { dispatch(NavigationActions.navigate({ routeName: 'BucketsScreen'})); },
         dispatch

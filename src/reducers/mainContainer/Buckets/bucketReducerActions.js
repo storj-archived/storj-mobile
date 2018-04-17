@@ -17,35 +17,35 @@ const {
     UNSET_NAME_ALREADY_EXIST_EXCEPTION
 } = BUCKET_ACTIONS;
 
-function selectBucket(bucket) {
+export function selectBucket(bucket) {
     return { type: SELECT_BUCKET, payload: { bucket } };
 }
 
-function deselectBucket(bucket) {
+export function deselectBucket(bucket) {
     return { type: DESELECT_BUCKET, payload: { bucket } };
 }
 
-function createBucket(bucket) {
+export function createBucket(bucket) {
     return { type: CREATE_BUCKET, payload: { bucket } };
 }
 
-function deleteBucket(bucketId) {
+export function deleteBucket(bucketId) {
     return { type: DELETE_BUCKET, payload: { bucketId } };
 }
 
-function getBuckets(buckets) {
+export function getBuckets(buckets) {
     return { type: GET_BUCKETS, payload: { buckets } };
 }
 
-function updateFavourite(buckets) {
+export function updateFavourite(buckets) {
     return { type: UPDATE_FAVOURITE, payload: { buckets } } 
 }
 
-function setNameAlreadyExistException() {
+export function setNameAlreadyExistException() {
     return { type: SET_NAME_ALREADY_EXIST_EXCEPTION } 
 }
 
-function unsetNameAlreadyExistException() {
+export function unsetNameAlreadyExistException() {
     return { type: UNSET_NAME_ALREADY_EXIST_EXCEPTION } 
 }
 

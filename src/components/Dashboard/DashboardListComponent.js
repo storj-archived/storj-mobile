@@ -1,7 +1,6 @@
 import {
     View,
     Text,
-    Animated,
     ScrollView,
     StyleSheet,
     TouchableOpacity,
@@ -9,8 +8,6 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import ListComponent from '../../components/ListComponent';
-import ListItemModel from '../../models/ListItemModel';
-import BucketModel from '../../models/BucketModel';
 import DashboardListFooterComponent from '../../components/Dashboard/DashboardListFooterComponent';
 import DashboardListHeaderComponent from '../../components/Dashboard/DashboardListHeaderComponent';
 import { getHeight, getWidth } from '../../utils/adaptive';
@@ -262,19 +259,8 @@ DashboardListComponent.propTypes = {
     animatedScrollValue: PropTypes.object,
     bandwidthAmount: PropTypes.string,
     buckets: PropTypes.array,
-    deselectItem: PropTypes.func,
-    disableSelectionMode: PropTypes.func,
-    enableSelectionMode: PropTypes.func,
     files: PropTypes.array,
-    isSelectionMode: PropTypes.bool,
-    isSingleItemSelected: PropTypes.bool,
-    navigateBack: PropTypes.func,
     navigateToDashboardFilesScreen: PropTypes.func,
-    onSingleItemSelected: PropTypes.func,
-    setDashboardBucketId: PropTypes.func,
-    dashboardBucketId: PropTypes.string,    
-    selectItem: PropTypes.func,
-    selectedItemId: PropTypes.string,
-    setSelectionId: PropTypes.func,
+    setDashboardBucketId: PropTypes.func,  
     storageAmount: PropTypes.string
 }
