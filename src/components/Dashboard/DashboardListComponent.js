@@ -150,6 +150,7 @@ const listComponent = (title, data, props, count, isBucket, screen, itemType, na
                     onPress = { () => { navigationAction(itemType) } }
                     title = { title } />
                 <ListComponent
+                    onRefresh = { () => { } }
                     activeScreen = { screen }
                     screens = { "DashboardScreen" }                
                     setSelectionId = { () => {} }
