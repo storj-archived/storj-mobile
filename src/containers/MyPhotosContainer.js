@@ -13,35 +13,31 @@ import { openImageViewer } from '../reducers/navigation/navigationActions';
 import { myPicturesListContainerMainActions, getPicturesBucketId } from '../reducers/mainContainer/mainReducerActions';
 import filesActions from '../reducers/mainContainer/Files/filesReducerActions';
 import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderComponent';
-import StorjModule from '../utils/StorjModule';
-import ListItemModel from '../models/ListItemModel';
-import FileModel from '../models/FileModel';
 import ServiceModule from '../utils/ServiceModule';
 import { TYPES } from '../utils/constants/typesConstants';
 import { getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 import EmpyBucketComponent from '../components/EmpyBucketComponent';
-import SyncModule from '../utils/SyncModule';
 import { listUploadingFiles, listFiles } from "../reducers/asyncActions/fileActionsAsync";
+import BaseFileListContainer from '../containers/BaseFileListContainer';
 
-class MyPhotosContainer extends Component {
+class MyPhotosContainer extends BaseFileListContainer {
     constructor(props) {
         super(props);
-
-        this.data = [];
+        
         this.animatedScrollValue = new Animated.Value(0);
         this.shouldRenew = true;
-    }
+    }    
 
     shouldComponentUpdate() {
         if(!this.shouldRenew) return true;
-        if(!this.props.myPhotosBucketId) return true;
+        if(!this.props.bucketId) return true;
         
-        ServiceModule.getFiles(this.props.myPhotosBucketId);         
-        this.props.pushLoading(this.props.myPhotosBucketId);        
+        ServiceModule.getFiles(this.props.bucketId);         
+        this.props.pushLoading(this.props.bucketId);        
     
-        this.props.listUploadingFilesAsync(this.props.myPhotosBucketId);
-        this.props.listFilesAsync(this.props.myPhotosBucketId);
+        this.props.listUploadingFilesAsync(this.props.bucketId);
+        this.props.listFilesAsync(this.props.bucketId);
 
         this.shouldRenew = false;        
 
@@ -53,49 +49,25 @@ class MyPhotosContainer extends Component {
     }
 
     getSelectedFilesCount() {        
-        if(!this.props.myPhotosBucketId || !this.props.files || this.props.files.length === 0) return 0; 
+        if(!this.props.bucketId || !this.props.fileListModels || this.props.fileListModels.length === 0) return 0; 
 
-        let openedBucket = this.props.files.filter(item => item.entity.bucketId === this.props.myPhotosBucketId);
+        let openedBucket = this.props.fileListModels.filter(item => item.entity.bucketId === this.props.bucketId);
 
         if(openedBucket) {
             return this.getArraySelectedCount(openedBucket);
         }
     }
 
-    async cancelDownload(file) {
-        let cancelDownloadResponse = await StorjModule.cancelDownload(file.fileRef);
-
-        if(cancelDownloadResponse.isSuccess) {
-            this.props.fileDownloadCanceled(this.props.openedBucketId, file.getId());
-        }
-    }
-
-    async cancelUpload(file) {        
-        let cancelUploadResponse = await StorjModule.cancelUpload(file.fileRef);
-
-        if(cancelUploadResponse.isSuccess) {
-            this.props.fileUploadCanceled(this.props.openedBucketId, file.getId());
-        }
-    }
-
-    onPress(file) {        
-        if(file.entity.isDownloaded && file.entity.mimeType.includes('image/')) {
-            this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId, file.getStarred());
-        }
-    }
-
     render() {
-        let data = this.props.files.
-                                concat(this.props.uploadingFileListModels).
-                                filter(file => file.entity.bucketId === this.props.myPhotosBucketId);
+        let data = this.getData();
 
-        let isLoading = this.props.loadingStack.includes(this.props.myPhotosBucketId);
+        let isLoading = this.props.loadingStack.includes(this.props.bucketId);
  
         return (
             <View style = { styles.mainContainer }>
             {
                data.length === 0 
-               && this.props.myPhotosBucketId !== null && !isLoading
+               && this.props.bucketId !== null && !isLoading
                    ? <EmpyBucketComponent />
                    : <ListComponent
                         activeScreen = { this.props.activeScreen }
@@ -107,13 +79,9 @@ class MyPhotosContainer extends Component {
                         cancelUpload = { (params) => { this.cancelUpload(params); }}
                         isGridViewShown = { this.props.isGridViewShown }
                         onPress = { (params) => { this.onPress(params); } }
-                        onRefresh = { () => {  
-                            this.props.pushLoading(this.props.myPhotosBucketId);
-                            ServiceModule.getFiles(this.props.myPhotosBucketId); 
-                            this.props.listUploadingFilesAsync(this.props.myPhotosBucketId); 
-                        } }
+                        onRefresh = { this.onRefresh.bind(this) }
                         itemType = { TYPES.REGULAR_FILE }
-                        bucketId = { this.props.myPhotosBucketId }
+                        bucketId = { this.props.bucketId }
                         onSingleItemSelected = { this.props.onSingleItemSelected }                    
                         animatedScrollValue = { this.animatedScrollValue }
                         enableSelectionMode = { this.props.enableSelectionMode }
@@ -143,7 +111,7 @@ class MyPhotosContainer extends Component {
                     setSearch = { this.props.setSearch }
                     clearSearch = { this.props.clearSearch }
                     searchIndex = { 0 }
-                    openedBucketId = { this.props.myPhotosBucketId } />
+                    openedBucketId = { this.props.bucketId } />
             </View>
         )
     }
@@ -163,11 +131,10 @@ function mapStateToProps(state) {
 
     return {
         loadingStack: state.mainReducer.loadingStack,
-        buckets: state.bucketReducer.buckets,
-        files: state.filesReducer.fileListModels,
+        buckets: state.bucketReducer.buckets,        
         selectedItemId: state.mainReducer.selectedItemId,
         mainNavReducer: state.navReducer,
-        myPhotosBucketId: state.mainReducer.myPhotosBucketId,
+        bucketId: state.mainReducer.myPhotosBucketId,
         isActionBarShown: state.mainReducer.isActionBarShown,
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
@@ -199,8 +166,7 @@ MyPhotosContainer.propTypes = {
     cancelDownload: PropTypes.bool,
     cancelUpload: PropTypes.bool,
     isGridViewShown: PropTypes.bool,
-    myPhotosBucketId: PropTypes.string,
-    bucketId: PropTypes.bool,
+    bucketId: PropTypes.string,    
     onSingleItemSelected: PropTypes.func,
     animatedScrollValue: PropTypes.bool,
     enableSelectionMode: PropTypes.func,
@@ -216,8 +182,7 @@ MyPhotosContainer.propTypes = {
     downloadedFileListModels: PropTypes.array,
     fileDownloadCanceled: PropTypes.func,
     fileListModels: PropTypes.array,
-    fileUploadCanceled: PropTypes.func,
-    files: PropTypes.array,
+    fileUploadCanceled: PropTypes.func,    
     isActionBarShown: PropTypes.bool,
     isLoading: PropTypes.bool,
     isSelectionMode: PropTypes.bool,

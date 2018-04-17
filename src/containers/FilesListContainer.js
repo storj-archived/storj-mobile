@@ -6,24 +6,16 @@ import { bucketNavigateBack, dashboardNavigateBack, openImageViewer } from '../r
 import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { listUploadingFiles, listFiles } from "../reducers/asyncActions/fileActionsAsync";
-import StorjModule from '../utils/StorjModule';
 import ServiceModule from '../utils/ServiceModule';
-import ListItemModel from '../models/ListItemModel';
-import FileModel from '../models/FileModel';
 import FilesListComponent from '../components/FilesListComponent';
-import SyncModule from '../utils/SyncModule';
+import BaseFileListContainer from '../containers/BaseFileListContainer';
 
-class FilesListContainer extends Component {
+class FilesListContainer extends BaseFileListContainer {
     constructor(props) {
         super(props);
 
         this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
-    }
-
-    getData() { 
-        return this.props.fileListModels.concat(this.props.uploadingFileListModels)
-                                        .filter(file => file.entity.bucketId === this.props.openedBucketId);
-    }
+    }    
 
     async componentWillMount() {        
         if(Platform.OS === "android") {
@@ -38,31 +30,15 @@ class FilesListContainer extends Component {
             }
         ).start();               
         
-        this.props.pushLoading(this.props.openedBucketId);
-        await this.props.listFilesAsync(this.props.openedBucketId);
-        await this.props.listUploadingFilesAsync(this.props.openedBucketId);
-        ServiceModule.getFiles(this.props.openedBucketId);  
+        this.props.pushLoading(this.props.bucketId);
+        await this.props.listFilesAsync(this.props.bucketId);
+        await this.props.listUploadingFilesAsync(this.props.bucketId);
+        ServiceModule.getFiles(this.props.bucketId);  
     }
 
     componentWillUnmount() {
         if(Platform.OS === "android") {
             BackHandler.removeEventListener("hardwarebackPress", this.onHardwareBackPress);
-        }
-    }
-
-    async cancelDownload(file) {
-        let cancelDownloadResponse = await StorjModule.cancelDownload(file.fileRef);
-
-        if(cancelDownloadResponse.isSuccess) {
-            this.props.fileDownloadCanceled(this.props.openedBucketId, file.getId());
-        }
-    }
-
-    async cancelUpload(file) {        
-        let cancelUploadResponse = await StorjModule.cancelUpload(file.fileRef);
-
-        if(cancelUploadResponse.isSuccess) {
-            this.props.fileUploadCanceled(this.props.openedBucketId, file.getId());
         }
     }
 
@@ -86,16 +62,12 @@ class FilesListContainer extends Component {
         this.props.bucketNavigateBack();
     }
 
-    onPress(file) {
-        if(file.entity.isDownloaded && file.entity.mimeType.includes('image/')) {
-            this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId, file.getStarred());
-        }
-    }
-
     render() {
+        let data = this.getData();
+
         return(
             <FilesListComponent
-                isLoading = { this.props.loadingStack.includes(this.props.openedBucketId) }
+                isLoading = { this.props.loadingStack.includes(this.props.bucketId) }
                 activeScreen = { this.props.activeScreen }  
                 setSelectionId = { this.props.screenProps.setSelectionId }
                 selectedItemId = { this.props.selectedItemId }
@@ -103,10 +75,9 @@ class FilesListContainer extends Component {
                 onPress = { (params) => { this.onPress(params); } }
                 cancelDownload = { (params) => { this.cancelDownload(params); } }
                 cancelUpload = { (params) => { this.cancelUpload(params); } }
-                bucketId = { this.props.openedBucketId }
-                openedBucketId = { this.props.openedBucketId }
+                bucketId = { this.props.bucketId }                
                 dashboardBucketId = { this.props.dashboardBucketId }
-                data = { this.getData() }
+                data = { data }
                 onSingleItemSelected = { this.props.onSingleItemSelected }
                 animatedScrollValue = { this.props.screenProps.animatedScrollValue }
                 enableSelectionMode = { this.props.enableSelectionMode }
@@ -117,11 +88,7 @@ class FilesListContainer extends Component {
                 selectFile = { this.props.selectFile }
                 sortingMode = { this.props.sortingMode }
                 searchSubSequence = { this.props.searchSubSequence }
-                renewFileList = { () => {
-                    this.props.pushLoading(this.props.openedBucketId); 
-                    ServiceModule.getFiles(this.props.openedBucketId); 
-                    this.props.listUploadingFilesAsync(this.props.openedBucketId); 
-                } } />
+                onRefresh = { this.onRefresh.bind(this) } />
         );
     }
 }
@@ -133,7 +100,7 @@ function mapStateToProps(state) {
     return {
         loadingStack: state.mainReducer.loadingStack,
         mainNavReducer: state.navReducer,
-        openedBucketId: state.mainReducer.openedBucketId,
+        bucketId: state.mainReducer.openedBucketId,
         dashboardBucketId: state.mainReducer.dashboardBucketId,
         isActionBarShown: state.mainReducer.isActionBarShown,
         isSelectionMode: state.mainReducer.isSelectionMode,

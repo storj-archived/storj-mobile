@@ -17,50 +17,33 @@ import { filesListContainerMainActions } from '../reducers/mainContainer/mainRed
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { dashboardNavigateBack, navigateToDashboardFilesScreen, navigateBack } from '../reducers/navigation/navigationActions';
 import filesActions from '../reducers/mainContainer/Files/filesReducerActions';
-import StorjModule from '../utils/StorjModule';
-import ListItemModel from '../models/ListItemModel';
-import FileModel from '../models/FileModel';
 import ServiceModule from '../utils/ServiceModule';
 import { TYPES } from '../utils/constants/typesConstants';
 import { getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 import EmpyBucketComponent from '../components/EmpyBucketComponent';
 import { listUploadingFiles, listFiles } from "../reducers/asyncActions/fileActionsAsync";
+import BaseFileListContainer from '../containers/BaseFileListContainer';
 
-class DashboardFileListContainer extends Component {
+class DashboardFileListContainer extends BaseFileListContainer {
     constructor(props) {
         super(props);
 
-        this.data = [];
         this.animatedScrollValue = new Animated.Value(0);
     }
 
     componentWillMount() {            
-        this.props.pushLoading(this.props.dashboardBucketId);
-        ServiceModule.getFiles(this.props.dashboardBucketId);  
-    }
-
-    getData() {        
-        this.data = this.props.files.
-                        concat(this.props.uploadingFileListModels).
-                        filter(file => file.entity.bucketId === this.props.dashboardBucketId);
-
-        return this.data;
-    }
+        this.props.pushLoading(this.props.bucketId);
+        ServiceModule.getFiles(this.props.bucketId);  
+    }    
 
     getArraySelectedCount(array) {
         return array.filter(item => item.isSelected).length;
     }
 
     getSelectedItemsCount() {        
-        return this.getArraySelectedCount(this.props.buckets.concat(this.props.files));
-    }
-
-    onPress(file) {        
-        if(file.entity.isDownloaded) {
-            this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId);
-        }
-    }
+        return this.getArraySelectedCount(this.props.buckets.concat(this.props.fileListModels));
+    }    
 
     navigateBack() {
         this.props.clearSearch(4);
@@ -71,12 +54,12 @@ class DashboardFileListContainer extends Component {
 
     render() {
         let data = this.getData();
-        let isLoading = this.props.loadingStack.includes(this.props.dashboardBucketId);
+        let isLoading = this.props.loadingStack.includes(this.props.bucketId);
         
         return (
             <View style = { styles.mainContainer }>
                 {
-                    data.length === 0 && this.props.dashboardBucketId !== null && !isLoading ?
+                    data.length === 0 && this.props.bucketId !== null && !isLoading ?
                         <EmpyBucketComponent />
                         : <ListComponent
                             activeScreen = { this.props.screenName }
@@ -85,11 +68,11 @@ class DashboardFileListContainer extends Component {
                             contentWrapperStyle = { styles.contentWrapper }
                             setSelectionId = { this.props.setSelectionId }
                             selectedItemId = { this.props.selectedItemId }
-                            cancelDownload = { this.props.cancelDownload }
-                            cancelUpload = { this.props.cancelUpload }
+                            cancelDownload = { (params) => { this.cancelDownload(params); }}
+                            cancelUpload = { (params) => { this.cancelUpload(params); }}
                             isGridViewShown = { this.props.isGridViewShown }
                             onPress = { (params) => { this.onPress(params); } }
-                            onRefresh = { () => ServiceModule.getFiles(this.props.dashboardBucketId) }
+                            onRefresh = { this.onRefresh.bind(this) }
                             itemType = { TYPES.REGULAR_FILE }
                             bucketId = { this.props.bucketId }
                             onSingleItemSelected = { this.props.onSingleItemSelected }                    
@@ -150,10 +133,10 @@ function mapStateToProps(state) {
     return {
         loadingStack: state.mainReducer.loadingStack,
         buckets: state.bucketReducer.buckets,
-        files: state.filesReducer.fileListModels,
+        fileListModels: state.filesReducer.fileListModels,
         selectedItemId: state.mainReducer.selectedItemId,
         mainNavReducer: state.navReducer,
-        dashboardBucketId: state.mainReducer.dashboardBucketId,
+        bucketId: state.mainReducer.dashboardBucketId,
         isActionBarShown: state.mainReducer.isActionBarShown,
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
@@ -197,8 +180,7 @@ DashboardFileListContainer.propTypes = {
     cancelDownload: PropTypes.bool,
     cancelUpload: PropTypes.bool,
     isGridViewShown: PropTypes.bool,
-    dashboardBucketId: PropTypes.string,
-    bucketId: PropTypes.bool,
+    bucketId: PropTypes.string,
     onSingleItemSelected: PropTypes.func,
     animatedScrollValue: PropTypes.bool,
     enableSelectionMode: PropTypes.func,
@@ -214,8 +196,7 @@ DashboardFileListContainer.propTypes = {
     downloadedFileListModels: PropTypes.array,
     fileDownloadCanceled: PropTypes.func,
     fileListModels: PropTypes.array,
-    fileUploadCanceled: PropTypes.func,
-    files: PropTypes.array,
+    fileUploadCanceled: PropTypes.func,    
     isActionBarShown: PropTypes.bool,
     isLoading: PropTypes.bool,
     isSelectionMode: PropTypes.bool,

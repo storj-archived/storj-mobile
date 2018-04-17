@@ -21,7 +21,7 @@ export default class FilesListComponent extends Component {
             <View style = { styles.mainContainer }>
                 {
                     this.props.data.length === 0 
-                    && this.props.openedBucketId !== null && !this.props.isLoading
+                    && this.props.bucketId !== null && !this.props.isLoading
                         ? <EmpyBucketComponent />
                         : <ListComponent
                             searchSubSequence = { this.props.searchSubSequence }
@@ -35,7 +35,7 @@ export default class FilesListComponent extends Component {
                             cancelUpload = { this.props.cancelUpload }
                             isGridViewShown = { this.props.isGridViewShown }
                             onPress = { this.props.onPress }
-                            onRefresh = { this.props.renewFileList }
+                            onRefresh = { this.props.onRefresh }
                             itemType = { TYPES.REGULAR_FILE }
                             bucketId = { this.props.bucketId }
                             onSingleItemSelected = { this.props.onSingleItemSelected }                    
@@ -95,8 +95,7 @@ FilesListComponent.propTypes = {
     isSelectionMode: PropTypes.bool,
     isSingleItemSelected: PropTypes.bool,
     onPress: PropTypes.func,
-    onSingleItemSelected: PropTypes.func,
-    openedBucketId: PropTypes.string,
+    onSingleItemSelected: PropTypes.func,    
     renewFileList: PropTypes.func,
     selectFile: PropTypes.func,
     selectedItemId: PropTypes.string,
