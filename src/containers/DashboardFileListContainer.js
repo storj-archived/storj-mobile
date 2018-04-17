@@ -9,20 +9,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ListComponent from '../components/ListComponent';
 import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderComponent';
-import { openImageViewer } from '../reducers/navigation/navigationActions';
-import { myPicturesListContainerMainActions, getPicturesBucketId } from '../reducers/mainContainer/mainReducerActions';
-import { dashboardContainerActions } from '../reducers/mainContainer/mainReducerActions';
+import { myPicturesListContainerMainActions, getPicturesBucketId, dashboardContainerActions, filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { dashboardContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
-import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
-import { dashboardNavigateBack, navigateToDashboardFilesScreen, navigateBack } from '../reducers/navigation/navigationActions';
+import { dashboardNavigateBack, navigateToDashboardFilesScreen, navigateBack, openImageViewer } from '../reducers/navigation/navigationActions';
 import filesActions from '../reducers/mainContainer/Files/filesReducerActions';
-import ServiceModule from '../utils/ServiceModule';
 import { TYPES } from '../utils/constants/typesConstants';
 import { getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 import EmpyBucketComponent from '../components/EmpyBucketComponent';
-import { listUploadingFiles, listFiles } from "../reducers/asyncActions/fileActionsAsync";
 import BaseFileListContainer from '../containers/BaseFileListContainer';
 
 /** 
@@ -39,8 +34,7 @@ class DashboardFileListContainer extends BaseFileListContainer {
      * Set initial data upload from Storj Network when screen is loaded
     */
     componentWillMount() {            
-        this.props.pushLoading(this.props.bucketId);
-        ServiceModule.getFiles(this.props.bucketId);  
+        this.onRefresh();
     }    
 
     getArraySelectedCount(array) {
@@ -72,7 +66,7 @@ class DashboardFileListContainer extends BaseFileListContainer {
                     data.length === 0 && this.props.bucketId !== null && !isLoading ?
                         <EmpyBucketComponent />
                         : <ListComponent
-                            activeScreen = { this.props.screenName }
+                            activeScreen = { this.props.activeScreen }
                             searchSubSequence = { this.props.searchSubSequence }
                             screens = { "DashboardScreen" }                    
                             contentWrapperStyle = { styles.contentWrapper }
@@ -108,14 +102,13 @@ class DashboardFileListContainer extends BaseFileListContainer {
                     searchIndex = { 4 }  
                     setDashboardBucketId = { this.props.setDashboardBucketId }
                     isFilesScreen = { true }
-                    buckets = { this.props.buckets }
-                    screenName = { this.props.screenName }
+                    buckets = { this.props.buckets }                    
                     selectItem = { this.props.selectItem }
                     showOptions = { this.props.screenProps.showOptions }
                     navigateBack = { () => { this.navigateBack() } }
                     deselectItem = { this.props.deselectItem }     
                     isSelectionMode = { this.props.isSelectionMode }
-                    openedBucketId = { this.props.selectedBucketId }
+                    openedBucketId = { this.props.bucketId }
                     animatedScrollValue = { this.animatedScrollValue }
                     enableSelectionMode = { this.props.enableSelectionMode }
                     disableSelectionMode = { this.props.disableSelectionMode }
@@ -138,34 +131,26 @@ const LoadingComponent = (props) => {
 function mapStateToProps(state) {
     let screenIndex = state.mainScreenNavReducer.index;
     let currentScreenName = state.mainScreenNavReducer.routes[screenIndex].routeName; 
-    let routes = state.dashboardScreenNavReducer.routes;
 
     return {
         loadingStack: state.mainReducer.loadingStack,
         buckets: state.bucketReducer.buckets,
         fileListModels: state.filesReducer.fileListModels,
-        selectedItemId: state.mainReducer.selectedItemId,
-        mainNavReducer: state.navReducer,
+        selectedItemId: state.mainReducer.selectedItemId,        
         bucketId: state.mainReducer.dashboardBucketId,
-        isActionBarShown: state.mainReducer.isActionBarShown,
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
         uploadingFileListModels: state.filesReducer.uploadingFileListModels,
         isLoading: state.mainReducer.isLoading,
         isGridViewShown: state.mainReducer.isGridViewShown,
-        downloadedFileListModels: state.filesReducer.downloadedFileListModels,
-        sortingMode: state.mainReducer.sortingMode,
-        isFirstSignIn: state.mainReducer.isFirstSignIn,
-        defaultRoute: routes[0].routeName,
-        screenName: currentScreenName,
-        selectedBucketId: state.mainReducer.dashboardBucketId,
+        sortingMode: state.mainReducer.sortingMode,        
+        activeScreen: currentScreenName,        
         searchSubSequence: state.mainReducer.dashboardFilesSearchSubSequence
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        ...bindActionCreators({  
+    return bindActionCreators({  
             openImageViewer, 
             ...myPicturesListContainerMainActions, 
             ...filesActions,
@@ -176,55 +161,31 @@ function mapDispatchToProps(dispatch) {
             dashboardNavigateBack,
             navigateToDashboardFilesScreen,
             navigateBack
-        }, dispatch),
-        listUploadingFilesAsync: async (bucketId) => { await dispatch(listUploadingFiles(bucketId)); },
-        listFilesAsync: async (bucketId) => { return await dispatch(listFiles(bucketId)); }
-    }
+        }, dispatch);    
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardFileListContainer);
 
 DashboardFileListContainer.propTypes = {
+    activeScreen: PropTypes.string,
+    searchSubSequence: PropTypes.string,
+    sortingMode: PropTypes.string,
     setSelectionId: PropTypes.func,
     selectedItemId: PropTypes.string,
-    cancelDownload: PropTypes.bool,
-    cancelUpload: PropTypes.bool,
     isGridViewShown: PropTypes.bool,
     bucketId: PropTypes.string,
     onSingleItemSelected: PropTypes.func,
     animatedScrollValue: PropTypes.bool,
     enableSelectionMode: PropTypes.func,
-    disableSelectionMode: PropTypes.func,
-    isSelectionMode: PropTypes.bool,
+    disableSelectionMode: PropTypes.func,    
     isSingleItemSelected: PropTypes.bool,
     deselectFile: PropTypes.func,
-    selectFile: PropTypes.func,
-    closeBucket: PropTypes.func,
-    deleteFile: PropTypes.func,
-    downloadFileError: PropTypes.func,
-    downloadFileSuccess: PropTypes.func,
-    downloadedFileListModels: PropTypes.array,
-    fileDownloadCanceled: PropTypes.func,
-    fileListModels: PropTypes.array,
-    fileUploadCanceled: PropTypes.func,    
-    isActionBarShown: PropTypes.bool,
+    selectFile: PropTypes.func,    
+    fileListModels: PropTypes.array,    
     isLoading: PropTypes.bool,
     isSelectionMode: PropTypes.bool,
-    isSingleItemSelected: PropTypes.bool,
-    listFiles: PropTypes.func,
-    mainNavReducer: PropTypes.object,
-    navigation: PropTypes.object,
-    openBucket: PropTypes.func,
-    openImageViewer: PropTypes.func,
-    screenProps: PropTypes.object,
-    setLoading: PropTypes.func,
-    listUploadingFiles: PropTypes.func,
-    unsetLoading: PropTypes.func,
-    updateFileDownloadProgress: PropTypes.func,
-    updateFileUploadProgress: PropTypes.func,
-    uploadFileError: PropTypes.func,
-    uploadFileStart: PropTypes.func,
-    uploadFileSuccess: PropTypes.func,
+    isSingleItemSelected: PropTypes.bool,       
+    screenProps: PropTypes.object,    
     uploadingFileListModels: PropTypes.array
 };
 

@@ -33,8 +33,7 @@ class BaseFileListContainer extends Component {
      */
     onRefresh() {
         this.props.pushLoading(this.props.bucketId);
-        ServiceModule.getFiles(this.props.bucketId); 
-        this.props.listUploadingFilesAsync(this.props.bucketId); 
+        ServiceModule.getFiles(this.props.bucketId);         
     }
 
     /**
@@ -72,7 +71,6 @@ BaseFileListContainer.propTypes = {
     fileListModels: PropTypes.array,
     uploadingFileListModels: PropTypes.array,
     pushLoading: PropTypes.func,
-    listUploadingFilesAsync: PropTypes.func,
     fileDownloadCanceled: PropTypes.func,
     fileUploadCanceled: PropTypes.func
 };

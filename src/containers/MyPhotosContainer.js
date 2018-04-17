@@ -13,12 +13,10 @@ import { openImageViewer } from '../reducers/navigation/navigationActions';
 import { myPicturesListContainerMainActions, getPicturesBucketId } from '../reducers/mainContainer/mainReducerActions';
 import filesActions from '../reducers/mainContainer/Files/filesReducerActions';
 import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderComponent';
-import ServiceModule from '../utils/ServiceModule';
 import { TYPES } from '../utils/constants/typesConstants';
 import { getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 import EmpyBucketComponent from '../components/EmpyBucketComponent';
-import { listUploadingFiles, listFiles } from "../reducers/asyncActions/fileActionsAsync";
 import BaseFileListContainer from '../containers/BaseFileListContainer';
 
 /** 
@@ -39,11 +37,7 @@ class MyPhotosContainer extends BaseFileListContainer {
         if(!this.shouldRenew) return true;
         if(!this.props.bucketId) return true;
         
-        ServiceModule.getFiles(this.props.bucketId);         
-        this.props.pushLoading(this.props.bucketId);        
-    
-        this.props.listUploadingFilesAsync(this.props.bucketId);
-        this.props.listFilesAsync(this.props.bucketId);
+        this.onRefresh();      
 
         this.shouldRenew = false;        
 
@@ -138,75 +132,46 @@ function mapStateToProps(state) {
     return {
         loadingStack: state.mainReducer.loadingStack,
         buckets: state.bucketReducer.buckets,        
+        fileListModels: state.filesReducer.fileListModels,
         selectedItemId: state.mainReducer.selectedItemId,
-        mainNavReducer: state.navReducer,
-        bucketId: state.mainReducer.myPhotosBucketId,
-        isActionBarShown: state.mainReducer.isActionBarShown,
+        bucketId: state.mainReducer.myPhotosBucketId,        
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
-        fileListModels: state.filesReducer.fileListModels,
         uploadingFileListModels: state.filesReducer.uploadingFileListModels,
         isLoading: state.mainReducer.isLoading,
-        isGridViewShown: state.mainReducer.isGridViewShown,
-        downloadedFileListModels: state.filesReducer.downloadedFileListModels,
-        selectedItemId: state.mainReducer.selectedItemId,
-        activeScreen: currentScreenName,
+        isGridViewShown: state.mainReducer.isGridViewShown,        
         sortingMode: state.mainReducer.sortingMode,
+        activeScreen: currentScreenName,        
         searchSubSequence: state.mainReducer.myPhotosSearchSubSequence
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return{
-        ...bindActionCreators({ openImageViewer, ...myPicturesListContainerMainActions, ...filesActions }, dispatch),
-        listUploadingFilesAsync: async (bucketId) => { await dispatch(listUploadingFiles(bucketId)); },
-        listFilesAsync: async (bucketId) => { return await dispatch(listFiles(bucketId)); }
-    } 
+    return bindActionCreators({ openImageViewer, ...myPicturesListContainerMainActions, ...filesActions }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPhotosContainer);
 
 MyPhotosContainer.propTypes = {
+    activeScreen: PropTypes.string,
+    searchSubSequence: PropTypes.string,
+    sortingMode: PropTypes.string,
     setSelectionId: PropTypes.func,
     selectedItemId: PropTypes.string,
-    cancelDownload: PropTypes.bool,
-    cancelUpload: PropTypes.bool,
     isGridViewShown: PropTypes.bool,
     bucketId: PropTypes.string,    
     onSingleItemSelected: PropTypes.func,
     animatedScrollValue: PropTypes.bool,
     enableSelectionMode: PropTypes.func,
-    disableSelectionMode: PropTypes.func,
-    isSelectionMode: PropTypes.bool,
+    disableSelectionMode: PropTypes.func,    
     isSingleItemSelected: PropTypes.bool,
     deselectFile: PropTypes.func,
     selectFile: PropTypes.func,
-    closeBucket: PropTypes.func,
-    deleteFile: PropTypes.func,
-    downloadFileError: PropTypes.func,
-    downloadFileSuccess: PropTypes.func,
-    downloadedFileListModels: PropTypes.array,
-    fileDownloadCanceled: PropTypes.func,
-    fileListModels: PropTypes.array,
-    fileUploadCanceled: PropTypes.func,    
-    isActionBarShown: PropTypes.bool,
+    fileListModels: PropTypes.array,        
     isLoading: PropTypes.bool,
     isSelectionMode: PropTypes.bool,
-    isSingleItemSelected: PropTypes.bool,
-    listFiles: PropTypes.func,
-    mainNavReducer: PropTypes.object,
-    navigation: PropTypes.object,
-    openBucket: PropTypes.func,
-    openImageViewer: PropTypes.func,
+    isSingleItemSelected: PropTypes.bool,        
     screenProps: PropTypes.object,
-    setLoading: PropTypes.func,
-    listUploadingFiles: PropTypes.func,
-    unsetLoading: PropTypes.func,
-    updateFileDownloadProgress: PropTypes.func,
-    updateFileUploadProgress: PropTypes.func,
-    uploadFileError: PropTypes.func,
-    uploadFileStart: PropTypes.func,
-    uploadFileSuccess: PropTypes.func,
     uploadingFileListModels: PropTypes.array
 };
 
