@@ -116,7 +116,7 @@ class DashboardFileListContainer extends BaseFileListContainer {
                     onSingleItemSelected = { this.props.onSingleItemSelected }  
                     isSingleItemSelected = { this.props.isSingleItemSelected } />
             </View>
-        )
+        );
     }
 }
 

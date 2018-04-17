@@ -28,7 +28,9 @@ export default class InitializeComponent extends Component {
         });
 
         this.keyboardListenerHide = Keyboard.addListener('keyboardDidHide', () => {
-            this._inputComponent._textInput.blur();
+            if(this._inputComponent && this._inputComponent._textInput) 
+                this._inputComponent._textInput.blur();
+            
             this.setState({isKeyboardShown: false})
         });
     }

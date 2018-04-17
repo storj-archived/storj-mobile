@@ -24,10 +24,57 @@ class BucketsListContainer extends Component {
         header: null
     };
 
+<<<<<<< 83e2c72160fb8351feab18d263abccf208df6c8d
     onPress(params) {
         this.props.openBucket(params.bucketId);
         this.props.navigateToFilesScreen(params.bucketId);    
     } 
+=======
+    onPress(item) {
+        if(this.props.isSingleItemSelected) {
+            this.disableSelectionMode();
+            return;
+        }
+
+        if(this.props.isSelectionMode) {                                             
+            this._onSelectionPress(item);
+            return;
+        }
+        
+        this._onPress(item);
+    }
+    onLongPress(item) {
+        if(!this.props.isSelectionMode) {
+            this.props.enableSelectionMode();
+            this._onSelectionPress(item);
+        }
+    }
+    onDotsPress(item) {
+        if(this.props.isSingleItemSelected) {
+            this.disableSelectionMode();
+        } else {
+            this.props.onSingleItemSelected();
+            this._onSelectionPress(item);
+            this.props.screenProps.setSelectionId(item.getId());
+        }
+    }
+
+    disableSelectionMode() {
+        this.props.screenProps.setSelectionId(null);
+        this.props.disableSelectionMode();
+    }
+
+    _onSelectionPress(item) {
+        if(item.isSelected)
+            this.props.deselectBucket(item);
+        else
+            this.props.selectBucket(item);
+    }
+    _onPress(item) {
+        this.props.openBucket(item.getId());
+        this.props.navigateToFilesScreen(item.getId());    
+    }
+>>>>>>> [REFACTORING] ListComponent, ListItemComponent, GridItemComponent
 
     render() {
         return(
@@ -35,7 +82,9 @@ class BucketsListContainer extends Component {
                 activeScreen = { this.props.activeScreen }
                 setSelectionId = { this.props.screenProps.setSelectionId }
                 isGridViewShown = { this.props.isGridViewShown }
-                onPress = { (params) => { this.onPress(params); } }
+                onPress = { (item) => { this.onPress(item); } }
+                onLongPress = { (item) => { this.onLongPress(item); } }
+                onDotsPress = { (item) => { this.onDotsPress(item); } }
                 selectedItemId = { this.props.screenProps.selectedItemId }
                 animatedScrollValue = { this.props.screenProps.animatedScrollValue }
                 onSingleItemSelected = { this.props.onSingleItemSelected }

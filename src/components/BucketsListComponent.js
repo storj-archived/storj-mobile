@@ -1,9 +1,11 @@
 import {
     View,
-    StyleSheet
+    StyleSheet,
+    Text
 } from 'react-native';
 import React, { Component } from 'react';
 import ListComponent from '../components/ListComponent';
+import ListComponent2 from '../components/ListComponent2';
 import { getHeight } from '../utils/adaptive';
 import { TYPES } from '../utils/constants/typesConstants';
 import PropTypes from 'prop-types';
@@ -16,7 +18,8 @@ export default class BucketsListComponent extends Component {
     render() {
         return(
             <View style = { styles.mainContainer }>
-                <ListComponent
+                <ListComponent2
+                    textComp = { (props) => <Text numberOfLines = { 1 } style = { props.style }>{ props.children }</Text> }
                     searchSubSequence = { this.props.searchSubSequence }
                     sortingMode = { this.props.sortingMode }
                     activeScreen = { this.props.activeScreen }
@@ -26,6 +29,8 @@ export default class BucketsListComponent extends Component {
                     setSelectionId = { this.props.setSelectionId }
                     isGridViewShown = { this.props.isGridViewShown }
                     onPress = { this.props.onPress }
+                    onLongPress = { this.props.onLongPress }
+                    onDotsPress = { this.props.onDotsPress }
                     itemType = { TYPES.REGULAR_BUCKET }
                     selectedItemId = { this.props.selectedItemId }
                     onSingleItemSelected = { this.props.onSingleItemSelected }                    

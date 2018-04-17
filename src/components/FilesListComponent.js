@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import ListComponent from '../components/ListComponent';
+import ListComponent2 from '../components/ListComponent2';
 import { getHeight } from '../utils/adaptive';
 import { TYPES } from '../utils/constants/typesConstants';
 import EmpyBucketComponent from '../components/EmpyBucketComponent';
@@ -15,8 +16,7 @@ export default class FilesListComponent extends Component {
         super(props);
     }
 
-    render() {
-        (null)        
+    render() {        
         return(
             <View style = { styles.mainContainer }>
                 {
