@@ -9,9 +9,12 @@
 #import "FilePickerLib.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 @import MobileCoreServices;
+#import "SingleResponse.h"
 
 #define KEY_PATH "path"
 #define KEY_ERROR_MESSAGE "errorMessage"
+#define KEY_SUCCESS "isSuccess"
+#define KEY_RESULT "result"
 
 #define OPTIONS_KEY_MIME_TYPE "mimeType"
 #define OPTIONS_KEY_FILE_PICKER_TITLE "pickerTitle"
@@ -49,6 +52,8 @@ RCT_REMAP_METHOD(show, showWithOptions:(NSDictionary *) options
     [self.options setValue:options[key] forKey:key];
   }
   
+//  self.picker = [[UIDocumentMenuViewController alloc] initW]
+  
   self.picker = [[UIImagePickerController alloc] init];
   
   // RNImagePickerTargetLibrarySingleImage
@@ -79,8 +84,14 @@ RCT_REMAP_METHOD(show, showWithOptions:(NSDictionary *) options
   dispatch_async(dispatch_get_main_queue(), ^{
     [picker dismissViewControllerAnimated:YES completion:nil];
   });
-  self.resolve(@{@KEY_PATH:@"",
-                 @KEY_ERROR_MESSAGE:@"Cancelled by user"});
+  self.resolve(@{@KEY_SUCCESS:@(NO),
+                  @KEY_RESULT:@[@{@KEY_PATH:@"",
+                                   @KEY_ERROR_MESSAGE:@""
+                                   }
+                                ],
+                  @KEY_ERROR_MESSAGE:@"Canceled by user"
+                  });
+ 
 }
 
 -(void)processRetrievedImage:(NSDictionary *) info{
@@ -113,17 +124,30 @@ RCT_REMAP_METHOD(show, showWithOptions:(NSDictionary *) options
       
       NSString *fileURL = [[NSURL fileURLWithPath:path] absoluteString];
       if(fileURL){
-        self.resolve(@{@KEY_PATH: fileURL,
-                        @KEY_ERROR_MESSAGE:@""});
+        self.resolve(@{@KEY_SUCCESS:@(YES),
+                        @KEY_RESULT:@[@{@KEY_PATH:fileURL,
+                                         @KEY_ERROR_MESSAGE:@""
+                                         }
+                                      ],
+                        @KEY_ERROR_MESSAGE:@""
+                        });
       } else {
-        self.resolve(@{@KEY_PATH:@"",
+        self.resolve(@{@KEY_SUCCESS:@(NO),
+                        @KEY_RESULT:@[@{@KEY_PATH:@"",
+                                         @KEY_ERROR_MESSAGE:@""
+                                         }
+                                      ],
                         @KEY_ERROR_MESSAGE:@"Error with getting full path"
                         });
       }
     } failureBlock:^(NSError *error) {
-      self.resolve(@{@KEY_PATH:@"",
-                     @KEY_ERROR_MESSAGE:[error localizedDescription]
-                    });
+      self.resolve(@{@KEY_SUCCESS:@(YES),
+                      @KEY_RESULT:@[@{@KEY_PATH:@"",
+                                       @KEY_ERROR_MESSAGE:@""
+                                       }
+                                    ],
+                      @KEY_ERROR_MESSAGE:[error localizedDescription]
+                      });
     }];
     return;
   }
@@ -133,12 +157,23 @@ RCT_REMAP_METHOD(show, showWithOptions:(NSDictionary *) options
   [data writeToFile:path atomically:YES];
   NSString *filePath = [[NSURL fileURLWithPath:path] absoluteString];
   if(filePath){
-    self.resolve(@{@KEY_PATH: filePath,
-                    @KEY_ERROR_MESSAGE:@""});
+    self.resolve(@{@KEY_SUCCESS:@(YES),
+                    @KEY_RESULT:@[@{@KEY_PATH:filePath,
+                                     @KEY_ERROR_MESSAGE:@""
+                                     }
+                                  ],
+                    @KEY_ERROR_MESSAGE:@""
+                    });
+    return;
   } else {
-    self.resolve(@{@KEY_PATH:@"",
+    self.resolve(@{@KEY_SUCCESS:@(NO),
+                    @KEY_RESULT:@[@{@KEY_PATH:@"",
+                                     @KEY_ERROR_MESSAGE:@""
+                                     }
+                                  ],
                     @KEY_ERROR_MESSAGE:@"Error with getting full path"
                     });
+    return;
   }
 }
 
@@ -156,17 +191,35 @@ RCT_REMAP_METHOD(show, showWithOptions:(NSDictionary *) options
   }
   NSError *error = nil;
   [fileManager moveItemAtURL:videoURL toURL:videoDestinationURL error:&error];
+  
   if (error) {
-    self.resolve(@{@KEY_PATH:@"",
-                    @KEY_ERROR_MESSAGE:[error localizedDescription]});
+    self.resolve(@{@KEY_SUCCESS:@(NO),
+                    @KEY_RESULT:@[@{@KEY_PATH:@"",
+                                     @KEY_ERROR_MESSAGE:[error localizedDescription]
+                                     }
+                                  ],
+                    @KEY_ERROR_MESSAGE:[error localizedDescription]
+                    });
     return;
   }
   if(videoDestinationURL){
-    self.resolve(@{@KEY_PATH:videoDestinationURL.absoluteString,
-                    @KEY_ERROR_MESSAGE:@""});
+    self.resolve(@{@KEY_SUCCESS:@(YES),
+                    @KEY_RESULT:@[@{@KEY_PATH:[videoDestinationURL absoluteString],
+                                     @KEY_ERROR_MESSAGE:@""
+                                     }
+                                  ],
+                    @KEY_ERROR_MESSAGE:@""
+                    });
+    return;
   } else{
-    self.resolve(@{@KEY_PATH:@"",
-                    @KEY_ERROR_MESSAGE:[error localizedDescription]});
+    self.resolve(@{@KEY_SUCCESS:@(NO),
+                    @KEY_RESULT:@[@{@KEY_PATH:@"",
+                                     @KEY_ERROR_MESSAGE:@""
+                                     }
+                                  ],
+                    @KEY_ERROR_MESSAGE:@"Error while retrieving Video URL"
+                    });
+    return;
   }
 }
 
@@ -179,10 +232,23 @@ RCT_REMAP_METHOD(show, showWithOptions:(NSDictionary *) options
   NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
   if([mediaType isEqualToString:(NSString *) kUTTypeImage]){
     [self processRetrievedImage:info];
+    return;
   }
   if([mediaType isEqualToString:(NSString *) kUTTypeMovie]){
     [self processRetrievedVideo:info];
+    return;
   }
+}
++(NSString *) convertToJsonWithArray:(NSArray *)array{
+  NSError * err;
+  NSData * jsonData = [NSJSONSerialization dataWithJSONObject:array options:0 error:&err];
+  if(!jsonData){
+    NSLog(@"Error while serialization");
+    return @"";
+  }
+  NSString *resultString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+  //  NSLog(@"result: %@", resultString);
+  return resultString;
 }
 
 - (UIImage *)fixOrientation:(UIImage *)srcImg {

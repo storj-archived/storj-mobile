@@ -53,6 +53,7 @@
 		D68D4C0D19FC44AFA409AB73 /* Montserrat-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEF7D3FD619949DEBB4F5660 /* Montserrat-SemiBoldItalic.ttf */; };
 		DC2841E6204972FD0093183F /* StorjIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC2841E020496AEA0093183F /* StorjIOS.framework */; };
 		DC2841E7204972FD0093183F /* StorjIOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DC2841E020496AEA0093183F /* StorjIOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DC76320C2084C6F800B7C64A /* DocumentsPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = DC76320B2084C6F800B7C64A /* DocumentsPicker.m */; };
 		DC914C47206BD55000F0C4FF /* StorjWrapperSingletone.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C46206BD55000F0C4FF /* StorjWrapperSingletone.m */; };
 		DC914C4A206BE5D400F0C4FF /* SyncModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C49206BE5D400F0C4FF /* SyncModule.m */; };
 		DC914C5C206BFBF200F0C4FF /* Sha256Module.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C5B206BFBF200F0C4FF /* Sha256Module.m */; };
@@ -459,6 +460,9 @@
 		CC74FFF11A4D422EA4F02E08 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../src/fonts/Montserrat/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		D57884CA17224EC589F7D3FA /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../src/fonts/OpenSans/OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StorjIOS.xcodeproj; path = "../../iOS-libstorj/StorjIOS/StorjIOS.xcodeproj"; sourceTree = "<group>"; };
+		DC7632092084C40600B7C64A /* StorjMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = StorjMobile.entitlements; path = StorjMobile/StorjMobile.entitlements; sourceTree = "<group>"; };
+		DC76320A2084C6F800B7C64A /* DocumentsPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DocumentsPicker.h; sourceTree = "<group>"; };
+		DC76320B2084C6F800B7C64A /* DocumentsPicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DocumentsPicker.m; sourceTree = "<group>"; };
 		DC914C45206BD55000F0C4FF /* StorjWrapperSingletone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorjWrapperSingletone.h; sourceTree = "<group>"; };
 		DC914C46206BD55000F0C4FF /* StorjWrapperSingletone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StorjWrapperSingletone.m; sourceTree = "<group>"; };
 		DC914C48206BE5D400F0C4FF /* SyncModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncModule.h; sourceTree = "<group>"; };
@@ -665,6 +669,7 @@
 		13B07FAE1A68108700A75B9A /* StorjMobile */ = {
 			isa = PBXGroup;
 			children = (
+				DC7632092084C40600B7C64A /* StorjMobile.entitlements */,
 				DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */,
 				DCDF702A206437E9001B2F95 /* FMDB */,
 				DCDF6FE72062BE1F001B2F95 /* utils */,
@@ -934,6 +939,8 @@
 				DC914C49206BE5D400F0C4FF /* SyncModule.m */,
 				DC914C5A206BFBF200F0C4FF /* Sha256Module.h */,
 				DC914C5B206BFBF200F0C4FF /* Sha256Module.m */,
+				DC76320A2084C6F800B7C64A /* DocumentsPicker.h */,
+				DC76320B2084C6F800B7C64A /* DocumentsPicker.m */,
 			);
 			path = ReactModules;
 			sourceTree = "<group>";
@@ -1066,6 +1073,11 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 5YZ2ANFT4Z;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -1526,6 +1538,7 @@
 				DCDF6FFC20631C73001B2F95 /* UploadFileModel.m in Sources */,
 				DCDF705D20643850001B2F95 /* FMDatabase.m in Sources */,
 				DCDF6FED2062C2AD001B2F95 /* DownloadFileModel.m in Sources */,
+				DC76320C2084C6F800B7C64A /* DocumentsPicker.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				DCDF6FC5205ADA04001B2F95 /* BucketContract.m in Sources */,
 				DCDF6FD1205FE9CC001B2F95 /* BaseRepository.m in Sources */,
@@ -1641,6 +1654,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = StorjMobile/StorjMobile.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 5YZ2ANFT4Z;
@@ -1660,7 +1674,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.storj.app;
 				PRODUCT_NAME = StorjMobile;
-				VALID_ARCHS = "x86_64 i386 armv7 arm64 armv7s";
+				VALID_ARCHS = "x86_64 armv7 arm64 armv7s";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1671,6 +1685,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = StorjMobile/StorjMobile.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5YZ2ANFT4Z;
 				ENABLE_BITCODE = NO;
@@ -1689,7 +1704,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.storj.app;
 				PRODUCT_NAME = StorjMobile;
-				VALID_ARCHS = "x86_64 i386 armv7 arm64 armv7s";
+				VALID_ARCHS = "x86_64 armv7 arm64 armv7s";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
