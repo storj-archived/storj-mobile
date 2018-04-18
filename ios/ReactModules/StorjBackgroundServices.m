@@ -384,107 +384,114 @@ RCT_REMAP_METHOD(cancelDownload,
 RCT_REMAP_METHOD(uploadFile,
                   uploadFileWithBucketId:(NSString *)bucketId
                   withLocalPath:(NSString *) localPath){
-  if(!bucketId || bucketId.length == 0){
-    return;
-  }
-  
-  if(!localPath || localPath.length == 0){
-    return;
-  }
-  
-  __block double uploadProgress = 0;
-  long fileRef = 0;
-  NSLog(@"Uploading file located at: %@ into bucket: %@", localPath, bucketId);
-  
-  NSNumber *fileSize = [FileUtils getFileSizeWithPath:localPath];
-  NSString *fileName = [FileUtils getFileNameWithPath:localPath];
-  
-  UploadFileDbo *dbo = [[UploadFileDbo alloc] initWithFileHandle:0
-                                                        progress:0
-                                                            size:[fileSize longValue]
-                                                        uploaded:0
-                                                            name:fileName
-                                                             uri:localPath
-                                                        bucketId:bucketId];
-  
-  FileUploadCallback *callback = [[FileUploadCallback alloc] init];
-  
-  callback.onProgress = ^(NSString *fileId, double progress, double uploadedBytes, double totalBytes) {
-    if([dbo fileHandle] != 0){
-      
-      if(progress - uploadProgress > 0.02){
-        uploadProgress = progress;
-      }
-      
-      if(uploadProgress != progress){
-        return;
-      }
-      [dbo set_progress: uploadProgress];
-      [dbo set_uploaded: uploadedBytes];
-      
-      UploadFileModel * fileModel =[[UploadFileModel alloc] initWithUploadFileDbo:dbo];
-      [[self uploadFileRepository] updateByModel:fileModel];
-      
-      NSDictionary *body = @{UploadFileContract.FILE_HANDLE : @([dbo fileHandle]),
-                             UploadFileContract.PROGRESS : @(uploadProgress),
-                             UploadFileContract.UPLOADED : @(uploadedBytes)};
-      [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_PROGRESS
-                         body: body];
-      
-      //NOTIFY IN NOTIFICATION CENTER
-    }
-  };
-  
-  callback.onSuccess = ^(NSString * fileId){
-    
-    NSLog(@"File Uploaded: %@", fileId);
-    FileModel *fileModel = [[FileModel alloc] initWithBucketId:bucketId
-                                                       created:@""
-                                                       erasure:@""
-                                                          hmac:@""
-                                                        fileId:fileId
-                                                         index:@""
-                                                      mimeType:@""
-                                                          name:fileName
-                                                          size:[fileSize longValue]
-                                                   isDecrypted:YES
-                                                     isStarred:NO
-                                                      isSynced:NO];
-    [[self uploadFileRepository] deleteById:[NSString stringWithFormat:@"%ld", [dbo fileHandle]]];
-    [[self fileRepository] insertWithModel:fileModel];
-    NSDictionary *bodyDict = @{UploadFileContract.FILE_HANDLE:@([dbo fileHandle]),
-                               FileContract.FILE_ID : [DictionaryUtils checkAndReturnNSString:
-                                                       [fileModel _fileId]]};
-    [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_SUCCESSFULLY
-                       body:bodyDict];
-  
-    //NOTIFY IN NOTIFICATION CENTER
-  };
-  
-  callback.onError = ^(int errorCode, NSString * _Nullable errorMessage) {
-    NSString *dboId = [NSString stringWithFormat:@"%ld", [dbo fileHandle]];
-    Response *deleteResponse = [[self uploadFileRepository] deleteById:dboId];
-    
-    [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_ERROR
-                       body:@{@"errorMessage":errorMessage,
-                              @"errorCode" : @(errorCode),
-                              UploadFileContract.FILE_HANDLE: dboId}];
-    
-    //NOTIFY IN NOTIFICATION CENTER
-  };
-  fileRef = [self.storjWrapper uploadFile:localPath toBucket:bucketId withCompletion:callback];
-  @synchronized (dbo) {
-    [dbo set_fileHandle:fileRef];
-//    [dbo setProp:UploadFileContract.FILE_HANDLE fromLong:fileRef];
-    UploadFileModel *fileModel = [[UploadFileModel alloc] initWithUploadFileDbo:dbo];
-    Response *insertResponse = [[self uploadFileRepository] insertWithModel:fileModel];
-    if([insertResponse isSuccess]){
-      NSDictionary *eventDict =@{@"fileHandle": @([dbo fileHandle])};
-      NSLog(@"Upload started");
-      [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_START
-                         body:eventDict];
-    }
-  }
+  [MethodHandler
+   invokeBackgroundRemainWithParams:@{@KEY_TASK_NAME:@"UploadFile"}
+   methodHandlerBlock:^(NSDictionary *params, UIBackgroundTaskIdentifier taskId) {
+     if(!bucketId || bucketId.length == 0){
+       return;
+     }
+     
+     if(!localPath || localPath.length == 0){
+       return;
+     }
+     
+     __block double uploadProgress = 0;
+     long fileRef = 0;
+     NSLog(@"Uploading file located at: %@ into bucket: %@", localPath, bucketId);
+     
+     NSNumber *fileSize = [FileUtils getFileSizeWithPath:localPath];
+     NSString *fileName = [FileUtils getFileNameWithPath:localPath];
+     
+     UploadFileDbo *dbo = [[UploadFileDbo alloc] initWithFileHandle:0
+                                                           progress:0
+                                                               size:[fileSize longValue]
+                                                           uploaded:0
+                                                               name:fileName
+                                                                uri:localPath
+                                                           bucketId:bucketId];
+     
+     FileUploadCallback *callback = [[FileUploadCallback alloc] init];
+     
+     callback.onProgress = ^(NSString *fileId, double progress, double uploadedBytes, double totalBytes) {
+       if([dbo fileHandle] == 0){
+         return;
+       }
+       
+       if(progress - uploadProgress > 0.02){
+         uploadProgress = progress;
+       }
+       
+       if(uploadProgress != progress){
+         return;
+       }
+       [dbo set_progress: uploadProgress];
+       [dbo set_uploaded: uploadedBytes];
+         UploadFileModel * fileModel =[[UploadFileModel alloc] initWithUploadFileDbo:dbo];
+         Response *response = [[self uploadFileRepository] updateByModel:fileModel];
+         if([response isSuccess]){
+           NSDictionary *body = @{UploadFileContract.FILE_HANDLE : @([dbo fileHandle]),
+                                  UploadFileContract.PROGRESS : @(uploadProgress),
+                                  UploadFileContract.UPLOADED : @(uploadedBytes)};
+           
+             [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_PROGRESS
+                                body: body];
+         }
+         //NOTIFY IN NOTIFICATION CENTER
+     };
+     
+     callback.onSuccess = ^(NSString * fileId){
+       
+       NSLog(@"File Uploaded: %@", fileId);
+       FileModel *fileModel = [[FileModel alloc] initWithBucketId:bucketId
+                                                          created:@""
+                                                          erasure:@""
+                                                             hmac:@""
+                                                           fileId:fileId
+                                                            index:@""
+                                                         mimeType:@""
+                                                             name:fileName
+                                                             size:[fileSize longValue]
+                                                      isDecrypted:YES
+                                                        isStarred:NO
+                                                         isSynced:NO];
+       [[self uploadFileRepository] deleteById:[NSString stringWithFormat:@"%ld", [dbo fileHandle]]];
+       [[self fileRepository] insertWithModel:fileModel];
+       NSDictionary *bodyDict = @{UploadFileContract.FILE_HANDLE:@([dbo fileHandle]),
+                                  FileContract.FILE_ID : [DictionaryUtils checkAndReturnNSString:
+                                                          [fileModel _fileId]]};
+       [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_SUCCESSFULLY
+                          body:bodyDict];
+       
+       //NOTIFY IN NOTIFICATION CENTER
+     };
+     
+     callback.onError = ^(int errorCode, NSString * _Nullable errorMessage) {
+       NSString *dboId = [NSString stringWithFormat:@"%ld", [dbo fileHandle]];
+       Response *deleteResponse = [[self uploadFileRepository] deleteById:dboId];
+       
+       [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_ERROR
+                          body:@{@"errorMessage":errorMessage,
+                                 @"errorCode" : @(errorCode),
+                                 UploadFileContract.FILE_HANDLE: dboId}];
+       
+       //NOTIFY IN NOTIFICATION CENTER
+     };
+     fileRef = [[self storjWrapper] uploadFile:localPath toBucket:bucketId withCompletion:callback];
+     @synchronized (dbo) {
+       [dbo set_fileHandle:fileRef];
+       UploadFileModel *fileModel = [[UploadFileModel alloc] initWithUploadFileDbo:dbo];
+       Response *insertResponse = [[self uploadFileRepository] insertWithModel:fileModel];
+       if([insertResponse isSuccess]){
+         NSDictionary *eventDict =@{@"fileHandle": @([dbo fileHandle])};
+         NSLog(@"Upload started");
+         [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_START
+                            body:eventDict];
+       }
+     }
+   }
+   expirationHandler:^{
+     
+   }];
 }
 
 //resolver:(RCTPromiseResolveBlock) resolve

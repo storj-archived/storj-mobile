@@ -75,7 +75,7 @@
                     withObjecktValue: (NSString *) objectValue {
   NSString *request = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@ = ?",
                        tableName, objectKey];
-  NSLog(@"SQL Delete Request: %@", request);
+  NSLog(@"SQL Delete Request: %@, %@ = %@", request, objectKey, objectValue);
   __block Response *response;
   FMDatabaseQueue *queue = [self writableQueue];
   [queue inDatabase:^(FMDatabase * _Nonnull db) {

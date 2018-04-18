@@ -40,5 +40,6 @@
                          bucketId:(NSString *)bucketId;
 
 -(BOOL)isValid;
+- (NSDictionary *)toDictionaryProgress;
 
 @end

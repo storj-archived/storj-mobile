@@ -78,4 +78,16 @@
   return resultDictionary;
 }
 
+- (NSDictionary *)toDictionaryProgress {
+  NSMutableDictionary *resultDictionary = [NSMutableDictionary dictionary];
+  [resultDictionary setObject:@(_fileHandle) forKey:UploadFileContract.FILE_HANDLE];
+  [resultDictionary setObject:@(_progress) forKey:UploadFileContract.PROGRESS];
+  [resultDictionary setObject:@(_size) forKey:UploadFileContract.SIZE];
+  [resultDictionary setObject:@(_uploaded) forKey:UploadFileContract.UPLOADED];
+  [resultDictionary setObject:[DictionaryUtils checkAndReturnNSString:_name] forKey:UploadFileContract.NAME];
+  [resultDictionary setObject:[DictionaryUtils checkAndReturnNSString:_uri] forKey:UploadFileContract.URI];
+  [resultDictionary setObject:[DictionaryUtils checkAndReturnNSString:_bucketId] forKey:UploadFileContract.BUCKET_ID];
+  return resultDictionary;
+}
+
 @end

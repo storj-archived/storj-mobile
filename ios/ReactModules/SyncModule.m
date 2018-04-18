@@ -155,7 +155,8 @@ RCT_REMAP_METHOD(getUploadingFile, getUploadingFileWithFileHandle: (NSString *) 
        response = [SingleResponse errorResponseWithMessage:@"Uploading file not found"];
      } else {
        response = [SingleResponse successSingleResponseWithResult:
-                   [DictionaryUtils convertToJsonWithDictionary:[uploadingFileModel toDictionary]]];
+                   [DictionaryUtils convertToJsonWithDictionary:
+                    [uploadingFileModel toDictionaryProgress]]];
      }
      resolve([response toDictionary]);
    }];
