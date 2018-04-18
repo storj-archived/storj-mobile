@@ -1,61 +1,50 @@
 import {
     View,
     StyleSheet,
+    Text,
     ActivityIndicator
 } from 'react-native';
-import React, { Component } from 'react';
-import ListComponent from '../components/ListComponent';
-import ListComponent2 from '../components/ListComponent2';
+import React from 'react';
 import { getHeight } from '../utils/adaptive';
-import { TYPES } from '../utils/constants/typesConstants';
+import BaseListComponent from "../components/BaseListComponent";
 import EmpyBucketComponent from '../components/EmpyBucketComponent';
 import PropTypes from 'prop-types';
 
-export default class FilesListComponent extends Component {
+export default class FilesListComponent extends BaseListComponent {
     constructor(props) {
         super(props);
     }
 
-    render() {        
+    render() {
+        const isGridView = this.props.isGridViewShown;
+        
         return(
             <View style = { styles.mainContainer }>
                 {
-                    this.props.data.length === 0 
-                    && this.props.bucketId !== null && !this.props.isLoading
+                    this.props.data.length === 0 && !this.props.isLoading
                         ? <EmpyBucketComponent />
-                        : <ListComponent
-                            searchSubSequence = { this.props.searchSubSequence }
-                            sortingMode = { this.props.sortingMode }
-                            activeScreen = { this.props.activeScreen }
-                            screens = { "BucketsScreen" }
-                            contentWrapperStyle = { styles.contentWrapper }
-                            setSelectionId = { this.props.setSelectionId }
-                            selectedItemId = { this.props.selectedItemId }
-                            cancelDownload = { this.props.cancelDownload }
-                            cancelUpload = { this.props.cancelUpload }
-                            isGridViewShown = { this.props.isGridViewShown }
-                            onPress = { this.props.onPress }
-                            onRefresh = { this.props.onRefresh }
-                            itemType = { TYPES.REGULAR_FILE }
-                            bucketId = { this.props.bucketId }
-                            onSingleItemSelected = { this.props.onSingleItemSelected }                    
-                            animatedScrollValue = { this.props.animatedScrollValue }
-                            enableSelectionMode = { this.props.enableSelectionMode }
-                            disableSelectionMode = { this.props.disableSelectionMode }
-                            isSelectionMode = { this.props.isSelectionMode }
-                            isSingleItemSelected = { this.props.isSingleItemSelected }
-                            deselectItem = { this.props.deselectFile }
-                            selectItem = { this.props.selectFile }
-                            data = { this.props.data }   
-                            listItemIcon = { require('../images/Icons/FileListItemIcon.png') }
-                            starredGridItemIcon = { require('../images/Icons/GridStarredFile.png') }
-                            starredListItemIcon = { require('../images/Icons/ListStarredFile.png') } />                       
+                        : <this.ListComponent
+                                textComp = { textComp.bind(this) }
+                                listItemIcon = { require('../images/Icons/FileListItemIcon.png') }
+                                starredListItemIcon = { isGridView ? require('../images/Icons/GridStarredFile.png') : require('../images/Icons/ListStarredFile.png') }
+                                contentWrapperStyle = { styles.contentWrapper } />                       
                 }
-                <LoadingComponent isLoading = { this.props.isLoading } />
+                { 
+                    this.props.isLoading ? <LoadingComponent isLoading = { this.props.isLoading } /> : null 
+                    /* TODO: Check bug with activity indicator */ 
+                }
             </View>
         );
     }
 }
+
+function textComp (props) {
+    return (
+        <Text numberOfLines = {1} style = { props.style }>{ this.props.getFileName(props.children).name }
+            <Text style = { styles.extentionText }>{ this.props.getFileName(props.children).extention }</Text> 
+        </Text>
+    );
+};
 
 const LoadingComponent = (props) => (
     <View style = { styles.loadingComponentContainer }>
@@ -78,6 +67,11 @@ const styles = StyleSheet.create({
         right: 0,
         top: getHeight(80),
         height: getHeight(60)
+    },
+    extentionText: {
+        fontFamily: 'Montserrat-Regular',
+        fontSize: getHeight(16),
+        color: 'rgba(56, 75, 101, 0.4)'
     }
 });
 
@@ -94,8 +88,7 @@ FilesListComponent.propTypes = {
     isGridViewShown: PropTypes.bool,
     isSelectionMode: PropTypes.bool,
     isSingleItemSelected: PropTypes.bool,
-    onPress: PropTypes.func,
-    onSingleItemSelected: PropTypes.func,    
+    onPress: PropTypes.func, 
     renewFileList: PropTypes.func,
     selectFile: PropTypes.func,
     selectedItemId: PropTypes.string,

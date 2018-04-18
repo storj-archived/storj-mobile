@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import BaseListContainer from "../containers/BaseListContainer";
 import ServiceModule from '../utils/ServiceModule';
 import StorjModule from '../utils/StorjModule';
 import PropTypes from 'prop-types';
@@ -6,7 +7,7 @@ import PropTypes from 'prop-types';
 /** 
  * Base class for all screen with file lists
 */
-class BaseFileListContainer extends Component {
+class BaseFilesListContainer extends BaseListContainer {
     constructor(props) {
         super(props);
     }    
@@ -22,10 +23,17 @@ class BaseFileListContainer extends Component {
     /**
      * Opens image viewer if file downloaded and its mime type is image
      */
-    onPress(file) {        
+    _onPress(file) {        
         if(file.entity.isDownloaded && file.entity.mimeType.includes('image/')) {
             this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId, file.getStarred());
         }
+    }
+
+    _onSelectionPress(item) {
+        if(item.isSelected)
+            this.props.deselectFile(item);
+        else
+            this.props.selectFile(item);
     }
 
     /**
@@ -43,7 +51,7 @@ class BaseFileListContainer extends Component {
         let cancelDownloadResponse = await StorjModule.cancelDownload(file.fileRef);
 
         if(cancelDownloadResponse.isSuccess) {
-            this.props.fileDownloadCanceled(this.props.bucketId, file.getId());
+            this.props.fileDownloadCanceled(file.entity.bucketId, file.getId());
         }
     }
 
@@ -54,8 +62,12 @@ class BaseFileListContainer extends Component {
         let cancelUploadResponse = await StorjModule.cancelUpload(file.fileRef);
 
         if(cancelUploadResponse.isSuccess) {
-            this.props.fileUploadCanceled(this.props.bucketId, file.getId());
+            this.props.fileUploadCanceled(file.entity.bucketId, file.getId());
         }
+    }
+
+    onCancelPress(file) {
+        file.entity.hmac ? this.cancelDownload(file) : this.cancelUpload(file);
     }
 
     render() {
@@ -63,10 +75,9 @@ class BaseFileListContainer extends Component {
     }
 }
 
-export default BaseFileListContainer;
+export default BaseFilesListContainer;
 
-BaseFileListContainer.propTypes = {
-    
+BaseFilesListContainer.propTypes = {
     bucketId: PropTypes.string,    
     fileListModels: PropTypes.array,
     uploadingFileListModels: PropTypes.array,

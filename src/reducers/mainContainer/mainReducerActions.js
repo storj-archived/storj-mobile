@@ -233,6 +233,7 @@ export const bucketsListContainerActions = {
     onSingleItemSelected,
     enableSelectionMode,
     disableSelectionMode,
+    setSelectionId,
     openBucket
 };
 
@@ -241,6 +242,7 @@ export const filesListContainerMainActions = {
     onSingleItemSelected,
     closeBucket,
     setLoading,
+    setSelectionId,
     enableSelectionMode,
     disableSelectionMode, 
     unsetLoading,

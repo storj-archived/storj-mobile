@@ -3,48 +3,26 @@ import {
     StyleSheet,
     Text
 } from 'react-native';
-import React, { Component } from 'react';
-import ListComponent from '../components/ListComponent';
-import ListComponent2 from '../components/ListComponent2';
+import React from 'react';
+import BaseListComponent from "../components/BaseListComponent";
 import { getHeight } from '../utils/adaptive';
-import { TYPES } from '../utils/constants/typesConstants';
 import PropTypes from 'prop-types';
 
-export default class BucketsListComponent extends Component {
+export default class BucketsListComponent extends BaseListComponent {
     constructor(props) {
         super(props);
     }
 
     render() {
+        const isGridView = this.props.isGridViewShown;
+
         return(
             <View style = { styles.mainContainer }>
-                <ListComponent2
-                    textComp = { (props) => <Text numberOfLines = { 1 } style = { props.style }>{ props.children }</Text> }
-                    searchSubSequence = { this.props.searchSubSequence }
-                    sortingMode = { this.props.sortingMode }
-                    activeScreen = { this.props.activeScreen }
-                    screens = { "BucketsScreen" }                    
-                    contentWrapperStyle = { styles.contentWrapper }
-                    onRefresh = { this.props.refresh }
-                    setSelectionId = { this.props.setSelectionId }
-                    isGridViewShown = { this.props.isGridViewShown }
-                    onPress = { this.props.onPress }
-                    onLongPress = { this.props.onLongPress }
-                    onDotsPress = { this.props.onDotsPress }
-                    itemType = { TYPES.REGULAR_BUCKET }
-                    selectedItemId = { this.props.selectedItemId }
-                    onSingleItemSelected = { this.props.onSingleItemSelected }                    
-                    animatedScrollValue = { this.props.animatedScrollValue }
-                    enableSelectionMode = { this.props.enableSelectionMode }
-                    disableSelectionMode = { this.props.disableSelectionMode }
-                    isSelectionMode = { this.props.isSelectionMode }
-                    isSingleItemSelected = { this.props.isSingleItemSelected }
+                <this.ListComponent
+                    textComp = { (props) => <Text numberOfLines = { 1 } style = { props.style }>{ this.props.getBucketName(props.children) }</Text> }
                     listItemIcon = { require('../images/Icons/BucketListItemIcon.png') }
-                    starredListItemIcon = { require('../images/Icons/ListStarredBucket.png') }
-                    starredGridItemIcon = { require('../images/Icons/GridStarredBucket.png') } 
-                    deselectItem = { this.props.deselectBucket }
-                    selectItem = { this.props.selectBucket }
-                    data = { this.props.buckets } />              
+                    starredListItemIcon = { isGridView ? require('../images/Icons/GridStarredBucket.png') : require('../images/Icons/ListStarredBucket.png') }
+                    contentWrapperStyle = { styles.contentWrapper } />              
             </View>
         );
     }
@@ -70,11 +48,8 @@ BucketsListComponent.propTypes = {
     enableSelectionMode: PropTypes.func,
     isGridViewShown: PropTypes.bool,
     isSelectionMode: PropTypes.bool,
-    isSingleItemSelected: PropTypes.bool,
     onPress: PropTypes.func,
-    onSingleItemSelected: PropTypes.func,
     refresh: PropTypes.func,
     selectBucket: PropTypes.func,
-    selectedItemId: PropTypes.string,
-    setSelectionId: PropTypes.func
+    selectedItemId: PropTypes.string
 }

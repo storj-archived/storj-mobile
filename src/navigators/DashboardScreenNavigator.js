@@ -1,7 +1,7 @@
 import { StackNavigator } from 'react-navigation';
-import FilesScreen from '../containers/DashboardFileListContainer';
+import FilesScreen from '../containers/DashboardFilesListContainer';
 import DashboardScreen from '../containers/DashboardContainer';
-import FavoritesItemsScreen from '../containers/FavoritesItemsContainer';
+import FavoriteFilesScreen from '../containers/FavoriteFilesContainer';
 
 const DashboardScreenNavigator = StackNavigator(
     {
@@ -14,11 +14,11 @@ const DashboardScreenNavigator = StackNavigator(
             routeName: 'DashboardFilesScreen'
         },
         FavoriteBucketsScreen: {
-            screen: FavoritesItemsScreen,
+            screen: FavoriteFilesScreen,
             routeName: 'FavoritesBucketsScreen'
         },
         FavoriteFilesScreen: {
-            screen: FavoritesItemsScreen,
+            screen: FavoriteFilesScreen,
             routeName: 'FavoritesFilesScreen'
         }
     }, 

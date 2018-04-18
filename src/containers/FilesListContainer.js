@@ -5,14 +5,15 @@ import { bindActionCreators } from 'redux';
 import { bucketNavigateBack, dashboardNavigateBack, openImageViewer } from '../reducers/navigation/navigationActions';
 import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
+import { getFileSize, getFullFileName, getShortFileName } from "../utils/fileUtils";
 import FilesListComponent from '../components/FilesListComponent';
-import BaseFileListContainer from '../containers/BaseFileListContainer';
+import BaseFilesListContainer from '../containers/BaseFilesListContainer';
 import PropTypes from 'prop-types';
 
 /** 
  * Files screen, base screen, appears after opening bucket on bucket screen
 */
-class FilesListContainer extends BaseFileListContainer {
+class FilesListContainer extends BaseFilesListContainer {
     constructor(props) {
         super(props);
 
@@ -77,23 +78,18 @@ class FilesListContainer extends BaseFileListContainer {
         return(
             <FilesListComponent
                 isLoading = { this.props.loadingStack.includes(this.props.bucketId) }
-                activeScreen = { this.props.activeScreen }  
-                setSelectionId = { this.props.screenProps.setSelectionId }
                 selectedItemId = { this.props.selectedItemId }
                 isGridViewShown = { this.props.isGridViewShown }
-                onPress = { (params) => { this.onPress(params); } }
-                cancelDownload = { (params) => { this.cancelDownload(params); } }
-                cancelUpload = { (params) => { this.cancelUpload(params); } }
-                bucketId = { this.props.bucketId }                                
+                onPress = { (item) => { this.onPress(item); } }
+                onLongPress = { (item) => { this.onLongPress(item); } }
+                onDotsPress = { (item) => { this.onDotsPress(item); } }
+                onCancelPress = { (item) => { this.onCancelPress(item); } }                             
                 data = { data }
-                onSingleItemSelected = { this.props.onSingleItemSelected }
+                getItemSize = { getFileSize }
+                getFileName = { this.props.isGridViewShown ? getShortFileName : getFullFileName }
                 animatedScrollValue = { this.props.screenProps.animatedScrollValue }
-                enableSelectionMode = { this.props.enableSelectionMode }
-                disableSelectionMode = { this.props.disableSelectionMode }
                 isSelectionMode = { this.props.isSelectionMode }
                 isSingleItemSelected = { this.props.isSingleItemSelected }
-                deselectFile = { this.props.deselectFile }
-                selectFile = { this.props.selectFile }
                 sortingMode = { this.props.sortingMode }
                 searchSubSequence = { this.props.searchSubSequence }
                 onRefresh = { this.onRefresh.bind(this) } />
@@ -137,7 +133,6 @@ FilesListContainer.propTypes = {
     selectedItemId: PropTypes.string,
     isGridViewShown: PropTypes.bool,
     bucketId: PropTypes.string,
-    onSingleItemSelected: PropTypes.func,
     animatedScrollValue: PropTypes.bool,
     enableSelectionMode: PropTypes.func,
     disableSelectionMode: PropTypes.func,    

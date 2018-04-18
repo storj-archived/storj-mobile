@@ -24,27 +24,6 @@ import SORTING from '../utils/constants/sortingConstants';
 export default class ListComponent2 extends Component {
     constructor(props) {
         super(props); 
-
-        this.state = {
-            refreshing: false
-        };
-
-        this.onCancelPress = props.onCancelPress ? props.onCancelPress : () => {};
-    }
-
-    shouldComponentUpdate(nextProps) {    
-        return this.props.screens === nextProps.activeScreen;
-    } 
-
-    /**
-     * Fires on swipe from top to bottom to refresh the data
-     */
-    onRefresh() {
-        this.setState({refreshing: true});
-        
-        this.props.onRefresh();
-
-        this.setState({refreshing: false});
     }
 
     sortByDate(items, sortingObject) {
@@ -213,9 +192,12 @@ export default class ListComponent2 extends Component {
     }
 
     getItem(item, ItemType) {
-        const listItemIconSource = item.getStarred() ? this.props.starredListItemIcon : this.props.listItemIcon;
-        const isSingleItemSelected = this.isItemActionsSelected(item);
         const TextComp = this.props.textComp;
+        const isSingleItemSelected = this.isItemActionsSelected(item);
+        const size = item.entity.size ? this.props.getItemSize(item.entity.size) : null;
+        const listItemIconSource = item.entity.thumbnail ? 
+                                    { uri: 'data:image/png;base64,' + item.entity.thumbnail } 
+                                    : item.getStarred() ? this.props.starredListItemIcon : this.props.listItemIcon;
 
         return(
             <ItemType
@@ -224,12 +206,13 @@ export default class ListComponent2 extends Component {
                 onPress = { () => { this.props.onPress(item); } }
                 onLongPress = { () => { this.props.onLongPress(item); } }
                 onDotsPress = { () => { this.props.onDotsPress(item); } }
-                onCancelPress = { () => { this.onCancelPress(item); } }
+                onCancelPress = { () => { this.props.onCancelPress(item); } }
                 isSelectionMode = { this.props.isSelectionMode }
                 isSingleItemSelected = { isSingleItemSelected }
                 isSelected = { item.isSelected }
                 isLoading = { item.isLoading }
-                progress = { item.progress } >
+                progress = { item.progress } 
+                size = { size } >
 
                 <TextComp style = { styles.mainTitleText }>{ item.getName() }</TextComp>
             </ItemType>
@@ -262,8 +245,8 @@ export default class ListComponent2 extends Component {
                     refreshControl = {
                         <RefreshControl
                             enabled = { !this.props.isSelectionMode }
-                            refreshing = { this.state.refreshing }
-                            onRefresh = { this.onRefresh.bind(this) } /> }>
+                            refreshing = { this.props.isRefreshing }
+                            onRefresh = { this.props.onRefresh } /> }>
                             <View style = { this.props.contentWrapperStyle ? this.props.contentWrapperStyle : null }>
                                 {
                                     this.getItemsList()

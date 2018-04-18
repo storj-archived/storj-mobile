@@ -57,7 +57,8 @@ export default class ListItemComponent2 extends Component {
                                                 animating = {true} 
                                                 indeterminate = { false } />
                                     })
-                                : null
+                                    : props.size ? <Text style = { listItemStyles.fileSizeText }>{ props.size }</Text> 
+                                                    : null
                             }
                         </View>
                         {
