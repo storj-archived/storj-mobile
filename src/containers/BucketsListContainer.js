@@ -14,40 +14,6 @@ class BucketsListContainer extends BaseListContainer {
         super(props);
     }
 
-    onPress(item) {
-        if(this.props.isSingleItemSelected) {
-            this.disableSelectionMode();
-            return;
-        }
-
-        if(this.props.isSelectionMode) {                                             
-            this._onSelectionPress(item);
-            return;
-        }
-        
-        this._onPress(item);
-    }
-    onLongPress(item) {
-        if(!this.props.isSelectionMode) {
-            this.props.enableSelectionMode();
-            this._onSelectionPress(item);
-        }
-    }
-    onDotsPress(item) {
-        if(this.props.isSingleItemSelected) {
-            this.disableSelectionMode();
-        } else {
-            this.props.onSingleItemSelected();
-            this._onSelectionPress(item);
-            this.props.screenProps.setSelectionId(item.getId());
-        }
-    }
-
-    disableSelectionMode() {
-        this.props.screenProps.setSelectionId(null);
-        this.props.disableSelectionMode();
-    }
-
     _onSelectionPress(item) {
         if(item.isSelected)
             this.props.deselectBucket(item);
@@ -98,13 +64,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {...bindActionCreators({ 
-            onSingleItemSelected,
-            enableSelectionMode,
-            disableSelectionMode, 
-            selectBucket,
-            deselectBucket, 
-            openBucket,
+    return {...bindActionCreators({
+            ...bucketsListContainerActions,
+            ...bucketsListContainerBucketActions, 
             navigateToFilesScreen 
         }, dispatch)
     };
