@@ -12,12 +12,12 @@
 
 
 @implementation UploadFileRepository
-@synthesize _database;
+
 static NSArray * columns;
 
 -(instancetype) initWithDB:(FMDatabase *)database {
   if (self = [super initWithDB:database]) {
-    _database = database;
+    
   }
   
   return self;
@@ -27,27 +27,26 @@ static NSArray * columns;
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@",
                        [[UploadFileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        UploadFileContract.TABLE_NAME];
-  if(![[self _database] open]) {
-    NSLog(@"Database cannot be oppened");
-    
-    return nil;
-  }
-  FMResultSet * resultSet = [[self _database] executeQuery:request];
-  if(!resultSet) {
-    NSLog(@"No result set returned");
-    
-    return nil;
-  }
-  NSMutableArray<UploadFileDbo *> * fileDboArray = [NSMutableArray<UploadFileDbo *> array];
-  
-  while ([resultSet next]) {
-    UploadFileDbo * dbo = [UploadFileRepository getFileDboFromResultSet:resultSet];
-    if(dbo) {
-      [fileDboArray addObject:dbo];
+
+  __block NSMutableArray<UploadFileDbo *> * fileDboArray = [NSMutableArray<UploadFileDbo *> array];
+  FMDatabaseQueue *queue =[self readableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    FMResultSet * resultSet = [db executeQuery:request];
+    if(!resultSet) {
+      NSLog(@"No result set returned");
+      
+      return;
     }
-  }
-  [resultSet close];
-  [[self _database] close];
+    
+    while ([resultSet next]) {
+      UploadFileDbo * dbo = [UploadFileRepository getFileDboFromResultSet:resultSet];
+      if(dbo) {
+        [fileDboArray addObject:dbo];
+      }
+    }
+    [resultSet close];
+  }];
+  [queue close];
   
   return fileDboArray;
 }
@@ -60,27 +59,26 @@ static NSArray * columns;
                        UploadFileContract.TABLE_NAME,
                        orderByColumn,
                        isDescending ? @"DESC" : @"ASC"];
-  if(![[self _database] open]) {
-    NSLog(@"Database cannot be oppened");
-    
-    return nil;
-  }
-  FMResultSet * resultSet = [[self _database] executeQuery:request];
-  if(!resultSet){
-    NSLog(@"No result set returned");
-    
-    return nil;
-  }
-  NSMutableArray<UploadFileDbo *> * fileDboArray = [NSMutableArray<UploadFileDbo *> array];
-  
-  while ([resultSet next]) {
-    UploadFileDbo * dbo = [UploadFileRepository getFileDboFromResultSet:resultSet];
-    if(dbo) {
-      [fileDboArray addObject:dbo];
+
+  __block NSMutableArray<UploadFileDbo *> * fileDboArray = [NSMutableArray<UploadFileDbo *> array];
+  FMDatabaseQueue *queue =[self readableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    FMResultSet * resultSet = [db executeQuery:request];
+    if(!resultSet){
+      NSLog(@"No result set returned");
+      
+      return;
     }
-  }
-  [resultSet close];
-  [[self _database] close];
+    
+    while ([resultSet next]) {
+      UploadFileDbo * dbo = [UploadFileRepository getFileDboFromResultSet:resultSet];
+      if(dbo) {
+        [fileDboArray addObject:dbo];
+      }
+    }
+    [resultSet close];
+  }];
+  [queue close];
   
   return fileDboArray;
 }
@@ -90,23 +88,23 @@ static NSArray * columns;
                        [[UploadFileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        UploadFileContract.TABLE_NAME,
                        UploadFileContract.ID];
-  if(![[self _database] open]) {
-    NSLog(@"Database cannot be oppened");
+
+  __block UploadFileDbo * dbo = nil;
+  FMDatabaseQueue *queue =[self readableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    FMResultSet * resultSet = [db executeQuery:request, fileId];
+    if(!resultSet) {
+      NSLog(@"No result set returned");
+      
+      return;
+    }
     
-    return nil;
-  }
-  FMResultSet * resultSet = [[self _database] executeQuery:request, fileId];
-  if(!resultSet) {
-    NSLog(@"No result set returned");
-    
-    return nil;
-  }
-  UploadFileDbo * dbo = nil;
-  if([resultSet next]) {
-    dbo = [UploadFileRepository getFileDboFromResultSet:resultSet];
-  }
-  [resultSet close];
-  [[self _database] close];
+    if([resultSet next]) {
+      dbo = [UploadFileRepository getFileDboFromResultSet:resultSet];
+    }
+    [resultSet close];
+  }];
+  [queue close];
   
   return [[UploadFileModel alloc] initWithUploadFileDbo:dbo];
 }
@@ -117,24 +115,23 @@ static NSArray * columns;
                        columnName,
                        UploadFileContract.TABLE_NAME,
                        columnName];
-  if(![[self _database] open]) {
-    NSLog(@"Database cannot be oppened");
+  __block UploadFileDbo *dbo = nil;
+  FMDatabaseQueue *queue =[self readableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    FMResultSet * resultSet = [db executeQuery:request, columnValue];
+    if(!resultSet) {
+      NSLog(@"No result set returned");
+      
+      return;
+    }
     
-    return nil;
-  }
-  FMResultSet * resultSet = [[self _database] executeQuery:request, columnValue];
-  if(!resultSet) {
-    NSLog(@"No result set returned");
-    
-    return nil;
-  }
-  UploadFileDbo *dbo = nil;
-  if([resultSet next]){
-    dbo = [UploadFileRepository getFileDboFromResultSet:resultSet];
-  }
-  [resultSet close];
-  [[self _database] close];
-  
+    if([resultSet next]){
+      dbo = [UploadFileRepository getFileDboFromResultSet:resultSet];
+    }
+    [resultSet close];
+  }];
+  [queue close];
+
   return dbo;
 }
 

@@ -19,8 +19,6 @@
 -(NSArray *) getAllWithOrderByColumn: (NSString *) columnName
                                order:(BOOL) isDescending;
 
--(NSArray *) getStarred;
-
 -(UploadFileModel *) getByFileId:(NSString *) fileId;
 
 -(UploadFileDbo *) getByColumnName:(NSString *) columnName

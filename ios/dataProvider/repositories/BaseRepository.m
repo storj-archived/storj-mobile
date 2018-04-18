@@ -7,9 +7,10 @@
 //
 
 #import "BaseRepository.h"
-
+#import "DatabaseFactory.h"
 @implementation BaseRepository
 @synthesize _database;
+
 
 -(instancetype) initWithDB:(FMDatabase *)database
 {
@@ -20,6 +21,34 @@
   return self;
 }
 
+-(FMDatabaseQueue *)readableQueue {
+  static NSString *dbPath;
+  static dispatch_once_t onceToken;
+  static FMDatabaseQueue *queue;
+  dispatch_once(&onceToken, ^{
+    dbPath = [[DatabaseFactory getSharedDatabaseFactory] getDBPath];
+    queue =[FMDatabaseQueue databaseQueueWithPath: dbPath
+                                            flags:SQLITE_OPEN_READONLY];
+  });
+//  NSLog(@"dbPath: %@", dbPath);
+  
+  return queue;
+}
+
+-(FMDatabaseQueue *)writableQueue {
+  static NSString *dbPath;
+  static dispatch_once_t onceToken;
+  static FMDatabaseQueue *queue;
+  dispatch_once(&onceToken, ^{
+    dbPath =[[DatabaseFactory getSharedDatabaseFactory] getDBPath];
+    queue =[FMDatabaseQueue databaseQueueWithPath:dbPath
+                                            flags:SQLITE_OPEN_READWRITE];
+  });
+//  NSLog(@"dbPath: %@", dbPath);
+  
+  return queue;
+}
+
 -(Response *) executeInsertIntoTable:(NSString *)tableName
                             fromDict:(NSDictionary *)dictionary {
   NSArray * columns = [dictionary allKeys];
@@ -28,20 +57,17 @@
                         [columns componentsJoinedByString:@","],
                         [[BaseRepository getDoubleDottedParametersArray:columns]
                          componentsJoinedByString:@","]];
-  
-  if([[self _database] open]) {
-    //  NSLog(@"SQL Insert Request: %@ for %@", request, dictionary);
-    if(![[self _database] executeUpdate:request withParameterDictionary:dictionary]) {
-      
-      return [self getResponseFromDatabaseError];
+  __block Response *response;
+  FMDatabaseQueue *queue = [self writableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    if(![db executeUpdate:request withParameterDictionary:dictionary]) {
+      response = [self getResponseFromDatabaseError:db];
+    } else {
+      response = [Response successResponse];
     }
-    [_database close];
-  } else {
-    
-    return [Response errorResponseWithMessage:@"Database cannot be oppened"];
-  }
-  
-  return [Response successResponse];
+  }];
+  [queue close];
+  return response;
 }
 
 -(Response *) executeDeleteFromTable:(NSString *)tableName
@@ -50,18 +76,17 @@
   NSString *request = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@ = ?",
                        tableName, objectKey];
   NSLog(@"SQL Delete Request: %@", request);
-  if([[self _database] open]) {
-    if(![[self _database] executeUpdate:request, objectValue]) {
-      
-      return [self getResponseFromDatabaseError];
+  __block Response *response;
+  FMDatabaseQueue *queue = [self writableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    if(![db executeUpdate:request, objectValue]) {
+      response = [self getResponseFromDatabaseError:db];
+    } else {
+      response = [Response successResponse];
     }
-    [[self _database] close];
-  } else {
-    
-    return [Response errorResponseWithMessage:@"Database cannot be oppened"];
-  }
-  
-  return [Response successResponse];
+  }];
+  [queue close];
+  return response;
 }
 
 -(Response *) executeDeleteFromTable:(NSString *)tableName
@@ -71,34 +96,32 @@
                        tableName, objectKey, [[BaseRepository getEscapedValuesArray:objectIds]
                                               componentsJoinedByString:@","]];
   NSLog(@"SQL Delete Request: %@", request);
-  if([[self _database] open]) {
-    if(![[self _database] executeUpdate:request]) {
-      
-      return [self getResponseFromDatabaseError];
+  __block Response *response;
+  FMDatabaseQueue *queue = [self writableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    if(![db executeUpdate:request]) {
+      response = [self getResponseFromDatabaseError:db];
+    } else {
+      response = [Response successResponse];
     }
-    [[self _database] close];
-  } else {
-    
-    return [Response errorResponseWithMessage:@"Database cannot be oppened"];
-  }
-  
-  return [Response successResponse];
+  }];
+  [queue close];
+  return response;
 }
 
 -(Response *) executeDeleteAllFromTable:(NSString *)tableName {
   NSString *request = [NSString stringWithFormat:@"DELETE FROM %@", tableName];
-  if([[self _database] open]) {
-    if(![[self _database] executeUpdate:request]) {
-      
-      return [self getResponseFromDatabaseError];
+  __block Response *response;
+  FMDatabaseQueue *queue = [self writableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    if(![db executeUpdate:request]) {
+      response = [self getResponseFromDatabaseError:db];
+    } else {
+      response = [Response successResponse];
     }
-    [[self _database] close];
-  } else {
-    
-    return [Response errorResponseWithMessage:@"Database cannot be oppened"];
-  }
-  
-  return [Response successResponse];
+  }];
+  [queue close];
+  return response;
 }
 
 -(Response *) executeUpdateAtTable:(NSString *) tableName
@@ -113,25 +136,23 @@
                        objectKey,
                        objectId];
   NSLog(@"SQL Update Request: %@", request);
-  if([[self _database] open]) {
-    if(![[self _database] executeUpdate:request withParameterDictionary:updateDictionary]) {
-      
-      return [self getResponseFromDatabaseError];
+  __block Response *response;
+  FMDatabaseQueue *queue = [self writableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    if(![db executeUpdate:request withParameterDictionary:updateDictionary]) {
+      response = [self getResponseFromDatabaseError:db];
+    } else {
+      response = [Response successResponse];
     }
-    [[self _database] close];
-  } else {
-    
-    return [Response errorResponseWithMessage:@"Database cannot be oppened"];
-  }
-  
-  return [Response successResponse];
+  }];
+  [queue close];
+  return response;
 }
 
--(Response *) getResponseFromDatabaseError {
-  int errorCode = self._database.lastErrorCode;
-  NSString *errorMessage = self._database.lastErrorMessage;
+-(Response *) getResponseFromDatabaseError:(FMDatabase *)db {
+  int errorCode = db.lastErrorCode;
+  NSString *errorMessage = db.lastErrorMessage;
   NSLog(@"Last error: %d - %@", errorCode, errorMessage);
-  [_database close];
   
   return [[Response alloc] initWithSuccess:NO
                              withErrorCode:errorCode
@@ -164,5 +185,6 @@
   
   return result;
 }
+
 
 @end

@@ -15,6 +15,7 @@
 @interface BaseRepository : NSObject
 
 @property (nonatomic, strong) FMDatabase * _database;
+//@property
 
 -(instancetype) initWithDB: (FMDatabase *) database;
 
@@ -36,6 +37,9 @@
                           objectId:(NSString *) objectId
 //                 columnsDictionary:(NSDictionary *) columnsDictionary
                   updateDictionary:(NSDictionary *) updateDictionary;
+
+-(FMDatabaseQueue *)readableQueue;
+-(FMDatabaseQueue *)writableQueue;
 
 +(NSString *) getWhereClauseWithColumnDictionary: (NSDictionary *)columnsDictionary
                                         objectId: (NSString *) objectId;

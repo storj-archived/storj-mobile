@@ -12,12 +12,12 @@
 #import "FileContract.h"
 
 @implementation FileRepository
-@synthesize _database;
+
 static NSArray * columns;
 
 -(instancetype) initWithDB:(FMDatabase *)database {
   if (self = [super initWithDB:database]) {
-    _database = database;
+    
   }
   
   return self;
@@ -27,27 +27,25 @@ static NSArray * columns;
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@",
                        [[FileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        FileContract.TABLE_NAME];
-  if(![[self _database] open]) {
-    NSLog(@"Database cannot be oppened");
-    
-    return nil;
-  }
-  FMResultSet * resultSet = [[self _database] executeQuery:request];
-  if(!resultSet) {
-    NSLog(@"No result set returned");
-    
-    return nil;
-  }
-  NSMutableArray<FileDbo *> * fileDboArray = [NSMutableArray<FileDbo *> array];
-  
-  while ([resultSet next]) {
-    FileDbo * dbo = [FileRepository getFileDboFromResultSet:resultSet];
-    if(dbo) {
-      [fileDboArray addObject:dbo];
+  __block NSMutableArray<FileDbo *> * fileDboArray = [NSMutableArray<FileDbo *> array];
+  FMDatabaseQueue *queue = [self readableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    FMResultSet * resultSet = [db executeQuery:request];
+    if(!resultSet) {
+      NSLog(@"No result set returned");
+      
+      return;
     }
-  }
-  [resultSet close];
-  [[self _database] close];
+    
+    while ([resultSet next]) {
+      FileDbo * dbo = [FileRepository getFileDboFromResultSet:resultSet];
+      if(dbo) {
+        [fileDboArray addObject:dbo];
+      }
+    }
+    [resultSet close];
+  }];
+  [queue close];
   
   return fileDboArray;
 }
@@ -57,27 +55,24 @@ static NSArray * columns;
                        [[FileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        FileContract.TABLE_NAME,
                        FileContract.FILE_FK];
-  if(![[self _database] open]) {
-    NSLog(@"Database cannot be oppened");
-    
-    return nil;
-  }
-  FMResultSet *resultSet = [[self _database] executeQuery:request, bucketId];
-  if(!resultSet) {
-    NSLog(@"No result set returned");
-    
-    return nil;
-  }
-  NSMutableArray <FileDbo *> * fileDboArray = [NSMutableArray <FileDbo *> array];
-  
-  while([resultSet next]) {
-    FileDbo *dbo = [FileRepository getFileDboFromResultSet:resultSet];
-    if(dbo){
-      [fileDboArray addObject:dbo];
+  __block NSMutableArray <FileDbo *> * fileDboArray = [NSMutableArray <FileDbo *> array];
+  FMDatabaseQueue *queue = [self readableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    FMResultSet *resultSet = [db executeQuery:request, bucketId];
+    if(!resultSet) {
+      NSLog(@"No result set returned");
+      return;
     }
-  }
-  [resultSet close];
-  [[self _database] close];
+    
+    while([resultSet next]) {
+      FileDbo *dbo = [FileRepository getFileDboFromResultSet:resultSet];
+      if(dbo){
+        [fileDboArray addObject:dbo];
+      }
+    }
+    [resultSet close];
+  }];
+  [queue close];
   
   return fileDboArray;
 }
@@ -93,27 +88,25 @@ static NSArray * columns;
                        FileContract.TABLE_NAME,
                        orderByColumn,
                        isDescending ? @"DESC" : @"ASC"];
-  if(![[self _database] open]) {
-    NSLog(@"Database cannot be oppened");
-    
-    return nil;
-  }
-  FMResultSet * resultSet = [[self _database] executeQuery:request];
-  if(!resultSet) {
-    NSLog(@"No result set returned");
-    
-    return nil;
-  }
-  NSMutableArray<FileDbo *> * fileDboArray = [NSMutableArray<FileDbo *> array];
+  __block NSMutableArray<FileDbo *> * fileDboArray = [NSMutableArray<FileDbo *> array];
+  FMDatabaseQueue *queue = [self readableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    FMResultSet * resultSet = [db executeQuery:request];
+    if(!resultSet) {
+      NSLog(@"No result set returned");
   
-  while ([resultSet next]) {
-    FileDbo * dbo = [FileRepository getFileDboFromResultSet:resultSet];
-    if(dbo) {
-      [fileDboArray addObject:dbo];
+      return;
     }
-  }
-  [resultSet close];
-  [[self _database] close];
+    
+    while ([resultSet next]) {
+      FileDbo * dbo = [FileRepository getFileDboFromResultSet:resultSet];
+      if(dbo) {
+        [fileDboArray addObject:dbo];
+      }
+    }
+    [resultSet close];
+  }];
+  [queue close];
   
   return fileDboArray;
 }
@@ -123,27 +116,25 @@ static NSArray * columns;
                        [[FileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        FileContract.TABLE_NAME,
                        FileContract.STARRED];
-  if(![[self _database] open]) {
-    NSLog(@"Database cannot be oppened");
-    
-    return nil;
-  }
-  FMResultSet * resultSet = [[self _database] executeQuery:request, 1];
-  if(!resultSet) {
-    NSLog(@"No result set returned");
-    
-    return nil;
-  }
-  NSMutableArray<FileDbo *> * fileDboArray = [NSMutableArray<FileDbo *> array];
-  
-  while ([resultSet next]) {
-    FileDbo * dbo = [FileRepository getFileDboFromResultSet:resultSet];
-    if(dbo) {
-      [fileDboArray addObject:dbo];
+  __block NSMutableArray<FileDbo *> * fileDboArray = [NSMutableArray<FileDbo *> array];
+  FMDatabaseQueue *queue = [self readableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    FMResultSet * resultSet = [db executeQuery:request, 1];
+    if(!resultSet) {
+      NSLog(@"No result set returned");
+      
+      return;
     }
-  }
-  [resultSet close];
-  [[self _database] close];
+  
+    while ([resultSet next]) {
+      FileDbo * dbo = [FileRepository getFileDboFromResultSet:resultSet];
+      if(dbo) {
+        [fileDboArray addObject:dbo];
+      }
+    }
+    [resultSet close];
+  }];
+  [queue close];
   
   return fileDboArray;
 }
@@ -153,22 +144,21 @@ static NSArray * columns;
                        [[FileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        FileContract.TABLE_NAME,
                        FileContract.FILE_ID];
-  if(![[self _database] open]) {
-    NSLog(@"Database cannot be oppened");
+  __block FileDbo * dbo = nil;
+  FMDatabaseQueue *queue = [self readableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    FMResultSet * resultSet = [db executeQuery:request, fileId];
+    if(!resultSet) {
+      NSLog(@"No result set returned");
+      return;
+    }
     
-    return nil;
-  }
-  FMResultSet * resultSet = [[self _database] executeQuery:request, fileId];
-  if(!resultSet) {
-    NSLog(@"No result set returned");
-    return nil;
-  }
-  FileDbo * dbo = nil;
-  if([resultSet next]) {
-    dbo = [FileRepository getFileDboFromResultSet:resultSet];
-  }
-  [resultSet close];
-  [[self _database] close];
+    if([resultSet next]) {
+      dbo = [FileRepository getFileDboFromResultSet:resultSet];
+    }
+    [resultSet close];
+  }];
+  [queue close];
   
   return dbo;
 }
@@ -179,22 +169,21 @@ static NSArray * columns;
                        columnName,
                        FileContract.TABLE_NAME,
                        columnName];
-  if(![[self _database] open]) {
-    NSLog(@"Database cannot be oppened");
+  __block FileDbo *dbo = nil;
+  FMDatabaseQueue *queue = [self readableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    FMResultSet * resultSet = [db executeQuery:request, columnValue];
+    if(!resultSet) {
+      NSLog(@"No result set returned");
+      return;
+    }
     
-    return nil;
-  }
-  FMResultSet * resultSet = [[self _database] executeQuery:request, columnValue];
-  if(!resultSet) {
-    NSLog(@"No result set returned");
-    return nil;
-  }
-  FileDbo *dbo = nil;
-  if([resultSet next]){
-    dbo = [FileRepository getFileDboFromResultSet:resultSet];
-  }
-  [resultSet close];
-  [[self _database] close];
+    if([resultSet next]){
+      dbo = [FileRepository getFileDboFromResultSet:resultSet];
+    }
+    [resultSet close];
+  }];
+  [queue close];
   
   return dbo;
 }

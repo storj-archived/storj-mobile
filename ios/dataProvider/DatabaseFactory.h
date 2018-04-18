@@ -22,4 +22,6 @@
 -(BOOL) createDatabase;
 
 -(FMDatabase *) getSharedDb;
+
+-(NSString *)getDBPath;
 @end

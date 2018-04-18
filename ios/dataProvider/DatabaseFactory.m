@@ -127,6 +127,10 @@ static FMDatabase * _database;
   return _database;
 }
 
+-(NSString *) getDBPath{
+  return databasePath;
+}
+
 -(void)dealloc{
   if(_database){
     [_database close];

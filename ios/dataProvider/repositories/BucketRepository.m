@@ -25,28 +25,24 @@ static NSArray *columns;
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@",
                        [[BucketRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        BucketContract.TABLE_NAME];
-  if(![[self _database] open]) {
-    NSLog(@"Database cannot be oppened");
+  __block NSMutableArray<BucketDbo *> * bucketDboArray = [NSMutableArray<BucketDbo *> array];
+  FMDatabaseQueue *queue = [self readableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    FMResultSet * resultSet = [db executeQuery:request];
     
-    return nil;
-  }
-  FMResultSet * resultSet = [[self _database] executeQuery:request];
-
-  if(!resultSet) {
-    NSLog( @"No result set returned");
-    
-    return nil;
-  }
-  NSMutableArray<BucketDbo *> * bucketDboArray = [NSMutableArray<BucketDbo *> array];
-  
-  while ([resultSet next]) {
-    BucketDbo * dbo = [BucketRepository getBucketDboFromResultSet:resultSet];
-    if(dbo) {
-      [bucketDboArray addObject:dbo];
+    if(!resultSet) {
+      NSLog( @"No result set returned");
+      return;
     }
-  }
-  [resultSet close];
-  [[self _database] close];
+    while ([resultSet next]) {
+      BucketDbo * dbo = [BucketRepository getBucketDboFromResultSet:resultSet];
+      if(dbo) {
+        [bucketDboArray addObject:dbo];
+      }
+    }
+    [resultSet close];
+  }];
+  [queue close];
   return bucketDboArray;
 }
 
@@ -61,28 +57,25 @@ static NSArray *columns;
                        BucketContract.TABLE_NAME,
                        orderByColumn,
                        isDescending ? @"DESC" : @"ASC"];
-  if(![[self _database] open]) {
-    NSLog(@"Database cannot be oppened");
-    
-    return nil;
-  }
-  FMResultSet * resultSet = [[self _database] executeQuery:request];
-  if(!resultSet) {
-    NSLog( @"No result set returned");
-    
-    return nil;
-  }
-  NSMutableArray<BucketDbo *> * bucketDboArray = [NSMutableArray<BucketDbo *> array];
   
-  while ([resultSet next]) {
-    BucketDbo * dbo = [BucketRepository getBucketDboFromResultSet:resultSet];
-    if(dbo) {
-      [bucketDboArray addObject:dbo];
+  __block NSMutableArray<BucketDbo *> * bucketDboArray = [NSMutableArray array];
+  FMDatabaseQueue *queue = [self readableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    FMResultSet * resultSet = [db executeQuery:request];
+    if(!resultSet) {
+      NSLog( @"No result set returned");
+      bucketDboArray = nil;
     }
-  }
-  [resultSet close];
-  [[self _database] close];
-  
+    while ([resultSet next]) {
+      BucketDbo * dbo = [BucketRepository getBucketDboFromResultSet:resultSet];
+      if(dbo) {
+        [bucketDboArray addObject:dbo];
+      }
+      
+      [resultSet close];
+    }
+  }];
+  [queue close];
   return bucketDboArray;
 }
 
@@ -91,26 +84,24 @@ static NSArray *columns;
                        [[BucketRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        BucketContract.TABLE_NAME,
                        BucketContract.STARRED];
-  if(![[self _database] open]) {
-    NSLog(@"Database cannot be oppened");
-    
-    return nil;
-  }
-  FMResultSet * resultSet = [[self _database] executeQuery:request, 1];
-  if(!resultSet) {
-    NSLog(@"No resultSet returned");
-    
-    return nil;
-  }
-  NSMutableArray<BucketDbo *> * bucketDboArray = [NSMutableArray<BucketDbo *> array];
-  
-  while ([resultSet next]) {
-    BucketDbo * dbo = [BucketRepository getBucketDboFromResultSet:resultSet];
-    if(dbo) {
-      [bucketDboArray addObject:dbo];
+  __block NSMutableArray<BucketDbo *> * bucketDboArray = [NSMutableArray<BucketDbo *> array];
+  FMDatabaseQueue *queue = [self readableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    FMResultSet * resultSet = [db executeQuery:request, 1];
+    if(!resultSet) {
+      NSLog(@"No resultSet returned");
+      return;
     }
-  }
-  [resultSet close];
+    while ([resultSet next]) {
+      BucketDbo * dbo = [BucketRepository getBucketDboFromResultSet:resultSet];
+      if(dbo) {
+        [bucketDboArray addObject:dbo];
+      }
+    }
+    [resultSet close];
+  }];
+  
+  
   [[self _database] close];
   
   return bucketDboArray;
@@ -121,24 +112,21 @@ static NSArray *columns;
                        [[BucketRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        BucketContract.TABLE_NAME,
                        BucketContract.ID];
-  if(![[self _database] open]) {
-    NSLog(@"Database cannot be oppened");
+  __block BucketDbo *dbo = nil;
+  FMDatabaseQueue *queue = [self readableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    FMResultSet * resultSet = [db executeQuery:request, bucketId];
+    if(!resultSet) {
+      NSLog(@"No resultSet returned");
+      return;
+    }
     
-    return nil;
-  }
-  FMResultSet * resultSet = [[self _database] executeQuery:request, bucketId];
-  if(!resultSet) {
-    NSLog(@"No resultSet returned");
-    
-    return nil;
-  }
-  BucketDbo *dbo = nil;
-  if([resultSet next]) {
-    dbo = [BucketRepository getBucketDboFromResultSet:resultSet];
-  }
-  [resultSet close];
-  [[self _database] close];
-  
+    if([resultSet next]) {
+      dbo = [BucketRepository getBucketDboFromResultSet:resultSet];
+    }
+    [resultSet close];
+  }];
+  [queue close];
   return dbo;
 }
 
@@ -148,24 +136,22 @@ static NSArray *columns;
                        columnName,
                        BucketContract.TABLE_NAME,
                        columnName];
-  if(![[self _database] open]) {
-    NSLog(@"Database cannot be oppened");
+  __block BucketDbo *dbo = nil;
+  FMDatabaseQueue *queue = [self readableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    FMResultSet *resultSet = [db executeQuery:request, columnValue];
+    if(!resultSet) {
+      NSLog(@"No resultSet returned");
+      
+      return;
+    }
     
-    return nil;
-  }
-  FMResultSet *resultSet = [[self _database] executeQuery:request, columnValue];
-  if(!resultSet) {
-    NSLog(@"No resultSet returned");
-    
-    return nil;
-  }
-  BucketDbo *dbo = nil;
-  if([resultSet next]) {
-    dbo = [BucketRepository getBucketDboFromResultSet:resultSet];
-  }
-  [resultSet close];
-  [[self _database] close];
-  
+    if([resultSet next]) {
+      dbo = [BucketRepository getBucketDboFromResultSet:resultSet];
+    }
+    [resultSet close];
+  }];
+  [queue close];
   return dbo;
 }
 
