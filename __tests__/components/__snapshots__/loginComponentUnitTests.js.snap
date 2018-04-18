@@ -19,7 +19,16 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <View
-          style={undefined}
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
         >
           <Image
             resizeMode="contain"
@@ -170,7 +179,6 @@ ShallowWrapper {
           style={
             Object {
               "alignItems": "center",
-              "height": 226,
               "marginTop": 20,
             }
           }
@@ -268,6 +276,7 @@ ShallowWrapper {
         </View>,
         null,
       ],
+      "keyboardDismissMode": "interactive",
       "style": Object {
         "backgroundColor": "white",
         "flex": 1,
@@ -293,7 +302,14 @@ ShallowWrapper {
               }
             }
           />,
-          "style": undefined,
+          "style": Object {
+            "backgroundColor": "transparent",
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
         },
         "ref": null,
         "rendered": Object {
@@ -803,7 +819,6 @@ ShallowWrapper {
           ],
           "style": Object {
             "alignItems": "center",
-            "height": 226,
             "marginTop": 20,
           },
         },
@@ -988,7 +1003,16 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <View
-            style={undefined}
+            style={
+              Object {
+                "backgroundColor": "transparent",
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
           >
             <Image
               resizeMode="contain"
@@ -1139,7 +1163,6 @@ ShallowWrapper {
             style={
               Object {
                 "alignItems": "center",
-                "height": 226,
                 "marginTop": 20,
               }
             }
@@ -1237,6 +1260,7 @@ ShallowWrapper {
           </View>,
           null,
         ],
+        "keyboardDismissMode": "interactive",
         "style": Object {
           "backgroundColor": "white",
           "flex": 1,
@@ -1262,7 +1286,14 @@ ShallowWrapper {
                 }
               }
             />,
-            "style": undefined,
+            "style": Object {
+              "backgroundColor": "transparent",
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
           },
           "ref": null,
           "rendered": Object {
@@ -1772,7 +1803,6 @@ ShallowWrapper {
             ],
             "style": Object {
               "alignItems": "center",
-              "height": 226,
               "marginTop": 20,
             },
           },

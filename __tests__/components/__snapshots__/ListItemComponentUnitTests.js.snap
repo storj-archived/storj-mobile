@@ -7,6 +7,9 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <ListItemComponent
     item={
       Object {
+        "entity": Object {
+          "thumbnail": Object {},
+        },
         "getName": [Function],
         "getStarred": [Function],
       }
@@ -40,8 +43,11 @@ ShallowWrapper {
       >
         <View>
           <Image
-            resizeMode="contain"
-            source={undefined}
+            source={
+              Object {
+                "uri": "data:image/png;base64,[object Object]",
+              }
+            }
             style={
               Object {
                 "height": 44,
@@ -67,7 +73,6 @@ ShallowWrapper {
                 "color": "#384B65",
                 "fontFamily": "Montserrat-Regular",
                 "fontSize": 32,
-                "lineHeight": 40,
               }
             }
           />
@@ -112,8 +117,11 @@ ShallowWrapper {
           undefined,
           <View>
             <Image
-              resizeMode="contain"
-              source={undefined}
+              source={
+                Object {
+                  "uri": "data:image/png;base64,[object Object]",
+                }
+              }
               style={
                 Object {
                   "height": 44,
@@ -139,7 +147,6 @@ ShallowWrapper {
                   "color": "#384B65",
                   "fontFamily": "Montserrat-Regular",
                   "fontSize": 32,
-                  "lineHeight": 40,
                 }
               }
             />
@@ -186,8 +193,11 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": <Image
-              resizeMode="contain"
-              source={undefined}
+              source={
+                Object {
+                  "uri": "data:image/png;base64,[object Object]",
+                }
+              }
               style={
                 Object {
                   "height": 44,
@@ -202,8 +212,9 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "resizeMode": "contain",
-              "source": undefined,
+              "source": Object {
+                "uri": "data:image/png;base64,[object Object]",
+              },
               "style": Object {
                 "height": 44,
                 "width": 50,
@@ -231,7 +242,6 @@ ShallowWrapper {
                     "color": "#384B65",
                     "fontFamily": "Montserrat-Regular",
                     "fontSize": 32,
-                    "lineHeight": 40,
                   }
                 }
               />,
@@ -257,7 +267,6 @@ ShallowWrapper {
                   "color": "#384B65",
                   "fontFamily": "Montserrat-Regular",
                   "fontSize": 32,
-                  "lineHeight": 40,
                 },
               },
               "ref": null,
@@ -336,8 +345,11 @@ ShallowWrapper {
         >
           <View>
             <Image
-              resizeMode="contain"
-              source={undefined}
+              source={
+                Object {
+                  "uri": "data:image/png;base64,[object Object]",
+                }
+              }
               style={
                 Object {
                   "height": 44,
@@ -363,7 +375,6 @@ ShallowWrapper {
                   "color": "#384B65",
                   "fontFamily": "Montserrat-Regular",
                   "fontSize": 32,
-                  "lineHeight": 40,
                 }
               }
             />
@@ -408,8 +419,11 @@ ShallowWrapper {
             undefined,
             <View>
               <Image
-                resizeMode="contain"
-                source={undefined}
+                source={
+                  Object {
+                    "uri": "data:image/png;base64,[object Object]",
+                  }
+                }
                 style={
                   Object {
                     "height": 44,
@@ -435,7 +449,6 @@ ShallowWrapper {
                     "color": "#384B65",
                     "fontFamily": "Montserrat-Regular",
                     "fontSize": 32,
-                    "lineHeight": 40,
                   }
                 }
               />
@@ -482,8 +495,11 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "children": <Image
-                resizeMode="contain"
-                source={undefined}
+                source={
+                  Object {
+                    "uri": "data:image/png;base64,[object Object]",
+                  }
+                }
                 style={
                   Object {
                     "height": 44,
@@ -498,8 +514,9 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "resizeMode": "contain",
-                "source": undefined,
+                "source": Object {
+                  "uri": "data:image/png;base64,[object Object]",
+                },
                 "style": Object {
                   "height": 44,
                   "width": 50,
@@ -527,7 +544,6 @@ ShallowWrapper {
                       "color": "#384B65",
                       "fontFamily": "Montserrat-Regular",
                       "fontSize": 32,
-                      "lineHeight": 40,
                     }
                   }
                 />,
@@ -553,7 +569,6 @@ ShallowWrapper {
                     "color": "#384B65",
                     "fontFamily": "Montserrat-Regular",
                     "fontSize": 32,
-                    "lineHeight": 40,
                   },
                 },
                 "ref": null,

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { 
@@ -79,6 +80,16 @@ class BucketsContainer extends Component {
     }
 
     render() {
+        const options = Platform.OS === 'android' ? [
+            { type: 'Pictures', isSelected: false, title: 'My photos', mask: SYNC_ENUM.SYNC_PHOTOS },
+            { type: 'Movies', isSelected: false, title: 'My movies', mask: SYNC_ENUM.SYNC_MOVIES },
+            { type: 'Documents', isSelected: false, title: 'My documents', mask: SYNC_ENUM.SYNC_DOCUMENTS },
+            { type: 'Music', isSelected: false, title: 'My music', mask: SYNC_ENUM.SYNC_MUSIC }
+        ] : [
+            { type: 'Pictures', isSelected: false, title: 'My photos' },
+            { type: 'Documents', isSelected: false, title: 'My documents' },
+        ]
+
         if(this.props.isFirstSignIn) {
             return(
                 <FirstSignInComponent
@@ -86,7 +97,8 @@ class BucketsContainer extends Component {
                     setFirstSignIn = { this.setFirstSignIn }
                     changeSyncStatus = { this.changeSyncStatus }
                     SYNC_ENUM = { SYNC_ENUM }
-                    createBucket = { this.createBucket.bind(this)} />
+                    createBucket = { this.createBucket.bind(this)} 
+                    options = { options } />
             );
         } else {
             return(

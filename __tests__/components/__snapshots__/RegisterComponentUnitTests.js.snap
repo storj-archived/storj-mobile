@@ -206,12 +206,7 @@ ShallowWrapper {
         </View>,
         null,
       ],
-      "keyboardVerticalOffset": 60,
-      "resetScrollToCoords": Object {
-        "x": 0,
-        "y": 0,
-      },
-      "scrollEnabled": true,
+      "keyboardDismissMode": "interactive",
       "style": Object {
         "backgroundColor": "white",
         "flex": 1,
@@ -990,12 +985,7 @@ ShallowWrapper {
           </View>,
           null,
         ],
-        "keyboardVerticalOffset": 60,
-        "resetScrollToCoords": Object {
-          "x": 0,
-          "y": 0,
-        },
-        "scrollEnabled": true,
+        "keyboardDismissMode": "interactive",
         "style": Object {
           "backgroundColor": "white",
           "flex": 1,

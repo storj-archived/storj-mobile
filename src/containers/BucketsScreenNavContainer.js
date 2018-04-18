@@ -18,10 +18,10 @@ class BucketsScreenNavContainer extends Component {
                 } }
                 navigation = { 
                     addNavigationHelpers({
-                         dispatch: this.props.dispatch,
-                         state: this.props.nav
+                        dispatch: this.props.dispatch,
+                        state: this.props.nav
                     })
-                 } />
+                } />
         );
     }
 }
@@ -31,7 +31,5 @@ function mapStateToProps(state) {
         nav: state.bucketsScreenNavReducer
     };
 }
-
-function mapDispatchToProps(dispatch) {}
 
 export default connect(mapStateToProps)(BucketsScreenNavContainer);

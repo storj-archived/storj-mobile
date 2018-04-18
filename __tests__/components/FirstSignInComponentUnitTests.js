@@ -21,7 +21,13 @@ describe('FirstSignInComponent', () => {
                     SYNC_MOVIES: () => {},
                     SYNC_DOCUMENTS: () => {},
                     SYNC_MUSIC: () => {},
-                } } />
+                } }
+                options = {[
+                    { type: 'Pictures', isSelected: false, title: 'My photos', mask: 16},
+                    { type: 'Movies', isSelected: false, title: 'My movies', mask: 8 },
+                    { type: 'Documents', isSelected: false, title: 'My documents', mask: 4 },
+                    { type: 'Music', isSelected: false, title: 'My music', mask: 2 }
+                ]} />
         );
 
         expect(wrapper).toMatchSnapshot();
@@ -35,7 +41,13 @@ describe('FirstSignInComponent', () => {
                     SYNC_MOVIES: 8,
                     SYNC_DOCUMENTS: 4,
                     SYNC_MUSIC: 2,
-                } } />
+                } }
+                options = {[
+                    { type: 'Pictures', isSelected: false, title: 'My photos', mask: 16},
+                    { type: 'Movies', isSelected: false, title: 'My movies', mask: 8 },
+                    { type: 'Documents', isSelected: false, title: 'My documents', mask: 4 },
+                    { type: 'Music', isSelected: false, title: 'My music', mask: 2 }
+                ]} />
         );
 
         wrapper.find('TouchableOpacity').forEach(child => {
@@ -43,7 +55,7 @@ describe('FirstSignInComponent', () => {
         });
 
         expectedState = { 
-            androidOptions: [ 
+            options: [ 
                 { type: 'Pictures', isSelected: false, title: 'My photos', mask: 16 },
                 { type: 'Movies', isSelected: false, title: 'My movies', mask: 8 },
                 { type: 'Documents', isSelected: false, title: 'My documents', mask: 4 },
@@ -63,7 +75,13 @@ describe('FirstSignInComponent', () => {
                     SYNC_MOVIES: () => {},
                     SYNC_DOCUMENTS: () => {},
                     SYNC_MUSIC: () => {},
-                } } />
+                } }
+                options = {[
+                    { type: 'Pictures', isSelected: false, title: 'My photos', mask: 16},
+                    { type: 'Movies', isSelected: false, title: 'My movies', mask: 8 },
+                    { type: 'Documents', isSelected: false, title: 'My documents', mask: 4 },
+                    { type: 'Music', isSelected: false, title: 'My music', mask: 2 }
+                ]} />
         );
 
         wrapper.find('TouchableOpacity').forEach(child => {
@@ -84,7 +102,13 @@ describe('FirstSignInComponent', () => {
                     SYNC_MOVIES: () => {},
                     SYNC_DOCUMENTS: () => {},
                     SYNC_MUSIC: () => {},
-                } } />
+                } }
+                options = {[
+                    { type: 'Pictures', isSelected: false, title: 'My photos', mask: 16},
+                    { type: 'Movies', isSelected: false, title: 'My movies', mask: 8 },
+                    { type: 'Documents', isSelected: false, title: 'My documents', mask: 4 },
+                    { type: 'Music', isSelected: false, title: 'My music', mask: 2 }
+                ]} />
         );
 
         wrapper.find('TouchableOpacity').forEach(child => {
@@ -103,7 +127,13 @@ describe('FirstSignInComponent', () => {
                     SYNC_MOVIES: () => {},
                     SYNC_DOCUMENTS: () => {},
                     SYNC_MUSIC: () => {},
-                } } />
+                } }
+                options = {[
+                    { type: 'Pictures', isSelected: false, title: 'My photos', mask: 16},
+                    { type: 'Movies', isSelected: false, title: 'My movies', mask: 8 },
+                    { type: 'Documents', isSelected: false, title: 'My documents', mask: 4 },
+                    { type: 'Music', isSelected: false, title: 'My music', mask: 2 }
+                ]} />
         );
 
         wrapper.setState({ showModal: true });
@@ -120,7 +150,13 @@ describe('FirstSignInComponent', () => {
                     SYNC_MOVIES: 8,
                     SYNC_DOCUMENTS: 4,
                     SYNC_MUSIC: 2,
-                } } />
+                } }
+                options = {[
+                    { type: 'Pictures', isSelected: false, title: 'My photos', mask: 16},
+                    { type: 'Movies', isSelected: false, title: 'My movies', mask: 8 },
+                    { type: 'Documents', isSelected: false, title: 'My documents', mask: 4 },
+                    { type: 'Music', isSelected: false, title: 'My music', mask: 2 }
+                ]} />
         );
 
         wrapper.setState({ showModal: true });
@@ -130,7 +166,7 @@ describe('FirstSignInComponent', () => {
         });
 
         expectedState = { 
-            androidOptions: [ 
+            options: [ 
                 { type: 'Pictures', isSelected: true, title: 'My photos', mask: 16 },
                 { type: 'Movies', isSelected: true, title: 'My movies', mask: 8 },
                 { type: 'Documents', isSelected: true, title: 'My documents', mask: 4 },
@@ -152,7 +188,13 @@ describe('FirstSignInComponent', () => {
                     SYNC_MOVIES: () => {},
                     SYNC_DOCUMENTS: () => {},
                     SYNC_MUSIC: () => {},
-                } } />
+                } }
+                options = {[
+                    { type: 'Pictures', isSelected: false, title: 'My photos', mask: 16},
+                    { type: 'Movies', isSelected: false, title: 'My movies', mask: 8 },
+                    { type: 'Documents', isSelected: false, title: 'My documents', mask: 4 },
+                    { type: 'Music', isSelected: false, title: 'My music', mask: 2 }
+                ]} />
         );
 
         wrapper.setState({ showModal: true });

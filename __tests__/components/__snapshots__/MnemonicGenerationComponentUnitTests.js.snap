@@ -17,7 +17,14 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
-      "children": Array [
+      "children": <ScrollViewMock
+        showsVerticalScrollIndicator={false}
+        style={
+          Object {
+            "paddingBottom": 120,
+          }
+        }
+      >
         <View
           style={
             Object {
@@ -64,26 +71,28 @@ ShallowWrapper {
                   }
                 />
               </TouchableOpacity>
-              <View>
+              <View
+                style={
+                  Object {
+                    "height": 200,
+                    "marginLeft": 30,
+                    "width": 480,
+                  }
+                }
+              >
                 <Text
                   accessible={true}
                   allowFontScaling={true}
                   ellipsizeMode="tail"
                   style={
-                    Array [
-                      Object {
-                        "color": "#384B65",
-                        "fontFamily": "Montserrat-Bold",
-                        "fontSize": 60,
-                        "lineHeight": 66,
-                      },
-                      Object {
-                        "marginLeft": 40,
-                      },
-                    ]
+                    Object {
+                      "color": "#384B65",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 60,
+                    }
                   }
                 >
-                  Secret phrase
+                  Safeguard your secret phrase
                 </Text>
               </View>
             </View>
@@ -111,9 +120,7 @@ ShallowWrapper {
                       "fontSize": 36,
                       "lineHeight": 44,
                     },
-                    Object {
-                      "marginLeft": 40,
-                    },
+                    undefined,
                   ]
                 }
               >
@@ -121,23 +128,66 @@ ShallowWrapper {
               </Text>
             </TouchableOpacity>
           </View>
-        </View>,
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
+        </View>
+        <View
           style={
             Object {
-              "color": "rgba(56, 75, 101, 0.4)",
-              "fontFamily": "Montserrat-Medium",
-              "fontSize": 24,
-              "lineHeight": 30,
+              "marginTop": 48,
             }
           }
         >
-          Your secret phrase
-        </Text>,
-        null,
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#384B65",
+                "fontFamily": "Montserrat-Regular",
+                "fontSize": 32,
+                "lineHeight": 50,
+              }
+            }
+          >
+            Make sure you
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "fontFamily": "Montserrat-Bold",
+                }
+              }
+            >
+               save 
+            </Text>
+            this list of words and their order. We don’t want you to lose your data, and you won’t be able to access your data without it.
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "marginTop": 34,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "rgba(56, 75, 101, 0.4)",
+                "fontFamily": "Montserrat-Medium",
+                "fontSize": 24,
+                "lineHeight": 30,
+              }
+            }
+          >
+            Your secret phrase
+          </Text>
+        </View>
         <TouchableOpacity
           activeOpacity={0.2}
           onPress={[Function]}
@@ -179,7 +229,7 @@ ShallowWrapper {
               Copy to clipboard
             </Text>
           </View>
-        </TouchableOpacity>,
+        </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.2}
           onPress={[Function]}
@@ -195,6 +245,7 @@ ShallowWrapper {
                 "borderWidth": 3,
                 "height": 100,
                 "justifyContent": "center",
+                "marginBottom": 60,
                 "marginTop": 50,
                 "width": 670,
               }
@@ -215,9 +266,8 @@ ShallowWrapper {
               Next
             </Text>
           </View>
-        </TouchableOpacity>,
-        null,
-      ],
+        </TouchableOpacity>
+      </ScrollViewMock>,
       "style": Object {
         "backgroundColor": "#FFFFFF",
         "flex": 1,
@@ -225,689 +275,7 @@ ShallowWrapper {
       },
     },
     "ref": null,
-    "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "children": <View
-            style={
-              Object {
-                "alignItems": "center",
-                "flexDirection": "row",
-                "justifyContent": "space-between",
-                "marginTop": 30,
-              }
-            }
-          >
-            <View
-              style={
-                Object {
-                  "flexDirection": "row",
-                }
-              }
-            >
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[Function]}
-                style={
-                  Object {
-                    "alignItems": "center",
-                    "height": 200,
-                    "justifyContent": "flex-start",
-                    "marginTop": 12,
-                  }
-                }
-              >
-                <Image
-                  source="BlueBackButton.png"
-                  style={
-                    Object {
-                      "height": 48,
-                      "width": 48,
-                    }
-                  }
-                />
-              </TouchableOpacity>
-              <View>
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  style={
-                    Array [
-                      Object {
-                        "color": "#384B65",
-                        "fontFamily": "Montserrat-Bold",
-                        "fontSize": 60,
-                        "lineHeight": 66,
-                      },
-                      Object {
-                        "marginLeft": 40,
-                      },
-                    ]
-                  }
-                >
-                  Secret phrase
-                </Text>
-              </View>
-            </View>
-            <TouchableOpacity
-              activeOpacity={0.2}
-              onPress={[Function]}
-              style={
-                Object {
-                  "alignItems": "center",
-                  "height": 200,
-                  "justifyContent": "flex-start",
-                  "marginTop": 12,
-                }
-              }
-            >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Array [
-                    Object {
-                      "color": "#2794FF",
-                      "fontFamily": "Montserrat-Medium",
-                      "fontSize": 36,
-                      "lineHeight": 44,
-                    },
-                    Object {
-                      "marginLeft": 40,
-                    },
-                  ]
-                }
-              >
-                Skip
-              </Text>
-            </TouchableOpacity>
-          </View>,
-          "style": Object {
-            "height": 230,
-          },
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": Array [
-              <View
-                style={
-                  Object {
-                    "flexDirection": "row",
-                  }
-                }
-              >
-                <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={[Function]}
-                  style={
-                    Object {
-                      "alignItems": "center",
-                      "height": 200,
-                      "justifyContent": "flex-start",
-                      "marginTop": 12,
-                    }
-                  }
-                >
-                  <Image
-                    source="BlueBackButton.png"
-                    style={
-                      Object {
-                        "height": 48,
-                        "width": 48,
-                      }
-                    }
-                  />
-                </TouchableOpacity>
-                <View>
-                  <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
-                    style={
-                      Array [
-                        Object {
-                          "color": "#384B65",
-                          "fontFamily": "Montserrat-Bold",
-                          "fontSize": 60,
-                          "lineHeight": 66,
-                        },
-                        Object {
-                          "marginLeft": 40,
-                        },
-                      ]
-                    }
-                  >
-                    Secret phrase
-                  </Text>
-                </View>
-              </View>,
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[Function]}
-                style={
-                  Object {
-                    "alignItems": "center",
-                    "height": 200,
-                    "justifyContent": "flex-start",
-                    "marginTop": 12,
-                  }
-                }
-              >
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  style={
-                    Array [
-                      Object {
-                        "color": "#2794FF",
-                        "fontFamily": "Montserrat-Medium",
-                        "fontSize": 36,
-                        "lineHeight": 44,
-                      },
-                      Object {
-                        "marginLeft": 40,
-                      },
-                    ]
-                  }
-                >
-                  Skip
-                </Text>
-              </TouchableOpacity>,
-            ],
-            "style": Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "justifyContent": "space-between",
-              "marginTop": 30,
-            },
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "children": Array [
-                  <TouchableOpacity
-                    activeOpacity={0.2}
-                    onPress={[Function]}
-                    style={
-                      Object {
-                        "alignItems": "center",
-                        "height": 200,
-                        "justifyContent": "flex-start",
-                        "marginTop": 12,
-                      }
-                    }
-                  >
-                    <Image
-                      source="BlueBackButton.png"
-                      style={
-                        Object {
-                          "height": 48,
-                          "width": 48,
-                        }
-                      }
-                    />
-                  </TouchableOpacity>,
-                  <View>
-                    <Text
-                      accessible={true}
-                      allowFontScaling={true}
-                      ellipsizeMode="tail"
-                      style={
-                        Array [
-                          Object {
-                            "color": "#384B65",
-                            "fontFamily": "Montserrat-Bold",
-                            "fontSize": 60,
-                            "lineHeight": 66,
-                          },
-                          Object {
-                            "marginLeft": 40,
-                          },
-                        ]
-                      }
-                    >
-                      Secret phrase
-                    </Text>
-                  </View>,
-                ],
-                "style": Object {
-                  "flexDirection": "row",
-                },
-              },
-              "ref": null,
-              "rendered": Array [
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "activeOpacity": 0.2,
-                    "children": <Image
-                      source="BlueBackButton.png"
-                      style={
-                        Object {
-                          "height": 48,
-                          "width": 48,
-                        }
-                      }
-                    />,
-                    "onPress": [Function],
-                    "style": Object {
-                      "alignItems": "center",
-                      "height": 200,
-                      "justifyContent": "flex-start",
-                      "marginTop": 12,
-                    },
-                  },
-                  "ref": null,
-                  "rendered": Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {
-                      "source": "BlueBackButton.png",
-                      "style": Object {
-                        "height": 48,
-                        "width": 48,
-                      },
-                    },
-                    "ref": null,
-                    "rendered": null,
-                    "type": [Function],
-                  },
-                  "type": [Function],
-                },
-                Object {
-                  "instance": null,
-                  "key": undefined,
-                  "nodeType": "class",
-                  "props": Object {
-                    "children": <Text
-                      accessible={true}
-                      allowFontScaling={true}
-                      ellipsizeMode="tail"
-                      style={
-                        Array [
-                          Object {
-                            "color": "#384B65",
-                            "fontFamily": "Montserrat-Bold",
-                            "fontSize": 60,
-                            "lineHeight": 66,
-                          },
-                          Object {
-                            "marginLeft": 40,
-                          },
-                        ]
-                      }
-                    >
-                      Secret phrase
-                    </Text>,
-                  },
-                  "ref": null,
-                  "rendered": Object {
-                    "instance": null,
-                    "key": undefined,
-                    "nodeType": "class",
-                    "props": Object {
-                      "accessible": true,
-                      "allowFontScaling": true,
-                      "children": "Secret phrase",
-                      "ellipsizeMode": "tail",
-                      "style": Array [
-                        Object {
-                          "color": "#384B65",
-                          "fontFamily": "Montserrat-Bold",
-                          "fontSize": 60,
-                          "lineHeight": 66,
-                        },
-                        Object {
-                          "marginLeft": 40,
-                        },
-                      ],
-                    },
-                    "ref": null,
-                    "rendered": "Secret phrase",
-                    "type": [Function],
-                  },
-                  "type": [Function],
-                },
-              ],
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "activeOpacity": 0.2,
-                "children": <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  style={
-                    Array [
-                      Object {
-                        "color": "#2794FF",
-                        "fontFamily": "Montserrat-Medium",
-                        "fontSize": 36,
-                        "lineHeight": 44,
-                      },
-                      Object {
-                        "marginLeft": 40,
-                      },
-                    ]
-                  }
-                >
-                  Skip
-                </Text>,
-                "onPress": [Function],
-                "style": Object {
-                  "alignItems": "center",
-                  "height": 200,
-                  "justifyContent": "flex-start",
-                  "marginTop": 12,
-                },
-              },
-              "ref": null,
-              "rendered": Object {
-                "instance": null,
-                "key": undefined,
-                "nodeType": "class",
-                "props": Object {
-                  "accessible": true,
-                  "allowFontScaling": true,
-                  "children": "Skip",
-                  "ellipsizeMode": "tail",
-                  "style": Array [
-                    Object {
-                      "color": "#2794FF",
-                      "fontFamily": "Montserrat-Medium",
-                      "fontSize": 36,
-                      "lineHeight": 44,
-                    },
-                    Object {
-                      "marginLeft": 40,
-                    },
-                  ],
-                },
-                "ref": null,
-                "rendered": "Skip",
-                "type": [Function],
-              },
-              "type": [Function],
-            },
-          ],
-          "type": [Function],
-        },
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "accessible": true,
-          "allowFontScaling": true,
-          "children": "Your secret phrase",
-          "ellipsizeMode": "tail",
-          "style": Object {
-            "color": "rgba(56, 75, 101, 0.4)",
-            "fontFamily": "Montserrat-Medium",
-            "fontSize": 24,
-            "lineHeight": 30,
-          },
-        },
-        "ref": null,
-        "rendered": "Your secret phrase",
-        "type": [Function],
-      },
-      null,
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "activeOpacity": 0.2,
-          "children": <View
-            style={
-              Object {
-                "alignItems": "center",
-                "flexDirection": "row",
-                "height": 110,
-                "marginTop": 90,
-              }
-            }
-          >
-            <Image
-              resizeMode="contain"
-              source="Clipboard.png"
-              style={
-                Object {
-                  "height": 48,
-                  "width": 48,
-                }
-              }
-            />
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "#2794FF",
-                  "fontFamily": "Montserrat-Regular",
-                  "fontSize": 32,
-                  "lineHeight": 40,
-                  "marginLeft": 30,
-                }
-              }
-            >
-              Copy to clipboard
-            </Text>
-          </View>,
-          "onPress": [Function],
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": Array [
-              <Image
-                resizeMode="contain"
-                source="Clipboard.png"
-                style={
-                  Object {
-                    "height": 48,
-                    "width": 48,
-                  }
-                }
-              />,
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "color": "#2794FF",
-                    "fontFamily": "Montserrat-Regular",
-                    "fontSize": 32,
-                    "lineHeight": 40,
-                    "marginLeft": 30,
-                  }
-                }
-              >
-                Copy to clipboard
-              </Text>,
-            ],
-            "style": Object {
-              "alignItems": "center",
-              "flexDirection": "row",
-              "height": 110,
-              "marginTop": 90,
-            },
-          },
-          "ref": null,
-          "rendered": Array [
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "resizeMode": "contain",
-                "source": "Clipboard.png",
-                "style": Object {
-                  "height": 48,
-                  "width": 48,
-                },
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "accessible": true,
-                "allowFontScaling": true,
-                "children": "Copy to clipboard",
-                "ellipsizeMode": "tail",
-                "style": Object {
-                  "color": "#2794FF",
-                  "fontFamily": "Montserrat-Regular",
-                  "fontSize": 32,
-                  "lineHeight": 40,
-                  "marginLeft": 30,
-                },
-              },
-              "ref": null,
-              "rendered": "Copy to clipboard",
-              "type": [Function],
-            },
-          ],
-          "type": [Function],
-        },
-        "type": [Function],
-      },
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "activeOpacity": 0.2,
-          "children": <View
-            style={
-              Object {
-                "alignItems": "center",
-                "alignSelf": "center",
-                "backgroundColor": "#2782ff",
-                "borderColor": "#2794FF",
-                "borderRadius": 12,
-                "borderWidth": 3,
-                "height": 100,
-                "justifyContent": "center",
-                "marginTop": 50,
-                "width": 670,
-              }
-            }
-          >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "white",
-                  "fontFamily": "Montserrat-Bold",
-                  "fontSize": 28,
-                }
-              }
-            >
-              Next
-            </Text>
-          </View>,
-          "onPress": [Function],
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "white",
-                  "fontFamily": "Montserrat-Bold",
-                  "fontSize": 28,
-                }
-              }
-            >
-              Next
-            </Text>,
-            "style": Object {
-              "alignItems": "center",
-              "alignSelf": "center",
-              "backgroundColor": "#2782ff",
-              "borderColor": "#2794FF",
-              "borderRadius": 12,
-              "borderWidth": 3,
-              "height": 100,
-              "justifyContent": "center",
-              "marginTop": 50,
-              "width": 670,
-            },
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "accessible": true,
-              "allowFontScaling": true,
-              "children": "Next",
-              "ellipsizeMode": "tail",
-              "style": Object {
-                "color": "white",
-                "fontFamily": "Montserrat-Bold",
-                "fontSize": 28,
-              },
-            },
-            "ref": null,
-            "rendered": "Next",
-            "type": [Function],
-          },
-          "type": [Function],
-        },
-        "type": [Function],
-      },
-      null,
-    ],
-    "type": [Function],
-  },
-  Symbol(enzyme.__nodes__): Array [
-    Object {
+    "rendered": Object {
       "instance": null,
       "key": undefined,
       "nodeType": "class",
@@ -959,26 +327,28 @@ ShallowWrapper {
                     }
                   />
                 </TouchableOpacity>
-                <View>
+                <View
+                  style={
+                    Object {
+                      "height": 200,
+                      "marginLeft": 30,
+                      "width": 480,
+                    }
+                  }
+                >
                   <Text
                     accessible={true}
                     allowFontScaling={true}
                     ellipsizeMode="tail"
                     style={
-                      Array [
-                        Object {
-                          "color": "#384B65",
-                          "fontFamily": "Montserrat-Bold",
-                          "fontSize": 60,
-                          "lineHeight": 66,
-                        },
-                        Object {
-                          "marginLeft": 40,
-                        },
-                      ]
+                      Object {
+                        "color": "#384B65",
+                        "fontFamily": "Montserrat-Bold",
+                        "fontSize": 60,
+                      }
                     }
                   >
-                    Secret phrase
+                    Safeguard your secret phrase
                   </Text>
                 </View>
               </View>
@@ -1006,9 +376,7 @@ ShallowWrapper {
                         "fontSize": 36,
                         "lineHeight": 44,
                       },
-                      Object {
-                        "marginLeft": 40,
-                      },
+                      undefined,
                     ]
                   }
                 >
@@ -1017,21 +385,65 @@ ShallowWrapper {
               </TouchableOpacity>
             </View>
           </View>,
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
+          <View
             style={
               Object {
-                "color": "rgba(56, 75, 101, 0.4)",
-                "fontFamily": "Montserrat-Medium",
-                "fontSize": 24,
-                "lineHeight": 30,
+                "marginTop": 48,
               }
             }
           >
-            Your secret phrase
-          </Text>,
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#384B65",
+                  "fontFamily": "Montserrat-Regular",
+                  "fontSize": 32,
+                  "lineHeight": 50,
+                }
+              }
+            >
+              Make sure you
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontFamily": "Montserrat-Bold",
+                  }
+                }
+              >
+                 save 
+              </Text>
+              this list of words and their order. We don’t want you to lose your data, and you won’t be able to access your data without it.
+            </Text>
+          </View>,
+          <View
+            style={
+              Object {
+                "marginTop": 34,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "rgba(56, 75, 101, 0.4)",
+                  "fontFamily": "Montserrat-Medium",
+                  "fontSize": 24,
+                  "lineHeight": 30,
+                }
+              }
+            >
+              Your secret phrase
+            </Text>
+          </View>,
           null,
           <TouchableOpacity
             activeOpacity={0.2}
@@ -1090,6 +502,7 @@ ShallowWrapper {
                   "borderWidth": 3,
                   "height": 100,
                   "justifyContent": "center",
+                  "marginBottom": 60,
                   "marginTop": 50,
                   "width": 670,
                 }
@@ -1113,10 +526,9 @@ ShallowWrapper {
           </TouchableOpacity>,
           null,
         ],
+        "showsVerticalScrollIndicator": false,
         "style": Object {
-          "backgroundColor": "#FFFFFF",
-          "flex": 1,
-          "paddingHorizontal": 40,
+          "paddingBottom": 120,
         },
       },
       "ref": null,
@@ -1165,26 +577,28 @@ ShallowWrapper {
                     }
                   />
                 </TouchableOpacity>
-                <View>
+                <View
+                  style={
+                    Object {
+                      "height": 200,
+                      "marginLeft": 30,
+                      "width": 480,
+                    }
+                  }
+                >
                   <Text
                     accessible={true}
                     allowFontScaling={true}
                     ellipsizeMode="tail"
                     style={
-                      Array [
-                        Object {
-                          "color": "#384B65",
-                          "fontFamily": "Montserrat-Bold",
-                          "fontSize": 60,
-                          "lineHeight": 66,
-                        },
-                        Object {
-                          "marginLeft": 40,
-                        },
-                      ]
+                      Object {
+                        "color": "#384B65",
+                        "fontFamily": "Montserrat-Bold",
+                        "fontSize": 60,
+                      }
                     }
                   >
-                    Secret phrase
+                    Safeguard your secret phrase
                   </Text>
                 </View>
               </View>
@@ -1212,9 +626,7 @@ ShallowWrapper {
                         "fontSize": 36,
                         "lineHeight": 44,
                       },
-                      Object {
-                        "marginLeft": 40,
-                      },
+                      undefined,
                     ]
                   }
                 >
@@ -1262,26 +674,28 @@ ShallowWrapper {
                       }
                     />
                   </TouchableOpacity>
-                  <View>
+                  <View
+                    style={
+                      Object {
+                        "height": 200,
+                        "marginLeft": 30,
+                        "width": 480,
+                      }
+                    }
+                  >
                     <Text
                       accessible={true}
                       allowFontScaling={true}
                       ellipsizeMode="tail"
                       style={
-                        Array [
-                          Object {
-                            "color": "#384B65",
-                            "fontFamily": "Montserrat-Bold",
-                            "fontSize": 60,
-                            "lineHeight": 66,
-                          },
-                          Object {
-                            "marginLeft": 40,
-                          },
-                        ]
+                        Object {
+                          "color": "#384B65",
+                          "fontFamily": "Montserrat-Bold",
+                          "fontSize": 60,
+                        }
                       }
                     >
-                      Secret phrase
+                      Safeguard your secret phrase
                     </Text>
                   </View>
                 </View>,
@@ -1309,9 +723,7 @@ ShallowWrapper {
                           "fontSize": 36,
                           "lineHeight": 44,
                         },
-                        Object {
-                          "marginLeft": 40,
-                        },
+                        undefined,
                       ]
                     }
                   >
@@ -1356,26 +768,28 @@ ShallowWrapper {
                         }
                       />
                     </TouchableOpacity>,
-                    <View>
+                    <View
+                      style={
+                        Object {
+                          "height": 200,
+                          "marginLeft": 30,
+                          "width": 480,
+                        }
+                      }
+                    >
                       <Text
                         accessible={true}
                         allowFontScaling={true}
                         ellipsizeMode="tail"
                         style={
-                          Array [
-                            Object {
-                              "color": "#384B65",
-                              "fontFamily": "Montserrat-Bold",
-                              "fontSize": 60,
-                              "lineHeight": 66,
-                            },
-                            Object {
-                              "marginLeft": 40,
-                            },
-                          ]
+                          Object {
+                            "color": "#384B65",
+                            "fontFamily": "Montserrat-Bold",
+                            "fontSize": 60,
+                          }
                         }
                       >
-                        Secret phrase
+                        Safeguard your secret phrase
                       </Text>
                     </View>,
                   ],
@@ -1436,21 +850,20 @@ ShallowWrapper {
                         allowFontScaling={true}
                         ellipsizeMode="tail"
                         style={
-                          Array [
-                            Object {
-                              "color": "#384B65",
-                              "fontFamily": "Montserrat-Bold",
-                              "fontSize": 60,
-                              "lineHeight": 66,
-                            },
-                            Object {
-                              "marginLeft": 40,
-                            },
-                          ]
+                          Object {
+                            "color": "#384B65",
+                            "fontFamily": "Montserrat-Bold",
+                            "fontSize": 60,
+                          }
                         }
                       >
-                        Secret phrase
+                        Safeguard your secret phrase
                       </Text>,
+                      "style": Object {
+                        "height": 200,
+                        "marginLeft": 30,
+                        "width": 480,
+                      },
                     },
                     "ref": null,
                     "rendered": Object {
@@ -1460,22 +873,16 @@ ShallowWrapper {
                       "props": Object {
                         "accessible": true,
                         "allowFontScaling": true,
-                        "children": "Secret phrase",
+                        "children": "Safeguard your secret phrase",
                         "ellipsizeMode": "tail",
-                        "style": Array [
-                          Object {
-                            "color": "#384B65",
-                            "fontFamily": "Montserrat-Bold",
-                            "fontSize": 60,
-                            "lineHeight": 66,
-                          },
-                          Object {
-                            "marginLeft": 40,
-                          },
-                        ],
+                        "style": Object {
+                          "color": "#384B65",
+                          "fontFamily": "Montserrat-Bold",
+                          "fontSize": 60,
+                        },
                       },
                       "ref": null,
-                      "rendered": "Secret phrase",
+                      "rendered": "Safeguard your secret phrase",
                       "type": [Function],
                     },
                     "type": [Function],
@@ -1501,9 +908,7 @@ ShallowWrapper {
                           "fontSize": 36,
                           "lineHeight": 44,
                         },
-                        Object {
-                          "marginLeft": 40,
-                        },
+                        undefined,
                       ]
                     }
                   >
@@ -1534,9 +939,7 @@ ShallowWrapper {
                         "fontSize": 36,
                         "lineHeight": 44,
                       },
-                      Object {
-                        "marginLeft": 40,
-                      },
+                      undefined,
                     ],
                   },
                   "ref": null,
@@ -1555,19 +958,141 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "accessible": true,
-            "allowFontScaling": true,
-            "children": "Your secret phrase",
-            "ellipsizeMode": "tail",
+            "children": <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#384B65",
+                  "fontFamily": "Montserrat-Regular",
+                  "fontSize": 32,
+                  "lineHeight": 50,
+                }
+              }
+            >
+              Make sure you
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontFamily": "Montserrat-Bold",
+                  }
+                }
+              >
+                 save 
+              </Text>
+              this list of words and their order. We don’t want you to lose your data, and you won’t be able to access your data without it.
+            </Text>,
             "style": Object {
-              "color": "rgba(56, 75, 101, 0.4)",
-              "fontFamily": "Montserrat-Medium",
-              "fontSize": 24,
-              "lineHeight": 30,
+              "marginTop": 48,
             },
           },
           "ref": null,
-          "rendered": "Your secret phrase",
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "accessible": true,
+              "allowFontScaling": true,
+              "children": Array [
+                "Make sure you",
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "fontFamily": "Montserrat-Bold",
+                    }
+                  }
+                >
+                   save 
+                </Text>,
+                "this list of words and their order. We don’t want you to lose your data, and you won’t be able to access your data without it.",
+              ],
+              "ellipsizeMode": "tail",
+              "style": Object {
+                "color": "#384B65",
+                "fontFamily": "Montserrat-Regular",
+                "fontSize": 32,
+                "lineHeight": 50,
+              },
+            },
+            "ref": null,
+            "rendered": Array [
+              "Make sure you",
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "accessible": true,
+                  "allowFontScaling": true,
+                  "children": " save ",
+                  "ellipsizeMode": "tail",
+                  "style": Object {
+                    "fontFamily": "Montserrat-Bold",
+                  },
+                },
+                "ref": null,
+                "rendered": " save ",
+                "type": [Function],
+              },
+              "this list of words and their order. We don’t want you to lose your data, and you won’t be able to access your data without it.",
+            ],
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "rgba(56, 75, 101, 0.4)",
+                  "fontFamily": "Montserrat-Medium",
+                  "fontSize": 24,
+                  "lineHeight": 30,
+                }
+              }
+            >
+              Your secret phrase
+            </Text>,
+            "style": Object {
+              "marginTop": 34,
+            },
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "accessible": true,
+              "allowFontScaling": true,
+              "children": "Your secret phrase",
+              "ellipsizeMode": "tail",
+              "style": Object {
+                "color": "rgba(56, 75, 101, 0.4)",
+                "fontFamily": "Montserrat-Medium",
+                "fontSize": 24,
+                "lineHeight": 30,
+              },
+            },
+            "ref": null,
+            "rendered": "Your secret phrase",
+            "type": [Function],
+          },
           "type": [Function],
         },
         null,
@@ -1718,6 +1243,7 @@ ShallowWrapper {
                   "borderWidth": 3,
                   "height": 100,
                   "justifyContent": "center",
+                  "marginBottom": 60,
                   "marginTop": 50,
                   "width": 670,
                 }
@@ -1769,6 +1295,7 @@ ShallowWrapper {
                 "borderWidth": 3,
                 "height": 100,
                 "justifyContent": "center",
+                "marginBottom": 60,
                 "marginTop": 50,
                 "width": 670,
               },
@@ -1799,6 +1326,1327 @@ ShallowWrapper {
         },
         null,
       ],
+      "type": [Function],
+    },
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": <ScrollViewMock
+          showsVerticalScrollIndicator={false}
+          style={
+            Object {
+              "paddingBottom": 120,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "height": 230,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "marginTop": 30,
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "flexDirection": "row",
+                  }
+                }
+              >
+                <TouchableOpacity
+                  activeOpacity={0.2}
+                  onPress={[Function]}
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "height": 200,
+                      "justifyContent": "flex-start",
+                      "marginTop": 12,
+                    }
+                  }
+                >
+                  <Image
+                    source="BlueBackButton.png"
+                    style={
+                      Object {
+                        "height": 48,
+                        "width": 48,
+                      }
+                    }
+                  />
+                </TouchableOpacity>
+                <View
+                  style={
+                    Object {
+                      "height": 200,
+                      "marginLeft": 30,
+                      "width": 480,
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#384B65",
+                        "fontFamily": "Montserrat-Bold",
+                        "fontSize": 60,
+                      }
+                    }
+                  >
+                    Safeguard your secret phrase
+                  </Text>
+                </View>
+              </View>
+              <TouchableOpacity
+                activeOpacity={0.2}
+                onPress={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "height": 200,
+                    "justifyContent": "flex-start",
+                    "marginTop": 12,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Medium",
+                        "fontSize": 36,
+                        "lineHeight": 44,
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  Skip
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View
+            style={
+              Object {
+                "marginTop": 48,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#384B65",
+                  "fontFamily": "Montserrat-Regular",
+                  "fontSize": 32,
+                  "lineHeight": 50,
+                }
+              }
+            >
+              Make sure you
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontFamily": "Montserrat-Bold",
+                  }
+                }
+              >
+                 save 
+              </Text>
+              this list of words and their order. We don’t want you to lose your data, and you won’t be able to access your data without it.
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "marginTop": 34,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "rgba(56, 75, 101, 0.4)",
+                  "fontFamily": "Montserrat-Medium",
+                  "fontSize": 24,
+                  "lineHeight": 30,
+                }
+              }
+            >
+              Your secret phrase
+            </Text>
+          </View>
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[Function]}
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "height": 110,
+                  "marginTop": 90,
+                }
+              }
+            >
+              <Image
+                resizeMode="contain"
+                source="Clipboard.png"
+                style={
+                  Object {
+                    "height": 48,
+                    "width": 48,
+                  }
+                }
+              />
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-Regular",
+                    "fontSize": 32,
+                    "lineHeight": 40,
+                    "marginLeft": 30,
+                  }
+                }
+              >
+                Copy to clipboard
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[Function]}
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "backgroundColor": "#2782ff",
+                  "borderColor": "#2794FF",
+                  "borderRadius": 12,
+                  "borderWidth": 3,
+                  "height": 100,
+                  "justifyContent": "center",
+                  "marginBottom": 60,
+                  "marginTop": 50,
+                  "width": 670,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "white",
+                    "fontFamily": "Montserrat-Bold",
+                    "fontSize": 28,
+                  }
+                }
+              >
+                Next
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </ScrollViewMock>,
+        "style": Object {
+          "backgroundColor": "#FFFFFF",
+          "flex": 1,
+          "paddingHorizontal": 40,
+        },
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <View
+              style={
+                Object {
+                  "height": 230,
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "space-between",
+                    "marginTop": 30,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <TouchableOpacity
+                    activeOpacity={0.2}
+                    onPress={[Function]}
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "height": 200,
+                        "justifyContent": "flex-start",
+                        "marginTop": 12,
+                      }
+                    }
+                  >
+                    <Image
+                      source="BlueBackButton.png"
+                      style={
+                        Object {
+                          "height": 48,
+                          "width": 48,
+                        }
+                      }
+                    />
+                  </TouchableOpacity>
+                  <View
+                    style={
+                      Object {
+                        "height": 200,
+                        "marginLeft": 30,
+                        "width": 480,
+                      }
+                    }
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "color": "#384B65",
+                          "fontFamily": "Montserrat-Bold",
+                          "fontSize": 60,
+                        }
+                      }
+                    >
+                      Safeguard your secret phrase
+                    </Text>
+                  </View>
+                </View>
+                <TouchableOpacity
+                  activeOpacity={0.2}
+                  onPress={[Function]}
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "height": 200,
+                      "justifyContent": "flex-start",
+                      "marginTop": 12,
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Medium",
+                          "fontSize": 36,
+                          "lineHeight": 44,
+                        },
+                        undefined,
+                      ]
+                    }
+                  >
+                    Skip
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>,
+            <View
+              style={
+                Object {
+                  "marginTop": 48,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#384B65",
+                    "fontFamily": "Montserrat-Regular",
+                    "fontSize": 32,
+                    "lineHeight": 50,
+                  }
+                }
+              >
+                Make sure you
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "fontFamily": "Montserrat-Bold",
+                    }
+                  }
+                >
+                   save 
+                </Text>
+                this list of words and their order. We don’t want you to lose your data, and you won’t be able to access your data without it.
+              </Text>
+            </View>,
+            <View
+              style={
+                Object {
+                  "marginTop": 34,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "rgba(56, 75, 101, 0.4)",
+                    "fontFamily": "Montserrat-Medium",
+                    "fontSize": 24,
+                    "lineHeight": 30,
+                  }
+                }
+              >
+                Your secret phrase
+              </Text>
+            </View>,
+            null,
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[Function]}
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "height": 110,
+                    "marginTop": 90,
+                  }
+                }
+              >
+                <Image
+                  resizeMode="contain"
+                  source="Clipboard.png"
+                  style={
+                    Object {
+                      "height": 48,
+                      "width": 48,
+                    }
+                  }
+                />
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 40,
+                      "marginLeft": 30,
+                    }
+                  }
+                >
+                  Copy to clipboard
+                </Text>
+              </View>
+            </TouchableOpacity>,
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[Function]}
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "alignSelf": "center",
+                    "backgroundColor": "#2782ff",
+                    "borderColor": "#2794FF",
+                    "borderRadius": 12,
+                    "borderWidth": 3,
+                    "height": 100,
+                    "justifyContent": "center",
+                    "marginBottom": 60,
+                    "marginTop": 50,
+                    "width": 670,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "white",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 28,
+                    }
+                  }
+                >
+                  Next
+                </Text>
+              </View>
+            </TouchableOpacity>,
+            null,
+          ],
+          "showsVerticalScrollIndicator": false,
+          "style": Object {
+            "paddingBottom": 120,
+          },
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "space-between",
+                    "marginTop": 30,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <TouchableOpacity
+                    activeOpacity={0.2}
+                    onPress={[Function]}
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "height": 200,
+                        "justifyContent": "flex-start",
+                        "marginTop": 12,
+                      }
+                    }
+                  >
+                    <Image
+                      source="BlueBackButton.png"
+                      style={
+                        Object {
+                          "height": 48,
+                          "width": 48,
+                        }
+                      }
+                    />
+                  </TouchableOpacity>
+                  <View
+                    style={
+                      Object {
+                        "height": 200,
+                        "marginLeft": 30,
+                        "width": 480,
+                      }
+                    }
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "color": "#384B65",
+                          "fontFamily": "Montserrat-Bold",
+                          "fontSize": 60,
+                        }
+                      }
+                    >
+                      Safeguard your secret phrase
+                    </Text>
+                  </View>
+                </View>
+                <TouchableOpacity
+                  activeOpacity={0.2}
+                  onPress={[Function]}
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "height": 200,
+                      "justifyContent": "flex-start",
+                      "marginTop": 12,
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Medium",
+                          "fontSize": 36,
+                          "lineHeight": 44,
+                        },
+                        undefined,
+                      ]
+                    }
+                  >
+                    Skip
+                  </Text>
+                </TouchableOpacity>
+              </View>,
+              "style": Object {
+                "height": 230,
+              },
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": Array [
+                  <View
+                    style={
+                      Object {
+                        "flexDirection": "row",
+                      }
+                    }
+                  >
+                    <TouchableOpacity
+                      activeOpacity={0.2}
+                      onPress={[Function]}
+                      style={
+                        Object {
+                          "alignItems": "center",
+                          "height": 200,
+                          "justifyContent": "flex-start",
+                          "marginTop": 12,
+                        }
+                      }
+                    >
+                      <Image
+                        source="BlueBackButton.png"
+                        style={
+                          Object {
+                            "height": 48,
+                            "width": 48,
+                          }
+                        }
+                      />
+                    </TouchableOpacity>
+                    <View
+                      style={
+                        Object {
+                          "height": 200,
+                          "marginLeft": 30,
+                          "width": 480,
+                        }
+                      }
+                    >
+                      <Text
+                        accessible={true}
+                        allowFontScaling={true}
+                        ellipsizeMode="tail"
+                        style={
+                          Object {
+                            "color": "#384B65",
+                            "fontFamily": "Montserrat-Bold",
+                            "fontSize": 60,
+                          }
+                        }
+                      >
+                        Safeguard your secret phrase
+                      </Text>
+                    </View>
+                  </View>,
+                  <TouchableOpacity
+                    activeOpacity={0.2}
+                    onPress={[Function]}
+                    style={
+                      Object {
+                        "alignItems": "center",
+                        "height": 200,
+                        "justifyContent": "flex-start",
+                        "marginTop": 12,
+                      }
+                    }
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#2794FF",
+                            "fontFamily": "Montserrat-Medium",
+                            "fontSize": 36,
+                            "lineHeight": 44,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      Skip
+                    </Text>
+                  </TouchableOpacity>,
+                ],
+                "style": Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "marginTop": 30,
+                },
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": Array [
+                      <TouchableOpacity
+                        activeOpacity={0.2}
+                        onPress={[Function]}
+                        style={
+                          Object {
+                            "alignItems": "center",
+                            "height": 200,
+                            "justifyContent": "flex-start",
+                            "marginTop": 12,
+                          }
+                        }
+                      >
+                        <Image
+                          source="BlueBackButton.png"
+                          style={
+                            Object {
+                              "height": 48,
+                              "width": 48,
+                            }
+                          }
+                        />
+                      </TouchableOpacity>,
+                      <View
+                        style={
+                          Object {
+                            "height": 200,
+                            "marginLeft": 30,
+                            "width": 480,
+                          }
+                        }
+                      >
+                        <Text
+                          accessible={true}
+                          allowFontScaling={true}
+                          ellipsizeMode="tail"
+                          style={
+                            Object {
+                              "color": "#384B65",
+                              "fontFamily": "Montserrat-Bold",
+                              "fontSize": 60,
+                            }
+                          }
+                        >
+                          Safeguard your secret phrase
+                        </Text>
+                      </View>,
+                    ],
+                    "style": Object {
+                      "flexDirection": "row",
+                    },
+                  },
+                  "ref": null,
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "activeOpacity": 0.2,
+                        "children": <Image
+                          source="BlueBackButton.png"
+                          style={
+                            Object {
+                              "height": 48,
+                              "width": 48,
+                            }
+                          }
+                        />,
+                        "onPress": [Function],
+                        "style": Object {
+                          "alignItems": "center",
+                          "height": 200,
+                          "justifyContent": "flex-start",
+                          "marginTop": 12,
+                        },
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "source": "BlueBackButton.png",
+                          "style": Object {
+                            "height": 48,
+                            "width": 48,
+                          },
+                        },
+                        "ref": null,
+                        "rendered": null,
+                        "type": [Function],
+                      },
+                      "type": [Function],
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "children": <Text
+                          accessible={true}
+                          allowFontScaling={true}
+                          ellipsizeMode="tail"
+                          style={
+                            Object {
+                              "color": "#384B65",
+                              "fontFamily": "Montserrat-Bold",
+                              "fontSize": 60,
+                            }
+                          }
+                        >
+                          Safeguard your secret phrase
+                        </Text>,
+                        "style": Object {
+                          "height": 200,
+                          "marginLeft": 30,
+                          "width": 480,
+                        },
+                      },
+                      "ref": null,
+                      "rendered": Object {
+                        "instance": null,
+                        "key": undefined,
+                        "nodeType": "class",
+                        "props": Object {
+                          "accessible": true,
+                          "allowFontScaling": true,
+                          "children": "Safeguard your secret phrase",
+                          "ellipsizeMode": "tail",
+                          "style": Object {
+                            "color": "#384B65",
+                            "fontFamily": "Montserrat-Bold",
+                            "fontSize": 60,
+                          },
+                        },
+                        "ref": null,
+                        "rendered": "Safeguard your secret phrase",
+                        "type": [Function],
+                      },
+                      "type": [Function],
+                    },
+                  ],
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "activeOpacity": 0.2,
+                    "children": <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#2794FF",
+                            "fontFamily": "Montserrat-Medium",
+                            "fontSize": 36,
+                            "lineHeight": 44,
+                          },
+                          undefined,
+                        ]
+                      }
+                    >
+                      Skip
+                    </Text>,
+                    "onPress": [Function],
+                    "style": Object {
+                      "alignItems": "center",
+                      "height": 200,
+                      "justifyContent": "flex-start",
+                      "marginTop": 12,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "accessible": true,
+                      "allowFontScaling": true,
+                      "children": "Skip",
+                      "ellipsizeMode": "tail",
+                      "style": Array [
+                        Object {
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Medium",
+                          "fontSize": 36,
+                          "lineHeight": 44,
+                        },
+                        undefined,
+                      ],
+                    },
+                    "ref": null,
+                    "rendered": "Skip",
+                    "type": [Function],
+                  },
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#384B65",
+                    "fontFamily": "Montserrat-Regular",
+                    "fontSize": 32,
+                    "lineHeight": 50,
+                  }
+                }
+              >
+                Make sure you
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "fontFamily": "Montserrat-Bold",
+                    }
+                  }
+                >
+                   save 
+                </Text>
+                this list of words and their order. We don’t want you to lose your data, and you won’t be able to access your data without it.
+              </Text>,
+              "style": Object {
+                "marginTop": 48,
+              },
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "accessible": true,
+                "allowFontScaling": true,
+                "children": Array [
+                  "Make sure you",
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "fontFamily": "Montserrat-Bold",
+                      }
+                    }
+                  >
+                     save 
+                  </Text>,
+                  "this list of words and their order. We don’t want you to lose your data, and you won’t be able to access your data without it.",
+                ],
+                "ellipsizeMode": "tail",
+                "style": Object {
+                  "color": "#384B65",
+                  "fontFamily": "Montserrat-Regular",
+                  "fontSize": 32,
+                  "lineHeight": 50,
+                },
+              },
+              "ref": null,
+              "rendered": Array [
+                "Make sure you",
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "accessible": true,
+                    "allowFontScaling": true,
+                    "children": " save ",
+                    "ellipsizeMode": "tail",
+                    "style": Object {
+                      "fontFamily": "Montserrat-Bold",
+                    },
+                  },
+                  "ref": null,
+                  "rendered": " save ",
+                  "type": [Function],
+                },
+                "this list of words and their order. We don’t want you to lose your data, and you won’t be able to access your data without it.",
+              ],
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "rgba(56, 75, 101, 0.4)",
+                    "fontFamily": "Montserrat-Medium",
+                    "fontSize": 24,
+                    "lineHeight": 30,
+                  }
+                }
+              >
+                Your secret phrase
+              </Text>,
+              "style": Object {
+                "marginTop": 34,
+              },
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "accessible": true,
+                "allowFontScaling": true,
+                "children": "Your secret phrase",
+                "ellipsizeMode": "tail",
+                "style": Object {
+                  "color": "rgba(56, 75, 101, 0.4)",
+                  "fontFamily": "Montserrat-Medium",
+                  "fontSize": 24,
+                  "lineHeight": 30,
+                },
+              },
+              "ref": null,
+              "rendered": "Your secret phrase",
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          null,
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "activeOpacity": 0.2,
+              "children": <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "height": 110,
+                    "marginTop": 90,
+                  }
+                }
+              >
+                <Image
+                  resizeMode="contain"
+                  source="Clipboard.png"
+                  style={
+                    Object {
+                      "height": 48,
+                      "width": 48,
+                    }
+                  }
+                />
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 40,
+                      "marginLeft": 30,
+                    }
+                  }
+                >
+                  Copy to clipboard
+                </Text>
+              </View>,
+              "onPress": [Function],
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": Array [
+                  <Image
+                    resizeMode="contain"
+                    source="Clipboard.png"
+                    style={
+                      Object {
+                        "height": 48,
+                        "width": 48,
+                      }
+                    }
+                  />,
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 40,
+                        "marginLeft": 30,
+                      }
+                    }
+                  >
+                    Copy to clipboard
+                  </Text>,
+                ],
+                "style": Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "height": 110,
+                  "marginTop": 90,
+                },
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "resizeMode": "contain",
+                    "source": "Clipboard.png",
+                    "style": Object {
+                      "height": 48,
+                      "width": 48,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "accessible": true,
+                    "allowFontScaling": true,
+                    "children": "Copy to clipboard",
+                    "ellipsizeMode": "tail",
+                    "style": Object {
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 40,
+                      "marginLeft": 30,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": "Copy to clipboard",
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "activeOpacity": 0.2,
+              "children": <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "alignSelf": "center",
+                    "backgroundColor": "#2782ff",
+                    "borderColor": "#2794FF",
+                    "borderRadius": 12,
+                    "borderWidth": 3,
+                    "height": 100,
+                    "justifyContent": "center",
+                    "marginBottom": 60,
+                    "marginTop": 50,
+                    "width": 670,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "white",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 28,
+                    }
+                  }
+                >
+                  Next
+                </Text>
+              </View>,
+              "onPress": [Function],
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "white",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 28,
+                    }
+                  }
+                >
+                  Next
+                </Text>,
+                "style": Object {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "backgroundColor": "#2782ff",
+                  "borderColor": "#2794FF",
+                  "borderRadius": 12,
+                  "borderWidth": 3,
+                  "height": 100,
+                  "justifyContent": "center",
+                  "marginBottom": 60,
+                  "marginTop": 50,
+                  "width": 670,
+                },
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "accessible": true,
+                  "allowFontScaling": true,
+                  "children": "Next",
+                  "ellipsizeMode": "tail",
+                  "style": Object {
+                    "color": "white",
+                    "fontFamily": "Montserrat-Bold",
+                    "fontSize": 28,
+                  },
+                },
+                "ref": null,
+                "rendered": "Next",
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          null,
+        ],
+        "type": [Function],
+      },
       "type": [Function],
     },
   ],

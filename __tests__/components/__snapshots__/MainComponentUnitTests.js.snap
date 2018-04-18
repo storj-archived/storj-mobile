@@ -50,6 +50,7 @@ ShallowWrapper {
         null,
         null,
         null,
+        null,
       ],
       "style": Object {
         "flex": 1,
@@ -117,6 +118,7 @@ ShallowWrapper {
       null,
       null,
       null,
+      null,
     ],
     "type": [Function],
   },
@@ -151,6 +153,7 @@ ShallowWrapper {
               showStorageInfo={[Function]}
             />
           </View>,
+          null,
           null,
           null,
           null,
@@ -226,6 +229,7 @@ ShallowWrapper {
         null,
         null,
         null,
+        null,
       ],
       "type": [Function],
     },
@@ -290,6 +294,7 @@ ShallowWrapper {
           bucketScreenRouteName={undefined}
           showTriangle={true}
         />,
+        null,
         null,
         null,
         null,
@@ -377,6 +382,7 @@ ShallowWrapper {
       null,
       null,
       null,
+      null,
     ],
     "type": [Function],
   },
@@ -417,6 +423,7 @@ ShallowWrapper {
             bucketScreenRouteName={undefined}
             showTriangle={true}
           />,
+          null,
           null,
           null,
           null,
@@ -504,6 +511,7 @@ ShallowWrapper {
         null,
         null,
         null,
+        null,
       ],
       "type": [Function],
     },
@@ -568,6 +576,7 @@ ShallowWrapper {
           bucketScreenRouteName={undefined}
           showTriangle={false}
         />,
+        null,
         null,
         null,
         null,
@@ -655,6 +664,7 @@ ShallowWrapper {
       null,
       null,
       null,
+      null,
     ],
     "type": [Function],
   },
@@ -695,6 +705,7 @@ ShallowWrapper {
             bucketScreenRouteName={undefined}
             showTriangle={false}
           />,
+          null,
           null,
           null,
           null,
@@ -775,6 +786,7 @@ ShallowWrapper {
           "rendered": null,
           "type": [Function],
         },
+        null,
         null,
         null,
         null,
@@ -880,6 +892,7 @@ ShallowWrapper {
             onCancel={[Function]}
           />
         </View>,
+        null,
         null,
         null,
         null,
@@ -1037,6 +1050,7 @@ ShallowWrapper {
       null,
       null,
       null,
+      null,
     ],
     "type": [Function],
   },
@@ -1111,6 +1125,7 @@ ShallowWrapper {
               onCancel={[Function]}
             />
           </View>,
+          null,
           null,
           null,
           null,
@@ -1262,6 +1277,7 @@ ShallowWrapper {
           ],
           "type": [Function],
         },
+        null,
         null,
         null,
         null,
@@ -1378,6 +1394,7 @@ ShallowWrapper {
         null,
         null,
         null,
+        null,
       ],
       "style": Object {
         "flex": 1,
@@ -1542,6 +1559,7 @@ ShallowWrapper {
       null,
       null,
       null,
+      null,
     ],
     "type": [Function],
   },
@@ -1621,6 +1639,7 @@ ShallowWrapper {
               onCancel={[Function]}
             />
           </View>,
+          null,
           null,
           null,
           null,
@@ -1785,6 +1804,7 @@ ShallowWrapper {
           ],
           "type": [Function],
         },
+        null,
         null,
         null,
         null,

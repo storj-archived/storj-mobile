@@ -40,9 +40,11 @@ describe('ViewOptionsComponent', () => {
     it('trigger actions on press correctly with not isGridViewShown', () => {
         const setListViewSpy = jest.fn();
         const setGridViewSpy = jest.fn();
+        const showOptionsSpy = jest.fn();
 
         const wrapper = shallow(
             <ViewOptionsComponent
+                showOptions = { showOptionsSpy }
                 isGridViewShown = { false }
                 setListView = { setListViewSpy }
                 setGridView = { setGridViewSpy } />
@@ -53,15 +55,18 @@ describe('ViewOptionsComponent', () => {
         });
 
         expect(setListViewSpy.mock.calls.length).toBe(0);
+        expect(showOptionsSpy.mock.calls.length).toBe(1);
         expect(setGridViewSpy.mock.calls.length).toBe(1);
     });
 
     it('trigger actions on press correctly with isGridViewShown', () => {
         const setListViewSpy = jest.fn();
         const setGridViewSpy = jest.fn();
+        const showOptionsSpy = jest.fn();
 
         const wrapper = shallow(
             <ViewOptionsComponent
+                showOptions = { showOptionsSpy }
                 isGridViewShown = { true }
                 setListView = { setListViewSpy }
                 setGridView = { setGridViewSpy } />
@@ -71,6 +76,7 @@ describe('ViewOptionsComponent', () => {
             child.simulate('Press');
         });
 
+        expect(showOptionsSpy.mock.calls.length).toBe(1);
         expect(setListViewSpy.mock.calls.length).toBe(1);
         expect(setGridViewSpy.mock.calls.length).toBe(0);
     });

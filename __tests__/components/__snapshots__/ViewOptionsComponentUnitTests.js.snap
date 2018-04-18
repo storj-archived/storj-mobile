@@ -20,7 +20,7 @@ ShallowWrapper {
       "children": Array [
         <TouchableOpacity
           activeOpacity={0.2}
-          onPress={undefined}
+          onPress={[Function]}
           style={
             Array [
               Object {
@@ -235,7 +235,7 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "activeOpacity": 0.2,
-          "onPress": undefined,
+          "onPress": [Function],
           "style": Array [
             Object {
               "backgroundColor": "transparent",
@@ -896,7 +896,7 @@ ShallowWrapper {
         "children": Array [
           <TouchableOpacity
             activeOpacity={0.2}
-            onPress={undefined}
+            onPress={[Function]}
             style={
               Array [
                 Object {
@@ -1111,7 +1111,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "activeOpacity": 0.2,
-            "onPress": undefined,
+            "onPress": [Function],
             "style": Array [
               Object {
                 "backgroundColor": "transparent",

@@ -47,7 +47,9 @@ ShallowWrapper {
           <TextInput
             allowFontScaling={true}
             autoCorrect={false}
+            autoFocus={undefined}
             editable={undefined}
+            keyboardType="default"
             multiline={undefined}
             onChangeText={undefined}
             placeholder={undefined}
@@ -131,7 +133,9 @@ ShallowWrapper {
             <TextInput
               allowFontScaling={true}
               autoCorrect={false}
+              autoFocus={undefined}
               editable={undefined}
+              keyboardType="default"
               multiline={undefined}
               onChangeText={undefined}
               placeholder={undefined}
@@ -171,7 +175,9 @@ ShallowWrapper {
             "props": Object {
               "allowFontScaling": true,
               "autoCorrect": false,
+              "autoFocus": undefined,
               "editable": undefined,
+              "keyboardType": "default",
               "multiline": undefined,
               "onChangeText": undefined,
               "placeholder": undefined,
@@ -193,7 +199,7 @@ ShallowWrapper {
               "underlineColorAndroid": "transparent",
               "value": undefined,
             },
-            "ref": null,
+            "ref": [Function],
             "rendered": null,
             "type": [Function],
           },
@@ -255,7 +261,9 @@ ShallowWrapper {
             <TextInput
               allowFontScaling={true}
               autoCorrect={false}
+              autoFocus={undefined}
               editable={undefined}
+              keyboardType="default"
               multiline={undefined}
               onChangeText={undefined}
               placeholder={undefined}
@@ -339,7 +347,9 @@ ShallowWrapper {
               <TextInput
                 allowFontScaling={true}
                 autoCorrect={false}
+                autoFocus={undefined}
                 editable={undefined}
+                keyboardType="default"
                 multiline={undefined}
                 onChangeText={undefined}
                 placeholder={undefined}
@@ -379,7 +389,9 @@ ShallowWrapper {
               "props": Object {
                 "allowFontScaling": true,
                 "autoCorrect": false,
+                "autoFocus": undefined,
                 "editable": undefined,
+                "keyboardType": "default",
                 "multiline": undefined,
                 "onChangeText": undefined,
                 "placeholder": undefined,
@@ -401,7 +413,7 @@ ShallowWrapper {
                 "underlineColorAndroid": "transparent",
                 "value": undefined,
               },
-              "ref": null,
+              "ref": [Function],
               "rendered": null,
               "type": [Function],
             },
@@ -487,7 +499,9 @@ ShallowWrapper {
           <TextInput
             allowFontScaling={true}
             autoCorrect={false}
+            autoFocus={undefined}
             editable={undefined}
+            keyboardType="default"
             multiline={true}
             onChangeText={undefined}
             placeholder={undefined}
@@ -571,7 +585,9 @@ ShallowWrapper {
             <TextInput
               allowFontScaling={true}
               autoCorrect={false}
+              autoFocus={undefined}
               editable={undefined}
+              keyboardType="default"
               multiline={true}
               onChangeText={undefined}
               placeholder={undefined}
@@ -611,7 +627,9 @@ ShallowWrapper {
             "props": Object {
               "allowFontScaling": true,
               "autoCorrect": false,
+              "autoFocus": undefined,
               "editable": undefined,
+              "keyboardType": "default",
               "multiline": true,
               "onChangeText": undefined,
               "placeholder": undefined,
@@ -633,7 +651,7 @@ ShallowWrapper {
               "underlineColorAndroid": "transparent",
               "value": undefined,
             },
-            "ref": null,
+            "ref": [Function],
             "rendered": null,
             "type": [Function],
           },
@@ -695,7 +713,9 @@ ShallowWrapper {
             <TextInput
               allowFontScaling={true}
               autoCorrect={false}
+              autoFocus={undefined}
               editable={undefined}
+              keyboardType="default"
               multiline={true}
               onChangeText={undefined}
               placeholder={undefined}
@@ -779,7 +799,9 @@ ShallowWrapper {
               <TextInput
                 allowFontScaling={true}
                 autoCorrect={false}
+                autoFocus={undefined}
                 editable={undefined}
+                keyboardType="default"
                 multiline={true}
                 onChangeText={undefined}
                 placeholder={undefined}
@@ -819,7 +841,9 @@ ShallowWrapper {
               "props": Object {
                 "allowFontScaling": true,
                 "autoCorrect": false,
+                "autoFocus": undefined,
                 "editable": undefined,
+                "keyboardType": "default",
                 "multiline": true,
                 "onChangeText": undefined,
                 "placeholder": undefined,
@@ -841,7 +865,7 @@ ShallowWrapper {
                 "underlineColorAndroid": "transparent",
                 "value": undefined,
               },
-              "ref": null,
+              "ref": [Function],
               "rendered": null,
               "type": [Function],
             },

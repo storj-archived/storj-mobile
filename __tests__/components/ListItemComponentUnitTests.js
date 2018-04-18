@@ -14,7 +14,7 @@ describe('ListItemComponent', ()=> {
 	it('renders correctly', () => {
 		const wrapper = shallow(
 			<ListItemComponent 
-                item = {{ getName: () => {}, getStarred: () => {} }} />	
+                item = {{ getName: () => {}, getStarred: () => {}, entity: { thumbnail: {} } }} />	
 		);
 
 		expect(wrapper).toMatchSnapshot();
@@ -26,7 +26,7 @@ describe('ListItemComponent', ()=> {
 
 		const wrapper = shallow(
             <ListItemComponent 
-                item = {{ getName: () => {}, getStarred: () => {} }}
+                item = {{ getName: () => {}, getStarred: () => {}, entity: { thumbnail: {} } }}
                 isSelectionModeEnabled = { true }
                 isSingleItemSelected = { true }
                 selectItemId = { selectItemIdSpy }
@@ -46,7 +46,7 @@ describe('ListItemComponent', ()=> {
 
 		const wrapper = shallow(
 			<ListItemComponent 
-                item = {{ getName: () => {}, getStarred: () => {} }}
+                item = {{ getName: () => {}, getStarred: () => {}, entity: { thumbnail: {} } }}
                 isSelectionModeEnabled = { false }
                 isSingleItemSelected = { true }
                 selectItemId = { selectItemIdSpy }
@@ -69,7 +69,7 @@ describe('ListItemComponent', ()=> {
 
 		const wrapper = shallow(
 			<ListItemComponent 
-                item = {{ getName: () => {}, getStarred: () => {}, getId: () => {}, entity: {bucketId: null} }}
+                item = {{ getName: () => {}, getStarred: () => {}, getId: () => {}, entity: {bucketId: null, thumbnail: {}} }}
                 isSelectionModeEnabled = { false }
                 isSingleItemSelected = { false }
                 onSelectionPress = { onSelectionPressSpy }

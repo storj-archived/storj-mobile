@@ -191,7 +191,7 @@ describe('ContentSlider', () => {
                     () => { return(<View/>) },
                     () => { return(<View/>) }
                 ]}
-                position = { 1 }
+                position = { 2 }
                 width = { 600 }
                 height = { 600 } />
         );
@@ -202,6 +202,6 @@ describe('ContentSlider', () => {
         const swipeSpy = sinon.spy(instance, 'onSwipe');
         instance.onSwipe({nativeEvent:{contentOffset:{x: 10}}});
 
-        expect(wrapper.instance().state.position).toBe(1);
+        expect(wrapper.instance().state.position).toBe(2);
     });
 });

@@ -36,7 +36,10 @@ describe('TabBarComponent', () => {
                     isSelectionMode: true,
                     isSingleItemSelected: false,
                     isActionBarShown: false
-                } } />
+                } }
+                screenProps = {{
+                    isFirstSignIn: false
+                }} />
         );
 
         expect(wrapper).toMatchSnapshot();
@@ -50,7 +53,10 @@ describe('TabBarComponent', () => {
                     isSelectionMode: false,
                     isSingleItemSelected: false,
                     isActionBarShown: true
-                } } />
+                } }
+                screenProps = {{
+                    isFirstSignIn: false
+                }} />
         );
 
         expect(wrapper).toMatchSnapshot();
@@ -64,7 +70,10 @@ describe('TabBarComponent', () => {
                     isSelectionMode: false,
                     isSingleItemSelected: true,
                     isActionBarShown: false
-                } } />
+                } }
+                screenProps = {{
+                    isFirstSignIn: false
+                }} />
         );
 
         expect(wrapper).toMatchSnapshot();
@@ -78,6 +87,7 @@ describe('TabBarComponent', () => {
         const openBucketSpy = jest.fn();
         const dashboardNavigateBackSpy = jest.fn();
         const bucketNavigateBackSpy = jest.fn();
+        const hideActionBarSpy = jest.fn();
 
         const wrapper = shallow(
             <TabBarComponent
@@ -90,11 +100,13 @@ describe('TabBarComponent', () => {
                     dashboardNavigateBack: dashboardNavigateBackSpy,
                     bucketNavigateBack: bucketNavigateBackSpy,
                     buckets: [],
+                    hideActionBar: hideActionBarSpy,
                     isSelectionMode: false,
                     isSingleItemSelected: false
                 } }
                 screenProps = {{
-                    setCurrentMainScreen: setMainScreenSpy
+                    setCurrentMainScreen: setMainScreenSpy,
+                    isFirstSignIn: false
                 }} />
         );
 
@@ -102,12 +114,13 @@ describe('TabBarComponent', () => {
             child.simulate('Press');
         });
 
-        expect(navigateSpy.mock.calls.length).toBe(2);
-        expect(goToBucketScreenSpy.mock.calls.length).toBe(1);
-        expect(openBucketSpy.mock.calls.length).toBe(3);
-        expect(setMainScreenSpy.mock.calls.length).toBe(3);
+        expect(navigateSpy.mock.calls.length).toBe(3);
+        expect(goToBucketScreenSpy.mock.calls.length).toBe(0);
+        expect(openBucketSpy.mock.calls.length).toBe(0);
+        expect(setMainScreenSpy.mock.calls.length).toBe(0);
         expect(onActionBarPressSpy.mock.calls.length).toBe(1);
-        expect(dashboardNavigateBackSpy.mock.calls.length).toBe(1);
-        expect(bucketNavigateBackSpy.mock.calls.length).toBe(1);
+        expect(dashboardNavigateBackSpy.mock.calls.length).toBe(0);
+        expect(bucketNavigateBackSpy.mock.calls.length).toBe(0);
+        expect(hideActionBarSpy.mock.calls.length).toBe(1);
     });
 });

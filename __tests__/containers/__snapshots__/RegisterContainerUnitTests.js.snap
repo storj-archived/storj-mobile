@@ -29,7 +29,6 @@ ShallowWrapper {
     "props": Object {
       "isButtonDisabled": true,
       "isEmailError": false,
-      "isLoading": false,
       "isPasswordError": false,
       "isPasswordMatchError": false,
       "isTermsAcceptedError": false,
@@ -54,7 +53,6 @@ ShallowWrapper {
       "props": Object {
         "isButtonDisabled": true,
         "isEmailError": false,
-        "isLoading": false,
         "isPasswordError": false,
         "isPasswordMatchError": false,
         "isTermsAcceptedError": false,

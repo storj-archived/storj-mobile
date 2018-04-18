@@ -3,7 +3,6 @@ import {
     Text,
     TouchableOpacity,
     StyleSheet,
-    Platform,
     Image
 } from 'react-native';
 import React, { Component } from 'react';
@@ -15,15 +14,7 @@ export default class FirstSignInComponent extends Component {
         super(props);
 
         this.state = {
-            options: Platform.OS === 'android' ? [
-                { type: 'Pictures', isSelected: false, title: 'My photos', mask: this.props.SYNC_ENUM.SYNC_PHOTOS },
-                { type: 'Movies', isSelected: false, title: 'My movies', mask: this.props.SYNC_ENUM.SYNC_MOVIES },
-                { type: 'Documents', isSelected: false, title: 'My documents', mask: this.props.SYNC_ENUM.SYNC_DOCUMENTS },
-                { type: 'Music', isSelected: false, title: 'My music', mask: this.props.SYNC_ENUM.SYNC_MUSIC }
-            ] : [
-                { type: 'Pictures', isSelected: false, title: 'My photos' },
-                { type: 'Documents', isSelected: false, title: 'My documents' },
-            ],
+            options: props.options,
             showModal: false
         }
     }
