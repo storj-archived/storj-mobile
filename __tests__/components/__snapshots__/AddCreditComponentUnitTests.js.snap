@@ -1,0 +1,3399 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddCreditComponent renders correctly with BTC option 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <AddCreditComponent
+    showCredits={[Function]}
+    wallets={Array []}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={[Function]}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              Object {
+                "backgroundColor": "black",
+                "opacity": 0.2,
+              },
+            ]
+          }
+        />,
+        null,
+        undefined,
+        null,
+      ],
+      "style": Array [
+        Object {
+          "backgroundColor": "transparent",
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "activeOpacity": 0.2,
+          "onPress": [Function],
+          "style": Array [
+            Object {
+              "backgroundColor": "transparent",
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            Object {
+              "backgroundColor": "black",
+              "opacity": 0.2,
+            },
+          ],
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      null,
+      undefined,
+      null,
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[Function]}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                Object {
+                  "backgroundColor": "black",
+                  "opacity": 0.2,
+                },
+              ]
+            }
+          />,
+          null,
+          undefined,
+          null,
+        ],
+        "style": Array [
+          Object {
+            "backgroundColor": "transparent",
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "activeOpacity": 0.2,
+            "onPress": [Function],
+            "style": Array [
+              Object {
+                "backgroundColor": "transparent",
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              Object {
+                "backgroundColor": "black",
+                "opacity": 0.2,
+              },
+            ],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        null,
+        undefined,
+        null,
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`AddCreditComponent renders correctly with Storj option 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <AddCreditComponent
+    wallets={Array []}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={undefined}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              Object {
+                "backgroundColor": "black",
+                "opacity": 0.2,
+              },
+            ]
+          }
+        />,
+        null,
+        null,
+        <View
+          style={
+            Object {
+              "alignSelf": "center",
+              "backgroundColor": "white",
+              "borderRadius": 6,
+              "height": 514,
+              "justifyContent": "space-between",
+              "marginTop": 30,
+              "paddingBottom": 60,
+              "paddingHorizontal": 20,
+              "paddingTop": 20,
+              "width": 710,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "paddingHorizontal": 40,
+                "paddingTop": 20,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#384B65",
+                  "fontFamily": "Montserrat-Regular",
+                  "fontSize": 32,
+                  "lineHeight": 46,
+                }
+              }
+            >
+              Please send your STORJ payments to the address below.
+            </Text>
+            <View
+              style={
+                Object {
+                  "marginTop": 40,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#384B65",
+                    "fontFamily": "Montserrat-Regular",
+                    "fontSize": 32,
+                    "lineHeight": 46,
+                  }
+                }
+              >
+                Sending any other token to this address will result in a loss of funds.
+              </Text>
+            </View>
+          </View>
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[Function]}
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "backgroundColor": "#2794FF",
+                  "borderColor": "#2794FF",
+                  "borderRadius": 12,
+                  "borderWidth": 3,
+                  "height": 100,
+                  "justifyContent": "center",
+                  "marginTop": 94,
+                  "width": 630,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "white",
+                    "fontFamily": "Montserrat-Bold",
+                    "fontSize": 28,
+                  }
+                }
+              >
+                Create Wallet
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>,
+      ],
+      "style": Array [
+        Object {
+          "backgroundColor": "transparent",
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "activeOpacity": 0.2,
+          "onPress": undefined,
+          "style": Array [
+            Object {
+              "backgroundColor": "transparent",
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            Object {
+              "backgroundColor": "black",
+              "opacity": 0.2,
+            },
+          ],
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      null,
+      null,
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <View
+              style={
+                Object {
+                  "alignSelf": "center",
+                  "paddingHorizontal": 40,
+                  "paddingTop": 20,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#384B65",
+                    "fontFamily": "Montserrat-Regular",
+                    "fontSize": 32,
+                    "lineHeight": 46,
+                  }
+                }
+              >
+                Please send your STORJ payments to the address below.
+              </Text>
+              <View
+                style={
+                  Object {
+                    "marginTop": 40,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#384B65",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 46,
+                    }
+                  }
+                >
+                  Sending any other token to this address will result in a loss of funds.
+                </Text>
+              </View>
+            </View>,
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[Function]}
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "alignSelf": "center",
+                    "backgroundColor": "#2794FF",
+                    "borderColor": "#2794FF",
+                    "borderRadius": 12,
+                    "borderWidth": 3,
+                    "height": 100,
+                    "justifyContent": "center",
+                    "marginTop": 94,
+                    "width": 630,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "white",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 28,
+                    }
+                  }
+                >
+                  Create Wallet
+                </Text>
+              </View>
+            </TouchableOpacity>,
+          ],
+          "style": Object {
+            "alignSelf": "center",
+            "backgroundColor": "white",
+            "borderRadius": 6,
+            "height": 514,
+            "justifyContent": "space-between",
+            "marginTop": 30,
+            "paddingBottom": 60,
+            "paddingHorizontal": 20,
+            "paddingTop": 20,
+            "width": 710,
+          },
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": Array [
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#384B65",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 46,
+                    }
+                  }
+                >
+                  Please send your STORJ payments to the address below.
+                </Text>,
+                <View
+                  style={
+                    Object {
+                      "marginTop": 40,
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#384B65",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      }
+                    }
+                  >
+                    Sending any other token to this address will result in a loss of funds.
+                  </Text>
+                </View>,
+              ],
+              "style": Object {
+                "alignSelf": "center",
+                "paddingHorizontal": 40,
+                "paddingTop": 20,
+              },
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "accessible": true,
+                  "allowFontScaling": true,
+                  "children": "Please send your STORJ payments to the address below.",
+                  "ellipsizeMode": "tail",
+                  "style": Object {
+                    "color": "#384B65",
+                    "fontFamily": "Montserrat-Regular",
+                    "fontSize": 32,
+                    "lineHeight": 46,
+                  },
+                },
+                "ref": null,
+                "rendered": "Please send your STORJ payments to the address below.",
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#384B65",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      }
+                    }
+                  >
+                    Sending any other token to this address will result in a loss of funds.
+                  </Text>,
+                  "style": Object {
+                    "marginTop": 40,
+                  },
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "accessible": true,
+                    "allowFontScaling": true,
+                    "children": "Sending any other token to this address will result in a loss of funds.",
+                    "ellipsizeMode": "tail",
+                    "style": Object {
+                      "color": "#384B65",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 46,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": "Sending any other token to this address will result in a loss of funds.",
+                  "type": [Function],
+                },
+                "type": [Function],
+              },
+            ],
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "activeOpacity": 0.2,
+              "children": <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "alignSelf": "center",
+                    "backgroundColor": "#2794FF",
+                    "borderColor": "#2794FF",
+                    "borderRadius": 12,
+                    "borderWidth": 3,
+                    "height": 100,
+                    "justifyContent": "center",
+                    "marginTop": 94,
+                    "width": 630,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "white",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 28,
+                    }
+                  }
+                >
+                  Create Wallet
+                </Text>
+              </View>,
+              "onPress": [Function],
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "white",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 28,
+                    }
+                  }
+                >
+                  Create Wallet
+                </Text>,
+                "style": Object {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "backgroundColor": "#2794FF",
+                  "borderColor": "#2794FF",
+                  "borderRadius": 12,
+                  "borderWidth": 3,
+                  "height": 100,
+                  "justifyContent": "center",
+                  "marginTop": 94,
+                  "width": 630,
+                },
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "accessible": true,
+                  "allowFontScaling": true,
+                  "children": "Create Wallet",
+                  "ellipsizeMode": "tail",
+                  "style": Object {
+                    "color": "white",
+                    "fontFamily": "Montserrat-Bold",
+                    "fontSize": 28,
+                  },
+                },
+                "ref": null,
+                "rendered": "Create Wallet",
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={undefined}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                Object {
+                  "backgroundColor": "black",
+                  "opacity": 0.2,
+                },
+              ]
+            }
+          />,
+          null,
+          null,
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "backgroundColor": "white",
+                "borderRadius": 6,
+                "height": 514,
+                "justifyContent": "space-between",
+                "marginTop": 30,
+                "paddingBottom": 60,
+                "paddingHorizontal": 20,
+                "paddingTop": 20,
+                "width": 710,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignSelf": "center",
+                  "paddingHorizontal": 40,
+                  "paddingTop": 20,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#384B65",
+                    "fontFamily": "Montserrat-Regular",
+                    "fontSize": 32,
+                    "lineHeight": 46,
+                  }
+                }
+              >
+                Please send your STORJ payments to the address below.
+              </Text>
+              <View
+                style={
+                  Object {
+                    "marginTop": 40,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#384B65",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 46,
+                    }
+                  }
+                >
+                  Sending any other token to this address will result in a loss of funds.
+                </Text>
+              </View>
+            </View>
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[Function]}
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "alignSelf": "center",
+                    "backgroundColor": "#2794FF",
+                    "borderColor": "#2794FF",
+                    "borderRadius": 12,
+                    "borderWidth": 3,
+                    "height": 100,
+                    "justifyContent": "center",
+                    "marginTop": 94,
+                    "width": 630,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "white",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 28,
+                    }
+                  }
+                >
+                  Create Wallet
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>,
+        ],
+        "style": Array [
+          Object {
+            "backgroundColor": "transparent",
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "activeOpacity": 0.2,
+            "onPress": undefined,
+            "style": Array [
+              Object {
+                "backgroundColor": "transparent",
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              Object {
+                "backgroundColor": "black",
+                "opacity": 0.2,
+              },
+            ],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        null,
+        null,
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <View
+                style={
+                  Object {
+                    "alignSelf": "center",
+                    "paddingHorizontal": 40,
+                    "paddingTop": 20,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#384B65",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 46,
+                    }
+                  }
+                >
+                  Please send your STORJ payments to the address below.
+                </Text>
+                <View
+                  style={
+                    Object {
+                      "marginTop": 40,
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#384B65",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      }
+                    }
+                  >
+                    Sending any other token to this address will result in a loss of funds.
+                  </Text>
+                </View>
+              </View>,
+              <TouchableOpacity
+                activeOpacity={0.2}
+                onPress={[Function]}
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "alignSelf": "center",
+                      "backgroundColor": "#2794FF",
+                      "borderColor": "#2794FF",
+                      "borderRadius": 12,
+                      "borderWidth": 3,
+                      "height": 100,
+                      "justifyContent": "center",
+                      "marginTop": 94,
+                      "width": 630,
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "white",
+                        "fontFamily": "Montserrat-Bold",
+                        "fontSize": 28,
+                      }
+                    }
+                  >
+                    Create Wallet
+                  </Text>
+                </View>
+              </TouchableOpacity>,
+            ],
+            "style": Object {
+              "alignSelf": "center",
+              "backgroundColor": "white",
+              "borderRadius": 6,
+              "height": 514,
+              "justifyContent": "space-between",
+              "marginTop": 30,
+              "paddingBottom": 60,
+              "paddingHorizontal": 20,
+              "paddingTop": 20,
+              "width": 710,
+            },
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": Array [
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#384B65",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      }
+                    }
+                  >
+                    Please send your STORJ payments to the address below.
+                  </Text>,
+                  <View
+                    style={
+                      Object {
+                        "marginTop": 40,
+                      }
+                    }
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "color": "#384B65",
+                          "fontFamily": "Montserrat-Regular",
+                          "fontSize": 32,
+                          "lineHeight": 46,
+                        }
+                      }
+                    >
+                      Sending any other token to this address will result in a loss of funds.
+                    </Text>
+                  </View>,
+                ],
+                "style": Object {
+                  "alignSelf": "center",
+                  "paddingHorizontal": 40,
+                  "paddingTop": 20,
+                },
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "accessible": true,
+                    "allowFontScaling": true,
+                    "children": "Please send your STORJ payments to the address below.",
+                    "ellipsizeMode": "tail",
+                    "style": Object {
+                      "color": "#384B65",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 46,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": "Please send your STORJ payments to the address below.",
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "color": "#384B65",
+                          "fontFamily": "Montserrat-Regular",
+                          "fontSize": 32,
+                          "lineHeight": 46,
+                        }
+                      }
+                    >
+                      Sending any other token to this address will result in a loss of funds.
+                    </Text>,
+                    "style": Object {
+                      "marginTop": 40,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "accessible": true,
+                      "allowFontScaling": true,
+                      "children": "Sending any other token to this address will result in a loss of funds.",
+                      "ellipsizeMode": "tail",
+                      "style": Object {
+                        "color": "#384B65",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      },
+                    },
+                    "ref": null,
+                    "rendered": "Sending any other token to this address will result in a loss of funds.",
+                    "type": [Function],
+                  },
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "activeOpacity": 0.2,
+                "children": <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "alignSelf": "center",
+                      "backgroundColor": "#2794FF",
+                      "borderColor": "#2794FF",
+                      "borderRadius": 12,
+                      "borderWidth": 3,
+                      "height": 100,
+                      "justifyContent": "center",
+                      "marginTop": 94,
+                      "width": 630,
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "white",
+                        "fontFamily": "Montserrat-Bold",
+                        "fontSize": 28,
+                      }
+                    }
+                  >
+                    Create Wallet
+                  </Text>
+                </View>,
+                "onPress": [Function],
+              },
+              "ref": null,
+              "rendered": Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "white",
+                        "fontFamily": "Montserrat-Bold",
+                        "fontSize": 28,
+                      }
+                    }
+                  >
+                    Create Wallet
+                  </Text>,
+                  "style": Object {
+                    "alignItems": "center",
+                    "alignSelf": "center",
+                    "backgroundColor": "#2794FF",
+                    "borderColor": "#2794FF",
+                    "borderRadius": 12,
+                    "borderWidth": 3,
+                    "height": 100,
+                    "justifyContent": "center",
+                    "marginTop": 94,
+                    "width": 630,
+                  },
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "accessible": true,
+                    "allowFontScaling": true,
+                    "children": "Create Wallet",
+                    "ellipsizeMode": "tail",
+                    "style": Object {
+                      "color": "white",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 28,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": "Create Wallet",
+                  "type": [Function],
+                },
+                "type": [Function],
+              },
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`AddCreditComponent renders correctly with no wallets 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <AddCreditComponent
+    wallets={Array []}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={undefined}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              Object {
+                "backgroundColor": "black",
+                "opacity": 0.2,
+              },
+            ]
+          }
+        />,
+        <View
+          style={
+            Object {
+              "alignSelf": "center",
+              "backgroundColor": "white",
+              "borderRadius": 6,
+              "height": 220,
+              "marginTop": 30,
+              "paddingHorizontal": 20,
+              "width": 710,
+            }
+          }
+        >
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "height": 110,
+                "justifyContent": "flex-start",
+                "paddingHorizontal": 40,
+              }
+            }
+          >
+            <Image
+              resizeMode="contain"
+              source="Storj.png"
+              style={
+                Object {
+                  "height": 48,
+                  "width": 48,
+                }
+              }
+            />
+            <View
+              style={
+                Object {
+                  "marginLeft": 30,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-Regular",
+                    "fontSize": 32,
+                    "lineHeight": 46,
+                  }
+                }
+              >
+                Add credits with Storj
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "height": 110,
+                "justifyContent": "flex-start",
+                "paddingHorizontal": 40,
+              }
+            }
+          >
+            <Image
+              resizeMode="contain"
+              source="BTC.png"
+              style={
+                Object {
+                  "height": 48,
+                  "width": 48,
+                }
+              }
+            />
+            <View
+              style={
+                Object {
+                  "marginLeft": 30,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-Regular",
+                    "fontSize": 32,
+                    "lineHeight": 46,
+                  }
+                }
+              >
+                Add credits with Btc
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>,
+        null,
+        null,
+      ],
+      "style": Array [
+        Object {
+          "backgroundColor": "transparent",
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "activeOpacity": 0.2,
+          "onPress": undefined,
+          "style": Array [
+            Object {
+              "backgroundColor": "transparent",
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            Object {
+              "backgroundColor": "black",
+              "opacity": 0.2,
+            },
+          ],
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "height": 110,
+                  "justifyContent": "flex-start",
+                  "paddingHorizontal": 40,
+                }
+              }
+            >
+              <Image
+                resizeMode="contain"
+                source="Storj.png"
+                style={
+                  Object {
+                    "height": 48,
+                    "width": 48,
+                  }
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "marginLeft": 30,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 46,
+                    }
+                  }
+                >
+                  Add credits with Storj
+                </Text>
+              </View>
+            </TouchableOpacity>,
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "height": 110,
+                  "justifyContent": "flex-start",
+                  "paddingHorizontal": 40,
+                }
+              }
+            >
+              <Image
+                resizeMode="contain"
+                source="BTC.png"
+                style={
+                  Object {
+                    "height": 48,
+                    "width": 48,
+                  }
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "marginLeft": 30,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 46,
+                    }
+                  }
+                >
+                  Add credits with Btc
+                </Text>
+              </View>
+            </TouchableOpacity>,
+          ],
+          "style": Object {
+            "alignSelf": "center",
+            "backgroundColor": "white",
+            "borderRadius": 6,
+            "height": 220,
+            "marginTop": 30,
+            "paddingHorizontal": 20,
+            "width": 710,
+          },
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "activeOpacity": 0.2,
+              "children": Array [
+                <Image
+                  resizeMode="contain"
+                  source="Storj.png"
+                  style={
+                    Object {
+                      "height": 48,
+                      "width": 48,
+                    }
+                  }
+                />,
+                <View
+                  style={
+                    Object {
+                      "marginLeft": 30,
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      }
+                    }
+                  >
+                    Add credits with Storj
+                  </Text>
+                </View>,
+              ],
+              "onPress": [Function],
+              "style": Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "height": 110,
+                "justifyContent": "flex-start",
+                "paddingHorizontal": 40,
+              },
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "resizeMode": "contain",
+                  "source": "Storj.png",
+                  "style": Object {
+                    "height": 48,
+                    "width": 48,
+                  },
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      }
+                    }
+                  >
+                    Add credits with Storj
+                  </Text>,
+                  "style": Object {
+                    "marginLeft": 30,
+                  },
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "accessible": true,
+                    "allowFontScaling": true,
+                    "children": "Add credits with Storj",
+                    "ellipsizeMode": "tail",
+                    "style": Object {
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 46,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": "Add credits with Storj",
+                  "type": [Function],
+                },
+                "type": [Function],
+              },
+            ],
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "activeOpacity": 0.2,
+              "children": Array [
+                <Image
+                  resizeMode="contain"
+                  source="BTC.png"
+                  style={
+                    Object {
+                      "height": 48,
+                      "width": 48,
+                    }
+                  }
+                />,
+                <View
+                  style={
+                    Object {
+                      "marginLeft": 30,
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      }
+                    }
+                  >
+                    Add credits with Btc
+                  </Text>
+                </View>,
+              ],
+              "onPress": [Function],
+              "style": Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "height": 110,
+                "justifyContent": "flex-start",
+                "paddingHorizontal": 40,
+              },
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "resizeMode": "contain",
+                  "source": "BTC.png",
+                  "style": Object {
+                    "height": 48,
+                    "width": 48,
+                  },
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      }
+                    }
+                  >
+                    Add credits with Btc
+                  </Text>,
+                  "style": Object {
+                    "marginLeft": 30,
+                  },
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "accessible": true,
+                    "allowFontScaling": true,
+                    "children": "Add credits with Btc",
+                    "ellipsizeMode": "tail",
+                    "style": Object {
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 46,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": "Add credits with Btc",
+                  "type": [Function],
+                },
+                "type": [Function],
+              },
+            ],
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      null,
+      null,
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={undefined}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                Object {
+                  "backgroundColor": "black",
+                  "opacity": 0.2,
+                },
+              ]
+            }
+          />,
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "backgroundColor": "white",
+                "borderRadius": 6,
+                "height": 220,
+                "marginTop": 30,
+                "paddingHorizontal": 20,
+                "width": 710,
+              }
+            }
+          >
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "height": 110,
+                  "justifyContent": "flex-start",
+                  "paddingHorizontal": 40,
+                }
+              }
+            >
+              <Image
+                resizeMode="contain"
+                source="Storj.png"
+                style={
+                  Object {
+                    "height": 48,
+                    "width": 48,
+                  }
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "marginLeft": 30,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 46,
+                    }
+                  }
+                >
+                  Add credits with Storj
+                </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "height": 110,
+                  "justifyContent": "flex-start",
+                  "paddingHorizontal": 40,
+                }
+              }
+            >
+              <Image
+                resizeMode="contain"
+                source="BTC.png"
+                style={
+                  Object {
+                    "height": 48,
+                    "width": 48,
+                  }
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "marginLeft": 30,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 46,
+                    }
+                  }
+                >
+                  Add credits with Btc
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>,
+          null,
+          null,
+        ],
+        "style": Array [
+          Object {
+            "backgroundColor": "transparent",
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "activeOpacity": 0.2,
+            "onPress": undefined,
+            "style": Array [
+              Object {
+                "backgroundColor": "transparent",
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              Object {
+                "backgroundColor": "black",
+                "opacity": 0.2,
+              },
+            ],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <TouchableOpacity
+                activeOpacity={0.2}
+                onPress={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "height": 110,
+                    "justifyContent": "flex-start",
+                    "paddingHorizontal": 40,
+                  }
+                }
+              >
+                <Image
+                  resizeMode="contain"
+                  source="Storj.png"
+                  style={
+                    Object {
+                      "height": 48,
+                      "width": 48,
+                    }
+                  }
+                />
+                <View
+                  style={
+                    Object {
+                      "marginLeft": 30,
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      }
+                    }
+                  >
+                    Add credits with Storj
+                  </Text>
+                </View>
+              </TouchableOpacity>,
+              <TouchableOpacity
+                activeOpacity={0.2}
+                onPress={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "height": 110,
+                    "justifyContent": "flex-start",
+                    "paddingHorizontal": 40,
+                  }
+                }
+              >
+                <Image
+                  resizeMode="contain"
+                  source="BTC.png"
+                  style={
+                    Object {
+                      "height": 48,
+                      "width": 48,
+                    }
+                  }
+                />
+                <View
+                  style={
+                    Object {
+                      "marginLeft": 30,
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      }
+                    }
+                  >
+                    Add credits with Btc
+                  </Text>
+                </View>
+              </TouchableOpacity>,
+            ],
+            "style": Object {
+              "alignSelf": "center",
+              "backgroundColor": "white",
+              "borderRadius": 6,
+              "height": 220,
+              "marginTop": 30,
+              "paddingHorizontal": 20,
+              "width": 710,
+            },
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "activeOpacity": 0.2,
+                "children": Array [
+                  <Image
+                    resizeMode="contain"
+                    source="Storj.png"
+                    style={
+                      Object {
+                        "height": 48,
+                        "width": 48,
+                      }
+                    }
+                  />,
+                  <View
+                    style={
+                      Object {
+                        "marginLeft": 30,
+                      }
+                    }
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Regular",
+                          "fontSize": 32,
+                          "lineHeight": 46,
+                        }
+                      }
+                    >
+                      Add credits with Storj
+                    </Text>
+                  </View>,
+                ],
+                "onPress": [Function],
+                "style": Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "height": 110,
+                  "justifyContent": "flex-start",
+                  "paddingHorizontal": 40,
+                },
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "resizeMode": "contain",
+                    "source": "Storj.png",
+                    "style": Object {
+                      "height": 48,
+                      "width": 48,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Regular",
+                          "fontSize": 32,
+                          "lineHeight": 46,
+                        }
+                      }
+                    >
+                      Add credits with Storj
+                    </Text>,
+                    "style": Object {
+                      "marginLeft": 30,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "accessible": true,
+                      "allowFontScaling": true,
+                      "children": "Add credits with Storj",
+                      "ellipsizeMode": "tail",
+                      "style": Object {
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      },
+                    },
+                    "ref": null,
+                    "rendered": "Add credits with Storj",
+                    "type": [Function],
+                  },
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "activeOpacity": 0.2,
+                "children": Array [
+                  <Image
+                    resizeMode="contain"
+                    source="BTC.png"
+                    style={
+                      Object {
+                        "height": 48,
+                        "width": 48,
+                      }
+                    }
+                  />,
+                  <View
+                    style={
+                      Object {
+                        "marginLeft": 30,
+                      }
+                    }
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Regular",
+                          "fontSize": 32,
+                          "lineHeight": 46,
+                        }
+                      }
+                    >
+                      Add credits with Btc
+                    </Text>
+                  </View>,
+                ],
+                "onPress": [Function],
+                "style": Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "height": 110,
+                  "justifyContent": "flex-start",
+                  "paddingHorizontal": 40,
+                },
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "resizeMode": "contain",
+                    "source": "BTC.png",
+                    "style": Object {
+                      "height": 48,
+                      "width": 48,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Regular",
+                          "fontSize": 32,
+                          "lineHeight": 46,
+                        }
+                      }
+                    >
+                      Add credits with Btc
+                    </Text>,
+                    "style": Object {
+                      "marginLeft": 30,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "accessible": true,
+                      "allowFontScaling": true,
+                      "children": "Add credits with Btc",
+                      "ellipsizeMode": "tail",
+                      "style": Object {
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      },
+                    },
+                    "ref": null,
+                    "rendered": "Add credits with Btc",
+                    "type": [Function],
+                  },
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        null,
+        null,
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`AddCreditComponent renders correctly with wallets 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <AddCreditComponent
+    wallets={
+      Array [
+        Object {
+          "address": "address",
+          "token": "token",
+        },
+      ]
+    }
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <TouchableOpacity
+          activeOpacity={0.2}
+          onPress={undefined}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              Object {
+                "backgroundColor": "black",
+                "opacity": 0.2,
+              },
+            ]
+          }
+        />,
+        <View
+          style={
+            Object {
+              "alignSelf": "center",
+              "backgroundColor": "white",
+              "borderRadius": 6,
+              "height": 220,
+              "marginTop": 30,
+              "paddingHorizontal": 20,
+              "width": 710,
+            }
+          }
+        >
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "height": 110,
+                "justifyContent": "flex-start",
+                "paddingHorizontal": 40,
+              }
+            }
+          >
+            <Image
+              resizeMode="contain"
+              source="Storj.png"
+              style={
+                Object {
+                  "height": 48,
+                  "width": 48,
+                }
+              }
+            />
+            <View
+              style={
+                Object {
+                  "marginLeft": 30,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-Regular",
+                    "fontSize": 32,
+                    "lineHeight": 46,
+                  }
+                }
+              >
+                Add credits with Storj
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "height": 110,
+                "justifyContent": "flex-start",
+                "paddingHorizontal": 40,
+              }
+            }
+          >
+            <Image
+              resizeMode="contain"
+              source="BTC.png"
+              style={
+                Object {
+                  "height": 48,
+                  "width": 48,
+                }
+              }
+            />
+            <View
+              style={
+                Object {
+                  "marginLeft": 30,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#2794FF",
+                    "fontFamily": "Montserrat-Regular",
+                    "fontSize": 32,
+                    "lineHeight": 46,
+                  }
+                }
+              >
+                Add credits with Btc
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>,
+        null,
+        null,
+      ],
+      "style": Array [
+        Object {
+          "backgroundColor": "transparent",
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "activeOpacity": 0.2,
+          "onPress": undefined,
+          "style": Array [
+            Object {
+              "backgroundColor": "transparent",
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            Object {
+              "backgroundColor": "black",
+              "opacity": 0.2,
+            },
+          ],
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "height": 110,
+                  "justifyContent": "flex-start",
+                  "paddingHorizontal": 40,
+                }
+              }
+            >
+              <Image
+                resizeMode="contain"
+                source="Storj.png"
+                style={
+                  Object {
+                    "height": 48,
+                    "width": 48,
+                  }
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "marginLeft": 30,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 46,
+                    }
+                  }
+                >
+                  Add credits with Storj
+                </Text>
+              </View>
+            </TouchableOpacity>,
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "height": 110,
+                  "justifyContent": "flex-start",
+                  "paddingHorizontal": 40,
+                }
+              }
+            >
+              <Image
+                resizeMode="contain"
+                source="BTC.png"
+                style={
+                  Object {
+                    "height": 48,
+                    "width": 48,
+                  }
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "marginLeft": 30,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 46,
+                    }
+                  }
+                >
+                  Add credits with Btc
+                </Text>
+              </View>
+            </TouchableOpacity>,
+          ],
+          "style": Object {
+            "alignSelf": "center",
+            "backgroundColor": "white",
+            "borderRadius": 6,
+            "height": 220,
+            "marginTop": 30,
+            "paddingHorizontal": 20,
+            "width": 710,
+          },
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "activeOpacity": 0.2,
+              "children": Array [
+                <Image
+                  resizeMode="contain"
+                  source="Storj.png"
+                  style={
+                    Object {
+                      "height": 48,
+                      "width": 48,
+                    }
+                  }
+                />,
+                <View
+                  style={
+                    Object {
+                      "marginLeft": 30,
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      }
+                    }
+                  >
+                    Add credits with Storj
+                  </Text>
+                </View>,
+              ],
+              "onPress": [Function],
+              "style": Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "height": 110,
+                "justifyContent": "flex-start",
+                "paddingHorizontal": 40,
+              },
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "resizeMode": "contain",
+                  "source": "Storj.png",
+                  "style": Object {
+                    "height": 48,
+                    "width": 48,
+                  },
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      }
+                    }
+                  >
+                    Add credits with Storj
+                  </Text>,
+                  "style": Object {
+                    "marginLeft": 30,
+                  },
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "accessible": true,
+                    "allowFontScaling": true,
+                    "children": "Add credits with Storj",
+                    "ellipsizeMode": "tail",
+                    "style": Object {
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 46,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": "Add credits with Storj",
+                  "type": [Function],
+                },
+                "type": [Function],
+              },
+            ],
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "activeOpacity": 0.2,
+              "children": Array [
+                <Image
+                  resizeMode="contain"
+                  source="BTC.png"
+                  style={
+                    Object {
+                      "height": 48,
+                      "width": 48,
+                    }
+                  }
+                />,
+                <View
+                  style={
+                    Object {
+                      "marginLeft": 30,
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      }
+                    }
+                  >
+                    Add credits with Btc
+                  </Text>
+                </View>,
+              ],
+              "onPress": [Function],
+              "style": Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+                "height": 110,
+                "justifyContent": "flex-start",
+                "paddingHorizontal": 40,
+              },
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "resizeMode": "contain",
+                  "source": "BTC.png",
+                  "style": Object {
+                    "height": 48,
+                    "width": 48,
+                  },
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      }
+                    }
+                  >
+                    Add credits with Btc
+                  </Text>,
+                  "style": Object {
+                    "marginLeft": 30,
+                  },
+                },
+                "ref": null,
+                "rendered": Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "accessible": true,
+                    "allowFontScaling": true,
+                    "children": "Add credits with Btc",
+                    "ellipsizeMode": "tail",
+                    "style": Object {
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 46,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": "Add credits with Btc",
+                  "type": [Function],
+                },
+                "type": [Function],
+              },
+            ],
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      null,
+      null,
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={undefined}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                Object {
+                  "backgroundColor": "black",
+                  "opacity": 0.2,
+                },
+              ]
+            }
+          />,
+          <View
+            style={
+              Object {
+                "alignSelf": "center",
+                "backgroundColor": "white",
+                "borderRadius": 6,
+                "height": 220,
+                "marginTop": 30,
+                "paddingHorizontal": 20,
+                "width": 710,
+              }
+            }
+          >
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "height": 110,
+                  "justifyContent": "flex-start",
+                  "paddingHorizontal": 40,
+                }
+              }
+            >
+              <Image
+                resizeMode="contain"
+                source="Storj.png"
+                style={
+                  Object {
+                    "height": 48,
+                    "width": 48,
+                  }
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "marginLeft": 30,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 46,
+                    }
+                  }
+                >
+                  Add credits with Storj
+                </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "height": 110,
+                  "justifyContent": "flex-start",
+                  "paddingHorizontal": 40,
+                }
+              }
+            >
+              <Image
+                resizeMode="contain"
+                source="BTC.png"
+                style={
+                  Object {
+                    "height": 48,
+                    "width": 48,
+                  }
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "marginLeft": 30,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 32,
+                      "lineHeight": 46,
+                    }
+                  }
+                >
+                  Add credits with Btc
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>,
+          null,
+          null,
+        ],
+        "style": Array [
+          Object {
+            "backgroundColor": "transparent",
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "activeOpacity": 0.2,
+            "onPress": undefined,
+            "style": Array [
+              Object {
+                "backgroundColor": "transparent",
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+              Object {
+                "backgroundColor": "black",
+                "opacity": 0.2,
+              },
+            ],
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <TouchableOpacity
+                activeOpacity={0.2}
+                onPress={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "height": 110,
+                    "justifyContent": "flex-start",
+                    "paddingHorizontal": 40,
+                  }
+                }
+              >
+                <Image
+                  resizeMode="contain"
+                  source="Storj.png"
+                  style={
+                    Object {
+                      "height": 48,
+                      "width": 48,
+                    }
+                  }
+                />
+                <View
+                  style={
+                    Object {
+                      "marginLeft": 30,
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      }
+                    }
+                  >
+                    Add credits with Storj
+                  </Text>
+                </View>
+              </TouchableOpacity>,
+              <TouchableOpacity
+                activeOpacity={0.2}
+                onPress={[Function]}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "height": 110,
+                    "justifyContent": "flex-start",
+                    "paddingHorizontal": 40,
+                  }
+                }
+              >
+                <Image
+                  resizeMode="contain"
+                  source="BTC.png"
+                  style={
+                    Object {
+                      "height": 48,
+                      "width": 48,
+                    }
+                  }
+                />
+                <View
+                  style={
+                    Object {
+                      "marginLeft": 30,
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      }
+                    }
+                  >
+                    Add credits with Btc
+                  </Text>
+                </View>
+              </TouchableOpacity>,
+            ],
+            "style": Object {
+              "alignSelf": "center",
+              "backgroundColor": "white",
+              "borderRadius": 6,
+              "height": 220,
+              "marginTop": 30,
+              "paddingHorizontal": 20,
+              "width": 710,
+            },
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "activeOpacity": 0.2,
+                "children": Array [
+                  <Image
+                    resizeMode="contain"
+                    source="Storj.png"
+                    style={
+                      Object {
+                        "height": 48,
+                        "width": 48,
+                      }
+                    }
+                  />,
+                  <View
+                    style={
+                      Object {
+                        "marginLeft": 30,
+                      }
+                    }
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Regular",
+                          "fontSize": 32,
+                          "lineHeight": 46,
+                        }
+                      }
+                    >
+                      Add credits with Storj
+                    </Text>
+                  </View>,
+                ],
+                "onPress": [Function],
+                "style": Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "height": 110,
+                  "justifyContent": "flex-start",
+                  "paddingHorizontal": 40,
+                },
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "resizeMode": "contain",
+                    "source": "Storj.png",
+                    "style": Object {
+                      "height": 48,
+                      "width": 48,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Regular",
+                          "fontSize": 32,
+                          "lineHeight": 46,
+                        }
+                      }
+                    >
+                      Add credits with Storj
+                    </Text>,
+                    "style": Object {
+                      "marginLeft": 30,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "accessible": true,
+                      "allowFontScaling": true,
+                      "children": "Add credits with Storj",
+                      "ellipsizeMode": "tail",
+                      "style": Object {
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      },
+                    },
+                    "ref": null,
+                    "rendered": "Add credits with Storj",
+                    "type": [Function],
+                  },
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "activeOpacity": 0.2,
+                "children": Array [
+                  <Image
+                    resizeMode="contain"
+                    source="BTC.png"
+                    style={
+                      Object {
+                        "height": 48,
+                        "width": 48,
+                      }
+                    }
+                  />,
+                  <View
+                    style={
+                      Object {
+                        "marginLeft": 30,
+                      }
+                    }
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Regular",
+                          "fontSize": 32,
+                          "lineHeight": 46,
+                        }
+                      }
+                    >
+                      Add credits with Btc
+                    </Text>
+                  </View>,
+                ],
+                "onPress": [Function],
+                "style": Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "height": 110,
+                  "justifyContent": "flex-start",
+                  "paddingHorizontal": 40,
+                },
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "resizeMode": "contain",
+                    "source": "BTC.png",
+                    "style": Object {
+                      "height": 48,
+                      "width": 48,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Regular",
+                          "fontSize": 32,
+                          "lineHeight": 46,
+                        }
+                      }
+                    >
+                      Add credits with Btc
+                    </Text>,
+                    "style": Object {
+                      "marginLeft": 30,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "accessible": true,
+                      "allowFontScaling": true,
+                      "children": "Add credits with Btc",
+                      "ellipsizeMode": "tail",
+                      "style": Object {
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 32,
+                        "lineHeight": 46,
+                      },
+                    },
+                    "ref": null,
+                    "rendered": "Add credits with Btc",
+                    "type": [Function],
+                  },
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        null,
+        null,
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
