@@ -88,7 +88,10 @@ InputComponent.propTypes = {
     editable: PropTypes.bool,
     placeholder: PropTypes.string,
     value: PropTypes.string,
-    style: PropTypes.number,
+    style: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.object
+    ]),
     multiline: PropTypes.bool,
     errorMessage: PropTypes.string,
     inputStyle: PropTypes.number,
