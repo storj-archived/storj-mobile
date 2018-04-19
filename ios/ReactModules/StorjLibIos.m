@@ -24,10 +24,6 @@
 
 RCT_EXPORT_MODULE();
 
-- (NSArray<NSString *> *)supportedEvents{
-  return @[@"uploadFile"];
-}
-
 -(FMDatabase *) database{
   if(!_database){
     _database = [[DatabaseFactory getSharedDatabaseFactory] getSharedDb];
@@ -212,108 +208,6 @@ RCT_REMAP_METHOD(register,
    }];
 }
 
-RCT_REMAP_METHOD(uploadFile,
-                 uploadFileWithBucketId:(NSString *)bucketId
-                 withLocalPath:(NSString *) localPath
-                 resolver:(RCTPromiseResolveBlock)resolver
-                 rejecter:(RCTPromiseRejectBlock)rejecter){
-  if(!bucketId || bucketId.length == 0){
-    return;
-  }
-  
-  if(!localPath || localPath.length == 0){
-    return;
-  }
-  
-  __block int uploadProgress = 0;
-  long fileRef;
-  NSLog(@"Uploading file located at: %@ into bucket: %@", localPath, bucketId);
-  
-  NSNumber *fileSize = [FileUtils getFileSizeWithPath:localPath];
-  NSString *fileName = [FileUtils getFileNameWithPath:localPath];
-  
-  UploadFileDbo *dbo = [[UploadFileDbo alloc] initWithFileHandle:0
-                                                        progress:0
-                                                            size:[fileSize longValue]
-                                                        uploaded:0
-                                                            name:fileName
-                                                             uri:localPath
-                                                        bucketId:bucketId];
-  
-  FileUploadCallback *callback = [[FileUploadCallback alloc] init];
-  
-  callback.onProgress = ^(NSString *fileId, double progress, double uploadedBytes, double totalBytes) {
-    int currentProgress = round(progress * 10);
-    
-    if(uploadProgress != currentProgress){
-      uploadProgress = currentProgress;
-      [dbo set_progress: uploadProgress];
-      [dbo set_uploaded:uploadedBytes];
-      
-      UploadFileModel * fileModel =[[UploadFileModel alloc] initWithUploadFileDbo:dbo];
-      Response * updateResponse = [_uploadFileRepository updateByModel:fileModel];
-      
-      UploadFileProgressModel *ufileProgress = [[UploadFileProgressModel alloc]
-                                                initWithBucketId:bucketId
-                                                filePath:localPath
-                                                progress:uploadProgress
-                                                uploadedBytes:uploadedBytes
-                                                totalBytes:totalBytes
-                                                filePointer:fileRef];
-      
-      [self sendEventWithName:@"uploadFile"
-                         body:[ufileProgress toDictionary]];
-      
-      //NOTIFY IN NOTIFICATION CENTER
-    }
-  };
-  
-  callback.onSuccess = ^(NSString * fileId){
-    FileModel *fileModel = [[FileModel alloc] initWithBucketId:bucketId
-                                                       created:@""
-                                                       erasure:@""
-                                                          hmac:@""
-                                                        fileId:fileId
-                                                         index:@""
-                                                      mimeType:@""
-                                                          name:fileName
-                                                          size:[fileSize longValue]
-                                                   isDecrypted:YES
-                                                     isStarred:NO
-                                                      isSynced:NO];
-    Response *deleteResponse = [_uploadFileRepository deleteById:fileId];
-    Response *insertResponse = [_fileRepository insertWithModel:fileModel];
-  
-    resolver([SingleResponse successSingleResponseWithResult:[DictionaryUtils
-                                                              convertToJsonWithDictionary:
-                                                              [fileModel toDictionary]]]);
-  };
-  
-  
-  callback.onError = ^(int errorCode, NSString * _Nullable errorMessage) {
-    NSString *dboId = [NSString stringWithFormat:@"%ld", [dbo fileHandle]];
-    Response *deleteResponse = [_uploadFileRepository deleteById:dboId];
-    
-    [self sendEventWithName:@"uploadFile"
-                       body:@{@"errorMessage":errorMessage,
-                              @"errorCode" : @(errorCode),
-                              UploadFileContract.FILE_HANDLE: dboId}];
-    
-    //NOTIFY IN NOTIFICATION CENTER
-  };
-  [self.storjWrapper uploadFile:localPath toBucket:bucketId withCompletion:callback];
-  @synchronized (dbo) {
-    [dbo set_fileHandle:fileRef];
-    //    [dbo setProp:UploadFileContract.FILE_HANDLE fromLong:fileRef];
-    UploadFileModel *fileModel = [[UploadFileModel alloc] initWithUploadFileDbo:dbo];
-    Response *insertResponse = [_uploadFileRepository insertWithModel:fileModel];
-    if([insertResponse isSuccess]){
-      [self sendEventWithName:@"uploadFile"
-                         body:@{@"fileHandle": @([dbo fileHandle])}];
-    }
-  }
-}
-
 RCT_REMAP_METHOD(deleteKeys,
                  deleteKeysWithResolver: (RCTPromiseResolveBlock) resolver
                  rejecter: (RCTPromiseRejectBlock) rejecter){
@@ -325,6 +219,36 @@ RCT_REMAP_METHOD(deleteKeys,
                                             andWithErrorMessage:@""]toDictionary]);
                     }];
 }
+
+RCT_REMAP_METHOD(cancelUpload,
+                 cancelUploadByFileRef:(double)fileRef
+                 resolver:(RCTPromiseResolveBlock) resolve
+                 rejecter:(RCTPromiseRejectBlock) reject){
+  
+  if(fileRef == 0 || fileRef == -1){
+    resolve([[Response errorResponseWithMessage:@"File uploading is not started"] toDictionary]);
+    return;
+  }
+  [MethodHandler
+   invokeParallelWithParams:@{@"resolver":resolve, @"rejecter":reject}
+   andMethodHandlerBlock:^(NSDictionary * _Nonnull param) {
+     RCTPromiseResolveBlock resolver = param[@"resolver"];
+     resolver([[[Response alloc] initWithSuccess:[[self storjWrapper] cancelUpload:(long)fileRef]
+                             andWithErrorMessage:@""]toDictionary]);
+   }];
+  
+}
+
+RCT_REMAP_METHOD(cancelDownload,
+                 cancelDownloadByFileRef:(long)fileRef
+                 resolver:(RCTPromiseResolveBlock) resolve
+                 rejecter:(RCTPromiseRejectBlock) reject){
+  if(fileRef == 0 || fileRef == -1){
+    return;
+  }
+  [[self storjWrapper] cancelDownload:fileRef];
+}
+
 
 RCT_REMAP_METHOD(getDownloadFolderPath,
                  getDownloadFolderPathWithResolver: (RCTPromiseResolveBlock) resolver

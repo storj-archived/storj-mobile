@@ -26,7 +26,7 @@
 #import "FileModel.h"
 #import "UploadFileProgressModel.h"
 
-@interface StorjLibIos : RCTEventEmitter<RCTBridgeModule>
+@interface StorjLibIos : NSObject<RCTBridgeModule>
 @property (nonatomic, strong) FMDatabase *_database;
 @property (nonatomic, strong) UploadFileRepository *_uploadFileRepository;
 @property (nonatomic, strong) FileRepository *_fileRepository;

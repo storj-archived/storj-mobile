@@ -63,6 +63,9 @@ export default function filesReducer(state = initialState, action) {
         case UPDATE_FILE_DOWNLOAD_PROGRESS:             
             newState.fileListModels = filesManager.updateFileDownloadingProgress(action.payload.bucketId, action.payload.fileId, action.payload.progress, action.payload.fileRef);
             break;
+        case FILE_UPLOAD_CANCELED:
+            newState.uploadingFileListModels = filesManager.delete(action.payload.fileId);
+            break;
         case FILE_DOWNLOAD_CANCELED:
             newState.fileListModels = filesManager.cancelDownload(action.payload.bucketId, action.payload.fileId);
             break;

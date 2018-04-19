@@ -361,26 +361,6 @@ RCT_REMAP_METHOD(downloadFile,
                    withCompletion:callback];
 }
 
-RCT_REMAP_METHOD(cancelUpload,
-                 cancelUploadByFileRef:(long)fileRef
-                 resolver:(RCTPromiseResolveBlock) resolve
-                 rejecter:(RCTPromiseRejectBlock) reject){
-  if(fileRef == 0 || fileRef == -1){
-    return;
-  }
-  [[self storjWrapper] cancelUpload:fileRef];
-}
-
-RCT_REMAP_METHOD(cancelDownload,
-                 cancelDownloadByFileRef:(long)fileRef
-                 resolver:(RCTPromiseResolveBlock) resolve
-                 rejecter:(RCTPromiseRejectBlock) reject){
-  if(fileRef == 0 || fileRef == -1){
-    return;
-  }
-  [[self storjWrapper] cancelDownload:fileRef];
-}
-
 RCT_REMAP_METHOD(uploadFile,
                   uploadFileWithBucketId:(NSString *)bucketId
                   withLocalPath:(NSString *) localPath){
@@ -439,21 +419,8 @@ RCT_REMAP_METHOD(uploadFile,
          //NOTIFY IN NOTIFICATION CENTER
      };
      
-     callback.onSuccess = ^(NSString * fileId){
-       
-       NSLog(@"File Uploaded: %@", fileId);
-       FileModel *fileModel = [[FileModel alloc] initWithBucketId:bucketId
-                                                          created:@""
-                                                          erasure:@""
-                                                             hmac:@""
-                                                           fileId:fileId
-                                                            index:@""
-                                                         mimeType:@""
-                                                             name:fileName
-                                                             size:[fileSize longValue]
-                                                      isDecrypted:YES
-                                                        isStarred:NO
-                                                         isSynced:NO];
+     callback.onSuccess = ^(SJFile * file){
+       FileModel *fileModel = [[FileModel alloc] initWithSJFile:file];
        [[self uploadFileRepository] deleteById:[NSString stringWithFormat:@"%ld", [dbo fileHandle]]];
        [[self fileRepository] insertWithModel:fileModel];
        NSDictionary *bodyDict = @{UploadFileContract.FILE_HANDLE:@([dbo fileHandle]),
