@@ -28,7 +28,7 @@ class FavoriteFilesContainer extends BaseFilesListContainer {
     }
 
     navigateBack() {
-        this.props.clearSearch(4);
+        this.props.clearSearch(3);
         this.props.dashboardNavigateBack();
         this.props.disableSelectionMode();
         this.props.setDashboardBucketId(null);

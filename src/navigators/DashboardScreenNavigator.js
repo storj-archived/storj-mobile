@@ -2,6 +2,7 @@ import { StackNavigator } from 'react-navigation';
 import FilesScreen from '../containers/DashboardFilesListContainer';
 import DashboardScreen from '../containers/DashboardContainer';
 import FavoriteFilesScreen from '../containers/FavoriteFilesContainer';
+import FavoriteBucketsScreen from "../containers/FavoriteBucketsContainer";
 
 const DashboardScreenNavigator = StackNavigator(
     {
@@ -14,7 +15,7 @@ const DashboardScreenNavigator = StackNavigator(
             routeName: 'DashboardFilesScreen'
         },
         FavoriteBucketsScreen: {
-            screen: FavoriteFilesScreen,
+            screen: FavoriteBucketsScreen,
             routeName: 'FavoritesBucketsScreen'
         },
         FavoriteFilesScreen: {

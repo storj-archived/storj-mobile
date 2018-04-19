@@ -4,10 +4,10 @@ import {
 } from "react-native";
 import React from "react";
 import { getHeight } from "../utils/adaptive";
-import FilesListComponent from "../components/FilesListComponent";
+import BucketsListComponent from "../components/BucketsListComponent";
 import BucketsScreenHeaderComponent from "../components/BucketsScreenHeaderComponent";
 
-export default class HeaderFilesListComponent extends FilesListComponent {
+export default class HeaderBucketsListComponent extends BucketsListComponent {
     constructor(props) {
         super(props);
     }
