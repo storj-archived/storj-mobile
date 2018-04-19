@@ -65,7 +65,7 @@ export default class LoginComponent extends Component {
                         placeholder = {'Please enter your secret phrase (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code'}
                         onChangeText = { this.onChangeMnemonic } 
                         editable = { !this.props.isRedirectedFromRegister}
-                        isPassword = { false }  
+                        isPassword = { true }  
                         value = { this.props.mnemonic }
                         isError = { this.props.isMnemonicError }
                         errorMessage = { 'Invalid secret phrase' }
