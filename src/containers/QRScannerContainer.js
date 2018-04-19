@@ -58,6 +58,8 @@ class QRScannerContainer extends Component {
         if(isEmailValid && isPasswordValid && isMnemonicValid) {
             await this.login();
         } else {
+            this._barComponent.setBorderColor('#EB5757');
+            this.releaseTimer = setTimeout(() => {this._startScan();}, 1500); 
             console.log('onError');
         }
     };
@@ -83,6 +85,8 @@ class QRScannerContainer extends Component {
                 additionalText: infoScreensConstants.loginFailureAdditionalText 
             });
 
+            this._barComponent.setBorderColor('#EB5757');
+            this.releaseTimer = setTimeout(() => {this._startScan();}, 1500); 
             return;
         }
 
@@ -98,6 +102,8 @@ class QRScannerContainer extends Component {
             this.props.loginSuccess();
             this.props.redirectToInitializeScreen();
         } else {
+            this._barComponent.setBorderColor('#EB5757');
+            this.releaseTimer = setTimeout(() => {this._startScan();}, 1500); 
             this.props.loginError();
             this.props.redirectToAuthFailureScreen({ 
                 mainText: infoScreensConstants.loginFailureMainText, 
@@ -125,13 +131,13 @@ class QRScannerContainer extends Component {
             } 
             else { 
                 this._barComponent.setBorderColor('#EB5757');
-                this.releaseTimer = setTimeout(() => {this._startScan();}, 2500); 
+                this.releaseTimer = setTimeout(() => {this._startScan();}, 1500); 
             }
         }
         catch(error) {
             console.log(error);
             this._barComponent.setBorderColor('#EB5757');
-            this.releaseTimer = setTimeout(() => {this._startScan();}, 2500);
+            this.releaseTimer = setTimeout(() => {this._startScan();}, 1500);
         }
     }
 
