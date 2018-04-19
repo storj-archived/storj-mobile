@@ -24,6 +24,7 @@ import { LoginStateModel } from '../models/LoginStateModel';
 import { LoginErrorModel } from '../models/LoginErrorModel';
 import infoScreensConstants from '../utils/constants/infoScreensConstants';
 import { getEmail, getMnemonic, getPassword, getFirstAction, setFirstAction } from '../utils/AsyncStorageModule';
+import { formatInput } from '../utils/utils';
 import PropTypes from 'prop-types';
 
 /**
@@ -130,8 +131,8 @@ class LoginContainer extends Component {
 
         let isEmailValid = validator.isEmail(this.state.stateModel.email);
         let isPasswordValid = this.state.stateModel.password ? true : false;
-        let isMnemonicValid = await StorjLib.checkMnemonic(this.state.stateModel.mnemonic);
-
+        let isMnemonicValid = await StorjLib.checkMnemonic(formatInput(this.state.stateModel.mnemonic));
+        
         if(isEmailValid && isPasswordValid && isMnemonicValid) {
             await this.login();
         } else {
@@ -152,7 +153,7 @@ class LoginContainer extends Component {
         this.props.login(
             this.state.stateModel.email, 
             this.state.stateModel.password,
-            this.state.stateModel.mnemonic);
+            formatInput(this.state.stateModel.mnemonic));
 
         let areCredentialsValid = await StorjLib.verifyKeys(
             this.state.stateModel.email, 
@@ -187,7 +188,7 @@ class LoginContainer extends Component {
         let areKeysImported = await StorjLib.importKeys(
             this.state.stateModel.email,
             this.state.stateModel.password,
-            this.state.stateModel.mnemonic,
+            this.state.stateModel.mnemonic.trim().toLowerCase(),
             ''
         );
         

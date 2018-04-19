@@ -108,4 +108,13 @@ export const formatAmount = function (amount) {
     }
   
     return `$${(newAmount).toFixed(2)}`;
-  };
+};
+
+/**
+ * Formats login credentials in login screen
+ * @param {string} string 
+ * @returns {string} formatted string 
+ */
+export function formatInput(string) {
+    return string.trim().toLowerCase();
+}
