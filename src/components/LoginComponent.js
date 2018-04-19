@@ -62,14 +62,14 @@ export default class LoginComponent extends Component {
                         style = { styles.mnemonicContainer }
                         inputStyle = { styles.mnemonicInput }
                         multiline = { true }
-                        placeholder = {'Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code'}
+                        placeholder = {'Please enter your secret phrase (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code'}
                         onChangeText = { this.onChangeMnemonic } 
                         editable = { !this.props.isRedirectedFromRegister}
                         isPassword = { false }  
                         value = { this.props.mnemonic }
                         isError = { this.props.isMnemonicError }
-                        errorMessage = { 'Invalid mnemonic' }
-                        regularMessage = { 'Mnemonic' } />
+                        errorMessage = { 'Invalid secret phrase' }
+                        regularMessage = { 'Secret phrase' } />
                     <View style = { styles.agreementWrapper }>
                         <TouchableOpacity onPress = { this.props.redirectToForgotPassword }>
                             <Text style = { styles.agreementText }>Forgot password?</Text>
