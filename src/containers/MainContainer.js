@@ -65,7 +65,7 @@ class MainContainer extends Component {
             //actions for bucket screen
             TabBarActionModelFactory.createNewAction(() => { this.setFavouriteFiles(); }, 'Action 4', require('../images/ActionBar/FavoritesIcon.png')),
             TabBarActionModelFactory.createNewAction(() => { this.downloadSelectedFiles(); }, 'Action 5', require('../images/ActionBar/DownloadIFileIcon.png')), 
-            TabBarActionModelFactory.createNewAction(() => { this.copySelectedFiles("c4ff624fc96fa10ef2fa7007"); }, 'Action 6', require('../images/ActionBar/CopyBucketIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { this.tryCopySelectedFiles(); }, 'Action 6', require('../images/ActionBar/CopyBucketIcon.png')), 
             TabBarActionModelFactory.createNewAction(() => { this.tryDeleteFiles(); }, 'Action 7', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
         
@@ -184,7 +184,7 @@ class MainContainer extends Component {
                 this.filePickerResponsePathes.push(file.path);
             });
 
-            this._mainComponent.showSelectBuckets();
+            this._mainComponent.showSelectBuckets(this.getBucketId.bind(this));
         }
     }  
 
@@ -320,17 +320,26 @@ class MainContainer extends Component {
         header: null
     };
 
-    copySelectedFiles(bucketId) {
-        let selectedFiles = this.props.fileListModels.filter(fileItem => fileItem.isSelected);
+    tryCopySelectedFiles() {
+        this._mainComponent.showSelectBuckets(this.copySelectedFiles.bind(this));
+    }
 
-        selectedFiles.forEach(async fileItem => {
-            if(fileItem.entity.isDownloaded) {
-                ServiceModule.uploadFile(bucketId, fileItem.entity.localPath);
-            } else {
-                let result = await StorjModule.getDownloadFolderPath();
-                ServiceModule.copyFile(fileItem.entity.bucketId, fileItem.getId(), result + "/" + fileItem.getName(), bucketId);
-            }
-        });
+    copySelectedFiles(params) {
+        let bucketId = params.bucketId;
+        
+        if(bucketId) {
+            let selectedFiles = this.props.fileListModels.filter(fileItem => fileItem.isSelected);
+
+            selectedFiles.forEach(async fileItem => {
+                if(fileItem.entity.isDownloaded) {
+                    ServiceModule.uploadFile(bucketId, fileItem.entity.localPath);
+                } else {
+                    let result = await StorjModule.getDownloadFolderPath();
+                    ServiceModule.copyFile(fileItem.entity.bucketId, fileItem.getId(), result + "/" + fileItem.getName(), bucketId);
+                }
+            });
+        }
+        this._mainComponent.showSelectBuckets();
     }
 
     getTapBarActions() {  

@@ -67,7 +67,7 @@ export default class ListItemComponent extends Component {
             if(kbSize[kbSize.length - 1] === 0) {
                 kbSize.splice(kbSize.length - 1, 1, 1);
             }
-            return kbSize + ' Kb'
+            return kbSize + ' KB'
         } 
         
         if(itemSize < 1073741824) {
@@ -76,7 +76,7 @@ export default class ListItemComponent extends Component {
             if(mbSize[mbSize.length - 1] === 0) {
                 mbSize.splice(mbSize.length - 1, 1, 1);
             }
-            return mbSize + ' Mb'
+            return mbSize + ' MB'
         } 
         
         let gbSize = (itemSize / 1048576*1024).toString().slice(0, 5).split(' ');
@@ -85,7 +85,7 @@ export default class ListItemComponent extends Component {
             gbSize.splice(gbSize.length - 1, 1, 1);
         }
 
-        return gbSize + ' Gb'     
+        return gbSize + ' GB'     
     }
 
     render() {

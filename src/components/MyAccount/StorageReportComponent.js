@@ -16,7 +16,7 @@ export default class StorageReportComponent extends Component{
         return(
             <View style = { styles.mainContainer }>
                 <View style = { styles.contentContainer }>
-                    <Text style = { styles.amountText }>{ this.props.amount + "Gb" }</Text>
+                    <Text style = { styles.amountText }>{ this.props.amount + "GB" }</Text>
                     <Text style = { styles.dateText }>{ this.props.date }</Text>
                 </View>
                 <View style = { styles.underline }/>

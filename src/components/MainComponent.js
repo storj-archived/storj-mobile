@@ -50,7 +50,11 @@ export default class MainComponent extends Component {
         this.setState({ showPopUp: !this.state.showPopUp });
     }
 
-    showSelectBuckets() {
+    showSelectBuckets(callback) {
+        if(callback) {
+            this.selectBucketCallback = callback;
+        }
+        
         this.setState({ isSelectBucketShown: !this.state.isSelectBucketShown })
     }
     
@@ -99,7 +103,7 @@ export default class MainComponent extends Component {
                 {
                     this.state.isSelectBucketShown  
                         ? <SelectBucketComponent
-                            getBucketId = { this.props.getBucketId }
+                            onSelect = { this.selectBucketCallback }
                             buckets = { this.props.buckets }
                             isGridViewShown = { this.props.isGridViewShown }
                             showOptions = { this.showOptions.bind(this) }

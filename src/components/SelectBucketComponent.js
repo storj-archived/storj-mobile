@@ -25,7 +25,7 @@ export default class SelectBucketComponent extends Component {
                     setSelectionId = { () => {} }
                     contentWrapperStyle = { styles.contentWrapper }
                     isGridViewShown = { this.props.isGridViewShown }
-                    onPress = { (params) => { this.props.getBucketId(params) } }
+                    onPress = { (params) => this.props.onSelect(params)  }
                     itemType = { TYPES.REGULAR_BUCKET }
                     isSelectDisabled = { true }
                     selectedItemId = { null }
