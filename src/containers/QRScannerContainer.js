@@ -59,7 +59,7 @@ class QRScannerContainer extends Component {
             await this.login();
         } else {
             this._barComponent.setBorderColor('#EB5757');
-            this.releaseTimer = setTimeout(() => {this._startScan();}, 1500); 
+            this.releaseTimer = setTimeout(() => {this._startScan();}, 2500); 
             console.log('onError');
         }
     };
@@ -73,7 +73,7 @@ class QRScannerContainer extends Component {
             this.stateModel.password,
             this.stateModel.mnemonic
         );
-
+        
         let areCredentialsValid = await StorjLib.verifyKeys(
             this.stateModel.email, 
             this.stateModel.password);
@@ -86,7 +86,7 @@ class QRScannerContainer extends Component {
             });
 
             this._barComponent.setBorderColor('#EB5757');
-            this.releaseTimer = setTimeout(() => {this._startScan();}, 1500); 
+            this.releaseTimer = setTimeout(() => {this._startScan();}, 2500); 
             return;
         }
 
@@ -103,7 +103,7 @@ class QRScannerContainer extends Component {
             this.props.redirectToInitializeScreen();
         } else {
             this._barComponent.setBorderColor('#EB5757');
-            this.releaseTimer = setTimeout(() => {this._startScan();}, 1500); 
+            this.releaseTimer = setTimeout(() => {this._startScan();}, 2500); 
             this.props.loginError();
             this.props.redirectToAuthFailureScreen({ 
                 mainText: infoScreensConstants.loginFailureMainText, 
@@ -131,13 +131,13 @@ class QRScannerContainer extends Component {
             } 
             else { 
                 this._barComponent.setBorderColor('#EB5757');
-                this.releaseTimer = setTimeout(() => {this._startScan();}, 1500); 
+                this.releaseTimer = setTimeout(() => {this._startScan();}, 2500); 
             }
         }
         catch(error) {
             console.log(error);
             this._barComponent.setBorderColor('#EB5757');
-            this.releaseTimer = setTimeout(() => {this._startScan();}, 1500);
+            this.releaseTimer = setTimeout(() => {this._startScan();}, 2500);
         }
     }
 

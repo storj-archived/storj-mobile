@@ -75,7 +75,7 @@ export default class LoginComponent extends Component {
                             <Text style = { styles.agreementText }>Forgot password?</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress = { this.props.redirectToMnemonicInfo } >
-                            <Text style = { styles.mnemonicInfoLinkText }>What is Mnemonic?</Text>
+                            <Text style = { styles.mnemonicInfoLinkText }>What is Secret phrase?</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
