@@ -85,7 +85,7 @@ export default class MyAccountMnemonicComponent extends Component {
                         <View style = { styles.topContentContainer } >
                             <View style = { styles.flexRow }>
                                 <TouchableOpacity 
-                                    onPress = { () => { this.props.screenProps.redirectToSettingsScreen(); } }
+                                    onPress = { this.props.screenProps.redirectToMyAccountScreen /* redirectToSettingsScreen */ }
                                     style = { styles.backButtonContainer } >
                                     <Image 
                                         source = { require('../../images/MyAccount/BlueBackButton.png') }

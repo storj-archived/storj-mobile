@@ -99,14 +99,14 @@ export default class SettingsComponent extends Component{
                     <View style = { styles.explanationContainer }>
                         <Text style = { styles.explanationText }>Security</Text>
                     </View>
-                    <TouchableOpacity style = { styles.optionsContainer } onPress = { this.props.screenProps.redirectToMyAccountMnemonicScreen }>
+                    {/* <TouchableOpacity style = { styles.optionsContainer } onPress = { this.props.screenProps.redirectToMyAccountMnemonicScreen }>
                         <Text style = { styles.switchText }>Secret phrase</Text>
                         <View style = { styles.expanderIconContainer }>
                             <Image
                                 source = { require('../../images/DashboardScreen/BlueVector.png') }
                                 style = { styles.expanderIcon } />
                         </View>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <View style = { styles.underline }/>
                     <TouchableOpacity style = { styles.optionsContainer } onPress = { this.props.screenProps.redirectToChangePasswordScreen } >
                         <Text style = { styles.switchText }>Change password</Text>
@@ -123,11 +123,6 @@ export default class SettingsComponent extends Component{
                             <Image
                                 source = { require('../../images/DashboardScreen/BlueVector.png') }
                                 style = { styles.expanderIcon } />
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <View style = { styles.deleteAccountButton }>
-                            <Text style = { styles.deleteAccountText }>Delete account</Text>
                         </View>
                     </TouchableOpacity>
                     <View style = { styles.bottomPadding }/>

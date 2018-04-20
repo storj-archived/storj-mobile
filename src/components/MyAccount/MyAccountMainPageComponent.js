@@ -101,9 +101,9 @@ export default class MyAccountMainPageComponent extends Component{
                     <View style = { styles.optionsMargin } >
                         {
                             <OptionsComponent 
-                                title = { 'Trash' }
+                                title = { 'Secret phrase' }
                                 imageSource = { require('../../images/MyAccount/Trash.png') }
-                                onPress = { () => {} } />
+                                onPress = { this.props.screenProps.redirectToMyAccountMnemonicScreen } />
                         }
                         <View style = { styles.underline } />
                         {
