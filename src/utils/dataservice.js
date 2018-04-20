@@ -60,6 +60,11 @@ async function _postWalletRequest(url, params) {
     return request;
 }
 
+/**
+ * Preparing parameters for request for Billing API
+ * @param {string} url 
+ * @param {array} params 
+ */
 async function _getBillingRequest(url, params) {
     let auth = await _getAuthorizationString();
 
@@ -73,7 +78,9 @@ async function _getBillingRequest(url, params) {
 }
 
 
-
+/**
+ * Creates Request object
+ */
 function _createRequest(url, methodType, auth, data) {
     let params = {
         method: methodType,
@@ -95,6 +102,9 @@ function _createRequest(url, methodType, auth, data) {
     return new Request(url, params);
 }
 
+/**
+ * Creating auth string using password and email of current user
+ */
 async function _getAuthorizationString() {
     let keysResponse = await StorjModule.getKeys("");
     let authString = "";

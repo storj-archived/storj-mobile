@@ -1,7 +1,7 @@
 import ListItemModel from '../../models/ListItemModel';
 
 /**
- * Helper class for working with items
+ * Exposes methods to manage Buckets in reducer.
  */
 export default class ItemManager {
     /**
@@ -68,6 +68,10 @@ export default class ItemManager {
         return this.itemList;
     };
 
+    /**
+     * Updating isStarred property of selected buckets
+     * @param {object[]} buckets 
+     */
     updateStarred(buckets) {
         let idList = buckets.map(bucket => bucket.getId());
 
