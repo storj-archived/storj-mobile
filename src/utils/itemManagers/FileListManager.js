@@ -1,6 +1,9 @@
 import ListItemModel from '../../models/ListItemModel';
 import FileListModel from '../../models/FileListModel';
 
+/**
+ * Exposes methods to manage Files in reducer.
+ */
 export default class FileListManager {
     /**
      * 
@@ -12,23 +15,49 @@ export default class FileListManager {
         this.newFileUploadingList = uploadingFileList;
     }
 
+    /**
+     * Adding file
+     * @param {string} bucketId 
+     * @param {object} file
+     */
     addFileEntry(bucketId, file) {
         return this._addFileEntry(this.newFilesList, bucketId, file);
     }
 
+    /**
+     * Adding uploading file
+     * @param {string} bucketId 
+     * @param {object} file
+     */
     addFileEntryU(bucketId, file) {
         return this._addFileEntry(this.newFileUploadingList, bucketId, file);
     }
 
     //--------------------------------------------------------------------------
+    /**
+     * Updating file
+     * @param {string} bucketId 
+     * @param {object} file
+     * @param {string} id 
+     */
     updateFileEntry(bucketId, file, id) {
         return this._updateFileEntry(this.newFilesList, bucketId, file, id);
     }
 
+    /**
+     * Updating uploading file file
+     * @param {string} bucketId 
+     * @param {object} file
+     * @param {string} id 
+     */
     updateFileEntryU(bucketId, file, id) {
         return this._updateFileEntry(this.newFileUploadingList, bucketId, file, id);
     }
 
+    /**
+     * Updating files starred prop
+     * @param {object[]} files 
+     */
     updateFileStarred(files) {        
         let fileIds = files.map(file => file.getId());
         
@@ -44,14 +73,28 @@ export default class FileListManager {
     }
 
     //------------------------------------------------------------------------
+    /**
+     * Deleting file
+     * @param {string} bucketId 
+     * @param {string} fileId 
+     */
     deleteFileEntry(bucketId, fileId) {
         return this._deleteFileEntry(this.newFilesList, bucketId, fileId);
     }
 
+    /**
+     * Deleting uploading file
+     * @param {string} bucketId 
+     * @param {string} fileId 
+     */
     deleteFileEntryU(bucketId, fileId) {
         return this._deleteFileEntry(this.newFileUploadingList, bucketId, fileId);
     }
 
+    /**
+     * removing file by id
+     * @param {string} id 
+     */
     delete(id) {
         this.newFileUploadingList = this.newFileUploadingList.filter(file => file.getId() !== id);
         
@@ -122,6 +165,11 @@ export default class FileListManager {
         return this.newFilesList;
     }
 
+    /**
+     * Retrieve list of uploading files from selected bucket
+     * @param {string} bucketId 
+     * @param {object[]} files 
+     */
     listUploadingFiles(bucketId, files) {
         let names = files.map(file => file.getName());
         let tempFilesArray = this.newFileUploadingList.filter(file => file.entity.bucketId === bucketId);        
@@ -130,13 +178,24 @@ export default class FileListManager {
 
         return this.newFileUploadingList;
     }
-
+    
+    /**
+     * Initializes uploading files
+     * @param {object[]} files 
+     */
     getUploadingFiles(files) {
         this.newFileUploadingList = files.slice();
 
         return this.newFileUploadingList;
     }
 
+    /**
+     * Updating propgress for uploading file
+     * @param {string} bucketId 
+     * @param {string} fileId 
+     * @param {double} progress 
+     * @param {double} fileRef reference of file, used to cancel upload
+     */
     updateFileUploadingProgress(bucketId, fileId, progress, fileRef) {
         this.newFileUploadingList.forEach(fileEntry => {
             if(fileEntry.getId() === fileId){
@@ -161,6 +220,13 @@ export default class FileListManager {
         return this.newFileUploadingList;
     }
 
+    /**
+     * Updating file after downloading
+     * @param {string} bucketId 
+     * @param {string} fileId 
+     * @param {string} localPath 
+     * @param {string} thumbnail 
+     */
     fileDownloaded(bucketId, fileId, localPath, thumbnail) {
         this.newFilesList = this.newFilesList.map(fileEntry => {
             if(fileEntry.getId() === fileId) {
@@ -177,6 +243,13 @@ export default class FileListManager {
         return this.newFilesList;
     }
 
+    /**
+     * Updating progress of downloading file
+     * @param {string} bucketId 
+     * @param {string} fileId 
+     * @param {double} progress 
+     * @param {double} fileRef 
+     */
     updateFileDownloadingProgress(bucketId, fileId, progress, fileRef) {
         this.newFilesList = this.newFilesList.map(fileEntry => {
             if(fileEntry.getId() === fileId) {
@@ -191,6 +264,11 @@ export default class FileListManager {
         return this.newFilesList;
     }
 
+    /**
+     * Updating file after cancelling download
+     * @param {string} bucketId 
+     * @param {string} fileId 
+     */
     cancelDownload(bucketId, fileId) {
         this.newFilesList = this.newFilesList.map(fileEntry => {
             if(fileEntry.getId() !== fileId) {
@@ -204,6 +282,11 @@ export default class FileListManager {
         return this.newFilesList;
     }
 
+    /**
+     * Updating file after cancelling upload
+     * @param {string} bucketId 
+     * @param {string} fileId 
+     */
     cancelUpload(bucketId, fileId) {
         this.newFileUploadingList = this.newFileUploadingList.filter(fileEntry => {
             return fileEntry.getId() !== fileId                      
@@ -212,14 +295,25 @@ export default class FileListManager {
         return this.newFilesList;
     }
 
+    /**
+     * Selecting file
+     * @param {object} file
+     */
     selectFile(file) {        
         return this._changeFileSelection(file.entity.id, true);
     }
 
+    /**
+     * Deselecting file
+     * @param {object} file
+     */
     deselectFile(file) {
         return this._changeFileSelection(file.entity.id, false);
     }
 
+    /**
+     * Deselecting all files
+     */
     clearSelection() {
         this.newFilesList.forEach((file) => {
             file.isSelected = false;
@@ -228,6 +322,11 @@ export default class FileListManager {
         return this.newFilesList;
     }
 
+    /**
+     * Updating file isSelected prop
+     * @param {string} fileId 
+     * @param {bool} value 
+     */
     _changeFileSelection(fileId, value) {
         this.newFilesList = this.newFilesList.map(file => {                
             if(file.getId() === fileId)

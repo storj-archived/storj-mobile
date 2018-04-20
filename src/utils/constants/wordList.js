@@ -1,3 +1,6 @@
+/**
+ * Used for mnemonic confirmation during registration
+ */
 export const WORDLIST = [
     "abandon",
     "ability",
