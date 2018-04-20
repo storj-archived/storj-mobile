@@ -23,6 +23,10 @@ class DashboardFilesListContainer extends BaseFilesListContainer {
         super(props);
 
         this.animatedScrollValue = new Animated.Value(0);
+        /**
+         * FileListComponent with header that is binded to 
+         * default props of this FileListContainer
+         */
         this.HeaderFilesListComponent = headerFilesListBinder.call(this);
     }
 

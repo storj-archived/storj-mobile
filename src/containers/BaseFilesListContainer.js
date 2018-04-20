@@ -3,6 +3,8 @@ import BaseListContainer from "../containers/BaseListContainer";
 import ServiceModule from '../utils/ServiceModule';
 import StorjModule from '../utils/StorjModule';
 import PropTypes from 'prop-types';
+import ListItemModel from '../models/ListItemModel';
+import FileModel from '../models/FileModel';
 
 /** 
  * Base class for all screen with file lists
@@ -14,6 +16,7 @@ class BaseFilesListContainer extends BaseListContainer {
             
     /**
      * Combine all files and uploading files
+     * @returns {ListItemModel<FileModel>[]} ListItemModels initialized with FileModel
      */
     getData() { 
         return this.props.fileListModels.concat(this.props.uploadingFileListModels)
@@ -21,7 +24,10 @@ class BaseFilesListContainer extends BaseListContainer {
     }
 
     /**
+     * Implementation of virtual method from baseListContainer
+     * that handles file on onPress
      * Opens image viewer if file downloaded and its mime type is image
+     * @param {ListItemModel<FileModel>} file ListItemModel initialized with FileModel
      */
     _onPress(file) {        
         if(file.entity.isDownloaded && file.entity.mimeType.includes('image/')) {
@@ -29,11 +35,16 @@ class BaseFilesListContainer extends BaseListContainer {
         }
     }
 
-    _onSelectionPress(item) {
-        if(item.isSelected)
-            this.props.deselectFile(item);
+    /**
+     * Implementation of virtual method from baseListContainer
+     * that handles change of file's selection status
+     * @param {ListItemModel<FileModel>} file ListItemModel initialized with FileModel 
+     */
+    _onSelectionPress(file) {
+        if(file.isSelected)
+            this.props.deselectFile(file);
         else
-            this.props.selectFile(item);
+            this.props.selectFile(file);
     }
 
     /**
@@ -45,7 +56,8 @@ class BaseFilesListContainer extends BaseListContainer {
     }
 
     /**
-     * cancels file download
+     * Cancels file download
+     * @param {ListItemModel<FileModel>} file ListItemModel initialized with FileModel
      */
     async cancelDownload(file) {
         let cancelDownloadResponse = await StorjModule.cancelDownload(file.fileRef);
@@ -56,7 +68,8 @@ class BaseFilesListContainer extends BaseListContainer {
     }
 
     /**
-     * cancels file upload
+     * Cancels file upload
+     * @param {ListItemModel<FileModel>} file ListItemModel initialized with FileModel
      */
     async cancelUpload(file) {        
         let cancelUploadResponse = await StorjModule.cancelUpload(file.fileRef);
@@ -66,6 +79,11 @@ class BaseFilesListContainer extends BaseListContainer {
         }
     }
 
+    /**
+     * Implementation of BaseListContainer's onCancel callback
+     * Choose what cancel method should be triggered  
+     * @param {ListItemModel<FileModel>} file ListItemModel initialized with FileModel
+     */
     onCancelPress(file) {
         file.entity.hmac ? this.cancelDownload(file) : this.cancelUpload(file);
     }

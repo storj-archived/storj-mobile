@@ -11,7 +11,11 @@ import filesActions from '../reducers/mainContainer/Files/filesReducerActions';
 import BaseListContainer from "../containers/BaseListContainer";
 import HeaderBucketsListComponent from "../components/HeaderBucketsListComponent";
 import PropTypes from 'prop-types';
+import BucketModel from '../models/BucketModel';
 
+/**
+ * Container for favorite buckets screen on dashboard
+ */
 class FavoriteBucketsContainer extends BaseListContainer {
     constructor(props) {
         super(props);
@@ -19,22 +23,40 @@ class FavoriteBucketsContainer extends BaseListContainer {
         this.animatedScrollValue = new Animated.Value(0);
     }
 
+    /**
+     * Get all starred buckets
+     * @returns {ListItemModel<BucketModel>[]} ListItemModels initialized with BucketModel
+     */
     getData() { 
         return this.props.buckets.filter(file => file.getStarred() === true);
     }
 
-    _onSelectionPress(item) {
-        if(item.isSelected)
-            this.props.deselectBucket(item);
+    /**
+     * Implementation of virtual method from base list container
+     * that changes of bucket's selection status 
+     * @param {ListItemModel<BucketModel>} bucket ListItemModel initialized with BucketModel
+     */
+    _onSelectionPress(bucket) {
+        if(bucket.isSelected)
+            this.props.deselectBucket(bucket);
         else
-            this.props.selectBucket(item);
+            this.props.selectBucket(bucket);
     }
 
-    _onPress(item) {
+    /**
+     * Implementation of virtual method from base list container
+     * that handles bucket on onPress
+     * @param {ListItemModel<BucketModel>} bucket ListItemModel initialized with BucketModel
+     */
+    _onPress(bucket) {
         /* this.props.openBucket(item.getId());
-        this.props.navigateToFilesScreen(item.getId());   */  
+        this.props.navigateToFilesScreen(item.getId()); */  
     }
 
+    /**      
+     * Navigate Back callback. Cleaning search state in header, 
+     * disables selecion mode and closes opened in dashboard screen bucket.
+    */
     navigateBack() {
         this.props.clearSearch(3);
         this.props.dashboardNavigateBack();
@@ -54,10 +76,10 @@ class FavoriteBucketsContainer extends BaseListContainer {
                 getBucketName = { getShortBucketName }
                 selectedItemId = { this.props.selectedItemId }
                 isGridViewShown = { this.props.isGridViewShown }
-                onPress = { (item) => { this.onPress(item); } }
-                onLongPress = { (item) => { this.onLongPress(item); } }
-                onDotsPress = { (item) => { this.onDotsPress(item); } }
-                onCancelPress = { (item) => { this.onCancelPress(item); } }                             
+                onPress = { (bucket) => { this.onPress(bucket); } }
+                onLongPress = { (bucket) => { this.onLongPress(bucket); } }
+                onDotsPress = { (bucket) => { this.onDotsPress(bucket); } }
+                onCancelPress = { (bucket) => { this.onCancelPress(bucket); } }                             
                 isSelectionMode = { this.props.isSelectionMode }
                 isSingleItemSelected = { this.props.isSingleItemSelected }
                 sortingMode = { this.props.sortingMode }

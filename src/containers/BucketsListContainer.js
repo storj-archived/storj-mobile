@@ -8,32 +8,48 @@ import { getShortBucketName } from "../utils/fileUtils";
 import ServiceModule from '../utils/ServiceModule';
 import BaseListContainer from "../containers/BaseListContainer";
 import BucketsListComponent from '../components/BucketsListComponent';
+import ListItemModel from '../models/ListItemModel';
+import BucketModel from '../models/BucketModel';
 
+/**
+ * Buckets list container
+ */
 class BucketsListContainer extends BaseListContainer {
     constructor(props) {
         super(props);
     }
 
-    _onSelectionPress(item) {
-        if(item.isSelected)
-            this.props.deselectBucket(item);
+    /**
+     * Implementation of virtual method from base list container
+     * that changes of bucket's selection status 
+     * @param {ListItemModel<BucketModel>} bucket ListItemModel initialized with BucketModel
+     */
+    _onSelectionPress(bucket) {
+        if(bucket.isSelected)
+            this.props.deselectBucket(bucket);
         else
-            this.props.selectBucket(item);
+            this.props.selectBucket(bucket);
     }
 
-    _onPress(item) {
-        this.props.openBucket(item.getId());
-        this.props.navigateToFilesScreen(item.getId());    
+    /**
+     * Implementation of virtual method from base list container
+     * that handles bucket on onPress
+     * Opens new screen that list all files of selected buckets 
+     * @param {ListItemModel<BucketModel>} bucket ListItemModel initialized with BucketModel
+     */
+    _onPress(bucket) {
+        this.props.openBucket(bucket.getId());
+        this.props.navigateToFilesScreen(bucket.getId());    
     }
 
     render() {
         return(
             <BucketsListComponent
                 isGridViewShown = { this.props.isGridViewShown }
-                onPress = { (item) => { this.onPress(item); } }
-                onLongPress = { (item) => { this.onLongPress(item); } }
-                onDotsPress = { (item) => { this.onDotsPress(item); } }
-                onCancelPress = { () => {} }
+                onPress = { (bucket) => { this.onPress(bucket); } }
+                onLongPress = { (bucket) => { this.onLongPress(bucket); } }
+                onDotsPress = { (bucket) => { this.onDotsPress(bucket); } }
+                onCancelPress = { (bucket) => { this.onCancelPress(bucket); } }
                 selectedItemId = { this.props.screenProps.selectedItemId }
                 animatedScrollValue = { this.props.screenProps.animatedScrollValue }
                 isSelectionMode = { this.props.isSelectionMode }

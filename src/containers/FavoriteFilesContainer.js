@@ -14,19 +14,35 @@ import BaseFilesListContainer from "../containers/BaseFilesListContainer";
 import headerFilesListBinder from "../viewBinders/headerFilesListBinder";
 import PropTypes from 'prop-types';
 
+/**
+ * Container for favorite files screen on dashboard
+ */
 class FavoriteFilesContainer extends BaseFilesListContainer {
     constructor(props) {
         super(props);
 
         this.animatedScrollValue = new Animated.Value(0);
+        /**
+         * FileListComponent with header that is binded to 
+         * default props of this FileListContainer
+         */
         this.HeaderFilesListComponent = headerFilesListBinder.call(this);
     }
 
+    /**
+     * Overriden method from BaseFileListContainer
+     * selects starred all files and uploadingFiles
+     * @returns {ListItemModel<FileModel>[]} ListItemModels initialized with FileModel
+     */
     getData() { 
         return this.props.fileListModels.concat(this.props.uploadingFileListModels)
                                         .filter(file => file.getStarred() === true);
     }
 
+    /**      
+     * Navigate Back callback. Cleaning search state in header, 
+     * disables selecion mode and closes opened in dashboard screen bucket.
+    */
     navigateBack() {
         this.props.clearSearch(3);
         this.props.dashboardNavigateBack();
