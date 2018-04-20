@@ -22,7 +22,6 @@ class MyPhotosContainer extends BaseFilesListContainer {
 
     render() {
         let data = this.getData();
-        
         return (
             <this.HeaderFilesListComponent
                 isLoading = { this.props.loadingStack.includes(this.props.bucketId) }                            
