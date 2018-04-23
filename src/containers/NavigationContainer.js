@@ -87,12 +87,6 @@ class Apps extends Component {
     }
 
 	async componentWillMount() {
-		if(this.isAndroid) {
-			await ServiceModule.bindGetBucketsService();
-			await ServiceModule.bindUploadService();
-			await ServiceModule.bindDownloadService();
-		}
-
 		let eventEmitter = this.isAndroid ? DeviceEventEmitter : new NativeEventEmitter(ServiceModule.getServiceNativeModule());
         
 		this.getbucketsListener = eventEmitter.addListener(eventNames.EVENT_BUCKETS_UPDATED, this.onBucketsReceived.bind(this));
@@ -119,6 +113,12 @@ class Apps extends Component {
 		});
 
 		NetInfo.isConnected.addEventListener('connectionChange', this.onConnectionChange.bind(this));
+
+		if(this.isAndroid) {
+			await ServiceModule.bindGetBucketsService();
+			await ServiceModule.bindUploadService();
+			await ServiceModule.bindDownloadService();
+		}
 	}
 	
 	onConnectionChange(isConnected) {
@@ -241,7 +241,7 @@ class Apps extends Component {
 	async onBucketsReceived() {
         this.props.setLoading();
 		let bucketsResponse = await SyncModule.listBuckets();
-		
+
         if(bucketsResponse.isSuccess) {
             let buckets = JSON.parse(bucketsResponse.result).map((file) => {
                 return new ListItemModel(new BucketModel(file));

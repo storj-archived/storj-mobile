@@ -1,16 +1,18 @@
 import {
     View,
     StyleSheet,
-    Animated
+    Animated,
+    Text
 } from 'react-native';
 import React, { Component } from 'react';
-import ListComponent from '../components/ListComponent';
+//import ListComponent from '../components/ListComponent';
 import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderComponent';
 import { getHeight } from '../utils/adaptive';
 import { TYPES } from '../utils/constants/typesConstants';
 import PropTypes from 'prop-types';
+import BaseListComponent from './BaseListComponent';
 
-export default class SelectBucketComponent extends Component {
+export default class SelectBucketComponent extends BaseListComponent {
     constructor(props) {
         super(props);
 
@@ -18,29 +20,16 @@ export default class SelectBucketComponent extends Component {
     }
 
     render() {
+        this.props.animatedScrollValue = this.animatedScrollValue;
+
         return(
             <View style = { styles.mainContainer }>
-                <ListComponent
-                    onRefresh = { () => {} }
-                    setSelectionId = { () => {} }
-                    contentWrapperStyle = { styles.contentWrapper }
-                    isGridViewShown = { this.props.isGridViewShown }
-                    onPress = { (params) => this.props.onSelect(params)  }
-                    itemType = { TYPES.REGULAR_BUCKET }
-                    isSelectDisabled = { true }
-                    selectedItemId = { null }
-                    onSingleItemSelected = { this.props.onSingleItemSelected }                    
-                    animatedScrollValue = { this.animatedScrollValue }
-                    enableSelectionMode = { () => {} }
-                    disableSelectionMode = { () => {} }
-                    isSelectionMode = { false }
-                    isSingleItemSelected = { false }
+                <this.ListComponent
+                    textComp = { (props) => <Text numberOfLines = { 1 } style = { props.style }>{ this.props.getBucketName(props.children) }</Text> }
                     listItemIcon = { require('../images/Icons/BucketListItemIcon.png') }
                     starredListItemIcon = { require('../images/Icons/ListStarredBucket.png') }
-                    starredGridItemIcon = { require('../images/Icons/GridStarredBucket.png') } 
-                    deselectItem = { () => {} }
-                    selectItem = { () => {} }
-                    data = { this.props.buckets } /> 
+                    contentWrapperStyle = { styles.contentWrapper } />
+
                 <BucketsScreenHeaderComponent
                     setDashboardBucketId = { () => {} }
                     isSelectBucketScreen = { true }

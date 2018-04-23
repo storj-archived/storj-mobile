@@ -12,6 +12,10 @@ class MyAccountContainer extends Component {
         super(props);
     }
 
+    shouldComponentUpdate(nextProps) {
+        return nextProps.activeScreen === "MyAccountScreen";
+    }
+
     convertedCredits() {
         return this.props.credits
             .filter((c) => !c.promo_amount)
@@ -68,9 +72,7 @@ class MyAccountContainer extends Component {
         let temp = [];
 
         const convertedCredits = this.convertedCredits();
-
         const convertedDebits = this.convertedDebits();
-
         const convertedPromoCredits = this.convertedPromoCredits();
             
         temp = [
@@ -92,7 +94,8 @@ class MyAccountContainer extends Component {
         return formatAmount(balance);
       }
 
-    render() {        
+    render() {
+        console.log("MyAccountContainer render");        
         return(
             <MyAccountNavComponent 
                 redirectToInitializationScreen = { this.props.screenProps.redirectToInitializationScreen }
@@ -112,13 +115,17 @@ class MyAccountContainer extends Component {
 function mapStateToProps(state) {
     let routes = state.myAccountScreenNavReducer.routes;
     let index = state.myAccountScreenNavReducer.index;
-    let currentScreenName = routes[index].routeName;
+    let currentAccountScreenName = routes[index].routeName;
+
+    let screenIndex = state.mainScreenNavReducer.index;
+    let currentScreenName = state.mainScreenNavReducer.routes[screenIndex].routeName;
 
     return {
         storage: state.billingReducer.storage,
         bandwidth: state.billingReducer.bandwidth,
         debits: state.billingReducer.debits,
-        credits: state.billingReducer.credits
+        credits: state.billingReducer.credits,
+        activeScreen: currentScreenName
     };
 }
     

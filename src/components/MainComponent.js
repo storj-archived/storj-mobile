@@ -5,7 +5,7 @@ import {
     StyleSheet
 } from 'react-native';
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { getShortBucketName } from "../utils/fileUtils";
 import MainNavigationContainer from '../containers/MainNavigationContainer';
 import ActionBarComponent from '../components/ActionBarComponent';
 import ViewOptionsComponent from '../components/ViewOptionsComponent';
@@ -15,6 +15,7 @@ import StorageInfoComponent from '../components/MyAccount/StorageInfoComponent';
 import AddCreditComponent from '../components/MyAccount/AddCreditComponent';
 import PopUpComponent from '../components/PopUpComponent';
 import SelectBucketComponent from '../components/SelectBucketComponent';
+import PropTypes from 'prop-types';
 
 export default class MainComponent extends Component {
     constructor(props) {
@@ -103,9 +104,21 @@ export default class MainComponent extends Component {
                 {
                     this.state.isSelectBucketShown  
                         ? <SelectBucketComponent
-                            onSelect = { this.selectBucketCallback }
-                            buckets = { this.props.buckets }
+                            getItemSize = { () => {} }
+                            isLoading = { false }
+                            searchSubSequence = { null }
+                            sortingMode = { null }
+                            onRefresh = { () => {} }
                             isGridViewShown = { this.props.isGridViewShown }
+                            onPress = { (bucket) => { this.selectBucketCallback({ bucketId: bucket.getId() }); } }
+                            onLongPress = { () => {} }
+                            onDotsPress = { () => {} }
+                            onCancelPress = { () => {} }
+                            selectedItemId = { null }
+                            isSelectionMode = { false }
+                            data = { this.props.buckets }
+                            getBucketName = { getShortBucketName }
+                            
                             showOptions = { this.showOptions.bind(this) }
                             navigateBack = { this.showSelectBuckets.bind(this) } />
                         : null

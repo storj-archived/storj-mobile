@@ -168,6 +168,7 @@ const listComponent = (title, data, props, count, isBucket, screen, itemType, na
                     navigateToFilesScreen = { props.navigateToFilesScreen ? props.navigateToFilesScreen : () => {} }
                     selectItem = { () => {} }
                     data = { data } />
+
                 <DashboardListFooterComponent
                     count = { count } 
                     onPress = { () => { navigationAction(itemType) } } />

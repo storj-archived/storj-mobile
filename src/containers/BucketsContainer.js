@@ -33,6 +33,10 @@ class BucketsContainer extends Component {
         this.navigateBack = this.navigateBack.bind(this);
     }
 
+    shouldComponentUpdate(nextProps) {
+        return nextProps.activeScreen === "BucketsScreen";
+    }
+
     getArraySelectedCount(array) {
         return array.filter(item => item.isSelected).length;
     }
@@ -80,6 +84,7 @@ class BucketsContainer extends Component {
     }
 
     render() {
+        console.log("BucketsContainer render"); 
         const options = Platform.OS === 'android' ? [
             { type: 'Pictures', isSelected: false, title: 'My photos', mask: SYNC_ENUM.SYNC_PHOTOS },
             { type: 'Movies', isSelected: false, title: 'My movies', mask: SYNC_ENUM.SYNC_MOVIES },
@@ -124,6 +129,9 @@ class BucketsContainer extends Component {
 }
 
 function mapStateToProps(state) {
+    let screenIndex = state.mainScreenNavReducer.index;
+    let currentScreenName = state.mainScreenNavReducer.routes[screenIndex].routeName;
+
     let routes = state.bucketsScreenNavReducer.routes;
     let index = state.bucketsScreenNavReducer.index;
     let currentBucketScreenName = routes[index].routeName;
@@ -137,7 +145,8 @@ function mapStateToProps(state) {
         openedBucketId: state.mainReducer.openedBucketId,
         selectedItemId: state.mainReducer.selectedItemId,
         email: state.mainReducer.email,
-        searchIndex: currentBucketScreenName === "BucketsListScreen" ? 1 : 2
+        searchIndex: currentBucketScreenName === "BucketsListScreen" ? 1 : 2,
+        activeScreen: currentScreenName
     };
 }
     

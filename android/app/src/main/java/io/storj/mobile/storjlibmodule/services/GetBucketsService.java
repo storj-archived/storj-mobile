@@ -40,6 +40,9 @@ import static io.storj.mobile.storjlibmodule.services.ServiceModule.FILE_DELETED
 
 public class GetBucketsService extends BaseReactService {
 
+    public final static String SERVICE_NAME_SHORT = "GetBucketsService";
+    public final static String SERVICE_NAME = ".storjlibmodule.services.GetBucketsService";
+
     private final static String EVENT_BUCKETS_UPDATED = "EVENT_BUCKETS_UPDATED";
     private final static String EVENT_FILES_UPDATED = "EVENT_FILES_UPDATED";
     private final static String EVENT_BUCKET_CREATED = "EVENT_BUCKET_CREATED";

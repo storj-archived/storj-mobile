@@ -22,9 +22,14 @@ class MyPhotosContainer extends BaseFilesListContainer {
          * default props of this FileListContainer
          */
         this.HeaderFilesListComponent = headerFilesListBinder.call(this);
-    }    
+    }
+    
+    shouldComponentUpdate(nextProps) {
+        return nextProps.activeScreen === "MyPhotosScreen";
+    }
 
     render() {
+        console.log("MyPhotosContainer render");
         let data = this.getData();
         return (
             <this.HeaderFilesListComponent

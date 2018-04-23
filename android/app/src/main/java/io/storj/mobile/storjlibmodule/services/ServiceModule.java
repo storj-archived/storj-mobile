@@ -26,8 +26,6 @@ import io.storj.mobile.storjlibmodule.models.PromiseHandler;
 
 public class ServiceModule extends ReactContextBaseJavaModule {
 
-    public final static String GET_SERVICE = "storjlib.services.GetBucketsService";
-    public final static String UPLOAD_SERVICE = "storjlib.services.UploadService";
     public final static String GET_BUCKETS = "GET_BUCKETS";
     public final static String GET_FILES = "GET_FILES";
     public final static String BUCKET_CREATED = "BUCKET_CREATED";
@@ -52,27 +50,28 @@ public class ServiceModule extends ReactContextBaseJavaModule {
             BaseReactService baseReactService = ((BaseReactService.BaseReactServiceBinder)service).getService();
             baseReactService.setReactContext(getReactApplicationContext());
 
-            String serviceName = name.getClassName();
+            String serviceName = name.getShortClassName();
 
             switch (serviceName) {
-                case GET_SERVICE:
+                case GetBucketsService.SERVICE_NAME:
                     connectService(mPromise, mGetBucketsService, baseReactService, serviceName);
                     break;
-                case UPLOAD_SERVICE:
+                case UploadService.SERVICE_NAME:
                     connectService(mUploadServicePromise, mUploadService, baseReactService, serviceName);
                     break;
                 case DownloadService.SERVICE_NAME:
                     connectService(mDownloadServicePromise, mDownloadService, baseReactService, serviceName);
+                    break;
             }
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
             switch (name.getClassName()) {
-                case GET_SERVICE:
+                case GetBucketsService.SERVICE_NAME:
                     mGetBucketsService = null;
                     break;
-                case UPLOAD_SERVICE:
+                case UploadService.SERVICE_NAME:
                     mUploadService = null;
                     break;
                 case DownloadService.SERVICE_NAME:
