@@ -12,7 +12,33 @@ As current implmentation of Storj API we used [libstorj](https://github.com/stor
 But you are able implement all API calls by yourself, [look](https://storj.io/api.html)
 #### Authorization
 
+Authorization is based on auth files that is stored on the device and can can be encrypted with password(PIN code). Auth file contains email, password and menmonic
 
+Authorization methods from [java-libstorj](https://github.com/storj/java-libstorj)
+
+```static native String generateMnemonic(int var)``` - generates new menominc. 24 words
+
+```static native boolean checkMnemonic(String var)``` - checks if mnemonic is correct. The only parameter - is mnemonic string.
+
+```int verifyKeys(String user, String pass)``` - verifies if user with such credentials exists in . It won't return true if user hasn't confirmed his email after registration.
+
+```boolean keysExist()``` - check if there is auth file on the device.
+
+```importKeys(email, password, mnemonic, passcode);``` - stores new auth file on the device that is encrypted with passcode. By default passcode is an empty string which means that authfile is not encrypted.
+
+```boolean deleteKeys()``` - deletes auth file from the device
+
+```Keys getKeys(String passphrase)``` - reads keys from auth file. If it's encrypted should supply valid one. By default empty string is passed for not encrypted auth file. Return instance of Keys:
+
+```
+class Keys {
+    private String user;
+    private String pass;
+    private String mnemonic;
+}
+```
+
+```void register(String user, String pass, RegisterCallback callback)``` - register new user with given email and password. OnSuccess it will send email with new user confirmation link. Check what is [RegisterCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/RegisterCallback.java)
 
 #### Buckets
 Bucket - is some kind of a folder. All buckets should be in root directory, for now there is no possibility to create one bucket inside of another. Example of Buket class described in Java-libstorj wrapper:
