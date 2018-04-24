@@ -154,4 +154,52 @@ IOS:
 
 ## Features
 ## Project structure
+
+The project consists of 3 main parts:
+1. Cross-platform view implemented with [React-Native Framework](https://facebook.github.io/react-native/)
+2. Source code for android devices, written in Java language
+3. Source code for Ios devices, written in Objective-C language
+
+Main functionality of source code for android and Ios devices:
+1. Database layer
+2. Background services for long-running operations, such as upload, download, synchronization of local files with Storj network
+3. [Native modules](https://facebook.github.io/react-native/docs/native-modules-android.html)
+
+### Frontend
+We used React-native + Redux approach and tried to design our code in appropriate way.
+
+Main parts of frondend structure:
+
+**Containers** - container components connected with Store, incaplulates all client logic inside and provides all callbacks to the presentations components.
+
+**Components** - presentations components, only concerned with how things look. Have no dependencies on the rest of the app, such as store, reducers or reducer actions.
+
+**Reducers** - specify how the application's state changes in response to actions sent to the store. Also contains initial state of application.
+
+**Navigators** - to implement navigation (tab navigation, stack navigators) we use [React Navigation](https://reactnavigation.org/) framework.
+
+### Android 
+
+Android part is written in Java language and its main modules are:
+
+1. **dataprovider** - out database layer. This layer includes:
+    - **data contracts** - entities, that describes correspondings tables.
+    
+    - **dbo** - Data base objects. Dbo - is an object that defines how the data will be sent to the database.
+    
+    - **repositories** - We use a repository to separate the logic that retrieves the data and maps it to the entity model from the         business logic that acts on the model.
+    
+    In our current implementation whe have 4 tables:
+    
+    -**Buckets** - stores already uploaded buckets and its metadata.
+    
+    -**Files**- stores already uploaded files metadata. Also stores thumbnail of downloaded/uploaded file as base64 String.
+    
+    -**UploadingFiles** - stores all uplaoding files. When uploading finish files will be removed and placed to the Files table.
+    
+    -**Settings** - stores all settings
+    
+    We use SQLite3 as local database.
+    
+2. **services** - list of our background services that executes long-running operations.
 ## Issues
