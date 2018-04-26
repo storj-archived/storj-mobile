@@ -102,7 +102,7 @@ export default class MyAccountMainPageComponent extends Component{
                         {
                             <OptionsComponent 
                                 title = { 'Secret phrase' }
-                                imageSource = { require('../../images/MyAccount/Trash.png') }
+                                imageSource = { require('../../images/MyAccount/SecretPhrase.png') }
                                 onPress = { this.props.screenProps.redirectToMyAccountMnemonicScreen } />
                         }
                         <View style = { styles.underline } />

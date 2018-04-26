@@ -23,14 +23,14 @@ class MyPhotosContainer extends BaseFilesListContainer {
          */
         this.HeaderFilesListComponent = headerFilesListBinder.call(this);
     }
-    
+
     shouldComponentUpdate(nextProps) {
         return nextProps.activeScreen === "MyPhotosScreen";
     }
 
     render() {
-        console.log("MyPhotosContainer render");
         let data = this.getData();
+
         return (
             <this.HeaderFilesListComponent
                 isLoading = { this.props.loadingStack.includes(this.props.bucketId) }                            
@@ -39,7 +39,9 @@ class MyPhotosContainer extends BaseFilesListContainer {
                 placeholder = { "Pictures" }
                 isFilesScreen = { false }
                 searchIndex = { 0 }
-                navigateBack = { () => {} } />
+                navigateBack = { () => {} }
+                selectAll = { this.props.screenProps.selectAll }
+                deselectAll = { this.props.screenProps.deselectAll } />
         );
     }
 }

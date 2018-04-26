@@ -5,7 +5,8 @@ import { changePasswordRequest } from '../../utils/dataservice';
 const { LOGIN, LOGIN_SUCCESS, LOGIN_ERROR, 
     REGISTER, REGISTER_SUCCESS, REGISTER_ERROR, 
     SET_EMAIL_NOT_CONFIRMED, SET_EMAIL_CONFIRMED,
-    SET_ACCOUNT_NOT_EXIST, SET_ACCOUNT_EXIST, CLEAR } = authActions;
+    SET_ACCOUNT_NOT_EXIST, SET_ACCOUNT_EXIST, CLEAR,
+    SAVE_MNEMONIC } = authActions;
 
 
 /**
@@ -56,6 +57,15 @@ export function login(email, password, mnemonic) {
  */
 export function clear() {
     return { type: CLEAR };
+};
+
+/**
+ * Saves mnemonic separatly in auth reducer
+ * @param {string} mnemonic 
+ * @returns action
+ */
+export function saveMnemonic(mnemonic) {
+    return { type: SAVE_MNEMONIC, mnemonic };
 }
 
 /**

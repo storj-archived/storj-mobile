@@ -11,6 +11,7 @@ import React, { Component } from 'react';
 import { getWidth, getHeight, getDeviceWidth} from '../utils/adaptive';
 import { getPicturesBucketId } from '../reducers/mainContainer/mainReducerActions';
 import PropTypes from 'prop-types';
+import ServiceModule from '../utils/ServiceModule';
 
 /**
 * Footer component in main page 
@@ -122,7 +123,8 @@ export default class TabBarComponent extends Component {
                                 let picturesBucketId = getPicturesBucketId(this.props.navigation.buckets);
 
                                 if(!picturesBucketId) return;
-
+                                ServiceModule.getFiles(picturesBucketId);   
+                                this.props.navigation.pushLoading(picturesBucketId);
                                 this.props.navigation.setPhotosBucketId(picturesBucketId);                     
                                 this.props.navigation.navigate("MyPhotosScreen");
                             } }>

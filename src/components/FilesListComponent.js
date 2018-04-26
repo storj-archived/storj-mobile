@@ -17,23 +17,22 @@ export default class FilesListComponent extends BaseListComponent {
 
     render() {
         const isGridView = this.props.isGridViewShown;
-        
+        let isEmpty = this.props.data.length === 0 && !this.props.isLoading;
+
         return(
-            <View style = { styles.mainContainer }>
-                {
-                    this.props.data.length === 0 && !this.props.isLoading
-                        ? <EmpyBucketComponent />
-                        : <this.ListComponent
-                                textComp = { textComp.bind(this) }
-                                listItemIcon = { require('../images/Icons/FileListItemIcon.png') }
-                                starredListItemIcon = { isGridView ? require('../images/Icons/GridStarredFile.png') : require('../images/Icons/ListStarredFile.png') }
-                                contentWrapperStyle = { styles.contentWrapper } />                       
-                }
-                { 
-                    this.props.isLoading ? <LoadingComponent isLoading = { this.props.isLoading } /> : null 
-                    /* TODO: Check bug with activity indicator */ 
-                }
-            </View>
+            isEmpty
+                ? <View style = { styles.mainContainer } key = { 'empty' }><EmpyBucketComponent/></View>
+                : <View style = { styles.mainContainer } key = { 'notempty' }>
+                    <this.ListComponent
+                        textComp = { textComp.bind(this) }
+                        listItemIcon = { require('../images/Icons/FileListItemIcon.png') }
+                        starredListItemIcon = { isGridView ? require('../images/Icons/GridStarredFile.png') : require('../images/Icons/ListStarredFile.png') }
+                        contentWrapperStyle = { styles.contentWrapper } />
+                    { 
+                        this.props.isLoading ? <LoadingComponent isLoading = { this.props.isLoading } /> : null 
+                        /* TODO: Check bug with activity indicator */ 
+                    }
+                </View>                       
         );
     }
 }

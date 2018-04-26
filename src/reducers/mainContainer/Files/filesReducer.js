@@ -12,8 +12,10 @@ const {
     DOWNLOAD_FILE_SUCCESS,
     DOWNLOAD_FILE_ERROR,
     DELETE_FILE, 
-    SELECT_FILE, 
+    SELECT_FILE,
+    SELECT_FILES, 
     DESELECT_FILE,
+    DESELECT_FILES,
     UPDATE_FILE_UPLOAD_PROGRESS,
     UPDATE_FILE_DOWNLOAD_PROGRESS,
     FILE_DOWNLOAD_CANCELED,
@@ -75,8 +77,14 @@ export default function filesReducer(state = initialState, action) {
         case SELECT_FILE: 
             newState.fileListModels = filesManager.selectFile(action.payload.file);
             break;
+        case SELECT_FILES: 
+            newState.fileListModels = filesManager.selectFiles(action.payload.bucketId); 
+            break;
         case DESELECT_FILE:
             newState.fileListModels = filesManager.deselectFile(action.payload.file);
+            break;
+        case DESELECT_FILES:
+            newState.fileListModels = filesManager.clearSelection();
             break;
         case DISABLE_SELECTION_MODE:
             newState.fileListModels = filesManager.clearSelection();
@@ -90,6 +98,5 @@ export default function filesReducer(state = initialState, action) {
         default:
             return state || initialState;
     }
-
     return newState;
 }

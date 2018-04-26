@@ -17,148 +17,32 @@ import PropTypes from 'prop-types';
 export default class GridItemComponent extends Component {
     constructor(props) {
         super(props);
-
-        this.bucket = null;
-        this.item = this.props.item;
-    }
-
-    shouldComponentUpdate(nextProps) {
-        if (this.props.item !== nextProps.item ||
-            this.props.isSelectionModeEnabled !== nextProps.isSelectionModeEnabled ||
-            this.props.isSelected !== nextProps.isSelected ||
-            this.props.isItemActionsSelected !== nextProps.isItemActionsSelected ||
-            this.props.isSingleItemSelected !== nextProps.isSingleItemSelected ||
-            this.props.progress !== nextProps.progress ||
-            this.props.isLoading !== nextProps.isLoading ||
-            this.props.isStarred !== nextProps.isStarred) 
-                return true;
-        
-        return false;
-    }
-
-    deselectAllItems() {
-        this.props.selectItemId(null);
-        this.props.disableSelectionMode();
-    }
-
-    renderItemName() {
-        switch(this.props.itemType) {
-            case TYPES.REGULAR_BUCKET: {
-                const name = this.props.item.getName();
-
-                if(name.length > 13) {
-                    let firstRowName = name.slice(0,10) + '...';
-
-                    return(
-                        <View style = { gridItemStyles.textMargin }>
-                            <Text style = { gridItemStyles.mainTitleText }>{ firstRowName }</Text> 
-                        </View>
-                    )
-                }; 
-
-                return(
-                    <Text numberOfLines = {1} style = { [gridItemStyles.mainTitleText, gridItemStyles.textMargin] }>{ name }</Text> 
-                ); 
-            } 
-                
-            break;
-            case TYPES.REGULAR_FILE: {
-                const fullName = this.props.item.getName();
-                const dotIndex = fullName.lastIndexOf('.');
-                const name = fullName.slice(0, dotIndex);
-                const extention = fullName.slice(dotIndex);
-
-                if(fullName.length > 13){
-
-                    if(name.length > 7) {
-                        name = name.slice(0,5) + '..';
-                    }
-
-                    if(extention.length > 6) {
-                        extention = '.' +  extention.slice(extention.length - 5, extention.length - 1);
-                    }
-
-                    return(
-                        <View style = { gridItemStyles.textMargin }>
-                            <Text style = { gridItemStyles.mainTitleText }>{ name }
-                                <Text style = { gridItemStyles.extentionText }>{ extention }</Text>
-                            </Text> 
-                        </View>
-                    )
-                }
-
-                return(
-                    <Text numberOfLines = {1} style = { [gridItemStyles.mainTitleText, gridItemStyles.textMargin] }>{ name }
-                        <Text style = { gridItemStyles.extentionText }>{ extention }</Text>
-                    </Text> 
-            )};
-            break;
-            default: return(
-                <Text numberOfLines = {1} style = { [gridItemStyles.mainTitleText, gridItemStyles.textMargin] }>{ this.props.item.getName() }</Text> 
-            ); 
-        }
     }
 
     render() {
-        let isSelected = this.props.item ? this.props.item.isSelected: false;
-        let props = this.props;
-
+        const props = this.props;
         return(
             <TouchableOpacity 
-                style = { props.isItemActionsSelected ? [gridItemStyles.listItemContainer, gridItemStyles.itemSelected] : gridItemStyles.listItemContainer }
-                onPress = { () => {
-                    if(props.isSingleItemSelected) {
-                        this.deselectAllItems();
-                        return;
-                    }
-
-                    if(props.isSelectionModeEnabled) {                                             
-                        props.onSelectionPress(props.item); 
-                        return;
-                    }
-                    
-                    if(props.item.entity.bucketId) { 
-                        this.props.onPress(props.item); 
-                    } else {
-                        this.props.onPress({ bucketId: props.item.getId() });
-                    }
-                }}
-                onLongPress = { () => {
-                    props.onLongPress(props.item);
-                }}>
+                style = { props.isSingleItemSelected ? [gridItemStyles.listItemContainer, gridItemStyles.itemSelected] : gridItemStyles.listItemContainer }
+                onPress = { props.onPress }
+                onLongPress = { props.onLongPress }>
                     <View style = { gridItemStyles.listItemContent }>
                         <View>
+                            <Image 
+                                style = { gridItemStyles.fileTypeIcon } 
+                                source = { props.listItemIconSource }
+                                resizeMode = 'contain' />
                             {
-                                (()=>{
-                                    if(props.item.entity.thumbnail){
-                                        let uri = 'data:image/png;base64,' + props.item.entity.thumbnail;
-                                        return <Image style = { gridItemStyles.fileTypeIcon } 
-                                                      source = {{ uri: uri }} />    
-                                    } else {
-                                        return <Image 
-                                                    style = { props.bucketId ? gridItemStyles.fileTypeIcon : gridItemStyles.bucketTypeIcon } 
-                                                    source = { props.isStarred ? props.starredGridItemIcon : props.listItemIcon }
-                                                    resizeMode = 'contain' />
-                                    }
-                                })()
-                            }
-                            {
-                                props.bucketId && props.item.isLoading ?
+                                props.isLoading ?
                                     <View style = { gridItemStyles.progressCircle }>
                                         <ProgressCircleComponent
-                                            percent = { props.item.progress * 100 }
+                                            percent = { props.progress * 100 }
                                             radius = { 17 }
                                             borderWidth = { 2 }
                                             color = "#2794FF"
                                             shadowColor = "#FFFFFF"
                                             bgColor = "#A8CEFF" >
-                                            <TouchableOpacity onPress = {() => {
-                                                if(props.cancelDownload && props.item.isLoading) {
-                                                    props.item.entity.hmac
-                                                        ? props.cancelDownload(props.item)
-                                                        : props.cancelUpload(props.item); 
-                                                }
-                                            }}>
+                                            <TouchableOpacity onPress = { props.onCancelPress }>
                                                 <Image 
                                                     source = { require('../images/Icons/CancelDownload.png') } 
                                                     style = { gridItemStyles.cancelDownloadImage } 
@@ -171,42 +55,33 @@ export default class GridItemComponent extends Component {
                         </View>
                         <View style = { gridItemStyles.textWrapper }>
                             {
-                                this.renderItemName()
+                                this.props.children
                             }
                             {
-                                !props.isSelectionModeEnabled && !props.isSelectDisabled ? 
+                                !props.isSelectionMode ? 
                                     <TouchableOpacity 
                                         style = { gridItemStyles.listItemActionsIconContainer } 
-                                        onPress = { () => {                     
-                                            if(props.isSingleItemSelected) {
-                                                props.selectItemId(null);
-                                                this.deselectAllItems()
-                                            } else {
-                                                props.onSingleItemSelected();
-                                                props.onSelectionPress(props.item);
-                                                props.selectItemId(props.item.getId());
-                                            }
-                                        }}>
+                                        onPress = { props.onDotsPress }>
                                         <Image style = { gridItemStyles.listItemActionsIcon } source = { require('../images/Icons/listItemActions.png') } />
                                     </TouchableOpacity> : null
                             }
                         </View>
                         {
-                            (() => {
-                                if(props.isSelectionModeEnabled) {
-                                    return isSelected 
-                                        ? <Image style = { gridItemStyles.selectedIcon } source = { require('../images/Icons/GridItemSelected.png') } />    
-                                        : <Image style = { gridItemStyles.selectedIcon } source = { require('../images/Icons/GridItemUnselected.png') } />
-                                }
-                            })()
+                            props.isSelectionMode ? <SelectionCheckboxComponent isSelected = { props.isSelected } /> 
+                                                    : null 
                         }
                     </View>
             </TouchableOpacity>
         );
     }
-}   
+}
 
-GridItemComponent.propTypes = {
+const SelectionCheckboxComponent = (props) => (
+    props.isSelected ? <Image style = { gridItemStyles.selectedIcon } source = { require('../images/Icons/GridItemSelected.png') } /> 
+                                                    : <Image style = { gridItemStyles.selectedIcon } source = { require('../images/Icons/GridItemUnselected.png') } />
+);
+
+/* GridItemComponent.propTypes = {
     itemType: PropTypes.string,
     item: PropTypes.object,
     onLongPress: PropTypes.func,
@@ -222,7 +97,7 @@ GridItemComponent.propTypes = {
     isSelected: PropTypes.bool,
     disableSelectionMode: PropTypes.func,
     onSingleItemSelected: PropTypes.func
-};
+}; */
 
 const gridItemStyles = StyleSheet.create({
     listItemContainer: {

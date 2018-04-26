@@ -3,7 +3,9 @@ import ItemManager from '../../../utils/itemManagers/ItemManager';
 
 const { 
     SELECT_BUCKET, 
-    DESELECT_BUCKET, 
+    SELECT_BUCKETS,
+    DESELECT_BUCKET,
+    DESELECT_BUCKETS, 
     CREATE_BUCKET,
     DELETE_BUCKET,
     GET_BUCKETS, 
@@ -30,8 +32,14 @@ export default function mainReducer(state = initialState, action) {
         case SELECT_BUCKET:
             newState.buckets = bucketsManager.changeItemSelectionStatus(action.payload.bucket, true);            
             break;
+        case SELECT_BUCKETS:
+            newState.buckets = bucketsManager.selectBuckets(action.isFavorites);           
+            break;
         case DESELECT_BUCKET:
             newState.buckets = bucketsManager.changeItemSelectionStatus(action.payload.bucket, false);            
+            break;
+        case DESELECT_BUCKETS:
+            newState.buckets = bucketsManager.clearSelection();
             break;
         case CREATE_BUCKET:
             newState.buckets = bucketsManager.addItem(action.payload.bucket);
@@ -60,6 +68,5 @@ export default function mainReducer(state = initialState, action) {
         default:
             return state || initialState;
     }
-    
     return newState; 
 };

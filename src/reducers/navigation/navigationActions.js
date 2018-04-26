@@ -94,6 +94,18 @@ export function redirectToRegisterScreen() {
     });
 };
 
+/**
+ * Navigation action that provides navigation to MnemonicHelpScreen
+ */
+export function redirectToMnemonicHelpScreen() {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'MnemonicHelpScreen'})
+        ]
+    });
+};
+
 export function navigateToFilesScreen(bucketId) {
     return NavigationActions.navigate({ routeName: 'FilesScreen', params: { bucketId } });
 }

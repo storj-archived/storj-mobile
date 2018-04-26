@@ -6,7 +6,8 @@ import MainScreenTabNav from '../navigators/MainScreenNavigator';
 import PropTypes from 'prop-types';
 import { 
     setPhotosBucketId,
-    hideActionBar
+    hideActionBar,
+    pushLoading
 } from '../reducers/mainContainer/mainReducerActions'
 
 /**
@@ -27,9 +28,12 @@ class MainNavigationContainer extends Component {
                     showCredits: this.props.showCredits,
                     showPopUp: this.props.showPopUp,
                     redirectToInitializationScreen: this.props.redirectToInitializationScreen,
-                    isFirstSignIn: this.props.isFirstSignIn
+                    isFirstSignIn: this.props.isFirstSignIn,
+                    selectAll: this.props.selectAll,
+                    deselectAll: this.props.deselectAll
                 }}
                 navigation = { addNavigationHelpers({
+                    pushLoading: this.props.pushLoading,
                     isActionBarShown: this.props.isActionBarShown,
                     isSelectionMode: this.props.isSelectionMode,
                     isSingleItemSelected: this.props.isSingleItemSelected,
@@ -44,7 +48,7 @@ class MainNavigationContainer extends Component {
                     openBucket: this.props.openBucket, 
                     bucketNavigateBack: this.props.bucketNavigateBack,
                     dashboardNavigateBack: this.props.dashboardNavigateBack,
-                    setPhotosBucketId: this.props.setPhotosBucketId
+                    setPhotosBucketId: this.props.setPhotosBucketId 
                 })} />
         );
     };
@@ -62,7 +66,8 @@ function mapDispatchToProps(dispatch) {
     return {
         ...bindActionCreators({ 
             setPhotosBucketId,
-            hideActionBar 
+            hideActionBar,
+            pushLoading 
         }, dispatch),
         testAction: () => { dispatch(NavigationActions.navigate({ routeName: 'TestScreen'})); },
         goToBucketsScreen: () => { dispatch(NavigationActions.navigate({ routeName: 'BucketsScreen'})); },

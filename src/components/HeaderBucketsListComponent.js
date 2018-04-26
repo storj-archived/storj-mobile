@@ -32,7 +32,9 @@ export default class HeaderBucketsListComponent extends BucketsListComponent {
                         setSearch = { this.props.setSearch }
                         clearSearch = { this.props.clearSearch }
                         searchIndex = { this.props.searchIndex }
-                        openedBucketId = { this.props.bucketId } />
+                        openedBucketId = { this.props.bucketId }
+                        selectAll = { this.props.selectAll }
+                        deselectAll = { this.props.deselectAll } />
             </View>
         );
     }

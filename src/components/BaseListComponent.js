@@ -4,7 +4,7 @@ import {
     Text
 } from 'react-native';
 import React, { Component } from 'react';
-import ListComponent2 from '../components/ListComponent2';
+import ListComponent from '../components/ListComponent';
 import { getHeight } from '../utils/adaptive';
 import { TYPES } from '../utils/constants/typesConstants';
 import PropTypes from 'prop-types';
@@ -13,7 +13,7 @@ export default class BaseListComponent extends Component {
     constructor(props) {
         super(props);
 
-        this.ListComponent = ListComponent.bind(this);
+        this.ListComponent = ListComponentWrapper.bind(this);
     }
 
     render() {
@@ -21,9 +21,10 @@ export default class BaseListComponent extends Component {
     }
 }
 
-function ListComponent(props) {
+function ListComponentWrapper(props) {
     return(
-        <ListComponent2
+        <ListComponent
+            isExpanderDisabled = { this.props.isExpanderDisabled }
             textComp = { props.textComp }
             listItemIcon = { props.listItemIcon }
             starredListItemIcon = { props.starredListItemIcon }
@@ -45,18 +46,4 @@ function ListComponent(props) {
     ); 
 }
 
-/* BucketsListComponent.propTypes = {
-    activeScreen: PropTypes.string,
-    animatedScrollValue: PropTypes.object,
-    buckets: PropTypes.array,
-    deselectBucket: PropTypes.func,
-    disableSelectionMode: PropTypes.func,
-    enableSelectionMode: PropTypes.func,
-    isGridViewShown: PropTypes.bool,
-    isSelectionMode: PropTypes.bool,
-    onPress: PropTypes.func,
-    refresh: PropTypes.func,
-    selectBucket: PropTypes.func,
-    selectedItemId: PropTypes.string,
-    setSelectionId: PropTypes.func
-} */
+//TODO: add props

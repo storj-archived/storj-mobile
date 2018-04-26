@@ -22,6 +22,8 @@ export default function headerFilesListBinder() {
                 searchSubSequence = { this.props.searchSubSequence }
                 onRefresh = { this.onRefresh.bind(this) }
 
+                selectAll = { props.selectAll }
+                deselectAll = { props.deselectAll }
                 placeholder = { props.placeholder }
                 isFilesScreen = { props.isFilesScreen }
                 searchIndex = { props.searchIndex }

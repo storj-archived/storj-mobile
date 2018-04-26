@@ -30,6 +30,31 @@ export default class ItemManager {
     };
 
     /**
+     * Change isSelected prop to true for all buckets
+     * @returns {ListItemModel[]} 
+     */
+    selectBuckets(isFavorites) {
+
+        if(!isFavorites) {
+            this.itemList = this.itemList.map((bucket) => {
+                bucket.isSelected = true;
+                return bucket;
+            })
+
+            return this.itemList;
+        }
+
+        this.itemList = this.itemList.map((bucket) => {
+            if(bucket.getStarred() === true) 
+            bucket.isSelected = true;
+            
+            return bucket;
+        })
+
+        return this.itemList;
+    };
+
+    /**
      * Set isSelected prop of whole array to false
      * * @returns {ListItemModel[]}
      */

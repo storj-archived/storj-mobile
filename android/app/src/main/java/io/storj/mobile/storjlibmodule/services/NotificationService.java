@@ -27,8 +27,8 @@ public class NotificationService {
     private void initBuilder(Context context) {
         mNotificationBuilder = new NotificationCompat.Builder(context)
                 .setContentTitle("Uploading file")
-                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.logo_blue))
-                .setSmallIcon(R.mipmap.logo_white)
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher))
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setAutoCancel(false)
                 .setPriority(Notification.PRIORITY_LOW)
                 .setOnlyAlertOnce(true);

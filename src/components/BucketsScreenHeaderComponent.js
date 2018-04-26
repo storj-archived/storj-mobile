@@ -33,7 +33,9 @@ export default class BucketsScreenHeaderComponent extends Component {
                     navigateBack = { this.props.navigateBack }
                     isSelectionMode = { this.props.isSelectionMode }
                     disableSelectionMode = { this.props.disableSelectionMode }
-                    animatedScrollValue = { this.props.animatedScrollValue } />
+                    animatedScrollValue = { this.props.animatedScrollValue }
+                    selectAll = { this.props.selectAll }
+                    deselectAll = { this.props.deselectAll } />
             </View>
         );
     }
@@ -139,15 +141,22 @@ class AnimatedHeader extends Component {
         );
     }
 
-    renderSelectComponent(res) {      
+    renderSelectComponent(res) {   
         let count = this.props.selectedItemsCount;
         return(
             <View style = { styles.selectionContainer }>
                 <Animated.View style = { [ styles.selectionWrapper, res[2] ] }>
-                    <Text style = { styles.selectionText }>{ count + " selected" }</Text>
+                    <View style = { styles.flexRow }>
+                        <TouchableOpacity 
+                            style = { styles.imageContainer } 
+                            onPress = { this.props.deselectAll } >
+                            <Image style = { styles.image } source = { require('../images/Icons/BlueCross.png') } resizeMode = 'contain' />
+                        </TouchableOpacity>
+                        <Text style = { styles.selectionText }>{ count + " selected" }</Text>
+                    </View>
                     <Text
-                        style = { styles.textDone } 
-                        onPress = { this.props.disableSelectionMode }>Done</Text>
+                        onPress = { () => this.props.selectAll(this.props.openedBucketId, this.props.isFilesScreen) }
+                        style = { styles.textDone }>Select all</Text>
                 </Animated.View>
             </View>
         );
@@ -217,6 +226,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     selectionText: {
+        marginLeft: getWidth(15),
         fontSize: getHeight(30), 
         color: '#384B65',
         fontFamily: 'Montserrat-Bold'
@@ -229,6 +239,16 @@ const styles = StyleSheet.create({
     searchComponent: {
         paddingVertical: getHeight(10),
         flex: 1
+    }, 
+    imageContainer: {
+        justifyContent: 'center'
+    },
+    image: {
+        height: getHeight(24),
+        width: getWidth(24)
+    },
+    flexRow: {
+        flexDirection: 'row'
     }
 });
 

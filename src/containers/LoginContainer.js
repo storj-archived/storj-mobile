@@ -14,7 +14,7 @@ import {
     redirectToAuthFailureScreen,
     redirectToMainScreen,
     redirectToInitializeScreen,
-    redirectToQRScannerScreen 
+    redirectToQRScannerScreen
 } from '../reducers/authentification/authActions';
 import StorjLib from '../utils/StorjModule';
 import SyncModule from "../utils/SyncModule";
@@ -229,11 +229,6 @@ class LoginContainer extends Component {
         Linking.openURL(forgotPasswordURL);
     }
 
-    redirectToMnemonicInfo() {
-        // let mnemonicInfoURL = '';
-        // Linking.openURL(mnemonicInfoURL);
-    }
-
 	render() {
 		return(
             <LoginComponent
@@ -249,10 +244,10 @@ class LoginContainer extends Component {
                 onChangePassword = { this.onChangePasswordInput.bind(this) }
                 onChangeMnemonic = { this.onChangeMnemonicInput.bind(this) }
                 redirectToForgotPassword = { this.redirectToForgotPassword.bind(this) }
-                redirectToMnemonicInfo = { this.redirectToMnemonicInfo.bind(this) }
                 onSubmit = { this.tryLogin.bind(this) }
                 redirectToQRScannerScreen = { this.redirectToQRScannerScreen.bind(this) }
                 registerButtonOnPress = { this.redirectToRegisterScreen.bind(this) }
+                redirectToMnemonicHelpScreen = { this.props.screenProps.redirectToMnemonicHelpScreen }
             />
 		);
 	};

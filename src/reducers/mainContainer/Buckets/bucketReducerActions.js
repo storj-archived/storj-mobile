@@ -8,7 +8,9 @@ const { PICTURES } = SYNC_BUCKETS;
 
 const { 
     SELECT_BUCKET, 
+    SELECT_BUCKETS,
     DESELECT_BUCKET, 
+    DESELECT_BUCKETS,
     CREATE_BUCKET,
     DELETE_BUCKET,
     GET_BUCKETS, 
@@ -19,6 +21,20 @@ const {
 
 export function selectBucket(bucket) {
     return { type: SELECT_BUCKET, payload: { bucket } };
+}
+
+/**
+ * actionCreator for all bucket selection
+ */
+export function selectBuckets(isFavorites) {
+    return { type: SELECT_BUCKETS, isFavorites };
+}
+
+/**
+ * actionCreator for all bucket deselection
+ */
+export function deselectBuckets() {
+    return { type: DESELECT_BUCKETS };
 }
 
 export function deselectBucket(bucket) {

@@ -21,7 +21,9 @@ export default class DashboardComponent extends Component {
                     setSelectionId = { this.props.setSelectionId }
                     defaultRoute = { this.props.defaultRoute }
                     animatedScrollValue = { this.animatedScrollValue }
-                    showOptions = { this.props.showOptions } />
+                    showOptions = { this.props.showOptions }
+                    selectAll = { this.props.selectAll }
+                    deselectAll = { this.props.deselectAll } />
             </View>
         )
     }

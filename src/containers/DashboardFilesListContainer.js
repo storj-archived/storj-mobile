@@ -58,7 +58,9 @@ class DashboardFilesListContainer extends BaseFilesListContainer {
                 animatedScrollValue = { this.animatedScrollValue }
                 isFilesScreen = { true }
                 searchIndex = { 4 }
-                navigateBack = { this.navigateBack.bind(this) } />
+                navigateBack = { this.navigateBack.bind(this) }
+                selectAll = { this.props.screenProps.selectAll }
+                deselectAll = { this.props.screenProps.deselectAll } />
         );
     }
 }

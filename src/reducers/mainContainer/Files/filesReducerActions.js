@@ -9,7 +9,9 @@ const {
     DOWNLOAD_FILE_ERROR,
     DELETE_FILE, 
     SELECT_FILE, 
+    SELECT_FILES,
     DESELECT_FILE,
+    DESELECT_FILES,
     UPDATE_FILE_UPLOAD_PROGRESS,
     UPDATE_FILE_DOWNLOAD_PROGRESS,
     FILE_DOWNLOAD_CANCELED,
@@ -107,8 +109,23 @@ export function selectFile(file) {
     return { type: SELECT_FILE, payload: { file } };
 }
 
+/**
+ * ActionCreator for local files multiple selection
+ * @param {FileModel[]} files 
+ */
+export function selectFiles(bucketId) {
+    return { type: SELECT_FILES, payload: { bucketId } };
+}
+
 export function deselectFile(file) {
     return { type: DESELECT_FILE, payload: { file } };
+}
+
+/**
+ * ActionCreator for all files deselection
+ */
+export function deselectFiles() {
+    return { type: DESELECT_FILES };
 }
 
 export function enableSelectionMode() {

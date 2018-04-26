@@ -3,20 +3,20 @@ import {
     Text,
     ScrollView,
     StyleSheet,
+    Animated,
     TouchableOpacity,
     Image
 } from 'react-native';
 import React, { Component } from 'react';
-import ListComponent from '../../components/ListComponent';
-import DashboardListFooterComponent from '../../components/Dashboard/DashboardListFooterComponent';
-import DashboardListHeaderComponent from '../../components/Dashboard/DashboardListHeaderComponent';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import PropTypes from 'prop-types';
 import { TYPES } from '../../utils/constants/typesConstants';
+import DashboardItemListComponent from './DashboardItemListComponent';
+import { getShortBucketName } from "../../utils/fileUtils";
 
 export default class DashboardListComponent extends Component{
     constructor(props) {
-        super(props);     
+        super(props);   
     }
 
     getThreeLast(array) {
@@ -99,9 +99,7 @@ export default class DashboardListComponent extends Component{
                                 'Favourite buckets', 
                                 this.getThreeLast(starredBuckets), 
                                 this.props, 
-                                starredBucketsCount, 
-                                true, 
-                                this.props.activeScreen,
+                                starredBucketsCount,
                                 TYPES.BUCKETS,
                                 this.props.redirectToFavoriteBucketsScreen
                             )
@@ -111,9 +109,7 @@ export default class DashboardListComponent extends Component{
                                 'Favourite files',
                                 this.getThreeLast(starredFiles), 
                                 this.props, 
-                                starredFilesCount, 
-                                false, 
-                                this.props.activeScreen,
+                                starredFilesCount,
                                 TYPES.FILES,
                                 this.props.redirectToFavoriteFilesScreen
                             )
@@ -124,8 +120,6 @@ export default class DashboardListComponent extends Component{
                                 this.getThreeLast(syncedFiles), 
                                 this.props, 
                                 syncedfilesCount, 
-                                false, 
-                                this.props.activeScreen,
                                 TYPES.SYNCED,
                                 this.props.redirectToFavoriteFilesScreen
                             )
@@ -138,41 +132,46 @@ export default class DashboardListComponent extends Component{
     }
 }
 
-const listComponent = (title, data, props, count, isBucket, screen, itemType, navigationAction) => {
+const listComponent = (title, data, props, count, itemType, navigationPress) => {
     if(data.length === 0) return null;
+        let animatedScrollValue = new Animated.Value(0);
+
+        const onPress = (item) => {
+            if(!item.entity.bucketId) {
+                props.setDashboardBucketId(item.getId());
+                props.navigateToDashboardFilesScreen();
+                return;
+            }
+
+            props.setDashboardBucketId(item.entity.bucketId);
+            props.navigateToDashboardFilesScreen();
+        }
 
         return(
-            <View>  
-                <DashboardListHeaderComponent
-                    onPress = { () => { navigationAction(itemType) } }
-                    title = { title } />
-                <ListComponent
-                    onRefresh = { () => { } }
-                    activeScreen = { screen }
-                    screens = { "DashboardScreen" }                
-                    setSelectionId = { () => {} }
-                    selectedItemId = { null }
-                    verticalPaddingDisabled = { true }
-                    isExpanderDisabled = { true }
-                    openBucket = { props.setDashboardBucketId }
-                    navigateToDashboardFilesScreen = { props.navigateToDashboardFilesScreen }
-                    onSingleItemSelected = { () => {} }
-                    animatedScrollValue = { props.animatedScrollValue }
-                    enableSelectionMode = { () => {} }
-                    disableSelectionMode = { () => {} }
-                    isSelectionMode = { false }
-                    isSingleItemSelected = { false }
-                    listItemIcon = { isBucket ? require('../../images/Icons/BucketListItemIcon.png') : require('../../images/Icons/FileListItemIcon.png') }
-                    starredListItemIcon = { isBucket ? require('../../images/Icons/ListStarredBucket.png') : require('../../images/Icons/ListStarredFile.png') }
-                    deselectItem = { () => {} }
-                    navigateToFilesScreen = { props.navigateToFilesScreen ? props.navigateToFilesScreen : () => {} }
-                    selectItem = { () => {} }
-                    data = { data } />
-
-                <DashboardListFooterComponent
-                    count = { count } 
-                    onPress = { () => { navigationAction(itemType) } } />
-            </View>
+            <DashboardItemListComponent 
+                animatedScrollValue = { animatedScrollValue }
+                title = { title }
+                count = { count }
+                itemType = { itemType }
+                navigationPress = { navigationPress }
+                props = { props }
+                getItemSize = { () => {} }
+                isLoading = { false }
+                searchSubSequence = { null }
+                sortingMode = { null }
+                onRefresh = { () => {} }
+                isGridViewShown = { false }
+                onPress = { onPress }
+                isExpanderDisabled = { true }
+                onLongPress = { () => {} }
+                onDotsPress = { () => {} }
+                onCancelPress = { () => {} }
+                selectedItemId = { null }
+                isSelectionMode = { false }
+                listItemIcon = { require('../../images/Icons/BucketListItemIcon.png') }
+                starredListItemIcon = { require('../../images/Icons/ListStarredBucket.png') }
+                data = { data }
+                getBucketName = { getShortBucketName } />
     )
 }
 

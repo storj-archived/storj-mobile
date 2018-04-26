@@ -94,8 +94,7 @@ class MyAccountContainer extends Component {
         return formatAmount(balance);
       }
 
-    render() {
-        console.log("MyAccountContainer render");        
+    render() {       
         return(
             <MyAccountNavComponent 
                 redirectToInitializationScreen = { this.props.screenProps.redirectToInitializationScreen }

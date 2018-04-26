@@ -304,6 +304,14 @@ export default class FileListManager {
     }
 
     /**
+     * Selecting files
+     * @param {object} files
+     */
+    selectFiles(bucketId) {        
+        return this._changeFilesSelection(bucketId, true);
+    }
+
+    /**
      * Deselecting file
      * @param {object} file
      */
@@ -335,6 +343,23 @@ export default class FileListManager {
             return file;
         });
 
+        return this.newFilesList;
+    }    
+
+    /**
+     * Updating files isSelected prop
+     * @param {string} bucketId 
+     * @param {bool} value 
+     */
+    _changeFilesSelection(bucketId, value) {
+        this.newFilesList = this.newFilesList.map(file => {
+            if(file.entity.bucketId === bucketId) {
+                file.isSelected = value;  
+            }
+
+            return file;
+        });
+        
         return this.newFilesList;
     }    
 }

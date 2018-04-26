@@ -66,6 +66,8 @@ export default class MainComponent extends Component {
             <View style={ styles.mainContainer }>
                 <View style = { styles.navigationContainer }>
                     <MainNavigationContainer
+                        selectAll = { this.props.selectAll }
+                        deselectAll = { this.props.deselectAll }
                         redirectToInitializationScreen = { this.props.redirectToInitializationScreen }
                         showOptions = { this.showOptions.bind(this) }
                         showQR = { this.showQR.bind(this) }
@@ -135,6 +137,8 @@ export default class MainComponent extends Component {
                 {
                     this.state.showOptions ? 
                         <ViewOptionsComponent 
+                            enableSelectionMode = { this.props.enableSelectionMode }
+                            isSelectionMode = { this.props.isSelectionMode }
                             setSorting = { this.props.setSorting }
                             isGridViewShown = { this.props.isGridViewShown }
                             setGridView = { this.props.setGridView }

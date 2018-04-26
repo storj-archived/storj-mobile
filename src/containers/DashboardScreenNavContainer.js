@@ -15,7 +15,9 @@ class DashboardScreenNavContainer extends Component {
                     animatedScrollValue: this.props.animatedScrollValue, 
                     defaultRoute: this.props.defaultRoute,
                     setSelectionId: this.props.setSelectionId,
-                    showOptions : this.props.showOptions 
+                    showOptions : this.props.showOptions,
+                    selectAll: this.props.selectAll,
+                    deselectAll: this.props.deselectAll 
                  } }
                 navigation = { 
                     addNavigationHelpers({

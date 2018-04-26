@@ -15,6 +15,7 @@ import MnemonicInfoScreen from '../components/Mnemonic/MnemonicInfoComponent';
 import MnemonicConfirmationScreen from '../components/Mnemonic/MnemonicConfirmationComponent';
 import MnemonicConfirmedScreen from '../components/Mnemonic/MnemonicConfirmedComponent';
 import MnemonicNotConfirmedScreen from '../components/Mnemonic/MnemonicNotConfirmedComponent';
+import MnemonicHelpScreen from '../components/Mnemonic/MnemonicHelpComponent';
 
 /**
  * Creating program main navigator
@@ -80,6 +81,10 @@ const StackNav = StackNavigator(
         MnemonicNotConfirmedScreen: {
             screen: MnemonicNotConfirmedScreen,
             routeName: 'MnemonicNotConfirmedScreen'
+        },
+        MnemonicHelpScreen: {
+            screen: MnemonicHelpScreen,
+            routeName: 'MnemonicHelpScreen'
         }
     },
     {

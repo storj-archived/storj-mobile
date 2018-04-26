@@ -51,7 +51,9 @@ class DashboardScreenContainer extends Component {
                 showOptions = { this.props.screenProps.showOptions }
                 setSelectionId = { this.props.setSelectionId }
                 defaultRoute = { this.props.defaultRoute }    
-                animatedScrollValue = { this.animatedScrollValue } />
+                animatedScrollValue = { this.animatedScrollValue }
+                selectAll = { this.props.screenProps.selectAll }
+                deselectAll = { this.props.screenProps.deselectAll } />
         ) 
     }
 }

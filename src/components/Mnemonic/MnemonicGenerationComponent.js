@@ -12,6 +12,7 @@ import React, { Component } from 'react';
 import mnemonicScreenConstants from '../../utils/constants/mnemonicScreenConstants';
 import { getWidth, getHeight } from '../../utils/adaptive';
 import { getMnemonic } from '../../utils/AsyncStorageModule';
+import StorjModule from '../../utils/StorjModule';
 import PropTypes from 'prop-types';
 
 /**
@@ -26,7 +27,8 @@ export default class MnemonicGenerationComponent extends Component {
          */
         this.state = {
             mnemonic: null,
-            showCopyPopUp: false
+            showCopyPopUp: false,
+            isBackButtonBlocked: false
         }
 
         this.secondWordsRowIndexCorrection = 13;
@@ -35,7 +37,14 @@ export default class MnemonicGenerationComponent extends Component {
     async componentDidMount() {
 
         getMnemonic().then((res)=>{
-            this.setState({mnemonic: res});
+            if(res) {
+                this.setState({mnemonic: res});
+            }
+
+            StorjModule.generateMnemonic().then((res)=>{
+                this.props.screenProps.saveMnemonic(res.result);
+                this.setState({mnemonic: res.result, isBackButtonBlocked: true});
+            })
         })
     }
 
@@ -91,7 +100,10 @@ export default class MnemonicGenerationComponent extends Component {
                         <View style = { styles.topContentContainer } >
                             <View style = { styles.flexRow }>
                                 <TouchableOpacity 
-                                    onPress = { () => { this.props.screenProps.redirectToMnemonicInfoScreen(); } }
+                                    onPress = { () => { 
+                                        if(this.state.isBackButtonBlocked) return;
+                                        this.props.screenProps.redirectToMnemonicInfoScreen();
+                                     } }
                                     style = { styles.backButtonContainer } >
                                     <Image 
                                         source = { require('../../images/MyAccount/BlueBackButton.png') }

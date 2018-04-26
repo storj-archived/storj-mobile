@@ -23,6 +23,10 @@ export default class ViewOptionsComponent extends Component {
         this.props.showOptions();
     }
 
+    setSelectinMode() {
+        this.props.enableSelectionMode();     
+    }
+
     renderOptionItem(imageSource, title, onPress) {
         return(
             <TouchableOpacity style = { styles.itemContainer } onPress = { onPress } >
@@ -47,14 +51,29 @@ export default class ViewOptionsComponent extends Component {
                         this.renderOptionItem( 
                             require('../images/Icons/ListIcon.png'), 
                             "List view", 
-                            () => this.props.setListView()) :
+                            () => {
+                                this.props.setListView(); 
+                                this.closeView();
+                            }
+                        ) :
                         this.renderOptionItem( 
                             require('../images/Icons/GridIcon.png'), 
                             "Grid view", 
-                            () => this.props.setGridView())   
+                            () => {
+                                this.props.setGridView();
+                                this.closeView();
+                            }
+                        )   
                 }
                 {
-                    this.renderOptionItem( require('../images/Icons/SelectItems.png'), "Select items", () => {})
+                    this.renderOptionItem( 
+                        require('../images/Icons/SelectItems.png'), 
+                        "Select items", 
+                        () => {
+                            this.setSelectinMode();
+                            this.closeView();
+                        }
+                    )
                 }
             </View>
         )

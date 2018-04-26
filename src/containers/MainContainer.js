@@ -5,22 +5,27 @@ import { connect } from 'react-redux';
 import { 
     showActionBar,
     hideActionBar,
-    disableSelectionMode,
     showCreateBucketInput,
     hideCreateBucketInput,
     setGridView,
     setListView,
     openBucket,
-    setSorting 
+    setSorting,
+    enableSelectionMode,
+    disableSelectionMode
 } from '../reducers/mainContainer/mainReducerActions';
 import {    
     createBucket,
     deleteBucket, 
-    updateFavourite 
+    updateFavourite,
+    selectBuckets,
+    deselectBuckets
 } from '../reducers/mainContainer/Buckets/bucketReducerActions';
 import { 
     deleteFile, 
-    updateFavouriteFiles 
+    updateFavouriteFiles,
+    selectFiles,
+    deselectFiles
 } from '../reducers/mainContainer/Files/filesReducerActions';
 import { 
     redirectToMainScreen, 
@@ -342,6 +347,21 @@ class MainContainer extends Component {
         this._mainComponent.showSelectBuckets();
     }
 
+    selectAll(bucketId, isFavoritesBuckets) {
+        if(bucketId) {
+            this.props.selectFiles(bucketId);
+            return;
+        }
+
+        this.props.selectBuckets(isFavoritesBuckets);
+    }
+
+    deselectAll() {
+        this.props.disableSelectionMode();
+        this.props.deselectFiles();
+        this.props.deselectBuckets();
+    }
+
     getTapBarActions() {  
         const isSelectionMode = this.props.isSelectionMode || this.props.isSingleItemSelected;
         const index = this.props.mainScreenNavReducer.index;      
@@ -410,6 +430,8 @@ class MainContainer extends Component {
                 createBucket = { this.createBucket.bind(this) }
                 hideCreateBucketInput = { this.props.hideCreateBucketInput }
                 tapBarActions = { this.getTapBarActions() } 
+                enableSelectionMode = { this.props.enableSelectionMode }
+                disableSelectionMode = { this.props.disableSelectionMode }
                 isSelectionMode = { this.props.isSelectionMode }
                 isSingleItemSelected = { this.props.isSingleItemSelected }
                 onActionBarPress = { () => { this.onActionBarPress(); } }
@@ -426,7 +448,9 @@ class MainContainer extends Component {
                 dashboardNavigateBack = { this.props.dashboardNavigateBack }
                 email = { this.props.email }
                 password = { this.props.password }
-                mnemonic = { this.props.mnemonic } />
+                mnemonic = { this.props.mnemonic }
+                selectAll = { this.selectAll.bind(this) }
+                deselectAll = { this.deselectAll.bind(this) } />
         );
     }
 }
@@ -492,13 +516,18 @@ function mapDispatchToProps(dispatch) {
             dashboardNavigateBack,
             showActionBar,
             hideActionBar,
-            disableSelectionMode,
             showCreateBucketInput,
             hideCreateBucketInput,
             setGridView,
             setListView,
             openBucket,
+            selectBuckets,
+            selectFiles,
+            deselectBuckets,
+            deselectFiles,
             setSorting,
+            enableSelectionMode,
+            disableSelectionMode,
             createBucket,
             deleteBucket, 
             deleteFile, 

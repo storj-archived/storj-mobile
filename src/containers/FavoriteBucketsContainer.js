@@ -94,7 +94,9 @@ class FavoriteBucketsContainer extends BaseListContainer {
                 clearSearch = { this.props.clearSearch }
                 disableSelectionMode = { this.props.disableSelectionMode }
                 showOptions = { this.props.screenProps.showOptions }
-                getSelectedFilesCount = { this.getSelectedItemsCount(data) } />
+                getSelectedFilesCount = { this.getSelectedItemsCount(data) }
+                selectAll = { this.props.screenProps.selectAll }
+                deselectAll = { this.props.screenProps.deselectAll } />
         );
     }
 }
@@ -116,7 +118,7 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({  
         ...bucketsListContainerBucketActions, 
         ...bucketsListContainerActions,
-        ...dashboardContainerActions, 
+        ...dashboardContainerActions,
         dashboardNavigateBack,
         navigateBack
     }, dispatch);

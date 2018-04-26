@@ -33,7 +33,7 @@ class BucketsContainer extends Component {
         this.navigateBack = this.navigateBack.bind(this);
     }
 
-    shouldComponentUpdate(nextProps) {
+    shouldComponentUpdate(nextProps) { 
         return nextProps.activeScreen === "BucketsScreen";
     }
 
@@ -84,7 +84,6 @@ class BucketsContainer extends Component {
     }
 
     render() {
-        console.log("BucketsContainer render"); 
         const options = Platform.OS === 'android' ? [
             { type: 'Pictures', isSelected: false, title: 'My photos', mask: SYNC_ENUM.SYNC_PHOTOS },
             { type: 'Movies', isSelected: false, title: 'My movies', mask: SYNC_ENUM.SYNC_MOVIES },
@@ -107,7 +106,9 @@ class BucketsContainer extends Component {
             );
         } else {
             return(
-                <BucketsComponent 
+                <BucketsComponent
+                    selectAll = { this.props.screenProps.selectAll }
+                    deselectAll = { this.props.screenProps.deselectAll } 
                     setSearch = { this.props.setSearch }
                     clearSearch = { this.props.clearSearch }
                     searchIndex = { this.props.searchIndex }                   

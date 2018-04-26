@@ -20,6 +20,7 @@ import {
 	popLoading,
 	setIsConnected
 } from '../reducers/mainContainer/mainReducerActions';
+import { saveMnemonic } from '../reducers/authentification/authActions';
 import { 
 	setNameAlreadyExistException,
 	unsetNameAlreadyExistException,
@@ -45,7 +46,8 @@ import {
     redirectToMnemonicInfoScreen,
     redirectToMnemonicNotConfirmedScreen,
     redirectToRegisterScreen,
-    redirectToRegisterSuccessScreen,
+	redirectToRegisterSuccessScreen,
+	redirectToMnemonicHelpScreen,
 	navigateBack 
 } from '../reducers/navigation/navigationActions';
 import ListItemModel from '../models/ListItemModel';
@@ -296,6 +298,7 @@ class Apps extends Component {
 			<View style = { styles.mainContainer }>
 				<StackNavigator 
 					screenProps = {{
+						saveMnemonic: this.props.saveMnemonic,
 						redirectToLoginScreen: this.props.redirectToLoginScreen,
 						redirectToMainScreen: this.props.redirectToMainScreen,
 						redirectToMnemonicConfirmationScreen: this.props.redirectToMnemonicConfirmationScreen,
@@ -305,6 +308,7 @@ class Apps extends Component {
 						redirectToMnemonicNotConfirmedScreen: this.props.redirectToMnemonicNotConfirmedScreen,
 						redirectToRegisterSuccessScreen: this.props.redirectToRegisterSuccessScreen,
 						redirectToRegisterScreen: this.props.redirectToRegisterScreen,
+						redirectToMnemonicHelpScreen: this.props.redirectToMnemonicHelpScreen,
 						navigateBack : this.props.navigateBack
 					}}
 					navigation = { addNavigationHelpers({
@@ -350,6 +354,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		...bindActionCreators( {
+		saveMnemonic,
 		setLoading,
 		unsetLoading, 
 		setNameAlreadyExistException,
@@ -373,6 +378,7 @@ function mapDispatchToProps(dispatch) {
 		redirectToMnemonicConfirmedScreen,
 		redirectToMnemonicGenerationScreen,
 		redirectToMnemonicInfoScreen,
+		redirectToMnemonicHelpScreen,
 		redirectToMnemonicNotConfirmedScreen,
 		redirectToRegisterScreen,
 		redirectToRegisterSuccessScreen,

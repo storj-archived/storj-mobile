@@ -35,19 +35,20 @@ class InitializeContainer extends Component {
     constructor(props) {
         super(props);
 
+        this.REGULAR_MESSAGE = "Enter PIN";
+        this.ERROR_MESSAGE = 'Wrong PIN, try again';
+        this.pincode = '';
+
         this.state = {
             filledPins: "",
             enterPassCode: false,
             isPasscodeWrong: false,
-            infoText: 'Enter PIN',
+            infoText: this.REGULAR_MESSAGE,
             isError: false,
             isLoading: false,
-            isFinished: false
+            isFinished: false,
+            isFirstLaunch: true
         };
-
-        this.REGULAR_MESSAGE = "Enter PIN";
-        this.ERROR_MESSAGE = 'Wrong PIN, try again';
-        this.pincode = '';
     };
 
     async componentWillMount() {
@@ -66,9 +67,8 @@ class InitializeContainer extends Component {
         } catch(e) {            
             this.props.redirectToOnBoardingScreen();
         }
-
-        this.setState({ isError: false, infoText: this.REGULAR_MESSAGE });
     }
+
 
     onChangePasscode(value) {
         if(this.state.isFinished) return;
@@ -87,6 +87,13 @@ class InitializeContainer extends Component {
         
         if(!getKeyResponse.isSuccess) {
             this.setState({ isFinished: false });
+
+            if(this.state.isFirstLaunch) { 
+                this.setState({ enterPassCode: true, isFirstLaunch: false });  
+
+                return; 
+            }
+
             this.setState({ enterPassCode: true, isLoading: false, infoText: this.ERROR_MESSAGE, isError: true });   
             return;
         }

@@ -15,8 +15,7 @@ class DashboardContainer extends Component {
         return nextProps.activeScreen === "DashboardScreen";
     }
 
-    render() {
-        console.log("DashboardContainer render");        
+    render() {     
         return(
             <DashboardListComponent                
                 activeScreen = { this.props.activeScreen }
