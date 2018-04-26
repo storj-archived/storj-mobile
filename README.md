@@ -202,4 +202,13 @@ Android part is written in Java language and its main modules are:
     We use SQLite3 as local database.
     
 2. **services** - list of our background services that executes long-running operations.
+     
+     - **ServiceModule** - entry point that is responsible for binding another services.
+     
+     Next methods of this service are called from frontend part to bind all services when application started.
+     ```void bindGetBucketsService(Promise promise)
+        void bindUploadService(Promise promise)
+        void bindDownloadService(Promise promise)
+     ```
+     
 ## Issues
