@@ -147,6 +147,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: getWidth(20)
     },
     topButtonsContainer: { 
+        marginTop: getHeight(15),
         flexDirection: 'row', 
         justifyContent: 'space-between' 
     },
@@ -207,8 +208,8 @@ const styles = StyleSheet.create({
         marginLeft: getWidth(5)
     },
     titleContainer: { 
-        marginTop: getHeight(30),
-        height: getHeight(70),  
+        marginTop: getHeight(15),
+        height: getHeight(40),  
         justifyContent: 'space-between',
         alignItems: 'center',  
         flexDirection: 'row' 
@@ -229,7 +230,7 @@ const styles = StyleSheet.create({
     },
     generateQRText: { 
         fontFamily: 'Montserrat-SemiBold', 
-        fontSize: getHeight(14), 
+        fontSize: getHeight(12), 
         color: '#2794FF' 
     },
     balanceButton: {
@@ -248,7 +249,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(56, 75, 101, 0.2)' 
     },
     logOutButton: { 
-        marginTop: getHeight(36),
+        marginTop: getHeight(65),
         width: getWidth(335),
         height: getHeight(50),
         borderRadius: 6,
