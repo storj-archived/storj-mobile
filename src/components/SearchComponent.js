@@ -167,8 +167,8 @@ const styles = StyleSheet.create({
         flex: 0.4
     },
     image: {
-        width: getHeight(16.5),
-        height: getHeight(16.5)
+        width: getHeight(24),
+        height: getHeight(24)
     },
     backButton: {
         width: getHeight(24),
