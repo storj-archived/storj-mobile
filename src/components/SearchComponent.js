@@ -117,7 +117,7 @@ export default class SearchComponent extends Component {
         return(
             <View style = { [ styles.rowContainer, styles.mainContainer, this.props.styleContainer ] }>
                     <View style = { styles.rowContainer }>
-                        { this.state.isSearchIconShown ? <Image style={ styles.image } source = { require("../images/Icons/Search.png") } resizeMode = { 'contain' } /> : null }
+                        { this.state.isSearchIconShown ? <Image style={ styles.searchImage } source = { require("../images/Icons/Search.png") } resizeMode = { 'contain' } /> : null }
                         <TextInput
                             onFocus = { () => { this.setState({ isSearchIconShown: false }); } }
                             onBlur = { () => { 
@@ -165,6 +165,10 @@ const styles = StyleSheet.create({
     updateStatusContainer: {
         justifyContent: 'flex-end',
         flex: 0.4
+    },
+    searchImage: {
+        height: getHeight(16.5),
+        width: getHeight(16.5)
     },
     image: {
         width: getHeight(24),
