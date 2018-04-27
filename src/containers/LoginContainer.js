@@ -23,7 +23,7 @@ import validator from '../utils/validator';
 import { LoginStateModel } from '../models/LoginStateModel';
 import { LoginErrorModel } from '../models/LoginErrorModel';
 import infoScreensConstants from '../utils/constants/infoScreensConstants';
-import { getEmail, getMnemonic, getPassword, getFirstAction, setFirstAction } from '../utils/AsyncStorageModule';
+import { getFirstAction, setFirstAction } from '../utils/AsyncStorageModule';
 import { formatInput } from '../utils/utils';
 import PropTypes from 'prop-types';
 
@@ -52,17 +52,13 @@ class LoginContainer extends Component {
      * Fill local state from store on component did mount
      */
     async componentDidMount() {
-        let email, password, mnemonic;
+        let email, password, mnemonic = null;
 
         if(this.props.user.mnemonic) {
             email = this.props.user.email;
             password = this.props.user.password;
             mnemonic = this.props.user.mnemonic;
-        } else {
-            email = await getEmail(),
-            password = await getPassword(),
-            mnemonic = await getMnemonic()   
-        }
+        } 
 
         this.setState({
             stateModel: new LoginStateModel(email, password, mnemonic)

@@ -11,7 +11,6 @@ import {
 import React, { Component } from 'react';
 import mnemonicScreenConstants from '../../utils/constants/mnemonicScreenConstants';
 import { getWidth, getHeight } from '../../utils/adaptive';
-import { getMnemonic } from '../../utils/AsyncStorageModule';
 import StorjModule from '../../utils/StorjModule';
 import PropTypes from 'prop-types';
 
@@ -35,16 +34,9 @@ export default class MnemonicGenerationComponent extends Component {
     }
 
     async componentDidMount() {
-
-        getMnemonic().then((res)=>{
-            if(res) {
-                this.setState({mnemonic: res});
-            }
-
-            StorjModule.generateMnemonic().then((res)=>{
-                this.props.screenProps.saveMnemonic(res.result);
-                this.setState({mnemonic: res.result, isBackButtonBlocked: true});
-            })
+        StorjModule.generateMnemonic().then((res)=>{
+            this.props.screenProps.saveMnemonic(res.result);
+            this.setState({mnemonic: res.result, isBackButtonBlocked: true});
         })
     }
 

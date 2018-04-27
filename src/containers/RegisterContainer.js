@@ -10,7 +10,8 @@ import {
     redirectToTermsOfUse,
     redirectToLoginScreen,
     redirectToAuthFailureScreen,
-    redirectToRegisterSuccessScreen 
+    redirectToRegisterSuccessScreen,
+    login
 } from '../reducers/authentification/authActions';
 import { RegisterStateModel } from '../models/RegisterStateModel';
 import { RegisterErrorModel } from '../models/RegisterErrorModel';
@@ -18,7 +19,7 @@ import RegisterComponent from '../components/RegisterComponent';
 import StorjModule from '../utils/StorjModule';
 import validator from '../utils/validator';
 import infoScreensConstants from '../utils/constants/infoScreensConstants';
-import { setEmail, setMnemonic, setPassword, getFirstAction, setFirstAction } from '../utils/AsyncStorageModule';
+import { getFirstAction, setFirstAction } from '../utils/AsyncStorageModule';
 import PropTypes from 'prop-types';
 
 /**
@@ -115,10 +116,8 @@ export class RegisterContainer extends Component {
     /**
      * Saving Auth data into AsyncStorage after successfull register
      */
-    saveData = async (mnemonic, email, password) => {
-        await setMnemonic(mnemonic);
-        await setEmail(email);
-        await setPassword(password);
+    saveData = (mnemonic, email, password) => {
+        this.props.login(email, password, mnemonic)
     }
 
     /**
@@ -259,7 +258,8 @@ function mapDispatchToProps(dispatch) {
             redirectToTermsOfUse,
             redirectToLoginScreen,
             redirectToAuthFailureScreen,
-            redirectToRegisterSuccessScreen}, dispatch)
+            redirectToRegisterSuccessScreen, 
+            login}, dispatch)
     }
 };
 

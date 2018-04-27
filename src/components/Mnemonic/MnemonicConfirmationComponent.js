@@ -13,7 +13,6 @@ import React, { Component } from 'react';
 import { WORDLIST } from '../../utils/constants/wordList';
 import mnemonicScreenConstants from '../../utils/constants/mnemonicScreenConstants';
 import { getWidth, getHeight } from '../../utils/adaptive';
-import { getMnemonic } from '../../utils/AsyncStorageModule';
 import PropTypes from 'prop-types';
 
 export default class MnemonicConfirmationComponent extends Component {

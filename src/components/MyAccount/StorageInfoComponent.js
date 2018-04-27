@@ -9,7 +9,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import myAccountConstants from '../../utils/constants/myAccountConstants';
-import { getEmail, getPassword, getMnemonic } from '../../utils/AsyncStorageModule';
 
 export default class StorageInfoComponent extends Component {
     constructor(props) {
