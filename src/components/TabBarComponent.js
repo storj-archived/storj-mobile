@@ -173,8 +173,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         opacity: 0.75,
         height:  getHeight(50),
-        borderTopColor: 'gray',
-        borderTopWidth: 0
+        borderTopColor: 'rgba(0, 0, 0, 0.1)',
+        borderTopWidth: 1
     },
     tabContainer: {
         flexDirection: 'row',
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     tabItemContainer: {
-        backgroundColor: 'rgba(255, 255, 255, 0.3)',
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
         flex: 20,
         alignItems: 'center',
         justifyContent: 'center'
