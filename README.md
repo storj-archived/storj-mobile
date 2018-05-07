@@ -1,34 +1,164 @@
 # Storj mobile client
 Mobile client for secure file storing.
 All files will be encrypted before sending to distributed network.
+
+# Overview
+
+- [Getting started](#anchor)
+- [Storj API Description](#anchor)
+ - [Authorization](#anchorAuthorization)
+ 	  - [Generate mnemonic](#anchorAuthGenerateMnemonic) 
+ 	  - [Check mnemonic](#anchorAuthCheckMnemonic) 
+ 	  - [Verify keys](#anchorAuthVerifyKeys)
+ 	  - [Check keys exists](#anchorAuthCheckKeysExists) 
+ 	  - [Import keys](#anchorAuthImportKeys) 
+ 	  - [Delete keys](#anchorAuthDeleteKeys) 
+ 	  - [Get keys](#anchorAuthGetKeys)
+ 	  - [Registration](#anchorAuthRegistration)
+ - [Buckets](#anchorBuckets) 
+     - [Buckets list](#anchorBucketList) 
+     - [Bucket creation](#anchorBucketCreate) 
+     - [Bucket deletion](#anchorBucketDelete)
+  - [Files](#anchor)
+	  - [File Upload](#anchor)
+	  - [File Download](#anchor)
+- [Features](#anchor)	
+- [Project Structure](#anchor)
+  - [Frontend](#anchor)
+  - [Android](#anchor)
+  - [iOS](#anchor)
+- [Known Issues](#anchor)
+- [](#anchor)
+
+<a name="anchor"></a>
 ## Getting Started
-* Install react native(Building projects with native code) -> https://facebook.github.io/react-native/docs/getting-started.html 
-* npm install
-* android: react-native run-android
-* ios: react-native run-ios
-* to run on physical device, add "--device" param
+Install react native(Building projects with native code) -> https://facebook.github.io/react-native/docs/getting-started.html 
+
+1. ```git clone git@github.com:storj/storj-mobile.git```
+2. ```cd storj-mobile``` 
+3. ```npm install```
+4. Run
+  * Android 
+     * ```react-native run-android```
+  * iOS
+     * ```react-native run-ios```
+5. Run on physical device
+  * Android
+     * ```react-native run-android --device```
+  * iOS
+     * ```react-native run-ios --device```
+
+<a name="anchorStorjApiDescription"></a>
 ## Storj API description
+
 As current implmentation of Storj API we used [libstorj](https://github.com/storj/libstorj) and its wrappers for [android](https://github.com/storj/android-libstorj) and [IOS](https://github.com/storj/ios-libstorj).
 But you are able implement all API calls by yourself, [look](https://storj.io/api.html)
+
+<a name="anchorAuthorization"></a>
 #### Authorization
 
 Authorization is based on auth files that is stored on the device and can can be encrypted with password(PIN code). Auth file contains email, password and menmonic
 
-Authorization methods from [java-libstorj](https://github.com/storj/java-libstorj)
+General description of auth file content: 
 
-```static native String generateMnemonic(int var)``` - generates new menominc. 24 words
+```
+string email
+string password
+string mnemonic
+```
 
-```static native boolean checkMnemonic(String var)``` - checks if mnemonic is correct. The only parameter - is mnemonic string.
+Authorization metnods for Android from [java-libstorj](https://github.com/storj/java-libstorj/)
 
-```int verifyKeys(String user, String pass)``` - verifies if user with such credentials exists in . It won't return true if user hasn't confirmed his email after registration.
+Authorization methods for iOS from [ios-libstorj](https://github.com/storj/ios-libstorj/)
 
-```boolean keysExist()``` - check if there is auth file on the device.
+<a name="anchorAuthGenerateMnemonic"></a>
+##### Generate new mnemonic
+Generates new mnemonic. 24 words
 
-```importKeys(email, password, mnemonic, passcode);``` - stores new auth file on the device that is encrypted with passcode. By default passcode is an empty string which means that authfile is not encrypted.
+###### Android
 
-```boolean deleteKeys()``` - deletes auth file from the device
+```static native String generateMnemonic(int var)```
 
-```Keys getKeys(String passphrase)``` - reads keys from auth file. If it's encrypted should supply valid one. By default empty string is passed for not encrypted auth file. Return instance of Keys:
+###### iOS
+
+```-(NSString *_Nullable)generateMnemonic:(int)strength```
+
+<a name="anchorAuthCheckMnemonic"></a>
+##### Check mnemonic
+Checks if mnemonic is correct. The only parameter - is mnemonic string.
+
+###### Android
+
+```static native boolean checkMnemonic(String var)```
+
+###### iOS
+
+```-(BOOL)checkMnemonic:(NSString *_Nonnull)mnemonic```
+
+<a name="anchorAuthVerifyKeys"></a>
+##### Verify keys
+Verifies if user with such credentials exists. It won't return true if user hasn't confirmed his email after registration.
+
+###### Android
+
+```int verifyKeys(String user, String pass)```
+
+###### iOS
+
+```
+-(BOOL)verifyKeysWithUserEmail:(NSString *_Nonnull) email 
+andPassword:(NSString *_Nonnull)password
+```
+
+<a name="anchorAuthCheckKeysExists"></a>
+##### Check keys exists
+
+Checks if ther is auth file on the device. Return true if file exists, false otherwise.
+
+###### Android
+
+```boolean keysExist()```
+
+###### iOS
+
+<a name="anchorAuthImportKeys"></a>
+##### Import keys
+Stores new auth file on the device that is encrypted with passcode. By default, passcode is an empty string which means that auth file is not encrypted.
+
+###### Android
+
+```importKeys(email, password, mnemonic, passcode)```
+
+###### iOS
+
+```
+-(BOOL)importKeysWithEmail:(NSString *) email
+              password:(NSString *) password
+              mnemonic:(NSString *) mnemonic
+           andPasscode:(NSString *) passcode
+```
+
+<a name="anchorAuthDeleteKeys"></a>
+##### Delete keys
+Deletes auth file from the device.
+
+###### Android
+
+```boolean deleteKeys()```
+
+###### iOS
+
+```-(BOOL) deleteAuthFile```
+
+<a name="anchorAuthGetKeys"></a>
+##### Get keys
+Reads keys from auth file. If it's encrypted should supply valid one. By default empty string is passed for not encrypted auth file. 
+
+###### Android 
+
+```Keys getKeys(String passphrase)```
+
+Return instance of Keys: 
 
 ```
 class Keys {
@@ -38,51 +168,109 @@ class Keys {
 }
 ```
 
-```void register(String user, String pass, RegisterCallback callback)``` - register new user with given email and password. OnSuccess it will send email with new user confirmation link. Check what is [RegisterCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/RegisterCallback.java)
+###### iOS
 
+```-(NSDictionary *_Nullable)getKeysWithPassCode:(NSString *_Nonnull) passcode```
+
+Returns NSDictionary with keys data :
+
+```
+@{@"email":email,
+  @"password":password,
+  @"mnemonic":mnemonic}
+```
+
+<a name="anchorAuthRegistration"></a>
+##### Registration
+Register new user with given email and password. Send email with confirmation link if registration is successfull
+
+###### Android
+
+```void register(String user, String pass, RegisterCallback callback)```
+
+Check what is [RegisterCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/RegisterCallback.java)
+
+###### iOS
+
+```
+-(void)registerUser:(NSString * _Nonnull)username
+           password:(NSString * _Nonnull)password
+       withCallback:(RegistrationCallback* _Nonnull) callback;
+```
+
+<a name="anchorBuckets"></a>
 #### Buckets
-Bucket - is some kind of a folder. All buckets should be in root directory, for now there is no possibility to create one bucket inside of another. Example of Buket class described in Java-libstorj wrapper:
+
+Bucket - is some kind of a folder. All buckets should be in root directory.
+
+* Currently, there is no possibility to create one bucket inside of another.
+* You can not have two buckets with the same name.
+
+You are able to create and to delete buckets. 
+
+Bucket model general scheme: 
 
 ```
-public class Bucket {
-    private String id;
-    private String name;
-    private String created;
-    private boolean decrypted;
-...
-}
+string id
+string name
+string created
+boolean decrypted
 ```
-You are able to create and to delete buckets. Also you can not have two buckets with the same name.
+<a name="anchorBucketList"></a>
+##### Bucket list
 
+###### Android
+
+```public void getBuckets(GetBucketsCallback callback)```
+
+[GetBucketsCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/GetBucketsCallback.java)
+
+###### iOS
+
+```-(void)getBucketListWithCompletion:(BucketListCallback* _Nonnull)completion```
+
+[BucketListCallback]()
+
+<a name="anchorBucketCreate"></a>
 ##### Bucket creation
 
-To create bucket you should call:
-
-Android - 
+###### Android 
 ```
 void createBucket(String bucketName, CreateBucketCallback callback)
 ```
 This method has two parameters - bucket name and [CreateBucketCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/CreateBucketCallback.java) callback.
 
-IOS - 
+###### IOS 
 
+```
+-(void)createBucket:(NSString *_Nonnull)bucketName
+       withCallback:(BucketCreateCallback* _Nonnull)callback;
+```
 
+[BucketCreateCallback]()
+
+<a name="anchorBucketDelete"></a>
 ##### Bucket deletion
 Deletion of the bucket will also delete all files, that are uploaded to this bucket.
 
 To delete bucket you should call:
 
-Android - 
+###### Android
+
 ```
 void deleteBucket(String bucketId, DeleteBucketCallback callback)
 ```
 
 This method has two parameters - String bucketId and [DeleteBucketCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/DeleteBucketCallback.java) callback.
 
-IOS - 
+###### iOS
 
+```
+-(void)deleteBucket:(NSString *_Nonnull)bucketName
+     withCompletion:(BucketDeleteCallback* _Nonnull)callback;
+```
 
-
+[BucketDeleteCallback]()
 
 #### Files
 All files stored in Storj distibuted systen as encrypted shards of your original file.
