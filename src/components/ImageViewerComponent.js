@@ -2,7 +2,8 @@ import {
     Image,
     View,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    TouchableWithoutFeedback
 } from 'react-native';
 import PhotoView from 'react-native-photo-view';
 import React, { Component } from 'react';
@@ -18,34 +19,35 @@ export default class ImageViewerComponent extends Component {
 
     render() {
         return(
-            <View style = { styles.mainContainer} >
-                <View style = { styles.backgroundWrapper } />
-                <PhotoView
-                    source = { this.props.imageUri }
-                    minimumZoomScale={ 1 }
-                    maximumZoomScale={ 3 }
-                    androidScaleType="fitCenter"
-                    style = { styles.image } />
+            <TouchableWithoutFeedback onPress = { this.props.showActionBar ? this.props.onOptionsPress : null }>
+                <View style = { styles.mainContainer} >
+                    <View style = { styles.backgroundWrapper } />
+                    <PhotoView
+                        source = { this.props.imageUri }
+                        minimumZoomScale={ 1 }
+                        maximumZoomScale={ 3 }
+                        androidScaleType="fitCenter"
+                        style = { styles.image } />
 
-                <View style = { [ styles.buttonWrapper, styles.topButtonsWrapper ] }>
-                    <Button 
-                        onPress = { this.props.onBackPress }
-                        source = { require("../images/Icons/ImageViewer/back.png") } />
-                    <Button 
-                        onPress = { this.props.onOptionsPress }
-                        source = { require("../images/Icons/ImageViewer/options.png") } />
+                    <View style = { [ styles.buttonWrapper, styles.topButtonsWrapper ] }>
+                        <Button 
+                            onPress = { this.props.onBackPress }
+                            source = { require("../images/Icons/ImageViewer/back.png") } />
+                        <Button 
+                            onPress = { this.props.onOptionsPress }
+                            source = { require("../images/Icons/ImageViewer/options.png") } />
+                    </View>
+                    <View style = { [ styles.buttonWrapper, styles.bottomButtonWrapper ] }>
+                        {
+                            this.props.showActionBar ? 
+                                <ActionBar 
+                                    actions = { this.props.actionBarActions } /> : null
+                                // <Button  
+                                //     source = { require("../images/Icons/ImageViewer/share.png") } />       
+                        }
+                    </View>
                 </View>
-                <View style = { [ styles.buttonWrapper, styles.bottomButtonWrapper ] }>
-                    {
-                        this.props.showActionBar ? 
-                            <ActionBar 
-                                actions = { this.props.actionBarActions } /> :
-                            <Button  
-                                source = { require("../images/Icons/ImageViewer/share.png") } />       
-                    }
-                </View>
-            </View>
-            
+            </TouchableWithoutFeedback>   
         );
     }
 }

@@ -25,12 +25,6 @@ class ImageViewerContainer extends Component {
         this.isStarred = props.navigation.state.params.isStarred;
 
         this.toggleActionBar = this.toggleActionBar.bind(this);
-
-        this.actionBarActions = actionBarActions = [
-            TabBarActionModelFactory.createNewAction(() => { this.setFavourite(); }, 'Action 1', require('../images/ActionBar/FavoritesIcon.png')),
-            TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 3', require('../images/ActionBar/CopyBucketIcon.png')),
-            TabBarActionModelFactory.createNewAction(() => { this.deleteImage(); }, 'Action 4', require('../images/ActionBar/TrashBucketIcon.png'))
-        ];
     }
 
     async componentWillMount() {
@@ -65,6 +59,20 @@ class ImageViewerContainer extends Component {
         }
     }
 
+    getActionBarActions() {
+        return [
+            TabBarActionModelFactory.createNewAction(
+                () => { this.setFavourite(); }, 
+                'Action 1', 
+                this.props.isStarred ?
+                    require('../images/ActionBar/UnsetFavourite.png') :
+                    require('../images/ActionBar/FavoritesIcon.png')
+            ),
+            TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 3', require('../images/ActionBar/CopyBucketIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { this.deleteImage(); }, 'Action 4', require('../images/ActionBar/TrashBucketIcon.png'))
+        ];
+    }
+
     static navigationOptions = { header: null };
 
     render() {
@@ -74,13 +82,17 @@ class ImageViewerContainer extends Component {
                 imageUri = { { uri: this.localPath } }
                 showActionBar = { this.state.showActionBar }
                 onOptionsPress = { this.toggleActionBar }
-                actionBarActions = { this.actionBarActions } />
+                actionBarActions = { this.getActionBarActions() } />
         );   
     }
 }
 
 function mapStateToProps(state) {
-    return {};
+    let index = state.navReducer.index;
+    let fileId = state.navReducer.routes[index].params.fileId;
+    return {
+        isStarred: state.filesReducer.fileListModels.find((item)=>item.getId() === fileId).getStarred()
+    };
 }
 
 function mapDispatchToProps(dispatch) {
