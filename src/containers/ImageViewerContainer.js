@@ -1,10 +1,10 @@
-import {} from 'react-native';
+import { Alert } from 'react-native';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { redirectToMainScreen } from '../reducers/navigation/navigationActions';
 import { imageViewerActions } from '../reducers/mainContainer/Files/filesReducerActions';
-import StorjModule from '../utils/StorjModule';
+import ServiceModule from '../utils/ServiceModule';
 import SyncModule from "../utils/SyncModule";
 import TabBarActionModelFactory from '../models/TabBarActionModel';
 import ImageViewComponent from "../components/ImageViewerComponent";
@@ -50,13 +50,21 @@ class ImageViewerContainer extends Component {
         }    
     }
 
-    async deleteImage() {
-        let deleteFileResponse = await StorjModule.deleteFile(this.bucketId, this.fileId);
+    tryDeleteFile() {
+        Alert.alert(
+            'Delete permanently?',
+            'Are you sure to delete selected files permanently?',
+            [
+                { text: 'Cancel', onPress: () => { }, style: 'cancel' },
+                { text: 'Delete', onPress: () => this.deleteImage() }
+            ],
+            { cancelable: false }
+        );
+    }
 
-        if(deleteFileResponse.isSuccess) {
-            this.props.deleteFile(this.bucketId, this.fileId);
-            this.props.redirectToMainScreen();
-        }
+    async deleteImage() {
+        let deleteResponse = await ServiceModule.deleteFile(this.bucketId, this.fileId);
+        this.props.redirectToMainScreen();
     }
 
     getActionBarActions() {
@@ -69,7 +77,7 @@ class ImageViewerContainer extends Component {
                     require('../images/ActionBar/FavoritesIcon.png')
             ),
             TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 3', require('../images/ActionBar/CopyBucketIcon.png')),
-            TabBarActionModelFactory.createNewAction(() => { this.deleteImage(); }, 'Action 4', require('../images/ActionBar/TrashBucketIcon.png'))
+            TabBarActionModelFactory.createNewAction(() => { this.tryDeleteFile(); }, 'Action 4', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
     }
 
@@ -90,8 +98,15 @@ class ImageViewerContainer extends Component {
 function mapStateToProps(state) {
     let index = state.navReducer.index;
     let fileId = state.navReducer.routes[index].params.fileId;
+    let isStarred = false;
+    let file = state.filesReducer.fileListModels.find((item) => item.getId() === fileId);
+
+    if(file) {
+        isStarred = file.getStarred();
+    }
+        
     return {
-        isStarred: state.filesReducer.fileListModels.find((item)=>item.getId() === fileId).getStarred()
+        isStarred: isStarred
     };
 }
 
