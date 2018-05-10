@@ -39,42 +39,30 @@ export default class MyAccountMainPageComponent extends Component{
                         </TouchableOpacity>
                     </View>
                     <View style = { styles.topButtonsContainer }>
-                        <TouchableOpacity onPress = { this.props.screenProps.redirectToStorageScreen } > 
-                            <View style = { styles.button }>
-                                <View style = { styles.buttonContentContainer }>
-                                    <Image 
-                                        style = { styles.buttonImage } 
-                                        source = { require('../../images/DashboardScreen/Storage.png') } 
-                                        resizeMode = 'contain' />
-                                    <View >
-                                        <Text style = { [styles.buttonTextRegular, styles.topButtonTextMargin] }>Storage</Text>
-                                        <Text style = { [styles.buttonTextBold, styles.topButtonTextMargin] }>{ this.props.screenProps.storageAmount }{ ' GB' }</Text>
-                                    </View>
-                                    <Image 
-                                        style = { [ styles.expandImage, styles.topButtonTextMargin ] } 
-                                        source = { require('../../images/DashboardScreen/Vector.png') } 
-                                        resizeMode = 'contain' />
+                        <View style = { styles.button }>
+                            <View style = { styles.buttonContentContainer }>
+                                <Image 
+                                    style = { styles.buttonImage } 
+                                    source = { require('../../images/DashboardScreen/Storage.png') } 
+                                    resizeMode = 'contain' />
+                                <View style = { styles.bandwidthMargin }>
+                                    <Text style = { [styles.buttonTextRegular, styles.topButtonTextMargin] }>Storage</Text>
+                                    <Text style = { [styles.buttonTextBold, styles.topButtonTextMargin] }>{ this.props.screenProps.storageAmount }{ ' GB' }</Text>
                                 </View>
                             </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress = { () => {} } >
-                            <View style = { styles.button }>
-                                <View style = { styles.buttonContentContainer }>
-                                    <Image 
-                                        style = { styles.buttonImage } 
-                                        source = { require('../../images/DashboardScreen/Bandwidth.png') } 
-                                        resizeMode = 'contain' />
-                                    <View >
-                                        <Text style = { [styles.buttonTextRegular, styles.bandwidthMargin] }>Bandwidth</Text>
-                                        <Text style = { [styles.buttonTextBold, styles.bandwidthMargin] }>{ this.props.screenProps.bandwidthAmount }{ ' GB' }</Text>
-                                    </View>
-                                    <Image 
-                                        style = { styles.expandImage } 
-                                        source = { require('../../images/DashboardScreen/Vector.png') } 
-                                        resizeMode = 'contain' />
+                        </View>
+                        <View style = { styles.button }>
+                            <View style = { styles.buttonContentContainer }>
+                                <Image 
+                                    style = { styles.buttonImage } 
+                                    source = { require('../../images/DashboardScreen/Bandwidth.png') } 
+                                    resizeMode = 'contain' />
+                                <View style = { styles.topButtonTextMargin }>
+                                    <Text style = { [styles.buttonTextRegular, styles.bandwidthMargin] }>Bandwidth</Text>
+                                    <Text style = { [styles.buttonTextBold, styles.bandwidthMargin] }>{ this.props.screenProps.bandwidthAmount }{ ' GB' }</Text>
                                 </View>
                             </View>
-                        </TouchableOpacity>
+                        </View>
                     </View>
                     <TouchableOpacity onPress = { this.props.screenProps.redirectToBalanceScreen } >
                         <View style = { styles.balanceButton }>
@@ -166,8 +154,7 @@ const styles = StyleSheet.create({
     buttonContentContainer: { 
         marginTop: getHeight(15), 
         marginHorizontal: getWidth(15), 
-        flexDirection: 'row', 
-        justifyContent: 'space-between' 
+        flexDirection: 'row'
     },
     balanceContentContainer: {
         marginHorizontal: getWidth(15), 
