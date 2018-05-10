@@ -21,7 +21,10 @@ export default class MnemonicConfirmedComponent extends Component {
             <View style = { styles.mainContainer }>
                 <View style = { styles.contentContainer }>
                     <View style = { styles.titleContainer } >
-                        <Text style = { styles.titleText } >Secret phrase backup confirmed</Text>
+                        <Text style = { styles.titleText } >Success!</Text>
+                    </View>
+                    <View style = { styles.infoContainer }>
+                        <Text style = { styles.infoText }>You’re ready to sign in and start using Storj!</Text>
                     </View>
                     <View style = { styles.successImageContainer }>
                         <Image
@@ -31,7 +34,7 @@ export default class MnemonicConfirmedComponent extends Component {
                     </View>
                     <TouchableOpacity onPress = { () => { this.props.screenProps.redirectToLoginScreen(); } }>
                         <View style = { styles.loginButton } >
-                            <Text style = { styles.loginButtonText }>Login</Text>
+                            <Text style = { styles.loginButtonText }>Sign in</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -74,7 +77,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     infoContainer: {
-        marginTop: getHeight(45)
+        marginTop: getHeight(5)
     },
     infoText:{
         fontFamily: 'Montserrat-Regular', 
@@ -83,7 +86,7 @@ const styles = StyleSheet.create({
         color: '#384B65'
     },
     loginButton: {
-        marginTop: getHeight(130),
+        marginTop: getHeight(120),
         alignSelf: 'center',
         width: getWidth(335),
         height: getHeight(50),

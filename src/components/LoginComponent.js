@@ -32,59 +32,57 @@ export default class LoginComponent extends Component {
 	render() {
 		return(
 			<ScrollView style={ styles.mainContainer } keyboardDismissMode = { "interactive" }>
-                <View style={ styles.backgroundWrapper }>
-                    <Image 
-                        style = { styles.logo } 
-                        source = { require('../images/Icons/LogoBlue.png') } 
-                        resizeMode = 'contain'/>
-                </View>
                 <View style={ styles.contentWrapper }>
-                    <Text style = { styles.titleBold }>Login</Text>
-                    <InputComponent 
-                        style = { styles.inputHeight }
-                        onChangeText = { this.onChangeLogin }
-                        isPassword = { false } 
-                        placeholder = {'your_email@mail.com'} 
-                        value = { this.props.email }
-                        isError = { this.props.isEmailError }
-                        errorMessage = { 'Invalid Email' }
-                        regularMessage = { 'Email' } />
-                    <InputComponent 
-                        style = { styles.inputHeight }
-                        onChangeText = { this.onChangePassword } 
-                        isPassword = { true } 
-                        placeholder = {'Enter your password'}
-                        value = { this.props.password }
-                        isError = { this.props.isPasswordError }
-                        errorMessage = { 'Invalid password' }
-                        regularMessage = { 'Password' } />
-                    <InputComponent 
-                        style = { styles.mnemonicContainer }
-                        inputStyle = { styles.mnemonicInput }
-                        multiline = { true }
-                        placeholder = {'Please enter your secret phrase (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code'}
-                        onChangeText = { this.onChangeMnemonic } 
-                        editable = { !this.props.isRedirectedFromRegister}
-                        isPassword = { true }  
-                        value = { this.props.mnemonic }
-                        isError = { this.props.isMnemonicError }
-                        errorMessage = { 'Invalid secret phrase' }
-                        regularMessage = { 'Secret phrase' } />
-                    <View style = { styles.agreementWrapper }>
-                        <TouchableOpacity onPress = { this.props.redirectToForgotPassword }>
-                            <Text style = { styles.agreementText }>Forgot password?</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress = { this.props.redirectToMnemonicHelpScreen } >
-                            <Text style = { styles.mnemonicInfoLinkText }>What is Secret phrase?</Text>
-                        </TouchableOpacity>
+                    <Text style = { styles.titleBold }>Sign in</Text>
+                    <View style = { styles.inputsMargin } >
+                        <InputComponent 
+                            style = { styles.inputHeight }
+                            onChangeText = { this.onChangeLogin }
+                            isPassword = { false } 
+                            placeholder = {'your_email@mail.com'} 
+                            value = { this.props.email }
+                            isError = { this.props.isEmailError }
+                            errorMessage = { 'Invalid Email' }
+                            regularMessage = { 'Email' } />
+                        <InputComponent 
+                            style = { styles.inputHeight }
+                            onChangeText = { this.onChangePassword } 
+                            isPassword = { true } 
+                            placeholder = {'Enter your password'}
+                            value = { this.props.password }
+                            isError = { this.props.isPasswordError }
+                            errorMessage = { 'Invalid password' }
+                            regularMessage = { 'Password' } />
+                        <View style = { styles.agreementWrapper } >
+                            <TouchableOpacity onPress = { this.props.redirectToForgotPassword }>
+                                <Text style = { styles.agreementText }>Forgot password?</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <InputComponent 
+                            style = { styles.mnemonicContainer }
+                            inputStyle = { styles.mnemonicInput }
+                            multiline = { true }
+                            placeholder = {'Please enter your secret phrase (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code'}
+                            onChangeText = { this.onChangeMnemonic } 
+                            editable = { !this.props.isRedirectedFromRegister}
+                            isPassword = { true }  
+                            value = { this.props.mnemonic }
+                            isError = { this.props.isMnemonicError }
+                            errorMessage = { 'Invalid secret phrase' }
+                            regularMessage = { 'Secret phrase' } />
+                        <View style = { styles.agreementWrapper }>
+                            <TouchableOpacity onPress = { this.props.redirectToMnemonicHelpScreen } >
+                                <Text style = { styles.mnemonicInfoLinkText }>Need help with your secret phrase?</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
                 <View style = { styles.footer }>
                     <TouchableOpacity style = { styles.createAccountButton } onPressOut = { this.onSubmit }>
-                        <Text style = { styles.createAccountText }>Login</Text>
+                        <Text style = { styles.createAccountText }>Log in</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style = { styles.loginViaQRButton } onPressOut = { this.redirectToQRScannerScreen }> 
-                        <Text style = { styles.loginViaQRText }>Login via QR</Text>
+                        <Text style = { styles.loginViaQRText }>Login via QR code</Text>
                     </TouchableOpacity>
                     <Text style = { styles.footerText }>Don't have an account? <Text onPress = { this.props.registerButtonOnPress } style = { styles.footerLink }>Sign Up</Text></Text>              
                 </View>
@@ -120,7 +118,7 @@ const styles = StyleSheet.create({
         opacity: 0.3
     },
     contentWrapper: {
-        marginTop: getHeight(86),
+        marginTop: getHeight(30),
         paddingLeft: getWidth(20),
         paddingRight: getWidth(20)
     },
@@ -213,16 +211,19 @@ const styles = StyleSheet.create({
         color: '#2794FF'
     },
     agreementWrapper: {
-        flexDirection: 'row',
-        marginTop: getHeight(45),
-        justifyContent: 'space-between'
+        marginTop: getHeight(10),
+        justifyContent: 'flex-end'
     },
     agreementText: {
         marginTop: getHeight(20),
         lineHeight: getHeight(24),
+        alignSelf: 'flex-end',
         fontSize: getHeight(16),
         color: '#2794FF',
         fontFamily: 'Montserrat-Bold'
+    },
+    inputsMargin: {
+        marginTop: getHeight(35)
     }
 });
 

@@ -21,7 +21,7 @@ export default class MnemonicNotConfirmedComponent extends Component {
             <View style = { styles.mainContainer }>
                 <View style = { styles.contentContainer }>
                     <View style = { styles.titleContainer } >
-                        <Text style = { styles.titleText } >Secret phrase backup failed</Text>
+                        <Text style = { styles.titleText } >Uh oh! Secret phrase backup failed</Text>
                     </View>
                     <View style = { styles.errorImageContainer }>
                         <Image
@@ -34,7 +34,7 @@ export default class MnemonicNotConfirmedComponent extends Component {
                         this.props.screenProps.navigateBack(); } }>
                         
                         <View style = { styles.backButton } >
-                            <Text style = { styles.backButtonText }>Back</Text>
+                            <Text style = { styles.backButtonText }>Try again</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress = { () => { this.props.screenProps.redirectToLoginScreen(); } } >

@@ -48,13 +48,13 @@ export default class ChangePasswordComponent extends Component{
                                     style = { styles.icon } />
                             </TouchableOpacity>
                             <View >
-                                <Text style = { [styles.titleText, styles.titleMargin] }>Change</Text>
-                                <Text style = { [styles.titleText, styles.titleMargin] }>password</Text>
+                                <Text style = { [styles.titleText, styles.titleMargin] }>Need password </Text>
+                                <Text style = { [styles.titleText, styles.titleMargin] }>help?</Text>
                             </View>
                         </View>
                     </View>
                 </View>
-                <Text style = { styles.infoText }>We’ll send you a link to change password</Text>
+                <Text style = { styles.infoText }>Enter your email address below and we’ll send you a link to reset your password.</Text>
                 <InputComponent 
                         style = { styles.emailInput }
                         onChangeText = { (value) => { this.setState({ email: value, isError: false }) } }  
@@ -65,7 +65,7 @@ export default class ChangePasswordComponent extends Component{
                         isError = { this.state.isError } />
                 <TouchableOpacity onPress = { this.state.email ? () => { this.sendEmail() } : () => {} }>
                     <View style = { this.state.email ? styles.sendLinkButton : [ styles.sendLinkButton ,styles.blurredButton ] } >
-                        <Text style = { styles.sendLinkButtonText }>Send me a link</Text>
+                        <Text style = { styles.sendLinkButtonText }>Reset password</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -100,7 +100,6 @@ const styles = StyleSheet.create({
     titleText: { 
         fontFamily: 'Montserrat-Bold', 
         fontSize: getHeight(30), 
-        lineHeight: getHeight(33),
         color: '#384B65' 
     },
     titleMargin: {

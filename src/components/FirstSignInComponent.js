@@ -150,7 +150,7 @@ export default class FirstSignInComponent extends Component {
                         </View>
                     </View>
                     <TouchableOpacity style = { styles.syncMyDeviceButton } onPressOut = { this.showModal.bind(this) }>
-                        <Text style = { styles.syncMyDeviceText }>Sync my device</Text>
+                        <Text style = { styles.syncMyDeviceText }>Sync my files</Text>
                     </TouchableOpacity>
                 </View>
                 {

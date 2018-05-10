@@ -19,7 +19,7 @@ export default class EmptyBucketComponent extends Component {
             <View style = { styles.mainContainer }>
                 <View style = { styles.contentContainer }>
                     <View style = { styles.titleContainer } >
-                        <Text style = { styles.titleText } >The bucket is empty. Add some files here.</Text>
+                        <Text style = { styles.titleText } >Start storing! Add some files here.</Text>
                     </View>
                     <View style = { styles.imageContainer }>
                         <Image

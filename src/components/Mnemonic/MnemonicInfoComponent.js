@@ -39,8 +39,8 @@ export default class MnemonicInfoComponent extends Component {
 
     showBackupAlert() {
         Alert.alert(
-            'Backup your secret phrase',
-            'It’s your pass code that will allow you to use the app. Please save it somewhere.',
+            'Generate your secret phrase',
+            'You’ll need this 24-word passcode to use Storj. Please save it in a safe place.',
             [
                 { 
                     text: 'Next time', 
@@ -74,7 +74,10 @@ export default class MnemonicInfoComponent extends Component {
                                 style = { styles.icon }
                                 resizeMode = 'contain' />
                         </TouchableOpacity>
-                        <Text style = { styles.titleText }>Your secret phrase</Text>
+                        <View>
+                            <Text style = { styles.titleText }>Next: generate your</Text>
+                            <Text style = { styles.titleText }>secret phrase</Text>
+                        </View>
                     </View>
                     <View style = { styles.successImageContainer }>
                         <Image
@@ -87,7 +90,7 @@ export default class MnemonicInfoComponent extends Component {
                     </View>
                     <TouchableOpacity onPress = { () => { this.props.screenProps.redirectToMnemonicGenerationScreen() } }>
                         <View style = { styles.backupButton } >
-                            <Text style = { styles.backupButtonText }>Backup</Text>
+                            <Text style = { styles.backupButtonText }>Generate</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress = { () => { this.setState({showEmailAlert: true}); } } >

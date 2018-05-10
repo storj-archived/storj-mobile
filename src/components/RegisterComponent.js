@@ -36,14 +36,8 @@ export default class RegisterComponent extends Component {
 	render() {
 		return(
             <ScrollView style={ styles.mainContainer } keyboardDismissMode = { "interactive" }>
-                <View style = { styles.backgoundWrapper }>
-                    <Image 
-                        style = { styles.logo } 
-                        source = { require('../images/Icons/LogoBlue.png') } 
-                        resizeMode = 'contain'/>
-                </View>
                 <View style = { styles.contentWrapper }>
-                    <Text style = { styles.titleBold }>Welcome on board</Text>
+                    <Text style = { styles.titleBold }>Let’s get started</Text>
                     <View style = { styles.firstInputMargin }>
                         <InputComponent 
                             onChangeText = { this.onChangeEmail }
@@ -158,7 +152,7 @@ const styles = StyleSheet.create({
     contentWrapper: {
         paddingLeft: getWidth(21),
         paddingRight: getWidth(25),
-        marginTop: getHeight(86)
+        marginTop: getHeight(20)
     },
     firstInputMargin: { 
         marginTop: getHeight(99),
@@ -167,7 +161,7 @@ const styles = StyleSheet.create({
     footer: {
        height: getHeight(113),
        alignItems: 'center',
-       marginTop: getHeight(40)
+       marginTop: getHeight(100)
     },
     createAccountButton: {
         width: getWidth(343),
