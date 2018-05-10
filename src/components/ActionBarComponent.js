@@ -51,11 +51,11 @@ export default class ActionBarComponent extends Component {
                 : [styles.imageWrapper, styles.imageWrapperBorder];
 
             return (
-                <View key = { action.id } style = { imageWrapperStyle }>
-                    <TouchableOpacity onPress = { action.callback }> 
+                <TouchableOpacity onPress = { action.callback } style = { imageWrapperStyle } key = { action.id } > 
+                    <View> 
                         <Image style = { styles.image } source = { action.icon } />
-                    </TouchableOpacity>
-                </View>
+                    </View>
+                </TouchableOpacity>
             );            
         });
     } 
