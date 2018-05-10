@@ -8,13 +8,27 @@ import {
 import PhotoView from 'react-native-photo-view';
 import React, { Component } from 'react';
 import { getDeviceWidth, getDeviceHeight, getWidth, getHeight } from '../utils/adaptive';
+import { getShortBucketName } from "../utils/fileUtils";
 import ActionBar from '../components/ActionBarComponent';
+import SelectBucketComponent from '../components/SelectBucketComponent';
 
 export default class ImageViewerComponent extends Component {
 
     //Pass uri through screen props
     constructor(props) {
         super(props);
+
+        this.state = {
+            isSelectBucketShown: false
+        }
+    }
+
+    showSelectBuckets(callback) {
+        if(callback) {
+            this.selectBucketCallback = callback;
+        }
+        
+        this.setState({ isSelectBucketShown: !this.state.isSelectBucketShown })
     }
 
     render() {
@@ -46,6 +60,28 @@ export default class ImageViewerComponent extends Component {
                                 //     source = { require("../images/Icons/ImageViewer/share.png") } />       
                         }
                     </View>
+                    {
+                        this.state.isSelectBucketShown  
+                            ? <SelectBucketComponent
+                                getItemSize = { () => {} }
+                                isLoading = { false }
+                                searchSubSequence = { null }
+                                sortingMode = { null }
+                                onRefresh = { () => {} }
+                                isGridViewShown = { this.props.isGridViewShown }
+                                onPress = { (bucket) => { this.selectBucketCallback({ bucketId: bucket.getId() }); } }
+                                onLongPress = { () => {} }
+                                onDotsPress = { () => {} }
+                                onCancelPress = { () => {} }
+                                selectedItemId = { null }
+                                isSelectionMode = { false }
+                                data = { this.props.buckets }
+                                getBucketName = { getShortBucketName }
+                                
+                                showOptions = { () => {} }
+                                navigateBack = { this.showSelectBuckets.bind(this) } />
+                            : null
+                    }
                 </View>
             </TouchableWithoutFeedback>   
         );

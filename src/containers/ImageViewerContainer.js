@@ -67,6 +67,19 @@ class ImageViewerContainer extends Component {
         this.props.redirectToMainScreen();
     }
 
+    tryCopySelectedFile() {
+        this._imageViewComponent.showSelectBuckets(this.copySelectedFile.bind(this));
+    }
+
+    copySelectedFile(params) {
+        let bucketId = params.bucketId;
+
+        if(bucketId) {
+            ServiceModule.uploadFile(bucketId, this.props.file.entity.localPath);
+        }
+        this._imageViewComponent.showSelectBuckets();
+    }
+
     getActionBarActions() {
         return [
             TabBarActionModelFactory.createNewAction(
@@ -76,7 +89,7 @@ class ImageViewerContainer extends Component {
                     require('../images/ActionBar/UnsetFavourite.png') :
                     require('../images/ActionBar/FavoritesIcon.png')
             ),
-            TabBarActionModelFactory.createNewAction(() => { console.log('Action 3') }, 'Action 3', require('../images/ActionBar/CopyBucketIcon.png')),
+            TabBarActionModelFactory.createNewAction(() => { this.tryCopySelectedFile()}, 'Action 3', require('../images/ActionBar/CopyBucketIcon.png')),
             TabBarActionModelFactory.createNewAction(() => { this.tryDeleteFile(); }, 'Action 4', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
     }
@@ -86,10 +99,13 @@ class ImageViewerContainer extends Component {
     render() {
         return(
             <ImageViewComponent
+                ref = { component => this._imageViewComponent = component }
                 onBackPress = { this.props.redirectToMainScreen }
                 imageUri = { { uri: this.localPath } }
                 showActionBar = { this.state.showActionBar }
                 onOptionsPress = { this.toggleActionBar }
+                isGridViewShown = { this.props.isGridViewShown }
+                buckets = { this.props.buckets }
                 actionBarActions = { this.getActionBarActions() } />
         );   
     }
@@ -106,7 +122,10 @@ function mapStateToProps(state) {
     }
         
     return {
-        isStarred: isStarred
+        file: file,
+        isStarred: isStarred,
+        isGridViewShown: state.mainReducer.isGridViewShown,
+        buckets: state.bucketReducer.buckets
     };
 }
 
