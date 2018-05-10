@@ -163,7 +163,8 @@ export const mainContainerFileActions = {
 export const imageViewerActions = {
     deleteFile,
     downloadFileError,
-    updateFavouriteFiles
+    updateFavouriteFiles,
+    fileDownloadCanceled
 };
 
 const allFileActions = {

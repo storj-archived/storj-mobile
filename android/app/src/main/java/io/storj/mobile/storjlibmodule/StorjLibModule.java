@@ -222,12 +222,14 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
         File downloadDir = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DOWNLOADS);
         SingleResponse response = null;
-        if(downloadDir == null || !downloadDir.exists() ||!downloadDir.isDirectory()){
+
+        if(downloadDir == null || !downloadDir.exists() || !downloadDir.isDirectory()) {
             response = new SingleResponse(false, null,
                     "Unable to retrieve downloads folder path.");
         } else {
             response = new SingleResponse(true, downloadDir.getAbsolutePath(), null);
         }
+        
         promise.resolve(response.toWritableMap());
     }
 }

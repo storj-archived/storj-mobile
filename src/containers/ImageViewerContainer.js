@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { redirectToMainScreen } from '../reducers/navigation/navigationActions';
 import { imageViewerActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import ServiceModule from '../utils/ServiceModule';
+import StorjModule from "../utils/StorjModule";
 import SyncModule from "../utils/SyncModule";
 import TabBarActionModelFactory from '../models/TabBarActionModel';
 import ImageViewComponent from "../components/ImageViewerComponent";
@@ -19,16 +20,23 @@ class ImageViewerContainer extends Component {
             showActionBar: false
         };
 
-        this.localPath = "file://" + props.navigation.state.params.localPath;
         this.fileId = props.navigation.state.params.fileId;
         this.bucketId = props.navigation.state.params.bucketId;
-        this.isStarred = props.navigation.state.params.isStarred;
+        this.name = props.navigation.state.params.fileName;
 
         this.toggleActionBar = this.toggleActionBar.bind(this);
     }
 
     async componentWillMount() {
-        let checkImageResponse = await SyncModule.checkImage(this.fileId, this.props.navigation.state.params.localPath);
+        if(!this.props.isDownloaded) {
+            let result = await StorjModule.getDownloadFolderPath();
+            console.log(this.bucketId, this.fileId, result + "/" + this.name);
+            ServiceModule.downloadFile(this.bucketId, this.fileId, result + "/" + this.name);
+
+            return;
+        }
+        
+        let checkImageResponse = await SyncModule.checkImage(this.fileId, this.props.localPath);
         
         if(!checkImageResponse.isSuccess) {
             this.props.downloadFileError(this.bucketId, this.fileId);
@@ -75,9 +83,26 @@ class ImageViewerContainer extends Component {
         let bucketId = params.bucketId;
 
         if(bucketId) {
-            ServiceModule.uploadFile(bucketId, this.props.file.entity.localPath);
+            ServiceModule.uploadFile(bucketId, this.props.localPath);
         }
+
         this._imageViewComponent.showSelectBuckets();
+    }
+
+    async navigateBack() {
+        if(this.props.isLoading) {
+            await this.cancelDownload();
+        }
+
+        this.props.redirectToMainScreen();
+    }
+
+    async cancelDownload() {
+        let cancelDownloadResponse = await StorjModule.cancelDownload(this.props.fileRef);
+
+        if(cancelDownloadResponse.isSuccess) {
+            this.props.fileDownloadCanceled(this.bucketId, this.fileId);
+        }
     }
 
     getActionBarActions() {
@@ -99,9 +124,12 @@ class ImageViewerContainer extends Component {
     render() {
         return(
             <ImageViewComponent
+                isLoading = { this.props.isLoading }
+                isDownloaded = { this.props.isDownloaded }
+                progress = { this.props.progress }
                 ref = { component => this._imageViewComponent = component }
-                onBackPress = { this.props.redirectToMainScreen }
-                imageUri = { { uri: this.localPath } }
+                onBackPress = { this.navigateBack.bind(this) }
+                imageUri = { { uri: "file://" + this.props.localPath } }
                 showActionBar = { this.state.showActionBar }
                 onOptionsPress = { this.toggleActionBar }
                 isGridViewShown = { this.props.isGridViewShown }
@@ -113,17 +141,31 @@ class ImageViewerContainer extends Component {
 
 function mapStateToProps(state) {
     let index = state.navReducer.index;
-    let fileId = state.navReducer.routes[index].params.fileId;
-    let isStarred = false;
+    let fileId = state.navReducer.routes[index].routeName === "ImageViewerScreen" ? state.navReducer.routes[index].params.fileId : null;
     let file = state.filesReducer.fileListModels.find((item) => item.getId() === fileId);
+    let isStarred = false;
+    let isLoading = false;
+    let isDownloaded = false;
+    let progress = 0;
+    let localPath = null;
+    let fileRef = 0;
 
     if(file) {
         isStarred = file.getStarred();
+        isLoading = file.isLoading;
+        isDownloaded = file.entity.isDownloaded;
+        progress = file.progress;
+        localPath = file.entity.localPath;
+        fileRef = file.fileRef ? file.fileRef: fileRef;
     }
         
     return {
-        file: file,
-        isStarred: isStarred,
+        isStarred,
+        isLoading,
+        isDownloaded,
+        progress,
+        localPath,
+        fileRef,
         isGridViewShown: state.mainReducer.isGridViewShown,
         buckets: state.bucketReducer.buckets
     };

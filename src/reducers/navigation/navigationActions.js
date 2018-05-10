@@ -110,8 +110,8 @@ export function navigateToFilesScreen(bucketId) {
     return NavigationActions.navigate({ routeName: 'FilesScreen', params: { bucketId } });
 }
 
-export function openImageViewer(fileId, localPath, bucketId, isStarred) {
-    return NavigationActions.navigate({ routeName: 'ImageViewerScreen', params: { fileId, localPath, bucketId, isStarred } });
+export function openImageViewer(fileId, bucketId, fileName) {
+    return NavigationActions.navigate({ routeName: 'ImageViewerScreen', params: { fileId, bucketId, fileName } });
 }
 
 export function navigateBack() {

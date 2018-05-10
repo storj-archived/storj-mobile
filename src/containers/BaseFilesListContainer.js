@@ -30,8 +30,8 @@ class BaseFilesListContainer extends BaseListContainer {
      * @param {ListItemModel<FileModel>} file ListItemModel initialized with FileModel
      */
     _onPress(file) {        
-        if(file.entity.isDownloaded && file.entity.mimeType.includes('image/')) {
-            this.props.openImageViewer(file.getId(), file.entity.localPath, file.entity.bucketId, file.getStarred());
+        if(/* file.entity.isDownloaded && */ file.entity.mimeType.includes('image/')) {
+            this.props.openImageViewer(file.getId(), file.entity.bucketId, file.getName());
         }
     }
 

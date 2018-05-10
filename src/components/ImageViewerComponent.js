@@ -3,7 +3,11 @@ import {
     View,
     StyleSheet,
     TouchableOpacity,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    ActivityIndicator,
+    ProgressBarAndroid,
+    ProgressViewIOS,
+    Platform
 } from 'react-native';
 import PhotoView from 'react-native-photo-view';
 import React, { Component } from 'react';
@@ -32,17 +36,38 @@ export default class ImageViewerComponent extends Component {
     }
 
     render() {
+        console.log(this.props.isDownloaded);
         return(
             <TouchableWithoutFeedback onPress = { this.props.showActionBar ? this.props.onOptionsPress : null }>
                 <View style = { styles.mainContainer} >
                     <View style = { styles.backgroundWrapper } />
-                    <PhotoView
-                        source = { this.props.imageUri }
-                        minimumZoomScale={ 1 }
-                        maximumZoomScale={ 3 }
-                        androidScaleType="fitCenter"
-                        style = { styles.image } />
-
+                    {
+                        this.props.isDownloaded ? 
+                            <PhotoView
+                                source = { this.props.imageUri }
+                                minimumZoomScale={ 1 }
+                                maximumZoomScale={ 3 }
+                                androidScaleType="fitCenter"
+                                style = { styles.image } />
+                            : <LoadingComponent isLoading  />
+                    }
+                    {
+                        this.props.isLoading ? 
+                            Platform.select({
+                                ios: 
+                                    <ProgressViewIOS 
+                                        progress = { this.props.progress }
+                                        trackTintColor = { '#f2f2f2' }
+                                        progressTintColor = { '#2794ff' } />,
+                                android:
+                                    <ProgressBarAndroid    
+                                        progress = { this.props.progress } 
+                                        styleAttr = { 'Horizontal' } 
+                                        color = { '#2794FF' } 
+                                        animating = {true} 
+                                        indeterminate = { false } />
+                            }) : null
+                    }    
                     <View style = { [ styles.buttonWrapper, styles.topButtonsWrapper ] }>
                         <Button 
                             onPress = { this.props.onBackPress }
@@ -88,6 +113,12 @@ export default class ImageViewerComponent extends Component {
     }
 }
 
+const LoadingComponent = (props) => (
+    <View style = { styles.loadingComponentContainer }>
+        <ActivityIndicator animating = { props.isLoading ? true : false } size = { 'large' } color = { 'blue' } />
+    </View>
+); 
+
 const Button = (props) => (
     <TouchableOpacity onPress = { props.onPress }>
         <Image source = { props.source } />
@@ -129,5 +160,12 @@ const styles = StyleSheet.create({
         right: 0,
         backgroundColor: 'black',
         opacity: 0.7
-    }
+    },
+    loadingComponentContainer: {
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: getHeight(80),
+        height: getHeight(60)
+    },
 });
