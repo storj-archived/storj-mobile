@@ -6,6 +6,7 @@ import ListItemModel from "../../models/ListItemModel";
 export function uploadFileStart(fileHandle) {
     return async (dispatch) => {
         let getFileResponse = await SyncModule.getUploadingFile(fileHandle);
+        
         if(getFileResponse.isSuccess) {
             let uploadingFile = JSON.parse(getFileResponse.result);
 

@@ -28,7 +28,7 @@ import io.storj.mobile.storjlibmodule.utils.UploadSyncObject;
 public class DownloadService extends BaseReactService {
 
     public final static String SERVICE_NAME_SHORT = "DownloadService";
-    public final static String SERVICE_NAME = ".storjlibmodule.services.DownloadService";
+    public final static String SERVICE_NAME = "io.storj.mobile.storjlibmodule.services.DownloadService";
 
     public final static String ACTION_DOWNLOAD_FILE = "ACTION_DOWNLOAD_FILE";
     public final static String ACTION_COPY_FILE = "ACTION_COPY_FILE";

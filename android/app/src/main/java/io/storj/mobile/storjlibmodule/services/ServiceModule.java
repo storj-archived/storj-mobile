@@ -50,7 +50,7 @@ public class ServiceModule extends ReactContextBaseJavaModule {
             BaseReactService baseReactService = ((BaseReactService.BaseReactServiceBinder)service).getService();
             baseReactService.setReactContext(getReactApplicationContext());
 
-            String serviceName = name.getShortClassName();
+            String serviceName = name.getClassName();
 
             switch (serviceName) {
                 case GetBucketsService.SERVICE_NAME:

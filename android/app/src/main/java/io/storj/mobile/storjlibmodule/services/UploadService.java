@@ -46,7 +46,7 @@ import io.storj.mobile.storjlibmodule.dataprovider.repositories.UploadingFilesRe
 public final class UploadService extends BaseReactService {
 
     public final static String SERVICE_NAME_SHORT = "UploadService";
-    public final static String SERVICE_NAME = ".storjlibmodule.services.UploadService";
+    public final static String SERVICE_NAME = "io.storj.mobile.storjlibmodule.services.UploadService";
 
     public final static String ACTION_UPLOAD_FILE = "UPLOAD_FILE";
     public final static String ACTION_UPLOAD_FILE_CANCEL = "UPLOAD_FILE_CANCEL";

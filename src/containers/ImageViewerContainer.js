@@ -30,7 +30,6 @@ class ImageViewerContainer extends Component {
     async componentWillMount() {
         if(!this.props.isDownloaded) {
             let result = await StorjModule.getDownloadFolderPath();
-            console.log(this.bucketId, this.fileId, result + "/" + this.name);
             ServiceModule.downloadFile(this.bucketId, this.fileId, result + "/" + this.name);
 
             return;

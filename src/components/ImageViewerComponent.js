@@ -36,11 +36,10 @@ export default class ImageViewerComponent extends Component {
     }
 
     render() {
-        console.log(this.props.isDownloaded);
         return(
-            <TouchableWithoutFeedback onPress = { this.props.showActionBar ? this.props.onOptionsPress : null }>
+            <TouchableWithoutFeedback style = { backgroundColor = "transparent" } onPress = { this.props.showActionBar ? this.props.onOptionsPress : null }>
                 <View style = { styles.mainContainer} >
-                    <View style = { styles.backgroundWrapper } />
+                    <View style = { [ styles.backgroundWrapper, { opacity: 0.7 } ] } />
                     {
                         this.props.isDownloaded ? 
                             <PhotoView
@@ -69,6 +68,7 @@ export default class ImageViewerComponent extends Component {
                             }) : null
                     }    
                     <View style = { [ styles.buttonWrapper, styles.topButtonsWrapper ] }>
+                        <View style = { styles.backgroundWrapper } />
                         <Button 
                             onPress = { this.props.onBackPress }
                             source = { require("../images/Icons/ImageViewer/back.png") } />
@@ -79,10 +79,15 @@ export default class ImageViewerComponent extends Component {
                     <View style = { [ styles.buttonWrapper, styles.bottomButtonWrapper ] }>
                         {
                             this.props.showActionBar ? 
+                                null :
+                                <View style = { styles.backgroundWrapper } />      
+                        }
+                        {
+                            this.props.showActionBar ? 
                                 <ActionBar 
-                                    actions = { this.props.actionBarActions } /> : null
-                                // <Button  
-                                //     source = { require("../images/Icons/ImageViewer/share.png") } />       
+                                    actions = { this.props.actionBarActions } /> :
+                                <Button  
+                                    source = { require("../images/Icons/ImageViewer/share.png") } />       
                         }
                     </View>
                     {
@@ -133,7 +138,6 @@ const styles = StyleSheet.create({
     },
     buttonWrapper: {
         position: "absolute",
-        backgroundColor: 'transparent',
         left: 0,
         right: 0,
         height: getHeight(72),
@@ -149,6 +153,7 @@ const styles = StyleSheet.create({
         bottom: 0
     },
     image: {
+        backgroundColor: "transparent",
         width: getDeviceWidth(),
         height: getDeviceHeight()
     },
@@ -159,9 +164,10 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         backgroundColor: 'black',
-        opacity: 0.7
+        opacity: 0.5
     },
     loadingComponentContainer: {
+        backgroundColor: 'transparent',
         position: "absolute",
         left: 0,
         right: 0,

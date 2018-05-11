@@ -93,6 +93,16 @@ const StackNav = StackNavigator(
         navigationOptions: {
             header:null,
             gesturesEnabled: false
+        },
+        cardStyle: { 
+            backgroundColor: "transparent", 
+            opacity: 1,
+            shadowRadius: 0
+        },
+        transitionConfig: () => {
+            containerStyle: {
+                backgroundColor: "transparent"
+            }
         }
     }
 );
