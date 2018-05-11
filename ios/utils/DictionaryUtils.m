@@ -11,41 +11,52 @@
 
 @implementation DictionaryUtils
 
-+(NSString *) checkAndReturnNSString:(NSString *)checkedString{
-  return checkedString == nil? @"" : checkedString;
++(NSString *) checkAndReturnNSString: (NSString *) checkedString {
+
+  return checkedString == nil ? @"" : checkedString;
 }
 
 
-+(NSString *) convertToJsonWithDictionary:(NSDictionary *)dictionary{
++(NSString *) convertToJsonWithDictionary: (NSDictionary *) dictionary {
   NSError * err;
-  NSData * jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:&err];
-  if(!jsonData){
+  NSData *jsonData = [NSJSONSerialization dataWithJSONObject: dictionary options: 0 error: &err];
+
+  if(!jsonData) {
     NSLog(@"Error while serialization");
+
     return @"";
   }
-  NSString *resultString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+
+  NSString *resultString = [[NSString alloc] initWithData: jsonData encoding: NSUTF8StringEncoding];
   NSLog(@"result: %@", resultString);
+
   return resultString;
 }
 
-+(NSString *) convertToJsonWithArray:(NSArray<IConvertibleToJS> *)array{
++(NSString *) convertToJsonWithArray: (NSArray<IConvertibleToJS> *) array{
   NSError * err;
-  NSMutableArray *marray = [NSMutableArray arrayWithCapacity:[array count]];
-  for (int i = 0; i < [array count]; i++){
-    [marray insertObject:[array[i] toDictionary] atIndex:i];
+  NSMutableArray *marray = [NSMutableArray arrayWithCapacity: [array count]];
+  for (int i = 0; i < [array count]; i++) {
+    [marray insertObject: [array[i] toDictionary] atIndex:i];
   }
-  NSData * jsonData = [NSJSONSerialization dataWithJSONObject:marray options:0 error:&err];
-  if(!jsonData){
+  NSData * jsonData = [NSJSONSerialization dataWithJSONObject: marray
+                                                      options:0
+                                                        error:&err];
+  if(!jsonData) {
     NSLog(@"Error while serialization");
+
     return @"";
   }
-  NSString *resultString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+  NSString *resultString = [[NSString alloc] initWithData: jsonData
+                                                 encoding: NSUTF8StringEncoding];
 //  NSLog(@"result: %@", resultString);
+
   return resultString;
 }
 
-+(BOOL) isNSStringValid :(NSString *) stringToCheck{
-  return stringToCheck;
++(BOOL) isNSStringValid: (NSString *) stringToCheck {
+
+  return stringToCheck && stringToCheck.length > 0;
 }
 
 

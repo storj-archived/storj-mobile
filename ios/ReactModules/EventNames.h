@@ -15,6 +15,11 @@
 @property (readonly, class) NSString *const EVENT_FILE_UPLOAD_SUCCESSFULLY;
 @property (readonly, class) NSString *const EVENT_FILE_UPLOAD_ERROR;
 
+@property (readonly, class) NSString *const EVENT_FILE_DOWNLOAD_START;
+@property (readonly, class) NSString *const EVENT_FILE_DOWNLOAD_PROGRESS;
+@property (readonly, class) NSString *const EVENT_FILE_DOWNLOAD_SUCCESS;
+@property (readonly, class) NSString *const EVENT_FILE_DOWNLOAD_ERROR;
+
 @property (readonly, class) NSString *const EVENT_BUCKETS_UPDATED;
 @property (readonly, class) NSString *const EVENT_FILES_UPDATED;
 @property (readonly, class) NSString *const EVENT_BUCKET_CREATED;

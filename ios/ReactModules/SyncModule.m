@@ -84,7 +84,7 @@ RCT_REMAP_METHOD(listFiles,
      for(int i = 0; i < length; i++){
        fileModels[i] = [[FileModel alloc] initWithFileDbo:fileDbos[i]];
      }
-     
+
      SingleResponse *response = [SingleResponse
                                  successSingleResponseWithResult:
                                  [DictionaryUtils convertToJsonWithArray:fileModels]];
@@ -188,9 +188,11 @@ RCT_REMAP_METHOD(getFile,
      if(!fileDbo){
        response = [SingleResponse errorResponseWithMessage:@"File Not Found"];
      } else {
+       FileModel *fileModel = [[FileModel alloc] initWithFileDbo:fileDbo];
+       NSDictionary *fileModelDict = [fileModel toDictionary];
        response = [SingleResponse successSingleResponseWithResult:[DictionaryUtils
                                                                    convertToJsonWithDictionary:
-                                                                   [[fileDbo toModel] toDictionary]]];
+                                                                   fileModelDict]];
      }
      resolve([response toDictionary]);
    }];
@@ -222,6 +224,36 @@ RCT_REMAP_METHOD(updateFileStarred,
      RCTPromiseResolveBlock resolve = param[@RESOLVER];
      resolve([[[self fileRepository] updateById:fileId starred:isStarred] toDictionary]);
    }];
+}
+
+RCT_REMAP_METHOD(checkImage,
+                 checkImageWithFileId: (NSString *) fileID localPath: (NSString *) localPath esolver: (RCTPromiseResolveBlock) resolver
+                 andRejecter: (RCTPromiseRejectBlock) rejecter){
+  
+  if(!localPath) {
+    resolver([[Response errorResponseWithMessage:@"Error: Path is null"] toDictionary]);
+    return;
+  }
+  
+  BOOL isDirectory;
+  BOOL isFileExists = [[NSFileManager defaultManager] fileExistsAtPath:localPath
+                                                           isDirectory:&isDirectory];
+  NSLog(@"Is file Exists: %hhd, isDir: %hhd", isFileExists, isDirectory);
+  if(!isFileExists || isDirectory) {
+    Response *updateResponse = [[self _fileRepository] updateById:fileID
+                                                    downloadState:0
+                                                       fileHandle:0
+                                                          fileUri:nil];
+    if([updateResponse isSuccess]){
+      NSLog(@"File entry updated successfully");
+    } else {
+      NSLog(@"Error while updating file entry");
+    }
+    
+    resolver([[Response errorResponseWithMessage:@"File has been removed from file system."] toDictionary]);
+    return;
+  }
+  resolver([[Response successResponse] toDictionary]);
 }
 
 

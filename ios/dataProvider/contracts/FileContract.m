@@ -23,10 +23,17 @@ static NSString * const _CREATED = @"created";
 static NSString * const _DECRYPTED = @"isDecrypted";
 static NSString * const _SIZE = @"size";
 static NSString * const _STARRED = @"isStarred";
-static NSString * const _FILE_FK = @"bucketId";
 static NSString * const _SYNCED = @"isSynced";
-+(NSString *) createTable{
-  return [NSString stringWithFormat:@"create table if not exists %@ (\
+static NSString * const _DOWNLOAD_STATE = @"downloadState";
+static NSString * const _FILE_HANDLE = @"fileHandle";
+static NSString * const _FILE_URI = @"fileUri";
+static NSString * const _FILE_THUMBNAIL = @"thumbnail";
+
+static NSString * const _FILE_FK = @"bucketId";
+
++(NSString *) createTable {
+
+  return [NSString stringWithFormat: @"create table if not exists %@ (\
 %@ TEXT primary key not null, \
 %@ TEXT not null, \
 %@ TEXT, \
@@ -37,12 +44,19 @@ static NSString * const _SYNCED = @"isSynced";
 %@ INTEGER, \
 %@ INTEGER, \
 %@ INTEGER, \
+%@ INTEGER, \
+%@ INTEGER DEFAULT 0, \
+%@ INTEGER DEFAULT 0, \
+%@ TEXT, \
 %@ TEXT not null, \
-FOREIGN KEY(%@) REFERENCES buckets(%@) ON DELETE CASCADE);", _TABLE_NAME, _FILE_ID, _NAME, _MIME_TYPE,
-          _INDEX, _HMAC, _ERASURE, _CREATED, _DECRYPTED, _STARRED, _SIZE, _FILE_FK, _FILE_FK, _FILE_ID];
+%@ TEXT, \
+FOREIGN KEY(%@) REFERENCES buckets(%@) ON DELETE CASCADE);", _TABLE_NAME, _FILE_ID, _NAME,
+          _MIME_TYPE, _INDEX, _HMAC, _ERASURE, _CREATED, _DECRYPTED, _STARRED, _SIZE, _SYNCED,
+          _DOWNLOAD_STATE, _FILE_HANDLE, _FILE_URI, _FILE_FK, _FILE_THUMBNAIL, _FILE_FK, _FILE_ID];
 }
 
-+(NSString *) TABLE_NAME{
++(NSString *) TABLE_NAME {
+
   return _TABLE_NAME;
 }
 
@@ -50,51 +64,84 @@ FOREIGN KEY(%@) REFERENCES buckets(%@) ON DELETE CASCADE);", _TABLE_NAME, _FILE_
 //  return _ID;
 //}
 
-+(NSString *) FILE_ID{
++(NSString *) FILE_ID {
+
   return _FILE_ID;
 }
 
-+(NSString *) NAME{
++(NSString *) NAME {
+
   return _NAME;
 }
 
-+(NSString *) MIME_TYPE{
++(NSString *) MIME_TYPE {
+
   return _MIME_TYPE;
 }
 
-+(NSString *) INDEX{
++(NSString *) INDEX {
+
   return _INDEX;
 }
 
-+(NSString *) HMAC{
++(NSString *) HMAC {
+
   return _HMAC;
 }
 
-+(NSString *) ERASURE{
++(NSString *) ERASURE {
+
   return _ERASURE;
 }
 
-+(NSString *) CREATED{
++(NSString *) CREATED {
+
   return _CREATED;
 }
 
-+(NSString *) DECRYPTED{
++(NSString *) DECRYPTED {
+
   return _DECRYPTED;
 }
 
-+(NSString *) SIZE{
++(NSString *) SIZE {
+
   return _SIZE;
 }
 
-+(NSString *) STARRED{
++(NSString *) STARRED {
+
   return _STARRED;
 }
 
-+(NSString *) FILE_FK{
++(NSString *) SYNCED {
+
+  return _SYNCED;
+}
+
++(NSString *) DOWNLOAD_STATE {
+
+  return _DOWNLOAD_STATE;
+}
+
++(NSString *) FILE_HANDLE {
+
+  return _FILE_HANDLE;
+}
+
++(NSString *) FILE_URI {
+
+  return _FILE_URI;
+}
+
++(NSString *) FILE_THUMBNAIL {
+
+  return _FILE_THUMBNAIL;
+}
+
++(NSString *) FILE_FK {
+
   return _FILE_FK;
 }
 
-+(NSString *) SYNCED{
-  return _SYNCED;
-}
 @end

@@ -191,7 +191,7 @@ RCT_REMAP_METHOD(register,
                                @REJECTER : rejecter}
    andMethodHandlerBlock:^(NSDictionary * params){
      
-     RegistrationCallback *callback = [[RegistrationCallback alloc] init];
+     SJRegistrationCallback *callback = [[SJRegistrationCallback alloc] init];
      callback.onSuccess = ^(NSString *email){
        NSString * mnemonic = [_storjWrapper generateMnemonic:256];
        RCTPromiseResolveBlock resolve = params[@RESOLVER];
@@ -216,7 +216,7 @@ RCT_REMAP_METHOD(deleteKeys,
                     andMethodHandlerBlock:^(NSDictionary * _Nonnull param) {
                       RCTPromiseResolveBlock resolve = param[@RESOLVER];
                       resolve([[[Response alloc] initWithSuccess:[[self storjWrapper] deleteAuthFile]
-                                            andWithErrorMessage:@""]toDictionary]);
+                                             andWithErrorMessage:@""]toDictionary]);
                     }];
 }
 
@@ -276,8 +276,8 @@ RCT_REMAP_METHOD(getDownloadFolderPath,
             }];
 }
 
--(void) arrayShift:(NSMutableArray *) array position:(int)position length:(int) length{
-  while(position < length -1){
+-(void) arrayShift:(NSMutableArray *) array position:(int)position length:(int) length {
+  while(position < length -1) {
     array[position] = array[position + 1];
     position++;
   }

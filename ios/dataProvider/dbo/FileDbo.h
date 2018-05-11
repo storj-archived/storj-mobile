@@ -10,7 +10,8 @@
 #import "IConvertibleToJS.h"
 @class FileModel;
 
-@interface FileDbo : NSObject<IConvertibleToJS, NSCopying>{
+@interface FileDbo : NSObject<IConvertibleToJS, NSCopying> {
+  
   NSString *_bucketId;
   NSString *_created;
   NSString *_erasure;
@@ -36,6 +37,10 @@
 @property BOOL _isDecrypted;
 @property BOOL _isStarred;
 @property BOOL _isSynced;
+@property int _downloadState;
+@property long _fileHandle;
+@property (nonatomic, strong) NSString *_fileUri;
+@property (nonatomic, strong) NSString *_thumbnail;
 
 +(FileDbo *) fileDboFromFileModel: (FileModel *) model;
 
@@ -49,12 +54,15 @@
                            index: (NSString *) index
                         mimeType: (NSString *)mimeType
                             name: (NSString *) name
-                           size :(long) size
+                            size: (long) size
                      isDecrypted: (BOOL) isDecrypted
                        isStarred: (BOOL) isStarred
-                        isSynced: (BOOL) isSynced;
+                        isSynced: (BOOL) isSynced
+                   downloadState: (int) downloadState
+                      fileHandle: (long) fileHandle
+                         fileUri: (NSString *) fileUri
+                       thumbnail: (NSString *) thumbnail;
 
 -(FileModel *) toModel;
-
 
 @end

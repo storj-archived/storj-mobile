@@ -78,7 +78,7 @@ static NSArray * columns;
 }
 
 -(NSArray *) getAllWithOrderByColumn: (NSString *) columnName
-                               order:(BOOL) isDescending {
+                               order: (BOOL) isDescending {
   NSString *orderByColumn = columnName;
   if(!columnName || [columnName length] == 0) {
     orderByColumn = FileContract.CREATED;
@@ -189,6 +189,7 @@ static NSArray * columns;
 }
 
 -(Response *) insertWithModel: (FileModel *) model {
+  NSLog(@"Inserting file: %@", [model toDictionary]);
   if(!model || ![model isValid]) {
     
     return [Response errorResponseWithMessage:@"Model is not valid"];
@@ -248,10 +249,28 @@ static NSArray * columns;
     return [Response errorResponseWithMessage:@"Model is not valid"];
   }
   
+  NSMutableDictionary *updateDictionary = [NSMutableDictionary dictionary];
+  [updateDictionary setObject:[DictionaryUtils checkAndReturnNSString:[model _created]]
+                       forKey:FileContract.CREATED];
+  [updateDictionary setObject:@([model _isDecrypted]) forKey:FileContract.DECRYPTED];
+  [updateDictionary setObject:[DictionaryUtils checkAndReturnNSString:[model _erasure]]
+                       forKey:FileContract.ERASURE];
+  [updateDictionary setObject:[DictionaryUtils checkAndReturnNSString:[model _hmac]]
+                       forKey:FileContract.HMAC];
+  [updateDictionary setObject:[DictionaryUtils checkAndReturnNSString:[model _index]]
+                       forKey:FileContract.INDEX];
+  [updateDictionary setObject:[DictionaryUtils checkAndReturnNSString:[model _mimeType]]
+                       forKey:FileContract.MIME_TYPE];
+  [updateDictionary setObject:@([model _size]) forKey:FileContract.SIZE];
+  [updateDictionary setObject:[DictionaryUtils checkAndReturnNSString:[model _bucketId]]
+                       forKey:FileContract.FILE_FK];
+  [updateDictionary setObject:[DictionaryUtils checkAndReturnNSString:[model _name]]
+                       forKey:FileContract.NAME];
+  
   return [super executeUpdateAtTable:FileContract.TABLE_NAME
                            objectKey:FileContract.FILE_ID
                             objectId:[model _fileId]
-                    updateDictionary:[[FileDbo fileDboFromFileModel:model]toDictionary]];
+                    updateDictionary:updateDictionary];
 }
 
 -(Response *) updateById:(NSString *)fileId
@@ -267,6 +286,40 @@ static NSArray * columns;
                             objectId:fileId
                     updateDictionary:@{FileContract.STARRED:@(isStarred)}];
 }
+-(Response *) updateById: (NSString *) fileId
+           downloadState: (int) downloadState
+              fileHandle: (long) fileHandle
+                 fileUri: (NSString *) fileUri {
+  NSLog(@"fileId %@, downloadState %d, fileHandle %lu, uri %@", fileId, downloadState, fileHandle, fileUri);
+  
+  if(!fileId || fileId.length == 0){
+    
+    return [Response errorResponseWithMessage:@"Model is not valid"];
+  }
+  
+  return [super executeUpdateAtTable:FileContract.TABLE_NAME
+                           objectKey:FileContract.FILE_ID
+                            objectId:[DictionaryUtils checkAndReturnNSString:fileId]
+                    updateDictionary:@{FileContract.DOWNLOAD_STATE: @(downloadState),
+                                       FileContract.FILE_HANDLE: @(fileHandle),
+                                       FileContract.FILE_URI: [DictionaryUtils checkAndReturnNSString:fileUri]}];
+}
+
+-(Response *) updateThumbnailWithFileId: (NSString *) fileId
+                        thumbnailBase64: (NSString *) thumbnailBase64String {
+  if(!fileId || fileId.length == 0){
+    return [Response errorResponseWithMessage:@"FileId is not valid"];
+  }
+  
+  if(!thumbnailBase64String || thumbnailBase64String.length == 0){
+    return [Response errorResponseWithMessage:@"Base64 representation of image is not valid"];
+  }
+  
+  return [super executeUpdateAtTable:FileContract.TABLE_NAME
+                           objectKey:FileContract.FILE_ID
+                            objectId:fileId
+                    updateDictionary:@{FileContract.FILE_THUMBNAIL: thumbnailBase64String}];
+}
 
 +(FileDbo *) getFileDboFromResultSet:(FMResultSet *) resultSet {
   
@@ -281,7 +334,11 @@ static NSArray * columns;
                                       size:[resultSet longForColumn:FileContract.SIZE]
                                isDecrypted:[resultSet boolForColumn:FileContract.DECRYPTED]
                                  isStarred:[resultSet boolForColumn:FileContract.STARRED]
-                                  isSynced:NO];
+                                  isSynced:NO
+                             downloadState:[resultSet intForColumn:FileContract.DOWNLOAD_STATE]
+                                fileHandle:[resultSet longForColumn:FileContract.FILE_HANDLE]
+                                   fileUri:[resultSet stringForColumn:FileContract.FILE_URI]
+                                 thumbnail:[resultSet stringForColumn:FileContract.FILE_THUMBNAIL]];
 }
 
 +(NSArray *)getSelectionColumnsString {
@@ -298,7 +355,12 @@ static NSArray * columns;
     [colArray addObject:FileContract.DECRYPTED];
     [colArray addObject:FileContract.SIZE];
     [colArray addObject:FileContract.STARRED];
+    [colArray addObject:FileContract.SYNCED];
     [colArray addObject:FileContract.FILE_FK];
+    [colArray addObject:FileContract.DOWNLOAD_STATE];
+    [colArray addObject:FileContract.FILE_HANDLE];
+    [colArray addObject:FileContract.FILE_URI];
+    [colArray addObject:FileContract.FILE_THUMBNAIL];
     columns = [NSArray arrayWithArray:colArray];
   }
   

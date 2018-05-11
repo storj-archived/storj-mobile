@@ -20,52 +20,48 @@
 #define OPTIONS_KEY_FILE_PICKER_TITLE "pickerTitle"
 
 @interface FilePickerLib()
+
 @property (nonatomic, strong) UIImagePickerController *picker;
 @property (nonatomic, strong) NSDictionary *defaultOptions;
 @property (nonatomic, strong) NSMutableDictionary *options;
 @property (nonatomic, strong) RCTPromiseRejectBlock reject;
 @property (nonatomic, strong) RCTPromiseResolveBlock resolve;
+
 @end
 
-
 @implementation FilePickerLib
+
 RCT_EXPORT_MODULE(FilePickerIos);
--(instancetype) init{
-  if(self = [super init]){
+
+-(instancetype) init {
+  if(self = [super init]) {
     self.defaultOptions = @{
                             @OPTIONS_KEY_FILE_PICKER_TITLE : @"Select",
                             @OPTIONS_KEY_MIME_TYPE : @"*/*"
                           };
   }
+  
   return self;
 }
 
 
-RCT_REMAP_METHOD(show, showWithOptions:(NSDictionary *) options
-                              resolver:(RCTPromiseResolveBlock)resolve
-                              rejector:(RCTPromiseRejectBlock)reject){
+RCT_REMAP_METHOD(show,
+                 showWithOptions:(NSDictionary *) options
+                 resolver: (RCTPromiseResolveBlock) resolve
+                 rejector: (RCTPromiseRejectBlock) reject) {
+  
   self.resolve = resolve;
   self.reject = reject;
   
-  self.options =  [NSMutableDictionary dictionaryWithDictionary:self.defaultOptions];
+  self.options =  [NSMutableDictionary dictionaryWithDictionary: self.defaultOptions];
   for (NSString *key in options.keyEnumerator) {
-    [self.options setValue:options[key] forKey:key];
+    [self.options setValue: options[key] forKey: key];
   }
   
-//  self.picker = [[UIDocumentMenuViewController alloc] initW]
-  
   self.picker = [[UIImagePickerController alloc] init];
-  
-  // RNImagePickerTargetLibrarySingleImage
   self.picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-  
   self.picker.mediaTypes = @[(NSString *)kUTTypeImage, (NSString *)kUTTypeMovie];
   self.picker.videoQuality = UIImagePickerControllerQualityTypeHigh;
-  
-  //  else {
-  //    self.picker.mediaTypes = @[(NSString *)kUTTypeImage];
-  //  }
-  
   self.picker.modalPresentationStyle = UIModalPresentationCurrentContext;
   self.picker.delegate = self;
   
@@ -74,184 +70,184 @@ RCT_REMAP_METHOD(show, showWithOptions:(NSDictionary *) options
     while (root.presentedViewController != nil) {
       root = root.presentedViewController;
     }
-    [root presentViewController:self.picker animated:YES completion:nil];
+    [root presentViewController: self.picker
+                       animated: YES
+                     completion: nil];
   });
-  
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
+- (void)imagePickerControllerDidCancel: (UIImagePickerController *) picker {
   dispatch_async(dispatch_get_main_queue(), ^{
-    [picker dismissViewControllerAnimated:YES completion:nil];
+    [picker dismissViewControllerAnimated: YES
+                               completion: nil];
   });
-  self.resolve(@{@KEY_SUCCESS:@(NO),
-                  @KEY_RESULT:@[@{@KEY_PATH:@"",
-                                   @KEY_ERROR_MESSAGE:@""
+  self.resolve(@{@KEY_SUCCESS: @(NO),
+                  @KEY_RESULT: @[@{@KEY_PATH: @"",
+                                   @KEY_ERROR_MESSAGE: @""
                                    }
                                 ],
-                  @KEY_ERROR_MESSAGE:@"Canceled by user"
+                  @KEY_ERROR_MESSAGE: @"Canceled by user"
                   });
  
 }
 
--(void)processRetrievedImage:(NSDictionary *) info{
-  
-  NSURL *imageURL = [info valueForKey:UIImagePickerControllerReferenceURL];
-  NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-  
+-(void)processRetrievedImage: (NSDictionary *) info {
+  NSURL *imageURL = [info valueForKey: UIImagePickerControllerReferenceURL];
+  NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
+
   NSString *tempFileName = [[NSUUID UUID] UUIDString];
   NSString *fileName;
-  if ([[imageURL absoluteString] containsString:@"ext=GIF"]) {
-    fileName = [tempFileName stringByAppendingString:@".gif"];
-  } else if ([[[self.options objectForKey:@"imageFileType"] stringValue] isEqualToString:@"png"]) {
-    fileName = [tempFileName stringByAppendingString:@".png"];
+  if ([[imageURL absoluteString] containsString: @"ext=GIF"]) {
+    fileName = [tempFileName stringByAppendingString: @".gif"];
+  } else if ([[[self.options objectForKey:  @"imageFileType"] stringValue] isEqualToString: @"png"]) {
+    fileName = [tempFileName stringByAppendingString: @".png"];
   } else {
-    fileName = [tempFileName stringByAppendingString:@".jpg"];
+    fileName = [tempFileName stringByAppendingString: @".jpg"];
   }
   
-  NSString *path = [[NSTemporaryDirectory()stringByStandardizingPath] stringByAppendingPathComponent:fileName];
-  UIImage *image =[info objectForKey:UIImagePickerControllerOriginalImage];
+  NSString *path = [[NSTemporaryDirectory()stringByStandardizingPath] stringByAppendingPathComponent: fileName];
+  UIImage *image =[info objectForKey: UIImagePickerControllerOriginalImage];
   
   // GIFs break when resized, so we handle them differently
-  if ([[imageURL absoluteString] containsString:@"ext=GIF"]) {
+  if ([[imageURL absoluteString] containsString: @"ext=GIF"]) {
     ALAssetsLibrary* assetsLibrary = [[ALAssetsLibrary alloc] init];
-    [assetsLibrary assetForURL:imageURL resultBlock:^(ALAsset *asset) {
+    [assetsLibrary assetForURL: imageURL resultBlock: ^(ALAsset *asset) {
       ALAssetRepresentation *rep = [asset defaultRepresentation];
       Byte *buffer = (Byte*)malloc(rep.size);
-      NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
-      NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
-      [data writeToFile:path atomically:YES];
+      NSUInteger buffered = [rep getBytes: buffer fromOffset: 0.0 length: rep.size error: nil];
+      NSData *data = [NSData dataWithBytesNoCopy: buffer length: buffered freeWhenDone: YES];
+      [data writeToFile: path atomically: YES];
       
-      NSString *fileURL = [[NSURL fileURLWithPath:path] absoluteString];
+      NSString *fileURL = [[NSURL fileURLWithPath: path] absoluteString];
       if(fileURL){
-        self.resolve(@{@KEY_SUCCESS:@(YES),
-                        @KEY_RESULT:@[@{@KEY_PATH:fileURL,
-                                         @KEY_ERROR_MESSAGE:@""
+        self.resolve(@{@KEY_SUCCESS: @(YES),
+                        @KEY_RESULT: @[@{@KEY_PATH: fileURL,
+                                         @KEY_ERROR_MESSAGE: @""
                                          }
                                       ],
-                        @KEY_ERROR_MESSAGE:@""
+                        @KEY_ERROR_MESSAGE: @""
                         });
       } else {
-        self.resolve(@{@KEY_SUCCESS:@(NO),
-                        @KEY_RESULT:@[@{@KEY_PATH:@"",
-                                         @KEY_ERROR_MESSAGE:@""
+        self.resolve(@{@KEY_SUCCESS: @(NO),
+                        @KEY_RESULT: @[@{@KEY_PATH: @"",
+                                         @KEY_ERROR_MESSAGE: @""
                                          }
                                       ],
-                        @KEY_ERROR_MESSAGE:@"Error with getting full path"
+                        @KEY_ERROR_MESSAGE: @"Error with getting full path"
                         });
       }
-    } failureBlock:^(NSError *error) {
-      self.resolve(@{@KEY_SUCCESS:@(YES),
-                      @KEY_RESULT:@[@{@KEY_PATH:@"",
-                                       @KEY_ERROR_MESSAGE:@""
+    } failureBlock: ^(NSError *error) {
+      self.resolve(@{@KEY_SUCCESS: @(YES),
+                      @KEY_RESULT: @[@{@KEY_PATH: @"",
+                                       @KEY_ERROR_MESSAGE: @""
                                        }
                                     ],
-                      @KEY_ERROR_MESSAGE:[error localizedDescription]
+                      @KEY_ERROR_MESSAGE: [error localizedDescription]
                       });
     }];
     return;
   }
   
-  image = [self fixOrientation:image];  // Rotate the image for upload to web
+  image = [self fixOrientation: image];  // Rotate the image for upload to web
   NSData *data = UIImageJPEGRepresentation(image, 1);
-  [data writeToFile:path atomically:YES];
-  NSString *filePath = [[NSURL fileURLWithPath:path] absoluteString];
+  [data writeToFile: path atomically: YES];
+  NSString *filePath = [[NSURL fileURLWithPath: path] absoluteString];
   if(filePath){
-    self.resolve(@{@KEY_SUCCESS:@(YES),
-                    @KEY_RESULT:@[@{@KEY_PATH:filePath,
-                                     @KEY_ERROR_MESSAGE:@""
+    self.resolve(@{@KEY_SUCCESS: @(YES),
+                    @KEY_RESULT: @[@{@KEY_PATH: filePath,
+                                     @KEY_ERROR_MESSAGE: @""
                                      }
                                   ],
-                    @KEY_ERROR_MESSAGE:@""
+                    @KEY_ERROR_MESSAGE: @""
                     });
     return;
   } else {
-    self.resolve(@{@KEY_SUCCESS:@(NO),
-                    @KEY_RESULT:@[@{@KEY_PATH:@"",
-                                     @KEY_ERROR_MESSAGE:@""
+    self.resolve(@{@KEY_SUCCESS: @(NO),
+                    @KEY_RESULT: @[@{@KEY_PATH: @"",
+                                     @KEY_ERROR_MESSAGE: @""
                                      }
                                   ],
-                    @KEY_ERROR_MESSAGE:@"Error with getting full path"
+                    @KEY_ERROR_MESSAGE: @"Error with getting full path"
                     });
     return;
   }
 }
 
--(void) processRetrievedVideo:(NSDictionary *)info{
+-(void) processRetrievedVideo: (NSDictionary *)info{
   NSURL *videoURL = info[UIImagePickerControllerMediaURL];
   NSString *fileName = videoURL.lastPathComponent;
-  NSString *path = [[NSTemporaryDirectory()stringByStandardizingPath] stringByAppendingPathComponent:fileName];
-  NSURL *videoDestinationURL = [NSURL fileURLWithPath:path];
+  NSString *path = [[NSTemporaryDirectory()stringByStandardizingPath] stringByAppendingPathComponent: fileName];
+  NSURL *videoDestinationURL = [NSURL fileURLWithPath: path];
   
   NSFileManager *fileManager = [NSFileManager defaultManager];
-  if ([fileName isEqualToString:@"capturedvideo.MOV"]) {
-    if ([fileManager fileExistsAtPath:videoDestinationURL.path]) {
-      [fileManager removeItemAtURL:videoDestinationURL error:nil];
+  if ([fileName isEqualToString: @"capturedvideo.MOV"]) {
+    if ([fileManager fileExistsAtPath: videoDestinationURL.path]) {
+      [fileManager removeItemAtURL: videoDestinationURL error: nil];
     }
   }
   NSError *error = nil;
-  [fileManager moveItemAtURL:videoURL toURL:videoDestinationURL error:&error];
-  
+  [fileManager moveItemAtURL: videoURL toURL: videoDestinationURL error: &error];
+
   if (error) {
-    self.resolve(@{@KEY_SUCCESS:@(NO),
-                    @KEY_RESULT:@[@{@KEY_PATH:@"",
-                                     @KEY_ERROR_MESSAGE:[error localizedDescription]
+    self.resolve(@{@KEY_SUCCESS: @(NO),
+                    @KEY_RESULT: @[@{@KEY_PATH: @"",
+                                     @KEY_ERROR_MESSAGE: [error localizedDescription]
                                      }
                                   ],
-                    @KEY_ERROR_MESSAGE:[error localizedDescription]
+                    @KEY_ERROR_MESSAGE: [error localizedDescription]
                     });
     return;
   }
   if(videoDestinationURL){
-    self.resolve(@{@KEY_SUCCESS:@(YES),
-                    @KEY_RESULT:@[@{@KEY_PATH:[videoDestinationURL absoluteString],
-                                     @KEY_ERROR_MESSAGE:@""
+    self.resolve(@{@KEY_SUCCESS: @(YES),
+                    @KEY_RESULT: @[@{@KEY_PATH: [videoDestinationURL absoluteString],
+                                     @KEY_ERROR_MESSAGE: @""
                                      }
                                   ],
-                    @KEY_ERROR_MESSAGE:@""
+                    @KEY_ERROR_MESSAGE: @""
                     });
     return;
   } else{
-    self.resolve(@{@KEY_SUCCESS:@(NO),
-                    @KEY_RESULT:@[@{@KEY_PATH:@"",
-                                     @KEY_ERROR_MESSAGE:@""
+    self.resolve(@{@KEY_SUCCESS: @(NO),
+                    @KEY_RESULT: @[@{@KEY_PATH: @"",
+                                     @KEY_ERROR_MESSAGE: @""
                                      }
                                   ],
-                    @KEY_ERROR_MESSAGE:@"Error while retrieving Video URL"
+                    @KEY_ERROR_MESSAGE: @"Error while retrieving Video URL"
                     });
     return;
   }
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+- (void)imagePickerController: (UIImagePickerController *)picker didFinishPickingMediaWithInfo: (NSDictionary *)info
 {
   dispatch_async(dispatch_get_main_queue(), ^{
-    [picker dismissViewControllerAnimated:YES completion:nil];
+    [picker dismissViewControllerAnimated: YES completion: nil];
   });
-  
-  NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-  if([mediaType isEqualToString:(NSString *) kUTTypeImage]){
-    [self processRetrievedImage:info];
+
+  NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
+  if([mediaType isEqualToString: (NSString *) kUTTypeImage]){
+    [self processRetrievedImage: info];
     return;
   }
-  if([mediaType isEqualToString:(NSString *) kUTTypeMovie]){
-    [self processRetrievedVideo:info];
+  if([mediaType isEqualToString: (NSString *) kUTTypeMovie]){
+    [self processRetrievedVideo: info];
     return;
   }
 }
-+(NSString *) convertToJsonWithArray:(NSArray *)array{
++(NSString *) convertToJsonWithArray: (NSArray *)array{
   NSError * err;
-  NSData * jsonData = [NSJSONSerialization dataWithJSONObject:array options:0 error:&err];
+  NSData * jsonData = [NSJSONSerialization dataWithJSONObject: array options: 0 error: &err];
   if(!jsonData){
     NSLog(@"Error while serialization");
     return @"";
   }
-  NSString *resultString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-  //  NSLog(@"result: %@", resultString);
+  NSString *resultString = [[NSString alloc] initWithData: jsonData encoding: NSUTF8StringEncoding];
+  //  NSLog(@"result:  %@", resultString);
   return resultString;
 }
 
-- (UIImage *)fixOrientation:(UIImage *)srcImg {
+- (UIImage *)fixOrientation: (UIImage *)srcImg {
   if (srcImg.imageOrientation == UIImageOrientationUp) {
     return srcImg;
   }
@@ -315,7 +311,7 @@ RCT_REMAP_METHOD(show, showWithOptions:(NSDictionary *) options
   }
   
   CGImageRef cgimg = CGBitmapContextCreateImage(ctx);
-  UIImage *img = [UIImage imageWithCGImage:cgimg];
+  UIImage *img = [UIImage imageWithCGImage: cgimg];
   CGContextRelease(ctx);
   CGImageRelease(cgimg);
   return img;

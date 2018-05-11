@@ -45,4 +45,12 @@
 -(Response *) updateById:(NSString *)fileId
                  starred:(BOOL) isStarred;
 
+-(Response *) updateById: (NSString *) fileId
+           downloadState: (int) downloadState
+              fileHandle: (long) fileHandle
+                 fileUri: (NSString *) fileUri;
+
+-(Response *) updateThumbnailWithFileId: (NSString *) fileId
+                        thumbnailBase64: (NSString *) thumbnailBase64String;
+
 @end

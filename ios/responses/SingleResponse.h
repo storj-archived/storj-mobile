@@ -10,7 +10,7 @@
 
 @interface SingleResponse : Response
 
-@property (nonatomic, strong) NSString * _result;
+@property (nonatomic, strong, getter=getResult) NSString * _result;
 
 -(instancetype)initWithSuccess: (BOOL) isSuccess
                     withResult: (NSString *) result

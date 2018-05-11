@@ -12,8 +12,7 @@
 #import <React/RCTLog.h>
 #import <UIKit/UIKit.h>
 
-@interface FilePickerLib : NSObject<RCTBridgeModule,UINavigationControllerDelegate,
+@interface FilePickerLib : NSObject<RCTBridgeModule, UINavigationControllerDelegate,
                                     UIActionSheetDelegate, UIImagePickerControllerDelegate>
-
 
 @end

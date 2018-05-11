@@ -27,6 +27,7 @@
 #import "EventNames.h"
 #import "PromiseHandler.h"
 #import "StorjWrapperSingletone.h"
+#import "ThumbnailProcessor.h"
 
 @import StorjIOS;
 

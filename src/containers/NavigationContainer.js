@@ -103,12 +103,10 @@ class Apps extends Component {
 		this.fileUploadSuccessListener = eventEmitter.addListener(eventNames.EVENT_FILE_UPLOADED_SUCCESSFULLY, this.fileUploadSuccess.bind(this));
 		this.fileUploadErrorListener = eventEmitter.addListener(eventNames.EVENT_FILE_UPLOAD_ERROR, this.fileUploadError.bind(this));
 
-		if(this.isAndroid) {
-            this.downloadFileStartListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_START, this.onFileDownloadStart.bind(this));
-            this.downloadFileProgressListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_PROGRESS, this.onFileDownloadProgress.bind(this));
-            this.downloadFileSuccessListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_SUCCESS, this.onFileDownloadSuccess.bind(this));
-            this.downloadFileErrorListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_ERROR, this.onFileDownloadError.bind(this));
-		}
+		this.downloadFileStartListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_START, this.onFileDownloadStart.bind(this));
+		this.downloadFileProgressListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_PROGRESS, this.onFileDownloadProgress.bind(this));
+		this.downloadFileSuccessListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_SUCCESS, this.onFileDownloadSuccess.bind(this));
+		this.downloadFileErrorListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_ERROR, this.onFileDownloadError.bind(this));
 
 		NetInfo.isConnected.fetch().then(isConnected => {
 			this.props.setIsConnected(isConnected);
