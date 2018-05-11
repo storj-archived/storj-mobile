@@ -197,7 +197,8 @@ export default class ListComponent extends Component {
         const size = item.entity.size ? this.props.getItemSize(item.entity.size) : null;
         const listItemIconSource = item.entity.thumbnail ? 
                                     { uri: 'data:image/png;base64,' + item.entity.thumbnail } 
-                                    : item.getStarred() ? this.props.starredListItemIcon : this.props.listItemIcon;
+                                    : item.entity.isDownloaded ? this.props.listItemIcon : this.props.cloudListItemIcon;
+        const starredIcon = item.getStarred() ? '★' : null;
 
         return(
             <ItemType
@@ -214,7 +215,11 @@ export default class ListComponent extends Component {
                 progress = { item.progress } 
                 size = { size } >
 
-                <TextComp style = { styles.mainTitleText }>{ item.getName() }</TextComp>
+                <TextComp style = { styles.mainTitleText }>
+                    <Text style = { styles.blueStar }>
+                        { starredIcon }
+                    </Text>
+                    { item.getName() }</TextComp>
             </ItemType>
         );
     }
@@ -293,6 +298,10 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Regular',
         fontSize: getHeight(16),
         color: '#384B65'
+    },
+    blueStar: {
+        fontSize: getHeight(16),
+        color: '#2794FF'
     }
 });
 

@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import { getWidth, getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 
-export default class ListItemComponent2 extends Component {
+export default class ListItemComponent extends Component {
     constructor(props) {
         super(props);
     }

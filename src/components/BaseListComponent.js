@@ -27,7 +27,7 @@ function ListComponentWrapper(props) {
             isExpanderDisabled = { this.props.isExpanderDisabled }
             textComp = { props.textComp }
             listItemIcon = { props.listItemIcon }
-            starredListItemIcon = { props.starredListItemIcon }
+            cloudListItemIcon = { props.cloudListItemIcon }
             contentWrapperStyle = { props.contentWrapperStyle }
             getItemSize = { this.props.getItemSize } 
             isRefreshing = { this.props.isLoading }

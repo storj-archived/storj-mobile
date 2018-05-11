@@ -157,7 +157,7 @@ const listComponent = (title, data, props, count, itemType, navigationPress) => 
                 selectedItemId = { null }
                 isSelectionMode = { false }
                 listItemIcon = { itemType === TYPES.BUCKETS ? require('../../images/Icons/BucketListItemIcon.png') : require('../../images/Icons/FileListItemIcon.png')  }
-                starredListItemIcon = { itemType === TYPES.BUCKETS ? require('../../images/Icons/ListStarredBucket.png') : require('../../images/Icons/ListStarredFile.png') }
+                cloudListItemIcon = { itemType === TYPES.BUCKETS ? require('../../images/Icons/CloudBucket.png') : require('../../images/Icons/CloudFile.png') }
                 data = { data }
                 getBucketName = { getShortBucketName } />
     )

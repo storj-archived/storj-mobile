@@ -26,7 +26,7 @@ export default class FilesListComponent extends BaseListComponent {
                     <this.ListComponent
                         textComp = { textComp.bind(this) }
                         listItemIcon = { require('../images/Icons/FileListItemIcon.png') }
-                        starredListItemIcon = { isGridView ? require('../images/Icons/GridStarredFile.png') : require('../images/Icons/ListStarredFile.png') }
+                        cloudListItemIcon = { require('../images/Icons/CloudFile.png') }
                         contentWrapperStyle = { styles.contentWrapper } />
                     { 
                         this.props.isLoading ? <LoadingComponent isLoading = { this.props.isLoading } /> : null 

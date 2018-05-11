@@ -23,7 +23,7 @@ export default class DashboardItemListComponent extends BaseListComponent {
                 <this.ListComponent
                     textComp = { (props) => <Text numberOfLines = { 1 } style = { props.style }>{ this.props.getBucketName(props.children) }</Text> }
                     listItemIcon = { this.props.listItemIcon }
-                    starredListItemIcon = { this.props.starredListItemIcon }
+                    cloudListItemIcon = { this.props.cloudListItemIcon }
                     />
                 <DashboardListFooterComponent
                     count = { this.props.count } 

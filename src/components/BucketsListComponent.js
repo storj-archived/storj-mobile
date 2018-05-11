@@ -21,7 +21,7 @@ export default class BucketsListComponent extends BaseListComponent {
                 <this.ListComponent
                     textComp = { (props) => <Text numberOfLines = { 1 } style = { props.style }>{ this.props.getBucketName(props.children) }</Text> }
                     listItemIcon = { require('../images/Icons/BucketListItemIcon.png') }
-                    starredListItemIcon = { isGridView ? require('../images/Icons/GridStarredBucket.png') : require('../images/Icons/ListStarredBucket.png') }
+                    cloudListItemIcon = { require('../images/Icons/CloudBucket.png') }
                     contentWrapperStyle = { styles.contentWrapper } />              
             </View>
         );
