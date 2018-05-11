@@ -156,8 +156,8 @@ const listComponent = (title, data, props, count, itemType, navigationPress) => 
                 onCancelPress = { () => {} }
                 selectedItemId = { null }
                 isSelectionMode = { false }
-                listItemIcon = { require('../../images/Icons/BucketListItemIcon.png') }
-                starredListItemIcon = { require('../../images/Icons/ListStarredBucket.png') }
+                listItemIcon = { itemType === TYPES.BUCKETS ? require('../../images/Icons/BucketListItemIcon.png') : require('../../images/Icons/FileListItemIcon.png')  }
+                starredListItemIcon = { itemType === TYPES.BUCKETS ? require('../../images/Icons/ListStarredBucket.png') : require('../../images/Icons/ListStarredFile.png') }
                 data = { data }
                 getBucketName = { getShortBucketName } />
     )
