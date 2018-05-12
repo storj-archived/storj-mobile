@@ -44,4 +44,7 @@
 
 @property (nonatomic, strong) StorjWrapper *_storjWrapper;
 
+-(void) uploadFileWithBucketId:(NSString *)bucketId
+                 withLocalPath:(NSString *) localPath;
+
 @end

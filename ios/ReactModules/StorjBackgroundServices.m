@@ -17,6 +17,15 @@
 
 RCT_EXPORT_MODULE(ServiceModuleIOS);
 
++(id)allocWithZone:(struct _NSZone *)zone {
+  static StorjBackgroundServices *sharedInstance = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    sharedInstance = [super allocWithZone:zone];
+  });
+  return sharedInstance;
+}
+
 - (NSArray<NSString *> *)supportedEvents
 {
   return [EventNames availableEvents];
@@ -80,7 +89,6 @@ RCT_REMAP_METHOD(bindDownloadService,
 
 RCT_REMAP_METHOD(getBuckets,
                  getBuckets){
-  NSLog(@"BGService: getBuckets");
   [MethodHandler
    invokeBackgroundRemainWithParams:@{@KEY_TASK_NAME:@"getBuckets"}
    methodHandlerBlock:^(NSDictionary *params,
@@ -93,13 +101,11 @@ RCT_REMAP_METHOD(getBuckets,
        }
        if([buckets count] == 0){
          [[self bucketRepository] deleteAll];
-         //db close
          [self sendEventWithName:EventNames.EVENT_BUCKETS_UPDATED
                             body:@(YES)];
          return;
        }
-//       [[self database] beginTransaction];
-       
+
        NSMutableArray <BucketDbo *> * bucketDbos = [NSMutableArray arrayWithArray:
                                                     [[self bucketRepository] getAll]];
        NSMutableArray <BucketDbo *> * copyBucketDbos;
@@ -127,7 +133,6 @@ RCT_REMAP_METHOD(getBuckets,
          [[self bucketRepository] insertWithModel:[[BucketModel alloc]
                                                    initWithStorjBucketModel:sjModel]];
        }
-//       [[self database] commit];
        [self sendEventWithName:EventNames.EVENT_BUCKETS_UPDATED
                           body:@(YES)];
        NSLog(@"Sending success event for bucket updated");
@@ -164,7 +169,7 @@ RCT_REMAP_METHOD(getFiles,
        }
        if([files count] == 0){
          [[self fileRepository] deleteAllFromBucket:bucketId];
-         //dbClose???
+
          [self sendEventWithName:EventNames.EVENT_FILES_UPDATED
                             body:[[SingleResponse successSingleResponseWithResult:bucketId]
                                   toDictionary]];
@@ -330,9 +335,6 @@ RCT_REMAP_METHOD(downloadFile,
                  resolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-
-  
-  
   if(!fileId || fileId.length == 0){
     return;
   }
@@ -475,7 +477,7 @@ RCT_REMAP_METHOD(uploadFile,
      SJFileUploadCallback *callback = [[SJFileUploadCallback alloc] init];
      
      callback.onProgress = ^(NSString *fileId, double progress, double uploadedBytes, double totalBytes) {
-       if([dbo fileHandle] == 0){
+       if([dbo fileHandle] == 0 || progress == 0){
          return;
        }
        
@@ -491,6 +493,7 @@ RCT_REMAP_METHOD(uploadFile,
        
          UploadFileModel * fileModel =[[UploadFileModel alloc] initWithUploadFileDbo:dbo];
          Response *response = [[self uploadFileRepository] updateByModel:fileModel];
+       NSLog(@"UploadFileProgress_DB_RESULT: %@", [response toDictionary]);
          if([response isSuccess]){
            NSDictionary *body = @{UploadFileContract.FILE_HANDLE : @([dbo fileHandle]),
                                   UploadFileContract.PROGRESS : @(uploadProgress),
@@ -548,13 +551,14 @@ RCT_REMAP_METHOD(uploadFile,
        [dbo set_fileHandle: fileRef];
        UploadFileModel *fileModel = [[UploadFileModel alloc] initWithUploadFileDbo:dbo];
        Response *insertResponse = [[self uploadFileRepository] insertWithModel:fileModel];
+       NSLog(@"StartFileUpload_BD_RESULT: %@", [insertResponse toDictionary]);
        if([insertResponse isSuccess]){
          NSDictionary *eventDict =@{@"fileHandle": @([dbo fileHandle])};
-//         [self sendEventWithName:@"ON_LOG_EMMIT" body:[NSString stringWithFormat:@"UploadStarted %ld", fileRef]];
-         NSLog(@"Upload started");
-         [StorjBackgroundServices log:@"Upload started"];
+         [StorjBackgroundServices log:[NSString stringWithFormat:@"Upload Started: %@", eventDict]];
          [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_START
                             body:eventDict];
+       } else {
+         [StorjBackgroundServices log:[NSString stringWithFormat:@"Upload is not Started: %@", insertResponse._error._errorMessage]];
        }
      }
    }
@@ -581,7 +585,5 @@ RCT_REMAP_METHOD(uploadFile,
 
 //resolver:(RCTPromiseResolveBlock) resolve
 //rejecter:(RCTPromiseRejectBlock) reject){
-
-
 
 @end
