@@ -1,8 +1,11 @@
-import { NativeModules } from 'react-native';
+import { NativeModules,
+    Platform } from 'react-native';
 
 const cameraModule = (() => {
     let instance = null;
-    const cameraModule = NativeModules.CameraModule;
+    const cameraModuleAndroid = NativeModules.CameraModule;
+    const cameraModuleIos = NativeModules.CameraModuleIos;
+    const cameraModule = Platform.OS === 'android' ? cameraModuleAndroid : cameraModuleIos;
 
     class CameraModule {
         constructor() {
