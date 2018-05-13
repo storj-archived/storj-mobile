@@ -50,8 +50,6 @@ public class GetBucketsService extends BaseReactService {
     private final static String EVENT_FILE_DELETED = "EVENT_FILE_DELETED";
 
     private DatabaseFactory _dbFactory;
-    private BucketRepository _bRepository;
-    private FileRepository _fRepository;
 
     public SQLiteDatabase getDb() {
         if(_dbFactory == null) {
@@ -119,7 +117,6 @@ public class GetBucketsService extends BaseReactService {
                 if(buckets == null) {
                     return;
                 }
-                //SQLiteDatabase db = new DatabaseFactory(GetBucketsService.this, null).getWritableDatabase();
 
                 if(buckets.length == 0) {
                     bRepository().deleteAll();

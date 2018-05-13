@@ -18,8 +18,6 @@ public final class SettingsContract implements BaseColumns {
     public final static String _SYNC_SETTINGS = "syncSettings";
     public final static String _LAST_SYNC = "lastSync";
 
-    //public final static String
-
     public static String createTable() {
         return String.format(
                 "create table if not exists %s (" +

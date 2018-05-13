@@ -43,14 +43,7 @@ interface IMethodHandlerCallback {
 public class StorjLibModule extends ReactContextBaseJavaModule {
 
     private static final String E_VERIFY_KEYS = "STORJ_E_VERIFY_KEYS";
-    private static final String E_IMPORT_KEYS = "E_IMPORT_KEYS";
-    private static final String E_KEYS_EXISTS = "E_KEYS_EXISTS";
-    private static final String E_GET_KEYS = "E_GET_KEYS";
-    private static final String E_REGISTER = "E_REGISTER";
-    private static final String E_GENERATE_MNEMONIC = "STORJ_E_GENERATE_MNEMONIC";
     private static final String E_CHECK_MNEMONIC = "E_CHECK_MNEMONIC";
-    private static final String E_KEYS_NOT_FOUND = "E_KEYS_NOT_FOUND";
-    private static final String E_CREATE_BUCKET = "E_CREATE_BUCKET";
     private static final String MODULE_NAME = "StorjLibAndroid";
 
     public static long _downloadFileRef = 0;

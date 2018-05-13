@@ -43,14 +43,6 @@ public class NotificationService {
                 .setProgress(maxProgress, progress, false)
                 .setContentText(message);
 
-        /*if(action != null) {
-            mNotificationBuilder.addAction(action);
-        }*/
-
-        /*if(maxProgress != 0) {
-            mNotificationBuilder.setOngoing(true);
-        }*/
-
         try {
             mNotificationManager.notify(id, mNotificationBuilder.build());
         } catch(Exception e) {
