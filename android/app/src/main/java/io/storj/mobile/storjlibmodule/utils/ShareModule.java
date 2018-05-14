@@ -3,9 +3,12 @@ package io.storj.mobile.storjlibmodule.utils;
 import android.content.Intent;
 import android.net.Uri;
 
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+
+import io.storj.mobile.storjlibmodule.responses.Response;
 
 public class ShareModule extends ReactContextBaseJavaModule {
 
@@ -15,11 +18,11 @@ public class ShareModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "ShareModule2";
+        return "ShareModuleAndroid";
     }
 
     @ReactMethod
-    public void share(String uri) {
+    public void shareFile(String uri, Promise promise) {
         Uri _uri = Uri.parse(uri);
 
         Intent shareIntent = new Intent();
@@ -28,5 +31,6 @@ public class ShareModule extends ReactContextBaseJavaModule {
         shareIntent.putExtra(Intent.EXTRA_STREAM, _uri);
         shareIntent.setType("image/*");
         getReactApplicationContext().startActivity(Intent.createChooser(shareIntent, "Share images to..."));
+        promise.resolve(new Response(true, null).toWritableMap());
     }
 }

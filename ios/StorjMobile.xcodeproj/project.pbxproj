@@ -53,7 +53,7 @@
 		D68D4C0D19FC44AFA409AB73 /* Montserrat-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEF7D3FD619949DEBB4F5660 /* Montserrat-SemiBoldItalic.ttf */; };
 		DC2841E6204972FD0093183F /* StorjIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC2841E020496AEA0093183F /* StorjIOS.framework */; };
 		DC2841E7204972FD0093183F /* StorjIOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DC2841E020496AEA0093183F /* StorjIOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DC37DF5620A4B4B700C4FEF8 /* SharingModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DC37DF5520A4B4B700C4FEF8 /* SharingModule.m */; };
+		DC37DF5620A4B4B700C4FEF8 /* ShareModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DC37DF5520A4B4B700C4FEF8 /* ShareModule.m */; };
 		DC37DF7F20A4B62C00C4FEF8 /* CameraModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DC37DF7E20A4B62C00C4FEF8 /* CameraModule.m */; };
 		DC76320C2084C6F800B7C64A /* DocumentsPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = DC76320B2084C6F800B7C64A /* DocumentsPicker.m */; };
 		DC914C47206BD55000F0C4FF /* StorjWrapperSingletone.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C46206BD55000F0C4FF /* StorjWrapperSingletone.m */; };
@@ -462,8 +462,8 @@
 		C04E439E0DB043ECBF958C35 /* RNPhotoView.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNPhotoView.xcodeproj; path = "../node_modules/react-native-photo-view/ios/RNPhotoView.xcodeproj"; sourceTree = "<group>"; };
 		CC74FFF11A4D422EA4F02E08 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../src/fonts/Montserrat/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		D57884CA17224EC589F7D3FA /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../src/fonts/OpenSans/OpenSans-Light.ttf"; sourceTree = "<group>"; };
-		DC37DF5420A4B4B700C4FEF8 /* SharingModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharingModule.h; sourceTree = "<group>"; };
-		DC37DF5520A4B4B700C4FEF8 /* SharingModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharingModule.m; sourceTree = "<group>"; };
+		DC37DF5420A4B4B700C4FEF8 /* ShareModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareModule.h; sourceTree = "<group>"; };
+		DC37DF5520A4B4B700C4FEF8 /* ShareModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareModule.m; sourceTree = "<group>"; };
 		DC37DF7D20A4B62C00C4FEF8 /* CameraModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraModule.h; sourceTree = "<group>"; };
 		DC37DF7E20A4B62C00C4FEF8 /* CameraModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraModule.m; sourceTree = "<group>"; };
 		DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StorjIOS.xcodeproj; path = "../../iOS-libstorj/StorjIOS/StorjIOS.xcodeproj"; sourceTree = "<group>"; };
@@ -950,8 +950,8 @@
 				DC914C5B206BFBF200F0C4FF /* Sha256Module.m */,
 				DC76320A2084C6F800B7C64A /* DocumentsPicker.h */,
 				DC76320B2084C6F800B7C64A /* DocumentsPicker.m */,
-				DC37DF5420A4B4B700C4FEF8 /* SharingModule.h */,
-				DC37DF5520A4B4B700C4FEF8 /* SharingModule.m */,
+				DC37DF5420A4B4B700C4FEF8 /* ShareModule.h */,
+				DC37DF5520A4B4B700C4FEF8 /* ShareModule.m */,
 				DC37DF7D20A4B62C00C4FEF8 /* CameraModule.h */,
 				DC37DF7E20A4B62C00C4FEF8 /* CameraModule.m */,
 			);
@@ -1552,7 +1552,7 @@
 				DCDF706820649821001B2F95 /* FileDbo.m in Sources */,
 				DCDF6FCB205AED17001B2F95 /* UploadFileContract.m in Sources */,
 				DCDF6FFC20631C73001B2F95 /* UploadFileModel.m in Sources */,
-				DC37DF5620A4B4B700C4FEF8 /* SharingModule.m in Sources */,
+				DC37DF5620A4B4B700C4FEF8 /* ShareModule.m in Sources */,
 				DCDF705D20643850001B2F95 /* FMDatabase.m in Sources */,
 				DCDF6FED2062C2AD001B2F95 /* DownloadFileModel.m in Sources */,
 				DC76320C2084C6F800B7C64A /* DocumentsPicker.m in Sources */,

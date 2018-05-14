@@ -120,7 +120,7 @@ class ImageViewerContainer extends Component {
     }
 
     async share(url) {
-        ShareModule.share(url);
+        await ShareModule.shareFile(url);
     }
 
     static navigationOptions = { header: null };
