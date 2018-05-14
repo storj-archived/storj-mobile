@@ -23,7 +23,8 @@ public class ShareModule extends ReactContextBaseJavaModule {
         Uri _uri = Uri.parse(uri);
 
         Intent shareIntent = new Intent();
-        shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         shareIntent.putExtra(Intent.EXTRA_STREAM, _uri);
         shareIntent.setType("image/*");
         getReactApplicationContext().startActivity(Intent.createChooser(shareIntent, "Share images to..."));
