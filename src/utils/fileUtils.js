@@ -64,6 +64,17 @@ export function getShortFileName(fullName) {
 
     return { name, extention };
 }
+
+export function isImage(imageFullName) {
+    if (!imageFullName) {
+        return false;
+    }
+
+    let extension = imageFullName.split('.').pop();
+
+    return ['tif', 'tiff', 'gif', 'jpeg', 'jpg', 'jif', 'jfif', 'jp2', 'jpx', 'j2k', 'j2c', 'fpx', 'pcd', 'png', 'pdf']
+        .includes(extension);
+}
 /* export function renderItemName() {
     switch(this.props.itemType) {
         case TYPES.REGULAR_BUCKET: {
