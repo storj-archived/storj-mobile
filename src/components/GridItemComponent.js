@@ -3,14 +3,10 @@ import {
     View,
     StyleSheet,
     TouchableOpacity,
-    Image,
-    ScrollView,
-    Platform
+    Image
 } from 'react-native';
-import React, {Component} from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
 import { getWidth, getHeight } from '../utils/adaptive';
-import { TYPES } from '../utils/constants/typesConstants';
 import ProgressCircleComponent from '../components/ProgressCircleComponent';
 import PropTypes from 'prop-types';
 
@@ -31,7 +27,7 @@ export default class GridItemComponent extends Component {
                             <Image 
                                 style = { gridItemStyles.fileTypeIcon } 
                                 source = { props.listItemIconSource }
-                                resizeMode = 'contain' />
+                                resizeMode = 'contain' /> 
                             {
                                 props.isLoading ?
                                     <View style = { gridItemStyles.progressCircle }>
@@ -51,7 +47,7 @@ export default class GridItemComponent extends Component {
                                         </ProgressCircleComponent>
                                     </View> 
                                     : null
-                            }
+                            }  
                         </View>
                         <View style = { gridItemStyles.textWrapper }>
                             {
@@ -158,9 +154,9 @@ const gridItemStyles = StyleSheet.create({
         marginTop: getHeight(5)
     },
     progressCircle: {
-        position: 'absolute', 
-        top: getWidth(32), 
-        left: getHeight(12) 
+        position: 'absolute',
+        top: getHeight(15),
+        alignSelf: 'center'
     },
     cancelDownloadImage: { 
         height: getHeight(24), 

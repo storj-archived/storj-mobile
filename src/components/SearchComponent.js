@@ -53,7 +53,8 @@ export default class SearchComponent extends Component {
                                     this.setState({ isSearchIconShown: true }); 
                                 }
                             }}
-                            placeholder = { this.getSelectedBucketName() }
+                            placeholder = { this.state.isSearchIconShown ? this.getSelectedBucketName() : null }
+                            placeholderTextColor = { '#000000' }
                             underlineColorAndroid = { 'transparent' } 
                             style = { styles.textInput }
                             onChangeText = { (value) => { 
@@ -88,7 +89,8 @@ export default class SearchComponent extends Component {
                                     this.setState({ isSearchIconShown: true }); 
                                 }
                             }}
-                            placeholder = { 'Select bucket' }
+                            placeholder = { this.state.isSearchIconShown ? 'Select bucket' : null }
+                            placeholderTextColor = { '#000000' }
                             underlineColorAndroid = { 'transparent' } 
                             style = { styles.textInput }
                             onChangeText = { (value) => { 
@@ -117,7 +119,7 @@ export default class SearchComponent extends Component {
         return(
             <View style = { [ styles.rowContainer, styles.mainContainer, this.props.styleContainer ] }>
                     <View style = { styles.rowContainer }>
-                        { this.state.isSearchIconShown ? <Image style={ styles.searchImage } source = { require("../images/Icons/Search.png") } resizeMode = { 'contain' } /> : null }
+                        { this.state.isSearchIconShown && this.props.placeholder !== 'Pictures' ? <Image style={ styles.searchImage } source = { require("../images/Icons/Search.png") } resizeMode = { 'contain' } /> : null }
                         <TextInput
                             onFocus = { () => { this.setState({ isSearchIconShown: false }); } }
                             onBlur = { () => { 
@@ -125,7 +127,8 @@ export default class SearchComponent extends Component {
                                     this.setState({ isSearchIconShown: true }); 
                                 }
                             }}
-                            placeholder = { this.props.placeholder }
+                            placeholder = { this.state.isSearchIconShown ? this.props.placeholder : null }
+                            placeholderTextColor = { '#000000' }
                             underlineColorAndroid = { 'transparent' } 
                             style = { styles.textInput }
                             onChangeText = { (value) => { 

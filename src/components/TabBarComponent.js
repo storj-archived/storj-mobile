@@ -5,7 +5,8 @@ import {
     TouchableOpacity,
     Keyboard,
     Animated,
-    Easing
+    Easing,
+    TouchableWithoutFeedback
 } from 'react-native';
 import React, { Component } from 'react';
 import { getWidth, getHeight, getDeviceWidth} from '../utils/adaptive';
@@ -141,14 +142,14 @@ export default class TabBarComponent extends Component {
                     </View>
                 </View>
                 <View style = { styles.actionButtonWrapper }>
-                    <TouchableOpacity onPress = { () => { this.props.navigation.onActionBarPress(); } }>
+                    <TouchableWithoutFeedback onPress = { () => { this.props.navigation.onActionBarPress(); } }>
                         <View>
                             <Image 
                                 source = { actionButtonSource } 
                                 style = { styles.circleActionbutton }
                                 resizeMode = { 'contain' } />
                         </View>
-                    </TouchableOpacity>
+                    </TouchableWithoutFeedback>
                 </View>
             </Animated.View>
         );
