@@ -99,11 +99,12 @@ const StackNav = StackNavigator(
             opacity: 1,
             shadowRadius: 0
         },
-        transitionConfig: () => {
+        transitionConfig: () => ({
             containerStyle: {
                 backgroundColor: "transparent"
-            }
-        }
+            },
+            screenInterpolator: () => null
+        })
     }
 );
 

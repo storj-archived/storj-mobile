@@ -30,7 +30,7 @@ public class ShareModule extends ReactContextBaseJavaModule {
         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         shareIntent.putExtra(Intent.EXTRA_STREAM, _uri);
         shareIntent.setType("image/*");
-        getReactApplicationContext().startActivity(Intent.createChooser(shareIntent, "Share images to..."));
+        getCurrentActivity().startActivity(Intent.createChooser(shareIntent, "Share images to..."));
         promise.resolve(new Response(true, null).toWritableMap());
     }
 }

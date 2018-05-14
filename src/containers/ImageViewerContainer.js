@@ -1,4 +1,4 @@
-import { Alert } from 'react-native';
+import { Alert, BackHandler, Platform } from 'react-native';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -26,9 +26,14 @@ class ImageViewerContainer extends Component {
         this.name = props.navigation.state.params.fileName;
 
         this.toggleActionBar = this.toggleActionBar.bind(this);
+        this.navigateBack = this.navigateBack.bind(this);
     }
 
     async componentWillMount() {
+        if(Platform.OS === 'android') {
+			BackHandler.addEventListener("hardwareBackPress", this.navigateBack);
+		}
+        
         if(!this.props.isDownloaded) {
             let result = await StorjModule.getDownloadFolderPath();
             ServiceModule.downloadFile(this.bucketId, this.fileId, result + "/" + this.name);
@@ -41,6 +46,12 @@ class ImageViewerContainer extends Component {
         if(!checkImageResponse.isSuccess) {
             this.props.downloadFileError(this.bucketId, this.fileId);
             this.props.redirectToMainScreen();
+        }
+    }
+
+    componentWillUnmount() {
+		if(Platform.OS === 'android') {
+			BackHandler.removeEventListener("hardwareBackPress", this.navigateBack);
         }
     }
 
@@ -120,6 +131,10 @@ class ImageViewerContainer extends Component {
     }
 
     async share(url) {
+        if(!this.props.isDownloaded) {
+            return;
+        }
+
         await ShareModule.shareFile(url);
     }
 
@@ -128,12 +143,12 @@ class ImageViewerContainer extends Component {
     render() {
         return(
             <ImageViewComponent
-                onShare = { this.share }
+                onShare = { this.share.bind(this) }
                 isLoading = { this.props.isLoading }
                 isDownloaded = { this.props.isDownloaded }
                 progress = { this.props.progress }
                 ref = { component => this._imageViewComponent = component }
-                onBackPress = { this.navigateBack.bind(this) }
+                onBackPress = { this.navigateBack }
                 imageUri = { { uri: "file://" + this.props.localPath } }
                 showActionBar = { this.state.showActionBar }
                 onOptionsPress = { this.toggleActionBar }

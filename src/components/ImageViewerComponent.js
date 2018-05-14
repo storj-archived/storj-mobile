@@ -39,7 +39,7 @@ export default class ImageViewerComponent extends Component {
         return(
             <TouchableWithoutFeedback style = { backgroundColor = "transparent" } onPress = { this.props.showActionBar ? this.props.onOptionsPress : null }>
                 <View style = { styles.mainContainer} >
-                    <View style = { [ styles.backgroundWrapper, { opacity: 0.7 } ] } />
+                    <View style = { [ styles.backgroundWrapper, { opacity: 0.93 } ] } />
                     {
                         this.props.isDownloaded ? 
                             <PhotoView
@@ -48,11 +48,7 @@ export default class ImageViewerComponent extends Component {
                                 maximumZoomScale={ 3 }
                                 androidScaleType="fitCenter"
                                 style = { styles.image } />
-                            : <LoadingComponent isLoading  />
-                    }
-                    {
-                        this.props.isLoading ? 
-                            Platform.select({
+                            : Platform.select({
                                 ios: 
                                     <ProgressViewIOS 
                                         progress = { this.props.progress }
@@ -65,8 +61,8 @@ export default class ImageViewerComponent extends Component {
                                         color = { '#2794FF' } 
                                         animating = {true} 
                                         indeterminate = { false } />
-                            }) : null
-                    }    
+                            }) //<LoadingComponent isLoading  />
+                    }
                     <View style = { [ styles.buttonWrapper, styles.topButtonsWrapper ] }>
                         <View style = { styles.backgroundWrapper } />
                         <Button 
@@ -87,7 +83,7 @@ export default class ImageViewerComponent extends Component {
                                 <ActionBar 
                                     actions = { this.props.actionBarActions } /> :
                                 <Button
-                                    onPress = { async () => { console.log(this.props.imageUri.uri); await this.props.onShare(this.props.imageUri.uri); } }
+                                    onPress = { async () => { await this.props.onShare(this.props.imageUri.uri); } }
                                     source = { require("../images/Icons/ImageViewer/share.png") } />       
                         }
                     </View>
