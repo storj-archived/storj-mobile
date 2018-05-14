@@ -137,6 +137,7 @@ export default class MainComponent extends Component {
                 {
                     this.state.showOptions ? 
                         <ViewOptionsComponent 
+                            getBuckets = { this.props.getBuckets }
                             enableSelectionMode = { this.props.enableSelectionMode }
                             isSelectionMode = { this.props.isSelectionMode }
                             setSorting = { this.props.setSorting }

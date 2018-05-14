@@ -56,7 +56,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void listBuckets(final Promise promise) {
+    public void listBuckets(final String sortingMode, final Promise promise) {
         Log.d("SYNC DEBUG", "List buckets sort START");
         new Thread(new Runnable() {
             @Override
@@ -64,7 +64,9 @@ public class SyncModule extends ReactContextBaseJavaModule {
                 try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
                     BucketRepository bucketRepository = new BucketRepository(db);
 
-                    ArrayList<BucketDbo> bucketDbos = (ArrayList)bucketRepository.getAll();
+                    ArrayList<BucketDbo> bucketDbos = sortingMode.equalsIgnoreCase("name")
+                            ? (ArrayList)bucketRepository.getAll(sortingMode, true)
+                            : (ArrayList)bucketRepository.getAll();
 
                     int length = bucketDbos.size();
                     BucketModel[] bucketModels = new BucketModel[length];

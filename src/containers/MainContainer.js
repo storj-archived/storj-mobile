@@ -19,7 +19,8 @@ import {
     deleteBucket, 
     updateFavourite,
     selectBuckets,
-    deselectBuckets
+    deselectBuckets,
+    getBuckets
 } from '../reducers/mainContainer/Buckets/bucketReducerActions';
 import { 
     deleteFile, 
@@ -43,6 +44,8 @@ import SyncModule from '../utils/SyncModule';
 import StorjModule from '../utils/StorjModule';
 import CameraModule from '../utils/CameraModule';
 import { SYNC_BUCKETS } from '../utils/constants/SyncBuckets';
+import ListItemModel from '../models/ListItemModel';
+import BucketModel from '../models/BucketModel';
 
 const { PICTURES } = SYNC_BUCKETS;
 
@@ -414,6 +417,20 @@ class MainContainer extends Component {
         return this.bucketActions;
     };
 
+    async getBuckets(sortingMode) {
+		let bucketsResponse = await SyncModule.listBuckets(sortingMode);
+
+        if(bucketsResponse.isSuccess) {
+            let buckets = JSON.parse(bucketsResponse.result).map((file) => {
+                return new ListItemModel(new BucketModel(file));
+            });                    
+			console.log(buckets);
+			ServiceModule.createBaseBuckets(buckets);
+
+            this.props.getBuckets(buckets);
+        }
+	}
+
     render() {
         const index = this.props.bucketsScreenNavReducer.index;      
         const routes = this.props.bucketsScreenNavReducer.routes;
@@ -421,6 +438,7 @@ class MainContainer extends Component {
         return(
             <MainComponent
                 ref = { component => this._mainComponent = component }
+                getBuckets = { this.getBuckets.bind(this) }
                 getBucketId = { this.getBucketId.bind(this) }
                 redirectToInitializationScreen = { this.props.redirectToInitializationScreen.bind(this) }
                 isGridViewShown = { this.props.isGridViewShown }
@@ -534,7 +552,8 @@ function mapDispatchToProps(dispatch) {
             updateFavourite, 
             updateFavouriteFiles,
             createWallet,
-            getWallets
+            getWallets,
+            getBuckets
         }, dispatch)    
     };    
 }

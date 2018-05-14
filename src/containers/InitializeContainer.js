@@ -129,6 +129,8 @@ class InitializeContainer extends Component {
                 return new ListItemModel(new BucketModel(file));
             });                    
 
+            console.log(buckets);
+
             this.props.getBuckets(buckets);
         }
     }

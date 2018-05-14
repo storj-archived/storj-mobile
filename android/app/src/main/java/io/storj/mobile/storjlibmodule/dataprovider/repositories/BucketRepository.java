@@ -63,8 +63,8 @@ public class BucketRepository extends BaseRepository {
         List<BucketDbo> result = new ArrayList();
         String column = orderByColumn;
 
-        if(orderByColumn != null && !orderByColumn.isEmpty()) {
-            column = BucketContract._CREATED;
+        if(orderByColumn == null || orderByColumn.isEmpty()) {
+            column = BucketContract._NAME;
         }
 
         String orderBy = isDesc ? column + " DESC" : orderByColumn + " ASC";

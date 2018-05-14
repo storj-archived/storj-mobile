@@ -1,4 +1,4 @@
 export default SORTING = {
     BY_NAME: 'name',
-    BY_DATE: 'date'
+    BY_DATE: 'created'
 };
