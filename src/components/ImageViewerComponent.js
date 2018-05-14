@@ -86,7 +86,8 @@ export default class ImageViewerComponent extends Component {
                             this.props.showActionBar ? 
                                 <ActionBar 
                                     actions = { this.props.actionBarActions } /> :
-                                <Button  
+                                <Button
+                                    onPress = { async () => { console.log(this.props.imageUri.uri); await this.props.onShare(this.props.imageUri.uri); } }
                                     source = { require("../images/Icons/ImageViewer/share.png") } />       
                         }
                     </View>

@@ -15,7 +15,7 @@ public class ShareModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "ShareModule";
+        return "ShareModule2";
     }
 
     @ReactMethod
@@ -26,6 +26,6 @@ public class ShareModule extends ReactContextBaseJavaModule {
         shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
         shareIntent.putExtra(Intent.EXTRA_STREAM, _uri);
         shareIntent.setType("image/*");
-        getReactApplicationContext().startActivity(Intent.createChooser(shareIntent, "Share images to.."));
+        getReactApplicationContext().startActivity(Intent.createChooser(shareIntent, "Share images to..."));
     }
 }

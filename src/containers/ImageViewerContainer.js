@@ -7,6 +7,7 @@ import { imageViewerActions } from '../reducers/mainContainer/Files/filesReducer
 import ServiceModule from '../utils/ServiceModule';
 import StorjModule from "../utils/StorjModule";
 import SyncModule from "../utils/SyncModule";
+import ShareModule from "../utils/ShareModule";
 import TabBarActionModelFactory from '../models/TabBarActionModel';
 import ImageViewComponent from "../components/ImageViewerComponent";
 import ListItemModel from '../models/ListItemModel';
@@ -118,11 +119,16 @@ class ImageViewerContainer extends Component {
         ];
     }
 
+    async share(url) {
+        ShareModule.share(url);
+    }
+
     static navigationOptions = { header: null };
 
     render() {
         return(
             <ImageViewComponent
+                onShare = { this.share }
                 isLoading = { this.props.isLoading }
                 isDownloaded = { this.props.isDownloaded }
                 progress = { this.props.progress }
