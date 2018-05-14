@@ -23,7 +23,7 @@ RCT_REMAP_METHOD(shareFile,
   UIImage *image = [UIImage imageWithContentsOfFile:imageUri];
   if(!image){
     //handle error
-    resolver([[Response errorResponseWithMessage:@"Unable"] toDictionary]);
+    resolver([[Response errorResponseWithMessage:@"Error while sharing file"] toDictionary]);
   }
   UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[image]
                                                                            applicationActivities:nil];

@@ -47,14 +47,20 @@ RCT_EXPORT_MODULE(SyncModuleIOS);
 }
 
 RCT_REMAP_METHOD(listBuckets,
-                 listBucketsWithResolver: (RCTPromiseResolveBlock) resolver
+                 listBucketsWithSortingMode: (NSString *) sortingMode
+                 withResolver: (RCTPromiseResolveBlock) resolver
                  andRejecter: (RCTPromiseRejectBlock) rejecter){
   NSLog(@"SyncModule: listBuckets");
   [MethodHandler
    invokeParallelWithParams:@{@RESOLVER: resolver,
                                @REJECTER : rejecter}
    andMethodHandlerBlock:^(NSDictionary * _Nonnull param) {
-     NSArray *bucketDbos = [NSArray arrayWithArray:[[self bucketRepository] getAll]];
+     
+     NSArray *bucketDbos = [NSArray arrayWithArray:
+                            [sortingMode isEqualToString:@"name"]
+                              ? [[self bucketRepository] getAllWithOrderByColumn:sortingMode order:YES]
+                              : [[self bucketRepository] getAll]];
+     
      int length = bucketDbos.count;
      NSMutableArray<BucketModel *> * bucketModels = [NSMutableArray arrayWithCapacity:length];
      for (int i = 0; i < length; i++){
@@ -70,6 +76,7 @@ RCT_REMAP_METHOD(listBuckets,
 
 RCT_REMAP_METHOD(listFiles,
                  listFilesFromBucket: (NSString *) bucketId
+                 withSortingMode: (NSString *) sortingMode
                  withResolver: (RCTPromiseResolveBlock) resolver
                  andRejecter: (RCTPromiseRejectBlock) rejecter){
   [MethodHandler
@@ -77,8 +84,12 @@ RCT_REMAP_METHOD(listFiles,
                                @REJECTER : rejecter}
    andMethodHandlerBlock:^(NSDictionary * _Nonnull param) {
      
-     NSArray <FileDbo *> * fileDbos = [NSArray arrayWithArray:[[self fileRepository]
-                                                               getAllFromBucket:bucketId]];
+     NSArray <FileDbo *> * fileDbos = [sortingMode isEqualToString:@"name"]
+     ? [NSArray arrayWithArray: [[self fileRepository] getAllFromBucket: bucketId
+                                                          orderByColumn: sortingMode
+                                                             descending: YES]]
+     : [NSArray arrayWithArray:[[self fileRepository] getAllFromBucket:bucketId]];
+     
      int length = fileDbos.count;
      NSMutableArray <FileModel *> * fileModels = [NSMutableArray arrayWithCapacity:length];
      for(int i = 0; i < length; i++){
@@ -93,20 +104,21 @@ RCT_REMAP_METHOD(listFiles,
    }];
 }
 
-RCT_REMAP_METHOD(listAllFiles, listAllFilesWithResolver: (RCTPromiseResolveBlock) resolver
-                 andRejecter: (RCTPromiseRejectBlock) rejecter){
+RCT_REMAP_METHOD(listAllFiles,
+                 listAllFilesBySortingMode: (NSString *) sortingMode
+                 withResolver: (RCTPromiseResolveBlock) resolver
+                 andRejecter: (RCTPromiseRejectBlock) rejecter) {
   [MethodHandler
    invokeParallelWithParams:@{@RESOLVER: resolver,
                                @REJECTER : rejecter}
    andMethodHandlerBlock:^(NSDictionary * _Nonnull param) {
-     NSArray<FileDbo *> *fileDbos = [[self fileRepository] getAll];
+     NSArray<FileDbo *> *fileDbos = [sortingMode isEqualToString:@"name"]
+     ? [[self fileRepository] getAllWithOrderByColumn:sortingMode order:YES]
+     : [[self fileRepository] getAll];
      int length = fileDbos.count;
      NSMutableArray *fileModels = [NSMutableArray arrayWithCapacity: length];
      for(int i = 0; i < length; i++){
        fileModels[i] = [[FileModel alloc] initWithFileDbo:fileDbos[i]];
-       if([fileModels[i] _isStarred]){
-         NSLog(@"STARRED FILE: %@", [fileModels[i] toDictionary]);
-       }
      }
      RCTPromiseResolveBlock resolve = param[@RESOLVER];
      resolve([[SingleResponse successSingleResponseWithResult:

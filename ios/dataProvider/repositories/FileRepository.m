@@ -77,12 +77,49 @@ static NSArray * columns;
   return fileDboArray;
 }
 
+-(NSArray *) getAllFromBucket:(NSString *)bucketId
+                orderByColumn: (NSString *) columnName
+                   descending: (BOOL) isDescending {
+  NSString *orderByColumn = columnName;
+  if(!columnName || columnName.length == 0) {
+    orderByColumn = FileContract.NAME;
+  }
+  
+  NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ? ORDER BY %@ %@",
+                       [[FileRepository getSelectionColumnsString]componentsJoinedByString:@","],
+                       FileContract.TABLE_NAME,
+                       FileContract.FILE_FK,
+                       orderByColumn,
+                       isDescending ? @"DESC" : @"ASC"];
+  __block NSMutableArray <FileDbo *> * fileDboArray = [NSMutableArray <FileDbo *> array];
+  FMDatabaseQueue *queue = [self readableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    FMResultSet *resultSet = [db executeQuery:request, bucketId];
+    if(!resultSet) {
+      NSLog(@"No result set returned");
+      return;
+    }
+    
+    while([resultSet next]) {
+      FileDbo *dbo = [FileRepository getFileDboFromResultSet:resultSet];
+      if(dbo){
+        [fileDboArray addObject:dbo];
+      }
+    }
+    [resultSet close];
+  }];
+  [queue close];
+  
+  return fileDboArray;
+}
+
 -(NSArray *) getAllWithOrderByColumn: (NSString *) columnName
                                order: (BOOL) isDescending {
   NSString *orderByColumn = columnName;
   if(!columnName || [columnName length] == 0) {
     orderByColumn = FileContract.CREATED;
   }
+  
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ ORDER BY %@ %@",
                        [[FileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        FileContract.TABLE_NAME,

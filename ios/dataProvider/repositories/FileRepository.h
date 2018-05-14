@@ -21,6 +21,10 @@
 -(NSArray *) getAllWithOrderByColumn: (NSString *) columnName
                                order:(BOOL) isDescending;
 
+-(NSArray *) getAllFromBucket:(NSString *)bucketId
+                orderByColumn: (NSString *) columnName
+                   descending: (BOOL) isDescending;
+
 -(NSArray *) getStarred;
 
 -(FileDbo *) getByFileId:(NSString *) fileId;
