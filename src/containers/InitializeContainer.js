@@ -129,14 +129,12 @@ class InitializeContainer extends Component {
                 return new ListItemModel(new BucketModel(file));
             });                    
 
-            console.log(buckets);
-
             this.props.getBuckets(buckets);
         }
     }
 
     async getAllFiles() {
-        let filesResponse = await SyncModule.listAllFiles();		
+        let filesResponse = await SyncModule.listAllFiles(this.props.sortingMode);		
 
         if(filesResponse.isSuccess) {
             let files = JSON.parse(filesResponse.result).map((file) => {

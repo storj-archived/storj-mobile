@@ -26,6 +26,7 @@ import {
     deleteFile, 
     updateFavouriteFiles,
     selectFiles,
+    listFiles,
     deselectFiles
 } from '../reducers/mainContainer/Files/filesReducerActions';
 import { 
@@ -46,6 +47,7 @@ import CameraModule from '../utils/CameraModule';
 import { SYNC_BUCKETS } from '../utils/constants/SyncBuckets';
 import ListItemModel from '../models/ListItemModel';
 import BucketModel from '../models/BucketModel';
+import FileModel from '../models/FileModel';
 
 const { PICTURES } = SYNC_BUCKETS;
 
@@ -424,12 +426,24 @@ class MainContainer extends Component {
             let buckets = JSON.parse(bucketsResponse.result).map((file) => {
                 return new ListItemModel(new BucketModel(file));
             });                    
-			console.log(buckets);
+
 			ServiceModule.createBaseBuckets(buckets);
 
             this.props.getBuckets(buckets);
         }
-	}
+    }
+    
+    async getFiles(sortingMode)
+    {
+        let filesResponse = await SyncModule.listFiles(this.props.openedBucketId, sortingMode);		
+
+        if(filesResponse.isSuccess) {
+            let files = JSON.parse(filesResponse.result).map((file) => {
+                return new ListItemModel(new FileModel(file));
+            });                    
+            this.props.listFiles(this.props.openedBucketId, files);
+        }
+    }
 
     render() {
         const index = this.props.bucketsScreenNavReducer.index;      
@@ -439,6 +453,7 @@ class MainContainer extends Component {
             <MainComponent
                 ref = { component => this._mainComponent = component }
                 getBuckets = { this.getBuckets.bind(this) }
+                getFiles = { this.getFiles.bind(this) }
                 getBucketId = { this.getBucketId.bind(this) }
                 redirectToInitializationScreen = { this.props.redirectToInitializationScreen.bind(this) }
                 isGridViewShown = { this.props.isGridViewShown }
@@ -543,6 +558,7 @@ function mapDispatchToProps(dispatch) {
             selectFiles,
             deselectBuckets,
             deselectFiles,
+            listFiles,
             setSorting,
             enableSelectionMode,
             disableSelectionMode,

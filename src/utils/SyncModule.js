@@ -13,12 +13,12 @@ const SyncModule = (() => {
             return await syncModule.listBuckets(String(sortingMode));
         }
 
-        async listFiles(bucketId) {
-            return await syncModule.listFiles(bucketId);
+        async listFiles(bucketId, sortingMode) {
+            return await syncModule.listFiles(bucketId, sortingMode);
         }
 
-        async listAllFiles() {
-            return await syncModule.listAllFiles();
+        async listAllFiles(sortingMode) {
+            return await syncModule.listAllFiles(sortingMode);
         }
 
         async listUploadingFiles(bucketId) {

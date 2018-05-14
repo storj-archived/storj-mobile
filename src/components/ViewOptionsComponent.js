@@ -89,8 +89,9 @@ export default class ViewOptionsComponent extends Component {
                         "Sort by date", 
                         () => { 
                             this.props.setSorting(SORTING.BY_DATE);
-                            this.closeView();
                             this.props.getBuckets(SORTING.BY_DATE);
+                            this.props.getFiles(SORTING.BY_DATE);
+                            this.closeView();
                         }
                     )
                 }
@@ -100,8 +101,9 @@ export default class ViewOptionsComponent extends Component {
                         "Sort by name", 
                         () => { 
                             this.props.setSorting(SORTING.BY_NAME);
-                            this.closeView();
                             this.props.getBuckets(SORTING.BY_NAME);
+                            this.props.getFiles(SORTING.BY_NAME);
+                            this.closeView();
                         }
                     )
                 }

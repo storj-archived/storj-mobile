@@ -52,6 +52,26 @@ public class FileRepository extends BaseRepository {
         return result;
     }
 
+    public List<FileDbo> getAll(String orderByColumn, boolean isDesc) {
+        List<FileDbo> result = new ArrayList();
+
+        String column = orderByColumn;
+
+        if(orderByColumn == null || orderByColumn.isEmpty()) {
+            column = FileContract._NAME;
+        }
+
+        String orderBy = isDesc ? column + " DESC" : orderByColumn + " ASC";
+
+        Cursor cursor = _db.query(FileContract.TABLE_NAME, null, null, null, null, null, orderBy, null);
+
+        result = _getListFromCursor(cursor);
+
+        cursor.close();
+
+        return result;
+    }
+
     public List<FileDbo> getAll(String bucketId) {
         List<FileDbo> result = new ArrayList();
         String[] selectionArgs = {
@@ -64,6 +84,36 @@ public class FileRepository extends BaseRepository {
                 null,
                 null,
                 null,
+                null);
+
+        result = _getListFromCursor(cursor);
+
+        cursor.close();
+
+        return result;
+    }
+
+    public List<FileDbo> getAll(String bucketId, String orderByColumn, boolean isDesc) {
+        List<FileDbo> result = new ArrayList();
+        String[] selectionArgs = {
+                bucketId
+        };
+
+        String column = orderByColumn;
+
+        if(orderByColumn == null || orderByColumn.isEmpty()) {
+            column = FileContract._NAME;
+        }
+
+        String orderBy = isDesc ? column + " DESC" : orderByColumn + " ASC";
+
+        Cursor cursor = _db.query(FileContract.TABLE_NAME,
+                null,
+                FileContract.FILE_FK + " = ?",
+                selectionArgs,
+                null,
+                null,
+                orderBy,
                 null);
 
         result = _getListFromCursor(cursor);

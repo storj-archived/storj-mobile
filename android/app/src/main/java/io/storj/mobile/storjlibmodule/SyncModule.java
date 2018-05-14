@@ -85,7 +85,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void listFiles(final String bucketId, final Promise promise) {
+    public void listFiles(final String bucketId, final String sortingMode, final Promise promise) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -93,7 +93,9 @@ public class SyncModule extends ReactContextBaseJavaModule {
 
                     FileRepository fileRepository = new FileRepository(db);
 
-                    ArrayList<FileDbo> fileDbos = (ArrayList)fileRepository.getAll(bucketId);
+                    ArrayList<FileDbo> fileDbos = sortingMode.equalsIgnoreCase("name")
+                            ? (ArrayList)fileRepository.getAll(bucketId, sortingMode, true)
+                            : (ArrayList)fileRepository.getAll(bucketId);
 
                     int length = fileDbos.size();
                     FileModel[] fileModels = new FileModel[length];
@@ -111,7 +113,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void listAllFiles(final Promise promise) {
+    public void listAllFiles(final String sortingMode, final Promise promise) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -119,7 +121,9 @@ public class SyncModule extends ReactContextBaseJavaModule {
 
                     FileRepository fileRepository = new FileRepository(db);
 
-                    ArrayList<FileDbo> fileDbos = (ArrayList)fileRepository.getAll();
+                    ArrayList<FileDbo> fileDbos = sortingMode.equalsIgnoreCase("name")
+                            ? (ArrayList)fileRepository.getAll(sortingMode, true)
+                            : (ArrayList)fileRepository.getAll();
 
                     int length = fileDbos.size();
                     FileModel[] fileModels = new FileModel[length];

@@ -194,7 +194,7 @@ class Apps extends Component {
 
 	async onFilesReceived(response) {
 		if(response.isSuccess) {
-			let filesResponse = await SyncModule.listFiles(response.result);		
+			let filesResponse = await SyncModule.listFiles(response.result, this.props.sortingMode);		
 
 			if(filesResponse.isSuccess) {
 				let files = JSON.parse(filesResponse.result).map((file) => {
