@@ -121,8 +121,8 @@ const listItemStyles = StyleSheet.create({
         flex: 1,
         marginHorizontal: getWidth(10),
         flexDirection: 'row',
-        borderBottomWidth: 0.5,
-        borderColor: 'rgba(56, 75, 101, 0.4)',
+        borderBottomWidth: 0.3,
+        borderColor: 'rgba(56, 75, 101, 0.2)',
         alignItems: 'center',
         justifyContent: 'space-between'
     },

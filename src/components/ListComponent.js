@@ -15,7 +15,7 @@ import GridItemComponent from '../components/GridItemComponent';
 import ExpanderComponent from '../components/ExpanderComponent';
 import ListItemModel from '../models/ListItemModel';
 import PropTypes from 'prop-types';
-import { getWidth, getHeight } from '../utils/adaptive';
+import { getWidth, getHeight, getDeviceWidth } from '../utils/adaptive';
 import SORTING from '../utils/constants/sortingConstants';
 
 /**
@@ -153,6 +153,7 @@ export default class ListComponent extends Component {
                             }
                         })()
                     }
+                    <View style = { styles.underLine }/>
                 </View>
             );
         });
@@ -180,6 +181,7 @@ export default class ListComponent extends Component {
                             }
                         })()
                     }
+                    <View style = { styles.underLine }/>   
                 </View>
             );
         });
@@ -302,6 +304,11 @@ const styles = StyleSheet.create({
     blueStar: {
         fontSize: getHeight(16),
         color: '#2794FF'
+    },
+    underLine: { 
+        height: 0.5, 
+        width: getDeviceWidth(), 
+        backgroundColor: 'rgba(56, 75, 101, 0.2)'
     }
 });
 
