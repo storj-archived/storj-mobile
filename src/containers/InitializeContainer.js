@@ -122,7 +122,7 @@ class InitializeContainer extends Component {
     }
 
     async getAllBuckets() {
-        let bucketsResponse = await SyncModule.listBuckets();
+        let bucketsResponse = await SyncModule.listBuckets(this.props.sortingMode);
 
         if(bucketsResponse.isSuccess) {
             let buckets = JSON.parse(bucketsResponse.result).map((file) => {
@@ -173,7 +173,7 @@ class InitializeContainer extends Component {
 /**
  * connecting reducer to component props 
  */
-function mapStateToProps(state) { return { navigation: state.navReducer }; };
+function mapStateToProps(state) { return { sortingMode: state.mainReducer.sortingMode, navigation: state.navReducer }; };
 function mapDispatchToProps(dispatch) { 
     return {
         ...bindActionCreators({

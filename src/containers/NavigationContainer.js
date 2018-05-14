@@ -240,7 +240,7 @@ class Apps extends Component {
 
 	async onBucketsReceived() {
         this.props.setLoading();
-		let bucketsResponse = await SyncModule.listBuckets();
+		let bucketsResponse = await SyncModule.listBuckets(this.props.sortingMode);
 
         if(bucketsResponse.isSuccess) {
             let buckets = JSON.parse(bucketsResponse.result).map((file) => {
@@ -342,6 +342,7 @@ function mapStateToProps(state) {
 		isEmailConfirmed: state.authReducer.user.isEmailConfirmed,
 		isAccountExist: state.authReducer.user.isAccountExist,
 		isNameExistException: state.bucketReducer.isNameExistException,
+		sortingMode: state.mainReducer.sortingMode,
 		isConnected: state.mainReducer.isConnected
     };
 }

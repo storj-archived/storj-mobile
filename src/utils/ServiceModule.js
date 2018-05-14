@@ -34,6 +34,10 @@ const ServiceModule = (() => {
             serviceModule.getFiles(bucketId);
         }
 
+        /**
+         * Getting buckets from Storj Network, updates local db and gets bucket list from db
+         * @param {string} sortingMode - available options - date and name
+         */
         getBuckets() {
             serviceModule.getBuckets();
         }

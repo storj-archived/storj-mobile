@@ -9,8 +9,8 @@ const SyncModule = (() => {
 
         }
 
-        async listBuckets() {
-            return await syncModule.listBuckets();
+        async listBuckets(sortingMode = "date") {
+            return await syncModule.listBuckets(String(sortingMode));
         }
 
         async listFiles(bucketId) {
