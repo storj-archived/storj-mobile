@@ -361,7 +361,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    private void checkImage(final String fileId, final String localPath, final Promise promise) {
+    private void checkFile(final String fileId, final String localPath, final Promise promise) {
         if(localPath == null) {
             promise.resolve(new Response(false, "localPath is null!").toWritableMap());
             Log.d("SYNC MODULE", "checkImage: Error local path is null!");

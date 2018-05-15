@@ -72,7 +72,7 @@ export function isImage(imageFullName) {
 
     let extension = imageFullName.split('.').pop();
 
-    return ['tif', 'tiff', 'gif', 'jpeg', 'jpg', 'jif', 'jfif', 'jp2', 'jpx', 'j2k', 'j2c', 'fpx', 'pcd', 'png', 'pdf']
+    return ['tif', 'tiff', 'gif', 'jpeg', 'jpg', 'jif', 'jfif', 'jp2', 'jpx', 'j2k', 'j2c', 'fpx', 'pcd', 'png']
         .includes(extension);
 }
 /* export function renderItemName() {

@@ -279,11 +279,12 @@ const StorjLib = (() => {
         };
 
         async getDownloadFolderPath(){
-            let response =  await storjLib.getDownloadFolderPath();
+            let response = await storjLib.getDownloadFolderPath();
 
             if(!response.isSuccess){
                 console.log("getDownloadFolderPath ", response.error.message);
             }
+            
             return response.result;
         }
 

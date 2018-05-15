@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import ListItemModel from '../models/ListItemModel';
 import FileModel from '../models/FileModel';
 import { isImage } from '../utils/fileUtils';
+import OpenFileModule from '../utils/OpenFileModule';
 
 /** 
  * Base class for all screen with file lists
@@ -31,6 +32,21 @@ class BaseFilesListContainer extends BaseListContainer {
      * @param {ListItemModel<FileModel>} file ListItemModel initialized with FileModel
      */
     _onPress(file) {
+        
+        // if(OpenFileModule.checkFile(file.entity.name))
+        // {
+        //     let filePath = StorjModule.getDownloadFolderPath() + "/" + file.entity.name;
+
+        //     if(!file.entity.isDownloaded) {    
+        //         ServiceModule.downloadFile(file.entity.bucketId, file.getId(), filePath);
+        //     }
+
+        //     let openFileResponse = OpenFileModule.openFile(filePath);
+
+        //     return
+        // }
+        
+        
         // if(/* file.entity.isDownloaded && */ file.entity.mimeType.includes('image/')) {
         if(isImage(file.entity.name)){
             this.props.openImageViewer(file.getId(), file.entity.bucketId, file.getName());

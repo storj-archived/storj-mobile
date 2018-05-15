@@ -61,8 +61,8 @@ const SyncModule = (() => {
             return await syncModule.changeSyncStatus(String(settingsId), Boolean(value));
         }
 
-        async checkImage(fileId, localPath) {
-            return await syncModule.checkImage(String(fileId), String(localPath));
+        async checkFile(fileId, localPath) {
+            return await syncModule.checkFile(String(fileId), String(localPath));
         }
     }  
 

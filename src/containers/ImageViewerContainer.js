@@ -1,19 +1,19 @@
-import { Alert, BackHandler, Platform } from 'react-native';
+import { Alert } from 'react-native';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { redirectToMainScreen } from '../reducers/navigation/navigationActions';
 import { imageViewerActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import ServiceModule from '../utils/ServiceModule';
-import StorjModule from "../utils/StorjModule";
 import SyncModule from "../utils/SyncModule";
 import ShareModule from "../utils/ShareModule";
 import TabBarActionModelFactory from '../models/TabBarActionModel';
 import ImageViewComponent from "../components/ImageViewerComponent";
 import ListItemModel from '../models/ListItemModel';
 import FileModel from "../models/FileModel";
+import BaseFileViewerContainer from '../containers/BaseFileViewerContainer';
 
-class ImageViewerContainer extends Component {
+class ImageViewerContainer extends BaseFileViewerContainer {
     constructor(props) {
         super(props);
 
@@ -21,38 +21,8 @@ class ImageViewerContainer extends Component {
             showActionBar: false
         };
 
-        this.fileId = props.navigation.state.params.fileId;
-        this.bucketId = props.navigation.state.params.bucketId;
-        this.name = props.navigation.state.params.fileName;
-
         this.toggleActionBar = this.toggleActionBar.bind(this);
         this.navigateBack = this.navigateBack.bind(this);
-    }
-
-    async componentWillMount() {
-        if(Platform.OS === 'android') {
-			BackHandler.addEventListener("hardwareBackPress", this.navigateBack);
-		}
-        
-        if(!this.props.isDownloaded) {
-            let result = await StorjModule.getDownloadFolderPath();
-            ServiceModule.downloadFile(this.bucketId, this.fileId, result + "/" + this.name);
-
-            return;
-        }
-        
-        let checkImageResponse = await SyncModule.checkImage(this.fileId, this.props.localPath);
-        
-        if(!checkImageResponse.isSuccess) {
-            this.props.downloadFileError(this.bucketId, this.fileId);
-            this.props.redirectToMainScreen();
-        }
-    }
-
-    componentWillUnmount() {
-		if(Platform.OS === 'android') {
-			BackHandler.removeEventListener("hardwareBackPress", this.navigateBack);
-        }
     }
 
     toggleActionBar() {
@@ -61,6 +31,7 @@ class ImageViewerContainer extends Component {
         });
     }
 
+    //ACTIONS
     async setFavourite() {
         let updateStarredResponse = await SyncModule.updateFileStarred(this.fileId, !this.isStarred);
         
@@ -100,22 +71,6 @@ class ImageViewerContainer extends Component {
         this._imageViewComponent.showSelectBuckets();
     }
 
-    async navigateBack() {
-        if(this.props.isLoading) {
-            await this.cancelDownload();
-        }
-
-        this.props.redirectToMainScreen();
-    }
-
-    async cancelDownload() {
-        let cancelDownloadResponse = await StorjModule.cancelDownload(this.props.fileRef);
-
-        if(cancelDownloadResponse.isSuccess) {
-            this.props.fileDownloadCanceled(this.bucketId, this.fileId);
-        }
-    }
-
     getActionBarActions() {
         return [
             TabBarActionModelFactory.createNewAction(
@@ -129,6 +84,7 @@ class ImageViewerContainer extends Component {
             TabBarActionModelFactory.createNewAction(() => { this.tryDeleteFile(); }, 'Action 4', require('../images/ActionBar/TrashBucketIcon.png'))
         ];
     }
+    //ACTIONS END
 
     async share(url) {
         if(!this.props.isDownloaded) {
@@ -137,8 +93,6 @@ class ImageViewerContainer extends Component {
 
         await ShareModule.shareFile(url);
     }
-
-    static navigationOptions = { header: null };
 
     render() {
         return(
