@@ -53,8 +53,8 @@ export function getBuckets(buckets) {
     return { type: GET_BUCKETS, payload: { buckets } };
 }
 
-export function updateFavourite(buckets) {
-    return { type: UPDATE_FAVOURITE, payload: { buckets } } 
+export function updateFavourite(buckets, starredStatus) {
+    return { type: UPDATE_FAVOURITE, payload: { buckets, starredStatus} } 
 }
 
 export function setNameAlreadyExistException() {

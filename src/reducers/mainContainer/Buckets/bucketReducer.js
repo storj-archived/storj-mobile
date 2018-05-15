@@ -57,7 +57,7 @@ export default function mainReducer(state = initialState, action) {
             newState.buckets = bucketsManager.clearSelection();//???
             break;
         case UPDATE_FAVOURITE:
-            newState.buckets = bucketsManager.updateStarred(action.payload.buckets, true);
+            newState.buckets = bucketsManager.updateStarred(action.payload.buckets, action.payload.starredStatus);
             break;  
         case SET_NAME_ALREADY_EXIST_EXCEPTION:
             newState.isNameExistException = true;

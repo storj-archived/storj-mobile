@@ -93,7 +93,7 @@ export default function filesReducer(state = initialState, action) {
             newState.uploadingFileListModels = filesManager.getUploadingFiles(action.payload.uploadingFiles);
             break;
         case FILE_UPDATE_FAVOURITE:
-            newState.fileListModels = filesManager.updateFileStarred(action.payload.files);
+            newState.fileListModels = filesManager.updateFileStarred(action.payload.files, action.payload.starredStatus);
             break;  
         default:
             return state || initialState;

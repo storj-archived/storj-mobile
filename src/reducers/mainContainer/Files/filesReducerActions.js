@@ -136,8 +136,8 @@ export function listUploadingFiles(uploadingFiles) {
     return { type: LIST_UPLOADING_FILES, payload: { uploadingFiles } };
 }
 
-export function updateFavouriteFiles(files) {
-    return { type: FILE_UPDATE_FAVOURITE, payload: { files } } 
+export function updateFavouriteFiles(files, starredStatus) {
+    return { type: FILE_UPDATE_FAVOURITE, payload: { files, starredStatus } } 
 }
 
 export const filesListContainerFileActions = {

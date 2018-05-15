@@ -55,15 +55,17 @@ export default class FileListManager {
     }
 
     /**
-     * Updating files starred prop
-     * @param {object[]} files 
+     * Updating files starred prop 
+     * @param {object[]} files to update starred status
+     * @param {bool} starredStatus status update to
+     * @returns updated status
      */
-    updateFileStarred(files) {        
+    updateFileStarred(files, starredStatus) {        
         let fileIds = files.map(file => file.getId());
         
         this.newFilesList = this.newFilesList.map(file => {
             if(fileIds.includes(file.getId())) { 
-                file.entity.isStarred = !file.entity.isStarred;
+                file.entity.isStarred = starredStatus;
             }   
 
             return file;

@@ -95,14 +95,16 @@ export default class ItemManager {
 
     /**
      * Updating isStarred property of selected buckets
-     * @param {object[]} buckets 
+     * @param {object[]} buckets to update starred status
+     * @param {bool} starredStatus status update to
+     * @returns updated buckets
      */
-    updateStarred(buckets) {
+    updateStarred(buckets, starredStatus) {
         let idList = buckets.map(bucket => bucket.getId());
 
         this.itemList = this.itemList.map(item => {
             if(idList.includes(item.getId())) {                           
-                item.entity.isStarred = !item.entity.isStarred;
+                item.entity.isStarred = starredStatus;
             }
             
             return item;
