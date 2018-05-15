@@ -34,7 +34,8 @@ const {
     POP_LOADING,
     SET_SEARCH,
     CLEAR_SEARCH,
-    SET_IS_CONNECTED
+    SET_IS_CONNECTED,
+    CHANGE_PIN_OPTIONS_STATUS
 } = MAIN_ACTIONS;
 
 /**
@@ -160,6 +161,10 @@ export function setSearch(index, searchSubSequence) {
 export function clearSearch(index) {
     return { type: CLEAR_SEARCH, payload: { index }}
 } 
+
+export function changePINOptionStatus(status) {
+    return { type: CHANGE_PIN_OPTIONS_STATUS, payload: { status } }
+}
 
 export function getPicturesBucketId(buckets) {
     if(!buckets || buckets.length === 0) return;

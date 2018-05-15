@@ -29,7 +29,8 @@ const {
     POP_LOADING,
     SET_SEARCH,
     CLEAR_SEARCH,
-    SET_IS_CONNECTED
+    SET_IS_CONNECTED,
+    CHANGE_PIN_OPTIONS_STATUS
  } = MAIN_ACTIONS; 
 
 const initialState = {
@@ -52,7 +53,8 @@ const initialState = {
     starredSearchSubSequence: null,
     dashboardFilesSearchSubSequence: null,
     loadingStack: [],
-    isConnected: true
+    isConnected: true,
+    isPinOptionsShown: false
 };
 
 export default function mainReducer(state = initialState, action) {
@@ -145,6 +147,9 @@ export default function mainReducer(state = initialState, action) {
             break;
         case CLEAR_SEARCH:
             setSearch(newState, action.payload.index, null);
+            break;
+        case CHANGE_PIN_OPTIONS_STATUS:
+            newState.isPinOptionsShown = action.payload.status;
             break;
         default:
             return state || initialState;

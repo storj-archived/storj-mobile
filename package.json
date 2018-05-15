@@ -9,7 +9,7 @@
   "dependencies": {
     "base-64": "^0.1.0",
     "moment": "^2.21.0",
-    "react-native": "0.51.0",
+    "react-native": "0.55.3",
     "react-native-photo-view": "^1.5.2",
     "react-native-qrcode": "^0.2.6",
     "react-native-smart-barcode": "https://github.com/NikolaiYurchenko/react-native-smart-barcode/archive/ReactNative_SmartBarCode_1.0.0.7.tar.gz",

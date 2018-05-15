@@ -15,6 +15,7 @@ import StorageInfoComponent from '../components/MyAccount/StorageInfoComponent';
 import AddCreditComponent from '../components/MyAccount/AddCreditComponent';
 import PopUpComponent from '../components/PopUpComponent';
 import SelectBucketComponent from '../components/SelectBucketComponent';
+import PinOptionComponent from '../components/PinOptionComponent';
 import PropTypes from 'prop-types';
 
 export default class MainComponent extends Component {
@@ -173,6 +174,13 @@ export default class MainComponent extends Component {
                         <PopUpComponent
                             showPopUp = { this.showPopUp.bind(this) }
                             message = 'Email sent' /> : null
+                }
+                {
+                    this.props.isPinOptionsShown ? 
+                        <PinOptionComponent
+                            changePINOptionStatus = { this.props.changePINOptionStatus }
+                            redirectToPinCodeGenerationScreen = { this.props.redirectToPinCodeGenerationScreen }
+                            deletePIN = { this.props.deletePIN } /> : null
                 }
             </View>
         );

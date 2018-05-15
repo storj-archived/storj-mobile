@@ -13,6 +13,9 @@ import {
     syncDocumentsAsync, 
     syncMoviesAsync 
 } from "../reducers/mainContainer/MyAccount/Settings/SettingsActionsAsync";
+import {
+    changePINOptionStatus
+} from '../reducers/mainContainer/mainReducerActions';
 import ServiceModule from '../utils/ServiceModule';
 
 class SettingsContainer extends Component {
@@ -104,7 +107,8 @@ class SettingsContainer extends Component {
                 syncPhotos = { this.props.syncPhotos }
                 syncMovies = { this.props.syncMovies }
                 syncDocuments = { this.props.syncDocuments } 
-                syncMusic = { this.props.syncMusic } />
+                syncMusic = { this.props.syncMusic }
+                changePINOptionStatus = { this.props.changePINOptionStatus } />
         );
     }
 } 
@@ -119,6 +123,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        ...bindActionCreators({ 
+            changePINOptionStatus }, dispatch), 
         listSettings: (settingsId) => dispatch(listSettingsAsync(settingsId)),
         changeSyncStatus: (settingsId, value) => dispatch(changeSyncStatusAsync(settingsId, value)),
         setWifiConstraint: (settingsId, value, prevSettingsState) => dispatch(setWifiConstraintAsync(settingsId, value, prevSettingsState)),

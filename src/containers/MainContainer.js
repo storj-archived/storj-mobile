@@ -12,7 +12,8 @@ import {
     openBucket,
     setSorting,
     enableSelectionMode,
-    disableSelectionMode
+    disableSelectionMode,
+    changePINOptionStatus
 } from '../reducers/mainContainer/mainReducerActions';
 import {    
     createBucket,
@@ -33,7 +34,8 @@ import {
     redirectToMainScreen, 
     redirectToInitializationScreen, 
     bucketNavigateBack, 
-    dashboardNavigateBack 
+    dashboardNavigateBack,
+    redirectToPinCodeGenerationScreen
 } from '../reducers/navigation/navigationActions';
 import { createWallet, getWallets } from '../reducers/billing/billingActions';
 import TabBarActionModelFactory from '../models/TabBarActionModel';
@@ -450,8 +452,7 @@ class MainContainer extends Component {
         }
     }
     
-    async getFiles(sortingMode)
-    {
+    async getFiles(sortingMode) {
         let filesResponse = await SyncModule.listFiles(this.props.openedBucketId, sortingMode);		
 
         if(filesResponse.isSuccess) {
@@ -460,6 +461,14 @@ class MainContainer extends Component {
             });                    
             this.props.listFiles(this.props.openedBucketId, files);
         }
+    }
+
+    async deletePIN() {
+        await StorjModule.importKeys(
+            this.props.email,
+            this.props.password,
+            this.props.mnemonic,
+            '');
     }
 
     render() {
@@ -473,6 +482,7 @@ class MainContainer extends Component {
                 getFiles = { this.getFiles.bind(this) }
                 getBucketId = { this.getBucketId.bind(this) }
                 redirectToInitializationScreen = { this.props.redirectToInitializationScreen.bind(this) }
+                redirectToPinCodeGenerationScreen = { this.props.redirectToPinCodeGenerationScreen }
                 isGridViewShown = { this.props.isGridViewShown }
                 setGridView = { this.props.setGridView }
                 setListView = { this.props.setListView }
@@ -500,7 +510,10 @@ class MainContainer extends Component {
                 password = { this.props.password }
                 mnemonic = { this.props.mnemonic }
                 selectAll = { this.selectAll.bind(this) }
-                deselectAll = { this.deselectAll.bind(this) } />
+                deselectAll = { this.deselectAll.bind(this) }
+                changePINOptionStatus = { this.props.changePINOptionStatus }
+                isPinOptionsShown = { this.props.isPinOptionsShown }
+                deletePIN = { this.deletePIN.bind(this) } />
         );
     }
 }
@@ -559,7 +572,8 @@ function mapStateToProps(state) {
         isGridViewShown: state.mainReducer.isGridViewShown,
         wallets: state.billingReducer.wallets,
         isStarredBucketsSelected,
-        isStarredFilesSelected
+        isStarredFilesSelected,
+        isPinOptionsShown: state.mainReducer.isPinOptionsShown
     };
 }
 function mapDispatchToProps(dispatch) { 
@@ -569,6 +583,7 @@ function mapDispatchToProps(dispatch) {
             redirectToInitializationScreen,
             bucketNavigateBack, 
             dashboardNavigateBack,
+            redirectToPinCodeGenerationScreen,
             showActionBar,
             hideActionBar,
             showCreateBucketInput,
@@ -591,7 +606,8 @@ function mapDispatchToProps(dispatch) {
             updateFavouriteFiles,
             createWallet,
             getWallets,
-            getBuckets
+            getBuckets,
+            changePINOptionStatus
         }, dispatch)    
     };    
 }
