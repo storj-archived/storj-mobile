@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Animated } from "react-native";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { openImageViewer } from '../reducers/navigation/navigationActions';
+import { openImageViewer, openFilePreview } from '../reducers/navigation/navigationActions';
 import { myPicturesListContainerMainActions, getPicturesBucketId } from '../reducers/mainContainer/mainReducerActions';
 import { dashboardContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import { dashboardContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
@@ -97,6 +97,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({  
         openImageViewer,
+        openFilePreview,
         ...myPicturesListContainerMainActions, 
         ...filesActions,...dashboardContainerActions, 
         ...dashboardContainerBucketActions,

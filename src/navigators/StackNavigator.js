@@ -16,6 +16,7 @@ import MnemonicConfirmationScreen from '../components/Mnemonic/MnemonicConfirmat
 import MnemonicConfirmedScreen from '../components/Mnemonic/MnemonicConfirmedComponent';
 import MnemonicNotConfirmedScreen from '../components/Mnemonic/MnemonicNotConfirmedComponent';
 import MnemonicHelpScreen from '../components/Mnemonic/MnemonicHelpComponent';
+import FilePreviewScreen from '../containers/FilePreviewContainer';
 
 /**
  * Creating program main navigator
@@ -69,6 +70,10 @@ const StackNav = StackNavigator(
         ImageViewerScreen: {
             screen: ImageViewerScreen,
             routeName: "ImageViewerScreen"
+        },
+        FilePreviewScreen: {
+            screen: FilePreviewScreen,
+            routeName: 'FilePreviewScreen'
         },
         MnemonicConfirmationScreen: {
             screen: MnemonicConfirmationScreen,

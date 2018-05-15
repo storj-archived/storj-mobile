@@ -2,7 +2,7 @@ import { BackHandler, Platform, DeviceEventEmitter, Animated } from 'react-nativ
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { bucketNavigateBack, dashboardNavigateBack, openImageViewer } from '../reducers/navigation/navigationActions';
+import { bucketNavigateBack, dashboardNavigateBack, openImageViewer, openFilePreview } from '../reducers/navigation/navigationActions';
 import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { getFileSize, getFullFileName, getShortFileName } from "../utils/fileUtils";
@@ -120,7 +120,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ bucketNavigateBack, dashboardNavigateBack, openImageViewer, ...filesListContainerMainActions, ...filesListContainerFileActions }, dispatch);    
+    return bindActionCreators({ bucketNavigateBack, dashboardNavigateBack, openImageViewer, openFilePreview, ...filesListContainerMainActions, ...filesListContainerFileActions }, dispatch);    
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilesListContainer);

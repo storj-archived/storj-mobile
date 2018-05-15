@@ -114,6 +114,10 @@ export function openImageViewer(fileId, bucketId, fileName) {
     return NavigationActions.navigate({ routeName: 'ImageViewerScreen', params: { fileId, bucketId, fileName } });
 }
 
+export function openFilePreview(fileId, bucketId, fileName) {
+    return NavigationActions.navigate({ routeName: 'FilePreviewScreen', params: { fileId, bucketId, fileName } });
+}
+
 export function navigateBack() {
     return NavigationActions.back();
 }

@@ -8,7 +8,7 @@ import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderCompo
 import { myPicturesListContainerMainActions, getPicturesBucketId, dashboardContainerActions, filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { dashboardContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
-import { dashboardNavigateBack, navigateToDashboardFilesScreen, navigateBack, openImageViewer } from '../reducers/navigation/navigationActions';
+import { dashboardNavigateBack, navigateToDashboardFilesScreen, navigateBack, openImageViewer, openFilePreview } from '../reducers/navigation/navigationActions';
 import filesActions from '../reducers/mainContainer/Files/filesReducerActions';
 import BaseFilesListContainer from '../containers/BaseFilesListContainer';
 import headerFilesListBinder from "../viewBinders/headerFilesListBinder";
@@ -89,6 +89,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({  
             openImageViewer, 
+            openFilePreview,
             ...myPicturesListContainerMainActions, 
             ...filesActions,
             ...dashboardContainerActions, 
