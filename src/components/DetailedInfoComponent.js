@@ -38,10 +38,7 @@ export default class PinOptionComponent extends Component {
                     this.renderOptionItem('Size', this.props.size)
                 }
                 {
-                    this.renderOptionItem('Created', this.props.creationDate)
-                }
-                {
-                    this.renderOptionItem('Updated', this.props.updateDate)
+                    this.renderOptionItem('Created', new Date(this.props.creationDate).toDateString())
                 }
             </View>
         )

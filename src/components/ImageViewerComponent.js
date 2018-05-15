@@ -43,7 +43,7 @@ export default class ImageViewerComponent extends Component {
                     {
                         this.props.isDownloaded ? 
                             <PhotoView
-                                source = { this.props.imageUri }
+                                source = { this.props.fileUri }
                                 minimumZoomScale={ 1 }
                                 maximumZoomScale={ 3 }
                                 androidScaleType="fitCenter"
@@ -83,7 +83,7 @@ export default class ImageViewerComponent extends Component {
                                 <ActionBar 
                                     actions = { this.props.actionBarActions } /> :
                                 <Button
-                                    onPress = { async () => { await this.props.onShare(this.props.imageUri.uri); } }
+                                    onPress = { async () => { await this.props.onShare(this.props.fileUri.uri); } }
                                     source = { require("../images/Icons/ImageViewer/share.png") } />       
                         }
                     </View>

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { BackHandler, Platform } from 'react-native';
+import { Alert, BackHandler, Platform } from 'react-native';
 import ServiceModule from '../utils/ServiceModule';
 import StorjModule from '../utils/StorjModule';
 import SyncModule from '../utils/SyncModule';
+import ShareModule from "../utils/ShareModule";
 import ListItemModel from '../models/ListItemModel';
 import PropTypes from 'prop-types';
+import FileModel from "../models/FileModel";
 
 /** 
  * Base class for all screen containers file preview + upload functionality
@@ -13,9 +15,15 @@ class BaseFileViewerContainer extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            showActionBar: false
+        };
+
         this.fileId = props.navigation.state.params.fileId;
         this.bucketId = props.navigation.state.params.bucketId;
         this.name = props.navigation.state.params.fileName;
+        this.toggleActionBar = this.toggleActionBar.bind(this);
+        this.navigateBack = this.navigateBack.bind(this);
     }
 
     /**
@@ -25,18 +33,21 @@ class BaseFileViewerContainer extends Component {
         header: null
     };
 
+    toggleActionBar() {
+        this.setState({
+            showActionBar: !this.state.showActionBar
+        });
+    }
+
     async componentWillMount() {
-        console.log(this.bucketId, this.fileId, this.name);
-        console.log(this.props);
         if(Platform.OS === 'android') {
 			BackHandler.addEventListener("hardwareBackPress", this.navigateBack);
 		}
         
         if(!this.props.isDownloaded) {
             let result = await StorjModule.getDownloadFolderPath();
-            console.log(result);
-            ServiceModule.downloadFile(this.bucketId, this.fileId, result + "/" + this.name);
 
+            ServiceModule.downloadFile(this.bucketId, this.fileId, result + "/" + this.name);
             return;
         }
         
@@ -55,7 +66,7 @@ class BaseFileViewerContainer extends Component {
     }
 
     async navigateBack() {
-        if(this.props.isLoading) {
+        if(this.props.isLoading) {            
             await this.cancelDownload();
         }
 
@@ -68,6 +79,39 @@ class BaseFileViewerContainer extends Component {
         if(cancelDownloadResponse.isSuccess) {
             this.props.fileDownloadCanceled(this.bucketId, this.fileId);
         }
+    }
+
+    async setFavourite() {
+        let updateStarredResponse = await SyncModule.updateFileStarred(this.fileId, !this.props.isStarred);
+        
+        if(updateStarredResponse.isSuccess) {
+            this.props.updateFavouriteFiles([new ListItemModel(new FileModel({ fileId: this.fileId }))]);
+        }    
+    }
+
+    tryDeleteFile() {
+        Alert.alert(
+            'Delete permanently?',
+            'Are you sure to delete selected files permanently?',
+            [
+                { text: 'Cancel', onPress: () => { }, style: 'cancel' },
+                { text: 'Delete', onPress: () => this.deleteImage() }
+            ],
+            { cancelable: false }
+        );
+    }
+
+    async deleteImage() {
+        let deleteResponse = await ServiceModule.deleteFile(this.bucketId, this.fileId);
+        this.props.redirectToMainScreen();
+    }
+
+    async share(url) {
+        if(!this.props.isDownloaded) {
+            return;
+        }
+
+        await ShareModule.shareFile(url);
     }
 
     render() {

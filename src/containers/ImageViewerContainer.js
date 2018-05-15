@@ -1,4 +1,3 @@
-import { Alert } from 'react-native';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -6,56 +5,17 @@ import { redirectToMainScreen } from '../reducers/navigation/navigationActions';
 import { imageViewerActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import ServiceModule from '../utils/ServiceModule';
 import SyncModule from "../utils/SyncModule";
-import ShareModule from "../utils/ShareModule";
 import TabBarActionModelFactory from '../models/TabBarActionModel';
 import ImageViewComponent from "../components/ImageViewerComponent";
-import ListItemModel from '../models/ListItemModel';
-import FileModel from "../models/FileModel";
 import BaseFileViewerContainer from '../containers/BaseFileViewerContainer';
 
 class ImageViewerContainer extends BaseFileViewerContainer {
     constructor(props) {
         super(props);
 
-        this.state = {
-            showActionBar: false
-        };
-
-        this.toggleActionBar = this.toggleActionBar.bind(this);
-        this.navigateBack = this.navigateBack.bind(this);
-    }
-
-    toggleActionBar() {
-        this.setState({
-            showActionBar: !this.state.showActionBar
-        });
-    }
-
-    //ACTIONS
-    async setFavourite() {
-        let updateStarredResponse = await SyncModule.updateFileStarred(this.fileId, !this.isStarred);
         
-        if(updateStarredResponse.isSuccess) {
-            this.props.updateFavouriteFiles([new ListItemModel(new FileModel({ fileId: this.fileId }))]);
-        }    
     }
-
-    tryDeleteFile() {
-        Alert.alert(
-            'Delete permanently?',
-            'Are you sure to delete selected files permanently?',
-            [
-                { text: 'Cancel', onPress: () => { }, style: 'cancel' },
-                { text: 'Delete', onPress: () => this.deleteImage() }
-            ],
-            { cancelable: false }
-        );
-    }
-
-    async deleteImage() {
-        let deleteResponse = await ServiceModule.deleteFile(this.bucketId, this.fileId);
-        this.props.redirectToMainScreen();
-    }
+    //ACTIONS
 
     tryCopySelectedFile() {
         this._imageViewComponent.showSelectBuckets(this.copySelectedFile.bind(this));
@@ -86,13 +46,7 @@ class ImageViewerContainer extends BaseFileViewerContainer {
     }
     //ACTIONS END
 
-    async share(url) {
-        if(!this.props.isDownloaded) {
-            return;
-        }
-
-        await ShareModule.shareFile(url);
-    }
+    
 
     render() {
         return(
@@ -103,7 +57,7 @@ class ImageViewerContainer extends BaseFileViewerContainer {
                 progress = { this.props.progress }
                 ref = { component => this._imageViewComponent = component }
                 onBackPress = { this.navigateBack }
-                imageUri = { { uri: "file://" + this.props.localPath } }
+                fileUri = { { uri: "file://" + this.props.localPath } }
                 showActionBar = { this.state.showActionBar }
                 onOptionsPress = { this.toggleActionBar }
                 isGridViewShown = { this.props.isGridViewShown }

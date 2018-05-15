@@ -17,10 +17,11 @@ const OpenFileModule = (() => {
             return openFileModule.openFile(String(fileUri));
         }
 
-        checkFile(fileName) {
+        async checkFile(fileName) {
             if(!isAndroid) return { isSuccess: false };         
 
-            return openFileModule.checkFile(String(fileName));
+            let response = await openFileModule.checkFile(String(fileName));
+            return response.isSuccess;
         }
     }
 

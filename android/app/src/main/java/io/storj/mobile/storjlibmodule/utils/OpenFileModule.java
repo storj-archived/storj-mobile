@@ -97,10 +97,12 @@ public class OpenFileModule  extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public boolean checkFile(String fileName) {
+    public void checkFile(String fileName, Promise promise) {
         String ext = getExtension(fileName);
 
-        return Arrays.asList(new String[] {"doc", "pdf",  "ppt", "pptx", "rtf", "wav", "mp3", "txt", "3gp", "mpg", "mpeg", "mpe", "mp4", "avi"}).contains(ext);
+        boolean contains = Arrays.asList(new String[] {"doc", "pdf",  "ppt", "pptx", "rtf", "wav", "mp3", "txt", "3gp", "mpg", "mpeg", "mpe", "mp4", "avi"}).contains(ext);
+
+        promise.resolve(new Response(contains, null).toWritableMap());
     }
 
     private String getExtension(String uri) {

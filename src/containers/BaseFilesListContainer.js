@@ -32,25 +32,12 @@ class BaseFilesListContainer extends BaseListContainer {
      * @param {ListItemModel<FileModel>} file ListItemModel initialized with FileModel
      */
     _onPress(file) {
-        
-        // if(OpenFileModule.checkFile(file.entity.name))
-        // {
-        //     let filePath = StorjModule.getDownloadFolderPath() + "/" + file.entity.name;
-
-        //     if(!file.entity.isDownloaded) {    
-        //         ServiceModule.downloadFile(file.entity.bucketId, file.getId(), filePath);
-        //     }
-
-        //     let openFileResponse = OpenFileModule.openFile(filePath);
-
-        //     return
-        // }
-        
-        
-        // if(/* file.entity.isDownloaded && */ file.entity.mimeType.includes('image/')) {
-        if(isImage(file.entity.name)){
+        if(isImage(file.entity.name)) {
             this.props.openImageViewer(file.getId(), file.entity.bucketId, file.getName());
+            return;
         }
+
+        this.props.openFilePreview(file.getId(), file.entity.bucketId, file.getName());
     }
 
     /**

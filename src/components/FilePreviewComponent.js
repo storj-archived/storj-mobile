@@ -38,16 +38,6 @@ export default class FilePreviewComponent extends Component {
         this.setState({ isSelectBucketShown: !this.state.isSelectBucketShown })
     }
 
-    showCentralContent() {
-        return(
-            <View style = { styles.centralContainer }>
-                <Image source = { require('../images/Icons/CloudFile.png') } style = { styles.cloudImage } />
-                <Text style = { styles.text }>Test text</Text>
-                <Text style = { styles.text }>Test text 2</Text>
-            </View>
-        )
-    }
-
     showDetailedInfo() {
         this.setState({ isDetailedInfoShown: !this.state.isDetailedInfoShown })
     }
@@ -57,10 +47,15 @@ export default class FilePreviewComponent extends Component {
             <TouchableWithoutFeedback style = { backgroundColor = "transparent" } onPress = { this.props.showActionBar ? this.props.onOptionsPress : null }>
                 <View style = { styles.mainContainer} >
                     <View style = { [ styles.backgroundWrapper, { opacity: 0.93 } ] } />
+                    <View style = { styles.centralContainer }>
+                        <Image source = { require('../images/Icons/CloudFile.png') } style = { styles.cloudImage } />
+                        <Text style = { styles.text }>{ this.props.name }</Text>
+                        <Text style = { styles.text }>{ this.props.size }</Text>
+                    </View>
                     {
                         this.props.isDownloaded ? 
-                            this.showCentralContent()
-                            : Platform.select({
+                            null :
+                            Platform.select({
                                 ios: 
                                     <ProgressViewIOS 
                                         progress = { this.props.progress }
@@ -73,7 +68,7 @@ export default class FilePreviewComponent extends Component {
                                         color = { '#2794FF' } 
                                         animating = {true} 
                                         indeterminate = { false } />
-                            }) //<LoadingComponent isLoading  />
+                            }) 
                     }
                     <View style = { [ styles.buttonWrapper, styles.topButtonsWrapper ] }>
                         <View style = { styles.backgroundWrapper } />
@@ -101,7 +96,7 @@ export default class FilePreviewComponent extends Component {
                                 <ActionBar 
                                     actions = { this.props.actionBarActions } /> :
                                 <Button
-                                    onPress = { async () => { await this.props.onShare(this.props.imageUri.uri); } }
+                                    onPress = { async () => { await this.props.onShare(this.props.fileUri.uri); } }
                                     source = { require("../images/Icons/BlueShare.png") } />       
                         }
                     </View>
@@ -131,11 +126,10 @@ export default class FilePreviewComponent extends Component {
                         this.state.isDetailedInfoShown 
                             ? <DetailedInfoComponent
                                 showDetailedInfo = { this.showDetailedInfo.bind(this) }
-                                fileName = { 'testName' }
-                                type = { 'testType' }
-                                size = { 'testSize' }
-                                creationDate = { 'testCreationDate' }
-                                updateDate = { 'testUpdateDate' } /> : null
+                                fileName = { this.props.name }
+                                type = { this.props.mimeType }
+                                size = { this.props.size }
+                                creationDate = { this.props.created } /> : null
                     }
                 </View>
             </TouchableWithoutFeedback>   
