@@ -27,7 +27,6 @@ export default class MainComponent extends Component {
             showQR: false,
             showStorageInfo: false,
             showCredits: false,
-            showPopUp: false,
             isSelectBucketShown: false
         }
     };
@@ -46,10 +45,6 @@ export default class MainComponent extends Component {
 
     showCredits() {
         this.setState({ showCredits: !this.state.showCredits });
-    }
-
-    showPopUp() {
-        this.setState({ showPopUp: !this.state.showPopUp });
     }
 
     showSelectBuckets(callback) {
@@ -74,7 +69,6 @@ export default class MainComponent extends Component {
                         showQR = { this.showQR.bind(this) }
                         showCredits = { this.showCredits.bind(this) }
                         showStorageInfo = { this.showStorageInfo.bind(this) }
-                        showPopUp = { this.showPopUp.bind(this) }
                         isSingleItemSelected = { this.props.isSingleItemSelected }
                         isActionBarShown = { this.props.isActionBarShown }
                         isSelectionMode = { this.props.isSelectionMode }
@@ -170,9 +164,9 @@ export default class MainComponent extends Component {
                             showCredits = { this.showCredits.bind(this) } /> : null
                 }
                 {
-                    this.state.showPopUp ? 
+                    this.props.isChangePasswordPopupShown ? 
                         <PopUpComponent
-                            showPopUp = { this.showPopUp.bind(this) }
+                            changePasswordPopupStatus = { this.props.changePasswordPopupStatus }
                             message = 'Email sent' /> : null
                 }
                 {

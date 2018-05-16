@@ -35,7 +35,8 @@ const {
     SET_SEARCH,
     CLEAR_SEARCH,
     SET_IS_CONNECTED,
-    CHANGE_PIN_OPTIONS_STATUS
+    CHANGE_PIN_OPTIONS_STATUS,
+    CHANGE_CHANGE_PASSWORD_POPUP_STATUS
 } = MAIN_ACTIONS;
 
 /**
@@ -164,6 +165,10 @@ export function clearSearch(index) {
 
 export function changePINOptionStatus(status) {
     return { type: CHANGE_PIN_OPTIONS_STATUS, payload: { status } }
+}
+
+export function changePasswordPopupStatus(status) {
+    return { type: CHANGE_CHANGE_PASSWORD_POPUP_STATUS, payload: { status } }
 }
 
 export function getPicturesBucketId(buckets) {

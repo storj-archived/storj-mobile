@@ -30,7 +30,8 @@ const {
     SET_SEARCH,
     CLEAR_SEARCH,
     SET_IS_CONNECTED,
-    CHANGE_PIN_OPTIONS_STATUS
+    CHANGE_PIN_OPTIONS_STATUS,
+    CHANGE_CHANGE_PASSWORD_POPUP_STATUS
  } = MAIN_ACTIONS; 
 
 const initialState = {
@@ -54,7 +55,8 @@ const initialState = {
     dashboardFilesSearchSubSequence: null,
     loadingStack: [],
     isConnected: true,
-    isPinOptionsShown: false
+    isPinOptionsShown: false,
+    isChangePasswordPopupShown: false
 };
 
 export default function mainReducer(state = initialState, action) {
@@ -150,6 +152,9 @@ export default function mainReducer(state = initialState, action) {
             break;
         case CHANGE_PIN_OPTIONS_STATUS:
             newState.isPinOptionsShown = action.payload.status;
+            break;
+        case CHANGE_CHANGE_PASSWORD_POPUP_STATUS: 
+            newState.isChangePasswordPopupShown = action.payload.status;
             break;
         default:
             return state || initialState;

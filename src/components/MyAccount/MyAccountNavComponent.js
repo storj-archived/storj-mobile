@@ -20,8 +20,7 @@ export default class MyAccountNavComponent extends Component {
                     redirectToInitializationScreen = { this.props.redirectToInitializationScreen }
                     showQR = { this.props.showQR }
                     showStorageInfo = { this.props.showStorageInfo }
-                    showCredits = { this.props.showCredits }
-                    showPopUp = { this.props.showPopUp }                         
+                    showCredits = { this.props.showCredits }                      
                     storageAmount = { this.props.storageAmount }
                     bandwidthAmount = { this.props.bandwidthAmount }
                     getBalance = { this.props.getBalance }
@@ -45,7 +44,6 @@ MyAccountNavComponent.propTypes = {
     redirectToInitializationScreen: PropTypes.func,
     resetPassword: PropTypes.func,
     showCredits: PropTypes.func,
-    showPopUp: PropTypes.func,
     showQR: PropTypes.func,
     showStorageInfo: PropTypes.func,
     storageAmount: PropTypes.string,

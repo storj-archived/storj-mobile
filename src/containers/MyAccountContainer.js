@@ -101,7 +101,6 @@ class MyAccountContainer extends Component {
                 showQR = { this.props.screenProps.showQR }
                 showStorageInfo = { this.props.screenProps.showStorageInfo }
                 showCredits = { this.props.screenProps.showCredits } 
-                showPopUp = { this.props.screenProps.showPopUp }
                 storageAmount = { this.props.storage }
                 bandwidthAmount = { this.props.bandwidth }                
                 getBalance = { this.balance.bind(this) }

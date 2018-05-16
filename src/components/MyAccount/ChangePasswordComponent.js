@@ -29,7 +29,7 @@ export default class ChangePasswordComponent extends Component{
             let result = await this.props.screenProps.resetPassword(this.state.email);
             
             if(result) {
-                this.props.screenProps.showPopUp();
+                this.props.screenProps.changePasswordPopupStatus(true);
             } else this.setState({isError: true});
         } else this.setState({isError: true}); 
     }

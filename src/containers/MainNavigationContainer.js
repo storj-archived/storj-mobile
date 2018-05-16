@@ -26,7 +26,6 @@ class MainNavigationContainer extends Component {
                     showQR: this.props.showQR,
                     showStorageInfo: this.props.showStorageInfo,
                     showCredits: this.props.showCredits,
-                    showPopUp: this.props.showPopUp,
                     redirectToInitializationScreen: this.props.redirectToInitializationScreen,
                     isFirstSignIn: this.props.isFirstSignIn,
                     selectAll: this.props.selectAll,
@@ -94,7 +93,6 @@ MainNavigationContainer.propTypes = {
     redirectToInitializationScreen: PropTypes.func,
     showCredits: PropTypes.func,
     showOptions: PropTypes.func,
-    showPopUp: PropTypes.func,
     showQR: PropTypes.func,
     showStorageInfo: PropTypes.func,
     testAction: PropTypes.func

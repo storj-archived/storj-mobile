@@ -15,10 +15,10 @@ export default class PopUpComponent extends Component {
     render() {
         return(
             <View style = { [ styles.backgroundWrapper ] }>  
-                <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { this.props.showPopUp } />
+                <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { () => this.props.changePasswordPopupStatus(false) } />
                 <View style = { styles.popUpContainer } >
                     <Text style = { styles.popUpInfoText } >{ this.props.message }</Text>
-                    <TouchableOpacity onPress = { this.props.showPopUp } >
+                    <TouchableOpacity onPress = { () => this.props.changePasswordPopupStatus(false) } >
                         <Text style = { styles.popUpCancelText }>OK</Text>
                     </TouchableOpacity>
                 </View>

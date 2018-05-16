@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux';
 import { addNavigationHelpers } from 'react-navigation';
 import React, { Component } from 'react';
 import MyAccountScreenNavigator from '../navigators/MyAccountScreenNavigator';
+import { changePasswordPopupStatus } from '../reducers/mainContainer/mainReducerActions';
 import { 
     redirectToMyAccountScreen,
     redirectToBalanceScreen,
@@ -69,8 +70,7 @@ class MyAccountNavContainer extends Component {
                         mnemonic: this.props.mnemonic,
                         showQR: this.props.showQR,
                         showStorageInfo: this.props.showStorageInfo,
-                        showCredits: this.props.showCredits,
-                        showPopUp: this.props.showPopUp,                         
+                        showCredits: this.props.showCredits,                       
                         storageAmount: this.props.storageAmount,
                         bandwidthAmount: this.props.bandwidthAmount,
                         getBalance: this.props.getBalance,
@@ -82,7 +82,8 @@ class MyAccountNavContainer extends Component {
                         redirectToSettingsScreen: this.props.redirectToSettingsScreen, 
                         redirectToStorageScreen: this.props.redirectToStorageScreen, 
                         redirectToMyAccountScreen: this.props.redirectToMyAccountScreen,
-                        redirectToMyAccountMnemonicScreen: this.props.redirectToMyAccountMnemonicScreen
+                        redirectToMyAccountMnemonicScreen: this.props.redirectToMyAccountMnemonicScreen,
+                        changePasswordPopupStatus: this.props.changePasswordPopupStatus
                     } }
                     navigation = { addNavigationHelpers({ 
                         dispatch: this.props.dispatch,
@@ -112,7 +113,8 @@ function mapDispatchToProps(dispatch) {
             redirectToSettingsScreen,
             redirectToStorageScreen,
             redirectToMyAccountMnemonicScreen,
-            clear
+            clear,
+            changePasswordPopupStatus
         }, dispatch)
     }
 }

@@ -13,7 +13,8 @@ import {
     setSorting,
     enableSelectionMode,
     disableSelectionMode,
-    changePINOptionStatus
+    changePINOptionStatus,
+    changePasswordPopupStatus
 } from '../reducers/mainContainer/mainReducerActions';
 import {    
     createBucket,
@@ -512,7 +513,9 @@ class MainContainer extends Component {
                 selectAll = { this.selectAll.bind(this) }
                 deselectAll = { this.deselectAll.bind(this) }
                 changePINOptionStatus = { this.props.changePINOptionStatus }
+                changePasswordPopupStatus = { this.props.changePasswordPopupStatus }
                 isPinOptionsShown = { this.props.isPinOptionsShown }
+                isChangePasswordPopupShown = { this.props.isChangePasswordPopupShown }
                 deletePIN = { this.deletePIN.bind(this) } />
         );
     }
@@ -573,7 +576,8 @@ function mapStateToProps(state) {
         wallets: state.billingReducer.wallets,
         isStarredBucketsSelected,
         isStarredFilesSelected,
-        isPinOptionsShown: state.mainReducer.isPinOptionsShown
+        isPinOptionsShown: state.mainReducer.isPinOptionsShown,
+        isChangePasswordPopupShown: state.mainReducer.isChangePasswordPopupShown
     };
 }
 function mapDispatchToProps(dispatch) { 
@@ -607,7 +611,8 @@ function mapDispatchToProps(dispatch) {
             createWallet,
             getWallets,
             getBuckets,
-            changePINOptionStatus
+            changePINOptionStatus,
+            changePasswordPopupStatus
         }, dispatch)    
     };    
 }
