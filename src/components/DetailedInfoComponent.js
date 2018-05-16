@@ -25,11 +25,17 @@ export default class PinOptionComponent extends Component {
     }
 
     renderOptions() {
+        const starredIcon = this.props.isStarred ? '★' : null;
+        
         return(
             <View style = { styles.mainContainer } >
                 <View style = { [styles.itemContainer, styles.justifyStart] } >
                     <Image style = { styles.icon } source = { require('../images/Icons/FileListItemIcon.png') } resizeMode = { 'contain' } />
-                    <Text style = { [styles.labelText, styles.nameTextMargin] }>{ this.props.fileName }</Text>
+                    <Text style = { [styles.labelText, styles.nameTextMargin] }>
+                        <Text style = { styles.blueStar }>
+                            { starredIcon }
+                        </Text>
+                    { this.props.fileName }</Text>
                 </View>
                 {
                     this.renderOptionItem('Type', this.props.type)
@@ -110,5 +116,9 @@ const styles = StyleSheet.create({
     },
     nameTextMargin: {
         marginLeft: getWidth(12)
+    },
+    blueStar: {
+        fontSize: getHeight(16),
+        color: '#2794FF'
     }
 });

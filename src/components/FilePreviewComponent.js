@@ -43,13 +43,19 @@ export default class FilePreviewComponent extends Component {
     }
 
     render() {
+        const starredIcon = this.props.isStarred ? '★' : null;
+
         return(
             <TouchableWithoutFeedback style = { backgroundColor = "transparent" } onPress = { this.props.showActionBar ? this.props.onOptionsPress : null }>
                 <View style = { styles.mainContainer} >
                     <View style = { [ styles.backgroundWrapper, { opacity: 0.93 } ] } />
                     <View style = { styles.centralContainer }>
                         <Image source = { require('../images/Icons/CloudFile.png') } style = { styles.cloudImage } />
-                        <Text style = { styles.text }>{ this.props.name }</Text>
+                        <Text style = { styles.text }>
+                        <Text style = { styles.blueStar }>
+                            { starredIcon }
+                        </Text>
+                        { this.props.name }</Text>
                         <Text style = { styles.text }>{ this.props.size }</Text>
                     </View>
                     {
@@ -129,7 +135,8 @@ export default class FilePreviewComponent extends Component {
                                 fileName = { this.props.name }
                                 type = { this.props.mimeType }
                                 size = { this.props.size }
-                                creationDate = { this.props.created } /> : null
+                                creationDate = { this.props.created }
+                                isStarred = { this.props.isStarred } /> : null
                     }
                 </View>
             </TouchableWithoutFeedback>   
@@ -216,5 +223,9 @@ const styles = StyleSheet.create({
     },
     searchButtonMargin: {
         marginLeft: getWidth(20)
+    },
+    blueStar: {
+        fontSize: getHeight(16),
+        color: '#2794FF'
     }
 });
