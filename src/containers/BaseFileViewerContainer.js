@@ -22,6 +22,8 @@ class BaseFileViewerContainer extends Component {
         this.fileId = props.navigation.state.params.fileId;
         this.bucketId = props.navigation.state.params.bucketId;
         this.name = props.navigation.state.params.fileName;
+        this.showProgress = true;
+
         this.toggleActionBar = this.toggleActionBar.bind(this);
         this.navigateBack = this.navigateBack.bind(this);
     }
@@ -95,13 +97,13 @@ class BaseFileViewerContainer extends Component {
             'Are you sure to delete selected files permanently?',
             [
                 { text: 'Cancel', onPress: () => { }, style: 'cancel' },
-                { text: 'Delete', onPress: () => this.deleteImage() }
+                { text: 'Delete', onPress: () => this.deleteFile() }
             ],
             { cancelable: false }
         );
     }
 
-    async deleteImage() {
+    async deleteFile() {
         let deleteResponse = await ServiceModule.deleteFile(this.bucketId, this.fileId);
         this.props.redirectToMainScreen();
     }

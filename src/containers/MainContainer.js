@@ -123,6 +123,18 @@ class MainContainer extends Component {
         );
     }
     
+    deleteFile(bucketId, fileId) {        
+        ServiceModule.deleteFile(bucketId, fileId);
+    }
+
+    deleteSelectedFiles(bucketId) {
+        this.props.fileListModels.forEach(fileItem => { 
+
+            if(fileItem.isSelected)
+                this.deleteFile(fileItem.entity.bucketId, fileItem.getId());
+        });
+    }
+    
     componentWillUnmount () {
         if(Platform.OS === "android") {
             BackHandler.removeEventListener("hardwareBackPress");
@@ -223,18 +235,6 @@ class MainContainer extends Component {
 
                 this.downloadFile(fileItem, result + "/" + fileItem.getName());
             }
-        });
-    }
-
-    deleteFile(bucketId, fileId) {        
-        ServiceModule.deleteFile(bucketId, fileId);
-    }
-
-    deleteSelectedFiles(bucketId) {
-        this.props.fileListModels.forEach(fileItem => { 
-
-            if(fileItem.isSelected)
-                this.deleteFile(fileItem.entity.bucketId, fileItem.getId());
         });
     }
 

@@ -14,7 +14,9 @@ class FilePreviewContainer extends BaseFileViewerContainer {
     constructor(props) {
         super(props);
         
+        this.size = props.size;
         this.navigateBack = this.navigateBack.bind(this);
+        this.isOpened = false;
     }
 
     async openFile() {
@@ -23,6 +25,7 @@ class FilePreviewContainer extends BaseFileViewerContainer {
         if(!await OpenFileModule.checkFile(this.name)) return
 
         OpenFileModule.openFile(this.props.localPath);
+        this.isOpened = true;
     }
 
     getActionBarActions() {
@@ -39,10 +42,15 @@ class FilePreviewContainer extends BaseFileViewerContainer {
     }
 
     render() {
-        // this.openFile();
+        if(!this.isOpened) this.openFile();
+        
+        if(this.props.isDownloaded) {
+            this.showProgress = false;
+        }
 
         return(
             <FilePreviewComponent
+                showProgress = { this.showProgress }
                 openFile = { this.openFile.bind(this) }
                 onShare = { this.share.bind(this) }
                 isLoading = { this.props.isLoading }
@@ -51,7 +59,7 @@ class FilePreviewContainer extends BaseFileViewerContainer {
                 onBackPress = { this.navigateBack }
                 fileUri = { { uri: "file://" + this.props.localPath } }
                 name = { this.name }
-                size = { this.props.size }
+                size = { this.size }
                 mimeType = { this.props.mimeType }
                 created = { this.props.created }
                 isStarred = { this.props.isStarred }

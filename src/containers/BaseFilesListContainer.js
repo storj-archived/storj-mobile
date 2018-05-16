@@ -32,6 +32,8 @@ class BaseFilesListContainer extends BaseListContainer {
      * @param {ListItemModel<FileModel>} file ListItemModel initialized with FileModel
      */
     _onPress(file) {
+        if(file.isLoading) return;
+
         if(isImage(file.entity.name)) {
             this.props.openImageViewer(file.getId(), file.entity.bucketId, file.getName());
             return;

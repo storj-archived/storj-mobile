@@ -41,7 +41,7 @@ export default class ImageViewerComponent extends Component {
                 <View style = { styles.mainContainer} >
                     <View style = { [ styles.backgroundWrapper, { opacity: 0.93 } ] } />
                     {
-                        this.props.isDownloaded ? 
+                        !this.props.showProgress || this.props.isDownloaded ? 
                             <PhotoView
                                 source = { this.props.fileUri }
                                 minimumZoomScale={ 1 }
@@ -61,7 +61,7 @@ export default class ImageViewerComponent extends Component {
                                         color = { '#2794FF' } 
                                         animating = {true} 
                                         indeterminate = { false } />
-                            }) //<LoadingComponent isLoading  />
+                            })
                     }
                     <View style = { [ styles.buttonWrapper, styles.topButtonsWrapper ] }>
                         <View style = { styles.backgroundWrapper } />

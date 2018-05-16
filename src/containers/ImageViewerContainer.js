@@ -49,8 +49,13 @@ class ImageViewerContainer extends BaseFileViewerContainer {
     
 
     render() {
+        if(this.props.isDownloaded) {
+            this.showProgress = false;
+        }
+
         return(
             <ImageViewComponent
+                showProgress = { this.showProgress }
                 onShare = { this.share.bind(this) }
                 isLoading = { this.props.isLoading }
                 isDownloaded = { this.props.isDownloaded }

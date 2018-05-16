@@ -59,7 +59,7 @@ export default class FilePreviewComponent extends Component {
                         <Text style = { styles.text }>{ this.props.size }</Text>
                     </View>
                     {
-                        this.props.isDownloaded ? 
+                        !this.props.showProgress || this.props.isDownloaded ? 
                             null :
                             Platform.select({
                                 ios: 
