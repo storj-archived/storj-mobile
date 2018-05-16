@@ -3,7 +3,7 @@ import { Alert, BackHandler, Platform } from 'react-native';
 import ServiceModule from '../utils/ServiceModule';
 import StorjModule from '../utils/StorjModule';
 import SyncModule from '../utils/SyncModule';
-import ShareModule from "../utils/ShareModule";
+import OpenFileModule from '../utils/OpenFileModule';
 import ListItemModel from '../models/ListItemModel';
 import PropTypes from 'prop-types';
 import FileModel from "../models/FileModel";
@@ -113,7 +113,7 @@ class BaseFileViewerContainer extends Component {
             return;
         }
 
-        await ShareModule.shareFile(url);
+        await OpenFileModule.shareFile(url);
     }
 
     render() {

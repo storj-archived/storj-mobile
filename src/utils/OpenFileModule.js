@@ -23,6 +23,12 @@ const OpenFileModule = (() => {
             let response = await openFileModule.checkFile(String(fileName));
             return response.isSuccess;
         }
+
+        shareFile(fileUri) {
+            if(!isAndroid) return { isSuccess: false };         
+
+            return openFileModule.shareFile(String(fileUri));
+        }
     }
 
     return {

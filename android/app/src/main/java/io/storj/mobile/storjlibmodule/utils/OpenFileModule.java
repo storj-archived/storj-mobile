@@ -46,42 +46,9 @@ public class OpenFileModule  extends ReactContextBaseJavaModule {
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
         String ext = getExtension(uri.toString());
+        String type = getType(ext);
 
-        switch (ext) {
-            case "doc":
-                intent.setDataAndType(uri, "application/msword");
-                break;
-            case "pdf":
-                intent.setDataAndType(uri, "application/pdf");
-                break;
-            case "ppt":
-            case "pptx":
-                intent.setDataAndType(uri, "application/vnd.ms-powerpoint");
-                break;
-            case "rtf":
-                intent.setDataAndType(uri, "application/rtf");
-                break;
-            case "wav":
-            case "mp3":
-                intent.setDataAndType(uri, "audio/x-wav");
-                break;
-            case "txt":
-                intent.setDataAndType(uri, "text/plain");
-                break;
-            case "3gp":
-            case "mpg":
-            case "mpeg":
-            case "mpe":
-            case "mp4":
-            case "avi":
-                intent.setDataAndType(uri, "video/*");
-                break;
-            default:
-                intent.setDataAndType(uri, "*/*");
-                promise.resolve(new Response(false, "File type not supported").toWritableMap());
-                return;
-        }
-
+        intent.setDataAndType(uri, type);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         PackageManager packageManager = getReactApplicationContext().getPackageManager();
@@ -97,12 +64,63 @@ public class OpenFileModule  extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void shareFile(String uri, Promise promise) {
+        Uri _uri = Uri.parse(uri);
+        String ext = getExtension(uri);
+        String type = getType(ext);
+
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, _uri);
+        shareIntent.setType(type);
+
+        PackageManager packageManager = getReactApplicationContext().getPackageManager();
+
+        if (shareIntent.resolveActivity(packageManager) == null) {
+            promise.resolve(new Response(false, "File type not suported or no default application for file found.").toWritableMap());
+            return;
+        }
+
+        getCurrentActivity().startActivity(Intent.createChooser(shareIntent, "Share file to..."));
+        promise.resolve(new Response(true, null).toWritableMap());
+    }
+
+    @ReactMethod
     public void checkFile(String fileName, Promise promise) {
         String ext = getExtension(fileName);
 
         boolean contains = Arrays.asList(new String[] {"doc", "pdf",  "ppt", "pptx", "rtf", "wav", "mp3", "txt", "3gp", "mpg", "mpeg", "mpe", "mp4", "avi"}).contains(ext);
 
         promise.resolve(new Response(contains, null).toWritableMap());
+    }
+
+    private String getType(String ext) {
+        switch (ext) {
+            case "doc":
+                return "application/msword";
+            case "pdf":
+                return "application/pdf";
+            case "ppt":
+            case "pptx":
+                return "application/vnd.ms-powerpoint";
+            case "rtf":
+                return "application/rtf";
+            case "wav":
+            case "mp3":
+                return "audio/x-wav";
+            case "txt":
+                return "text/plain";
+            case "3gp":
+            case "mpg":
+            case "mpeg":
+            case "mpe":
+            case "mp4":
+            case "avi":
+                return "video/*";
+            default:
+                return "*/*";
+        }
     }
 
     private String getExtension(String uri) {

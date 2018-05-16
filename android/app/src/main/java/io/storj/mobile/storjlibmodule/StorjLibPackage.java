@@ -13,7 +13,6 @@ import io.storj.mobile.storjlibmodule.utils.CameraModule;
 import io.storj.mobile.storjlibmodule.utils.OpenFileModule;
 import io.storj.mobile.storjlibmodule.utils.Sha256Module;
 import io.storj.mobile.storjlibmodule.services.ServiceModule;
-import io.storj.mobile.storjlibmodule.utils.ShareModule;
 
 /**
  * Created by Yaroslav-Note on 1/4/2018.
@@ -37,7 +36,6 @@ public class StorjLibPackage implements ReactPackage {
         modules.add(new ServiceModule(reactContext));
         modules.add(new SyncModule(reactContext));
         modules.add(new CameraModule(reactContext));
-        modules.add(new ShareModule(reactContext));
         modules.add(new OpenFileModule(reactContext));
 
         return modules;
