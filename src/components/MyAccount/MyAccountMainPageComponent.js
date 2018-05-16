@@ -11,6 +11,7 @@ import { getHeight, getWidth } from '../../utils/adaptive';
 import OptionsComponent from './OptionsComponent';
 import StorjModule from '../../utils/StorjModule';
 import PropTypes from 'prop-types';
+import { InfoButtonComponent } from '../InfoButtonComponent';
 
 export default class MyAccountMainPageComponent extends Component{
     constructor(props) {
@@ -39,30 +40,14 @@ export default class MyAccountMainPageComponent extends Component{
                         </TouchableOpacity>
                     </View>
                     <View style = { styles.topButtonsContainer }>
-                        <View style = { styles.button }>
-                            <View style = { styles.buttonContentContainer }>
-                                <Image 
-                                    style = { styles.buttonImage } 
-                                    source = { require('../../images/DashboardScreen/Storage.png') } 
-                                    resizeMode = 'contain' />
-                                <View style = { styles.bandwidthMargin }>
-                                    <Text style = { [styles.buttonTextRegular, styles.topButtonTextMargin] }>Storage</Text>
-                                    <Text style = { [styles.buttonTextBold, styles.topButtonTextMargin] }>{ this.props.screenProps.storageAmount }{ ' GB' }</Text>
-                                </View>
-                            </View>
-                        </View>
-                        <View style = { styles.button }>
-                            <View style = { styles.buttonContentContainer }>
-                                <Image 
-                                    style = { styles.buttonImage } 
-                                    source = { require('../../images/DashboardScreen/Bandwidth.png') } 
-                                    resizeMode = 'contain' />
-                                <View style = { styles.topButtonTextMargin }>
-                                    <Text style = { [styles.buttonTextRegular, styles.bandwidthMargin] }>Bandwidth</Text>
-                                    <Text style = { [styles.buttonTextBold, styles.bandwidthMargin] }>{ this.props.screenProps.bandwidthAmount }{ ' GB' }</Text>
-                                </View>
-                            </View>
-                        </View>
+                        <InfoButtonComponent 
+                            imagePath = { require('../../images/DashboardScreen/Storage.png') }
+                            title = { 'Storage' }
+                            amount = { this.props.screenProps.storageAmount } />
+                        <InfoButtonComponent 
+                            imagePath = { require('../../images/DashboardScreen/Bandwidth.png') }
+                            title = { 'Bandwidth' }
+                            amount = { this.props.screenProps.bandwidthAmount } />
                     </View>
                     <TouchableOpacity onPress = { this.props.screenProps.redirectToBalanceScreen } >
                         <View style = { styles.balanceButton }>
@@ -139,23 +124,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row', 
         justifyContent: 'space-between' 
     },
-    button: { 
-        height: getHeight(70), 
-        width: getWidth(163), 
-        backgroundColor: '#2794FF', 
-        borderRadius: 6, 
-        borderWidth: 1, 
-        borderColor: '#2794FF' 
-    },
+    
     balanceContent: {
         flexDirection: 'row',
         marginTop: getHeight(15)
     },
-    buttonContentContainer: { 
-        marginTop: getHeight(15), 
-        marginHorizontal: getWidth(15), 
-        flexDirection: 'row'
-    },
+    
     balanceContentContainer: {
         marginHorizontal: getWidth(15), 
         flexDirection: 'row', 
@@ -163,7 +137,7 @@ const styles = StyleSheet.create({
     },
     buttonImage: { 
         height: getHeight(24), 
-        width: getWidth(24) 
+        width: getWidth(24)
     },
     buttonTextRegular: { 
         fontFamily: 'Montserrat-Regular', 
@@ -187,12 +161,6 @@ const styles = StyleSheet.create({
     expandImage: { 
         height: getHeight(24), 
         width: getWidth(24)
-    },
-    topButtonTextMargin: {
-        marginLeft: getWidth(10)
-    },
-    bandwidthMargin: {
-        marginLeft: getWidth(5)
     },
     titleContainer: { 
         marginTop: getHeight(15),

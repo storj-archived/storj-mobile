@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import { TYPES } from '../../utils/constants/typesConstants';
 import DashboardItemListComponent from './DashboardItemListComponent';
 import { getShortBucketName } from "../../utils/fileUtils";
+import { InfoButtonComponent } from '../InfoButtonComponent';
 
 export default class DashboardListComponent extends Component{
     constructor(props) {
@@ -40,30 +41,14 @@ export default class DashboardListComponent extends Component{
                 <View style = { styles.scrollViewContainer }>
                     <ScrollView showsVerticalScrollIndicator = { false } decelerationRate = { 'normal' }>
                         <View style = { styles.topButtonsContainer }>
-                            <View style = { styles.button }>
-                                <View style = { styles.buttonContentContainer }>
-                                    <Image 
-                                        style = { styles.buttonImage } 
-                                        source = { require('../../images/DashboardScreen/Storage.png') } 
-                                        resizeMode = 'contain' />
-                                    <View style = { styles.buttonTextContainer }>
-                                        <Text style = { styles.buttonTextRegular }>Storage</Text>
-                                        <Text style = { styles.buttonTextBold }>{ this.props.storageAmount }{ ' GB' }</Text>
-                                    </View>
-                                </View>
-                            </View>
-                            <View style = { styles.button }>
-                                <View style = { styles.buttonContentContainer }>
-                                    <Image 
-                                        style = { styles.buttonImage } 
-                                        source = { require('../../images/DashboardScreen/Bandwidth.png') } 
-                                        resizeMode = 'contain' />
-                                    <View style = { styles.buttonTextContainer }>
-                                        <Text style = { styles.buttonTextRegular }>Bandwidth</Text>
-                                        <Text style = { styles.buttonTextBold }>{ this.props.bandwidthAmount }{ ' GB' }</Text>
-                                    </View>
-                                </View>
-                            </View>
+                            <InfoButtonComponent 
+                                imagePath = { require('../../images/DashboardScreen/Storage.png') }
+                                title = { 'Storage' }
+                                amount = { this.props.storageAmount  } />
+                            <InfoButtonComponent 
+                                imagePath = { require('../../images/DashboardScreen/Bandwidth.png') }
+                                title = { 'Bandwidth' }
+                                amount = { this.props.bandwidthAmount } />
                         </View>
                         <View style = { styles.contentWrapper }>
                         {
@@ -176,19 +161,6 @@ const styles = StyleSheet.create({
         marginHorizontal: getWidth(10),
         flexDirection: 'row', 
         justifyContent: 'space-between' 
-    },
-    button: { 
-        height: getHeight(70), 
-        width: getWidth(163), 
-        backgroundColor: '#2794FF', 
-        borderRadius: 6, 
-        borderWidth: 1, 
-        borderColor: '#2794FF' 
-    },
-    buttonContentContainer: { 
-        marginTop: getHeight(15), 
-        marginHorizontal: getWidth(15), 
-        flexDirection: 'row'
     },
     buttonImage: { 
         height: getHeight(24), 
