@@ -45,7 +45,6 @@ RCT_EXPORT_MODULE();
   return _fileRepository;
 }
 
-
 -(StorjWrapper *)storjWrapper{
   if(!_storjWrapper){
     _storjWrapper = [[StorjWrapperSingletone sharedStorjWrapper]storjWrapper];
@@ -151,7 +150,6 @@ RCT_REMAP_METHOD(importKeys,
    }];
 }
 
-
 RCT_EXPORT_METHOD(getKeys: (NSString *) passcode
                   successCallback:(RCTPromiseResolveBlock) resolver
                   errorCallback:(RCTPromiseRejectBlock) rejecter)
@@ -233,22 +231,29 @@ RCT_REMAP_METHOD(cancelUpload,
    invokeParallelWithParams:@{@"resolver":resolve, @"rejecter":reject}
    andMethodHandlerBlock:^(NSDictionary * _Nonnull param) {
      RCTPromiseResolveBlock resolver = param[@"resolver"];
-     resolver([[[Response alloc] initWithSuccess:[[self storjWrapper] cancelUpload:(long)fileRef]
-                             andWithErrorMessage:@""]toDictionary]);
+     resolver([[self storjWrapper] cancelUpload:(long)fileRef]
+              ? [[Response successResponse] toDictionary]
+              : [[Response errorResponseWithMessage:@"Unable to cancel upload"] toDictionary]);
    }];
-  
 }
 
 RCT_REMAP_METHOD(cancelDownload,
-                 cancelDownloadByFileRef:(long)fileRef
+                 cancelDownloadByFileRef:(double)fileRef
                  resolver:(RCTPromiseResolveBlock) resolve
                  rejecter:(RCTPromiseRejectBlock) reject){
   if(fileRef == 0 || fileRef == -1){
+    resolve([[Response errorResponseWithMessage:@"File downloading is not started"] toDictionary]);
     return;
   }
-  [[self storjWrapper] cancelDownload:fileRef];
+  [MethodHandler
+   invokeParallelWithParams:@{@"resolver":resolve, @"rejecter":reject}
+   andMethodHandlerBlock:^(NSDictionary * _Nonnull param) {
+     RCTPromiseResolveBlock resolver = param[@"resolver"];
+     resolver([[self storjWrapper] cancelDownload:(long)fileRef]
+              ? [[Response successResponse] toDictionary]
+              : [[Response errorResponseWithMessage:@"Unable to cancel download"] toDictionary]);
+   }];
 }
-
 
 RCT_REMAP_METHOD(getDownloadFolderPath,
                  getDownloadFolderPathWithResolver: (RCTPromiseResolveBlock) resolver
