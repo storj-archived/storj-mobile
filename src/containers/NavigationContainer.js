@@ -244,6 +244,7 @@ class Apps extends Component {
 
         if(bucketsResponse.isSuccess) {
             let buckets = JSON.parse(bucketsResponse.result).map((file) => {
+				console.log(file);
                 return new ListItemModel(new BucketModel(file));
             });                    
 

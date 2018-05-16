@@ -64,6 +64,10 @@ public class FileModel {
         this(file, isStarred, false, 0, 0, null, null);
     }
 
+    public FileModel(File file, boolean isSynced, int downloadState, String fileUri, String thumbnail) {
+        this(file, false, isSynced, downloadState, 0, fileUri, thumbnail);
+    }
+
     public FileModel(File file, boolean isStarred, boolean isSynced) {
         this(file, isStarred, isSynced, 0, 0, null, null);
     }

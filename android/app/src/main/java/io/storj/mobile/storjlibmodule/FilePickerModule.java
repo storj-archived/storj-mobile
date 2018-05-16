@@ -30,6 +30,7 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
     public static final String MODULE_NAME = "FilePickerAndroid";
 
     public static final String KEY_PATH = "path";
+    public static final String KEY_NAME = "name";
     public static final String KEY_RESULT = "result";
     public static final String KEY_ERROR_MESSAGE = "errorMessage";
     public static final String KEY_SUCCESS = "isSuccess";
@@ -171,6 +172,13 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
 
             if (_checkPath(path, uriMap, resultMap)) continue;
 
+            String name = "";
+            int cut = path.lastIndexOf('/');
+            if (cut != -1) {
+                name = path.substring(cut + 1);
+            }
+
+            uriMap.putString(KEY_NAME, name);
             uriMap.putString(KEY_PATH, path);
             resultMap.pushMap(uriMap);
         }
@@ -188,6 +196,13 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
 
         if (_checkPath(path, uriMap, resultMap)) return;
 
+        String name = "";
+        int cut = path.lastIndexOf('/');
+        if (cut != -1) {
+            name = path.substring(cut + 1);
+        }
+
+        uriMap.putString(KEY_NAME, name);
         uriMap.putString(KEY_PATH, path);
         resultMap.pushMap(uriMap);
     }

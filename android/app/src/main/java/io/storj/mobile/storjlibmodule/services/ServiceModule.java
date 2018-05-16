@@ -1,30 +1,38 @@
 package io.storj.mobile.storjlibmodule.services;
 
+import android.app.Activity;
 import android.content.ComponentName;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.IBinder;
 
+import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import java.util.List;
+import java.util.Map;
 
 import io.storj.mobile.storjlibmodule.GsonSingle;
 import io.storj.mobile.storjlibmodule.dataprovider.DatabaseFactory;
 import io.storj.mobile.storjlibmodule.dataprovider.repositories.BucketRepository;
 import io.storj.mobile.storjlibmodule.dataprovider.repositories.FileRepository;
 import io.storj.mobile.storjlibmodule.models.PromiseHandler;
+import io.storj.mobile.storjlibmodule.utils.WritableMapMapper;
 
 /**
  * Created by Yaroslav-Note on 3/6/2018.
  */
 
-public class ServiceModule extends ReactContextBaseJavaModule {
+public class ServiceModule extends ReactContextBaseJavaModule implements ActivityEventListener {
 
     public final static String GET_BUCKETS = "GET_BUCKETS";
     public final static String GET_FILES = "GET_FILES";
@@ -90,6 +98,8 @@ public class ServiceModule extends ReactContextBaseJavaModule {
         mPromise = new PromiseHandler();
         mUploadServicePromise = new PromiseHandler();
         mDownloadServicePromise = new PromiseHandler();
+
+        reactContext.addActivityEventListener(this);
     }
 
     @Override
@@ -121,15 +131,27 @@ public class ServiceModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void uploadFile(String bucketId, String uri) {
-        if(bucketId == null || uri == null) {
+    public void uploadFile(String bucketId, String localPath, String fileName) {
+        if(bucketId == null || localPath == null) {
             return;
         }
 
-        Intent uploadIntent = new Intent(getReactApplicationContext(), UploadService.class);
-        uploadIntent.setAction(UploadService.ACTION_UPLOAD_FILE);
-        uploadIntent.putExtra(UploadService.PARAMS_BUCKET_ID, bucketId);
-        uploadIntent.putExtra(UploadService.PARAMS_URI, uri);
+        if(fileName == null) {
+            int cut = localPath.lastIndexOf('/');
+            if (cut != -1) {
+                fileName = localPath.substring(cut + 1);
+            }
+        }
+
+        Intent uploadIntent = new Intent(getReactApplicationContext(), UploadService2.class);
+//        uploadIntent.setAction(UploadService.ACTION_UPLOAD_FILE);
+////        uploadIntent.putExtra(UploadService.PARAMS_BUCKET_ID, bucketId);
+////        uploadIntent.putExtra(UploadService.PARAMS_URI, uri);
+
+        uploadIntent.setAction(UploadService2.ACTION_UPLOAD_FILE);
+        uploadIntent.putExtra(UploadService2.PARAM_BUCKET_ID, bucketId);
+        uploadIntent.putExtra(UploadService2.PARAM_LOCAL_PATH, localPath);
+        uploadIntent.putExtra(UploadService2.PARAM_FILE_NAME, fileName);
 
         getReactApplicationContext().startService(uploadIntent);
     }
@@ -203,6 +225,18 @@ public class ServiceModule extends ReactContextBaseJavaModule {
         getReactApplicationContext().startService(serviceIntent);
     }
 
+    @ReactMethod
+    public void test() {
+        Intent intent = new Intent(getReactApplicationContext(), UploadService2.class);
+
+        intent.setAction(UploadService2.ACTION_UPLOAD_FILE);
+        intent.putExtra(UploadService2.PARAM_BUCKET_ID, "6bb13bf31e330a6de76bb9d9");
+        intent.putExtra(UploadService2.PARAM_FILE_NAME, "test.jpg");
+        intent.putExtra(UploadService2.PARAM_LOCAL_PATH, "/storage/emulated/0/Download/13.jpg");
+
+        getReactApplicationContext().startService(intent);
+    }
+
     private void bindService(PromiseHandler handler, Class<? extends BaseReactService> serviceClass, Promise promise) {
         handler.setPromise(promise);
 
@@ -221,5 +255,23 @@ public class ServiceModule extends ReactContextBaseJavaModule {
 
     private <T> String toJson(List<T> convertible) {
         return GsonSingle.getInstanse().toJson(convertible);
+    }
+
+    @Override
+    public void onActivityResult(Activity activity, int i, int i1, Intent intent) {
+
+    }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+        if(intent == null || intent.getAction() != "ACTION_EVENT") {
+            return;
+        }
+
+        String eventName = intent.getStringExtra("eventName");
+        ContentValues data = intent.getParcelableExtra("data");
+
+        getReactApplicationContext().getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(eventName, WritableMapMapper.get(data));
     }
 }

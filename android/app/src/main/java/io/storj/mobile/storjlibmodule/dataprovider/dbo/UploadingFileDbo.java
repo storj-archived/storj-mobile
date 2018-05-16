@@ -20,6 +20,11 @@ public class UploadingFileDbo {
 
     public UploadingFileDbo() {}
 
+    public UploadingFileDbo(long fileHandle, String name, String uri, String bucketId) {
+        this(fileHandle, 0, 0, 0, name, uri, bucketId);
+        isIdSet = true;
+    }
+
     public UploadingFileDbo(long fileHandle, double progress, long size, long uploaded, String name, String uri, String bucketId) {
         _fileHandle = fileHandle;
         _progress = progress;

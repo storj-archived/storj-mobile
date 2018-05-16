@@ -9,6 +9,7 @@ import { getFileSize, getFullFileName, getShortFileName } from "../utils/fileUti
 import FilesListComponent from '../components/FilesListComponent';
 import BaseFilesListContainer from '../containers/BaseFilesListContainer';
 import PropTypes from 'prop-types';
+import ServiceModule from "../utils/ServiceModule";
 
 /** 
  * Files screen, base screen, appears after opening bucket on bucket screen
@@ -38,6 +39,8 @@ class FilesListContainer extends BaseFilesListContainer {
         ).start();               
         
         this.onRefresh(); 
+
+        //ServiceModule.test();
     }
 
     /**      

@@ -90,19 +90,6 @@ public class SynchronizationJobService extends JobService {
         return true;
     }
 
-    private void uploadFile(String bucketId, String uri, String settingsId, int syncSettings) {
-        Log.d(DEBUG_TAG, "sync: " + "sending new intent for " + uri);
-        Intent uploadIntent = new Intent(this, UploadService.class);
-        uploadIntent.setAction(UploadService.ACTION_UPLOAD_FILE);
-        uploadIntent.putExtra(UploadService.PARAMS_BUCKET_ID, bucketId);
-        uploadIntent.putExtra(UploadService.PARAMS_URI, uri);
-        uploadIntent.putExtra(FileContract._SYNCED, true);
-        uploadIntent.putExtra(SettingsContract._SYNC_SETTINGS, syncSettings);
-        uploadIntent.putExtra(SettingsContract._SETTINGS_ID, settingsId);
-
-        startService(uploadIntent);
-    }
-
     private final static String DEBUG_TAG = "SYNCHRONIZATION DEBUG";
 
     private void syncFolder(String settingsId, int syncSettings, SyncSettingsEnum syncEnum, BucketRepository bucketRepo, SQLiteDatabase db) {
@@ -158,6 +145,19 @@ public class SynchronizationJobService extends JobService {
                 uploadFile(bucketId, file.getPath(), settingsId, syncSettings);
             }
         }
+    }
+
+    private void uploadFile(String bucketId, String uri, String settingsId, int syncSettings) {
+        Log.d(DEBUG_TAG, "sync: " + "sending new intent for " + uri);
+        Intent uploadIntent = new Intent(this, UploadService.class);
+        uploadIntent.setAction(UploadService.ACTION_UPLOAD_FILE);
+        uploadIntent.putExtra(UploadService.PARAMS_BUCKET_ID, bucketId);
+        uploadIntent.putExtra(UploadService.PARAMS_URI, uri);
+        uploadIntent.putExtra(FileContract._SYNCED, true);
+        uploadIntent.putExtra(SettingsContract._SYNC_SETTINGS, syncSettings);
+        uploadIntent.putExtra(SettingsContract._SETTINGS_ID, settingsId);
+
+        startService(uploadIntent);
     }
 
     private String getDateTime() {

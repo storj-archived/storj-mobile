@@ -42,6 +42,11 @@
           android:enabled="true" />
 
         <service
+            android:name=".storjlibmodule.services.UploadService2"
+            android:exported="true"
+            android:enabled="true" />
+
+        <service
             android:name=".storjlibmodule.services.DownloadService"
             android:exported="true"
             android:enabled="true" />

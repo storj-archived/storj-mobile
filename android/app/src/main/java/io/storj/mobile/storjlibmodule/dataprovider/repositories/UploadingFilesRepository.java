@@ -112,6 +112,7 @@ public class UploadingFilesRepository extends BaseRepository {
         ContentValues map = new ContentValues();
 
         map.put(UploadingFileContract._PROGRESS, model.getProgress());
+        map.put(UploadingFileContract._SIZE, model.getSize());
         map.put(UploadingFileContract._UPLOADED, model.getUploaded());
 
         return _executeUpdate(UploadingFileContract.TABLE_NAME, String.valueOf(model.getFileHandle()), null,null, map);

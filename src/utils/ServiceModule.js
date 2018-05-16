@@ -43,7 +43,7 @@ const ServiceModule = (() => {
         }
 
         uploadFile(bucketId, uri) {
-            serviceModule.uploadFile(String(bucketId), String(uri));
+            serviceModule.uploadFile(String(bucketId), String(uri), null);
         }
 
         downloadFile(bucketId, fileId, localPath) {
@@ -52,6 +52,10 @@ const ServiceModule = (() => {
 
         copyFile(bucketId, fileId, localPath, targetBucketId) {
             serviceModule.copyFile(String(bucketId), String(fileId), String(localPath), String(targetBucketId));
+        }
+
+        test() {
+            serviceModule.test();
         }
 
         async createBucket(bucketName) {

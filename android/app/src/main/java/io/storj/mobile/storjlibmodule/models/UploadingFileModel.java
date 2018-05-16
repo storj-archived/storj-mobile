@@ -59,8 +59,7 @@ public class UploadingFileModel {
     }
 
     public boolean isValid() {
-        return  _size > 0 &&
-                _name != null && !_name.isEmpty() &&
+        return  _name != null && !_name.isEmpty() &&
                 _uri != null && !_uri.isEmpty() &&
                 _bucketId != null && !_bucketId.isEmpty();
     }
