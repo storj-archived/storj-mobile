@@ -26,7 +26,7 @@ export default class ListItemComponent extends Component {
                 style = { props.isSingleItemSelected ? [listItemStyles.listItemContainer, listItemStyles.itemSelected] : listItemStyles.listItemContainer }
                 onPress = { props.onPress }
                 onLongPress = { props.onLongPress }>
-                    <View style = { listItemStyles.listItemContent }>
+                    <View style = { props.isExpanderDisabled ? [listItemStyles.listItemContent, listItemStyles.justifyStart] : listItemStyles.listItemContent }>
                         {
                             props.isSelectionMode ? <SelectionCheckboxComponent isSelected = { props.isSelected } /> 
                                                     : null   
@@ -62,7 +62,7 @@ export default class ListItemComponent extends Component {
                             }
                         </View>
                         {
-                            !props.isSelectionMode ? 
+                            !props.isSelectionMode && !props.isExpanderDisabled ? 
                                 <RightIconComponent 
                                     onPress = { props.isLoading ? props.onCancelPress : props.onDotsPress } 
                                     iconSource = { props.isLoading ? require('../images/Icons/CancelDownload.png') : require('../images/Icons/listItemActions.png') } /> 
@@ -125,6 +125,9 @@ const listItemStyles = StyleSheet.create({
         borderColor: 'rgba(56, 75, 101, 0.2)',
         alignItems: 'center',
         justifyContent: 'space-between'
+    },
+    justifyStart: {
+        justifyContent: 'flex-start'
     },
     textWrapper: {
         flex: 0.9

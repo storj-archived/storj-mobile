@@ -204,6 +204,7 @@ export default class ListComponent extends Component {
 
         return(
             <ItemType
+                isExpanderDisabled = { this.props.isExpanderDisabled }
                 key = { item.getId() }
                 listItemIconSource = { listItemIconSource }
                 onPress = { () => { this.props.onPress(item); } }
@@ -217,7 +218,7 @@ export default class ListComponent extends Component {
                 progress = { item.progress } 
                 size = { size } >
 
-                <TextComp style = { styles.mainTitleText }>
+                <TextComp style = { this.props.isExpanderDisabled ? [styles.mainTitleText, styles.textMargin] : styles.mainTitleText }>
                     <Text style = { styles.blueStar }>
                         { starredIcon }
                     </Text>
@@ -309,7 +310,10 @@ const styles = StyleSheet.create({
         height: 0.5, 
         width: getDeviceWidth(), 
         backgroundColor: 'rgba(56, 75, 101, 0.2)'
-    }
+    },
+    textMargin: {
+        marginLeft: getWidth(10)
+    },
 });
 
 
