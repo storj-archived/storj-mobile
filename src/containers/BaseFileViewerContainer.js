@@ -85,7 +85,7 @@ class BaseFileViewerContainer extends Component {
         let updateStarredResponse = await SyncModule.updateFileStarred(this.fileId, !this.props.isStarred);
         
         if(updateStarredResponse.isSuccess) {
-            this.props.updateFavouriteFiles([new ListItemModel(new FileModel({ fileId: this.fileId }))]);
+            this.props.updateFavouriteFiles([new ListItemModel(new FileModel({ fileId: this.fileId }))], !this.props.isStarred);
         }    
     }
 

@@ -39,7 +39,7 @@ class FilePreviewContainer extends BaseFileViewerContainer {
     }
 
     render() {
-        this.openFile();
+        // this.openFile();
 
         return(
             <FilePreviewComponent
