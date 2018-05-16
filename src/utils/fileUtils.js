@@ -48,13 +48,13 @@ export function getShortBucketName(name) {
     return name;
 }
 
-export function getShortFileName(fullName) {
+export function getFileNameWithFixedSize(name, size) {
     let { name, extention } = getFullFileName(fullName);
 
-    if(fullName.length > 13){
+    if(fullName.length > size + 5){
 
-        if(name.length > 7) {
-            name = name.slice(0,5) + '..';
+        if(name.length > size) {
+            name = name.slice(0,18) + '..';
         }
 
         if(extention.length > 6) {
@@ -63,6 +63,11 @@ export function getShortFileName(fullName) {
     }
 
     return { name, extention };
+}
+
+export function getShortFileName(fullName) {
+    
+    return getFileNameWithFixedSize(fullName, 7);
 }
 
 export function isImage(imageFullName) {

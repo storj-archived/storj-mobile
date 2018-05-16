@@ -131,7 +131,8 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: 'transparent',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        paddingHorizontal: getWidth(20)
     },
     buttonWrapper: {
         position: "absolute",

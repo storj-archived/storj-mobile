@@ -26,16 +26,18 @@ export default class PinOptionComponent extends Component {
 
     renderOptions() {
         const starredIcon = this.props.isStarred ? '★' : null;
-        
+
         return(
             <View style = { styles.mainContainer } >
                 <View style = { [styles.itemContainer, styles.justifyStart] } >
                     <Image style = { styles.icon } source = { require('../images/Icons/FileListItemIcon.png') } resizeMode = { 'contain' } />
-                    <Text style = { [styles.labelText, styles.nameTextMargin] }>
-                        <Text style = { styles.blueStar }>
-                            { starredIcon }
-                        </Text>
-                    { this.props.fileName }</Text>
+                    <View style = { styles.textContainer }>
+                        <Text style = { [styles.labelText, styles.nameTextMargin] }>
+                            <Text style = { styles.blueStar }>
+                                { starredIcon }
+                            </Text>
+                        { this.props.fileName }</Text>
+                    </View>
                 </View>
                 {
                     this.renderOptionItem('Type', this.props.type)
@@ -69,7 +71,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         borderRadius: 6,
         position: 'absolute',
-        bottom: getHeight(10)
+        bottom: getHeight(10),
+        paddingHorizontal: getWidth(20)
     },
     backgroundWrapper: {
         top: 0,
@@ -90,7 +93,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0.5, 
         borderBottomColor: 'rgba(56, 75, 101, 0.2)',
         justifyContent: 'space-between',
-        paddingHorizontal: getWidth(20)
+        // paddingHorizontal: getWidth(20)
     },
     labelText: {
         fontFamily: 'Montserrat-Regular',
@@ -120,5 +123,11 @@ const styles = StyleSheet.create({
     blueStar: {
         fontSize: getHeight(16),
         color: '#2794FF'
+    },
+    textContainer: {
+        justifyContent: 'center',
+        width: getWidth(300),
+        height: getHeight(50),
+        paddingRight: getWidth(12)
     }
 });

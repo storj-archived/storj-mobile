@@ -13,7 +13,7 @@ import {
 import PhotoView from 'react-native-photo-view';
 import React, { Component } from 'react';
 import { getDeviceWidth, getDeviceHeight, getWidth, getHeight } from '../utils/adaptive';
-import { getShortBucketName } from "../utils/fileUtils";
+import { getShortBucketName, getFileNameWithFixedSize } from "../utils/fileUtils";
 import ActionBar from '../components/ActionBarComponent';
 import SelectBucketComponent from '../components/SelectBucketComponent';
 import DetailedInfoComponent from '../components/DetailedInfoComponent';
@@ -44,6 +44,7 @@ export default class FilePreviewComponent extends Component {
 
     render() {
         const starredIcon = this.props.isStarred ? '★' : null;
+        let { name, extention } = getFileNameWithFixedSize(this.props.name, 20);
 
         return(
             <TouchableWithoutFeedback style = { backgroundColor = "transparent" } onPress = { this.props.showActionBar ? this.props.onOptionsPress : null }>
@@ -55,7 +56,10 @@ export default class FilePreviewComponent extends Component {
                         <Text style = { styles.blueStar }>
                             { starredIcon }
                         </Text>
-                        { this.props.name }</Text>
+                        <Text style = { styles.boldText }>
+                            { name }
+                        </Text>
+                        { extention }</Text>
                         <Text style = { styles.text }>{ this.props.size }</Text>
                     </View>
                     {
@@ -160,7 +164,8 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: 'white',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        paddingHorizontal: getWidth(20)
     },
     buttonWrapper: {
         position: "absolute",
@@ -202,7 +207,7 @@ const styles = StyleSheet.create({
     },
     centralContainer: {
         alignSelf: 'center',
-        width: getWidth(150),
+        width: getWidth(300),
         alignItems: 'center'
     },
     cloudImage: {
@@ -215,8 +220,13 @@ const styles = StyleSheet.create({
     }, 
     text: {
         fontFamily: 'Montserrat-Regular', 
-        fontSize: getHeight(19), 
+        fontSize: getHeight(18), 
         color: 'rgba(56, 75, 101, 0.4)'
+    },
+    boldText: {
+        fontFamily: 'Montserrat-SemiBold', 
+        fontSize: getHeight(18), 
+        color: '#384B65'
     },
     flexRow: {
         flexDirection: 'row'
