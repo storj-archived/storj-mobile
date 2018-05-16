@@ -21,11 +21,6 @@ export default class BalanceReportComponent extends Component{
                     <Text style = { styles.amountText }>{ this.props.amount }</Text>
                     <View style = { styles.flexRow }>
                         <Text style = { styles.dateText }>{ this.props.date }</Text>
-                        <TouchableOpacity style = { styles.expanderIconContainer }>
-                            <Image
-                                source = { require('../../images/DashboardScreen/BlueVector.png') }
-                                style = { styles.expanderIcon } />
-                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style = { styles.underline }/>

@@ -48,7 +48,7 @@ export function getShortBucketName(name) {
     return name;
 }
 
-export function getFileNameWithFixedSize(name, size) {
+export function getFileNameWithFixedSize(fullName, size) {
     let { name, extention } = getFullFileName(fullName);
 
     if(fullName.length > size + 5){
