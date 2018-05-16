@@ -208,7 +208,7 @@ class MainContainer extends Component {
 
         if(filePickerResponse.isSuccess) {
             filePickerResponse.result.forEach(file =>{
-                this.getSelectedBuckets().forEach(item => {
+                this.getSelectedItems(this.props.buckets).forEach(item => {
                     ServiceModule.uploadFile(item.getId(), file.path);
                 });
             })
@@ -311,7 +311,7 @@ class MainContainer extends Component {
     }
 
     deleteBuckets() {
-        this.getSelectedBuckets().forEach(item => {
+        this.getSelectedItems(this.props.buckets).forEach(item => {
             if(item.getName() === PICTURES) return; //TODO: we shoul add some notification here
 
             this.deleteBucket(item);
