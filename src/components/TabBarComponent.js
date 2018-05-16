@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     tabItemContainer: {
-        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        backgroundColor: 'rgba(255, 255, 255, 0.96)',
         flex: 20,
         alignItems: 'center',
         justifyContent: 'center'
