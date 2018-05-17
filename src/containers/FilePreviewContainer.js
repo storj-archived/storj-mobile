@@ -20,8 +20,6 @@ class FilePreviewContainer extends BaseFileViewerContainer {
     }
 
     async openFile() {
-        if(!this.props.isDownloaded) return;
-
         if(!await OpenFileModule.checkFile(this.name)) return
 
         OpenFileModule.openFile(this.props.localPath);

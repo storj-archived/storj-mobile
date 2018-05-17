@@ -12,21 +12,15 @@ const OpenFileModule = (() => {
     class OpenFileModule {
 
         openFile(fileUri) {
-            if(!isAndroid) return { isSuccess: false };         
-
             return openFileModule.openFile(String(fileUri));
         }
 
         async checkFile(fileName) {
-            if(!isAndroid) return { isSuccess: false };         
-
             let response = await openFileModule.checkFile(String(fileName));
             return response.isSuccess;
         }
 
         shareFile(fileUri) {
-            if(!isAndroid) return { isSuccess: false };         
-
             return openFileModule.shareFile(String(fileUri));
         }
     }

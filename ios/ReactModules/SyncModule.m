@@ -238,8 +238,8 @@ RCT_REMAP_METHOD(updateFileStarred,
    }];
 }
 
-RCT_REMAP_METHOD(checkImage,
-                 checkImageWithFileId: (NSString *) fileID localPath: (NSString *) localPath esolver: (RCTPromiseResolveBlock) resolver
+RCT_REMAP_METHOD(checkFile,
+                 checkFileWithFileId: (NSString *) fileID localPath: (NSString *) localPath esolver: (RCTPromiseResolveBlock) resolver
                  andRejecter: (RCTPromiseRejectBlock) rejecter){
   
   if(!localPath) {
