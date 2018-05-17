@@ -17,6 +17,23 @@ public class SyncQueueEntryDbo {
 
     public SyncQueueEntryDbo() {}
 
+    public SyncQueueEntryDbo(SyncQueueEntryModel model) {
+        this(model.getId(),
+                model.getFileName(),
+                model.getLocalPath(),
+                model.getStatus(),
+                model.getErrorCode(),
+                model.getSize(),
+                model.getCount(),
+                model.getCreationDate(),
+                model.getBucketId(),
+                model.getFileHandle());
+    }
+
+    public SyncQueueEntryDbo(String fileName, String localPath, String bucketId) {
+        this(0, fileName, localPath, 0, 0, 0, 0, null, bucketId, 0);
+    }
+
     public SyncQueueEntryDbo(int id, String fileName, String localPath, int status, int errorCode, long size, int count, String creationDate, String bucketId, long fileHandle) {
         _id = id;
         _fileName = fileName;
@@ -34,8 +51,10 @@ public class SyncQueueEntryDbo {
         switch (key) {
             case SynchronizationQueueContract._ID:
                 _id = value;
+                break;
             case SynchronizationQueueContract._STATUS:
                 _status = value;
+                break;
             case SynchronizationQueueContract._ERROR_CODE:
                 _errorCode = value;
                 break;

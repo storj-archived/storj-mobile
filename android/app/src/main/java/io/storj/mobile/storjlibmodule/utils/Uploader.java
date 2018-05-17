@@ -17,7 +17,11 @@ public class Uploader {
         mCallback = callback;
     }
 
-    public void uploadFile(String bucketId, String fileName, String localPath) throws InterruptedException, NullPointerException {
+    public void uploadFile(String bucketId, String fileName, String localPath) throws Exception, InterruptedException, NullPointerException {
+        if(mCallback == null) {
+            throw new Exception("No callback passed to uploader!");
+        }
+
         final CountDownLatch uploadLatch = new CountDownLatch(1);
 
         long fileHandle = StorjAndroid.getInstance(mContext).uploadFile(bucketId, fileName, localPath, new UploadFileCallback() {

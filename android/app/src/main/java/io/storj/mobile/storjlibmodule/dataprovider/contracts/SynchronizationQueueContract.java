@@ -25,7 +25,7 @@ public final class SynchronizationQueueContract extends BaseContract {
                         "%s INTEGER default 0, " + //count
                         "%s TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " + //creationDate //NOT SET
                         "%s TEXT not null, " + //bucketId
-                        "%s INTEGER default 0, " + //fileHandle
+                        "%s INTEGER, " + //fileHandle
                         "FOREIGN KEY(%s) REFERENCES uploadingFiles(%s) ON DELETE SET NULL, " + //uploadingfiles FK
                         "FOREIGN KEY(%s) REFERENCES buckets(%s) ON DELETE SET NULL)", //buckets FK
                 TABLE_NAME, _ID, _FILE_NAME, _LOCAL_PATH, _STATUS, _ERROR_CODE, _SIZE, _COUNT, _CREATION_DATE, _BUCKET_ID, _FILE_HANDLE, _FILE_HANDLE, _ID, _BUCKET_ID, _ID);

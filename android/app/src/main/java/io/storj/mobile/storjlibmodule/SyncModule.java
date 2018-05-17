@@ -1,5 +1,6 @@
 package io.storj.mobile.storjlibmodule;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,7 +40,8 @@ import io.storj.mobile.storjlibmodule.dataprovider.repositories.BucketRepository
 import io.storj.mobile.storjlibmodule.dataprovider.repositories.FileRepository;
 import io.storj.mobile.storjlibmodule.dataprovider.repositories.SettingsRepository;
 import io.storj.mobile.storjlibmodule.dataprovider.repositories.UploadingFilesRepository;
-import io.storj.mobile.storjlibmodule.services.SynchronizationJobService;
+import io.storj.mobile.storjlibmodule.services.SynchronizationSchedulerJobService;
+import io.storj.mobile.storjlibmodule.services.SynchronizationService;
 
 /**
  * Created by Yaroslav-Note on 3/9/2018.
@@ -333,6 +335,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
                     Driver driver = new GooglePlayDriver(getReactApplicationContext());
                     FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(driver);
                     dispatcher.cancelAll();
+                    cancelSync();
 
                     SettingsRepository settingsRepo = new SettingsRepository(db);
                     SettingsDbo settingsDbo = settingsRepo.get(id);
@@ -358,6 +361,13 @@ public class SyncModule extends ReactContextBaseJavaModule {
                 }
             }
         }).run();
+    }
+
+    private void cancelSync() {
+        Intent cancelSyncIntent = new Intent(getReactApplicationContext(), SynchronizationService.class);
+        cancelSyncIntent.setAction(SynchronizationService.ACTION_SYNC_CANCEL);
+
+        getReactApplicationContext().startService(cancelSyncIntent);
     }
 
     @ReactMethod
@@ -426,7 +436,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
     private Job.Builder getJobBuilder(FirebaseJobDispatcher dispatcher, Bundle bundle, List<Integer> constaraints) {
         Job.Builder myJobBuilder = dispatcher.newJobBuilder()
                 // the JobService that will be called
-                .setService(SynchronizationJobService.class)
+                .setService(SynchronizationSchedulerJobService.class)
                 // uniquely identifies the job
                 .setTag("sync-job")
                 // one-off job

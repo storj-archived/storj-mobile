@@ -52,9 +52,9 @@ public class SyncQueueEntryModel {
     }
 
     public boolean isValid() {
-        return _fileName == null || _fileName.isEmpty()
-                && _localPath == null || _localPath.isEmpty()
-                && _bucketId == null || _bucketId.isEmpty(); // FILE SIZE?
+        return !(_fileName == null || _fileName.isEmpty())
+                && !(_localPath == null || _localPath.isEmpty())
+                && !(_bucketId == null || _bucketId.isEmpty()); // FILE SIZE?
     }
 
     public int getId() { return _id; }

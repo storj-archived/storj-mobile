@@ -21,20 +21,23 @@ import io.storj.mobile.storjlibmodule.dataprovider.contracts.UploadingFileContra
 import io.storj.mobile.storjlibmodule.dataprovider.dbo.BucketDbo;
 import io.storj.mobile.storjlibmodule.dataprovider.dbo.FileDbo;
 import io.storj.mobile.storjlibmodule.dataprovider.dbo.SettingsDbo;
+import io.storj.mobile.storjlibmodule.dataprovider.dbo.SyncQueueEntryDbo;
 import io.storj.mobile.storjlibmodule.dataprovider.repositories.BucketRepository;
 import io.storj.mobile.storjlibmodule.dataprovider.repositories.FileRepository;
 import io.storj.mobile.storjlibmodule.dataprovider.repositories.SettingsRepository;
+import io.storj.mobile.storjlibmodule.dataprovider.repositories.SyncQueueRepository;
 import io.storj.mobile.storjlibmodule.dataprovider.repositories.UploadingFilesRepository;
 import io.storj.mobile.storjlibmodule.enums.SyncSettingsEnum;
+import io.storj.mobile.storjlibmodule.models.SyncQueueEntryModel;
 import io.storj.mobile.storjlibmodule.models.UploadingFileModel;
+import io.storj.mobile.storjlibmodule.responses.Response;
 
 /**
  * Created by Yaroslav-Note on 3/13/2018.
  */
 
-public class SynchronizationJobService extends JobService {
+public class SynchronizationSchedulerJobService extends JobService {
     private AsyncTask mBackgroundTask;
-    private NotificationService mNotificationService = new NotificationService();
 
     @Override
     public boolean onStartJob(final JobParameters job) {
@@ -48,7 +51,7 @@ public class SynchronizationJobService extends JobService {
                     return null;
                 }
 
-                try(SQLiteDatabase db = new DatabaseFactory(SynchronizationJobService.this, null).getReadableDatabase()) {
+                try(SQLiteDatabase db = new DatabaseFactory(SynchronizationSchedulerJobService.this, null).getReadableDatabase()) {
                     SettingsRepository settingsRepo = new SettingsRepository(db);
                     SettingsDbo dbo = settingsRepo.get(settingsId);
 
@@ -75,6 +78,9 @@ public class SynchronizationJobService extends JobService {
 
             @Override
             protected void onPostExecute(Object o) {
+                Intent syncIntent = new Intent(SynchronizationSchedulerJobService.this, SynchronizationService.class);
+                syncIntent.setAction(SynchronizationService.ACTION_SYNC);
+                SynchronizationSchedulerJobService.this.startService(syncIntent);
                 jobFinished(job, true);
             }
         };
@@ -129,7 +135,7 @@ public class SynchronizationJobService extends JobService {
         File[] files = folder.listFiles();
 
         FileRepository fileRepo = new FileRepository(db);
-        UploadingFilesRepository uploadFileRepo = new UploadingFilesRepository(db);
+        SyncQueueRepository syncRepo = new SyncQueueRepository(db);
 
         for(File file : files) {
             Log.d(DEBUG_TAG, "sync: " + "File, name: " + file.getName());
@@ -139,12 +145,20 @@ public class SynchronizationJobService extends JobService {
             }
 
             FileDbo fileDbo = fileRepo.get(file.getName(), FileContract._NAME, bucketId);
-            UploadingFileModel uploadingFileModel = uploadFileRepo.get(file.getName(), UploadingFileContract._NAME);
+            SyncQueueEntryModel syncEntry = syncRepo.get(file.getName(), bucketId);
 
-            if(fileDbo == null && uploadingFileModel == null) {
-                uploadFile(bucketId, file.getPath(), settingsId, syncSettings);
+            if(fileDbo == null && syncEntry == null) {
+                //uploadFile(bucketId, file.getPath(), settingsId, syncSettings);
+                syncFile(file.getName(), file.getPath(), bucketId, db);
             }
         }
+    }
+
+    private void syncFile(String fileName, String localPath, String bucketId, SQLiteDatabase db) {
+        SyncQueueRepository syncRepo = new SyncQueueRepository(db);
+
+        SyncQueueEntryDbo dbo = new SyncQueueEntryDbo(fileName, localPath, bucketId);
+        Response response = syncRepo.insert(dbo.toModel());
     }
 
     private void uploadFile(String bucketId, String uri, String settingsId, int syncSettings) {

@@ -57,7 +57,9 @@ public class SyncQueueRepository extends BaseRepository {
         map.put(SynchronizationQueueContract._SIZE, model.getSize());
         map.put(SynchronizationQueueContract._COUNT, model.getCount());
         map.put(SynchronizationQueueContract._BUCKET_ID, model.getBucketId());
-        map.put(SynchronizationQueueContract._FILE_HANDLE, model.getFileHandle());
+
+        if(model.getFileHandle() != 0)
+            map.put(SynchronizationQueueContract._FILE_HANDLE, model.getFileHandle());
 
         return _executeUpdate(SynchronizationQueueContract.TABLE_NAME, String.valueOf(model.getId()), null,null, map);
     }
@@ -79,10 +81,10 @@ public class SyncQueueRepository extends BaseRepository {
         return result;
     }
 
-    public SyncQueueEntryModel get(String id) {
+    public SyncQueueEntryModel get(int id) {
         SyncQueueEntryModel model = null;
         String[] selectionArgs = new String[] {
-                id
+                String.valueOf(id)
         };
 
         Cursor cursor = _db.query(SynchronizationQueueContract.TABLE_NAME,
@@ -99,7 +101,30 @@ public class SyncQueueRepository extends BaseRepository {
         }
 
         return model;
-}
+    }
+
+    public SyncQueueEntryModel get(String fileName, String bucketId) {
+        SyncQueueEntryModel model = null;
+        String[] selectionArgs = new String[] {
+            fileName,
+            bucketId
+        };
+
+        Cursor cursor = _db.query(SynchronizationQueueContract.TABLE_NAME,
+                null,
+                SynchronizationQueueContract._FILE_NAME + " = ? AND " + SynchronizationQueueContract._BUCKET_ID + " = ?",
+                selectionArgs,
+                null, null, null);
+
+        SyncQueueEntryDbo dbo = _getSingleFromCursor(cursor);
+        cursor.close();
+
+        if(dbo != null) {
+            model = dbo.toModel();
+        }
+
+        return model;
+    }
 
     private List<SyncQueueEntryDbo> _getListFromCursor(Cursor cursor) {
         List<SyncQueueEntryDbo> result = new ArrayList();

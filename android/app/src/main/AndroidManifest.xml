@@ -51,7 +51,12 @@
             android:exported="true"
             android:enabled="true" />
 
-        <service android:name=".storjlibmodule.services.SynchronizationJobService" android:enabled="true">
+        <service
+            android:name=".storjlibmodule.services.SynchronizationService"
+            android:exported="true"
+            android:enabled="true" />
+
+        <service android:name=".storjlibmodule.services.SynchronizationSchedulerJobService" android:enabled="true">
             <intent-filter>
                 <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
             </intent-filter>
