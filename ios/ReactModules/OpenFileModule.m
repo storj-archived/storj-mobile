@@ -54,27 +54,37 @@ RCT_REMAP_METHOD(openFile,
   
   openFileController.delegate = self;
   [openFileController presentPreviewAnimated:YES];
-//  [openFileController presentOpenInMenuFromRect:<#(CGRect)#> inView:<#(nonnull UIView *)#> animated:<#(BOOL)#>]
-//  dispatch_async(dispatch_get_main_queue(), ^{
-//    UIViewController *rootView = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-//
-//    [rootView presentViewController:openFileController
-//                           animated:YES
-//                         completion:^{
-//                           resolver([[SingleResponse successSingleResponseWithResult:nil] toDictionary]);
-//                         }];
-//  });
+  resolver([[Response successResponse] toDictionary]);
 }
 
+RCT_REMAP_METHOD(shareFile,
+                 shareFileWithUri: (NSString *) fileUri
+                 resolver: (RCTPromiseResolveBlock) resolver
+                 rejecter: (RCTPromiseRejectBlock) rejecter){
+  
+  if(!fileUri || fileUri.length == 0) {
+    resolver([[Response errorResponseWithMessage:@"File URI is corrupted."] toDictionary]);
+    return;
+  }
+  
+  NSURL *url = [NSURL fileURLWithPath:fileUri];
+  UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[url]
+                                                                           applicationActivities:nil];
+  
+  dispatch_async(dispatch_get_main_queue(), ^{
+    UIViewController *rootView = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    [rootView presentViewController:controller
+                           animated:YES
+                         completion:^{
+                           resolver([[SingleResponse successSingleResponseWithResult:nil] toDictionary]);
+                         }];
+  });
+}
+
+
 -(UIViewController *) documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller {
+  
   return [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-//  __block UIViewController *viewController = nil;
-//  
-//  dispatch_async(dispatch_get_main_queue(), ^{
-////    return [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-//    viewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-//  });
-//  return viewController;
 }
 
 @end
