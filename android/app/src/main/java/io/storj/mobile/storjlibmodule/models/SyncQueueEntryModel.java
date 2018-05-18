@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 import io.storj.mobile.storjlibmodule.dataprovider.contracts.SynchronizationQueueContract;
 
-
 public class SyncQueueEntryModel {
     @Expose
     @SerializedName(SynchronizationQueueContract._ID)

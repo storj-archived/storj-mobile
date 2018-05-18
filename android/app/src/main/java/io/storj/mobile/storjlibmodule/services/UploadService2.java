@@ -1,10 +1,14 @@
 package io.storj.mobile.storjlibmodule.services;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -14,6 +18,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.facebook.react.ReactApplication;
 import com.facebook.react.bridge.Arguments;
@@ -53,9 +58,24 @@ public class UploadService2 extends Service {
     private Handler mWorkerThreadHandler;
     private Handler mSyncThreadHandler;
     private Handler mCancelThreadHandler;
+    private BroadcastReceiver mBroadcastReceiver;
 
     public UploadService2() {
         mServiceName = "UploadService";
+        mBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                ConnectivityManager connectivityManager =
+                        (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
+
+                if (activeNetInfo != null && activeNetInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+                    //WIFI ON
+                } else {
+                    //WIFI OFF
+                }
+            }
+        };
     }
 
     private final static String TAG = "UPLOAD SERVICE 2 DEBUG";
@@ -81,6 +101,9 @@ public class UploadService2 extends Service {
     @Override
     public void onCreate() {
         Log.d(TAG, "onCreate: " + mServiceName);
+        IntentFilter filters = new IntentFilter();
+        filters.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        this.registerReceiver(mBroadcastReceiver, filters);
 
         HandlerThread workerThread = new HandlerThread("UploadWorkerThread", android.os.Process.THREAD_PRIORITY_BACKGROUND);
         HandlerThread syncThread = new HandlerThread("UploadSyncThread", android.os.Process.THREAD_PRIORITY_BACKGROUND);
@@ -457,5 +480,6 @@ public class UploadService2 extends Service {
     @Override
     public void onDestroy() {
         Log.d(TAG, "onDestroy: " + mServiceName);
+        this.unregisterReceiver(mBroadcastReceiver);
     }
 }
