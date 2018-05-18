@@ -103,6 +103,10 @@ public class SynchronizationService extends IntentService {
                     dbo.setProp(SynchronizationQueueContract._STATUS, SyncStateEnum.IDLE.getValue());
 
                     Response response = syncRepo.update(dbo.toModel());
+
+                    if(response.isSuccess()) {
+                        mEventEmitter.SyncEntryUpdated(syncEntry.getId());
+                    }
                 }
             }
         } catch (Exception e) {
