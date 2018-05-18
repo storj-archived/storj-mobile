@@ -289,7 +289,8 @@ static NSArray * columns;
   NSMutableDictionary *updateDictionary = [NSMutableDictionary dictionary];
   [updateDictionary setObject:[DictionaryUtils checkAndReturnNSString:[model _created]]
                        forKey:FileContract.CREATED];
-  [updateDictionary setObject:@([model _isDecrypted]) forKey:FileContract.DECRYPTED];
+  [updateDictionary setObject:@([model _isDecrypted])
+                       forKey:FileContract.DECRYPTED];
   [updateDictionary setObject:[DictionaryUtils checkAndReturnNSString:[model _erasure]]
                        forKey:FileContract.ERASURE];
   [updateDictionary setObject:[DictionaryUtils checkAndReturnNSString:[model _hmac]]
@@ -298,7 +299,8 @@ static NSArray * columns;
                        forKey:FileContract.INDEX];
   [updateDictionary setObject:[DictionaryUtils checkAndReturnNSString:[model _mimeType]]
                        forKey:FileContract.MIME_TYPE];
-  [updateDictionary setObject:@([model _size]) forKey:FileContract.SIZE];
+  [updateDictionary setObject:@([model _size])
+                       forKey:FileContract.SIZE];
   [updateDictionary setObject:[DictionaryUtils checkAndReturnNSString:[model _bucketId]]
                        forKey:FileContract.FILE_FK];
   [updateDictionary setObject:[DictionaryUtils checkAndReturnNSString:[model _name]]

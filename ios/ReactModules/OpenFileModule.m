@@ -45,7 +45,7 @@ RCT_REMAP_METHOD(openFile,
     return;
   }
  
-  NSURL *fileUrl = [NSURL fileURLWithPath:fileUri];
+  NSURL *fileUrl = [NSURL fileURLWithPath:fileUri isDirectory:NO];
   if(!fileUrl) {
     resolver([[Response errorResponseWithMessage:@"Cannot share file(URL corrupted)."] toDictionary]);
     return;
@@ -60,17 +60,31 @@ RCT_REMAP_METHOD(openFile,
 RCT_REMAP_METHOD(shareFile,
                  shareFileWithUri: (NSString *) fileUri
                  resolver: (RCTPromiseResolveBlock) resolver
-                 rejecter: (RCTPromiseRejectBlock) rejecter){
+                 rejecter: (RCTPromiseRejectBlock) rejecter) {
   
+  NSLog(@"Share file: %@", fileUri);
   if(!fileUri || fileUri.length == 0) {
     resolver([[Response errorResponseWithMessage:@"File URI is corrupted."] toDictionary]);
     return;
   }
   
-  NSURL *url = [NSURL fileURLWithPath:fileUri];
-  UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[url]
-                                                                           applicationActivities:nil];
-  
+  UIActivityViewController *controller;
+  NSString *imagePath = [fileUri hasPrefix:@"file://"]
+    ? [fileUri stringByReplacingOccurrencesOfString:@"file://" withString:@""]
+    : fileUri;
+  UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
+  if(image) {
+    controller = [[UIActivityViewController alloc] initWithActivityItems:@[image]
+                                                   applicationActivities:nil];
+  } else {
+    NSURL *url = [NSURL fileURLWithPath:fileUri isDirectory:NO];
+    if(!url) {
+      resolver([[Response errorResponseWithMessage:@"File URI is corrupted."] toDictionary]);
+      return;
+    }
+    controller = [[UIActivityViewController alloc] initWithActivityItems:@[url]
+                                                   applicationActivities:nil];
+  }
   dispatch_async(dispatch_get_main_queue(), ^{
     UIViewController *rootView = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
     [rootView presentViewController:controller
