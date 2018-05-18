@@ -20,13 +20,23 @@ import com.firebase.jobdispatcher.Trigger;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
+import io.storj.mobile.storjlibmodule.dataprovider.contracts.SynchronizationQueueContract;
+import io.storj.mobile.storjlibmodule.dataprovider.dbo.SyncQueueEntryDbo;
+import io.storj.mobile.storjlibmodule.dataprovider.repositories.SyncQueueRepository;
 import io.storj.mobile.storjlibmodule.enums.DownloadStateEnum;
 import io.storj.mobile.storjlibmodule.enums.SyncSettingsEnum;
+import io.storj.mobile.storjlibmodule.enums.SyncStateEnum;
 import io.storj.mobile.storjlibmodule.models.BucketModel;
 import io.storj.mobile.storjlibmodule.models.FileModel;
 import io.storj.mobile.storjlibmodule.models.SettingsModel;
+import io.storj.mobile.storjlibmodule.models.SyncQueueEntryModel;
 import io.storj.mobile.storjlibmodule.models.UploadingFileModel;
 import io.storj.mobile.storjlibmodule.responses.Response;
 import io.storj.mobile.storjlibmodule.responses.SingleResponse;
@@ -42,14 +52,32 @@ import io.storj.mobile.storjlibmodule.dataprovider.repositories.SettingsReposito
 import io.storj.mobile.storjlibmodule.dataprovider.repositories.UploadingFilesRepository;
 import io.storj.mobile.storjlibmodule.services.SynchronizationSchedulerJobService;
 import io.storj.mobile.storjlibmodule.services.SynchronizationService;
+import io.storj.mobile.storjlibmodule.services.UploadService2;
 
 /**
  * Created by Yaroslav-Note on 3/9/2018.
  */
 
 public class SyncModule extends ReactContextBaseJavaModule {
+    private static final int KEEP_ALIVE_TIME = 1;
+    private static final TimeUnit KEEP_ALIVE_TIME_UNIT = TimeUnit.SECONDS;
+    private static int NUMBER_OF_CORES =
+            Runtime.getRuntime().availableProcessors();
+
+    private final BlockingDeque<Runnable> mWorkQueue;
+    private final ThreadPoolExecutor mThreadPool;
+    
     public SyncModule(ReactApplicationContext reactContext) {
+        
         super(reactContext);
+        mWorkQueue = new LinkedBlockingDeque<>();
+        mThreadPool = new ThreadPoolExecutor(
+                NUMBER_OF_CORES,
+                NUMBER_OF_CORES,
+                KEEP_ALIVE_TIME,
+                KEEP_ALIVE_TIME_UNIT,
+                mWorkQueue
+        );
     }
 
     @Override
@@ -371,7 +399,107 @@ public class SyncModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    private void checkFile(final String fileId, final String localPath, final Promise promise) {
+    public void getSyncQueue(final Promise promise) {
+        mThreadPool.execute(new Runnable() {
+            @Override
+            public void run() {
+                try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getWritableDatabase()) {
+                    SyncQueueRepository syncRepo = new SyncQueueRepository(db);
+                    List<SyncQueueEntryModel> models = syncRepo.getAll();
+
+                    promise.resolve(new SingleResponse(true, toJson(models), null).toWritableMap());
+                } catch (Exception e) {
+                    promise.resolve(new Response(false, e.getMessage()));
+                }
+            }
+        });
+    }
+
+    @ReactMethod
+    public void getSyncQueueEntry(final int id, final Promise promise) {
+        mThreadPool.execute(new Runnable() {
+            @Override
+            public void run() {
+                try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getWritableDatabase()) {
+                    SyncQueueRepository syncRepo = new SyncQueueRepository(db);
+                    SyncQueueEntryModel model = syncRepo.get(id);
+
+                    if(model == null)
+                        throw new Exception("Sync entrie not found");
+
+                    promise.resolve(new SingleResponse(true, toJson(model), null).toWritableMap());
+                } catch (Exception e) {
+                    promise.resolve(new Response(false, e.getMessage()));
+                }
+            }
+        });
+    }
+
+    @ReactMethod
+    public void updateSyncQueueEntryFileName(final int id, final String newFileName, final Promise promise) {
+        if(newFileName == null)
+            promise.resolve(new Response(false, "File name can't be null!"));
+
+        updateSyncEntry(id, promise, new SetDboPropCallback() {
+            @Override
+            public void setProp(SyncQueueEntryDbo dbo) {
+                dbo.setProp(SynchronizationQueueContract._STATUS, SyncStateEnum.QUEUED.getValue());
+                dbo.setProp(SynchronizationQueueContract._FILE_NAME, newFileName);
+            }
+        });
+    }
+
+    @ReactMethod
+    public void updateSyncQueueEntryStatus(final int id, final int newStatus, final Promise promise) {
+       updateSyncEntry(id, promise, new SetDboPropCallback() {
+           @Override
+           public void setProp(SyncQueueEntryDbo dbo) {
+               List<SyncStateEnum> enums = Arrays.asList(SyncStateEnum.values());
+
+               if(enums.contains(SyncStateEnum.valueOf(newStatus))) {
+                   dbo.setProp(SynchronizationQueueContract._STATUS, newStatus);
+               }
+           }
+       });
+    }
+
+    private interface SetDboPropCallback {
+        void setProp(SyncQueueEntryDbo dbo);
+    }
+
+    private <T extends String> void updateSyncEntry(final int id, final Promise promise, final SetDboPropCallback callback) {
+        mThreadPool.execute(new Runnable() {
+            @Override
+            public void run() {
+                try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getWritableDatabase()) {
+                    SyncQueueRepository syncRepo = new SyncQueueRepository(db);
+                    SyncQueueEntryModel model = syncRepo.get(id);
+
+                    if(model == null)
+                        throw new Exception("No entrie has been found!");
+
+                    if(model.getStatus() == SyncStateEnum.PROCESSING.getValue() || model.getStatus() == SyncStateEnum.QUEUED.getValue())
+                        throw new Exception("Can't update processing entry");
+
+                    SyncQueueEntryDbo dbo = new SyncQueueEntryDbo(model);
+                    callback.setProp(dbo);
+
+                    model = dbo.toModel();
+                    Response response = syncRepo.update(model);
+
+                    if(!response.isSuccess())
+                        throw new Exception(response.getError().getMessage());
+
+                    promise.resolve(new SingleResponse(true, toJson(model), null).toWritableMap());
+                } catch (Exception e) {
+                    promise.resolve(new Response(false, e.getMessage()));
+                }
+            }
+        });
+    }
+
+    @ReactMethod
+    public void checkFile(final String fileId, final String localPath, final Promise promise) {
         if(localPath == null) {
             promise.resolve(new Response(false, "localPath is null!").toWritableMap());
             Log.d("SYNC MODULE", "checkImage: Error local path is null!");

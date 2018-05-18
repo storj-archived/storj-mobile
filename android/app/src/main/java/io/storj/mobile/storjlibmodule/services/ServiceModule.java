@@ -226,6 +226,23 @@ public class ServiceModule extends ReactContextBaseJavaModule implements Activit
     }
 
     @ReactMethod
+    public void removeFileFromSyncQueue(int id) {
+        Intent removeFromQueueIntent = new Intent(getReactApplicationContext(), SynchronizationService.class);
+        removeFromQueueIntent.setAction(SynchronizationService.ACTION_REMOVE_FROM_QUEUE);
+        removeFromQueueIntent.putExtra(UploadService2.PARAM_SYNC_ENTRY_ID, id);
+
+        getReactApplicationContext().startService(removeFromQueueIntent);
+    }
+
+    @ReactMethod
+    public void startSync() {
+        Intent startSyncIntent = new Intent(getReactApplicationContext(), SynchronizationService.class);
+        startSyncIntent.setAction(SynchronizationService.ACTION_SYNC);
+
+        getReactApplicationContext().startService(startSyncIntent);
+    }
+
+    @ReactMethod
     public void test() {
         Intent intent = new Intent(getReactApplicationContext(), UploadService2.class);
 

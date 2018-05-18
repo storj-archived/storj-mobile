@@ -9,6 +9,7 @@ import filesReducer from '../reducers/mainContainer/Files/filesReducer';
 import bucketReducer from '../reducers/mainContainer/Buckets/bucketReducer';
 import billingReducer from '../reducers/billing/billingReducer';
 import settingsReducer from "../reducers/mainContainer/MyAccount/Settings/SettingsReducer";
+import syncQueueReducer from "../reducers/mainContainer/SyncQueue/syncQueueReducer";
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from "redux-thunk"
 
@@ -26,7 +27,8 @@ const reducers = {
     filesReducer,
     bucketReducer,
     billingReducer,
-    settingsReducer
+    settingsReducer,
+    syncQueueReducer
 };
 
 export const store = createStore(combineReducers({ ...reducers }), applyMiddleware(thunk));

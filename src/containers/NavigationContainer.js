@@ -56,6 +56,7 @@ import FileModel from '../models/FileModel';
 import WarningComponent from '../components/WarningComponent';
 import { SYNC_BUCKETS } from '../utils/constants/SyncBuckets';
 import { uploadFileStart, uploadFileSuccess } from '../reducers/asyncActions/fileActionsAsync';
+import { listSyncQueueEntriesAsync, getSyncQueueEntryAsync } from "../reducers/mainContainer/SyncQueue/syncQueueReducerAsyncActions";
 
 const { PICTURES } = SYNC_BUCKETS;
 
@@ -83,6 +84,8 @@ class Apps extends Component {
 		this.downloadFileProgressListener = null;
 		this.downloadFileSuccessListener = null;
 		this.downloadFileErrorListener = null;
+		this.syncQueueEntryUpdateListener = null;
+		this.syncStartedListener = null;
 
 		this.isAndroid = Platform.OS === "android";
 		this.timer = null;
@@ -107,6 +110,9 @@ class Apps extends Component {
 		this.downloadFileProgressListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_PROGRESS, this.onFileDownloadProgress.bind(this));
 		this.downloadFileSuccessListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_SUCCESS, this.onFileDownloadSuccess.bind(this));
 		this.downloadFileErrorListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_ERROR, this.onFileDownloadError.bind(this));
+
+		this.syncQueueEntryUpdateListener = eventEmitter.addListener(eventNames.EVENT_SYNC_ENTRY_UPDATED, this.onSyncQueueEntryUpdated.bind(this));
+		this.syncStartedListener = eventEmitter.addListener(eventNames.EVENT_SYNC_STARTED, this.onSyncStarted.bind(this));
 
 		NetInfo.isConnected.fetch().then(isConnected => {
 			this.props.setIsConnected(isConnected);
@@ -167,6 +173,16 @@ class Apps extends Component {
 		this.props.downloadFileError(null, params.fileId);
 	}
 
+	onSyncStarted() {
+		console.log("SYNC STARTED");
+		this.props.listSyncQueueEntriesAsync();
+	}
+
+	onSyncQueueEntryUpdated(params) { //TODO: name error
+		console.log("HELLLOOOOOO", params);
+		this.props.getSyncQueueEntryAsync(params.syncEntryId);
+	}
+
 	componentWillUnmount() {
 		if(Platform.OS === 'android') {
 			BackHandler.removeEventListener("hardwareBackPress", this.onHardwareBackPress);
@@ -181,6 +197,8 @@ class Apps extends Component {
 		this.downloadFileProgressListener.remove();
 		this.downloadFileSuccessListener.remove();
 		this.downloadFileErrorListener.remove();
+		this.syncQueueEntryUpdateListener.remove();
+		this.syncStartedListener.remove();
 	}
 
 	onHardwareBackPress() {
@@ -244,7 +262,6 @@ class Apps extends Component {
 
         if(bucketsResponse.isSuccess) {
             let buckets = JSON.parse(bucketsResponse.result).map((file) => {
-				console.log(file);
                 return new ListItemModel(new BucketModel(file));
             });                    
 
@@ -379,7 +396,9 @@ function mapDispatchToProps(dispatch) {
 		redirectToMnemonicNotConfirmedScreen,
 		redirectToRegisterScreen,
 		redirectToRegisterSuccessScreen,
-		navigateBack  }, dispatch),
+		navigateBack,
+		listSyncQueueEntriesAsync,
+		getSyncQueueEntryAsync  }, dispatch),
 		uploadSuccess: (fileHandle, fileId) => dispatch(uploadFileSuccess(fileHandle, fileId)),		
 		getUploadingFile: (fileHandle) => dispatch(uploadFileStart(fileHandle))};
 }

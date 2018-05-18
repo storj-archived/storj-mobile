@@ -54,6 +54,14 @@ const ServiceModule = (() => {
             serviceModule.copyFile(String(bucketId), String(fileId), String(localPath), String(targetBucketId));
         }
 
+        removeFileFromSyncQueue(id) {
+            serviceModule.removeFileFromSyncQueue(Number(id));
+        }
+
+        startSync() {
+            serviceModule.startSync();
+        }
+
         test() {
             serviceModule.test();
         }

@@ -145,7 +145,7 @@ public class SynchronizationSchedulerJobService extends JobService {
             }
 
             FileDbo fileDbo = fileRepo.get(file.getName(), FileContract._NAME, bucketId);
-            SyncQueueEntryModel syncEntry = syncRepo.get(file.getName(), bucketId);
+            SyncQueueEntryModel syncEntry = syncRepo.get(file.getPath(), bucketId);
 
             if(fileDbo == null && syncEntry == null) {
                 //uploadFile(bucketId, file.getPath(), settingsId, syncSettings);

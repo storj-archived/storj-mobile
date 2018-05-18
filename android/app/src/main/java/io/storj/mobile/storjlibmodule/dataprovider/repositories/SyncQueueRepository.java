@@ -103,16 +103,16 @@ public class SyncQueueRepository extends BaseRepository {
         return model;
     }
 
-    public SyncQueueEntryModel get(String fileName, String bucketId) {
+    public SyncQueueEntryModel get(String localPath, String bucketId) {
         SyncQueueEntryModel model = null;
         String[] selectionArgs = new String[] {
-            fileName,
+            localPath,
             bucketId
         };
 
         Cursor cursor = _db.query(SynchronizationQueueContract.TABLE_NAME,
                 null,
-                SynchronizationQueueContract._FILE_NAME + " = ? AND " + SynchronizationQueueContract._BUCKET_ID + " = ?",
+                SynchronizationQueueContract._LOCAL_PATH + " = ? AND " + SynchronizationQueueContract._BUCKET_ID + " = ?",
                 selectionArgs,
                 null, null, null);
 

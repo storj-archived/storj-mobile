@@ -40,6 +40,8 @@ import io.storj.mobile.storjlibmodule.models.SyncQueueEntryModel;
 import io.storj.mobile.storjlibmodule.models.UploadingFileModel;
 import io.storj.mobile.storjlibmodule.responses.Response;
 import io.storj.mobile.storjlibmodule.responses.SingleResponse;
+import io.storj.mobile.storjlibmodule.services.eventemitters.BaseEventEmitter;
+import io.storj.mobile.storjlibmodule.services.eventemitters.SynchronizationEventEmitter;
 import io.storj.mobile.storjlibmodule.utils.ProgressResolver;
 import io.storj.mobile.storjlibmodule.utils.ThumbnailProcessor;
 import io.storj.mobile.storjlibmodule.utils.Uploader;
@@ -61,13 +63,14 @@ public class UploadService2 extends Service {
     public final static String ACTION_UPLOAD_FILE = "ACTION_UPLOAD_FILE";
     public final static String ACTION_SYNC_FILE = "ACTION_SYNC_FILE";
     public final static String ACTION_CANCEL_UPLOAD = "ACTION_CANCEL_UPLOAD";
+    public final static String ACTION_REMOVE_FROM_SYNC_QUEUE = "ACTION_REMOVE_FROM_SYNC_QUEUE";
     public final static String ACTION_CANCEL_SYNC = "ACTION_CANCEL_SYNC";
 
-    public final static String PARAM_BUCKET_ID = "PARAM_BUCKET_ID";
-    public final static String PARAM_FILE_NAME = "PARAM_FILE_NAME";
-    public final static String PARAM_LOCAL_PATH = "PARAM_LOCAL_PATH";
-    public final static String PARAM_SYNC_ENTRY_ID = "PARAM_SYNC_ENTRY_ID";
-    public final static String PARAM_FILE_HANDLE = "PARAM_FILE_HANDLE";
+    public final static String PARAM_BUCKET_ID = "bucketId";
+    public final static String PARAM_FILE_NAME = "fileName";
+    public final static String PARAM_LOCAL_PATH = "localPath";
+    public final static String PARAM_SYNC_ENTRY_ID = "syncEntryId";
+    public final static String PARAM_FILE_HANDLE = "fileHandle";
 
     @Nullable
     @Override
@@ -109,12 +112,21 @@ public class UploadService2 extends Service {
             case ACTION_CANCEL_UPLOAD:
                 processIntent(intent, startId, mCancelThreadHandler);
                 break;
+            case ACTION_REMOVE_FROM_SYNC_QUEUE:
+                removeFromSyncQueue(intent.getIntExtra(PARAM_SYNC_ENTRY_ID, -1));
+                break;
             case ACTION_CANCEL_SYNC:
                 mSyncThreadHandler.removeCallbacksAndMessages(null);
                 break;
         }
 
         return Service.START_NOT_STICKY;
+    }
+
+    private void removeFromSyncQueue(int id) {
+        if(mSyncThreadHandler.hasMessages(id)) {
+            mSyncThreadHandler.removeMessages(id);
+        }
     }
 
     private void processIntent(Intent intent, int id, Handler handler) {
@@ -181,34 +193,6 @@ public class UploadService2 extends Service {
         @Override
         public void onError(String localPath, int code, String message) {
             Response response = mUploadingRepo.delete(mDbo.getId());
-        }
-    }
-
-    public class BaseEventEmitter {
-        protected Context mContext;
-
-        public final static String ACTION_EVENT = "ACTION_EVENT";
-        public final static String PARAM_DATA = "data";
-        public final static String PARAM_EVENT_NAME = "eventName";
-
-        public BaseEventEmitter(Context context) {
-            mContext = context;
-        }
-
-        public void Emit(String eventName, ContentValues map) {
-            if(mContext == null) {
-                return;
-            }
-
-//                ReactContext reactContext = ((ReactApplication)mContext).getReactNativeHost().getReactInstanceManager().getCurrentReactContext();
-//                reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-//                        .emit(eventName, WritableMapMapper.get(map));
-
-            Intent eventIntent = new Intent(ACTION_EVENT);
-            eventIntent.putExtra(PARAM_DATA, map);
-            eventIntent.putExtra(PARAM_EVENT_NAME, eventName);
-
-            LocalBroadcastManager.getInstance(mContext).sendBroadcast(eventIntent);
         }
     }
 
@@ -342,11 +326,13 @@ public class UploadService2 extends Service {
         private int mSyncEntryId;
         private SyncQueueRepository mSyncRepo;
         private SyncQueueEntryModel mSyncEntryModel;
+        private SynchronizationEventEmitter mSyncEventEmitter;
 
         public SyncUploaderCallback(SQLiteDatabase db, Uploader.Callback eventEmitter, int syncEntryId) {
             super(db, eventEmitter, true);
             mSyncEntryId = syncEntryId;
             mSyncRepo = new SyncQueueRepository(db);
+            mSyncEventEmitter = new SynchronizationEventEmitter((BaseEventEmitter)eventEmitter);
         }
 
         @Override
@@ -359,6 +345,10 @@ public class UploadService2 extends Service {
             syncEntryDbo.setProp(SynchronizationQueueContract._FILE_HANDLE, fileHandle);
 
             Response response = mSyncRepo.update(syncEntryDbo.toModel());
+
+            if(response.isSuccess()) {
+                mSyncEventEmitter.SyncEntryUpdated(mSyncEntryId);
+            }
         }
 
         @Override
@@ -369,6 +359,10 @@ public class UploadService2 extends Service {
             syncEntryDbo.setProp(SynchronizationQueueContract._STATUS, SyncStateEnum.PROCESSED.getValue());
 
             Response response = mSyncRepo.update(syncEntryDbo.toModel());
+
+            if(response.isSuccess()) {
+                mSyncEventEmitter.SyncEntryUpdated(mSyncEntryId);
+            }
         }
 
         @Override
@@ -380,6 +374,10 @@ public class UploadService2 extends Service {
             syncEntryDbo.setProp(SynchronizationQueueContract._ERROR_CODE, code);
 
             Response response = mSyncRepo.update(syncEntryDbo.toModel());
+
+            if(response.isSuccess()) {
+                mSyncEventEmitter.SyncEntryUpdated(mSyncEntryId);
+            }
         }
     }
 

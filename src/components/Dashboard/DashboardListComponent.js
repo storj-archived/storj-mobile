@@ -12,12 +12,17 @@ import { getHeight, getWidth } from '../../utils/adaptive';
 import PropTypes from 'prop-types';
 import { TYPES } from '../../utils/constants/typesConstants';
 import DashboardItemListComponent from './DashboardItemListComponent';
+import SyncQueueEntryComponent from "../SynQueue/SyncQueueEntryComponent";
 import { getShortBucketName } from "../../utils/fileUtils";
 import { InfoButtonComponent } from '../InfoButtonComponent';
+import { getSyncStatusFromCode, getActionIconFromCode } from '../../utils/syncStatusMapper';
+import SyncState from '../../utils/constants/SyncState';
+import ServiceModule from '../../utils/ServiceModule';
 
 export default class DashboardListComponent extends Component{
     constructor(props) {
-        super(props);   
+        super(props);
+        this.props.listSyncQueueEntriesAsync();
     }
 
     getThreeLast(array) {
@@ -67,6 +72,25 @@ export default class DashboardListComponent extends Component{
                             </View>
                             : null
                         }
+                        <TouchableOpacity onPress = { ServiceModule.startSync } style = { { height: 20, width: 60, backgroundColor: "navy" } }>
+                            <Text style = { { color: "white" } }>Start Sync</Text>
+                        </TouchableOpacity>
+                        {
+                            this.props.syncQueueEntries.map((entry) => {
+                                return(
+                                    <SyncQueueEntryComponent key = { entry.getId() }
+                                        fileName = { entry.getName() }
+                                        iconSource = { require("../../images/Icons/CloudFile.png") }
+                                        actionIconSource = { getActionIconFromCode(entry.entity.status) }
+                                        actionCallback = { entry.entity.status === SyncState.QUEUED ? 
+                                            () => { ServiceModule.removeFileFromSyncQueue(entry.getId()); } 
+                                            : () => { this.props.updateSyncQueueEntryStatusAsync(entry.getId(), SyncState.IDLE); } }
+                                        isLoading = { entry.entity.status === SyncState.PROCESSING }
+                                        progress = { this.props.getProgress(entry.entity.fileHandle) }
+                                        status = { getSyncStatusFromCode(entry.entity.status) } />
+                                );
+                            })
+                        }
                         {
                             listComponent(
                                 'Favourite buckets', 
@@ -96,7 +120,7 @@ export default class DashboardListComponent extends Component{
                                 TYPES.SYNCED,
                                 this.props.redirectToFavoriteFilesScreen
                             )
-                        }     
+                        }
                         </View>
                     </ScrollView>
                 </View>
