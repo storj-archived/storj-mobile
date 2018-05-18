@@ -14,8 +14,7 @@ export const InfoButtonComponent = (props) => {
                 <Image 
                     style = { styles.buttonImage } 
                     source = { props.imagePath } 
-                    resizeMode = 'contain'
-                    tintColor = '#384B65' />
+                    resizeMode = 'contain' />
                 <View style = { styles.bandwidthMargin }>
                     <Text style = { [styles.buttonTextRegular, styles.topButtonTextMargin, styles.blackTextColor] }>{ props.title }</Text>
                     <Text style = { [styles.buttonTextBold, styles.topButtonTextMargin, styles.blackTextColor] }>{ props.amount }{ ' GB' }</Text>
