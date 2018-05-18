@@ -409,7 +409,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
 
                     promise.resolve(new SingleResponse(true, toJson(models), null).toWritableMap());
                 } catch (Exception e) {
-                    promise.resolve(new Response(false, e.getMessage()));
+                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
                 }
             }
         });
@@ -429,7 +429,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
 
                     promise.resolve(new SingleResponse(true, toJson(model), null).toWritableMap());
                 } catch (Exception e) {
-                    promise.resolve(new Response(false, e.getMessage()));
+                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
                 }
             }
         });
@@ -467,7 +467,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
         void setProp(SyncQueueEntryDbo dbo);
     }
 
-    private <T extends String> void updateSyncEntry(final int id, final Promise promise, final SetDboPropCallback callback) {
+    private void updateSyncEntry(final int id, final Promise promise, final SetDboPropCallback callback) {
         mThreadPool.execute(new Runnable() {
             @Override
             public void run() {
@@ -492,7 +492,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
 
                     promise.resolve(new SingleResponse(true, toJson(model), null).toWritableMap());
                 } catch (Exception e) {
-                    promise.resolve(new Response(false, e.getMessage()));
+                    promise.resolve(new Response(false, e.getMessage()).toWritableMap());
                 }
             }
         });

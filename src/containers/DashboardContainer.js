@@ -17,9 +17,10 @@ class DashboardContainer extends Component {
     }
 
     getProgress(fileHandle) {
-        let uploadingFile = this.props.uploadingFiles.find(uploadingFile => fileHandle);
-
+        let uploadingFile = this.props.uploadingFiles.find(uploadingFile => uploadingFile.getId() === fileHandle);
         if(uploadingFile) {
+            console.log("fileHandle", fileHandle);
+            console.log("uploadingFile", uploadingFile);
             return uploadingFile.progress;
         }
 
