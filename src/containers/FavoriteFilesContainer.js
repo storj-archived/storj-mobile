@@ -12,6 +12,7 @@ import { dashboardNavigateBack, navigateToDashboardFilesScreen, navigateBack } f
 import filesActions from '../reducers/mainContainer/Files/filesReducerActions';
 import BaseFilesListContainer from "../containers/BaseFilesListContainer";
 import headerFilesListBinder from "../viewBinders/headerFilesListBinder";
+import { TYPES } from '../utils/constants/typesConstants';
 import PropTypes from 'prop-types';
 
 /**
@@ -35,6 +36,10 @@ class FavoriteFilesContainer extends BaseFilesListContainer {
      * @returns {ListItemModel<FileModel>[]} ListItemModels initialized with FileModel
      */
     getData() { 
+        if(this.props.navigation.state.params.itemType === TYPES.SYNCED)
+            return this.props.fileListModels.concat(this.props.uploadingFileListModels)
+                                            .filter(file => file.getSynced() === true);
+
         return this.props.fileListModels.concat(this.props.uploadingFileListModels)
                                         .filter(file => file.getStarred() === true);
     }
