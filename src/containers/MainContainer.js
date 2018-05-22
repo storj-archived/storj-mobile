@@ -60,27 +60,27 @@ class MainContainer extends Component {
 
         //Common stuff
         let newAction = TabBarActionModelFactory.createNewAction;
-        let uploadFileIcon = '../images/ActionBar/UploadFileIcon.png';
-        let favIcon = '../images/ActionBar/FavoritesIcon.png';
-        let unfavIcon = '../images/ActionBar/UnsetFavourite.png';
-        let trashIcon = '../images/ActionBar/TrashBucketIcon.png';
-        let iosUploadPhotoIcon = '../images/ActionBar/IosUploadPhoto.png';
-        let iosUploadFileIcon = '../images/ActionBar/IosUploadFile.png';
+        let uploadFileIcon = require('../images/ActionBar/UploadFileIcon.png');
+        let favIcon = require('../images/ActionBar/FavoritesIcon.png');
+        let unfavIcon = require('../images/ActionBar/UnsetFavourite.png');
+        let trashIcon = require('../images/ActionBar/TrashBucketIcon.png');
+        let iosUploadPhotoIcon = require('../images/ActionBar/IosUploadPhoto.png');
+        let iosUploadFileIcon = require('../images/ActionBar/IosUploadFile.png');
 
         //Action callbacks
         let createBucketAction = newAction(() => { this.props.showCreateBucketInput(); }, require('../images/ActionBar/NewBucketIcon.png'));
-        let openFilePickerAction = (type, imgUrl) => newAction(() => { this.bucketScreenUploadFile(type) }, require(imgUrl));
+        let openFilePickerAction = (type, imgUrl) => newAction(() => { this.bucketScreenUploadFile(type) }, imgUrl);
         let openCameraAction = (id) => newAction(() => { CameraModule.openCamera(id); }, require('../images/ActionBar/UploadPhotoIcon.png'));
-        let uploadFileAction = (bucketId, type, imgUrl) => newAction(() => { this.uploadFile(bucketId, type); }, require(imgUrl));
-        let setFavouriteAction = newAction(() => { this.setFavourite(); }, props.isStarredBucketsSelected ? require(unfavIcon)
-                                                                                                          : require(favIcon));
-        let uploadFileToSelectedBucketsAction = (type, imgUrl) => newAction(() => { this.uploadFileToSelectedBuckets(type); }, require(imgUrl));
-        let tryDeleteBucketsAction = newAction(() => { this.tryDeleteBuckets(); }, require(trashIcon));
-        let setFavouriteFilesAction = newAction(() => { this.setFavouriteFiles(); }, this.props.isStarredFilesSelected ? require(unfavIcon) 
-                                                                                                                       : require(favIcon));
+        let uploadFileAction = (bucketId, type, imgUrl) => newAction(() => { this.uploadFile(bucketId, type); }, imgUrl);
+        let setFavouriteAction = newAction(() => { this.setFavourite(); }, props.isStarredBucketsSelected ? unfavIcon
+                                                                                                          : favIcon);
+        let uploadFileToSelectedBucketsAction = (type, imgUrl) => newAction(() => { this.uploadFileToSelectedBuckets(type); }, imgUrl);
+        let tryDeleteBucketsAction = newAction(() => { this.tryDeleteBuckets(); }, trashIcon);
+        let setFavouriteFilesAction = newAction(() => { this.setFavouriteFiles(); }, this.props.isStarredFilesSelected ? unfavIcon 
+                                                                                                                       : favIcon);
         let downloadSelectedFilesAction = newAction(() => { this.downloadSelectedFiles(); }, require('../images/ActionBar/DownloadIFileIcon.png'));
         let tryCopySelectedFilesAction = newAction(() => { this.tryCopySelectedFiles(); }, require('../images/ActionBar/CopyBucketIcon.png'));
-        let tryDeleteFiles = newAction(() => { this.tryDeleteFiles(); }, require(trashIcon));
+        let tryDeleteFiles = newAction(() => { this.tryDeleteFiles(); }, trashIcon);
 
         //Action arrays
         this.bucketActions = Platform.OS === "android" 
