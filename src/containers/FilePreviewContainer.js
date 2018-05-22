@@ -30,12 +30,11 @@ class FilePreviewContainer extends BaseFileViewerContainer {
         return [
             TabBarActionModelFactory.createNewAction(
                 () => { this.setFavourite(); }, 
-                'Action 1', 
                 this.props.isStarred ?
                     require('../images/ActionBar/UnsetFavourite.png') :
                     require('../images/ActionBar/FavoritesIcon.png')
             ),
-            TabBarActionModelFactory.createNewAction(() => { this.tryDeleteFile(); }, 'Action 4', require('../images/ActionBar/TrashBucketIcon.png'))
+            TabBarActionModelFactory.createNewAction(() => { this.tryDeleteFile(); }, require('../images/ActionBar/TrashBucketIcon.png'))
         ];
     }
 
