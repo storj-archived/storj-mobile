@@ -65,6 +65,11 @@ public class OpenFileModule  extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void shareFile(String uri, Promise promise) {
+        if (uri == null || uri.isEmpty()) {
+            promise.resolve(new Response(false, "Uri is corrupted").toWritableMap());
+            return;
+        }
+
         Uri _uri = Uri.parse(uri);
         String ext = getExtension(uri);
         String type = getType(ext);
@@ -88,6 +93,11 @@ public class OpenFileModule  extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void checkFile(String fileName, Promise promise) {
+        if (fileName == null || fileName.isEmpty()) {
+            promise.resolve(new Response(false, "Uri is corrupted").toWritableMap());
+            return;
+        }
+
         String ext = getExtension(fileName);
 
         boolean contains = Arrays.asList(new String[] {"doc", "pdf",  "ppt", "pptx", "rtf", "wav", "mp3", "txt", "3gp", "mpg", "mpeg", "mpe", "mp4", "avi"}).contains(ext);
