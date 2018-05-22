@@ -59,12 +59,18 @@ class MainContainer extends Component {
         super(props);
 
         //this.state = {
-        this.bucketActions = [
+        this.bucketActions = Platform.OS === "android" ? [
             //actions for bucket screen
             TabBarActionModelFactory.createNewAction(() => { this.props.showCreateBucketInput(); }, 'Action 1', require('../images/ActionBar/NewBucketIcon.png')), 
             TabBarActionModelFactory.createNewAction(() => { this.bucketScreenUploadFile() }, 'Action 2', require('../images/ActionBar/UploadFileIcon.png')),
             TabBarActionModelFactory.createNewAction(() => { CameraModule.openCamera(this.props.myPhotosBucketId); }, 'Action 3', require('../images/ActionBar/UploadPhotoIcon.png'))
-        ];
+        ] : [
+            //actions for bucket screen
+            TabBarActionModelFactory.createNewAction(() => { this.props.showCreateBucketInput(); }, 'Action 1', require('../images/ActionBar/NewBucketIcon.png')), 
+            TabBarActionModelFactory.createNewAction(() => { this.bucketScreenUploadFile("document") }, 'Action 2', require('../images/ActionBar/IosUploadFile.png')),
+            TabBarActionModelFactory.createNewAction(() => { this.bucketScreenUploadFile("image") }, 'Action 3', require('../images/ActionBar/IosUploadPhoto.png')),
+            TabBarActionModelFactory.createNewAction(() => { CameraModule.openCamera(this.props.myPhotosBucketId); }, 'Action 4', require('../images/ActionBar/UploadPhotoIcon.png'))
+        ]
         
         this.openedBucketActions = [
             TabBarActionModelFactory.createNewAction(() => { this.uploadFile(this.props.openedBucketId); }, 'Action 8', require('../images/ActionBar/UploadFileIcon.png')),
@@ -178,8 +184,8 @@ class MainContainer extends Component {
         }
     }
 
-    async bucketScreenUploadFile() {
-        let filePickerResponse = await filePicker.show();
+    async bucketScreenUploadFile(type) {
+        let filePickerResponse = await filePicker.show(type);
         this.props.hideActionBar();
 
         if(filePickerResponse.isSuccess) {

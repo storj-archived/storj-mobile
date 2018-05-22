@@ -7,18 +7,31 @@ const FilePicker = (() => {
     let instance = null;
 
     const filePickerLibAndroid = NativeModules.FilePickerAndroid;
-    const filePickerLibIos = NativeModules.FilePickerIos;
+    const imagePickerLibIos = NativeModules.FilePickerIos;
+    const documentsPickerModule = NativeModules.DocumentsPickerModule;
     const isAndroid = Platform.OS === 'android';
-
-    const filePickerLib = isAndroid ? filePickerLibAndroid : filePickerLibIos;
 
     class FilePicker {
 
-        async show() {
+        async show(type) {
             var options = {
                 mimeType:'*/*',
                 pickerTitle:'Choose file to download'
             }            
+
+            var filePickerLib = null;
+
+            switch(type) {
+                case "image":
+                    filePickerLib = imagePickerLibIos;
+                    break;
+                case "document":
+                    filePickerLib = documentsPickerModule;
+                    break;
+                default:
+                    filePickerLib = filePickerLibAndroid;
+                    break;
+            }
 
             return await filePickerLib.show(options);
         }
