@@ -35,7 +35,7 @@ export default class RegisterComponent extends Component {
 
 	render() {
 		return(
-            <ScrollView style={ styles.mainContainer } keyboardDismissMode = { "interactive" }>
+            <ScrollView style={ styles.mainContainer } keyboardDismissMode = { "interactive" } keyboardShouldPersistTaps = { 'always' } >
                 <View style = { styles.contentWrapper }>
                     <Text style = { styles.titleBold }>Let’s get started</Text>
                     <View style = { styles.firstInputMargin }>

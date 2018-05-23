@@ -3,6 +3,7 @@ import {
     TextInput,
     Text,
     Image,
+    Keyboard,
     StyleSheet,
     TouchableOpacity
 } from 'react-native';
@@ -56,7 +57,8 @@ export default class InputComponent extends Component {
                         autoFocus = { this.props.autoFocus }
                         keyboardType = { this.props.keyboardType ? this.props.keyboardType : 'default' }
                         onChangeText={ this.props.onChangeText }
-                        value={ this.props.value } />
+                        value={ this.props.value }
+                        onSubmitEditing = { () => Keyboard.dismiss() } />
                         {
                             (() => {
                                 if(this.props.isPassword) {
