@@ -15,8 +15,6 @@ import DashboardItemListComponent from './DashboardItemListComponent';
 import SyncQueueEntryComponent from "../SynQueue/SyncQueueEntryComponent";
 import { getShortBucketName } from "../../utils/fileUtils";
 import { InfoButtonComponent } from '../InfoButtonComponent';
-import { getSyncStatusFromCode, getActionIconFromCode } from '../../utils/syncStatusMapper';
-import SyncState from '../../utils/constants/SyncState';
 import ServiceModule from '../../utils/ServiceModule';
 
 export default class DashboardListComponent extends Component{
@@ -76,20 +74,7 @@ export default class DashboardListComponent extends Component{
                             <Text style = { { color: "white" } }>Start Sync</Text>
                         </TouchableOpacity>
                         {
-                            this.props.syncQueueEntries.map((entry) => {
-                                return(
-                                    <SyncQueueEntryComponent key = { entry.getId() }
-                                        fileName = { entry.getName() }
-                                        iconSource = { require("../../images/Icons/CloudFile.png") }
-                                        actionIconSource = { getActionIconFromCode(entry.entity.status) }
-                                        actionCallback = { entry.entity.status === SyncState.QUEUED ? 
-                                            () => { ServiceModule.removeFileFromSyncQueue(entry.getId()); } 
-                                            : () => { this.props.updateSyncQueueEntryStatusAsync(entry.getId(), SyncState.IDLE); } }
-                                        isLoading = { entry.entity.status === SyncState.PROCESSING }
-                                        progress = { this.props.getProgress(entry.entity.fileHandle) }
-                                        status = { getSyncStatusFromCode(entry.entity.status) } />
-                                );
-                            })
+                            this.props.syncQueueEntries
                         }
                         {
                             listComponent(
@@ -249,4 +234,4 @@ DashboardListComponent.propTypes = {
     navigateToDashboardFilesScreen: PropTypes.func,
     setDashboardBucketId: PropTypes.func,  
     storageAmount: PropTypes.string
-}
+};

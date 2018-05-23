@@ -12,8 +12,9 @@ export default class SyncQueueEntryModel extends ItemModel {
         this.fileHandle = fileHandle;
     }
 
+    isValid = () => this.id && this.fileName && this.bucketId && this.date;
+
     static fromModel(syncQueueEntryModel) {
-        console.log("formModel", syncQueueEntryModel);
         return new SyncQueueEntryModel(
             syncQueueEntryModel._id,
             syncQueueEntryModel.fileName,

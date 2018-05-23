@@ -1,4 +1,4 @@
-import { Keyboard, BackHandler, Platform, Alert } from 'react-native';
+import { Keyboard, BackHandler, Platform, Alert, Animated, Easing } from 'react-native';
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -14,7 +14,8 @@ import {
     enableSelectionMode,
     disableSelectionMode,
     changePINOptionStatus,
-    changePasswordPopupStatus
+    changePasswordPopupStatus,
+    toggleSyncWindow
 } from '../reducers/mainContainer/mainReducerActions';
 import {    
     createBucket,
@@ -52,6 +53,14 @@ import { SYNC_BUCKETS } from '../utils/constants/SyncBuckets';
 import ListItemModel from '../models/ListItemModel';
 import BucketModel from '../models/BucketModel';
 import FileModel from '../models/FileModel';
+
+import { listSyncQueueEntriesAsync, updateSyncQueueEntryFileNameAsync, updateSyncQueueEntryStatusAsync } from "../reducers/mainContainer/SyncQueue/syncQueueReducerAsyncActions";
+import { getSyncStatusFromCode, getActionIconFromCode, getActionsFromCode, getIsLoading, getAllFromCode } from "../utils/syncQueue/syncStatusMapper";
+import SyncQueueEntryComponent from "../components/SynQueue/SyncQueueEntryComponent";
+import SyncQueueCallbackObject from "../models/SyncQueueCallbackObject";
+import SyncState from '../utils/constants/SyncState';
+import { getDeviceHeight } from "../utils/adaptive";
+
 
 const { PICTURES } = SYNC_BUCKETS;
 
@@ -124,7 +133,119 @@ class MainContainer extends Component {
         this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
 
         this.filePickerResponsePathes = [];
-    }    
+
+
+        this.animValue = new Animated.Value(0);
+
+        let callbackOject = {};
+        let reSyncCallback = (entry) => this.props.updateSyncQueueEntryStatusAsync(entry.getId(), SyncState.IDLE);
+
+        callbackOject.queued = (entry) => ServiceModule.removeFileFromSyncQueue(entry.getId()); 
+        callbackOject.error = reSyncCallback;
+        callbackOject.cancelled = reSyncCallback;
+        callbackOject.processing = (entry) => StorjModule.cancelUpload(entry.entity.fileHandle);
+        callbackOject.processed = reSyncCallback;
+        callbackOject.idle = (entry) => this.props.updateSyncQueueEntryStatusAsync(entry.getId(), SyncState.CANCELLED);
+
+        SyncQueueCallbackObject.CallbackObject = callbackOject;
+    }
+    
+
+
+
+
+    interpolate() {
+        const moveY = this.animValue.interpolate({
+            inputRange: [
+                0, 
+                1
+            ],
+            outputRange: [-getDeviceHeight(), 10]
+        });
+
+        return {
+            transform: [
+                { translateY: moveY }
+            ]
+        };
+    }
+
+    interpolateBackground() {
+        const opacityChange = this.animValue.interpolate({
+            inputRange: [
+                0, 
+                1
+            ],
+            outputRange: [0, 0.6]
+        });
+
+        return {
+            opacity: opacityChange
+        };
+    }
+
+    getProgress(fileHandle) {
+        let uploadingFile = this.props.uploadingFiles.find(uploadingFile => uploadingFile.getId() === fileHandle);
+
+        if(uploadingFile) {
+            return uploadingFile.progress;
+        }
+
+        return 0;
+    }
+
+    getSyncQueueEntry({item}) {
+        const describer = getAllFromCode(item.entity.status, new SyncQueueCallbackObject(item));
+
+        return(
+            <SyncQueueEntryComponent 
+                key = { item.getId() }
+                fileName = { item.getName() }
+                iconSource = { require("../images/Icons/CloudFile.png") }
+                actionIconSource = { describer.actionIcon }
+                actionCallback = { describer.action }
+                isLoading = { describer.isLoading }
+                progress = { this.getProgress(item.entity.fileHandle) }
+                status = { describer.status } />
+        );
+    }
+
+    showSyncWindow() {
+        this.props.toggleSyncWindow(true);
+
+        Animated.timing(
+            this.animValue,
+            {
+              toValue: 1,
+              duration: 500,
+              delay: 0,
+              easing: Easing.circle,
+              useNativeDriver: true
+            }
+        ).start();
+    }
+
+    hideSyncWindow() {
+        Animated.timing(
+            this.animValue,
+            {
+              toValue: 0,
+              duration: 500,
+              easing: Easing.circle,
+              useNativeDriver: true
+            }
+        ).start(() => this.props.toggleSyncWindow(false));
+    }
+
+
+
+
+
+
+
+
+
+
 
     async componentWillMount () {
         if(Platform.OS === "android") {
@@ -484,6 +605,14 @@ class MainContainer extends Component {
 
         return(
             <MainComponent
+                interpolate = { this.interpolate.bind(this) }
+                interpolateBackground = { this.interpolateBackground.bind(this) }
+                syncQueueEntries = { this.props.syncQueueEntries }
+                renderSyncQueueEntry = { this.getSyncQueueEntry.bind(this) }
+                showSyncWindow = { this.showSyncWindow.bind(this) }
+                hideSyncWindow = { this.hideSyncWindow.bind(this) }
+                isSyncWindowShown = { this.props.isSyncWindowShown }
+
                 getBuckets = { this.getBuckets.bind(this) }
                 getFiles = { this.getFiles.bind(this) }
                 getBucketId = { this.getBucketId.bind(this) }
@@ -559,6 +688,10 @@ function mapStateToProps(state) {
     let isStarredFilesSelected = state.filesReducer.fileListModels.filter(item => item.isSelected === true).filter(item => item.entity.isStarred === true).length !== 0;
 
     return {
+        syncQueueEntries: state.syncQueueReducer.syncQueueEntries,
+        uploadingFiles: state.filesReducer.uploadingFileListModels,
+        isSyncWindowShown: state.mainReducer.isSyncWindowShown,
+
         email: state.authReducer.user.email,
         password: state.authReducer.user.password,
         mnemonic: state.authReducer.user.mnemonic,
@@ -587,7 +720,12 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) { 
     return {
-        ...bindActionCreators({ 
+        ...bindActionCreators({
+            listSyncQueueEntriesAsync,
+            updateSyncQueueEntryFileNameAsync,
+            updateSyncQueueEntryStatusAsync,
+            toggleSyncWindow,
+
             redirectToMainScreen, 
             redirectToInitializationScreen,
             bucketNavigateBack, 

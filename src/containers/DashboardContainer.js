@@ -5,11 +5,29 @@ import { setDashboardBucketId } from '../reducers/mainContainer/mainReducerActio
 import { navigateToDashboardFilesScreen, redirectToFavoriteBucketsScreen, redirectToFavoriteFilesScreen } from '../reducers/navigation/navigationActions';
 import { uploadFileStart, uploadFileSuccess } from '../reducers/asyncActions/fileActionsAsync';
 import { listSyncQueueEntriesAsync, updateSyncQueueEntryFileNameAsync, updateSyncQueueEntryStatusAsync } from "../reducers/mainContainer/SyncQueue/syncQueueReducerAsyncActions";
+import { getSyncStatusFromCode, getActionIconFromCode, getActionsFromCode, getIsLoading, getAllFromCode } from "../utils/syncQueue/syncStatusMapper";
+import SyncQueueCallbackObject from "../models/SyncQueueCallbackObject";
 import DashboardListComponent from '../components/Dashboard/DashboardListComponent';
+import SyncQueueEntryComponent from "../components/SynQueue/SyncQueueEntryComponent";
+import ServiceModule from '../utils/ServiceModule';
+import StorjModule from '../utils/StorjModule';
+import SyncState from '../utils/constants/SyncState';
 
 class DashboardContainer extends Component {
     constructor(props) {
         super(props);
+
+        let callbackOject = {};
+        let reSyncCallback = (entry) => this.props.updateSyncQueueEntryStatusAsync(entry.getId(), SyncState.IDLE);
+
+        callbackOject.queued = (entry) => ServiceModule.removeFileFromSyncQueue(entry.getId()); 
+        callbackOject.error = reSyncCallback;
+        callbackOject.cancelled = reSyncCallback;
+        callbackOject.processing = (entry) => StorjModule.cancelUpload(entry.entity.fileHandle);
+        callbackOject.processed = reSyncCallback;
+        callbackOject.idle = (entry) => this.props.updateSyncQueueEntryStatusAsync(entry.getId(), SyncState.CANCELLED);
+
+        SyncQueueCallbackObject.CallbackObject = callbackOject;
     }
 
     shouldComponentUpdate(nextProps) {
@@ -18,6 +36,7 @@ class DashboardContainer extends Component {
 
     getProgress(fileHandle) {
         let uploadingFile = this.props.uploadingFiles.find(uploadingFile => uploadingFile.getId() === fileHandle);
+
         if(uploadingFile) {
             return uploadingFile.progress;
         }
@@ -25,14 +44,32 @@ class DashboardContainer extends Component {
         return 0;
     }
 
-    render() {     
+    getSyncQueueEntries() {
+        return this.props.syncQueueEntries.map((entry) => this.getSyncQueueEntry(entry));
+    }
+
+    getSyncQueueEntry(entry) {
+        const describer = getAllFromCode(entry.entity.status, new SyncQueueCallbackObject(entry));
+
+        return(
+            <SyncQueueEntryComponent key = { entry.getId() }
+                fileName = { entry.getName() }
+                iconSource = { require("../images/Icons/CloudFile.png") }
+                actionIconSource = { describer.actionIcon }
+                actionCallback = { describer.action }
+                isLoading = { describer.isLoading }
+                progress = { this.getProgress(entry.entity.fileHandle) }
+                status = { describer.status } />
+        );
+    }
+
+    render() {
         return(
             <DashboardListComponent
-                syncQueueEntries = { this.props.syncQueueEntries }
+                syncQueueEntries = { this.getSyncQueueEntries() }
                 listSyncQueueEntriesAsync = { this.props.listSyncQueueEntriesAsync }
                 updateSyncQueueEntryFileNameAsync = { this.props.updateSyncQueueEntryFileNameAsync }
                 updateSyncQueueEntryStatusAsync = { this.props.updateSyncQueueEntryStatusAsync }
-                getProgress = { this.getProgress.bind(this) }
             
                 activeScreen = { this.props.activeScreen }
                 files = { this.props.files }

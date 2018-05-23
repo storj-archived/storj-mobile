@@ -37,7 +37,8 @@ const {
     SET_IS_CONNECTED,
     CHANGE_PIN_OPTIONS_STATUS,
     CHANGE_PASSWORD_POPUP_STATUS,
-    SET_BUCKETID_TO_COPY
+    SET_BUCKETID_TO_COPY,
+    CHANGE_SYNC_WINDOW_POPUP_STATUS
 } = MAIN_ACTIONS;
 
 /**
@@ -190,6 +191,10 @@ export function getPicturesBucketId(buckets) {
     if(picturesBucket) {
         return picturesBucket.entity.id;
     } 
+}
+
+export function toggleSyncWindow(value) {
+    return { type: CHANGE_SYNC_WINDOW_POPUP_STATUS, payload: { value } };
 }
 
 //action creators for main container

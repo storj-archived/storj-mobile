@@ -32,7 +32,8 @@ const {
     SET_IS_CONNECTED,
     CHANGE_PIN_OPTIONS_STATUS,
     CHANGE_PASSWORD_POPUP_STATUS,
-    SET_BUCKETID_TO_COPY
+    SET_BUCKETID_TO_COPY,
+    CHANGE_SYNC_WINDOW_POPUP_STATUS
  } = MAIN_ACTIONS; 
 
 const initialState = {
@@ -59,7 +60,9 @@ const initialState = {
     isConnected: true,
     isPinOptionsShown: false,
     isChangePasswordPopupShown: false,
-    bucketIdToCopy: null
+    bucketIdToCopy: null, 
+    
+    isSyncWindowShown: false
 };
 
 export default function mainReducer(state = initialState, action) {
@@ -68,6 +71,9 @@ export default function mainReducer(state = initialState, action) {
 
     //TODO: we can call return after switch, and reduce lines of code
     switch(action.type) {
+        case CHANGE_SYNC_WINDOW_POPUP_STATUS:
+            newState.isSyncWindowShown = action.payload.value;
+            break; 
         case SET_IS_CONNECTED:
             newState.isConnected = action.payload.isConnected;
             break;

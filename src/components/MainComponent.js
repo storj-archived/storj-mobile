@@ -1,6 +1,7 @@
 import {
     View,
     Text,
+    Animated,
     ActivityIndicator,
     StyleSheet
 } from 'react-native';
@@ -15,6 +16,9 @@ import AddCreditComponent from '../components/MyAccount/AddCreditComponent';
 import PopUpComponent from '../components/PopUpComponent';
 import SelectBucketComponent from '../components/SelectBucketComponent';
 import PinOptionComponent from '../components/PinOptionComponent';
+import AnimatedWindowComponent from "../components/AnimatedWindowComponent";
+import SyncOverlayComponent from "../components/SynQueue/SyncOverlayComponent";
+import SyncQueueListComponent from "../components/SynQueue/SyncQueueListComponent";
 import PropTypes from 'prop-types';
 
 export default class MainComponent extends Component {
@@ -50,6 +54,7 @@ export default class MainComponent extends Component {
 
         return(
             <View style={ styles.mainContainer }>
+                <SyncOverlayComponent onPress = { this.props.showSyncWindow }/>
                 <View style = { styles.navigationContainer }>
                     <MainNavigationContainer
                         selectAll = { this.props.selectAll }
@@ -144,6 +149,21 @@ export default class MainComponent extends Component {
                             redirectToPinCodeGenerationScreen = { this.props.redirectToPinCodeGenerationScreen }
                             deletePIN = { this.props.deletePIN } /> : null
                 }
+                {
+                    this.props.isSyncWindowShown ?
+                    <View style = { styles.backgroundWrapper } >
+                        <AnimatedWindowComponent style = {[ styles.backgroundWrapper, styles.blackBackround ]} interpolate = { this.props.interpolateBackground } />
+                        <AnimatedWindowComponent style = { styles.syncWindowContainer } interpolate = { this.props.interpolate }>
+                            <SyncQueueListComponent 
+                                title = "Title"
+                                touchableRightTitle = "test"
+                                onCancelPress = { this.props.hideSyncWindow }
+                                data = { this.props.syncQueueEntries }
+                                renderItem = { this.props.renderSyncQueueEntry }  
+                            />
+                        </AnimatedWindowComponent>
+                    </View> : null
+                }
             </View>
         );
     };
@@ -164,6 +184,9 @@ const styles = StyleSheet.create({
         position: 'absolute',
         backgroundColor: 'transparent'
     },
+    blackBackround: {
+        backgroundColor: 'black'
+    },
     dimBlack: {
         backgroundColor: 'black',
         opacity: 0.3
@@ -182,6 +205,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    syncWindowContainer: {
+        backgroundColor: "white",
+        position: "absolute",
+        left: 15,
+        right: 15,
+        // bottom : -200,
+        height: 320,
+        borderRadius: 15
+    }
 });
 
 
