@@ -428,6 +428,10 @@ dependencies {
 
 After this press File -> Sync project with gradle files
 
+Also add next line to your AndroidManifest.xml
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
 3. Implementation
 
 We have already attach android-libstorj lib to our project, so lets start implementing simple module with basic functionality.
@@ -753,3 +757,21 @@ public class BucketActivity extends AppCompatActivity implements CreateBucketCal
 2. ### IOS
 3. ### React-native
 
+In this tutorial we will show you how to use storjlib in React-native android application. We will use Android Studio, Java lang for Android part, Objective-c for IOS part and javascript.
+
+1. Create new application. 
+
+First, run in your command line:
+
+react-native init AwesomeProject
+
+
+2. Implement Storj functionality
+
+To do this we should implement native modules for android and IOS.
+
+Let's create native for android.
+
+Open your android folder and create new package called StorjLibModule.
+
+Create new class called 
