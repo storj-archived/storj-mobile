@@ -147,6 +147,7 @@ export default class ListComponent extends Component {
                                 })
                                 return(
                                     <ExpanderComponent
+                                        isListActionsDisabled = { this.props.isListActionsDisabled }
                                         propName = { propName } 
                                         listItems = { listItems } />
                                 );
@@ -175,6 +176,7 @@ export default class ListComponent extends Component {
 
                                 return(
                                     <ExpanderComponent
+                                        isListActionsDisabled = { this.props.isListActionsDisabled }
                                         propName = { propName } 
                                         listItems = { listItems } />
                                 );
@@ -201,7 +203,6 @@ export default class ListComponent extends Component {
                                     { uri: 'data:image/png;base64,' + item.entity.thumbnail } 
                                     : item.entity.isDownloaded ? this.props.listItemIcon : this.props.cloudListItemIcon;
         const starredIcon = item.getStarred() ? '★' : null;
-
         return(
             <ItemType
                 isExpanderDisabled = { this.props.isExpanderDisabled }
@@ -216,7 +217,8 @@ export default class ListComponent extends Component {
                 isSelected = { item.isSelected }
                 isLoading = { item.isLoading }
                 progress = { item.progress } 
-                size = { size } >
+                size = { size }
+                isListActionsDisabled = { this.props.isListActionsDisabled } >
 
                 <TextComp style = { this.props.isExpanderDisabled ? [styles.mainTitleText, styles.textMargin] : styles.mainTitleText }>
                     <Text style = { styles.blueStar }>
@@ -238,29 +240,29 @@ export default class ListComponent extends Component {
 
     render() {                     
         return (
-                <Animated.ScrollView style = { styles.listContainer }
-                    decelerationRate = { 'normal' }
-                    scrollEventThrottle = { 16 }
-                    onScroll = {
-                        Animated.event([{
-                            nativeEvent: { 
-                                    contentOffset: { 
-                                        y: this.props.animatedScrollValue 
-                                    } 
-                                }
+            <Animated.ScrollView style = { styles.listContainer }
+                decelerationRate = { 'normal' }
+                scrollEventThrottle = { 16 }
+                onScroll = {
+                    Animated.event([{
+                        nativeEvent: { 
+                                contentOffset: { 
+                                    y: this.props.animatedScrollValue 
+                                } 
                             }
-                        ], { useNativeDriver: true }) }
-                    refreshControl = {
-                        <RefreshControl
-                            enabled = { !this.props.isSelectionMode }
-                            refreshing = { this.props.isRefreshing }
-                            onRefresh = { this.props.onRefresh } /> }>
-                            <View style = { this.props.contentWrapperStyle ? this.props.contentWrapperStyle : null }>
-                                {
-                                    this.getItemsList()
-                                }
-                            </View>
-                </Animated.ScrollView>       
+                        }
+                    ], { useNativeDriver: true }) }
+                refreshControl = {
+                    <RefreshControl
+                        enabled = { !this.props.isSelectionMode }
+                        refreshing = { this.props.isRefreshing }
+                        onRefresh = { this.props.onRefresh } /> }>
+                        <View style = { this.props.contentWrapperStyle ? this.props.contentWrapperStyle : null }>
+                            {
+                                this.getItemsList()
+                            }
+                        </View>
+            </Animated.ScrollView>       
         );
     }
 }

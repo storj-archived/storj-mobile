@@ -54,12 +54,13 @@ export default class GridItemComponent extends Component {
                                 this.props.children
                             }
                             {
-                                !props.isSelectionMode ? 
-                                    <TouchableOpacity 
+                                !props.isListActionsDisabled || props.isSelectionMode ? 
+                                    <View/>
+                                    : <TouchableOpacity 
                                         style = { gridItemStyles.listItemActionsIconContainer } 
                                         onPress = { props.onDotsPress }>
                                         <Image style = { gridItemStyles.listItemActionsIcon } source = { require('../images/Icons/listItemActions.png') } />
-                                    </TouchableOpacity> : null
+                                    </TouchableOpacity> 
                             }
                         </View>
                         {

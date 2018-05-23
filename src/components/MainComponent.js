@@ -5,7 +5,6 @@ import {
     StyleSheet
 } from 'react-native';
 import React, { Component } from 'react';
-import { getShortBucketName } from "../utils/fileUtils";
 import MainNavigationContainer from '../containers/MainNavigationContainer';
 import ActionBarComponent from '../components/ActionBarComponent';
 import ViewOptionsComponent from '../components/ViewOptionsComponent';
@@ -26,8 +25,7 @@ export default class MainComponent extends Component {
             showOptions: false,
             showQR: false,
             showStorageInfo: false,
-            showCredits: false,
-            isSelectBucketShown: false
+            showCredits: false
         }
     };
 
@@ -45,14 +43,6 @@ export default class MainComponent extends Component {
 
     showCredits() {
         this.setState({ showCredits: !this.state.showCredits });
-    }
-
-    showSelectBuckets(callback) {
-        if(callback) {
-            this.selectBucketCallback = callback;
-        }
-        
-        this.setState({ isSelectBucketShown: !this.state.isSelectBucketShown })
     }
     
     render() {
@@ -97,28 +87,6 @@ export default class MainComponent extends Component {
                                     this.props.hideCreateBucketInput(); 
                                 }} />
                         </View> : null
-                }
-                {
-                    this.state.isSelectBucketShown  
-                        ? <SelectBucketComponent
-                            getItemSize = { () => {} }
-                            isLoading = { false }
-                            searchSubSequence = { null }
-                            sortingMode = { null }
-                            onRefresh = { () => {} }
-                            isGridViewShown = { this.props.isGridViewShown }
-                            onPress = { (bucket) => { this.selectBucketCallback({ bucketId: bucket.getId() }); } }
-                            onLongPress = { () => {} }
-                            onDotsPress = { () => {} }
-                            onCancelPress = { () => {} }
-                            selectedItemId = { null }
-                            isSelectionMode = { false }
-                            data = { this.props.buckets }
-                            getBucketName = { getShortBucketName }
-                            
-                            showOptions = { this.showOptions.bind(this) }
-                            navigateBack = { this.showSelectBuckets.bind(this) } />
-                        : null
                 }
                 {
                     this.props.isLoading ?

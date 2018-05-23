@@ -24,6 +24,7 @@ export default class BaseListComponent extends Component {
 function ListComponentWrapper(props) {
     return(
         <ListComponent
+            isListActionsDisabled = { this.props.isListActionsDisabled }
             isExpanderDisabled = { this.props.isExpanderDisabled }
             textComp = { props.textComp }
             listItemIcon = { props.listItemIcon }

@@ -8,7 +8,9 @@ import {
     ProgressViewIOS,
     ProgressBarAndroid
 } from 'react-native';
-import React, {Component} from 'react';
+import React, {
+    Component
+} from 'react';
 import { connect } from 'react-redux';
 import { getWidth, getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
@@ -62,11 +64,12 @@ export default class ListItemComponent extends Component {
                             }
                         </View>
                         {
-                            !props.isSelectionMode && !props.isExpanderDisabled ? 
-                                <RightIconComponent 
+                            props.isListActionsDisabled || (props.isSelectionMode && props.isExpanderDisabled) ? 
+                                <View/>
+                                : <RightIconComponent 
                                     onPress = { props.isLoading ? props.onCancelPress : props.onDotsPress } 
                                     iconSource = { props.isLoading ? require('../images/Icons/CancelDownload.png') : require('../images/Icons/listItemActions.png') } /> 
-                                : null
+                                
                         }
                     </View>
             </TouchableOpacity>

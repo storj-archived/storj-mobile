@@ -31,7 +31,8 @@ const {
     CLEAR_SEARCH,
     SET_IS_CONNECTED,
     CHANGE_PIN_OPTIONS_STATUS,
-    CHANGE_CHANGE_PASSWORD_POPUP_STATUS
+    CHANGE_PASSWORD_POPUP_STATUS,
+    SET_BUCKETID_TO_COPY
  } = MAIN_ACTIONS; 
 
 const initialState = {
@@ -53,10 +54,12 @@ const initialState = {
     filesSearchSubSequence: null,
     starredSearchSubSequence: null,
     dashboardFilesSearchSubSequence: null,
+    selectBucketsSearchSubSequence: null,
     loadingStack: [],
     isConnected: true,
     isPinOptionsShown: false,
-    isChangePasswordPopupShown: false
+    isChangePasswordPopupShown: false,
+    bucketIdToCopy: null
 };
 
 export default function mainReducer(state = initialState, action) {
@@ -156,6 +159,10 @@ export default function mainReducer(state = initialState, action) {
         case CHANGE_CHANGE_PASSWORD_POPUP_STATUS: 
             newState.isChangePasswordPopupShown = action.payload.status;
             break;
+        case SET_BUCKETID_TO_COPY: 
+            if(!action.payload.id) break;
+            newState.bucketIdToCopy = action.payload.id;
+            break;
         default:
             return state || initialState;
     }
@@ -170,5 +177,6 @@ function setSearch(newState, index, value) {
         case 2 : newState.filesSearchSubSequence = value; break;
         case 3 : newState.starredSearchSubSequence = value; break;
         case 4 : newState.dashboardFilesSearchSubSequence = value; break;
+        case 5 : newState.selectBucketsSearchSubSequence = value; break;
     }
 }

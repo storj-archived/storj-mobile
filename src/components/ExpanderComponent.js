@@ -28,9 +28,13 @@ export default class ExpanderComponent extends Component {
                 <View style = { styles.expanderTextView }>
                     <Text style = { styles.expanderText }> { this.props.propName } </Text>
                     <View style = { styles.imageWrapper }>
-                        <Image 
+                    {
+                        this.props.isListActionsDisabled ? <View/>
+                        : <Image 
                             source = { this.state.isExpanded ? require('../images/Icons/expandList.png') : require('../images/Icons/collapsList.png') } 
                             style = { this.state.isExpanded ? styles.expanderImage : styles.collapseImage } />
+                    }
+                        
                     </View>
                 </View>
                 <View>

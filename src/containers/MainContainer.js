@@ -36,7 +36,8 @@ import {
     redirectToInitializationScreen, 
     bucketNavigateBack, 
     dashboardNavigateBack,
-    redirectToPinCodeGenerationScreen
+    redirectToPinCodeGenerationScreen,
+    openSelectBucketScreen
 } from '../reducers/navigation/navigationActions';
 import { createWallet, getWallets } from '../reducers/billing/billingActions';
 import TabBarActionModelFactory from '../models/TabBarActionModel';
@@ -221,7 +222,7 @@ class MainContainer extends Component {
                 this.filePickerResponsePathes.push(file.path);
             });
 
-            this._mainComponent.showSelectBuckets(this.getBucketId.bind(this));
+            this.props.openSelectBucketScreen(this.getBucketId.bind(this));
         }
     }  
 
@@ -233,7 +234,6 @@ class MainContainer extends Component {
         }
 
         this.filePickerResponsePathes = [];
-        this._mainComponent.showSelectBuckets();
     }
 
     async uploadFileToSelectedBuckets(type) {
@@ -360,7 +360,7 @@ class MainContainer extends Component {
     };
 
     tryCopySelectedFiles() {
-        this._mainComponent.showSelectBuckets(this.copySelectedFiles.bind(this));
+        this.props.openSelectBucketScreen(this.copySelectedFiles.bind(this));
     }
 
     copySelectedFiles(params) {
@@ -378,7 +378,6 @@ class MainContainer extends Component {
                 }
             });
         }
-        this._mainComponent.showSelectBuckets();
     }
 
     selectAll(bucketId, isFavoritesBuckets) {
@@ -485,7 +484,6 @@ class MainContainer extends Component {
 
         return(
             <MainComponent
-                ref = { component => this._mainComponent = component }
                 getBuckets = { this.getBuckets.bind(this) }
                 getFiles = { this.getFiles.bind(this) }
                 getBucketId = { this.getBucketId.bind(this) }
@@ -595,6 +593,7 @@ function mapDispatchToProps(dispatch) {
             bucketNavigateBack, 
             dashboardNavigateBack,
             redirectToPinCodeGenerationScreen,
+            openSelectBucketScreen,
             showActionBar,
             hideActionBar,
             showCreateBucketInput,

@@ -17,6 +17,7 @@ import MnemonicConfirmedScreen from '../components/Mnemonic/MnemonicConfirmedCom
 import MnemonicNotConfirmedScreen from '../components/Mnemonic/MnemonicNotConfirmedComponent';
 import MnemonicHelpScreen from '../components/Mnemonic/MnemonicHelpComponent';
 import FilePreviewScreen from '../containers/FilePreviewContainer';
+import SelectBucketScreen from '../containers/SelectBucketContainer';
 
 /**
  * Creating program main navigator
@@ -90,6 +91,10 @@ const StackNav = StackNavigator(
         MnemonicHelpScreen: {
             screen: MnemonicHelpScreen,
             routeName: 'MnemonicHelpScreen'
+        },
+        SelectBucketScreen: {
+            screen: SelectBucketScreen,
+            routeName: 'SelectBucketScreen'
         }
     },
     {

@@ -21,18 +21,6 @@ export default class ImageViewerComponent extends Component {
     //Pass uri through screen props
     constructor(props) {
         super(props);
-
-        this.state = {
-            isSelectBucketShown: false
-        }
-    }
-
-    showSelectBuckets(callback) {
-        if(callback) {
-            this.selectBucketCallback = callback;
-        }
-        
-        this.setState({ isSelectBucketShown: !this.state.isSelectBucketShown })
     }
 
     render() {
@@ -87,28 +75,6 @@ export default class ImageViewerComponent extends Component {
                                     source = { require("../images/Icons/ImageViewer/whiteExport.png") } />       
                         }
                     </View>
-                    {
-                        this.state.isSelectBucketShown  
-                            ? <SelectBucketComponent
-                                getItemSize = { () => {} }
-                                isLoading = { false }
-                                searchSubSequence = { null }
-                                sortingMode = { null }
-                                onRefresh = { () => {} }
-                                isGridViewShown = { this.props.isGridViewShown }
-                                onPress = { (bucket) => { this.selectBucketCallback({ bucketId: bucket.getId() }); } }
-                                onLongPress = { () => {} }
-                                onDotsPress = { () => {} }
-                                onCancelPress = { () => {} }
-                                selectedItemId = { null }
-                                isSelectionMode = { false }
-                                data = { this.props.buckets }
-                                getBucketName = { getShortBucketName }
-                                
-                                showOptions = { () => {} }
-                                navigateBack = { this.showSelectBuckets.bind(this) } />
-                            : null
-                    }
                 </View>
             </TouchableWithoutFeedback>   
         );

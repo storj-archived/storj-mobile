@@ -118,6 +118,10 @@ export function openFilePreview(fileId, bucketId, fileName) {
     return NavigationActions.navigate({ routeName: 'FilePreviewScreen', params: { fileId, bucketId, fileName } });
 }
 
+export function openSelectBucketScreen(callback) {
+    return NavigationActions.navigate({ routeName: 'SelectBucketScreen', params: { callback } });
+}
+
 export function navigateBack() {
     return NavigationActions.back();
 }

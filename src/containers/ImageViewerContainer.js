@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { redirectToMainScreen } from '../reducers/navigation/navigationActions';
+import { redirectToMainScreen, openSelectBucketScreen } from '../reducers/navigation/navigationActions';
 import { imageViewerActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import ServiceModule from '../utils/ServiceModule';
 import SyncModule from "../utils/SyncModule";
@@ -12,23 +12,19 @@ import BaseFileViewerContainer from '../containers/BaseFileViewerContainer';
 class ImageViewerContainer extends BaseFileViewerContainer {
     constructor(props) {
         super(props);
-
-        
     }
     //ACTIONS
 
     tryCopySelectedFile() {
-        this._imageViewComponent.showSelectBuckets(this.copySelectedFile.bind(this));
+        this.props.openSelectBucketScreen(this.copySelectedFile.bind(this));
     }
 
     copySelectedFile(params) {
         let bucketId = params.bucketId;
 
         if(bucketId) {
-            ServiceModule.uploadFile(bucketId, this.props.localPath);
+            ServiceModule.uploadFile(bucketId, this.localPath);
         }
-
-        this._imageViewComponent.showSelectBuckets();
     }
 
     getActionBarActions() {
@@ -45,9 +41,15 @@ class ImageViewerContainer extends BaseFileViewerContainer {
     }
     //ACTIONS END
 
-    
+    cacheLocalPath() {
+        if(this.props.localPath) {
+            this.localPath = this.props.localPath;
+        } 
+    }
 
     render() {
+        this.cacheLocalPath();
+
         if(this.props.isDownloaded) {
             this.showProgress = false;
         }
@@ -59,12 +61,10 @@ class ImageViewerContainer extends BaseFileViewerContainer {
                 isLoading = { this.props.isLoading }
                 isDownloaded = { this.props.isDownloaded }
                 progress = { this.props.progress }
-                ref = { component => this._imageViewComponent = component }
                 onBackPress = { this.navigateBack }
                 fileUri = { { uri: "file://" + this.props.localPath } }
                 showActionBar = { this.state.showActionBar }
                 onOptionsPress = { this.toggleActionBar }
-                isGridViewShown = { this.props.isGridViewShown }
                 buckets = { this.props.buckets }
                 actionBarActions = { this.getActionBarActions() } />
         );   
@@ -104,7 +104,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ redirectToMainScreen, ...imageViewerActions }, dispatch);
+    return bindActionCreators({ redirectToMainScreen, ...imageViewerActions, openSelectBucketScreen }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ImageViewerContainer);

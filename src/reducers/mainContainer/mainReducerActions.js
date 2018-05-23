@@ -36,7 +36,8 @@ const {
     CLEAR_SEARCH,
     SET_IS_CONNECTED,
     CHANGE_PIN_OPTIONS_STATUS,
-    CHANGE_CHANGE_PASSWORD_POPUP_STATUS
+    CHANGE_PASSWORD_POPUP_STATUS,
+    SET_BUCKETID_TO_COPY
 } = MAIN_ACTIONS;
 
 /**
@@ -169,6 +170,10 @@ export function changePINOptionStatus(status) {
 
 export function changePasswordPopupStatus(status) {
     return { type: CHANGE_CHANGE_PASSWORD_POPUP_STATUS, payload: { status } }
+}
+
+export function setBucketIdToCopy(id) {
+    return { type: SET_BUCKETID_TO_COPY, payload: { id } }
 }
 
 export function getPicturesBucketId(buckets) {

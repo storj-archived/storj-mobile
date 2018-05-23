@@ -78,7 +78,7 @@ export default class SearchComponent extends Component {
         return(
             <View style = { [ styles.rowContainer, this.props.styleContainer ] }>
                 <TouchableOpacity style = { styles.backButtonWrapper } onPress = { () => { this.props.navigateBack ? this.props.navigateBack() : () => {} } }>
-                    <Image style = { styles.backButton } source = { require("../images/Icons/BlueCross.png") } resizeMode = { 'contain' } />
+                    <Image style = { styles.backButton } source = { require("../images/Icons/BackButton.png") } resizeMode = { 'contain' } />
                 </TouchableOpacity>
                 <View style = { [ styles.rowContainer, styles.mainContainer, styles.fileHeader ] }>
                     <View style = {[ styles.rowContainer, { height: getHeight(50) } ]}>
@@ -89,7 +89,7 @@ export default class SearchComponent extends Component {
                                     this.setState({ isSearchIconShown: true }); 
                                 }
                             }}
-                            placeholder = { this.state.isSearchIconShown ? 'Select bucket' : null }
+                            placeholder = { this.state.isSearchIconShown ? 'Where to upload?' : null }
                             placeholderTextColor = { '#000000' }
                             underlineColorAndroid = { 'transparent' } 
                             style = { styles.textInput }
@@ -100,9 +100,7 @@ export default class SearchComponent extends Component {
                             value = { this.state.searchValue } />
                     </View>
                     <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>
-                        <TouchableOpacity onPress = { this.props.showOptions }>
-                            <Image style = { styles.image } source = { require("../images/Icons/SearchOptions.png") } resizeMode = { 'contain' } />
-                        </TouchableOpacity>
+                    
                     </View>
                 </View>
             </View>
