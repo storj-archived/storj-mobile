@@ -432,76 +432,44 @@ After this press File -> Sync project with gradle files
 
 We have already attach android-libstorj lib to our project, so lets start implementing simple module with basic functionality.
 
+Create new package called StorjLibModule.
+
+You can read detailed api description in API section
+
 3.1 Registration flow
 
-Lets implement registration flow in out MainActivity:
+
+Create new class with the RegisterModule name there.
+
+
+
 
 ````
-package com.mystorjappl.mystorjapp;
+package StorjModule;
 
-import android.os.Bundle;
+import android.content.Context;
 import android.os.Process;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 
-import StorjModule.RegisterModule;
 import io.storj.libstorj.Keys;
 import io.storj.libstorj.KeysNotFoundException;
 import io.storj.libstorj.RegisterCallback;
 import io.storj.libstorj.Storj;
 import io.storj.libstorj.android.StorjAndroid;
 
-public class MainActivity extends AppCompatActivity implements RegisterCallback {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+public class RegisterModule {
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-    }
+    private final Context _context;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public RegisterModule(Context context) {
+        _context = context;
     }
 
     private Storj getStorj() {
-        return StorjAndroid.getInstance(this);
+        return StorjAndroid.getInstance(_context);
     }
 
     public String generateMnemonic() {
-        return Storj.generateMnemonic(256);
+            return Storj.generateMnemonic(256);
     }
 
     public boolean checkMnemonic(String mnemonic) {
@@ -538,35 +506,25 @@ public class MainActivity extends AppCompatActivity implements RegisterCallback 
         return getStorj().getKeys(passcode);
     }
 
-    public void register(final String email, final String password) {
-        String mnemonic = this.generateMnemonic();
-
+    public void register(final String email, final String password, final RegisterCallback callback) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                if (Process.getThreadPriority(0) != Process.THREAD_PRIORITY_BACKGROUND) {
+                if(Process.getThreadPriority(0) != Process.THREAD_PRIORITY_BACKGROUND) {
                     Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
                 }
 
                 try {
-                    getStorj().register(email, password, MainActivity.this);
-                } catch (KeysNotFoundException error) {
+                    getStorj().register(email, password, callback);
+                }
+                catch (KeysNotFoundException error) {
 
-                } catch (Exception error) {
+                }
+                catch(Exception error) {
 
                 }
             }
         }).start();
-    }
-
-    @Override
-    public void onConfirmationPending(String email) {
-        //show some notification here or change activity state
-    }
-
-    @Override
-    public void onError(int code, String message) {
-        //show some notification here or change activity state
     }
 }
 
@@ -585,23 +543,45 @@ First of all we should create an account.
 ````
 public boolean register(final String login, final String password)
 ````
-This method requires RegisterCallback. So let implement this interface in our Activity
+This method requires RegisterCallback. So let implement this interface in our Activity.
+
+Create new Activity, called RegisterActivity
 
 ````
-public class MainActivity extends AppCompatActivity implements RegisterCallback
-{
-...
+package com.mystorjappl.mystorjapp;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import StorjModule.RegisterModule;
+import io.storj.libstorj.RegisterCallback;
+
+public class RegisterActivity extends AppCompatActivity implements RegisterCallback {
+
+    private RegisterModule mRegisterModule;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
+        mRegisterModule = new RegisterModule(this);
+    }
+
+    public void register() {
+        mRegisterModule.register("myEmail@test.com", "123123", this);
+    }
 
     @Override
     public void onConfirmationPending(String email) {
-        //show some notification here or change activity state
+        //Show some notifications here or change activity state
     }
 
     @Override
     public void onError(int code, String message) {
-        //show some notification here or change activity state
+        //Show some notifications here or change activity state
     }
 }
+
 ````
 
 
@@ -638,6 +618,128 @@ To delete your keys (for log out functionality, for example), you can use:
 
 ````
 public boolean deleteKeys()
+````
+
+3.2 Bucket flow
+
+Lets create new module that will implement all bucket functionality.
+
+````
+package StorjModule;
+
+import android.content.Context;
+
+import io.storj.libstorj.Bucket;
+import io.storj.libstorj.CreateBucketCallback;
+import io.storj.libstorj.DeleteBucketCallback;
+import io.storj.libstorj.GetBucketsCallback;
+import io.storj.libstorj.KeysNotFoundException;
+import io.storj.libstorj.Storj;
+import io.storj.libstorj.android.StorjAndroid;
+
+public class BucketsModule {
+
+    private final Context _context;
+
+    private Storj getStorj() {
+        return StorjAndroid.getInstance(_context);
+    }
+
+    public BucketsModule (Context context) {
+        _context = context;
+    }
+
+    public void createBucket(final String bucketName, final CreateBucketCallback callback) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    getStorj().createBucket(bucketName, callback);
+                } catch (KeysNotFoundException error) {
+
+                }
+            }
+        }).start();
+    }
+
+    public void getBuckets(final GetBucketsCallback callback) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    getStorj().getBuckets(callback);
+                } catch (KeysNotFoundException error) {
+
+                }
+            }
+        }).start();
+    }
+
+    public void deleteBucket(final String bucketId, final DeleteBucketCallback callback) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    getStorj().deleteBucket(bucketId, callback);
+                } catch (KeysNotFoundException error) {
+
+                }
+            }
+        }).start();
+    }
+}
+
+
+````
+
+And lets create new Activity that will implement all needed callbacks
+
+````
+package com.mystorjappl.mystorjapp;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import io.storj.libstorj.Bucket;
+import io.storj.libstorj.CreateBucketCallback;
+import io.storj.libstorj.DeleteBucketCallback;
+import io.storj.libstorj.GetBucketsCallback;
+
+public class BucketActivity extends AppCompatActivity implements CreateBucketCallback, GetBucketsCallback, DeleteBucketCallback {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_bucket);
+    }
+
+    @Override
+    public void onBucketCreated(Bucket bucket) {
+
+    }
+
+    @Override
+    public void onBucketDeleted(String bucketId) {
+
+    }
+
+    @Override
+    public void onError(String bucketName, int code, String message) {
+
+    }
+
+    @Override
+    public void onBucketsReceived(Bucket[] buckets) {
+
+    }
+
+    @Override
+    public void onError(int code, String message) {
+
+    }
+}
+
 ````
 
 2. ### IOS
