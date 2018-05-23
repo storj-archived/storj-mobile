@@ -472,11 +472,6 @@ public class MainActivity extends AppCompatActivity implements RegisterCallback 
                         .setAction("Action", null).show();
             }
         });
-
-        RegisterModule rModule = new RegisterModule(this);
-
-        boolean registerResult = rModule.register("myEmail@ukr.net", "123123123");
-
     }
 
     @Override
