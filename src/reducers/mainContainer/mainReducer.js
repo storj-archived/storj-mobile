@@ -156,7 +156,7 @@ export default function mainReducer(state = initialState, action) {
         case CHANGE_PIN_OPTIONS_STATUS:
             newState.isPinOptionsShown = action.payload.status;
             break;
-        case CHANGE_CHANGE_PASSWORD_POPUP_STATUS: 
+        case CHANGE_PASSWORD_POPUP_STATUS: 
             newState.isChangePasswordPopupShown = action.payload.status;
             break;
         case SET_BUCKETID_TO_COPY: 
