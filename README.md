@@ -701,17 +701,25 @@ package com.mystorjappl.mystorjapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import StorjModule.BucketsModule;
+import StorjModule.RegisterModule;
 import io.storj.libstorj.Bucket;
 import io.storj.libstorj.CreateBucketCallback;
 import io.storj.libstorj.DeleteBucketCallback;
 import io.storj.libstorj.GetBucketsCallback;
 
 public class BucketActivity extends AppCompatActivity implements CreateBucketCallback, GetBucketsCallback, DeleteBucketCallback {
+    
+    private BucketsModule mBucketsModule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bucket);
+
+        mBucketsModule = new BucketsModule(getApplicationContext());
+
+        mBucketsModule.getBuckets(this);
     }
 
     @Override
