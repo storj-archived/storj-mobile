@@ -435,6 +435,162 @@ We have already attach android-libstorj lib to our project, so lets start implem
 Create new package called StorjLibModule.
 Create new class with the same name there.
 
+You can read detailed api description in API section
+
+3.1 Registration flow
+
+Create new class:
+
+````
+package StorjModule;
+
+import android.content.Context;
+import android.os.Process;
+
+import io.storj.libstorj.Keys;
+import io.storj.libstorj.KeysNotFoundException;
+import io.storj.libstorj.RegisterCallback;
+import io.storj.libstorj.Storj;
+import io.storj.libstorj.android.StorjAndroid;
+
+public class RegisterModule {
+
+    private final Context _context;
+
+    public RegisterModule(Context context) {
+        _context = context;
+    }
+
+    private Storj getStorj() {
+        return StorjAndroid.getInstance(_context);
+    }
+
+    public String generateMnemonic() {
+            return Storj.generateMnemonic(256);
+    }
+
+    public boolean checkMnemonic(String mnemonic) {
+        return Storj.checkMnemonic(mnemonic);
+    }
+
+    public boolean verifyKeys(String email, String password) {
+        int result;
+
+        try {
+
+            result = getStorj().verifyKeys(email, password);
+        } catch(InterruptedException ex) {
+
+            return false;
+        }
+
+        return result == 0;
+    }
+
+    public boolean keysExists() {
+        return getStorj().keysExist();
+    }
+
+    public boolean importKeys(String email, String password, String mnemonic, String passcode) {
+        return getStorj().importKeys(new Keys(email, password, mnemonic), passcode);
+    }
+
+    public boolean deleteKeys() {
+        return getStorj().deleteKeys();
+    }
+
+    public Keys getKeys(String passcode) {
+        return getStorj().getKeys(passcode);
+    }
+
+    public boolean register(final String login, final String password) {
+        String mnemonic = this.generateMnemonic();
+
+        if(mnemonic == null || mnemonic.isEmpty()) return false;
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if(Process.getThreadPriority(0) != Process.THREAD_PRIORITY_BACKGROUND) {
+                    Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+                }
+
+                try {
+                    getStorj().register(login, password, new RegisterCallback() {
+                        @Override
+                        public void onConfirmationPending(String email) {
+
+                        }
+
+                        @Override
+                        public void onError(int code, String message) {
+
+                        }
+                    });
+                }
+                catch (KeysNotFoundException error) {
+
+                }
+                catch(Exception error) {
+
+                }
+            }
+        }).start();
+
+        return true;
+    }
+}
+
+
+````
+
+````
+private Storj getStorj() {
+        return StorjAndroid.getInstance(_context);
+    }
+````
+this method is used to initialize and get Storj context. This context is needed to call non-static of methods.
+Storj context is a Singleton.
+
+First of all we should create an account.
+
+````
+public boolean register(final String login, final String password)
+````
+this method could block ui so let call it in a new thread. After success registration you will receive an email with confirmation link, to finish registration.
+
+After creating an account you are able to login (create keys)
+
+To create keys you should use 
+
+````
+public boolean importKeys(String email, String password, String mnemonic, String passcode)
+````
+
+To generate and check mnemonic use next methods:
+
+````
+public boolean checkMnemonic(String mnemonic)
+public String generateMnemonic()
+````
+
+To check if your account exists you can use 
+
+````
+public boolean verifyKeys(String email, String password)
+````
+To receice your email, password and mnemonic use
+
+````
+    public Keys getKeys(String passcode)
+````
+This method will return new Key object with all needed info.
+
+To delete your keys (for log out functionality, for example), you can use:
+
+````
+public boolean deleteKeys()
+````
 
 2. ### IOS
 3. ### React-native
