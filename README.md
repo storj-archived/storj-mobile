@@ -400,3 +400,42 @@ Android part is written in Java language and its main modules are:
      ```
      
 ## Issues
+
+## Step by step tutorials
+1. ### Android
+
+In this tutorial we will show you how to use storjlib in native android application.
+We will use Android Studio, Java lang and Ubuntu 18 machine.
+
+1. Create new application.
+Lets open android studio and create new application, called MyStorjApp.
+In Target Android Devices select Android API 25: Android 7.1.1 (Nougat).
+Next select Basic Activity pattern.
+
+2. Add libstorj-android dependency to build.gradle (Module:app)
+After adding it should looks like:
+
+dependencies {
+    implementation 'io.storj:libstorj-android:0.7.2'
+    ...
+}
+
+If you are using older versions of Android it could be a bit different. For example:
+dependencies {
+    compile 'io.storj:libstorj-android:0.7.2'
+    ...
+}
+
+After this press File -> Sync project with gradle files
+
+3. Implement own StorjLibModule
+
+We have already attach android-libstorj lib to our project, so lets start implementing simple module with basic functionality.
+
+Create new package called StorjLibModule.
+Create new class with the same name there.
+
+
+2. ### IOS
+3. ### React-native
+
