@@ -428,45 +428,85 @@ dependencies {
 
 After this press File -> Sync project with gradle files
 
-3. Implement own StorjLibModule
+3. Implementation
 
 We have already attach android-libstorj lib to our project, so lets start implementing simple module with basic functionality.
 
-Create new package called StorjLibModule.
-Create new class with the same name there.
-
-You can read detailed api description in API section
-
 3.1 Registration flow
 
-Create new class:
+Lets implement registration flow in out MainActivity:
 
 ````
-package StorjModule;
+package com.mystorjappl.mystorjapp;
 
-import android.content.Context;
+import android.os.Bundle;
 import android.os.Process;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import StorjModule.RegisterModule;
 import io.storj.libstorj.Keys;
 import io.storj.libstorj.KeysNotFoundException;
 import io.storj.libstorj.RegisterCallback;
 import io.storj.libstorj.Storj;
 import io.storj.libstorj.android.StorjAndroid;
 
-public class RegisterModule {
+public class MainActivity extends AppCompatActivity implements RegisterCallback {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-    private final Context _context;
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
-    public RegisterModule(Context context) {
-        _context = context;
+        RegisterModule rModule = new RegisterModule(this);
+
+        boolean registerResult = rModule.register("myEmail@ukr.net", "123123123");
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private Storj getStorj() {
-        return StorjAndroid.getInstance(_context);
+        return StorjAndroid.getInstance(this);
     }
 
     public String generateMnemonic() {
-            return Storj.generateMnemonic(256);
+        return Storj.generateMnemonic(256);
     }
 
     public boolean checkMnemonic(String mnemonic) {
@@ -503,44 +543,37 @@ public class RegisterModule {
         return getStorj().getKeys(passcode);
     }
 
-    public boolean register(final String login, final String password) {
+    public void register(final String email, final String password) {
         String mnemonic = this.generateMnemonic();
-
-        if(mnemonic == null || mnemonic.isEmpty()) return false;
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                if(Process.getThreadPriority(0) != Process.THREAD_PRIORITY_BACKGROUND) {
+                if (Process.getThreadPriority(0) != Process.THREAD_PRIORITY_BACKGROUND) {
                     Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
                 }
 
                 try {
-                    getStorj().register(login, password, new RegisterCallback() {
-                        @Override
-                        public void onConfirmationPending(String email) {
+                    getStorj().register(email, password, MainActivity.this);
+                } catch (KeysNotFoundException error) {
 
-                        }
-
-                        @Override
-                        public void onError(int code, String message) {
-
-                        }
-                    });
-                }
-                catch (KeysNotFoundException error) {
-
-                }
-                catch(Exception error) {
+                } catch (Exception error) {
 
                 }
             }
         }).start();
+    }
 
-        return true;
+    @Override
+    public void onConfirmationPending(String email) {
+        //show some notification here or change activity state
+    }
+
+    @Override
+    public void onError(int code, String message) {
+        //show some notification here or change activity state
     }
 }
-
 
 ````
 
@@ -557,6 +590,26 @@ First of all we should create an account.
 ````
 public boolean register(final String login, final String password)
 ````
+This method requires RegisterCallback. So let implement this interface in our Activity
+
+````
+public class MainActivity extends AppCompatActivity implements RegisterCallback
+{
+...
+
+    @Override
+    public void onConfirmationPending(String email) {
+        //show some notification here or change activity state
+    }
+
+    @Override
+    public void onError(int code, String message) {
+        //show some notification here or change activity state
+    }
+}
+````
+
+
 this method could block ui so let call it in a new thread. After success registration you will receive an email with confirmation link, to finish registration.
 
 After creating an account you are able to login (create keys)
