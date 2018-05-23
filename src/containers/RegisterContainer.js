@@ -224,6 +224,7 @@ export class RegisterContainer extends Component {
 	render() {
 		return(
                 <RegisterComponent
+                    isLoading = { this.state.isLoading }
                     onSubmit = { this.onSubmit.bind(this) }
                     onChangeEmail = { this.onChangeEmail.bind(this) }
                     onChangePassword = { this.onChangePassword.bind(this) }

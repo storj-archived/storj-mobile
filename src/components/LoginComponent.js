@@ -88,12 +88,10 @@ export default class LoginComponent extends Component {
                 </View>
                 {
                     this.props.isLoading ?
-                        <View style = { [ styles.backgroundWrapper ] }>
-                            <View style = { [ styles.backgroundWrapper, styles.dimBlack ] } />
-                            <View style = { [ styles.backgroundWrapper, styles.setChildCenter ] }>
-                                <ActivityIndicator animating = { true } color = { "#2782ff" } size = { "large" }/>
-                            </View>
-                        </View> : null
+                        <View style = { [ styles.backgroundWrapper, styles.setChildCenter ] }>
+                            <ActivityIndicator animating = { true } color = { "#2782ff" } size = { "large" }/>
+                        </View>
+                         : null
                 }
 			</ScrollView>
 		);
