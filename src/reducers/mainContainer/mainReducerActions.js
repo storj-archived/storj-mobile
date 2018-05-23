@@ -169,7 +169,7 @@ export function changePINOptionStatus(status) {
 }
 
 export function changePasswordPopupStatus(status) {
-    return { type: CHANGE_CHANGE_PASSWORD_POPUP_STATUS, payload: { status } }
+    return { type: CHANGE_PASSWORD_POPUP_STATUS, payload: { status } }
 }
 
 export function setBucketIdToCopy(id) {
