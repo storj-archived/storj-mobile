@@ -60,6 +60,7 @@ import SyncQueueEntryComponent from "../components/SynQueue/SyncQueueEntryCompon
 import SyncQueueCallbackObject from "../models/SyncQueueCallbackObject";
 import SyncState from '../utils/constants/SyncState';
 import { getDeviceHeight } from "../utils/adaptive";
+import { getFileCopyName } from "../utils/fileUtils";
 
 
 const { PICTURES } = SYNC_BUCKETS;
@@ -140,6 +141,12 @@ class MainContainer extends Component {
         let callbackOject = {};
         let reSyncCallback = (entry) => this.props.updateSyncQueueEntryStatusAsync(entry.getId(), SyncState.IDLE);
         let errorCallback = (entry) => {
+            if(entry.entity.errorCode === 1013) {
+                let fileName = entry.getName();
+                fileName = getFileCopyName(fileName);
+
+                return this.props.updateSyncQueueEntryFileNameAsync(entry.getId(), fileName);
+            }
 
             return this.props.updateSyncQueueEntryStatusAsync(entry.getId(), SyncState.IDLE);
         };
@@ -200,6 +207,12 @@ class MainContainer extends Component {
         return 0;
     }
 
+    getSyncEntryLoadingCount() {
+        let loadingEntries = this.props.syncQueueEntries.filter(entry => entry.entity.status === SyncState.PROCESSING || entry.entity.status === SyncState.QUEUED);
+
+        return loadingEntries.length;
+    }
+
     _getLoadingSyncEntry = () => this.props.syncQueueEntries.find(entry => entry.entity.status === SyncState.PROCESSING);
 
     getLoadingSyncEntry() {
@@ -215,9 +228,10 @@ class MainContainer extends Component {
 
     _getSyncQueueEntry(item, addProps) {
         const describer = getAllFromCode(item.entity.status, new SyncQueueCallbackObject(item));
-
+        
         return(
             <SyncQueueEntryComponent
+                error = { describer.error }
                 styleContainer = { addProps }
                 key = { item.getId() }
                 fileName = { item.getName() }
@@ -634,6 +648,7 @@ class MainContainer extends Component {
                 hideSyncWindow = { this.hideSyncWindow.bind(this) }
                 isSyncWindowShown = { this.props.isSyncWindowShown }
                 getLoadingSyncEntry = { this.getLoadingSyncEntry.bind(this) }
+                getSyncEntryLoadingCount = { this.getSyncEntryLoadingCount.bind(this) }
 
                 getBuckets = { this.getBuckets.bind(this) }
                 getFiles = { this.getFiles.bind(this) }

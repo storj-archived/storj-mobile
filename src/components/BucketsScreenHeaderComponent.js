@@ -100,7 +100,7 @@ function rotateTransform(xOffset) {
     return [
         {
             transform: [
-                { translateY: mainContainerMoveY }
+                // { translateY: mainContainerMoveY }
             ]
         },
         {
@@ -109,7 +109,7 @@ function rotateTransform(xOffset) {
         },
         {
             transform: [
-                { translateY: selectY }
+                // { translateY: selectY }
             ]
         }
     ];

@@ -27,7 +27,7 @@ class DashboardContainer extends Component {
         callbackOject.processed = reSyncCallback;
         callbackOject.idle = (entry) => this.props.updateSyncQueueEntryStatusAsync(entry.getId(), SyncState.CANCELLED);
 
-        SyncQueueCallbackObject.CallbackObject = callbackOject;
+        //SyncQueueCallbackObject.CallbackObject = callbackOject;
     }
 
     shouldComponentUpdate(nextProps) {
@@ -53,6 +53,7 @@ class DashboardContainer extends Component {
 
         return(
             <SyncQueueEntryComponent key = { entry.getId() }
+                error = { describer.error }
                 fileName = { entry.getName() }
                 iconSource = { require("../images/Icons/CloudFile.png") }
                 actionIconSource = { describer.actionIcon }

@@ -21,6 +21,7 @@ import SyncOverlayComponent from "../components/SynQueue/SyncOverlayComponent";
 import SyncQueueListComponent from "../components/SynQueue/SyncQueueListComponent";
 import { getHeight } from "../utils/adaptive";
 import PropTypes from 'prop-types';
+import ServiceModule from "../utils/ServiceModule"
 
 export default class MainComponent extends Component {
     constructor(props) {
@@ -163,11 +164,12 @@ export default class MainComponent extends Component {
                         <AnimatedWindowComponent style = {[ styles.backgroundWrapper, styles.blackBackround ]} interpolate = { this.props.interpolateBackground } />
                         <AnimatedWindowComponent style = { styles.syncWindowContainer } interpolate = { this.props.interpolate }>
                             <SyncQueueListComponent 
-                                title = { this.props.syncQueueEntries.length + " files uploading" }
-                                touchableRightTitle = "Retry all"
+                                title = { this.props.getSyncEntryLoadingCount() + " files uploading" }
+                                touchableRightTitle = "Cancell all"
                                 onCancelPress = { this.props.hideSyncWindow }
                                 data = { this.props.syncQueueEntries }
                                 renderItem = { this.props.renderSyncQueueEntry }  
+                                onTouchableRightPress = { ServiceModule.cancelSync }
                             />
                         </AnimatedWindowComponent>
                     </View> : null

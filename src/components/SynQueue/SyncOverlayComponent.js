@@ -25,6 +25,8 @@ export default class SyncOverlayComponent extends Component {
 const styles = StyleSheet.create({
     mainContainer: {
         backgroundColor: "transparent",
-        height: 50
+        height: 50,
+        padding: 10,
+        paddingTop: 0
     }
 });

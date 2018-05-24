@@ -62,6 +62,10 @@ const ServiceModule = (() => {
             serviceModule.startSync();
         }
 
+        cancelSync() {
+            serviceModule.cancelSync();
+        }
+
         test() {
             serviceModule.test();
         }

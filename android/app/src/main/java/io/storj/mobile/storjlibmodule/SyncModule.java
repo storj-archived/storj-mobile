@@ -391,6 +391,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
         }).run();
     }
 
+    @ReactMethod
     private void cancelSync() {
         Intent cancelSyncIntent = new Intent(getReactApplicationContext(), SynchronizationService.class);
         cancelSyncIntent.setAction(SynchronizationService.ACTION_SYNC_CANCEL);
@@ -443,7 +444,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
         updateSyncEntry(id, promise, new SetDboPropCallback() {
             @Override
             public void setProp(SyncQueueEntryDbo dbo) {
-                dbo.setProp(SynchronizationQueueContract._STATUS, SyncStateEnum.QUEUED.getValue());
+                dbo.setProp(SynchronizationQueueContract._STATUS, SyncStateEnum.IDLE.getValue());
                 dbo.setProp(SynchronizationQueueContract._FILE_NAME, newFileName);
             }
         });

@@ -48,8 +48,8 @@ export function getAllFromCode(code, callbackHandler) {
 
     const actionsCallback = new GetFromCodeCallback({
         queued: () => new DescribingModel(callbackHandler.Queued, actionIconsCallback.queued(), statusCallback.queued()),
-        error: () => new DescribingModel(callbackHandler.Error, actionIconsCallback.error(), statusCallback.error()),
-        cancelled: () => new DescribingModel(callbackHandler.Cancelled, actionIconsCallback.cancelled(), statusCallback.cancelled()),
+        error: () => new DescribingModel(callbackHandler.Error, actionIconsCallback.error(), statusCallback.error(), false, true),
+        cancelled: () => new DescribingModel(callbackHandler.Cancelled, actionIconsCallback.cancelled(), statusCallback.cancelled(), false, true),
         processing: () => new DescribingModel(callbackHandler.Processing, actionIconsCallback.processing(), statusCallback.processing(), true),
         processed: () => new DescribingModel(callbackHandler.Processed, actionIconsCallback.processed(), statusCallback.processed()),
         idle: () => new DescribingModel(callbackHandler.Idle, actionIconsCallback.idle(), statusCallback.idle()),
@@ -81,10 +81,11 @@ function _getFromCode(code, callback) {
 }
 
 class DescribingModel {
-    constructor(action ,actionIcon, status, isLoading) {
+    constructor(action ,actionIcon, status, isLoading, error) {
         this.action = action;
         this.actionIcon = actionIcon;
         this.status = status;
         this.isLoading = isLoading;
+        this.error = error;
     }
 }

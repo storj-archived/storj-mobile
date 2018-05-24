@@ -10,6 +10,7 @@ import {
     ProgressBarAndroid
 } from "react-native";
 import { getHeight, getWidth } from "../../utils/adaptive";
+import { getFullFileName } from "../../utils/fileUtils";
 
 export default class SyncQueueEntryComponent extends Component {
     constructor(props) {
@@ -17,14 +18,15 @@ export default class SyncQueueEntryComponent extends Component {
     }
 
     render() {
+        const name = getFullFileName(this.props.fileName);
         return(
             <View style = { this.props.styleContainer ? styles.mainContainer2 : styles.mainContainer }>
                 <View style = { styles.rowRapper }>
                     <View style = { styles.rowRapperInner }>
                         <Image style = { styles.icon } source = { this.props.iconSource } />
                         <View style = { styles.textWrapper }>
-                            <Text>{ this.props.fileName }</Text>
-                            <Text>{ this.props.status }</Text>
+                            <Text style = { styles.text }><Text style = { styles.textFileName }>{name.name}</Text>{ name.extention }</Text>
+                            <Text style = { [ styles.text, this.props.error ? styles.errorText : null ] }>{ this.props.status }</Text>
                         </View>
                     </View>
                     <TouchableOpacity onPress = { this.props.actionCallback }>
@@ -68,7 +70,8 @@ const styles = StyleSheet.create({
         justifyContent: "space-between"
     },
     rowRapperInner: {
-        flexDirection: "row"
+        flexDirection: "row",
+        alignItems: "center"
     },
     icon: {
         height: getHeight(24),
@@ -83,5 +86,18 @@ const styles = StyleSheet.create({
     },
     progressWrapper: {
         marginTop: getHeight(12)
+    },
+    text: {
+        fontSize: getHeight(12),
+        fontFamily: "Montserrat-Regular",
+        color: "#38424b"
+    },
+    textFileName: {
+        color: "#384B65",
+        fontSize: getHeight(14),
+        fontFamily: "Montserrat-SemiBold",
+    },
+    errorText: {
+        color: "red"
     }
 });

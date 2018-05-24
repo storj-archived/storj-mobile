@@ -80,60 +80,33 @@ export function isImage(imageFullName) {
     return ['tif', 'tiff', 'gif', 'jpeg', 'jpg', 'jif', 'jfif', 'jp2', 'jpx', 'j2k', 'j2c', 'fpx', 'pcd', 'png']
         .includes(extension);
 }
-/* export function renderItemName() {
-    switch(this.props.itemType) {
-        case TYPES.REGULAR_BUCKET: {
-            const name = this.props.item.getName();
 
-            if(name.length > 13) {
-                let firstRowName = name.slice(0,10) + '...';
+export function getFileCopyName(fileName) {
+    let name = getFullFileName(fileName);
 
-                return(
-                    <View style = { gridItemStyles.textMargin }>
-                        <Text style = { gridItemStyles.mainTitleText }>{ firstRowName }</Text> 
-                    </View>
-                )
-            }; 
+    let regx = /\(\d*\)$/gi;
 
-            return(
-                <Text numberOfLines = {1} style = { [gridItemStyles.mainTitleText, gridItemStyles.textMargin] }>{ name }</Text> 
-            ); 
-        } 
-            
-        break;
-        case TYPES.REGULAR_FILE: {
-            const fullName = this.props.item.getName();
-            const dotIndex = fullName.lastIndexOf('.');
-            const name = fullName.slice(0, dotIndex);
-            const extention = fullName.slice(dotIndex);
+    let res = regx.exec(name.name);
 
-            if(fullName.length > 13){
+    let pureName = name.name.replace(regx, "");
+    let newName = pureName;
 
-                if(name.length > 7) {
-                    name = name.slice(0,5) + '..';
-                }
+    if(res) {
+        let strippedIndex = res[0].replace(/(\()/gi, "").replace(/(\))/gi, "");
+        let newIndex = "(" + (Number(strippedIndex) + 1) + ")";
 
-                if(extention.length > 6) {
-                    extention = '.' +  extention.slice(extention.length - 5, extention.length - 1);
-                }
-
-                return(
-                    <View style = { gridItemStyles.textMargin }>
-                        <Text style = { gridItemStyles.mainTitleText }>{ name }
-                            <Text style = { gridItemStyles.extentionText }>{ extention }</Text>
-                        </Text> 
-                    </View>
-                )
-            }
-
-            return(
-                <Text numberOfLines = {1} style = { [gridItemStyles.mainTitleText, gridItemStyles.textMargin] }>{ name }
-                    <Text style = { gridItemStyles.extentionText }>{ extention }</Text>
-                </Text> 
-        )};
-        break;
-        default: return(
-            <Text numberOfLines = {1} style = { [gridItemStyles.mainTitleText, gridItemStyles.textMargin] }>{ this.props.item.getName() }</Text> 
-        ); 
+        newName = pureName + newIndex;
+    } else {
+        newName = pureName + "(1)";
     }
-} */
+
+    
+
+    console.log(res);
+
+    //name.name = name.name + "(1)";
+
+    return newName + name.extention;
+}
+
+console.log(getFileCopyName("100MB(1).bin"));

@@ -52,11 +52,11 @@ const styles = StyleSheet.create({
         backgroundColor: "white"
     },
     headerContainer: {
-        paddingTop: getHeight(15),
+        paddingTop: getHeight(5),
         paddingBottom: getHeight(10),
         flexDirection: "row",
         justifyContent: "space-between",
-        backgroundColor: "purple"
+        backgroundColor: "transparent"
     },
     contentWrapper: {
     },
@@ -64,19 +64,18 @@ const styles = StyleSheet.create({
         paddingVertical: getHeight(5),
     },
     row: {
-        flexDirection: "row"
+        flexDirection: "row" 
     },
     itemSeparator: {
         height: getHeight(2),
         backgroundColor: "#F2F2F2"
     },
     icon: {
-        width: getHeight(14),
-        height: getHeight(14)
+        width: getHeight(20),
+        height: getHeight(20)
     },
     titleWrapper: {
-        marginLeft: getWidth(21),
-        backgroundColor: "yellow"
+        backgroundColor: "transparent"
     },
     title: {
         color: "#384B65",
@@ -85,7 +84,10 @@ const styles = StyleSheet.create({
         width: getWidth(169)
     },
     cancelWrapper: {
-        backgroundColor: "green"
+        paddingRight: getWidth(15),
+        paddingTop: getHeight(10),
+        backgroundColor: "transparent",
+        alignItems: "center"
     },
     touchableRightText: {
         color: "#2794FF",
@@ -93,6 +95,6 @@ const styles = StyleSheet.create({
         fontSize: 18
     }, 
     touchableRightWrapper: {
-        backgroundColor: "green"
+        backgroundColor: "transparent"
     }
 });

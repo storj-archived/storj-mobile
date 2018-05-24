@@ -70,12 +70,12 @@ export default class DashboardListComponent extends Component{
                             </View>
                             : null
                         }
-                        <TouchableOpacity onPress = { ServiceModule.startSync } style = { { height: 20, width: 60, backgroundColor: "navy" } }>
+                        {/* <TouchableOpacity onPress = { ServiceModule.startSync } style = { { height: 20, width: 60, backgroundColor: "navy" } }>
                             <Text style = { { color: "white" } }>Start Sync</Text>
                         </TouchableOpacity>
                         {
                             this.props.syncQueueEntries
-                        }
+                        } */}
                         {
                             listComponent(
                                 'Favourite buckets', 
