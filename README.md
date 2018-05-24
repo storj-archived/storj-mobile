@@ -19,7 +19,7 @@ All files will be encrypted before sending to distributed network.
      - [Buckets list](#anchorBucketList) 
      - [Bucket creation](#anchorBucketCreate) 
      - [Bucket deletion](#anchorBucketDelete)
-  - [Files](#anchor)
+  - [Files](#anchorFiles)
 	  - [File Upload](#anchor)
 	  - [File Download](#anchor)
 - [Features](#anchor)	
@@ -272,6 +272,7 @@ This method has two parameters - String bucketId and [DeleteBucketCallback](http
 
 [BucketDeleteCallback]()
 
+<a name="#anchorFiles"></a>
 #### Files
 All files stored in Storj distibuted systen as encrypted shards of your original file.
 
