@@ -29,6 +29,9 @@ All files will be encrypted before sending to distributed network.
   - [iOS](#anchorIos)
 - [Known Issues](#anchorIssues)
 - [Steb by step tutorials](#anchorTutorials)
+  - [Android](#anchorAndroidTutorial)
+  - [Ios](#anchorIosTutorial)
+  - [React-native](#anchorRnTutorial)
 
 <a name="anchor"></a>
 ## Getting Started
@@ -411,6 +414,8 @@ Android part is written in Java language and its main modules are:
 
 <a name="anchorTutorials"></a>
 ## Step by step tutorials
+
+<a name="anchorAndroidTutorial"></a>
 1. ### Android
 
 In this tutorial we will show you how to use storjlib in native android application.
@@ -764,6 +769,7 @@ public class BucketActivity extends AppCompatActivity implements CreateBucketCal
 ````
 
 2. ### IOS
+<a name="anchorRnTutorial"></a>
 3. ### React-native
 
 In this tutorial we will show you how to use storjlib in React-native android application. We will use Android Studio, Java lang for Android part, Objective-c for IOS part and javascript.
