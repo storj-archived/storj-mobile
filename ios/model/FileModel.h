@@ -12,7 +12,6 @@
 #import "FileDbo.h"
 @import StorjIOS;
 
-
 #define FILE_MODEL_BUCKET_ID "bucketId"
 #define FILE_MODEL_INDEX "index"
 

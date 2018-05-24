@@ -24,8 +24,12 @@ typedef void(^MethodHandlerCallbackBlock)(NSDictionary * _Nonnull param);
     andMethodHandlerBlock: (MethodHandlerCallbackBlock _Nonnull) callback;
 
 +(void) invokeBackgroundRemainWithParams :(NSDictionary *_Nonnull) params
-                       methodHandlerBlock: (void(^ __nonnull)(NSDictionary *params,
+                       methodHandlerBlock: (void(^ __nonnull)(NSDictionary * params,
                                                               UIBackgroundTaskIdentifier taskId)) callback
                         expirationHandler:(void(^ __nullable)(void)) expirationHandler;
+
++(void)invokeBackgroundSyncRemainWithParams:(NSDictionary *)params
+                         methodHandlerBlock:(void (^)(NSDictionary *, UIBackgroundTaskIdentifier))callback
+                          expirationHandler:(void (^)(void))expirationHandler;
 
 @end

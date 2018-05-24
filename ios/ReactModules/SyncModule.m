@@ -239,9 +239,9 @@ RCT_REMAP_METHOD(updateFileStarred,
 }
 
 RCT_REMAP_METHOD(checkFile,
-                 checkFileWithFileId: (NSString *) fileID localPath: (NSString *) localPath esolver: (RCTPromiseResolveBlock) resolver
+                 checkFileWithFileId: (NSString *) fileID localPath: (NSString *) localPath resolver: (RCTPromiseResolveBlock) resolver
                  andRejecter: (RCTPromiseRejectBlock) rejecter){
-  
+  NSLog(@"Checking file: ID: %@, localPath: %@", fileID, localPath);
   if(!localPath) {
     resolver([[Response errorResponseWithMessage:@"Error: Path is null"] toDictionary]);
     return;
@@ -250,7 +250,7 @@ RCT_REMAP_METHOD(checkFile,
   BOOL isDirectory;
   BOOL isFileExists = [[NSFileManager defaultManager] fileExistsAtPath:localPath
                                                            isDirectory:&isDirectory];
-  NSLog(@"Is file Exists: %hhd, isDir: %hhd", isFileExists, isDirectory);
+  NSLog(@"Is file Exists: %d, isDir: %d", isFileExists, isDirectory);
   if(!isFileExists || isDirectory) {
     Response *updateResponse = [[self _fileRepository] updateById:fileID
                                                     downloadState:0

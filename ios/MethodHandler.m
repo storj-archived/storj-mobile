@@ -43,7 +43,31 @@
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
     callback(params, bgTask);
   });
+}
+
++(void)invokeBackgroundSyncRemainWithParams:(NSDictionary *)params
+                         methodHandlerBlock:(void (^)(NSDictionary *, UIBackgroundTaskIdentifier))callback
+                          expirationHandler:(void (^)(void))expirationHandler {
+  if(!callback){
+    return;
+  }
   
+  UIBackgroundTaskIdentifier bgTask = [[UIApplication sharedApplication]
+                                       beginBackgroundTaskWithName:params[@KEY_TASK_NAME]
+                                       expirationHandler : expirationHandler];
+  
+  dispatch_async([MethodHandler getSyncQueue], ^{
+    callback(params, bgTask);
+  });
+}
+
++(dispatch_queue_t) getSyncQueue {
+  static dispatch_queue_t queue;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    queue = dispatch_queue_create("io.storj.app.background.serial", DISPATCH_QUEUE_SERIAL);
+  });
+  return queue;
 }
 
 @end
