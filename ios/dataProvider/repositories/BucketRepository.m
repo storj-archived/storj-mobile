@@ -57,7 +57,6 @@ static NSArray *columns;
                        BucketContract.TABLE_NAME,
                        orderByColumn,
                        isDescending ? @"DESC" : @"ASC"];
-  
   __block NSMutableArray<BucketDbo *> * bucketDboArray = [NSMutableArray array];
   FMDatabaseQueue *queue = [self readableQueue];
   [queue inDatabase:^(FMDatabase * _Nonnull db) {
@@ -71,9 +70,8 @@ static NSArray *columns;
       if(dbo) {
         [bucketDboArray addObject:dbo];
       }
-      
-      [resultSet close];
     }
+    [resultSet close];
   }];
   [queue close];
   return bucketDboArray;
