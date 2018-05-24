@@ -860,7 +860,7 @@ Then we need to create package that implements ReactPackage
 
 ````
 
-package com.testreadme;
+package com.our_app;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
