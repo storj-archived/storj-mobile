@@ -272,7 +272,7 @@ This method has two parameters - String bucketId and [DeleteBucketCallback](http
 
 [BucketDeleteCallback]()
 
-<a name="#anchorFiles"></a>
+<a name="anchorFiles"></a>
 #### Files
 All files stored in Storj distibuted systen as encrypted shards of your original file.
 
