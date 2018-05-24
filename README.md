@@ -348,41 +348,6 @@ IOS:
 <a name="anchorFeatures"></a>
 ## Features
 
-Storj Mobile iOS and Android App is multifunctional cloud storage consumer mobile application that allows to individual use all popular cloud storage features but in very secure way and to store files around distributed network of computers around the world.
-
-We designed Storj Mobile applications with the next list of features inside:
-- registration
-- authorization
-- file download
-- file upload
-- download cancellation
-- file preview
-- file deletion
-- file marking (favorite list)
-- bucket creation
-- bucket deletion 
-- bucket marking (favorite list)
-- QR generation with login credentials inside
-- QR code scanner
-- Two factor Authentication through internal PIN code to login
-- Buckets list from my Storj Account
-- Files list from chosen bucket
-- Take a photo with next uploading to one of the list of buckets
-- Sort files/buckets (by date, by name)
-- File Copying 
-- Files/Buckets Grid View
-- Files/Buckets List View
-- File/Buckets Selection bar (to do an action with multiple files/buckets in one time)
-- Search around buckets and files
-- Billing to help user top up his Storj account Balance via STORJ and Bitcoins
-- Mnemonic (secret phrase) generation
-- Synchronization (from device to Storj)
-- Multiple Synchronization options (When charging, Wi-Fi only, Sync optional folders, Sync cancellation, synchronization que)
-- Changing Password
-
-- Log Out
-
-
 <a name="anchorProjStruct"></a>
 ## Project structure
 
@@ -831,4 +796,124 @@ Let's create native for android.
 
 Open your android folder and create new package called StorjLibModule.
 
-Create new class called 
+Create new class called BucketsModule that extends ReactContextBaseJavaModule
+
+````
+package com.storjlibmodule;
+
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContextBaseJavaModule;
+
+import io.storj.libstorj.Storj;
+import io.storj.libstorj.android.StorjAndroid;
+
+public class BucketsModule extends ReactContextBaseJavaModule {
+
+    private Storj getStorj() {
+        return StorjAndroid.getInstance(getReactApplicationContext());
+    }
+
+    @Override
+    public String getName() {
+        return "BucketsModule";
+    }
+
+    public BucketsModule (ReactApplicationContext reactContext) {
+        super(reactContext);
+    }
+    
+}
+
+````
+Then let`s make ReactMethod in BucketsModule, for example createBucket from StorjAndroid and add related imports:
+
+````
+...another imports here...
+import com.facebook.react.bridge.ReactMethod;
+
+import io.storj.libstorj.CreateBucketCallback;
+import io.storj.libstorj.KeysNotFoundException;
+
+
+public class BucketsModule extends ReactContextBaseJavaModule {
+	.........
+	
+	@ReactMethod
+	    public void createBucket(final String bucketName, final CreateBucketCallback callback) {
+
+		new Thread(new Runnable() {
+		    @Override
+		    public void run() {
+			try {
+			    getStorj().createBucket(bucketName, callback);
+			} catch (KeysNotFoundException error) {
+
+			}
+		    }
+		}).start();
+    	}
+}
+
+````
+
+Then we need to create package that implements ReactPackage
+
+````
+
+package com.testreadme;
+
+import com.facebook.react.ReactPackage;
+import com.facebook.react.bridge.NativeModule;
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.uimanager.ViewManager;
+import com.storjlibmodule.BucketsModule;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+
+public class OurTestPackage implements ReactPackage {
+
+    @Override
+    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public List<NativeModule> createNativeModules(
+            ReactApplicationContext reactContext) {
+        List<NativeModule> modules = new ArrayList<>();
+
+        modules.add(new BucketsModule(reactContext));
+
+        return modules;
+    }
+
+}
+
+````
+
+Finally, we need to add our package in MainApplication gerPackages() method:
+
+````
+
+@Override
+    protected List<ReactPackage> getPackages() {
+      return Arrays.<ReactPackage>asList(
+          new MainReactPackage(),
+          new OurTestPackage()
+      );
+    }
+
+````
+
+And we can successfully use our module in JavaScript by importing NativeModules from react-native package: 
+
+````
+
+import { NativeModules } from 'react-native';
+
+NativeModules.BucketsModule.createBucket('bucketName');
+
+````
