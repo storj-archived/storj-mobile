@@ -2,7 +2,8 @@ import {
     View,
     StyleSheet,
     BackHandler,
-    Platform
+    Platform,
+    Linking
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -56,7 +57,17 @@ class MyAccountNavContainer extends Component {
             break;
             default: this.props.redirectToMyAccountScreen();
         }
-	}
+    }
+
+    redirectToAboutPage() {
+        const aboutUri = "https://storj.io/faq.html";
+        Linking.openURL(aboutUri);
+    }
+
+    redirectToHelpPage() {
+        const helpUri = "https://storj.io/support.html";
+        Linking.openURL(helpUri);
+    }
 
     render() {
         return(
@@ -83,7 +94,9 @@ class MyAccountNavContainer extends Component {
                         redirectToStorageScreen: this.props.redirectToStorageScreen, 
                         redirectToMyAccountScreen: this.props.redirectToMyAccountScreen,
                         redirectToMyAccountMnemonicScreen: this.props.redirectToMyAccountMnemonicScreen,
-                        changePasswordPopupStatus: this.props.changePasswordPopupStatus
+                        changePasswordPopupStatus: this.props.changePasswordPopupStatus,
+                        redirectToAboutPage: this.redirectToAboutPage.bind(this),
+                        redirectToHelpPage: this.redirectToHelpPage.bind(this)
                     } }
                     navigation = { addNavigationHelpers({ 
                         dispatch: this.props.dispatch,

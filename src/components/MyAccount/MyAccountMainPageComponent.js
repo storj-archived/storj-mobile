@@ -90,14 +90,14 @@ export default class MyAccountMainPageComponent extends Component{
                             <OptionsComponent 
                                 title = { 'Help' }
                                 imageSource = { require('../../images/MyAccount/Help.png') }
-                                onPress = { () => {} } />
+                                onPress = { this.props.screenProps.redirectToHelpPage } />
                         }
                         <View style = { styles.underline } />
                         {
                             <OptionsComponent 
                                 title = { 'About' }
                                 imageSource = { require('../../images/MyAccount/Info.png') }
-                                onPress = { () => {} } />
+                                onPress = { this.props.screenProps.redirectToAboutPage } />
                         }
                     </View>
                     <TouchableOpacity onPress = { () => { this.logOut(); } }>
