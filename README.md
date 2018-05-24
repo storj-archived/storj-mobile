@@ -20,15 +20,15 @@ All files will be encrypted before sending to distributed network.
      - [Bucket creation](#anchorBucketCreate) 
      - [Bucket deletion](#anchorBucketDelete)
   - [Files](#anchorFiles)
-	  - [File Upload](#anchor)
-	  - [File Download](#anchor)
-- [Features](#anchor)	
-- [Project Structure](#anchor)
-  - [Frontend](#anchor)
-  - [Android](#anchor)
-  - [iOS](#anchor)
-- [Known Issues](#anchor)
-- [](#anchor)
+	  - [File Upload](#anchorFilesUpload)
+	  - [File Download](#anchorFilesDownload)
+- [Features](#anchorFeatures)	
+- [Project Structure](#anchorProjStruct)
+  - [Frontend](#anchorFront)
+  - [Android](#anchorAndroid)
+  - [iOS](#anchorIos)
+- [Known Issues](#anchorIssues)
+- [Steb by step tutorials](#anchorTutorials)
 
 <a name="anchor"></a>
 ## Getting Started
@@ -294,7 +294,7 @@ public class File {
     private String hmac;
 }
 ```
-
+<a name="anchorFilesUpload"></a>
 ##### File uploading
 Before uploading file will be encrypted, and splitted on little chunks. During this process all file will be placed in virtual memory of your device. In case if your device doesn't have enough free virtual memory - your application will crash.
 
@@ -322,6 +322,7 @@ callback. It parameters contain all needed information to implement progress of 
 
 IOS:
 
+<a name="anchorFilesDownload"></a>
 ##### File downloading
 Android: 
 
@@ -341,7 +342,10 @@ Just save you fileHandle and pass it as a parameter to this method.
 
 IOS:
 
+<a name="anchorFeatures"></a>
 ## Features
+
+<a name="anchorProjStruct"></a>
 ## Project structure
 
 The project consists of 3 main parts:
@@ -354,6 +358,7 @@ Main functionality of source code for android and Ios devices:
 2. Background services for long-running operations, such as upload, download, synchronization of local files with Storj network
 3. [Native modules](https://facebook.github.io/react-native/docs/native-modules-android.html)
 
+<a name="anchorFront"></a>
 ### Frontend
 We used React-native + Redux approach and tried to design our code in appropriate way.
 
@@ -367,6 +372,7 @@ Main parts of frondend structure:
 
 **Navigators** - to implement navigation (tab navigation, stack navigators) we use [React Navigation](https://reactnavigation.org/) framework.
 
+<a name="anchorAndroid"></a>
 ### Android 
 
 Android part is written in Java language and its main modules are:
@@ -399,9 +405,11 @@ Android part is written in Java language and its main modules are:
         void bindUploadService(Promise promise)
         void bindDownloadService(Promise promise)
      ```
-     
+
+<a name="anchorIssues"></a>
 ## Issues
 
+<a name="anchorTutorials"></a>
 ## Step by step tutorials
 1. ### Android
 
