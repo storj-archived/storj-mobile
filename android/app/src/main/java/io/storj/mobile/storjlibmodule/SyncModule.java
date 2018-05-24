@@ -391,7 +391,6 @@ public class SyncModule extends ReactContextBaseJavaModule {
         }).run();
     }
 
-    @ReactMethod
     private void cancelSync() {
         Intent cancelSyncIntent = new Intent(getReactApplicationContext(), SynchronizationService.class);
         cancelSyncIntent.setAction(SynchronizationService.ACTION_SYNC_CANCEL);

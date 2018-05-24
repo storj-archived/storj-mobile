@@ -10,7 +10,7 @@ import { bindActionCreators } from 'redux';
 import { addNavigationHelpers } from 'react-navigation';
 import React, { Component } from 'react';
 import MyAccountScreenNavigator from '../navigators/MyAccountScreenNavigator';
-import { changePasswordPopupStatus } from '../reducers/mainContainer/mainReducerActions';
+import { changePasswordPopupStatus, toggleSyncWindow } from '../reducers/mainContainer/mainReducerActions';
 import { 
     redirectToMyAccountScreen,
     redirectToBalanceScreen,
@@ -96,7 +96,9 @@ class MyAccountNavContainer extends Component {
                         redirectToMyAccountMnemonicScreen: this.props.redirectToMyAccountMnemonicScreen,
                         changePasswordPopupStatus: this.props.changePasswordPopupStatus,
                         redirectToAboutPage: this.redirectToAboutPage.bind(this),
-                        redirectToHelpPage: this.redirectToHelpPage.bind(this)
+                        redirectToHelpPage: this.redirectToHelpPage.bind(this),
+
+                        showSyncWindow: this.props.showSyncWindow
                     } }
                     navigation = { addNavigationHelpers({ 
                         dispatch: this.props.dispatch,
@@ -127,7 +129,9 @@ function mapDispatchToProps(dispatch) {
             redirectToStorageScreen,
             redirectToMyAccountMnemonicScreen,
             clear,
-            changePasswordPopupStatus
+            changePasswordPopupStatus,
+
+            toggleSyncWindow
         }, dispatch)
     }
 }

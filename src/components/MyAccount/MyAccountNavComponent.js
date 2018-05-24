@@ -18,6 +18,7 @@ export default class MyAccountNavComponent extends Component {
             <View style={ styles.mainContainer }>
                 <MyAccountNavContainer
                     redirectToInitializationScreen = { this.props.redirectToInitializationScreen }
+                    showSyncWindow = { this.props.showSyncWindow }
                     showQR = { this.props.showQR }
                     showStorageInfo = { this.props.showStorageInfo }
                     showCredits = { this.props.showCredits }                      

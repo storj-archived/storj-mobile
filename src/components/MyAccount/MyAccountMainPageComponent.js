@@ -99,6 +99,13 @@ export default class MyAccountMainPageComponent extends Component{
                                 imageSource = { require('../../images/MyAccount/Info.png') }
                                 onPress = { this.props.screenProps.redirectToAboutPage } />
                         }
+                        <View style = { styles.underline } />
+                        {
+                            <OptionsComponent 
+                                title = { 'Show synchronization queue' }
+                                imageSource = { require('../../images/MyAccount/Info.png') }
+                                onPress = { this.props.screenProps.showSyncWindow } />
+                        }
                     </View>
                     <TouchableOpacity onPress = { () => { this.logOut(); } }>
                         <View style = { styles.logOutButton }>
@@ -201,10 +208,10 @@ const styles = StyleSheet.create({
     },
     underline: { 
         height: getHeight(0.5), 
-        backgroundColor: 'rgba(56, 75, 101, 0.2)' 
+        backgroundColor: 'rgba(56, 75, 101, 0.2)'
     },
     logOutButton: { 
-        marginTop: getHeight(65),
+        marginTop: getHeight(20),
         width: getWidth(335),
         height: getHeight(50),
         borderRadius: 6,

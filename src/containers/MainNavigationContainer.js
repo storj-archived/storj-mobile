@@ -29,7 +29,8 @@ class MainNavigationContainer extends Component {
                     redirectToInitializationScreen: this.props.redirectToInitializationScreen,
                     isFirstSignIn: this.props.isFirstSignIn,
                     selectAll: this.props.selectAll,
-                    deselectAll: this.props.deselectAll
+                    deselectAll: this.props.deselectAll,
+                    showSyncWindow: this.props.showSyncWindow
                 }}
                 navigation = { addNavigationHelpers({
                     pushLoading: this.props.pushLoading,

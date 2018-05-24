@@ -66,6 +66,8 @@ export default class MainComponent extends Component {
                 }
                 <View style = { styles.navigationContainer }>
                     <MainNavigationContainer
+                        showSyncWindow = { this.props.showSyncWindow }
+
                         selectAll = { this.props.selectAll }
                         deselectAll = { this.props.deselectAll }
                         redirectToInitializationScreen = { this.props.redirectToInitializationScreen }
@@ -165,7 +167,7 @@ export default class MainComponent extends Component {
                         <AnimatedWindowComponent style = { styles.syncWindowContainer } interpolate = { this.props.interpolate }>
                             <SyncQueueListComponent 
                                 title = { this.props.getSyncEntryLoadingCount() + " files uploading" }
-                                touchableRightTitle = "Cancell all"
+                                touchableRightTitle = "Cancell sync"
                                 onCancelPress = { this.props.hideSyncWindow }
                                 data = { this.props.syncQueueEntries }
                                 renderItem = { this.props.renderSyncQueueEntry }  

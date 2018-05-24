@@ -98,6 +98,7 @@ class MyAccountContainer extends Component {
         return(
             <MyAccountNavComponent 
                 redirectToInitializationScreen = { this.props.screenProps.redirectToInitializationScreen }
+                showSyncWindow = { this.props.screenProps.showSyncWindow }
                 showQR = { this.props.screenProps.showQR }
                 showStorageInfo = { this.props.screenProps.showStorageInfo }
                 showCredits = { this.props.screenProps.showCredits } 

@@ -207,6 +207,14 @@ public class ServiceModule extends ReactContextBaseJavaModule implements Activit
     }
 
     @ReactMethod
+    public void cancelSync() {
+        Intent cancelSyncIntent = new Intent(getReactApplicationContext(), SynchronizationService.class);
+        cancelSyncIntent.setAction(SynchronizationService.ACTION_SYNC_CANCEL);
+
+        getReactApplicationContext().startService(cancelSyncIntent);
+    }
+
+    @ReactMethod
     public void deleteBucket(final String bucketId) {
         Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
         serviceIntent.setAction(BUCKET_DELETED);
