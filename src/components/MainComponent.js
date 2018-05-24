@@ -19,6 +19,7 @@ import PinOptionComponent from '../components/PinOptionComponent';
 import AnimatedWindowComponent from "../components/AnimatedWindowComponent";
 import SyncOverlayComponent from "../components/SynQueue/SyncOverlayComponent";
 import SyncQueueListComponent from "../components/SynQueue/SyncQueueListComponent";
+import { getHeight } from "../utils/adaptive";
 import PropTypes from 'prop-types';
 
 export default class MainComponent extends Component {
@@ -54,7 +55,14 @@ export default class MainComponent extends Component {
 
         return(
             <View style={ styles.mainContainer }>
-                <SyncOverlayComponent onPress = { this.props.showSyncWindow }/>
+                {
+                    this.props.getLoadingSyncEntry() ?
+                    <SyncOverlayComponent onPress = { this.props.showSyncWindow }>
+                    {
+                        this.props.getLoadingSyncEntry()
+                    }
+                    </SyncOverlayComponent> : null
+                }
                 <View style = { styles.navigationContainer }>
                     <MainNavigationContainer
                         selectAll = { this.props.selectAll }
@@ -155,8 +163,8 @@ export default class MainComponent extends Component {
                         <AnimatedWindowComponent style = {[ styles.backgroundWrapper, styles.blackBackround ]} interpolate = { this.props.interpolateBackground } />
                         <AnimatedWindowComponent style = { styles.syncWindowContainer } interpolate = { this.props.interpolate }>
                             <SyncQueueListComponent 
-                                title = "Title"
-                                touchableRightTitle = "test"
+                                title = { this.props.syncQueueEntries.length + " files uploading" }
+                                touchableRightTitle = "Retry all"
                                 onCancelPress = { this.props.hideSyncWindow }
                                 data = { this.props.syncQueueEntries }
                                 renderItem = { this.props.renderSyncQueueEntry }  
@@ -210,9 +218,8 @@ const styles = StyleSheet.create({
         position: "absolute",
         left: 15,
         right: 15,
-        // bottom : -200,
-        height: 320,
-        borderRadius: 15
+        borderRadius: 8,
+        paddingVertical: getHeight(10),
     }
 });
 

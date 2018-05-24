@@ -20,6 +20,7 @@ import io.storj.mobile.storjlibmodule.responses.Response;
 import io.storj.mobile.storjlibmodule.StorjLibPackage;
 import io.storj.mobile.storjlibmodule.dataprovider.DatabaseFactory;
 import io.storj.mobile.storjlibmodule.dataprovider.repositories.UploadingFilesRepository;
+import io.storj.mobile.storjlibmodule.services.SynchronizationService;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -52,6 +53,7 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     public void onCreate() {
+        SynchronizationService.clean(this);
         super.onCreate();
         SoLoader.init(this, /* native exopackage */ false);
     }

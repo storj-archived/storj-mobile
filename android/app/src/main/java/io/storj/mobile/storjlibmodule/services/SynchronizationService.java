@@ -2,6 +2,7 @@ package io.storj.mobile.storjlibmodule.services;
 
 import android.app.IntentService;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import io.storj.mobile.storjlibmodule.dataprovider.DatabaseFactory;
 import io.storj.mobile.storjlibmodule.dataprovider.contracts.SynchronizationQueueContract;
 import io.storj.mobile.storjlibmodule.dataprovider.dbo.SyncQueueEntryDbo;
 import io.storj.mobile.storjlibmodule.dataprovider.repositories.SyncQueueRepository;
+import io.storj.mobile.storjlibmodule.dataprovider.repositories.UploadingFilesRepository;
 import io.storj.mobile.storjlibmodule.enums.SyncStateEnum;
 import io.storj.mobile.storjlibmodule.models.SyncQueueEntryModel;
 import io.storj.mobile.storjlibmodule.responses.Response;
@@ -26,7 +28,7 @@ public class SynchronizationService extends IntentService {
     public final static String ACTION_SYNC_CANCEL = "ACTION_SYNC_CANCEL";
 
     public final static String EVENT_SYNC_ENTRY_UPDATED = "EVENT_SYNC_ENTRY_UPDATED";
-    public final static String EVENT_SYNC_STARTED = "EVENT_SYNC_STARTED";
+    public final static String EVENT_SYNC_STARTED = "EVENT_SYNC_STARTED"; //TODO: Rename to sync list updated
 
     private SynchronizationEventEmitter mEventEmitter;
 
@@ -58,8 +60,31 @@ public class SynchronizationService extends IntentService {
         }
     }
 
+    //DELETE ALL UPLOADING FILES
+    //SET PROCESSING AND QUEUE ENTRIES TO IDLE STATE
+    public static void clean(Context context) {
+        try(SQLiteDatabase db = new DatabaseFactory(context, null).getWritableDatabase()) {
+            UploadingFilesRepository uploadRepo = new UploadingFilesRepository(db);
+            Response response = uploadRepo.deleteAll();
+
+            SyncQueueRepository syncRepo = new SyncQueueRepository(db);
+            List<SyncQueueEntryModel> syncEntries = syncRepo.getAll();
+
+            for(SyncQueueEntryModel syncEntry : syncEntries) {
+                if(syncEntry.getStatus() == SyncStateEnum.PROCESSING.getValue() || syncEntry.getStatus() == SyncStateEnum.QUEUED.getValue()) {
+                    SyncQueueEntryDbo dbo = new SyncQueueEntryDbo(syncEntry);
+                    dbo.setProp(SynchronizationQueueContract._STATUS, SyncStateEnum.IDLE.getValue());
+
+                    Response updateResponse = syncRepo.update(dbo.toModel());
+                }
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
     private void sync(Intent intent) {
-        try(SQLiteDatabase db = new DatabaseFactory(this, null).getWritableDatabase()){
+        try(SQLiteDatabase db = new DatabaseFactory(this, null).getWritableDatabase()) {
             SyncQueueRepository syncRepo = new SyncQueueRepository(db);
 
             List<SyncQueueEntryModel> syncEntries = syncRepo.getAll();

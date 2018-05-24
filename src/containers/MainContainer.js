@@ -53,7 +53,7 @@ import { SYNC_BUCKETS } from '../utils/constants/SyncBuckets';
 import ListItemModel from '../models/ListItemModel';
 import BucketModel from '../models/BucketModel';
 import FileModel from '../models/FileModel';
-
+import {listUploadingFiles} from "../reducers/asyncActions/fileActionsAsync";
 import { listSyncQueueEntriesAsync, updateSyncQueueEntryFileNameAsync, updateSyncQueueEntryStatusAsync } from "../reducers/mainContainer/SyncQueue/syncQueueReducerAsyncActions";
 import { getSyncStatusFromCode, getActionIconFromCode, getActionsFromCode, getIsLoading, getAllFromCode } from "../utils/syncQueue/syncStatusMapper";
 import SyncQueueEntryComponent from "../components/SynQueue/SyncQueueEntryComponent";
@@ -139,15 +139,21 @@ class MainContainer extends Component {
 
         let callbackOject = {};
         let reSyncCallback = (entry) => this.props.updateSyncQueueEntryStatusAsync(entry.getId(), SyncState.IDLE);
+        let errorCallback = (entry) => {
+
+            return this.props.updateSyncQueueEntryStatusAsync(entry.getId(), SyncState.IDLE);
+        };
 
         callbackOject.queued = (entry) => ServiceModule.removeFileFromSyncQueue(entry.getId()); 
-        callbackOject.error = reSyncCallback;
+        callbackOject.error = errorCallback;
         callbackOject.cancelled = reSyncCallback;
         callbackOject.processing = (entry) => StorjModule.cancelUpload(entry.entity.fileHandle);
         callbackOject.processed = reSyncCallback;
         callbackOject.idle = (entry) => this.props.updateSyncQueueEntryStatusAsync(entry.getId(), SyncState.CANCELLED);
 
         SyncQueueCallbackObject.CallbackObject = callbackOject;
+
+        this.props.listUploadingFiles();
     }
     
 
@@ -194,11 +200,25 @@ class MainContainer extends Component {
         return 0;
     }
 
+    _getLoadingSyncEntry = () => this.props.syncQueueEntries.find(entry => entry.entity.status === SyncState.PROCESSING);
+
+    getLoadingSyncEntry() {
+        let loadingSyncEntry = this.props.syncQueueEntries.find(entry => entry.entity.status === SyncState.PROCESSING);
+        if(loadingSyncEntry) {
+            return this._getSyncQueueEntry(loadingSyncEntry, false);
+        }
+    }
+
     getSyncQueueEntry({item}) {
+        return this._getSyncQueueEntry(item, true);
+    }
+
+    _getSyncQueueEntry(item, addProps) {
         const describer = getAllFromCode(item.entity.status, new SyncQueueCallbackObject(item));
 
         return(
-            <SyncQueueEntryComponent 
+            <SyncQueueEntryComponent
+                styleContainer = { addProps }
                 key = { item.getId() }
                 fileName = { item.getName() }
                 iconSource = { require("../images/Icons/CloudFile.png") }
@@ -605,6 +625,7 @@ class MainContainer extends Component {
 
         return(
             <MainComponent
+                getLoadingSyncEntry = { this._getLoadingSyncEntry.bind(this) } 
                 interpolate = { this.interpolate.bind(this) }
                 interpolateBackground = { this.interpolateBackground.bind(this) }
                 syncQueueEntries = { this.props.syncQueueEntries }
@@ -612,6 +633,7 @@ class MainContainer extends Component {
                 showSyncWindow = { this.showSyncWindow.bind(this) }
                 hideSyncWindow = { this.hideSyncWindow.bind(this) }
                 isSyncWindowShown = { this.props.isSyncWindowShown }
+                getLoadingSyncEntry = { this.getLoadingSyncEntry.bind(this) }
 
                 getBuckets = { this.getBuckets.bind(this) }
                 getFiles = { this.getFiles.bind(this) }
@@ -725,6 +747,7 @@ function mapDispatchToProps(dispatch) {
             updateSyncQueueEntryFileNameAsync,
             updateSyncQueueEntryStatusAsync,
             toggleSyncWindow,
+            listUploadingFiles,
 
             redirectToMainScreen, 
             redirectToInitializationScreen,

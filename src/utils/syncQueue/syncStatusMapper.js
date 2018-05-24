@@ -19,10 +19,10 @@ export function getSyncStatusFromCode(code) {
 
 const actionIconsCallback = new GetFromCodeCallback();
 actionIconsCallback.QueuedCallback = () => require("../../images/Icons/CancelDownload.png");
-actionIconsCallback.ErrorCallback = () => require("../../images/Icons/BlueShare.png");
-actionIconsCallback.CancelledCallback = () => require("../../images/Icons/BlueShare.png");
+actionIconsCallback.ErrorCallback = () => require("../../images/Icons/Retry.png");
+actionIconsCallback.CancelledCallback = () => require("../../images/Icons/Retry.png");
 actionIconsCallback.ProcessingCallback = () => require("../../images/Icons/CancelDownload.png");
-actionIconsCallback.ProcessedCallback = () => require("../../images/Icons/GridItemSelected.png");
+actionIconsCallback.ProcessedCallback = () => null;
 actionIconsCallback.IdleCallback = () => require("../../images/Icons/CancelDownload.png");
 actionIconsCallback.DefaultCallback = () => null;
 

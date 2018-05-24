@@ -14,7 +14,9 @@ export default class SyncOverlayComponent extends Component {
     render() {
         return(
             <TouchableOpacity onPress = { this.props.onPress } style = { styles.mainContainer } >
-                <Text>PlaceHolder</Text>
+                {
+                    this.props.children
+                }
             </TouchableOpacity>
         );
     }
@@ -22,7 +24,7 @@ export default class SyncOverlayComponent extends Component {
 
 const styles = StyleSheet.create({
     mainContainer: {
-        backgroundColor: "red",
+        backgroundColor: "transparent",
         height: 50
     }
 });

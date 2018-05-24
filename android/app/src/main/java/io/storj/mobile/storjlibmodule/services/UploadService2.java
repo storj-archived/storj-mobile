@@ -78,7 +78,7 @@ public class UploadService2 extends Service {
         };
     }
 
-    private final static String TAG = "UPLOAD SERVICE 2 DEBUG";
+    private final static String TAG = "UPLOAD_SERVICE_2_DEBUG";
 
     public final static String ACTION_UPLOAD_FILE = "ACTION_UPLOAD_FILE";
     public final static String ACTION_SYNC_FILE = "ACTION_SYNC_FILE";
@@ -144,6 +144,10 @@ public class UploadService2 extends Service {
         }
 
         return Service.START_NOT_STICKY;
+    }
+
+    private Intent getSynchronizationIntent(String action) {
+        return new Intent(this, SynchronizationService.class).setAction(action);
     }
 
     private void removeFromSyncQueue(int id) {
@@ -472,9 +476,12 @@ public class UploadService2 extends Service {
         }
     }
 
+
+
     @Override
     public void onTaskRemoved(Intent rootIntent) {
         Log.d(TAG, "onTaskRemoved: " + mServiceName);
+        this.unregisterReceiver(mBroadcastReceiver);
     }
 
     @Override

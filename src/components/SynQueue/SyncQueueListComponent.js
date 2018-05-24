@@ -7,6 +7,7 @@ import {
     StyleSheet,
     TouchableOpacity
 } from "react-native";
+import { getWidth, getHeight } from "../../utils/adaptive";
 
 export default class SyncQueueListComponent extends Component {
     constructor(props) {
@@ -17,19 +18,25 @@ export default class SyncQueueListComponent extends Component {
         return(
             <View style = { [ styles.container, this.props.containerStyle ] }>
                 <View style = { styles.headerContainer }>
-                    <TouchableOpacity onPress = { this.props.onCancelPress }>
-                        <Image source = { require("../../images/Icons/BlueCross.png") } />
-                    </TouchableOpacity>
-                    <Text>{ this.props.title }</Text>
-                    <TouchableOpacity onPress = { this.props.onTouchableRightPress }>
-                        <Text>{ this.props.touchableRightTitle }</Text>
+                    <View style = { styles.row }>
+                        <TouchableOpacity style = { styles.cancelWrapper } onPress = { this.props.onCancelPress }>
+                            <Image style = { styles.icon } source = { require("../../images/Icons/BlueCross.png") } />
+                        </TouchableOpacity>
+                        <View style={ styles.titleWrapper }>
+                            <Text numberOfLines = { 2 } style = { styles.title }>{ this.props.title }</Text>
+                        </View>
+                    </View>
+                    <TouchableOpacity style = { styles.touchableRightWrapper } onPress = { this.props.onTouchableRightPress }>
+                        <Text style = { styles.touchableRightText }>{ this.props.touchableRightTitle }</Text>
                     </TouchableOpacity>
                 </View>
-                <View style = { styles.contentContainer }>
+                <View style = { styles.contentWrapper }>
                     <FlatList
+                        contentContainerStyle = { styles.contentContainer }
+                        style = { { height: 320 } }
                         data = { this.props.data }
                         renderItem = { this.props.renderItem }
-                        ItemSeparatorComponent = { null }
+                        ItemSeparatorComponent = { () => <View style = { styles.itemSeparator } /> }
                         ListEmptyComponent = { null } />
                 </View>
             </View>
@@ -39,13 +46,53 @@ export default class SyncQueueListComponent extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        paddingLeft: getWidth(20),
+        paddingRight: getWidth(10),
+        backgroundColor: "white"
     },
     headerContainer: {
+        paddingTop: getHeight(15),
+        paddingBottom: getHeight(10),
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        backgroundColor: "purple"
+    },
+    contentWrapper: {
     },
     contentContainer: {
-
+        paddingVertical: getHeight(5),
+    },
+    row: {
+        flexDirection: "row"
+    },
+    itemSeparator: {
+        height: getHeight(2),
+        backgroundColor: "#F2F2F2"
+    },
+    icon: {
+        width: getHeight(14),
+        height: getHeight(14)
+    },
+    titleWrapper: {
+        marginLeft: getWidth(21),
+        backgroundColor: "yellow"
+    },
+    title: {
+        color: "#384B65",
+        fontFamily: "Montserrat-Bold",
+        fontSize: getHeight(30),
+        width: getWidth(169)
+    },
+    cancelWrapper: {
+        backgroundColor: "green"
+    },
+    touchableRightText: {
+        color: "#2794FF",
+        fontFamily: "Montserrat-Medium",
+        fontSize: 18
+    }, 
+    touchableRightWrapper: {
+        backgroundColor: "green"
     }
 });

@@ -18,19 +18,20 @@ export default class SyncQueueEntryComponent extends Component {
 
     render() {
         return(
-            <View style = { styles.mainContainer }>
+            <View style = { this.props.styleContainer ? styles.mainContainer2 : styles.mainContainer }>
                 <View style = { styles.rowRapper }>
                     <View style = { styles.rowRapperInner }>
                         <Image style = { styles.icon } source = { this.props.iconSource } />
-                        <View>
+                        <View style = { styles.textWrapper }>
                             <Text>{ this.props.fileName }</Text>
                             <Text>{ this.props.status }</Text>
                         </View>
                     </View>
                     <TouchableOpacity onPress = { this.props.actionCallback }>
-                        <Image style = { styles.icon } source = { this.props.actionIconSource } />
+                        <Image style = { styles.iconRight } source = { this.props.actionIconSource } />
                     </TouchableOpacity>
                 </View>
+                <View style = { this.props.styleContainer ? styles.progressWrapper : null }>
                 {
                     this.props.isLoading ?
                         Platform.select({
@@ -48,6 +49,7 @@ export default class SyncQueueEntryComponent extends Component {
                                     indeterminate = { false } />
                         }) : null
                 }
+                </View>
             </View>
         );
     }
@@ -57,6 +59,10 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1
     },
+    mainContainer2: {
+        flex: 1,
+        marginTop: getHeight(20)
+    },
     rowRapper: {
         flexDirection: "row",
         justifyContent: "space-between"
@@ -65,7 +71,17 @@ const styles = StyleSheet.create({
         flexDirection: "row"
     },
     icon: {
-        height: getHeight(40),
-        width: getWidth(40)
+        height: getHeight(24),
+        width: getWidth(20)
+    },
+    iconRight: {
+        height: getHeight(22),
+        width: getHeight(22)
+    },
+    textWrapper: {
+        marginLeft: getWidth(10)
+    },
+    progressWrapper: {
+        marginTop: getHeight(12)
     }
 });
