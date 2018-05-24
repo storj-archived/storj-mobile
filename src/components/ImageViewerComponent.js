@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     },
     image: {
         backgroundColor: "transparent",
-        width: getDeviceWidth(),
+        width: getDeviceWidth() - getWidth(40),
         height: getDeviceHeight()
     },
     backgroundWrapper: {

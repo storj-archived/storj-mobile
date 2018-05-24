@@ -54,7 +54,7 @@ export default class GridItemComponent extends Component {
                                 this.props.children
                             }
                             {
-                                !props.isListActionsDisabled || props.isSelectionMode ? 
+                                props.isListActionsDisabled || props.isSelectionMode ? 
                                     <View/>
                                     : <TouchableOpacity 
                                         style = { gridItemStyles.listItemActionsIconContainer } 
