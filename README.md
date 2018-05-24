@@ -412,6 +412,13 @@ Android part is written in Java language and its main modules are:
 <a name="anchorIssues"></a>
 ## Issues
 
+1. ### File upload
+If you will try to upload large file - be sure that your device has enough free RAM. During uploadin your file will bw encrypted and splitted on chunks and will be placed in virtual memory of your device. So you should have enough free RAM. In other case - application will be crashed.
+
+2. ### File download
+
+If your device doesn't have enough free space on its drive and you will try to upload large file - downloading process will stuck. But you will be able to cancel file downloading.
+
 <a name="anchorTutorials"></a>
 ## Step by step tutorials
 
