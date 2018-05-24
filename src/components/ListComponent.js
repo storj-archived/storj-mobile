@@ -51,18 +51,11 @@ export default class ListComponent extends Component {
         });
     }
 
-    sortByName(items, sortingObject) {        
-        let rows = [];
-        rows = [...new Set(items.map((item) => {            
-            let firstChar = item.getName().charAt(0);            
-            if(rows.includes(firstChar.toUpperCase()))
-                return ;
-        }))];      
-
+    sortByName(items, sortingObject) {         
         items.forEach((item) => {
             var firstLetter = item.getName()[0];
 
-            var prop = item.getName().charAt(0);            
+            var prop = item.getName().charAt(0).toUpperCase();            
             
             if(!sortingObject[prop]) {
                 sortingObject[prop] = [];
@@ -84,7 +77,7 @@ export default class ListComponent extends Component {
 
     sort(items) {
         let data = this.searchFilter(items);
-
+        console.log(data);
         let sortingObject = {};
         let sortingCallback;
 
