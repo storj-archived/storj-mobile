@@ -14,12 +14,9 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import java.util.List;
-import java.util.Map;
 
 import io.storj.mobile.storjlibmodule.GsonSingle;
 import io.storj.mobile.storjlibmodule.dataprovider.DatabaseFactory;
@@ -44,7 +41,7 @@ public class ServiceModule extends ReactContextBaseJavaModule implements Activit
     private final BucketRepository _bRepository;
     private final FileRepository _fRepository;
 
-    private GetBucketsService mGetBucketsService;
+    private FetchService mFetchService;
     private UploadService mUploadService;
     private DownloadService mDownloadService;
 
@@ -61,11 +58,8 @@ public class ServiceModule extends ReactContextBaseJavaModule implements Activit
             String serviceName = name.getClassName();
 
             switch (serviceName) {
-                case GetBucketsService.SERVICE_NAME:
-                    connectService(mPromise, mGetBucketsService, baseReactService, serviceName);
-                    break;
-                case UploadService.SERVICE_NAME:
-                    connectService(mUploadServicePromise, mUploadService, baseReactService, serviceName);
+                case FetchService.SERVICE_NAME:
+                    connectService(mPromise, mFetchService, baseReactService, serviceName);
                     break;
                 case DownloadService.SERVICE_NAME:
                     connectService(mDownloadServicePromise, mDownloadService, baseReactService, serviceName);
@@ -76,11 +70,8 @@ public class ServiceModule extends ReactContextBaseJavaModule implements Activit
         @Override
         public void onServiceDisconnected(ComponentName name) {
             switch (name.getClassName()) {
-                case GetBucketsService.SERVICE_NAME:
-                    mGetBucketsService = null;
-                    break;
-                case UploadService.SERVICE_NAME:
-                    mUploadService = null;
+                case FetchService.SERVICE_NAME:
+                    mFetchService = null;
                     break;
                 case DownloadService.SERVICE_NAME:
                     mDownloadService = null;
@@ -109,12 +100,7 @@ public class ServiceModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void bindGetBucketsService(Promise promise) {
-        bindService(mPromise, GetBucketsService.class, promise);
-    }
-
-    @ReactMethod
-    public void bindUploadService(Promise promise) {
-        bindService(mUploadServicePromise, UploadService.class, promise);
+        bindService(mPromise, FetchService.class, promise);
     }
 
     @ReactMethod
@@ -124,7 +110,7 @@ public class ServiceModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getBuckets() {
-        Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
+        Intent serviceIntent = new Intent(getReactApplicationContext(), FetchService.class);
         serviceIntent.setAction(GET_BUCKETS);
 
         getReactApplicationContext().startService(serviceIntent);
@@ -143,15 +129,15 @@ public class ServiceModule extends ReactContextBaseJavaModule implements Activit
             }
         }
 
-        Intent uploadIntent = new Intent(getReactApplicationContext(), UploadService2.class);
+        Intent uploadIntent = new Intent(getReactApplicationContext(), UploadService.class);
 //        uploadIntent.setAction(UploadService.ACTION_UPLOAD_FILE);
 ////        uploadIntent.putExtra(UploadService.PARAMS_BUCKET_ID, bucketId);
 ////        uploadIntent.putExtra(UploadService.PARAMS_URI, uri);
 
-        uploadIntent.setAction(UploadService2.ACTION_UPLOAD_FILE);
-        uploadIntent.putExtra(UploadService2.PARAM_BUCKET_ID, bucketId);
-        uploadIntent.putExtra(UploadService2.PARAM_LOCAL_PATH, localPath);
-        uploadIntent.putExtra(UploadService2.PARAM_FILE_NAME, fileName);
+        uploadIntent.setAction(UploadService.ACTION_UPLOAD_FILE);
+        uploadIntent.putExtra(UploadService.PARAM_BUCKET_ID, bucketId);
+        uploadIntent.putExtra(UploadService.PARAM_LOCAL_PATH, localPath);
+        uploadIntent.putExtra(UploadService.PARAM_FILE_NAME, fileName);
 
         getReactApplicationContext().startService(uploadIntent);
     }
@@ -190,7 +176,7 @@ public class ServiceModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void getFiles(String bucketId) {
-        Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
+        Intent serviceIntent = new Intent(getReactApplicationContext(), FetchService.class);
         serviceIntent.setAction(GET_FILES);
         serviceIntent.putExtra("bucketId", bucketId);
 
@@ -199,7 +185,7 @@ public class ServiceModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void createBucket(final String bucketName) {
-        Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
+        Intent serviceIntent = new Intent(getReactApplicationContext(), FetchService.class);
         serviceIntent.setAction(BUCKET_CREATED);
         serviceIntent.putExtra("bucketName", bucketName);
 
@@ -216,7 +202,7 @@ public class ServiceModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void deleteBucket(final String bucketId) {
-        Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
+        Intent serviceIntent = new Intent(getReactApplicationContext(), FetchService.class);
         serviceIntent.setAction(BUCKET_DELETED);
         serviceIntent.putExtra("bucketId", bucketId);
 
@@ -225,7 +211,7 @@ public class ServiceModule extends ReactContextBaseJavaModule implements Activit
 
     @ReactMethod
     public void deleteFile(final String bucketId, final String fileId) {
-        Intent serviceIntent = new Intent(getReactApplicationContext(), GetBucketsService.class);
+        Intent serviceIntent = new Intent(getReactApplicationContext(), FetchService.class);
         serviceIntent.setAction(FILE_DELETED);
         serviceIntent.putExtra("bucketId", bucketId);
         serviceIntent.putExtra("fileId", fileId);
@@ -237,7 +223,7 @@ public class ServiceModule extends ReactContextBaseJavaModule implements Activit
     public void removeFileFromSyncQueue(int id) {
         Intent removeFromQueueIntent = new Intent(getReactApplicationContext(), SynchronizationService.class);
         removeFromQueueIntent.setAction(SynchronizationService.ACTION_REMOVE_FROM_QUEUE);
-        removeFromQueueIntent.putExtra(UploadService2.PARAM_SYNC_ENTRY_ID, id);
+        removeFromQueueIntent.putExtra(UploadService.PARAM_SYNC_ENTRY_ID, id);
 
         getReactApplicationContext().startService(removeFromQueueIntent);
     }
@@ -248,18 +234,6 @@ public class ServiceModule extends ReactContextBaseJavaModule implements Activit
         startSyncIntent.setAction(SynchronizationService.ACTION_SYNC);
 
         getReactApplicationContext().startService(startSyncIntent);
-    }
-
-    @ReactMethod
-    public void test() {
-        Intent intent = new Intent(getReactApplicationContext(), UploadService2.class);
-
-        intent.setAction(UploadService2.ACTION_UPLOAD_FILE);
-        intent.putExtra(UploadService2.PARAM_BUCKET_ID, "6bb13bf31e330a6de76bb9d9");
-        intent.putExtra(UploadService2.PARAM_FILE_NAME, "test.jpg");
-        intent.putExtra(UploadService2.PARAM_LOCAL_PATH, "/storage/emulated/0/Download/13.jpg");
-
-        getReactApplicationContext().startService(intent);
     }
 
     private void bindService(PromiseHandler handler, Class<? extends BaseReactService> serviceClass, Promise promise) {

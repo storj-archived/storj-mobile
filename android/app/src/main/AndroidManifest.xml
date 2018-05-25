@@ -35,14 +35,14 @@
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
 
-      <service android:name=".storjlibmodule.services.GetBucketsService" android:enabled="true" />
+      <service android:name=".storjlibmodule.services.FetchService" android:enabled="true" />
       <service
           android:name=".storjlibmodule.services.UploadService"
           android:exported="true"
           android:enabled="true" />
 
         <service
-            android:name=".storjlibmodule.services.UploadService2"
+            android:name=".storjlibmodule.services.UploadService"
             android:exported="true"
             android:enabled="true" />
 

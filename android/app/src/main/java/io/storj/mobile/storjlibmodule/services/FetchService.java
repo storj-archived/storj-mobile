@@ -38,10 +38,10 @@ import static io.storj.mobile.storjlibmodule.services.ServiceModule.FILE_DELETED
  * Created by Yaroslav-Note on 3/6/2018.
  */
 
-public class GetBucketsService extends BaseReactService {
+public class FetchService extends BaseReactService {
 
-    public final static String SERVICE_NAME_SHORT = "GetBucketsService";
-    public final static String SERVICE_NAME = "io.storj.mobile.storjlibmodule.services.GetBucketsService";
+    public final static String SERVICE_NAME_SHORT = "FetchService";
+    public final static String SERVICE_NAME = "io.storj.mobile.storjlibmodule.services.FetchService";
 
     private final static String EVENT_BUCKETS_UPDATED = "EVENT_BUCKETS_UPDATED";
     private final static String EVENT_FILES_UPDATED = "EVENT_FILES_UPDATED";
@@ -53,7 +53,7 @@ public class GetBucketsService extends BaseReactService {
 
     public SQLiteDatabase getDb() {
         if(_dbFactory == null) {
-            _dbFactory = new DatabaseFactory(GetBucketsService.this, null);
+            _dbFactory = new DatabaseFactory(FetchService.this, null);
         }
 
         return _dbFactory.getWritableDatabase();
@@ -69,8 +69,8 @@ public class GetBucketsService extends BaseReactService {
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
      */
-    public GetBucketsService() {
-        super("GetBucketsService");
+    public FetchService() {
+        super("FetchService");
     }
 
     private static final String TAG = "INTENT GET BUCKETS";

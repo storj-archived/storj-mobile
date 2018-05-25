@@ -22,10 +22,6 @@ const ServiceModule = (() => {
             return await serviceModule.bindGetBucketsService();
         }
 
-        async bindUploadService() {
-            return await serviceModule.bindUploadService();
-        }
-
         async bindDownloadService() {
             return await serviceModule.bindDownloadService();
         }
@@ -64,10 +60,6 @@ const ServiceModule = (() => {
 
         cancelSync() {
             serviceModule.cancelSync();
-        }
-
-        test() {
-            serviceModule.test();
         }
 
         async createBucket(bucketName) {

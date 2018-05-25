@@ -81,8 +81,8 @@ public class DownloadService extends BaseReactService {
     private void uploadFile(String bucketId, String localPath) {
         Intent uploadIntent = new Intent(this, UploadService.class);
         uploadIntent.setAction(UploadService.ACTION_UPLOAD_FILE);
-        uploadIntent.putExtra(UploadService.PARAMS_BUCKET_ID, bucketId);
-        uploadIntent.putExtra(UploadService.PARAMS_URI, localPath);
+        uploadIntent.putExtra(UploadService.PARAM_BUCKET_ID, bucketId);
+        uploadIntent.putExtra(UploadService.PARAM_LOCAL_PATH, localPath);
 
         this.startService(uploadIntent);
     }

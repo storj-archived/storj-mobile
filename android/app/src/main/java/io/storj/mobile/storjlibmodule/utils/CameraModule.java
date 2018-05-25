@@ -123,9 +123,8 @@ public class CameraModule extends ReactContextBaseJavaModule implements Activity
     private void startUpload(String bucketId, String uri) {
         Intent uploadIntent = new Intent(mReactContext, UploadService.class);
         uploadIntent.setAction(UploadService.ACTION_UPLOAD_FILE);
-        uploadIntent.putExtra(UploadService.PARAMS_BUCKET_ID, bucketId);
-        uploadIntent.putExtra(UploadService.PARAMS_URI, uri);
-        uploadIntent.putExtra(FileContract._SYNCED, false);
+        uploadIntent.putExtra(UploadService.PARAM_BUCKET_ID, bucketId);
+        uploadIntent.putExtra(UploadService.PARAM_LOCAL_PATH, uri);
 
         mReactContext.startService(uploadIntent);
     }

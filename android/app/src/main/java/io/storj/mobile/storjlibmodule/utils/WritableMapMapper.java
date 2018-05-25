@@ -1,14 +1,13 @@
 package io.storj.mobile.storjlibmodule.utils;
 
 import android.content.ContentValues;
-import android.widget.Switch;
 
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 
 import io.storj.mobile.storjlibmodule.dataprovider.contracts.FileContract;
 import io.storj.mobile.storjlibmodule.dataprovider.contracts.UploadingFileContract;
-import io.storj.mobile.storjlibmodule.services.UploadService2;
+import io.storj.mobile.storjlibmodule.services.UploadService;
 
 public class WritableMapMapper {
 
@@ -28,11 +27,11 @@ public class WritableMapMapper {
                     map.putDouble(key, values.getAsDouble(key));
                     break;
                 case FileContract._FILE_ID:
-                case UploadService2.UploadEventEmitter.ERROR_MESSAGE:
+                case UploadService.UploadEventEmitter.ERROR_MESSAGE:
                     map.putString(key, values.getAsString(key));
                     break;
-                case UploadService2.UploadEventEmitter.ERROR_CODE:
-                case UploadService2.PARAM_SYNC_ENTRY_ID:
+                case UploadService.UploadEventEmitter.ERROR_CODE:
+                case UploadService.PARAM_SYNC_ENTRY_ID:
                     map.putInt(key, values.getAsInteger(key));
                     break;
             }

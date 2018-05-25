@@ -1,7 +1,6 @@
 package io.storj.mobile.storjlibmodule.services;
 
 import android.app.IntentService;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -108,8 +107,8 @@ public class SynchronizationService extends IntentService {
     }
 
     private void cancelSync(Intent intent) {
-        Intent cancelSyncIntent = new Intent(this, UploadService2.class);
-        cancelSyncIntent.setAction(UploadService2.ACTION_CANCEL_SYNC);
+        Intent cancelSyncIntent = new Intent(this, UploadService.class);
+        cancelSyncIntent.setAction(UploadService.ACTION_CANCEL_SYNC);
 
         this.startService(cancelSyncIntent);
 
@@ -140,12 +139,12 @@ public class SynchronizationService extends IntentService {
     }
 
     private void syncFile(String fileName, String localPath, String bucketId, int syncEntryId) {
-        Intent syncFileIntent = new Intent(this, UploadService2.class);
-        syncFileIntent.setAction(UploadService2.ACTION_SYNC_FILE);
-        syncFileIntent.putExtra(UploadService2.PARAM_FILE_NAME, fileName);
-        syncFileIntent.putExtra(UploadService2.PARAM_LOCAL_PATH, localPath);
-        syncFileIntent.putExtra(UploadService2.PARAM_BUCKET_ID, bucketId);
-        syncFileIntent.putExtra(UploadService2.PARAM_SYNC_ENTRY_ID, syncEntryId);
+        Intent syncFileIntent = new Intent(this, UploadService.class);
+        syncFileIntent.setAction(UploadService.ACTION_SYNC_FILE);
+        syncFileIntent.putExtra(UploadService.PARAM_FILE_NAME, fileName);
+        syncFileIntent.putExtra(UploadService.PARAM_LOCAL_PATH, localPath);
+        syncFileIntent.putExtra(UploadService.PARAM_BUCKET_ID, bucketId);
+        syncFileIntent.putExtra(UploadService.PARAM_SYNC_ENTRY_ID, syncEntryId);
 
         this.startService(syncFileIntent);
     }
@@ -155,15 +154,15 @@ public class SynchronizationService extends IntentService {
             return;
         }
 
-        Intent syncFileIntent = new Intent(this, UploadService2.class);
-        syncFileIntent.setAction(UploadService2.ACTION_CANCEL_UPLOAD);
-        syncFileIntent.putExtra(UploadService2.PARAM_FILE_HANDLE, fileHandle);
+        Intent syncFileIntent = new Intent(this, UploadService.class);
+        syncFileIntent.setAction(UploadService.ACTION_CANCEL_UPLOAD);
+        syncFileIntent.putExtra(UploadService.PARAM_FILE_HANDLE, fileHandle);
 
         this.startService(syncFileIntent);
     }
 
     private void removeFileFromQueue(Intent intent) {
-        int syncEntryId = intent.getIntExtra(UploadService2.PARAM_SYNC_ENTRY_ID, -1);
+        int syncEntryId = intent.getIntExtra(UploadService.PARAM_SYNC_ENTRY_ID, -1);
 
         if(syncEntryId == -1) {
             return;
@@ -183,9 +182,9 @@ public class SynchronizationService extends IntentService {
             Response response = syncRepo.update(dbo.toModel());
 
             if(response.isSuccess()) {
-                Intent removeFromSyncQueueIntent = new Intent(this, UploadService2.class);
-                removeFromSyncQueueIntent.setAction(UploadService2.ACTION_REMOVE_FROM_SYNC_QUEUE);
-                removeFromSyncQueueIntent.putExtra(UploadService2.PARAM_SYNC_ENTRY_ID, syncEntryId);
+                Intent removeFromSyncQueueIntent = new Intent(this, UploadService.class);
+                removeFromSyncQueueIntent.setAction(UploadService.ACTION_REMOVE_FROM_SYNC_QUEUE);
+                removeFromSyncQueueIntent.putExtra(UploadService.PARAM_SYNC_ENTRY_ID, syncEntryId);
 
                 this.startService(removeFromSyncQueueIntent);
                 mEventEmitter.SyncEntryUpdated(model.getId());

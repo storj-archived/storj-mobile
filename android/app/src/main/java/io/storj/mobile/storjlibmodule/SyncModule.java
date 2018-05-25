@@ -52,7 +52,6 @@ import io.storj.mobile.storjlibmodule.dataprovider.repositories.SettingsReposito
 import io.storj.mobile.storjlibmodule.dataprovider.repositories.UploadingFilesRepository;
 import io.storj.mobile.storjlibmodule.services.SynchronizationSchedulerJobService;
 import io.storj.mobile.storjlibmodule.services.SynchronizationService;
-import io.storj.mobile.storjlibmodule.services.UploadService2;
 
 /**
  * Created by Yaroslav-Note on 3/9/2018.

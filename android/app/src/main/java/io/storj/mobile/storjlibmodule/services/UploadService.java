@@ -1,359 +1,481 @@
 package io.storj.mobile.storjlibmodule.services;
 
+import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.BatteryManager;
-import android.os.Build;
-import android.os.Process;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.WritableNativeMap;
-
 import io.storj.libstorj.File;
-import io.storj.libstorj.UploadFileCallback;
-import io.storj.libstorj.android.StorjAndroid;
-import io.storj.mobile.storjlibmodule.dataprovider.dbo.SettingsDbo;
-import io.storj.mobile.storjlibmodule.dataprovider.repositories.SettingsRepository;
+import io.storj.mobile.storjlibmodule.dataprovider.DatabaseFactory;
+import io.storj.mobile.storjlibmodule.dataprovider.contracts.FileContract;
+import io.storj.mobile.storjlibmodule.dataprovider.contracts.SynchronizationQueueContract;
+import io.storj.mobile.storjlibmodule.dataprovider.contracts.UploadingFileContract;
+import io.storj.mobile.storjlibmodule.dataprovider.dbo.SyncQueueEntryDbo;
+import io.storj.mobile.storjlibmodule.dataprovider.dbo.UploadingFileDbo;
+import io.storj.mobile.storjlibmodule.dataprovider.repositories.FileRepository;
+import io.storj.mobile.storjlibmodule.dataprovider.repositories.SyncQueueRepository;
+import io.storj.mobile.storjlibmodule.dataprovider.repositories.UploadingFilesRepository;
 import io.storj.mobile.storjlibmodule.enums.DownloadStateEnum;
-import io.storj.mobile.storjlibmodule.enums.SyncSettingsEnum;
+import io.storj.mobile.storjlibmodule.enums.SyncStateEnum;
 import io.storj.mobile.storjlibmodule.models.FileModel;
-import io.storj.mobile.storjlibmodule.models.SettingsModel;
+import io.storj.mobile.storjlibmodule.models.SyncQueueEntryModel;
 import io.storj.mobile.storjlibmodule.models.UploadingFileModel;
 import io.storj.mobile.storjlibmodule.responses.Response;
 import io.storj.mobile.storjlibmodule.responses.SingleResponse;
+import io.storj.mobile.storjlibmodule.services.eventemitters.BaseEventEmitter;
+import io.storj.mobile.storjlibmodule.services.eventemitters.SynchronizationEventEmitter;
 import io.storj.mobile.storjlibmodule.utils.ProgressResolver;
 import io.storj.mobile.storjlibmodule.utils.ThumbnailProcessor;
-import io.storj.mobile.storjlibmodule.utils.UploadSyncObject;
-import io.storj.mobile.storjlibmodule.dataprovider.DatabaseFactory;
-import io.storj.mobile.storjlibmodule.dataprovider.dbo.UploadingFileDbo;
-import io.storj.mobile.storjlibmodule.dataprovider.contracts.FileContract;
-import io.storj.mobile.storjlibmodule.dataprovider.contracts.SettingsContract;
-import io.storj.mobile.storjlibmodule.dataprovider.contracts.UploadingFileContract;
-import io.storj.mobile.storjlibmodule.dataprovider.repositories.FileRepository;
-import io.storj.mobile.storjlibmodule.dataprovider.repositories.UploadingFilesRepository;
+import io.storj.mobile.storjlibmodule.utils.Uploader;
 
-/**
- * Created by Yaroslav-Note on 3/7/2018.
- */
+public class UploadService extends Service {
+    private String mServiceName;
 
-public final class UploadService extends BaseReactService {
-
-    public final static String SERVICE_NAME_SHORT = "UploadService";
-    public final static String SERVICE_NAME = "io.storj.mobile.storjlibmodule.services.UploadService";
-
-    public final static String ACTION_UPLOAD_FILE = "UPLOAD_FILE";
-    public final static String ACTION_UPLOAD_FILE_CANCEL = "UPLOAD_FILE_CANCEL";
-
-    public final static String EVENT_FILE_UPLOAD_START = "EVENT_FILE_UPLOAD_START";
-    public final static String EVENT_FILE_UPLOADED_PROGRESS = "EVENT_FILE_UPLOADED_PROGRESS";
-    public final static String EVENT_FILE_UPLOADED_SUCCESSFULLY = "EVENT_FILE_UPLOADED_SUCCESSFULLY";
-    public final static String EVENT_FILE_UPLOAD_ERROR = "EVENT_FILE_UPLOAD_ERROR";
-
-    public final static String PARAMS_BUCKET_ID = "bucketId";
-    public final static String PARAMS_URI = "uri";
-    public final static String PARAMS_FILE_HANDLE = "fileHandle";
-
-    public final static int UPLOAD_CANCEL_REQUEST_CODE = 223132;
-
-    private volatile boolean mCancelationToken = false;
-
-    private final NotificationService mNotificationService = new NotificationService();
+    private Handler mWorkerThreadHandler;
+    private Handler mSyncThreadHandler;
+    private Handler mCancelThreadHandler;
+    private BroadcastReceiver mBroadcastReceiver;
 
     public UploadService() {
-        super("UploadService");
+        mServiceName = "UploadService";
+        mBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                ConnectivityManager connectivityManager =
+                        (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
+
+                if (activeNetInfo != null && activeNetInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+                    //WIFI ON
+                } else {
+                    //WIFI OFF
+                }
+            }
+        };
+    }
+
+    private final static String TAG = "UPLOAD_SERVICE_2_DEBUG";
+
+    public final static String ACTION_UPLOAD_FILE = "ACTION_UPLOAD_FILE";
+    public final static String ACTION_SYNC_FILE = "ACTION_SYNC_FILE";
+    public final static String ACTION_CANCEL_UPLOAD = "ACTION_CANCEL_UPLOAD";
+    public final static String ACTION_REMOVE_FROM_SYNC_QUEUE = "ACTION_REMOVE_FROM_SYNC_QUEUE";
+    public final static String ACTION_CANCEL_SYNC = "ACTION_CANCEL_SYNC";
+
+    public final static String PARAM_BUCKET_ID = "bucketId";
+    public final static String PARAM_FILE_NAME = "fileName";
+    public final static String PARAM_LOCAL_PATH = "localPath";
+    public final static String PARAM_SYNC_ENTRY_ID = "syncEntryId";
+    public final static String PARAM_FILE_HANDLE = "fileHandle";
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 
     @Override
-    protected void onHandleIntent(@Nullable Intent intent) {
-        Log.d("UPLOAD DEBUG", "onHandleIntent: START");
+    public void onCreate() {
+        Log.d(TAG, "onCreate: " + mServiceName);
+        IntentFilter filters = new IntentFilter();
+        filters.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        this.registerReceiver(mBroadcastReceiver, filters);
+
+        HandlerThread workerThread = new HandlerThread("UploadWorkerThread", android.os.Process.THREAD_PRIORITY_BACKGROUND);
+        HandlerThread syncThread = new HandlerThread("UploadSyncThread", android.os.Process.THREAD_PRIORITY_BACKGROUND);
+        HandlerThread cancelThread = new HandlerThread("UploadCancelThread", android.os.Process.THREAD_PRIORITY_BACKGROUND);
+
+        workerThread.start();
+        syncThread.start();
+        cancelThread.start();
+
+        mWorkerThreadHandler = new WorkerHandler(workerThread.getLooper());
+        mSyncThreadHandler = new SyncHandler(syncThread.getLooper());
+        mCancelThreadHandler = new CancelHandler(cancelThread.getLooper());
+    }
+
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d(TAG, "onStartCommand: " + mServiceName);
+
         if(intent == null) {
+            return Service.START_NOT_STICKY;
+        }
+
+        switch(intent.getAction()) {
+            case ACTION_UPLOAD_FILE:
+                processIntent(intent, startId, mWorkerThreadHandler);
+                break;
+            case ACTION_SYNC_FILE:
+                processIntent(intent, intent.getIntExtra(PARAM_SYNC_ENTRY_ID, -1), mSyncThreadHandler);
+                break;
+            case ACTION_CANCEL_UPLOAD:
+                processIntent(intent, startId, mCancelThreadHandler);
+                break;
+            case ACTION_REMOVE_FROM_SYNC_QUEUE:
+                removeFromSyncQueue(intent.getIntExtra(PARAM_SYNC_ENTRY_ID, -1));
+                break;
+            case ACTION_CANCEL_SYNC:
+                mSyncThreadHandler.removeCallbacksAndMessages(null);
+                break;
+        }
+
+        return Service.START_NOT_STICKY;
+    }
+
+    private Intent getSynchronizationIntent(String action) {
+        return new Intent(this, SynchronizationService.class).setAction(action);
+    }
+
+    private void removeFromSyncQueue(int id) {
+        if(mSyncThreadHandler.hasMessages(id)) {
+            mSyncThreadHandler.removeMessages(id);
+        }
+    }
+
+    private void processIntent(Intent intent, int id, Handler handler) {
+        if(id == -1 || handler.hasMessages(id)) {
             return;
         }
 
-        String action = intent.getAction();
-
-        switch(action) {
-            case ACTION_UPLOAD_FILE:
-                boolean isSync = intent.getBooleanExtra(FileContract._SYNCED, false);
-                //int syncSettings = intent.getIntExtra(SettingsContract._SYNC_SETTINGS, 0);
-                String settingsId = intent.getStringExtra(SettingsContract._SETTINGS_ID);
-
-                SQLiteDatabase db = new DatabaseFactory(this, null).getWritableDatabase();
-                SettingsRepository settingsRepo = new SettingsRepository(db);
-                SettingsDbo settingsDbo = settingsRepo.get(settingsId);
-                int syncSettings = 0;
-                boolean isSyncOn = isSync;
-
-                if(settingsDbo != null) {
-                    SettingsModel settingsModel = settingsDbo.toModel();
-                    syncSettings = settingsModel.getSyncSettings();
-                    isSyncOn = settingsModel.syncStatus();
-                }
-
-                boolean onWifi = (syncSettings & SyncSettingsEnum.ON_WIFI.getValue()) == SyncSettingsEnum.ON_WIFI.getValue();
-                boolean onCharging = (syncSettings & SyncSettingsEnum.ON_CHARGING.getValue()) == SyncSettingsEnum.ON_CHARGING.getValue();;
-
-                if(!checkConstraints(isSync, onWifi, onCharging, isSyncOn)) {
-                    return;
-                }
-
-                uploadFile(intent.getStringExtra(PARAMS_BUCKET_ID),
-                        intent.getStringExtra(PARAMS_URI), isSync);
-                break;
-            case ACTION_UPLOAD_FILE_CANCEL:
-                long fileHandle = intent.getLongExtra(PARAMS_FILE_HANDLE, -1);
-                Log.d("UPLOAD DEBUG", "File upload cancel action: " + Thread.currentThread().getId() + ". Handle: " + fileHandle);
-                uploadFileCancel(fileHandle);
-                break;
-        }
-        Log.d("UPLOAD DEBUG", "onHandleIntent: END, " + intent.getStringExtra(PARAMS_URI));
+        Message msg = handler.obtainMessage(id);
+        msg.setData(intent.getExtras());
+        msg.sendToTarget();
     }
 
-    private boolean checkConstraints(boolean isSync, boolean onWifi, boolean onCharging, boolean isSyncOn) {
-        if(!isSync) {
+    public class BaseUploaderCallback implements Uploader.Callback {
+        private SQLiteDatabase mDb;
+        private UploadingFilesRepository mUploadingRepo;
+        private ProgressResolver mProgressResolver;
+        private UploadingFileDbo mDbo;
+        private final Object lock = new Object();
+
+        public BaseUploaderCallback(SQLiteDatabase db) {
+            mDb = db;
+            mUploadingRepo = new UploadingFilesRepository(db);
+            mProgressResolver = new ProgressResolver();
+        }
+
+        @Override
+        public void onStart(long fileHandle, String bucketId, String fileName, String localPath) {
+            synchronized (lock) {
+                mDbo = new UploadingFileDbo(fileHandle, fileName, localPath, bucketId);
+            }
+
+            Response response = mUploadingRepo.insert(new UploadingFileModel(mDbo));
+        }
+
+        @Override
+        public boolean onProgress(String localPath, double progress, long uploadedBytes, long totalBytes) {
+            synchronized (lock) {
+                if(mDbo == null || !mDbo.isIdSet()) {
+                    return false;
+                }
+            }
+
+            synchronized (mProgressResolver) {
+                mProgressResolver.setMProgress(progress);
+
+                if(mProgressResolver.getMProgress() != progress) {
+                    return false;
+                }
+
+                mDbo.setProp(UploadingFileContract._PROGRESS, mProgressResolver.getMProgress());
+                mDbo.setProp(UploadingFileContract._UPLOADED, uploadedBytes);
+                mDbo.setProp(UploadingFileContract._SIZE, totalBytes);
+            }
+
+            Response response = mUploadingRepo.update(new UploadingFileModel(mDbo));
             return true;
         }
 
-        if(!isSyncOn) {
-            Log.d("UPLOAD DEBUG", "ABORTING SYNC file uploading due to failing of SYNC_STATUS constraint");
-            return false;
+        @Override
+        public void onComplete(String localPath, File file) {
+            Response response = mUploadingRepo.delete(mDbo.getId());
         }
 
-        ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-
-        if(onWifi && !mWifi.isConnected()) {
-            Log.d("UPLOAD DEBUG", "ABORTING SYNC file uploading due to failing of ON_WIFI constraint");
-            return false;
-        }
-
-        if(onCharging && !isCharging(this)) {
-            Log.d("UPLOAD DEBUG", "ABORTING SYNC file uploading due to failing of ON_CHARGING constraint");
-            return false;
-        }
-
-        return true;
-    }
-
-    private void uploadFileCancel(long fileHandle) {
-        if(fileHandle == -1) {
-            return;
-        }
-
-        StorjAndroid.getInstance(this).cancelUpload(fileHandle);
-    }
-
-    private void uploadFile(String bucketId, final String uri, final boolean isSynced) {
-        Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
-        //Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
-
-        java.io.File file = new java.io.File(uri);
-
-        if(bucketId == null || !file.exists()) {
-            return;
-        }
-
-        final SQLiteDatabase db = new DatabaseFactory(UploadService.this, null).getWritableDatabase();
-        final UploadingFilesRepository repo = new UploadingFilesRepository(db);
-
-        final UploadingFileDbo dbo = new UploadingFileDbo(0, 0, file.getTotalSpace(), 0, file.getName(), uri, bucketId);
-
-        if(dbo == null) {
-            return;
-        }
-
-        final UploadSyncObject syncObj = new UploadSyncObject();
-        final ProgressResolver progressResolver = new ProgressResolver();
-
-        mNotificationService.init(this);
-
-        Log.d("HANDLER DEBUG", "File upload call: " + Thread.currentThread().getId() + " , name: " + Thread.currentThread().getName() + ". Uri: " + uri);
-        final long fileHandle = StorjAndroid.getInstance(getApplicationContext()).uploadFile(bucketId, uri, new UploadFileCallback() {
-            @Override
-            public void onProgress(String filePath, double progress, long uploadedBytes, long totalBytes) {
-                if(Process.getThreadPriority(0) != Process.THREAD_PRIORITY_BACKGROUND)
-                    Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
-
-                synchronized (dbo) {
-                    try {
-                        Thread threadName = Thread.currentThread();
-                        if(!dbo.isIdSet())
-                            dbo.wait();
-                    } catch (Exception e) {
-                        return;
-                    }
-                }
-
-                double _progress;
-
-                synchronized (progressResolver) {
-                    progressResolver.setMProgress(progress);
-                    _progress = progressResolver.getMProgress();
-
-                    if(_progress != progress) {
-                        return;
-                    }
-                }
-
-                Log.d("UPLOAD DEBUG", "File upload progress: " + Thread.currentThread().getId() + " , name: " + Thread.currentThread().getName() + ". Progress: " + progress);
-
-                dbo.setProp(UploadingFileContract._PROGRESS, _progress);
-                dbo.setProp(UploadingFileContract._UPLOADED, uploadedBytes);
-
-                UploadingFileModel model = new UploadingFileModel(dbo);
-                Response updateResponse = repo.update(model);
-
-                WritableMap map = new WritableNativeMap();
-                map.putDouble(UploadingFileContract._FILE_HANDLE, dbo.getId());
-                map.putDouble(UploadingFileContract._PROGRESS, _progress);
-                map.putDouble(UploadingFileContract._UPLOADED, uploadedBytes);
-
-                sendEvent(EVENT_FILE_UPLOADED_PROGRESS, map);
-
-                /*Intent cancelIntent = new Intent(UploadService.this, UploadService.class);
-                cancelIntent.setAction(ACTION_UPLOAD_FILE_CANCEL);
-                cancelIntent.putExtra("fileHandle", dbo.getId());
-
-                PendingIntent cancelIntentPending = PendingIntent.getService(UploadService.this, (int)dbo.getId(), cancelIntent,PendingIntent.FLAG_UPDATE_CURRENT);
-
-                final NotificationCompat.Action cancelUploadAction = new NotificationCompat.Action(R.mipmap.ic_launcher, "Cancel", cancelIntentPending);*/
-
-                mNotificationService.notify((int)dbo.getId(), "Uploading " + dbo.getName(), (int)(_progress * 10000), 10000/*, cancelUploadAction*/);
-            }
-
-            @Override
-            public void onComplete(String filePath, File file) {
-                Log.d("UPLOAD DEBUG", "File upload completed: " + Thread.currentThread().getId());
-
-                FileRepository fileRepo = new FileRepository(db);
-                ThumbnailProcessor tProc = new ThumbnailProcessor(fileRepo);
-
-                String thumbnail = null;
-
-                if(file.getMimeType().contains("image/")) {
-                    SingleResponse resp = tProc.getThumbbnail(uri);
-
-                    if(resp.isSuccess()) thumbnail = resp.getResult();
-                }
-
-                FileModel model = new FileModel(file,
-                        false,
-                        isSynced,
-                        DownloadStateEnum.DOWNLOADED.getValue(),
-                        0,
-                        uri,
-                        thumbnail);
-
-                long fileHandle = dbo.getId();
-
-                Response deleteResponse = repo.delete(fileHandle);
-                Response insertResponse = fileRepo.insert(model);
-                db.close();
-
-                if(deleteResponse.isSuccess() && insertResponse.isSuccess()) {
-                    WritableMap map = new WritableNativeMap();
-                    map.putDouble(UploadingFileContract._FILE_HANDLE, fileHandle);
-                    map.putString(FileContract._FILE_ID, model.getFileId());
-
-                    sendEvent(EVENT_FILE_UPLOADED_SUCCESSFULLY, map);
-                    mNotificationService.notify((int)dbo.getId(), file.getName() + " uploaded succesfully", 0, 0/*, null*/);
-                } else {
-                    Log.d("UPLOAD DEBUG", "uploaded succesfully: " + Thread.currentThread().getId() +
-                            ". COULDN'T DELETE ENTRY, ERROR DELETE: " +
-                            deleteResponse.getError().getMessage() +
-                            ". ERROR INSERT: " +
-                            insertResponse.getError().getMessage());
-                }
-
-                synchronized (syncObj) {
-                    syncObj.setJobFinished();
-                }
-            }
-
-            @Override
-            public void onError(String filePath, int code, String message) {
-                Log.d("UPLOAD DEBUG", "File upload error: " + Thread.currentThread().getId() + ". Error: " + message);
-
-                Response deleteResponse = repo.delete(dbo.getId());
-                db.close();
-
-                if(deleteResponse.isSuccess()) {
-                    WritableMap map = new WritableNativeMap();
-
-                    map.putString("errorMessage", message);
-                    map.putInt("errorCode", code);
-                    map.putDouble(UploadingFileContract._FILE_HANDLE, dbo.getId());
-
-                    sendEvent(EVENT_FILE_UPLOAD_ERROR, map);
-                    mNotificationService.notify((int)dbo.getId(), message, 0, 0/*, null*/);
-                } else {
-                    Log.d("UPLOAD DEBUG", "File upload error: " + Thread.currentThread().getId() +
-                            ". COULDN'T DELETE UPLOADDING FILE ENTRY, ERROR: " +
-                            deleteResponse.getError().getMessage());
-                }
-
-                synchronized (syncObj) {
-                    syncObj.setJobFinished();
-                }
-            }
-        });
-
-        synchronized (dbo) {
-            long threadName = Thread.currentThread().getId();
-            dbo.setProp("_id", fileHandle);
-
-            UploadingFileModel model = new UploadingFileModel(dbo);
-            Response insertResponse = repo.insert(model);
-
-            if(insertResponse.isSuccess()) {
-                WritableMap map = Arguments.createMap();
-                //map.putString("fileHandle", String.valueOf(dbo.getId()));
-                map.putDouble("fileHandle", dbo.getId());
-
-                sendEvent(EVENT_FILE_UPLOAD_START, map);
-            }
-
-            dbo.notifyAll();
-        }
-
-        synchronized (syncObj) {
-            syncObj.isJobFinished();
+        @Override
+        public void onError(String localPath, int code, String message) {
+            Response response = mUploadingRepo.delete(mDbo.getId());
         }
     }
 
-    private boolean isCharging(Context context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            BatteryManager batteryManager = (BatteryManager) context.getSystemService(Context.BATTERY_SERVICE);
-            return batteryManager.isCharging();
-        } else {
-            IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-            Intent intent = context.registerReceiver(null, filter);
-            int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+    public class UploadEventEmitter extends BaseEventEmitter implements Uploader.Callback {
+        protected long mFileHandle;
 
-            if (status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL) {
-                return true;
+        public final static String EVENT_FILE_UPLOAD_START = "EVENT_FILE_UPLOAD_START";
+        public final static String EVENT_FILE_UPLOADED_PROGRESS = "EVENT_FILE_UPLOADED_PROGRESS";
+        public final static String EVENT_FILE_UPLOADED_SUCCESSFULLY = "EVENT_FILE_UPLOADED_SUCCESSFULLY";
+        public final static String EVENT_FILE_UPLOAD_ERROR = "EVENT_FILE_UPLOAD_ERROR";
+
+        public final static String ERROR_MESSAGE = "errorMessage";
+        public final static String ERROR_CODE = "errorCode";
+
+        public UploadEventEmitter() {
+            super(null);
+        }
+
+        public UploadEventEmitter(Context context) {
+            super(context);
+        }
+
+        @Override
+        public void onStart(long fileHandle, String bucketId, String fileName, String localPath) {
+            ContentValues map = new ContentValues();
+            map.put(UploadingFileContract._FILE_HANDLE, fileHandle);
+
+            mFileHandle = fileHandle;
+
+            Emit(EVENT_FILE_UPLOAD_START, map);
+        }
+
+        @Override
+        public boolean onProgress(String localPath, double progress, long uploadedBytes, long totalBytes) {
+            ContentValues map = new ContentValues();
+            map.put(UploadingFileContract._FILE_HANDLE, mFileHandle);
+            map.put(UploadingFileContract._PROGRESS, progress);
+            map.put(UploadingFileContract._UPLOADED, uploadedBytes);
+
+            Emit(EVENT_FILE_UPLOADED_PROGRESS, map);
+            return true;
+        }
+
+        @Override
+        public void onComplete(String localPath, File file) {
+            ContentValues map = new ContentValues();
+            map.put(UploadingFileContract._FILE_HANDLE, mFileHandle);
+            map.put(FileContract._FILE_ID, file.getId());
+
+            Emit(EVENT_FILE_UPLOADED_SUCCESSFULLY, map);
+        }
+
+        @Override
+        public void onError(String localPath, int code, String message) {
+            ContentValues map = new ContentValues();
+
+            map.put(ERROR_MESSAGE, message);
+            map.put(ERROR_CODE, code);
+            map.put(UploadingFileContract._FILE_HANDLE, mFileHandle);
+
+            Emit(EVENT_FILE_UPLOAD_ERROR, map);
+        }
+    }
+
+    public class WorkerUploaderCallback extends BaseUploaderCallback {
+        private FileRepository mFileRepo;
+        protected Uploader.Callback mEventEmitter;
+        protected boolean mIsSync;
+
+        public WorkerUploaderCallback(SQLiteDatabase db, Uploader.Callback eventEmitter, boolean isSync) {
+            super(db);
+            mFileRepo = new FileRepository(db);
+            mEventEmitter = eventEmitter;
+            mIsSync = isSync;
+
+            if(eventEmitter == null) {
+                mEventEmitter = new UploadEventEmitter();
             }
         }
-        return false;
+
+        @Override
+        public void onStart(long fileHandle, String bucketId, String fileName, String localPath) {
+            super.onStart(fileHandle, bucketId, fileName, localPath);
+            mEventEmitter.onStart(fileHandle, bucketId, fileName, localPath);
+        }
+
+        @Override
+        public boolean onProgress(String localPath, double progress, long uploadedBytes, long totalBytes) {
+            boolean result = super.onProgress(localPath, progress, uploadedBytes, totalBytes);
+
+            if(result) {
+                mEventEmitter.onProgress(localPath, progress, uploadedBytes, totalBytes);
+            }
+
+            return result;
+        }
+
+        @Override
+        public void onComplete(String localPath, File file) {
+            super.onComplete(localPath, file);
+
+            ThumbnailProcessor tProc = new ThumbnailProcessor(mFileRepo);
+            String thumbnail = null;
+
+            if(file.getMimeType().contains("image/")) {
+                SingleResponse resp = tProc.getThumbbnail(localPath);
+
+                if(resp.isSuccess())
+                    thumbnail = resp.getResult();
+            }
+
+            FileModel fileModel = new FileModel(
+                    file,
+                    mIsSync,
+                    DownloadStateEnum.DOWNLOADED.getValue(),
+                    localPath,
+                    thumbnail);
+
+            Response response = mFileRepo.insert(fileModel);
+            mEventEmitter.onComplete(localPath, file);
+        }
+
+        @Override
+        public void onError(String localPath, int code, String message) {
+            super.onError(localPath, code, message);
+            mEventEmitter.onError(localPath, code, message);
+        }
     }
+
+    public class SyncUploaderCallback extends WorkerUploaderCallback {
+        private int mSyncEntryId;
+        private SyncQueueRepository mSyncRepo;
+        private SyncQueueEntryModel mSyncEntryModel;
+        private SynchronizationEventEmitter mSyncEventEmitter;
+
+        public SyncUploaderCallback(SQLiteDatabase db, Uploader.Callback eventEmitter, int syncEntryId) {
+            super(db, eventEmitter, true);
+            mSyncEntryId = syncEntryId;
+            mSyncRepo = new SyncQueueRepository(db);
+            mSyncEventEmitter = new SynchronizationEventEmitter((BaseEventEmitter)eventEmitter);
+        }
+
+        @Override
+        public void onStart(long fileHandle, String bucketId, String fileName, String localPath) {
+            super.onStart(fileHandle, bucketId, fileName, localPath);
+            mSyncEntryModel = mSyncRepo.get(mSyncEntryId);
+
+            SyncQueueEntryDbo syncEntryDbo = new SyncQueueEntryDbo(mSyncEntryModel);
+            syncEntryDbo.setProp(SynchronizationQueueContract._STATUS, SyncStateEnum.PROCESSING.getValue());
+            syncEntryDbo.setProp(SynchronizationQueueContract._FILE_HANDLE, fileHandle);
+
+            Response response = mSyncRepo.update(syncEntryDbo.toModel());
+
+            if(response.isSuccess()) {
+                mSyncEventEmitter.SyncEntryUpdated(mSyncEntryId);
+            }
+        }
+
+        @Override
+        public void onComplete(String localPath, File file) {
+            super.onComplete(localPath, file);
+
+            SyncQueueEntryDbo syncEntryDbo = new SyncQueueEntryDbo(mSyncEntryModel);
+            syncEntryDbo.setProp(SynchronizationQueueContract._STATUS, SyncStateEnum.PROCESSED.getValue());
+
+            Response response = mSyncRepo.update(syncEntryDbo.toModel());
+
+            if(response.isSuccess()) {
+                mSyncEventEmitter.SyncEntryUpdated(mSyncEntryId);
+            }
+        }
+
+        @Override
+        public void onError(String localPath, int code, String message) {
+            super.onError(localPath, code, message);
+
+            SyncQueueEntryDbo syncEntryDbo = new SyncQueueEntryDbo(mSyncEntryModel);
+            syncEntryDbo.setProp(SynchronizationQueueContract._STATUS, SyncStateEnum.ERROR.getValue());
+            syncEntryDbo.setProp(SynchronizationQueueContract._ERROR_CODE, code);
+
+            Response response = mSyncRepo.update(syncEntryDbo.toModel());
+
+            if(response.isSuccess()) {
+                mSyncEventEmitter.SyncEntryUpdated(mSyncEntryId);
+            }
+        }
+    }
+
+    public class SyncHandler extends Handler {
+        public SyncHandler(Looper looper) {
+            super(looper);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            Bundle data = msg.getData();
+            String fileName = data.getString(PARAM_FILE_NAME);
+            String localPath = data.getString(PARAM_LOCAL_PATH);
+            String bucketId = data.getString(PARAM_BUCKET_ID);
+            int syncEntryId = data.getInt(PARAM_SYNC_ENTRY_ID);
+
+            try(SQLiteDatabase db = new DatabaseFactory(UploadService.this, null).getWritableDatabase()) {
+                Uploader uploader = new Uploader(UploadService.this, new SyncUploaderCallback(db, new UploadEventEmitter(getApplicationContext()), syncEntryId));
+                uploader.uploadFile(bucketId, fileName, localPath);
+            } catch (Exception e) {
+                String message = e.getMessage();
+            }
+        }
+    }
+
+    public class WorkerHandler extends Handler {
+        public WorkerHandler(Looper looper) {
+            super(looper);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            Bundle data = msg.getData();
+            String fileName = data.getString(PARAM_FILE_NAME);
+            String localPath = data.getString(PARAM_LOCAL_PATH);
+            String bucketId = data.getString(PARAM_BUCKET_ID);
+
+            try(SQLiteDatabase db = new DatabaseFactory(UploadService.this, null).getWritableDatabase()) {
+                Uploader uploader = new Uploader(UploadService.this, new WorkerUploaderCallback(db, new UploadEventEmitter(getApplicationContext()), false));
+                uploader.uploadFile(bucketId, fileName, localPath);
+            } catch (Exception e) {
+                String message = e.getMessage();
+            }
+        }
+    }
+
+    public class CancelHandler extends Handler {
+        public CancelHandler(Looper looper) {
+            super(looper);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            Bundle data = msg.getData();
+            long fileHandle = data.getLong(PARAM_FILE_HANDLE);
+
+            try(SQLiteDatabase db = new DatabaseFactory(UploadService.this, null).getWritableDatabase()) {
+                UploadingFilesRepository uploadRepo = new UploadingFilesRepository(db);
+                UploadingFileModel model = uploadRepo.get(String.valueOf(fileHandle));
+
+                if(model != null) {
+                    Uploader uploader = new Uploader(UploadService.this, null);
+                    boolean result = uploader.cancelFileUpload(fileHandle);
+                }
+
+            } catch (Exception e) {
+                String message = e.getMessage();
+            }
+        }
+    }
+
+
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        try(SQLiteDatabase db = new DatabaseFactory(this, null).getWritableDatabase()) {
-            UploadingFilesRepository uploadRepo = new UploadingFilesRepository(db);
-            Response deleteAllResponse = uploadRepo.deleteAll();
-            Log.d("APPLICATION DEBUG", "onTaskRemoved: isSuccess " + deleteAllResponse.isSuccess());
-        } catch(Exception e) {
-            Log.d("APPLICATION DEBUG", "onTaskRemoved: error" + e.getMessage());
-        }
+        Log.d(TAG, "onTaskRemoved: " + mServiceName);
+        this.unregisterReceiver(mBroadcastReceiver);
+    }
 
-        super.onTaskRemoved(rootIntent);
+    @Override
+    public void onDestroy() {
+        Log.d(TAG, "onDestroy: " + mServiceName);
+        this.unregisterReceiver(mBroadcastReceiver);
     }
 }

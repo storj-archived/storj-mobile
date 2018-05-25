@@ -122,7 +122,6 @@ class Apps extends Component {
 
 		if(this.isAndroid) {
 			await ServiceModule.bindGetBucketsService();
-			await ServiceModule.bindUploadService();
 			await ServiceModule.bindDownloadService();
 		}
 	}

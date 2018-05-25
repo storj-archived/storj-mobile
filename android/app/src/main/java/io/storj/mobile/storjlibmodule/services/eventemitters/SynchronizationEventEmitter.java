@@ -3,7 +3,7 @@ package io.storj.mobile.storjlibmodule.services.eventemitters;
 import android.content.ContentValues;
 
 import io.storj.mobile.storjlibmodule.services.SynchronizationService;
-import io.storj.mobile.storjlibmodule.services.UploadService2;
+import io.storj.mobile.storjlibmodule.services.UploadService;
 
 public class SynchronizationEventEmitter {
     private BaseEventEmitter mEventEmitter;
@@ -18,7 +18,7 @@ public class SynchronizationEventEmitter {
 
     public void SyncEntryUpdated(int id) {
         ContentValues map = new ContentValues();
-        map.put(UploadService2.PARAM_SYNC_ENTRY_ID, id);
+        map.put(UploadService.PARAM_SYNC_ENTRY_ID, id);
 
         emit(SynchronizationService.EVENT_SYNC_ENTRY_UPDATED, map);
     }

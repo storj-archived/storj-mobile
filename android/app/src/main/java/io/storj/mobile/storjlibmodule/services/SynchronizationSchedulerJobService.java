@@ -148,7 +148,6 @@ public class SynchronizationSchedulerJobService extends JobService {
             SyncQueueEntryModel syncEntry = syncRepo.get(file.getPath(), bucketId);
 
             if(fileDbo == null && syncEntry == null) {
-                //uploadFile(bucketId, file.getPath(), settingsId, syncSettings);
                 syncFile(file.getName(), file.getPath(), bucketId, db);
             }
         }
@@ -159,19 +158,6 @@ public class SynchronizationSchedulerJobService extends JobService {
 
         SyncQueueEntryDbo dbo = new SyncQueueEntryDbo(fileName, localPath, bucketId);
         Response response = syncRepo.insert(dbo.toModel());
-    }
-
-    private void uploadFile(String bucketId, String uri, String settingsId, int syncSettings) {
-        Log.d(DEBUG_TAG, "sync: " + "sending new intent for " + uri);
-        Intent uploadIntent = new Intent(this, UploadService.class);
-        uploadIntent.setAction(UploadService.ACTION_UPLOAD_FILE);
-        uploadIntent.putExtra(UploadService.PARAMS_BUCKET_ID, bucketId);
-        uploadIntent.putExtra(UploadService.PARAMS_URI, uri);
-        uploadIntent.putExtra(FileContract._SYNCED, true);
-        uploadIntent.putExtra(SettingsContract._SYNC_SETTINGS, syncSettings);
-        uploadIntent.putExtra(SettingsContract._SETTINGS_ID, settingsId);
-
-        startService(uploadIntent);
     }
 
     private String getDateTime() {
