@@ -167,7 +167,7 @@ export default class MainComponent extends Component {
                         <AnimatedWindowComponent style = { styles.syncWindowContainer } interpolate = { this.props.interpolate }>
                             <SyncQueueListComponent 
                                 title = { this.props.getSyncEntryLoadingCount() + " files uploading" }
-                                touchableRightTitle = "Cancell sync"
+                                touchableRightTitle = "Cancel sync"
                                 onCancelPress = { this.props.hideSyncWindow }
                                 data = { this.props.syncQueueEntries }
                                 renderItem = { this.props.renderSyncQueueEntry }  

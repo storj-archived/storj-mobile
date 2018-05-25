@@ -4,6 +4,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     StatusBar,
+    ScrollView,
     Image
 } from 'react-native';
 import React, { Component } from 'react';
@@ -30,6 +31,10 @@ export default class MyAccountMainPageComponent extends Component{
     render() {        
         return(
             <View style = { styles.mainContainer }>
+                <ScrollView 
+                    showsVerticalScrollIndicator = { false } 
+                    decelerationRate = { 'normal' } 
+                    style = { styles.scrollContainer } >
                 <View style = { styles.contentContainer }>
                     <View style = { styles.titleContainer }>
                         <Text style = { styles.titleText }>My account</Text>
@@ -71,48 +76,49 @@ export default class MyAccountMainPageComponent extends Component{
                             </View>
                         </View>
                     </TouchableOpacity>
-                    <View style = { styles.optionsMargin } >
-                        {
-                            <OptionsComponent 
-                                title = { 'Secret phrase' }
-                                imageSource = { require('../../images/MyAccount/SecretPhrase.png') }
-                                onPress = { this.props.screenProps.redirectToMyAccountMnemonicScreen } />
-                        }
-                        <View style = { styles.underline } />
-                        {
-                            <OptionsComponent 
-                                title = { 'Settings' }
-                                imageSource = { require('../../images/MyAccount/Settings.png') }
-                                onPress = { this.props.screenProps.redirectToSettingsScreen } />
-                        }
-                        <View style = { styles.underline } />
-                        {
-                            <OptionsComponent 
-                                title = { 'Help' }
-                                imageSource = { require('../../images/MyAccount/Help.png') }
-                                onPress = { this.props.screenProps.redirectToHelpPage } />
-                        }
-                        <View style = { styles.underline } />
-                        {
-                            <OptionsComponent 
-                                title = { 'About' }
-                                imageSource = { require('../../images/MyAccount/Info.png') }
-                                onPress = { this.props.screenProps.redirectToAboutPage } />
-                        }
-                        <View style = { styles.underline } />
-                        {
-                            <OptionsComponent 
-                                title = { 'Show synchronization queue' }
-                                imageSource = { require('../../images/MyAccount/Info.png') }
-                                onPress = { this.props.screenProps.showSyncWindow } />
-                        }
-                    </View>
-                    <TouchableOpacity onPress = { () => { this.logOut(); } }>
-                        <View style = { styles.logOutButton }>
-                            <Text style = { styles.logOutText }>Log out</Text>
+                        <View style = { styles.optionsMargin } >
+                            {
+                                <OptionsComponent 
+                                    title = { 'Secret phrase' }
+                                    imageSource = { require('../../images/MyAccount/SecretPhrase.png') }
+                                    onPress = { this.props.screenProps.redirectToMyAccountMnemonicScreen } />
+                            }
+                            <View style = { styles.underline } />
+                            {
+                                <OptionsComponent 
+                                    title = { 'Settings' }
+                                    imageSource = { require('../../images/MyAccount/Settings.png') }
+                                    onPress = { this.props.screenProps.redirectToSettingsScreen } />
+                            }
+                            <View style = { styles.underline } />
+                            {
+                                <OptionsComponent 
+                                    title = { 'Help' }
+                                    imageSource = { require('../../images/MyAccount/Help.png') }
+                                    onPress = { this.props.screenProps.redirectToHelpPage } />
+                            }
+                            <View style = { styles.underline } />
+                            {
+                                <OptionsComponent 
+                                    title = { 'About' }
+                                    imageSource = { require('../../images/MyAccount/Info.png') }
+                                    onPress = { this.props.screenProps.redirectToAboutPage } />
+                            }
+                            <View style = { styles.underline } />
+                            {
+                                <OptionsComponent 
+                                    title = { 'Show synchronization queue' }
+                                    imageSource = { require('../../images/MyAccount/Info.png') }
+                                    onPress = { this.props.screenProps.showSyncWindow } />
+                            }
                         </View>
-                    </TouchableOpacity>
-                </View>
+                        <TouchableOpacity onPress = { () => { this.logOut(); } }>
+                            <View style = { styles.logOutButton }>
+                                <Text style = { styles.logOutText }>Log out</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
             </View>
         );
     }
@@ -211,7 +217,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(56, 75, 101, 0.2)'
     },
     logOutButton: { 
-        marginTop: getHeight(20),
+        marginTop: getHeight(10),
+        marginBottom: getHeight(70),
         width: getWidth(335),
         height: getHeight(50),
         borderRadius: 6,
@@ -224,6 +231,9 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-SemiBold', 
         fontSize: getHeight(16), 
         color: '#EB5757' 
+    },
+    scrollContainer: {
+        paddingBottom: getHeight(50)
     }
 });
 

@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     touchableRightText: {
         color: "#2794FF",
         fontFamily: "Montserrat-Medium",
-        fontSize: 18
+        fontSize: getHeight(18)
     }, 
     touchableRightWrapper: {
         backgroundColor: "transparent"
