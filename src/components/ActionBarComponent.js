@@ -34,7 +34,7 @@ export default class ActionBarComponent extends Component {
         if(this.props.bucketScreenRouteName !== nextProps.bucketScreenRouteName)
             return true;
 
-        return false;
+        return true; //TODO: Check for better render
     }
 
     deleteBuckets() {

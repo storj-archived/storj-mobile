@@ -9,6 +9,10 @@ export class TabBarActionModel {
         this.callback = callback;
         this.icon = icon;
     }
+
+    changeIcon(newIcon) {
+        this.icon = newIcon;
+    }
 }
 
 let actionsCount = 0;

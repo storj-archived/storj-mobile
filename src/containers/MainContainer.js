@@ -72,8 +72,8 @@ class MainContainer extends Component {
         //Common stuff
         let newAction = TabBarActionModelFactory.createNewAction;
         let uploadFileIcon = require('../images/ActionBar/UploadFileIcon.png');
-        let favIcon = require('../images/ActionBar/FavoritesIcon.png');
-        let unfavIcon = require('../images/ActionBar/UnsetFavourite.png');
+        this.favIcon = require('../images/ActionBar/FavoritesIcon.png');
+        this.unfavIcon = require('../images/ActionBar/UnsetFavourite.png');
         let trashIcon = require('../images/ActionBar/TrashBucketIcon.png');
         let iosUploadPhotoIcon = require('../images/ActionBar/IosUploadPhoto.png');
         let iosUploadFileIcon = require('../images/ActionBar/IosUploadFile.png');
@@ -85,13 +85,13 @@ class MainContainer extends Component {
         let createBucketAction = newAction(() => { this.props.showCreateBucketInput(); }, require('../images/ActionBar/NewBucketIcon.png'));
         let openFilePickerAction = (type, imgUrl) => newAction(() => { this.bucketScreenUploadFile(type) }, imgUrl);
         let openCameraAction = (id) => newAction(() => { CameraModule.openCamera(id); }, require('../images/ActionBar/UploadPhotoIcon.png'));
-        let uploadFileAction = (bucketIdGetter, type, imgUrl) => newAction(() => { console.log(bucketIdGetter()); console.log(this.props); this.uploadFile(bucketIdGetter(), type); }, imgUrl);
-        let setFavouriteAction = newAction(() => { this.setFavourite(); }, props.isStarredBucketsSelected ? unfavIcon
-                                                                                                          : favIcon);
+        let uploadFileAction = (bucketIdGetter, type, imgUrl) => newAction(() => { this.uploadFile(bucketIdGetter(), type); }, imgUrl);
+        this.setFavouriteAction = newAction(() => { this.setFavourite(); }, this.props.isStarredBucketsSelected ? this.unfavIcon
+                                                                                                          : this.favIcon);
         let uploadFileToSelectedBucketsAction = (type, imgUrl) => newAction(() => { this.uploadFileToSelectedBuckets(type); }, imgUrl);
         let tryDeleteBucketsAction = newAction(() => { this.tryDeleteBuckets(); }, trashIcon);
-        let setFavouriteFilesAction = newAction(() => { this.setFavouriteFiles(); }, this.props.isStarredFilesSelected ? unfavIcon 
-                                                                                                                       : favIcon);
+        this.setFavouriteFilesAction = newAction(() => { this.setFavouriteFiles(); }, this.props.isStarredFilesSelected ? this.unfavIcon 
+                                                                                                                       : this.favIcon);
         let downloadSelectedFilesAction = newAction(() => { this.downloadSelectedFiles(); }, require('../images/ActionBar/DownloadIFileIcon.png'));
         let tryCopySelectedFilesAction = newAction(() => { this.tryCopySelectedFiles(); }, require('../images/ActionBar/CopyBucketIcon.png'));
         let tryDeleteFiles = newAction(() => { this.tryDeleteFiles(); }, trashIcon);
@@ -103,12 +103,12 @@ class MainContainer extends Component {
                 openFilePickerAction("image", iosUploadPhotoIcon), openCameraAction(this.props.openedBucketId) ];
     
         this.selectionBucketActions = Platform.OS === "android" 
-            ? [ setFavouriteAction, uploadFileToSelectedBucketsAction(null, uploadFileIcon), tryDeleteBucketsAction ]
-            : [ setFavouriteAction, uploadFileToSelectedBucketsAction("document", iosUploadFileIcon), 
+            ? [ this.setFavouriteAction, uploadFileToSelectedBucketsAction(null, uploadFileIcon), tryDeleteBucketsAction ]
+            : [ this.setFavouriteAction, uploadFileToSelectedBucketsAction("document", iosUploadFileIcon), 
                 uploadFileToSelectedBucketsAction("image", iosUploadPhotoIcon), tryDeleteBucketsAction ];
 
         this.selectionFileActions = [
-            setFavouriteFilesAction,
+            this.setFavouriteFilesAction,
             downloadSelectedFilesAction, 
             tryCopySelectedFilesAction, 
             tryDeleteFiles
@@ -642,6 +642,9 @@ class MainContainer extends Component {
         const index = this.props.bucketsScreenNavReducer.index;      
         const routes = this.props.bucketsScreenNavReducer.routes;
         const props = this.props;
+        
+        this.setFavouriteAction.changeIcon(this.props.isStarredBucketsSelected ? this.unfavIcon : this.favIcon);
+        this.setFavouriteFilesAction.changeIcon(this.props.isStarredFilesSelected ? this.unfavIcon : this.favIcon);
 
         return(
             <MainComponent
