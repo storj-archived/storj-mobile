@@ -77,12 +77,15 @@ class MainContainer extends Component {
         let trashIcon = require('../images/ActionBar/TrashBucketIcon.png');
         let iosUploadPhotoIcon = require('../images/ActionBar/IosUploadPhoto.png');
         let iosUploadFileIcon = require('../images/ActionBar/IosUploadFile.png');
+        let openedBucketIdGetter = () => this.props.openedBucketId;
+        let dashboardBucketIdGetter = () => this.props.dashboardBucketId;
+        let myPhotosBucketIdGetter = () => this.props.myPhotosBucketId;
 
         //Action callbacks
         let createBucketAction = newAction(() => { this.props.showCreateBucketInput(); }, require('../images/ActionBar/NewBucketIcon.png'));
         let openFilePickerAction = (type, imgUrl) => newAction(() => { this.bucketScreenUploadFile(type) }, imgUrl);
         let openCameraAction = (id) => newAction(() => { CameraModule.openCamera(id); }, require('../images/ActionBar/UploadPhotoIcon.png'));
-        let uploadFileAction = (bucketId, type, imgUrl) => newAction(() => { console.log(bucketId); console.log(this.props); this.uploadFile(bucketId, type); }, imgUrl);
+        let uploadFileAction = (bucketIdGetter, type, imgUrl) => newAction(() => { console.log(bucketIdGetter()); console.log(this.props); this.uploadFile(bucketIdGetter(), type); }, imgUrl);
         let setFavouriteAction = newAction(() => { this.setFavourite(); }, props.isStarredBucketsSelected ? unfavIcon
                                                                                                           : favIcon);
         let uploadFileToSelectedBucketsAction = (type, imgUrl) => newAction(() => { this.uploadFileToSelectedBuckets(type); }, imgUrl);
@@ -112,19 +115,19 @@ class MainContainer extends Component {
         ];
 
         this.openedBucketActions = Platform.OS === "android" 
-            ? [ uploadFileAction(this.props.openedBucketId, "", uploadFileIcon), openCameraAction(props.openedBucketId) ]
-            : [ uploadFileAction(this.props.openedBucketId, "document", iosUploadFileIcon), 
-                uploadFileAction(this.props.openedBucketId, "image", iosUploadPhotoIcon), openCameraAction(props.openedBucketId) ];
+            ? [ uploadFileAction(openedBucketIdGetter, "", uploadFileIcon), openCameraAction(props.openedBucketId) ]
+            : [ uploadFileAction(openedBucketIdGetter, "document", iosUploadFileIcon), 
+                uploadFileAction(openedBucketIdGetter, "image", iosUploadPhotoIcon), openCameraAction(props.openedBucketId) ];
 
         this.dashboardBucketActions = Platform.OS === "android" 
-            ? [ uploadFileAction(this.props.dashboardBucketId, "", uploadFileIcon), openCameraAction(props.dashboardBucketId) ]
-            : [ uploadFileAction(this.props.dashboardBucketId, "document", iosUploadFileIcon), 
-                uploadFileAction(this.props.dashboardBucketId, "image", iosUploadPhotoIcon), openCameraAction(props.dashboardBucketId) ];
+            ? [ uploadFileAction(dashboardBucketIdGetter, "", uploadFileIcon), openCameraAction(props.dashboardBucketId) ]
+            : [ uploadFileAction(dashboardBucketIdGetter, "document", iosUploadFileIcon), 
+                uploadFileAction(dashboardBucketIdGetter, "image", iosUploadPhotoIcon), openCameraAction(props.dashboardBucketId) ];
 
         this.picturesBucketActions = Platform.OS === "android" 
-            ? [ uploadFileAction(this.props.myPhotosBucketId, "", uploadFileIcon), openCameraAction(props.myPhotosBucketId) ]
-            : [ uploadFileAction(this.props.myPhotosBucketId, "document", iosUploadFileIcon), 
-                uploadFileAction(this.props.myPhotosBucketId, "image", iosUploadPhotoIcon), openCameraAction(props.myPhotosBucketId) ];
+            ? [ uploadFileAction(myPhotosBucketIdGetter, "", uploadFileIcon), openCameraAction(props.myPhotosBucketId) ]
+            : [ uploadFileAction(myPhotosBucketIdGetter, "document", iosUploadFileIcon), 
+                uploadFileAction(myPhotosBucketIdGetter, "image", iosUploadPhotoIcon), openCameraAction(props.myPhotosBucketId) ];
 
         this.downloadListener = (fileParams) => {
             let res = observablePropFactory.getObservable(fileParams.fileId);
@@ -639,64 +642,7 @@ class MainContainer extends Component {
         const index = this.props.bucketsScreenNavReducer.index;      
         const routes = this.props.bucketsScreenNavReducer.routes;
         const props = this.props;
-        //---------------------------------------------------------------------------------------------------------------------------------
-        //Common stuff
-        let newAction = TabBarActionModelFactory.createNewAction;
-        let uploadFileIcon = require('../images/ActionBar/UploadFileIcon.png');
-        let favIcon = require('../images/ActionBar/FavoritesIcon.png');
-        let unfavIcon = require('../images/ActionBar/UnsetFavourite.png');
-        let trashIcon = require('../images/ActionBar/TrashBucketIcon.png');
-        let iosUploadPhotoIcon = require('../images/ActionBar/IosUploadPhoto.png');
-        let iosUploadFileIcon = require('../images/ActionBar/IosUploadFile.png');
 
-        //Action callbacks
-        let createBucketAction = newAction(() => { this.props.showCreateBucketInput(); }, require('../images/ActionBar/NewBucketIcon.png'));
-        let openFilePickerAction = (type, imgUrl) => newAction(() => { this.bucketScreenUploadFile(type) }, imgUrl);
-        let openCameraAction = (id) => newAction(() => { CameraModule.openCamera(id); }, require('../images/ActionBar/UploadPhotoIcon.png'));
-        let uploadFileAction = (bucketId, type, imgUrl) => newAction(() => { console.log(bucketId); console.log(this.props); this.uploadFile(bucketId, type); }, imgUrl);
-        let setFavouriteAction = newAction(() => { this.setFavourite(); }, props.isStarredBucketsSelected ? unfavIcon
-                                                                                                          : favIcon);
-        let uploadFileToSelectedBucketsAction = (type, imgUrl) => newAction(() => { this.uploadFileToSelectedBuckets(type); }, imgUrl);
-        let tryDeleteBucketsAction = newAction(() => { this.tryDeleteBuckets(); }, trashIcon);
-        let setFavouriteFilesAction = newAction(() => { this.setFavouriteFiles(); }, this.props.isStarredFilesSelected ? unfavIcon 
-                                                                                                                       : favIcon);
-        let downloadSelectedFilesAction = newAction(() => { this.downloadSelectedFiles(); }, require('../images/ActionBar/DownloadIFileIcon.png'));
-        let tryCopySelectedFilesAction = newAction(() => { this.tryCopySelectedFiles(); }, require('../images/ActionBar/CopyBucketIcon.png'));
-        let tryDeleteFiles = newAction(() => { this.tryDeleteFiles(); }, trashIcon);
-
-        //Action arrays
-        this.bucketActions = Platform.OS === "android" 
-            ? [ createBucketAction, openFilePickerAction(null, uploadFileIcon), openCameraAction(this.props.openedBucketId) ] 
-            : [ createBucketAction, openFilePickerAction("document", iosUploadFileIcon), 
-                openFilePickerAction("image", iosUploadPhotoIcon), openCameraAction(this.props.openedBucketId) ];
-    
-        this.selectionBucketActions = Platform.OS === "android" 
-            ? [ setFavouriteAction, uploadFileToSelectedBucketsAction(null, uploadFileIcon), tryDeleteBucketsAction ]
-            : [ setFavouriteAction, uploadFileToSelectedBucketsAction("document", iosUploadFileIcon), 
-                uploadFileToSelectedBucketsAction("image", iosUploadPhotoIcon), tryDeleteBucketsAction ];
-
-        this.selectionFileActions = [
-            setFavouriteFilesAction,
-            downloadSelectedFilesAction, 
-            tryCopySelectedFilesAction, 
-            tryDeleteFiles
-        ];
-
-        this.openedBucketActions = Platform.OS === "android" 
-            ? [ uploadFileAction(this.props.openedBucketId, "", uploadFileIcon), openCameraAction(props.openedBucketId) ]
-            : [ uploadFileAction(this.props.openedBucketId, "document", iosUploadFileIcon), 
-                uploadFileAction(this.props.openedBucketId, "image", iosUploadPhotoIcon), openCameraAction(props.openedBucketId) ];
-
-        this.dashboardBucketActions = Platform.OS === "android" 
-            ? [ uploadFileAction(this.props.dashboardBucketId, "", uploadFileIcon), openCameraAction(props.dashboardBucketId) ]
-            : [ uploadFileAction(this.props.dashboardBucketId, "document", iosUploadFileIcon), 
-                uploadFileAction(this.props.dashboardBucketId, "image", iosUploadPhotoIcon), openCameraAction(props.dashboardBucketId) ];
-
-        this.picturesBucketActions = Platform.OS === "android" 
-            ? [ uploadFileAction(this.props.myPhotosBucketId, "", uploadFileIcon), openCameraAction(props.myPhotosBucketId) ]
-            : [ uploadFileAction(this.props.myPhotosBucketId, "document", iosUploadFileIcon), 
-                uploadFileAction(this.props.myPhotosBucketId, "image", iosUploadPhotoIcon), openCameraAction(props.myPhotosBucketId) ];
-        //---------------------------------------------------------------------------------------------------------------------------------
         return(
             <MainComponent
                 getLoadingSyncEntry = { this._getLoadingSyncEntry.bind(this) } 
