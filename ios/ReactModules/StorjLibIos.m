@@ -20,37 +20,36 @@
 #define REJECTER "RCTrejecter"
 
 @implementation StorjLibIos
-@synthesize _database, _uploadFileRepository, _fileRepository;
+@synthesize _uploadFileRepository, _fileRepository;
 
 RCT_EXPORT_MODULE();
 
--(FMDatabase *) database{
-  if(!_database){
-    _database = [[DatabaseFactory getSharedDatabaseFactory] getSharedDb];
+-(UploadFileRepository *) uploadFileRepository
+  {
+    if(!_uploadFileRepository)
+    {
+      _uploadFileRepository = [[UploadFileRepository alloc] init];
+    }
+    return _uploadFileRepository;
   }
-  return _database;
-}
 
--(UploadFileRepository *) uploadFileRepository{
-  if(!_uploadFileRepository){
-    _uploadFileRepository = [[UploadFileRepository alloc] initWithDB:[self database]];
+-(FileRepository *) fileRepository
+  {
+    if(!_fileRepository)
+    {
+      _fileRepository = [[FileRepository alloc] init];
+    }
+    return _fileRepository;
   }
-  return _uploadFileRepository;
-}
 
--(FileRepository *) fileRepository{
-  if(!_fileRepository){
-    _fileRepository = [[FileRepository alloc] initWithDB:[self database]];
+-(StorjWrapper *)storjWrapper
+  {
+    if(!_storjWrapper)
+    {
+      _storjWrapper = [[StorjWrapperSingletone sharedStorjWrapper]storjWrapper];
+    }
+    return _storjWrapper;
   }
-  return _fileRepository;
-}
-
--(StorjWrapper *)storjWrapper{
-  if(!_storjWrapper){
-    _storjWrapper = [[StorjWrapperSingletone sharedStorjWrapper]storjWrapper];
-  }
-  return _storjWrapper;
-}
 
 #pragma mark - Mnemonic requests
 RCT_REMAP_METHOD(generateMnemonic,
@@ -139,10 +138,8 @@ RCT_REMAP_METHOD(importKeys,
    invokeParallelWithParams:@{@RESOLVER: resolver,
                                @REJECTER : rejecter}
    andMethodHandlerBlock:^(NSDictionary * params){
-     BOOL result = [self.storjWrapper importKeysWithEmail:email
-                                                 password:password
-                                                 mnemonic:mnemonic
-                                              andPasscode:passcode];
+     SJKeys *keys = [[SJKeys alloc] initWithUser:email password:password mnemonic:mnemonic];
+     BOOL result = [self.storjWrapper importKeys:keys andPassphrase:passcode];
      RCTPromiseResolveBlock resolve = params[@RESOLVER];
      
      resolve([[[Response alloc] initWithSuccess:result
@@ -159,16 +156,18 @@ RCT_EXPORT_METHOD(getKeys: (NSString *) passcode
    invokeParallelWithParams:@{@RESOLVER: resolver,
                                @REJECTER : rejecter}
    andMethodHandlerBlock:^(NSDictionary * params){
-     NSDictionary * authCredentials = [self.storjWrapper getKeysWithPassCode:passcode];
+     SJKeys * keys = [self.storjWrapper getKeysWithPassphrase:passcode];
+     
      SingleResponse *response;
-     if(!authCredentials || authCredentials.count != 3){
+     if(![keys areKeysValid])
+     {
        response = [[SingleResponse alloc] initWithSuccess:NO
                                                withResult:nil
                                           andErrorMessage:@"Error externing keys"];
      } else{
        response  = [SingleResponse
                  successSingleResponseWithResult:[DictionaryUtils
-                                                  convertToJsonWithDictionary:authCredentials]];
+                                                  convertToJsonWithDictionary:[keys toDictionary]]];
        
      }
      RCTPromiseResolveBlock resolve = params[@RESOLVER];

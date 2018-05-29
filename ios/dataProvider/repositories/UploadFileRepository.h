@@ -12,7 +12,7 @@
 
 @interface UploadFileRepository : BaseRepository
 
--(instancetype) initWithDB:(FMDatabase *)database;
+-(instancetype) init;
 
 -(NSArray *) getAll;
 

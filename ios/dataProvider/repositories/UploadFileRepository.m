@@ -15,10 +15,8 @@
 
 static NSArray * columns;
 
--(instancetype) initWithDB:(FMDatabase *)database {
-  if (self = [super initWithDB:database]) {
-    
-  }
+-(instancetype) init {
+  if (self = [super init]) {}
   
   return self;
 }

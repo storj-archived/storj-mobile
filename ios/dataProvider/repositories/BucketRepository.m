@@ -9,13 +9,11 @@
 #import "BucketRepository.h"
 
 @implementation BucketRepository
-@synthesize _database;
+
 static NSArray *columns;
 
--(instancetype) initWithDB:(FMDatabase *)database {
-  if (self = [super initWithDB:database]) {
-    _database = database;
-  }
+-(instancetype) init {
+  if (self = [super init]) {}
   
   return self;
 }
@@ -98,9 +96,7 @@ static NSArray *columns;
     }
     [resultSet close];
   }];
-  
-  
-  [[self _database] close];
+  [queue close];
   
   return bucketDboArray;
 }

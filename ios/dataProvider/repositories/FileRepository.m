@@ -15,13 +15,12 @@
 
 static NSArray * columns;
 
--(instancetype) initWithDB:(FMDatabase *)database {
-  if (self = [super initWithDB:database]) {
+-(instancetype) init
+  {
+    if (self = [super init]) {}
     
+    return self;
   }
-  
-  return self;
-}
 
 -(NSArray *) getAll {
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@",

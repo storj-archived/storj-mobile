@@ -33,7 +33,6 @@
 
 @interface StorjBackgroundServices : RCTEventEmitter<RCTBridgeModule>
 
-@property (nonatomic, strong) FMDatabase *_database;
 @property (nonatomic, strong) BucketRepository *_bucketRepository;
 @property (nonatomic, strong) FileRepository *_fileRepository;
 @property (nonatomic, strong) UploadFileRepository *_uploadFileRepository;
@@ -44,7 +43,8 @@
 
 @property (nonatomic, strong) StorjWrapper *_storjWrapper;
 
--(void) uploadFileWithBucketId:(NSString *)bucketId
-                 withLocalPath:(NSString *) localPath;
+-(void) uploadFileWithBucketId: (NSString *) bucketId
+                 withLocalPath: (NSString *) localPath
+                      fileName: (NSString *) fileName;
 
 @end

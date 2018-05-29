@@ -9,14 +9,10 @@
 #import "BaseRepository.h"
 #import "DatabaseFactory.h"
 @implementation BaseRepository
-@synthesize _database;
 
-
--(instancetype) initWithDB:(FMDatabase *)database
+-(instancetype) init
 {
-  if(self = [super init]) {
-    _database = database;
-  }
+  if(self = [super init]) {}
   
   return self;
 }

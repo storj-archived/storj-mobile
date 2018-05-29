@@ -8,9 +8,11 @@
 
 #import "StorjBackgroundServices.h"
 #import <CoreData/CoreData.h>
+#import "STUploader.h"
+#import "STFileUploadCallback.h"
 
 @implementation StorjBackgroundServices
-@synthesize _database;
+
 @synthesize _bucketRepository, _fileRepository, _uploadFileRepository;
 @synthesize _storjWrapper;
 @synthesize _mainOperationsPromise, _uploadOperationsPromise, _downloadOperationsPromise;
@@ -31,30 +33,23 @@ RCT_EXPORT_MODULE(ServiceModuleIOS);
   return [EventNames availableEvents];
 }
 
--(FMDatabase *) database{
-  if(!_database){
-    _database = [[DatabaseFactory getSharedDatabaseFactory] getSharedDb];
-  }
-  return _database;
-}
-
 -(BucketRepository *)bucketRepository{
   if(!_bucketRepository){
-    _bucketRepository = [[BucketRepository alloc] initWithDB:[self database]];
+    _bucketRepository = [[BucketRepository alloc] init];
   }
   return _bucketRepository;
 }
 
 -(FileRepository *) fileRepository{
   if(!_fileRepository){
-    _fileRepository = [[FileRepository alloc] initWithDB:[self database]];
+    _fileRepository = [[FileRepository alloc] init];
   }
   return _fileRepository;
 }
 
 -(UploadFileRepository *) uploadFileRepository{
   if(!_uploadFileRepository){
-    _uploadFileRepository = [[UploadFileRepository alloc] initWithDB:[self database]];
+    _uploadFileRepository = [[UploadFileRepository alloc] init];
   }
   return _uploadFileRepository;
 }
@@ -155,7 +150,6 @@ RCT_REMAP_METHOD(getFiles,
          return;
        }
        
-       [_database beginTransaction];
        NSMutableArray <FileDbo *> *fileDbos = [NSMutableArray arrayWithArray:
                                                [[self fileRepository] getAllFromBucket:bucketId]];
        NSMutableArray <FileDbo *> *copyFileDbos;
@@ -180,7 +174,7 @@ RCT_REMAP_METHOD(getFiles,
        for (FileDbo * fileDbo in fileDbos) {
          [[self fileRepository] deleteById:[fileDbo _fileId]];
        }
-       [[self database] commit];
+       
        [StorjBackgroundServices log:@"Sending success event for files updated"];
        [self sendEventWithName:EventNames.EVENT_FILES_UPDATED
                           body:[[SingleResponse successSingleResponseWithResult:bucketId]toDictionary]];
@@ -189,7 +183,8 @@ RCT_REMAP_METHOD(getFiles,
        [self sendEventWithName:EventNames.EVENT_FILES_UPDATED
                    body:@(NO)];
      };
-     [self.storjWrapper listFiles:bucketId withCompletion:(callback)];
+     [[self storjWrapper] listFilesForBucketId:bucketId withCompletion:callback];
+//     [self.storjWrapper listFiles:bucketId withCompletion:(callback)];
    } expirationHandler:^{
      
    }];
@@ -434,125 +429,59 @@ RCT_REMAP_METHOD(downloadFile,
 
 RCT_REMAP_METHOD(uploadFile,
                   uploadFileWithBucketId:(NSString *)bucketId
-                  withLocalPath:(NSString *) localPath){
-  [MethodHandler
-   invokeBackgroundSyncRemainWithParams:@{@KEY_TASK_NAME:@"UploadFile"}
-   methodHandlerBlock:^(NSDictionary *params, UIBackgroundTaskIdentifier taskId) {
-     if(!bucketId || bucketId.length == 0){
-       return;
-     }
-     
-     if(!localPath || localPath.length == 0){
-       return;
-     }
-     
-     __block double uploadProgress = 0;
-     long fileRef = 0;
-     [StorjBackgroundServices log:[NSString stringWithFormat:@"Uploading file located at: %@ into bucket: %@", localPath, bucketId]];
-     NSNumber *fileSize = [FileUtils getFileSizeWithPath:localPath];
-     NSString *fileName = [FileUtils getFileNameWithPath:localPath];
-     
-     UploadFileDbo *dbo = [[UploadFileDbo alloc] initWithFileHandle:0
-                                                           progress:0
-                                                               size:[fileSize longValue]
-                                                           uploaded:0
-                                                               name:fileName
-                                                                uri:localPath
-                                                           bucketId:bucketId];
-     
-     SJFileUploadCallback *callback = [[SJFileUploadCallback alloc] init];
-     
-     callback.onProgress = ^(NSString *fileId, double progress, double uploadedBytes, double totalBytes) {
-       if([dbo fileHandle] == 0 || progress == 0){
-         return;
-       }
-       
-       if(progress - uploadProgress > 0.02){
-         uploadProgress = progress;
-       }
-       
-       if(uploadProgress != progress){
-         return;
-       }
-       [dbo set_progress: uploadProgress];
-       [dbo set_uploaded: uploadedBytes];
-       
-         UploadFileModel * fileModel =[[UploadFileModel alloc] initWithUploadFileDbo:dbo];
-         Response *response = [[self uploadFileRepository] updateByModel:fileModel];
-
-         if([response isSuccess]) {
-           NSDictionary *body = @{UploadFileContract.FILE_HANDLE : @([dbo fileHandle]),
-                                  UploadFileContract.PROGRESS : @(uploadProgress),
-                                  UploadFileContract.UPLOADED : @(uploadedBytes)};
-           [StorjBackgroundServices log:[NSString stringWithFormat:@"File upload progress: %@", body]];
-             [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_PROGRESS
-                                body: body];
-         }
-     };
-     
-     callback.onSuccess = ^(SJFile * file){
-       ThumbnailProcessor *thumbnailProcessor = [[ThumbnailProcessor alloc]
-                                                initThumbnailProcessorWithFileRepository:[self fileRepository]];
-       NSString *thumbnail = nil;
-       // Due to the fact that StorjLib returns mimeType: application/octet-stream, we are trying to
-       // generate thumbnail image and save it to local database
-         SingleResponse *thumbnailGenerationResponse = [thumbnailProcessor getThumbnailWithFilePath:localPath];
-         if([thumbnailGenerationResponse isSuccess]){
-           thumbnail = [thumbnailGenerationResponse getResult];
-         }
-       FileModel *fileModel = [[FileModel alloc] initWithSJFile:file starred:NO synced:NO downloadState:2 fileHandle:[dbo fileHandle] fileUri:localPath thumbnail:thumbnail];
-       [fileModel set_name:[dbo name]];
-       
-       Response *deleteUploadFileResponse = [[self uploadFileRepository]
-                                             deleteById:[NSString stringWithFormat:@"%ld",
-                                                         [dbo fileHandle]]];
-       Response *insertFileResponse = [[self fileRepository] insertWithModel:fileModel];
-       NSDictionary *bodyDict = @{UploadFileContract.FILE_HANDLE:@([dbo fileHandle]),
-                                  FileContract.FILE_ID : [DictionaryUtils checkAndReturnNSString:
-                                                          [fileModel _fileId]]};
-       [StorjBackgroundServices log:[NSString stringWithFormat:@"File successfully uploaded: %@", [DictionaryUtils convertToJsonWithDictionary:[fileModel toDictionary]]]];
-       [StorjBackgroundServices log:[NSString stringWithFormat:@"Sending success event for Upload Complete %@, ", bodyDict]];
-       [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_SUCCESSFULLY
-                          body:bodyDict];
-     };
-     
-     callback.onError = ^(int errorCode, NSString * _Nullable errorMessage) {
-       NSString *dboId = [NSString stringWithFormat:@"%ld", [dbo fileHandle]];
-       Response *deleteResponse = [[self uploadFileRepository] deleteById:dboId];
-       [StorjBackgroundServices log:[NSString stringWithFormat:@"onError: %d, %@", errorCode, errorMessage]];
-       [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_ERROR
-                          body:@{@"errorMessage":errorMessage,
-                                 @"errorCode" : @(errorCode),
-                                 UploadFileContract.FILE_HANDLE: dboId}];
-     };
-     
-     fileRef = [[self storjWrapper] uploadFile:localPath toBucket:bucketId withCompletion:callback];
-     @synchronized (dbo) {
-       [dbo set_fileHandle: fileRef];
-       UploadFileModel *fileModel = [[UploadFileModel alloc] initWithUploadFileDbo:dbo];
-       Response *insertResponse = [[self uploadFileRepository] insertWithModel:fileModel];
-       if([insertResponse isSuccess]){
-         NSDictionary *eventDict =@{@"fileHandle": @([dbo fileHandle])};
-         [StorjBackgroundServices log:[NSString stringWithFormat:@"Upload Started: %@", eventDict]];
-         [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_START
-                            body:eventDict];
-       } else {
-         [StorjBackgroundServices log:[NSString stringWithFormat:@"Upload is not Started: %@",
-                                       insertResponse._error._errorMessage]];
-       }
-     }
-   }
-   expirationHandler:^{
-     
-   }];
+                  withLocalPath:(NSString *) localPath
+                  fileName:(NSString *) fileName){
+  [StorjBackgroundServices log:[NSString stringWithFormat:@"Uploading file located at: %@ into bucket: %@", localPath, bucketId]];
+  
+  STFileUploadCallback *fileUploadCallback = [[STFileUploadCallback alloc] init];
+  
+  fileUploadCallback._uploadCompleteBlock = ^(long fileHandle, NSString *fileId) {
+    NSDictionary *bodyDict = @{UploadFileContract.FILE_HANDLE:@(fileHandle),
+                               FileContract.FILE_ID : [DictionaryUtils checkAndReturnNSString:
+                                                       fileId]};
+    [StorjBackgroundServices log:[NSString stringWithFormat:@"Sending success event for Upload Complete %@, ", bodyDict]];
+    [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_SUCCESSFULLY
+                       body:bodyDict];
+  };
+  
+  fileUploadCallback._uploadProgressBlock = ^(long fileHandle, double uploadProgress, double uploadedBytes) {
+    NSDictionary *body = @{UploadFileContract.FILE_HANDLE : @(fileHandle),
+                           UploadFileContract.PROGRESS : @(uploadProgress),
+                           UploadFileContract.UPLOADED : @(uploadedBytes)};
+    [StorjBackgroundServices log:[NSString stringWithFormat:@"File upload progress: %@", body]];
+    [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_PROGRESS
+                       body: body];
+  };
+  
+  fileUploadCallback._uploadErrorBlock = ^(long fileHandle, int errorCode, NSString *errorMessage) {
+    [StorjBackgroundServices log:[NSString stringWithFormat:@"onError: %d, %@", errorCode, errorMessage]];
+    [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_ERROR
+                       body:@{@"errorMessage":errorMessage,
+                              @"errorCode" : @(errorCode),
+                              UploadFileContract.FILE_HANDLE: @(fileHandle)}];
+  };
+  
+  fileUploadCallback._uploadStartBlock = ^(long fileHandle) {
+    NSDictionary *eventDict =@{@"fileHandle": @(fileHandle)};
+    [StorjBackgroundServices log:[NSString stringWithFormat:@"Upload Started: %@", eventDict]];
+    [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_START
+                       body:eventDict];
+  };
+  
+  STUploader *uploader = [[STUploader alloc] initWithBucketId:bucketId localPath:localPath fileName:fileName callbackNotifier:fileUploadCallback];
+  
+  if([uploader isUploadValid])
+  {
+    [uploader startUpload];
+  }
 }
+  
 +(void) log:(NSString *)message{
   NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
   NSString *docsDir = dirPaths[0];
   NSString *filePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent: @"storjAppLog.txt"]];
   
   FILE *fp;
-  
   fp = fopen([filePath cStringUsingEncoding:NSUTF8StringEncoding], "a+");
   if(!fp){
     return;

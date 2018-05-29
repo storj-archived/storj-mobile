@@ -14,10 +14,7 @@
 
 @interface BaseRepository : NSObject
 
-@property (nonatomic, strong) FMDatabase * _database;
-//@property
-
--(instancetype) initWithDB: (FMDatabase *) database;
+-(instancetype) init;
 
 -(Response *) executeInsertIntoTable: (NSString *) tableName
                             fromDict: (NSDictionary *) dictionary;
@@ -39,6 +36,7 @@
                   updateDictionary:(NSDictionary *) updateDictionary;
 
 -(FMDatabaseQueue *)readableQueue;
+  
 -(FMDatabaseQueue *)writableQueue;
 
 +(NSString *) getWhereClauseWithColumnDictionary: (NSDictionary *)columnsDictionary

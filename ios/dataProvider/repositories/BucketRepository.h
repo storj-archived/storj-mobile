@@ -13,7 +13,7 @@
 
 @interface BucketRepository : BaseRepository
 
--(instancetype) initWithDB:(FMDatabase *)database;
+-(instancetype) init;
 
 -(NSArray *) getAll;
 

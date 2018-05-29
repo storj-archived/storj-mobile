@@ -27,21 +27,21 @@ RCT_EXPORT_MODULE(SyncModuleIOS);
 
 -(BucketRepository *)bucketRepository{
   if(!_bucketRepository){
-    _bucketRepository = [[BucketRepository alloc] initWithDB:[self database]];
+    _bucketRepository = [[BucketRepository alloc] init];
   }
   return _bucketRepository;
 }
 
 -(FileRepository *) fileRepository{
   if(!_fileRepository){
-    _fileRepository = [[FileRepository alloc] initWithDB:[self database]];
+    _fileRepository = [[FileRepository alloc] init];
   }
   return _fileRepository;
 }
 
 -(UploadFileRepository *) uploadFileRepository{
   if(!_uploadFileRepository){
-    _uploadFileRepository = [[UploadFileRepository alloc] initWithDB:[self database]];
+    _uploadFileRepository = [[UploadFileRepository alloc] init];
   }
   return _uploadFileRepository;
 }
