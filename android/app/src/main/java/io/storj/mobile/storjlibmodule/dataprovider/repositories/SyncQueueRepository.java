@@ -9,6 +9,7 @@ import java.util.List;
 
 import io.storj.mobile.storjlibmodule.dataprovider.contracts.SynchronizationQueueContract;
 import io.storj.mobile.storjlibmodule.dataprovider.dbo.SyncQueueEntryDbo;
+import io.storj.mobile.storjlibmodule.enums.SyncStateEnum;
 import io.storj.mobile.storjlibmodule.models.SyncQueueEntryModel;
 import io.storj.mobile.storjlibmodule.responses.Response;
 
@@ -124,6 +125,21 @@ public class SyncQueueRepository extends BaseRepository {
         }
 
         return model;
+    }
+
+    public int getActiveCount() {
+        String[] selectionArgs = new String[] {
+                String.valueOf(SyncStateEnum.QUEUED.getValue()),
+                String.valueOf(SyncStateEnum.PROCESSING.getValue())
+        };
+
+        Cursor cursor = _db.query(SynchronizationQueueContract.TABLE_NAME,
+                null,
+                SynchronizationQueueContract._STATUS + " = ? OR " + SynchronizationQueueContract._STATUS + " = ?",
+                selectionArgs,
+                null, null, null);
+
+        return cursor.getCount();
     }
 
     private List<SyncQueueEntryDbo> _getListFromCursor(Cursor cursor) {

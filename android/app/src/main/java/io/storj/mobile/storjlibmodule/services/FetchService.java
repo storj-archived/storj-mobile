@@ -66,9 +66,7 @@ public class FetchService extends BaseReactService {
     public FileRepository fRepository() {
         return new FileRepository(getDb());
     }
-    /**
-     * Creates an IntentService.  Invoked by your subclass's constructor.
-     */
+
     public FetchService() {
         super("FetchService");
     }

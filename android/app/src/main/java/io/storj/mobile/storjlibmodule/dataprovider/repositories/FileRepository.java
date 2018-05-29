@@ -235,7 +235,7 @@ public class FileRepository extends BaseRepository {
     }
 
     public Response deleteAll(String bucketId) {
-        return _executeDelete(new String[] { bucketId }, FileContract.TABLE_NAME, FileContract.FILE_FK + " = ?s");
+        return _deleteAll(FileContract.TABLE_NAME);
     }
 
     public Response update(FileModel model) {

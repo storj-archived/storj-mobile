@@ -398,7 +398,6 @@ class MainContainer extends Component {
         let filePickerResponse = await filePicker.show(type);
         this.props.hideActionBar();
 
-        console.log("---------------------------", filePickerResponse);
         if(filePickerResponse.isSuccess) {
             filePickerResponse.result.forEach(file =>{
                 this.getSelectedItems(this.props.buckets).forEach(item => {
@@ -411,8 +410,7 @@ class MainContainer extends Component {
     async uploadFile(bucketId, type) {
         let filePickerResponse = await filePicker.show(type);
         this.props.hideActionBar();
-        console.log("---------------------------", filePickerResponse);
-        console.log("bucketId", bucketId);
+
         if(filePickerResponse.isSuccess) {
             filePickerResponse.result.forEach(file => ServiceModule.uploadFile(bucketId, file.path));
         }

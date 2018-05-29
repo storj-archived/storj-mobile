@@ -1,6 +1,8 @@
 package io.storj.mobile.storjlibmodule.services;
 
+import android.app.ActivityManager;
 import android.app.IntentService;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -133,6 +135,8 @@ public class SynchronizationService extends IntentService {
                     }
                 }
             }
+
+            NotificationService.Clean(this);
         } catch (Exception e) {
 
         }

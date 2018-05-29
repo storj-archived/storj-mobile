@@ -77,7 +77,7 @@ export default class ListComponent extends Component {
 
     sort(items) {
         let data = this.searchFilter(items);
-        console.log(data);
+        
         let sortingObject = {};
         let sortingCallback;
 
