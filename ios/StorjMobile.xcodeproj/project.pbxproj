@@ -60,7 +60,8 @@
 		DC914C4A206BE5D400F0C4FF /* SyncModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C49206BE5D400F0C4FF /* SyncModule.m */; };
 		DC914C5C206BFBF200F0C4FF /* Sha256Module.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C5B206BFBF200F0C4FF /* Sha256Module.m */; };
 		DCACD444201FDF630050921B /* StorjLibIos.m in Sources */ = {isa = PBXBuildFile; fileRef = DCACD443201FDF630050921B /* StorjLibIos.m */; };
-		DCBD1A5020B2F07E005B30C3 /* Uploader.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBD1A4F20B2F07E005B30C3 /* Uploader.m */; };
+		DCBD1A5020B2F07E005B30C3 /* STUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBD1A4F20B2F07E005B30C3 /* STUploader.m */; };
+		DCBF1F2E20BD786500240E8B /* STFileUploadCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBF1F2D20BD786500240E8B /* STFileUploadCallback.m */; };
 		DCC368832056B6D4004813CD /* DatabaseFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC368822056B6D4004813CD /* DatabaseFactory.m */; };
 		DCCD2FD520459F610032D3F5 /* FilePickerLib.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCD2FD420459F600032D3F5 /* FilePickerLib.m */; };
 		DCDF6FC5205ADA04001B2F95 /* BucketContract.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FC4205ADA04001B2F95 /* BucketContract.m */; };
@@ -493,8 +494,10 @@
 		DC914C5B206BFBF200F0C4FF /* Sha256Module.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Sha256Module.m; sourceTree = "<group>"; };
 		DCACD442201FDF630050921B /* StorjLibIos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorjLibIos.h; sourceTree = "<group>"; };
 		DCACD443201FDF630050921B /* StorjLibIos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorjLibIos.m; sourceTree = "<group>"; };
-		DCBD1A4E20B2F07E005B30C3 /* Uploader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Uploader.h; sourceTree = "<group>"; };
-		DCBD1A4F20B2F07E005B30C3 /* Uploader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Uploader.m; sourceTree = "<group>"; };
+		DCBD1A4E20B2F07E005B30C3 /* STUploader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STUploader.h; sourceTree = "<group>"; };
+		DCBD1A4F20B2F07E005B30C3 /* STUploader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STUploader.m; sourceTree = "<group>"; };
+		DCBF1F2C20BD786500240E8B /* STFileUploadCallback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STFileUploadCallback.h; sourceTree = "<group>"; };
+		DCBF1F2D20BD786500240E8B /* STFileUploadCallback.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STFileUploadCallback.m; sourceTree = "<group>"; };
 		DCC368812056B6D4004813CD /* DatabaseFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseFactory.h; sourceTree = "<group>"; };
 		DCC368822056B6D4004813CD /* DatabaseFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatabaseFactory.m; sourceTree = "<group>"; };
 		DCCD2FD320459F600032D3F5 /* FilePickerLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilePickerLib.h; sourceTree = "<group>"; };
@@ -860,8 +863,10 @@
 		DC03940920B2EEF500904DEB /* loaders */ = {
 			isa = PBXGroup;
 			children = (
-				DCBD1A4E20B2F07E005B30C3 /* Uploader.h */,
-				DCBD1A4F20B2F07E005B30C3 /* Uploader.m */,
+				DCBD1A4E20B2F07E005B30C3 /* STUploader.h */,
+				DCBD1A4F20B2F07E005B30C3 /* STUploader.m */,
+				DCBF1F2C20BD786500240E8B /* STFileUploadCallback.h */,
+				DCBF1F2D20BD786500240E8B /* STFileUploadCallback.m */,
 			);
 			path = loaders;
 			sourceTree = "<group>";
@@ -1574,6 +1579,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCBF1F2E20BD786500240E8B /* STFileUploadCallback.m in Sources */,
 				DCC368832056B6D4004813CD /* DatabaseFactory.m in Sources */,
 				DCDF70652064732C001B2F95 /* BucketDbo.m in Sources */,
 				DCDF6FF62062D5C4001B2F95 /* FileModel.m in Sources */,
@@ -1591,7 +1597,7 @@
 				DC914C47206BD55000F0C4FF /* StorjWrapperSingletone.m in Sources */,
 				DCDF706B2064A15A001B2F95 /* UploadFileDbo.m in Sources */,
 				DCDF6FE2206022EC001B2F95 /* ListResponse.m in Sources */,
-				DCBD1A5020B2F07E005B30C3 /* Uploader.m in Sources */,
+				DCBD1A5020B2F07E005B30C3 /* STUploader.m in Sources */,
 				DCDF6FD9205FF0A7001B2F95 /* Response.m in Sources */,
 				DCDF706820649821001B2F95 /* FileDbo.m in Sources */,
 				DCDF6FCB205AED17001B2F95 /* UploadFileContract.m in Sources */,
