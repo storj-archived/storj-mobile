@@ -10,11 +10,13 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 @import MobileCoreServices;
 #import "SingleResponse.h"
+#import <Photos/Photos.h>
 
 #define KEY_PATH "path"
 #define KEY_ERROR_MESSAGE "errorMessage"
 #define KEY_SUCCESS "isSuccess"
 #define KEY_RESULT "result"
+#define KEY_NAME "name"
 
 #define OPTIONS_KEY_MIME_TYPE "mimeType"
 #define OPTIONS_KEY_FILE_PICKER_TITLE "pickerTitle"
@@ -88,22 +90,32 @@ RCT_REMAP_METHOD(show,
                                 ],
                   @KEY_ERROR_MESSAGE: @"Canceled by user"
                   });
- 
 }
+  
+  - (void)imagePickerController: (UIImagePickerController *)picker didFinishPickingMediaWithInfo: (NSDictionary *)info
+  {
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [picker dismissViewControllerAnimated: YES completion: nil];
+    });
+    
+    NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
+    if([mediaType isEqualToString: (NSString *) kUTTypeImage]){
+      [self processRetrievedImage: info];
+      return;
+    }
+    if([mediaType isEqualToString: (NSString *) kUTTypeMovie]){
+      [self processRetrievedVideo: info];
+      return;
+    }
+  }
 
 -(void)processRetrievedImage: (NSDictionary *) info {
+  
   NSURL *imageURL = [info valueForKey: UIImagePickerControllerReferenceURL];
-  NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
+  PHAsset *asset = [[PHAsset fetchAssetsWithALAssetURLs:@[imageURL] options:nil] firstObject];
 
-  NSString *tempFileName = [[NSUUID UUID] UUIDString];
-  NSString *fileName;
-  if ([[imageURL absoluteString] containsString: @"ext=GIF"]) {
-    fileName = [tempFileName stringByAppendingString: @".gif"];
-  } else if ([[[self.options objectForKey:  @"imageFileType"] stringValue] isEqualToString: @"png"]) {
-    fileName = [tempFileName stringByAppendingString: @".png"];
-  } else {
-    fileName = [tempFileName stringByAppendingString: @".jpg"];
-  }
+  NSString *fileName = [asset valueForKey:@"filename"];
+  NSLog(@"PHAsset local ident: %@", fileName);
   
   NSString *path = [[NSTemporaryDirectory()stringByStandardizingPath] stringByAppendingPathComponent: fileName];
   UIImage *image =[info objectForKey: UIImagePickerControllerOriginalImage];
@@ -113,6 +125,7 @@ RCT_REMAP_METHOD(show,
     ALAssetsLibrary* assetsLibrary = [[ALAssetsLibrary alloc] init];
     [assetsLibrary assetForURL: imageURL resultBlock: ^(ALAsset *asset) {
       ALAssetRepresentation *rep = [asset defaultRepresentation];
+      
       Byte *buffer = (Byte*)malloc(rep.size);
       NSUInteger buffered = [rep getBytes: buffer fromOffset: 0.0 length: rep.size error: nil];
       NSData *data = [NSData dataWithBytesNoCopy: buffer length: buffered freeWhenDone: YES];
@@ -175,7 +188,32 @@ RCT_REMAP_METHOD(show,
 
 -(void) processRetrievedVideo: (NSDictionary *)info{
   NSURL *videoURL = info[UIImagePickerControllerMediaURL];
-  NSString *fileName = videoURL.lastPathComponent;
+  NSLog(@"VideoURL: lastPath: %@", [videoURL lastPathComponent]);
+  NSString *fileName;
+  if (@available(iOS 11.0, *)) {
+    PHAsset *asset = [info objectForKey:UIImagePickerControllerPHAsset];
+    
+    NSDate *creationDate = [asset valueForKey:@"creationDate"];
+    //  [creationDate ]
+    if(creationDate)
+    {
+      NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+      dateFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+      dateFormatter.dateFormat = @"yyy-MM-d_HH-mm-ss";
+      NSString *formattedDate = [dateFormatter stringFromDate:creationDate];
+      if(formattedDate)
+      {
+        NSString *extension = [[asset valueForKey:@"filename"] pathExtension];
+        fileName = [NSString stringWithFormat:@"Video_%@.%@", formattedDate, extension];
+      }
+    } else {
+      fileName = [asset valueForKey:@"filename"];
+    }
+  } else {
+    fileName = [videoURL lastPathComponent];
+  }
+ 
+  
   NSString *path = [[NSTemporaryDirectory()stringByStandardizingPath] stringByAppendingPathComponent: fileName];
   NSURL *videoDestinationURL = [NSURL fileURLWithPath: path];
   
@@ -186,6 +224,19 @@ RCT_REMAP_METHOD(show,
     }
   }
   NSError *error = nil;
+  if([fileManager fileExistsAtPath:videoDestinationURL.path] || [videoURL.path isEqualToString:videoDestinationURL.path]) {
+    NSDictionary *response = @{@KEY_SUCCESS: @(YES),
+                                @KEY_RESULT: @[@{@KEY_PATH: [videoDestinationURL absoluteString],
+                                                  @KEY_ERROR_MESSAGE: @"",
+                                                  @KEY_NAME: @""
+                                                  }
+                                               ],
+                                @KEY_ERROR_MESSAGE: @""
+                                };
+    NSLog(@"Video picker response: %@", response);
+    self.resolve(response);
+    return;
+  }
   [fileManager moveItemAtURL: videoURL toURL: videoDestinationURL error: &error];
 
   if (error) {
@@ -219,22 +270,6 @@ RCT_REMAP_METHOD(show,
   }
 }
 
-- (void)imagePickerController: (UIImagePickerController *)picker didFinishPickingMediaWithInfo: (NSDictionary *)info
-{
-  dispatch_async(dispatch_get_main_queue(), ^{
-    [picker dismissViewControllerAnimated: YES completion: nil];
-  });
-
-  NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
-  if([mediaType isEqualToString: (NSString *) kUTTypeImage]){
-    [self processRetrievedImage: info];
-    return;
-  }
-  if([mediaType isEqualToString: (NSString *) kUTTypeMovie]){
-    [self processRetrievedVideo: info];
-    return;
-  }
-}
 +(NSString *) convertToJsonWithArray: (NSArray *)array{
   NSError * err;
   NSData * jsonData = [NSJSONSerialization dataWithJSONObject: array options: 0 error: &err];
