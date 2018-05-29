@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     },
     flexRow: {
         flexDirection: 'row'
-    }
+    },
     errorMessageContainer: {
         marginTop: getHeight(500),
         alignItems: 'center'
