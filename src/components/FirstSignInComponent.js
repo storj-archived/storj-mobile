@@ -135,7 +135,7 @@ export default class FirstSignInComponent extends Component {
                             <Text style = { styles.titleLightBoldText }> 25GB of free storage</Text>
                         </Text>
                     </View>
-                    <View >
+                    <View style = { styles.cetralImageContainer }>
                         <Image style = { styles.imageContainer } source = { require('../images/MainScreen/Folder.png') } resizeMode = 'contain' ></Image>
                     </View>
                     <View style = { styles.aditionalTextContainer }>
@@ -198,12 +198,16 @@ const styles = StyleSheet.create({
     flexRow: {
         flexDirection: 'row'
     },
-    imageContainer: {
+    cetralImageContainer: {
         marginTop: getHeight(38),
         marginLeft: getWidth(-20),
         height: getHeight(250),
         width: getDeviceWidth(),
-        alignSelf: 'center'
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    imageContainer: {
+        height: getHeight(250)
     },
     syncMyDeviceButton: {
         marginTop: getHeight(85),
