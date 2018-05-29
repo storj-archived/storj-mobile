@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "STUploader.h"
 #import "STFileUploadCallback.h"
+#import "Logger.h"
 
 @implementation StorjBackgroundServices
 
@@ -175,7 +176,7 @@ RCT_REMAP_METHOD(getFiles,
          [[self fileRepository] deleteById:[fileDbo _fileId]];
        }
        
-       [StorjBackgroundServices log:@"Sending success event for files updated"];
+       [Logger log:@"Sending success event for files updated"];
        [self sendEventWithName:EventNames.EVENT_FILES_UPDATED
                           body:[[SingleResponse successSingleResponseWithResult:bucketId]toDictionary]];
      };
@@ -325,8 +326,7 @@ RCT_REMAP_METHOD(downloadFile,
      ThumbnailProcessor *thumbnailProcessor = [[ThumbnailProcessor alloc]
                                                initThumbnailProcessorWithFileRepository:[self fileRepository]];
      long fileRef = 0;
-     [StorjBackgroundServices
-      log: [NSString stringWithFormat:@"Downloading \nfile %@ \nfrom %@ \nto %@",
+     [Logger log: [NSString stringWithFormat:@"Downloading \nfile %@ \nfrom %@ \nto %@",
             fileId, bucketId, localPath]];
      FileDbo *fileDbo = [[self fileRepository] getByFileId:fileId];
      if(!fileDbo){
@@ -351,12 +351,12 @@ RCT_REMAP_METHOD(downloadFile,
        NSDictionary *eventDictionary = @{FileContract.FILE_ID: fileId,
                                          FileContract.FILE_HANDLE: @([fileDbo _fileHandle]),
                                          @"progress": @(progress)};
-       [StorjBackgroundServices log:[NSString stringWithFormat:@"FileDownloadProgress: %@", eventDictionary]];
+       [Logger log:[NSString stringWithFormat:@"FileDownloadProgress: %@", eventDictionary]];
        [self sendEventWithName:EventNames.EVENT_FILE_DOWNLOAD_PROGRESS body:eventDictionary];
      };
      
      callback.onDownloadComplete = ^(NSString *fileId, NSString *localPath) {
-       [StorjBackgroundServices log:
+       [Logger log:
         [NSString stringWithFormat:@"Download complete fileID: %@, localPath: %@", fileId, localPath]];
        Response *updateResponse =[[self fileRepository]
                                   updateById:fileId
@@ -382,21 +382,21 @@ RCT_REMAP_METHOD(downloadFile,
          }
          //      }
          [self sendEventWithName:EventNames.EVENT_FILE_DOWNLOAD_SUCCESS body:eventDictionary];
-         [StorjBackgroundServices log:[NSString stringWithFormat:@"DownloadComplete: %@", eventDictionary]];
+         [Logger log:[NSString stringWithFormat:@"DownloadComplete: %@", eventDictionary]];
        }
      };
      
      callback.onError = ^(int errorCode, NSString * _Nullable errorMessage) {
-       [StorjBackgroundServices log:[NSString stringWithFormat:@"File download for fileID: %@, error %d, %@", fileId, errorCode, errorMessage]];
+       [Logger log:[NSString stringWithFormat:@"File download for fileID: %@, error %d, %@", fileId, errorCode, errorMessage]];
        Response* updateResponse = [[self fileRepository] updateById:fileId downloadState:0 fileHandle:0 fileUri:nil];
-       [StorjBackgroundServices log:[NSString stringWithFormat:@"Error updateResponse %@", [updateResponse toDictionary]]];
+       [Logger log:[NSString stringWithFormat:@"Error updateResponse %@", [updateResponse toDictionary]]];
        if([updateResponse isSuccess]){
          NSMutableDictionary *eventDictionary = [NSMutableDictionary dictionary];
          [eventDictionary setObject: [DictionaryUtils checkAndReturnNSString:fileId] forKey:FileContract.FILE_ID];
          [eventDictionary setObject: [DictionaryUtils checkAndReturnNSString:errorMessage] forKey:@"errorMessage"];
          [eventDictionary setObject: @(errorCode)forKey:@"errorCode"];
          
-         [StorjBackgroundServices log:[NSString stringWithFormat:@"File download error event dict: %@", eventDictionary]];
+         [Logger log:[NSString stringWithFormat:@"File download error event dict: %@", eventDictionary]];
          [self sendEventWithName:EventNames.EVENT_FILE_DOWNLOAD_ERROR body:eventDictionary];
        }
      };
@@ -407,7 +407,7 @@ RCT_REMAP_METHOD(downloadFile,
                                 withCompletion:callback];
      @synchronized (fileDbo) {
        if(fileRef == 0 || fileRef == -1){
-         [StorjBackgroundServices log:@"File download is not started. FileRef == -1"];
+         [Logger log:@"File download is not started. FileRef == -1"];
          return;
        }
        [fileDbo set_fileHandle:fileRef];
@@ -417,7 +417,7 @@ RCT_REMAP_METHOD(downloadFile,
                                      fileUri:nil] isSuccess]){
          NSDictionary * eventDictionary = @{FileContract.FILE_ID: fileId,
                                             FileContract.FILE_HANDLE: @([fileDbo _fileHandle])};
-         [StorjBackgroundServices log:[NSString stringWithFormat:@"FileDownload started: %@", eventDictionary]];
+         [Logger log:[NSString stringWithFormat:@"FileDownload started: %@", eventDictionary]];
          [self sendEventWithName:EventNames.EVENT_FILE_DOWNLOAD_START
                             body:eventDictionary];
        }
@@ -431,7 +431,7 @@ RCT_REMAP_METHOD(uploadFile,
                   uploadFileWithBucketId:(NSString *)bucketId
                   withLocalPath:(NSString *) localPath
                   fileName:(NSString *) fileName){
-  [StorjBackgroundServices log:[NSString stringWithFormat:@"Uploading file located at: %@ into bucket: %@", localPath, bucketId]];
+  [Logger log:[NSString stringWithFormat:@"Uploading file located at: %@ into bucket: %@", localPath, bucketId]];
   
   STFileUploadCallback *fileUploadCallback = [[STFileUploadCallback alloc] init];
   
@@ -439,7 +439,7 @@ RCT_REMAP_METHOD(uploadFile,
     NSDictionary *bodyDict = @{UploadFileContract.FILE_HANDLE:@(fileHandle),
                                FileContract.FILE_ID : [DictionaryUtils checkAndReturnNSString:
                                                        fileId]};
-    [StorjBackgroundServices log:[NSString stringWithFormat:@"Sending success event for Upload Complete %@, ", bodyDict]];
+    [Logger log:[NSString stringWithFormat:@"Sending success event for Upload Complete %@, ", bodyDict]];
     [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_SUCCESSFULLY
                        body:bodyDict];
   };
@@ -448,13 +448,13 @@ RCT_REMAP_METHOD(uploadFile,
     NSDictionary *body = @{UploadFileContract.FILE_HANDLE : @(fileHandle),
                            UploadFileContract.PROGRESS : @(uploadProgress),
                            UploadFileContract.UPLOADED : @(uploadedBytes)};
-    [StorjBackgroundServices log:[NSString stringWithFormat:@"File upload progress: %@", body]];
+    [Logger log:[NSString stringWithFormat:@"File upload progress: %@", body]];
     [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_PROGRESS
                        body: body];
   };
   
   fileUploadCallback._uploadErrorBlock = ^(long fileHandle, int errorCode, NSString *errorMessage) {
-    [StorjBackgroundServices log:[NSString stringWithFormat:@"onError: %d, %@", errorCode, errorMessage]];
+    [Logger log:[NSString stringWithFormat:@"onError: %d, %@", errorCode, errorMessage]];
     [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_ERROR
                        body:@{@"errorMessage":errorMessage,
                               @"errorCode" : @(errorCode),
@@ -463,7 +463,7 @@ RCT_REMAP_METHOD(uploadFile,
   
   fileUploadCallback._uploadStartBlock = ^(long fileHandle) {
     NSDictionary *eventDict =@{@"fileHandle": @(fileHandle)};
-    [StorjBackgroundServices log:[NSString stringWithFormat:@"Upload Started: %@", eventDict]];
+    [Logger log:[NSString stringWithFormat:@"Upload Started: %@", eventDict]];
     [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_START
                        body:eventDict];
   };
@@ -474,22 +474,6 @@ RCT_REMAP_METHOD(uploadFile,
   {
     [uploader startUpload];
   }
-}
-  
-+(void) log:(NSString *)message{
-  NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-  NSString *docsDir = dirPaths[0];
-  NSString *filePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent: @"storjAppLog.txt"]];
-  
-  FILE *fp;
-  fp = fopen([filePath cStringUsingEncoding:NSUTF8StringEncoding], "a+");
-  if(!fp){
-    return;
-  }
-  NSLog(@"message: %@", message);
-  fprintf(fp, "\nmessage: '%s'", [message cStringUsingEncoding:kCFStringEncodingUTF8]);
-  fclose(fp);
-    
 }
 
 //resolver:(RCTPromiseResolveBlock) resolve

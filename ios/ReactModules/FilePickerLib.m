@@ -11,6 +11,7 @@
 @import MobileCoreServices;
 #import "SingleResponse.h"
 #import <Photos/Photos.h>
+#import "Logger.h"
 
 #define KEY_PATH "path"
 #define KEY_ERROR_MESSAGE "errorMessage"
@@ -98,6 +99,8 @@ RCT_REMAP_METHOD(show,
       [picker dismissViewControllerAnimated: YES completion: nil];
     });
     
+    [Logger log:[NSString stringWithFormat:@"ImagePicked.Info: %@", info]];
+    
     NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
     if([mediaType isEqualToString: (NSString *) kUTTypeImage]){
       [self processRetrievedImage: info];
@@ -109,21 +112,30 @@ RCT_REMAP_METHOD(show,
     }
   }
 
--(void)processRetrievedImage: (NSDictionary *) info {
-  
+-(void)processRetrievedImage: (NSDictionary *) info
+{
+  [Logger log:@"Processing retrieved image"];
   NSURL *imageURL = [info valueForKey: UIImagePickerControllerReferenceURL];
+
   PHAsset *asset = [[PHAsset fetchAssetsWithALAssetURLs:@[imageURL] options:nil] firstObject];
+  [Logger log:[NSString stringWithFormat:@"PHAsset: %@", asset]];
 
   NSString *fileName = [asset valueForKey:@"filename"];
-  NSLog(@"PHAsset local ident: %@", fileName);
   
-  NSString *path = [[NSTemporaryDirectory()stringByStandardizingPath] stringByAppendingPathComponent: fileName];
+  [Logger log:[NSString stringWithFormat:@"Image fileName: %@", fileName]];
+  
+  NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *rootDir = dirPaths[0];
+  NSString *path = [rootDir stringByAppendingPathComponent: fileName];
+
   UIImage *image =[info objectForKey: UIImagePickerControllerOriginalImage];
   
   // GIFs break when resized, so we handle them differently
-  if ([[imageURL absoluteString] containsString: @"ext=GIF"]) {
+  if ([[imageURL absoluteString] containsString: @"ext=GIF"])
+  {
     ALAssetsLibrary* assetsLibrary = [[ALAssetsLibrary alloc] init];
-    [assetsLibrary assetForURL: imageURL resultBlock: ^(ALAsset *asset) {
+    [assetsLibrary assetForURL: imageURL resultBlock: ^(ALAsset *asset)
+    {
       ALAssetRepresentation *rep = [asset defaultRepresentation];
       
       Byte *buffer = (Byte*)malloc(rep.size);
@@ -132,7 +144,8 @@ RCT_REMAP_METHOD(show,
       [data writeToFile: path atomically: YES];
       
       NSString *fileURL = [[NSURL fileURLWithPath: path] absoluteString];
-      if(fileURL){
+      if(fileURL)
+      {
         self.resolve(@{@KEY_SUCCESS: @(YES),
                         @KEY_RESULT: @[@{@KEY_PATH: fileURL,
                                          @KEY_ERROR_MESSAGE: @""
@@ -165,6 +178,7 @@ RCT_REMAP_METHOD(show,
   NSData *data = UIImageJPEGRepresentation(image, 1);
   [data writeToFile: path atomically: YES];
   NSString *filePath = [[NSURL fileURLWithPath: path] absoluteString];
+  [Logger log:[NSString stringWithFormat:@"File path: %@", filePath]];
   if(filePath){
     self.resolve(@{@KEY_SUCCESS: @(YES),
                     @KEY_RESULT: @[@{@KEY_PATH: filePath,
@@ -203,18 +217,20 @@ RCT_REMAP_METHOD(show,
       NSString *formattedDate = [dateFormatter stringFromDate:creationDate];
       if(formattedDate)
       {
-        NSString *extension = [[asset valueForKey:@"filename"] pathExtension];
+        NSString *extension = [[[asset valueForKey:@"filename"] pathExtension] lowercaseString];
         fileName = [NSString stringWithFormat:@"Video_%@.%@", formattedDate, extension];
       }
     } else {
       fileName = [asset valueForKey:@"filename"];
     }
   } else {
-    fileName = [videoURL lastPathComponent];
+    fileName = [[videoURL lastPathComponent] lowercaseString];
   }
  
+  NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *rootDir = dirPaths[0];
+  NSString *path = [rootDir stringByAppendingPathComponent: fileName];
   
-  NSString *path = [[NSTemporaryDirectory()stringByStandardizingPath] stringByAppendingPathComponent: fileName];
   NSURL *videoDestinationURL = [NSURL fileURLWithPath: path];
   
   NSFileManager *fileManager = [NSFileManager defaultManager];
