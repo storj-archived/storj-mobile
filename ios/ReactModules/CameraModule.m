@@ -46,7 +46,8 @@ didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
   [picker dismissViewControllerAnimated:YES completion:NULL];
   if(filePath) {
     [[StorjBackgroundServices allocWithZone:nil] uploadFileWithBucketId: _bucketId
-                                                          withLocalPath: filePath];
+                                                          withLocalPath: filePath
+                                                               fileName: @""];
   }
 }
 
