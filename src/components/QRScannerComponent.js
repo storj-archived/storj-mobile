@@ -79,14 +79,6 @@ export default class QRScannerComponent extends Component {
                             <TouchableOpacity onPress = { () => this.navigateBack() } >
                                 <Image style = { styles.backButton } source = { require('../images/Icons/BackButton.png') }/>
                             </TouchableOpacity>
-                            <View style = { styles.flexRow }>
-                                <TouchableOpacity onPress = { () => {} } >
-                                    <Image style = { styles.flashButton } source = { require('../images/Icons/Flash.png') } />
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress = { () => {} } >
-                                    <Image style = { styles.reverseCameraButton } source = { require('../images/Icons/SwitchCamera.png') }/>
-                                </TouchableOpacity>
-                            </View>
                         </View>
                         {
                             this.state.borderColor === '#EB5757' ?
@@ -133,7 +125,7 @@ const styles = StyleSheet.create({
     buttonPanelContainer: {
         marginTop: getHeight(30), 
         flexDirection: 'row', 
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         paddingLeft: getWidth(20), 
         paddingRight: getWidth(20)
     },
@@ -143,16 +135,7 @@ const styles = StyleSheet.create({
     },
     flexRow: {
         flexDirection: 'row'
-    },
-    flashButton: {
-        width: getWidth(24), 
-        height: getHeight(36), 
-        marginRight: getWidth(23)
-    },
-    reverseCameraButton: {
-        width: getWidth(30),
-        height: getHeight(30)
-    },
+    }
     errorMessageContainer: {
         marginTop: getHeight(500),
         alignItems: 'center'
