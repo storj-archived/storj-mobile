@@ -8,8 +8,13 @@
 
 #import "StorjBackgroundServices.h"
 #import <CoreData/CoreData.h>
+
 #import "STUploader.h"
+#import "STDownloader.h"
+
 #import "STFileUploadCallback.h"
+#import "STFileDownloadCallback.h"
+
 #import "Logger.h"
 
 @implementation StorjBackgroundServices
@@ -310,121 +315,78 @@ RCT_REMAP_METHOD(downloadFile,
                  resolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-  [MethodHandler
-   invokeBackgroundSyncRemainWithParams:@{@KEY_TASK_NAME:@"DownloadFile"}
-   methodHandlerBlock:^(NSDictionary *params, UIBackgroundTaskIdentifier taskId) {
-     
-     if(!fileId || fileId.length == 0){
-       return;
-     }
-     
-     if(!localPath || localPath.length == 0){
-       return;
-     }
-     
-     __block double downloadProgress = 0;
-     ThumbnailProcessor *thumbnailProcessor = [[ThumbnailProcessor alloc]
-                                               initThumbnailProcessorWithFileRepository:[self fileRepository]];
-     long fileRef = 0;
-     [Logger log: [NSString stringWithFormat:@"Downloading \nfile %@ \nfrom %@ \nto %@",
-            fileId, bucketId, localPath]];
-     FileDbo *fileDbo = [[self fileRepository] getByFileId:fileId];
-     if(!fileDbo){
-#pragma mark TODO return boolean, move to separate method
-       return;
-     }
-     SJFileDownloadCallback *callback = [[SJFileDownloadCallback alloc]init];
-     
-     callback.onDownloadProgress = ^(NSString *fileId, double progress, double downloadedBytes, double totalBytes) {
-       if([fileDbo _fileHandle] == 0){
-         return;
-       }
-       if(progress == 0){
-         return;
-       }
-       if(progress - downloadProgress > 0.02){
-         downloadProgress = progress;
-       }
-       if(downloadProgress != progress){
-         return;
-       }
-       NSDictionary *eventDictionary = @{FileContract.FILE_ID: fileId,
-                                         FileContract.FILE_HANDLE: @([fileDbo _fileHandle]),
-                                         @"progress": @(progress)};
-       [Logger log:[NSString stringWithFormat:@"FileDownloadProgress: %@", eventDictionary]];
-       [self sendEventWithName:EventNames.EVENT_FILE_DOWNLOAD_PROGRESS body:eventDictionary];
-     };
-     
-     callback.onDownloadComplete = ^(NSString *fileId, NSString *localPath) {
-       [Logger log:
-        [NSString stringWithFormat:@"Download complete fileID: %@, localPath: %@", fileId, localPath]];
-       Response *updateResponse =[[self fileRepository]
-                                  updateById:fileId
-                                  downloadState:2
-                                  fileHandle:0
-                                  fileUri:localPath];
-       NSLog(@"InsertUpdateDB RESULT: %@", [updateResponse toDictionary]);
-       if([updateResponse isSuccess]){
-         
-         NSMutableDictionary *eventDictionary = [NSMutableDictionary dictionary];
-         [eventDictionary setObject:[DictionaryUtils checkAndReturnNSString:fileId]
-                             forKey:FileContract.FILE_ID];
-         [eventDictionary setObject:localPath forKey:@"localPath"];
-         NSLog(@"FILE MIME_TYPE: %@", [fileDbo _mimeType]);
-         //      if([[fileDbo _mimeType] containsString:@"image/"]){
-         SingleResponse *thumbnailResponse = [thumbnailProcessor getThumbnailWithFileId:fileId
-                                                                               filePath:localPath];
-         
-         if([thumbnailResponse isSuccess]){
-           [eventDictionary setObject:[DictionaryUtils
-                                       checkAndReturnNSString:[thumbnailResponse getResult]]
-                               forKey:FileContract.FILE_THUMBNAIL];
-         }
-         //      }
-         [self sendEventWithName:EventNames.EVENT_FILE_DOWNLOAD_SUCCESS body:eventDictionary];
-         [Logger log:[NSString stringWithFormat:@"DownloadComplete: %@", eventDictionary]];
-       }
-     };
-     
-     callback.onError = ^(int errorCode, NSString * _Nullable errorMessage) {
-       [Logger log:[NSString stringWithFormat:@"File download for fileID: %@, error %d, %@", fileId, errorCode, errorMessage]];
-       Response* updateResponse = [[self fileRepository] updateById:fileId downloadState:0 fileHandle:0 fileUri:nil];
-       [Logger log:[NSString stringWithFormat:@"Error updateResponse %@", [updateResponse toDictionary]]];
-       if([updateResponse isSuccess]){
-         NSMutableDictionary *eventDictionary = [NSMutableDictionary dictionary];
-         [eventDictionary setObject: [DictionaryUtils checkAndReturnNSString:fileId] forKey:FileContract.FILE_ID];
-         [eventDictionary setObject: [DictionaryUtils checkAndReturnNSString:errorMessage] forKey:@"errorMessage"];
-         [eventDictionary setObject: @(errorCode)forKey:@"errorCode"];
-         
-         [Logger log:[NSString stringWithFormat:@"File download error event dict: %@", eventDictionary]];
-         [self sendEventWithName:EventNames.EVENT_FILE_DOWNLOAD_ERROR body:eventDictionary];
-       }
-     };
-     
-     fileRef = [self.storjWrapper downloadFile:fileId
-                                    fromBucket:bucketId
-                                     localPath:localPath
-                                withCompletion:callback];
-     @synchronized (fileDbo) {
-       if(fileRef == 0 || fileRef == -1){
-         [Logger log:@"File download is not started. FileRef == -1"];
-         return;
-       }
-       [fileDbo set_fileHandle:fileRef];
-       if([[[self fileRepository] updateById:fileId
-                               downloadState:1
-                                  fileHandle:[fileDbo _fileHandle]
-                                     fileUri:nil] isSuccess]){
-         NSDictionary * eventDictionary = @{FileContract.FILE_ID: fileId,
-                                            FileContract.FILE_HANDLE: @([fileDbo _fileHandle])};
-         [Logger log:[NSString stringWithFormat:@"FileDownload started: %@", eventDictionary]];
-         [self sendEventWithName:EventNames.EVENT_FILE_DOWNLOAD_START
-                            body:eventDictionary];
-       }
-     }
-   } expirationHandler:^{
-     
-   }];
+  [Logger log: [NSString stringWithFormat:@"Downloading \nfile %@ \nfrom %@ \nto %@",
+                fileId, bucketId, localPath]];
+  
+  STFileDownloadCallback *fileDownloadCallback = [[STFileDownloadCallback alloc] init];
+
+  fileDownloadCallback._downloadStartBlock = ^(NSString *fileId,
+                                               long fileHandle)
+  {
+    NSDictionary * eventDictionary = @{FileContract.FILE_ID: fileId,
+                                       FileContract.FILE_HANDLE: @(fileHandle)};
+    
+    [Logger log:[NSString stringWithFormat:@"FileDownload started: %@", eventDictionary]];
+    
+    [self sendEventWithName:EventNames.EVENT_FILE_DOWNLOAD_START
+                       body:eventDictionary];
+  };
+  
+  fileDownloadCallback._downloadProgressBlock = ^(NSString *fileId,
+                                                  long fileHandle,
+                                                  double progress)
+  {
+    NSDictionary *eventDictionary = @{FileContract.FILE_ID: fileId,
+                                      FileContract.FILE_HANDLE: @(fileHandle),
+                                      @"progress": @(progress)};
+    
+    [Logger log:[NSString stringWithFormat:@"FileDownloadProgress: %@", eventDictionary]];
+    
+    [self sendEventWithName:EventNames.EVENT_FILE_DOWNLOAD_PROGRESS body:eventDictionary];
+  };
+  
+  fileDownloadCallback._downloadCompleteBlock = ^(NSString *fileId,
+                                                  NSString *filePath,
+                                                  NSString *thumbnail)
+  {
+    
+    NSDictionary *eventDictionary =
+    @{
+      FileContract.FILE_ID : [DictionaryUtils checkAndReturnNSString:fileId],
+      @"localPath" : [DictionaryUtils checkAndReturnNSString:filePath],
+      FileContract.FILE_THUMBNAIL : [DictionaryUtils checkAndReturnNSString:thumbnail]
+      };
+
+    [self sendEventWithName:EventNames.EVENT_FILE_DOWNLOAD_SUCCESS body:eventDictionary];
+    
+    [Logger log:[NSString stringWithFormat:@"DownloadComplete: %@", eventDictionary]];
+  };
+  
+  fileDownloadCallback._downloadErrorBlock = ^(NSString *fileId,
+                                               int errorCode,
+                                               NSString *errorMessage)
+  {
+    NSDictionary *eventDictionary =
+    @{
+      FileContract.FILE_ID : [DictionaryUtils checkAndReturnNSString:fileId],
+      @"errorMessage": [DictionaryUtils checkAndReturnNSString:errorMessage],
+      @"errorCode" : @(errorCode)
+      };
+    
+    [Logger log:[NSString stringWithFormat:@"File download error event dict: %@", eventDictionary]];
+    
+    [self sendEventWithName:EventNames.EVENT_FILE_DOWNLOAD_ERROR body:eventDictionary];
+  };
+  
+  STDownloader *downloader = [[STDownloader alloc] initWithFileId:fileId
+                                                         bucketId:bucketId
+                                                        localPath:localPath
+                                                 callbackNotifier:fileDownloadCallback];
+  
+  if([downloader isDownloadValid])
+  {
+    [downloader startDownload];
+  }
 }
 
 RCT_REMAP_METHOD(uploadFile,
@@ -468,7 +430,10 @@ RCT_REMAP_METHOD(uploadFile,
                        body:eventDict];
   };
   
-  STUploader *uploader = [[STUploader alloc] initWithBucketId:bucketId localPath:localPath fileName:fileName callbackNotifier:fileUploadCallback];
+  STUploader *uploader = [[STUploader alloc] initWithBucketId:bucketId
+                                                    localPath:localPath
+                                                     fileName:fileName
+                                             callbackNotifier:fileUploadCallback];
   
   if([uploader isUploadValid])
   {

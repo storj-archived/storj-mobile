@@ -15,7 +15,7 @@
 
 @property (nonatomic, strong) FileRepository *_fileRepository;
 
--(ThumbnailProcessor *) initThumbnailProcessorWithFileRepository: (FileRepository *) fileRepository;
+-(ThumbnailProcessor *) initWithFileRepository: (FileRepository *) fileRepository;
 
 -(SingleResponse *) getThumbnailWithFileId: (NSString *) fileID
                                   filePath: (NSString *) filePath;

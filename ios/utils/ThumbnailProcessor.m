@@ -11,7 +11,7 @@
 @implementation ThumbnailProcessor
 @synthesize _fileRepository;
 
--(ThumbnailProcessor *) initThumbnailProcessorWithFileRepository: (FileRepository *) fileRepository {
+-(ThumbnailProcessor *) initWithFileRepository: (FileRepository *) fileRepository {
   if(self = [super init]) {
     _fileRepository = fileRepository;
   }

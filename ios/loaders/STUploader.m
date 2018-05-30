@@ -148,7 +148,7 @@
   
   _innerUploadFileCallback.onSuccess = ^(SJFile * file){
     ThumbnailProcessor *thumbnailProcessor = [[ThumbnailProcessor alloc]
-                                              initThumbnailProcessorWithFileRepository:[self _fileRepository]];
+                                              initWithFileRepository:[self _fileRepository]];
     NSString *thumbnail = nil;
     // Due to the fact that StorjLib returns mimeType: applicatio9n/octet-stream, we are trying to
     // generate thumbnail image and save it to local database

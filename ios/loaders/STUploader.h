@@ -23,7 +23,6 @@
                         fileName: (NSString *) fileName
                 callbackNotifier: (STFileUploadCallback *) fileUploadCallback;
   
-  
 -(BOOL) isUploadValid;
   
 -(void) startUpload;
