@@ -33,6 +33,7 @@ public class CameraModule extends ReactContextBaseJavaModule implements Activity
     private ReactContext mReactContext;
     private String mCurrentPhotoPath;
     private String mCurrentBucketId;
+    private String mCurrentPhotoName;
 
     public CameraModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -59,6 +60,7 @@ public class CameraModule extends ReactContextBaseJavaModule implements Activity
 
             mCurrentPhotoPath = image.getAbsolutePath();
             mCurrentBucketId = bucketId;
+            mCurrentPhotoName = imageName + ".jpg";
 
             Uri photoURI = FileProvider.getUriForFile(mReactContext,
                     BuildConfig.APPLICATION_ID,
@@ -88,11 +90,12 @@ public class CameraModule extends ReactContextBaseJavaModule implements Activity
 
         if(resultCode == Activity.RESULT_OK) {
             galleryAddPic(mCurrentPhotoPath);
-            uploadFile(mCurrentPhotoPath, mCurrentBucketId);
+            uploadFile(mCurrentPhotoPath, mCurrentBucketId, mCurrentPhotoName);
         } 
 
         mCurrentPhotoPath = null;
         mCurrentBucketId = null;
+        mCurrentPhotoName = null;
     }
 
     private void galleryAddPic(String photoPath) {
@@ -103,7 +106,7 @@ public class CameraModule extends ReactContextBaseJavaModule implements Activity
         mReactContext.sendBroadcast(mediaScanIntent);
     }
 
-    private void uploadFile(String filePath, String bucketId) {
+    private void uploadFile(String filePath, String bucketId, String fileName) {
         if(filePath == null || bucketId == null) {
             return;
         }
@@ -116,15 +119,16 @@ public class CameraModule extends ReactContextBaseJavaModule implements Activity
                 return;
             }
 
-            startUpload(bucketDbo.getId(), filePath);
+            startUpload(bucketDbo.getId(), filePath, fileName);
         } catch(Exception e) {}
     }
 
-    private void startUpload(String bucketId, String uri) {
+    private void startUpload(String bucketId, String uri, String fileName) {
         Intent uploadIntent = new Intent(mReactContext, UploadService.class);
         uploadIntent.setAction(UploadService.ACTION_UPLOAD_FILE);
         uploadIntent.putExtra(UploadService.PARAM_BUCKET_ID, bucketId);
         uploadIntent.putExtra(UploadService.PARAM_LOCAL_PATH, uri);
+        uploadIntent.putExtra(UploadService.PARAM_FILE_NAME, fileName);
 
         mReactContext.startService(uploadIntent);
     }
