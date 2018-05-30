@@ -79,12 +79,18 @@ class MainContainer extends Component {
         let iosUploadFileIcon = require('../images/ActionBar/IosUploadFile.png');
         let openedBucketIdGetter = () => this.props.openedBucketId;
         let dashboardBucketIdGetter = () => this.props.dashboardBucketId;
-        let myPhotosBucketIdGetter = () => this.props.myPhotosBucketId;
+        let myPhotosBucketIdGetter = () => {
+            if(this.props.myPhotosBucketId) return this.props.myPhotosBucketId;
+
+            let myPhotosBucketId = this.props.buckets.filter(bucket => bucket.entity.name === "Pictures")[0].entity.id;
+             
+            return myPhotosBucketId;
+        }
 
         //Action callbacks
         let createBucketAction = newAction(() => { this.props.showCreateBucketInput(); }, require('../images/ActionBar/NewBucketIcon.png'));
         let openFilePickerAction = (type, imgUrl) => newAction(() => { this.bucketScreenUploadFile(type) }, imgUrl);
-        let openCameraAction = (id) => newAction(() => { CameraModule.openCamera(id); }, require('../images/ActionBar/UploadPhotoIcon.png'));
+        let openCameraAction = () => newAction(() => { CameraModule.openCamera(myPhotosBucketIdGetter()); }, require('../images/ActionBar/UploadPhotoIcon.png'));
         let uploadFileAction = (bucketIdGetter, type, imgUrl) => newAction(() => { this.uploadFile(bucketIdGetter(), type); }, imgUrl);
         this.setFavouriteAction = newAction(() => { this.setFavourite(); }, this.props.isStarredBucketsSelected ? this.unfavIcon
                                                                                                           : this.favIcon);
@@ -98,9 +104,9 @@ class MainContainer extends Component {
 
         //Action arrays
         this.bucketActions = Platform.OS === "android" 
-            ? [ createBucketAction, openFilePickerAction(null, uploadFileIcon), openCameraAction(this.props.openedBucketId) ] 
+            ? [ createBucketAction, openFilePickerAction(null, uploadFileIcon), openCameraAction() ] 
             : [ createBucketAction, openFilePickerAction("document", iosUploadFileIcon), 
-                openFilePickerAction("image", iosUploadPhotoIcon), openCameraAction(this.props.openedBucketId) ];
+                openFilePickerAction("image", iosUploadPhotoIcon), openCameraAction() ];
     
         this.selectionBucketActions = Platform.OS === "android" 
             ? [ this.setFavouriteAction, uploadFileToSelectedBucketsAction(null, uploadFileIcon), tryDeleteBucketsAction ]
@@ -115,19 +121,19 @@ class MainContainer extends Component {
         ];
 
         this.openedBucketActions = Platform.OS === "android" 
-            ? [ uploadFileAction(openedBucketIdGetter, "", uploadFileIcon), openCameraAction(props.openedBucketId) ]
+            ? [ uploadFileAction(openedBucketIdGetter, "", uploadFileIcon), openCameraAction() ]
             : [ uploadFileAction(openedBucketIdGetter, "document", iosUploadFileIcon), 
-                uploadFileAction(openedBucketIdGetter, "image", iosUploadPhotoIcon), openCameraAction(props.openedBucketId) ];
+                uploadFileAction(openedBucketIdGetter, "image", iosUploadPhotoIcon), openCameraAction() ];
 
         this.dashboardBucketActions = Platform.OS === "android" 
-            ? [ uploadFileAction(dashboardBucketIdGetter, "", uploadFileIcon), openCameraAction(props.dashboardBucketId) ]
+            ? [ uploadFileAction(dashboardBucketIdGetter, "", uploadFileIcon), openCameraAction() ]
             : [ uploadFileAction(dashboardBucketIdGetter, "document", iosUploadFileIcon), 
-                uploadFileAction(dashboardBucketIdGetter, "image", iosUploadPhotoIcon), openCameraAction(props.dashboardBucketId) ];
+                uploadFileAction(dashboardBucketIdGetter, "image", iosUploadPhotoIcon), openCameraAction() ];
 
         this.picturesBucketActions = Platform.OS === "android" 
-            ? [ uploadFileAction(myPhotosBucketIdGetter, "", uploadFileIcon), openCameraAction(props.myPhotosBucketId) ]
+            ? [ uploadFileAction(myPhotosBucketIdGetter, "", uploadFileIcon), openCameraAction() ]
             : [ uploadFileAction(myPhotosBucketIdGetter, "document", iosUploadFileIcon), 
-                uploadFileAction(myPhotosBucketIdGetter, "image", iosUploadPhotoIcon), openCameraAction(props.myPhotosBucketId) ];
+                uploadFileAction(myPhotosBucketIdGetter, "image", iosUploadPhotoIcon), openCameraAction() ];
 
         this.downloadListener = (fileParams) => {
             let res = observablePropFactory.getObservable(fileParams.fileId);
