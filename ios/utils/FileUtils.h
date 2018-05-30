@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface FileUtils : NSObject
+
 +(NSNumber *) getFileSizeWithPath: (NSString *)filePath;
+
 +(NSString *) getFileNameWithPath: (NSString *)filePath;
+
++(NSString *) getFileNameWithoutExtensionWithPath: (NSString *)filePath;
+
 @end

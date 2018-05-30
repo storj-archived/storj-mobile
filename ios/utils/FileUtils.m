@@ -10,14 +10,26 @@
 
 @implementation FileUtils
 
-+(NSNumber *) getFileSizeWithPath: (NSString *)filePath{
++(NSNumber *) getFileSizeWithPath: (NSString *)filePath
+{
+  
   return [NSNumber numberWithUnsignedLongLong:[[[NSFileManager defaultManager]
                                                 attributesOfItemAtPath:filePath error:nil]
                                                fileSize]];
 }
 
-+(NSString *) getFileNameWithPath: (NSString *)filePath{
++(NSString *) getFileNameWithPath: (NSString *)filePath
+{
+  
+  return [filePath lastPathComponent];
+}
+
++(NSString *) getFileNameWithoutExtensionWithPath: (NSString *)filePath
+{
+  
   return [[filePath lastPathComponent] stringByDeletingPathExtension];
 }
+
+
 
 @end

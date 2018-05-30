@@ -24,6 +24,8 @@
 
 #import "ThumbnailProcessor.h"
 
+#import "Logger.h"
+
 @implementation STUploader
   {
     UploadFileDbo *_uploadFileDbo;
@@ -149,15 +151,26 @@
       // Due to the fact that StorjLib returns mimeType: applicatio9n/octet-stream, we are trying to
       // generate thumbnail image and save it to local database
       SingleResponse *thumbnailGenerationResponse = [thumbnailProcessor getThumbnailWithFilePath:_localPath];
-      if([thumbnailGenerationResponse isSuccess]){
+      if([thumbnailGenerationResponse isSuccess])
+      {
         thumbnail = [thumbnailGenerationResponse getResult];
       }
+      NSFileManager *fileManager = [NSFileManager defaultManager];
+      [_localPath stringByStandardizingPath];
+      NSString *filePath = [_localPath stringByReplacingOccurrencesOfString: @"file://"
+                                                                 withString: @""];
+      if([fileManager fileExistsAtPath:filePath])
+      {
+        NSError *error;
+        [fileManager removeItemAtPath: filePath error: &error];
+      }
+      
       FileModel *fileModel = [[FileModel alloc] initWithSJFile:file
                                                        starred:NO
                                                         synced:NO
-                                                 downloadState:2
+                                                 downloadState:0
                                                     fileHandle:[_uploadFileDbo fileHandle]
-                                                       fileUri:_localPath
+                                                       fileUri:@""
                                                      thumbnail:thumbnail];
       
       [fileModel set_name:[_uploadFileDbo name]];
