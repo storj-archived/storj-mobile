@@ -95,6 +95,8 @@
 		DCDF70742064D348001B2F95 /* UploadFileRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF70732064D348001B2F95 /* UploadFileRepository.m */; };
 		DCDF7077206895DF001B2F95 /* MethodHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF7076206895DF001B2F95 /* MethodHandler.m */; };
 		DCDF707A2068B337001B2F95 /* StorjBackgroundServices.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF70792068B337001B2F95 /* StorjBackgroundServices.m */; };
+		DCEB072820BEAE9800D50758 /* STDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEB072720BEAE9800D50758 /* STDownloader.m */; };
+		DCEB075420BEAFBC00D50758 /* STFileDownloadCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEB075320BEAFBC00D50758 /* STFileDownloadCallback.m */; };
 		DCEB535020697A55006B0624 /* EventNames.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEB534F20697A55006B0624 /* EventNames.m */; };
 		DCEB5379206AA77A006B0624 /* PromiseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEB5378206AA77A006B0624 /* PromiseHandler.m */; };
 		DCEB539A206BA643006B0624 /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEB5399206BA643006B0624 /* FileUtils.m */; };
@@ -567,6 +569,10 @@
 		DCDF7076206895DF001B2F95 /* MethodHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MethodHandler.m; sourceTree = "<group>"; };
 		DCDF70782068B337001B2F95 /* StorjBackgroundServices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorjBackgroundServices.h; sourceTree = "<group>"; };
 		DCDF70792068B337001B2F95 /* StorjBackgroundServices.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StorjBackgroundServices.m; sourceTree = "<group>"; };
+		DCEB072620BEAE9800D50758 /* STDownloader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STDownloader.h; sourceTree = "<group>"; };
+		DCEB072720BEAE9800D50758 /* STDownloader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STDownloader.m; sourceTree = "<group>"; };
+		DCEB075220BEAFBC00D50758 /* STFileDownloadCallback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STFileDownloadCallback.h; sourceTree = "<group>"; };
+		DCEB075320BEAFBC00D50758 /* STFileDownloadCallback.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STFileDownloadCallback.m; sourceTree = "<group>"; };
 		DCEB534E20697A55006B0624 /* EventNames.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventNames.h; sourceTree = "<group>"; };
 		DCEB534F20697A55006B0624 /* EventNames.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventNames.m; sourceTree = "<group>"; };
 		DCEB5377206AA77A006B0624 /* PromiseHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PromiseHandler.h; sourceTree = "<group>"; };
@@ -866,10 +872,11 @@
 		DC03940920B2EEF500904DEB /* loaders */ = {
 			isa = PBXGroup;
 			children = (
+				DCEB075120BEAF9E00D50758 /* callbacks */,
 				DCBD1A4E20B2F07E005B30C3 /* STUploader.h */,
 				DCBD1A4F20B2F07E005B30C3 /* STUploader.m */,
-				DCBF1F2C20BD786500240E8B /* STFileUploadCallback.h */,
-				DCBF1F2D20BD786500240E8B /* STFileUploadCallback.m */,
+				DCEB072620BEAE9800D50758 /* STDownloader.h */,
+				DCEB072720BEAE9800D50758 /* STDownloader.m */,
 			);
 			path = loaders;
 			sourceTree = "<group>";
@@ -1067,6 +1074,17 @@
 				DCDF705C20643850001B2F95 /* Info.plist */,
 			);
 			path = FMDB;
+			sourceTree = "<group>";
+		};
+		DCEB075120BEAF9E00D50758 /* callbacks */ = {
+			isa = PBXGroup;
+			children = (
+				DCBF1F2C20BD786500240E8B /* STFileUploadCallback.h */,
+				DCBF1F2D20BD786500240E8B /* STFileUploadCallback.m */,
+				DCEB075220BEAFBC00D50758 /* STFileDownloadCallback.h */,
+				DCEB075320BEAFBC00D50758 /* STFileDownloadCallback.m */,
+			);
+			path = callbacks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1631,6 +1649,8 @@
 				DCDF6FF32062D423001B2F95 /* FileDeleteModel.m in Sources */,
 				DCDF6FC8205AE94C001B2F95 /* FileContract.m in Sources */,
 				DCDF705F20643850001B2F95 /* FMDatabaseAdditions.m in Sources */,
+				DCEB072820BEAE9800D50758 /* STDownloader.m in Sources */,
+				DCEB075420BEAFBC00D50758 /* STFileDownloadCallback.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
