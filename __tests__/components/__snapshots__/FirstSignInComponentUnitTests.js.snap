@@ -13,7 +13,34 @@ ShallowWrapper {
         "SYNC_PHOTOS": [Function],
       }
     }
-    options={Array []}
+    options={
+      Array [
+        Object {
+          "isSelected": false,
+          "mask": 16,
+          "title": "My photos",
+          "type": "Pictures",
+        },
+        Object {
+          "isSelected": false,
+          "mask": 8,
+          "title": "My movies",
+          "type": "Movies",
+        },
+        Object {
+          "isSelected": false,
+          "mask": 4,
+          "title": "My documents",
+          "type": "Documents",
+        },
+        Object {
+          "isSelected": false,
+          "mask": 2,
+          "title": "My music",
+          "type": "Music",
+        },
+      ]
+    }
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -28,14 +55,14 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <View
+        <Component
           style={
             Object {
               "paddingHorizontal": 40,
             }
           }
         >
-          <View
+          <Component
             style={
               Object {
                 "marginTop": 30,
@@ -57,8 +84,8 @@ ShallowWrapper {
             >
               Let’s get started!
             </Text>
-          </View>
-          <View
+          </Component>
+          <Component
             style={
               Object {
                 "marginTop": 38,
@@ -93,23 +120,30 @@ ShallowWrapper {
                  25GB of free storage
               </Text>
             </Text>
-          </View>
-          <View>
+          </Component>
+          <Component
+            style={
+              Object {
+                "alignItems": "center",
+                "height": 500,
+                "justifyContent": "center",
+                "marginLeft": -40,
+                "marginTop": 76,
+                "width": 750,
+              }
+            }
+          >
             <Image
               resizeMode="contain"
               source="Folder.png"
               style={
                 Object {
-                  "alignSelf": "center",
                   "height": 500,
-                  "marginLeft": -40,
-                  "marginTop": 76,
-                  "width": 750,
                 }
               }
             />
-          </View>
-          <View
+          </Component>
+          <Component
             style={
               Object {
                 "marginTop": 128,
@@ -144,7 +178,7 @@ ShallowWrapper {
                  photos, videos,
               </Text>
             </Text>
-            <View
+            <Component
               style={
                 Object {
                   "flexDirection": "row",
@@ -207,8 +241,8 @@ ShallowWrapper {
               >
                  or add them manually.
               </Text>
-            </View>
-          </View>
+            </Component>
+          </Component>
           <TouchableOpacity
             activeOpacity={0.2}
             onPressOut={[Function]}
@@ -236,10 +270,10 @@ ShallowWrapper {
                 }
               }
             >
-              Sync my device
+              Sync my files
             </Text>
           </TouchableOpacity>
-        </View>,
+        </Component>,
         undefined,
       ],
       "style": Object {
@@ -255,7 +289,7 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <View
+            <Component
               style={
                 Object {
                   "marginTop": 30,
@@ -277,8 +311,8 @@ ShallowWrapper {
               >
                 Let’s get started!
               </Text>
-            </View>,
-            <View
+            </Component>,
+            <Component
               style={
                 Object {
                   "marginTop": 38,
@@ -313,23 +347,30 @@ ShallowWrapper {
                    25GB of free storage
                 </Text>
               </Text>
-            </View>,
-            <View>
+            </Component>,
+            <Component
+              style={
+                Object {
+                  "alignItems": "center",
+                  "height": 500,
+                  "justifyContent": "center",
+                  "marginLeft": -40,
+                  "marginTop": 76,
+                  "width": 750,
+                }
+              }
+            >
               <Image
                 resizeMode="contain"
                 source="Folder.png"
                 style={
                   Object {
-                    "alignSelf": "center",
                     "height": 500,
-                    "marginLeft": -40,
-                    "marginTop": 76,
-                    "width": 750,
                   }
                 }
               />
-            </View>,
-            <View
+            </Component>,
+            <Component
               style={
                 Object {
                   "marginTop": 128,
@@ -364,7 +405,7 @@ ShallowWrapper {
                    photos, videos,
                 </Text>
               </Text>
-              <View
+              <Component
                 style={
                   Object {
                     "flexDirection": "row",
@@ -427,8 +468,8 @@ ShallowWrapper {
                 >
                    or add them manually.
                 </Text>
-              </View>
-            </View>,
+              </Component>
+            </Component>,
             <TouchableOpacity
               activeOpacity={0.2}
               onPressOut={[Function]}
@@ -456,7 +497,7 @@ ShallowWrapper {
                   }
                 }
               >
-                Sync my device
+                Sync my files
               </Text>
             </TouchableOpacity>,
           ],
@@ -619,14 +660,18 @@ ShallowWrapper {
                 source="Folder.png"
                 style={
                   Object {
-                    "alignSelf": "center",
                     "height": 500,
-                    "marginLeft": -40,
-                    "marginTop": 76,
-                    "width": 750,
                   }
                 }
               />,
+              "style": Object {
+                "alignItems": "center",
+                "height": 500,
+                "justifyContent": "center",
+                "marginLeft": -40,
+                "marginTop": 76,
+                "width": 750,
+              },
             },
             "ref": null,
             "rendered": Object {
@@ -637,11 +682,7 @@ ShallowWrapper {
                 "resizeMode": "contain",
                 "source": "Folder.png",
                 "style": Object {
-                  "alignSelf": "center",
                   "height": 500,
-                  "marginLeft": -40,
-                  "marginTop": 76,
-                  "width": 750,
                 },
               },
               "ref": null,
@@ -684,7 +725,7 @@ ShallowWrapper {
                      photos, videos,
                   </Text>
                 </Text>,
-                <View
+                <Component
                   style={
                     Object {
                       "flexDirection": "row",
@@ -747,7 +788,7 @@ ShallowWrapper {
                   >
                      or add them manually.
                   </Text>
-                </View>,
+                </Component>,
               ],
               "style": Object {
                 "marginTop": 128,
@@ -980,7 +1021,7 @@ ShallowWrapper {
                   }
                 }
               >
-                Sync my device
+                Sync my files
               </Text>,
               "onPressOut": [Function],
               "style": Object {
@@ -1001,7 +1042,7 @@ ShallowWrapper {
               "props": Object {
                 "accessible": true,
                 "allowFontScaling": true,
-                "children": "Sync my device",
+                "children": "Sync my files",
                 "ellipsizeMode": "tail",
                 "style": Object {
                   "color": "white",
@@ -1010,7 +1051,7 @@ ShallowWrapper {
                 },
               },
               "ref": null,
-              "rendered": "Sync my device",
+              "rendered": "Sync my files",
               "type": [Function],
             },
             "type": [Function],
@@ -1029,14 +1070,14 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <View
+          <Component
             style={
               Object {
                 "paddingHorizontal": 40,
               }
             }
           >
-            <View
+            <Component
               style={
                 Object {
                   "marginTop": 30,
@@ -1058,8 +1099,8 @@ ShallowWrapper {
               >
                 Let’s get started!
               </Text>
-            </View>
-            <View
+            </Component>
+            <Component
               style={
                 Object {
                   "marginTop": 38,
@@ -1094,23 +1135,30 @@ ShallowWrapper {
                    25GB of free storage
                 </Text>
               </Text>
-            </View>
-            <View>
+            </Component>
+            <Component
+              style={
+                Object {
+                  "alignItems": "center",
+                  "height": 500,
+                  "justifyContent": "center",
+                  "marginLeft": -40,
+                  "marginTop": 76,
+                  "width": 750,
+                }
+              }
+            >
               <Image
                 resizeMode="contain"
                 source="Folder.png"
                 style={
                   Object {
-                    "alignSelf": "center",
                     "height": 500,
-                    "marginLeft": -40,
-                    "marginTop": 76,
-                    "width": 750,
                   }
                 }
               />
-            </View>
-            <View
+            </Component>
+            <Component
               style={
                 Object {
                   "marginTop": 128,
@@ -1145,7 +1193,7 @@ ShallowWrapper {
                    photos, videos,
                 </Text>
               </Text>
-              <View
+              <Component
                 style={
                   Object {
                     "flexDirection": "row",
@@ -1208,8 +1256,8 @@ ShallowWrapper {
                 >
                    or add them manually.
                 </Text>
-              </View>
-            </View>
+              </Component>
+            </Component>
             <TouchableOpacity
               activeOpacity={0.2}
               onPressOut={[Function]}
@@ -1237,10 +1285,10 @@ ShallowWrapper {
                   }
                 }
               >
-                Sync my device
+                Sync my files
               </Text>
             </TouchableOpacity>
-          </View>,
+          </Component>,
           undefined,
         ],
         "style": Object {
@@ -1256,7 +1304,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <View
+              <Component
                 style={
                   Object {
                     "marginTop": 30,
@@ -1278,8 +1326,8 @@ ShallowWrapper {
                 >
                   Let’s get started!
                 </Text>
-              </View>,
-              <View
+              </Component>,
+              <Component
                 style={
                   Object {
                     "marginTop": 38,
@@ -1314,23 +1362,30 @@ ShallowWrapper {
                      25GB of free storage
                   </Text>
                 </Text>
-              </View>,
-              <View>
+              </Component>,
+              <Component
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "height": 500,
+                    "justifyContent": "center",
+                    "marginLeft": -40,
+                    "marginTop": 76,
+                    "width": 750,
+                  }
+                }
+              >
                 <Image
                   resizeMode="contain"
                   source="Folder.png"
                   style={
                     Object {
-                      "alignSelf": "center",
                       "height": 500,
-                      "marginLeft": -40,
-                      "marginTop": 76,
-                      "width": 750,
                     }
                   }
                 />
-              </View>,
-              <View
+              </Component>,
+              <Component
                 style={
                   Object {
                     "marginTop": 128,
@@ -1365,7 +1420,7 @@ ShallowWrapper {
                      photos, videos,
                   </Text>
                 </Text>
-                <View
+                <Component
                   style={
                     Object {
                       "flexDirection": "row",
@@ -1428,8 +1483,8 @@ ShallowWrapper {
                   >
                      or add them manually.
                   </Text>
-                </View>
-              </View>,
+                </Component>
+              </Component>,
               <TouchableOpacity
                 activeOpacity={0.2}
                 onPressOut={[Function]}
@@ -1457,7 +1512,7 @@ ShallowWrapper {
                     }
                   }
                 >
-                  Sync my device
+                  Sync my files
                 </Text>
               </TouchableOpacity>,
             ],
@@ -1620,14 +1675,18 @@ ShallowWrapper {
                   source="Folder.png"
                   style={
                     Object {
-                      "alignSelf": "center",
                       "height": 500,
-                      "marginLeft": -40,
-                      "marginTop": 76,
-                      "width": 750,
                     }
                   }
                 />,
+                "style": Object {
+                  "alignItems": "center",
+                  "height": 500,
+                  "justifyContent": "center",
+                  "marginLeft": -40,
+                  "marginTop": 76,
+                  "width": 750,
+                },
               },
               "ref": null,
               "rendered": Object {
@@ -1638,11 +1697,7 @@ ShallowWrapper {
                   "resizeMode": "contain",
                   "source": "Folder.png",
                   "style": Object {
-                    "alignSelf": "center",
                     "height": 500,
-                    "marginLeft": -40,
-                    "marginTop": 76,
-                    "width": 750,
                   },
                 },
                 "ref": null,
@@ -1685,7 +1740,7 @@ ShallowWrapper {
                        photos, videos,
                     </Text>
                   </Text>,
-                  <View
+                  <Component
                     style={
                       Object {
                         "flexDirection": "row",
@@ -1748,7 +1803,7 @@ ShallowWrapper {
                     >
                        or add them manually.
                     </Text>
-                  </View>,
+                  </Component>,
                 ],
                 "style": Object {
                   "marginTop": 128,
@@ -1981,7 +2036,7 @@ ShallowWrapper {
                     }
                   }
                 >
-                  Sync my device
+                  Sync my files
                 </Text>,
                 "onPressOut": [Function],
                 "style": Object {
@@ -2002,7 +2057,7 @@ ShallowWrapper {
                 "props": Object {
                   "accessible": true,
                   "allowFontScaling": true,
-                  "children": "Sync my device",
+                  "children": "Sync my files",
                   "ellipsizeMode": "tail",
                   "style": Object {
                     "color": "white",
@@ -2011,7 +2066,7 @@ ShallowWrapper {
                   },
                 },
                 "ref": null,
-                "rendered": "Sync my device",
+                "rendered": "Sync my files",
                 "type": [Function],
               },
               "type": [Function],

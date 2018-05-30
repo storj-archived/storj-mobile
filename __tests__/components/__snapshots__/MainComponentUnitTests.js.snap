@@ -4,7 +4,9 @@ exports[`MainComponent renders correctly 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <MainComponent />,
+  Symbol(enzyme.__unrendered__): <MainComponent
+    getLoadingSyncEntry={[Function]}
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -18,7 +20,8 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <View
+        null,
+        <Component
           style={
             Object {
               "flex": 1,
@@ -29,19 +32,22 @@ ShallowWrapper {
             bucketNavigateBack={undefined}
             buckets={undefined}
             dashboardNavigateBack={undefined}
+            deselectAll={undefined}
             isActionBarShown={undefined}
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
             openBucket={undefined}
             redirectToInitializationScreen={undefined}
+            selectAll={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
-            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
+            showSyncWindow={undefined}
           />
-        </View>,
+        </Component>,
+        null,
         null,
         null,
         null,
@@ -58,6 +64,7 @@ ShallowWrapper {
     },
     "ref": null,
     "rendered": Array [
+      null,
       Object {
         "instance": null,
         "key": undefined,
@@ -67,17 +74,19 @@ ShallowWrapper {
             bucketNavigateBack={undefined}
             buckets={undefined}
             dashboardNavigateBack={undefined}
+            deselectAll={undefined}
             isActionBarShown={undefined}
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
             openBucket={undefined}
             redirectToInitializationScreen={undefined}
+            selectAll={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
-            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
+            showSyncWindow={undefined}
           />,
           "style": Object {
             "flex": 1,
@@ -92,17 +101,19 @@ ShallowWrapper {
             "bucketNavigateBack": undefined,
             "buckets": undefined,
             "dashboardNavigateBack": undefined,
+            "deselectAll": undefined,
             "isActionBarShown": undefined,
             "isSelectionMode": undefined,
             "isSingleItemSelected": undefined,
             "onActionBarPress": [Function],
             "openBucket": undefined,
             "redirectToInitializationScreen": undefined,
+            "selectAll": undefined,
             "showCredits": [Function],
             "showOptions": [Function],
-            "showPopUp": [Function],
             "showQR": [Function],
             "showStorageInfo": [Function],
+            "showSyncWindow": undefined,
           },
           "ref": null,
           "rendered": null,
@@ -110,6 +121,7 @@ ShallowWrapper {
         },
         "type": [Function],
       },
+      null,
       null,
       null,
       null,
@@ -129,7 +141,8 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <View
+          null,
+          <Component
             style={
               Object {
                 "flex": 1,
@@ -140,19 +153,22 @@ ShallowWrapper {
               bucketNavigateBack={undefined}
               buckets={undefined}
               dashboardNavigateBack={undefined}
+              deselectAll={undefined}
               isActionBarShown={undefined}
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
               openBucket={undefined}
               redirectToInitializationScreen={undefined}
+              selectAll={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
-              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
+              showSyncWindow={undefined}
             />
-          </View>,
+          </Component>,
+          null,
           null,
           null,
           null,
@@ -169,6 +185,7 @@ ShallowWrapper {
       },
       "ref": null,
       "rendered": Array [
+        null,
         Object {
           "instance": null,
           "key": undefined,
@@ -178,17 +195,19 @@ ShallowWrapper {
               bucketNavigateBack={undefined}
               buckets={undefined}
               dashboardNavigateBack={undefined}
+              deselectAll={undefined}
               isActionBarShown={undefined}
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
               openBucket={undefined}
               redirectToInitializationScreen={undefined}
+              selectAll={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
-              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
+              showSyncWindow={undefined}
             />,
             "style": Object {
               "flex": 1,
@@ -203,17 +222,19 @@ ShallowWrapper {
               "bucketNavigateBack": undefined,
               "buckets": undefined,
               "dashboardNavigateBack": undefined,
+              "deselectAll": undefined,
               "isActionBarShown": undefined,
               "isSelectionMode": undefined,
               "isSingleItemSelected": undefined,
               "onActionBarPress": [Function],
               "openBucket": undefined,
               "redirectToInitializationScreen": undefined,
+              "selectAll": undefined,
               "showCredits": [Function],
               "showOptions": [Function],
-              "showPopUp": [Function],
               "showQR": [Function],
               "showStorageInfo": [Function],
+              "showSyncWindow": undefined,
             },
             "ref": null,
             "rendered": null,
@@ -221,6 +242,7 @@ ShallowWrapper {
           },
           "type": [Function],
         },
+        null,
         null,
         null,
         null,
@@ -249,6 +271,7 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <MainComponent
+    getLoadingSyncEntry={[Function]}
     isActionBarShown={true}
   />,
   Symbol(enzyme.__renderer__): Object {
@@ -264,7 +287,8 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <View
+        null,
+        <Component
           style={
             Object {
               "flex": 1,
@@ -275,25 +299,28 @@ ShallowWrapper {
             bucketNavigateBack={undefined}
             buckets={undefined}
             dashboardNavigateBack={undefined}
+            deselectAll={undefined}
             isActionBarShown={true}
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
             openBucket={undefined}
             redirectToInitializationScreen={undefined}
+            selectAll={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
-            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
+            showSyncWindow={undefined}
           />
-        </View>,
+        </Component>,
         <ActionBarComponent
           actions={undefined}
           applyMargin={true}
           bucketScreenRouteName={undefined}
           showTriangle={true}
         />,
+        null,
         null,
         null,
         null,
@@ -309,6 +336,7 @@ ShallowWrapper {
     },
     "ref": null,
     "rendered": Array [
+      null,
       Object {
         "instance": null,
         "key": undefined,
@@ -318,17 +346,19 @@ ShallowWrapper {
             bucketNavigateBack={undefined}
             buckets={undefined}
             dashboardNavigateBack={undefined}
+            deselectAll={undefined}
             isActionBarShown={true}
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
             openBucket={undefined}
             redirectToInitializationScreen={undefined}
+            selectAll={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
-            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
+            showSyncWindow={undefined}
           />,
           "style": Object {
             "flex": 1,
@@ -343,17 +373,19 @@ ShallowWrapper {
             "bucketNavigateBack": undefined,
             "buckets": undefined,
             "dashboardNavigateBack": undefined,
+            "deselectAll": undefined,
             "isActionBarShown": true,
             "isSelectionMode": undefined,
             "isSingleItemSelected": undefined,
             "onActionBarPress": [Function],
             "openBucket": undefined,
             "redirectToInitializationScreen": undefined,
+            "selectAll": undefined,
             "showCredits": [Function],
             "showOptions": [Function],
-            "showPopUp": [Function],
             "showQR": [Function],
             "showStorageInfo": [Function],
+            "showSyncWindow": undefined,
           },
           "ref": null,
           "rendered": null,
@@ -383,6 +415,7 @@ ShallowWrapper {
       null,
       null,
       null,
+      null,
     ],
     "type": [Function],
   },
@@ -393,7 +426,8 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <View
+          null,
+          <Component
             style={
               Object {
                 "flex": 1,
@@ -404,25 +438,28 @@ ShallowWrapper {
               bucketNavigateBack={undefined}
               buckets={undefined}
               dashboardNavigateBack={undefined}
+              deselectAll={undefined}
               isActionBarShown={true}
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
               openBucket={undefined}
               redirectToInitializationScreen={undefined}
+              selectAll={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
-              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
+              showSyncWindow={undefined}
             />
-          </View>,
+          </Component>,
           <ActionBarComponent
             actions={undefined}
             applyMargin={true}
             bucketScreenRouteName={undefined}
             showTriangle={true}
           />,
+          null,
           null,
           null,
           null,
@@ -438,6 +475,7 @@ ShallowWrapper {
       },
       "ref": null,
       "rendered": Array [
+        null,
         Object {
           "instance": null,
           "key": undefined,
@@ -447,17 +485,19 @@ ShallowWrapper {
               bucketNavigateBack={undefined}
               buckets={undefined}
               dashboardNavigateBack={undefined}
+              deselectAll={undefined}
               isActionBarShown={true}
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
               openBucket={undefined}
               redirectToInitializationScreen={undefined}
+              selectAll={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
-              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
+              showSyncWindow={undefined}
             />,
             "style": Object {
               "flex": 1,
@@ -472,17 +512,19 @@ ShallowWrapper {
               "bucketNavigateBack": undefined,
               "buckets": undefined,
               "dashboardNavigateBack": undefined,
+              "deselectAll": undefined,
               "isActionBarShown": true,
               "isSelectionMode": undefined,
               "isSingleItemSelected": undefined,
               "onActionBarPress": [Function],
               "openBucket": undefined,
               "redirectToInitializationScreen": undefined,
+              "selectAll": undefined,
               "showCredits": [Function],
               "showOptions": [Function],
-              "showPopUp": [Function],
               "showQR": [Function],
               "showStorageInfo": [Function],
+              "showSyncWindow": undefined,
             },
             "ref": null,
             "rendered": null,
@@ -512,6 +554,7 @@ ShallowWrapper {
         null,
         null,
         null,
+        null,
       ],
       "type": [Function],
     },
@@ -531,6 +574,7 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <MainComponent
+    getLoadingSyncEntry={[Function]}
     isSelectionMode={true}
   />,
   Symbol(enzyme.__renderer__): Object {
@@ -546,7 +590,8 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <View
+        null,
+        <Component
           style={
             Object {
               "flex": 1,
@@ -557,25 +602,28 @@ ShallowWrapper {
             bucketNavigateBack={undefined}
             buckets={undefined}
             dashboardNavigateBack={undefined}
+            deselectAll={undefined}
             isActionBarShown={undefined}
             isSelectionMode={true}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
             openBucket={undefined}
             redirectToInitializationScreen={undefined}
+            selectAll={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
-            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
+            showSyncWindow={undefined}
           />
-        </View>,
+        </Component>,
         <ActionBarComponent
           actions={undefined}
           applyMargin={false}
           bucketScreenRouteName={undefined}
           showTriangle={false}
         />,
+        null,
         null,
         null,
         null,
@@ -591,6 +639,7 @@ ShallowWrapper {
     },
     "ref": null,
     "rendered": Array [
+      null,
       Object {
         "instance": null,
         "key": undefined,
@@ -600,17 +649,19 @@ ShallowWrapper {
             bucketNavigateBack={undefined}
             buckets={undefined}
             dashboardNavigateBack={undefined}
+            deselectAll={undefined}
             isActionBarShown={undefined}
             isSelectionMode={true}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
             openBucket={undefined}
             redirectToInitializationScreen={undefined}
+            selectAll={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
-            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
+            showSyncWindow={undefined}
           />,
           "style": Object {
             "flex": 1,
@@ -625,17 +676,19 @@ ShallowWrapper {
             "bucketNavigateBack": undefined,
             "buckets": undefined,
             "dashboardNavigateBack": undefined,
+            "deselectAll": undefined,
             "isActionBarShown": undefined,
             "isSelectionMode": true,
             "isSingleItemSelected": undefined,
             "onActionBarPress": [Function],
             "openBucket": undefined,
             "redirectToInitializationScreen": undefined,
+            "selectAll": undefined,
             "showCredits": [Function],
             "showOptions": [Function],
-            "showPopUp": [Function],
             "showQR": [Function],
             "showStorageInfo": [Function],
+            "showSyncWindow": undefined,
           },
           "ref": null,
           "rendered": null,
@@ -665,6 +718,7 @@ ShallowWrapper {
       null,
       null,
       null,
+      null,
     ],
     "type": [Function],
   },
@@ -675,7 +729,8 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <View
+          null,
+          <Component
             style={
               Object {
                 "flex": 1,
@@ -686,25 +741,28 @@ ShallowWrapper {
               bucketNavigateBack={undefined}
               buckets={undefined}
               dashboardNavigateBack={undefined}
+              deselectAll={undefined}
               isActionBarShown={undefined}
               isSelectionMode={true}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
               openBucket={undefined}
               redirectToInitializationScreen={undefined}
+              selectAll={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
-              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
+              showSyncWindow={undefined}
             />
-          </View>,
+          </Component>,
           <ActionBarComponent
             actions={undefined}
             applyMargin={false}
             bucketScreenRouteName={undefined}
             showTriangle={false}
           />,
+          null,
           null,
           null,
           null,
@@ -720,6 +778,7 @@ ShallowWrapper {
       },
       "ref": null,
       "rendered": Array [
+        null,
         Object {
           "instance": null,
           "key": undefined,
@@ -729,17 +788,19 @@ ShallowWrapper {
               bucketNavigateBack={undefined}
               buckets={undefined}
               dashboardNavigateBack={undefined}
+              deselectAll={undefined}
               isActionBarShown={undefined}
               isSelectionMode={true}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
               openBucket={undefined}
               redirectToInitializationScreen={undefined}
+              selectAll={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
-              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
+              showSyncWindow={undefined}
             />,
             "style": Object {
               "flex": 1,
@@ -754,17 +815,19 @@ ShallowWrapper {
               "bucketNavigateBack": undefined,
               "buckets": undefined,
               "dashboardNavigateBack": undefined,
+              "deselectAll": undefined,
               "isActionBarShown": undefined,
               "isSelectionMode": true,
               "isSingleItemSelected": undefined,
               "onActionBarPress": [Function],
               "openBucket": undefined,
               "redirectToInitializationScreen": undefined,
+              "selectAll": undefined,
               "showCredits": [Function],
               "showOptions": [Function],
-              "showPopUp": [Function],
               "showQR": [Function],
               "showStorageInfo": [Function],
+              "showSyncWindow": undefined,
             },
             "ref": null,
             "rendered": null,
@@ -794,6 +857,7 @@ ShallowWrapper {
         null,
         null,
         null,
+        null,
       ],
       "type": [Function],
     },
@@ -813,6 +877,7 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <MainComponent
+    getLoadingSyncEntry={[Function]}
     isCreateBucketInputShown={true}
   />,
   Symbol(enzyme.__renderer__): Object {
@@ -828,7 +893,8 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <View
+        null,
+        <Component
           style={
             Object {
               "flex": 1,
@@ -839,21 +905,23 @@ ShallowWrapper {
             bucketNavigateBack={undefined}
             buckets={undefined}
             dashboardNavigateBack={undefined}
+            deselectAll={undefined}
             isActionBarShown={undefined}
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
             openBucket={undefined}
             redirectToInitializationScreen={undefined}
+            selectAll={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
-            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
+            showSyncWindow={undefined}
           />
-        </View>,
+        </Component>,
         null,
-        <View
+        <Component
           style={
             Object {
               "alignItems": "center",
@@ -867,7 +935,7 @@ ShallowWrapper {
             }
           }
         >
-          <View
+          <Component
             style={
               Array [
                 Object {
@@ -891,7 +959,8 @@ ShallowWrapper {
             onApply={[Function]}
             onCancel={[Function]}
           />
-        </View>,
+        </Component>,
+        null,
         null,
         null,
         null,
@@ -906,6 +975,7 @@ ShallowWrapper {
     },
     "ref": null,
     "rendered": Array [
+      null,
       Object {
         "instance": null,
         "key": undefined,
@@ -915,17 +985,19 @@ ShallowWrapper {
             bucketNavigateBack={undefined}
             buckets={undefined}
             dashboardNavigateBack={undefined}
+            deselectAll={undefined}
             isActionBarShown={undefined}
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
             openBucket={undefined}
             redirectToInitializationScreen={undefined}
+            selectAll={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
-            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
+            showSyncWindow={undefined}
           />,
           "style": Object {
             "flex": 1,
@@ -940,17 +1012,19 @@ ShallowWrapper {
             "bucketNavigateBack": undefined,
             "buckets": undefined,
             "dashboardNavigateBack": undefined,
+            "deselectAll": undefined,
             "isActionBarShown": undefined,
             "isSelectionMode": undefined,
             "isSingleItemSelected": undefined,
             "onActionBarPress": [Function],
             "openBucket": undefined,
             "redirectToInitializationScreen": undefined,
+            "selectAll": undefined,
             "showCredits": [Function],
             "showOptions": [Function],
-            "showPopUp": [Function],
             "showQR": [Function],
             "showStorageInfo": [Function],
+            "showSyncWindow": undefined,
           },
           "ref": null,
           "rendered": null,
@@ -965,7 +1039,7 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <View
+            <Component
               style={
                 Array [
                   Object {
@@ -1051,6 +1125,7 @@ ShallowWrapper {
       null,
       null,
       null,
+      null,
     ],
     "type": [Function],
   },
@@ -1061,7 +1136,8 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <View
+          null,
+          <Component
             style={
               Object {
                 "flex": 1,
@@ -1072,21 +1148,23 @@ ShallowWrapper {
               bucketNavigateBack={undefined}
               buckets={undefined}
               dashboardNavigateBack={undefined}
+              deselectAll={undefined}
               isActionBarShown={undefined}
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
               openBucket={undefined}
               redirectToInitializationScreen={undefined}
+              selectAll={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
-              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
+              showSyncWindow={undefined}
             />
-          </View>,
+          </Component>,
           null,
-          <View
+          <Component
             style={
               Object {
                 "alignItems": "center",
@@ -1100,7 +1178,7 @@ ShallowWrapper {
               }
             }
           >
-            <View
+            <Component
               style={
                 Array [
                   Object {
@@ -1124,7 +1202,8 @@ ShallowWrapper {
               onApply={[Function]}
               onCancel={[Function]}
             />
-          </View>,
+          </Component>,
+          null,
           null,
           null,
           null,
@@ -1139,6 +1218,7 @@ ShallowWrapper {
       },
       "ref": null,
       "rendered": Array [
+        null,
         Object {
           "instance": null,
           "key": undefined,
@@ -1148,17 +1228,19 @@ ShallowWrapper {
               bucketNavigateBack={undefined}
               buckets={undefined}
               dashboardNavigateBack={undefined}
+              deselectAll={undefined}
               isActionBarShown={undefined}
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
               openBucket={undefined}
               redirectToInitializationScreen={undefined}
+              selectAll={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
-              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
+              showSyncWindow={undefined}
             />,
             "style": Object {
               "flex": 1,
@@ -1173,17 +1255,19 @@ ShallowWrapper {
               "bucketNavigateBack": undefined,
               "buckets": undefined,
               "dashboardNavigateBack": undefined,
+              "deselectAll": undefined,
               "isActionBarShown": undefined,
               "isSelectionMode": undefined,
               "isSingleItemSelected": undefined,
               "onActionBarPress": [Function],
               "openBucket": undefined,
               "redirectToInitializationScreen": undefined,
+              "selectAll": undefined,
               "showCredits": [Function],
               "showOptions": [Function],
-              "showPopUp": [Function],
               "showQR": [Function],
               "showStorageInfo": [Function],
+              "showSyncWindow": undefined,
             },
             "ref": null,
             "rendered": null,
@@ -1198,7 +1282,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <View
+              <Component
                 style={
                   Array [
                     Object {
@@ -1284,6 +1368,7 @@ ShallowWrapper {
         null,
         null,
         null,
+        null,
       ],
       "type": [Function],
     },
@@ -1303,6 +1388,7 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <MainComponent
+    getLoadingSyncEntry={[Function]}
     isActionBarShown={true}
     isCreateBucketInputShown={true}
   />,
@@ -1319,7 +1405,8 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <View
+        null,
+        <Component
           style={
             Object {
               "flex": 1,
@@ -1330,26 +1417,28 @@ ShallowWrapper {
             bucketNavigateBack={undefined}
             buckets={undefined}
             dashboardNavigateBack={undefined}
+            deselectAll={undefined}
             isActionBarShown={true}
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
             openBucket={undefined}
             redirectToInitializationScreen={undefined}
+            selectAll={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
-            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
+            showSyncWindow={undefined}
           />
-        </View>,
+        </Component>,
         <ActionBarComponent
           actions={undefined}
           applyMargin={true}
           bucketScreenRouteName={undefined}
           showTriangle={true}
         />,
-        <View
+        <Component
           style={
             Object {
               "alignItems": "center",
@@ -1363,7 +1452,7 @@ ShallowWrapper {
             }
           }
         >
-          <View
+          <Component
             style={
               Array [
                 Object {
@@ -1387,7 +1476,8 @@ ShallowWrapper {
             onApply={[Function]}
             onCancel={[Function]}
           />
-        </View>,
+        </Component>,
+        null,
         null,
         null,
         null,
@@ -1402,6 +1492,7 @@ ShallowWrapper {
     },
     "ref": null,
     "rendered": Array [
+      null,
       Object {
         "instance": null,
         "key": undefined,
@@ -1411,17 +1502,19 @@ ShallowWrapper {
             bucketNavigateBack={undefined}
             buckets={undefined}
             dashboardNavigateBack={undefined}
+            deselectAll={undefined}
             isActionBarShown={true}
             isSelectionMode={undefined}
             isSingleItemSelected={undefined}
             onActionBarPress={[Function]}
             openBucket={undefined}
             redirectToInitializationScreen={undefined}
+            selectAll={undefined}
             showCredits={[Function]}
             showOptions={[Function]}
-            showPopUp={[Function]}
             showQR={[Function]}
             showStorageInfo={[Function]}
+            showSyncWindow={undefined}
           />,
           "style": Object {
             "flex": 1,
@@ -1436,17 +1529,19 @@ ShallowWrapper {
             "bucketNavigateBack": undefined,
             "buckets": undefined,
             "dashboardNavigateBack": undefined,
+            "deselectAll": undefined,
             "isActionBarShown": true,
             "isSelectionMode": undefined,
             "isSingleItemSelected": undefined,
             "onActionBarPress": [Function],
             "openBucket": undefined,
             "redirectToInitializationScreen": undefined,
+            "selectAll": undefined,
             "showCredits": [Function],
             "showOptions": [Function],
-            "showPopUp": [Function],
             "showQR": [Function],
             "showStorageInfo": [Function],
+            "showSyncWindow": undefined,
           },
           "ref": null,
           "rendered": null,
@@ -1474,7 +1569,7 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <View
+            <Component
               style={
                 Array [
                   Object {
@@ -1560,6 +1655,7 @@ ShallowWrapper {
       null,
       null,
       null,
+      null,
     ],
     "type": [Function],
   },
@@ -1570,7 +1666,8 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <View
+          null,
+          <Component
             style={
               Object {
                 "flex": 1,
@@ -1581,26 +1678,28 @@ ShallowWrapper {
               bucketNavigateBack={undefined}
               buckets={undefined}
               dashboardNavigateBack={undefined}
+              deselectAll={undefined}
               isActionBarShown={true}
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
               openBucket={undefined}
               redirectToInitializationScreen={undefined}
+              selectAll={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
-              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
+              showSyncWindow={undefined}
             />
-          </View>,
+          </Component>,
           <ActionBarComponent
             actions={undefined}
             applyMargin={true}
             bucketScreenRouteName={undefined}
             showTriangle={true}
           />,
-          <View
+          <Component
             style={
               Object {
                 "alignItems": "center",
@@ -1614,7 +1713,7 @@ ShallowWrapper {
               }
             }
           >
-            <View
+            <Component
               style={
                 Array [
                   Object {
@@ -1638,7 +1737,8 @@ ShallowWrapper {
               onApply={[Function]}
               onCancel={[Function]}
             />
-          </View>,
+          </Component>,
+          null,
           null,
           null,
           null,
@@ -1653,6 +1753,7 @@ ShallowWrapper {
       },
       "ref": null,
       "rendered": Array [
+        null,
         Object {
           "instance": null,
           "key": undefined,
@@ -1662,17 +1763,19 @@ ShallowWrapper {
               bucketNavigateBack={undefined}
               buckets={undefined}
               dashboardNavigateBack={undefined}
+              deselectAll={undefined}
               isActionBarShown={true}
               isSelectionMode={undefined}
               isSingleItemSelected={undefined}
               onActionBarPress={[Function]}
               openBucket={undefined}
               redirectToInitializationScreen={undefined}
+              selectAll={undefined}
               showCredits={[Function]}
               showOptions={[Function]}
-              showPopUp={[Function]}
               showQR={[Function]}
               showStorageInfo={[Function]}
+              showSyncWindow={undefined}
             />,
             "style": Object {
               "flex": 1,
@@ -1687,17 +1790,19 @@ ShallowWrapper {
               "bucketNavigateBack": undefined,
               "buckets": undefined,
               "dashboardNavigateBack": undefined,
+              "deselectAll": undefined,
               "isActionBarShown": true,
               "isSelectionMode": undefined,
               "isSingleItemSelected": undefined,
               "onActionBarPress": [Function],
               "openBucket": undefined,
               "redirectToInitializationScreen": undefined,
+              "selectAll": undefined,
               "showCredits": [Function],
               "showOptions": [Function],
-              "showPopUp": [Function],
               "showQR": [Function],
               "showStorageInfo": [Function],
+              "showSyncWindow": undefined,
             },
             "ref": null,
             "rendered": null,
@@ -1725,7 +1830,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <View
+              <Component
                 style={
                   Array [
                     Object {
@@ -1804,6 +1909,303 @@ ShallowWrapper {
           ],
           "type": [Function],
         },
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+  },
+}
+`;
+
+exports[`MainComponent renders correctly with sync 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <MainComponent
+    getLoadingSyncEntry={[Function]}
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <SyncOverlayComponent
+          onPress={undefined}
+        >
+          true
+        </SyncOverlayComponent>,
+        <Component
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          <Connect(MainNavigationContainer)
+            bucketNavigateBack={undefined}
+            buckets={undefined}
+            dashboardNavigateBack={undefined}
+            deselectAll={undefined}
+            isActionBarShown={undefined}
+            isSelectionMode={undefined}
+            isSingleItemSelected={undefined}
+            onActionBarPress={[Function]}
+            openBucket={undefined}
+            redirectToInitializationScreen={undefined}
+            selectAll={undefined}
+            showCredits={[Function]}
+            showOptions={[Function]}
+            showQR={[Function]}
+            showStorageInfo={[Function]}
+            showSyncWindow={undefined}
+          />
+        </Component>,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+      ],
+      "style": Object {
+        "flex": 1,
+      },
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": true,
+          "onPress": undefined,
+        },
+        "ref": null,
+        "rendered": true,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": <Connect(MainNavigationContainer)
+            bucketNavigateBack={undefined}
+            buckets={undefined}
+            dashboardNavigateBack={undefined}
+            deselectAll={undefined}
+            isActionBarShown={undefined}
+            isSelectionMode={undefined}
+            isSingleItemSelected={undefined}
+            onActionBarPress={[Function]}
+            openBucket={undefined}
+            redirectToInitializationScreen={undefined}
+            selectAll={undefined}
+            showCredits={[Function]}
+            showOptions={[Function]}
+            showQR={[Function]}
+            showStorageInfo={[Function]}
+            showSyncWindow={undefined}
+          />,
+          "style": Object {
+            "flex": 1,
+          },
+        },
+        "ref": null,
+        "rendered": Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "bucketNavigateBack": undefined,
+            "buckets": undefined,
+            "dashboardNavigateBack": undefined,
+            "deselectAll": undefined,
+            "isActionBarShown": undefined,
+            "isSelectionMode": undefined,
+            "isSingleItemSelected": undefined,
+            "onActionBarPress": [Function],
+            "openBucket": undefined,
+            "redirectToInitializationScreen": undefined,
+            "selectAll": undefined,
+            "showCredits": [Function],
+            "showOptions": [Function],
+            "showQR": [Function],
+            "showStorageInfo": [Function],
+            "showSyncWindow": undefined,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        "type": [Function],
+      },
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <SyncOverlayComponent
+            onPress={undefined}
+          >
+            true
+          </SyncOverlayComponent>,
+          <Component
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <Connect(MainNavigationContainer)
+              bucketNavigateBack={undefined}
+              buckets={undefined}
+              dashboardNavigateBack={undefined}
+              deselectAll={undefined}
+              isActionBarShown={undefined}
+              isSelectionMode={undefined}
+              isSingleItemSelected={undefined}
+              onActionBarPress={[Function]}
+              openBucket={undefined}
+              redirectToInitializationScreen={undefined}
+              selectAll={undefined}
+              showCredits={[Function]}
+              showOptions={[Function]}
+              showQR={[Function]}
+              showStorageInfo={[Function]}
+              showSyncWindow={undefined}
+            />
+          </Component>,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+        ],
+        "style": Object {
+          "flex": 1,
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": true,
+            "onPress": undefined,
+          },
+          "ref": null,
+          "rendered": true,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <Connect(MainNavigationContainer)
+              bucketNavigateBack={undefined}
+              buckets={undefined}
+              dashboardNavigateBack={undefined}
+              deselectAll={undefined}
+              isActionBarShown={undefined}
+              isSelectionMode={undefined}
+              isSingleItemSelected={undefined}
+              onActionBarPress={[Function]}
+              openBucket={undefined}
+              redirectToInitializationScreen={undefined}
+              selectAll={undefined}
+              showCredits={[Function]}
+              showOptions={[Function]}
+              showQR={[Function]}
+              showStorageInfo={[Function]}
+              showSyncWindow={undefined}
+            />,
+            "style": Object {
+              "flex": 1,
+            },
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "bucketNavigateBack": undefined,
+              "buckets": undefined,
+              "dashboardNavigateBack": undefined,
+              "deselectAll": undefined,
+              "isActionBarShown": undefined,
+              "isSelectionMode": undefined,
+              "isSingleItemSelected": undefined,
+              "onActionBarPress": [Function],
+              "openBucket": undefined,
+              "redirectToInitializationScreen": undefined,
+              "selectAll": undefined,
+              "showCredits": [Function],
+              "showOptions": [Function],
+              "showQR": [Function],
+              "showStorageInfo": [Function],
+              "showSyncWindow": undefined,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        null,
+        null,
+        null,
         null,
         null,
         null,

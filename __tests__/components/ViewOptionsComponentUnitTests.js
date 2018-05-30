@@ -13,7 +13,8 @@ describe('ViewOptionsComponent', () => {
 
     it('renders correctly', () => {
         const wrapper = shallow(
-            <ViewOptionsComponent />
+            <ViewOptionsComponent
+                enableSelectionMode = { () => {} } />
         );
 
         expect(wrapper).toMatchSnapshot();
@@ -22,7 +23,8 @@ describe('ViewOptionsComponent', () => {
     it('renders correctly with not isGridViewShown', () => {
         const wrapper = shallow(
             <ViewOptionsComponent
-                isGridViewShown = { false } />
+                isGridViewShown = { false }
+                enableSelectionMode = { () => {} } />
         );
 
         expect(wrapper.containsMatchingElement(<Text>Grid view</Text>)).toBe(true);
@@ -31,7 +33,8 @@ describe('ViewOptionsComponent', () => {
     it('renders correctly with isGridViewShown', () => {
         const wrapper = shallow(
             <ViewOptionsComponent
-                isGridViewShown = { true } />
+                isGridViewShown = { true }
+                enableSelectionMode = { () => {} } />
         );
 
         expect(wrapper.containsMatchingElement(<Text>List view</Text>)).toBe(true);
@@ -47,7 +50,8 @@ describe('ViewOptionsComponent', () => {
                 showOptions = { showOptionsSpy }
                 isGridViewShown = { false }
                 setListView = { setListViewSpy }
-                setGridView = { setGridViewSpy } />
+                setGridView = { setGridViewSpy }
+                enableSelectionMode = { () => {} } />
         );
 
         wrapper.find('TouchableOpacity').forEach(child => {
@@ -55,7 +59,7 @@ describe('ViewOptionsComponent', () => {
         });
 
         expect(setListViewSpy.mock.calls.length).toBe(0);
-        expect(showOptionsSpy.mock.calls.length).toBe(1);
+        expect(showOptionsSpy.mock.calls.length).toBe(3);
         expect(setGridViewSpy.mock.calls.length).toBe(1);
     });
 
@@ -69,14 +73,15 @@ describe('ViewOptionsComponent', () => {
                 showOptions = { showOptionsSpy }
                 isGridViewShown = { true }
                 setListView = { setListViewSpy }
-                setGridView = { setGridViewSpy } />
+                setGridView = { setGridViewSpy }
+                enableSelectionMode = { () => {} } />
         );
 
         wrapper.find('TouchableOpacity').forEach(child => {
             child.simulate('Press');
         });
 
-        expect(showOptionsSpy.mock.calls.length).toBe(1);
+        expect(showOptionsSpy.mock.calls.length).toBe(3);
         expect(setListViewSpy.mock.calls.length).toBe(1);
         expect(setGridViewSpy.mock.calls.length).toBe(0);
     });

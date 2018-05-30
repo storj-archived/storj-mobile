@@ -4,7 +4,9 @@ exports[`ViewOptionsComponent renders correctly 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <ViewOptionsComponent />,
+  Symbol(enzyme.__unrendered__): <ViewOptionsComponent
+    enableSelectionMode={[Function]}
+  />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -38,7 +40,7 @@ ShallowWrapper {
             ]
           }
         />,
-        <View
+        <Component
           style={
             Object {
               "alignSelf": "center",
@@ -62,7 +64,7 @@ ShallowWrapper {
               }
             }
           >
-            <View
+            <Component
               style={
                 Object {
                   "marginLeft": 40,
@@ -79,8 +81,8 @@ ShallowWrapper {
                   }
                 }
               />
-            </View>
-            <View
+            </Component>
+            <Component
               style={
                 Object {
                   "marginLeft": 30,
@@ -102,7 +104,7 @@ ShallowWrapper {
               >
                 Sort items...
               </Text>
-            </View>
+            </Component>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.2}
@@ -117,7 +119,7 @@ ShallowWrapper {
               }
             }
           >
-            <View
+            <Component
               style={
                 Object {
                   "marginLeft": 40,
@@ -134,8 +136,8 @@ ShallowWrapper {
                   }
                 }
               />
-            </View>
-            <View
+            </Component>
+            <Component
               style={
                 Object {
                   "marginLeft": 30,
@@ -157,7 +159,7 @@ ShallowWrapper {
               >
                 Grid view
               </Text>
-            </View>
+            </Component>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.2}
@@ -172,7 +174,7 @@ ShallowWrapper {
               }
             }
           >
-            <View
+            <Component
               style={
                 Object {
                   "marginLeft": 40,
@@ -189,8 +191,8 @@ ShallowWrapper {
                   }
                 }
               />
-            </View>
-            <View
+            </Component>
+            <Component
               style={
                 Object {
                   "marginLeft": 30,
@@ -212,9 +214,9 @@ ShallowWrapper {
               >
                 Select items
               </Text>
-            </View>
+            </Component>
           </TouchableOpacity>
-        </View>,
+        </Component>,
       ],
       "style": Array [
         Object {
@@ -274,7 +276,7 @@ ShallowWrapper {
                 }
               }
             >
-              <View
+              <Component
                 style={
                   Object {
                     "marginLeft": 40,
@@ -291,8 +293,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
-              <View
+              </Component>
+              <Component
                 style={
                   Object {
                     "marginLeft": 30,
@@ -314,7 +316,7 @@ ShallowWrapper {
                 >
                   Sort items...
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>,
             <TouchableOpacity
               activeOpacity={0.2}
@@ -329,7 +331,7 @@ ShallowWrapper {
                 }
               }
             >
-              <View
+              <Component
                 style={
                   Object {
                     "marginLeft": 40,
@@ -346,8 +348,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
-              <View
+              </Component>
+              <Component
                 style={
                   Object {
                     "marginLeft": 30,
@@ -369,7 +371,7 @@ ShallowWrapper {
                 >
                   Grid view
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>,
             <TouchableOpacity
               activeOpacity={0.2}
@@ -384,7 +386,7 @@ ShallowWrapper {
                 }
               }
             >
-              <View
+              <Component
                 style={
                   Object {
                     "marginLeft": 40,
@@ -401,8 +403,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
-              <View
+              </Component>
+              <Component
                 style={
                   Object {
                     "marginLeft": 30,
@@ -424,7 +426,7 @@ ShallowWrapper {
                 >
                   Select items
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>,
           ],
           "style": Object {
@@ -444,7 +446,7 @@ ShallowWrapper {
             "props": Object {
               "activeOpacity": 0.2,
               "children": Array [
-                <View
+                <Component
                   style={
                     Object {
                       "marginLeft": 40,
@@ -461,8 +463,8 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>,
-                <View
+                </Component>,
+                <Component
                   style={
                     Object {
                       "marginLeft": 30,
@@ -484,7 +486,7 @@ ShallowWrapper {
                   >
                     Sort items...
                   </Text>
-                </View>,
+                </Component>,
               ],
               "onPress": [Function],
               "style": Object {
@@ -592,7 +594,7 @@ ShallowWrapper {
             "props": Object {
               "activeOpacity": 0.2,
               "children": Array [
-                <View
+                <Component
                   style={
                     Object {
                       "marginLeft": 40,
@@ -609,8 +611,8 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>,
-                <View
+                </Component>,
+                <Component
                   style={
                     Object {
                       "marginLeft": 30,
@@ -632,7 +634,7 @@ ShallowWrapper {
                   >
                     Grid view
                   </Text>
-                </View>,
+                </Component>,
               ],
               "onPress": [Function],
               "style": Object {
@@ -740,7 +742,7 @@ ShallowWrapper {
             "props": Object {
               "activeOpacity": 0.2,
               "children": Array [
-                <View
+                <Component
                   style={
                     Object {
                       "marginLeft": 40,
@@ -757,8 +759,8 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>,
-                <View
+                </Component>,
+                <Component
                   style={
                     Object {
                       "marginLeft": 30,
@@ -780,7 +782,7 @@ ShallowWrapper {
                   >
                     Select items
                   </Text>
-                </View>,
+                </Component>,
               ],
               "onPress": [Function],
               "style": Object {
@@ -914,7 +916,7 @@ ShallowWrapper {
               ]
             }
           />,
-          <View
+          <Component
             style={
               Object {
                 "alignSelf": "center",
@@ -938,7 +940,7 @@ ShallowWrapper {
                 }
               }
             >
-              <View
+              <Component
                 style={
                   Object {
                     "marginLeft": 40,
@@ -955,8 +957,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
-              <View
+              </Component>
+              <Component
                 style={
                   Object {
                     "marginLeft": 30,
@@ -978,7 +980,7 @@ ShallowWrapper {
                 >
                   Sort items...
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.2}
@@ -993,7 +995,7 @@ ShallowWrapper {
                 }
               }
             >
-              <View
+              <Component
                 style={
                   Object {
                     "marginLeft": 40,
@@ -1010,8 +1012,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
-              <View
+              </Component>
+              <Component
                 style={
                   Object {
                     "marginLeft": 30,
@@ -1033,7 +1035,7 @@ ShallowWrapper {
                 >
                   Grid view
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.2}
@@ -1048,7 +1050,7 @@ ShallowWrapper {
                 }
               }
             >
-              <View
+              <Component
                 style={
                   Object {
                     "marginLeft": 40,
@@ -1065,8 +1067,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
-              <View
+              </Component>
+              <Component
                 style={
                   Object {
                     "marginLeft": 30,
@@ -1088,9 +1090,9 @@ ShallowWrapper {
                 >
                   Select items
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>
-          </View>,
+          </Component>,
         ],
         "style": Array [
           Object {
@@ -1150,7 +1152,7 @@ ShallowWrapper {
                   }
                 }
               >
-                <View
+                <Component
                   style={
                     Object {
                       "marginLeft": 40,
@@ -1167,8 +1169,8 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
-                <View
+                </Component>
+                <Component
                   style={
                     Object {
                       "marginLeft": 30,
@@ -1190,7 +1192,7 @@ ShallowWrapper {
                   >
                     Sort items...
                   </Text>
-                </View>
+                </Component>
               </TouchableOpacity>,
               <TouchableOpacity
                 activeOpacity={0.2}
@@ -1205,7 +1207,7 @@ ShallowWrapper {
                   }
                 }
               >
-                <View
+                <Component
                   style={
                     Object {
                       "marginLeft": 40,
@@ -1222,8 +1224,8 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
-                <View
+                </Component>
+                <Component
                   style={
                     Object {
                       "marginLeft": 30,
@@ -1245,7 +1247,7 @@ ShallowWrapper {
                   >
                     Grid view
                   </Text>
-                </View>
+                </Component>
               </TouchableOpacity>,
               <TouchableOpacity
                 activeOpacity={0.2}
@@ -1260,7 +1262,7 @@ ShallowWrapper {
                   }
                 }
               >
-                <View
+                <Component
                   style={
                     Object {
                       "marginLeft": 40,
@@ -1277,8 +1279,8 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
-                <View
+                </Component>
+                <Component
                   style={
                     Object {
                       "marginLeft": 30,
@@ -1300,7 +1302,7 @@ ShallowWrapper {
                   >
                     Select items
                   </Text>
-                </View>
+                </Component>
               </TouchableOpacity>,
             ],
             "style": Object {
@@ -1320,7 +1322,7 @@ ShallowWrapper {
               "props": Object {
                 "activeOpacity": 0.2,
                 "children": Array [
-                  <View
+                  <Component
                     style={
                       Object {
                         "marginLeft": 40,
@@ -1337,8 +1339,8 @@ ShallowWrapper {
                         }
                       }
                     />
-                  </View>,
-                  <View
+                  </Component>,
+                  <Component
                     style={
                       Object {
                         "marginLeft": 30,
@@ -1360,7 +1362,7 @@ ShallowWrapper {
                     >
                       Sort items...
                     </Text>
-                  </View>,
+                  </Component>,
                 ],
                 "onPress": [Function],
                 "style": Object {
@@ -1468,7 +1470,7 @@ ShallowWrapper {
               "props": Object {
                 "activeOpacity": 0.2,
                 "children": Array [
-                  <View
+                  <Component
                     style={
                       Object {
                         "marginLeft": 40,
@@ -1485,8 +1487,8 @@ ShallowWrapper {
                         }
                       }
                     />
-                  </View>,
-                  <View
+                  </Component>,
+                  <Component
                     style={
                       Object {
                         "marginLeft": 30,
@@ -1508,7 +1510,7 @@ ShallowWrapper {
                     >
                       Grid view
                     </Text>
-                  </View>,
+                  </Component>,
                 ],
                 "onPress": [Function],
                 "style": Object {
@@ -1616,7 +1618,7 @@ ShallowWrapper {
               "props": Object {
                 "activeOpacity": 0.2,
                 "children": Array [
-                  <View
+                  <Component
                     style={
                       Object {
                         "marginLeft": 40,
@@ -1633,8 +1635,8 @@ ShallowWrapper {
                         }
                       }
                     />
-                  </View>,
-                  <View
+                  </Component>,
+                  <Component
                     style={
                       Object {
                         "marginLeft": 30,
@@ -1656,7 +1658,7 @@ ShallowWrapper {
                     >
                       Select items
                     </Text>
-                  </View>,
+                  </Component>,
                 ],
                 "onPress": [Function],
                 "style": Object {

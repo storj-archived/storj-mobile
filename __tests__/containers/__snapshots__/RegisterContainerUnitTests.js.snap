@@ -5,6 +5,7 @@ ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <RegisterContainer
+    login={[Function]}
     navigateBack={[Function]}
     redirectToAuthFailureScreen={[Function]}
     redirectToLoginScreen={[Function]}
@@ -29,6 +30,7 @@ ShallowWrapper {
     "props": Object {
       "isButtonDisabled": true,
       "isEmailError": false,
+      "isLoading": false,
       "isPasswordError": false,
       "isPasswordMatchError": false,
       "isTermsAcceptedError": false,
@@ -53,6 +55,7 @@ ShallowWrapper {
       "props": Object {
         "isButtonDisabled": true,
         "isEmailError": false,
+        "isLoading": false,
         "isPasswordError": false,
         "isPasswordMatchError": false,
         "isTermsAcceptedError": false,

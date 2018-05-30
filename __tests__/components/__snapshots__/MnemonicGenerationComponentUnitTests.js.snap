@@ -17,7 +17,7 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
-      "children": <ScrollViewMock
+      "children": <ScrollView
         showsVerticalScrollIndicator={false}
         style={
           Object {
@@ -25,14 +25,14 @@ ShallowWrapper {
           }
         }
       >
-        <View
+        <Component
           style={
             Object {
               "height": 230,
             }
           }
         >
-          <View
+          <Component
             style={
               Object {
                 "alignItems": "center",
@@ -42,7 +42,7 @@ ShallowWrapper {
               }
             }
           >
-            <View
+            <Component
               style={
                 Object {
                   "flexDirection": "row",
@@ -71,7 +71,7 @@ ShallowWrapper {
                   }
                 />
               </TouchableOpacity>
-              <View
+              <Component
                 style={
                   Object {
                     "height": 200,
@@ -94,8 +94,8 @@ ShallowWrapper {
                 >
                   Safeguard your secret phrase
                 </Text>
-              </View>
-            </View>
+              </Component>
+            </Component>
             <TouchableOpacity
               activeOpacity={0.2}
               onPress={[Function]}
@@ -127,9 +127,9 @@ ShallowWrapper {
                 Skip
               </Text>
             </TouchableOpacity>
-          </View>
-        </View>
-        <View
+          </Component>
+        </Component>
+        <Component
           style={
             Object {
               "marginTop": 48,
@@ -164,8 +164,8 @@ ShallowWrapper {
             </Text>
             this list of words and their order. We don’t want you to lose your data, and you won’t be able to access your data without it.
           </Text>
-        </View>
-        <View
+        </Component>
+        <Component
           style={
             Object {
               "marginTop": 34,
@@ -187,12 +187,12 @@ ShallowWrapper {
           >
             Your secret phrase
           </Text>
-        </View>
+        </Component>
         <TouchableOpacity
           activeOpacity={0.2}
           onPress={[Function]}
         >
-          <View
+          <Component
             style={
               Object {
                 "alignItems": "center",
@@ -228,13 +228,13 @@ ShallowWrapper {
             >
               Copy to clipboard
             </Text>
-          </View>
+          </Component>
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.2}
           onPress={[Function]}
         >
-          <View
+          <Component
             style={
               Object {
                 "alignItems": "center",
@@ -265,9 +265,9 @@ ShallowWrapper {
             >
               Next
             </Text>
-          </View>
+          </Component>
         </TouchableOpacity>
-      </ScrollViewMock>,
+      </ScrollView>,
       "style": Object {
         "backgroundColor": "#FFFFFF",
         "flex": 1,
@@ -281,14 +281,14 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <View
+          <Component
             style={
               Object {
                 "height": 230,
               }
             }
           >
-            <View
+            <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -298,7 +298,7 @@ ShallowWrapper {
                 }
               }
             >
-              <View
+              <Component
                 style={
                   Object {
                     "flexDirection": "row",
@@ -327,7 +327,7 @@ ShallowWrapper {
                     }
                   />
                 </TouchableOpacity>
-                <View
+                <Component
                   style={
                     Object {
                       "height": 200,
@@ -350,8 +350,8 @@ ShallowWrapper {
                   >
                     Safeguard your secret phrase
                   </Text>
-                </View>
-              </View>
+                </Component>
+              </Component>
               <TouchableOpacity
                 activeOpacity={0.2}
                 onPress={[Function]}
@@ -383,9 +383,9 @@ ShallowWrapper {
                   Skip
                 </Text>
               </TouchableOpacity>
-            </View>
-          </View>,
-          <View
+            </Component>
+          </Component>,
+          <Component
             style={
               Object {
                 "marginTop": 48,
@@ -420,8 +420,8 @@ ShallowWrapper {
               </Text>
               this list of words and their order. We don’t want you to lose your data, and you won’t be able to access your data without it.
             </Text>
-          </View>,
-          <View
+          </Component>,
+          <Component
             style={
               Object {
                 "marginTop": 34,
@@ -443,13 +443,13 @@ ShallowWrapper {
             >
               Your secret phrase
             </Text>
-          </View>,
+          </Component>,
           null,
           <TouchableOpacity
             activeOpacity={0.2}
             onPress={[Function]}
           >
-            <View
+            <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -485,13 +485,13 @@ ShallowWrapper {
               >
                 Copy to clipboard
               </Text>
-            </View>
+            </Component>
           </TouchableOpacity>,
           <TouchableOpacity
             activeOpacity={0.2}
             onPress={[Function]}
           >
-            <View
+            <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -522,7 +522,7 @@ ShallowWrapper {
               >
                 Next
               </Text>
-            </View>
+            </Component>
           </TouchableOpacity>,
           null,
         ],
@@ -538,7 +538,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "children": <View
+            "children": <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -548,7 +548,7 @@ ShallowWrapper {
                 }
               }
             >
-              <View
+              <Component
                 style={
                   Object {
                     "flexDirection": "row",
@@ -577,7 +577,7 @@ ShallowWrapper {
                     }
                   />
                 </TouchableOpacity>
-                <View
+                <Component
                   style={
                     Object {
                       "height": 200,
@@ -600,8 +600,8 @@ ShallowWrapper {
                   >
                     Safeguard your secret phrase
                   </Text>
-                </View>
-              </View>
+                </Component>
+              </Component>
               <TouchableOpacity
                 activeOpacity={0.2}
                 onPress={[Function]}
@@ -633,7 +633,7 @@ ShallowWrapper {
                   Skip
                 </Text>
               </TouchableOpacity>
-            </View>,
+            </Component>,
             "style": Object {
               "height": 230,
             },
@@ -645,7 +645,7 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "children": Array [
-                <View
+                <Component
                   style={
                     Object {
                       "flexDirection": "row",
@@ -674,7 +674,7 @@ ShallowWrapper {
                       }
                     />
                   </TouchableOpacity>
-                  <View
+                  <Component
                     style={
                       Object {
                         "height": 200,
@@ -697,8 +697,8 @@ ShallowWrapper {
                     >
                       Safeguard your secret phrase
                     </Text>
-                  </View>
-                </View>,
+                  </Component>
+                </Component>,
                 <TouchableOpacity
                   activeOpacity={0.2}
                   onPress={[Function]}
@@ -768,7 +768,7 @@ ShallowWrapper {
                         }
                       />
                     </TouchableOpacity>,
-                    <View
+                    <Component
                       style={
                         Object {
                           "height": 200,
@@ -791,7 +791,7 @@ ShallowWrapper {
                       >
                         Safeguard your secret phrase
                       </Text>
-                    </View>,
+                    </Component>,
                   ],
                   "style": Object {
                     "flexDirection": "row",
@@ -1102,7 +1102,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "activeOpacity": 0.2,
-            "children": <View
+            "children": <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -1138,7 +1138,7 @@ ShallowWrapper {
               >
                 Copy to clipboard
               </Text>
-            </View>,
+            </Component>,
             "onPress": [Function],
           },
           "ref": null,
@@ -1232,7 +1232,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "activeOpacity": 0.2,
-            "children": <View
+            "children": <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -1263,7 +1263,7 @@ ShallowWrapper {
               >
                 Next
               </Text>
-            </View>,
+            </Component>,
             "onPress": [Function],
           },
           "ref": null,
@@ -1326,7 +1326,7 @@ ShallowWrapper {
         },
         null,
       ],
-      "type": [Function],
+      "type": [MockFunction],
     },
     "type": [Function],
   },
@@ -1336,7 +1336,7 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
-        "children": <ScrollViewMock
+        "children": <ScrollView
           showsVerticalScrollIndicator={false}
           style={
             Object {
@@ -1344,14 +1344,14 @@ ShallowWrapper {
             }
           }
         >
-          <View
+          <Component
             style={
               Object {
                 "height": 230,
               }
             }
           >
-            <View
+            <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -1361,7 +1361,7 @@ ShallowWrapper {
                 }
               }
             >
-              <View
+              <Component
                 style={
                   Object {
                     "flexDirection": "row",
@@ -1390,7 +1390,7 @@ ShallowWrapper {
                     }
                   />
                 </TouchableOpacity>
-                <View
+                <Component
                   style={
                     Object {
                       "height": 200,
@@ -1413,8 +1413,8 @@ ShallowWrapper {
                   >
                     Safeguard your secret phrase
                   </Text>
-                </View>
-              </View>
+                </Component>
+              </Component>
               <TouchableOpacity
                 activeOpacity={0.2}
                 onPress={[Function]}
@@ -1446,9 +1446,9 @@ ShallowWrapper {
                   Skip
                 </Text>
               </TouchableOpacity>
-            </View>
-          </View>
-          <View
+            </Component>
+          </Component>
+          <Component
             style={
               Object {
                 "marginTop": 48,
@@ -1483,8 +1483,8 @@ ShallowWrapper {
               </Text>
               this list of words and their order. We don’t want you to lose your data, and you won’t be able to access your data without it.
             </Text>
-          </View>
-          <View
+          </Component>
+          <Component
             style={
               Object {
                 "marginTop": 34,
@@ -1506,12 +1506,12 @@ ShallowWrapper {
             >
               Your secret phrase
             </Text>
-          </View>
+          </Component>
           <TouchableOpacity
             activeOpacity={0.2}
             onPress={[Function]}
           >
-            <View
+            <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -1547,13 +1547,13 @@ ShallowWrapper {
               >
                 Copy to clipboard
               </Text>
-            </View>
+            </Component>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.2}
             onPress={[Function]}
           >
-            <View
+            <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -1584,9 +1584,9 @@ ShallowWrapper {
               >
                 Next
               </Text>
-            </View>
+            </Component>
           </TouchableOpacity>
-        </ScrollViewMock>,
+        </ScrollView>,
         "style": Object {
           "backgroundColor": "#FFFFFF",
           "flex": 1,
@@ -1600,14 +1600,14 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <View
+            <Component
               style={
                 Object {
                   "height": 230,
                 }
               }
             >
-              <View
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -1617,7 +1617,7 @@ ShallowWrapper {
                   }
                 }
               >
-                <View
+                <Component
                   style={
                     Object {
                       "flexDirection": "row",
@@ -1646,7 +1646,7 @@ ShallowWrapper {
                       }
                     />
                   </TouchableOpacity>
-                  <View
+                  <Component
                     style={
                       Object {
                         "height": 200,
@@ -1669,8 +1669,8 @@ ShallowWrapper {
                     >
                       Safeguard your secret phrase
                     </Text>
-                  </View>
-                </View>
+                  </Component>
+                </Component>
                 <TouchableOpacity
                   activeOpacity={0.2}
                   onPress={[Function]}
@@ -1702,9 +1702,9 @@ ShallowWrapper {
                     Skip
                   </Text>
                 </TouchableOpacity>
-              </View>
-            </View>,
-            <View
+              </Component>
+            </Component>,
+            <Component
               style={
                 Object {
                   "marginTop": 48,
@@ -1739,8 +1739,8 @@ ShallowWrapper {
                 </Text>
                 this list of words and their order. We don’t want you to lose your data, and you won’t be able to access your data without it.
               </Text>
-            </View>,
-            <View
+            </Component>,
+            <Component
               style={
                 Object {
                   "marginTop": 34,
@@ -1762,13 +1762,13 @@ ShallowWrapper {
               >
                 Your secret phrase
               </Text>
-            </View>,
+            </Component>,
             null,
             <TouchableOpacity
               activeOpacity={0.2}
               onPress={[Function]}
             >
-              <View
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -1804,13 +1804,13 @@ ShallowWrapper {
                 >
                   Copy to clipboard
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>,
             <TouchableOpacity
               activeOpacity={0.2}
               onPress={[Function]}
             >
-              <View
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -1841,7 +1841,7 @@ ShallowWrapper {
                 >
                   Next
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>,
             null,
           ],
@@ -1857,7 +1857,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "children": <View
+              "children": <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -1867,7 +1867,7 @@ ShallowWrapper {
                   }
                 }
               >
-                <View
+                <Component
                   style={
                     Object {
                       "flexDirection": "row",
@@ -1896,7 +1896,7 @@ ShallowWrapper {
                       }
                     />
                   </TouchableOpacity>
-                  <View
+                  <Component
                     style={
                       Object {
                         "height": 200,
@@ -1919,8 +1919,8 @@ ShallowWrapper {
                     >
                       Safeguard your secret phrase
                     </Text>
-                  </View>
-                </View>
+                  </Component>
+                </Component>
                 <TouchableOpacity
                   activeOpacity={0.2}
                   onPress={[Function]}
@@ -1952,7 +1952,7 @@ ShallowWrapper {
                     Skip
                   </Text>
                 </TouchableOpacity>
-              </View>,
+              </Component>,
               "style": Object {
                 "height": 230,
               },
@@ -1964,7 +1964,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "children": Array [
-                  <View
+                  <Component
                     style={
                       Object {
                         "flexDirection": "row",
@@ -1993,7 +1993,7 @@ ShallowWrapper {
                         }
                       />
                     </TouchableOpacity>
-                    <View
+                    <Component
                       style={
                         Object {
                           "height": 200,
@@ -2016,8 +2016,8 @@ ShallowWrapper {
                       >
                         Safeguard your secret phrase
                       </Text>
-                    </View>
-                  </View>,
+                    </Component>
+                  </Component>,
                   <TouchableOpacity
                     activeOpacity={0.2}
                     onPress={[Function]}
@@ -2087,7 +2087,7 @@ ShallowWrapper {
                           }
                         />
                       </TouchableOpacity>,
-                      <View
+                      <Component
                         style={
                           Object {
                             "height": 200,
@@ -2110,7 +2110,7 @@ ShallowWrapper {
                         >
                           Safeguard your secret phrase
                         </Text>
-                      </View>,
+                      </Component>,
                     ],
                     "style": Object {
                       "flexDirection": "row",
@@ -2421,7 +2421,7 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "activeOpacity": 0.2,
-              "children": <View
+              "children": <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -2457,7 +2457,7 @@ ShallowWrapper {
                 >
                   Copy to clipboard
                 </Text>
-              </View>,
+              </Component>,
               "onPress": [Function],
             },
             "ref": null,
@@ -2551,7 +2551,7 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "activeOpacity": 0.2,
-              "children": <View
+              "children": <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -2582,7 +2582,7 @@ ShallowWrapper {
                 >
                   Next
                 </Text>
-              </View>,
+              </Component>,
               "onPress": [Function],
             },
             "ref": null,
@@ -2645,7 +2645,7 @@ ShallowWrapper {
           },
           null,
         ],
-        "type": [Function],
+        "type": [MockFunction],
       },
       "type": [Function],
     },

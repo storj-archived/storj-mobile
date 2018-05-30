@@ -25,7 +25,7 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <ScrollViewMock
+        <ScrollView
           decelerationRate={0.99}
           horizontal={true}
           onMomentumScrollEnd={[Function]}
@@ -33,7 +33,7 @@ ShallowWrapper {
           showsHorizontalScrollIndicator={false}
           style={Object {}}
         >
-          <View
+          <Component
             style={
               Object {
                 "height": undefined,
@@ -42,8 +42,8 @@ ShallowWrapper {
             }
           >
             [Function]
-          </View>
-          <View
+          </Component>
+          <Component
             style={
               Object {
                 "height": undefined,
@@ -52,9 +52,9 @@ ShallowWrapper {
             }
           >
             [Function]
-          </View>
-        </ScrollViewMock>,
-        <View
+          </Component>
+        </ScrollView>,
+        <Component
           style={
             Object {
               "alignItems": "center",
@@ -68,6 +68,7 @@ ShallowWrapper {
         >
           <TouchableHighlight
             activeOpacity={0.85}
+            delayPressOut={100}
             onPressOut={[Function]}
             style={
               Array [
@@ -88,10 +89,11 @@ ShallowWrapper {
             }
             underlayColor="#ccc"
           >
-            <View />
+            <Component />
           </TouchableHighlight>
           <TouchableHighlight
             activeOpacity={0.85}
+            delayPressOut={100}
             onPressOut={[Function]}
             style={
               Array [
@@ -109,9 +111,9 @@ ShallowWrapper {
             }
             underlayColor="#ccc"
           >
-            <View />
+            <Component />
           </TouchableHighlight>
-        </View>,
+        </Component>,
       ],
       "style": Array [
         Object {
@@ -128,7 +130,7 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <View
+            <Component
               style={
                 Object {
                   "height": undefined,
@@ -137,8 +139,8 @@ ShallowWrapper {
               }
             >
               [Function]
-            </View>,
-            <View
+            </Component>,
+            <Component
               style={
                 Object {
                   "height": undefined,
@@ -147,7 +149,7 @@ ShallowWrapper {
               }
             >
               [Function]
-            </View>,
+            </Component>,
           ],
           "decelerationRate": 0.99,
           "horizontal": true,
@@ -189,7 +191,7 @@ ShallowWrapper {
             "type": [Function],
           },
         ],
-        "type": [Function],
+        "type": [MockFunction],
       },
       Object {
         "instance": null,
@@ -199,6 +201,7 @@ ShallowWrapper {
           "children": Array [
             <TouchableHighlight
               activeOpacity={0.85}
+              delayPressOut={100}
               onPressOut={[Function]}
               style={
                 Array [
@@ -219,10 +222,11 @@ ShallowWrapper {
               }
               underlayColor="#ccc"
             >
-              <View />
+              <Component />
             </TouchableHighlight>,
             <TouchableHighlight
               activeOpacity={0.85}
+              delayPressOut={100}
               onPressOut={[Function]}
               style={
                 Array [
@@ -240,7 +244,7 @@ ShallowWrapper {
               }
               underlayColor="#ccc"
             >
-              <View />
+              <Component />
             </TouchableHighlight>,
           ],
           "style": Object {
@@ -260,7 +264,8 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "activeOpacity": 0.85,
-              "children": <View />,
+              "children": <Component />,
+              "delayPressOut": 100,
               "onPressOut": [Function],
               "style": Array [
                 Object {
@@ -297,7 +302,8 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "activeOpacity": 0.85,
-              "children": <View />,
+              "children": <Component />,
+              "delayPressOut": 100,
               "onPressOut": [Function],
               "style": Array [
                 Object {
@@ -338,7 +344,7 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <ScrollViewMock
+          <ScrollView
             decelerationRate={0.99}
             horizontal={true}
             onMomentumScrollEnd={[Function]}
@@ -346,7 +352,7 @@ ShallowWrapper {
             showsHorizontalScrollIndicator={false}
             style={Object {}}
           >
-            <View
+            <Component
               style={
                 Object {
                   "height": undefined,
@@ -355,8 +361,8 @@ ShallowWrapper {
               }
             >
               [Function]
-            </View>
-            <View
+            </Component>
+            <Component
               style={
                 Object {
                   "height": undefined,
@@ -365,9 +371,9 @@ ShallowWrapper {
               }
             >
               [Function]
-            </View>
-          </ScrollViewMock>,
-          <View
+            </Component>
+          </ScrollView>,
+          <Component
             style={
               Object {
                 "alignItems": "center",
@@ -381,6 +387,7 @@ ShallowWrapper {
           >
             <TouchableHighlight
               activeOpacity={0.85}
+              delayPressOut={100}
               onPressOut={[Function]}
               style={
                 Array [
@@ -401,10 +408,11 @@ ShallowWrapper {
               }
               underlayColor="#ccc"
             >
-              <View />
+              <Component />
             </TouchableHighlight>
             <TouchableHighlight
               activeOpacity={0.85}
+              delayPressOut={100}
               onPressOut={[Function]}
               style={
                 Array [
@@ -422,9 +430,9 @@ ShallowWrapper {
               }
               underlayColor="#ccc"
             >
-              <View />
+              <Component />
             </TouchableHighlight>
-          </View>,
+          </Component>,
         ],
         "style": Array [
           Object {
@@ -441,7 +449,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <View
+              <Component
                 style={
                   Object {
                     "height": undefined,
@@ -450,8 +458,8 @@ ShallowWrapper {
                 }
               >
                 [Function]
-              </View>,
-              <View
+              </Component>,
+              <Component
                 style={
                   Object {
                     "height": undefined,
@@ -460,7 +468,7 @@ ShallowWrapper {
                 }
               >
                 [Function]
-              </View>,
+              </Component>,
             ],
             "decelerationRate": 0.99,
             "horizontal": true,
@@ -502,7 +510,7 @@ ShallowWrapper {
               "type": [Function],
             },
           ],
-          "type": [Function],
+          "type": [MockFunction],
         },
         Object {
           "instance": null,
@@ -512,6 +520,7 @@ ShallowWrapper {
             "children": Array [
               <TouchableHighlight
                 activeOpacity={0.85}
+                delayPressOut={100}
                 onPressOut={[Function]}
                 style={
                   Array [
@@ -532,10 +541,11 @@ ShallowWrapper {
                 }
                 underlayColor="#ccc"
               >
-                <View />
+                <Component />
               </TouchableHighlight>,
               <TouchableHighlight
                 activeOpacity={0.85}
+                delayPressOut={100}
                 onPressOut={[Function]}
                 style={
                   Array [
@@ -553,7 +563,7 @@ ShallowWrapper {
                 }
                 underlayColor="#ccc"
               >
-                <View />
+                <Component />
               </TouchableHighlight>,
             ],
             "style": Object {
@@ -573,7 +583,8 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "activeOpacity": 0.85,
-                "children": <View />,
+                "children": <Component />,
+                "delayPressOut": 100,
                 "onPressOut": [Function],
                 "style": Array [
                   Object {
@@ -610,7 +621,8 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "activeOpacity": 0.85,
-                "children": <View />,
+                "children": <Component />,
+                "delayPressOut": 100,
                 "onPressOut": [Function],
                 "style": Array [
                   Object {

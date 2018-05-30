@@ -8,21 +8,18 @@ ShallowWrapper {
     actions={
       Array [
         TabBarActionModel {
-          "actionName": "Action 1",
           "callback": [MockFunction],
-          "icon": "icon",
+          "icon": "Action 1",
           "id": 0,
         },
         TabBarActionModel {
-          "actionName": "Action 2",
           "callback": [MockFunction],
-          "icon": "icon",
+          "icon": "Action 2",
           "id": 1,
         },
         TabBarActionModel {
-          "actionName": "Action 3",
           "callback": [MockFunction],
-          "icon": "icon",
+          "icon": "Action 3",
           "id": 2,
         },
       ]
@@ -32,27 +29,23 @@ ShallowWrapper {
     selectionModeActions={
       Array [
         TabBarActionModel {
-          "actionName": "Action 1",
           "callback": [MockFunction],
-          "icon": "icon",
+          "icon": "Action 1",
           "id": 3,
         },
         TabBarActionModel {
-          "actionName": "Action 2",
           "callback": [MockFunction],
-          "icon": "icon",
+          "icon": "Action 2",
           "id": 4,
         },
         TabBarActionModel {
-          "actionName": "Action 3",
           "callback": [MockFunction],
-          "icon": "icon",
+          "icon": "Action 3",
           "id": 5,
         },
         TabBarActionModel {
-          "actionName": "Action 3",
           "callback": [MockFunction],
-          "icon": "icon",
+          "icon": "Action 3",
           "id": 6,
         },
       ]
@@ -71,7 +64,7 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <View
+        <Component
           style={
             Object {
               "backgroundColor": "#2684FF",
@@ -83,7 +76,9 @@ ShallowWrapper {
             }
           }
         >
-          <View
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[MockFunction]}
             style={
               Object {
                 "alignItems": "center",
@@ -94,12 +89,9 @@ ShallowWrapper {
               }
             }
           >
-            <TouchableOpacity
-              activeOpacity={0.2}
-              onPress={[MockFunction]}
-            >
+            <Component>
               <Image
-                source="icon"
+                source="Action 1"
                 style={
                   Object {
                     "height": 60,
@@ -107,9 +99,11 @@ ShallowWrapper {
                   }
                 }
               />
-            </TouchableOpacity>
-          </View>
-          <View
+            </Component>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[MockFunction]}
             style={
               Array [
                 Object {
@@ -126,12 +120,9 @@ ShallowWrapper {
               ]
             }
           >
-            <TouchableOpacity
-              activeOpacity={0.2}
-              onPress={[MockFunction]}
-            >
+            <Component>
               <Image
-                source="icon"
+                source="Action 2"
                 style={
                   Object {
                     "height": 60,
@@ -139,9 +130,11 @@ ShallowWrapper {
                   }
                 }
               />
-            </TouchableOpacity>
-          </View>
-          <View
+            </Component>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[MockFunction]}
             style={
               Array [
                 Object {
@@ -158,12 +151,9 @@ ShallowWrapper {
               ]
             }
           >
-            <TouchableOpacity
-              activeOpacity={0.2}
-              onPress={[MockFunction]}
-            >
+            <Component>
               <Image
-                source="icon"
+                source="Action 3"
                 style={
                   Object {
                     "height": 60,
@@ -171,9 +161,9 @@ ShallowWrapper {
                   }
                 }
               />
-            </TouchableOpacity>
-          </View>
-        </View>,
+            </Component>
+          </TouchableOpacity>
+        </Component>,
         null,
       ],
       "style": Array [
@@ -193,7 +183,9 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <View
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[MockFunction]}
               style={
                 Object {
                   "alignItems": "center",
@@ -204,12 +196,9 @@ ShallowWrapper {
                 }
               }
             >
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
+              <Component>
                 <Image
-                  source="icon"
+                  source="Action 1"
                   style={
                     Object {
                       "height": 60,
@@ -217,9 +206,11 @@ ShallowWrapper {
                     }
                   }
                 />
-              </TouchableOpacity>
-            </View>,
-            <View
+              </Component>
+            </TouchableOpacity>,
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[MockFunction]}
               style={
                 Array [
                   Object {
@@ -236,12 +227,9 @@ ShallowWrapper {
                 ]
               }
             >
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
+              <Component>
                 <Image
-                  source="icon"
+                  source="Action 2"
                   style={
                     Object {
                       "height": 60,
@@ -249,9 +237,11 @@ ShallowWrapper {
                     }
                   }
                 />
-              </TouchableOpacity>
-            </View>,
-            <View
+              </Component>
+            </TouchableOpacity>,
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[MockFunction]}
               style={
                 Array [
                   Object {
@@ -268,12 +258,9 @@ ShallowWrapper {
                 ]
               }
             >
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
+              <Component>
                 <Image
-                  source="icon"
+                  source="Action 3"
                   style={
                     Object {
                       "height": 60,
@@ -281,8 +268,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </TouchableOpacity>
-            </View>,
+              </Component>
+            </TouchableOpacity>,
           ],
           "style": Object {
             "backgroundColor": "#2684FF",
@@ -300,12 +287,10 @@ ShallowWrapper {
             "key": "0",
             "nodeType": "class",
             "props": Object {
-              "children": <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
+              "activeOpacity": 0.2,
+              "children": <Component>
                 <Image
-                  source="icon"
+                  source="Action 1"
                   style={
                     Object {
                       "height": 60,
@@ -313,7 +298,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </TouchableOpacity>,
+              </Component>,
+              "onPress": [MockFunction],
               "style": Object {
                 "alignItems": "center",
                 "flex": 1,
@@ -328,9 +314,8 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "activeOpacity": 0.2,
                 "children": <Image
-                  source="icon"
+                  source="Action 1"
                   style={
                     Object {
                       "height": 60,
@@ -338,7 +323,6 @@ ShallowWrapper {
                     }
                   }
                 />,
-                "onPress": [MockFunction],
               },
               "ref": null,
               "rendered": Object {
@@ -346,7 +330,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "source": "icon",
+                  "source": "Action 1",
                   "style": Object {
                     "height": 60,
                     "width": 60,
@@ -365,12 +349,10 @@ ShallowWrapper {
             "key": "1",
             "nodeType": "class",
             "props": Object {
-              "children": <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
+              "activeOpacity": 0.2,
+              "children": <Component>
                 <Image
-                  source="icon"
+                  source="Action 2"
                   style={
                     Object {
                       "height": 60,
@@ -378,7 +360,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </TouchableOpacity>,
+              </Component>,
+              "onPress": [MockFunction],
               "style": Array [
                 Object {
                   "alignItems": "center",
@@ -399,9 +382,8 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "activeOpacity": 0.2,
                 "children": <Image
-                  source="icon"
+                  source="Action 2"
                   style={
                     Object {
                       "height": 60,
@@ -409,7 +391,6 @@ ShallowWrapper {
                     }
                   }
                 />,
-                "onPress": [MockFunction],
               },
               "ref": null,
               "rendered": Object {
@@ -417,7 +398,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "source": "icon",
+                  "source": "Action 2",
                   "style": Object {
                     "height": 60,
                     "width": 60,
@@ -436,12 +417,10 @@ ShallowWrapper {
             "key": "2",
             "nodeType": "class",
             "props": Object {
-              "children": <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
+              "activeOpacity": 0.2,
+              "children": <Component>
                 <Image
-                  source="icon"
+                  source="Action 3"
                   style={
                     Object {
                       "height": 60,
@@ -449,7 +428,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </TouchableOpacity>,
+              </Component>,
+              "onPress": [MockFunction],
               "style": Array [
                 Object {
                   "alignItems": "center",
@@ -470,9 +450,8 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "activeOpacity": 0.2,
                 "children": <Image
-                  source="icon"
+                  source="Action 3"
                   style={
                     Object {
                       "height": 60,
@@ -480,7 +459,6 @@ ShallowWrapper {
                     }
                   }
                 />,
-                "onPress": [MockFunction],
               },
               "ref": null,
               "rendered": Object {
@@ -488,7 +466,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "source": "icon",
+                  "source": "Action 3",
                   "style": Object {
                     "height": 60,
                     "width": 60,
@@ -516,7 +494,7 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <View
+          <Component
             style={
               Object {
                 "backgroundColor": "#2684FF",
@@ -528,7 +506,9 @@ ShallowWrapper {
               }
             }
           >
-            <View
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[MockFunction]}
               style={
                 Object {
                   "alignItems": "center",
@@ -539,12 +519,9 @@ ShallowWrapper {
                 }
               }
             >
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
+              <Component>
                 <Image
-                  source="icon"
+                  source="Action 1"
                   style={
                     Object {
                       "height": 60,
@@ -552,9 +529,11 @@ ShallowWrapper {
                     }
                   }
                 />
-              </TouchableOpacity>
-            </View>
-            <View
+              </Component>
+            </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[MockFunction]}
               style={
                 Array [
                   Object {
@@ -571,12 +550,9 @@ ShallowWrapper {
                 ]
               }
             >
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
+              <Component>
                 <Image
-                  source="icon"
+                  source="Action 2"
                   style={
                     Object {
                       "height": 60,
@@ -584,9 +560,11 @@ ShallowWrapper {
                     }
                   }
                 />
-              </TouchableOpacity>
-            </View>
-            <View
+              </Component>
+            </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[MockFunction]}
               style={
                 Array [
                   Object {
@@ -603,12 +581,9 @@ ShallowWrapper {
                 ]
               }
             >
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
+              <Component>
                 <Image
-                  source="icon"
+                  source="Action 3"
                   style={
                     Object {
                       "height": 60,
@@ -616,9 +591,9 @@ ShallowWrapper {
                     }
                   }
                 />
-              </TouchableOpacity>
-            </View>
-          </View>,
+              </Component>
+            </TouchableOpacity>
+          </Component>,
           null,
         ],
         "style": Array [
@@ -638,7 +613,9 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <View
+              <TouchableOpacity
+                activeOpacity={0.2}
+                onPress={[MockFunction]}
                 style={
                   Object {
                     "alignItems": "center",
@@ -649,12 +626,9 @@ ShallowWrapper {
                   }
                 }
               >
-                <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={[MockFunction]}
-                >
+                <Component>
                   <Image
-                    source="icon"
+                    source="Action 1"
                     style={
                       Object {
                         "height": 60,
@@ -662,9 +636,11 @@ ShallowWrapper {
                       }
                     }
                   />
-                </TouchableOpacity>
-              </View>,
-              <View
+                </Component>
+              </TouchableOpacity>,
+              <TouchableOpacity
+                activeOpacity={0.2}
+                onPress={[MockFunction]}
                 style={
                   Array [
                     Object {
@@ -681,12 +657,9 @@ ShallowWrapper {
                   ]
                 }
               >
-                <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={[MockFunction]}
-                >
+                <Component>
                   <Image
-                    source="icon"
+                    source="Action 2"
                     style={
                       Object {
                         "height": 60,
@@ -694,9 +667,11 @@ ShallowWrapper {
                       }
                     }
                   />
-                </TouchableOpacity>
-              </View>,
-              <View
+                </Component>
+              </TouchableOpacity>,
+              <TouchableOpacity
+                activeOpacity={0.2}
+                onPress={[MockFunction]}
                 style={
                   Array [
                     Object {
@@ -713,12 +688,9 @@ ShallowWrapper {
                   ]
                 }
               >
-                <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={[MockFunction]}
-                >
+                <Component>
                   <Image
-                    source="icon"
+                    source="Action 3"
                     style={
                       Object {
                         "height": 60,
@@ -726,8 +698,8 @@ ShallowWrapper {
                       }
                     }
                   />
-                </TouchableOpacity>
-              </View>,
+                </Component>
+              </TouchableOpacity>,
             ],
             "style": Object {
               "backgroundColor": "#2684FF",
@@ -745,12 +717,10 @@ ShallowWrapper {
               "key": "0",
               "nodeType": "class",
               "props": Object {
-                "children": <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={[MockFunction]}
-                >
+                "activeOpacity": 0.2,
+                "children": <Component>
                   <Image
-                    source="icon"
+                    source="Action 1"
                     style={
                       Object {
                         "height": 60,
@@ -758,7 +728,8 @@ ShallowWrapper {
                       }
                     }
                   />
-                </TouchableOpacity>,
+                </Component>,
+                "onPress": [MockFunction],
                 "style": Object {
                   "alignItems": "center",
                   "flex": 1,
@@ -773,9 +744,8 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "activeOpacity": 0.2,
                   "children": <Image
-                    source="icon"
+                    source="Action 1"
                     style={
                       Object {
                         "height": 60,
@@ -783,7 +753,6 @@ ShallowWrapper {
                       }
                     }
                   />,
-                  "onPress": [MockFunction],
                 },
                 "ref": null,
                 "rendered": Object {
@@ -791,7 +760,7 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "source": "icon",
+                    "source": "Action 1",
                     "style": Object {
                       "height": 60,
                       "width": 60,
@@ -810,12 +779,10 @@ ShallowWrapper {
               "key": "1",
               "nodeType": "class",
               "props": Object {
-                "children": <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={[MockFunction]}
-                >
+                "activeOpacity": 0.2,
+                "children": <Component>
                   <Image
-                    source="icon"
+                    source="Action 2"
                     style={
                       Object {
                         "height": 60,
@@ -823,7 +790,8 @@ ShallowWrapper {
                       }
                     }
                   />
-                </TouchableOpacity>,
+                </Component>,
+                "onPress": [MockFunction],
                 "style": Array [
                   Object {
                     "alignItems": "center",
@@ -844,9 +812,8 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "activeOpacity": 0.2,
                   "children": <Image
-                    source="icon"
+                    source="Action 2"
                     style={
                       Object {
                         "height": 60,
@@ -854,7 +821,6 @@ ShallowWrapper {
                       }
                     }
                   />,
-                  "onPress": [MockFunction],
                 },
                 "ref": null,
                 "rendered": Object {
@@ -862,7 +828,7 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "source": "icon",
+                    "source": "Action 2",
                     "style": Object {
                       "height": 60,
                       "width": 60,
@@ -881,12 +847,10 @@ ShallowWrapper {
               "key": "2",
               "nodeType": "class",
               "props": Object {
-                "children": <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={[MockFunction]}
-                >
+                "activeOpacity": 0.2,
+                "children": <Component>
                   <Image
-                    source="icon"
+                    source="Action 3"
                     style={
                       Object {
                         "height": 60,
@@ -894,7 +858,8 @@ ShallowWrapper {
                       }
                     }
                   />
-                </TouchableOpacity>,
+                </Component>,
+                "onPress": [MockFunction],
                 "style": Array [
                   Object {
                     "alignItems": "center",
@@ -915,9 +880,8 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "activeOpacity": 0.2,
                   "children": <Image
-                    source="icon"
+                    source="Action 3"
                     style={
                       Object {
                         "height": 60,
@@ -925,7 +889,6 @@ ShallowWrapper {
                       }
                     }
                   />,
-                  "onPress": [MockFunction],
                 },
                 "ref": null,
                 "rendered": Object {
@@ -933,7 +896,7 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "source": "icon",
+                    "source": "Action 3",
                     "style": Object {
                       "height": 60,
                       "width": 60,
@@ -973,21 +936,18 @@ ShallowWrapper {
     actions={
       Array [
         TabBarActionModel {
-          "actionName": "Action 1",
           "callback": [MockFunction],
-          "icon": "icon",
+          "icon": "Action 1",
           "id": 7,
         },
         TabBarActionModel {
-          "actionName": "Action 2",
           "callback": [MockFunction],
-          "icon": "icon",
+          "icon": "Action 2",
           "id": 8,
         },
         TabBarActionModel {
-          "actionName": "Action 3",
           "callback": [MockFunction],
-          "icon": "icon",
+          "icon": "Action 3",
           "id": 9,
         },
       ]
@@ -997,27 +957,23 @@ ShallowWrapper {
     selectionModeActions={
       Array [
         TabBarActionModel {
-          "actionName": "Action 1",
           "callback": [MockFunction],
-          "icon": "icon",
+          "icon": "Action 1",
           "id": 10,
         },
         TabBarActionModel {
-          "actionName": "Action 2",
           "callback": [MockFunction],
-          "icon": "icon",
+          "icon": "Action 2",
           "id": 11,
         },
         TabBarActionModel {
-          "actionName": "Action 3",
           "callback": [MockFunction],
-          "icon": "icon",
+          "icon": "Action 3",
           "id": 12,
         },
         TabBarActionModel {
-          "actionName": "Action 3",
           "callback": [MockFunction],
-          "icon": "icon",
+          "icon": "Action 3",
           "id": 13,
         },
       ]
@@ -1036,7 +992,7 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <View
+        <Component
           style={
             Object {
               "backgroundColor": "#2684FF",
@@ -1048,7 +1004,9 @@ ShallowWrapper {
             }
           }
         >
-          <View
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[MockFunction]}
             style={
               Object {
                 "alignItems": "center",
@@ -1059,12 +1017,9 @@ ShallowWrapper {
               }
             }
           >
-            <TouchableOpacity
-              activeOpacity={0.2}
-              onPress={[MockFunction]}
-            >
+            <Component>
               <Image
-                source="icon"
+                source="Action 1"
                 style={
                   Object {
                     "height": 60,
@@ -1072,9 +1027,11 @@ ShallowWrapper {
                   }
                 }
               />
-            </TouchableOpacity>
-          </View>
-          <View
+            </Component>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[MockFunction]}
             style={
               Array [
                 Object {
@@ -1091,12 +1048,9 @@ ShallowWrapper {
               ]
             }
           >
-            <TouchableOpacity
-              activeOpacity={0.2}
-              onPress={[MockFunction]}
-            >
+            <Component>
               <Image
-                source="icon"
+                source="Action 2"
                 style={
                   Object {
                     "height": 60,
@@ -1104,9 +1058,11 @@ ShallowWrapper {
                   }
                 }
               />
-            </TouchableOpacity>
-          </View>
-          <View
+            </Component>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.2}
+            onPress={[MockFunction]}
             style={
               Array [
                 Object {
@@ -1123,12 +1079,9 @@ ShallowWrapper {
               ]
             }
           >
-            <TouchableOpacity
-              activeOpacity={0.2}
-              onPress={[MockFunction]}
-            >
+            <Component>
               <Image
-                source="icon"
+                source="Action 3"
                 style={
                   Object {
                     "height": 60,
@@ -1136,9 +1089,9 @@ ShallowWrapper {
                   }
                 }
               />
-            </TouchableOpacity>
-          </View>
-        </View>,
+            </Component>
+          </TouchableOpacity>
+        </Component>,
         null,
       ],
       "style": Array [
@@ -1158,7 +1111,9 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <View
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[MockFunction]}
               style={
                 Object {
                   "alignItems": "center",
@@ -1169,12 +1124,9 @@ ShallowWrapper {
                 }
               }
             >
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
+              <Component>
                 <Image
-                  source="icon"
+                  source="Action 1"
                   style={
                     Object {
                       "height": 60,
@@ -1182,9 +1134,11 @@ ShallowWrapper {
                     }
                   }
                 />
-              </TouchableOpacity>
-            </View>,
-            <View
+              </Component>
+            </TouchableOpacity>,
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[MockFunction]}
               style={
                 Array [
                   Object {
@@ -1201,12 +1155,9 @@ ShallowWrapper {
                 ]
               }
             >
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
+              <Component>
                 <Image
-                  source="icon"
+                  source="Action 2"
                   style={
                     Object {
                       "height": 60,
@@ -1214,9 +1165,11 @@ ShallowWrapper {
                     }
                   }
                 />
-              </TouchableOpacity>
-            </View>,
-            <View
+              </Component>
+            </TouchableOpacity>,
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[MockFunction]}
               style={
                 Array [
                   Object {
@@ -1233,12 +1186,9 @@ ShallowWrapper {
                 ]
               }
             >
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
+              <Component>
                 <Image
-                  source="icon"
+                  source="Action 3"
                   style={
                     Object {
                       "height": 60,
@@ -1246,8 +1196,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </TouchableOpacity>
-            </View>,
+              </Component>
+            </TouchableOpacity>,
           ],
           "style": Object {
             "backgroundColor": "#2684FF",
@@ -1265,12 +1215,10 @@ ShallowWrapper {
             "key": "7",
             "nodeType": "class",
             "props": Object {
-              "children": <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
+              "activeOpacity": 0.2,
+              "children": <Component>
                 <Image
-                  source="icon"
+                  source="Action 1"
                   style={
                     Object {
                       "height": 60,
@@ -1278,7 +1226,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </TouchableOpacity>,
+              </Component>,
+              "onPress": [MockFunction],
               "style": Object {
                 "alignItems": "center",
                 "flex": 1,
@@ -1293,9 +1242,8 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "activeOpacity": 0.2,
                 "children": <Image
-                  source="icon"
+                  source="Action 1"
                   style={
                     Object {
                       "height": 60,
@@ -1303,7 +1251,6 @@ ShallowWrapper {
                     }
                   }
                 />,
-                "onPress": [MockFunction],
               },
               "ref": null,
               "rendered": Object {
@@ -1311,7 +1258,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "source": "icon",
+                  "source": "Action 1",
                   "style": Object {
                     "height": 60,
                     "width": 60,
@@ -1330,12 +1277,10 @@ ShallowWrapper {
             "key": "8",
             "nodeType": "class",
             "props": Object {
-              "children": <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
+              "activeOpacity": 0.2,
+              "children": <Component>
                 <Image
-                  source="icon"
+                  source="Action 2"
                   style={
                     Object {
                       "height": 60,
@@ -1343,7 +1288,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </TouchableOpacity>,
+              </Component>,
+              "onPress": [MockFunction],
               "style": Array [
                 Object {
                   "alignItems": "center",
@@ -1364,9 +1310,8 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "activeOpacity": 0.2,
                 "children": <Image
-                  source="icon"
+                  source="Action 2"
                   style={
                     Object {
                       "height": 60,
@@ -1374,7 +1319,6 @@ ShallowWrapper {
                     }
                   }
                 />,
-                "onPress": [MockFunction],
               },
               "ref": null,
               "rendered": Object {
@@ -1382,7 +1326,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "source": "icon",
+                  "source": "Action 2",
                   "style": Object {
                     "height": 60,
                     "width": 60,
@@ -1401,12 +1345,10 @@ ShallowWrapper {
             "key": "9",
             "nodeType": "class",
             "props": Object {
-              "children": <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
+              "activeOpacity": 0.2,
+              "children": <Component>
                 <Image
-                  source="icon"
+                  source="Action 3"
                   style={
                     Object {
                       "height": 60,
@@ -1414,7 +1356,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </TouchableOpacity>,
+              </Component>,
+              "onPress": [MockFunction],
               "style": Array [
                 Object {
                   "alignItems": "center",
@@ -1435,9 +1378,8 @@ ShallowWrapper {
               "key": undefined,
               "nodeType": "class",
               "props": Object {
-                "activeOpacity": 0.2,
                 "children": <Image
-                  source="icon"
+                  source="Action 3"
                   style={
                     Object {
                       "height": 60,
@@ -1445,7 +1387,6 @@ ShallowWrapper {
                     }
                   }
                 />,
-                "onPress": [MockFunction],
               },
               "ref": null,
               "rendered": Object {
@@ -1453,7 +1394,7 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "source": "icon",
+                  "source": "Action 3",
                   "style": Object {
                     "height": 60,
                     "width": 60,
@@ -1481,7 +1422,7 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <View
+          <Component
             style={
               Object {
                 "backgroundColor": "#2684FF",
@@ -1493,7 +1434,9 @@ ShallowWrapper {
               }
             }
           >
-            <View
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[MockFunction]}
               style={
                 Object {
                   "alignItems": "center",
@@ -1504,12 +1447,9 @@ ShallowWrapper {
                 }
               }
             >
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
+              <Component>
                 <Image
-                  source="icon"
+                  source="Action 1"
                   style={
                     Object {
                       "height": 60,
@@ -1517,9 +1457,11 @@ ShallowWrapper {
                     }
                   }
                 />
-              </TouchableOpacity>
-            </View>
-            <View
+              </Component>
+            </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[MockFunction]}
               style={
                 Array [
                   Object {
@@ -1536,12 +1478,9 @@ ShallowWrapper {
                 ]
               }
             >
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
+              <Component>
                 <Image
-                  source="icon"
+                  source="Action 2"
                   style={
                     Object {
                       "height": 60,
@@ -1549,9 +1488,11 @@ ShallowWrapper {
                     }
                   }
                 />
-              </TouchableOpacity>
-            </View>
-            <View
+              </Component>
+            </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.2}
+              onPress={[MockFunction]}
               style={
                 Array [
                   Object {
@@ -1568,12 +1509,9 @@ ShallowWrapper {
                 ]
               }
             >
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={[MockFunction]}
-              >
+              <Component>
                 <Image
-                  source="icon"
+                  source="Action 3"
                   style={
                     Object {
                       "height": 60,
@@ -1581,9 +1519,9 @@ ShallowWrapper {
                     }
                   }
                 />
-              </TouchableOpacity>
-            </View>
-          </View>,
+              </Component>
+            </TouchableOpacity>
+          </Component>,
           null,
         ],
         "style": Array [
@@ -1603,7 +1541,9 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <View
+              <TouchableOpacity
+                activeOpacity={0.2}
+                onPress={[MockFunction]}
                 style={
                   Object {
                     "alignItems": "center",
@@ -1614,12 +1554,9 @@ ShallowWrapper {
                   }
                 }
               >
-                <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={[MockFunction]}
-                >
+                <Component>
                   <Image
-                    source="icon"
+                    source="Action 1"
                     style={
                       Object {
                         "height": 60,
@@ -1627,9 +1564,11 @@ ShallowWrapper {
                       }
                     }
                   />
-                </TouchableOpacity>
-              </View>,
-              <View
+                </Component>
+              </TouchableOpacity>,
+              <TouchableOpacity
+                activeOpacity={0.2}
+                onPress={[MockFunction]}
                 style={
                   Array [
                     Object {
@@ -1646,12 +1585,9 @@ ShallowWrapper {
                   ]
                 }
               >
-                <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={[MockFunction]}
-                >
+                <Component>
                   <Image
-                    source="icon"
+                    source="Action 2"
                     style={
                       Object {
                         "height": 60,
@@ -1659,9 +1595,11 @@ ShallowWrapper {
                       }
                     }
                   />
-                </TouchableOpacity>
-              </View>,
-              <View
+                </Component>
+              </TouchableOpacity>,
+              <TouchableOpacity
+                activeOpacity={0.2}
+                onPress={[MockFunction]}
                 style={
                   Array [
                     Object {
@@ -1678,12 +1616,9 @@ ShallowWrapper {
                   ]
                 }
               >
-                <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={[MockFunction]}
-                >
+                <Component>
                   <Image
-                    source="icon"
+                    source="Action 3"
                     style={
                       Object {
                         "height": 60,
@@ -1691,8 +1626,8 @@ ShallowWrapper {
                       }
                     }
                   />
-                </TouchableOpacity>
-              </View>,
+                </Component>
+              </TouchableOpacity>,
             ],
             "style": Object {
               "backgroundColor": "#2684FF",
@@ -1710,12 +1645,10 @@ ShallowWrapper {
               "key": "7",
               "nodeType": "class",
               "props": Object {
-                "children": <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={[MockFunction]}
-                >
+                "activeOpacity": 0.2,
+                "children": <Component>
                   <Image
-                    source="icon"
+                    source="Action 1"
                     style={
                       Object {
                         "height": 60,
@@ -1723,7 +1656,8 @@ ShallowWrapper {
                       }
                     }
                   />
-                </TouchableOpacity>,
+                </Component>,
+                "onPress": [MockFunction],
                 "style": Object {
                   "alignItems": "center",
                   "flex": 1,
@@ -1738,9 +1672,8 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "activeOpacity": 0.2,
                   "children": <Image
-                    source="icon"
+                    source="Action 1"
                     style={
                       Object {
                         "height": 60,
@@ -1748,7 +1681,6 @@ ShallowWrapper {
                       }
                     }
                   />,
-                  "onPress": [MockFunction],
                 },
                 "ref": null,
                 "rendered": Object {
@@ -1756,7 +1688,7 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "source": "icon",
+                    "source": "Action 1",
                     "style": Object {
                       "height": 60,
                       "width": 60,
@@ -1775,12 +1707,10 @@ ShallowWrapper {
               "key": "8",
               "nodeType": "class",
               "props": Object {
-                "children": <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={[MockFunction]}
-                >
+                "activeOpacity": 0.2,
+                "children": <Component>
                   <Image
-                    source="icon"
+                    source="Action 2"
                     style={
                       Object {
                         "height": 60,
@@ -1788,7 +1718,8 @@ ShallowWrapper {
                       }
                     }
                   />
-                </TouchableOpacity>,
+                </Component>,
+                "onPress": [MockFunction],
                 "style": Array [
                   Object {
                     "alignItems": "center",
@@ -1809,9 +1740,8 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "activeOpacity": 0.2,
                   "children": <Image
-                    source="icon"
+                    source="Action 2"
                     style={
                       Object {
                         "height": 60,
@@ -1819,7 +1749,6 @@ ShallowWrapper {
                       }
                     }
                   />,
-                  "onPress": [MockFunction],
                 },
                 "ref": null,
                 "rendered": Object {
@@ -1827,7 +1756,7 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "source": "icon",
+                    "source": "Action 2",
                     "style": Object {
                       "height": 60,
                       "width": 60,
@@ -1846,12 +1775,10 @@ ShallowWrapper {
               "key": "9",
               "nodeType": "class",
               "props": Object {
-                "children": <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={[MockFunction]}
-                >
+                "activeOpacity": 0.2,
+                "children": <Component>
                   <Image
-                    source="icon"
+                    source="Action 3"
                     style={
                       Object {
                         "height": 60,
@@ -1859,7 +1786,8 @@ ShallowWrapper {
                       }
                     }
                   />
-                </TouchableOpacity>,
+                </Component>,
+                "onPress": [MockFunction],
                 "style": Array [
                   Object {
                     "alignItems": "center",
@@ -1880,9 +1808,8 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "activeOpacity": 0.2,
                   "children": <Image
-                    source="icon"
+                    source="Action 3"
                     style={
                       Object {
                         "height": 60,
@@ -1890,7 +1817,6 @@ ShallowWrapper {
                       }
                     }
                   />,
-                  "onPress": [MockFunction],
                 },
                 "ref": null,
                 "rendered": Object {
@@ -1898,7 +1824,7 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "source": "icon",
+                    "source": "Action 3",
                     "style": Object {
                       "height": 60,
                       "width": 60,

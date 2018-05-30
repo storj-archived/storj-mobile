@@ -18,36 +18,10 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <View
+        <Component
           style={
             Object {
-              "backgroundColor": "transparent",
-              "bottom": 0,
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            }
-          }
-        >
-          <Image
-            resizeMode="contain"
-            source="LogoBlue.png"
-            style={
-              Object {
-                "height": 112,
-                "left": 40,
-                "position": "absolute",
-                "top": 40,
-                "width": 240,
-              }
-            }
-          />
-        </View>,
-        <View
-          style={
-            Object {
-              "marginTop": 172,
+              "marginTop": 60,
               "paddingLeft": 40,
               "paddingRight": 40,
             }
@@ -66,116 +40,133 @@ ShallowWrapper {
               }
             }
           >
-            Login
+            Sign in
           </Text>
-          <InputComponent
-            errorMessage="Invalid Email"
-            isError={undefined}
-            isPassword={false}
-            onChangeText={[Function]}
-            placeholder="your_email@mail.com"
-            regularMessage="Email"
+          <Component
             style={
               Object {
-                "height": 100,
-                "marginTop": 40,
-              }
-            }
-            value={undefined}
-          />
-          <InputComponent
-            errorMessage="Invalid password"
-            isError={undefined}
-            isPassword={true}
-            onChangeText={[Function]}
-            placeholder="Enter your password"
-            regularMessage="Password"
-            style={
-              Object {
-                "height": 100,
-                "marginTop": 40,
-              }
-            }
-            value={undefined}
-          />
-          <InputComponent
-            editable={true}
-            errorMessage="Invalid mnemonic"
-            inputStyle={
-              Object {
-                "fontSize": 28,
-                "height": 160,
-              }
-            }
-            isError={undefined}
-            isPassword={false}
-            multiline={true}
-            onChangeText={[Function]}
-            placeholder="Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code"
-            regularMessage="Mnemonic"
-            style={
-              Object {
-                "height": 180,
-                "marginTop": 40,
-              }
-            }
-            value={undefined}
-          />
-          <View
-            style={
-              Object {
-                "flexDirection": "row",
-                "justifyContent": "space-between",
-                "marginTop": 90,
+                "marginTop": 70,
               }
             }
           >
-            <TouchableOpacity
-              activeOpacity={0.2}
-              onPress={undefined}
-            >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "color": "#2794FF",
-                    "fontFamily": "Montserrat-Bold",
-                    "fontSize": 32,
-                    "lineHeight": 48,
-                    "marginTop": 40,
-                  }
+            <InputComponent
+              errorMessage="Invalid Email"
+              isError={undefined}
+              isPassword={false}
+              onChangeText={[Function]}
+              placeholder="your_email@mail.com"
+              regularMessage="Email"
+              style={
+                Object {
+                  "height": 100,
+                  "marginTop": 40,
                 }
-              >
-                Forgot password?
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.2}
-              onPress={undefined}
-            >
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "alignSelf": "flex-end",
-                    "color": "#2794FF",
-                    "fontFamily": "Montserrat-Regular",
-                    "fontSize": 26,
-                    "fontWeight": "bold",
-                    "marginBottom": 48,
-                  }
+              }
+              value={undefined}
+            />
+            <InputComponent
+              errorMessage="Invalid password"
+              isError={undefined}
+              isPassword={true}
+              onChangeText={[Function]}
+              placeholder="Enter your password"
+              regularMessage="Password"
+              style={
+                Object {
+                  "height": 100,
+                  "marginTop": 40,
                 }
+              }
+              value={undefined}
+            />
+            <Component
+              style={
+                Object {
+                  "justifyContent": "flex-end",
+                  "marginTop": 20,
+                }
+              }
+            >
+              <TouchableOpacity
+                activeOpacity={0.2}
+                onPress={undefined}
               >
-                What is Mnemonic?
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>,
-        <View
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 32,
+                      "lineHeight": 48,
+                      "marginTop": 40,
+                    }
+                  }
+                >
+                  Forgot password?
+                </Text>
+              </TouchableOpacity>
+            </Component>
+            <InputComponent
+              editable={true}
+              errorMessage="Invalid secret phrase"
+              inputStyle={
+                Object {
+                  "fontSize": 28,
+                  "height": 160,
+                }
+              }
+              isError={undefined}
+              isPassword={true}
+              multiline={true}
+              onChangeText={[Function]}
+              placeholder="Please enter your secret phrase (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code"
+              regularMessage="Secret phrase"
+              style={
+                Object {
+                  "height": 180,
+                  "marginTop": 40,
+                }
+              }
+              value={undefined}
+            />
+            <Component
+              style={
+                Object {
+                  "justifyContent": "flex-end",
+                  "marginTop": 20,
+                }
+              }
+            >
+              <TouchableOpacity
+                activeOpacity={0.2}
+                onPress={undefined}
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "alignSelf": "flex-end",
+                      "color": "#2794FF",
+                      "fontFamily": "Montserrat-Regular",
+                      "fontSize": 26,
+                      "fontWeight": "bold",
+                      "marginBottom": 48,
+                    }
+                  }
+                >
+                  Need help with your secret phrase?
+                </Text>
+              </TouchableOpacity>
+            </Component>
+          </Component>
+        </Component>,
+        <Component
           style={
             Object {
               "alignItems": "center",
@@ -209,7 +200,7 @@ ShallowWrapper {
                 }
               }
             >
-              Login
+              Log in
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -241,7 +232,7 @@ ShallowWrapper {
                 }
               }
             >
-              Login via QR
+              Login via QR code
             </Text>
           </TouchableOpacity>
           <Text
@@ -273,10 +264,11 @@ ShallowWrapper {
               Sign Up
             </Text>
           </Text>
-        </View>,
+        </Component>,
         null,
       ],
       "keyboardDismissMode": "interactive",
+      "keyboardShouldPersistTaps": "always",
       "style": Object {
         "backgroundColor": "white",
         "flex": 1,
@@ -284,55 +276,6 @@ ShallowWrapper {
     },
     "ref": null,
     "rendered": Array [
-      Object {
-        "instance": null,
-        "key": undefined,
-        "nodeType": "class",
-        "props": Object {
-          "children": <Image
-            resizeMode="contain"
-            source="LogoBlue.png"
-            style={
-              Object {
-                "height": 112,
-                "left": 40,
-                "position": "absolute",
-                "top": 40,
-                "width": 240,
-              }
-            }
-          />,
-          "style": Object {
-            "backgroundColor": "transparent",
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
-        },
-        "ref": null,
-        "rendered": Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "resizeMode": "contain",
-            "source": "LogoBlue.png",
-            "style": Object {
-              "height": 112,
-              "left": 40,
-              "position": "absolute",
-              "top": 40,
-              "width": 240,
-            },
-          },
-          "ref": null,
-          "rendered": null,
-          "type": [Function],
-        },
-        "type": [Function],
-      },
       Object {
         "instance": null,
         "key": undefined,
@@ -352,117 +295,134 @@ ShallowWrapper {
                 }
               }
             >
-              Login
+              Sign in
             </Text>,
-            <InputComponent
-              errorMessage="Invalid Email"
-              isError={undefined}
-              isPassword={false}
-              onChangeText={[Function]}
-              placeholder="your_email@mail.com"
-              regularMessage="Email"
+            <Component
               style={
                 Object {
-                  "height": 100,
-                  "marginTop": 40,
-                }
-              }
-              value={undefined}
-            />,
-            <InputComponent
-              errorMessage="Invalid password"
-              isError={undefined}
-              isPassword={true}
-              onChangeText={[Function]}
-              placeholder="Enter your password"
-              regularMessage="Password"
-              style={
-                Object {
-                  "height": 100,
-                  "marginTop": 40,
-                }
-              }
-              value={undefined}
-            />,
-            <InputComponent
-              editable={true}
-              errorMessage="Invalid mnemonic"
-              inputStyle={
-                Object {
-                  "fontSize": 28,
-                  "height": 160,
-                }
-              }
-              isError={undefined}
-              isPassword={false}
-              multiline={true}
-              onChangeText={[Function]}
-              placeholder="Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code"
-              regularMessage="Mnemonic"
-              style={
-                Object {
-                  "height": 180,
-                  "marginTop": 40,
-                }
-              }
-              value={undefined}
-            />,
-            <View
-              style={
-                Object {
-                  "flexDirection": "row",
-                  "justifyContent": "space-between",
-                  "marginTop": 90,
+                  "marginTop": 70,
                 }
               }
             >
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={undefined}
-              >
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  style={
-                    Object {
-                      "color": "#2794FF",
-                      "fontFamily": "Montserrat-Bold",
-                      "fontSize": 32,
-                      "lineHeight": 48,
-                      "marginTop": 40,
-                    }
+              <InputComponent
+                errorMessage="Invalid Email"
+                isError={undefined}
+                isPassword={false}
+                onChangeText={[Function]}
+                placeholder="your_email@mail.com"
+                regularMessage="Email"
+                style={
+                  Object {
+                    "height": 100,
+                    "marginTop": 40,
                   }
-                >
-                  Forgot password?
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={undefined}
-              >
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  style={
-                    Object {
-                      "alignSelf": "flex-end",
-                      "color": "#2794FF",
-                      "fontFamily": "Montserrat-Regular",
-                      "fontSize": 26,
-                      "fontWeight": "bold",
-                      "marginBottom": 48,
-                    }
+                }
+                value={undefined}
+              />
+              <InputComponent
+                errorMessage="Invalid password"
+                isError={undefined}
+                isPassword={true}
+                onChangeText={[Function]}
+                placeholder="Enter your password"
+                regularMessage="Password"
+                style={
+                  Object {
+                    "height": 100,
+                    "marginTop": 40,
                   }
+                }
+                value={undefined}
+              />
+              <Component
+                style={
+                  Object {
+                    "justifyContent": "flex-end",
+                    "marginTop": 20,
+                  }
+                }
+              >
+                <TouchableOpacity
+                  activeOpacity={0.2}
+                  onPress={undefined}
                 >
-                  What is Mnemonic?
-                </Text>
-              </TouchableOpacity>
-            </View>,
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "alignSelf": "flex-end",
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Bold",
+                        "fontSize": 32,
+                        "lineHeight": 48,
+                        "marginTop": 40,
+                      }
+                    }
+                  >
+                    Forgot password?
+                  </Text>
+                </TouchableOpacity>
+              </Component>
+              <InputComponent
+                editable={true}
+                errorMessage="Invalid secret phrase"
+                inputStyle={
+                  Object {
+                    "fontSize": 28,
+                    "height": 160,
+                  }
+                }
+                isError={undefined}
+                isPassword={true}
+                multiline={true}
+                onChangeText={[Function]}
+                placeholder="Please enter your secret phrase (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code"
+                regularMessage="Secret phrase"
+                style={
+                  Object {
+                    "height": 180,
+                    "marginTop": 40,
+                  }
+                }
+                value={undefined}
+              />
+              <Component
+                style={
+                  Object {
+                    "justifyContent": "flex-end",
+                    "marginTop": 20,
+                  }
+                }
+              >
+                <TouchableOpacity
+                  activeOpacity={0.2}
+                  onPress={undefined}
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "alignSelf": "flex-end",
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 26,
+                        "fontWeight": "bold",
+                        "marginBottom": 48,
+                      }
+                    }
+                  >
+                    Need help with your secret phrase?
+                  </Text>
+                </TouchableOpacity>
+              </Component>
+            </Component>,
           ],
           "style": Object {
-            "marginTop": 172,
+            "marginTop": 60,
             "paddingLeft": 40,
             "paddingRight": 40,
           },
@@ -476,7 +436,7 @@ ShallowWrapper {
             "props": Object {
               "accessible": true,
               "allowFontScaling": true,
-              "children": "Login",
+              "children": "Sign in",
               "ellipsizeMode": "tail",
               "style": Object {
                 "color": "#384B65",
@@ -486,76 +446,7 @@ ShallowWrapper {
               },
             },
             "ref": null,
-            "rendered": "Login",
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "errorMessage": "Invalid Email",
-              "isError": undefined,
-              "isPassword": false,
-              "onChangeText": [Function],
-              "placeholder": "your_email@mail.com",
-              "regularMessage": "Email",
-              "style": Object {
-                "height": 100,
-                "marginTop": 40,
-              },
-              "value": undefined,
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "errorMessage": "Invalid password",
-              "isError": undefined,
-              "isPassword": true,
-              "onChangeText": [Function],
-              "placeholder": "Enter your password",
-              "regularMessage": "Password",
-              "style": Object {
-                "height": 100,
-                "marginTop": 40,
-              },
-              "value": undefined,
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "editable": true,
-              "errorMessage": "Invalid mnemonic",
-              "inputStyle": Object {
-                "fontSize": 28,
-                "height": 160,
-              },
-              "isError": undefined,
-              "isPassword": false,
-              "multiline": true,
-              "onChangeText": [Function],
-              "placeholder": "Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code",
-              "regularMessage": "Mnemonic",
-              "style": Object {
-                "height": 180,
-                "marginTop": 40,
-              },
-              "value": undefined,
-            },
-            "ref": null,
-            "rendered": null,
+            "rendered": "Sign in",
             "type": [Function],
           },
           Object {
@@ -564,54 +455,124 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "children": Array [
-                <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={undefined}
-                >
-                  <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
-                    style={
-                      Object {
-                        "color": "#2794FF",
-                        "fontFamily": "Montserrat-Bold",
-                        "fontSize": 32,
-                        "lineHeight": 48,
-                        "marginTop": 40,
-                      }
+                <InputComponent
+                  errorMessage="Invalid Email"
+                  isError={undefined}
+                  isPassword={false}
+                  onChangeText={[Function]}
+                  placeholder="your_email@mail.com"
+                  regularMessage="Email"
+                  style={
+                    Object {
+                      "height": 100,
+                      "marginTop": 40,
                     }
-                  >
-                    Forgot password?
-                  </Text>
-                </TouchableOpacity>,
-                <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={undefined}
-                >
-                  <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
-                    style={
-                      Object {
-                        "alignSelf": "flex-end",
-                        "color": "#2794FF",
-                        "fontFamily": "Montserrat-Regular",
-                        "fontSize": 26,
-                        "fontWeight": "bold",
-                        "marginBottom": 48,
-                      }
+                  }
+                  value={undefined}
+                />,
+                <InputComponent
+                  errorMessage="Invalid password"
+                  isError={undefined}
+                  isPassword={true}
+                  onChangeText={[Function]}
+                  placeholder="Enter your password"
+                  regularMessage="Password"
+                  style={
+                    Object {
+                      "height": 100,
+                      "marginTop": 40,
                     }
+                  }
+                  value={undefined}
+                />,
+                <Component
+                  style={
+                    Object {
+                      "justifyContent": "flex-end",
+                      "marginTop": 20,
+                    }
+                  }
+                >
+                  <TouchableOpacity
+                    activeOpacity={0.2}
+                    onPress={undefined}
                   >
-                    What is Mnemonic?
-                  </Text>
-                </TouchableOpacity>,
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "alignSelf": "flex-end",
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Bold",
+                          "fontSize": 32,
+                          "lineHeight": 48,
+                          "marginTop": 40,
+                        }
+                      }
+                    >
+                      Forgot password?
+                    </Text>
+                  </TouchableOpacity>
+                </Component>,
+                <InputComponent
+                  editable={true}
+                  errorMessage="Invalid secret phrase"
+                  inputStyle={
+                    Object {
+                      "fontSize": 28,
+                      "height": 160,
+                    }
+                  }
+                  isError={undefined}
+                  isPassword={true}
+                  multiline={true}
+                  onChangeText={[Function]}
+                  placeholder="Please enter your secret phrase (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code"
+                  regularMessage="Secret phrase"
+                  style={
+                    Object {
+                      "height": 180,
+                      "marginTop": 40,
+                    }
+                  }
+                  value={undefined}
+                />,
+                <Component
+                  style={
+                    Object {
+                      "justifyContent": "flex-end",
+                      "marginTop": 20,
+                    }
+                  }
+                >
+                  <TouchableOpacity
+                    activeOpacity={0.2}
+                    onPress={undefined}
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "alignSelf": "flex-end",
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Regular",
+                          "fontSize": 26,
+                          "fontWeight": "bold",
+                          "marginBottom": 48,
+                        }
+                      }
+                    >
+                      Need help with your secret phrase?
+                    </Text>
+                  </TouchableOpacity>
+                </Component>,
               ],
               "style": Object {
-                "flexDirection": "row",
-                "justifyContent": "space-between",
-                "marginTop": 90,
+                "marginTop": 70,
               },
             },
             "ref": null,
@@ -621,24 +582,74 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "activeOpacity": 0.2,
-                  "children": <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
-                    style={
-                      Object {
-                        "color": "#2794FF",
-                        "fontFamily": "Montserrat-Bold",
-                        "fontSize": 32,
-                        "lineHeight": 48,
-                        "marginTop": 40,
-                      }
-                    }
+                  "errorMessage": "Invalid Email",
+                  "isError": undefined,
+                  "isPassword": false,
+                  "onChangeText": [Function],
+                  "placeholder": "your_email@mail.com",
+                  "regularMessage": "Email",
+                  "style": Object {
+                    "height": 100,
+                    "marginTop": 40,
+                  },
+                  "value": undefined,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "errorMessage": "Invalid password",
+                  "isError": undefined,
+                  "isPassword": true,
+                  "onChangeText": [Function],
+                  "placeholder": "Enter your password",
+                  "regularMessage": "Password",
+                  "style": Object {
+                    "height": 100,
+                    "marginTop": 40,
+                  },
+                  "value": undefined,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <TouchableOpacity
+                    activeOpacity={0.2}
+                    onPress={undefined}
                   >
-                    Forgot password?
-                  </Text>,
-                  "onPress": undefined,
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "alignSelf": "flex-end",
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Bold",
+                          "fontSize": 32,
+                          "lineHeight": 48,
+                          "marginTop": 40,
+                        }
+                      }
+                    >
+                      Forgot password?
+                    </Text>
+                  </TouchableOpacity>,
+                  "style": Object {
+                    "justifyContent": "flex-end",
+                    "marginTop": 20,
+                  },
                 },
                 "ref": null,
                 "rendered": Object {
@@ -646,20 +657,49 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "accessible": true,
-                    "allowFontScaling": true,
-                    "children": "Forgot password?",
-                    "ellipsizeMode": "tail",
-                    "style": Object {
-                      "color": "#2794FF",
-                      "fontFamily": "Montserrat-Bold",
-                      "fontSize": 32,
-                      "lineHeight": 48,
-                      "marginTop": 40,
-                    },
+                    "activeOpacity": 0.2,
+                    "children": <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "alignSelf": "flex-end",
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Bold",
+                          "fontSize": 32,
+                          "lineHeight": 48,
+                          "marginTop": 40,
+                        }
+                      }
+                    >
+                      Forgot password?
+                    </Text>,
+                    "onPress": undefined,
                   },
                   "ref": null,
-                  "rendered": "Forgot password?",
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "accessible": true,
+                      "allowFontScaling": true,
+                      "children": "Forgot password?",
+                      "ellipsizeMode": "tail",
+                      "style": Object {
+                        "alignSelf": "flex-end",
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Bold",
+                        "fontSize": 32,
+                        "lineHeight": 48,
+                        "marginTop": 40,
+                      },
+                    },
+                    "ref": null,
+                    "rendered": "Forgot password?",
+                    "type": [Function],
+                  },
                   "type": [Function],
                 },
                 "type": [Function],
@@ -669,25 +709,59 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "activeOpacity": 0.2,
-                  "children": <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
-                    style={
-                      Object {
-                        "alignSelf": "flex-end",
-                        "color": "#2794FF",
-                        "fontFamily": "Montserrat-Regular",
-                        "fontSize": 26,
-                        "fontWeight": "bold",
-                        "marginBottom": 48,
-                      }
-                    }
+                  "editable": true,
+                  "errorMessage": "Invalid secret phrase",
+                  "inputStyle": Object {
+                    "fontSize": 28,
+                    "height": 160,
+                  },
+                  "isError": undefined,
+                  "isPassword": true,
+                  "multiline": true,
+                  "onChangeText": [Function],
+                  "placeholder": "Please enter your secret phrase (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code",
+                  "regularMessage": "Secret phrase",
+                  "style": Object {
+                    "height": 180,
+                    "marginTop": 40,
+                  },
+                  "value": undefined,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": <TouchableOpacity
+                    activeOpacity={0.2}
+                    onPress={undefined}
                   >
-                    What is Mnemonic?
-                  </Text>,
-                  "onPress": undefined,
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "alignSelf": "flex-end",
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Regular",
+                          "fontSize": 26,
+                          "fontWeight": "bold",
+                          "marginBottom": 48,
+                        }
+                      }
+                    >
+                      Need help with your secret phrase?
+                    </Text>
+                  </TouchableOpacity>,
+                  "style": Object {
+                    "justifyContent": "flex-end",
+                    "marginTop": 20,
+                  },
                 },
                 "ref": null,
                 "rendered": Object {
@@ -695,21 +769,49 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "accessible": true,
-                    "allowFontScaling": true,
-                    "children": "What is Mnemonic?",
-                    "ellipsizeMode": "tail",
-                    "style": Object {
-                      "alignSelf": "flex-end",
-                      "color": "#2794FF",
-                      "fontFamily": "Montserrat-Regular",
-                      "fontSize": 26,
-                      "fontWeight": "bold",
-                      "marginBottom": 48,
-                    },
+                    "activeOpacity": 0.2,
+                    "children": <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "alignSelf": "flex-end",
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Regular",
+                          "fontSize": 26,
+                          "fontWeight": "bold",
+                          "marginBottom": 48,
+                        }
+                      }
+                    >
+                      Need help with your secret phrase?
+                    </Text>,
+                    "onPress": undefined,
                   },
                   "ref": null,
-                  "rendered": "What is Mnemonic?",
+                  "rendered": Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "accessible": true,
+                      "allowFontScaling": true,
+                      "children": "Need help with your secret phrase?",
+                      "ellipsizeMode": "tail",
+                      "style": Object {
+                        "alignSelf": "flex-end",
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 26,
+                        "fontWeight": "bold",
+                        "marginBottom": 48,
+                      },
+                    },
+                    "ref": null,
+                    "rendered": "Need help with your secret phrase?",
+                    "type": [Function],
+                  },
                   "type": [Function],
                 },
                 "type": [Function],
@@ -752,7 +854,7 @@ ShallowWrapper {
                   }
                 }
               >
-                Login
+                Log in
               </Text>
             </TouchableOpacity>,
             <TouchableOpacity
@@ -784,7 +886,7 @@ ShallowWrapper {
                   }
                 }
               >
-                Login via QR
+                Login via QR code
               </Text>
             </TouchableOpacity>,
             <Text
@@ -842,7 +944,7 @@ ShallowWrapper {
                   }
                 }
               >
-                Login
+                Log in
               </Text>,
               "onPressOut": [Function],
               "style": Object {
@@ -862,7 +964,7 @@ ShallowWrapper {
               "props": Object {
                 "accessible": true,
                 "allowFontScaling": true,
-                "children": "Login",
+                "children": "Log in",
                 "ellipsizeMode": "tail",
                 "style": Object {
                   "color": "white",
@@ -871,7 +973,7 @@ ShallowWrapper {
                 },
               },
               "ref": null,
-              "rendered": "Login",
+              "rendered": "Log in",
               "type": [Function],
             },
             "type": [Function],
@@ -894,7 +996,7 @@ ShallowWrapper {
                   }
                 }
               >
-                Login via QR
+                Login via QR code
               </Text>,
               "onPressOut": [Function],
               "style": Object {
@@ -917,7 +1019,7 @@ ShallowWrapper {
               "props": Object {
                 "accessible": true,
                 "allowFontScaling": true,
-                "children": "Login via QR",
+                "children": "Login via QR code",
                 "ellipsizeMode": "tail",
                 "style": Object {
                   "color": "#2794FF",
@@ -926,7 +1028,7 @@ ShallowWrapper {
                 },
               },
               "ref": null,
-              "rendered": "Login via QR",
+              "rendered": "Login via QR code",
               "type": [Function],
             },
             "type": [Function],
@@ -993,7 +1095,7 @@ ShallowWrapper {
       },
       null,
     ],
-    "type": [Function],
+    "type": [MockFunction],
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
@@ -1002,36 +1104,10 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <View
+          <Component
             style={
               Object {
-                "backgroundColor": "transparent",
-                "bottom": 0,
-                "left": 0,
-                "position": "absolute",
-                "right": 0,
-                "top": 0,
-              }
-            }
-          >
-            <Image
-              resizeMode="contain"
-              source="LogoBlue.png"
-              style={
-                Object {
-                  "height": 112,
-                  "left": 40,
-                  "position": "absolute",
-                  "top": 40,
-                  "width": 240,
-                }
-              }
-            />
-          </View>,
-          <View
-            style={
-              Object {
-                "marginTop": 172,
+                "marginTop": 60,
                 "paddingLeft": 40,
                 "paddingRight": 40,
               }
@@ -1050,116 +1126,133 @@ ShallowWrapper {
                 }
               }
             >
-              Login
+              Sign in
             </Text>
-            <InputComponent
-              errorMessage="Invalid Email"
-              isError={undefined}
-              isPassword={false}
-              onChangeText={[Function]}
-              placeholder="your_email@mail.com"
-              regularMessage="Email"
+            <Component
               style={
                 Object {
-                  "height": 100,
-                  "marginTop": 40,
-                }
-              }
-              value={undefined}
-            />
-            <InputComponent
-              errorMessage="Invalid password"
-              isError={undefined}
-              isPassword={true}
-              onChangeText={[Function]}
-              placeholder="Enter your password"
-              regularMessage="Password"
-              style={
-                Object {
-                  "height": 100,
-                  "marginTop": 40,
-                }
-              }
-              value={undefined}
-            />
-            <InputComponent
-              editable={true}
-              errorMessage="Invalid mnemonic"
-              inputStyle={
-                Object {
-                  "fontSize": 28,
-                  "height": 160,
-                }
-              }
-              isError={undefined}
-              isPassword={false}
-              multiline={true}
-              onChangeText={[Function]}
-              placeholder="Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code"
-              regularMessage="Mnemonic"
-              style={
-                Object {
-                  "height": 180,
-                  "marginTop": 40,
-                }
-              }
-              value={undefined}
-            />
-            <View
-              style={
-                Object {
-                  "flexDirection": "row",
-                  "justifyContent": "space-between",
-                  "marginTop": 90,
+                  "marginTop": 70,
                 }
               }
             >
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={undefined}
-              >
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  style={
-                    Object {
-                      "color": "#2794FF",
-                      "fontFamily": "Montserrat-Bold",
-                      "fontSize": 32,
-                      "lineHeight": 48,
-                      "marginTop": 40,
-                    }
+              <InputComponent
+                errorMessage="Invalid Email"
+                isError={undefined}
+                isPassword={false}
+                onChangeText={[Function]}
+                placeholder="your_email@mail.com"
+                regularMessage="Email"
+                style={
+                  Object {
+                    "height": 100,
+                    "marginTop": 40,
                   }
-                >
-                  Forgot password?
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                activeOpacity={0.2}
-                onPress={undefined}
-              >
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  style={
-                    Object {
-                      "alignSelf": "flex-end",
-                      "color": "#2794FF",
-                      "fontFamily": "Montserrat-Regular",
-                      "fontSize": 26,
-                      "fontWeight": "bold",
-                      "marginBottom": 48,
-                    }
+                }
+                value={undefined}
+              />
+              <InputComponent
+                errorMessage="Invalid password"
+                isError={undefined}
+                isPassword={true}
+                onChangeText={[Function]}
+                placeholder="Enter your password"
+                regularMessage="Password"
+                style={
+                  Object {
+                    "height": 100,
+                    "marginTop": 40,
                   }
+                }
+                value={undefined}
+              />
+              <Component
+                style={
+                  Object {
+                    "justifyContent": "flex-end",
+                    "marginTop": 20,
+                  }
+                }
+              >
+                <TouchableOpacity
+                  activeOpacity={0.2}
+                  onPress={undefined}
                 >
-                  What is Mnemonic?
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>,
-          <View
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "alignSelf": "flex-end",
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Bold",
+                        "fontSize": 32,
+                        "lineHeight": 48,
+                        "marginTop": 40,
+                      }
+                    }
+                  >
+                    Forgot password?
+                  </Text>
+                </TouchableOpacity>
+              </Component>
+              <InputComponent
+                editable={true}
+                errorMessage="Invalid secret phrase"
+                inputStyle={
+                  Object {
+                    "fontSize": 28,
+                    "height": 160,
+                  }
+                }
+                isError={undefined}
+                isPassword={true}
+                multiline={true}
+                onChangeText={[Function]}
+                placeholder="Please enter your secret phrase (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code"
+                regularMessage="Secret phrase"
+                style={
+                  Object {
+                    "height": 180,
+                    "marginTop": 40,
+                  }
+                }
+                value={undefined}
+              />
+              <Component
+                style={
+                  Object {
+                    "justifyContent": "flex-end",
+                    "marginTop": 20,
+                  }
+                }
+              >
+                <TouchableOpacity
+                  activeOpacity={0.2}
+                  onPress={undefined}
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "alignSelf": "flex-end",
+                        "color": "#2794FF",
+                        "fontFamily": "Montserrat-Regular",
+                        "fontSize": 26,
+                        "fontWeight": "bold",
+                        "marginBottom": 48,
+                      }
+                    }
+                  >
+                    Need help with your secret phrase?
+                  </Text>
+                </TouchableOpacity>
+              </Component>
+            </Component>
+          </Component>,
+          <Component
             style={
               Object {
                 "alignItems": "center",
@@ -1193,7 +1286,7 @@ ShallowWrapper {
                   }
                 }
               >
-                Login
+                Log in
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -1225,7 +1318,7 @@ ShallowWrapper {
                   }
                 }
               >
-                Login via QR
+                Login via QR code
               </Text>
             </TouchableOpacity>
             <Text
@@ -1257,10 +1350,11 @@ ShallowWrapper {
                 Sign Up
               </Text>
             </Text>
-          </View>,
+          </Component>,
           null,
         ],
         "keyboardDismissMode": "interactive",
+        "keyboardShouldPersistTaps": "always",
         "style": Object {
           "backgroundColor": "white",
           "flex": 1,
@@ -1268,55 +1362,6 @@ ShallowWrapper {
       },
       "ref": null,
       "rendered": Array [
-        Object {
-          "instance": null,
-          "key": undefined,
-          "nodeType": "class",
-          "props": Object {
-            "children": <Image
-              resizeMode="contain"
-              source="LogoBlue.png"
-              style={
-                Object {
-                  "height": 112,
-                  "left": 40,
-                  "position": "absolute",
-                  "top": 40,
-                  "width": 240,
-                }
-              }
-            />,
-            "style": Object {
-              "backgroundColor": "transparent",
-              "bottom": 0,
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            },
-          },
-          "ref": null,
-          "rendered": Object {
-            "instance": null,
-            "key": undefined,
-            "nodeType": "class",
-            "props": Object {
-              "resizeMode": "contain",
-              "source": "LogoBlue.png",
-              "style": Object {
-                "height": 112,
-                "left": 40,
-                "position": "absolute",
-                "top": 40,
-                "width": 240,
-              },
-            },
-            "ref": null,
-            "rendered": null,
-            "type": [Function],
-          },
-          "type": [Function],
-        },
         Object {
           "instance": null,
           "key": undefined,
@@ -1336,117 +1381,134 @@ ShallowWrapper {
                   }
                 }
               >
-                Login
+                Sign in
               </Text>,
-              <InputComponent
-                errorMessage="Invalid Email"
-                isError={undefined}
-                isPassword={false}
-                onChangeText={[Function]}
-                placeholder="your_email@mail.com"
-                regularMessage="Email"
+              <Component
                 style={
                   Object {
-                    "height": 100,
-                    "marginTop": 40,
-                  }
-                }
-                value={undefined}
-              />,
-              <InputComponent
-                errorMessage="Invalid password"
-                isError={undefined}
-                isPassword={true}
-                onChangeText={[Function]}
-                placeholder="Enter your password"
-                regularMessage="Password"
-                style={
-                  Object {
-                    "height": 100,
-                    "marginTop": 40,
-                  }
-                }
-                value={undefined}
-              />,
-              <InputComponent
-                editable={true}
-                errorMessage="Invalid mnemonic"
-                inputStyle={
-                  Object {
-                    "fontSize": 28,
-                    "height": 160,
-                  }
-                }
-                isError={undefined}
-                isPassword={false}
-                multiline={true}
-                onChangeText={[Function]}
-                placeholder="Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code"
-                regularMessage="Mnemonic"
-                style={
-                  Object {
-                    "height": 180,
-                    "marginTop": 40,
-                  }
-                }
-                value={undefined}
-              />,
-              <View
-                style={
-                  Object {
-                    "flexDirection": "row",
-                    "justifyContent": "space-between",
-                    "marginTop": 90,
+                    "marginTop": 70,
                   }
                 }
               >
-                <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={undefined}
-                >
-                  <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
-                    style={
-                      Object {
-                        "color": "#2794FF",
-                        "fontFamily": "Montserrat-Bold",
-                        "fontSize": 32,
-                        "lineHeight": 48,
-                        "marginTop": 40,
-                      }
+                <InputComponent
+                  errorMessage="Invalid Email"
+                  isError={undefined}
+                  isPassword={false}
+                  onChangeText={[Function]}
+                  placeholder="your_email@mail.com"
+                  regularMessage="Email"
+                  style={
+                    Object {
+                      "height": 100,
+                      "marginTop": 40,
                     }
-                  >
-                    Forgot password?
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  activeOpacity={0.2}
-                  onPress={undefined}
-                >
-                  <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
-                    style={
-                      Object {
-                        "alignSelf": "flex-end",
-                        "color": "#2794FF",
-                        "fontFamily": "Montserrat-Regular",
-                        "fontSize": 26,
-                        "fontWeight": "bold",
-                        "marginBottom": 48,
-                      }
+                  }
+                  value={undefined}
+                />
+                <InputComponent
+                  errorMessage="Invalid password"
+                  isError={undefined}
+                  isPassword={true}
+                  onChangeText={[Function]}
+                  placeholder="Enter your password"
+                  regularMessage="Password"
+                  style={
+                    Object {
+                      "height": 100,
+                      "marginTop": 40,
                     }
+                  }
+                  value={undefined}
+                />
+                <Component
+                  style={
+                    Object {
+                      "justifyContent": "flex-end",
+                      "marginTop": 20,
+                    }
+                  }
+                >
+                  <TouchableOpacity
+                    activeOpacity={0.2}
+                    onPress={undefined}
                   >
-                    What is Mnemonic?
-                  </Text>
-                </TouchableOpacity>
-              </View>,
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "alignSelf": "flex-end",
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Bold",
+                          "fontSize": 32,
+                          "lineHeight": 48,
+                          "marginTop": 40,
+                        }
+                      }
+                    >
+                      Forgot password?
+                    </Text>
+                  </TouchableOpacity>
+                </Component>
+                <InputComponent
+                  editable={true}
+                  errorMessage="Invalid secret phrase"
+                  inputStyle={
+                    Object {
+                      "fontSize": 28,
+                      "height": 160,
+                    }
+                  }
+                  isError={undefined}
+                  isPassword={true}
+                  multiline={true}
+                  onChangeText={[Function]}
+                  placeholder="Please enter your secret phrase (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code"
+                  regularMessage="Secret phrase"
+                  style={
+                    Object {
+                      "height": 180,
+                      "marginTop": 40,
+                    }
+                  }
+                  value={undefined}
+                />
+                <Component
+                  style={
+                    Object {
+                      "justifyContent": "flex-end",
+                      "marginTop": 20,
+                    }
+                  }
+                >
+                  <TouchableOpacity
+                    activeOpacity={0.2}
+                    onPress={undefined}
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "alignSelf": "flex-end",
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Regular",
+                          "fontSize": 26,
+                          "fontWeight": "bold",
+                          "marginBottom": 48,
+                        }
+                      }
+                    >
+                      Need help with your secret phrase?
+                    </Text>
+                  </TouchableOpacity>
+                </Component>
+              </Component>,
             ],
             "style": Object {
-              "marginTop": 172,
+              "marginTop": 60,
               "paddingLeft": 40,
               "paddingRight": 40,
             },
@@ -1460,7 +1522,7 @@ ShallowWrapper {
               "props": Object {
                 "accessible": true,
                 "allowFontScaling": true,
-                "children": "Login",
+                "children": "Sign in",
                 "ellipsizeMode": "tail",
                 "style": Object {
                   "color": "#384B65",
@@ -1470,76 +1532,7 @@ ShallowWrapper {
                 },
               },
               "ref": null,
-              "rendered": "Login",
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "errorMessage": "Invalid Email",
-                "isError": undefined,
-                "isPassword": false,
-                "onChangeText": [Function],
-                "placeholder": "your_email@mail.com",
-                "regularMessage": "Email",
-                "style": Object {
-                  "height": 100,
-                  "marginTop": 40,
-                },
-                "value": undefined,
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "errorMessage": "Invalid password",
-                "isError": undefined,
-                "isPassword": true,
-                "onChangeText": [Function],
-                "placeholder": "Enter your password",
-                "regularMessage": "Password",
-                "style": Object {
-                  "height": 100,
-                  "marginTop": 40,
-                },
-                "value": undefined,
-              },
-              "ref": null,
-              "rendered": null,
-              "type": [Function],
-            },
-            Object {
-              "instance": null,
-              "key": undefined,
-              "nodeType": "class",
-              "props": Object {
-                "editable": true,
-                "errorMessage": "Invalid mnemonic",
-                "inputStyle": Object {
-                  "fontSize": 28,
-                  "height": 160,
-                },
-                "isError": undefined,
-                "isPassword": false,
-                "multiline": true,
-                "onChangeText": [Function],
-                "placeholder": "Please enter your mnemonic (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code",
-                "regularMessage": "Mnemonic",
-                "style": Object {
-                  "height": 180,
-                  "marginTop": 40,
-                },
-                "value": undefined,
-              },
-              "ref": null,
-              "rendered": null,
+              "rendered": "Sign in",
               "type": [Function],
             },
             Object {
@@ -1548,54 +1541,124 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "children": Array [
-                  <TouchableOpacity
-                    activeOpacity={0.2}
-                    onPress={undefined}
-                  >
-                    <Text
-                      accessible={true}
-                      allowFontScaling={true}
-                      ellipsizeMode="tail"
-                      style={
-                        Object {
-                          "color": "#2794FF",
-                          "fontFamily": "Montserrat-Bold",
-                          "fontSize": 32,
-                          "lineHeight": 48,
-                          "marginTop": 40,
-                        }
+                  <InputComponent
+                    errorMessage="Invalid Email"
+                    isError={undefined}
+                    isPassword={false}
+                    onChangeText={[Function]}
+                    placeholder="your_email@mail.com"
+                    regularMessage="Email"
+                    style={
+                      Object {
+                        "height": 100,
+                        "marginTop": 40,
                       }
-                    >
-                      Forgot password?
-                    </Text>
-                  </TouchableOpacity>,
-                  <TouchableOpacity
-                    activeOpacity={0.2}
-                    onPress={undefined}
-                  >
-                    <Text
-                      accessible={true}
-                      allowFontScaling={true}
-                      ellipsizeMode="tail"
-                      style={
-                        Object {
-                          "alignSelf": "flex-end",
-                          "color": "#2794FF",
-                          "fontFamily": "Montserrat-Regular",
-                          "fontSize": 26,
-                          "fontWeight": "bold",
-                          "marginBottom": 48,
-                        }
+                    }
+                    value={undefined}
+                  />,
+                  <InputComponent
+                    errorMessage="Invalid password"
+                    isError={undefined}
+                    isPassword={true}
+                    onChangeText={[Function]}
+                    placeholder="Enter your password"
+                    regularMessage="Password"
+                    style={
+                      Object {
+                        "height": 100,
+                        "marginTop": 40,
                       }
+                    }
+                    value={undefined}
+                  />,
+                  <Component
+                    style={
+                      Object {
+                        "justifyContent": "flex-end",
+                        "marginTop": 20,
+                      }
+                    }
+                  >
+                    <TouchableOpacity
+                      activeOpacity={0.2}
+                      onPress={undefined}
                     >
-                      What is Mnemonic?
-                    </Text>
-                  </TouchableOpacity>,
+                      <Text
+                        accessible={true}
+                        allowFontScaling={true}
+                        ellipsizeMode="tail"
+                        style={
+                          Object {
+                            "alignSelf": "flex-end",
+                            "color": "#2794FF",
+                            "fontFamily": "Montserrat-Bold",
+                            "fontSize": 32,
+                            "lineHeight": 48,
+                            "marginTop": 40,
+                          }
+                        }
+                      >
+                        Forgot password?
+                      </Text>
+                    </TouchableOpacity>
+                  </Component>,
+                  <InputComponent
+                    editable={true}
+                    errorMessage="Invalid secret phrase"
+                    inputStyle={
+                      Object {
+                        "fontSize": 28,
+                        "height": 160,
+                      }
+                    }
+                    isError={undefined}
+                    isPassword={true}
+                    multiline={true}
+                    onChangeText={[Function]}
+                    placeholder="Please enter your secret phrase (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code"
+                    regularMessage="Secret phrase"
+                    style={
+                      Object {
+                        "height": 180,
+                        "marginTop": 40,
+                      }
+                    }
+                    value={undefined}
+                  />,
+                  <Component
+                    style={
+                      Object {
+                        "justifyContent": "flex-end",
+                        "marginTop": 20,
+                      }
+                    }
+                  >
+                    <TouchableOpacity
+                      activeOpacity={0.2}
+                      onPress={undefined}
+                    >
+                      <Text
+                        accessible={true}
+                        allowFontScaling={true}
+                        ellipsizeMode="tail"
+                        style={
+                          Object {
+                            "alignSelf": "flex-end",
+                            "color": "#2794FF",
+                            "fontFamily": "Montserrat-Regular",
+                            "fontSize": 26,
+                            "fontWeight": "bold",
+                            "marginBottom": 48,
+                          }
+                        }
+                      >
+                        Need help with your secret phrase?
+                      </Text>
+                    </TouchableOpacity>
+                  </Component>,
                 ],
                 "style": Object {
-                  "flexDirection": "row",
-                  "justifyContent": "space-between",
-                  "marginTop": 90,
+                  "marginTop": 70,
                 },
               },
               "ref": null,
@@ -1605,24 +1668,74 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "activeOpacity": 0.2,
-                    "children": <Text
-                      accessible={true}
-                      allowFontScaling={true}
-                      ellipsizeMode="tail"
-                      style={
-                        Object {
-                          "color": "#2794FF",
-                          "fontFamily": "Montserrat-Bold",
-                          "fontSize": 32,
-                          "lineHeight": 48,
-                          "marginTop": 40,
-                        }
-                      }
+                    "errorMessage": "Invalid Email",
+                    "isError": undefined,
+                    "isPassword": false,
+                    "onChangeText": [Function],
+                    "placeholder": "your_email@mail.com",
+                    "regularMessage": "Email",
+                    "style": Object {
+                      "height": 100,
+                      "marginTop": 40,
+                    },
+                    "value": undefined,
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "errorMessage": "Invalid password",
+                    "isError": undefined,
+                    "isPassword": true,
+                    "onChangeText": [Function],
+                    "placeholder": "Enter your password",
+                    "regularMessage": "Password",
+                    "style": Object {
+                      "height": 100,
+                      "marginTop": 40,
+                    },
+                    "value": undefined,
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": <TouchableOpacity
+                      activeOpacity={0.2}
+                      onPress={undefined}
                     >
-                      Forgot password?
-                    </Text>,
-                    "onPress": undefined,
+                      <Text
+                        accessible={true}
+                        allowFontScaling={true}
+                        ellipsizeMode="tail"
+                        style={
+                          Object {
+                            "alignSelf": "flex-end",
+                            "color": "#2794FF",
+                            "fontFamily": "Montserrat-Bold",
+                            "fontSize": 32,
+                            "lineHeight": 48,
+                            "marginTop": 40,
+                          }
+                        }
+                      >
+                        Forgot password?
+                      </Text>
+                    </TouchableOpacity>,
+                    "style": Object {
+                      "justifyContent": "flex-end",
+                      "marginTop": 20,
+                    },
                   },
                   "ref": null,
                   "rendered": Object {
@@ -1630,20 +1743,49 @@ ShallowWrapper {
                     "key": undefined,
                     "nodeType": "class",
                     "props": Object {
-                      "accessible": true,
-                      "allowFontScaling": true,
-                      "children": "Forgot password?",
-                      "ellipsizeMode": "tail",
-                      "style": Object {
-                        "color": "#2794FF",
-                        "fontFamily": "Montserrat-Bold",
-                        "fontSize": 32,
-                        "lineHeight": 48,
-                        "marginTop": 40,
-                      },
+                      "activeOpacity": 0.2,
+                      "children": <Text
+                        accessible={true}
+                        allowFontScaling={true}
+                        ellipsizeMode="tail"
+                        style={
+                          Object {
+                            "alignSelf": "flex-end",
+                            "color": "#2794FF",
+                            "fontFamily": "Montserrat-Bold",
+                            "fontSize": 32,
+                            "lineHeight": 48,
+                            "marginTop": 40,
+                          }
+                        }
+                      >
+                        Forgot password?
+                      </Text>,
+                      "onPress": undefined,
                     },
                     "ref": null,
-                    "rendered": "Forgot password?",
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "accessible": true,
+                        "allowFontScaling": true,
+                        "children": "Forgot password?",
+                        "ellipsizeMode": "tail",
+                        "style": Object {
+                          "alignSelf": "flex-end",
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Bold",
+                          "fontSize": 32,
+                          "lineHeight": 48,
+                          "marginTop": 40,
+                        },
+                      },
+                      "ref": null,
+                      "rendered": "Forgot password?",
+                      "type": [Function],
+                    },
                     "type": [Function],
                   },
                   "type": [Function],
@@ -1653,25 +1795,59 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "activeOpacity": 0.2,
-                    "children": <Text
-                      accessible={true}
-                      allowFontScaling={true}
-                      ellipsizeMode="tail"
-                      style={
-                        Object {
-                          "alignSelf": "flex-end",
-                          "color": "#2794FF",
-                          "fontFamily": "Montserrat-Regular",
-                          "fontSize": 26,
-                          "fontWeight": "bold",
-                          "marginBottom": 48,
-                        }
-                      }
+                    "editable": true,
+                    "errorMessage": "Invalid secret phrase",
+                    "inputStyle": Object {
+                      "fontSize": 28,
+                      "height": 160,
+                    },
+                    "isError": undefined,
+                    "isPassword": true,
+                    "multiline": true,
+                    "onChangeText": [Function],
+                    "placeholder": "Please enter your secret phrase (secret phrase that you generated while registred in Storj befores) or scan your log in credentials via QR code",
+                    "regularMessage": "Secret phrase",
+                    "style": Object {
+                      "height": 180,
+                      "marginTop": 40,
+                    },
+                    "value": undefined,
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": <TouchableOpacity
+                      activeOpacity={0.2}
+                      onPress={undefined}
                     >
-                      What is Mnemonic?
-                    </Text>,
-                    "onPress": undefined,
+                      <Text
+                        accessible={true}
+                        allowFontScaling={true}
+                        ellipsizeMode="tail"
+                        style={
+                          Object {
+                            "alignSelf": "flex-end",
+                            "color": "#2794FF",
+                            "fontFamily": "Montserrat-Regular",
+                            "fontSize": 26,
+                            "fontWeight": "bold",
+                            "marginBottom": 48,
+                          }
+                        }
+                      >
+                        Need help with your secret phrase?
+                      </Text>
+                    </TouchableOpacity>,
+                    "style": Object {
+                      "justifyContent": "flex-end",
+                      "marginTop": 20,
+                    },
                   },
                   "ref": null,
                   "rendered": Object {
@@ -1679,21 +1855,49 @@ ShallowWrapper {
                     "key": undefined,
                     "nodeType": "class",
                     "props": Object {
-                      "accessible": true,
-                      "allowFontScaling": true,
-                      "children": "What is Mnemonic?",
-                      "ellipsizeMode": "tail",
-                      "style": Object {
-                        "alignSelf": "flex-end",
-                        "color": "#2794FF",
-                        "fontFamily": "Montserrat-Regular",
-                        "fontSize": 26,
-                        "fontWeight": "bold",
-                        "marginBottom": 48,
-                      },
+                      "activeOpacity": 0.2,
+                      "children": <Text
+                        accessible={true}
+                        allowFontScaling={true}
+                        ellipsizeMode="tail"
+                        style={
+                          Object {
+                            "alignSelf": "flex-end",
+                            "color": "#2794FF",
+                            "fontFamily": "Montserrat-Regular",
+                            "fontSize": 26,
+                            "fontWeight": "bold",
+                            "marginBottom": 48,
+                          }
+                        }
+                      >
+                        Need help with your secret phrase?
+                      </Text>,
+                      "onPress": undefined,
                     },
                     "ref": null,
-                    "rendered": "What is Mnemonic?",
+                    "rendered": Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "accessible": true,
+                        "allowFontScaling": true,
+                        "children": "Need help with your secret phrase?",
+                        "ellipsizeMode": "tail",
+                        "style": Object {
+                          "alignSelf": "flex-end",
+                          "color": "#2794FF",
+                          "fontFamily": "Montserrat-Regular",
+                          "fontSize": 26,
+                          "fontWeight": "bold",
+                          "marginBottom": 48,
+                        },
+                      },
+                      "ref": null,
+                      "rendered": "Need help with your secret phrase?",
+                      "type": [Function],
+                    },
                     "type": [Function],
                   },
                   "type": [Function],
@@ -1736,7 +1940,7 @@ ShallowWrapper {
                     }
                   }
                 >
-                  Login
+                  Log in
                 </Text>
               </TouchableOpacity>,
               <TouchableOpacity
@@ -1768,7 +1972,7 @@ ShallowWrapper {
                     }
                   }
                 >
-                  Login via QR
+                  Login via QR code
                 </Text>
               </TouchableOpacity>,
               <Text
@@ -1826,7 +2030,7 @@ ShallowWrapper {
                     }
                   }
                 >
-                  Login
+                  Log in
                 </Text>,
                 "onPressOut": [Function],
                 "style": Object {
@@ -1846,7 +2050,7 @@ ShallowWrapper {
                 "props": Object {
                   "accessible": true,
                   "allowFontScaling": true,
-                  "children": "Login",
+                  "children": "Log in",
                   "ellipsizeMode": "tail",
                   "style": Object {
                     "color": "white",
@@ -1855,7 +2059,7 @@ ShallowWrapper {
                   },
                 },
                 "ref": null,
-                "rendered": "Login",
+                "rendered": "Log in",
                 "type": [Function],
               },
               "type": [Function],
@@ -1878,7 +2082,7 @@ ShallowWrapper {
                     }
                   }
                 >
-                  Login via QR
+                  Login via QR code
                 </Text>,
                 "onPressOut": [Function],
                 "style": Object {
@@ -1901,7 +2105,7 @@ ShallowWrapper {
                 "props": Object {
                   "accessible": true,
                   "allowFontScaling": true,
-                  "children": "Login via QR",
+                  "children": "Login via QR code",
                   "ellipsizeMode": "tail",
                   "style": Object {
                     "color": "#2794FF",
@@ -1910,7 +2114,7 @@ ShallowWrapper {
                   },
                 },
                 "ref": null,
-                "rendered": "Login via QR",
+                "rendered": "Login via QR code",
                 "type": [Function],
               },
               "type": [Function],
@@ -1977,7 +2181,7 @@ ShallowWrapper {
         },
         null,
       ],
-      "type": [Function],
+      "type": [MockFunction],
     },
   ],
   Symbol(enzyme.__options__): Object {

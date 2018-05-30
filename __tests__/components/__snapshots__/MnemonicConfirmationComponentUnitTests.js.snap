@@ -28,14 +28,14 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <View
+        <Component
           style={
             Object {
               "height": 300,
             }
           }
         >
-          <View
+          <Component
             style={
               Object {
                 "alignItems": "center",
@@ -45,7 +45,7 @@ ShallowWrapper {
               }
             }
           >
-            <View
+            <Component
               style={
                 Object {
                   "flexDirection": "row",
@@ -74,7 +74,7 @@ ShallowWrapper {
                   }
                 />
               </TouchableOpacity>
-              <View>
+              <Component>
                 <Text
                   accessible={true}
                   allowFontScaling={true}
@@ -135,8 +135,8 @@ ShallowWrapper {
                 >
                   backup
                 </Text>
-              </View>
-            </View>
+              </Component>
+            </Component>
             <TouchableOpacity
               activeOpacity={0.2}
               onPress={[Function]}
@@ -170,9 +170,9 @@ ShallowWrapper {
                 Skip
               </Text>
             </TouchableOpacity>
-          </View>
-        </View>,
-        <View
+          </Component>
+        </Component>,
+        <Component
           style={
             Object {
               "height": 100,
@@ -193,10 +193,10 @@ ShallowWrapper {
               }
             }
           >
-            Please enter two words from your secret phrase, so we’ll besure you saved it.
+            Please enter two words from your secret phrase, so we can be sure you saved it.
           </Text>
-        </View>,
-        <View
+        </Component>,
+        <Component
           style={
             Object {
               "marginTop": 60,
@@ -207,7 +207,7 @@ ShallowWrapper {
             activeOpacity={0.2}
             onPress={[Function]}
           >
-            <View
+            <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -218,7 +218,7 @@ ShallowWrapper {
                 }
               }
             >
-              <View
+              <Component
                 style={null}
               >
                 <Text
@@ -235,7 +235,7 @@ ShallowWrapper {
                 >
                   Word #1
                 </Text>
-              </View>
+              </Component>
               <Image
                 source="BlueVector.png"
                 style={
@@ -245,8 +245,8 @@ ShallowWrapper {
                   }
                 }
               />
-            </View>
-            <View
+            </Component>
+            <Component
               style={
                 Object {
                   "backgroundColor": "rgba(56, 75, 101, 0.2)",
@@ -255,7 +255,7 @@ ShallowWrapper {
               }
             />
           </TouchableOpacity>
-          <View
+          <Component
             style={
               Object {
                 "marginTop": 40,
@@ -266,7 +266,7 @@ ShallowWrapper {
               activeOpacity={0.2}
               onPress={[Function]}
             >
-              <View
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -277,7 +277,7 @@ ShallowWrapper {
                   }
                 }
               >
-                <View
+                <Component
                   style={null}
                 >
                   <Text
@@ -294,7 +294,7 @@ ShallowWrapper {
                   >
                     Word #0
                   </Text>
-                </View>
+                </Component>
                 <Image
                   source="BlueVector.png"
                   style={
@@ -304,8 +304,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
-              <View
+              </Component>
+              <Component
                 style={
                   Object {
                     "backgroundColor": "rgba(56, 75, 101, 0.2)",
@@ -314,13 +314,13 @@ ShallowWrapper {
                 }
               />
             </TouchableOpacity>
-          </View>
-        </View>,
+          </Component>
+        </Component>,
         <TouchableOpacity
           activeOpacity={0.2}
           onPress={[Function]}
         >
-          <View
+          <Component
             style={
               Array [
                 Object {
@@ -356,7 +356,7 @@ ShallowWrapper {
             >
               Confirm
             </Text>
-          </View>
+          </Component>
         </TouchableOpacity>,
         null,
         null,
@@ -374,7 +374,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
-          "children": <View
+          "children": <Component
             style={
               Object {
                 "alignItems": "center",
@@ -384,7 +384,7 @@ ShallowWrapper {
               }
             }
           >
-            <View
+            <Component
               style={
                 Object {
                   "flexDirection": "row",
@@ -413,7 +413,7 @@ ShallowWrapper {
                   }
                 />
               </TouchableOpacity>
-              <View>
+              <Component>
                 <Text
                   accessible={true}
                   allowFontScaling={true}
@@ -474,8 +474,8 @@ ShallowWrapper {
                 >
                   backup
                 </Text>
-              </View>
-            </View>
+              </Component>
+            </Component>
             <TouchableOpacity
               activeOpacity={0.2}
               onPress={[Function]}
@@ -509,7 +509,7 @@ ShallowWrapper {
                 Skip
               </Text>
             </TouchableOpacity>
-          </View>,
+          </Component>,
           "style": Object {
             "height": 300,
           },
@@ -521,7 +521,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <View
+              <Component
                 style={
                   Object {
                     "flexDirection": "row",
@@ -550,7 +550,7 @@ ShallowWrapper {
                     }
                   />
                 </TouchableOpacity>
-                <View>
+                <Component>
                   <Text
                     accessible={true}
                     allowFontScaling={true}
@@ -611,8 +611,8 @@ ShallowWrapper {
                   >
                     backup
                   </Text>
-                </View>
-              </View>,
+                </Component>
+              </Component>,
               <TouchableOpacity
                 activeOpacity={0.2}
                 onPress={[Function]}
@@ -684,7 +684,7 @@ ShallowWrapper {
                       }
                     />
                   </TouchableOpacity>,
-                  <View>
+                  <Component>
                     <Text
                       accessible={true}
                       allowFontScaling={true}
@@ -745,7 +745,7 @@ ShallowWrapper {
                     >
                       backup
                     </Text>
-                  </View>,
+                  </Component>,
                 ],
                 "style": Object {
                   "flexDirection": "row",
@@ -1030,7 +1030,7 @@ ShallowWrapper {
               }
             }
           >
-            Please enter two words from your secret phrase, so we’ll besure you saved it.
+            Please enter two words from your secret phrase, so we can be sure you saved it.
           </Text>,
           "style": Object {
             "height": 100,
@@ -1045,7 +1045,7 @@ ShallowWrapper {
           "props": Object {
             "accessible": true,
             "allowFontScaling": true,
-            "children": "Please enter two words from your secret phrase, so we’ll besure you saved it.",
+            "children": "Please enter two words from your secret phrase, so we can be sure you saved it.",
             "ellipsizeMode": "tail",
             "style": Object {
               "color": "#384B65",
@@ -1055,7 +1055,7 @@ ShallowWrapper {
             },
           },
           "ref": null,
-          "rendered": "Please enter two words from your secret phrase, so we’ll besure you saved it.",
+          "rendered": "Please enter two words from your secret phrase, so we can be sure you saved it.",
           "type": [Function],
         },
         "type": [Function],
@@ -1070,7 +1070,7 @@ ShallowWrapper {
               activeOpacity={0.2}
               onPress={[Function]}
             >
-              <View
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -1081,7 +1081,7 @@ ShallowWrapper {
                   }
                 }
               >
-                <View
+                <Component
                   style={null}
                 >
                   <Text
@@ -1098,7 +1098,7 @@ ShallowWrapper {
                   >
                     Word #1
                   </Text>
-                </View>
+                </Component>
                 <Image
                   source="BlueVector.png"
                   style={
@@ -1108,8 +1108,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
-              <View
+              </Component>
+              <Component
                 style={
                   Object {
                     "backgroundColor": "rgba(56, 75, 101, 0.2)",
@@ -1118,7 +1118,7 @@ ShallowWrapper {
                 }
               />
             </TouchableOpacity>,
-            <View
+            <Component
               style={
                 Object {
                   "marginTop": 40,
@@ -1129,7 +1129,7 @@ ShallowWrapper {
                 activeOpacity={0.2}
                 onPress={[Function]}
               >
-                <View
+                <Component
                   style={
                     Object {
                       "alignItems": "center",
@@ -1140,7 +1140,7 @@ ShallowWrapper {
                     }
                   }
                 >
-                  <View
+                  <Component
                     style={null}
                   >
                     <Text
@@ -1157,7 +1157,7 @@ ShallowWrapper {
                     >
                       Word #0
                     </Text>
-                  </View>
+                  </Component>
                   <Image
                     source="BlueVector.png"
                     style={
@@ -1167,8 +1167,8 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
-                <View
+                </Component>
+                <Component
                   style={
                     Object {
                       "backgroundColor": "rgba(56, 75, 101, 0.2)",
@@ -1177,7 +1177,7 @@ ShallowWrapper {
                   }
                 />
               </TouchableOpacity>
-            </View>,
+            </Component>,
           ],
           "style": Object {
             "marginTop": 60,
@@ -1192,7 +1192,7 @@ ShallowWrapper {
             "props": Object {
               "activeOpacity": 0.2,
               "children": Array [
-                <View
+                <Component
                   style={
                     Object {
                       "alignItems": "center",
@@ -1203,7 +1203,7 @@ ShallowWrapper {
                     }
                   }
                 >
-                  <View
+                  <Component
                     style={null}
                   >
                     <Text
@@ -1220,7 +1220,7 @@ ShallowWrapper {
                     >
                       Word #1
                     </Text>
-                  </View>
+                  </Component>
                   <Image
                     source="BlueVector.png"
                     style={
@@ -1230,8 +1230,8 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>,
-                <View
+                </Component>,
+                <Component
                   style={
                     Object {
                       "backgroundColor": "rgba(56, 75, 101, 0.2)",
@@ -1250,7 +1250,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "children": Array [
-                    <View
+                    <Component
                       style={null}
                     >
                       <Text
@@ -1267,7 +1267,7 @@ ShallowWrapper {
                       >
                         Word #1
                       </Text>
-                    </View>,
+                    </Component>,
                     <Image
                       source="BlueVector.png"
                       style={
@@ -1381,7 +1381,7 @@ ShallowWrapper {
                 activeOpacity={0.2}
                 onPress={[Function]}
               >
-                <View
+                <Component
                   style={
                     Object {
                       "alignItems": "center",
@@ -1392,7 +1392,7 @@ ShallowWrapper {
                     }
                   }
                 >
-                  <View
+                  <Component
                     style={null}
                   >
                     <Text
@@ -1409,7 +1409,7 @@ ShallowWrapper {
                     >
                       Word #0
                     </Text>
-                  </View>
+                  </Component>
                   <Image
                     source="BlueVector.png"
                     style={
@@ -1419,8 +1419,8 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
-                <View
+                </Component>
+                <Component
                   style={
                     Object {
                       "backgroundColor": "rgba(56, 75, 101, 0.2)",
@@ -1441,7 +1441,7 @@ ShallowWrapper {
               "props": Object {
                 "activeOpacity": 0.2,
                 "children": Array [
-                  <View
+                  <Component
                     style={
                       Object {
                         "alignItems": "center",
@@ -1452,7 +1452,7 @@ ShallowWrapper {
                       }
                     }
                   >
-                    <View
+                    <Component
                       style={null}
                     >
                       <Text
@@ -1469,7 +1469,7 @@ ShallowWrapper {
                       >
                         Word #0
                       </Text>
-                    </View>
+                    </Component>
                     <Image
                       source="BlueVector.png"
                       style={
@@ -1479,8 +1479,8 @@ ShallowWrapper {
                         }
                       }
                     />
-                  </View>,
-                  <View
+                  </Component>,
+                  <Component
                     style={
                       Object {
                         "backgroundColor": "rgba(56, 75, 101, 0.2)",
@@ -1499,7 +1499,7 @@ ShallowWrapper {
                   "nodeType": "class",
                   "props": Object {
                     "children": Array [
-                      <View
+                      <Component
                         style={null}
                       >
                         <Text
@@ -1516,7 +1516,7 @@ ShallowWrapper {
                         >
                           Word #0
                         </Text>
-                      </View>,
+                      </Component>,
                       <Image
                         source="BlueVector.png"
                         style={
@@ -1632,7 +1632,7 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "activeOpacity": 0.2,
-          "children": <View
+          "children": <Component
             style={
               Array [
                 Object {
@@ -1668,7 +1668,7 @@ ShallowWrapper {
             >
               Confirm
             </Text>
-          </View>,
+          </Component>,
           "onPress": [Function],
         },
         "ref": null,
@@ -1746,14 +1746,14 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <View
+          <Component
             style={
               Object {
                 "height": 300,
               }
             }
           >
-            <View
+            <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -1763,7 +1763,7 @@ ShallowWrapper {
                 }
               }
             >
-              <View
+              <Component
                 style={
                   Object {
                     "flexDirection": "row",
@@ -1792,7 +1792,7 @@ ShallowWrapper {
                     }
                   />
                 </TouchableOpacity>
-                <View>
+                <Component>
                   <Text
                     accessible={true}
                     allowFontScaling={true}
@@ -1853,8 +1853,8 @@ ShallowWrapper {
                   >
                     backup
                   </Text>
-                </View>
-              </View>
+                </Component>
+              </Component>
               <TouchableOpacity
                 activeOpacity={0.2}
                 onPress={[Function]}
@@ -1888,9 +1888,9 @@ ShallowWrapper {
                   Skip
                 </Text>
               </TouchableOpacity>
-            </View>
-          </View>,
-          <View
+            </Component>
+          </Component>,
+          <Component
             style={
               Object {
                 "height": 100,
@@ -1911,10 +1911,10 @@ ShallowWrapper {
                 }
               }
             >
-              Please enter two words from your secret phrase, so we’ll besure you saved it.
+              Please enter two words from your secret phrase, so we can be sure you saved it.
             </Text>
-          </View>,
-          <View
+          </Component>,
+          <Component
             style={
               Object {
                 "marginTop": 60,
@@ -1925,7 +1925,7 @@ ShallowWrapper {
               activeOpacity={0.2}
               onPress={[Function]}
             >
-              <View
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -1936,7 +1936,7 @@ ShallowWrapper {
                   }
                 }
               >
-                <View
+                <Component
                   style={null}
                 >
                   <Text
@@ -1953,7 +1953,7 @@ ShallowWrapper {
                   >
                     Word #1
                   </Text>
-                </View>
+                </Component>
                 <Image
                   source="BlueVector.png"
                   style={
@@ -1963,8 +1963,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
-              <View
+              </Component>
+              <Component
                 style={
                   Object {
                     "backgroundColor": "rgba(56, 75, 101, 0.2)",
@@ -1973,7 +1973,7 @@ ShallowWrapper {
                 }
               />
             </TouchableOpacity>
-            <View
+            <Component
               style={
                 Object {
                   "marginTop": 40,
@@ -1984,7 +1984,7 @@ ShallowWrapper {
                 activeOpacity={0.2}
                 onPress={[Function]}
               >
-                <View
+                <Component
                   style={
                     Object {
                       "alignItems": "center",
@@ -1995,7 +1995,7 @@ ShallowWrapper {
                     }
                   }
                 >
-                  <View
+                  <Component
                     style={null}
                   >
                     <Text
@@ -2012,7 +2012,7 @@ ShallowWrapper {
                     >
                       Word #0
                     </Text>
-                  </View>
+                  </Component>
                   <Image
                     source="BlueVector.png"
                     style={
@@ -2022,8 +2022,8 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
-                <View
+                </Component>
+                <Component
                   style={
                     Object {
                       "backgroundColor": "rgba(56, 75, 101, 0.2)",
@@ -2032,13 +2032,13 @@ ShallowWrapper {
                   }
                 />
               </TouchableOpacity>
-            </View>
-          </View>,
+            </Component>
+          </Component>,
           <TouchableOpacity
             activeOpacity={0.2}
             onPress={[Function]}
           >
-            <View
+            <Component
               style={
                 Array [
                   Object {
@@ -2074,7 +2074,7 @@ ShallowWrapper {
               >
                 Confirm
               </Text>
-            </View>
+            </Component>
           </TouchableOpacity>,
           null,
           null,
@@ -2092,7 +2092,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "children": <View
+            "children": <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -2102,7 +2102,7 @@ ShallowWrapper {
                 }
               }
             >
-              <View
+              <Component
                 style={
                   Object {
                     "flexDirection": "row",
@@ -2131,7 +2131,7 @@ ShallowWrapper {
                     }
                   />
                 </TouchableOpacity>
-                <View>
+                <Component>
                   <Text
                     accessible={true}
                     allowFontScaling={true}
@@ -2192,8 +2192,8 @@ ShallowWrapper {
                   >
                     backup
                   </Text>
-                </View>
-              </View>
+                </Component>
+              </Component>
               <TouchableOpacity
                 activeOpacity={0.2}
                 onPress={[Function]}
@@ -2227,7 +2227,7 @@ ShallowWrapper {
                   Skip
                 </Text>
               </TouchableOpacity>
-            </View>,
+            </Component>,
             "style": Object {
               "height": 300,
             },
@@ -2239,7 +2239,7 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "children": Array [
-                <View
+                <Component
                   style={
                     Object {
                       "flexDirection": "row",
@@ -2268,7 +2268,7 @@ ShallowWrapper {
                       }
                     />
                   </TouchableOpacity>
-                  <View>
+                  <Component>
                     <Text
                       accessible={true}
                       allowFontScaling={true}
@@ -2329,8 +2329,8 @@ ShallowWrapper {
                     >
                       backup
                     </Text>
-                  </View>
-                </View>,
+                  </Component>
+                </Component>,
                 <TouchableOpacity
                   activeOpacity={0.2}
                   onPress={[Function]}
@@ -2402,7 +2402,7 @@ ShallowWrapper {
                         }
                       />
                     </TouchableOpacity>,
-                    <View>
+                    <Component>
                       <Text
                         accessible={true}
                         allowFontScaling={true}
@@ -2463,7 +2463,7 @@ ShallowWrapper {
                       >
                         backup
                       </Text>
-                    </View>,
+                    </Component>,
                   ],
                   "style": Object {
                     "flexDirection": "row",
@@ -2748,7 +2748,7 @@ ShallowWrapper {
                 }
               }
             >
-              Please enter two words from your secret phrase, so we’ll besure you saved it.
+              Please enter two words from your secret phrase, so we can be sure you saved it.
             </Text>,
             "style": Object {
               "height": 100,
@@ -2763,7 +2763,7 @@ ShallowWrapper {
             "props": Object {
               "accessible": true,
               "allowFontScaling": true,
-              "children": "Please enter two words from your secret phrase, so we’ll besure you saved it.",
+              "children": "Please enter two words from your secret phrase, so we can be sure you saved it.",
               "ellipsizeMode": "tail",
               "style": Object {
                 "color": "#384B65",
@@ -2773,7 +2773,7 @@ ShallowWrapper {
               },
             },
             "ref": null,
-            "rendered": "Please enter two words from your secret phrase, so we’ll besure you saved it.",
+            "rendered": "Please enter two words from your secret phrase, so we can be sure you saved it.",
             "type": [Function],
           },
           "type": [Function],
@@ -2788,7 +2788,7 @@ ShallowWrapper {
                 activeOpacity={0.2}
                 onPress={[Function]}
               >
-                <View
+                <Component
                   style={
                     Object {
                       "alignItems": "center",
@@ -2799,7 +2799,7 @@ ShallowWrapper {
                     }
                   }
                 >
-                  <View
+                  <Component
                     style={null}
                   >
                     <Text
@@ -2816,7 +2816,7 @@ ShallowWrapper {
                     >
                       Word #1
                     </Text>
-                  </View>
+                  </Component>
                   <Image
                     source="BlueVector.png"
                     style={
@@ -2826,8 +2826,8 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
-                <View
+                </Component>
+                <Component
                   style={
                     Object {
                       "backgroundColor": "rgba(56, 75, 101, 0.2)",
@@ -2836,7 +2836,7 @@ ShallowWrapper {
                   }
                 />
               </TouchableOpacity>,
-              <View
+              <Component
                 style={
                   Object {
                     "marginTop": 40,
@@ -2847,7 +2847,7 @@ ShallowWrapper {
                   activeOpacity={0.2}
                   onPress={[Function]}
                 >
-                  <View
+                  <Component
                     style={
                       Object {
                         "alignItems": "center",
@@ -2858,7 +2858,7 @@ ShallowWrapper {
                       }
                     }
                   >
-                    <View
+                    <Component
                       style={null}
                     >
                       <Text
@@ -2875,7 +2875,7 @@ ShallowWrapper {
                       >
                         Word #0
                       </Text>
-                    </View>
+                    </Component>
                     <Image
                       source="BlueVector.png"
                       style={
@@ -2885,8 +2885,8 @@ ShallowWrapper {
                         }
                       }
                     />
-                  </View>
-                  <View
+                  </Component>
+                  <Component
                     style={
                       Object {
                         "backgroundColor": "rgba(56, 75, 101, 0.2)",
@@ -2895,7 +2895,7 @@ ShallowWrapper {
                     }
                   />
                 </TouchableOpacity>
-              </View>,
+              </Component>,
             ],
             "style": Object {
               "marginTop": 60,
@@ -2910,7 +2910,7 @@ ShallowWrapper {
               "props": Object {
                 "activeOpacity": 0.2,
                 "children": Array [
-                  <View
+                  <Component
                     style={
                       Object {
                         "alignItems": "center",
@@ -2921,7 +2921,7 @@ ShallowWrapper {
                       }
                     }
                   >
-                    <View
+                    <Component
                       style={null}
                     >
                       <Text
@@ -2938,7 +2938,7 @@ ShallowWrapper {
                       >
                         Word #1
                       </Text>
-                    </View>
+                    </Component>
                     <Image
                       source="BlueVector.png"
                       style={
@@ -2948,8 +2948,8 @@ ShallowWrapper {
                         }
                       }
                     />
-                  </View>,
-                  <View
+                  </Component>,
+                  <Component
                     style={
                       Object {
                         "backgroundColor": "rgba(56, 75, 101, 0.2)",
@@ -2968,7 +2968,7 @@ ShallowWrapper {
                   "nodeType": "class",
                   "props": Object {
                     "children": Array [
-                      <View
+                      <Component
                         style={null}
                       >
                         <Text
@@ -2985,7 +2985,7 @@ ShallowWrapper {
                         >
                           Word #1
                         </Text>
-                      </View>,
+                      </Component>,
                       <Image
                         source="BlueVector.png"
                         style={
@@ -3099,7 +3099,7 @@ ShallowWrapper {
                   activeOpacity={0.2}
                   onPress={[Function]}
                 >
-                  <View
+                  <Component
                     style={
                       Object {
                         "alignItems": "center",
@@ -3110,7 +3110,7 @@ ShallowWrapper {
                       }
                     }
                   >
-                    <View
+                    <Component
                       style={null}
                     >
                       <Text
@@ -3127,7 +3127,7 @@ ShallowWrapper {
                       >
                         Word #0
                       </Text>
-                    </View>
+                    </Component>
                     <Image
                       source="BlueVector.png"
                       style={
@@ -3137,8 +3137,8 @@ ShallowWrapper {
                         }
                       }
                     />
-                  </View>
-                  <View
+                  </Component>
+                  <Component
                     style={
                       Object {
                         "backgroundColor": "rgba(56, 75, 101, 0.2)",
@@ -3159,7 +3159,7 @@ ShallowWrapper {
                 "props": Object {
                   "activeOpacity": 0.2,
                   "children": Array [
-                    <View
+                    <Component
                       style={
                         Object {
                           "alignItems": "center",
@@ -3170,7 +3170,7 @@ ShallowWrapper {
                         }
                       }
                     >
-                      <View
+                      <Component
                         style={null}
                       >
                         <Text
@@ -3187,7 +3187,7 @@ ShallowWrapper {
                         >
                           Word #0
                         </Text>
-                      </View>
+                      </Component>
                       <Image
                         source="BlueVector.png"
                         style={
@@ -3197,8 +3197,8 @@ ShallowWrapper {
                           }
                         }
                       />
-                    </View>,
-                    <View
+                    </Component>,
+                    <Component
                       style={
                         Object {
                           "backgroundColor": "rgba(56, 75, 101, 0.2)",
@@ -3217,7 +3217,7 @@ ShallowWrapper {
                     "nodeType": "class",
                     "props": Object {
                       "children": Array [
-                        <View
+                        <Component
                           style={null}
                         >
                           <Text
@@ -3234,7 +3234,7 @@ ShallowWrapper {
                           >
                             Word #0
                           </Text>
-                        </View>,
+                        </Component>,
                         <Image
                           source="BlueVector.png"
                           style={
@@ -3350,7 +3350,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "activeOpacity": 0.2,
-            "children": <View
+            "children": <Component
               style={
                 Array [
                   Object {
@@ -3386,7 +3386,7 @@ ShallowWrapper {
               >
                 Confirm
               </Text>
-            </View>,
+            </Component>,
             "onPress": [Function],
           },
           "ref": null,

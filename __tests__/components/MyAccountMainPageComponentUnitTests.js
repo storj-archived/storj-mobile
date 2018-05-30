@@ -57,7 +57,7 @@ describe('MyAccountMainPageComponent', () => {
         });
 
         expect(showQRSpy.mock.calls.length).toBe(1);
-        expect(redirectToStorageScreenSpy.mock.calls.length).toBe(1);
+        expect(redirectToStorageScreenSpy.mock.calls.length).toBe(0);
         expect(redirectToBalanceScreenSpy.mock.calls.length).toBe(1);
         expect(redirectToSettingsScreenSpy.mock.calls.length).toBe(1);
     });

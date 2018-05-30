@@ -18,14 +18,14 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <View
+        <Component
           style={
             Object {
               "paddingHorizontal": 40,
             }
           }
         >
-          <View
+          <Component
             style={
               Object {
                 "flexDirection": "row",
@@ -54,24 +54,42 @@ ShallowWrapper {
                 }
               />
             </TouchableOpacity>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "#384B65",
-                  "fontFamily": "Montserrat-Bold",
-                  "fontSize": 54,
-                  "lineHeight": 66,
-                  "marginLeft": 30,
+            <Component>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#384B65",
+                    "fontFamily": "Montserrat-Bold",
+                    "fontSize": 54,
+                    "lineHeight": 66,
+                    "marginLeft": 30,
+                  }
                 }
-              }
-            >
-              Your secret phrase
-            </Text>
-          </View>
-          <View
+              >
+                Next: generate your
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#384B65",
+                    "fontFamily": "Montserrat-Bold",
+                    "fontSize": 54,
+                    "lineHeight": 66,
+                    "marginLeft": 30,
+                  }
+                }
+              >
+                secret phrase
+              </Text>
+            </Component>
+          </Component>
+          <Component
             style={
               Object {
                 "alignItems": "center",
@@ -91,8 +109,8 @@ ShallowWrapper {
                 }
               }
             />
-          </View>
-          <View
+          </Component>
+          <Component
             style={
               Object {
                 "marginTop": 90,
@@ -112,14 +130,14 @@ ShallowWrapper {
                 }
               }
             >
-              It’s your pass code that will allow you to use the app. Please save it somewhere.
+              You’ll need a secret phrase—a list of 24 words—to access your data. Make sure you save it!
             </Text>
-          </View>
+          </Component>
           <TouchableOpacity
             activeOpacity={0.2}
             onPress={[Function]}
           >
-            <View
+            <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -147,15 +165,15 @@ ShallowWrapper {
                   }
                 }
               >
-                Backup
+                Generate
               </Text>
-            </View>
+            </Component>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.2}
             onPress={[Function]}
           >
-            <View
+            <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -183,9 +201,9 @@ ShallowWrapper {
               >
                 Skip
               </Text>
-            </View>
+            </Component>
           </TouchableOpacity>
-        </View>,
+        </Component>,
         null,
         null,
       ],
@@ -202,7 +220,7 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <View
+            <Component
               style={
                 Object {
                   "flexDirection": "row",
@@ -231,24 +249,42 @@ ShallowWrapper {
                   }
                 />
               </TouchableOpacity>
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "color": "#384B65",
-                    "fontFamily": "Montserrat-Bold",
-                    "fontSize": 54,
-                    "lineHeight": 66,
-                    "marginLeft": 30,
+              <Component>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#384B65",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 54,
+                      "lineHeight": 66,
+                      "marginLeft": 30,
+                    }
                   }
-                }
-              >
-                Your secret phrase
-              </Text>
-            </View>,
-            <View
+                >
+                  Next: generate your
+                </Text>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#384B65",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 54,
+                      "lineHeight": 66,
+                      "marginLeft": 30,
+                    }
+                  }
+                >
+                  secret phrase
+                </Text>
+              </Component>
+            </Component>,
+            <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -268,8 +304,8 @@ ShallowWrapper {
                   }
                 }
               />
-            </View>,
-            <View
+            </Component>,
+            <Component
               style={
                 Object {
                   "marginTop": 90,
@@ -289,14 +325,14 @@ ShallowWrapper {
                   }
                 }
               >
-                It’s your pass code that will allow you to use the app. Please save it somewhere.
+                You’ll need a secret phrase—a list of 24 words—to access your data. Make sure you save it!
               </Text>
-            </View>,
+            </Component>,
             <TouchableOpacity
               activeOpacity={0.2}
               onPress={[Function]}
             >
-              <View
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -324,15 +360,15 @@ ShallowWrapper {
                     }
                   }
                 >
-                  Backup
+                  Generate
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>,
             <TouchableOpacity
               activeOpacity={0.2}
               onPress={[Function]}
             >
-              <View
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -360,7 +396,7 @@ ShallowWrapper {
                 >
                   Skip
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>,
           ],
           "style": Object {
@@ -395,22 +431,40 @@ ShallowWrapper {
                     }
                   />
                 </TouchableOpacity>,
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  style={
-                    Object {
-                      "color": "#384B65",
-                      "fontFamily": "Montserrat-Bold",
-                      "fontSize": 54,
-                      "lineHeight": 66,
-                      "marginLeft": 30,
+                <Component>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#384B65",
+                        "fontFamily": "Montserrat-Bold",
+                        "fontSize": 54,
+                        "lineHeight": 66,
+                        "marginLeft": 30,
+                      }
                     }
-                  }
-                >
-                  Your secret phrase
-                </Text>,
+                  >
+                    Next: generate your
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#384B65",
+                        "fontFamily": "Montserrat-Bold",
+                        "fontSize": 54,
+                        "lineHeight": 66,
+                        "marginLeft": 30,
+                      }
+                    }
+                  >
+                    secret phrase
+                  </Text>
+                </Component>,
               ],
               "style": Object {
                 "flexDirection": "row",
@@ -465,20 +519,86 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "accessible": true,
-                  "allowFontScaling": true,
-                  "children": "Your secret phrase",
-                  "ellipsizeMode": "tail",
-                  "style": Object {
-                    "color": "#384B65",
-                    "fontFamily": "Montserrat-Bold",
-                    "fontSize": 54,
-                    "lineHeight": 66,
-                    "marginLeft": 30,
-                  },
+                  "children": Array [
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "color": "#384B65",
+                          "fontFamily": "Montserrat-Bold",
+                          "fontSize": 54,
+                          "lineHeight": 66,
+                          "marginLeft": 30,
+                        }
+                      }
+                    >
+                      Next: generate your
+                    </Text>,
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "color": "#384B65",
+                          "fontFamily": "Montserrat-Bold",
+                          "fontSize": 54,
+                          "lineHeight": 66,
+                          "marginLeft": 30,
+                        }
+                      }
+                    >
+                      secret phrase
+                    </Text>,
+                  ],
                 },
                 "ref": null,
-                "rendered": "Your secret phrase",
+                "rendered": Array [
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "accessible": true,
+                      "allowFontScaling": true,
+                      "children": "Next: generate your",
+                      "ellipsizeMode": "tail",
+                      "style": Object {
+                        "color": "#384B65",
+                        "fontFamily": "Montserrat-Bold",
+                        "fontSize": 54,
+                        "lineHeight": 66,
+                        "marginLeft": 30,
+                      },
+                    },
+                    "ref": null,
+                    "rendered": "Next: generate your",
+                    "type": [Function],
+                  },
+                  Object {
+                    "instance": null,
+                    "key": undefined,
+                    "nodeType": "class",
+                    "props": Object {
+                      "accessible": true,
+                      "allowFontScaling": true,
+                      "children": "secret phrase",
+                      "ellipsizeMode": "tail",
+                      "style": Object {
+                        "color": "#384B65",
+                        "fontFamily": "Montserrat-Bold",
+                        "fontSize": 54,
+                        "lineHeight": 66,
+                        "marginLeft": 30,
+                      },
+                    },
+                    "ref": null,
+                    "rendered": "secret phrase",
+                    "type": [Function],
+                  },
+                ],
                 "type": [Function],
               },
             ],
@@ -543,7 +663,7 @@ ShallowWrapper {
                   }
                 }
               >
-                It’s your pass code that will allow you to use the app. Please save it somewhere.
+                You’ll need a secret phrase—a list of 24 words—to access your data. Make sure you save it!
               </Text>,
               "style": Object {
                 "marginTop": 90,
@@ -557,7 +677,7 @@ ShallowWrapper {
               "props": Object {
                 "accessible": true,
                 "allowFontScaling": true,
-                "children": "It’s your pass code that will allow you to use the app. Please save it somewhere.",
+                "children": "You’ll need a secret phrase—a list of 24 words—to access your data. Make sure you save it!",
                 "ellipsizeMode": "tail",
                 "style": Object {
                   "color": "#384B65",
@@ -567,7 +687,7 @@ ShallowWrapper {
                 },
               },
               "ref": null,
-              "rendered": "It’s your pass code that will allow you to use the app. Please save it somewhere.",
+              "rendered": "You’ll need a secret phrase—a list of 24 words—to access your data. Make sure you save it!",
               "type": [Function],
             },
             "type": [Function],
@@ -578,7 +698,7 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "activeOpacity": 0.2,
-              "children": <View
+              "children": <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -606,9 +726,9 @@ ShallowWrapper {
                     }
                   }
                 >
-                  Backup
+                  Generate
                 </Text>
-              </View>,
+              </Component>,
               "onPress": [Function],
             },
             "ref": null,
@@ -629,7 +749,7 @@ ShallowWrapper {
                     }
                   }
                 >
-                  Backup
+                  Generate
                 </Text>,
                 "style": Object {
                   "alignItems": "center",
@@ -652,7 +772,7 @@ ShallowWrapper {
                 "props": Object {
                   "accessible": true,
                   "allowFontScaling": true,
-                  "children": "Backup",
+                  "children": "Generate",
                   "ellipsizeMode": "tail",
                   "style": Object {
                     "color": "white",
@@ -661,7 +781,7 @@ ShallowWrapper {
                   },
                 },
                 "ref": null,
-                "rendered": "Backup",
+                "rendered": "Generate",
                 "type": [Function],
               },
               "type": [Function],
@@ -674,7 +794,7 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "activeOpacity": 0.2,
-              "children": <View
+              "children": <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -702,7 +822,7 @@ ShallowWrapper {
                 >
                   Skip
                 </Text>
-              </View>,
+              </Component>,
               "onPress": [Function],
             },
             "ref": null,
@@ -775,14 +895,14 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <View
+          <Component
             style={
               Object {
                 "paddingHorizontal": 40,
               }
             }
           >
-            <View
+            <Component
               style={
                 Object {
                   "flexDirection": "row",
@@ -811,24 +931,42 @@ ShallowWrapper {
                   }
                 />
               </TouchableOpacity>
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                ellipsizeMode="tail"
-                style={
-                  Object {
-                    "color": "#384B65",
-                    "fontFamily": "Montserrat-Bold",
-                    "fontSize": 54,
-                    "lineHeight": 66,
-                    "marginLeft": 30,
+              <Component>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#384B65",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 54,
+                      "lineHeight": 66,
+                      "marginLeft": 30,
+                    }
                   }
-                }
-              >
-                Your secret phrase
-              </Text>
-            </View>
-            <View
+                >
+                  Next: generate your
+                </Text>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#384B65",
+                      "fontFamily": "Montserrat-Bold",
+                      "fontSize": 54,
+                      "lineHeight": 66,
+                      "marginLeft": 30,
+                    }
+                  }
+                >
+                  secret phrase
+                </Text>
+              </Component>
+            </Component>
+            <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -848,8 +986,8 @@ ShallowWrapper {
                   }
                 }
               />
-            </View>
-            <View
+            </Component>
+            <Component
               style={
                 Object {
                   "marginTop": 90,
@@ -869,14 +1007,14 @@ ShallowWrapper {
                   }
                 }
               >
-                It’s your pass code that will allow you to use the app. Please save it somewhere.
+                You’ll need a secret phrase—a list of 24 words—to access your data. Make sure you save it!
               </Text>
-            </View>
+            </Component>
             <TouchableOpacity
               activeOpacity={0.2}
               onPress={[Function]}
             >
-              <View
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -904,15 +1042,15 @@ ShallowWrapper {
                     }
                   }
                 >
-                  Backup
+                  Generate
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.2}
               onPress={[Function]}
             >
-              <View
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -940,9 +1078,9 @@ ShallowWrapper {
                 >
                   Skip
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>
-          </View>,
+          </Component>,
           null,
           null,
         ],
@@ -959,7 +1097,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <View
+              <Component
                 style={
                   Object {
                     "flexDirection": "row",
@@ -988,24 +1126,42 @@ ShallowWrapper {
                     }
                   />
                 </TouchableOpacity>
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  style={
-                    Object {
-                      "color": "#384B65",
-                      "fontFamily": "Montserrat-Bold",
-                      "fontSize": 54,
-                      "lineHeight": 66,
-                      "marginLeft": 30,
+                <Component>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#384B65",
+                        "fontFamily": "Montserrat-Bold",
+                        "fontSize": 54,
+                        "lineHeight": 66,
+                        "marginLeft": 30,
+                      }
                     }
-                  }
-                >
-                  Your secret phrase
-                </Text>
-              </View>,
-              <View
+                  >
+                    Next: generate your
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "color": "#384B65",
+                        "fontFamily": "Montserrat-Bold",
+                        "fontSize": 54,
+                        "lineHeight": 66,
+                        "marginLeft": 30,
+                      }
+                    }
+                  >
+                    secret phrase
+                  </Text>
+                </Component>
+              </Component>,
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -1025,8 +1181,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>,
-              <View
+              </Component>,
+              <Component
                 style={
                   Object {
                     "marginTop": 90,
@@ -1046,14 +1202,14 @@ ShallowWrapper {
                     }
                   }
                 >
-                  It’s your pass code that will allow you to use the app. Please save it somewhere.
+                  You’ll need a secret phrase—a list of 24 words—to access your data. Make sure you save it!
                 </Text>
-              </View>,
+              </Component>,
               <TouchableOpacity
                 activeOpacity={0.2}
                 onPress={[Function]}
               >
-                <View
+                <Component
                   style={
                     Object {
                       "alignItems": "center",
@@ -1081,15 +1237,15 @@ ShallowWrapper {
                       }
                     }
                   >
-                    Backup
+                    Generate
                   </Text>
-                </View>
+                </Component>
               </TouchableOpacity>,
               <TouchableOpacity
                 activeOpacity={0.2}
                 onPress={[Function]}
               >
-                <View
+                <Component
                   style={
                     Object {
                       "alignItems": "center",
@@ -1117,7 +1273,7 @@ ShallowWrapper {
                   >
                     Skip
                   </Text>
-                </View>
+                </Component>
               </TouchableOpacity>,
             ],
             "style": Object {
@@ -1152,22 +1308,40 @@ ShallowWrapper {
                       }
                     />
                   </TouchableOpacity>,
-                  <Text
-                    accessible={true}
-                    allowFontScaling={true}
-                    ellipsizeMode="tail"
-                    style={
-                      Object {
-                        "color": "#384B65",
-                        "fontFamily": "Montserrat-Bold",
-                        "fontSize": 54,
-                        "lineHeight": 66,
-                        "marginLeft": 30,
+                  <Component>
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "color": "#384B65",
+                          "fontFamily": "Montserrat-Bold",
+                          "fontSize": 54,
+                          "lineHeight": 66,
+                          "marginLeft": 30,
+                        }
                       }
-                    }
-                  >
-                    Your secret phrase
-                  </Text>,
+                    >
+                      Next: generate your
+                    </Text>
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Object {
+                          "color": "#384B65",
+                          "fontFamily": "Montserrat-Bold",
+                          "fontSize": 54,
+                          "lineHeight": 66,
+                          "marginLeft": 30,
+                        }
+                      }
+                    >
+                      secret phrase
+                    </Text>
+                  </Component>,
                 ],
                 "style": Object {
                   "flexDirection": "row",
@@ -1222,20 +1396,86 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "accessible": true,
-                    "allowFontScaling": true,
-                    "children": "Your secret phrase",
-                    "ellipsizeMode": "tail",
-                    "style": Object {
-                      "color": "#384B65",
-                      "fontFamily": "Montserrat-Bold",
-                      "fontSize": 54,
-                      "lineHeight": 66,
-                      "marginLeft": 30,
-                    },
+                    "children": Array [
+                      <Text
+                        accessible={true}
+                        allowFontScaling={true}
+                        ellipsizeMode="tail"
+                        style={
+                          Object {
+                            "color": "#384B65",
+                            "fontFamily": "Montserrat-Bold",
+                            "fontSize": 54,
+                            "lineHeight": 66,
+                            "marginLeft": 30,
+                          }
+                        }
+                      >
+                        Next: generate your
+                      </Text>,
+                      <Text
+                        accessible={true}
+                        allowFontScaling={true}
+                        ellipsizeMode="tail"
+                        style={
+                          Object {
+                            "color": "#384B65",
+                            "fontFamily": "Montserrat-Bold",
+                            "fontSize": 54,
+                            "lineHeight": 66,
+                            "marginLeft": 30,
+                          }
+                        }
+                      >
+                        secret phrase
+                      </Text>,
+                    ],
                   },
                   "ref": null,
-                  "rendered": "Your secret phrase",
+                  "rendered": Array [
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "accessible": true,
+                        "allowFontScaling": true,
+                        "children": "Next: generate your",
+                        "ellipsizeMode": "tail",
+                        "style": Object {
+                          "color": "#384B65",
+                          "fontFamily": "Montserrat-Bold",
+                          "fontSize": 54,
+                          "lineHeight": 66,
+                          "marginLeft": 30,
+                        },
+                      },
+                      "ref": null,
+                      "rendered": "Next: generate your",
+                      "type": [Function],
+                    },
+                    Object {
+                      "instance": null,
+                      "key": undefined,
+                      "nodeType": "class",
+                      "props": Object {
+                        "accessible": true,
+                        "allowFontScaling": true,
+                        "children": "secret phrase",
+                        "ellipsizeMode": "tail",
+                        "style": Object {
+                          "color": "#384B65",
+                          "fontFamily": "Montserrat-Bold",
+                          "fontSize": 54,
+                          "lineHeight": 66,
+                          "marginLeft": 30,
+                        },
+                      },
+                      "ref": null,
+                      "rendered": "secret phrase",
+                      "type": [Function],
+                    },
+                  ],
                   "type": [Function],
                 },
               ],
@@ -1300,7 +1540,7 @@ ShallowWrapper {
                     }
                   }
                 >
-                  It’s your pass code that will allow you to use the app. Please save it somewhere.
+                  You’ll need a secret phrase—a list of 24 words—to access your data. Make sure you save it!
                 </Text>,
                 "style": Object {
                   "marginTop": 90,
@@ -1314,7 +1554,7 @@ ShallowWrapper {
                 "props": Object {
                   "accessible": true,
                   "allowFontScaling": true,
-                  "children": "It’s your pass code that will allow you to use the app. Please save it somewhere.",
+                  "children": "You’ll need a secret phrase—a list of 24 words—to access your data. Make sure you save it!",
                   "ellipsizeMode": "tail",
                   "style": Object {
                     "color": "#384B65",
@@ -1324,7 +1564,7 @@ ShallowWrapper {
                   },
                 },
                 "ref": null,
-                "rendered": "It’s your pass code that will allow you to use the app. Please save it somewhere.",
+                "rendered": "You’ll need a secret phrase—a list of 24 words—to access your data. Make sure you save it!",
                 "type": [Function],
               },
               "type": [Function],
@@ -1335,7 +1575,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "activeOpacity": 0.2,
-                "children": <View
+                "children": <Component
                   style={
                     Object {
                       "alignItems": "center",
@@ -1363,9 +1603,9 @@ ShallowWrapper {
                       }
                     }
                   >
-                    Backup
+                    Generate
                   </Text>
-                </View>,
+                </Component>,
                 "onPress": [Function],
               },
               "ref": null,
@@ -1386,7 +1626,7 @@ ShallowWrapper {
                       }
                     }
                   >
-                    Backup
+                    Generate
                   </Text>,
                   "style": Object {
                     "alignItems": "center",
@@ -1409,7 +1649,7 @@ ShallowWrapper {
                   "props": Object {
                     "accessible": true,
                     "allowFontScaling": true,
-                    "children": "Backup",
+                    "children": "Generate",
                     "ellipsizeMode": "tail",
                     "style": Object {
                       "color": "white",
@@ -1418,7 +1658,7 @@ ShallowWrapper {
                     },
                   },
                   "ref": null,
-                  "rendered": "Backup",
+                  "rendered": "Generate",
                   "type": [Function],
                 },
                 "type": [Function],
@@ -1431,7 +1671,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "activeOpacity": 0.2,
-                "children": <View
+                "children": <Component
                   style={
                     Object {
                       "alignItems": "center",
@@ -1459,7 +1699,7 @@ ShallowWrapper {
                   >
                     Skip
                   </Text>
-                </View>,
+                </Component>,
                 "onPress": [Function],
               },
               "ref": null,

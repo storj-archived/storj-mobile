@@ -18,7 +18,7 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "activeOpacity": 0.2,
-      "children": <View
+      "children": <Component
         style={null}
       />,
       "onPress": [Function],
@@ -53,7 +53,7 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "activeOpacity": 0.2,
-        "children": <View
+        "children": <Component
           style={null}
         />,
         "onPress": [Function],

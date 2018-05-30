@@ -36,19 +36,19 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <View
+        <Component
           style={
             Object {
               "backgroundColor": "transparent",
-              "borderTopColor": "gray",
-              "borderTopWidth": 0,
+              "borderTopColor": "rgba(0, 0, 0, 0.1)",
+              "borderTopWidth": 1,
               "bottom": 0,
               "height": 100,
               "opacity": 0.75,
             }
           }
         >
-          <View
+          <Component
             style={
               Object {
                 "flex": 1,
@@ -63,13 +63,13 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
               }
             >
-              <View>
+              <Component>
                 <Image
                   source="HomeTabBar.png"
                   style={
@@ -85,7 +85,7 @@ ShallowWrapper {
                     ]
                   }
                 />
-              </View>
+              </Component>
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.2}
@@ -93,13 +93,13 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
               }
             >
-              <View>
+              <Component>
                 <Image
                   source="BucketTabBar.png"
                   style={
@@ -110,13 +110,13 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
+              </Component>
             </TouchableOpacity>
-            <View
+            <Component
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
@@ -128,13 +128,13 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
               }
             >
-              <View>
+              <Component>
                 <Image
                   source="MyPhotos.png"
                   style={
@@ -145,7 +145,7 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
+              </Component>
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.2}
@@ -153,13 +153,13 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
               }
             >
-              <View>
+              <Component>
                 <Image
                   source="UserTabBar.png"
                   style={
@@ -170,11 +170,11 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
+              </Component>
             </TouchableOpacity>
-          </View>
-        </View>,
-        <View
+          </Component>
+        </Component>,
+        <Component
           style={
             Object {
               "alignSelf": "center",
@@ -183,11 +183,10 @@ ShallowWrapper {
             }
           }
         >
-          <TouchableOpacity
-            activeOpacity={0.2}
+          <TouchableWithoutFeedback
             onPress={[Function]}
           >
-            <View>
+            <Component>
               <Image
                 resizeMode="contain"
                 source="Ellipse.png"
@@ -198,9 +197,9 @@ ShallowWrapper {
                   }
                 }
               />
-            </View>
-          </TouchableOpacity>
-        </View>,
+            </Component>
+          </TouchableWithoutFeedback>
+        </Component>,
       ],
       "style": Array [
         Object {
@@ -228,7 +227,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
-          "children": <View
+          "children": <Component
             style={
               Object {
                 "flex": 1,
@@ -243,13 +242,13 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
               }
             >
-              <View>
+              <Component>
                 <Image
                   source="HomeTabBar.png"
                   style={
@@ -265,7 +264,7 @@ ShallowWrapper {
                     ]
                   }
                 />
-              </View>
+              </Component>
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.2}
@@ -273,13 +272,13 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
               }
             >
-              <View>
+              <Component>
                 <Image
                   source="BucketTabBar.png"
                   style={
@@ -290,13 +289,13 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
+              </Component>
             </TouchableOpacity>
-            <View
+            <Component
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
@@ -308,13 +307,13 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
               }
             >
-              <View>
+              <Component>
                 <Image
                   source="MyPhotos.png"
                   style={
@@ -325,7 +324,7 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
+              </Component>
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.2}
@@ -333,13 +332,13 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
               }
             >
-              <View>
+              <Component>
                 <Image
                   source="UserTabBar.png"
                   style={
@@ -350,13 +349,13 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
+              </Component>
             </TouchableOpacity>
-          </View>,
+          </Component>,
           "style": Object {
             "backgroundColor": "transparent",
-            "borderTopColor": "gray",
-            "borderTopWidth": 0,
+            "borderTopColor": "rgba(0, 0, 0, 0.1)",
+            "borderTopWidth": 1,
             "bottom": 0,
             "height": 100,
             "opacity": 0.75,
@@ -375,13 +374,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="HomeTabBar.png"
                     style={
@@ -397,7 +396,7 @@ ShallowWrapper {
                       ]
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>,
               <TouchableOpacity
                 activeOpacity={0.2}
@@ -405,13 +404,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="BucketTabBar.png"
                     style={
@@ -422,13 +421,13 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>,
-              <View
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
@@ -440,13 +439,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="MyPhotos.png"
                     style={
@@ -457,7 +456,7 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>,
               <TouchableOpacity
                 activeOpacity={0.2}
@@ -465,13 +464,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="UserTabBar.png"
                     style={
@@ -482,7 +481,7 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>,
             ],
             "style": Object {
@@ -499,7 +498,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "activeOpacity": 0.2,
-                "children": <View>
+                "children": <Component>
                   <Image
                     source="HomeTabBar.png"
                     style={
@@ -515,11 +514,11 @@ ShallowWrapper {
                       ]
                     }
                   />
-                </View>,
+                </Component>,
                 "onPress": [Function],
                 "style": Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 },
@@ -578,7 +577,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "activeOpacity": 0.2,
-                "children": <View>
+                "children": <Component>
                   <Image
                     source="BucketTabBar.png"
                     style={
@@ -589,11 +588,11 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>,
+                </Component>,
                 "onPress": [Function],
                 "style": Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 },
@@ -643,7 +642,7 @@ ShallowWrapper {
               "props": Object {
                 "style": Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 },
@@ -658,7 +657,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "activeOpacity": 0.2,
-                "children": <View>
+                "children": <Component>
                   <Image
                     source="MyPhotos.png"
                     style={
@@ -669,11 +668,11 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>,
+                </Component>,
                 "onPress": [Function],
                 "style": Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 },
@@ -722,7 +721,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "activeOpacity": 0.2,
-                "children": <View>
+                "children": <Component>
                   <Image
                     source="UserTabBar.png"
                     style={
@@ -733,11 +732,11 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>,
+                </Component>,
                 "onPress": [Function],
                 "style": Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 },
@@ -790,11 +789,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
-          "children": <TouchableOpacity
-            activeOpacity={0.2}
+          "children": <TouchableWithoutFeedback
             onPress={[Function]}
           >
-            <View>
+            <Component>
               <Image
                 resizeMode="contain"
                 source="Ellipse.png"
@@ -805,8 +803,8 @@ ShallowWrapper {
                   }
                 }
               />
-            </View>
-          </TouchableOpacity>,
+            </Component>
+          </TouchableWithoutFeedback>,
           "style": Object {
             "alignSelf": "center",
             "bottom": 10,
@@ -819,8 +817,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "activeOpacity": 0.2,
-            "children": <View>
+            "children": <Component>
               <Image
                 resizeMode="contain"
                 source="Ellipse.png"
@@ -831,7 +828,7 @@ ShallowWrapper {
                   }
                 }
               />
-            </View>,
+            </Component>,
             "onPress": [Function],
           },
           "ref": null,
@@ -884,19 +881,19 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <View
+          <Component
             style={
               Object {
                 "backgroundColor": "transparent",
-                "borderTopColor": "gray",
-                "borderTopWidth": 0,
+                "borderTopColor": "rgba(0, 0, 0, 0.1)",
+                "borderTopWidth": 1,
                 "bottom": 0,
                 "height": 100,
                 "opacity": 0.75,
               }
             }
           >
-            <View
+            <Component
               style={
                 Object {
                   "flex": 1,
@@ -911,13 +908,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="HomeTabBar.png"
                     style={
@@ -933,7 +930,7 @@ ShallowWrapper {
                       ]
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.2}
@@ -941,13 +938,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="BucketTabBar.png"
                     style={
@@ -958,13 +955,13 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>
-              <View
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
@@ -976,13 +973,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="MyPhotos.png"
                     style={
@@ -993,7 +990,7 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.2}
@@ -1001,13 +998,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="UserTabBar.png"
                     style={
@@ -1018,11 +1015,11 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>
-            </View>
-          </View>,
-          <View
+            </Component>
+          </Component>,
+          <Component
             style={
               Object {
                 "alignSelf": "center",
@@ -1031,11 +1028,10 @@ ShallowWrapper {
               }
             }
           >
-            <TouchableOpacity
-              activeOpacity={0.2}
+            <TouchableWithoutFeedback
               onPress={[Function]}
             >
-              <View>
+              <Component>
                 <Image
                   resizeMode="contain"
                   source="Ellipse.png"
@@ -1046,9 +1042,9 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
-            </TouchableOpacity>
-          </View>,
+              </Component>
+            </TouchableWithoutFeedback>
+          </Component>,
         ],
         "style": Array [
           Object {
@@ -1076,7 +1072,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "children": <View
+            "children": <Component
               style={
                 Object {
                   "flex": 1,
@@ -1091,13 +1087,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="HomeTabBar.png"
                     style={
@@ -1113,7 +1109,7 @@ ShallowWrapper {
                       ]
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.2}
@@ -1121,13 +1117,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="BucketTabBar.png"
                     style={
@@ -1138,13 +1134,13 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>
-              <View
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
@@ -1156,13 +1152,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="MyPhotos.png"
                     style={
@@ -1173,7 +1169,7 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.2}
@@ -1181,13 +1177,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="UserTabBar.png"
                     style={
@@ -1198,13 +1194,13 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>
-            </View>,
+            </Component>,
             "style": Object {
               "backgroundColor": "transparent",
-              "borderTopColor": "gray",
-              "borderTopWidth": 0,
+              "borderTopColor": "rgba(0, 0, 0, 0.1)",
+              "borderTopWidth": 1,
               "bottom": 0,
               "height": 100,
               "opacity": 0.75,
@@ -1223,13 +1219,13 @@ ShallowWrapper {
                   style={
                     Object {
                       "alignItems": "center",
-                      "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                      "backgroundColor": "rgba(255, 255, 255, 0.96)",
                       "flex": 20,
                       "justifyContent": "center",
                     }
                   }
                 >
-                  <View>
+                  <Component>
                     <Image
                       source="HomeTabBar.png"
                       style={
@@ -1245,7 +1241,7 @@ ShallowWrapper {
                         ]
                       }
                     />
-                  </View>
+                  </Component>
                 </TouchableOpacity>,
                 <TouchableOpacity
                   activeOpacity={0.2}
@@ -1253,13 +1249,13 @@ ShallowWrapper {
                   style={
                     Object {
                       "alignItems": "center",
-                      "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                      "backgroundColor": "rgba(255, 255, 255, 0.96)",
                       "flex": 20,
                       "justifyContent": "center",
                     }
                   }
                 >
-                  <View>
+                  <Component>
                     <Image
                       source="BucketTabBar.png"
                       style={
@@ -1270,13 +1266,13 @@ ShallowWrapper {
                         }
                       }
                     />
-                  </View>
+                  </Component>
                 </TouchableOpacity>,
-                <View
+                <Component
                   style={
                     Object {
                       "alignItems": "center",
-                      "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                      "backgroundColor": "rgba(255, 255, 255, 0.96)",
                       "flex": 20,
                       "justifyContent": "center",
                     }
@@ -1288,13 +1284,13 @@ ShallowWrapper {
                   style={
                     Object {
                       "alignItems": "center",
-                      "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                      "backgroundColor": "rgba(255, 255, 255, 0.96)",
                       "flex": 20,
                       "justifyContent": "center",
                     }
                   }
                 >
-                  <View>
+                  <Component>
                     <Image
                       source="MyPhotos.png"
                       style={
@@ -1305,7 +1301,7 @@ ShallowWrapper {
                         }
                       }
                     />
-                  </View>
+                  </Component>
                 </TouchableOpacity>,
                 <TouchableOpacity
                   activeOpacity={0.2}
@@ -1313,13 +1309,13 @@ ShallowWrapper {
                   style={
                     Object {
                       "alignItems": "center",
-                      "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                      "backgroundColor": "rgba(255, 255, 255, 0.96)",
                       "flex": 20,
                       "justifyContent": "center",
                     }
                   }
                 >
-                  <View>
+                  <Component>
                     <Image
                       source="UserTabBar.png"
                       style={
@@ -1330,7 +1326,7 @@ ShallowWrapper {
                         }
                       }
                     />
-                  </View>
+                  </Component>
                 </TouchableOpacity>,
               ],
               "style": Object {
@@ -1347,7 +1343,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "activeOpacity": 0.2,
-                  "children": <View>
+                  "children": <Component>
                     <Image
                       source="HomeTabBar.png"
                       style={
@@ -1363,11 +1359,11 @@ ShallowWrapper {
                         ]
                       }
                     />
-                  </View>,
+                  </Component>,
                   "onPress": [Function],
                   "style": Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   },
@@ -1426,7 +1422,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "activeOpacity": 0.2,
-                  "children": <View>
+                  "children": <Component>
                     <Image
                       source="BucketTabBar.png"
                       style={
@@ -1437,11 +1433,11 @@ ShallowWrapper {
                         }
                       }
                     />
-                  </View>,
+                  </Component>,
                   "onPress": [Function],
                   "style": Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   },
@@ -1491,7 +1487,7 @@ ShallowWrapper {
                 "props": Object {
                   "style": Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   },
@@ -1506,7 +1502,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "activeOpacity": 0.2,
-                  "children": <View>
+                  "children": <Component>
                     <Image
                       source="MyPhotos.png"
                       style={
@@ -1517,11 +1513,11 @@ ShallowWrapper {
                         }
                       }
                     />
-                  </View>,
+                  </Component>,
                   "onPress": [Function],
                   "style": Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   },
@@ -1570,7 +1566,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "activeOpacity": 0.2,
-                  "children": <View>
+                  "children": <Component>
                     <Image
                       source="UserTabBar.png"
                       style={
@@ -1581,11 +1577,11 @@ ShallowWrapper {
                         }
                       }
                     />
-                  </View>,
+                  </Component>,
                   "onPress": [Function],
                   "style": Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   },
@@ -1638,11 +1634,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "children": <TouchableOpacity
-              activeOpacity={0.2}
+            "children": <TouchableWithoutFeedback
               onPress={[Function]}
             >
-              <View>
+              <Component>
                 <Image
                   resizeMode="contain"
                   source="Ellipse.png"
@@ -1653,8 +1648,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
-            </TouchableOpacity>,
+              </Component>
+            </TouchableWithoutFeedback>,
             "style": Object {
               "alignSelf": "center",
               "bottom": 10,
@@ -1667,8 +1662,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "activeOpacity": 0.2,
-              "children": <View>
+              "children": <Component>
                 <Image
                   resizeMode="contain"
                   source="Ellipse.png"
@@ -1679,7 +1673,7 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>,
+              </Component>,
               "onPress": [Function],
             },
             "ref": null,
@@ -1772,19 +1766,19 @@ ShallowWrapper {
     "nodeType": "class",
     "props": Object {
       "children": Array [
-        <View
+        <Component
           style={
             Object {
               "backgroundColor": "transparent",
-              "borderTopColor": "gray",
-              "borderTopWidth": 0,
+              "borderTopColor": "rgba(0, 0, 0, 0.1)",
+              "borderTopWidth": 1,
               "bottom": 0,
               "height": 100,
               "opacity": 0.75,
             }
           }
         >
-          <View
+          <Component
             style={
               Object {
                 "flex": 1,
@@ -1799,13 +1793,13 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
               }
             >
-              <View>
+              <Component>
                 <Image
                   source="HomeTabBar.png"
                   style={
@@ -1821,7 +1815,7 @@ ShallowWrapper {
                     ]
                   }
                 />
-              </View>
+              </Component>
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.2}
@@ -1829,13 +1823,13 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
               }
             >
-              <View>
+              <Component>
                 <Image
                   source="BucketTabBar.png"
                   style={
@@ -1846,13 +1840,13 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
+              </Component>
             </TouchableOpacity>
-            <View
+            <Component
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
@@ -1864,13 +1858,13 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
               }
             >
-              <View>
+              <Component>
                 <Image
                   source="MyPhotos.png"
                   style={
@@ -1881,7 +1875,7 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
+              </Component>
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.2}
@@ -1889,13 +1883,13 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
               }
             >
-              <View>
+              <Component>
                 <Image
                   source="UserTabBar.png"
                   style={
@@ -1906,11 +1900,11 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
+              </Component>
             </TouchableOpacity>
-          </View>
-        </View>,
-        <View
+          </Component>
+        </Component>,
+        <Component
           style={
             Object {
               "alignSelf": "center",
@@ -1919,11 +1913,10 @@ ShallowWrapper {
             }
           }
         >
-          <TouchableOpacity
-            activeOpacity={0.2}
+          <TouchableWithoutFeedback
             onPress={[Function]}
           >
-            <View>
+            <Component>
               <Image
                 resizeMode="contain"
                 source="EllipseCancel.png"
@@ -1934,9 +1927,9 @@ ShallowWrapper {
                   }
                 }
               />
-            </View>
-          </TouchableOpacity>
-        </View>,
+            </Component>
+          </TouchableWithoutFeedback>
+        </Component>,
       ],
       "style": Array [
         Object {
@@ -1964,7 +1957,7 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
-          "children": <View
+          "children": <Component
             style={
               Object {
                 "flex": 1,
@@ -1979,13 +1972,13 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
               }
             >
-              <View>
+              <Component>
                 <Image
                   source="HomeTabBar.png"
                   style={
@@ -2001,7 +1994,7 @@ ShallowWrapper {
                     ]
                   }
                 />
-              </View>
+              </Component>
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.2}
@@ -2009,13 +2002,13 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
               }
             >
-              <View>
+              <Component>
                 <Image
                   source="BucketTabBar.png"
                   style={
@@ -2026,13 +2019,13 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
+              </Component>
             </TouchableOpacity>
-            <View
+            <Component
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
@@ -2044,13 +2037,13 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
               }
             >
-              <View>
+              <Component>
                 <Image
                   source="MyPhotos.png"
                   style={
@@ -2061,7 +2054,7 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
+              </Component>
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.2}
@@ -2069,13 +2062,13 @@ ShallowWrapper {
               style={
                 Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 }
               }
             >
-              <View>
+              <Component>
                 <Image
                   source="UserTabBar.png"
                   style={
@@ -2086,13 +2079,13 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
+              </Component>
             </TouchableOpacity>
-          </View>,
+          </Component>,
           "style": Object {
             "backgroundColor": "transparent",
-            "borderTopColor": "gray",
-            "borderTopWidth": 0,
+            "borderTopColor": "rgba(0, 0, 0, 0.1)",
+            "borderTopWidth": 1,
             "bottom": 0,
             "height": 100,
             "opacity": 0.75,
@@ -2111,13 +2104,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="HomeTabBar.png"
                     style={
@@ -2133,7 +2126,7 @@ ShallowWrapper {
                       ]
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>,
               <TouchableOpacity
                 activeOpacity={0.2}
@@ -2141,13 +2134,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="BucketTabBar.png"
                     style={
@@ -2158,13 +2151,13 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>,
-              <View
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
@@ -2176,13 +2169,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="MyPhotos.png"
                     style={
@@ -2193,7 +2186,7 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>,
               <TouchableOpacity
                 activeOpacity={0.2}
@@ -2201,13 +2194,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="UserTabBar.png"
                     style={
@@ -2218,7 +2211,7 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>,
             ],
             "style": Object {
@@ -2235,7 +2228,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "activeOpacity": 0.2,
-                "children": <View>
+                "children": <Component>
                   <Image
                     source="HomeTabBar.png"
                     style={
@@ -2251,11 +2244,11 @@ ShallowWrapper {
                       ]
                     }
                   />
-                </View>,
+                </Component>,
                 "onPress": [Function],
                 "style": Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 },
@@ -2314,7 +2307,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "activeOpacity": 0.2,
-                "children": <View>
+                "children": <Component>
                   <Image
                     source="BucketTabBar.png"
                     style={
@@ -2325,11 +2318,11 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>,
+                </Component>,
                 "onPress": [Function],
                 "style": Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 },
@@ -2379,7 +2372,7 @@ ShallowWrapper {
               "props": Object {
                 "style": Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 },
@@ -2394,7 +2387,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "activeOpacity": 0.2,
-                "children": <View>
+                "children": <Component>
                   <Image
                     source="MyPhotos.png"
                     style={
@@ -2405,11 +2398,11 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>,
+                </Component>,
                 "onPress": [Function],
                 "style": Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 },
@@ -2458,7 +2451,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "activeOpacity": 0.2,
-                "children": <View>
+                "children": <Component>
                   <Image
                     source="UserTabBar.png"
                     style={
@@ -2469,11 +2462,11 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>,
+                </Component>,
                 "onPress": [Function],
                 "style": Object {
                   "alignItems": "center",
-                  "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                  "backgroundColor": "rgba(255, 255, 255, 0.96)",
                   "flex": 20,
                   "justifyContent": "center",
                 },
@@ -2526,11 +2519,10 @@ ShallowWrapper {
         "key": undefined,
         "nodeType": "class",
         "props": Object {
-          "children": <TouchableOpacity
-            activeOpacity={0.2}
+          "children": <TouchableWithoutFeedback
             onPress={[Function]}
           >
-            <View>
+            <Component>
               <Image
                 resizeMode="contain"
                 source="EllipseCancel.png"
@@ -2541,8 +2533,8 @@ ShallowWrapper {
                   }
                 }
               />
-            </View>
-          </TouchableOpacity>,
+            </Component>
+          </TouchableWithoutFeedback>,
           "style": Object {
             "alignSelf": "center",
             "bottom": 10,
@@ -2555,8 +2547,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "activeOpacity": 0.2,
-            "children": <View>
+            "children": <Component>
               <Image
                 resizeMode="contain"
                 source="EllipseCancel.png"
@@ -2567,7 +2558,7 @@ ShallowWrapper {
                   }
                 }
               />
-            </View>,
+            </Component>,
             "onPress": [Function],
           },
           "ref": null,
@@ -2620,19 +2611,19 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <View
+          <Component
             style={
               Object {
                 "backgroundColor": "transparent",
-                "borderTopColor": "gray",
-                "borderTopWidth": 0,
+                "borderTopColor": "rgba(0, 0, 0, 0.1)",
+                "borderTopWidth": 1,
                 "bottom": 0,
                 "height": 100,
                 "opacity": 0.75,
               }
             }
           >
-            <View
+            <Component
               style={
                 Object {
                   "flex": 1,
@@ -2647,13 +2638,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="HomeTabBar.png"
                     style={
@@ -2669,7 +2660,7 @@ ShallowWrapper {
                       ]
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.2}
@@ -2677,13 +2668,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="BucketTabBar.png"
                     style={
@@ -2694,13 +2685,13 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>
-              <View
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
@@ -2712,13 +2703,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="MyPhotos.png"
                     style={
@@ -2729,7 +2720,7 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.2}
@@ -2737,13 +2728,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="UserTabBar.png"
                     style={
@@ -2754,11 +2745,11 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>
-            </View>
-          </View>,
-          <View
+            </Component>
+          </Component>,
+          <Component
             style={
               Object {
                 "alignSelf": "center",
@@ -2767,11 +2758,10 @@ ShallowWrapper {
               }
             }
           >
-            <TouchableOpacity
-              activeOpacity={0.2}
+            <TouchableWithoutFeedback
               onPress={[Function]}
             >
-              <View>
+              <Component>
                 <Image
                   resizeMode="contain"
                   source="EllipseCancel.png"
@@ -2782,9 +2772,9 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
-            </TouchableOpacity>
-          </View>,
+              </Component>
+            </TouchableWithoutFeedback>
+          </Component>,
         ],
         "style": Array [
           Object {
@@ -2812,7 +2802,7 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "children": <View
+            "children": <Component
               style={
                 Object {
                   "flex": 1,
@@ -2827,13 +2817,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="HomeTabBar.png"
                     style={
@@ -2849,7 +2839,7 @@ ShallowWrapper {
                       ]
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.2}
@@ -2857,13 +2847,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="BucketTabBar.png"
                     style={
@@ -2874,13 +2864,13 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>
-              <View
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
@@ -2892,13 +2882,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="MyPhotos.png"
                     style={
@@ -2909,7 +2899,7 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.2}
@@ -2917,13 +2907,13 @@ ShallowWrapper {
                 style={
                   Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   }
                 }
               >
-                <View>
+                <Component>
                   <Image
                     source="UserTabBar.png"
                     style={
@@ -2934,13 +2924,13 @@ ShallowWrapper {
                       }
                     }
                   />
-                </View>
+                </Component>
               </TouchableOpacity>
-            </View>,
+            </Component>,
             "style": Object {
               "backgroundColor": "transparent",
-              "borderTopColor": "gray",
-              "borderTopWidth": 0,
+              "borderTopColor": "rgba(0, 0, 0, 0.1)",
+              "borderTopWidth": 1,
               "bottom": 0,
               "height": 100,
               "opacity": 0.75,
@@ -2959,13 +2949,13 @@ ShallowWrapper {
                   style={
                     Object {
                       "alignItems": "center",
-                      "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                      "backgroundColor": "rgba(255, 255, 255, 0.96)",
                       "flex": 20,
                       "justifyContent": "center",
                     }
                   }
                 >
-                  <View>
+                  <Component>
                     <Image
                       source="HomeTabBar.png"
                       style={
@@ -2981,7 +2971,7 @@ ShallowWrapper {
                         ]
                       }
                     />
-                  </View>
+                  </Component>
                 </TouchableOpacity>,
                 <TouchableOpacity
                   activeOpacity={0.2}
@@ -2989,13 +2979,13 @@ ShallowWrapper {
                   style={
                     Object {
                       "alignItems": "center",
-                      "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                      "backgroundColor": "rgba(255, 255, 255, 0.96)",
                       "flex": 20,
                       "justifyContent": "center",
                     }
                   }
                 >
-                  <View>
+                  <Component>
                     <Image
                       source="BucketTabBar.png"
                       style={
@@ -3006,13 +2996,13 @@ ShallowWrapper {
                         }
                       }
                     />
-                  </View>
+                  </Component>
                 </TouchableOpacity>,
-                <View
+                <Component
                   style={
                     Object {
                       "alignItems": "center",
-                      "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                      "backgroundColor": "rgba(255, 255, 255, 0.96)",
                       "flex": 20,
                       "justifyContent": "center",
                     }
@@ -3024,13 +3014,13 @@ ShallowWrapper {
                   style={
                     Object {
                       "alignItems": "center",
-                      "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                      "backgroundColor": "rgba(255, 255, 255, 0.96)",
                       "flex": 20,
                       "justifyContent": "center",
                     }
                   }
                 >
-                  <View>
+                  <Component>
                     <Image
                       source="MyPhotos.png"
                       style={
@@ -3041,7 +3031,7 @@ ShallowWrapper {
                         }
                       }
                     />
-                  </View>
+                  </Component>
                 </TouchableOpacity>,
                 <TouchableOpacity
                   activeOpacity={0.2}
@@ -3049,13 +3039,13 @@ ShallowWrapper {
                   style={
                     Object {
                       "alignItems": "center",
-                      "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                      "backgroundColor": "rgba(255, 255, 255, 0.96)",
                       "flex": 20,
                       "justifyContent": "center",
                     }
                   }
                 >
-                  <View>
+                  <Component>
                     <Image
                       source="UserTabBar.png"
                       style={
@@ -3066,7 +3056,7 @@ ShallowWrapper {
                         }
                       }
                     />
-                  </View>
+                  </Component>
                 </TouchableOpacity>,
               ],
               "style": Object {
@@ -3083,7 +3073,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "activeOpacity": 0.2,
-                  "children": <View>
+                  "children": <Component>
                     <Image
                       source="HomeTabBar.png"
                       style={
@@ -3099,11 +3089,11 @@ ShallowWrapper {
                         ]
                       }
                     />
-                  </View>,
+                  </Component>,
                   "onPress": [Function],
                   "style": Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   },
@@ -3162,7 +3152,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "activeOpacity": 0.2,
-                  "children": <View>
+                  "children": <Component>
                     <Image
                       source="BucketTabBar.png"
                       style={
@@ -3173,11 +3163,11 @@ ShallowWrapper {
                         }
                       }
                     />
-                  </View>,
+                  </Component>,
                   "onPress": [Function],
                   "style": Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   },
@@ -3227,7 +3217,7 @@ ShallowWrapper {
                 "props": Object {
                   "style": Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   },
@@ -3242,7 +3232,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "activeOpacity": 0.2,
-                  "children": <View>
+                  "children": <Component>
                     <Image
                       source="MyPhotos.png"
                       style={
@@ -3253,11 +3243,11 @@ ShallowWrapper {
                         }
                       }
                     />
-                  </View>,
+                  </Component>,
                   "onPress": [Function],
                   "style": Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   },
@@ -3306,7 +3296,7 @@ ShallowWrapper {
                 "nodeType": "class",
                 "props": Object {
                   "activeOpacity": 0.2,
-                  "children": <View>
+                  "children": <Component>
                     <Image
                       source="UserTabBar.png"
                       style={
@@ -3317,11 +3307,11 @@ ShallowWrapper {
                         }
                       }
                     />
-                  </View>,
+                  </Component>,
                   "onPress": [Function],
                   "style": Object {
                     "alignItems": "center",
-                    "backgroundColor": "rgba(255, 255, 255, 0.3)",
+                    "backgroundColor": "rgba(255, 255, 255, 0.96)",
                     "flex": 20,
                     "justifyContent": "center",
                   },
@@ -3374,11 +3364,10 @@ ShallowWrapper {
           "key": undefined,
           "nodeType": "class",
           "props": Object {
-            "children": <TouchableOpacity
-              activeOpacity={0.2}
+            "children": <TouchableWithoutFeedback
               onPress={[Function]}
             >
-              <View>
+              <Component>
                 <Image
                   resizeMode="contain"
                   source="EllipseCancel.png"
@@ -3389,8 +3378,8 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>
-            </TouchableOpacity>,
+              </Component>
+            </TouchableWithoutFeedback>,
             "style": Object {
               "alignSelf": "center",
               "bottom": 10,
@@ -3403,8 +3392,7 @@ ShallowWrapper {
             "key": undefined,
             "nodeType": "class",
             "props": Object {
-              "activeOpacity": 0.2,
-              "children": <View>
+              "children": <Component>
                 <Image
                   resizeMode="contain"
                   source="EllipseCancel.png"
@@ -3415,7 +3403,7 @@ ShallowWrapper {
                     }
                   }
                 />
-              </View>,
+              </Component>,
               "onPress": [Function],
             },
             "ref": null,

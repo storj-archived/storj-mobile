@@ -21,7 +21,8 @@ describe('LoginContainer', ()=> {
 
 		const mockedStore = mockStore(initialState);
 		const wrapper = shallow(
-			<LoginContainer />,
+			<LoginContainer	
+				screenProps = {{ redirectToMnemonicHelpScreen: () => {}}} />,
 			{ context: { store: mockedStore } }
 		);
 
@@ -33,7 +34,8 @@ describe('LoginContainer', ()=> {
 		const storeSpy = sinon.spy(mockedStore, 'dispatch');
 
 		const wrapper = shallow(
-			<LoginContainer />,
+			<LoginContainer 
+				screenProps = {{ redirectToMnemonicHelpScreen: () => {}}} />,
 			{ context: { store: mockedStore } }
 		);
 
@@ -49,7 +51,8 @@ describe('LoginContainer', ()=> {
 	it('triggers setState on onChangeEmailInput', () => {
 		const mockedStore = mockStore(initialState);
 		const wrapper = shallow(
-			<LoginContainer />,
+			<LoginContainer 
+				screenProps = {{ redirectToMnemonicHelpScreen: () => {}}} />,
 			{ context: { store: mockedStore } }
 		);
 
@@ -64,7 +67,8 @@ describe('LoginContainer', ()=> {
 	it('triggers setState on onChangePasswordInput', () => {
 		const mockedStore = mockStore(initialState);
 		const wrapper = shallow(
-			<LoginContainer />,
+			<LoginContainer 
+				screenProps = {{ redirectToMnemonicHelpScreen: () => {}}} />,
 			{ context: { store: mockedStore } }
 		);
 
@@ -79,7 +83,8 @@ describe('LoginContainer', ()=> {
 	it('triggers navigateToRegisterScreen on redirectToRegisterScreen', () => {
 		const mockedStore = mockStore(initialState);
 		const wrapper = shallow(
-			<LoginContainer />,
+			<LoginContainer 
+				screenProps = {{ redirectToMnemonicHelpScreen: () => {}}} />,
 			{ context: { store: mockedStore } }
 		);
 
@@ -94,7 +99,8 @@ describe('LoginContainer', ()=> {
 	it('triggers setState on ChangePassword', () => {
 		const mockedStore = mockStore(initialState);
         const wrapper = shallow(
-            <LoginContainer />,
+			<LoginContainer 
+				screenProps = {{ redirectToMnemonicHelpScreen: () => {}}} />,
             { context: { store: mockedStore } }
         );
         const newPass = 'newPassword';
@@ -113,7 +119,8 @@ describe('LoginContainer', ()=> {
 		const mockedStore = mockStore(initialState);
 		
         const wrapper = shallow(
-            <LoginContainer />,
+            <LoginContainer 
+				screenProps = {{ redirectToMnemonicHelpScreen: () => {}}} />,
             { context: { store: mockedStore } }
         );
 

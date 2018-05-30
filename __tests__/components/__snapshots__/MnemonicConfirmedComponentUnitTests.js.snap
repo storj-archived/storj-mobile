@@ -17,14 +17,14 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "class",
     "props": Object {
-      "children": <View
+      "children": <Component
         style={
           Object {
             "paddingHorizontal": 40,
           }
         }
       >
-        <View
+        <Component
           style={
             Object {
               "flexDirection": "row",
@@ -47,10 +47,33 @@ ShallowWrapper {
               }
             }
           >
-            Secret phrase backup confirmed
+            Success!
           </Text>
-        </View>
-        <View
+        </Component>
+        <Component
+          style={
+            Object {
+              "marginTop": 10,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#384B65",
+                "fontFamily": "Montserrat-Regular",
+                "fontSize": 32,
+                "lineHeight": 46,
+              }
+            }
+          >
+            You’re ready to sign in and start using Storj!
+          </Text>
+        </Component>
+        <Component
           style={
             Object {
               "alignItems": "center",
@@ -70,12 +93,12 @@ ShallowWrapper {
               }
             }
           />
-        </View>
+        </Component>
         <TouchableOpacity
           activeOpacity={0.2}
           onPress={[Function]}
         >
-          <View
+          <Component
             style={
               Object {
                 "alignItems": "center",
@@ -86,7 +109,7 @@ ShallowWrapper {
                 "borderWidth": 3,
                 "height": 100,
                 "justifyContent": "center",
-                "marginTop": 260,
+                "marginTop": 240,
                 "width": 670,
               }
             }
@@ -103,11 +126,11 @@ ShallowWrapper {
                 }
               }
             >
-              Login
+              Sign in
             </Text>
-          </View>
+          </Component>
         </TouchableOpacity>
-      </View>,
+      </Component>,
       "style": Object {
         "backgroundColor": "#FFFFFF",
         "flex": 1,
@@ -120,7 +143,7 @@ ShallowWrapper {
       "nodeType": "class",
       "props": Object {
         "children": Array [
-          <View
+          <Component
             style={
               Object {
                 "flexDirection": "row",
@@ -143,10 +166,33 @@ ShallowWrapper {
                 }
               }
             >
-              Secret phrase backup confirmed
+              Success!
             </Text>
-          </View>,
-          <View
+          </Component>,
+          <Component
+            style={
+              Object {
+                "marginTop": 10,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#384B65",
+                  "fontFamily": "Montserrat-Regular",
+                  "fontSize": 32,
+                  "lineHeight": 46,
+                }
+              }
+            >
+              You’re ready to sign in and start using Storj!
+            </Text>
+          </Component>,
+          <Component
             style={
               Object {
                 "alignItems": "center",
@@ -166,12 +212,12 @@ ShallowWrapper {
                 }
               }
             />
-          </View>,
+          </Component>,
           <TouchableOpacity
             activeOpacity={0.2}
             onPress={[Function]}
           >
-            <View
+            <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -182,7 +228,7 @@ ShallowWrapper {
                   "borderWidth": 3,
                   "height": 100,
                   "justifyContent": "center",
-                  "marginTop": 260,
+                  "marginTop": 240,
                   "width": 670,
                 }
               }
@@ -199,9 +245,9 @@ ShallowWrapper {
                   }
                 }
               >
-                Login
+                Sign in
               </Text>
-            </View>
+            </Component>
           </TouchableOpacity>,
         ],
         "style": Object {
@@ -229,7 +275,7 @@ ShallowWrapper {
                 }
               }
             >
-              Secret phrase backup confirmed
+              Success!
             </Text>,
             "style": Object {
               "flexDirection": "row",
@@ -245,7 +291,7 @@ ShallowWrapper {
             "props": Object {
               "accessible": true,
               "allowFontScaling": true,
-              "children": "Secret phrase backup confirmed",
+              "children": "Success!",
               "ellipsizeMode": "tail",
               "style": Object {
                 "color": "#384B65",
@@ -256,7 +302,54 @@ ShallowWrapper {
               },
             },
             "ref": null,
-            "rendered": "Secret phrase backup confirmed",
+            "rendered": "Success!",
+            "type": [Function],
+          },
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#384B65",
+                  "fontFamily": "Montserrat-Regular",
+                  "fontSize": 32,
+                  "lineHeight": 46,
+                }
+              }
+            >
+              You’re ready to sign in and start using Storj!
+            </Text>,
+            "style": Object {
+              "marginTop": 10,
+            },
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "accessible": true,
+              "allowFontScaling": true,
+              "children": "You’re ready to sign in and start using Storj!",
+              "ellipsizeMode": "tail",
+              "style": Object {
+                "color": "#384B65",
+                "fontFamily": "Montserrat-Regular",
+                "fontSize": 32,
+                "lineHeight": 46,
+              },
+            },
+            "ref": null,
+            "rendered": "You’re ready to sign in and start using Storj!",
             "type": [Function],
           },
           "type": [Function],
@@ -308,7 +401,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "activeOpacity": 0.2,
-            "children": <View
+            "children": <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -319,7 +412,7 @@ ShallowWrapper {
                   "borderWidth": 3,
                   "height": 100,
                   "justifyContent": "center",
-                  "marginTop": 260,
+                  "marginTop": 240,
                   "width": 670,
                 }
               }
@@ -336,9 +429,9 @@ ShallowWrapper {
                   }
                 }
               >
-                Login
+                Sign in
               </Text>
-            </View>,
+            </Component>,
             "onPress": [Function],
           },
           "ref": null,
@@ -359,7 +452,7 @@ ShallowWrapper {
                   }
                 }
               >
-                Login
+                Sign in
               </Text>,
               "style": Object {
                 "alignItems": "center",
@@ -370,7 +463,7 @@ ShallowWrapper {
                 "borderWidth": 3,
                 "height": 100,
                 "justifyContent": "center",
-                "marginTop": 260,
+                "marginTop": 240,
                 "width": 670,
               },
             },
@@ -382,7 +475,7 @@ ShallowWrapper {
               "props": Object {
                 "accessible": true,
                 "allowFontScaling": true,
-                "children": "Login",
+                "children": "Sign in",
                 "ellipsizeMode": "tail",
                 "style": Object {
                   "color": "white",
@@ -391,7 +484,7 @@ ShallowWrapper {
                 },
               },
               "ref": null,
-              "rendered": "Login",
+              "rendered": "Sign in",
               "type": [Function],
             },
             "type": [Function],
@@ -409,14 +502,14 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "class",
       "props": Object {
-        "children": <View
+        "children": <Component
           style={
             Object {
               "paddingHorizontal": 40,
             }
           }
         >
-          <View
+          <Component
             style={
               Object {
                 "flexDirection": "row",
@@ -439,10 +532,33 @@ ShallowWrapper {
                 }
               }
             >
-              Secret phrase backup confirmed
+              Success!
             </Text>
-          </View>
-          <View
+          </Component>
+          <Component
+            style={
+              Object {
+                "marginTop": 10,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#384B65",
+                  "fontFamily": "Montserrat-Regular",
+                  "fontSize": 32,
+                  "lineHeight": 46,
+                }
+              }
+            >
+              You’re ready to sign in and start using Storj!
+            </Text>
+          </Component>
+          <Component
             style={
               Object {
                 "alignItems": "center",
@@ -462,12 +578,12 @@ ShallowWrapper {
                 }
               }
             />
-          </View>
+          </Component>
           <TouchableOpacity
             activeOpacity={0.2}
             onPress={[Function]}
           >
-            <View
+            <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -478,7 +594,7 @@ ShallowWrapper {
                   "borderWidth": 3,
                   "height": 100,
                   "justifyContent": "center",
-                  "marginTop": 260,
+                  "marginTop": 240,
                   "width": 670,
                 }
               }
@@ -495,11 +611,11 @@ ShallowWrapper {
                   }
                 }
               >
-                Login
+                Sign in
               </Text>
-            </View>
+            </Component>
           </TouchableOpacity>
-        </View>,
+        </Component>,
         "style": Object {
           "backgroundColor": "#FFFFFF",
           "flex": 1,
@@ -512,7 +628,7 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <View
+            <Component
               style={
                 Object {
                   "flexDirection": "row",
@@ -535,10 +651,33 @@ ShallowWrapper {
                   }
                 }
               >
-                Secret phrase backup confirmed
+                Success!
               </Text>
-            </View>,
-            <View
+            </Component>,
+            <Component
+              style={
+                Object {
+                  "marginTop": 10,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#384B65",
+                    "fontFamily": "Montserrat-Regular",
+                    "fontSize": 32,
+                    "lineHeight": 46,
+                  }
+                }
+              >
+                You’re ready to sign in and start using Storj!
+              </Text>
+            </Component>,
+            <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -558,12 +697,12 @@ ShallowWrapper {
                   }
                 }
               />
-            </View>,
+            </Component>,
             <TouchableOpacity
               activeOpacity={0.2}
               onPress={[Function]}
             >
-              <View
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -574,7 +713,7 @@ ShallowWrapper {
                     "borderWidth": 3,
                     "height": 100,
                     "justifyContent": "center",
-                    "marginTop": 260,
+                    "marginTop": 240,
                     "width": 670,
                   }
                 }
@@ -591,9 +730,9 @@ ShallowWrapper {
                     }
                   }
                 >
-                  Login
+                  Sign in
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>,
           ],
           "style": Object {
@@ -621,7 +760,7 @@ ShallowWrapper {
                   }
                 }
               >
-                Secret phrase backup confirmed
+                Success!
               </Text>,
               "style": Object {
                 "flexDirection": "row",
@@ -637,7 +776,7 @@ ShallowWrapper {
               "props": Object {
                 "accessible": true,
                 "allowFontScaling": true,
-                "children": "Secret phrase backup confirmed",
+                "children": "Success!",
                 "ellipsizeMode": "tail",
                 "style": Object {
                   "color": "#384B65",
@@ -648,7 +787,54 @@ ShallowWrapper {
                 },
               },
               "ref": null,
-              "rendered": "Secret phrase backup confirmed",
+              "rendered": "Success!",
+              "type": [Function],
+            },
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#384B65",
+                    "fontFamily": "Montserrat-Regular",
+                    "fontSize": 32,
+                    "lineHeight": 46,
+                  }
+                }
+              >
+                You’re ready to sign in and start using Storj!
+              </Text>,
+              "style": Object {
+                "marginTop": 10,
+              },
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "accessible": true,
+                "allowFontScaling": true,
+                "children": "You’re ready to sign in and start using Storj!",
+                "ellipsizeMode": "tail",
+                "style": Object {
+                  "color": "#384B65",
+                  "fontFamily": "Montserrat-Regular",
+                  "fontSize": 32,
+                  "lineHeight": 46,
+                },
+              },
+              "ref": null,
+              "rendered": "You’re ready to sign in and start using Storj!",
               "type": [Function],
             },
             "type": [Function],
@@ -700,7 +886,7 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "activeOpacity": 0.2,
-              "children": <View
+              "children": <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -711,7 +897,7 @@ ShallowWrapper {
                     "borderWidth": 3,
                     "height": 100,
                     "justifyContent": "center",
-                    "marginTop": 260,
+                    "marginTop": 240,
                     "width": 670,
                   }
                 }
@@ -728,9 +914,9 @@ ShallowWrapper {
                     }
                   }
                 >
-                  Login
+                  Sign in
                 </Text>
-              </View>,
+              </Component>,
               "onPress": [Function],
             },
             "ref": null,
@@ -751,7 +937,7 @@ ShallowWrapper {
                     }
                   }
                 >
-                  Login
+                  Sign in
                 </Text>,
                 "style": Object {
                   "alignItems": "center",
@@ -762,7 +948,7 @@ ShallowWrapper {
                   "borderWidth": 3,
                   "height": 100,
                   "justifyContent": "center",
-                  "marginTop": 260,
+                  "marginTop": 240,
                   "width": 670,
                 },
               },
@@ -774,7 +960,7 @@ ShallowWrapper {
                 "props": Object {
                   "accessible": true,
                   "allowFontScaling": true,
-                  "children": "Login",
+                  "children": "Sign in",
                   "ellipsizeMode": "tail",
                   "style": Object {
                     "color": "white",
@@ -783,7 +969,7 @@ ShallowWrapper {
                   },
                 },
                 "ref": null,
-                "rendered": "Login",
+                "rendered": "Sign in",
                 "type": [Function],
               },
               "type": [Function],

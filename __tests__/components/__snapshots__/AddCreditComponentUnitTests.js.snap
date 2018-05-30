@@ -219,7 +219,7 @@ ShallowWrapper {
         />,
         null,
         null,
-        <View
+        <Component
           style={
             Object {
               "alignSelf": "center",
@@ -235,7 +235,7 @@ ShallowWrapper {
             }
           }
         >
-          <View
+          <Component
             style={
               Object {
                 "alignSelf": "center",
@@ -259,7 +259,7 @@ ShallowWrapper {
             >
               Please send your STORJ payments to the address below.
             </Text>
-            <View
+            <Component
               style={
                 Object {
                   "marginTop": 40,
@@ -281,13 +281,13 @@ ShallowWrapper {
               >
                 Sending any other token to this address will result in a loss of funds.
               </Text>
-            </View>
-          </View>
+            </Component>
+          </Component>
           <TouchableOpacity
             activeOpacity={0.2}
             onPress={[Function]}
           >
-            <View
+            <Component
               style={
                 Object {
                   "alignItems": "center",
@@ -317,9 +317,9 @@ ShallowWrapper {
               >
                 Create Wallet
               </Text>
-            </View>
+            </Component>
           </TouchableOpacity>
-        </View>,
+        </Component>,
       ],
       "style": Array [
         Object {
@@ -368,7 +368,7 @@ ShallowWrapper {
         "nodeType": "class",
         "props": Object {
           "children": Array [
-            <View
+            <Component
               style={
                 Object {
                   "alignSelf": "center",
@@ -392,7 +392,7 @@ ShallowWrapper {
               >
                 Please send your STORJ payments to the address below.
               </Text>
-              <View
+              <Component
                 style={
                   Object {
                     "marginTop": 40,
@@ -414,13 +414,13 @@ ShallowWrapper {
                 >
                   Sending any other token to this address will result in a loss of funds.
                 </Text>
-              </View>
-            </View>,
+              </Component>
+            </Component>,
             <TouchableOpacity
               activeOpacity={0.2}
               onPress={[Function]}
             >
-              <View
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -450,7 +450,7 @@ ShallowWrapper {
                 >
                   Create Wallet
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>,
           ],
           "style": Object {
@@ -489,7 +489,7 @@ ShallowWrapper {
                 >
                   Please send your STORJ payments to the address below.
                 </Text>,
-                <View
+                <Component
                   style={
                     Object {
                       "marginTop": 40,
@@ -511,7 +511,7 @@ ShallowWrapper {
                   >
                     Sending any other token to this address will result in a loss of funds.
                   </Text>
-                </View>,
+                </Component>,
               ],
               "style": Object {
                 "alignSelf": "center",
@@ -597,7 +597,7 @@ ShallowWrapper {
             "nodeType": "class",
             "props": Object {
               "activeOpacity": 0.2,
-              "children": <View
+              "children": <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -627,7 +627,7 @@ ShallowWrapper {
                 >
                   Create Wallet
                 </Text>
-              </View>,
+              </Component>,
               "onPress": [Function],
             },
             "ref": null,
@@ -722,7 +722,7 @@ ShallowWrapper {
           />,
           null,
           null,
-          <View
+          <Component
             style={
               Object {
                 "alignSelf": "center",
@@ -738,7 +738,7 @@ ShallowWrapper {
               }
             }
           >
-            <View
+            <Component
               style={
                 Object {
                   "alignSelf": "center",
@@ -762,7 +762,7 @@ ShallowWrapper {
               >
                 Please send your STORJ payments to the address below.
               </Text>
-              <View
+              <Component
                 style={
                   Object {
                     "marginTop": 40,
@@ -784,13 +784,13 @@ ShallowWrapper {
                 >
                   Sending any other token to this address will result in a loss of funds.
                 </Text>
-              </View>
-            </View>
+              </Component>
+            </Component>
             <TouchableOpacity
               activeOpacity={0.2}
               onPress={[Function]}
             >
-              <View
+              <Component
                 style={
                   Object {
                     "alignItems": "center",
@@ -820,9 +820,9 @@ ShallowWrapper {
                 >
                   Create Wallet
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>
-          </View>,
+          </Component>,
         ],
         "style": Array [
           Object {
@@ -871,7 +871,7 @@ ShallowWrapper {
           "nodeType": "class",
           "props": Object {
             "children": Array [
-              <View
+              <Component
                 style={
                   Object {
                     "alignSelf": "center",
@@ -895,7 +895,7 @@ ShallowWrapper {
                 >
                   Please send your STORJ payments to the address below.
                 </Text>
-                <View
+                <Component
                   style={
                     Object {
                       "marginTop": 40,
@@ -917,13 +917,13 @@ ShallowWrapper {
                   >
                     Sending any other token to this address will result in a loss of funds.
                   </Text>
-                </View>
-              </View>,
+                </Component>
+              </Component>,
               <TouchableOpacity
                 activeOpacity={0.2}
                 onPress={[Function]}
               >
-                <View
+                <Component
                   style={
                     Object {
                       "alignItems": "center",
@@ -953,7 +953,7 @@ ShallowWrapper {
                   >
                     Create Wallet
                   </Text>
-                </View>
+                </Component>
               </TouchableOpacity>,
             ],
             "style": Object {
@@ -992,7 +992,7 @@ ShallowWrapper {
                   >
                     Please send your STORJ payments to the address below.
                   </Text>,
-                  <View
+                  <Component
                     style={
                       Object {
                         "marginTop": 40,
@@ -1014,7 +1014,7 @@ ShallowWrapper {
                     >
                       Sending any other token to this address will result in a loss of funds.
                     </Text>
-                  </View>,
+                  </Component>,
                 ],
                 "style": Object {
                   "alignSelf": "center",
@@ -1100,7 +1100,7 @@ ShallowWrapper {
               "nodeType": "class",
               "props": Object {
                 "activeOpacity": 0.2,
-                "children": <View
+                "children": <Component
                   style={
                     Object {
                       "alignItems": "center",
@@ -1130,7 +1130,7 @@ ShallowWrapper {
                   >
                     Create Wallet
                   </Text>
-                </View>,
+                </Component>,
                 "onPress": [Function],
               },
               "ref": null,
@@ -1247,7 +1247,7 @@ ShallowWrapper {
             ]
           }
         />,
-        <View
+        <Component
           style={
             Object {
               "alignSelf": "center",
@@ -1283,7 +1283,7 @@ ShallowWrapper {
                 }
               }
             />
-            <View
+            <Component
               style={
                 Object {
                   "marginLeft": 30,
@@ -1305,7 +1305,7 @@ ShallowWrapper {
               >
                 Add credits with Storj
               </Text>
-            </View>
+            </Component>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.2}
@@ -1330,7 +1330,7 @@ ShallowWrapper {
                 }
               }
             />
-            <View
+            <Component
               style={
                 Object {
                   "marginLeft": 30,
@@ -1352,9 +1352,9 @@ ShallowWrapper {
               >
                 Add credits with Btc
               </Text>
-            </View>
+            </Component>
           </TouchableOpacity>
-        </View>,
+        </Component>,
         null,
         null,
       ],
@@ -1426,7 +1426,7 @@ ShallowWrapper {
                   }
                 }
               />
-              <View
+              <Component
                 style={
                   Object {
                     "marginLeft": 30,
@@ -1448,7 +1448,7 @@ ShallowWrapper {
                 >
                   Add credits with Storj
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>,
             <TouchableOpacity
               activeOpacity={0.2}
@@ -1473,7 +1473,7 @@ ShallowWrapper {
                   }
                 }
               />
-              <View
+              <Component
                 style={
                   Object {
                     "marginLeft": 30,
@@ -1495,7 +1495,7 @@ ShallowWrapper {
                 >
                   Add credits with Btc
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>,
           ],
           "style": Object {
@@ -1527,7 +1527,7 @@ ShallowWrapper {
                     }
                   }
                 />,
-                <View
+                <Component
                   style={
                     Object {
                       "marginLeft": 30,
@@ -1549,7 +1549,7 @@ ShallowWrapper {
                   >
                     Add credits with Storj
                   </Text>
-                </View>,
+                </Component>,
               ],
               "onPress": [Function],
               "style": Object {
@@ -1645,7 +1645,7 @@ ShallowWrapper {
                     }
                   }
                 />,
-                <View
+                <Component
                   style={
                     Object {
                       "marginLeft": 30,
@@ -1667,7 +1667,7 @@ ShallowWrapper {
                   >
                     Add credits with Btc
                   </Text>
-                </View>,
+                </Component>,
               ],
               "onPress": [Function],
               "style": Object {
@@ -1781,7 +1781,7 @@ ShallowWrapper {
               ]
             }
           />,
-          <View
+          <Component
             style={
               Object {
                 "alignSelf": "center",
@@ -1817,7 +1817,7 @@ ShallowWrapper {
                   }
                 }
               />
-              <View
+              <Component
                 style={
                   Object {
                     "marginLeft": 30,
@@ -1839,7 +1839,7 @@ ShallowWrapper {
                 >
                   Add credits with Storj
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.2}
@@ -1864,7 +1864,7 @@ ShallowWrapper {
                   }
                 }
               />
-              <View
+              <Component
                 style={
                   Object {
                     "marginLeft": 30,
@@ -1886,9 +1886,9 @@ ShallowWrapper {
                 >
                   Add credits with Btc
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>
-          </View>,
+          </Component>,
           null,
           null,
         ],
@@ -1960,7 +1960,7 @@ ShallowWrapper {
                     }
                   }
                 />
-                <View
+                <Component
                   style={
                     Object {
                       "marginLeft": 30,
@@ -1982,7 +1982,7 @@ ShallowWrapper {
                   >
                     Add credits with Storj
                   </Text>
-                </View>
+                </Component>
               </TouchableOpacity>,
               <TouchableOpacity
                 activeOpacity={0.2}
@@ -2007,7 +2007,7 @@ ShallowWrapper {
                     }
                   }
                 />
-                <View
+                <Component
                   style={
                     Object {
                       "marginLeft": 30,
@@ -2029,7 +2029,7 @@ ShallowWrapper {
                   >
                     Add credits with Btc
                   </Text>
-                </View>
+                </Component>
               </TouchableOpacity>,
             ],
             "style": Object {
@@ -2061,7 +2061,7 @@ ShallowWrapper {
                       }
                     }
                   />,
-                  <View
+                  <Component
                     style={
                       Object {
                         "marginLeft": 30,
@@ -2083,7 +2083,7 @@ ShallowWrapper {
                     >
                       Add credits with Storj
                     </Text>
-                  </View>,
+                  </Component>,
                 ],
                 "onPress": [Function],
                 "style": Object {
@@ -2179,7 +2179,7 @@ ShallowWrapper {
                       }
                     }
                   />,
-                  <View
+                  <Component
                     style={
                       Object {
                         "marginLeft": 30,
@@ -2201,7 +2201,7 @@ ShallowWrapper {
                     >
                       Add credits with Btc
                     </Text>
-                  </View>,
+                  </Component>,
                 ],
                 "onPress": [Function],
                 "style": Object {
@@ -2346,7 +2346,7 @@ ShallowWrapper {
             ]
           }
         />,
-        <View
+        <Component
           style={
             Object {
               "alignSelf": "center",
@@ -2382,7 +2382,7 @@ ShallowWrapper {
                 }
               }
             />
-            <View
+            <Component
               style={
                 Object {
                   "marginLeft": 30,
@@ -2404,7 +2404,7 @@ ShallowWrapper {
               >
                 Add credits with Storj
               </Text>
-            </View>
+            </Component>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.2}
@@ -2429,7 +2429,7 @@ ShallowWrapper {
                 }
               }
             />
-            <View
+            <Component
               style={
                 Object {
                   "marginLeft": 30,
@@ -2451,9 +2451,9 @@ ShallowWrapper {
               >
                 Add credits with Btc
               </Text>
-            </View>
+            </Component>
           </TouchableOpacity>
-        </View>,
+        </Component>,
         null,
         null,
       ],
@@ -2525,7 +2525,7 @@ ShallowWrapper {
                   }
                 }
               />
-              <View
+              <Component
                 style={
                   Object {
                     "marginLeft": 30,
@@ -2547,7 +2547,7 @@ ShallowWrapper {
                 >
                   Add credits with Storj
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>,
             <TouchableOpacity
               activeOpacity={0.2}
@@ -2572,7 +2572,7 @@ ShallowWrapper {
                   }
                 }
               />
-              <View
+              <Component
                 style={
                   Object {
                     "marginLeft": 30,
@@ -2594,7 +2594,7 @@ ShallowWrapper {
                 >
                   Add credits with Btc
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>,
           ],
           "style": Object {
@@ -2626,7 +2626,7 @@ ShallowWrapper {
                     }
                   }
                 />,
-                <View
+                <Component
                   style={
                     Object {
                       "marginLeft": 30,
@@ -2648,7 +2648,7 @@ ShallowWrapper {
                   >
                     Add credits with Storj
                   </Text>
-                </View>,
+                </Component>,
               ],
               "onPress": [Function],
               "style": Object {
@@ -2744,7 +2744,7 @@ ShallowWrapper {
                     }
                   }
                 />,
-                <View
+                <Component
                   style={
                     Object {
                       "marginLeft": 30,
@@ -2766,7 +2766,7 @@ ShallowWrapper {
                   >
                     Add credits with Btc
                   </Text>
-                </View>,
+                </Component>,
               ],
               "onPress": [Function],
               "style": Object {
@@ -2880,7 +2880,7 @@ ShallowWrapper {
               ]
             }
           />,
-          <View
+          <Component
             style={
               Object {
                 "alignSelf": "center",
@@ -2916,7 +2916,7 @@ ShallowWrapper {
                   }
                 }
               />
-              <View
+              <Component
                 style={
                   Object {
                     "marginLeft": 30,
@@ -2938,7 +2938,7 @@ ShallowWrapper {
                 >
                   Add credits with Storj
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.2}
@@ -2963,7 +2963,7 @@ ShallowWrapper {
                   }
                 }
               />
-              <View
+              <Component
                 style={
                   Object {
                     "marginLeft": 30,
@@ -2985,9 +2985,9 @@ ShallowWrapper {
                 >
                   Add credits with Btc
                 </Text>
-              </View>
+              </Component>
             </TouchableOpacity>
-          </View>,
+          </Component>,
           null,
           null,
         ],
@@ -3059,7 +3059,7 @@ ShallowWrapper {
                     }
                   }
                 />
-                <View
+                <Component
                   style={
                     Object {
                       "marginLeft": 30,
@@ -3081,7 +3081,7 @@ ShallowWrapper {
                   >
                     Add credits with Storj
                   </Text>
-                </View>
+                </Component>
               </TouchableOpacity>,
               <TouchableOpacity
                 activeOpacity={0.2}
@@ -3106,7 +3106,7 @@ ShallowWrapper {
                     }
                   }
                 />
-                <View
+                <Component
                   style={
                     Object {
                       "marginLeft": 30,
@@ -3128,7 +3128,7 @@ ShallowWrapper {
                   >
                     Add credits with Btc
                   </Text>
-                </View>
+                </Component>
               </TouchableOpacity>,
             ],
             "style": Object {
@@ -3160,7 +3160,7 @@ ShallowWrapper {
                       }
                     }
                   />,
-                  <View
+                  <Component
                     style={
                       Object {
                         "marginLeft": 30,
@@ -3182,7 +3182,7 @@ ShallowWrapper {
                     >
                       Add credits with Storj
                     </Text>
-                  </View>,
+                  </Component>,
                 ],
                 "onPress": [Function],
                 "style": Object {
@@ -3278,7 +3278,7 @@ ShallowWrapper {
                       }
                     }
                   />,
-                  <View
+                  <Component
                     style={
                       Object {
                         "marginLeft": 30,
@@ -3300,7 +3300,7 @@ ShallowWrapper {
                     >
                       Add credits with Btc
                     </Text>
-                  </View>,
+                  </Component>,
                 ],
                 "onPress": [Function],
                 "style": Object {

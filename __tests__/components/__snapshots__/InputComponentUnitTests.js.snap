@@ -36,7 +36,7 @@ ShallowWrapper {
            
            
         </Text>,
-        <View
+        <Component
           style={
             Object {
               "flexDirection": "row",
@@ -52,6 +52,7 @@ ShallowWrapper {
             keyboardType="default"
             multiline={undefined}
             onChangeText={undefined}
+            onSubmitEditing={[Function]}
             placeholder={undefined}
             placeholderTextColor="grey"
             secureTextEntry={undefined}
@@ -73,8 +74,8 @@ ShallowWrapper {
             underlineColorAndroid="transparent"
             value={undefined}
           />
-        </View>,
-        <View
+        </Component>,
+        <Component
           style={
             Object {
               "backgroundColor": "#a6b5ca",
@@ -138,6 +139,7 @@ ShallowWrapper {
               keyboardType="default"
               multiline={undefined}
               onChangeText={undefined}
+              onSubmitEditing={[Function]}
               placeholder={undefined}
               placeholderTextColor="grey"
               secureTextEntry={undefined}
@@ -180,6 +182,7 @@ ShallowWrapper {
               "keyboardType": "default",
               "multiline": undefined,
               "onChangeText": undefined,
+              "onSubmitEditing": [Function],
               "placeholder": undefined,
               "placeholderTextColor": "grey",
               "secureTextEntry": undefined,
@@ -250,7 +253,7 @@ ShallowWrapper {
              
              
           </Text>,
-          <View
+          <Component
             style={
               Object {
                 "flexDirection": "row",
@@ -266,6 +269,7 @@ ShallowWrapper {
               keyboardType="default"
               multiline={undefined}
               onChangeText={undefined}
+              onSubmitEditing={[Function]}
               placeholder={undefined}
               placeholderTextColor="grey"
               secureTextEntry={undefined}
@@ -287,8 +291,8 @@ ShallowWrapper {
               underlineColorAndroid="transparent"
               value={undefined}
             />
-          </View>,
-          <View
+          </Component>,
+          <Component
             style={
               Object {
                 "backgroundColor": "#a6b5ca",
@@ -352,6 +356,7 @@ ShallowWrapper {
                 keyboardType="default"
                 multiline={undefined}
                 onChangeText={undefined}
+                onSubmitEditing={[Function]}
                 placeholder={undefined}
                 placeholderTextColor="grey"
                 secureTextEntry={undefined}
@@ -394,6 +399,7 @@ ShallowWrapper {
                 "keyboardType": "default",
                 "multiline": undefined,
                 "onChangeText": undefined,
+                "onSubmitEditing": [Function],
                 "placeholder": undefined,
                 "placeholderTextColor": "grey",
                 "secureTextEntry": undefined,
@@ -488,7 +494,7 @@ ShallowWrapper {
            
            
         </Text>,
-        <View
+        <Component
           style={
             Object {
               "flexDirection": "row",
@@ -504,6 +510,7 @@ ShallowWrapper {
             keyboardType="default"
             multiline={true}
             onChangeText={undefined}
+            onSubmitEditing={[Function]}
             placeholder={undefined}
             placeholderTextColor="grey"
             secureTextEntry={undefined}
@@ -525,8 +532,8 @@ ShallowWrapper {
             underlineColorAndroid="transparent"
             value={undefined}
           />
-        </View>,
-        <View
+        </Component>,
+        <Component
           style={
             Object {
               "backgroundColor": "#a6b5ca",
@@ -590,6 +597,7 @@ ShallowWrapper {
               keyboardType="default"
               multiline={true}
               onChangeText={undefined}
+              onSubmitEditing={[Function]}
               placeholder={undefined}
               placeholderTextColor="grey"
               secureTextEntry={undefined}
@@ -632,6 +640,7 @@ ShallowWrapper {
               "keyboardType": "default",
               "multiline": true,
               "onChangeText": undefined,
+              "onSubmitEditing": [Function],
               "placeholder": undefined,
               "placeholderTextColor": "grey",
               "secureTextEntry": undefined,
@@ -702,7 +711,7 @@ ShallowWrapper {
              
              
           </Text>,
-          <View
+          <Component
             style={
               Object {
                 "flexDirection": "row",
@@ -718,6 +727,7 @@ ShallowWrapper {
               keyboardType="default"
               multiline={true}
               onChangeText={undefined}
+              onSubmitEditing={[Function]}
               placeholder={undefined}
               placeholderTextColor="grey"
               secureTextEntry={undefined}
@@ -739,8 +749,8 @@ ShallowWrapper {
               underlineColorAndroid="transparent"
               value={undefined}
             />
-          </View>,
-          <View
+          </Component>,
+          <Component
             style={
               Object {
                 "backgroundColor": "#a6b5ca",
@@ -804,6 +814,7 @@ ShallowWrapper {
                 keyboardType="default"
                 multiline={true}
                 onChangeText={undefined}
+                onSubmitEditing={[Function]}
                 placeholder={undefined}
                 placeholderTextColor="grey"
                 secureTextEntry={undefined}
@@ -846,6 +857,7 @@ ShallowWrapper {
                 "keyboardType": "default",
                 "multiline": true,
                 "onChangeText": undefined,
+                "onSubmitEditing": [Function],
                 "placeholder": undefined,
                 "placeholderTextColor": "grey",
                 "secureTextEntry": undefined,

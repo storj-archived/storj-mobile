@@ -118,7 +118,7 @@ describe('TabBarComponent', () => {
         expect(goToBucketScreenSpy.mock.calls.length).toBe(0);
         expect(openBucketSpy.mock.calls.length).toBe(0);
         expect(setMainScreenSpy.mock.calls.length).toBe(0);
-        expect(onActionBarPressSpy.mock.calls.length).toBe(1);
+        expect(onActionBarPressSpy.mock.calls.length).toBe(0);
         expect(dashboardNavigateBackSpy.mock.calls.length).toBe(0);
         expect(bucketNavigateBackSpy.mock.calls.length).toBe(0);
         expect(hideActionBarSpy.mock.calls.length).toBe(1);
