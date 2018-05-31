@@ -10,33 +10,23 @@
 #import "UploadFileModel.h"
 #import "UploadFileContract.h"
 #import "IConvertibleToJS.h"
-@interface UploadFileDbo : NSObject<IConvertibleToJS, NSCopying>{
-  long _fileHandle;
-  double _progress;
-  long _size;
-  long _uploaded;
-  NSString * _name;
-  NSString * _uri;
-  NSString * _bucketId;
-}
+@interface UploadFileDbo : NSObject<NSCopying>
 
-@property (nonatomic, strong, getter=name) NSString *_name;
-@property (nonatomic, strong, getter=bucketId) NSString *_bucketId;
-@property (nonatomic, strong, getter=uri) NSString *_uri;
-@property (nonatomic, getter=fileHandle) long _fileHandle;
-@property (nonatomic, getter=uploaded) long _uploaded;
-@property (nonatomic, getter=size) long _size;
-@property (nonatomic, getter=progress) double _progress;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *bucketId;
+@property (nonatomic, strong) NSString *uri;
+@property (nonatomic) long fileHandle;
+@property (nonatomic) long uploaded;
+@property (nonatomic) long size;
+@property (nonatomic) double progress;
 
-//+(UploadFileDbo *)uploadFileDboFromUploadFileModel: (UploadFileModel *)model;
-
--(instancetype)initWithFileHandle:(long) fileHandle
-                         progress:(double)progress
-                             size:(long) size
-                         uploaded:(long) uploaded
-                             name:(NSString *)name
-                              uri:(NSString *)uri
-                         bucketId:(NSString *)bucketId;
+-(instancetype) initWithFileHandle: (long) fileHandle
+                         progress: (double)progress
+                             size: (long) size
+                         uploaded: (long) uploaded
+                             name: (NSString *)name
+                              uri: (NSString *)uri
+                         bucketId: (NSString *)bucketId;
 
 -(UploadFileModel *) toModel;
 

@@ -10,7 +10,7 @@
 
 
 @implementation UploadFileDbo
-@synthesize _bucketId,_fileHandle,_name,_progress,_size,_uploaded,_uri;
+
 BOOL isIdSet = false;
 
 -(instancetype)initWithFileHandle:(long) fileHandle
@@ -32,7 +32,8 @@ BOOL isIdSet = false;
   return self;
 }
 
--(UploadFileModel *) toModel{
+-(UploadFileModel *) toModel
+{
   return [[UploadFileModel alloc]initWithFileHandle:_fileHandle progress:_progress size:_size uploaded:_uploaded name:_name uri:_uri bucketId:_bucketId];
 }
 

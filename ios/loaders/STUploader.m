@@ -122,8 +122,8 @@
       return;
     }
     
-    [_uploadFileDbo set_progress: _uploadProgress];
-    [_uploadFileDbo set_uploaded: uploadedBytes];
+    [_uploadFileDbo setProgress: _uploadProgress];
+    [_uploadFileDbo setUploaded: uploadedBytes];
     
     UploadFileModel * fileModel =[[UploadFileModel alloc] initWithUploadFileDbo:_uploadFileDbo];
     Response *response = [[self _uploadFileRepository] updateByModel:fileModel];
@@ -183,7 +183,7 @@
                                    withCompletion:_innerUploadFileCallback];
   @synchronized (_uploadFileDbo)
   {
-    [_uploadFileDbo set_fileHandle:fileRef];
+    [_uploadFileDbo setFileHandle:fileRef];
     UploadFileModel *fileModel = [[UploadFileModel alloc] initWithUploadFileDbo:_uploadFileDbo];
     
     Response *insertResponse = [[self _uploadFileRepository] insertWithModel:fileModel];
