@@ -11,6 +11,7 @@
 #import "BucketContract.h"
 #import "FileContract.h"
 #import "UploadFileContract.h"
+#import "SynchronizationQueueContract.h"
 
 #define DATABASE_NAME "storj.db"
 

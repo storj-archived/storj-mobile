@@ -105,6 +105,11 @@
 		E1B69957B9F74BD08F47F764 /* Montserrat-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA3A41C878E0424E92862DE9 /* Montserrat-ExtraLightItalic.ttf */; };
 		E6A2862F2CF54CA4A398C3EB /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6614E0B481304028A1D06F8A /* Montserrat-Black.ttf */; };
 		E897D74594BA49939DB05574 /* Montserrat-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C778753B10440D3B23670E2 /* Montserrat-LightItalic.ttf */; };
+		F355E24520C025AB007DAEE5 /* SyncQueueEntryDbo.m in Sources */ = {isa = PBXBuildFile; fileRef = F355E24420C025AB007DAEE5 /* SyncQueueEntryDbo.m */; };
+		F355E24820C03102007DAEE5 /* SyncQueueEntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F355E24720C03102007DAEE5 /* SyncQueueEntryModel.m */; };
+		F355E24B20C04067007DAEE5 /* SyncQueueRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F355E24A20C04067007DAEE5 /* SyncQueueRepository.m */; };
+		F389386220BFFBC900FB6C76 /* STFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F389386120BFFBC900FB6C76 /* STFileManager.m */; };
+		F389386520C00B9300FB6C76 /* SynchronizationQueueContract.m in Sources */ = {isa = PBXBuildFile; fileRef = F389386420C00B9300FB6C76 /* SynchronizationQueueContract.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -585,6 +590,16 @@
 		E8B379A61F534A10BAAA4E4B /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-LightItalic.ttf"; path = "../src/fonts/OpenSans/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
 		EDC564F35292492DA53A5EBD /* Montserrat-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-BoldItalic.ttf"; path = "../src/fonts/Montserrat/Montserrat-BoldItalic.ttf"; sourceTree = "<group>"; };
 		F04347ECBAEC4A348F8B4E29 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Bold.ttf"; path = "../src/fonts/OpenSans/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		F355E21B20C02585007DAEE5 /* SyncQueueEntryDbo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncQueueEntryDbo.h; sourceTree = "<group>"; };
+		F355E24420C025AB007DAEE5 /* SyncQueueEntryDbo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyncQueueEntryDbo.m; sourceTree = "<group>"; };
+		F355E24620C030E2007DAEE5 /* SyncQueueEntryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncQueueEntryModel.h; sourceTree = "<group>"; };
+		F355E24720C03102007DAEE5 /* SyncQueueEntryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyncQueueEntryModel.m; sourceTree = "<group>"; };
+		F355E24920C04050007DAEE5 /* SyncQueueRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncQueueRepository.h; sourceTree = "<group>"; };
+		F355E24A20C04067007DAEE5 /* SyncQueueRepository.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyncQueueRepository.m; sourceTree = "<group>"; };
+		F389386020BFFBC800FB6C76 /* STFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STFileManager.h; path = FileManager/STFileManager.h; sourceTree = SOURCE_ROOT; };
+		F389386120BFFBC900FB6C76 /* STFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STFileManager.m; path = FileManager/STFileManager.m; sourceTree = SOURCE_ROOT; };
+		F389386320C00AC100FB6C76 /* SynchronizationQueueContract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SynchronizationQueueContract.h; sourceTree = "<group>"; };
+		F389386420C00B9300FB6C76 /* SynchronizationQueueContract.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SynchronizationQueueContract.m; sourceTree = "<group>"; };
 		F76C6AA2A02B4583A7084288 /* Montserrat-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraBoldItalic.ttf"; path = "../src/fonts/Montserrat/Montserrat-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		FD483430D07D4D6395ABDE9B /* RCTBarCode.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTBarCode.xcodeproj; path = "../node_modules/react-native-smart-barcode/ios/RCTBarcode/RCTBarCode.xcodeproj"; sourceTree = "<group>"; };
 		FED5CF1007864C3FB8C7BA2E /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../src/fonts/OpenSans/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
@@ -707,6 +722,7 @@
 		13B07FAE1A68108700A75B9A /* StorjMobile */ = {
 			isa = PBXGroup;
 			children = (
+				F389385F20BFFB8400FB6C76 /* FileManager */,
 				DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */,
 				DC7632092084C40600B7C64A /* StorjMobile.entitlements */,
 				DC03940920B2EEF500904DEB /* loaders */,
@@ -945,6 +961,8 @@
 				DCDF70702064C7A2001B2F95 /* FileRepository.m */,
 				DCDF70722064D348001B2F95 /* UploadFileRepository.h */,
 				DCDF70732064D348001B2F95 /* UploadFileRepository.m */,
+				F355E24920C04050007DAEE5 /* SyncQueueRepository.h */,
+				F355E24A20C04067007DAEE5 /* SyncQueueRepository.m */,
 			);
 			path = repositories;
 			sourceTree = "<group>";
@@ -958,6 +976,8 @@
 				DCDF706720649821001B2F95 /* FileDbo.m */,
 				DCDF70692064A15A001B2F95 /* UploadFileDbo.h */,
 				DCDF706A2064A15A001B2F95 /* UploadFileDbo.m */,
+				F355E21B20C02585007DAEE5 /* SyncQueueEntryDbo.h */,
+				F355E24420C025AB007DAEE5 /* SyncQueueEntryDbo.m */,
 			);
 			path = dbo;
 			sourceTree = "<group>";
@@ -971,6 +991,8 @@
 				DCDF6FC7205AE94C001B2F95 /* FileContract.m */,
 				DCDF6FC9205AED17001B2F95 /* UploadFileContract.h */,
 				DCDF6FCA205AED17001B2F95 /* UploadFileContract.m */,
+				F389386320C00AC100FB6C76 /* SynchronizationQueueContract.h */,
+				F389386420C00B9300FB6C76 /* SynchronizationQueueContract.m */,
 			);
 			path = contracts;
 			sourceTree = "<group>";
@@ -1038,6 +1060,8 @@
 				DCDF6FFB20631C73001B2F95 /* UploadFileModel.m */,
 				DCEB5377206AA77A006B0624 /* PromiseHandler.h */,
 				DCEB5378206AA77A006B0624 /* PromiseHandler.m */,
+				F355E24620C030E2007DAEE5 /* SyncQueueEntryModel.h */,
+				F355E24720C03102007DAEE5 /* SyncQueueEntryModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1085,6 +1109,16 @@
 				DCEB075320BEAFBC00D50758 /* STFileDownloadCallback.m */,
 			);
 			path = callbacks;
+			sourceTree = "<group>";
+		};
+		F389385F20BFFB8400FB6C76 /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				F389386020BFFBC800FB6C76 /* STFileManager.h */,
+				F389386120BFFBC900FB6C76 /* STFileManager.m */,
+			);
+			name = FileManager;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1618,6 +1652,7 @@
 				DCDF6FEA2062BE39001B2F95 /* DictionaryUtils.m in Sources */,
 				DCDF7077206895DF001B2F95 /* MethodHandler.m in Sources */,
 				DC914C47206BD55000F0C4FF /* StorjWrapperSingletone.m in Sources */,
+				F389386220BFFBC900FB6C76 /* STFileManager.m in Sources */,
 				DCBF1F4320BDBADA00240E8B /* Logger.m in Sources */,
 				DCDF706B2064A15A001B2F95 /* UploadFileDbo.m in Sources */,
 				DCDF6FE2206022EC001B2F95 /* ListResponse.m in Sources */,
@@ -1633,6 +1668,7 @@
 				DCDF6FC5205ADA04001B2F95 /* BucketContract.m in Sources */,
 				DCDF6FD1205FE9CC001B2F95 /* BaseRepository.m in Sources */,
 				DC37DF7F20A4B62C00C4FEF8 /* CameraModule.m in Sources */,
+				F389386520C00B9300FB6C76 /* SynchronizationQueueContract.m in Sources */,
 				DCDF6FF92062E223001B2F95 /* UploadFileProgressModel.m in Sources */,
 				DCDF70712064C7A2001B2F95 /* FileRepository.m in Sources */,
 				DCEB539A206BA643006B0624 /* FileUtils.m in Sources */,
@@ -1645,12 +1681,15 @@
 				DCDF6FDF2060073F001B2F95 /* SingleResponse.m in Sources */,
 				DCDF706020643850001B2F95 /* FMResultSet.m in Sources */,
 				DCDF6FDC205FF88A001B2F95 /* Error.m in Sources */,
+				F355E24820C03102007DAEE5 /* SyncQueueEntryModel.m in Sources */,
 				DCCD2FD520459F610032D3F5 /* FilePickerLib.m in Sources */,
 				DCDF6FF32062D423001B2F95 /* FileDeleteModel.m in Sources */,
 				DCDF6FC8205AE94C001B2F95 /* FileContract.m in Sources */,
 				DCDF705F20643850001B2F95 /* FMDatabaseAdditions.m in Sources */,
+				F355E24B20C04067007DAEE5 /* SyncQueueRepository.m in Sources */,
 				DCEB072820BEAE9800D50758 /* STDownloader.m in Sources */,
 				DCEB075420BEAFBC00D50758 /* STFileDownloadCallback.m in Sources */,
+				F355E24520C025AB007DAEE5 /* SyncQueueEntryDbo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

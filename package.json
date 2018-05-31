@@ -13,7 +13,7 @@
     "react-native-photo-view": "^1.5.2",
     "react-native-qrcode": "^0.2.6",
     "react-native-smart-barcode": "https://github.com/NikolaiYurchenko/react-native-smart-barcode/archive/ReactNative_SmartBarCode_1.0.0.7.tar.gz",
-    "react-navigation": "^1.0.0-beta.25",
+    "react-navigation": "1.0.0-beta.26",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"

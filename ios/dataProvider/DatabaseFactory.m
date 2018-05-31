@@ -83,6 +83,10 @@ static FMDatabase * _database;
   if(![_database executeUpdate:[UploadFileContract createTable]]) {
     NSLog(@"Failed to create table \'%@\'", UploadFileContract.TABLE_NAME);
   }
+  
+  if(![_database executeUpdate:[SynchronizationQueueContract createTable]]) {
+    NSLog(@"Failed to create table \'%@\'", SynchronizationQueueContract.TABLE_NAME);
+  }
   NSLog(@"Tables Created");
   [_database close];
   
@@ -97,7 +101,8 @@ static FMDatabase * _database;
   }
   BOOL tablesExist =[_database tableExists:BucketContract.TABLE_NAME]
   || [_database tableExists:FileContract.TABLE_NAME]
-  || [_database tableExists:UploadFileContract.TABLE_NAME];
+  || [_database tableExists:UploadFileContract.TABLE_NAME]
+  || [_database tableExists:SynchronizationQueueContract.TABLE_NAME];
   
   [_database close];
   
@@ -118,6 +123,7 @@ static FMDatabase * _database;
   [_database executeUpdate:@"DROP TABLE IF EXISTS ?", BucketContract.TABLE_NAME];
   [_database executeUpdate:@"DROP TABLE IF EXISTS ?", FileContract.TABLE_NAME];
   [_database executeUpdate:@"DROP TABLE IF EXISTS ?", UploadFileContract.TABLE_NAME];
+  [_database executeUpdate:@"DROP TABLE IF EXISTS ?", SynchronizationQueueContract.TABLE_NAME];
   
   [_database close];
 }
