@@ -33,6 +33,7 @@
               creationDate: (NSString *) creationDate
                   bucketId:(NSString *) bucketId
                 fileHandle: (long) fileHandle;
+
 @end
 
 #endif /* SynchronizationQueueEntryDbo_h */

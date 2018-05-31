@@ -9,6 +9,7 @@
 #import "Response.h"
 #import "SyncQueueEntryModel.h"
 #import "SyncQueueEntryDbo.h"
+#import "SynchronizationQueueContract.h"
 
 #ifndef SyncQueueRepository_h
 #define SyncQueueRepository_h
@@ -18,13 +19,17 @@
 -(instancetype) init;
 
 -(NSArray *) getAll;
+
 -(SyncQueueEntryModel *) getById: (int) _id;
+
 -(SyncQueueEntryModel *) getByLocalPath: (NSString *) localPath
                                bucketId: (NSString *) bucketId;
 
--(Response *) insert: (SyncQueueEntryModel *) model;
--(Response *) update: (SyncQueueEntryModel *) model;
--(Response *) delete: (int) _id;
+-(Response *) insertWithModel: (SyncQueueEntryModel *) model;
+
+-(Response *) updateWithModel: (SyncQueueEntryModel *) model;
+
+-(Response *) deleteById: (int) _id;
 
 @end
 

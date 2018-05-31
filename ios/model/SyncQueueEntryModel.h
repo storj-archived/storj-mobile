@@ -10,7 +10,6 @@
 #import "SynchronizationQueueContract.h"
 #import "DictionaryUtils.h"
 #import "IConvertibleToJS.h"
-#import "SyncQueueEntryDbo.h"
 
 #ifndef SyncQueueEntryModel_h
 #define SyncQueueEntryModel_h
@@ -41,9 +40,9 @@
                   bucketId: (NSString *) bucketId
                 fileHandle: (long) fileHandle;
 
--(instancetype) initWithDbo: (SyncQueueEntryDbo *) dbo;
+-(BOOL) isValid;
 
--(SyncQueueEntryDbo *) toDbo;
+-(instancetype) initWithDbo: (SyncQueueEntryDbo *) dbo;
 
 @end
 #endif /* SyncQueueEntryModel_h */

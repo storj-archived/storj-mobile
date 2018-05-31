@@ -54,6 +54,13 @@
     return [[SyncQueueEntryDbo alloc] initWithId: (int) __id fileName: (NSString *) _fileName localPath: (NSString *) _localPath status: (int) _status errorCode:(int) _errorCode size: (long) _size count: (int) _count creationDate: (NSString *) _creationDate bucketId: (NSString *) _bucketId fileHandle: (long) _fileHandle];
 }
 
+-(BOOL) isValid
+{
+  return _fileName.length > 0
+          && _localPath.length > 0
+          && _bucketId.length > 0;
+}
+
 - (NSDictionary *)toDictionary
 {
     NSMutableDictionary *object = [[NSMutableDictionary alloc] init];
