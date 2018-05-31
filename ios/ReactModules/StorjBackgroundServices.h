@@ -25,7 +25,6 @@
 #import "DictionaryUtils.h"
 #import "FileUtils.h"
 #import "EventNames.h"
-#import "PromiseHandler.h"
 #import "StorjWrapperSingletone.h"
 #import "ThumbnailProcessor.h"
 
@@ -36,10 +35,6 @@
 @property (nonatomic, strong) BucketRepository *_bucketRepository;
 @property (nonatomic, strong) FileRepository *_fileRepository;
 @property (nonatomic, strong) UploadFileRepository *_uploadFileRepository;
-
-@property (nonatomic, strong) PromiseHandler *_mainOperationsPromise;
-@property (nonatomic, strong) PromiseHandler *_uploadOperationsPromise;
-@property (nonatomic, strong) PromiseHandler *_downloadOperationsPromise;
 
 @property (nonatomic, strong) StorjWrapper *_storjWrapper;
 

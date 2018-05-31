@@ -21,7 +21,6 @@
 
 @synthesize _bucketRepository, _fileRepository, _uploadFileRepository;
 @synthesize _storjWrapper;
-@synthesize _mainOperationsPromise, _uploadOperationsPromise, _downloadOperationsPromise;
 
 RCT_EXPORT_MODULE(ServiceModuleIOS);
 
