@@ -57,6 +57,7 @@
 		DC69A17120C02E2E00E4BC51 /* SettingsContract.m in Sources */ = {isa = PBXBuildFile; fileRef = DC69A17020C02E2E00E4BC51 /* SettingsContract.m */; };
 		DC69A19C20C031A500E4BC51 /* SettingsDbo.m in Sources */ = {isa = PBXBuildFile; fileRef = DC69A19B20C031A500E4BC51 /* SettingsDbo.m */; };
 		DC69A19F20C037EB00E4BC51 /* SettingsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC69A19E20C037EB00E4BC51 /* SettingsModel.m */; };
+		DC69A1CF20C0637500E4BC51 /* SettingsRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = DC69A1CE20C0637500E4BC51 /* SettingsRepository.m */; };
 		DC70934D20AC3FDB00E889DA /* OpenFileModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DC70934C20AC3FDB00E889DA /* OpenFileModule.m */; };
 		DC76320C2084C6F800B7C64A /* DocumentsPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = DC76320B2084C6F800B7C64A /* DocumentsPicker.m */; };
 		DC914C47206BD55000F0C4FF /* StorjWrapperSingletone.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C46206BD55000F0C4FF /* StorjWrapperSingletone.m */; };
@@ -497,6 +498,8 @@
 		DC69A19B20C031A500E4BC51 /* SettingsDbo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsDbo.m; sourceTree = "<group>"; };
 		DC69A19D20C037EB00E4BC51 /* SettingsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsModel.h; sourceTree = "<group>"; };
 		DC69A19E20C037EB00E4BC51 /* SettingsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsModel.m; sourceTree = "<group>"; };
+		DC69A1CD20C0637500E4BC51 /* SettingsRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsRepository.h; sourceTree = "<group>"; };
+		DC69A1CE20C0637500E4BC51 /* SettingsRepository.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsRepository.m; sourceTree = "<group>"; };
 		DC70934B20AC3FDB00E889DA /* OpenFileModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenFileModule.h; sourceTree = "<group>"; };
 		DC70934C20AC3FDB00E889DA /* OpenFileModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenFileModule.m; sourceTree = "<group>"; };
 		DC7632092084C40600B7C64A /* StorjMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = StorjMobile.entitlements; path = StorjMobile/StorjMobile.entitlements; sourceTree = "<group>"; };
@@ -969,6 +972,8 @@
 				DCDF70732064D348001B2F95 /* UploadFileRepository.m */,
 				F355E24920C04050007DAEE5 /* SyncQueueRepository.h */,
 				F355E24A20C04067007DAEE5 /* SyncQueueRepository.m */,
+				DC69A1CD20C0637500E4BC51 /* SettingsRepository.h */,
+				DC69A1CE20C0637500E4BC51 /* SettingsRepository.m */,
 			);
 			path = repositories;
 			sourceTree = "<group>";
@@ -1662,6 +1667,7 @@
 				DC69A19C20C031A500E4BC51 /* SettingsDbo.m in Sources */,
 				DCDF6FEA2062BE39001B2F95 /* DictionaryUtils.m in Sources */,
 				DCDF7077206895DF001B2F95 /* MethodHandler.m in Sources */,
+				DC69A1CF20C0637500E4BC51 /* SettingsRepository.m in Sources */,
 				DC914C47206BD55000F0C4FF /* StorjWrapperSingletone.m in Sources */,
 				F389386220BFFBC900FB6C76 /* STFileManager.m in Sources */,
 				DCBF1F4320BDBADA00240E8B /* Logger.m in Sources */,

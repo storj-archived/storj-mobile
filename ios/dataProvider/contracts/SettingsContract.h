@@ -19,4 +19,6 @@
 @property (readonly, class) NSString *const SYNC_SETTINGS;
 @property (readonly, class) NSString *const LAST_SYNC;
 
++(NSString *) createTable;
+
 @end

@@ -2,7 +2,7 @@
 //  SettingsModel.m
 //  StorjMobile
 //
-//  Created by Barterio on 5/31/18.
+//  Created by Bohdan Artemenko on 5/31/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
@@ -14,9 +14,7 @@
 
 -(instancetype) init
 {
-  if(self = [super init]){}
-  
-  return self;
+  return [super init];
 }
 
 -(instancetype) initWithSettingsId: (NSString *) settingsId

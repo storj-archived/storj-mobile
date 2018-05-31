@@ -7,6 +7,7 @@
 //
 
 #import "DatabaseFactory.h"
+#import "SettingsContract.h"
 
 static DatabaseFactory *_sharedInstance = nil;
 static FMDatabase * _database;
@@ -63,34 +64,45 @@ static FMDatabase * _database;
 }
 
 -(BOOL)createTables {
+  BOOL isSuccess = YES;
   if(![_database open]) {
     NSLog(@"Database cannot be opened");
     
-    return NO;
+    isSuccess = NO;
   }
   if(![_database executeUpdate:[BucketContract createTable]]) {
     NSLog(@"Failed to create table \'%@\'", BucketContract.TABLE_NAME);
     
-    return NO;
+    isSuccess = NO;
   }
   
   if(![_database executeUpdate:[FileContract createTable]]) {
     NSLog(@"Failed to create table \'%@\'", FileContract.TABLE_NAME);
     
-    return NO;
+    isSuccess = NO;
   }
   
   if(![_database executeUpdate:[UploadFileContract createTable]]) {
     NSLog(@"Failed to create table \'%@\'", UploadFileContract.TABLE_NAME);
+    
+    isSuccess = NO;
   }
   
   if(![_database executeUpdate:[SynchronizationQueueContract createTable]]) {
     NSLog(@"Failed to create table \'%@\'", SynchronizationQueueContract.TABLE_NAME);
+    
+    isSuccess = NO;
+  }
+  
+  if(![_database executeUpdate:[SettingsContract createTable]]) {
+    NSLog(@"Failed to create table \'%@\'", SettingsContract.TABLE_NAME);
+    
+    isSuccess = NO;
   }
   NSLog(@"Tables Created");
   [_database close];
   
-  return YES;
+  return isSuccess;
 }
 
 -(BOOL) checkTablesExist {
@@ -102,7 +114,8 @@ static FMDatabase * _database;
   BOOL tablesExist =[_database tableExists:BucketContract.TABLE_NAME]
   || [_database tableExists:FileContract.TABLE_NAME]
   || [_database tableExists:UploadFileContract.TABLE_NAME]
-  || [_database tableExists:SynchronizationQueueContract.TABLE_NAME];
+  || [_database tableExists:SynchronizationQueueContract.TABLE_NAME]
+  || [_database tableExists:SettingsContract.TABLE_NAME];
   
   [_database close];
   
@@ -123,7 +136,8 @@ static FMDatabase * _database;
   [_database executeUpdate:@"DROP TABLE IF EXISTS ?", BucketContract.TABLE_NAME];
   [_database executeUpdate:@"DROP TABLE IF EXISTS ?", FileContract.TABLE_NAME];
   [_database executeUpdate:@"DROP TABLE IF EXISTS ?", UploadFileContract.TABLE_NAME];
-  [_database executeUpdate:@"DROP TABLE IF EXISTS ?", SynchronizationQueueContract.TABLE_NAME];
+  [_database executeUpdate:@"DROP TABLE IF EXISTS ?", SynchronizationQueueContract.TABLE_NAME]
+  [_database executeUpdate:@"DROP TABLE IF EXISTS ?", SettingsContract.TABLE_NAME];
   
   [_database close];
 }

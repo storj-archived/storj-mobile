@@ -12,6 +12,7 @@
 
 static NSString *const _TABLE_NAME = @"settingsTable";
 static NSString *const _ID = @"_id";
+
 static NSString *const _SETTINGS_ID = @"settingsId";
 static NSString *const _FIRST_SIGN_IN = @"isFirstSignIn";
 static NSString *const _SYNC_STATUS = @"syncStatus";
@@ -51,6 +52,17 @@ static NSString *const _LAST_SYNC = @"lastSync";
 +(NSString *) LAST_SYNC
 {
   return _LAST_SYNC;
+}
+
++(NSString *) createTable
+{
+  return [NSString stringWithFormat:@"create table if not exists %@ (\
+%@ TEXT primary key not null, \
+%@ NUMBER DEFAULT 1, \
+%@ NUMBER DEFAULT 0, \
+%@ NUMBER DEFAULT 0, \
+%@ TIMESTAMP DEFAULT CURRENT_TIMESTAMP)", _TABLE_NAME, _ID, _FIRST_SIGN_IN, _SYNC_STATUS,
+          _SYNC_SETTINGS, _LAST_SYNC];
 }
 
 @end
