@@ -46,9 +46,9 @@
 }
 
 +(void)invokeBackgroundSyncRemainWithParams:(NSDictionary *)params
-                         methodHandlerBlock:(void (^)(NSDictionary *, UIBackgroundTaskIdentifier))callback
+                         methodHandlerBlock:(void (^)(NSDictionary *, UIBackgroundTaskIdentifier))methodHandlerBlock
                           expirationHandler:(void (^)(void))expirationHandler {
-  if(!callback){
+  if(!methodHandlerBlock){
     return;
   }
   
@@ -57,7 +57,7 @@
                                        expirationHandler : expirationHandler];
   
   dispatch_async([MethodHandler getSyncQueue], ^{
-    callback(params, bgTask);
+    methodHandlerBlock(params, bgTask);
   });
 }
 
