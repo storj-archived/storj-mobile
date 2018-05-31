@@ -54,6 +54,9 @@
 		DC2841E6204972FD0093183F /* StorjIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC2841E020496AEA0093183F /* StorjIOS.framework */; };
 		DC2841E7204972FD0093183F /* StorjIOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DC2841E020496AEA0093183F /* StorjIOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DC37DF7F20A4B62C00C4FEF8 /* CameraModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DC37DF7E20A4B62C00C4FEF8 /* CameraModule.m */; };
+		DC69A17120C02E2E00E4BC51 /* SettingsContract.m in Sources */ = {isa = PBXBuildFile; fileRef = DC69A17020C02E2E00E4BC51 /* SettingsContract.m */; };
+		DC69A19C20C031A500E4BC51 /* SettingsDbo.m in Sources */ = {isa = PBXBuildFile; fileRef = DC69A19B20C031A500E4BC51 /* SettingsDbo.m */; };
+		DC69A19F20C037EB00E4BC51 /* SettingsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC69A19E20C037EB00E4BC51 /* SettingsModel.m */; };
 		DC70934D20AC3FDB00E889DA /* OpenFileModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DC70934C20AC3FDB00E889DA /* OpenFileModule.m */; };
 		DC76320C2084C6F800B7C64A /* DocumentsPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = DC76320B2084C6F800B7C64A /* DocumentsPicker.m */; };
 		DC914C47206BD55000F0C4FF /* StorjWrapperSingletone.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C46206BD55000F0C4FF /* StorjWrapperSingletone.m */; };
@@ -98,7 +101,6 @@
 		DCEB072820BEAE9800D50758 /* STDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEB072720BEAE9800D50758 /* STDownloader.m */; };
 		DCEB075420BEAFBC00D50758 /* STFileDownloadCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEB075320BEAFBC00D50758 /* STFileDownloadCallback.m */; };
 		DCEB535020697A55006B0624 /* EventNames.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEB534F20697A55006B0624 /* EventNames.m */; };
-		DCEB5379206AA77A006B0624 /* PromiseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEB5378206AA77A006B0624 /* PromiseHandler.m */; };
 		DCEB539A206BA643006B0624 /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEB5399206BA643006B0624 /* FileUtils.m */; };
 		DCFA7519209110FA00EFA765 /* ThumbnailProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = DCFA7518209110FA00EFA765 /* ThumbnailProcessor.m */; };
 		DDD138767961421DB8C87363 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A51459F91D3420BBC6E2C58 /* Montserrat-ExtraLight.ttf */; };
@@ -489,6 +491,12 @@
 		DC37DF7D20A4B62C00C4FEF8 /* CameraModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraModule.h; sourceTree = "<group>"; };
 		DC37DF7E20A4B62C00C4FEF8 /* CameraModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraModule.m; sourceTree = "<group>"; };
 		DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StorjIOS.xcodeproj; path = "../../iOS-libstorj/StorjIOS/StorjIOS.xcodeproj"; sourceTree = "<group>"; };
+		DC69A16F20C02E2E00E4BC51 /* SettingsContract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsContract.h; sourceTree = "<group>"; };
+		DC69A17020C02E2E00E4BC51 /* SettingsContract.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsContract.m; sourceTree = "<group>"; };
+		DC69A19A20C031A500E4BC51 /* SettingsDbo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsDbo.h; sourceTree = "<group>"; };
+		DC69A19B20C031A500E4BC51 /* SettingsDbo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsDbo.m; sourceTree = "<group>"; };
+		DC69A19D20C037EB00E4BC51 /* SettingsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsModel.h; sourceTree = "<group>"; };
+		DC69A19E20C037EB00E4BC51 /* SettingsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsModel.m; sourceTree = "<group>"; };
 		DC70934B20AC3FDB00E889DA /* OpenFileModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenFileModule.h; sourceTree = "<group>"; };
 		DC70934C20AC3FDB00E889DA /* OpenFileModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenFileModule.m; sourceTree = "<group>"; };
 		DC7632092084C40600B7C64A /* StorjMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = StorjMobile.entitlements; path = StorjMobile/StorjMobile.entitlements; sourceTree = "<group>"; };
@@ -580,8 +588,6 @@
 		DCEB075320BEAFBC00D50758 /* STFileDownloadCallback.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STFileDownloadCallback.m; sourceTree = "<group>"; };
 		DCEB534E20697A55006B0624 /* EventNames.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventNames.h; sourceTree = "<group>"; };
 		DCEB534F20697A55006B0624 /* EventNames.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventNames.m; sourceTree = "<group>"; };
-		DCEB5377206AA77A006B0624 /* PromiseHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PromiseHandler.h; sourceTree = "<group>"; };
-		DCEB5378206AA77A006B0624 /* PromiseHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PromiseHandler.m; sourceTree = "<group>"; };
 		DCEB5398206BA643006B0624 /* FileUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileUtils.h; sourceTree = "<group>"; };
 		DCEB5399206BA643006B0624 /* FileUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileUtils.m; sourceTree = "<group>"; };
 		DCFA7517209110FA00EFA765 /* ThumbnailProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThumbnailProcessor.h; sourceTree = "<group>"; };
@@ -978,6 +984,8 @@
 				DCDF706A2064A15A001B2F95 /* UploadFileDbo.m */,
 				F355E21B20C02585007DAEE5 /* SyncQueueEntryDbo.h */,
 				F355E24420C025AB007DAEE5 /* SyncQueueEntryDbo.m */,
+				DC69A19A20C031A500E4BC51 /* SettingsDbo.h */,
+				DC69A19B20C031A500E4BC51 /* SettingsDbo.m */,
 			);
 			path = dbo;
 			sourceTree = "<group>";
@@ -993,6 +1001,8 @@
 				DCDF6FCA205AED17001B2F95 /* UploadFileContract.m */,
 				F389386320C00AC100FB6C76 /* SynchronizationQueueContract.h */,
 				F389386420C00B9300FB6C76 /* SynchronizationQueueContract.m */,
+				DC69A16F20C02E2E00E4BC51 /* SettingsContract.h */,
+				DC69A17020C02E2E00E4BC51 /* SettingsContract.m */,
 			);
 			path = contracts;
 			sourceTree = "<group>";
@@ -1058,10 +1068,10 @@
 				DCDF6FF82062E223001B2F95 /* UploadFileProgressModel.m */,
 				DCDF6FFA20631C73001B2F95 /* UploadFileModel.h */,
 				DCDF6FFB20631C73001B2F95 /* UploadFileModel.m */,
-				DCEB5377206AA77A006B0624 /* PromiseHandler.h */,
-				DCEB5378206AA77A006B0624 /* PromiseHandler.m */,
 				F355E24620C030E2007DAEE5 /* SyncQueueEntryModel.h */,
 				F355E24720C03102007DAEE5 /* SyncQueueEntryModel.m */,
+				DC69A19D20C037EB00E4BC51 /* SettingsModel.h */,
+				DC69A19E20C037EB00E4BC51 /* SettingsModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1647,13 +1657,15 @@
 				DC914C4A206BE5D400F0C4FF /* SyncModule.m in Sources */,
 				DCDF6FE620603015001B2F95 /* BucketModel.m in Sources */,
 				DCDF705E20643850001B2F95 /* FMDatabasePool.m in Sources */,
-				DCEB5379206AA77A006B0624 /* PromiseHandler.m in Sources */,
+				DC69A17120C02E2E00E4BC51 /* SettingsContract.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				DC69A19C20C031A500E4BC51 /* SettingsDbo.m in Sources */,
 				DCDF6FEA2062BE39001B2F95 /* DictionaryUtils.m in Sources */,
 				DCDF7077206895DF001B2F95 /* MethodHandler.m in Sources */,
 				DC914C47206BD55000F0C4FF /* StorjWrapperSingletone.m in Sources */,
 				F389386220BFFBC900FB6C76 /* STFileManager.m in Sources */,
 				DCBF1F4320BDBADA00240E8B /* Logger.m in Sources */,
+				DC69A19F20C037EB00E4BC51 /* SettingsModel.m in Sources */,
 				DCDF706B2064A15A001B2F95 /* UploadFileDbo.m in Sources */,
 				DCDF6FE2206022EC001B2F95 /* ListResponse.m in Sources */,
 				DCBD1A5020B2F07E005B30C3 /* STUploader.m in Sources */,
