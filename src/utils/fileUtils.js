@@ -77,7 +77,7 @@ export function isImage(imageFullName) {
 
     let extension = imageFullName.split('.').pop().toLowerCase();
 
-    return ['tif', 'tiff', 'gif', 'jpeg', 'jpg', 'jif', 'jfif', 'jp2', 'jpx', 'j2k', 'j2c', 'fpx', 'pcd', 'png']
+    return ['tif', 'tiff', 'gif', 'jpeg', 'jpg', 'jif', 'jfif', 'jp2', 'jpx', 'j2k', 'j2c', 'fpx', 'pcd', 'png', 'heic']
         .includes(extension);
 }
 
