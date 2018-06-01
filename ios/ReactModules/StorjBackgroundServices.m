@@ -49,6 +49,10 @@
 
 #import "Logger.h"
 
+#import "UploadService.h"
+
+static StorjBackgroundServices *sharedInstance = nil;
+
 @implementation StorjBackgroundServices
 
 @synthesize _bucketRepository, _fileRepository, _uploadFileRepository;
@@ -57,11 +61,16 @@
 RCT_EXPORT_MODULE(ServiceModuleIOS);
 
 +(id)allocWithZone:(struct _NSZone *)zone {
-  static StorjBackgroundServices *sharedInstance = nil;
+  //static StorjBackgroundServices *sharedInstance = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     sharedInstance = [super allocWithZone:zone];
   });
+  return sharedInstance;
+}
+
++(instancetype) sharedInstance
+{
   return sharedInstance;
 }
 
@@ -426,50 +435,57 @@ RCT_REMAP_METHOD(uploadFile,
                   fileName:(NSString *) fileName){
   [Logger log:[NSString stringWithFormat:@"Uploading file located at: %@ into bucket: %@", localPath, bucketId]];
   
-  STFileUploadCallback *fileUploadCallback = [[STFileUploadCallback alloc] init];
+  [[UploadService sharedInstance] uploadFileWithBucketId:(NSString *) bucketId
+                                                fileName:(NSString *) fileName
+                                               localPath:(NSString *) localPath];
   
-  fileUploadCallback._uploadCompleteBlock = ^(long fileHandle, NSString *fileId) {
-    NSDictionary *bodyDict = @{UploadFileContract.FILE_HANDLE:@(fileHandle),
-                               FileContract.FILE_ID : [DictionaryUtils checkAndReturnNSString:
-                                                       fileId]};
-    [Logger log:[NSString stringWithFormat:@"Sending success event for Upload Complete %@, ", bodyDict]];
-    [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_SUCCESSFULLY
-                       body:bodyDict];
-  };
+  NSString *sad = [NSString stringWithFormat:(NSString *) @"sadsaads%@", @"sadas"];
   
-  fileUploadCallback._uploadProgressBlock = ^(long fileHandle, double uploadProgress, double uploadedBytes) {
-    NSDictionary *body = @{UploadFileContract.FILE_HANDLE : @(fileHandle),
-                           UploadFileContract.PROGRESS : @(uploadProgress),
-                           UploadFileContract.UPLOADED : @(uploadedBytes)};
-    [Logger log:[NSString stringWithFormat:@"File upload progress: %@", body]];
-    [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_PROGRESS
-                       body: body];
-  };
+//  STFileUploadCallback *fileUploadCallback = [[STFileUploadCallback alloc] init];
+//
+//  fileUploadCallback._uploadCompleteBlock = ^(long fileHandle, NSString *fileId) {
+//    NSDictionary *bodyDict = @{UploadFileContract.FILE_HANDLE:@(fileHandle),
+//                               FileContract.FILE_ID : [DictionaryUtils checkAndReturnNSString:
+//                                                       fileId]};
+//    [Logger log:[NSString stringWithFormat:@"Sending success event for Upload Complete %@, ", bodyDict]];
+//    [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_SUCCESSFULLY
+//                       body:bodyDict];
+//  };
+//
+//  fileUploadCallback._uploadProgressBlock = ^(long fileHandle, double uploadProgress, double uploadedBytes) {
+//    NSDictionary *body = @{UploadFileContract.FILE_HANDLE : @(fileHandle),
+//                           UploadFileContract.PROGRESS : @(uploadProgress),
+//                           UploadFileContract.UPLOADED : @(uploadedBytes)};
+//    [Logger log:[NSString stringWithFormat:@"File upload progress: %@", body]];
+//    [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_PROGRESS
+//                       body: body];
+//  };
+//
+//  fileUploadCallback._uploadErrorBlock = ^(long fileHandle, int errorCode, NSString *errorMessage) {
+//    [Logger log:[NSString stringWithFormat:@"onError: %d, %@", errorCode, errorMessage]];
+//    [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_ERROR
+//                       body:@{@"errorMessage":errorMessage,
+//                              @"errorCode" : @(errorCode),
+//                              UploadFileContract.FILE_HANDLE: @(fileHandle)}];
+//  };
+//
+//  fileUploadCallback._uploadStartBlock = ^(long fileHandle) {
+//    NSDictionary *eventDict =@{@"fileHandle": @(fileHandle)};
+//    [Logger log:[NSString stringWithFormat:@"Upload Started: %@", eventDict]];
+//    [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_START
+//                       body:eventDict];
+//  };
+//
+//  STUploader *uploader = [[STUploader alloc] initWithBucketId:bucketId
+//                                                    localPath:localPath
+//                                                     fileName:fileName
+//                                             callbackNotifier:fileUploadCallback];
+//
+//  if([uploader isUploadValid])
+//  {
+//    [uploader startUpload];
+//  }
   
-  fileUploadCallback._uploadErrorBlock = ^(long fileHandle, int errorCode, NSString *errorMessage) {
-    [Logger log:[NSString stringWithFormat:@"onError: %d, %@", errorCode, errorMessage]];
-    [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_ERROR
-                       body:@{@"errorMessage":errorMessage,
-                              @"errorCode" : @(errorCode),
-                              UploadFileContract.FILE_HANDLE: @(fileHandle)}];
-  };
-  
-  fileUploadCallback._uploadStartBlock = ^(long fileHandle) {
-    NSDictionary *eventDict =@{@"fileHandle": @(fileHandle)};
-    [Logger log:[NSString stringWithFormat:@"Upload Started: %@", eventDict]];
-    [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_START
-                       body:eventDict];
-  };
-  
-  STUploader *uploader = [[STUploader alloc] initWithBucketId:bucketId
-                                                    localPath:localPath
-                                                     fileName:fileName
-                                             callbackNotifier:fileUploadCallback];
-  
-  if([uploader isUploadValid])
-  {
-    [uploader startUpload];
-  }
 }
 
 //resolver:(RCTPromiseResolveBlock) resolve

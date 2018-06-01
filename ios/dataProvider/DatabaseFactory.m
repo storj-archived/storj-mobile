@@ -61,6 +61,10 @@ static FMDatabase * _database;
       if(![self checkTablesExist]) {
         [self upgradeDatabase];
         NSLog(@"Updating DB. Drop and Create");
+      } else
+      {
+        //Clean uploading files if some left after crash
+        [self clean];
       }
     }
   }
@@ -126,6 +130,18 @@ static FMDatabase * _database;
   [_database close];
   
   return tablesExist;
+}
+
+-(void) clean
+{
+  if(![_database open]) {
+    NSLog(@"Database cannot be opened CLEAN");
+    
+    return;
+  }
+  
+  [_database executeUpdate: @"DELETE FROM uploadingFiles", UploadFileContract.TABLE_NAME]; //change
+  [_database close];
 }
 
 -(void) upgradeDatabase {

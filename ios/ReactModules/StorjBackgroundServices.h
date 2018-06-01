@@ -27,4 +27,6 @@
                  withLocalPath: (NSString *) localPath
                       fileName: (NSString *) fileName;
 
++(instancetype) sharedInstance;
+
 @end

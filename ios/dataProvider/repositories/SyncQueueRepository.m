@@ -86,7 +86,9 @@ static NSArray * columns;
 {
   NSDictionary* dict = [model toDictionary];
   
-  NSArray *keys = [dict keysOfEntriesPassingTest:
+  __block NSMutableArray * array = [NSMutableArray arrayWithCapacity:(NSUInteger) [dict count] - 2];
+  
+  [dict keysOfEntriesPassingTest:
                         ^BOOL(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
     if(
        (NSString *) key == SynchronizationQueueContract.ID
@@ -95,11 +97,12 @@ static NSArray * columns;
       return NO;
     }
     
+    [array addObject:(id) obj];
     return YES;
   }];
   
   
-  return [dict dictionaryWithValuesForKeys:keys];
+  return [dict dictionaryWithValuesForKeys:array];
 }
 
 -(SyncQueueEntryModel *) getSingleModelWithRequest: (NSString *) request params: (NSArray *) params

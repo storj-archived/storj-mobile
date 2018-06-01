@@ -111,6 +111,7 @@
 		F355E24520C025AB007DAEE5 /* SyncQueueEntryDbo.m in Sources */ = {isa = PBXBuildFile; fileRef = F355E24420C025AB007DAEE5 /* SyncQueueEntryDbo.m */; };
 		F355E24820C03102007DAEE5 /* SyncQueueEntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F355E24720C03102007DAEE5 /* SyncQueueEntryModel.m */; };
 		F355E24B20C04067007DAEE5 /* SyncQueueRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F355E24A20C04067007DAEE5 /* SyncQueueRepository.m */; };
+		F355E29520C1783C007DAEE5 /* UploadService.m in Sources */ = {isa = PBXBuildFile; fileRef = F355E29420C1783C007DAEE5 /* UploadService.m */; };
 		F389386220BFFBC900FB6C76 /* STFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F389386120BFFBC900FB6C76 /* STFileManager.m */; };
 		F389386520C00B9300FB6C76 /* SynchronizationQueueContract.m in Sources */ = {isa = PBXBuildFile; fileRef = F389386420C00B9300FB6C76 /* SynchronizationQueueContract.m */; };
 /* End PBXBuildFile section */
@@ -605,6 +606,8 @@
 		F355E24720C03102007DAEE5 /* SyncQueueEntryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyncQueueEntryModel.m; sourceTree = "<group>"; };
 		F355E24920C04050007DAEE5 /* SyncQueueRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncQueueRepository.h; sourceTree = "<group>"; };
 		F355E24A20C04067007DAEE5 /* SyncQueueRepository.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyncQueueRepository.m; sourceTree = "<group>"; };
+		F355E29320C16E71007DAEE5 /* UploadService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadService.h; sourceTree = "<group>"; };
+		F355E29420C1783C007DAEE5 /* UploadService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadService.m; sourceTree = "<group>"; };
 		F389386020BFFBC800FB6C76 /* STFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STFileManager.h; path = FileManager/STFileManager.h; sourceTree = SOURCE_ROOT; };
 		F389386120BFFBC900FB6C76 /* STFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STFileManager.m; path = FileManager/STFileManager.m; sourceTree = SOURCE_ROOT; };
 		F389386320C00AC100FB6C76 /* SynchronizationQueueContract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SynchronizationQueueContract.h; sourceTree = "<group>"; };
@@ -731,6 +734,7 @@
 		13B07FAE1A68108700A75B9A /* StorjMobile */ = {
 			isa = PBXGroup;
 			children = (
+				F355E26A20C16E26007DAEE5 /* Synchronization */,
 				F389385F20BFFB8400FB6C76 /* FileManager */,
 				DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */,
 				DC7632092084C40600B7C64A /* StorjMobile.entitlements */,
@@ -1124,6 +1128,15 @@
 				DCEB075320BEAFBC00D50758 /* STFileDownloadCallback.m */,
 			);
 			path = callbacks;
+			sourceTree = "<group>";
+		};
+		F355E26A20C16E26007DAEE5 /* Synchronization */ = {
+			isa = PBXGroup;
+			children = (
+				F355E29320C16E71007DAEE5 /* UploadService.h */,
+				F355E29420C1783C007DAEE5 /* UploadService.m */,
+			);
+			path = Synchronization;
 			sourceTree = "<group>";
 		};
 		F389385F20BFFB8400FB6C76 /* FileManager */ = {
@@ -1657,6 +1670,7 @@
 				DCDF6FF62062D5C4001B2F95 /* FileModel.m in Sources */,
 				DCEB535020697A55006B0624 /* EventNames.m in Sources */,
 				DCFA7519209110FA00EFA765 /* ThumbnailProcessor.m in Sources */,
+				F355E29520C1783C007DAEE5 /* UploadService.m in Sources */,
 				DCDF706E2064ACEC001B2F95 /* BucketRepository.m in Sources */,
 				DCDF707A2068B337001B2F95 /* StorjBackgroundServices.m in Sources */,
 				DC914C4A206BE5D400F0C4FF /* SyncModule.m in Sources */,
