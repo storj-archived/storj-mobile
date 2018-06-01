@@ -83,7 +83,7 @@ static NSString * const _BUCKET_ID = @"bucketId";
 +(NSString *) createTable
 {
   return [NSString stringWithFormat: @"create table if not exists %@ (\
-%@ TEXT primary key AUTOINCREMENT not null, \
+%@ INTEGER primary key AUTOINCREMENT not null, \
 %@ TEXT not null, \
 %@ TEXT not null, \
 %@ INTEGER default 0, \
@@ -93,7 +93,7 @@ static NSString * const _BUCKET_ID = @"bucketId";
 %@ TIMESTAMP default CURRENT_TIMESTAMP, \
 %@ TEXT not null, \
 %@ INTEGER, \
-FOREIGN KEY(%@) REFERENCES uploadingFiles(%@) ON DELETE CASCADE), \
+FOREIGN KEY(%@) REFERENCES uploadingFiles(%@) ON DELETE CASCADE, \
 FOREIGN KEY(%@) REFERENCES buckets(%@) ON DELETE CASCADE);",
           _TABLE_NAME, _ID, _FILE_NAME, _LOCAL_PATH, _STATUS, _ERROR_CODE, _SIZE, _COUNT,
           _CREATION_DATE, _BUCKET_ID, _FILE_HANDLE, _FILE_HANDLE, _FILE_HANDLE, _BUCKET_ID, _ID];
