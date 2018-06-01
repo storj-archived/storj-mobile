@@ -142,8 +142,7 @@ class MainContainer extends Component {
 
         this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
 
-        this.filePickerResponsePathes = [];
-
+        this.filePickerResponsePaths = [];
 
         this.animValue = new Animated.Value(0);
 
@@ -171,10 +170,6 @@ class MainContainer extends Component {
 
         this.props.listUploadingFiles();
     }
-    
-
-
-
 
     interpolate() {
         const moveY = this.animValue.interpolate({
@@ -280,16 +275,6 @@ class MainContainer extends Component {
         ).start(() => this.props.toggleSyncWindow(false));
     }
 
-
-
-
-
-
-
-
-
-
-
     async componentWillMount () {
         if(Platform.OS === "android") {
             BackHandler.addEventListener("hardwareBackPress", this.onHardwareBackPress);
@@ -383,7 +368,7 @@ class MainContainer extends Component {
 
         if(filePickerResponse.isSuccess) {
             filePickerResponse.result.forEach(file => {
-                this.filePickerResponsePathes.push(file.path);
+                this.filePickerResponsePaths.push(file.path);
             });
 
             this.props.openSelectBucketScreen(this.getBucketId.bind(this));
@@ -392,12 +377,12 @@ class MainContainer extends Component {
 
     getBucketId(params) {
         if(params.bucketId) {
-            this.filePickerResponsePathes.forEach(element => {
+            this.filePickerResponsePaths.forEach(element => {
                 ServiceModule.uploadFile(params.bucketId, element);
             });  
         }
 
-        this.filePickerResponsePathes = [];
+        this.filePickerResponsePaths = [];
     }
 
     async uploadFileToSelectedBuckets(type) {

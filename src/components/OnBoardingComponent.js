@@ -4,67 +4,26 @@ import {
     TouchableOpacity,
     StyleSheet,
     Image,
-    ScrollView
+    ScrollView,
+    Dimensions
 } from 'react-native';
 import React, { Component } from 'react';
 import ContentSlider from '../components/ContentSliderComponent';
 import onBoardingScreensConstants from '../utils/constants/onBoardingScreeensConstants';
 import { getDeviceWidth, getWidth, getHeight } from '../utils/adaptive';
 import { NavigationActions } from 'react-navigation';
+import SideSwipe from 'react-native-sideswipe';
 
-/**
- * Content of 1 onBoarding screen
- */
-SafetyOnBoardingScreen = () => {
+
+OnBoardingScreen = (props) =>  {
     return(
         <View style = { styles.contentContainer }>
             <View style = { styles.imageContainer }>
-                <Image style = { styles.image } source = { onBoardingScreensConstants.safetyImagePath } resizeMode = { 'contain' } />
+                <Image style = { styles.image } source = { props.imagePath } resizeMode = { 'contain' } />
             </View>
             <View style={ styles.textContainer }>
                 {
-                    onBoardingScreensConstants.safetyMainText.map((element, index) => {
-                        return <Text 
-                        key = {index} style = { styles.textInfo }>{ element }</Text>
-                    })
-                }
-            </View>
-        </View>
-    );
-};
-
-/**
- * Content of 2 onBoarding screen
- */
-IncomeOnBoardingScreen = () =>  {
-    return(
-        <View style = { styles.contentContainer }>
-            <View style = { styles.imageContainer }>
-                <Image style = { styles.image } source = { onBoardingScreensConstants.incomeImagePath } resizeMode = { 'contain' } />
-            </View>
-            <View style={ styles.textContainer }>
-                {
-                    onBoardingScreensConstants.incomeMainText.map((element, index) => {
-                        return <Text key = {index} style = { styles.textInfo }>{ element }</Text>
-                    })
-                }
-            </View>
-        </View>
-    );
-};
-
-/**
- * Content of 3 onBoarding screen
- */
-SpaceOnBoardingScreen = () =>  {
-    return(
-        <View style = { styles.contentContainer }>
-            <View style = { styles.imageContainer }>
-                <Image style = { styles.image } source = { onBoardingScreensConstants.spaceImagePath } resizeMode = { 'contain' } />
-            </View>
-            <View style={ styles.textContainer }>
-                {
-                    onBoardingScreensConstants.spaceMainText.map((element, index) => {
+                    props.textArray.map((element, index) => {
                         return <Text key = {index} style = { styles.textInfo }>{ element }</Text>
                     })
                 }
@@ -79,6 +38,10 @@ SpaceOnBoardingScreen = () =>  {
 export default class OnBoardingComponent extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            currentIndex: 0
+        }
     };
 
     /**
@@ -103,16 +66,38 @@ export default class OnBoardingComponent extends Component {
     }
 
     render() {
+        const { width } = Dimensions.get('window');
+
         return(
             <View style={ styles.screen }>
                 <View style = { styles.titleContainer }>
                     <Text style = { styles.titleText }>Welcome to Storj!</Text>
                 </View>
                 <View style={ styles.content }>
-                    <ContentSlider
-                        content = {[ SafetyOnBoardingScreen(), IncomeOnBoardingScreen(), SpaceOnBoardingScreen() ]}
-                        width = { getDeviceWidth() }
-                        position = { 0 } />  
+                    <SideSwipe
+                        index = { this.state.currentIndex }
+                        itemWidth = { getDeviceWidth() }
+                        contentOffset = { getWidth(30) }
+                        data = { [
+                            { imagePath: onBoardingScreensConstants.safetyImagePath, textArray: onBoardingScreensConstants.safetyMainText },
+                            { imagePath: onBoardingScreensConstants.incomeImagePath, textArray: onBoardingScreensConstants.incomeMainText },
+                            { imagePath: onBoardingScreensConstants.spaceImagePath, textArray: onBoardingScreensConstants.spaceMainText }
+                        ] }
+                        onIndexChange={ index => {
+                            let finalIndex = this.state.currentIndex;
+
+                            if(index === finalIndex) return;
+
+                            index >= finalIndex 
+                                ? finalIndex += 1
+                                : finalIndex -= 1;
+
+                            this.setState(() => ({ currentIndex: finalIndex }))
+                            
+                        }}
+                        renderItem = { ({ itemIndex, currentIndex, item, animatedValue }) => (
+                            OnBoardingScreen(item)
+                        )} />
                 </View>
                 <View style={ styles.footer }>                   
                     <TouchableOpacity 
@@ -198,6 +183,7 @@ const styles = StyleSheet.create({
         backgroundColor: params.colorBlue
     },
     contentContainer: {
+        backgroundColor: 'red',
         flex: 1,
         paddingVertical: params.contentPaddingVertical
     },
