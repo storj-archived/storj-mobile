@@ -8,6 +8,8 @@
 
 #import "BaseRepository.h"
 #import "DatabaseFactory.h"
+#import "Response.h"
+
 @implementation BaseRepository
 
 -(instancetype) init

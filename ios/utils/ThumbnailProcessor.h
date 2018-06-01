@@ -6,9 +6,9 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "SingleResponse.h"
-#import "FileRepository.h"
+@import UIKit;
+@class SingleResponse;
+@class FileRepository;
 
 #define THUMBNAIL_SIZE 64
 @interface ThumbnailProcessor : NSObject

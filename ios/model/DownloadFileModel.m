@@ -7,6 +7,7 @@
 //
 
 #import "DownloadFileModel.h"
+#import "DictionaryUtils.h"
 
 @implementation DownloadFileModel
 @synthesize _fileId;

@@ -11,6 +11,10 @@
 #import "FileModel.h"
 #import "FileContract.h"
 
+#import "DictionaryUtils.h"
+
+#import "Response.h"
+
 @implementation FileRepository
 
 static NSArray * columns;

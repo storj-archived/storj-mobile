@@ -6,10 +6,12 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "UploadFileModel.h"
-#import "UploadFileContract.h"
+@import Foundation;
 #import "IConvertibleToJS.h"
+
+@class UploadFileModel;
+@class UploadFileContract;
+
 @interface UploadFileDbo : NSObject<NSCopying>
 
 @property (nonatomic, strong) NSString *name;

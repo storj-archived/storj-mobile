@@ -8,6 +8,7 @@
 
 #import "SettingsRepository.h"
 #import "FMResultSet.h"
+#import "Response.h"
 
 @implementation SettingsRepository
 

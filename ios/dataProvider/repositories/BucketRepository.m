@@ -8,6 +8,10 @@
 
 #import "BucketRepository.h"
 
+#import "BaseRepository.h"
+#import "BucketContract.h"
+#import "Response.h"
+
 @implementation BucketRepository
 
 static NSArray *columns;

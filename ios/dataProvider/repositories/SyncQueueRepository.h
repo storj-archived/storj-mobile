@@ -5,11 +5,13 @@
 //  Created by Developer Mac on 31.05.2018.
 //  Copyright © 2018 Storj. All rights reserved.
 //
+
+@import Foundation;
 #import "BaseRepository.h"
-#import "Response.h"
 #import "SyncQueueEntryModel.h"
 #import "SyncQueueEntryDbo.h"
-#import "SynchronizationQueueContract.h"
+
+@class Response;
 
 #ifndef SyncQueueRepository_h
 #define SyncQueueRepository_h

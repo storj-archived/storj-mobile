@@ -6,7 +6,7 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @interface IResponse : NSObject
 

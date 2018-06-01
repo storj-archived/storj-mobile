@@ -7,6 +7,7 @@
 //
 
 #import "DownloadFileProgressModel.h"
+#import "DictionaryUtils.h"
 
 @implementation DownloadFileProgressModel
 @synthesize _bucketId;

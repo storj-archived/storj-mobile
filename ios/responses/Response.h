@@ -6,10 +6,10 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "Error.h"
+@import Foundation;
 #import "IConvertibleToJS.h"
-#import "IResponse.h"
+
+@class Error;
 
 #define RESPONSE_KEY_IS_SUCCESS "isSuccess"
 #define RESPONSE_KEY_ERROR "error"

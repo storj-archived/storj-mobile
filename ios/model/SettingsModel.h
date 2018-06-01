@@ -6,7 +6,7 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import "IConvertibleToJS.h"
 
 @interface SettingsModel : NSObject<IConvertibleToJS>

@@ -8,6 +8,8 @@
 
 #import "STFileDownloadCallback.h"
 
+@import StorjIOS;
+
 @implementation STFileDownloadCallback
 
 @synthesize _downloadErrorBlock, _downloadStartBlock, _downloadCompleteBlock, _downloadProgressBlock;

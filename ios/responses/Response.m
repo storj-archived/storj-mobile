@@ -7,6 +7,7 @@
 //
 
 #import "Response.h"
+#import "Error.h"
 
 @implementation Response
 

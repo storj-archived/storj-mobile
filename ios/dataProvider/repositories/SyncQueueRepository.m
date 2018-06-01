@@ -6,8 +6,9 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "SyncQueueRepository.h"
+#import "Response.h"
+#import "SynchronizationQueueContract.h"
 
 typedef void (^getCallback)(FMResultSet *resultSet);
 

@@ -7,6 +7,10 @@
 //
 
 #import "ThumbnailProcessor.h"
+#import "SingleResponse.h"
+#import "FileRepository.h"
+
+@import Foundation;
 
 @implementation ThumbnailProcessor
 @synthesize _fileRepository;

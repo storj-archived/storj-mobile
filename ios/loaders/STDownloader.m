@@ -8,22 +8,23 @@
 
 #import "STDownloader.h"
 
-@import StorjIOS;
-
-#import "DownloadFileModel.h"
 #import "FileModel.h"
+#import "DownloadFileModel.h"
 
-#import "FileUtils.h"
+#import "FileDbo.h"
+#import "UploadFileDbo.h"
 
 #import "FileRepository.h"
+#import "UploadFileRepository.h"
 
+#import "FileUtils.h"
 #import "StorjWrapperSingletone.h"
+#import "ThumbnailProcessor.h"
+#import "Logger.h"
 
 #import "STFileDownloadCallback.h"
 
-#import "ThumbnailProcessor.h"
-
-#import "Logger.h"
+#import "SingleResponse.h"
 
 @implementation STDownloader
 {

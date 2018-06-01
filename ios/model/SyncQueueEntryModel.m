@@ -6,8 +6,11 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "SyncQueueEntryModel.h"
+#import "SyncQueueEntryDbo.h"
+#import "SynchronizationQueueContract.h"
+
+#import "DictionaryUtils.h"
 
 @implementation SyncQueueEntryModel
 

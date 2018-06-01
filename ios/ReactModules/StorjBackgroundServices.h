@@ -8,27 +8,12 @@
 
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventEmitter.h>
-#import <React/RCTLog.h>
-#import "DatabaseFactory.h"
-#import "BaseRepository.h"
-#import "BucketRepository.h"
-#import "FileRepository.h"
-#import "UploadFileRepository.h"
-#import "FileDeleteModel.h"
-#import "UploadFileDbo.h"
-#import "UploadFileModel.h"
-#import "UploadFileProgressModel.h"
-#import "BucketModel.h"
-#import "ListResponse.h"
-#import "SingleResponse.h"
-#import "MethodHandler.h"
-#import "DictionaryUtils.h"
-#import "FileUtils.h"
-#import "EventNames.h"
-#import "StorjWrapperSingletone.h"
-#import "ThumbnailProcessor.h"
 
-@import StorjIOS;
+@class BucketRepository;
+@class FileRepository;
+@class UploadFileRepository;
+
+@class StorjWrapper;
 
 @interface StorjBackgroundServices : RCTEventEmitter<RCTBridgeModule>
 

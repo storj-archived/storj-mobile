@@ -6,8 +6,9 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import Foundation;
 #import "IConvertibleToJS.h"
+
 @class FileModel;
 
 @interface FileDbo : NSObject<IConvertibleToJS, NSCopying> {

@@ -6,7 +6,11 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
+@import StorjIOS;
 #import "BucketModel.h"
+#import "BucketContract.h"
+
+#import "DictionaryUtils.h"
 
 @implementation BucketModel
 

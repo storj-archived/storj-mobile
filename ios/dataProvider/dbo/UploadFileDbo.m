@@ -7,7 +7,8 @@
 //
 
 #import "UploadFileDbo.h"
-
+#import "UploadFileModel.h"
+#import "UploadFileContract.h"
 
 @implementation UploadFileDbo
 

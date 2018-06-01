@@ -8,23 +8,24 @@
 
 #import "STUploader.h"
 
-@import StorjIOS;
-
 #import "UploadFileModel.h"
 #import "FileModel.h"
 
-#import "FileUtils.h"
+#import "UploadFileDbo.h"
+#import "FileDbo.h"
 
 #import "UploadFileRepository.h"
 #import "FileRepository.h"
 
+#import "FileUtils.h"
+#import "Logger.h"
+#import "ThumbnailProcessor.h"
+
+#import "SingleResponse.h"
+
 #import "StorjWrapperSingletone.h"
 
 #import "STFileUploadCallback.h"
-
-#import "ThumbnailProcessor.h"
-
-#import "Logger.h"
 
 @implementation STUploader
 {

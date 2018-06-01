@@ -6,16 +6,16 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import "Response.h"
+@import Foundation;
 
 @interface DictionaryUtils : NSObject
 
-+(NSString *) checkAndReturnNSString:(NSString *)checkedString;
++(NSString *) checkAndReturnNSString: (NSString *) checkedString;
 
-+(NSString *) convertToJsonWithDictionary:(NSDictionary *)dictionary;
++(NSString *) convertToJsonWithDictionary: (NSDictionary *) dictionary;
 
-+(NSString *) convertToJsonWithArray:(NSArray *)array;
++(NSString *) convertToJsonWithArray: (NSArray *) array;
 
-+(BOOL) isNSStringValid :(NSString *) stringToCheck;
++(BOOL) isNSStringValid: (NSString *) stringToCheck;
 
 @end

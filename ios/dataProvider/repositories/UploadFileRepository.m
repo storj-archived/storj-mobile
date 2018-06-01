@@ -10,6 +10,8 @@
 
 #import "UploadFileContract.h"
 
+#import "Response.h"
+
 
 @implementation UploadFileRepository
 

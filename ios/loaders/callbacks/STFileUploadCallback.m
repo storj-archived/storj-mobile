@@ -8,6 +8,7 @@
 
 #import "STFileUploadCallback.h"
 
+@import StorjIOS;
 
 @implementation STFileUploadCallback
 

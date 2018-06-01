@@ -6,10 +6,12 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
+@import Foundation;
 #import "BaseRepository.h"
+
 #import "BucketDbo.h"
 #import "BucketModel.h"
-#import "Response.h"
+@class Response;
 
 @interface BucketRepository : BaseRepository
 

@@ -6,15 +6,8 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "FileDbo.h"
-#import "UploadFileDbo.h"
-#import "UploadFileRepository.h"
-#import "FileRepository.h"
-
+@import Foundation;
 @class STFileUploadCallback;
-
-//@class StorjIOS;
 
 @interface STUploader : NSObject
   

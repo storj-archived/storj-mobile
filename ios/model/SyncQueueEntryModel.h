@@ -6,10 +6,10 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import "SyncQueueEntryDbo.h"
-#import "SynchronizationQueueContract.h"
-#import "DictionaryUtils.h"
+@import Foundation;
 #import "IConvertibleToJS.h"
+
+@class SyncQueueEntryDbo;
 
 #ifndef SyncQueueEntryModel_h
 #define SyncQueueEntryModel_h

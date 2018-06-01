@@ -6,8 +6,7 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-@import StorjIOS;
+@import Foundation;
 
 typedef void(^ STUploadProgressBlock)(long fileHandle, double uploadProgress, double uploadedBytes);
 
@@ -20,11 +19,8 @@ typedef void(^STUploadStartBlock)(long fileHandle);
 @interface STFileUploadCallback : NSObject
 
 @property (nonatomic) _Nonnull STUploadProgressBlock _uploadProgressBlock;
-
 @property (nonatomic) _Nonnull STUploadCompleteBlock _uploadCompleteBlock;
-
 @property (nonatomic) _Nonnull STUploadErrorBlock _uploadErrorBlock;
-
 @property (nonatomic) _Nonnull STUploadStartBlock _uploadStartBlock;
 
 -(void) uploadProgressWithFileHandle: (long) fileHandle

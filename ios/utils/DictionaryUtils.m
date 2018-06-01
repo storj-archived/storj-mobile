@@ -16,7 +16,6 @@
   return checkedString == nil ? @"" : checkedString;
 }
 
-
 +(NSString *) convertToJsonWithDictionary: (NSDictionary *) dictionary {
   NSError * err;
   NSData *jsonData = [NSJSONSerialization dataWithJSONObject: dictionary options: 0 error: &err];

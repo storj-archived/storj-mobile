@@ -7,6 +7,7 @@
 //
 
 #import "FileDeleteModel.h"
+#import "DictionaryUtils.h"
 
 @implementation FileDeleteModel
 

@@ -2,16 +2,13 @@
 //  DatabaseFactory.h
 //  StorjMobile
 //
-//  Created by Barterio on 3/12/18.
+//  Created by Bohdan Artemenko on 3/12/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "FMDB.h"
-#import "BucketContract.h"
-#import "FileContract.h"
-#import "UploadFileContract.h"
-#import "SynchronizationQueueContract.h"
+@import Foundation;
+
+@class FMDatabase;
 
 #define DATABASE_NAME "storj.db"
 
@@ -20,9 +17,9 @@
 }
 
 +(DatabaseFactory *) getSharedDatabaseFactory;
--(BOOL) createDatabase;
 
 -(FMDatabase *) getSharedDb;
 
 -(NSString *)getDBPath;
+
 @end

@@ -7,8 +7,10 @@
 //
 
 #import "SettingsDbo.h"
-#import "DictionaryUtils.h"
+#import "SettingsModel.h"
 #import "SettingsContract.h"
+
+#import "DictionaryUtils.h"
 
 @implementation SettingsDbo
 

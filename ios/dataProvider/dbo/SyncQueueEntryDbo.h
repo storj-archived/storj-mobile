@@ -10,6 +10,7 @@
 #define SynchronizationQueueEntryDbo_h
 
 @interface SyncQueueEntryDbo : NSObject
+
 @property (readwrite, assign) int _id;
 @property (readwrite, assign) NSString *fileName;
 @property (readwrite, assign) NSString *localPath;

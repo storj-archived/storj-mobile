@@ -8,6 +8,9 @@
 
 #import "FileModel.h"
 #import "FileContract.h"
+#import "FileDbo.h"
+#import "DictionaryUtils.h"
+
 
 @implementation FileModel
 

@@ -6,11 +6,11 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "IConvertibleToJS.h"
-#import "DictionaryUtils.h"
-#import "FileDbo.h"
+@import Foundation;
 @import StorjIOS;
+#import "IConvertibleToJS.h"
+
+@class FileDbo;
 
 #define FILE_MODEL_BUCKET_ID "bucketId"
 #define FILE_MODEL_INDEX "index"

@@ -6,9 +6,8 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import "IConvertibleToJS.h"
-#import "DictionaryUtils.h"
 
 #define UPLOAD_FILE_PROGRESS_MODEL_BUCKET_ID "bucketId"
 #define UPLOAD_FILE_PROGRESS_MODEL_FILE_PATH "filePath"

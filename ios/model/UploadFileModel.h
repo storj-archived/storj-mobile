@@ -6,10 +6,10 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+@import Foundation;
 #import "IConvertibleToJS.h"
-#import "DictionaryUtils.h"
-#import "UploadFileContract.h"
+
 @class UploadFileDbo;
 @class UploadFileContract;
 

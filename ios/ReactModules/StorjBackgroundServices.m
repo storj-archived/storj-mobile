@@ -15,6 +15,38 @@
 #import "STFileUploadCallback.h"
 #import "STFileDownloadCallback.h"
 
+#import "DatabaseFactory.h"
+
+#import "BucketRepository.h"
+#import "FileRepository.h"
+#import "UploadFileRepository.h"
+
+#import "BucketContract.h"
+#import "FileContract.h"
+#import "UploadFileContract.h"
+#import "SynchronizationQueueContract.h"
+#import "SettingsContract.h"
+
+#import "FileUtils.h"
+#import "DictionaryUtils.h"
+#import "StorjWrapperSingletone.h"
+#import "ThumbnailProcessor.h"
+
+#import "FileDeleteModel.h"
+#import "UploadFileDbo.h"
+#import "UploadFileModel.h"
+#import "UploadFileProgressModel.h"
+
+#import "BucketModel.h"
+#import "BucketDbo.h"
+#import "ListResponse.h"
+#import "SingleResponse.h"
+#import "MethodHandler.h"
+
+#import "EventNames.h"
+
+@import StorjIOS;
+
 #import "Logger.h"
 
 @implementation StorjBackgroundServices

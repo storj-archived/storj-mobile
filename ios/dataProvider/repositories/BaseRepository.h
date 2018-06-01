@@ -6,11 +6,10 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "ListResponse.h"
-#import "SingleResponse.h"
-#import "Response.h"
+@import Foundation;
 #import "FMDB.h"
+
+@class Response;
 
 @interface BaseRepository : NSObject
 

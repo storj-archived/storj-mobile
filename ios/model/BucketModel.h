@@ -6,13 +6,12 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
+
+@class SJBucket;
+@class BucketContract;
+
 #import "IConvertibleToJS.h"
-#import "DictionaryUtils.h"
-#import "StorjLibIos.h"
-#import "BucketContract.h"
-//#import "storj.h"
-@import StorjIOS;
 
 @interface BucketModel : NSObject<IConvertibleToJS>
 

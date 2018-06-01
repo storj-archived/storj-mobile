@@ -9,7 +9,7 @@
 #ifndef SynchronizationQueueContract_h
 #define SynchronizationQueueContract_h
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @interface SynchronizationQueueContract : NSObject
 

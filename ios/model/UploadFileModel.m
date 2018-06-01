@@ -9,6 +9,7 @@
 #import "UploadFileModel.h"
 #import "UploadFileDbo.h"
 #import "UploadFileContract.h"
+#import "DictionaryUtils.h"
 
 @implementation UploadFileModel
 @synthesize _bucketId, _fileHandle, _name, _progress, _size, _uploaded, _uri;

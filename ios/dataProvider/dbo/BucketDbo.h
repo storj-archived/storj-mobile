@@ -6,10 +6,11 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import Foundation;
 #import "IConvertibleToJS.h"
-#import "BucketModel.h"
-#import "BucketContract.h"
+
+@class BucketModel;
+@class BucketContract;
 
 @interface BucketDbo : NSObject<IConvertibleToJS, NSCopying> {
   NSString *_id;

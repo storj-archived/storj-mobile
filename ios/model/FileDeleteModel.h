@@ -6,9 +6,8 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
+@import Foundation;
 #import "IConvertibleToJS.h"
-#import "DictionaryUtils.h"
-#import <Foundation/Foundation.h>
 
 #define FILE_DELETE_MODEL_BUCKET_ID "bucketId"
 #define FILE_DELETE_MODEL_FILE_ID "fileId"

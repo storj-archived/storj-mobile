@@ -6,9 +6,8 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import "IConvertibleToJS.h"
-#import "DictionaryUtils.h"
 
 #define DOWNLOADING_FILE_MODEL_FILE_ID "fileId"
 #define DOWNLOADING_FILE_MODEL_LOCAL_PATH "localPath"

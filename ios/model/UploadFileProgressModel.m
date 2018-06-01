@@ -7,8 +7,10 @@
 //
 
 #import "UploadFileProgressModel.h"
+#import "DictionaryUtils.h"
 
 @implementation UploadFileProgressModel
+
 @synthesize _bucketId;
 @synthesize _filePath;
 @synthesize _progress;

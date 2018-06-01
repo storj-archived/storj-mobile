@@ -8,6 +8,8 @@
 
 #import "BucketDbo.h"
 #import "DictionaryUtils.h"
+#import "BucketModel.h"
+#import "BucketContract.h"
 
 @implementation BucketDbo
 

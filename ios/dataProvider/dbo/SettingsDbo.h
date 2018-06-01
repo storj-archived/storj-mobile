@@ -6,10 +6,10 @@
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import "SettingsContract.h"
 
-#import "SettingsModel.h"
+@class SettingsModel;
 
 @interface SettingsDbo : NSObject
 

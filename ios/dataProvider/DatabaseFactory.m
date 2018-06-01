@@ -7,6 +7,12 @@
 //
 
 #import "DatabaseFactory.h"
+#import "FMDB.h"
+
+#import "BucketContract.h"
+#import "FileContract.h"
+#import "UploadFileContract.h"
+#import "SynchronizationQueueContract.h"
 #import "SettingsContract.h"
 
 static DatabaseFactory *_sharedInstance = nil;
@@ -136,7 +142,7 @@ static FMDatabase * _database;
   [_database executeUpdate:@"DROP TABLE IF EXISTS ?", BucketContract.TABLE_NAME];
   [_database executeUpdate:@"DROP TABLE IF EXISTS ?", FileContract.TABLE_NAME];
   [_database executeUpdate:@"DROP TABLE IF EXISTS ?", UploadFileContract.TABLE_NAME];
-  [_database executeUpdate:@"DROP TABLE IF EXISTS ?", SynchronizationQueueContract.TABLE_NAME]
+  [_database executeUpdate:@"DROP TABLE IF EXISTS ?", SynchronizationQueueContract.TABLE_NAME];
   [_database executeUpdate:@"DROP TABLE IF EXISTS ?", SettingsContract.TABLE_NAME];
   
   [_database close];
