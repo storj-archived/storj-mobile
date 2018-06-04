@@ -386,6 +386,41 @@ IOS:
 <a name="anchorFeatures"></a>
 ## Features
 
+Storj Mobile iOS and Android App is multifunctional cloud storage consumer mobile application that allows to individual use all popular cloud storage features but in very secure way and to store files around distributed network of computers around the world.
+
+We designed Storj Mobile applications with the next list of features inside:
+- registration
+- authorization
+- file download
+- file upload
+- download cancellation
+- file preview
+- file deletion
+- file marking (favorite list)
+- bucket creation
+- bucket deletion 
+- bucket marking (favorite list)
+- QR generation with login credentials inside
+- QR code scanner
+- Two factor Authentication through internal PIN code to login
+- Buckets list from my Storj Account
+- Files list from chosen bucket
+- Take a photo with next uploading to one of the list of buckets
+- Sort files/buckets (by date, by name)
+- File Copying 
+- Files/Buckets Grid View
+- Files/Buckets List View
+- File/Buckets Selection bar (to do an action with multiple files/buckets in one time)
+- Search around buckets and files
+- Billing to help user top up his Storj account Balance via STORJ and Bitcoins
+- Mnemonic (secret phrase) generation
+- Synchronization (from device to Storj)
+- Multiple Synchronization options (When charging, Wi-Fi only, Sync optional folders, Sync cancellation, synchronization que)
+- Changing Password
+
+- Log Out
+
+
 <a name="anchorProjStruct"></a>
 ## Project structure
 
