@@ -76,8 +76,8 @@ export default class OnBoardingComponent extends Component {
                 <View style={ styles.content }>
                     <SideSwipe
                         index = { this.state.currentIndex }
-                        itemWidth = { getDeviceWidth() }
-                        contentOffset = { getWidth(30) }
+                        itemWidth = { getWidth(349) }
+                        contentOffset = { 0 }
                         data = { [
                             { imagePath: onBoardingScreensConstants.safetyImagePath, textArray: onBoardingScreensConstants.safetyMainText },
                             { imagePath: onBoardingScreensConstants.incomeImagePath, textArray: onBoardingScreensConstants.incomeMainText },
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
         backgroundColor: params.colorBlue
     },
     contentContainer: {
-        backgroundColor: 'red',
+        // backgroundColor: 'red',
         flex: 1,
         paddingVertical: params.contentPaddingVertical
     },
@@ -212,7 +212,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent'
     },
     textInfo: {
-        fontFamily: 'Montserrat',
+        marginLeft: getWidth(3),
+        fontFamily: 'Montserrat-Regular',
         lineHeight: getHeight(25),
         fontSize: params.text,
         color: params.colorDarkBlue
