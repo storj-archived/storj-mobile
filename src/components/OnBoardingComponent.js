@@ -15,22 +15,25 @@ import { NavigationActions } from 'react-navigation';
 import SideSwipe from 'react-native-sideswipe';
 
 
-OnBoardingScreen = (props) =>  {
+OnBoardingScreen = (props) => {
     return(
         <View style = { styles.contentContainer }>
             <View style = { styles.imageContainer }>
                 <Image style = { styles.image } source = { props.imagePath } resizeMode = { 'contain' } />
             </View>
             <View style={ styles.textContainer }>
-                {
-                    props.textArray.map((element, index) => {
-                        return <Text key = {index} style = { styles.textInfo }>{ element }</Text>
-                    })
-                }
+                <Text style = { styles.textInfo }>{ props.textArray }</Text>
             </View>
         </View>
     );
 };
+
+PaginationComponent = (props) => {
+    return(<View style = { styles.paginationCompContainer }>
+                <View style = {[ styles.paginationComponent, { backgroundColor: props.color }]} />
+            </View>
+    );
+}
 
 /**
  * OnBoarding component, using SliderComponent to switch between 1 and 2 content screens, described above
@@ -67,6 +70,11 @@ export default class OnBoardingComponent extends Component {
 
     render() {
         const { width } = Dimensions.get('window');
+        let data = [
+            { imagePath: onBoardingScreensConstants.safetyImagePath, textArray: onBoardingScreensConstants.safetyMainText },
+            { imagePath: onBoardingScreensConstants.incomeImagePath, textArray: onBoardingScreensConstants.incomeMainText },
+            { imagePath: onBoardingScreensConstants.spaceImagePath, textArray: onBoardingScreensConstants.spaceMainText }
+        ];
 
         return(
             <View style={ styles.screen }>
@@ -78,11 +86,7 @@ export default class OnBoardingComponent extends Component {
                         index = { this.state.currentIndex }
                         itemWidth = { getWidth(349) }
                         contentOffset = { 0 }
-                        data = { [
-                            { imagePath: onBoardingScreensConstants.safetyImagePath, textArray: onBoardingScreensConstants.safetyMainText },
-                            { imagePath: onBoardingScreensConstants.incomeImagePath, textArray: onBoardingScreensConstants.incomeMainText },
-                            { imagePath: onBoardingScreensConstants.spaceImagePath, textArray: onBoardingScreensConstants.spaceMainText }
-                        ] }
+                        data = { data }
                         onIndexChange={ index => {
                             let finalIndex = this.state.currentIndex;
 
@@ -98,6 +102,17 @@ export default class OnBoardingComponent extends Component {
                         renderItem = { ({ itemIndex, currentIndex, item, animatedValue }) => (
                             OnBoardingScreen(item)
                         )} />
+                    <View style = { styles.paginationContainer }>
+                        {
+                            data.map((element, index) => {
+                                return(
+                                    <PaginationComponent
+                                        key = { index }
+                                        color = { index === this.state.currentIndex ? '#939BA6' : '#FFFFFF' } />
+                                )
+                            })
+                        }
+                    </View>
                 </View>
                 <View style={ styles.footer }>                   
                     <TouchableOpacity 
@@ -221,6 +236,25 @@ const styles = StyleSheet.create({
     image: {
         height: getHeight(250),
         width: getWidth(335)
+    },
+    paginationContainer: { 
+        marginTop: getHeight(10), 
+        height: getHeight(20), 
+        width: getDeviceWidth() - getWidth(40), 
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        justifyContent: 'center'
+    },
+    paginationCompContainer: {
+        width: getWidth(17), 
+        alignItems: "center"
+    },
+    paginationComponent: { 
+        height: getHeight(7), 
+        width: getWidth(7), 
+        borderRadius: 50, 
+        borderWidth: 1,
+        borderColor: '#C6D5DF' 
     }
 });
 
