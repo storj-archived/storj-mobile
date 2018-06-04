@@ -80,11 +80,15 @@ Generates new mnemonic. 24 words
 
 ###### Android
 
-```static native String generateMnemonic(int var)```
+```java
+static native String generateMnemonic(int var)
+```
 
 ###### iOS
 
-```-(NSString *_Nullable)generateMnemonic:(int)strength```
+```objc
+-(NSString *_Nullable)generateMnemonic:(int)strength
+```
 
 <a name="anchorAuthCheckMnemonic"></a>
 ##### Check mnemonic
@@ -92,11 +96,15 @@ Checks if mnemonic is correct. The only parameter - is mnemonic string.
 
 ###### Android
 
-```static native boolean checkMnemonic(String var)```
+```java
+static native boolean checkMnemonic(String var)
+```
 
 ###### iOS
 
-```-(BOOL)checkMnemonic:(NSString *_Nonnull)mnemonic```
+```objc
+-(BOOL)checkMnemonic:(NSString *_Nonnull)mnemonic
+```
 
 <a name="anchorAuthVerifyKeys"></a>
 ##### Verify keys
@@ -104,11 +112,13 @@ Verifies if user with such credentials exists. It won't return true if user hasn
 
 ###### Android
 
-```int verifyKeys(String user, String pass)```
+```java
+int verifyKeys(String user, String pass)
+```
 
 ###### iOS
 
-```
+```objc
 -(BOOL)verifyKeysWithUserEmail:(NSString *_Nonnull) email 
 andPassword:(NSString *_Nonnull)password
 ```
@@ -120,7 +130,9 @@ Checks if ther is auth file on the device. Return true if file exists, false oth
 
 ###### Android
 
-```boolean keysExist()```
+```java
+boolean keysExist()
+```
 
 ###### iOS
 
@@ -130,11 +142,13 @@ Stores new auth file on the device that is encrypted with passcode. By default, 
 
 ###### Android
 
-```importKeys(email, password, mnemonic, passcode)```
+```java
+importKeys(email, password, mnemonic, passcode)
+```
 
 ###### iOS
 
-```
+```objc
 -(BOOL)importKeysWithEmail:(NSString *) email
               password:(NSString *) password
               mnemonic:(NSString *) mnemonic
@@ -147,11 +161,15 @@ Deletes auth file from the device.
 
 ###### Android
 
-```boolean deleteKeys()```
+```java
+boolean deleteKeys()
+```
 
 ###### iOS
 
-```-(BOOL) deleteAuthFile```
+```objc
+-(BOOL) deleteAuthFile
+```
 
 <a name="anchorAuthGetKeys"></a>
 ##### Get keys
@@ -159,11 +177,13 @@ Reads keys from auth file. If it's encrypted should supply valid one. By default
 
 ###### Android 
 
-```Keys getKeys(String passphrase)```
+```java
+Keys getKeys(String passphrase)
+```
 
 Return instance of Keys: 
 
-```
+```java
 class Keys {
     private String user;
     private String pass;
@@ -173,11 +193,13 @@ class Keys {
 
 ###### iOS
 
-```-(NSDictionary *_Nullable)getKeysWithPassCode:(NSString *_Nonnull) passcode```
+```objc
+-(NSDictionary *_Nullable)getKeysWithPassCode:(NSString *_Nonnull) passcode
+```
 
 Returns NSDictionary with keys data :
 
-```
+```objc
 @{@"email":email,
   @"password":password,
   @"mnemonic":mnemonic}
@@ -189,13 +211,15 @@ Register new user with given email and password. Send email with confirmation li
 
 ###### Android
 
-```void register(String user, String pass, RegisterCallback callback)```
+```java
+void register(String user, String pass, RegisterCallback callback)
+```
 
 Check what is [RegisterCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/RegisterCallback.java)
 
 ###### iOS
 
-```
+```objc
 -(void)registerUser:(NSString * _Nonnull)username
            password:(NSString * _Nonnull)password
        withCallback:(RegistrationCallback* _Nonnull) callback;
@@ -213,7 +237,7 @@ You are able to create and to delete buckets.
 
 Bucket model general scheme: 
 
-```
+```java
 string id
 string name
 string created
@@ -224,13 +248,17 @@ boolean decrypted
 
 ###### Android
 
-```public void getBuckets(GetBucketsCallback callback)```
+```java
+public void getBuckets(GetBucketsCallback callback)
+```
 
 [GetBucketsCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/GetBucketsCallback.java)
 
 ###### iOS
 
-```-(void)getBucketListWithCompletion:(BucketListCallback* _Nonnull)completion```
+```objc
+-(void)getBucketListWithCompletion:(BucketListCallback* _Nonnull)completion
+```
 
 [BucketListCallback]()
 
@@ -238,14 +266,14 @@ boolean decrypted
 ##### Bucket creation
 
 ###### Android 
-```
+```java
 void createBucket(String bucketName, CreateBucketCallback callback)
 ```
 This method has two parameters - bucket name and [CreateBucketCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/CreateBucketCallback.java) callback.
 
 ###### IOS 
 
-```
+```objc
 -(void)createBucket:(NSString *_Nonnull)bucketName
        withCallback:(BucketCreateCallback* _Nonnull)callback;
 ```
@@ -260,7 +288,7 @@ To delete bucket you should call:
 
 ###### Android
 
-```
+```java
 void deleteBucket(String bucketId, DeleteBucketCallback callback)
 ```
 
@@ -268,7 +296,7 @@ This method has two parameters - String bucketId and [DeleteBucketCallback](http
 
 ###### iOS
 
-```
+```objc
 -(void)deleteBucket:(NSString *_Nonnull)bucketName
      withCompletion:(BucketDeleteCallback* _Nonnull)callback;
 ```
@@ -283,7 +311,7 @@ Files could be uploaded to Storj Network, downloaded from it and deleted.
 
 Example of file class in [Java-libstorj](https://github.com/storj/java-libstorj)
 
-```
+```java
 public class File {
     private String id;
     private String bucketId;
@@ -304,7 +332,9 @@ Before uploading file will be encrypted, and splitted on little chunks. During t
 To upload file you should call
 
 Android:
- ```long uploadFile(String bucketId, String localPath, UploadFileCallback callback)```
+ ```java 
+ long uploadFile(String bucketId, String localPath, UploadFileCallback callback)
+ ```
  
  This method has three parameters - id of the bucket, path, to the file, and [UploadFileCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/UploadFileCallback.java)
 
@@ -312,7 +342,9 @@ Return value of this method - is fileHandle, that is needed to cancel upload.
 
 File upload cancellation:
 
-```boolean cancelUpload(long uploadState)```
+```java
+boolean cancelUpload(long uploadState)
+```
 
 Just save you fileHandle and pass it as a parameter to this method.
 
@@ -320,7 +352,9 @@ File uploading propgress:
 
 in your [UploadFileCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/UploadFileCallback.java)
 you can find 
-```void onProgress(String filePath, double progress, long uploadedBytes, long totalBytes)```
+```java
+void onProgress(String filePath, double progress, long uploadedBytes, long totalBytes)
+```
 callback. It parameters contain all needed information to implement progress of file uploading in your application.
 
 IOS:
@@ -331,7 +365,9 @@ Android:
 
 Before file downloading you should check that your device has enough free memory in its disk space. In other case - you can face issues in download behaviour.
 
-```long downloadFile(String bucketId, String fileId, String localPath, DownloadFileCallback callback)```
+```java
+long downloadFile(String bucketId, String fileId, String localPath, DownloadFileCallback callback)
+```
 
 This method has three parameters - id of the file, path, to the file, and [DownloadFileCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/DownloadFileCallback.java)
 
@@ -436,22 +472,27 @@ Next select Basic Activity pattern.
 2. Add libstorj-android dependency to build.gradle (Module:app)
 After adding it should looks like:
 
+```Gradle
 dependencies {
     implementation 'io.storj:libstorj-android:0.7.2'
     ...
 }
+```
 
 If you are using older versions of Android it could be a bit different. For example:
+```Gradle
 dependencies {
     compile 'io.storj:libstorj-android:0.7.2'
     ...
 }
+```
 
 After this press File -> Sync project with gradle files
 
 Also add next line to your AndroidManifest.xml
-
+```XML
     <uses-permission android:name="android.permission.INTERNET" />
+```
 
 3. Implementation
 
@@ -469,7 +510,7 @@ Create new class with the RegisterModule name there.
 
 
 
-````
+````java
 package StorjModule;
 
 import android.content.Context;
@@ -552,10 +593,9 @@ public class RegisterModule {
         }).start();
     }
 }
-
 ````
 
-````
+````java
 private Storj getStorj() {
         return StorjAndroid.getInstance(_context);
     }
@@ -565,14 +605,14 @@ Storj context is a Singleton.
 
 First of all we should create an account.
 
-````
+````java
 public boolean register(final String login, final String password)
 ````
 This method requires RegisterCallback. So let implement this interface in our Activity.
 
 Create new Activity, called RegisterActivity
 
-````
+````java
 package com.mystorjappl.mystorjapp;
 
 import android.support.v7.app.AppCompatActivity;
@@ -616,32 +656,32 @@ After creating an account you are able to login (create keys)
 
 To create keys you should use 
 
-````
+````java
 public boolean importKeys(String email, String password, String mnemonic, String passcode)
 ````
 
 To generate and check mnemonic use next methods:
 
-````
+````java
 public boolean checkMnemonic(String mnemonic)
 public String generateMnemonic()
 ````
 
 To check if your account exists you can use 
 
-````
+````java
 public boolean verifyKeys(String email, String password)
 ````
 To receice your email, password and mnemonic use
 
-````
+````java
     public Keys getKeys(String passcode)
 ````
 This method will return new Key object with all needed info.
 
 To delete your keys (for log out functionality, for example), you can use:
 
-````
+````java
 public boolean deleteKeys()
 ````
 
@@ -649,7 +689,7 @@ public boolean deleteKeys()
 
 Lets create new module that will implement all bucket functionality.
 
-````
+````java
 package StorjModule;
 
 import android.content.Context;
@@ -720,7 +760,7 @@ public class BucketsModule {
 
 And lets create new Activity that will implement all needed callbacks
 
-````
+````java
 package com.mystorjappl.mystorjapp;
 
 import android.support.v7.app.AppCompatActivity;
@@ -798,7 +838,7 @@ Open your android folder and create new package called StorjLibModule.
 
 Create new class called BucketsModule that extends ReactContextBaseJavaModule
 
-````
+````java
 package com.storjlibmodule;
 
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -827,7 +867,7 @@ public class BucketsModule extends ReactContextBaseJavaModule {
 ````
 Then let`s make ReactMethod in BucketsModule, for example createBucket from StorjAndroid and add related imports:
 
-````
+````java
 ...another imports here...
 import com.facebook.react.bridge.ReactMethod;
 
@@ -858,7 +898,7 @@ public class BucketsModule extends ReactContextBaseJavaModule {
 
 Then we need to create package that implements ReactPackage
 
-````
+````java
 
 package com.our_app;
 
@@ -896,7 +936,7 @@ public class OurTestPackage implements ReactPackage {
 
 Finally, we need to add our package in MainApplication gerPackages() method:
 
-````
+````java
 
 @Override
     protected List<ReactPackage> getPackages() {
@@ -910,7 +950,7 @@ Finally, we need to add our package in MainApplication gerPackages() method:
 
 And we can successfully use our module in JavaScript by importing NativeModules from react-native package: 
 
-````
+````js
 
 import { NativeModules } from 'react-native';
 
