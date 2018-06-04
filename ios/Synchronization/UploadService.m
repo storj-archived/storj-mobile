@@ -67,7 +67,6 @@ static dispatch_once_t onceToken;
     {
       [uploader startUpload];
       dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-      NSString *sad = [NSString stringWithFormat:(NSString *) @"sadsaads%@", @"sadas"];
     }
   };
   

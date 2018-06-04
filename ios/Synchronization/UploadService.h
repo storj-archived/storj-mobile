@@ -21,6 +21,7 @@
                        bucketId: (NSString *) bucketId
                        fileName: (NSString *) fileName
                       localPath: (NSString *) localPath;
+
 -(void) clean;
 
 @end
