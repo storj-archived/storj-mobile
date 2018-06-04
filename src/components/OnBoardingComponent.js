@@ -12,7 +12,7 @@ import ContentSlider from '../components/ContentSliderComponent';
 import onBoardingScreensConstants from '../utils/constants/onBoardingScreeensConstants';
 import { getDeviceWidth, getWidth, getHeight } from '../utils/adaptive';
 import { NavigationActions } from 'react-navigation';
-import SideSwipe from 'react-native-sideswipe';
+import SideSwipe from '../components/SideSwipeComponent';
 
 
 OnBoardingScreen = (props) => {
@@ -85,7 +85,7 @@ export default class OnBoardingComponent extends Component {
                 <View style={ styles.content }>
                     <SideSwipe
                         index = { this.state.currentIndex }
-                        itemWidth = { getWidth(349) }
+                        itemWidth = { getWidth(351) }
                         contentOffset = { 0 }
                         data = { this.data }
                         onIndexChange={ index => {
@@ -212,6 +212,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         marginTop: getHeight(20),
         height: getHeight(80),
+        paddingHorizontal: getWidth(5),
         width: getWidth(335),
         alignItems: 'flex-start'
     },
@@ -228,7 +229,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent'
     },
     textInfo: {
-        marginLeft: getWidth(3),
         fontFamily: 'Montserrat-Regular',
         lineHeight: getHeight(25),
         fontSize: params.text,

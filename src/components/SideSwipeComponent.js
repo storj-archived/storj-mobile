@@ -93,7 +93,7 @@ export default class SideSwipe extends Component {
 
 		return (
 			<View
-				style={[{ width: itemWidth -5 }, style]}
+				style={[{ width: itemWidth - 2 }, style]}
 				{...this.panResponder.panHandlers}>
 				<AnimatedFlatList
 					horizontal
