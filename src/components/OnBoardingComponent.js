@@ -45,6 +45,12 @@ export default class OnBoardingComponent extends Component {
         this.state = {
             currentIndex: 0
         }
+
+        this.data = [
+            { imagePath: onBoardingScreensConstants.safetyImagePath, textArray: onBoardingScreensConstants.safetyMainText },
+            { imagePath: onBoardingScreensConstants.incomeImagePath, textArray: onBoardingScreensConstants.incomeMainText },
+            { imagePath: onBoardingScreensConstants.spaceImagePath, textArray: onBoardingScreensConstants.spaceMainText }
+        ];
     };
 
     /**
@@ -70,11 +76,6 @@ export default class OnBoardingComponent extends Component {
 
     render() {
         const { width } = Dimensions.get('window');
-        let data = [
-            { imagePath: onBoardingScreensConstants.safetyImagePath, textArray: onBoardingScreensConstants.safetyMainText },
-            { imagePath: onBoardingScreensConstants.incomeImagePath, textArray: onBoardingScreensConstants.incomeMainText },
-            { imagePath: onBoardingScreensConstants.spaceImagePath, textArray: onBoardingScreensConstants.spaceMainText }
-        ];
 
         return(
             <View style={ styles.screen }>
@@ -86,7 +87,7 @@ export default class OnBoardingComponent extends Component {
                         index = { this.state.currentIndex }
                         itemWidth = { getWidth(349) }
                         contentOffset = { 0 }
-                        data = { data }
+                        data = { this.data }
                         onIndexChange={ index => {
                             let finalIndex = this.state.currentIndex;
 
@@ -104,7 +105,7 @@ export default class OnBoardingComponent extends Component {
                         )} />
                     <View style = { styles.paginationContainer }>
                         {
-                            data.map((element, index) => {
+                            this.data.map((element, index) => {
                                 return(
                                     <PaginationComponent
                                         key = { index }
