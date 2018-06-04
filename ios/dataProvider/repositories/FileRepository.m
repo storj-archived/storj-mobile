@@ -88,7 +88,7 @@ static NSArray * columns;
     orderByColumn = FileContract.NAME;
   }
   
-  NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ? ORDER BY %@ %@",
+  NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ? ORDER BY %@ COLLATE NOCASE %@",
                        [[FileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        FileContract.TABLE_NAME,
                        FileContract.FILE_FK,
@@ -123,7 +123,7 @@ static NSArray * columns;
     orderByColumn = FileContract.CREATED;
   }
   
-  NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ ORDER BY %@ %@",
+  NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ ORDER BY %@ COLLATE NOCASE s%@",
                        [[FileRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        FileContract.TABLE_NAME,
                        orderByColumn,

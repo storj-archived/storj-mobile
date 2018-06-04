@@ -54,7 +54,7 @@ static NSArray *columns;
   if(!columnName || [columnName length] == 0) {
     orderByColumn = BucketContract.CREATED;
   }
-  NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ ORDER BY %@ %@",
+  NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ ORDER BY %@ COLLATE NOCASE %@",
                        [[BucketRepository getSelectionColumnsString]componentsJoinedByString:@","],
                        BucketContract.TABLE_NAME,
                        orderByColumn,
