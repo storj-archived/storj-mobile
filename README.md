@@ -143,7 +143,7 @@ Stores new auth file on the device that is encrypted with passcode. By default, 
 ###### Android
 
 ```java
-importKeys(email, password, mnemonic, passcode)
+boolean importKeys(email, password, mnemonic, passcode)
 ```
 
 ###### iOS
@@ -199,11 +199,11 @@ class Keys {
 
 Returns NSDictionary with keys data :
 
-```objc
+````objc
 @{@"email":email,
   @"password":password,
   @"mnemonic":mnemonic}
-```
+````
 
 <a name="anchorAuthRegistration"></a>
 ##### Registration
@@ -375,7 +375,9 @@ Return value of this method - is fileHandle, that is needed to cancel download.
 
 File download cancellation:
 
-```boolean cancelDownload(long downloadState)```
+```java
+boolean cancelDownload(long downloadState)
+```
 
 Just save you fileHandle and pass it as a parameter to this method.
 
