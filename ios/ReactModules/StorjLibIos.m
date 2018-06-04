@@ -138,7 +138,7 @@ RCT_REMAP_METHOD(importKeys,
    invokeParallelWithParams:@{@RESOLVER: resolver,
                                @REJECTER : rejecter}
    andMethodHandlerBlock:^(NSDictionary * params){
-     SJKeys *keys = [[SJKeys alloc] initWithUser:email password:password mnemonic:mnemonic];
+     SJKeys *keys = [[SJKeys alloc] initWithEmail:email password:password mnemonic:mnemonic];
      BOOL result = [self.storjWrapper importKeys:keys andPassphrase:passcode];
      RCTPromiseResolveBlock resolve = params[@RESOLVER];
      
