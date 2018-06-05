@@ -67,9 +67,30 @@ public class BucketRepository extends BaseRepository {
             column = BucketContract._NAME;
         }
 
-        String orderBy = isDesc ? column + " DESC" : orderByColumn + " ASC";
+        String orderBy = isDesc ? column + " DESC" : column + " ASC";
 
         Cursor cursor = _db.query(BucketContract.TABLE_NAME, null, null, null, null, null, orderBy, null);
+
+        result = _getListFromCursor(cursor);
+
+        cursor.close();
+
+        return result;
+    }
+
+    public List<BucketDbo> getAllCollateNocase(String orderByColumn, boolean isDesc) {
+        List<BucketDbo> result = new ArrayList();
+        String column = orderByColumn;
+
+        if(orderByColumn == null || orderByColumn.isEmpty()) {
+            column = BucketContract._NAME;
+        }
+
+        String orderBy = isDesc ? " ORDER BY " + column + " COLLATE NOCASE DESC;" : " ORDER BY " + column + " COLLATE NOCASE ASC;";
+
+        String query = "SELECT * FROM " +BucketContract.TABLE_NAME + orderBy;
+
+        Cursor cursor = _db.rawQuery(query, null);
 
         result = _getListFromCursor(cursor);
 

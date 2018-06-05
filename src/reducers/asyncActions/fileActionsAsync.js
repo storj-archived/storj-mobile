@@ -2,6 +2,7 @@ import fileActions from "../mainContainer/Files/filesReducerActions";
 import SyncModule from "../../utils/SyncModule";
 import FileModel from "../../models/FileModel";
 import ListItemModel from "../../models/ListItemModel";
+import moment from 'moment';
 
 export function uploadFileStart(fileHandle) {
     return async (dispatch) => {
@@ -13,7 +14,7 @@ export function uploadFileStart(fileHandle) {
             let fileModel = new FileModel({ 
                 name: uploadingFile.name, 
                 fileId: uploadingFile.fileHandle,
-                created: new Date().toLocaleString(),
+                created: moment().format(),//new Date().toLocaleString(),
                 erasure: null,
                 hmac: null,
                 index: null,

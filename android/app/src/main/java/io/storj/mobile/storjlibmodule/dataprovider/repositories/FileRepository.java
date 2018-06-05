@@ -105,7 +105,7 @@ public class FileRepository extends BaseRepository {
             column = FileContract._NAME;
         }
 
-        String orderBy = isDesc ? column + " DESC" : orderByColumn + " ASC";
+        String orderBy = isDesc ? column + " DESC" : column + " ASC";
 
         Cursor cursor = _db.query(FileContract.TABLE_NAME,
                 null,
@@ -115,6 +115,31 @@ public class FileRepository extends BaseRepository {
                 null,
                 orderBy,
                 null);
+
+        result = _getListFromCursor(cursor);
+
+        cursor.close();
+
+        return result;
+    }
+
+    public List<FileDbo> getAllCollateNocase(String bucketId, String orderByColumn, boolean isDesc) {
+        List<FileDbo> result = new ArrayList();
+        String[] selectionArgs = {
+                bucketId
+        };
+
+        String column = orderByColumn;
+
+        if(orderByColumn == null || orderByColumn.isEmpty()) {
+            column = FileContract._NAME;
+        }
+
+        String orderBy = isDesc ? " ORDER BY " + column + " COLLATE NOCASE DESC;" : " ORDER BY " + column + " COLLATE NOCASE ASC;";
+
+        String query = "SELECT * FROM " + FileContract.TABLE_NAME + " WHERE " + FileContract.FILE_FK + " = ?" + orderBy;
+
+        Cursor cursor = _db.rawQuery(query, new String[] { bucketId  });
 
         result = _getListFromCursor(cursor);
 

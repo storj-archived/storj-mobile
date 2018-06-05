@@ -94,7 +94,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
                     BucketRepository bucketRepository = new BucketRepository(db);
 
                     ArrayList<BucketDbo> bucketDbos = sortingMode.equalsIgnoreCase("name")
-                            ? (ArrayList)bucketRepository.getAll(sortingMode, true)
+                            ? (ArrayList)bucketRepository.getAllCollateNocase(sortingMode, true)
                             : (ArrayList)bucketRepository.getAll();
 
                     int length = bucketDbos.size();
@@ -123,7 +123,7 @@ public class SyncModule extends ReactContextBaseJavaModule {
                     FileRepository fileRepository = new FileRepository(db);
 
                     ArrayList<FileDbo> fileDbos = sortingMode.equalsIgnoreCase("name")
-                            ? (ArrayList)fileRepository.getAll(bucketId, sortingMode, true)
+                            ? (ArrayList)fileRepository.getAllCollateNocase(bucketId, sortingMode, true)
                             : (ArrayList)fileRepository.getAll(bucketId);
 
                     int length = fileDbos.size();
