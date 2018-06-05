@@ -44,5 +44,7 @@
 
 -(instancetype) initWithDbo: (SyncQueueEntryDbo *) dbo;
 
+-(SyncQueueEntryDbo *) toDbo;
+
 @end
 #endif /* SyncQueueEntryModel_h */

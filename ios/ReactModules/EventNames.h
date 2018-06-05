@@ -26,6 +26,9 @@
 @property (readonly, class) NSString *const EVENT_BUCKET_DELETED;
 @property (readonly, class) NSString *const EVENT_FILE_DELETED;
 
+@property (readonly, class) NSString *const EVENT_SYNC_STARTED;
+@property (readonly, class) NSString *const EVENT_SYNC_ENTRY_UPDATED;
+
 @property (readonly, class) NSArray *const availableEvents;
 
 @end

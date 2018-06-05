@@ -26,6 +26,9 @@ static NSString *const _EVENT_BUCKET_CREATED = @"EVENT_BUCKET_CREATED";
 static NSString *const _EVENT_BUCKET_DELETED = @"EVENT_BUCKET_DELETED";
 static NSString *const _EVENT_FILE_DELETED = @"EVENT_FILE_DELETED";
 
+static NSString *const _EVENT_SYNC_ENTRY_UPDATED = @"EVENT_SYNC_ENTRY_UPDATED";
+static NSString *const _EVENT_SYNC_STARTED = @"EVENT_SYNC_STARTED";
+
 static NSArray * _availableEvents;
 
 +(NSString *)EVENT_FILE_UPLOAD_START {
@@ -93,6 +96,16 @@ static NSArray * _availableEvents;
   return _EVENT_FILE_DELETED;
 }
 
++(NSString *) EVENT_SYNC_STARTED {
+  
+  return _EVENT_SYNC_STARTED;
+}
+
++(NSString *) EVENT_SYNC_ENTRY_UPDATED {
+  
+  return _EVENT_SYNC_ENTRY_UPDATED;
+}
+
 +(NSArray *) availableEvents {
   if(!_availableEvents) {
     _availableEvents = @[_EVENT_FILE_UPLOAD_START,
@@ -107,7 +120,10 @@ static NSArray * _availableEvents;
                          _EVENT_FILE_DOWNLOAD_START,
                          _EVENT_FILE_DOWNLOAD_PROGRESS,
                          _EVENT_FILE_DOWNLOAD_SUCCESS,
-                         _EVENT_FILE_DOWNLOAD_ERROR];
+                         _EVENT_FILE_DOWNLOAD_ERROR,
+                         _EVENT_SYNC_ENTRY_UPDATED,
+                         _EVENT_SYNC_STARTED
+                         ];
   }
 
   return _availableEvents;

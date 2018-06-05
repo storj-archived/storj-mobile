@@ -50,6 +50,7 @@
 #import "Logger.h"
 
 #import "UploadService.h"
+#import "SyncQueueRepository.h"
 
 static StorjBackgroundServices *sharedInstance = nil;
 
@@ -343,7 +344,9 @@ RCT_REMAP_METHOD(deleteFile,
                           body:result];
      };
      [[self storjWrapper] deleteFile:fileId fromBucket:bucketId withCompletion:callback];
-   } expirationHandler:^{
+   }
+   
+   expirationHandler: ^{
      
    }];
 }
@@ -439,7 +442,41 @@ RCT_REMAP_METHOD(uploadFile,
                                                 fileName:(NSString *) fileName
                                                localPath:(NSString *) localPath];
   
-  NSString *sad = [NSString stringWithFormat:(NSString *) @"sadsaads%@", @"sadas"];
+  //TEST
+  SyncQueueRepository *repo = [[SyncQueueRepository alloc] init];
+  
+//  SyncQueueEntryDbo *dbo = [[SyncQueueEntryDbo alloc] init];
+//  dbo.localPath = localPath;
+//  dbo.fileName = fileName;
+//  dbo.bucketId = bucketId;
+//
+//  SyncQueueEntryModel *model = [[SyncQueueEntryModel alloc] initWithDbo:(SyncQueueEntryDbo *) dbo];
+//
+//  [repo insertWithModel:(SyncQueueEntryModel *)model];
+//  [repo insertWithModel:(SyncQueueEntryModel *)model];
+//  [repo insertWithModel:(SyncQueueEntryModel *)model];
+//
+//  [self sendEventWithName:(NSString *) EventNames.EVENT_SYNC_STARTED body: [NSNull null]];
+//
+//  [[UploadService sharedInstance] syncFileWithSyncEntryId: 1
+//                                                 bucketId:(NSString *) bucketId
+//                                                 fileName:(NSString *) fileName
+//                                                localPath:(NSString *) localPath];
+//
+//  [[UploadService sharedInstance] syncFileWithSyncEntryId: 2
+//                                                 bucketId:(NSString *) bucketId
+//                                                 fileName:(NSString *) fileName
+//                                                localPath:(NSString *) localPath];
+//
+//  [[UploadService sharedInstance] syncFileWithSyncEntryId: 3
+//                                                 bucketId:(NSString *) bucketId
+//                                                 fileName:(NSString *) fileName
+//                                                localPath:(NSString *) localPath];
+//
+//  [[UploadService sharedInstance] syncFileWithSyncEntryId: 1
+//                                                 bucketId:(NSString *) bucketId
+//                                                 fileName:(NSString *) fileName
+//                                                localPath:(NSString *) localPath];
   
 //  STFileUploadCallback *fileUploadCallback = [[STFileUploadCallback alloc] init];
 //
