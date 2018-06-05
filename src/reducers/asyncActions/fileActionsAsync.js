@@ -14,7 +14,7 @@ export function uploadFileStart(fileHandle) {
             let fileModel = new FileModel({ 
                 name: uploadingFile.name, 
                 fileId: uploadingFile.fileHandle,
-                created: moment().format(),//new Date().toLocaleString(),
+                created: moment().format(),
                 erasure: null,
                 hmac: null,
                 index: null,

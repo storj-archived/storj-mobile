@@ -88,7 +88,7 @@ public class BucketRepository extends BaseRepository {
 
         String orderBy = isDesc ? " ORDER BY " + column + " COLLATE NOCASE DESC;" : " ORDER BY " + column + " COLLATE NOCASE ASC;";
 
-        String query = "SELECT * FROM " +BucketContract.TABLE_NAME + orderBy;
+        String query = "SELECT * FROM " + BucketContract.TABLE_NAME + orderBy;
 
         Cursor cursor = _db.rawQuery(query, null);
 
