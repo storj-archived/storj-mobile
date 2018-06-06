@@ -5,6 +5,7 @@ import {
     StyleSheet,
     Image,
     ScrollView,
+    Platform,
     Dimensions
 } from 'react-native';
 import React, { Component } from 'react';
@@ -199,7 +200,7 @@ const styles = StyleSheet.create({
         backgroundColor: params.colorBlue
     },
     contentContainer: {
-        // backgroundColor: 'red',
+        marginLeft: Platform.OS === 'ios' ? getWidth(5) : 0 ,
         flex: 1,
         paddingVertical: params.contentPaddingVertical
     },
