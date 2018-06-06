@@ -30,14 +30,14 @@
   if(self = [super init])
   {
     __id = _id;
-    _fileName = fileName;
-    _localPath = localPath;
+    _fileName = (NSString *)[fileName copy];
+    _localPath = (NSString *)[localPath copy];
     _status = status;
     _errorCode = errorCode;
     _size = size;
     _count = count;
-    _creationDate = creationDate;
-    _bucketId = bucketId;
+    _creationDate = (NSString *)[creationDate copy];
+    _bucketId = (NSString *)[bucketId copy];
     _fileHandle = fileHandle;
   }
   

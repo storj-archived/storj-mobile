@@ -11,16 +11,16 @@
 
 @interface SyncQueueEntryDbo : NSObject
 
-@property (readwrite, assign) int _id;
-@property (readwrite, assign) NSString *fileName;
-@property (readwrite, assign) NSString *localPath;
-@property (readwrite, assign) int status;
-@property (readwrite, assign) int errorCode;
-@property (readwrite, assign) long size;
-@property (readwrite, assign) int count;
-@property (readwrite, assign) NSString *creationDate;
-@property (readwrite, assign) NSString *bucketId;
-@property (readwrite, assign) long fileHandle;
+@property (readwrite) int _id;
+@property (readwrite, strong) NSString *fileName;
+@property (readwrite, strong) NSString *localPath;
+@property (readwrite) int status;
+@property (readwrite) int errorCode;
+@property (readwrite) long size;
+@property (readwrite) int count;
+@property (readwrite, strong) NSString *creationDate;
+@property (readwrite, strong) NSString *bucketId;
+@property (readwrite) long fileHandle;
 
 -(instancetype) init;
 

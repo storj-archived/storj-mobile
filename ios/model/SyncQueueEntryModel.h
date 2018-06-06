@@ -16,16 +16,16 @@
 
 @interface SyncQueueEntryModel: NSObject<IConvertibleToJS>
 
-@property (readonly, assign) int _id;
-@property (readonly, assign) NSString *fileName;
-@property (readonly, assign) NSString *localPath;
-@property (readonly, assign) int status;
-@property (readonly, assign) int errorCode;
-@property (readonly, assign) long size;
-@property (readonly, assign) int count;
-@property (readonly, assign) NSString *creationDate;
-@property (readonly, assign) NSString *bucketId;
-@property (readonly, assign) long fileHandle;
+@property (readonly) int _id;
+@property (readonly, strong) NSString *fileName;
+@property (readonly, strong) NSString *localPath;
+@property (readonly) int status;
+@property (readonly) int errorCode;
+@property (readonly) long size;
+@property (readonly) int count;
+@property (readonly, strong) NSString *creationDate;
+@property (readonly, strong) NSString *bucketId;
+@property (readonly) long fileHandle;
 
 -(instancetype) init;
 

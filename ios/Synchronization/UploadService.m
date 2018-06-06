@@ -107,7 +107,7 @@ static dispatch_once_t onceToken;
   __block SyncTask *syncTaskObj = [self schedule: syncEntryId];
   
   dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-  STFileUploadCallback *uploadCallback = [UploadService getUploadCallbackWithWaiter : semaphore];
+  STFileUploadCallback *uploadCallback = [UploadService getSyncCallbackWithWaiter:(dispatch_semaphore_t) semaphore syncEntryId: syncEntryId];
   
   STUploader *uploader = [[STUploader alloc] initWithBucketId: bucketId
                                                     localPath: localPath
@@ -189,7 +189,7 @@ static dispatch_once_t onceToken;
   
   void (^updateDbo)(UpdateDboBlock) = ^(UpdateDboBlock callback)
   {
-    if(syncModel)
+    if(!syncModel)
     {
       return;
     }

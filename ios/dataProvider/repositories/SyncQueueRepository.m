@@ -86,7 +86,7 @@ static NSArray * columns;
 {
   NSDictionary* dict = [model toDictionary];
   
-  __block NSMutableArray * array = [NSMutableArray arrayWithCapacity:(NSUInteger) [dict count] - 2];
+  __block NSMutableArray<NSString *> * array = [NSMutableArray arrayWithCapacity:(NSUInteger) [dict count] - 2];
   
   [dict keysOfEntriesPassingTest:
                         ^BOOL(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
@@ -97,12 +97,13 @@ static NSArray * columns;
       return NO;
     }
     
-    [array addObject:(id) obj];
+    [array addObject:(NSString *) key];
     return YES;
   }];
   
+  NSDictionary *result = [dict dictionaryWithValuesForKeys:array];
   
-  return [dict dictionaryWithValuesForKeys:array];
+  return result;
 }
 
 -(SyncQueueEntryModel *) getSingleModelWithRequest: (NSString *) request params: (NSArray *) params

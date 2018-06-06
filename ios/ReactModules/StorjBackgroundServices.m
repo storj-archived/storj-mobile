@@ -443,26 +443,27 @@ RCT_REMAP_METHOD(uploadFile,
                                                localPath:(NSString *) localPath];
   
   //TEST
-  SyncQueueRepository *repo = [[SyncQueueRepository alloc] init];
-  
+//  SyncQueueRepository *repo = [[SyncQueueRepository alloc] init];
+//
 //  SyncQueueEntryDbo *dbo = [[SyncQueueEntryDbo alloc] init];
 //  dbo.localPath = localPath;
-//  dbo.fileName = fileName;
+//  dbo.fileName = @"asda.jpg";
 //  dbo.bucketId = bucketId;
 //
 //  SyncQueueEntryModel *model = [[SyncQueueEntryModel alloc] initWithDbo:(SyncQueueEntryDbo *) dbo];
-//
-//  [repo insertWithModel:(SyncQueueEntryModel *)model];
-//  [repo insertWithModel:(SyncQueueEntryModel *)model];
-//  [repo insertWithModel:(SyncQueueEntryModel *)model];
-//
+
+  //[repo insertWithModel:(SyncQueueEntryModel *)model];
+  //[repo insertWithModel:(SyncQueueEntryModel *)model];
+  //[repo insertWithModel:(SyncQueueEntryModel *)model];
+
 //  [self sendEventWithName:(NSString *) EventNames.EVENT_SYNC_STARTED body: [NSNull null]];
 //
-//  [[UploadService sharedInstance] syncFileWithSyncEntryId: 1
+//  [[UploadService sharedInstance] syncFileWithSyncEntryId: 5
 //                                                 bucketId:(NSString *) bucketId
 //                                                 fileName:(NSString *) fileName
 //                                                localPath:(NSString *) localPath];
 //
+// cd $(find / -type f -name storj.db | sed "s/storj.db//")
 //  [[UploadService sharedInstance] syncFileWithSyncEntryId: 2
 //                                                 bucketId:(NSString *) bucketId
 //                                                 fileName:(NSString *) fileName
