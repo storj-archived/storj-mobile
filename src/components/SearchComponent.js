@@ -22,7 +22,7 @@ export default class SearchComponent extends Component {
 
     shouldComponentUpdate(nextProps) {
         if(this.props.searchIndex !== nextProps.searchIndex) {
-            this.setState({searchValue : ''})
+            this.setState({ searchValue: '' });
             this.props.clearSearch(this.props.searchIndex);
         }
 
@@ -38,6 +38,14 @@ export default class SearchComponent extends Component {
         }
     }
 
+    onOptionPress() {
+        if(this._fileTextInput) this._fileTextInput.blur();
+
+        if(this._bucketTextInput) this._bucketTextInput.blur();
+
+        this.props.showOptions();
+    }
+
     fileScreenHeader() {
         return(
             <View style = { [ styles.rowContainer, this.props.styleContainer ] }>
@@ -47,6 +55,7 @@ export default class SearchComponent extends Component {
                 <View style = { [ styles.rowContainer, styles.mainContainer, styles.fileHeader ] }>
                     <View style = {[ styles.rowContainer, { height: getHeight(50) } ]}>
                         <TextInput
+                            ref = { comp => this._fileTextInput = comp }
                             onFocus = { () => { this.setState({ isSearchIconShown: false }); } }
                             onBlur = { () => { 
                                 if(!this.state.searchValue) {
@@ -65,7 +74,7 @@ export default class SearchComponent extends Component {
                     </View>
                     <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>
                         <Text style = { styles.updateStatus }>Just now</Text>
-                        <TouchableOpacity onPress = { this.props.showOptions }>
+                        <TouchableOpacity onPress = { this.onOptionPress.bind(this) }>
                             <Image style = { styles.image } source = { require("../images/Icons/SearchOptions.png") } resizeMode = { 'contain' } />
                         </TouchableOpacity>
                     </View>
@@ -119,6 +128,7 @@ export default class SearchComponent extends Component {
                     <View style = { styles.rowContainer }>
                         { this.state.isSearchIconShown && this.props.placeholder !== 'Pictures' ? <Image style={ styles.searchImage } source = { require("../images/Icons/Search.png") } resizeMode = { 'contain' } /> : null }
                         <TextInput
+                            ref = { comp => this._bucketTextInput = comp }
                             onFocus = { () => { this.setState({ isSearchIconShown: false }); } }
                             onBlur = { () => { 
                                 if(!this.state.searchValue) {
@@ -137,7 +147,7 @@ export default class SearchComponent extends Component {
                     </View>
                     <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>
                         <Text style = { styles.updateStatus }>Update Status</Text>
-                        <TouchableOpacity onPress = { this.props.showOptions }>
+                        <TouchableOpacity onPress = { this.onOptionPress.bind(this) }>
                             <Image style = { styles.image } source = { require("../images/Icons/SearchOptions.png") } resizeMode = { 'contain' } />
                         </TouchableOpacity>
                     </View>
