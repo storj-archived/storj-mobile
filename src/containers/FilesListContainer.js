@@ -39,8 +39,6 @@ class FilesListContainer extends BaseFilesListContainer {
         ).start();               
         
         this.onRefresh(); 
-
-        //ServiceModule.test();
     }
 
     /**      
@@ -50,6 +48,10 @@ class FilesListContainer extends BaseFilesListContainer {
         if(Platform.OS === "android") {
             BackHandler.removeEventListener("hardwarebackPress", this.onHardwareBackPress);
         }
+    }
+
+    shouldComponentUpdate(nextProps) {
+        return nextProps.activeScreen === "BucketsScreen";
     }
 
     /**      
@@ -75,7 +77,7 @@ class FilesListContainer extends BaseFilesListContainer {
         this.props.bucketNavigateBack();
     }
 
-    render() {
+    render() {        
         let data = this.getData();
 
         return(

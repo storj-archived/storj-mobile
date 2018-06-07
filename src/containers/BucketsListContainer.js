@@ -42,7 +42,11 @@ class BucketsListContainer extends BaseListContainer {
         this.props.navigateToFilesScreen(bucket.getId());    
     }
 
-    render() {
+    shouldComponentUpdate(nextProps) {
+        return nextProps.activeScreen === "BucketsScreen";
+    }
+
+    render() {        
         return(
             <BucketsListComponent
                 isGridViewShown = { this.props.isGridViewShown }
@@ -67,7 +71,7 @@ class BucketsListContainer extends BaseListContainer {
 function mapStateToProps(state) {
     let screenIndex = state.mainScreenNavReducer.index;
     let currentScreenName = state.mainScreenNavReducer.routes[screenIndex].routeName;
-    
+
     return {
         activeScreen: currentScreenName,
         isSelectionMode: state.mainReducer.isSelectionMode,

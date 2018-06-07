@@ -31,10 +31,14 @@ class DashboardFilesListContainer extends BaseFilesListContainer {
 
     /** 
      * Set initial data upload from Storj Network when screen is loaded
-    */
+     */
     componentWillMount() {            
         this.onRefresh();
     } 
+
+    shouldComponentUpdate(nextProps) {
+        return nextProps.activeScreen === "DashboardScreen";
+    }
 
     /**      
      * Navigate Back callback. Cleaning search state in header, 
@@ -47,7 +51,7 @@ class DashboardFilesListContainer extends BaseFilesListContainer {
         this.props.setDashboardBucketId(null);
     }
 
-    render() {
+    render() {        
         let data = this.getData();
         let isLoading = this.props.loadingStack.includes(this.props.bucketId);
         
