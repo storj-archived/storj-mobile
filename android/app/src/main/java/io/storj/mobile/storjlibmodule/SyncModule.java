@@ -118,13 +118,18 @@ public class SyncModule extends ReactContextBaseJavaModule {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                if(bucketId == null || bucketId.isEmpty()) {
+                    promise.resolve(new Response(false,  "Bucket id is corrupted").toWritableMap());
+                    return;
+                }
+
                 try(SQLiteDatabase db = new DatabaseFactory(getReactApplicationContext(), null).getReadableDatabase()) {
 
                     FileRepository fileRepository = new FileRepository(db);
 
-                    ArrayList<FileDbo> fileDbos = sortingMode.equalsIgnoreCase("name")
-                            ? (ArrayList)fileRepository.getAllCollateNocase(bucketId, sortingMode, true)
-                            : (ArrayList)fileRepository.getAll(bucketId);
+                    List<FileDbo> fileDbos = sortingMode.equalsIgnoreCase("name")
+                            ? fileRepository.getAllCollateNocase(bucketId, sortingMode, true)
+                            : fileRepository.getAll(bucketId);
 
                     int length = fileDbos.size();
                     FileModel[] fileModels = new FileModel[length];
@@ -150,9 +155,9 @@ public class SyncModule extends ReactContextBaseJavaModule {
 
                     FileRepository fileRepository = new FileRepository(db);
 
-                    ArrayList<FileDbo> fileDbos = sortingMode.equalsIgnoreCase("name")
-                            ? (ArrayList)fileRepository.getAll(sortingMode, true)
-                            : (ArrayList)fileRepository.getAll();
+                    List<FileDbo> fileDbos = sortingMode.equalsIgnoreCase("name")
+                            ? fileRepository.getAll(sortingMode, true)
+                            : fileRepository.getAll();
 
                     int length = fileDbos.size();
                     FileModel[] fileModels = new FileModel[length];

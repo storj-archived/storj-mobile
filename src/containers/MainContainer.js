@@ -351,10 +351,16 @@ class MainContainer extends Component {
         this.props.showCreateBucketInput();
     }
 
-    onActionBarPress() {
+    getCurrentScreen() {
         const index = this.props.mainScreenNavReducer.index;      
         const routes = this.props.mainScreenNavReducer.routes;
         const currentScreen = routes[index].routeName;
+
+        return currentScreen;
+    }
+
+    onActionBarPress() {
+        const currentScreen = this.getCurrentScreen();
 
         if(currentScreen != "MyAccountScreen") {
             this.props.isActionBarShown ? 
@@ -609,13 +615,28 @@ class MainContainer extends Component {
     }
     
     async getFiles(sortingMode) {
-        let filesResponse = await SyncModule.listFiles(this.props.openedBucketId, sortingMode);		
+
+        let bucketId = null;
+
+        switch(this.getCurrentScreen()) {
+            case "BucketsScreen":
+                bucketId = this.props.openedBucketId;
+                break;
+            case "MyPhotosScreen":
+                bucketId = this.props.myPhotosBucketId;
+                break;
+            case "DashboardScreen":
+                bucketId = this.props.dashboardBucketId;
+                break;
+        }
+
+        let filesResponse = await SyncModule.listFiles(bucketId, sortingMode);		
 
         if(filesResponse.isSuccess) {
             let files = JSON.parse(filesResponse.result).map((file) => {
                 return new ListItemModel(new FileModel(file));
             });                    
-            this.props.listFiles(this.props.openedBucketId, files);
+            this.props.listFiles(bucketId, files);
         }
     }
 
@@ -719,6 +740,7 @@ function handleDashboardScreenActions(bucketId, isSelection, actions, selectionM
 }
 
 function mapStateToProps(state) { 
+    console.log("AAAAAAAAAA", state);
     let isStarredBucketsSelected = state.bucketReducer.buckets.filter(item => item.isSelected === true).filter(item => item.entity.isStarred === true).length !== 0; 
     let isStarredFilesSelected = state.filesReducer.fileListModels.filter(item => item.isSelected === true).filter(item => item.entity.isStarred === true).length !== 0;
 
