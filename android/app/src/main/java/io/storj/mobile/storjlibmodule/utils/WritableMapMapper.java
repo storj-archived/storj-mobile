@@ -8,6 +8,7 @@ import com.facebook.react.bridge.WritableNativeMap;
 import io.storj.mobile.storjlibmodule.dataprovider.contracts.FileContract;
 import io.storj.mobile.storjlibmodule.dataprovider.contracts.UploadingFileContract;
 import io.storj.mobile.storjlibmodule.services.UploadService;
+import io.storj.mobile.storjlibmodule.services.eventemitters.UploadEventEmitter;
 
 public class WritableMapMapper {
 
@@ -27,10 +28,10 @@ public class WritableMapMapper {
                     map.putDouble(key, values.getAsDouble(key));
                     break;
                 case FileContract._FILE_ID:
-                case UploadService.UploadEventEmitter.ERROR_MESSAGE:
+                case UploadEventEmitter.ERROR_MESSAGE:
                     map.putString(key, values.getAsString(key));
                     break;
-                case UploadService.UploadEventEmitter.ERROR_CODE:
+                case UploadEventEmitter.ERROR_CODE:
                 case UploadService.PARAM_SYNC_ENTRY_ID:
                     map.putInt(key, values.getAsInteger(key));
                     break;

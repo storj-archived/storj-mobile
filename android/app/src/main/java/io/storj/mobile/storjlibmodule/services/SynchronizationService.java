@@ -44,11 +44,11 @@ public class SynchronizationService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        if(intent == null) {
+        if (intent == null) {
             return;
         }
 
-        switch(intent.getAction()) {
+        switch (intent.getAction()) {
             case ACTION_SYNC:
                 sync(intent);
                 break;
@@ -64,15 +64,20 @@ public class SynchronizationService extends IntentService {
     //DELETE ALL UPLOADING FILES
     //SET PROCESSING AND QUEUE ENTRIES TO IDLE STATE
     public static void clean(Context context) {
-        try(SQLiteDatabase db = new DatabaseFactory(context, null).getWritableDatabase()) {
+        try (SQLiteDatabase db = new DatabaseFactory(context, null).getWritableDatabase()) {
             UploadingFilesRepository uploadRepo = new UploadingFilesRepository(db);
             Response response = uploadRepo.deleteAll();
 
             SyncQueueRepository syncRepo = new SyncQueueRepository(db);
             List<SyncQueueEntryModel> syncEntries = syncRepo.getAll();
 
-            for(SyncQueueEntryModel syncEntry : syncEntries) {
-                if(syncEntry.getStatus() == SyncStateEnum.PROCESSING.getValue() || syncEntry.getStatus() == SyncStateEnum.QUEUED.getValue()) {
+            for (SyncQueueEntryModel syncEntry : syncEntries) {
+
+                boolean isProcessing = syncEntry.getStatus() == SyncStateEnum.PROCESSING.getValue();
+                boolean isQued = syncEntry.getStatus() == SyncStateEnum.QUEUED.getValue();
+
+                if (isProcessing || isQued) {
+
                     SyncQueueEntryDbo dbo = new SyncQueueEntryDbo(syncEntry);
                     dbo.setProp(SynchronizationQueueContract._STATUS, SyncStateEnum.IDLE.getValue());
 
@@ -90,13 +95,14 @@ public class SynchronizationService extends IntentService {
 
             List<SyncQueueEntryModel> syncEntries = syncRepo.getAll();
 
-            for(SyncQueueEntryModel syncEntry : syncEntries) {
-                if(syncEntry.getStatus() == SyncStateEnum.IDLE.getValue()) {
+            for (SyncQueueEntryModel syncEntry : syncEntries) {
+                if (syncEntry.getStatus() == SyncStateEnum.IDLE.getValue()) {
+
                     SyncQueueEntryDbo dbo = new SyncQueueEntryDbo(syncEntry);
                     dbo.setProp(SynchronizationQueueContract._STATUS, SyncStateEnum.QUEUED.getValue());
 
                     Response response = syncRepo.update(dbo.toModel());
-                    if(response.isSuccess()) {
+                    if (response.isSuccess()) {
                         syncFile(syncEntry.getFileName(), syncEntry.getLocalPath(), syncEntry.getBucketId(), syncEntry.getId());
                     }
                 }
@@ -114,23 +120,24 @@ public class SynchronizationService extends IntentService {
 
         this.startService(cancelSyncIntent);
 
-        try(SQLiteDatabase db = new DatabaseFactory(this, null).getWritableDatabase()){
+        try (SQLiteDatabase db = new DatabaseFactory(this, null).getWritableDatabase()){
             SyncQueueRepository syncRepo = new SyncQueueRepository(db);
 
             List<SyncQueueEntryModel> syncEntries = syncRepo.getAll();
 
-            for(SyncQueueEntryModel syncEntry : syncEntries) {
-                if(syncEntry.getStatus() == SyncStateEnum.PROCESSING.getValue()) {
+            for (SyncQueueEntryModel syncEntry : syncEntries) {
+                if (syncEntry.getStatus() == SyncStateEnum.PROCESSING.getValue()) {
                     cancelFileSync(syncEntry.getFileHandle());
                 }
 
-                if(syncEntry.getStatus() == SyncStateEnum.QUEUED.getValue()) {
+                if (syncEntry.getStatus() == SyncStateEnum.QUEUED.getValue()) {
+
                     SyncQueueEntryDbo dbo = new SyncQueueEntryDbo(syncEntry);
                     dbo.setProp(SynchronizationQueueContract._STATUS, SyncStateEnum.IDLE.getValue());
 
                     Response response = syncRepo.update(dbo.toModel());
 
-                    if(response.isSuccess()) {
+                    if (response.isSuccess()) {
                         mEventEmitter.SyncEntryUpdated(syncEntry.getId());
                     }
                 }
@@ -154,7 +161,7 @@ public class SynchronizationService extends IntentService {
     }
 
     private void cancelFileSync(long fileHandle) {
-        if(fileHandle == 0) {
+        if (fileHandle == 0) {
             return;
         }
 
@@ -168,11 +175,11 @@ public class SynchronizationService extends IntentService {
     private void removeFileFromQueue(Intent intent) {
         int syncEntryId = intent.getIntExtra(UploadService.PARAM_SYNC_ENTRY_ID, -1);
 
-        if(syncEntryId == -1) {
+        if (syncEntryId == -1) {
             return;
         }
 
-        try(SQLiteDatabase db = new DatabaseFactory(this, null).getWritableDatabase()) {
+        try (SQLiteDatabase db = new DatabaseFactory(this, null).getWritableDatabase()) {
             SyncQueueRepository syncRepo = new SyncQueueRepository(db);
             SyncQueueEntryModel model = syncRepo.get(syncEntryId);
 
@@ -185,7 +192,7 @@ public class SynchronizationService extends IntentService {
 
             Response response = syncRepo.update(dbo.toModel());
 
-            if(response.isSuccess()) {
+            if (response.isSuccess()) {
                 Intent removeFromSyncQueueIntent = new Intent(this, UploadService.class);
                 removeFromSyncQueueIntent.setAction(UploadService.ACTION_REMOVE_FROM_SYNC_QUEUE);
                 removeFromSyncQueueIntent.putExtra(UploadService.PARAM_SYNC_ENTRY_ID, syncEntryId);

@@ -139,7 +139,7 @@ public class SynchronizationSchedulerJobService extends JobService {
 
         for(File file : files) {
             Log.d(DEBUG_TAG, "sync: " + "File, name: " + file.getName());
-            if(file.isDirectory()) {
+            if (file.isDirectory()) {
                 Log.d(DEBUG_TAG, "sync: " + "File is directory continue");
                 continue;
             }
@@ -147,7 +147,7 @@ public class SynchronizationSchedulerJobService extends JobService {
             FileDbo fileDbo = fileRepo.get(file.getName(), FileContract._NAME, bucketId);
             SyncQueueEntryModel syncEntry = syncRepo.get(file.getPath(), bucketId);
 
-            if(fileDbo == null && syncEntry == null) {
+            if (fileDbo == null && syncEntry == null) {
                 syncFile(file.getName(), file.getPath(), bucketId, db);
             }
         }
