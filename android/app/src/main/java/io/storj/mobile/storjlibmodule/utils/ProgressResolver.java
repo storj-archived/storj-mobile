@@ -8,7 +8,7 @@ public class ProgressResolver {
     private double mProgress;
 
     public void setMProgress(double progress) {
-        if(progress - mProgress > 0.02) {
+        if(progress - mProgress > 0.05) {
             mProgress = progress;
         }
     }

@@ -61,6 +61,7 @@ import SyncQueueCallbackObject from "../models/SyncQueueCallbackObject";
 import SyncState from '../utils/constants/SyncState';
 import { getDeviceHeight } from "../utils/adaptive";
 import { getFileCopyName } from "../utils/fileUtils";
+import { setButtonInvokeTimeout } from '../utils/buttonDelay';
 
 
 const { PICTURES } = SYNC_BUCKETS;
@@ -68,6 +69,8 @@ const { PICTURES } = SYNC_BUCKETS;
 class MainContainer extends Component {
     constructor(props) {
         super(props);
+
+        this.isLoading = false;
 
         //Common stuff
         let newAction = TabBarActionModelFactory.createNewAction;
@@ -88,19 +91,69 @@ class MainContainer extends Component {
         }
 
         //Action callbacks
-        let createBucketAction = newAction(() => { this.props.showCreateBucketInput(); }, require('../images/ActionBar/NewBucketIcon.png'));
-        let openFilePickerAction = (type, imgUrl) => newAction(() => { this.bucketScreenUploadFile(type) }, imgUrl);
-        let openCameraAction = () => newAction(() => { CameraModule.openCamera(myPhotosBucketIdGetter()); }, require('../images/ActionBar/UploadPhotoIcon.png'));
-        let uploadFileAction = (bucketIdGetter, type, imgUrl) => newAction(() => { this.uploadFile(bucketIdGetter(), type); }, imgUrl);
+        let createBucketAction = newAction(() => { 
+            this.props.showCreateBucketInput();
+        }, require('../images/ActionBar/NewBucketIcon.png'));
+        let openFilePickerAction = (type, imgUrl) => newAction(() => { 
+            if(this.isLoading) return;
+
+            this.isLoading = true;
+            this.bucketScreenUploadFile(type);
+            setButtonInvokeTimeout(2000, this);
+        }, imgUrl);
+        let openCameraAction = () => newAction(() => { 
+            if(this.isLoading) return;
+
+            this.isLoading = true;
+            CameraModule.openCamera(myPhotosBucketIdGetter()); 
+            setButtonInvokeTimeout(2000, this);
+        }, require('../images/ActionBar/UploadPhotoIcon.png'));
+        let uploadFileAction = (bucketIdGetter, type, imgUrl) => newAction(() => { 
+            if(this.isLoading) return;
+
+            this.isLoading = true;
+            this.uploadFile(bucketIdGetter(), type); 
+            setButtonInvokeTimeout(2000, this);
+        }, imgUrl);
         this.setFavouriteAction = newAction(() => { this.setFavourite(); }, this.props.isStarredBucketsSelected ? this.unfavIcon
-                                                                                                          : this.favIcon);
-        let uploadFileToSelectedBucketsAction = (type, imgUrl) => newAction(() => { this.uploadFileToSelectedBuckets(type); }, imgUrl);
-        let tryDeleteBucketsAction = newAction(() => { this.tryDeleteBuckets(); }, trashIcon);
+                                                                                                            : this.favIcon);
+        let uploadFileToSelectedBucketsAction = (type, imgUrl) => newAction(() => { 
+            if(this.isLoading) return;
+
+            this.isLoading = true;
+            this.uploadFileToSelectedBuckets(type); 
+            setButtonInvokeTimeout(2000, this);
+        }, imgUrl);
+        let tryDeleteBucketsAction = newAction(() => { 
+            if(this.isLoading) return;
+
+            this.isLoading = true;
+            this.tryDeleteBuckets(); 
+            setButtonInvokeTimeout(2000, this);
+        }, trashIcon);
         this.setFavouriteFilesAction = newAction(() => { this.setFavouriteFiles(); }, this.props.isStarredFilesSelected ? this.unfavIcon 
-                                                                                                                       : this.favIcon);
-        let downloadSelectedFilesAction = newAction(() => { this.downloadSelectedFiles(); }, require('../images/ActionBar/DownloadIFileIcon.png'));
-        let tryCopySelectedFilesAction = newAction(() => { this.tryCopySelectedFiles(); }, require('../images/ActionBar/CopyBucketIcon.png'));
-        let tryDeleteFiles = newAction(() => { this.tryDeleteFiles(); }, trashIcon);
+                                                                                                                        : this.favIcon);
+        let downloadSelectedFilesAction = newAction(() => {
+            if(this.isLoading) return;
+
+            this.isLoading = true; 
+            this.downloadSelectedFiles(); 
+            setButtonInvokeTimeout(2000, this);
+        }, require('../images/ActionBar/DownloadIFileIcon.png'));
+        let tryCopySelectedFilesAction = newAction(() => { 
+            if(this.isLoading) return;
+
+            this.isLoading = true;
+            this.tryCopySelectedFiles(); 
+            setButtonInvokeTimeout(2000, this);
+        }, require('../images/ActionBar/CopyBucketIcon.png'));
+        let tryDeleteFiles = newAction(() => { 
+            if(this.isLoading) return;
+
+            this.isLoading = true;
+            this.tryDeleteFiles(); 
+            setButtonInvokeTimeout(2000, this);
+        }, trashIcon);
 
         //Action arrays
         this.bucketActions = Platform.OS === "android" 
@@ -389,6 +442,7 @@ class MainContainer extends Component {
         }
 
         this.filePickerResponsePaths = [];
+        this.props.disableSelectionMode();
     }
 
     async uploadFileToSelectedBuckets(type) {
@@ -533,6 +587,8 @@ class MainContainer extends Component {
                 }
             });
         }
+
+        this.props.disableSelectionMode();
     }
 
     selectAll(bucketId, isFavoritesBuckets) {
