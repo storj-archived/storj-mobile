@@ -40,7 +40,6 @@ export default class SettingsComponent extends Component{
                         <Switch 
                             onTintColor = { '#2794FF' } 
                             tintColor = { 'rgba(56, 75, 101, 0.2)' } 
-                            thumbTintColor = { '#FFFFFF' }
                             onValueChange = { () => { this.props.changeSyncStatus(!this.props.syncStatus); } }
                             value = { this.props.syncStatus } />
                     </View>
@@ -50,7 +49,6 @@ export default class SettingsComponent extends Component{
                         <Switch 
                             onTintColor = { '#2794FF' } 
                             tintColor = { 'rgba(56, 75, 101, 0.2)' } 
-                            thumbTintColor = { '#FFFFFF' }
                             onValueChange = { () => { this.props.setWifiConstraint(!this.props.onWifi, this.props.getStateObject()); } }
                             value = { this.props.onWifi } />
                     </View>
@@ -60,7 +58,6 @@ export default class SettingsComponent extends Component{
                         <Switch 
                             onTintColor = { '#2794FF' } 
                             tintColor = { 'rgba(56, 75, 101, 0.2)' } 
-                            thumbTintColor = { '#FFFFFF' }
                             onValueChange = { () => { this.props.setChargingConstraint(!this.props.onCharging, this.props.getStateObject()); } }
                             value = { this.props.onCharging } />
                     </View>
