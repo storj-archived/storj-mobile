@@ -90,70 +90,28 @@ class MainContainer extends Component {
             return myPhotosBucketId;
         }
 
+        let actionWithDelay = (action) => {
+            if(this.isLoading) return;
+
+            this.isLoading = true;
+            action();
+            setButtonInvokeTimeout(2000, this);
+        }
+
         //Action callbacks
-        let createBucketAction = newAction(() => { 
-            this.props.showCreateBucketInput();
-        }, require('../images/ActionBar/NewBucketIcon.png'));
-        let openFilePickerAction = (type, imgUrl) => newAction(() => { 
-            if(this.isLoading) return;
-
-            this.isLoading = true;
-            this.bucketScreenUploadFile(type);
-            setButtonInvokeTimeout(2000, this);
-        }, imgUrl);
-        let openCameraAction = () => newAction(() => { 
-            if(this.isLoading) return;
-
-            this.isLoading = true;
-            CameraModule.openCamera(myPhotosBucketIdGetter()); 
-            setButtonInvokeTimeout(2000, this);
-        }, require('../images/ActionBar/UploadPhotoIcon.png'));
-        let uploadFileAction = (bucketIdGetter, type, imgUrl) => newAction(() => { 
-            if(this.isLoading) return;
-
-            this.isLoading = true;
-            this.uploadFile(bucketIdGetter(), type); 
-            setButtonInvokeTimeout(2000, this);
-        }, imgUrl);
+        let createBucketAction = newAction(() => {  actionWithDelay(() => this.props.showCreateBucketInput()) }, require('../images/ActionBar/NewBucketIcon.png'));
+        let openFilePickerAction = (type, imgUrl) => newAction(() => { actionWithDelay(() => this.bucketScreenUploadFile(type)); }, imgUrl);
+        let openCameraAction = () => newAction(() => { actionWithDelay(() => CameraModule.openCamera(myPhotosBucketIdGetter())); }, require('../images/ActionBar/UploadPhotoIcon.png'));
+        let uploadFileAction = (bucketIdGetter, type, imgUrl) => newAction(() => { actionWithDelay(() => this.uploadFile(bucketIdGetter(), type)); }, imgUrl);
         this.setFavouriteAction = newAction(() => { this.setFavourite(); }, this.props.isStarredBucketsSelected ? this.unfavIcon
                                                                                                             : this.favIcon);
-        let uploadFileToSelectedBucketsAction = (type, imgUrl) => newAction(() => { 
-            if(this.isLoading) return;
-
-            this.isLoading = true;
-            this.uploadFileToSelectedBuckets(type); 
-            setButtonInvokeTimeout(2000, this);
-        }, imgUrl);
-        let tryDeleteBucketsAction = newAction(() => { 
-            if(this.isLoading) return;
-
-            this.isLoading = true;
-            this.tryDeleteBuckets(); 
-            setButtonInvokeTimeout(2000, this);
-        }, trashIcon);
+        let uploadFileToSelectedBucketsAction = (type, imgUrl) => newAction(() => { actionWithDelay(() => this.uploadFileToSelectedBuckets(type)); }, imgUrl);
+        let tryDeleteBucketsAction = newAction(() => { actionWithDelay(() => this.tryDeleteBuckets()); }, trashIcon);
         this.setFavouriteFilesAction = newAction(() => { this.setFavouriteFiles(); }, this.props.isStarredFilesSelected ? this.unfavIcon 
                                                                                                                         : this.favIcon);
-        let downloadSelectedFilesAction = newAction(() => {
-            if(this.isLoading) return;
-
-            this.isLoading = true; 
-            this.downloadSelectedFiles(); 
-            setButtonInvokeTimeout(2000, this);
-        }, require('../images/ActionBar/DownloadIFileIcon.png'));
-        let tryCopySelectedFilesAction = newAction(() => { 
-            if(this.isLoading) return;
-
-            this.isLoading = true;
-            this.tryCopySelectedFiles(); 
-            setButtonInvokeTimeout(2000, this);
-        }, require('../images/ActionBar/CopyBucketIcon.png'));
-        let tryDeleteFiles = newAction(() => { 
-            if(this.isLoading) return;
-
-            this.isLoading = true;
-            this.tryDeleteFiles(); 
-            setButtonInvokeTimeout(2000, this);
-        }, trashIcon);
+        let downloadSelectedFilesAction = newAction(() => { actionWithDelay(() => this.downloadSelectedFiles()); }, require('../images/ActionBar/DownloadIFileIcon.png'));
+        let tryCopySelectedFilesAction = newAction(() => { actionWithDelay(() => this.tryCopySelectedFiles()); }, require('../images/ActionBar/CopyBucketIcon.png'));
+        let tryDeleteFiles = newAction(() => { actionWithDelay(() => this.tryDeleteFiles()); }, trashIcon);
 
         //Action arrays
         this.bucketActions = Platform.OS === "android" 

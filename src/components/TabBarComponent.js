@@ -13,6 +13,7 @@ import { getWidth, getHeight, getDeviceWidth} from '../utils/adaptive';
 import { getPicturesBucketId } from '../reducers/mainContainer/mainReducerActions';
 import PropTypes from 'prop-types';
 import ServiceModule from '../utils/ServiceModule';
+import { setButtonInvokeTimeout } from '../utils/buttonDelay';
 
 /**
 * Footer component in main page 
@@ -22,6 +23,7 @@ export default class TabBarComponent extends Component {
         super(props);
 
         this.tabBarPositionAnimated = new Animated.Value(0);
+        this.isLoading = false;
     }
 
     componentWillMount () {
@@ -90,6 +92,14 @@ export default class TabBarComponent extends Component {
         };
     }
 
+    actionWithDelay = (action) => {
+        if(this.isLoading) return;
+
+        this.isLoading = true;
+        action();
+        setButtonInvokeTimeout(10, this);
+    }
+
     render() {
         let navIndex = this.props.navigationState.index;
         let actionButtonSource = !this.props.navigation.isActionBarShown 
@@ -105,22 +115,22 @@ export default class TabBarComponent extends Component {
                     <View style = { styles.tabContainer }>
                         <TouchableOpacity 
                             style = { styles.tabItemContainer } 
-                            onPress = { () => {                                
+                            onPress = { () => this.actionWithDelay(() => {                                
                                 this.props.navigation.navigate("DashboardScreen");                                
-                            } }>
+                            }) }>
                             <View><Image source = { require('../images/TabBar/HomeTabBar.png') } style = { navIndex === 0 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
                         <TouchableOpacity 
                             style = { styles.tabItemContainer } 
-                            onPress = { () => {  
+                            onPress = { () => this.actionWithDelay(() => {  
                                 this.props.navigation.navigate("BucketsScreen");                                
-                            } }>
+                            }) }>
                             <View><Image source = { require('../images/TabBar/BucketTabBar.png') } style = { navIndex === 1 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
                         <View style = { styles.tabItemContainer } ></View>
                         <TouchableOpacity 
                             style = { styles.tabItemContainer } 
-                            onPress = { () => { 
+                            onPress = { () => this.actionWithDelay(() => { 
                                 let picturesBucketId = getPicturesBucketId(this.props.navigation.buckets);
 
                                 if(!picturesBucketId) return;
@@ -128,21 +138,21 @@ export default class TabBarComponent extends Component {
                                 this.props.navigation.pushLoading(picturesBucketId);
                                 this.props.navigation.setPhotosBucketId(picturesBucketId);                     
                                 this.props.navigation.navigate("MyPhotosScreen");
-                            } }>
+                            }) }>
                             <View><Image source = { require('../images/TabBar/MyPhotos.png') } style = { navIndex === 2 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
                         <TouchableOpacity 
                             style = { styles.tabItemContainer } 
-                            onPress = { () => {                                                            
+                            onPress = { () => this.actionWithDelay(() => {                                                            
                                 this.props.navigation.hideActionBar();                                
                                 this.props.navigation.navigate("MyAccountScreen");
-                            } }>
+                            }) }>
                             <View><Image source = { require('../images/TabBar/UserTabBar.png') } style = { navIndex === 3 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
                     </View>
                 </View>
                 <View style = { styles.actionButtonWrapper }>
-                    <TouchableWithoutFeedback onPress = { () => { this.props.navigation.onActionBarPress(); } }>
+                    <TouchableWithoutFeedback onPress = { () => this.actionWithDelay(() => { this.props.navigation.onActionBarPress(); }) }>
                         <View>
                             <Image 
                                 source = { actionButtonSource } 
