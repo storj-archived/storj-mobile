@@ -16,7 +16,7 @@
 RCT_EXPORT_MODULE(SyncModuleIOS);
 
 @synthesize _database;
-@synthesize _bucketRepository, _fileRepository, _uploadFileRepository;
+@synthesize _bucketRepository, _fileRepository, _uploadFileRepository, _syncQueueRepository;
 
 -(FMDatabase *) database{
   if(!_database){
@@ -44,6 +44,15 @@ RCT_EXPORT_MODULE(SyncModuleIOS);
     _uploadFileRepository = [[UploadFileRepository alloc] init];
   }
   return _uploadFileRepository;
+}
+
+-(SyncQueueRepository *) syncQueueRepository
+{
+  if(!_syncQueueRepository)
+  {
+    _syncQueueRepository = [[SyncQueueRepository alloc] init];
+  }
+  return _syncQueueRepository;
 }
 
 RCT_REMAP_METHOD(listBuckets,
@@ -146,6 +155,51 @@ RCT_REMAP_METHOD(listUploadingFiles,
      RCTPromiseResolveBlock resolve = param[@RESOLVER];
      resolve([response toDictionary]);
    }];
+}
+
+RCT_REMAP_METHOD(getSyncQueue, getSyncQueueWithResolver: (RCTPromiseResolveBlock) resolver
+                                            andRejecter: (RCTPromiseRejectBlock) rejecter)
+{
+  void (^callback)(NSDictionary *) = ^(NSDictionary *param)
+  {
+    NSArray <SyncQueueEntryModel *> *syncQueue = [NSArray arrayWithArray:
+                                                  [[self syncQueueRepository] getAll]];
+    
+    SingleResponse *response = [SingleResponse successSingleResponseWithResult:
+                                [DictionaryUtils convertToJsonWithArray: syncQueue]];
+    
+    
+    RCTPromiseResolveBlock resolve = param[@RESOLVER];
+    resolve([response toDictionary]);
+  };
+  
+  [MethodHandler invokeParallelWithParams: @{@RESOLVER: resolver, @REJECTER: rejecter}
+                    andMethodHandlerBlock: callback];
+}
+
+RCT_REMAP_METHOD(getSyncQueueEntry, getSyncQueueEntryWithId: (int) _id
+                                                   Resolver: (RCTPromiseResolveBlock) resolver
+                                                andRejecter: (RCTPromiseRejectBlock) rejecter)
+{
+  void (^callback)(NSDictionary *) = ^(NSDictionary *param)
+  {
+    RCTPromiseResolveBlock resolve = param[@RESOLVER];
+    SyncQueueEntryModel *entry = [[self syncQueueRepository] getById: _id];
+    
+    if(!entry)
+    {
+      resolve([[SingleResponse errorResponseWithMessage:@"Can't find entry"] toDictionary]);
+      return;
+    }
+    
+    SingleResponse *response = [SingleResponse successSingleResponseWithResult:
+                                [DictionaryUtils convertToJsonWithDictionary:
+                                 [entry toDictionary]]];
+    resolve(response);
+  };
+  
+  [MethodHandler invokeParallelWithParams: @{@RESOLVER: resolver, @REJECTER: rejecter}
+                    andMethodHandlerBlock: callback];
 }
 
 RCT_REMAP_METHOD(getUploadingFile, getUploadingFileWithFileHandle: (NSString *) fileHandle

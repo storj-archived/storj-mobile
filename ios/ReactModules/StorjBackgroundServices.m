@@ -51,6 +51,7 @@
 
 #import "UploadService.h"
 #import "SyncQueueRepository.h"
+#import "FileUtils.h"
 
 static StorjBackgroundServices *sharedInstance = nil;
 
@@ -443,20 +444,32 @@ RCT_REMAP_METHOD(uploadFile,
                                                localPath:(NSString *) localPath];
   
   //TEST
-//  SyncQueueRepository *repo = [[SyncQueueRepository alloc] init];
+//    if(!fileName)
+//    {
+//      fileName = [FileUtils getFileNameWithPath: localPath];
+//    }
+  
+//    SyncQueueRepository *repo = [[SyncQueueRepository alloc] init];
 //
-//  SyncQueueEntryDbo *dbo = [[SyncQueueEntryDbo alloc] init];
-//  dbo.localPath = localPath;
-//  dbo.fileName = @"asda.jpg";
-//  dbo.bucketId = bucketId;
+//    SyncQueueEntryDbo *dbo = [[SyncQueueEntryDbo alloc] init];
+//    dbo.localPath = localPath;
+//    dbo.fileName = fileName;
+//    dbo.bucketId = bucketId;
 //
-//  SyncQueueEntryModel *model = [[SyncQueueEntryModel alloc] initWithDbo:(SyncQueueEntryDbo *) dbo];
-
-  //[repo insertWithModel:(SyncQueueEntryModel *)model];
-  //[repo insertWithModel:(SyncQueueEntryModel *)model];
-  //[repo insertWithModel:(SyncQueueEntryModel *)model];
-
-//  [self sendEventWithName:(NSString *) EventNames.EVENT_SYNC_STARTED body: [NSNull null]];
+//    SyncQueueEntryModel *model = [[SyncQueueEntryModel alloc] initWithDbo:(SyncQueueEntryDbo *) dbo];
+//
+//    Response *resp = [repo insertWithModel:(SyncQueueEntryModel *)model];
+//
+//    if(![resp isSuccess])
+//    {
+//      return;
+//    }
+//
+//    NSArray *arr = [repo getAll];
+//    //[repo insertWithModel:(SyncQueueEntryModel *)model];
+//    //[repo insertWithModel:(SyncQueueEntryModel *)model];
+//
+//    [self sendEventWithName:(NSString *) EventNames.EVENT_SYNC_STARTED body: [NSNull null]];
 //
 //  [[UploadService sharedInstance] syncFileWithSyncEntryId: 5
 //                                                 bucketId:(NSString *) bucketId
@@ -464,11 +477,11 @@ RCT_REMAP_METHOD(uploadFile,
 //                                                localPath:(NSString *) localPath];
 //
 // cd $(find / -type f -name storj.db | sed "s/storj.db//")
-//  [[UploadService sharedInstance] syncFileWithSyncEntryId: 2
+//    [[UploadService sharedInstance] syncFileWithSyncEntryId: [arr count]
 //                                                 bucketId:(NSString *) bucketId
 //                                                 fileName:(NSString *) fileName
 //                                                localPath:(NSString *) localPath];
-//
+
 //  [[UploadService sharedInstance] syncFileWithSyncEntryId: 3
 //                                                 bucketId:(NSString *) bucketId
 //                                                 fileName:(NSString *) fileName

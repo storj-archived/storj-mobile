@@ -111,8 +111,8 @@ class Apps extends Component {
 		this.downloadFileSuccessListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_SUCCESS, this.onFileDownloadSuccess.bind(this));
 		this.downloadFileErrorListener = eventEmitter.addListener(eventNames.EVENT_FILE_DOWNLOAD_ERROR, this.onFileDownloadError.bind(this));
 
-		//this.syncQueueEntryUpdateListener = eventEmitter.addListener(eventNames.EVENT_SYNC_ENTRY_UPDATED, this.onSyncQueueEntryUpdated.bind(this));
-		//this.syncStartedListener = eventEmitter.addListener(eventNames.EVENT_SYNC_STARTED, this.onSyncStarted.bind(this));
+		this.syncQueueEntryUpdateListener = eventEmitter.addListener(eventNames.EVENT_SYNC_ENTRY_UPDATED, this.onSyncQueueEntryUpdated.bind(this));
+		this.syncStartedListener = eventEmitter.addListener(eventNames.EVENT_SYNC_STARTED, this.onSyncStarted.bind(this));
 
 		NetInfo.isConnected.fetch().then(isConnected => {
 			this.props.setIsConnected(isConnected);

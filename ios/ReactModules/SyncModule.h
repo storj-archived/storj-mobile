@@ -14,6 +14,7 @@
 #import "BucketRepository.h"
 #import "FileRepository.h"
 #import "UploadFileRepository.h"
+#import "SyncQueueRepository.h"
 
 #import "BucketModel.h"
 
@@ -30,7 +31,7 @@
 @property (nonatomic, strong) BucketRepository *_bucketRepository;
 @property (nonatomic, strong) FileRepository *_fileRepository;
 @property (nonatomic, strong) UploadFileRepository *_uploadFileRepository;
-
+@property (nonatomic, strong) SyncQueueRepository *_syncQueueRepository;
 
 
 @end

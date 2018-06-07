@@ -137,6 +137,13 @@ static dispatch_once_t onceToken;
 {
   SyncTask *syncTask = [[SyncTask alloc] initWithSyncEntryId: syncEntryId];
   
+  [self removeFromQueue: syncEntryId];
+  [syncQueueArray addObject: syncTask];
+  return syncTask;
+}
+
+-(void) removeFromQueue: (int) syncEntryId
+{
   NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
     if(!evaluatedObject)
     {
@@ -154,8 +161,6 @@ static dispatch_once_t onceToken;
   }];
   
   [syncQueueArray filterUsingPredicate:(NSPredicate *) predicate];
-  [syncQueueArray addObject:(id) syncTask];
-  return syncTask;
 }
 
 +(STFileUploadCallback *) getUploadCallbackWithWaiter: (dispatch_semaphore_t) semaphore
