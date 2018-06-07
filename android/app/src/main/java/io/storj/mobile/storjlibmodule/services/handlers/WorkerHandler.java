@@ -32,6 +32,13 @@ public class WorkerHandler extends Handler {
         String localPath = data.getString(PARAM_LOCAL_PATH);
         String bucketId = data.getString(PARAM_BUCKET_ID);
 
+        if(fileName == null) {
+            int cut = localPath.lastIndexOf('/');
+            if (cut != -1) {
+                fileName = localPath.substring(cut + 1);
+            }
+        }
+
         try(SQLiteDatabase db = new DatabaseFactory(mContext, null).getWritableDatabase()) {
             Uploader uploader = new Uploader(mContext, new WorkerUploaderCallback(db, new UploadEventEmitter(mContext), false));
             uploader.uploadFile(bucketId, fileName, localPath);

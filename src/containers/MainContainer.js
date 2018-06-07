@@ -740,7 +740,6 @@ function handleDashboardScreenActions(bucketId, isSelection, actions, selectionM
 }
 
 function mapStateToProps(state) { 
-    console.log("AAAAAAAAAA", state);
     let isStarredBucketsSelected = state.bucketReducer.buckets.filter(item => item.isSelected === true).filter(item => item.entity.isStarred === true).length !== 0; 
     let isStarredFilesSelected = state.filesReducer.fileListModels.filter(item => item.isSelected === true).filter(item => item.entity.isStarred === true).length !== 0;
 
