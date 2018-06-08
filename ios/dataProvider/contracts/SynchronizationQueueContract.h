@@ -18,6 +18,7 @@
 
 @property (readonly, class) NSString *const FILE_NAME;
 @property (readonly, class) NSString *const LOCAL_PATH;
+@property (readonly, class) NSString *const LOCAL_IDENTIFIER;
 @property (readonly, class) NSString *const STATUS;
 @property (readonly, class) NSString *const ERROR_CODE;
 @property (readonly, class) NSString *const SIZE;

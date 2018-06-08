@@ -128,6 +128,30 @@ static NSArray *columns;
   return dbo;
 }
 
+-(BucketDbo *) getBucketByBucketName: (NSString *) bucketName
+{
+  NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ?",
+                       [[BucketRepository getSelectionColumnsString]componentsJoinedByString:@","],
+                       BucketContract.TABLE_NAME,
+                       BucketContract.NAME];
+  __block BucketDbo *dbo = nil;
+  FMDatabaseQueue *queue = [self readableQueue];
+  [queue inDatabase:^(FMDatabase * _Nonnull db) {
+    FMResultSet * resultSet = [db executeQuery:request, bucketName];
+    if(!resultSet) {
+      NSLog(@"No resultSet returned");
+      return;
+    }
+    
+    if([resultSet next]) {
+      dbo = [BucketRepository getBucketDboFromResultSet:resultSet];
+    }
+    [resultSet close];
+  }];
+  [queue close];
+  return dbo;
+}
+
 -(BucketDbo *) getByColumnName:(NSString *) columnName
                    columnValue:(NSString *) columnValue {
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ?",

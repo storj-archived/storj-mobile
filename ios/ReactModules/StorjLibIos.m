@@ -7,6 +7,7 @@
 //
 #import "StorjLibIos.h"
 @import StorjIOS;
+#import "STFileManager.h"
 
 @interface StorjLibIos()
 @property (nonatomic, strong) StorjWrapper *storjWrapper;
@@ -261,19 +262,15 @@ RCT_REMAP_METHOD(getDownloadFolderPath,
                                      @REJECTER : rejecter}
             andMethodHandlerBlock:^(NSDictionary * _Nonnull param) {
               RCTPromiseResolveBlock resolve = param[@RESOLVER];
-              NSString * downloadsDir = [NSSearchPathForDirectoriesInDomains(/*NSDocumentDirectory*/NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-              downloadsDir = [downloadsDir stringByAppendingString:@"/Downloads"];
-              NSLog(@"DonwloadsDir: %@", downloadsDir);
-              if(![[NSFileManager defaultManager]fileExistsAtPath:downloadsDir isDirectory:NULL]){
-                NSError *error = nil;
-                if (![[NSFileManager defaultManager] createDirectoryAtPath:downloadsDir withIntermediateDirectories:YES attributes:nil error:&error]) {
-                  NSLog(@"%@", error.localizedDescription);
-                }
-              }
+              STFileManager *stFileMan = [[STFileManager alloc] init];
+              NSString *downloadsDir = [stFileMan getDownloadFolder];
+              
               SingleResponse *response;
-              if(downloadsDir || downloadsDir.length > 0){
+              if(downloadsDir || downloadsDir.length > 0)
+              {
                 response = [SingleResponse successSingleResponseWithResult:downloadsDir];
-              } else {
+              } else
+              {
                 response = [SingleResponse errorResponseWithMessage:@"Unable to retrieve downloads folder"];
               }
               resolve([response toDictionary]);

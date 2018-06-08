@@ -21,9 +21,7 @@ static NSArray * columns;
 
 -(instancetype) init
   {
-    if (self = [super init]) {}
-    
-    return self;
+    return [super init];
   }
 
 -(NSArray *) getAll {

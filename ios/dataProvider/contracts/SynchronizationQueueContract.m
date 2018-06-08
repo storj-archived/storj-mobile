@@ -16,6 +16,7 @@ static NSString * const _TABLE_NAME = @"SynchronizationQueue";
 static NSString * const _ID = @"_id";
 static NSString * const _FILE_NAME = @"fileName";
 static NSString * const _LOCAL_PATH = @"localPath";
+static NSString * const _LOCAL_IDENTIFIER = @"localIdentifier";
 static NSString * const _STATUS = @"status";
 static NSString * const _ERROR_CODE = @"errorCode";
 static NSString * const _SIZE = @"size";
@@ -43,6 +44,11 @@ static NSString * const _BUCKET_ID = @"bucketId";
 +(NSString *) LOCAL_PATH
 {
   return _LOCAL_PATH;
+}
+
++(NSString *) LOCAL_IDENTIFIER
+{
+  return _LOCAL_IDENTIFIER;
 }
 
 +(NSString *) STATUS
@@ -86,6 +92,7 @@ static NSString * const _BUCKET_ID = @"bucketId";
 %@ INTEGER primary key AUTOINCREMENT not null, \
 %@ TEXT not null, \
 %@ TEXT not null, \
+%@ TEXT not null, \
 %@ INTEGER default 0, \
 %@ INTEGER default 0, \
 %@ INTEGER default 0, \
@@ -95,7 +102,7 @@ static NSString * const _BUCKET_ID = @"bucketId";
 %@ INTEGER, \
 FOREIGN KEY(%@) REFERENCES uploadingFiles(%@) ON DELETE CASCADE, \
 FOREIGN KEY(%@) REFERENCES buckets(%@) ON DELETE CASCADE);",
-          _TABLE_NAME, _ID, _FILE_NAME, _LOCAL_PATH, _STATUS, _ERROR_CODE, _SIZE, _COUNT,
+          _TABLE_NAME, _ID, _FILE_NAME, _LOCAL_PATH, _LOCAL_IDENTIFIER, _STATUS, _ERROR_CODE, _SIZE, _COUNT,
           _CREATION_DATE, _BUCKET_ID, _FILE_HANDLE, _FILE_HANDLE, _FILE_HANDLE, _BUCKET_ID, _ID];
 }
 

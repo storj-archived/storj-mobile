@@ -19,6 +19,7 @@
 @property (readonly) int _id;
 @property (readonly, strong) NSString *fileName;
 @property (readonly, strong) NSString *localPath;
+@property (readonly, strong) NSString *localIdentifier;
 @property (readonly) int status;
 @property (readonly) int errorCode;
 @property (readonly) long size;
@@ -32,6 +33,7 @@
 -(instancetype) initWithId: (int) _id
                   fileName: (NSString *) fileName
                  localPath: (NSString *) localPath
+           localIdentifier: (NSString *) localIdentifier
                     status: (int) status
                  errorCode: (int) errorCode
                       size: (long) size

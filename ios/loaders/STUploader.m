@@ -137,8 +137,8 @@
   };
   
   _innerUploadFileCallback.onError = ^(int errorCode, NSString * _Nullable errorMessage) {
-    NSString *dboId = [NSString stringWithFormat:@"%ld", [_uploadFileDbo fileHandle]];
-    Response *deleteResponse = [[self _uploadFileRepository] deleteById:dboId];
+    Response *deleteResponse = [[self _uploadFileRepository] deleteById:
+                                [@([_uploadFileDbo fileHandle]) stringValue]];
     
     [self deleteFile];
     
@@ -151,7 +151,7 @@
     ThumbnailProcessor *thumbnailProcessor = [[ThumbnailProcessor alloc]
                                               initWithFileRepository:[self _fileRepository]];
     NSString *thumbnail = nil;
-    // Due to the fact that StorjLib returns mimeType: applicatio9n/octet-stream, we are trying to
+    // Due to the fact that StorjLib returns mimeType: application/octet-stream, we are trying to
     // generate thumbnail image and save it to local database
     SingleResponse *thumbnailGenerationResponse = [thumbnailProcessor getThumbnailWithFilePath:_localPath];
     if([thumbnailGenerationResponse isSuccess])

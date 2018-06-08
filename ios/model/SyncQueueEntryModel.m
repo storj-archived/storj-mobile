@@ -22,6 +22,7 @@
 -(instancetype) initWithId: (int) _id
                   fileName: (NSString *) fileName
                  localPath: (NSString *) localPath
+           localIdentifier: (NSString *) localIdentifier
                     status: (int) status
                  errorCode: (int) errorCode
                       size: (long) size
@@ -35,6 +36,7 @@
         __id = _id;
         _fileName = (NSString *)[fileName copy];
         _localPath = (NSString *)[localPath copy];
+        _localIdentifier = (NSString *)[localIdentifier copy];
         _status = status;
         _errorCode = errorCode;
         _size = size;
@@ -52,6 +54,7 @@
     return [self initWithId: dbo._id
                    fileName: dbo.fileName
                   localPath: dbo.localPath
+            localIdentifier: dbo.localIdentifier
                      status: dbo.status
                   errorCode: dbo.errorCode
                        size: dbo.size
@@ -63,7 +66,17 @@
 
 -(SyncQueueEntryDbo *) toDbo
 {
-    return [[SyncQueueEntryDbo alloc] initWithId: (int) __id fileName: (NSString *) _fileName localPath: (NSString *) _localPath status: (int) _status errorCode:(int) _errorCode size: (long) _size count: (int) _count creationDate: (NSString *) _creationDate bucketId: (NSString *) _bucketId fileHandle: (long) _fileHandle];
+  return [[SyncQueueEntryDbo alloc] initWithId: (int) __id
+                                      fileName: (NSString *) _fileName
+                                     localPath: (NSString *) _localPath
+                               localIdentifier: (NSString *) _localIdentifier
+                                        status: (int) _status
+                                     errorCode: (int) _errorCode
+                                          size: (long) _size
+                                         count: (int) _count
+                                  creationDate: (NSString *) _creationDate
+                                      bucketId: (NSString *) _bucketId
+                                    fileHandle: (long) _fileHandle];
 }
 
 -(BOOL) isValid
@@ -75,30 +88,31 @@
 
 - (NSDictionary *)toDictionary
 {
-    NSMutableDictionary *object = [[NSMutableDictionary alloc] init];
-    
-    [object setObject: @(__id)
-               forKey: SynchronizationQueueContract.ID];
-    [object setObject: [DictionaryUtils checkAndReturnNSString: _fileName]
-               forKey: SynchronizationQueueContract.FILE_NAME];
-    [object setObject: [DictionaryUtils checkAndReturnNSString: _localPath]
-               forKey: SynchronizationQueueContract.LOCAL_PATH];
-    [object setObject: @(_status)
-               forKey: SynchronizationQueueContract.STATUS];
-    [object setObject: @(_errorCode)
-               forKey: SynchronizationQueueContract.ERROR_CODE];
-    [object setObject: @(_size)
-               forKey: SynchronizationQueueContract.SIZE];
-    [object setObject: @(_count)
-               forKey: SynchronizationQueueContract.COUNT];
-    [object setObject: [DictionaryUtils checkAndReturnNSString: _creationDate]
-               forKey: SynchronizationQueueContract.CREATION_DATE];
-    [object setObject: [DictionaryUtils checkAndReturnNSString: _bucketId]
-               forKey: SynchronizationQueueContract.BUCKET_ID];
-    [object setObject: @(_fileHandle)
-               forKey: SynchronizationQueueContract.FILE_HANDLE];
-    
-    
+  NSMutableDictionary *object = [[NSMutableDictionary alloc] init];
+  
+  [object setObject: @(__id)
+             forKey: SynchronizationQueueContract.ID];
+  [object setObject: [DictionaryUtils checkAndReturnNSString: _fileName]
+             forKey: SynchronizationQueueContract.FILE_NAME];
+  [object setObject: [DictionaryUtils checkAndReturnNSString: _localPath]
+             forKey: SynchronizationQueueContract.LOCAL_PATH];
+  [object setObject: [DictionaryUtils checkAndReturnNSString: _localIdentifier]
+             forKey: SynchronizationQueueContract.LOCAL_IDENTIFIER];
+  [object setObject: @(_status)
+             forKey: SynchronizationQueueContract.STATUS];
+  [object setObject: @(_errorCode)
+             forKey: SynchronizationQueueContract.ERROR_CODE];
+  [object setObject: @(_size)
+             forKey: SynchronizationQueueContract.SIZE];
+  [object setObject: @(_count)
+             forKey: SynchronizationQueueContract.COUNT];
+  [object setObject: [DictionaryUtils checkAndReturnNSString: _creationDate]
+             forKey: SynchronizationQueueContract.CREATION_DATE];
+  [object setObject: [DictionaryUtils checkAndReturnNSString: _bucketId]
+             forKey: SynchronizationQueueContract.BUCKET_ID];
+  [object setObject: @(_fileHandle)
+             forKey: SynchronizationQueueContract.FILE_HANDLE];
+  
     return object;
 }
 

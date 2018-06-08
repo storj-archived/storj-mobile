@@ -58,7 +58,7 @@ static NSArray * columns;
   if(!model || ![model isValid]) {
     return [Response errorResponseWithMessage:@"Model is not valid"];
   }
-  
+
   return [super executeInsertIntoTable:SynchronizationQueueContract.TABLE_NAME
       fromDict: [SyncQueueRepository getUpdateDictionaryFromModel: (SyncQueueEntryModel *) model]];
 }
@@ -211,6 +211,7 @@ static NSArray * columns;
                              initWithId: [resultSet intForColumn: SynchronizationQueueContract.ID]
                              fileName: [resultSet stringForColumn: SynchronizationQueueContract.FILE_NAME]
                              localPath: [resultSet stringForColumn: SynchronizationQueueContract.LOCAL_PATH]
+                             localIdentifier: [resultSet stringForColumn:SynchronizationQueueContract.LOCAL_IDENTIFIER]
                              status: [resultSet intForColumn: SynchronizationQueueContract.STATUS]
                              errorCode: [resultSet intForColumn: SynchronizationQueueContract.ERROR_CODE]
                              size: [resultSet longForColumn: SynchronizationQueueContract.SIZE]

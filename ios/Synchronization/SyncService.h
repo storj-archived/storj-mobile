@@ -10,4 +10,10 @@
 
 @interface SyncService : NSObject
 
+-(void) startSync;
+
+-(void) stopSync;
+
+-(void) clean;
+
 @end

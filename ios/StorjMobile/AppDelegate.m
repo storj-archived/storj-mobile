@@ -11,6 +11,9 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import "STFileManager.h"
+#import "PrepareSyncService.h"
+#import "SyncService.h"
 
 @implementation AppDelegate
 
@@ -18,12 +21,15 @@
 {
   NSURL *jsCodeLocation;
   
-
+//  NSArray *array = [[[PrepareSyncService alloc] init] getSyncQueue];
+//  NSLog(@"SyncQueue: %@", array);
+//  
+//  [[[SyncService alloc] init] startSync];
   //debug
-  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+//  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
   
   //Release
-  //jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"Storj"

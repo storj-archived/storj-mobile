@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class STAssetFileModel;
+
 #ifndef STFileManager_h
 #define STFileManager_h
 
@@ -15,7 +17,11 @@
 
 -(instancetype) init;
 
--(NSMutableArray *) getAssetsFromGallery;
+-(NSMutableArray <STAssetFileModel *> *) getAssetsFromGallery;
+
+-(NSString *) getUploadFolder;
+
+-(NSString *) getDownloadFolder;
 
 @end
 

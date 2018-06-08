@@ -26,6 +26,8 @@
 
 -(BucketDbo *) getByBucketId:(NSString *) bucketId;
 
+-(BucketDbo *) getBucketByBucketName: (NSString *) bucketName;
+
 -(BucketDbo *) getByColumnName:(NSString *) columnName
                    columnValue:(NSString *) columnValue;
 

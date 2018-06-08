@@ -17,14 +17,15 @@
 }
 
 -(instancetype) initWithId: (int) _id
-                fileName: (NSString *) fileName
-                localPath: (NSString *) localPath
-                status: (int) status
-                errorCode: (int) errorCode
-                size: (long) size
-                count: (int) count
-                creationDate: (NSString *) creationDate
-                bucketId: (NSString *) bucketId
+                  fileName: (NSString *) fileName
+                 localPath: (NSString *) localPath
+           localIdentifier: (NSString *) localIdentifier
+                    status: (int) status
+                 errorCode: (int) errorCode
+                      size: (long) size
+                     count: (int) count
+              creationDate: (NSString *) creationDate
+                  bucketId: (NSString *) bucketId
                 fileHandle: (long) fileHandle
 {
   if(self = [super init])
@@ -32,6 +33,7 @@
     __id = _id;
     _fileName = (NSString *)[fileName copy];
     _localPath = (NSString *)[localPath copy];
+    _localIdentifier = (NSString *)[localIdentifier copy];
     _status = status;
     _errorCode = errorCode;
     _size = size;

@@ -195,7 +195,7 @@ RCT_REMAP_METHOD(getSyncQueueEntry, getSyncQueueEntryWithId: (int) _id
     SingleResponse *response = [SingleResponse successSingleResponseWithResult:
                                 [DictionaryUtils convertToJsonWithDictionary:
                                  [entry toDictionary]]];
-    resolve(response);
+    resolve([response toDictionary]);
   };
   
   [MethodHandler invokeParallelWithParams: @{@RESOLVER: resolver, @REJECTER: rejecter}

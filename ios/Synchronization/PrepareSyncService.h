@@ -10,4 +10,10 @@
 
 @interface PrepareSyncService : NSObject
 
+-(instancetype) init;
+
+-(NSArray *) prepareSyncQueue;
+
+-(NSArray *) getSyncQueue;
+
 @end
