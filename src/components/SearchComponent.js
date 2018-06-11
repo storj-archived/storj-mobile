@@ -73,7 +73,7 @@ export default class SearchComponent extends Component {
                             value = { this.state.searchValue } />
                     </View>
                     <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>
-                        <Text style = { styles.updateStatus }>Just now</Text>
+                        <Text style = { styles.updateStatus }>{ this.props.lastSync }</Text>
                         <TouchableOpacity onPress = { this.onOptionPress.bind(this) }>
                             <Image style = { styles.image } source = { require("../images/Icons/SearchOptions.png") } resizeMode = { 'contain' } />
                         </TouchableOpacity>
@@ -124,6 +124,7 @@ export default class SearchComponent extends Component {
         }
         
         return(
+            
             <View style = { [ styles.rowContainer, styles.mainContainer, this.props.styleContainer ] }>
                     <View style = { styles.rowContainer }>
                         { this.state.isSearchIconShown && this.props.placeholder !== 'Pictures' ? <Image style={ styles.searchImage } source = { require("../images/Icons/Search.png") } resizeMode = { 'contain' } /> : null }
@@ -146,7 +147,7 @@ export default class SearchComponent extends Component {
                             value = { this.state.searchValue } />
                     </View>
                     <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>
-                        <Text style = { styles.updateStatus }>Update Status</Text>
+                        <Text style = { styles.updateStatus }>{ this.props.lastSync }</Text>
                         <TouchableOpacity onPress = { this.onOptionPress.bind(this) }>
                             <Image style = { styles.image } source = { require("../images/Icons/SearchOptions.png") } resizeMode = { 'contain' } />
                         </TouchableOpacity>

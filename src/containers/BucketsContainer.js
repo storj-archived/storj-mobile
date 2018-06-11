@@ -107,6 +107,7 @@ class BucketsContainer extends Component {
         } else {
             return(
                 <BucketsComponent
+                    lastSync = { this.props.lastSync }
                     selectAll = { this.props.screenProps.selectAll }
                     deselectAll = { this.props.screenProps.deselectAll } 
                     setSearch = { this.props.setSearch }
@@ -138,6 +139,7 @@ function mapStateToProps(state) {
     let currentBucketScreenName = routes[index].routeName;
     
     return {
+        lastSync: state.settingsReducer.lastSync,
         isFirstSignIn: state.mainReducer.isFirstSignIn,
         isSelectionMode: state.mainReducer.isSelectionMode,        
         buckets: state.bucketReducer.buckets,

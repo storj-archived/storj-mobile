@@ -68,7 +68,6 @@ public class SettingsRepository extends BaseRepository {
     public Response update(String id, String dateTime) {
         ContentValues map = new ContentValues();
 
-        //map.put(SettingsContract._ID, id);
         map.put(SettingsContract._LAST_SYNC, dateTime);
 
         return _executeUpdate(SettingsContract.TABLE_NAME, id, null, null, map);

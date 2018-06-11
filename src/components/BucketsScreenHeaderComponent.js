@@ -20,6 +20,7 @@ export default class BucketsScreenHeaderComponent extends Component {
         return(
             <View style = { styles.mainContainer }>
                 <AnimatedHeader
+                    lastSync = { this.props.lastSync }
                     placeholder = { this.props.placeholder }
                     setSearch = { this.props.setSearch }
                     clearSearch = { this.props.clearSearch }
@@ -42,65 +43,10 @@ export default class BucketsScreenHeaderComponent extends Component {
 }
 
 function rotateTransform(xOffset) {
-    
-    let searchX = xOffset.interpolate({
-		inputRange: [
-			0, 
-            180,
-            181
-		],
-		outputRange: [1, 1.03, 1.03]
-    });
-
-    let searchY = xOffset.interpolate({
-		inputRange: [
-			0, 
-            180,
-            181
-		],
-		outputRange: [1, 0.92, 0.92]
-    });
-
-    let searchMoveY = xOffset.interpolate({
-		inputRange: [
-			0, 
-            180,
-            181
-		],
-		outputRange: [1, -5, -5]
-    });
-    
-    let mainContainerMoveY = xOffset.interpolate({
-		inputRange: [
-			0, 
-            180,
-            181
-		],
-		outputRange: [0, -20, -20]
-    });
-
-    let selectY = xOffset.interpolate({
-		inputRange: [
-			0, 
-            180,
-            181
-		],
-		outputRange: [0, 20, 20]
-    });
-    
-    let color = xOffset.interpolate({
-		inputRange: [
-			0, 
-            180,
-            181
-		],
-		outputRange: ['rgba(255, 255, 255, 1)', 'rgba(255, 255, 255, 1)', 'rgba(255, 255, 255, 1)']
-	});
-
     return [
         {
             transform: [
-                // { translateY: mainContainerMoveY }
+                
             ]
         },
         {
@@ -109,7 +55,7 @@ function rotateTransform(xOffset) {
         },
         {
             transform: [
-                // { translateY: selectY }
+                
             ]
         }
     ];
@@ -125,6 +71,7 @@ class AnimatedHeader extends Component {
             <View style = { [ styles.searchWrapper ] }>
                 <Animated.View style = { [ styles.searchWrapperInner, res[1] ] }>
                     <SearchComponent
+                        lastSync = { this.props.lastSync }
                         placeholder = { this.props.placeholder }
                         searchIndex = { this.props.searchIndex }
                         setSearch = { this.props.setSearch }

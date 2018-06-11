@@ -116,15 +116,17 @@ export default class TabBarComponent extends Component {
                         <TouchableOpacity 
                             style = { styles.tabItemContainer } 
                             onPress = { () => this.actionWithDelay(() => {                                
-                                this.props.navigation.navigate("DashboardScreen");                                
+                                this.props.navigation.navigate("DashboardScreen");  
+                                this.props.navigation.listSettings(this.props.navigation.email);                                   
                             }) }>
                             <View><Image source = { require('../images/TabBar/HomeTabBar.png') } style = { navIndex === 0 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
                         <TouchableOpacity 
                             style = { styles.tabItemContainer } 
                             onPress = { () => this.actionWithDelay(() => {  
-                                this.props.navigation.navigate("BucketsScreen");                                
-                            }) }>
+                                this.props.navigation.navigate("BucketsScreen");          
+                                this.props.navigation.listSettings(this.props.navigation.email);                      
+                            }) }>                            
                             <View><Image source = { require('../images/TabBar/BucketTabBar.png') } style = { navIndex === 1 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
                         <View style = { styles.tabItemContainer } ></View>
@@ -134,6 +136,7 @@ export default class TabBarComponent extends Component {
                                 let picturesBucketId = getPicturesBucketId(this.props.navigation.buckets);
 
                                 if(!picturesBucketId) return;
+                                this.props.navigation.listSettings(this.props.navigation.email);
                                 ServiceModule.getFiles(picturesBucketId);   
                                 this.props.navigation.pushLoading(picturesBucketId);
                                 this.props.navigation.setPhotosBucketId(picturesBucketId);                     

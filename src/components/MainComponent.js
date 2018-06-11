@@ -14,7 +14,6 @@ import QRCodeComponent from '../components/MyAccount/QRCodeComponent';
 import StorageInfoComponent from '../components/MyAccount/StorageInfoComponent';
 import AddCreditComponent from '../components/MyAccount/AddCreditComponent';
 import PopUpComponent from '../components/PopUpComponent';
-import SelectBucketComponent from '../components/SelectBucketComponent';
 import PinOptionComponent from '../components/PinOptionComponent';
 import AnimatedWindowComponent from "../components/AnimatedWindowComponent";
 import SyncOverlayComponent from "../components/SynQueue/SyncOverlayComponent";

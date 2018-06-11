@@ -57,6 +57,7 @@ class DashboardFilesListContainer extends BaseFilesListContainer {
         
         return (
             <this.HeaderFilesListComponent
+                lastSync = { this.props.lastSync }
                 isLoading = { this.props.loadingStack.includes(this.props.bucketId) }                            
                 data = { data }
                 animatedScrollValue = { this.animatedScrollValue }
@@ -74,6 +75,7 @@ function mapStateToProps(state) {
     let currentScreenName = state.mainScreenNavReducer.routes[screenIndex].routeName; 
 
     return {
+        lastSync: state.settingsReducer.lastSync,
         loadingStack: state.mainReducer.loadingStack,
         buckets: state.bucketReducer.buckets,
         fileListModels: state.filesReducer.fileListModels,

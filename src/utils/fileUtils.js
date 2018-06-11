@@ -108,5 +108,3 @@ export function getFileCopyName(fileName) {
 
     return newName + name.extention;
 }
-
-console.log(getFileCopyName("100MB(1).bin"));

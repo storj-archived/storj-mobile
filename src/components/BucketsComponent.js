@@ -23,6 +23,7 @@ export default class BucketsComponent extends Component {
                     setSelectionId = { this.props.setSelectionId }
                     selectedItemId = { this.props.selectedItemId }  />
                 <BucketsScreenHeaderComponent
+                    lastSync = { this.props.lastSync }
                     selectAll = { this.props.selectAll }
                     deselectAll = { this.props.deselectAll }
                     setSearch = { this.props.setSearch }

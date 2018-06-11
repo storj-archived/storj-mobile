@@ -1,4 +1,5 @@
 import { SETTINGS_ACTIONS } from "../../../../utils/constants/actionConstants";
+import moment from 'moment';
 
 const {
     LIST_SETTINGS,
@@ -13,6 +14,9 @@ const {
 } = SETTINGS_ACTIONS;
 
 const initialState = { 
+    isSyncActive: false,
+    lastSync: "",
+    settingsId: null,
     syncStatus: false, 
     onWifi: false, 
     onCharging: false, 
@@ -23,18 +27,24 @@ const initialState = {
 };
 
 export default function settingsReducer(state = initialState, action) {
+    
+
     switch(action.type) {
         case LIST_SETTINGS:
-            return {
+            let newState = {
                 ...state,
                 ...action.payload.settings
             };
+
+            newState.lastSync = formatLastSync(newState.lastSync, newState.isSyncActive);
+            
+            return newState;
         case SYNC_ON:
             return {
                 ...state,
                 syncStatus: true
             };
-        case SYNC_OFF:
+        case SYNC_OFF:          
             return {
                 ...state,
                 syncStatus: false
@@ -72,5 +82,30 @@ export default function settingsReducer(state = initialState, action) {
         default:
             return state || initialState;
     }
+}
+
+formatLastSync = function(lastSync) {
+    let result = "";
+    let lastSyncString = "Last sync: ";
+
+    if(!lastSync || !moment(lastSync).isValid()) return result;
+  
+    var diff = moment.duration(moment().diff(moment(lastSync))).asMinutes();
+
+    let diffMins = Math.abs(Math.round(diff));  
+    let diffHrs = Math.abs(Math.round(diffMins / 60));
+    let diffDays = Math.abs(Math.round(diffHrs / 24));
+
+    if(diffMins <= 1) return lastSyncString + "just now";
+    
+    if(diffMins > 1 && diffMins < 59) return lastSyncString + diffMins + " minutes ago";
+
+    if(diffMins >= 60 && diffMins < 120) return lastSyncString + "hour ago";
+
+    if(diffDays < 2 && diffHrs > 1)  return lastSyncString + diffHrs + " hours ago";
+
+    if(diffDays > 1) return lastSyncString + diffDays + " days ago";
+
+    return result;
 }
 

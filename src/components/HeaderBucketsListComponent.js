@@ -20,21 +20,22 @@ export default class HeaderBucketsListComponent extends BucketsListComponent {
                 }
 
                 <BucketsScreenHeaderComponent
-                        navigateBack = { this.props.navigateBack }
-                        buckets = { this.props.buckets }
-                        isFilesScreen = { this.props.isFilesScreen }
-                        placeholder = { this.props.placeholder }
-                        selectedItemsCount = { this.props.getSelectedFilesCount }
-                        showOptions = { this.props.showOptions }
-                        isSelectionMode = { this.props.isSelectionMode }
-                        disableSelectionMode = { this.props.disableSelectionMode }
-                        animatedScrollValue = { this.props.animatedScrollValue }
-                        setSearch = { this.props.setSearch }
-                        clearSearch = { this.props.clearSearch }
-                        searchIndex = { this.props.searchIndex }
-                        openedBucketId = { this.props.bucketId }
-                        selectAll = { this.props.selectAll }
-                        deselectAll = { this.props.deselectAll } />
+                    lastSync = { this.props.lastSync }
+                    navigateBack = { this.props.navigateBack }
+                    buckets = { this.props.buckets }
+                    isFilesScreen = { this.props.isFilesScreen }
+                    placeholder = { this.props.placeholder }
+                    selectedItemsCount = { this.props.getSelectedFilesCount }
+                    showOptions = { this.props.showOptions }
+                    isSelectionMode = { this.props.isSelectionMode }
+                    disableSelectionMode = { this.props.disableSelectionMode }
+                    animatedScrollValue = { this.props.animatedScrollValue }
+                    setSearch = { this.props.setSearch }
+                    clearSearch = { this.props.clearSearch }
+                    searchIndex = { this.props.searchIndex }
+                    openedBucketId = { this.props.bucketId }
+                    selectAll = { this.props.selectAll }
+                    deselectAll = { this.props.deselectAll } />
             </View>
         );
     }

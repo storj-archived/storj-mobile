@@ -60,6 +60,7 @@ class FavoriteFilesContainer extends BaseFilesListContainer {
 
         return (
             <this.HeaderFilesListComponent
+                lastSync = { this.props.lastSync }
                 isLoading = { false }                            
                 data = { data }
                 animatedScrollValue = { this.animatedScrollValue }
@@ -78,6 +79,7 @@ function mapStateToProps(state) {
     let currentScreenName = routes[index].routeName;  
 
     return {
+        lastSync: state.settingsReducer.lastSync,
         buckets: state.bucketReducer.buckets,
         fileListModels: state.filesReducer.fileListModels,
         uploadingFileListModels: state.filesReducer.uploadingFileListModels,

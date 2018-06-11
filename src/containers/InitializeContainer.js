@@ -7,6 +7,7 @@ import {
     redirectToOnBoardingScreen
 } from '../reducers/navigation/navigationActions';
 import { getDebits, getCredits, getWallets }  from '../reducers/billing/billingActions';
+import { listSettingsAsync } from "../reducers/mainContainer/MyAccount/Settings/SettingsActionsAsync";
 import StorjLib from '../utils/StorjModule';
 import { getFirstAction } from '../utils/AsyncStorageModule';
 import ListItemModel from '../models/ListItemModel';
@@ -112,7 +113,7 @@ class InitializeContainer extends Component {
         this.getAllBuckets();
         ServiceModule.getBuckets();                
         this.getAllFiles();
-
+        this.props.listSettings(getKeysResult.email);
         this.props.setEmail(getKeysResult.email);
         this.props.getDebits();
         this.props.getCredits();
@@ -190,7 +191,8 @@ function mapDispatchToProps(dispatch) {
             listFiles, 
             getDebits, 
             getCredits, 
-            getWallets }, dispatch)
+            getWallets }, dispatch),
+            listSettings: (settingsId) => dispatch(listSettingsAsync(settingsId))
     };
 };
 

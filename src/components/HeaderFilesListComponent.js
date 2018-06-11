@@ -20,6 +20,7 @@ export default class HeaderFilesListComponent extends FilesListComponent {
                 }
 
                 <BucketsScreenHeaderComponent
+                        lastSync = { this.props.lastSync }
                         navigateBack = { this.props.navigateBack }
                         buckets = { this.props.buckets }
                         isFilesScreen = { this.props.isFilesScreen }

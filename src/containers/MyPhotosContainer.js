@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Animated } from "react-native";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { openImageViewer, openFilePreview } from '../reducers/navigation/navigationActions';
-import { myPicturesListContainerMainActions, getPicturesBucketId } from '../reducers/mainContainer/mainReducerActions';
+import { myPicturesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import filesActions from '../reducers/mainContainer/Files/filesReducerActions';
 import headerFilesListBinder from "../viewBinders/headerFilesListBinder";
 import BaseFilesListContainer from '../containers/BaseFilesListContainer';
@@ -33,6 +33,7 @@ class MyPhotosContainer extends BaseFilesListContainer {
 
         return (
             <this.HeaderFilesListComponent
+                lastSync = { this.props.lastSync }
                 isLoading = { this.props.loadingStack.includes(this.props.bucketId) }                            
                 data = { data }
                 animatedScrollValue = { this.animatedScrollValue }
@@ -51,6 +52,7 @@ function mapStateToProps(state) {
     let currentScreenName = state.mainScreenNavReducer.routes[screenIndex].routeName;
 
     return {
+        lastSync: state.settingsReducer.lastSync,
         loadingStack: state.mainReducer.loadingStack,
         buckets: state.bucketReducer.buckets,        
         fileListModels: state.filesReducer.fileListModels,
@@ -68,7 +70,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ openImageViewer, openFilePreview, ...myPicturesListContainerMainActions, ...filesActions }, dispatch);
+    return {
+        ...bindActionCreators({ openImageViewer, openFilePreview, ...myPicturesListContainerMainActions, ...filesActions }, dispatch)
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPhotosContainer);

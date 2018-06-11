@@ -69,6 +69,7 @@ class FavoriteBucketsContainer extends BaseListContainer {
 
         return (
             <HeaderBucketsListComponent
+                lastSync = { this.props.lastSync }
                 isLoading = { this.props.isLoading }
                 data = { data }
                 animatedScrollValue = { this.animatedScrollValue }
@@ -103,6 +104,7 @@ class FavoriteBucketsContainer extends BaseListContainer {
 
 function mapStateToProps(state) {
     return {
+        lastSync: state.settingsReducer.lastSync,
         buckets: state.bucketReducer.buckets,
         selectedItemId: state.mainReducer.selectedItemId,
         isSelectionMode: state.mainReducer.isSelectionMode,

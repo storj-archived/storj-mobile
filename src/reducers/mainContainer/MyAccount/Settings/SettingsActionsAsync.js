@@ -4,7 +4,7 @@ import settingsActions from './SettingsActions';
 export function listSettingsAsync(settingsId) {
     return async (dispatch) => {
         let getSettingsResponse = await SyncModule.listSettings(settingsId);
-
+        
         if(getSettingsResponse.isSuccess) {
             let settingsModel = JSON.parse(getSettingsResponse.result);
 
@@ -13,6 +13,9 @@ export function listSettingsAsync(settingsId) {
             syncSettings = settingsModel.syncStatus ? syncSettings | SYNC_ENUM.SYNC_ON : syncSettings &(~SYNC_ENUM.SYNC_ON);
 
             const newSettings = getObjectFromInt(syncSettings);
+
+            newSettings.lastSync = settingsModel.lastSync;
+            newSettings.settingsId = settingsModel.settingsId;
 
             dispatch(settingsActions.listSettings(newSettings));
         }
@@ -31,13 +34,6 @@ async function _changeSyncStatusAsync(dispatch, settingsId, value) {
 
 export function changeSyncStatusAsync(settingsId, value) {
     return async (dispatch) => {
-        /* value ? dispatch(settingsActions.syncOn()) : dispatch(settingsActions.syncOff());
-
-        let changeSyncStatusResponse = await SyncModule.changeSyncStatus(settingsId, value);
-        
-        if(!changeSyncStatusResponse.isSuccess) {
-            dispatch(settingsActions.syncOff());
-        } */
         _changeSyncStatusAsync(dispatch, settingsId, value);
     };
 }

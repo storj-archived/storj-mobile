@@ -5,6 +5,7 @@ import HeaderFilesListComponent from "../components/HeaderFilesListComponent";
 export default function headerFilesListBinder() {
     return (props) => (
         <HeaderFilesListComponent
+                lastSync = { this.props.lastSync }
                 isLoading = { props.isLoading }
                 data = { props.data }
                 animatedScrollValue = { props.animatedScrollValue }

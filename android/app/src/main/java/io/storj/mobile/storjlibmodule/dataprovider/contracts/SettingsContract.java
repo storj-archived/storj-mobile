@@ -14,7 +14,7 @@ public final class SettingsContract implements BaseColumns {
 
     public final static String _SETTINGS_ID = "settingsId";
     public final static String _FIRST_SIGN_IN = "isFirstSignIn";
-    public final static  String _SYNC_STATUS = "syncStatus";
+    public final static String _SYNC_STATUS = "syncStatus";
     public final static String _SYNC_SETTINGS = "syncSettings";
     public final static String _LAST_SYNC = "lastSync";
 

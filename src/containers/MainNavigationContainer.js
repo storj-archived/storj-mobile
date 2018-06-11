@@ -8,7 +8,8 @@ import {
     setPhotosBucketId,
     hideActionBar,
     pushLoading
-} from '../reducers/mainContainer/mainReducerActions'
+} from '../reducers/mainContainer/mainReducerActions';
+import { listSettingsAsync } from "../reducers/mainContainer/MyAccount/Settings/SettingsActionsAsync";
 
 /**
 * Container for main screen navigation
@@ -33,6 +34,8 @@ class MainNavigationContainer extends Component {
                     showSyncWindow: this.props.showSyncWindow
                 }}
                 navigation = { addNavigationHelpers({
+                    email: this.props.email,
+                    listSettings: this.props.listSettings,
                     pushLoading: this.props.pushLoading,
                     isActionBarShown: this.props.isActionBarShown,
                     isSelectionMode: this.props.isSelectionMode,
@@ -56,6 +59,7 @@ class MainNavigationContainer extends Component {
 
 function mapStateToProps(state) {
     return {
+        email: state.authReducer.user.email,
         nav: state.mainScreenNavReducer,
         isSelectionMode: state.mainReducer.isSelectionMode,
         isFirstSignIn: state.mainReducer.isFirstSignIn,
@@ -71,6 +75,7 @@ function mapDispatchToProps(dispatch) {
         }, dispatch),
         testAction: () => { dispatch(NavigationActions.navigate({ routeName: 'TestScreen'})); },
         goToBucketsScreen: () => { dispatch(NavigationActions.navigate({ routeName: 'BucketsScreen'})); },
+		listSettings: (settingsId) => dispatch(listSettingsAsync(settingsId)),
         dispatch
     };
 };

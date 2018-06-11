@@ -12,7 +12,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addNavigationHelpers } from 'react-navigation';
 import StackNavigator from '../navigators/StackNavigator';
-import { NavigationActions } from 'react-navigation';
 import eventNames from '../utils/constants/eventNames';
 import {
 	setLoading,
@@ -54,16 +53,14 @@ import ListItemModel from '../models/ListItemModel';
 import BucketModel from '../models/BucketModel';
 import FileModel from '../models/FileModel';
 import WarningComponent from '../components/WarningComponent';
-import { SYNC_BUCKETS } from '../utils/constants/SyncBuckets';
 import { uploadFileStart, uploadFileSuccess } from '../reducers/asyncActions/fileActionsAsync';
 import { listSyncQueueEntriesAsync, getSyncQueueEntryAsync } from "../reducers/mainContainer/SyncQueue/syncQueueReducerAsyncActions";
-
-const { PICTURES } = SYNC_BUCKETS;
+import { listSettingsAsync } from "../reducers/mainContainer/MyAccount/Settings/SettingsActionsAsync";
 
 import SyncModule from '../utils/SyncModule';
 import ServiceModule from '../utils/ServiceModule';
 
-import { getHeight, statusBarHeightIos } from "../utils/adaptive";
+import { statusBarHeightIos } from "../utils/adaptive";
 
 /**
  * Component that contains main navigator
@@ -173,12 +170,11 @@ class Apps extends Component {
 	}
 
 	onSyncStarted() {
-		console.log("SYNC STARTED");
+		this.props.listSettings(this.props.email);
 		this.props.listSyncQueueEntriesAsync();
 	}
 
 	onSyncQueueEntryUpdated(params) { //TODO: name error
-		console.log("HELLLOOOOOO", params);
 		this.props.getSyncQueueEntryAsync(params.syncEntryId);
 	}
 
@@ -360,7 +356,8 @@ function mapStateToProps(state) {
 		isAccountExist: state.authReducer.user.isAccountExist,
 		isNameExistException: state.bucketReducer.isNameExistException,
 		sortingMode: state.mainReducer.sortingMode,
-		isConnected: state.mainReducer.isConnected
+		isConnected: state.mainReducer.isConnected,
+		email: state.authReducer.user.email
     };
 }
 
@@ -398,6 +395,7 @@ function mapDispatchToProps(dispatch) {
 		navigateBack,
 		listSyncQueueEntriesAsync,
 		getSyncQueueEntryAsync  }, dispatch),
+		listSettings: (settingsId) => dispatch(listSettingsAsync(settingsId)),
 		uploadSuccess: (fileHandle, fileId) => dispatch(uploadFileSuccess(fileHandle, fileId)),		
 		getUploadingFile: (fileHandle) => dispatch(uploadFileStart(fileHandle))};
 }
