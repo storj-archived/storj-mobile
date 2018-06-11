@@ -89,6 +89,7 @@ export default class OnBoardingComponent extends Component {
                         itemWidth = { getWidth(351) }
                         contentOffset = { 0 }
                         data = { this.data }
+                        threshold = { getWidth(50) }
                         onIndexChange={ index => {
                             let finalIndex = this.state.currentIndex;
 

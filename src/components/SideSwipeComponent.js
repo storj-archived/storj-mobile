@@ -162,6 +162,7 @@ export default class SideSwipe extends Component {
 		const currentOffset =
 		this.state.currentIndex * this.props.itemWidth;
 		const resolvedOffset = currentOffset - dx;
+
 		const resolvedIndex = Math.round(
 			(resolvedOffset +
 				(dx > 0 ? -this.props.threshold : this.props.threshold)) /

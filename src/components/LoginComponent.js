@@ -31,7 +31,7 @@ export default class LoginComponent extends Component {
 
 	render() {
 		return(
-			<ScrollView style={ styles.mainContainer } keyboardDismissMode = { "interactive" } keyboardShouldPersistTaps = { 'always' } >
+			<ScrollView style={ styles.mainContainer } keyboardDismissMode = { "on-drag" } keyboardShouldPersistTaps = { 'always' } >
                 <View style={ styles.contentWrapper }>
                     <Text style = { styles.titleBold }>Sign in</Text>
                     <View style = { styles.inputsMargin } >
