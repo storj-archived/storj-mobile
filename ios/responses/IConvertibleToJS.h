@@ -8,6 +8,8 @@
 
 @import Foundation;
 
+typedef NSDictionary * (^ConvertCallback)(NSObject *);
+
 @protocol IConvertibleToJS <NSObject>
 
 -(NSDictionary *) toDictionary;

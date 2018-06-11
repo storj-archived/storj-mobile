@@ -55,24 +55,30 @@ static NSArray * columns;
 
 -(Response *) insertWithModel: (SyncQueueEntryModel *) model
 {
-  if(!model || ![model isValid]) {
+  if(!model || ![model isValid])
+  {
     return [Response errorResponseWithMessage:@"Model is not valid"];
   }
 
-  return [super executeInsertIntoTable:SynchronizationQueueContract.TABLE_NAME
-      fromDict: [SyncQueueRepository getUpdateDictionaryFromModel: (SyncQueueEntryModel *) model]];
+  Response *result = [super executeInsertIntoTable:SynchronizationQueueContract.TABLE_NAME
+                                          fromDict: [SyncQueueRepository getUpdateDictionaryFromModel: (SyncQueueEntryModel *) model]];
+  
+  return result;
 }
 
 -(Response *) updateWithModel: (SyncQueueEntryModel *) model
 {
-  if(!model || ![model isValid]) {
+  if(!model || ![model isValid])
+  {
     return [Response errorResponseWithMessage:@"Model is not valid"];
   }
   
-  return [super executeUpdateAtTable:(NSString *) SynchronizationQueueContract.TABLE_NAME
-                           objectKey:(NSString *) SynchronizationQueueContract.ID
-                            objectId:(NSString *) [@(model._id) stringValue]
-                    updateDictionary:(NSDictionary *) [SyncQueueRepository getUpdateDictionaryFromModel: (SyncQueueEntryModel *) model]];
+  Response *result = [super executeUpdateAtTable:(NSString *) SynchronizationQueueContract.TABLE_NAME
+                                      objectKey:(NSString *) SynchronizationQueueContract.ID
+                                       objectId:(NSString *) [@(model._id) stringValue]
+                               updateDictionary:(NSDictionary *) [SyncQueueRepository getUpdateDictionaryFromModel: (SyncQueueEntryModel *) model]];
+  
+  return result;
 }
 
 -(Response *) deleteById: (int) _id

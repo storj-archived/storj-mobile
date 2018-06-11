@@ -52,7 +52,7 @@ export function listUploadingFiles(bucketId) {
                 let fileModel = new FileModel({ 
                     name: uploadingFile.name, 
                     fileId: uploadingFile.fileHandle,
-                    created: new Date().toLocaleString(),
+                    created: moment().format(),
                     erasure: null,
                     hmac: null,
                     index: null,

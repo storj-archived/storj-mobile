@@ -7,7 +7,6 @@
 //
 
 #import "DictionaryUtils.h"
-#import "IConvertibleToJS.h"
 
 @implementation DictionaryUtils
 
@@ -33,23 +32,35 @@
 }
 
 +(NSString *) convertToJsonWithArray: (NSArray<IConvertibleToJS> *) array{
+  ConvertCallback callback = ^(NSObject<IConvertibleToJS> *object)
+  {
+    NSDictionary *dict = nil;
+    dict = [object toDictionary];
+    return dict;
+  };
+
+  return [self convertToJsonWithArray: array andConvertCallback: callback];
+}
+
++(NSString *) convertToJsonWithArray:(NSArray *) array andConvertCallback: (ConvertCallback) callback
+{
   NSError * err;
   NSMutableArray *marray = [NSMutableArray arrayWithCapacity: [array count]];
   for (int i = 0; i < [array count]; i++) {
-    [marray insertObject: [array[i] toDictionary] atIndex:i];
+    [marray insertObject: callback(array[i]) atIndex:i];
   }
   NSData * jsonData = [NSJSONSerialization dataWithJSONObject: marray
                                                       options:0
                                                         error:&err];
   if(!jsonData) {
     NSLog(@"Error while serialization");
-
+    
     return @"";
   }
   NSString *resultString = [[NSString alloc] initWithData: jsonData
                                                  encoding: NSUTF8StringEncoding];
-//  NSLog(@"result: %@", resultString);
-
+  //  NSLog(@"result: %@", resultString);
+  
   return resultString;
 }
 

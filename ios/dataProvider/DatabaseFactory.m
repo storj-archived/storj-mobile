@@ -140,6 +140,7 @@ static FMDatabase * _database;
     return;
   }
   
+  [_database executeUpdate: @"DELETE FROM SynchronizationQueue", UploadFileContract.TABLE_NAME];
   [_database executeUpdate: @"DELETE FROM uploadingFiles", UploadFileContract.TABLE_NAME]; //change
   [_database close];
 }
@@ -152,9 +153,9 @@ static FMDatabase * _database;
 -(void) dropTables {
   if(![_database open]) {
     NSLog(@"Database cannot be opened");
-    
     return;
   }
+  
   [_database executeUpdate:@"DROP TABLE IF EXISTS ?", BucketContract.TABLE_NAME];
   [_database executeUpdate:@"DROP TABLE IF EXISTS ?", FileContract.TABLE_NAME];
   [_database executeUpdate:@"DROP TABLE IF EXISTS ?", UploadFileContract.TABLE_NAME];

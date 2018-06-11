@@ -11,16 +11,40 @@
 #import "UploadFileRepository.h"
 #import "UploadService.h"
 
-@import Photos;
+#import "StorjBackgroundServices.h"
+#import "EventNames.h"
 
-@implementation SyncService
+@import Photos;
 
 static SyncQueueRepository *syncRepository;
 static UploadFileRepository *uploadFileRepository;
 
+static SyncService *instance;
+static dispatch_once_t onceToken;
+
+@implementation SyncService
+{
+@private
+  dispatch_queue_t workerQueue;
+}
+
 -(instancetype) init
 {
-  return [super init];
+  if(self = [super init])
+  {
+    workerQueue = dispatch_queue_create("io.storj.mobile.sync.queue", DISPATCH_QUEUE_SERIAL);
+  }
+  
+  return self;
+}
+
++(instancetype) sharedInstance
+{
+  dispatch_once(&onceToken, ^{
+    instance = [[SyncService alloc] init];
+  });
+  
+  return instance;
 }
 
 -(SyncQueueRepository *) syncRepository
@@ -39,37 +63,81 @@ static UploadFileRepository *uploadFileRepository;
   {
     uploadFileRepository = [[UploadFileRepository alloc] init];
   }
+  
   return uploadFileRepository;
 }
 
 -(void) startSync
 {
-  NSLog(@"starting sync");
-  NSArray *syncQueueArray = [[self syncRepository] getAll];
-  if(!syncQueueArray || syncQueueArray.count == 0)
-  {
-    //error handling;
-    NSLog(@"sync queue array is nil");
-    return;
-  }
-  
-  for (SyncQueueEntryDbo *syncDbo in syncQueueArray)
-  {    
-    NSLog(@"iterationg. now");
-    if([syncDbo status] == 0) //IDLE
+  dispatch_async(workerQueue, [self getSyncTask]);
+}
+
+-(void) removeFileFromSyncQueue: (int) syncEntryId
+{
+    dispatch_block_t removeTask = ^
     {
-      BOOL isCopySuccessfull = [self copyAssetToSandboxByLocalId:[syncDbo localIdentifier]
-                                                   toPath:[syncDbo localPath]];
-      if(isCopySuccessfull)
+        SyncQueueEntryModel *model = [[self syncRepository] getById: syncEntryId];
+
+        if(!model || [model status] != 5)
+        {
+          return;
+        }
+
+        [[UploadService sharedInstance] cancelSyncEntry: syncEntryId];
+
+        SyncQueueEntryDbo *dbo = [model toDbo];
+        dbo.status = 3;
+
+        Response *resp = [[self syncRepository] updateWithModel: [[SyncQueueEntryModel alloc] initWithDbo: dbo]];
+
+        //[resp isS]
+
+        [[StorjBackgroundServices sharedInstance] sendEventWithName: EventNames.EVENT_SYNC_ENTRY_UPDATED
+                                                               body:@{@"syncEntryId":@(syncEntryId)}];
+    };
+    
+    dispatch_async(workerQueue, removeTask);
+}
+
+-(dispatch_block_t) getSyncTask
+{
+  dispatch_block_t startSyncTask = ^
+  {
+    NSLog(@"starting sync");
+    NSArray *syncQueueArray = [[self syncRepository] getAll];
+    if(!syncQueueArray || syncQueueArray.count == 0)
+    {
+      //error handling;
+      NSLog(@"sync queue array is nil");
+      return;
+    }
+    
+    for (SyncQueueEntryModel *syncModel in syncQueueArray)
+    {
+      NSLog(@"iterationg. now");
+      if([syncModel status] == 0) //IDLE
       {
-        [[UploadService sharedInstance] syncFileWithSyncEntryId: [syncDbo _id]
-                                                       bucketId: [syncDbo bucketId]
-                                                       fileName: [syncDbo fileName]
-                                                      localPath: [syncDbo localPath]];
+        BOOL isCopySuccessfull = [self copyAssetToSandboxByLocalId:[syncModel localIdentifier]
+                                                            toPath:[syncModel localPath]];
+        if(isCopySuccessfull)
+        {
+          SyncQueueEntryDbo *dbo = [syncModel toDbo];
+          dbo.status = 5;
+          [[self syncRepository] updateWithModel: [[SyncQueueEntryModel alloc] initWithDbo: dbo]];
+          
+          [[UploadService sharedInstance] syncFileWithSyncEntryId: [syncModel _id]
+                                                         bucketId: [syncModel bucketId]
+                                                         fileName: [syncModel fileName]
+                                                        localPath: [syncModel localPath]];
+        }
       }
     }
-  }
+    
+    [[StorjBackgroundServices sharedInstance] sendEventWithName: EventNames.EVENT_SYNC_STARTED
+                                                           body: [NSNull null]];
+  };
   
+  return startSyncTask;
 }
 
 -(BOOL) copyAssetToSandboxByLocalId: (NSString *) localIdentifier
@@ -80,19 +148,19 @@ static UploadFileRepository *uploadFileRepository;
     NSLog(@"file local id malformed");
     return NO;
   }
+  
   PHAsset *asset = [[PHAsset fetchAssetsWithLocalIdentifiers:@[localIdentifier] options:nil]
                     firstObject];
-  
   NSData *assetData = [self assetDataFromPHAsset:asset];
-  if(!assetData){
+  
+  if(!assetData)
+  {
     return NO;
   }
-  BOOL isWriteSuccess = NO;
-  NSFileManager *fileMan = [NSFileManager defaultManager];
-  if(![fileMan fileExistsAtPath:localPath])
-  {
-    isWriteSuccess = [fileMan createFileAtPath:localPath contents:assetData attributes:nil];
-  }
+  
+  BOOL isWriteSuccess = [[NSFileManager defaultManager] createFileAtPath: localPath
+                                                                contents: assetData
+                                                              attributes: nil];
   
   return isWriteSuccess;
 }
@@ -121,18 +189,19 @@ static UploadFileRepository *uploadFileRepository;
                                                NSString * _Nullable dataUTI,
                                                UIImageOrientation orientation,
                                                NSDictionary * _Nullable info)
-   {
-     
-     NSLog(@"info:%@", info);
-     NSLog(@"dataExist: %d", imageData != nil);
-     dispatch_async(dispatch_get_main_queue(), ^{
-       _imageData = (NSData *)[imageData copy];
-       isComplete = YES;
-     });
-   }];
-  while (!isComplete) {
+  {
+    NSLog(@"info:%@", info);
+    NSLog(@"dataExist: %d", imageData != nil);
+    
+    _imageData = (NSData *)[imageData copy];
+    isComplete = YES;
+  }];
+  
+  while (!isComplete)
+  {
     [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
   }
+  
   return _imageData;
 }
 
@@ -145,16 +214,16 @@ static UploadFileRepository *uploadFileRepository;
                              resultHandler:^(AVAsset * _Nullable asset,
                                              AVAudioMix * _Nullable audioMix,
                                              NSDictionary * _Nullable info)
-   {
-     dispatch_async(dispatch_get_main_queue(), ^{
-       videoData = [NSData dataWithContentsOfURL:[(AVURLAsset *) asset URL]];
-       isComplete = YES;
-     });
-    
-   }];
-  while (!isComplete) {
+  {
+    videoData = [NSData dataWithContentsOfURL:[(AVURLAsset *) asset URL]];
+    isComplete = YES;
+  }];
+  
+  while (!isComplete)
+  {
     [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
   }
+  
   return videoData;
 }
 
@@ -166,6 +235,7 @@ static UploadFileRepository *uploadFileRepository;
 -(void) clean
 {
   NSArray *syncQueueArray = [[self syncRepository] getAll];
+  
   if(!syncQueueArray || syncQueueArray.count == 0)
   {
     //error handling;

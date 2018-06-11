@@ -37,7 +37,7 @@ const initialState = {
 export default function filesReducer(state = initialState, action) {
     let newState = Object.assign({}, state);
     let filesManager = new FileListManager(newState.fileListModels, newState.uploadingFileListModels);
-
+    
     switch(action.type) {
         case LIST_FILES:
             newState.fileListModels = filesManager.listFiles(action.payload.bucketId, action.payload.files);
@@ -46,7 +46,7 @@ export default function filesReducer(state = initialState, action) {
         case UPLOAD_FILE_START:
             newState.uploadingFileListModels = filesManager.addFileEntryU(action.payload.bucketId, action.payload.file);
             break;
-        case UPLOAD_FILE_SUCCESS:            
+        case UPLOAD_FILE_SUCCESS:
             newState.uploadingFileListModels = filesManager.deleteFileEntryU(action.payload.bucketId, action.payload.filePath);
             newState.fileListModels = filesManager.addFileEntry(action.payload.bucketId, action.payload.file);
             break;

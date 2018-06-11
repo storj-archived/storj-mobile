@@ -30,8 +30,11 @@ export default function billingReducer(state, action) {
             break;
         case SET_DEBITS:      
             newState.debits = action.payload.debits;
-            newState.storage = action.payload.usage.storage;
-            newState.bandwidth = action.payload.usage.bandwidth;
+            if(action.payload.usage) {
+                newState.storage = action.payload.usage.storage;
+                newState.bandwidth = action.payload.usage.bandwidth;
+            }
+            
             break;
         case CREATE_WALLET:
             break;

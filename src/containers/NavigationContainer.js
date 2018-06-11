@@ -121,6 +121,8 @@ class Apps extends Component {
 			await ServiceModule.bindGetBucketsService();
 			await ServiceModule.bindDownloadService();
 		}
+
+		//ServiceModule.startSync();
 	}
 	
 	onConnectionChange(isConnected) {
@@ -143,8 +145,8 @@ class Apps extends Component {
 		this.props.updateFileUploadProgress(result.fileHandle, result.progress, result.uploaded);
 	}
 
-	async onFileUploadStart(response) {
-		this.props.getUploadingFile(response.fileHandle);
+	async onFileUploadStart(result) {
+		this.props.getUploadingFile(result.fileHandle);
 	}
 
 	componentDidMount() {

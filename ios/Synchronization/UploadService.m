@@ -116,12 +116,12 @@ static dispatch_once_t onceToken;
   
   UploadTask syncTask = ^
   {
+    [syncQueueArray removeObject:(id) syncTaskObj];
+    
     if(syncTaskObj.isCancelled)
     {
       return;
     }
-
-    [syncQueueArray removeObject:(id) syncTaskObj];
     
     if([uploader isUploadValid])
     {
@@ -137,12 +137,12 @@ static dispatch_once_t onceToken;
 {
   SyncTask *syncTask = [[SyncTask alloc] initWithSyncEntryId: syncEntryId];
   
-  [self removeFromQueue: syncEntryId];
+  [self cancelSyncEntry: syncEntryId];
   [syncQueueArray addObject: syncTask];
   return syncTask;
 }
 
--(void) removeFromQueue: (int) syncEntryId
+-(void) cancelSyncEntry: (int) syncEntryId
 {
   NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
     if(!evaluatedObject)

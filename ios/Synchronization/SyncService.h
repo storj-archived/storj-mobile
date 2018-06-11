@@ -10,9 +10,13 @@
 
 @interface SyncService : NSObject
 
++(instancetype) sharedInstance;
+
 -(void) startSync;
 
 -(void) stopSync;
+
+-(void) removeFileFromSyncQueue: (int) syncEntryId;
 
 -(void) clean;
 

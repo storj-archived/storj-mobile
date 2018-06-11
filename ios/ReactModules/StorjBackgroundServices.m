@@ -50,6 +50,7 @@
 #import "Logger.h"
 
 #import "UploadService.h"
+#import "SyncService.h"
 #import "SyncQueueRepository.h"
 #import "FileUtils.h"
 
@@ -433,113 +434,26 @@ RCT_REMAP_METHOD(downloadFile,
   }
 }
 
+RCT_REMAP_METHOD(startSync, startSync)
+{
+  [[SyncService sharedInstance] startSync];
+}
+
+RCT_REMAP_METHOD(removeFileFromSyncQueue, removeFileFromSyncQueueWithId: (int) syncEntryId)
+{
+  [[SyncService sharedInstance] removeFileFromSyncQueue: syncEntryId];
+}
+
 RCT_REMAP_METHOD(uploadFile,
                   uploadFileWithBucketId:(NSString *)bucketId
                   withLocalPath:(NSString *) localPath
-                  fileName:(NSString *) fileName){
+                  fileName:(NSString *) fileName)
+{
   [Logger log:[NSString stringWithFormat:@"Uploading file located at: %@ into bucket: %@", localPath, bucketId]];
   
   [[UploadService sharedInstance] uploadFileWithBucketId:(NSString *) bucketId
                                                 fileName:(NSString *) fileName
                                                localPath:(NSString *) localPath];
-  
-  //TEST
-//    if(!fileName)
-//    {
-//      fileName = [FileUtils getFileNameWithPath: localPath];
-//    }
-  
-//    SyncQueueRepository *repo = [[SyncQueueRepository alloc] init];
-//
-//    SyncQueueEntryDbo *dbo = [[SyncQueueEntryDbo alloc] init];
-//    dbo.localPath = localPath;
-//    dbo.fileName = fileName;
-//    dbo.bucketId = bucketId;
-//
-//    SyncQueueEntryModel *model = [[SyncQueueEntryModel alloc] initWithDbo:(SyncQueueEntryDbo *) dbo];
-//
-//    Response *resp = [repo insertWithModel:(SyncQueueEntryModel *)model];
-//
-//    if(![resp isSuccess])
-//    {
-//      return;
-//    }
-//
-//    NSArray *arr = [repo getAll];
-//    //[repo insertWithModel:(SyncQueueEntryModel *)model];
-//    //[repo insertWithModel:(SyncQueueEntryModel *)model];
-//
-//    [self sendEventWithName:(NSString *) EventNames.EVENT_SYNC_STARTED body: [NSNull null]];
-//
-//  [[UploadService sharedInstance] syncFileWithSyncEntryId: 5
-//                                                 bucketId:(NSString *) bucketId
-//                                                 fileName:(NSString *) fileName
-//                                                localPath:(NSString *) localPath];
-//
-// cd $(find / -type f -name storj.db | sed "s/storj.db//")
-//    [[UploadService sharedInstance] syncFileWithSyncEntryId: [arr count]
-//                                                 bucketId:(NSString *) bucketId
-//                                                 fileName:(NSString *) fileName
-//                                                localPath:(NSString *) localPath];
-
-//  [[UploadService sharedInstance] syncFileWithSyncEntryId: 3
-//                                                 bucketId:(NSString *) bucketId
-//                                                 fileName:(NSString *) fileName
-//                                                localPath:(NSString *) localPath];
-//
-//  [[UploadService sharedInstance] syncFileWithSyncEntryId: 1
-//                                                 bucketId:(NSString *) bucketId
-//                                                 fileName:(NSString *) fileName
-//                                                localPath:(NSString *) localPath];
-  
-//  STFileUploadCallback *fileUploadCallback = [[STFileUploadCallback alloc] init];
-//
-//  fileUploadCallback._uploadCompleteBlock = ^(long fileHandle, NSString *fileId) {
-//    NSDictionary *bodyDict = @{UploadFileContract.FILE_HANDLE:@(fileHandle),
-//                               FileContract.FILE_ID : [DictionaryUtils checkAndReturnNSString:
-//                                                       fileId]};
-//    [Logger log:[NSString stringWithFormat:@"Sending success event for Upload Complete %@, ", bodyDict]];
-//    [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_SUCCESSFULLY
-//                       body:bodyDict];
-//  };
-//
-//  fileUploadCallback._uploadProgressBlock = ^(long fileHandle, double uploadProgress, double uploadedBytes) {
-//    NSDictionary *body = @{UploadFileContract.FILE_HANDLE : @(fileHandle),
-//                           UploadFileContract.PROGRESS : @(uploadProgress),
-//                           UploadFileContract.UPLOADED : @(uploadedBytes)};
-//    [Logger log:[NSString stringWithFormat:@"File upload progress: %@", body]];
-//    [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_PROGRESS
-//                       body: body];
-//  };
-//
-//  fileUploadCallback._uploadErrorBlock = ^(long fileHandle, int errorCode, NSString *errorMessage) {
-//    [Logger log:[NSString stringWithFormat:@"onError: %d, %@", errorCode, errorMessage]];
-//    [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_ERROR
-//                       body:@{@"errorMessage":errorMessage,
-//                              @"errorCode" : @(errorCode),
-//                              UploadFileContract.FILE_HANDLE: @(fileHandle)}];
-//  };
-//
-//  fileUploadCallback._uploadStartBlock = ^(long fileHandle) {
-//    NSDictionary *eventDict =@{@"fileHandle": @(fileHandle)};
-//    [Logger log:[NSString stringWithFormat:@"Upload Started: %@", eventDict]];
-//    [self sendEventWithName:EventNames.EVENT_FILE_UPLOAD_START
-//                       body:eventDict];
-//  };
-//
-//  STUploader *uploader = [[STUploader alloc] initWithBucketId:bucketId
-//                                                    localPath:localPath
-//                                                     fileName:fileName
-//                                             callbackNotifier:fileUploadCallback];
-//
-//  if([uploader isUploadValid])
-//  {
-//    [uploader startUpload];
-//  }
-  
 }
-
-//resolver:(RCTPromiseResolveBlock) resolve
-//rejecter:(RCTPromiseRejectBlock) reject){
 
 @end

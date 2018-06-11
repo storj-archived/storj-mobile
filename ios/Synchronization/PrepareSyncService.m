@@ -104,7 +104,7 @@ static FileRepository *fileRepository;
 //          dbo.localIdentifier = [assetObject.localIdentifier substringToIndex:32];
 //        } else
 //        {
-          dbo.localIdentifier = assetObject.localIdentifier;
+        dbo.localIdentifier = assetObject.localIdentifier;
 //        }
 
         SyncQueueEntryModel *syncModel = [[SyncQueueEntryModel alloc] initWithDbo:dbo];
@@ -119,10 +119,12 @@ static FileRepository *fileRepository;
 -(NSArray *) getSyncQueue
 {
   NSArray *syncArray = [[[SyncQueueRepository alloc] init] getAll];
+  
   if(!syncArray || syncArray.count == 0)
   {
     return [self prepareSyncQueue];
-  } else
+  }
+  else
   {
     return syncArray;
   }

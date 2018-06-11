@@ -22,6 +22,8 @@
                        fileName: (NSString *) fileName
                       localPath: (NSString *) localPath;
 
+-(void) cancelSyncEntry: (int) syncEntryId;
+
 -(void) clean;
 
 @end

@@ -36,6 +36,8 @@ export function updateSyncQueueEntryStatusAsync(id, newStatus) {
 export function getSyncQueueEntryAsync(id) {
     return async (dispatch) => {
         let response = await SyncModule.getSyncQueueEntry(id);
+        console.log("asdsaass-------asdsa");
+        console.log(response);
 
         processUpdateResponse(dispatch, response);
     }

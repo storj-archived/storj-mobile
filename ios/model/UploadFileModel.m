@@ -70,6 +70,7 @@
 - (NSDictionary *)toDictionary {
   NSMutableDictionary *resultDictionary = [NSMutableDictionary dictionary];
   [resultDictionary setObject:@(_fileHandle) forKey:UploadFileContract.ID];
+  //[resultDictionary setObject:@(_fileHandle) forKey:UploadFileContract.FILE_HANDLE];
   [resultDictionary setObject:@(_progress) forKey:UploadFileContract.PROGRESS];
   [resultDictionary setObject:@(_size) forKey:UploadFileContract.SIZE];
   [resultDictionary setObject:@(_uploaded) forKey:UploadFileContract.UPLOADED];

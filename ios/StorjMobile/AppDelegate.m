@@ -14,6 +14,7 @@
 #import "STFileManager.h"
 #import "PrepareSyncService.h"
 #import "SyncService.h"
+#import "SyncEntryState.h"
 
 @implementation AppDelegate
 
@@ -21,16 +22,15 @@
 {
   NSURL *jsCodeLocation;
   
-//  NSArray *array = [[[PrepareSyncService alloc] init] getSyncQueue];
-//  NSLog(@"SyncQueue: %@", array);
-//  
-//  [[[SyncService alloc] init] startSync];
+  NSArray *array = [[[PrepareSyncService alloc] init] prepareSyncQueue];
+  NSLog(@"SyncQueue: %@", array);
+  
   //debug
-//  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
   
   //Release
-  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
-
+  //jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"Storj"
                                                initialProperties:nil

@@ -150,8 +150,19 @@ RCT_REMAP_METHOD(listUploadingFiles,
      for (int i = 0; i < length; i++) {
        fileModels[i] = [[UploadFileModel alloc] initWithUploadFileDbo:ufileDbos[i]];
      }
+     
+     NSDictionary *(^callback)(NSObject *) = ^(NSObject *object)
+     {
+       NSDictionary *dict = nil;
+       
+       dict = [(UploadFileModel *)object toDictionaryProgress];
+       
+       return dict;
+     };
+     
      SingleResponse *response = [SingleResponse successSingleResponseWithResult:
-                                 [DictionaryUtils convertToJsonWithArray:fileModels]];
+                                 [DictionaryUtils convertToJsonWithArray: fileModels
+                                                      andConvertCallback: callback]];
      RCTPromiseResolveBlock resolve = param[@RESOLVER];
      resolve([response toDictionary]);
    }];
@@ -189,6 +200,52 @@ RCT_REMAP_METHOD(getSyncQueueEntry, getSyncQueueEntryWithId: (int) _id
     if(!entry)
     {
       resolve([[SingleResponse errorResponseWithMessage:@"Can't find entry"] toDictionary]);
+      return;
+    }
+    
+    SingleResponse *response = [SingleResponse successSingleResponseWithResult:
+                                [DictionaryUtils convertToJsonWithDictionary:
+                                 [entry toDictionary]]];
+    resolve([response toDictionary]);
+  };
+  
+  [MethodHandler invokeParallelWithParams: @{@RESOLVER: resolver, @REJECTER: rejecter}
+                    andMethodHandlerBlock: callback];
+}
+
+RCT_REMAP_METHOD(updateSyncQueueEntryStatus, updateSyncQueueEntryStatusWithId: (int) _id
+                                                                    newStatus: (int) newStatus
+                                                                     Resolver: (RCTPromiseResolveBlock) resolver
+                                                                  andRejecter: (RCTPromiseRejectBlock) rejecter)
+{
+  void (^callback)(NSDictionary *) = ^(NSDictionary *param)
+  {
+    RCTPromiseResolveBlock resolve = param[@RESOLVER];
+    
+    if(newStatus == 1 || newStatus == 5)
+    {
+      resolve([[SingleResponse errorResponseWithMessage:@"Can't update entry that is beeing processed"] toDictionary]);
+      return;
+    }
+    
+    SyncQueueEntryModel *entry = [[self syncQueueRepository] getById: _id];
+    
+    if(!entry)
+    {
+      resolve([[SingleResponse errorResponseWithMessage:@"Can't find entry"] toDictionary]);
+      return;
+    }
+    
+    SyncQueueEntryDbo *dbo = [entry toDbo];
+    dbo.status = newStatus;
+    
+    entry = [[SyncQueueEntryModel alloc] initWithDbo: dbo];
+    
+    Response *updateResponse = [[self syncQueueRepository] updateWithModel: entry];
+    
+    if(![updateResponse isSuccess])
+    {
+      resolve([updateResponse toDictionary]);
       return;
     }
     

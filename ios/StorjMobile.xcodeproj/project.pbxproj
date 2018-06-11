@@ -614,6 +614,7 @@
 		E8B379A61F534A10BAAA4E4B /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-LightItalic.ttf"; path = "../src/fonts/OpenSans/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
 		EDC564F35292492DA53A5EBD /* Montserrat-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-BoldItalic.ttf"; path = "../src/fonts/Montserrat/Montserrat-BoldItalic.ttf"; sourceTree = "<group>"; };
 		F04347ECBAEC4A348F8B4E29 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Bold.ttf"; path = "../src/fonts/OpenSans/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		F3391BC720CADDC20080D578 /* SyncEntryState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncEntryState.h; sourceTree = "<group>"; };
 		F355E21B20C02585007DAEE5 /* SyncQueueEntryDbo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncQueueEntryDbo.h; sourceTree = "<group>"; };
 		F355E24420C025AB007DAEE5 /* SyncQueueEntryDbo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyncQueueEntryDbo.m; sourceTree = "<group>"; };
 		F355E24620C030E2007DAEE5 /* SyncQueueEntryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncQueueEntryModel.h; sourceTree = "<group>"; };
@@ -746,6 +747,7 @@
 		13B07FAE1A68108700A75B9A /* StorjMobile */ = {
 			isa = PBXGroup;
 			children = (
+				F3391B9E20CADD880080D578 /* Enums */,
 				DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */,
 				DC7632092084C40600B7C64A /* StorjMobile.entitlements */,
 				F355E26A20C16E26007DAEE5 /* Synchronization */,
@@ -1145,6 +1147,14 @@
 				DCEB075320BEAFBC00D50758 /* STFileDownloadCallback.m */,
 			);
 			path = callbacks;
+			sourceTree = "<group>";
+		};
+		F3391B9E20CADD880080D578 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				F3391BC720CADDC20080D578 /* SyncEntryState.h */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		F355E26A20C16E26007DAEE5 /* Synchronization */ = {
