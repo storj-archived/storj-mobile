@@ -23,12 +23,7 @@
 {
   NSURL *jsCodeLocation;
   
-  NSArray *array = [[[PrepareSyncService alloc] init] prepareSyncQueue];
-  NSLog(@"SyncQueue: %@", array);
-
-//  [[[SyncService alloc] init] startSync];
-  
-    [self requestPermissions];
+  [self requestPermissions];
   
   //debug
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
@@ -71,6 +66,13 @@
                                  delegate: self
                         cancelButtonTitle: @"OK"
                         otherButtonTitles: nil] show];
+    } else
+    {
+      
+      NSArray *array = [[[PrepareSyncService alloc] init] prepareSyncQueue];
+      NSLog(@"SyncQueue: %@", array);
+      
+      //  [[[SyncService alloc] init] startSync];
     }
   }];
 

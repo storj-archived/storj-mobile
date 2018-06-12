@@ -87,7 +87,8 @@ static FileRepository *fileRepository;
     }
     if(!isFileExistAtBucket)
     {
-      NSString *syncFilePath = [@"Uploads" stringByAppendingPathComponent: fileName];
+      NSString *syncFilePath = [[stFileManager getUploadFolder]
+                                stringByAppendingPathComponent: fileName];
       
       SyncQueueEntryModel *syncEntryModel = [[self syncRepository] getByLocalPath:syncFilePath
                                                          bucketId:picturesBucketDbo._id];
