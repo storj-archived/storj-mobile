@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dashboardContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import { bucketsListContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
-import { bucketsListContainerActions } from '../reducers/mainContainer/mainReducerActions';
+import { bucketsListContainerActions, setSearch, clearSearch } from '../reducers/mainContainer/mainReducerActions';
 import { dashboardNavigateBack, navigateBack } from '../reducers/navigation/navigationActions';
 import { getShortBucketName } from "../utils/fileUtils";
 import filesActions from '../reducers/mainContainer/Files/filesReducerActions';
@@ -66,7 +66,7 @@ class FavoriteBucketsContainer extends BaseListContainer {
 
     render() {
         let data = this.getData();
-
+        
         return (
             <HeaderBucketsListComponent
                 lastSync = { this.props.lastSync }
@@ -122,7 +122,9 @@ function mapDispatchToProps(dispatch) {
         ...bucketsListContainerActions,
         ...dashboardContainerActions,
         dashboardNavigateBack,
-        navigateBack
+        navigateBack,
+        setSearch,
+        clearSearch
     }, dispatch);
 }
 

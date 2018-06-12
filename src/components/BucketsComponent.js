@@ -24,6 +24,7 @@ export default class BucketsComponent extends Component {
                     selectedItemId = { this.props.selectedItemId }  />
                 <BucketsScreenHeaderComponent
                     lastSync = { this.props.lastSync }
+                    searchSubSequence = { this.props.searchSubSequence }
                     selectAll = { this.props.selectAll }
                     deselectAll = { this.props.deselectAll }
                     setSearch = { this.props.setSearch }

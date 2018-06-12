@@ -124,7 +124,8 @@ class BucketsContainer extends Component {
                     openedBucketId = { this.props.openedBucketId }
                     selectedItemId = { this.props.selectedItemId }
                     files = { this.props.files }
-                    navigateBack = { () => { this.navigateBack(); } } /> 
+                    navigateBack = { () => { this.navigateBack(); } }
+                    searchSubSequence = { this.props.searchSubSequence } /> 
             );
         }
     }
@@ -137,7 +138,7 @@ function mapStateToProps(state) {
     let routes = state.bucketsScreenNavReducer.routes;
     let index = state.bucketsScreenNavReducer.index;
     let currentBucketScreenName = routes[index].routeName;
-    
+    let searchSubSequence = index === 0 ? state.mainReducer.bucketSearchSubSequence : state.mainReducer.filesSearchSubSequence; 
     return {
         lastSync: state.settingsReducer.lastSync,
         isFirstSignIn: state.mainReducer.isFirstSignIn,
@@ -147,6 +148,7 @@ function mapStateToProps(state) {
         screenName: currentBucketScreenName,
         openedBucketId: state.mainReducer.openedBucketId,
         selectedItemId: state.mainReducer.selectedItemId,
+        searchSubSequence,
         email: state.mainReducer.email,
         searchIndex: currentBucketScreenName === "BucketsListScreen" ? 1 : 2,
         activeScreen: currentScreenName

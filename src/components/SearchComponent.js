@@ -16,7 +16,7 @@ export default class SearchComponent extends Component {
 
         this.state = {
             isSearchIconShown: true,
-            searchValue: ''
+            searchValue: this.props.searchSubSequence
         };
     }
 

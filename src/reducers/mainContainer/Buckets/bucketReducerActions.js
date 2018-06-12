@@ -26,8 +26,8 @@ export function selectBucket(bucket) {
 /**
  * actionCreator for all bucket selection
  */
-export function selectBuckets(isFavorites) {
-    return { type: SELECT_BUCKETS, isFavorites };
+export function selectBuckets(isFavorites, searchSequence) {
+    return { type: SELECT_BUCKETS, isFavorites, searchSequence };
 }
 
 /**

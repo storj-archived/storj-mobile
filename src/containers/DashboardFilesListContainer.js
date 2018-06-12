@@ -65,7 +65,8 @@ class DashboardFilesListContainer extends BaseFilesListContainer {
                 searchIndex = { 4 }
                 navigateBack = { this.navigateBack.bind(this) }
                 selectAll = { this.props.screenProps.selectAll }
-                deselectAll = { this.props.screenProps.deselectAll } />
+                deselectAll = { this.props.screenProps.deselectAll }
+                searchSubSequence = { this.props.searchSubSequence } />
         );
     }
 }

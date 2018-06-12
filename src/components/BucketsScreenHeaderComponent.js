@@ -21,6 +21,7 @@ export default class BucketsScreenHeaderComponent extends Component {
             <View style = { styles.mainContainer }>
                 <AnimatedHeader
                     lastSync = { this.props.lastSync }
+                    searchSubSequence = { this.props.searchSubSequence }
                     placeholder = { this.props.placeholder }
                     setSearch = { this.props.setSearch }
                     clearSearch = { this.props.clearSearch }
@@ -72,6 +73,7 @@ class AnimatedHeader extends Component {
                 <Animated.View style = { [ styles.searchWrapperInner, res[1] ] }>
                     <SearchComponent
                         lastSync = { this.props.lastSync }
+                        searchSubSequence = { this.props.searchSubSequence }
                         placeholder = { this.props.placeholder }
                         searchIndex = { this.props.searchIndex }
                         setSearch = { this.props.setSearch }

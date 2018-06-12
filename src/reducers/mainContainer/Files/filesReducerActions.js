@@ -113,8 +113,8 @@ export function selectFile(file) {
  * ActionCreator for local files multiple selection
  * @param {FileModel[]} files 
  */
-export function selectFiles(bucketId) {
-    return { type: SELECT_FILES, payload: { bucketId } };
+export function selectFiles(bucketId, searchSequence) {
+    return { type: SELECT_FILES, payload: { bucketId, searchSequence } };
 }
 
 export function deselectFile(file) {

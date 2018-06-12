@@ -35,7 +35,8 @@ export default class HeaderFilesListComponent extends FilesListComponent {
                         searchIndex = { this.props.searchIndex }
                         openedBucketId = { this.props.bucketId }
                         selectAll = { this.props.selectAll }
-                        deselectAll = { this.props.deselectAll } />
+                        deselectAll = { this.props.deselectAll }
+                        searchSubSequence = { this.props.searchSubSequence } />
             </View>
         );
     }

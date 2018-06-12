@@ -18,7 +18,7 @@ const BucketsScreenNavigator = StackNavigator(
         initialRouteName: 'BucketsListScreen',
         headerMode: 'none',
         navigationOptions: {
-            header:null,
+            header: null,
             gesturesEnabled: false
         }
     }

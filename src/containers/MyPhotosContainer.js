@@ -42,7 +42,8 @@ class MyPhotosContainer extends BaseFilesListContainer {
                 searchIndex = { 0 }
                 navigateBack = { () => {} }
                 selectAll = { this.props.screenProps.selectAll }
-                deselectAll = { this.props.screenProps.deselectAll } />
+                deselectAll = { this.props.screenProps.deselectAll }
+                searchSubSequence = { this.props.searchSubSequence } />
         );
     }
 }

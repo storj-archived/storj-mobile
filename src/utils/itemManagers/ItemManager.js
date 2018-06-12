@@ -33,11 +33,11 @@ export default class ItemManager {
      * Change isSelected prop to true for all buckets
      * @returns {ListItemModel[]} 
      */
-    selectBuckets(isFavorites) {
+    selectBuckets(isFavorites, searchSequence) {
 
         if(!isFavorites) {
             this.itemList = this.itemList.map((bucket) => {
-                bucket.isSelected = true;
+                if(bucket.entity.name.toLowerCase().includes(searchSequence.toLowerCase())) bucket.isSelected = true;
                 return bucket;
             })
 
@@ -45,11 +45,13 @@ export default class ItemManager {
         }
 
         this.itemList = this.itemList.map((bucket) => {
-            if(bucket.getStarred() === true) 
-            bucket.isSelected = true;
+            if (bucket.getStarred() && 
+                bucket.entity.name.toLowerCase()
+                .includes(searchSequence.toLowerCase())) 
+                    bucket.isSelected = true;
             
             return bucket;
-        })
+        });
 
         return this.itemList;
     };

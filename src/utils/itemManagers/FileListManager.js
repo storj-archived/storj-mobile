@@ -309,8 +309,8 @@ export default class FileListManager {
      * Selecting files
      * @param {object} files
      */
-    selectFiles(bucketId) {        
-        return this._changeFilesSelection(bucketId, true);
+    selectFiles(bucketId, searchSequence) {        
+        return this._changeFilesSelection(bucketId, true, searchSequence);
     }
 
     /**
@@ -353,11 +353,21 @@ export default class FileListManager {
      * @param {string} bucketId 
      * @param {bool} value 
      */
-    _changeFilesSelection(bucketId, value) {
+    _changeFilesSelection(bucketId, value, searchSequence) {
+        if (searchSequence) {
+            this.newFilesList = this.newFilesList.map(file => {
+                if (file.entity.bucketId === bucketId && file.entity.name.toLowerCase().includes(searchSequence.toLowerCase()))
+                    file.isSelected = value; 
+
+                return file;
+            })
+
+            return this.newFilesList;
+        }
+        
         this.newFilesList = this.newFilesList.map(file => {
-            if(file.entity.bucketId === bucketId) {
+            if(file.entity.bucketId === bucketId) 
                 file.isSelected = value;  
-            }
 
             return file;
         });

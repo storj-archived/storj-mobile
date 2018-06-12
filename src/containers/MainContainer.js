@@ -551,11 +551,11 @@ class MainContainer extends Component {
 
     selectAll(bucketId, isFavoritesBuckets) {
         if(bucketId) {
-            this.props.selectFiles(bucketId);
+            this.props.selectFiles(bucketId, this.props.searchSequence);
             return;
         }
 
-        this.props.selectBuckets(isFavoritesBuckets);
+        this.props.selectBuckets(isFavoritesBuckets, this.props.searchSequence);
     }
 
     deselectAll() {
@@ -720,7 +720,8 @@ class MainContainer extends Component {
                 changePasswordPopupStatus = { this.props.changePasswordPopupStatus }
                 isPinOptionsShown = { this.props.isPinOptionsShown }
                 isChangePasswordPopupShown = { this.props.isChangePasswordPopupShown }
-                deletePIN = { this.deletePIN.bind(this) } />
+                deletePIN = { this.deletePIN.bind(this) }
+                searchSequence = { this.props.searchSequence } />
         );
     }
 }
@@ -754,10 +755,28 @@ function handleDashboardScreenActions(bucketId, isSelection, actions, selectionM
 }
 
 function mapStateToProps(state) { 
+
+    function getSearchSequenceIndex(mainNavigationState, bucketsScreenNavState, dashboardScreenNavState) {
+        if(mainNavigationState.index === 2) return 0;
+        if(mainNavigationState.index === 1 && bucketsScreenNavState.index === 0) return 1;
+        if(mainNavigationState.index === 1 && bucketsScreenNavState.index === 1) return 2;
+        if(mainNavigationState.index === 0 && dashboardScreenNavState.index === 0) return 3;
+        if(mainNavigationState.index === 0 && dashboardScreenNavState.index === 1) return 4;
+    }
+
     let isStarredBucketsSelected = state.bucketReducer.buckets.filter(item => item.isSelected === true).filter(item => item.entity.isStarred === true).length !== 0; 
     let isStarredFilesSelected = state.filesReducer.fileListModels.filter(item => item.isSelected === true).filter(item => item.entity.isStarred === true).length !== 0;
+    let sequenceIndex = getSearchSequenceIndex(state.mainScreenNavReducer, state.bucketsScreenNavReducer, state.dashboardScreenNavReducer);
+    let sequnceList = [ 
+        state.mainReducer.myPhotosSearchSubSequence,
+        state.mainReducer.bucketSearchSubSequence,
+        state.mainReducer.filesSearchSubSequence,
+        state.mainReducer.starredSearchSubSequence,
+        state.mainReducer.dashboardFilesSearchSubSequence
+    ];
 
     return {
+        searchSequence: sequnceList[sequenceIndex],
         syncQueueEntries: state.syncQueueReducer.syncQueueEntries,
         uploadingFiles: state.filesReducer.uploadingFileListModels,
         isSyncWindowShown: state.mainReducer.isSyncWindowShown,
