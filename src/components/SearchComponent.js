@@ -46,10 +46,15 @@ export default class SearchComponent extends Component {
         this.props.showOptions();
     }
 
+    navigateBack() {
+        this.props.navigateBack();
+        this.setState({ searchValue: this.props.searchSubSequence });
+    }
+
     fileScreenHeader() {
         return(
             <View style = { [ styles.rowContainer, this.props.styleContainer ] }>
-                <TouchableOpacity style = { styles.backButtonWrapper } onPress = { () => { this.props.navigateBack ? this.props.navigateBack() : () => {} } }>
+                <TouchableOpacity style = { styles.backButtonWrapper } onPress = { () => { this.props.navigateBack ? this.navigateBack() : () => {} } }>
                     <Image style = { styles.backButton } source = { require("../images/Icons/BackButton.png") } resizeMode = { 'contain' } />
                 </TouchableOpacity>
                 <View style = { [ styles.rowContainer, styles.mainContainer, styles.fileHeader ] }>
@@ -73,7 +78,13 @@ export default class SearchComponent extends Component {
                             value = { this.state.searchValue } />
                     </View>
                     <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>
-                        <Text style = { styles.updateStatus }>{ this.props.lastSync }</Text>
+                        {
+                            this.state.searchValue
+                            ? null
+                            : <View style = { styles.updateTextContainer } >
+                                <Text style = { styles.updateStatus }>{ this.props.lastSync }</Text>
+                            </View>
+                        }
                         <TouchableOpacity onPress = { this.onOptionPress.bind(this) }>
                             <Image style = { styles.image } source = { require("../images/Icons/SearchOptions.png") } resizeMode = { 'contain' } />
                         </TouchableOpacity>
@@ -122,7 +133,7 @@ export default class SearchComponent extends Component {
         } else if (this.props.isSelectBucketScreen) {
             return this.selectBucketScreenHeader();
         }
-        
+        console.log("this.props.lastSync", this.props.lastSync)
         return(
             
             <View style = { [ styles.rowContainer, styles.mainContainer, this.props.styleContainer ] }>
@@ -147,7 +158,13 @@ export default class SearchComponent extends Component {
                             value = { this.state.searchValue } />
                     </View>
                     <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>
-                        <Text style = { styles.updateStatus }>{ this.props.lastSync }</Text>
+                        {
+                            !this.state.searchValue
+                            ? <View style = { styles.updateTextContainer } >
+                                <Text style = { styles.updateStatus }>{ this.props.lastSync }</Text>
+                            </View>
+                            : null
+                        }
                         <TouchableOpacity onPress = { this.onOptionPress.bind(this) }>
                             <Image style = { styles.image } source = { require("../images/Icons/SearchOptions.png") } resizeMode = { 'contain' } />
                         </TouchableOpacity>
@@ -207,6 +224,10 @@ const styles = StyleSheet.create({
         fontSize: getHeight(12),
         color: '#384B65',
         fontFamily: 'Montserrat-Regular'
+    },
+    updateTextContainer: {
+        width: getWidth(100), 
+        alignSelf: "flex-end"
     }
 });
 
