@@ -86,9 +86,17 @@
   return authStatus == AVAuthorizationStatusAuthorized;
 }
 
+-(BOOL) isCameraPermissionDenied
+{
+  AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:
+                                      AVMediaTypeVideo];
+  
+  return authStatus == AVAuthorizationStatusDenied;
+}
+
 -(void) requestCameraPermission
 {
-  if([self isCameraPermissionGranted])
+  if([self isCameraPermissionGranted] || [self isCameraPermissionDenied])
   {
     [permissions removeLastObject];
     [self checkPermissionsListAndProcess];
@@ -114,9 +122,16 @@
   return authStatus == PHAuthorizationStatusAuthorized;
 }
 
+-(BOOL) isPhotoLibraryPermissionDenied
+{
+  PHAuthorizationStatus authStatus = [PHPhotoLibrary authorizationStatus];
+  
+  return authStatus == PHAuthorizationStatusDenied;
+}
+
 -(void) requestPhotoLibraryPermission
 {
-  if([self isPhotoLibraryPermissionGranted])
+  if([self isPhotoLibraryPermissionGranted] || [self isPhotoLibraryPermissionDenied])
   {
     [permissions removeLastObject];
     [self checkPermissionsListAndProcess];

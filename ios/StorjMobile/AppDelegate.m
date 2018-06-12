@@ -55,6 +55,8 @@
   
   if([permissionManager isAllPermissionsGranted])
   {
+    [self prepareSync];
+    
     return;
   }
 
@@ -68,14 +70,18 @@
                         otherButtonTitles: nil] show];
     } else
     {
-      
-      NSArray *array = [[[PrepareSyncService alloc] init] prepareSyncQueue];
-      NSLog(@"SyncQueue: %@", array);
-      
-      //  [[[SyncService alloc] init] startSync];
+      [self prepareSync];
     }
   }];
 
+}
+
+-(void) prepareSync
+{
+  NSArray *array = [[[PrepareSyncService alloc] init] prepareSyncQueue];
+  NSLog(@"SyncQueue: %@", array);
+  
+  //  [[[SyncService alloc] init] startSync];
 }
 
 @end
