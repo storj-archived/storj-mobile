@@ -24,6 +24,8 @@
 	<string>50</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
@@ -35,14 +37,8 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSAppleMusicUsageDescription</key>
-	<string>Acces to media library is required to upload your media data</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Access to camera is required to use QRCode Scanner capabilities</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Acces to media library is required to save your photo</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Acces to media library is required to upload your photo data</string>
 	<key>UIAppFonts</key>
@@ -77,8 +73,6 @@
 		<string>Montserrat-ThinItalic.ttf</string>
 	</array>
 	<key>UIFileSharingEnabled</key>
-	<true/>
-	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

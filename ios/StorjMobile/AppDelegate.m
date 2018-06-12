@@ -15,6 +15,7 @@
 #import "PrepareSyncService.h"
 #import "SyncService.h"
 #import "SyncEntryState.h"
+#import "PermissionManager.h"
 
 @implementation AppDelegate
 
@@ -24,6 +25,10 @@
   
   NSArray *array = [[[PrepareSyncService alloc] init] prepareSyncQueue];
   NSLog(@"SyncQueue: %@", array);
+
+//  [[[SyncService alloc] init] startSync];
+  
+    [self requestPermissions];
   
   //debug
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
@@ -42,7 +47,33 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+//
+  
   return YES;
+}
+
+-(void) requestPermissions
+{
+  
+  PermissionManager *permissionManager = [[PermissionManager  alloc] init];
+  
+  if([permissionManager isAllPermissionsGranted])
+  {
+    return;
+  }
+
+  [permissionManager requestAllPermissionsWithCompletion:^{
+    if(![permissionManager isAllPermissionsGranted])
+    {
+      [[[UIAlertView alloc] initWithTitle: @"Attention"
+                                  message: @"You have refused permissions. Please enable them in Settings."
+                                 delegate: self
+                        cancelButtonTitle: @"OK"
+                        otherButtonTitles: nil] show];
+    }
+  }];
+
 }
 
 @end

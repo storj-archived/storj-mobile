@@ -87,8 +87,7 @@ static FileRepository *fileRepository;
     }
     if(!isFileExistAtBucket)
     {
-      NSString *syncFilePath = [[stFileManager getUploadFolder]
-                                stringByAppendingPathComponent: fileName];
+      NSString *syncFilePath = [@"Uploads" stringByAppendingPathComponent: fileName];
       
       SyncQueueEntryModel *syncEntryModel = [[self syncRepository] getByLocalPath:syncFilePath
                                                          bucketId:picturesBucketDbo._id];
@@ -99,13 +98,7 @@ static FileRepository *fileRepository;
         dbo.fileName = fileName;
         dbo.localPath = syncFilePath;
         dbo.bucketId = picturesBucketDbo._id;
-//        if(assetObject.localIdentifier.length >=32)
-//        {
-//          dbo.localIdentifier = [assetObject.localIdentifier substringToIndex:32];
-//        } else
-//        {
         dbo.localIdentifier = assetObject.localIdentifier;
-//        }
 
         SyncQueueEntryModel *syncModel = [[SyncQueueEntryModel alloc] initWithDbo:dbo];
         [[self syncRepository] insertWithModel: syncModel];

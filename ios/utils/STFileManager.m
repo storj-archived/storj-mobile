@@ -30,6 +30,46 @@
 
 -(NSMutableArray <STAssetFileModel *> *) getAssetsFromGallery
 {
+  
+  NSLog(@"get Assets from gallery");
+  PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+  switch (status) {
+    case PHAuthorizationStatusAuthorized:
+      NSLog(@"Permission authorized");
+      break;
+    
+    case PHAuthorizationStatusDenied:
+      NSLog(@"Permission denied");
+      break;
+      
+    case PHAuthorizationStatusNotDetermined:
+      NSLog(@"Permission not determined");
+      [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+        switch (status) {
+          case PHAuthorizationStatusAuthorized:
+            NSLog(@"Permission authorized");
+            break;
+            
+          case PHAuthorizationStatusDenied:
+            NSLog(@"Permission denied");
+            break;
+            
+          case PHAuthorizationStatusNotDetermined:
+            NSLog(@"Permission notDetermined");
+            break;
+            
+          default:
+            
+            break;
+        }
+      }];
+      break;
+      
+    default:
+      
+      break;
+  }
+  NSLog(@"Permission processed");
   PHFetchResult *imageResults = [PHAsset
                                  fetchAssetsWithMediaType: PHAssetMediaTypeImage options:nil];
   PHFetchResult *videoResults = [PHAsset

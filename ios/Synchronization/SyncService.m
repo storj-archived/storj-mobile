@@ -10,6 +10,7 @@
 #import "SyncQueueRepository.h"
 #import "UploadFileRepository.h"
 #import "UploadService.h"
+#import "STFileManager.h"
 
 #import "StorjBackgroundServices.h"
 #import "EventNames.h"
@@ -184,21 +185,16 @@ static dispatch_once_t onceToken;
   __block NSData * _imageData;
   __block BOOL isComplete = NO;
   [[PHImageManager defaultManager] requestImageDataForAsset:phAsset
-                                     options:nil
-                               resultHandler:^(NSData * _Nullable imageData,
-                                               NSString * _Nullable dataUTI,
-                                               UIImageOrientation orientation,
-                                               NSDictionary * _Nullable info)
-  {
-    NSLog(@"info:%@", info);
-    NSLog(@"dataExist: %d", imageData != nil);
-    
-    _imageData = (NSData *)[imageData copy];
-    isComplete = YES;
-  }];
-  
-  while (!isComplete)
-  {
+                                                    options:nil
+                                              resultHandler:^(NSData * _Nullable imageData,
+                                                              NSString * _Nullable dataUTI,
+                                                              UIImageOrientation orientation,
+                                                              NSDictionary * _Nullable info)
+   {
+     _imageData = (NSData *)[imageData copy];
+     isComplete = YES;
+   }];
+  while (!isComplete) {
     [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
   }
   
@@ -229,14 +225,13 @@ static dispatch_once_t onceToken;
 
 -(void) stopSync
 {
- //uploadFileRep getCurren upload
+  //uploadFileRep getCurren upload
 }
 
 -(void) clean
 {
   NSArray *syncQueueArray = [[self syncRepository] getAll];
-  
-  if(!syncQueueArray || syncQueueArray.count == 0)
+  if(!syncQueueArray)
   {
     //error handling;
     return;

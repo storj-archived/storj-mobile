@@ -68,6 +68,7 @@
 		DC914C4A206BE5D400F0C4FF /* SyncModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C49206BE5D400F0C4FF /* SyncModule.m */; };
 		DC914C5C206BFBF200F0C4FF /* Sha256Module.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C5B206BFBF200F0C4FF /* Sha256Module.m */; };
 		DCAC417220C9409500D39053 /* STAssetFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCAC417120C9409500D39053 /* STAssetFileModel.m */; };
+		DCAC421520CAEC4F00D39053 /* PermissionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCAC421420CAEC4F00D39053 /* PermissionManager.m */; };
 		DCACD444201FDF630050921B /* StorjLibIos.m in Sources */ = {isa = PBXBuildFile; fileRef = DCACD443201FDF630050921B /* StorjLibIos.m */; };
 		DCBD1A5020B2F07E005B30C3 /* STUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBD1A4F20B2F07E005B30C3 /* STUploader.m */; };
 		DCBF1F2E20BD786500240E8B /* STFileUploadCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBF1F2D20BD786500240E8B /* STFileUploadCallback.m */; };
@@ -526,6 +527,8 @@
 		DC914C5B206BFBF200F0C4FF /* Sha256Module.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Sha256Module.m; sourceTree = "<group>"; };
 		DCAC417020C9409500D39053 /* STAssetFileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STAssetFileModel.h; sourceTree = "<group>"; };
 		DCAC417120C9409500D39053 /* STAssetFileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STAssetFileModel.m; sourceTree = "<group>"; };
+		DCAC421320CAEC4F00D39053 /* PermissionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PermissionManager.h; sourceTree = "<group>"; };
+		DCAC421420CAEC4F00D39053 /* PermissionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PermissionManager.m; sourceTree = "<group>"; };
 		DCACD442201FDF630050921B /* StorjLibIos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorjLibIos.h; sourceTree = "<group>"; };
 		DCACD443201FDF630050921B /* StorjLibIos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorjLibIos.m; sourceTree = "<group>"; };
 		DCBD1A4E20B2F07E005B30C3 /* STUploader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STUploader.h; sourceTree = "<group>"; };
@@ -1115,6 +1118,8 @@
 				DCBF1F4220BDBADA00240E8B /* Logger.m */,
 				DC4804E320C5CF4E009CEDB7 /* STFileNamingFormatter.h */,
 				DC4804E420C5CF4E009CEDB7 /* STFileNamingFormatter.m */,
+				DCAC421320CAEC4F00D39053 /* PermissionManager.h */,
+				DCAC421420CAEC4F00D39053 /* PermissionManager.m */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -1709,6 +1714,7 @@
 				DC69A19F20C037EB00E4BC51 /* SettingsModel.m in Sources */,
 				DC69A24120C55E9100E4BC51 /* STFileManager.m in Sources */,
 				DCDF706B2064A15A001B2F95 /* UploadFileDbo.m in Sources */,
+				DCAC421520CAEC4F00D39053 /* PermissionManager.m in Sources */,
 				DCDF6FE2206022EC001B2F95 /* ListResponse.m in Sources */,
 				DCBD1A5020B2F07E005B30C3 /* STUploader.m in Sources */,
 				DCDF6FD9205FF0A7001B2F95 /* Response.m in Sources */,
