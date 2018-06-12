@@ -54,7 +54,7 @@ export function getFileNameWithFixedSize(fullName, size) {
     if(fullName.length > size + 5){
 
         if(name.length > size) {
-            name = name.slice(0,18) + '..';
+            name = name.slice(0, size - 2) + '..';
         }
 
         if(extention.length > 6) {

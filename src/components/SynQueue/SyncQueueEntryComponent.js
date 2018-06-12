@@ -10,7 +10,7 @@ import {
     ProgressBarAndroid
 } from "react-native";
 import { getHeight, getWidth } from "../../utils/adaptive";
-import { getFullFileName } from "../../utils/fileUtils";
+import { getFileNameWithFixedSize } from "../../utils/fileUtils";
 
 export default class SyncQueueEntryComponent extends Component {
     constructor(props) {
@@ -18,7 +18,7 @@ export default class SyncQueueEntryComponent extends Component {
     }
 
     render() {
-        const name = getFullFileName(this.props.fileName);
+        const name = getFileNameWithFixedSize(this.props.fileName, 25);
         return(
             <View style = { this.props.styleContainer ? styles.mainContainer2 : styles.mainContainer }>
                 <View style = { styles.rowRapper }>
