@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Montserrat-Regular'
     },
     updateTextContainer: {
-        width: getWidth(100), 
+        width: getWidth(90), 
         alignSelf: "flex-end"
     }
 });

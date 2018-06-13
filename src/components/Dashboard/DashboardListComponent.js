@@ -132,6 +132,7 @@ const listComponent = (title, data, props, count, itemType, navigationPress) => 
         return(
             <DashboardItemListComponent 
                 animatedScrollValue = { animatedScrollValue }
+                isListActionsDisabled = { true }
                 title = { title }
                 count = { count }
                 itemType = { itemType }

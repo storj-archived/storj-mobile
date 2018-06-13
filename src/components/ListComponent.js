@@ -17,6 +17,7 @@ import ListItemModel from '../models/ListItemModel';
 import PropTypes from 'prop-types';
 import { getWidth, getHeight, getDeviceWidth } from '../utils/adaptive';
 import SORTING from '../utils/constants/sortingConstants';
+import { getFileNameWithFixedSize } from "../utils/fileUtils";
 
 /**
 * Custom List component
@@ -196,6 +197,7 @@ export default class ListComponent extends Component {
                                     { uri: 'data:image/png;base64,' + item.entity.thumbnail } 
                                     : item.entity.isDownloaded ? this.props.listItemIcon : this.props.cloudListItemIcon;
         const starredIcon = item.getStarred() ? '★' : null;
+        let fullItemName = getFileNameWithFixedSize(item.getName(), 20)
         return(
             <ItemType
                 isExpanderDisabled = { this.props.isExpanderDisabled }
@@ -217,7 +219,9 @@ export default class ListComponent extends Component {
                     <Text style = { styles.blueStar }>
                         { starredIcon }
                     </Text>
-                    { item.getName() }</TextComp>
+                    { fullItemName.name }
+                    <Text style = { styles.extentionText } >{ fullItemName.extention }</Text>
+                    </TextComp>
             </ItemType>
         );
     }
@@ -309,6 +313,9 @@ const styles = StyleSheet.create({
     textMargin: {
         marginLeft: getWidth(10)
     },
+    extentionText: {
+        fontFamily: 'Montserrat-Regular',
+        fontSize: getHeight(16),
+        color: 'rgba(56, 75, 101, 0.4)'
+    }
 });
-
-

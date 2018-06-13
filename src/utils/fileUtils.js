@@ -100,11 +100,5 @@ export function getFileCopyName(fileName) {
         newName = pureName + "(1)";
     }
 
-    
-
-    console.log(res);
-
-    //name.name = name.name + "(1)";
-
     return newName + name.extention;
 }
