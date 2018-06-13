@@ -9,6 +9,7 @@
 #import "SettingsRepository.h"
 #import "FMResultSet.h"
 #import "Response.h"
+#import "DictionaryUtils.h"
 
 @implementation SettingsRepository
 
@@ -94,6 +95,23 @@ static NSArray *columns;
                            objectKey: SettingsContract.ID
                             objectId: [model _id]
                     updateDictionary: [model toDictionary]];
+}
+
+-(Response *) updateById: (NSString *) settingId
+                dateTime: (NSString *) dateTime
+{
+  if(!settingId || settingId.length == 0)
+  {
+    return [Response errorResponseWithMessage: @"Model is not valid"];
+  }
+  
+  return [super executeUpdateAtTable:SettingsContract.TABLE_NAME
+                           objectKey:SettingsContract.ID
+                            objectId:settingId
+                    updateDictionary:@{
+                                       SettingsContract.LAST_SYNC :
+                                         [DictionaryUtils checkAndReturnNSString: dateTime]}
+          ];
 }
 
 -(Response *) updateById: (NSString *) settingId

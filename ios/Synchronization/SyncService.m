@@ -11,6 +11,8 @@
 #import "UploadFileRepository.h"
 #import "UploadService.h"
 #import "STFileManager.h"
+#import "SettingsRepository.h"
+#import "Logger.h"
 
 #import "StorjBackgroundServices.h"
 #import "EventNames.h"
@@ -19,6 +21,7 @@
 
 static SyncQueueRepository *syncRepository;
 static UploadFileRepository *uploadFileRepository;
+static SettingsRepository *settingsRepository;
 
 static SyncService *instance;
 static dispatch_once_t onceToken;
@@ -68,6 +71,16 @@ static dispatch_once_t onceToken;
   return uploadFileRepository;
 }
 
+-(SettingsRepository *) settingsRepository
+{
+  if(!settingsRepository)
+  {
+    settingsRepository = [[SettingsRepository alloc] init];
+  }
+  
+  return settingsRepository;
+}
+
 -(void) startSync
 {
   dispatch_async(workerQueue, [self getSyncTask]);
@@ -100,6 +113,15 @@ static dispatch_once_t onceToken;
     dispatch_async(workerQueue, removeTask);
 }
 
+-(NSString *) currentDateFormatted
+{
+  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+  dateFormatter.locale = [NSLocale localeWithLocaleIdentifier: @"en_US_POSIX"];
+  dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+  
+  return [dateFormatter stringFromDate: [NSDate date]];
+}
+
 -(dispatch_block_t) getSyncTask
 {
   dispatch_block_t startSyncTask = ^
@@ -109,9 +131,20 @@ static dispatch_once_t onceToken;
     if(!syncQueueArray || syncQueueArray.count == 0)
     {
       //error handling;
-      NSLog(@"sync queue array is nil");
+      [Logger log:@"Sync queue array is nil"];
       return;
     }
+    
+    
+    //log to settings start time
+    NSString *userEmail = [NSUserDefaults.standardUserDefaults stringForKey:@"email"];
+    if(!userEmail)
+    {
+      [Logger log:@"No settings id! Aborting."];
+      return;
+    }
+    [[self settingsRepository] updateById: userEmail
+                                 dateTime: [self currentDateFormatted]];
     
     for (SyncQueueEntryModel *syncModel in syncQueueArray)
     {

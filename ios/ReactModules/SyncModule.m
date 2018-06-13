@@ -7,6 +7,8 @@
 //
 
 #import "SyncModule.h"
+#import "SettingsRepository.h"
+#import "SyncService.h"
 
 #define RESOLVER "RCTresolver"
 #define REJECTER "RCTrejecter"
@@ -17,6 +19,8 @@ RCT_EXPORT_MODULE(SyncModuleIOS);
 
 @synthesize _database;
 @synthesize _bucketRepository, _fileRepository, _uploadFileRepository, _syncQueueRepository;
+
+static SettingsRepository *settingsRepository;
 
 -(FMDatabase *) database{
   if(!_database){
@@ -53,6 +57,15 @@ RCT_EXPORT_MODULE(SyncModuleIOS);
     _syncQueueRepository = [[SyncQueueRepository alloc] init];
   }
   return _syncQueueRepository;
+}
+
+-(SettingsRepository *) settingsRepository
+{
+  if(!settingsRepository)
+  {
+    settingsRepository = [[SettingsRepository alloc] init];
+  }
+  return settingsRepository;
 }
 
 RCT_REMAP_METHOD(listBuckets,
@@ -285,13 +298,6 @@ RCT_REMAP_METHOD(getUploadingFile, getUploadingFileWithFileHandle: (NSString *) 
    }];
 }
 
-RCT_REMAP_METHOD(listSettings,
-                 listSettingsWithSettingsId: (NSString *) settingsId
-                 withResolver: (RCTPromiseResolveBlock) resolver
-                 andRejecter: (RCTPromiseRejectBlock) rejecter){
-  resolver(@[@{}]);
-}
-
 RCT_REMAP_METHOD(getFile,
                  getFileWithFileId: (NSString *) fileId
                  WithResolver: (RCTPromiseResolveBlock) resolver
@@ -379,6 +385,84 @@ RCT_REMAP_METHOD(checkFile,
   resolver([[Response successResponse] toDictionary]);
 }
 
+RCT_REMAP_METHOD(listSettings,
+                 listSettingsWithSettingsId: (NSString *) settingsId
+                 withResolver: (RCTPromiseResolveBlock) resolver
+                 andRejecter: (RCTPromiseRejectBlock) rejecter){
+  SettingsDbo *settingsDbo = [[self settingsRepository] getById: settingsId];
+  
+  NSDictionary *settingsDict = [[settingsDbo toModel] toDictionary];
+  NSString *serializedSettings = [DictionaryUtils convertToJsonWithDictionary: settingsDict];
+  
+  SingleResponse *response = [SingleResponse successSingleResponseWithResult: serializedSettings];
+  
+  resolver([response toDictionary]);
+}
+
+RCT_REMAP_METHOD(insertSyncSettings,
+                 insertSettingsWithSettingsId: (NSString *) settingsId
+                 withResolver: (RCTPromiseResolveBlock) resolver
+                 andRejecter: (RCTPromiseRejectBlock) rejecter)
+{
+  Response *insertResult = [[self settingsRepository] insertById:settingsId];
+  
+  resolver([insertResult toDictionary]);
+}
+
+RCT_REMAP_METHOD(updateSyncSettings,
+                 updateSettingsWithSettingsId: (NSString *) settingsId
+                 syncSettings: (int) syncSettings
+                 withResolver: (RCTPromiseResolveBlock) resolver
+                 andRejecter: (RCTPromiseRejectBlock) rejecter)
+{
+  resolver([[[self settingsRepository] updateById: settingsId
+                                     syncSettings: syncSettings] toDictionary]);
+}
+
+RCT_REMAP_METHOD(setFirstSignIn, setFirstSighInWithSettingsId: (NSString *) settingsId
+                 syncSettings: (int) syncSettings
+                 withResolver: (RCTPromiseResolveBlock) resolver
+                 andRejecter: (RCTPromiseRejectBlock) rejecter)
+{
+  resolver([[self settingsRepository] updateById: settingsId
+                                    syncSettings: syncSettings
+                                      firtSignIn: NO]);
+}
+
+RCT_REMAP_METHOD(changeSyncStatus,
+                 changeSyncStatusWithSettingId: (NSString *) settingId
+                 value: (BOOL) value
+                 withResolver: (RCTPromiseResolveBlock) resolver
+                 andRejecter: (RCTPromiseRejectBlock) rejecter)
+{
+  if(!settingId)
+  {
+    resolver([[Response errorResponseWithMessage:@"SettingId is not specified"] toDictionary]);
+    
+    return;
+  }
+  
+  [[SyncService sharedInstance] stopSync];
+  SettingsDbo *settingDbo = [[self settingsRepository] getById: settingId];
+  
+  if(!settingDbo)
+  {
+    resolver([[Response errorResponseWithMessage: @"No setting entry for current account"]
+              toDictionary]);
+    
+    return;
+  }
+  
+  SettingsModel *settingsModel = [settingDbo toModel];
+  if(value)
+  {
+   //schedule new sync
+  }
+  
+  resolver([[[self settingsRepository] updateById:settingId
+                                       syncStatus:value] toDictionary]);
+  
+}
 
 //WithResolver: (RCTPromiseResolveBlock) resolver
 //andRejecter: (RCTPromiseRejectBlock) rejecter){

@@ -22,6 +22,9 @@
 -(Response *) update: (SettingsModel *) model;
 
 -(Response *) updateById: (NSString *) settingId
+                dateTime: (NSString *) dateTime;
+
+-(Response *) updateById: (NSString *) settingId
               syncStatus: (BOOL) syncStatus;
 
 -(Response *) updateById: (NSString *) settingId

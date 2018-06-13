@@ -495,6 +495,7 @@
 		C04E439E0DB043ECBF958C35 /* RNPhotoView.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNPhotoView.xcodeproj; path = "../node_modules/react-native-photo-view/ios/RNPhotoView.xcodeproj"; sourceTree = "<group>"; };
 		CC74FFF11A4D422EA4F02E08 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../src/fonts/Montserrat/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		D57884CA17224EC589F7D3FA /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../src/fonts/OpenSans/OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		DC0C23B820D044A3009D2511 /* SyncSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncSettings.h; sourceTree = "<group>"; };
 		DC37DF7D20A4B62C00C4FEF8 /* CameraModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraModule.h; sourceTree = "<group>"; };
 		DC37DF7E20A4B62C00C4FEF8 /* CameraModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraModule.m; sourceTree = "<group>"; };
 		DC4804E320C5CF4E009CEDB7 /* STFileNamingFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STFileNamingFormatter.h; sourceTree = "<group>"; };
@@ -1158,6 +1159,7 @@
 			isa = PBXGroup;
 			children = (
 				F3391BC720CADDC20080D578 /* SyncEntryState.h */,
+				DC0C23B820D044A3009D2511 /* SyncSettings.h */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
