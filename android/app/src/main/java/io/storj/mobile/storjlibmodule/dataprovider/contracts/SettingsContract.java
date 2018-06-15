@@ -25,7 +25,7 @@ public final class SettingsContract implements BaseColumns {
                         "%s NUMBER DEFAULT 1, " +
                         "%s NUMBER DEFAULT 0, " +
                         "%s NUMBER DEFAULT 0, " +
-                        "%s TIMESTAMP DEFAULT CURRENT_TIMESTAMP)",
+                        "%s TIMESTAMP)",
                 TABLE_NAME, _ID, _FIRST_SIGN_IN, _SYNC_STATUS, _SYNC_SETTINGS, _LAST_SYNC);
     }
 }

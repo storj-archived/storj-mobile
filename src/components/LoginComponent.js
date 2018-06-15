@@ -7,7 +7,8 @@ import {
     Text,
     ActivityIndicator,
     Keyboard,
-    ScrollView
+    ScrollView,
+    Platform
 } from 'react-native';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -31,7 +32,7 @@ export default class LoginComponent extends Component {
 
 	render() {
 		return(
-			<ScrollView style={ styles.mainContainer } keyboardDismissMode = { "on-drag" } keyboardShouldPersistTaps = { 'always' } >
+			<ScrollView style={ styles.mainContainer } keyboardDismissMode = { Platform.OS === "ios" ? "on-drag" : "none" } keyboardShouldPersistTaps = { 'always' } >
                 <View style={ styles.contentWrapper }>
                     <Text style = { styles.titleBold }>Sign in</Text>
                     <View style = { styles.inputsMargin } >
