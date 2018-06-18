@@ -98,7 +98,9 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'transparent',
         justifyContent: 'center',
-        paddingHorizontal: getWidth(20)
+        alignItems: 'center'
+        // paddingHorizontal: getWidth(5),
+        // paddingVertical: getHeight(10)
     },
     buttonWrapper: {
         position: "absolute",
@@ -118,8 +120,17 @@ const styles = StyleSheet.create({
     },
     image: {
         backgroundColor: "transparent",
-        width: getDeviceWidth() - getWidth(40),
-        height: getDeviceHeight()
+        ...Platform.select({
+            ios: {
+                width: getDeviceWidth(),
+                height: getDeviceHeight() - getHeight(20)
+            },
+            android: {
+                width: getDeviceWidth() - getWidth(40),
+                height: getDeviceHeight()
+            }
+        })
+        
     },
     backgroundWrapper: {
         position: 'absolute',
