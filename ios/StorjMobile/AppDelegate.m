@@ -23,8 +23,6 @@
 {
   NSURL *jsCodeLocation;
   
-  [self requestPermissions];
-  
   //debug
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
   
@@ -43,9 +41,13 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   
-//
-  
   return YES;
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+  [self requestPermissions];
+  NSLog(@"Application did become active");
 }
 
 -(void) requestPermissions
@@ -63,17 +65,30 @@
   [permissionManager requestAllPermissionsWithCompletion:^{
     if(![permissionManager isAllPermissionsGranted])
     {
-      [[[UIAlertView alloc] initWithTitle: @"Attention"
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Attention"
                                   message: @"You have refused permissions. Please enable them in Settings."
                                  delegate: self
-                        cancelButtonTitle: @"OK"
-                        otherButtonTitles: nil] show];
+                        cancelButtonTitle: @"Open settings"
+                        otherButtonTitles: nil];
+      [alert show];
     } else
     {
       [self prepareSync];
     }
   }];
+}
 
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+ if(buttonIndex == 0)
+ {
+   [[UIApplication sharedApplication] openURL: [NSURL URLWithString: UIApplicationOpenSettingsURLString]
+                                      options: @{}
+                            completionHandler: ^(BOOL success)
+    {
+      NSLog(@"SUCCESS: %d", success);
+    }];
+ }
 }
 
 -(void) prepareSync
