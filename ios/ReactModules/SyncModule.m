@@ -404,6 +404,7 @@ RCT_REMAP_METHOD(insertSyncSetting,
                  withResolver: (RCTPromiseResolveBlock) resolver
                  andRejecter: (RCTPromiseRejectBlock) rejecter)
 {
+  [NSUserDefaults.standardUserDefaults setObject:settingsId forKey:@"email"];
   Response *insertResult = [[self settingsRepository] insertById:settingsId];
   
   resolver([insertResult toDictionary]);
