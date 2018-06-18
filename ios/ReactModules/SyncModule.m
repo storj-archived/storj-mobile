@@ -399,7 +399,7 @@ RCT_REMAP_METHOD(listSettings,
   resolver([response toDictionary]);
 }
 
-RCT_REMAP_METHOD(insertSyncSettings,
+RCT_REMAP_METHOD(insertSyncSetting,
                  insertSettingsWithSettingsId: (NSString *) settingsId
                  withResolver: (RCTPromiseResolveBlock) resolver
                  andRejecter: (RCTPromiseRejectBlock) rejecter)
@@ -424,9 +424,9 @@ RCT_REMAP_METHOD(setFirstSignIn, setFirstSighInWithSettingsId: (NSString *) sett
                  withResolver: (RCTPromiseResolveBlock) resolver
                  andRejecter: (RCTPromiseRejectBlock) rejecter)
 {
-  resolver([[self settingsRepository] updateById: settingsId
-                                    syncSettings: syncSettings
-                                      firtSignIn: NO]);
+  resolver([[[self settingsRepository] updateById: settingsId
+                                     syncSettings: syncSettings
+                                       firtSignIn: NO] toDictionary]);
 }
 
 RCT_REMAP_METHOD(changeSyncStatus,
