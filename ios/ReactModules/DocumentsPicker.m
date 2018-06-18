@@ -91,7 +91,7 @@ RCT_REMAP_METHOD(show,
     [coordinator coordinateReadingItemAtURL:url options:NSFileCoordinatorReadingResolvesSymbolicLink error:&error byAccessor:^(NSURL *newURL) {
       NSMutableDictionary* result = [NSMutableDictionary dictionary];
       
-      [result setValue:newURL.absoluteString forKey:@"uri"];
+      [result setValue:newURL.absoluteString forKey:@"path"];
       [result setValue:[newURL lastPathComponent] forKey:@"fileName"];
       
       NSError *attributesError = nil;
@@ -101,10 +101,14 @@ RCT_REMAP_METHOD(show,
       } else {
         NSLog(@"%@", attributesError);
       }
-      _resolveBlock(@{
-                      @"isSuccess":@(YES),
-                      @"result": result ? result : @{},
-                      @"errorMessage":@""});
+      
+      NSArray *arr = @[result];
+      NSDictionary *testResult = @{
+                                   @"isSuccess":@(YES),
+                                   @"result": result ? arr : @[],
+                                   @"errorMessage":@""};
+      NSLog(@"Result: %@", testResult);
+      _resolveBlock(testResult);
 //      callback(@[[NSNull null], result]);
     }];
     

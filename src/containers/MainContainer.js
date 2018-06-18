@@ -383,18 +383,18 @@ class MainContainer extends Component {
         let filePickerResponse = await filePicker.show(type);
         this.props.hideActionBar();
 
-        if(filePickerResponse.isSuccess) {
-            filePickerResponse.result.forEach(file => {
-                this.filePickerResponsePaths.push(file.path);
-            });
-
-            this.props.openSelectBucketScreen(this.getBucketId.bind(this));
-        }
+        console.log("filePickerResponse", filePickerResponse);
+        filePickerResponse.result.forEach(file => {
+            this.filePickerResponsePaths.push(file.path);
+        });
+        console.log("filePickerResponsePaths", this.filePickerResponsePaths);
+        this.props.openSelectBucketScreen(this.getBucketId.bind(this));
     }  
 
     getBucketId(params) {
         if(params.bucketId) {
             this.filePickerResponsePaths.forEach(element => {
+                console.log("------getBucketId----------", this.filePickerResponsePaths);
                 ServiceModule.uploadFile(params.bucketId, element);
             });  
         }
