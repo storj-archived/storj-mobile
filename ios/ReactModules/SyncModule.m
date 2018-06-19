@@ -9,6 +9,7 @@
 #import "SyncModule.h"
 #import "SettingsRepository.h"
 #import "SyncService.h"
+#import "SyncSettings.h"
 
 #define RESOLVER "RCTresolver"
 #define REJECTER "RCTrejecter"
@@ -504,14 +505,23 @@ RCT_REMAP_METHOD(changeSyncStatus,
   }
   
   SettingsModel *settingsModel = [settingDbo toModel];
+  int settings = [settingsModel syncSettings];
+  
   if(value)
   {
-   //schedule new sync
+    settings = settings | (SyncON | SyncPhotos);
+    //scheduleSync
+  }
+  else
+  {
+    settings = ~SyncON & settings;
   }
   
-  resolver([[[self settingsRepository] updateById:settingId
-                                       syncStatus:value] toDictionary]);
+  [settingDbo setSyncStatus: value];
+  [settingDbo setSyncSettings: settings];
   
+  Response *result = [[self settingsRepository] update: [settingDbo toModel]];
+  resolver([result toDictionary]);
 }
 
 //WithResolver: (RCTPromiseResolveBlock) resolver

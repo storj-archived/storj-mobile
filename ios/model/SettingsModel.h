@@ -27,4 +27,5 @@
                       syncSettings: (int) syncSettings
                           lastSync: (NSString *) lastSync;
 
+-(NSDictionary *) toUpdateDictionary;
 @end

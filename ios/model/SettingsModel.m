@@ -61,4 +61,19 @@
   return dictionary;
 }
 
+- (NSDictionary *)toUpdateDictionary
+{
+  NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithCapacity: 4];
+  [dictionary setObject: @(_isFirstSignIn)
+                 forKey: SettingsContract.FIRST_SIGN_IN];
+  [dictionary setObject: @(_syncStatus)
+                 forKey: SettingsContract.SYNC_STATUS];
+  [dictionary setObject: @(_syncSettings)
+                 forKey: SettingsContract.SYNC_SETTINGS];
+  [dictionary setObject: [DictionaryUtils checkAndReturnNSString:_lastSync]
+                 forKey: SettingsContract.LAST_SYNC];
+  
+  return dictionary;
+}
+
 @end

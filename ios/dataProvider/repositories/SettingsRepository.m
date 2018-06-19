@@ -94,7 +94,7 @@ static NSArray *columns;
   return [super executeUpdateAtTable: SettingsContract.TABLE_NAME
                            objectKey: SettingsContract.ID
                             objectId: [model _id]
-                    updateDictionary: [model toDictionary]];
+                    updateDictionary: [model toUpdateDictionary]];
 }
 
 -(Response *) updateById: (NSString *) settingId
@@ -122,12 +122,13 @@ static NSArray *columns;
     return [Response errorResponseWithMessage: @"Model is not valid"];
   }
   
+  
   return [super executeUpdateAtTable: SettingsContract.TABLE_NAME
                            objectKey: SettingsContract.ID
                             objectId: settingId
                     updateDictionary: @{
                                         SettingsContract.ID : settingId,
-                                        SettingsContract.SYNC_SETTINGS : @(syncStatus)
+                                        SettingsContract.SYNC_STATUS : @(syncStatus)
                                         }];
 }
 

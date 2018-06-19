@@ -62,7 +62,7 @@ export default class SettingsComponent extends Component{
                             value = { this.props.onCharging } />
                     </View>
                     <View style = { styles.underline }/>
-                    <View style = { styles.checkboxPhotosContainer }>
+                    {/* <View style = { styles.checkboxPhotosContainer }>
                         <TouchableOpacity 
                                 onPress = { () => { this.props.syncPhotosAction(!this.props.syncPhotos, this.props.getStateObject()); } }
                                 style = { styles.flexRow } >
@@ -77,8 +77,8 @@ export default class SettingsComponent extends Component{
                             <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync photos and videos</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style = { styles.underline }/>
-                    <View style = { styles.checkboxPhotosContainer }>
+                    <View style = { styles.underline }/> */}
+                    {/* <View style = { styles.checkboxPhotosContainer }>
                         <TouchableOpacity 
                             onPress = { () => { this.props.syncDocumentsAction(!this.props.syncDocuments, this.props.getStateObject()); } }
                             style = { styles.flexRow } >
@@ -92,7 +92,7 @@ export default class SettingsComponent extends Component{
                         
                             <Text style = { [ styles.switchText, styles.checkboxTextMargin ] } >Sync documents</Text>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
                     <View style = { styles.explanationContainer }>
                         <Text style = { styles.explanationText }>Security</Text>
                     </View>
