@@ -65,6 +65,7 @@ RCT_REMAP_METHOD(show,
 
 - (void)documentMenu:(UIDocumentMenuViewController *)documentMenu didPickDocumentPicker:(UIDocumentPickerViewController *)documentPicker {
   documentPicker.delegate = self;
+  [documentPicker setAllowsMultipleSelection:YES];
   documentPicker.modalPresentationStyle = UIModalPresentationFormSheet;
   
   UIViewController *rootViewController = [[[[UIApplication sharedApplication]delegate] window] rootViewController];

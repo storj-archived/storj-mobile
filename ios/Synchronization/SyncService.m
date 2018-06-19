@@ -134,9 +134,7 @@ static dispatch_once_t onceToken;
       [Logger log:@"Sync queue array is nil"];
       return;
     }
-    
-    
-    //log to settings start time
+
     NSString *userEmail = [NSUserDefaults.standardUserDefaults stringForKey:@"email"];
     if(!userEmail)
     {

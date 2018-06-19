@@ -27,7 +27,7 @@
     {
       NSLog(@"message: %@", message);
     }
-    fprintf(fp, "\nmessage: '%s'", [message cStringUsingEncoding:kCFStringEncodingUTF8]);
+    fprintf(fp, "\nmessage: '%s'", [message cStringUsingEncoding:NSUTF8StringEncoding]);
     fclose(fp);
   }
   

@@ -11,11 +11,8 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-#import "STFileManager.h"
-#import "PrepareSyncService.h"
-#import "SyncService.h"
-#import "SyncEntryState.h"
 #import "PermissionManager.h"
+#import "SyncScheduler.h"
 
 @implementation AppDelegate
 
@@ -24,10 +21,10 @@
   NSURL *jsCodeLocation;
   
   //debug
-  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+//  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
   
   //Release
-  //jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
   
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"Storj"
@@ -47,17 +44,15 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
   [self requestPermissions];
-  NSLog(@"Application did become active");
 }
 
 -(void) requestPermissions
 {
-  
   PermissionManager *permissionManager = [[PermissionManager  alloc] init];
   
   if([permissionManager isAllPermissionsGranted])
   {
-    [self prepareSync];
+    [self launchScheduler];
     
     return;
   }
@@ -73,7 +68,7 @@
       [alert show];
     } else
     {
-      [self prepareSync];
+      [self launchScheduler];
     }
   }];
 }
@@ -91,12 +86,9 @@
  }
 }
 
--(void) prepareSync
+-(void) launchScheduler
 {
-  NSArray *array = [[[PrepareSyncService alloc] init] prepareSyncQueue];
-  NSLog(@"SyncQueue: %@", array);
-  
-  //  [[[SyncService alloc] init] startSync];
+  [[SyncScheduler sharedInstance] scheduleSync];
 }
 
 @end

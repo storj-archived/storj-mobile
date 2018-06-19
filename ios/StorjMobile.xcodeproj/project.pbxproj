@@ -64,6 +64,8 @@
 		DC6BFB9F20C55FAD00B7E697 /* SyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6BFB9E20C55FAD00B7E697 /* SyncService.m */; };
 		DC70934D20AC3FDB00E889DA /* OpenFileModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DC70934C20AC3FDB00E889DA /* OpenFileModule.m */; };
 		DC76320C2084C6F800B7C64A /* DocumentsPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = DC76320B2084C6F800B7C64A /* DocumentsPicker.m */; };
+		DC8AC22820D8394700FBE8BF /* SyncScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8AC22720D8394700FBE8BF /* SyncScheduler.m */; };
+		DC8AC25320D84E5900FBE8BF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8AC25220D84E5800FBE8BF /* Reachability.m */; };
 		DC914C47206BD55000F0C4FF /* StorjWrapperSingletone.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C46206BD55000F0C4FF /* StorjWrapperSingletone.m */; };
 		DC914C4A206BE5D400F0C4FF /* SyncModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C49206BE5D400F0C4FF /* SyncModule.m */; };
 		DC914C5C206BFBF200F0C4FF /* Sha256Module.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C5B206BFBF200F0C4FF /* Sha256Module.m */; };
@@ -520,6 +522,10 @@
 		DC7632092084C40600B7C64A /* StorjMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = StorjMobile.entitlements; path = StorjMobile/StorjMobile.entitlements; sourceTree = "<group>"; };
 		DC76320A2084C6F800B7C64A /* DocumentsPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DocumentsPicker.h; sourceTree = "<group>"; };
 		DC76320B2084C6F800B7C64A /* DocumentsPicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DocumentsPicker.m; sourceTree = "<group>"; };
+		DC8AC22620D8394700FBE8BF /* SyncScheduler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncScheduler.h; sourceTree = "<group>"; };
+		DC8AC22720D8394700FBE8BF /* SyncScheduler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyncScheduler.m; sourceTree = "<group>"; };
+		DC8AC25120D84E5800FBE8BF /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		DC8AC25220D84E5800FBE8BF /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		DC914C45206BD55000F0C4FF /* StorjWrapperSingletone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorjWrapperSingletone.h; sourceTree = "<group>"; };
 		DC914C46206BD55000F0C4FF /* StorjWrapperSingletone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StorjWrapperSingletone.m; sourceTree = "<group>"; };
 		DC914C48206BE5D400F0C4FF /* SyncModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncModule.h; sourceTree = "<group>"; };
@@ -1107,6 +1113,8 @@
 		DCDF6FE72062BE1F001B2F95 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				DC8AC25120D84E5800FBE8BF /* Reachability.h */,
+				DC8AC25220D84E5800FBE8BF /* Reachability.m */,
 				DC69A24020C55E9100E4BC51 /* STFileManager.h */,
 				DC69A23F20C55E9100E4BC51 /* STFileManager.m */,
 				DCDF6FE82062BE39001B2F95 /* DictionaryUtils.h */,
@@ -1173,6 +1181,8 @@
 				DC6BFB9B20C55F9E00B7E697 /* PrepareSyncService.m */,
 				DC6BFB9D20C55FAD00B7E697 /* SyncService.h */,
 				DC6BFB9E20C55FAD00B7E697 /* SyncService.m */,
+				DC8AC22620D8394700FBE8BF /* SyncScheduler.h */,
+				DC8AC22720D8394700FBE8BF /* SyncScheduler.m */,
 			);
 			path = Synchronization;
 			sourceTree = "<group>";
@@ -1730,6 +1740,8 @@
 				DCDF6FC5205ADA04001B2F95 /* BucketContract.m in Sources */,
 				DCDF6FD1205FE9CC001B2F95 /* BaseRepository.m in Sources */,
 				DC37DF7F20A4B62C00C4FEF8 /* CameraModule.m in Sources */,
+				DC8AC22820D8394700FBE8BF /* SyncScheduler.m in Sources */,
+				DC8AC25320D84E5900FBE8BF /* Reachability.m in Sources */,
 				F389386520C00B9300FB6C76 /* SynchronizationQueueContract.m in Sources */,
 				DCDF6FF92062E223001B2F95 /* UploadFileProgressModel.m in Sources */,
 				DCDF70712064C7A2001B2F95 /* FileRepository.m in Sources */,
