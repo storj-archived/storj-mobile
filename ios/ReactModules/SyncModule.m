@@ -493,7 +493,7 @@ RCT_REMAP_METHOD(changeSyncStatus,
     return;
   }
   
-  [[SyncService sharedInstance] stopSync];
+  [[SyncScheduler sharedInstance] cancelSchedule];
   SettingsDbo *settingDbo = [[self settingsRepository] getById: settingId];
   
   if(!settingDbo)

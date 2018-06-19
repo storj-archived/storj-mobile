@@ -16,6 +16,8 @@
 
 #import "StorjBackgroundServices.h"
 #import "EventNames.h"
+#import "SyncEntryState.h"
+#import "StorjWrapperSingletone.h"
 
 @import Photos;
 
@@ -254,9 +256,38 @@ static dispatch_once_t onceToken;
   return videoData;
 }
 
+-(dispatch_block_t) getStopSyncTask
+{
+  dispatch_block_t stopSyncTask = ^
+  {
+    NSLog(@"starting sync");
+    NSArray *syncQueueArray = [[self syncRepository] getAll];
+    if(!syncQueueArray || syncQueueArray.count == 0)
+    {
+      //error handling;
+      [Logger log:@"Sync queue array is nil"];
+      return;
+    }
+    
+    for (SyncQueueEntryModel *syncModel in syncQueueArray)
+    {
+      if(syncModel.status == PROCESSING)
+      {
+        [[[StorjWrapperSingletone sharedStorjWrapper] storjWrapper] cancelUpload: syncModel.fileHandle];
+      }
+      else if (syncModel.status == QUEUED)
+      {
+        [self removeFileFromSyncQueue: syncModel._id];
+      }
+    }
+  };
+  
+  return stopSyncTask;
+}
+
 -(void) stopSync
 {
-  //uploadFileRep getCurren upload
+  dispatch_async(workerQueue, [self getStopSyncTask]);
 }
 
 -(void) clean

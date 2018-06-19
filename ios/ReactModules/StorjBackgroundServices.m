@@ -53,6 +53,7 @@
 #import "SyncService.h"
 #import "SyncQueueRepository.h"
 #import "FileUtils.h"
+#import "SyncScheduler.h"
 
 static StorjBackgroundServices *sharedInstance = nil;
 
@@ -437,6 +438,11 @@ RCT_REMAP_METHOD(downloadFile,
 RCT_REMAP_METHOD(startSync, startSync)
 {
   [[SyncService sharedInstance] startSync];
+}
+
+RCT_REMAP_METHOD(cancelSync, cancelSync)
+{
+  [[SyncService sharedInstance] stopSync];
 }
 
 RCT_REMAP_METHOD(removeFileFromSyncQueue, removeFileFromSyncQueueWithId: (int) syncEntryId)

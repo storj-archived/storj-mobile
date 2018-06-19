@@ -192,13 +192,45 @@ static NSTimer *startSyncTimer;
 -(void) setStartSyncTimer
 {
   dispatch_async(dispatch_get_main_queue(), ^{
-    startSyncTimer = [NSTimer scheduledTimerWithTimeInterval: (60 * 1)
+    startSyncTimer = [NSTimer scheduledTimerWithTimeInterval: (60 * 5)
                                                            target: self
                                                          selector: @selector(scheduleSync)
                                                          userInfo: nil
                                                           repeats: NO];
     [Logger log:@"Synchronization start scheduled"];
   });
+}
+
+-(void) cancelStartSyncTimer
+{
+  if(startSyncTimer)
+  {
+    if([startSyncTimer isValid])
+    {
+      [startSyncTimer invalidate];
+    }
+  }
+  startSyncTimer = nil;
+}
+
+-(void) cancelRescheduleSyncTimer
+{
+  if(rescheduleSyncTimer)
+  {
+    if([rescheduleSyncTimer isValid])
+    {
+      [rescheduleSyncTimer invalidate];
+    }
+  }
+  rescheduleSyncTimer = nil;
+}
+
+-(void) cancelSchedule
+{
+  [[SyncService sharedInstance] stopSync];
+  
+  [self cancelStartSyncTimer];
+  [self cancelRescheduleSyncTimer];
 }
 
 -(BOOL) isOnWiFi
