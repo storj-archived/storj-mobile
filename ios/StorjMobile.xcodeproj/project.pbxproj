@@ -53,46 +53,43 @@
 		D68D4C0D19FC44AFA409AB73 /* Montserrat-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEF7D3FD619949DEBB4F5660 /* Montserrat-SemiBoldItalic.ttf */; };
 		DC2841E6204972FD0093183F /* StorjIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC2841E020496AEA0093183F /* StorjIOS.framework */; };
 		DC2841E7204972FD0093183F /* StorjIOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DC2841E020496AEA0093183F /* StorjIOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DC37DF7F20A4B62C00C4FEF8 /* CameraModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DC37DF7E20A4B62C00C4FEF8 /* CameraModule.m */; };
+		DC37DF7F20A4B62C00C4FEF8 /* STCameraModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DC37DF7E20A4B62C00C4FEF8 /* STCameraModule.m */; };
 		DC4804E520C5CF4E009CEDB7 /* STFileNamingFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = DC4804E420C5CF4E009CEDB7 /* STFileNamingFormatter.m */; };
 		DC69A17120C02E2E00E4BC51 /* SettingsContract.m in Sources */ = {isa = PBXBuildFile; fileRef = DC69A17020C02E2E00E4BC51 /* SettingsContract.m */; };
 		DC69A19C20C031A500E4BC51 /* SettingsDbo.m in Sources */ = {isa = PBXBuildFile; fileRef = DC69A19B20C031A500E4BC51 /* SettingsDbo.m */; };
-		DC69A19F20C037EB00E4BC51 /* SettingsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC69A19E20C037EB00E4BC51 /* SettingsModel.m */; };
-		DC69A1CF20C0637500E4BC51 /* SettingsRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = DC69A1CE20C0637500E4BC51 /* SettingsRepository.m */; };
+		DC69A19F20C037EB00E4BC51 /* STSettingsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC69A19E20C037EB00E4BC51 /* STSettingsModel.m */; };
+		DC69A1CF20C0637500E4BC51 /* STSettingsRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = DC69A1CE20C0637500E4BC51 /* STSettingsRepository.m */; };
 		DC69A24120C55E9100E4BC51 /* STFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DC69A23F20C55E9100E4BC51 /* STFileManager.m */; };
-		DC6BFB9C20C55F9E00B7E697 /* PrepareSyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6BFB9B20C55F9E00B7E697 /* PrepareSyncService.m */; };
-		DC6BFB9F20C55FAD00B7E697 /* SyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6BFB9E20C55FAD00B7E697 /* SyncService.m */; };
-		DC70934D20AC3FDB00E889DA /* OpenFileModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DC70934C20AC3FDB00E889DA /* OpenFileModule.m */; };
-		DC76320C2084C6F800B7C64A /* DocumentsPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = DC76320B2084C6F800B7C64A /* DocumentsPicker.m */; };
-		DC8AC22820D8394700FBE8BF /* SyncScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8AC22720D8394700FBE8BF /* SyncScheduler.m */; };
+		DC6BFB9C20C55F9E00B7E697 /* STPrepareSyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6BFB9B20C55F9E00B7E697 /* STPrepareSyncService.m */; };
+		DC6BFB9F20C55FAD00B7E697 /* STSyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = DC6BFB9E20C55FAD00B7E697 /* STSyncService.m */; };
+		DC70934D20AC3FDB00E889DA /* STOpenFileModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DC70934C20AC3FDB00E889DA /* STOpenFileModule.m */; };
+		DC76320C2084C6F800B7C64A /* STDocumentsPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = DC76320B2084C6F800B7C64A /* STDocumentsPicker.m */; };
+		DC8AC22820D8394700FBE8BF /* STSyncScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8AC22720D8394700FBE8BF /* STSyncScheduler.m */; };
 		DC8AC25320D84E5900FBE8BF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8AC25220D84E5800FBE8BF /* Reachability.m */; };
+		DC8AC25620D932A500FBE8BF /* STFileDeleteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DC8AC25520D932A500FBE8BF /* STFileDeleteModel.m */; };
 		DC914C47206BD55000F0C4FF /* StorjWrapperSingletone.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C46206BD55000F0C4FF /* StorjWrapperSingletone.m */; };
-		DC914C4A206BE5D400F0C4FF /* SyncModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C49206BE5D400F0C4FF /* SyncModule.m */; };
+		DC914C4A206BE5D400F0C4FF /* STSyncModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C49206BE5D400F0C4FF /* STSyncModule.m */; };
 		DC914C5C206BFBF200F0C4FF /* Sha256Module.m in Sources */ = {isa = PBXBuildFile; fileRef = DC914C5B206BFBF200F0C4FF /* Sha256Module.m */; };
 		DCAC417220C9409500D39053 /* STAssetFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCAC417120C9409500D39053 /* STAssetFileModel.m */; };
-		DCAC421520CAEC4F00D39053 /* PermissionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCAC421420CAEC4F00D39053 /* PermissionManager.m */; };
-		DCACD444201FDF630050921B /* StorjLibIos.m in Sources */ = {isa = PBXBuildFile; fileRef = DCACD443201FDF630050921B /* StorjLibIos.m */; };
+		DCAC421520CAEC4F00D39053 /* STPermissionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DCAC421420CAEC4F00D39053 /* STPermissionManager.m */; };
+		DCACD444201FDF630050921B /* STStorjLib.m in Sources */ = {isa = PBXBuildFile; fileRef = DCACD443201FDF630050921B /* STStorjLib.m */; };
 		DCBD1A5020B2F07E005B30C3 /* STUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBD1A4F20B2F07E005B30C3 /* STUploader.m */; };
 		DCBF1F2E20BD786500240E8B /* STFileUploadCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBF1F2D20BD786500240E8B /* STFileUploadCallback.m */; };
 		DCBF1F4320BDBADA00240E8B /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = DCBF1F4220BDBADA00240E8B /* Logger.m */; };
-		DCC368832056B6D4004813CD /* DatabaseFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC368822056B6D4004813CD /* DatabaseFactory.m */; };
-		DCCD2FD520459F610032D3F5 /* FilePickerLib.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCD2FD420459F600032D3F5 /* FilePickerLib.m */; };
+		DCC368832056B6D4004813CD /* STDatabaseFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = DCC368822056B6D4004813CD /* STDatabaseFactory.m */; };
+		DCCD2FD520459F610032D3F5 /* STFilePickerLib.m in Sources */ = {isa = PBXBuildFile; fileRef = DCCD2FD420459F600032D3F5 /* STFilePickerLib.m */; };
 		DCDF6FC5205ADA04001B2F95 /* BucketContract.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FC4205ADA04001B2F95 /* BucketContract.m */; };
 		DCDF6FC8205AE94C001B2F95 /* FileContract.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FC7205AE94C001B2F95 /* FileContract.m */; };
 		DCDF6FCB205AED17001B2F95 /* UploadFileContract.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FCA205AED17001B2F95 /* UploadFileContract.m */; };
 		DCDF6FD1205FE9CC001B2F95 /* BaseRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FD0205FE9CC001B2F95 /* BaseRepository.m */; };
 		DCDF6FD9205FF0A7001B2F95 /* Response.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FD8205FF0A7001B2F95 /* Response.m */; };
-		DCDF6FDC205FF88A001B2F95 /* Error.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FDB205FF88A001B2F95 /* Error.m */; };
+		DCDF6FDC205FF88A001B2F95 /* STError.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FDB205FF88A001B2F95 /* STError.m */; };
 		DCDF6FDF2060073F001B2F95 /* SingleResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FDE2060073F001B2F95 /* SingleResponse.m */; };
 		DCDF6FE2206022EC001B2F95 /* ListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FE1206022EC001B2F95 /* ListResponse.m */; };
-		DCDF6FE620603015001B2F95 /* BucketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FE520603015001B2F95 /* BucketModel.m */; };
+		DCDF6FE620603015001B2F95 /* STBucketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FE520603015001B2F95 /* STBucketModel.m */; };
 		DCDF6FEA2062BE39001B2F95 /* DictionaryUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FE92062BE39001B2F95 /* DictionaryUtils.m */; };
-		DCDF6FED2062C2AD001B2F95 /* DownloadFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FEC2062C2AD001B2F95 /* DownloadFileModel.m */; };
-		DCDF6FF02062CC74001B2F95 /* DownloadFileProgressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FEF2062CC74001B2F95 /* DownloadFileProgressModel.m */; };
-		DCDF6FF32062D423001B2F95 /* FileDeleteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FF22062D423001B2F95 /* FileDeleteModel.m */; };
-		DCDF6FF62062D5C4001B2F95 /* FileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FF52062D5C4001B2F95 /* FileModel.m */; };
-		DCDF6FF92062E223001B2F95 /* UploadFileProgressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FF82062E223001B2F95 /* UploadFileProgressModel.m */; };
-		DCDF6FFC20631C73001B2F95 /* UploadFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FFB20631C73001B2F95 /* UploadFileModel.m */; };
+		DCDF6FF62062D5C4001B2F95 /* STFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FF52062D5C4001B2F95 /* STFileModel.m */; };
+		DCDF6FFC20631C73001B2F95 /* STUploadFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF6FFB20631C73001B2F95 /* STUploadFileModel.m */; };
 		DCDF705D20643850001B2F95 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF70512064384F001B2F95 /* FMDatabase.m */; };
 		DCDF705E20643850001B2F95 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF70532064384F001B2F95 /* FMDatabasePool.m */; };
 		DCDF705F20643850001B2F95 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF705920643850001B2F95 /* FMDatabaseAdditions.m */; };
@@ -102,24 +99,24 @@
 		DCDF70652064732C001B2F95 /* BucketDbo.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF70642064732C001B2F95 /* BucketDbo.m */; };
 		DCDF706820649821001B2F95 /* FileDbo.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF706720649821001B2F95 /* FileDbo.m */; };
 		DCDF706B2064A15A001B2F95 /* UploadFileDbo.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF706A2064A15A001B2F95 /* UploadFileDbo.m */; };
-		DCDF706E2064ACEC001B2F95 /* BucketRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF706D2064ACEC001B2F95 /* BucketRepository.m */; };
-		DCDF70712064C7A2001B2F95 /* FileRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF70702064C7A2001B2F95 /* FileRepository.m */; };
-		DCDF70742064D348001B2F95 /* UploadFileRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF70732064D348001B2F95 /* UploadFileRepository.m */; };
+		DCDF706E2064ACEC001B2F95 /* STBucketRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF706D2064ACEC001B2F95 /* STBucketRepository.m */; };
+		DCDF70712064C7A2001B2F95 /* STFileRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF70702064C7A2001B2F95 /* STFileRepository.m */; };
+		DCDF70742064D348001B2F95 /* STUploadFileRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF70732064D348001B2F95 /* STUploadFileRepository.m */; };
 		DCDF7077206895DF001B2F95 /* MethodHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF7076206895DF001B2F95 /* MethodHandler.m */; };
-		DCDF707A2068B337001B2F95 /* StorjBackgroundServices.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF70792068B337001B2F95 /* StorjBackgroundServices.m */; };
+		DCDF707A2068B337001B2F95 /* STStorjBackgroundServices.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDF70792068B337001B2F95 /* STStorjBackgroundServices.m */; };
 		DCEB072820BEAE9800D50758 /* STDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEB072720BEAE9800D50758 /* STDownloader.m */; };
 		DCEB075420BEAFBC00D50758 /* STFileDownloadCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEB075320BEAFBC00D50758 /* STFileDownloadCallback.m */; };
-		DCEB535020697A55006B0624 /* EventNames.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEB534F20697A55006B0624 /* EventNames.m */; };
-		DCEB539A206BA643006B0624 /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEB5399206BA643006B0624 /* FileUtils.m */; };
-		DCFA7519209110FA00EFA765 /* ThumbnailProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = DCFA7518209110FA00EFA765 /* ThumbnailProcessor.m */; };
+		DCEB535020697A55006B0624 /* STEventNames.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEB534F20697A55006B0624 /* STEventNames.m */; };
+		DCEB539A206BA643006B0624 /* STFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEB5399206BA643006B0624 /* STFileUtils.m */; };
+		DCFA7519209110FA00EFA765 /* STThumbnailProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = DCFA7518209110FA00EFA765 /* STThumbnailProcessor.m */; };
 		DDD138767961421DB8C87363 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8A51459F91D3420BBC6E2C58 /* Montserrat-ExtraLight.ttf */; };
 		E1B69957B9F74BD08F47F764 /* Montserrat-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA3A41C878E0424E92862DE9 /* Montserrat-ExtraLightItalic.ttf */; };
 		E6A2862F2CF54CA4A398C3EB /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6614E0B481304028A1D06F8A /* Montserrat-Black.ttf */; };
 		E897D74594BA49939DB05574 /* Montserrat-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C778753B10440D3B23670E2 /* Montserrat-LightItalic.ttf */; };
 		F355E24520C025AB007DAEE5 /* SyncQueueEntryDbo.m in Sources */ = {isa = PBXBuildFile; fileRef = F355E24420C025AB007DAEE5 /* SyncQueueEntryDbo.m */; };
-		F355E24820C03102007DAEE5 /* SyncQueueEntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F355E24720C03102007DAEE5 /* SyncQueueEntryModel.m */; };
+		F355E24820C03102007DAEE5 /* STSyncQueueEntryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F355E24720C03102007DAEE5 /* STSyncQueueEntryModel.m */; };
 		F355E24B20C04067007DAEE5 /* SyncQueueRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = F355E24A20C04067007DAEE5 /* SyncQueueRepository.m */; };
-		F355E29520C1783C007DAEE5 /* UploadService.m in Sources */ = {isa = PBXBuildFile; fileRef = F355E29420C1783C007DAEE5 /* UploadService.m */; };
+		F355E29520C1783C007DAEE5 /* STUploadService.m in Sources */ = {isa = PBXBuildFile; fileRef = F355E29420C1783C007DAEE5 /* STUploadService.m */; };
 		F389386520C00B9300FB6C76 /* SynchronizationQueueContract.m in Sources */ = {isa = PBXBuildFile; fileRef = F389386420C00B9300FB6C76 /* SynchronizationQueueContract.m */; };
 /* End PBXBuildFile section */
 
@@ -498,8 +495,8 @@
 		CC74FFF11A4D422EA4F02E08 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Bold.ttf"; path = "../src/fonts/Montserrat/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		D57884CA17224EC589F7D3FA /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../src/fonts/OpenSans/OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		DC0C23B820D044A3009D2511 /* SyncSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncSettings.h; sourceTree = "<group>"; };
-		DC37DF7D20A4B62C00C4FEF8 /* CameraModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraModule.h; sourceTree = "<group>"; };
-		DC37DF7E20A4B62C00C4FEF8 /* CameraModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraModule.m; sourceTree = "<group>"; };
+		DC37DF7D20A4B62C00C4FEF8 /* STCameraModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STCameraModule.h; sourceTree = "<group>"; };
+		DC37DF7E20A4B62C00C4FEF8 /* STCameraModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STCameraModule.m; sourceTree = "<group>"; };
 		DC4804E320C5CF4E009CEDB7 /* STFileNamingFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STFileNamingFormatter.h; sourceTree = "<group>"; };
 		DC4804E420C5CF4E009CEDB7 /* STFileNamingFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STFileNamingFormatter.m; sourceTree = "<group>"; };
 		DC68D1902044264000D8D05D /* StorjIOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StorjIOS.xcodeproj; path = "../../iOS-libstorj/StorjIOS/StorjIOS.xcodeproj"; sourceTree = "<group>"; };
@@ -507,47 +504,49 @@
 		DC69A17020C02E2E00E4BC51 /* SettingsContract.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsContract.m; sourceTree = "<group>"; };
 		DC69A19A20C031A500E4BC51 /* SettingsDbo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsDbo.h; sourceTree = "<group>"; };
 		DC69A19B20C031A500E4BC51 /* SettingsDbo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsDbo.m; sourceTree = "<group>"; };
-		DC69A19D20C037EB00E4BC51 /* SettingsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsModel.h; sourceTree = "<group>"; };
-		DC69A19E20C037EB00E4BC51 /* SettingsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsModel.m; sourceTree = "<group>"; };
-		DC69A1CD20C0637500E4BC51 /* SettingsRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsRepository.h; sourceTree = "<group>"; };
-		DC69A1CE20C0637500E4BC51 /* SettingsRepository.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsRepository.m; sourceTree = "<group>"; };
+		DC69A19D20C037EB00E4BC51 /* STSettingsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSettingsModel.h; sourceTree = "<group>"; };
+		DC69A19E20C037EB00E4BC51 /* STSettingsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSettingsModel.m; sourceTree = "<group>"; };
+		DC69A1CD20C0637500E4BC51 /* STSettingsRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSettingsRepository.h; sourceTree = "<group>"; };
+		DC69A1CE20C0637500E4BC51 /* STSettingsRepository.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSettingsRepository.m; sourceTree = "<group>"; };
 		DC69A23F20C55E9100E4BC51 /* STFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFileManager.m; sourceTree = "<group>"; };
 		DC69A24020C55E9100E4BC51 /* STFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFileManager.h; sourceTree = "<group>"; };
-		DC6BFB9A20C55F9E00B7E697 /* PrepareSyncService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrepareSyncService.h; sourceTree = "<group>"; };
-		DC6BFB9B20C55F9E00B7E697 /* PrepareSyncService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrepareSyncService.m; sourceTree = "<group>"; };
-		DC6BFB9D20C55FAD00B7E697 /* SyncService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncService.h; sourceTree = "<group>"; };
-		DC6BFB9E20C55FAD00B7E697 /* SyncService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyncService.m; sourceTree = "<group>"; };
-		DC70934B20AC3FDB00E889DA /* OpenFileModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenFileModule.h; sourceTree = "<group>"; };
-		DC70934C20AC3FDB00E889DA /* OpenFileModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenFileModule.m; sourceTree = "<group>"; };
+		DC6BFB9A20C55F9E00B7E697 /* STPrepareSyncService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STPrepareSyncService.h; sourceTree = "<group>"; };
+		DC6BFB9B20C55F9E00B7E697 /* STPrepareSyncService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STPrepareSyncService.m; sourceTree = "<group>"; };
+		DC6BFB9D20C55FAD00B7E697 /* STSyncService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSyncService.h; sourceTree = "<group>"; };
+		DC6BFB9E20C55FAD00B7E697 /* STSyncService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSyncService.m; sourceTree = "<group>"; };
+		DC70934B20AC3FDB00E889DA /* STOpenFileModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STOpenFileModule.h; sourceTree = "<group>"; };
+		DC70934C20AC3FDB00E889DA /* STOpenFileModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STOpenFileModule.m; sourceTree = "<group>"; };
 		DC7632092084C40600B7C64A /* StorjMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = StorjMobile.entitlements; path = StorjMobile/StorjMobile.entitlements; sourceTree = "<group>"; };
-		DC76320A2084C6F800B7C64A /* DocumentsPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DocumentsPicker.h; sourceTree = "<group>"; };
-		DC76320B2084C6F800B7C64A /* DocumentsPicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DocumentsPicker.m; sourceTree = "<group>"; };
-		DC8AC22620D8394700FBE8BF /* SyncScheduler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncScheduler.h; sourceTree = "<group>"; };
-		DC8AC22720D8394700FBE8BF /* SyncScheduler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyncScheduler.m; sourceTree = "<group>"; };
+		DC76320A2084C6F800B7C64A /* STDocumentsPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STDocumentsPicker.h; sourceTree = "<group>"; };
+		DC76320B2084C6F800B7C64A /* STDocumentsPicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STDocumentsPicker.m; sourceTree = "<group>"; };
+		DC8AC22620D8394700FBE8BF /* STSyncScheduler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSyncScheduler.h; sourceTree = "<group>"; };
+		DC8AC22720D8394700FBE8BF /* STSyncScheduler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSyncScheduler.m; sourceTree = "<group>"; };
 		DC8AC25120D84E5800FBE8BF /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		DC8AC25220D84E5800FBE8BF /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		DC8AC25420D932A400FBE8BF /* STFileDeleteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFileDeleteModel.h; sourceTree = "<group>"; };
+		DC8AC25520D932A500FBE8BF /* STFileDeleteModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFileDeleteModel.m; sourceTree = "<group>"; };
 		DC914C45206BD55000F0C4FF /* StorjWrapperSingletone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorjWrapperSingletone.h; sourceTree = "<group>"; };
 		DC914C46206BD55000F0C4FF /* StorjWrapperSingletone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StorjWrapperSingletone.m; sourceTree = "<group>"; };
-		DC914C48206BE5D400F0C4FF /* SyncModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncModule.h; sourceTree = "<group>"; };
-		DC914C49206BE5D400F0C4FF /* SyncModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyncModule.m; sourceTree = "<group>"; };
+		DC914C48206BE5D400F0C4FF /* STSyncModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSyncModule.h; sourceTree = "<group>"; };
+		DC914C49206BE5D400F0C4FF /* STSyncModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSyncModule.m; sourceTree = "<group>"; };
 		DC914C5A206BFBF200F0C4FF /* Sha256Module.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sha256Module.h; sourceTree = "<group>"; };
 		DC914C5B206BFBF200F0C4FF /* Sha256Module.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Sha256Module.m; sourceTree = "<group>"; };
 		DCAC417020C9409500D39053 /* STAssetFileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STAssetFileModel.h; sourceTree = "<group>"; };
 		DCAC417120C9409500D39053 /* STAssetFileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STAssetFileModel.m; sourceTree = "<group>"; };
-		DCAC421320CAEC4F00D39053 /* PermissionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PermissionManager.h; sourceTree = "<group>"; };
-		DCAC421420CAEC4F00D39053 /* PermissionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PermissionManager.m; sourceTree = "<group>"; };
-		DCACD442201FDF630050921B /* StorjLibIos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorjLibIos.h; sourceTree = "<group>"; };
-		DCACD443201FDF630050921B /* StorjLibIos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorjLibIos.m; sourceTree = "<group>"; };
+		DCAC421320CAEC4F00D39053 /* STPermissionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STPermissionManager.h; sourceTree = "<group>"; };
+		DCAC421420CAEC4F00D39053 /* STPermissionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STPermissionManager.m; sourceTree = "<group>"; };
+		DCACD442201FDF630050921B /* STStorjLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STStorjLib.h; sourceTree = "<group>"; };
+		DCACD443201FDF630050921B /* STStorjLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STStorjLib.m; sourceTree = "<group>"; };
 		DCBD1A4E20B2F07E005B30C3 /* STUploader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STUploader.h; sourceTree = "<group>"; };
 		DCBD1A4F20B2F07E005B30C3 /* STUploader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STUploader.m; sourceTree = "<group>"; };
 		DCBF1F2C20BD786500240E8B /* STFileUploadCallback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STFileUploadCallback.h; sourceTree = "<group>"; };
 		DCBF1F2D20BD786500240E8B /* STFileUploadCallback.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STFileUploadCallback.m; sourceTree = "<group>"; };
 		DCBF1F4120BDBADA00240E8B /* Logger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 		DCBF1F4220BDBADA00240E8B /* Logger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Logger.m; sourceTree = "<group>"; };
-		DCC368812056B6D4004813CD /* DatabaseFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseFactory.h; sourceTree = "<group>"; };
-		DCC368822056B6D4004813CD /* DatabaseFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatabaseFactory.m; sourceTree = "<group>"; };
-		DCCD2FD320459F600032D3F5 /* FilePickerLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilePickerLib.h; sourceTree = "<group>"; };
-		DCCD2FD420459F600032D3F5 /* FilePickerLib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilePickerLib.m; sourceTree = "<group>"; };
+		DCC368812056B6D4004813CD /* STDatabaseFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STDatabaseFactory.h; sourceTree = "<group>"; };
+		DCC368822056B6D4004813CD /* STDatabaseFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STDatabaseFactory.m; sourceTree = "<group>"; };
+		DCCD2FD320459F600032D3F5 /* STFilePickerLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STFilePickerLib.h; sourceTree = "<group>"; };
+		DCCD2FD420459F600032D3F5 /* STFilePickerLib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STFilePickerLib.m; sourceTree = "<group>"; };
 		DCDF6FC3205ADA04001B2F95 /* BucketContract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BucketContract.h; sourceTree = "<group>"; };
 		DCDF6FC4205ADA04001B2F95 /* BucketContract.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BucketContract.m; sourceTree = "<group>"; };
 		DCDF6FC6205AE94C001B2F95 /* FileContract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileContract.h; sourceTree = "<group>"; };
@@ -560,28 +559,20 @@
 		DCDF6FD4205FF083001B2F95 /* IResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IResponse.h; sourceTree = "<group>"; };
 		DCDF6FD7205FF0A7001B2F95 /* Response.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Response.h; sourceTree = "<group>"; };
 		DCDF6FD8205FF0A7001B2F95 /* Response.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Response.m; sourceTree = "<group>"; };
-		DCDF6FDA205FF88A001B2F95 /* Error.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Error.h; sourceTree = "<group>"; };
-		DCDF6FDB205FF88A001B2F95 /* Error.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Error.m; sourceTree = "<group>"; };
+		DCDF6FDA205FF88A001B2F95 /* STError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STError.h; sourceTree = "<group>"; };
+		DCDF6FDB205FF88A001B2F95 /* STError.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STError.m; sourceTree = "<group>"; };
 		DCDF6FDD2060073F001B2F95 /* SingleResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleResponse.h; sourceTree = "<group>"; };
 		DCDF6FDE2060073F001B2F95 /* SingleResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingleResponse.m; sourceTree = "<group>"; };
 		DCDF6FE0206022EC001B2F95 /* ListResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListResponse.h; sourceTree = "<group>"; };
 		DCDF6FE1206022EC001B2F95 /* ListResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListResponse.m; sourceTree = "<group>"; };
-		DCDF6FE420603015001B2F95 /* BucketModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BucketModel.h; sourceTree = "<group>"; };
-		DCDF6FE520603015001B2F95 /* BucketModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BucketModel.m; sourceTree = "<group>"; };
+		DCDF6FE420603015001B2F95 /* STBucketModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STBucketModel.h; sourceTree = "<group>"; };
+		DCDF6FE520603015001B2F95 /* STBucketModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STBucketModel.m; sourceTree = "<group>"; };
 		DCDF6FE82062BE39001B2F95 /* DictionaryUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DictionaryUtils.h; sourceTree = "<group>"; };
 		DCDF6FE92062BE39001B2F95 /* DictionaryUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DictionaryUtils.m; sourceTree = "<group>"; };
-		DCDF6FEB2062C2AD001B2F95 /* DownloadFileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadFileModel.h; sourceTree = "<group>"; };
-		DCDF6FEC2062C2AD001B2F95 /* DownloadFileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadFileModel.m; sourceTree = "<group>"; };
-		DCDF6FEE2062CC74001B2F95 /* DownloadFileProgressModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadFileProgressModel.h; sourceTree = "<group>"; };
-		DCDF6FEF2062CC74001B2F95 /* DownloadFileProgressModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadFileProgressModel.m; sourceTree = "<group>"; };
-		DCDF6FF12062D423001B2F95 /* FileDeleteModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileDeleteModel.h; sourceTree = "<group>"; };
-		DCDF6FF22062D423001B2F95 /* FileDeleteModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileDeleteModel.m; sourceTree = "<group>"; };
-		DCDF6FF42062D5C4001B2F95 /* FileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileModel.h; sourceTree = "<group>"; };
-		DCDF6FF52062D5C4001B2F95 /* FileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileModel.m; sourceTree = "<group>"; };
-		DCDF6FF72062E223001B2F95 /* UploadFileProgressModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadFileProgressModel.h; sourceTree = "<group>"; };
-		DCDF6FF82062E223001B2F95 /* UploadFileProgressModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadFileProgressModel.m; sourceTree = "<group>"; };
-		DCDF6FFA20631C73001B2F95 /* UploadFileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadFileModel.h; sourceTree = "<group>"; };
-		DCDF6FFB20631C73001B2F95 /* UploadFileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadFileModel.m; sourceTree = "<group>"; };
+		DCDF6FF42062D5C4001B2F95 /* STFileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STFileModel.h; sourceTree = "<group>"; };
+		DCDF6FF52062D5C4001B2F95 /* STFileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STFileModel.m; sourceTree = "<group>"; };
+		DCDF6FFA20631C73001B2F95 /* STUploadFileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STUploadFileModel.h; sourceTree = "<group>"; };
+		DCDF6FFB20631C73001B2F95 /* STUploadFileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STUploadFileModel.m; sourceTree = "<group>"; };
 		DCDF70512064384F001B2F95 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		DCDF70522064384F001B2F95 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		DCDF70532064384F001B2F95 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
@@ -600,26 +591,26 @@
 		DCDF706720649821001B2F95 /* FileDbo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileDbo.m; sourceTree = "<group>"; };
 		DCDF70692064A15A001B2F95 /* UploadFileDbo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadFileDbo.h; sourceTree = "<group>"; };
 		DCDF706A2064A15A001B2F95 /* UploadFileDbo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadFileDbo.m; sourceTree = "<group>"; };
-		DCDF706C2064ACEC001B2F95 /* BucketRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BucketRepository.h; sourceTree = "<group>"; };
-		DCDF706D2064ACEC001B2F95 /* BucketRepository.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BucketRepository.m; sourceTree = "<group>"; };
-		DCDF706F2064C7A2001B2F95 /* FileRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileRepository.h; sourceTree = "<group>"; };
-		DCDF70702064C7A2001B2F95 /* FileRepository.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileRepository.m; sourceTree = "<group>"; };
-		DCDF70722064D348001B2F95 /* UploadFileRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadFileRepository.h; sourceTree = "<group>"; };
-		DCDF70732064D348001B2F95 /* UploadFileRepository.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadFileRepository.m; sourceTree = "<group>"; };
+		DCDF706C2064ACEC001B2F95 /* STBucketRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STBucketRepository.h; sourceTree = "<group>"; };
+		DCDF706D2064ACEC001B2F95 /* STBucketRepository.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STBucketRepository.m; sourceTree = "<group>"; };
+		DCDF706F2064C7A2001B2F95 /* STFileRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STFileRepository.h; sourceTree = "<group>"; };
+		DCDF70702064C7A2001B2F95 /* STFileRepository.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STFileRepository.m; sourceTree = "<group>"; };
+		DCDF70722064D348001B2F95 /* STUploadFileRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STUploadFileRepository.h; sourceTree = "<group>"; };
+		DCDF70732064D348001B2F95 /* STUploadFileRepository.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STUploadFileRepository.m; sourceTree = "<group>"; };
 		DCDF7075206895DF001B2F95 /* MethodHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MethodHandler.h; sourceTree = "<group>"; };
 		DCDF7076206895DF001B2F95 /* MethodHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MethodHandler.m; sourceTree = "<group>"; };
-		DCDF70782068B337001B2F95 /* StorjBackgroundServices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorjBackgroundServices.h; sourceTree = "<group>"; };
-		DCDF70792068B337001B2F95 /* StorjBackgroundServices.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StorjBackgroundServices.m; sourceTree = "<group>"; };
+		DCDF70782068B337001B2F95 /* STStorjBackgroundServices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STStorjBackgroundServices.h; sourceTree = "<group>"; };
+		DCDF70792068B337001B2F95 /* STStorjBackgroundServices.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STStorjBackgroundServices.m; sourceTree = "<group>"; };
 		DCEB072620BEAE9800D50758 /* STDownloader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STDownloader.h; sourceTree = "<group>"; };
 		DCEB072720BEAE9800D50758 /* STDownloader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STDownloader.m; sourceTree = "<group>"; };
 		DCEB075220BEAFBC00D50758 /* STFileDownloadCallback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STFileDownloadCallback.h; sourceTree = "<group>"; };
 		DCEB075320BEAFBC00D50758 /* STFileDownloadCallback.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STFileDownloadCallback.m; sourceTree = "<group>"; };
-		DCEB534E20697A55006B0624 /* EventNames.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventNames.h; sourceTree = "<group>"; };
-		DCEB534F20697A55006B0624 /* EventNames.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventNames.m; sourceTree = "<group>"; };
-		DCEB5398206BA643006B0624 /* FileUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileUtils.h; sourceTree = "<group>"; };
-		DCEB5399206BA643006B0624 /* FileUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileUtils.m; sourceTree = "<group>"; };
-		DCFA7517209110FA00EFA765 /* ThumbnailProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThumbnailProcessor.h; sourceTree = "<group>"; };
-		DCFA7518209110FA00EFA765 /* ThumbnailProcessor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThumbnailProcessor.m; sourceTree = "<group>"; };
+		DCEB534E20697A55006B0624 /* STEventNames.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STEventNames.h; sourceTree = "<group>"; };
+		DCEB534F20697A55006B0624 /* STEventNames.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STEventNames.m; sourceTree = "<group>"; };
+		DCEB5398206BA643006B0624 /* STFileUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STFileUtils.h; sourceTree = "<group>"; };
+		DCEB5399206BA643006B0624 /* STFileUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STFileUtils.m; sourceTree = "<group>"; };
+		DCFA7517209110FA00EFA765 /* STThumbnailProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STThumbnailProcessor.h; sourceTree = "<group>"; };
+		DCFA7518209110FA00EFA765 /* STThumbnailProcessor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STThumbnailProcessor.m; sourceTree = "<group>"; };
 		DEF7D3FD619949DEBB4F5660 /* Montserrat-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-SemiBoldItalic.ttf"; path = "../src/fonts/Montserrat/Montserrat-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		E8B379A61F534A10BAAA4E4B /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-LightItalic.ttf"; path = "../src/fonts/OpenSans/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
 		EDC564F35292492DA53A5EBD /* Montserrat-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-BoldItalic.ttf"; path = "../src/fonts/Montserrat/Montserrat-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -627,12 +618,12 @@
 		F3391BC720CADDC20080D578 /* SyncEntryState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncEntryState.h; sourceTree = "<group>"; };
 		F355E21B20C02585007DAEE5 /* SyncQueueEntryDbo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncQueueEntryDbo.h; sourceTree = "<group>"; };
 		F355E24420C025AB007DAEE5 /* SyncQueueEntryDbo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyncQueueEntryDbo.m; sourceTree = "<group>"; };
-		F355E24620C030E2007DAEE5 /* SyncQueueEntryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncQueueEntryModel.h; sourceTree = "<group>"; };
-		F355E24720C03102007DAEE5 /* SyncQueueEntryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyncQueueEntryModel.m; sourceTree = "<group>"; };
+		F355E24620C030E2007DAEE5 /* STSyncQueueEntryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSyncQueueEntryModel.h; sourceTree = "<group>"; };
+		F355E24720C03102007DAEE5 /* STSyncQueueEntryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSyncQueueEntryModel.m; sourceTree = "<group>"; };
 		F355E24920C04050007DAEE5 /* SyncQueueRepository.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncQueueRepository.h; sourceTree = "<group>"; };
 		F355E24A20C04067007DAEE5 /* SyncQueueRepository.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyncQueueRepository.m; sourceTree = "<group>"; };
-		F355E29320C16E71007DAEE5 /* UploadService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploadService.h; sourceTree = "<group>"; };
-		F355E29420C1783C007DAEE5 /* UploadService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadService.m; sourceTree = "<group>"; };
+		F355E29320C16E71007DAEE5 /* STUploadService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STUploadService.h; sourceTree = "<group>"; };
+		F355E29420C1783C007DAEE5 /* STUploadService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STUploadService.m; sourceTree = "<group>"; };
 		F389386320C00AC100FB6C76 /* SynchronizationQueueContract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SynchronizationQueueContract.h; sourceTree = "<group>"; };
 		F389386420C00B9300FB6C76 /* SynchronizationQueueContract.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SynchronizationQueueContract.m; sourceTree = "<group>"; };
 		F76C6AA2A02B4583A7084288 /* Montserrat-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ExtraBoldItalic.ttf"; path = "../src/fonts/Montserrat/Montserrat-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
@@ -980,8 +971,8 @@
 				DCC368862056BD08004813CD /* contracts */,
 				DCC368852056BCF7004813CD /* dbo */,
 				DCC368842056BC9D004813CD /* repositories */,
-				DCC368812056B6D4004813CD /* DatabaseFactory.h */,
-				DCC368822056B6D4004813CD /* DatabaseFactory.m */,
+				DCC368812056B6D4004813CD /* STDatabaseFactory.h */,
+				DCC368822056B6D4004813CD /* STDatabaseFactory.m */,
 			);
 			path = dataProvider;
 			sourceTree = "<group>";
@@ -991,16 +982,16 @@
 			children = (
 				DCDF6FCF205FE9CC001B2F95 /* BaseRepository.h */,
 				DCDF6FD0205FE9CC001B2F95 /* BaseRepository.m */,
-				DCDF706C2064ACEC001B2F95 /* BucketRepository.h */,
-				DCDF706D2064ACEC001B2F95 /* BucketRepository.m */,
-				DCDF706F2064C7A2001B2F95 /* FileRepository.h */,
-				DCDF70702064C7A2001B2F95 /* FileRepository.m */,
-				DCDF70722064D348001B2F95 /* UploadFileRepository.h */,
-				DCDF70732064D348001B2F95 /* UploadFileRepository.m */,
+				DCDF706C2064ACEC001B2F95 /* STBucketRepository.h */,
+				DCDF706D2064ACEC001B2F95 /* STBucketRepository.m */,
+				DCDF706F2064C7A2001B2F95 /* STFileRepository.h */,
+				DCDF70702064C7A2001B2F95 /* STFileRepository.m */,
+				DCDF70722064D348001B2F95 /* STUploadFileRepository.h */,
+				DCDF70732064D348001B2F95 /* STUploadFileRepository.m */,
 				F355E24920C04050007DAEE5 /* SyncQueueRepository.h */,
 				F355E24A20C04067007DAEE5 /* SyncQueueRepository.m */,
-				DC69A1CD20C0637500E4BC51 /* SettingsRepository.h */,
-				DC69A1CE20C0637500E4BC51 /* SettingsRepository.m */,
+				DC69A1CD20C0637500E4BC51 /* STSettingsRepository.h */,
+				DC69A1CE20C0637500E4BC51 /* STSettingsRepository.m */,
 			);
 			path = repositories;
 			sourceTree = "<group>";
@@ -1042,26 +1033,26 @@
 		DCDF6FC22059423F001B2F95 /* ReactModules */ = {
 			isa = PBXGroup;
 			children = (
-				DCACD442201FDF630050921B /* StorjLibIos.h */,
-				DCACD443201FDF630050921B /* StorjLibIos.m */,
-				DCCD2FD320459F600032D3F5 /* FilePickerLib.h */,
-				DCCD2FD420459F600032D3F5 /* FilePickerLib.m */,
-				DCDF70782068B337001B2F95 /* StorjBackgroundServices.h */,
-				DCDF70792068B337001B2F95 /* StorjBackgroundServices.m */,
-				DCEB534E20697A55006B0624 /* EventNames.h */,
-				DCEB534F20697A55006B0624 /* EventNames.m */,
+				DCACD442201FDF630050921B /* STStorjLib.h */,
+				DCACD443201FDF630050921B /* STStorjLib.m */,
+				DCCD2FD320459F600032D3F5 /* STFilePickerLib.h */,
+				DCCD2FD420459F600032D3F5 /* STFilePickerLib.m */,
+				DCDF70782068B337001B2F95 /* STStorjBackgroundServices.h */,
+				DCDF70792068B337001B2F95 /* STStorjBackgroundServices.m */,
+				DCEB534E20697A55006B0624 /* STEventNames.h */,
+				DCEB534F20697A55006B0624 /* STEventNames.m */,
 				DC914C45206BD55000F0C4FF /* StorjWrapperSingletone.h */,
 				DC914C46206BD55000F0C4FF /* StorjWrapperSingletone.m */,
-				DC914C48206BE5D400F0C4FF /* SyncModule.h */,
-				DC914C49206BE5D400F0C4FF /* SyncModule.m */,
+				DC914C48206BE5D400F0C4FF /* STSyncModule.h */,
+				DC914C49206BE5D400F0C4FF /* STSyncModule.m */,
 				DC914C5A206BFBF200F0C4FF /* Sha256Module.h */,
 				DC914C5B206BFBF200F0C4FF /* Sha256Module.m */,
-				DC76320A2084C6F800B7C64A /* DocumentsPicker.h */,
-				DC76320B2084C6F800B7C64A /* DocumentsPicker.m */,
-				DC37DF7D20A4B62C00C4FEF8 /* CameraModule.h */,
-				DC37DF7E20A4B62C00C4FEF8 /* CameraModule.m */,
-				DC70934B20AC3FDB00E889DA /* OpenFileModule.h */,
-				DC70934C20AC3FDB00E889DA /* OpenFileModule.m */,
+				DC76320A2084C6F800B7C64A /* STDocumentsPicker.h */,
+				DC76320B2084C6F800B7C64A /* STDocumentsPicker.m */,
+				DC37DF7D20A4B62C00C4FEF8 /* STCameraModule.h */,
+				DC37DF7E20A4B62C00C4FEF8 /* STCameraModule.m */,
+				DC70934B20AC3FDB00E889DA /* STOpenFileModule.h */,
+				DC70934C20AC3FDB00E889DA /* STOpenFileModule.m */,
 			);
 			path = ReactModules;
 			sourceTree = "<group>";
@@ -1073,8 +1064,8 @@
 				DCDF6FD4205FF083001B2F95 /* IResponse.h */,
 				DCDF6FD7205FF0A7001B2F95 /* Response.h */,
 				DCDF6FD8205FF0A7001B2F95 /* Response.m */,
-				DCDF6FDA205FF88A001B2F95 /* Error.h */,
-				DCDF6FDB205FF88A001B2F95 /* Error.m */,
+				DCDF6FDA205FF88A001B2F95 /* STError.h */,
+				DCDF6FDB205FF88A001B2F95 /* STError.m */,
 				DCDF6FDD2060073F001B2F95 /* SingleResponse.h */,
 				DCDF6FDE2060073F001B2F95 /* SingleResponse.m */,
 				DCDF6FE0206022EC001B2F95 /* ListResponse.h */,
@@ -1086,24 +1077,18 @@
 		DCDF6FE320602F91001B2F95 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				DCDF6FE420603015001B2F95 /* BucketModel.h */,
-				DCDF6FE520603015001B2F95 /* BucketModel.m */,
-				DCDF6FEB2062C2AD001B2F95 /* DownloadFileModel.h */,
-				DCDF6FEC2062C2AD001B2F95 /* DownloadFileModel.m */,
-				DCDF6FEE2062CC74001B2F95 /* DownloadFileProgressModel.h */,
-				DCDF6FEF2062CC74001B2F95 /* DownloadFileProgressModel.m */,
-				DCDF6FF12062D423001B2F95 /* FileDeleteModel.h */,
-				DCDF6FF22062D423001B2F95 /* FileDeleteModel.m */,
-				DCDF6FF42062D5C4001B2F95 /* FileModel.h */,
-				DCDF6FF52062D5C4001B2F95 /* FileModel.m */,
-				DCDF6FF72062E223001B2F95 /* UploadFileProgressModel.h */,
-				DCDF6FF82062E223001B2F95 /* UploadFileProgressModel.m */,
-				DCDF6FFA20631C73001B2F95 /* UploadFileModel.h */,
-				DCDF6FFB20631C73001B2F95 /* UploadFileModel.m */,
-				F355E24620C030E2007DAEE5 /* SyncQueueEntryModel.h */,
-				F355E24720C03102007DAEE5 /* SyncQueueEntryModel.m */,
-				DC69A19D20C037EB00E4BC51 /* SettingsModel.h */,
-				DC69A19E20C037EB00E4BC51 /* SettingsModel.m */,
+				DC8AC25420D932A400FBE8BF /* STFileDeleteModel.h */,
+				DC8AC25520D932A500FBE8BF /* STFileDeleteModel.m */,
+				DCDF6FE420603015001B2F95 /* STBucketModel.h */,
+				DCDF6FE520603015001B2F95 /* STBucketModel.m */,
+				DCDF6FF42062D5C4001B2F95 /* STFileModel.h */,
+				DCDF6FF52062D5C4001B2F95 /* STFileModel.m */,
+				DCDF6FFA20631C73001B2F95 /* STUploadFileModel.h */,
+				DCDF6FFB20631C73001B2F95 /* STUploadFileModel.m */,
+				F355E24620C030E2007DAEE5 /* STSyncQueueEntryModel.h */,
+				F355E24720C03102007DAEE5 /* STSyncQueueEntryModel.m */,
+				DC69A19D20C037EB00E4BC51 /* STSettingsModel.h */,
+				DC69A19E20C037EB00E4BC51 /* STSettingsModel.m */,
 				DCAC417020C9409500D39053 /* STAssetFileModel.h */,
 				DCAC417120C9409500D39053 /* STAssetFileModel.m */,
 			);
@@ -1119,16 +1104,16 @@
 				DC69A23F20C55E9100E4BC51 /* STFileManager.m */,
 				DCDF6FE82062BE39001B2F95 /* DictionaryUtils.h */,
 				DCDF6FE92062BE39001B2F95 /* DictionaryUtils.m */,
-				DCEB5398206BA643006B0624 /* FileUtils.h */,
-				DCEB5399206BA643006B0624 /* FileUtils.m */,
-				DCFA7517209110FA00EFA765 /* ThumbnailProcessor.h */,
-				DCFA7518209110FA00EFA765 /* ThumbnailProcessor.m */,
+				DCEB5398206BA643006B0624 /* STFileUtils.h */,
+				DCEB5399206BA643006B0624 /* STFileUtils.m */,
+				DCFA7517209110FA00EFA765 /* STThumbnailProcessor.h */,
+				DCFA7518209110FA00EFA765 /* STThumbnailProcessor.m */,
 				DCBF1F4120BDBADA00240E8B /* Logger.h */,
 				DCBF1F4220BDBADA00240E8B /* Logger.m */,
 				DC4804E320C5CF4E009CEDB7 /* STFileNamingFormatter.h */,
 				DC4804E420C5CF4E009CEDB7 /* STFileNamingFormatter.m */,
-				DCAC421320CAEC4F00D39053 /* PermissionManager.h */,
-				DCAC421420CAEC4F00D39053 /* PermissionManager.m */,
+				DCAC421320CAEC4F00D39053 /* STPermissionManager.h */,
+				DCAC421420CAEC4F00D39053 /* STPermissionManager.m */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -1175,14 +1160,14 @@
 		F355E26A20C16E26007DAEE5 /* Synchronization */ = {
 			isa = PBXGroup;
 			children = (
-				F355E29320C16E71007DAEE5 /* UploadService.h */,
-				F355E29420C1783C007DAEE5 /* UploadService.m */,
-				DC6BFB9A20C55F9E00B7E697 /* PrepareSyncService.h */,
-				DC6BFB9B20C55F9E00B7E697 /* PrepareSyncService.m */,
-				DC6BFB9D20C55FAD00B7E697 /* SyncService.h */,
-				DC6BFB9E20C55FAD00B7E697 /* SyncService.m */,
-				DC8AC22620D8394700FBE8BF /* SyncScheduler.h */,
-				DC8AC22720D8394700FBE8BF /* SyncScheduler.m */,
+				F355E29320C16E71007DAEE5 /* STUploadService.h */,
+				F355E29420C1783C007DAEE5 /* STUploadService.m */,
+				DC6BFB9A20C55F9E00B7E697 /* STPrepareSyncService.h */,
+				DC6BFB9B20C55F9E00B7E697 /* STPrepareSyncService.m */,
+				DC6BFB9D20C55FAD00B7E697 /* STSyncService.h */,
+				DC6BFB9E20C55FAD00B7E697 /* STSyncService.m */,
+				DC8AC22620D8394700FBE8BF /* STSyncScheduler.h */,
+				DC8AC22720D8394700FBE8BF /* STSyncScheduler.m */,
 			);
 			path = Synchronization;
 			sourceTree = "<group>";
@@ -1703,67 +1688,64 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCBF1F2E20BD786500240E8B /* STFileUploadCallback.m in Sources */,
-				DCC368832056B6D4004813CD /* DatabaseFactory.m in Sources */,
+				DCC368832056B6D4004813CD /* STDatabaseFactory.m in Sources */,
 				DCDF70652064732C001B2F95 /* BucketDbo.m in Sources */,
-				DCDF6FF62062D5C4001B2F95 /* FileModel.m in Sources */,
-				DCEB535020697A55006B0624 /* EventNames.m in Sources */,
-				DCFA7519209110FA00EFA765 /* ThumbnailProcessor.m in Sources */,
-				F355E29520C1783C007DAEE5 /* UploadService.m in Sources */,
-				DCDF706E2064ACEC001B2F95 /* BucketRepository.m in Sources */,
-				DCDF707A2068B337001B2F95 /* StorjBackgroundServices.m in Sources */,
-				DC914C4A206BE5D400F0C4FF /* SyncModule.m in Sources */,
-				DCDF6FE620603015001B2F95 /* BucketModel.m in Sources */,
+				DCDF6FF62062D5C4001B2F95 /* STFileModel.m in Sources */,
+				DCEB535020697A55006B0624 /* STEventNames.m in Sources */,
+				DCFA7519209110FA00EFA765 /* STThumbnailProcessor.m in Sources */,
+				F355E29520C1783C007DAEE5 /* STUploadService.m in Sources */,
+				DCDF706E2064ACEC001B2F95 /* STBucketRepository.m in Sources */,
+				DCDF707A2068B337001B2F95 /* STStorjBackgroundServices.m in Sources */,
+				DC914C4A206BE5D400F0C4FF /* STSyncModule.m in Sources */,
+				DCDF6FE620603015001B2F95 /* STBucketModel.m in Sources */,
 				DCDF705E20643850001B2F95 /* FMDatabasePool.m in Sources */,
 				DC69A17120C02E2E00E4BC51 /* SettingsContract.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				DC69A19C20C031A500E4BC51 /* SettingsDbo.m in Sources */,
 				DCDF6FEA2062BE39001B2F95 /* DictionaryUtils.m in Sources */,
 				DCDF7077206895DF001B2F95 /* MethodHandler.m in Sources */,
-				DC69A1CF20C0637500E4BC51 /* SettingsRepository.m in Sources */,
+				DC69A1CF20C0637500E4BC51 /* STSettingsRepository.m in Sources */,
 				DC914C47206BD55000F0C4FF /* StorjWrapperSingletone.m in Sources */,
 				DC4804E520C5CF4E009CEDB7 /* STFileNamingFormatter.m in Sources */,
+				DC8AC25620D932A500FBE8BF /* STFileDeleteModel.m in Sources */,
 				DCBF1F4320BDBADA00240E8B /* Logger.m in Sources */,
-				DC69A19F20C037EB00E4BC51 /* SettingsModel.m in Sources */,
+				DC69A19F20C037EB00E4BC51 /* STSettingsModel.m in Sources */,
 				DC69A24120C55E9100E4BC51 /* STFileManager.m in Sources */,
 				DCDF706B2064A15A001B2F95 /* UploadFileDbo.m in Sources */,
-				DCAC421520CAEC4F00D39053 /* PermissionManager.m in Sources */,
+				DCAC421520CAEC4F00D39053 /* STPermissionManager.m in Sources */,
 				DCDF6FE2206022EC001B2F95 /* ListResponse.m in Sources */,
 				DCBD1A5020B2F07E005B30C3 /* STUploader.m in Sources */,
 				DCDF6FD9205FF0A7001B2F95 /* Response.m in Sources */,
 				DCDF706820649821001B2F95 /* FileDbo.m in Sources */,
 				DCDF6FCB205AED17001B2F95 /* UploadFileContract.m in Sources */,
-				DCDF6FFC20631C73001B2F95 /* UploadFileModel.m in Sources */,
+				DCDF6FFC20631C73001B2F95 /* STUploadFileModel.m in Sources */,
 				DCDF705D20643850001B2F95 /* FMDatabase.m in Sources */,
-				DCDF6FED2062C2AD001B2F95 /* DownloadFileModel.m in Sources */,
-				DC76320C2084C6F800B7C64A /* DocumentsPicker.m in Sources */,
+				DC76320C2084C6F800B7C64A /* STDocumentsPicker.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				DCDF6FC5205ADA04001B2F95 /* BucketContract.m in Sources */,
 				DCDF6FD1205FE9CC001B2F95 /* BaseRepository.m in Sources */,
-				DC37DF7F20A4B62C00C4FEF8 /* CameraModule.m in Sources */,
-				DC8AC22820D8394700FBE8BF /* SyncScheduler.m in Sources */,
+				DC37DF7F20A4B62C00C4FEF8 /* STCameraModule.m in Sources */,
+				DC8AC22820D8394700FBE8BF /* STSyncScheduler.m in Sources */,
 				DC8AC25320D84E5900FBE8BF /* Reachability.m in Sources */,
 				F389386520C00B9300FB6C76 /* SynchronizationQueueContract.m in Sources */,
-				DCDF6FF92062E223001B2F95 /* UploadFileProgressModel.m in Sources */,
-				DCDF70712064C7A2001B2F95 /* FileRepository.m in Sources */,
-				DCEB539A206BA643006B0624 /* FileUtils.m in Sources */,
-				DCDF6FF02062CC74001B2F95 /* DownloadFileProgressModel.m in Sources */,
-				DCDF70742064D348001B2F95 /* UploadFileRepository.m in Sources */,
+				DCDF70712064C7A2001B2F95 /* STFileRepository.m in Sources */,
+				DCEB539A206BA643006B0624 /* STFileUtils.m in Sources */,
+				DCDF70742064D348001B2F95 /* STUploadFileRepository.m in Sources */,
 				DCDF706120643850001B2F95 /* FMDatabaseQueue.m in Sources */,
-				DCACD444201FDF630050921B /* StorjLibIos.m in Sources */,
+				DCACD444201FDF630050921B /* STStorjLib.m in Sources */,
 				DCAC417220C9409500D39053 /* STAssetFileModel.m in Sources */,
-				DC70934D20AC3FDB00E889DA /* OpenFileModule.m in Sources */,
+				DC70934D20AC3FDB00E889DA /* STOpenFileModule.m in Sources */,
 				DC914C5C206BFBF200F0C4FF /* Sha256Module.m in Sources */,
 				DCDF6FDF2060073F001B2F95 /* SingleResponse.m in Sources */,
 				DCDF706020643850001B2F95 /* FMResultSet.m in Sources */,
-				DCDF6FDC205FF88A001B2F95 /* Error.m in Sources */,
-				F355E24820C03102007DAEE5 /* SyncQueueEntryModel.m in Sources */,
-				DC6BFB9F20C55FAD00B7E697 /* SyncService.m in Sources */,
-				DCCD2FD520459F610032D3F5 /* FilePickerLib.m in Sources */,
-				DCDF6FF32062D423001B2F95 /* FileDeleteModel.m in Sources */,
+				DCDF6FDC205FF88A001B2F95 /* STError.m in Sources */,
+				F355E24820C03102007DAEE5 /* STSyncQueueEntryModel.m in Sources */,
+				DC6BFB9F20C55FAD00B7E697 /* STSyncService.m in Sources */,
+				DCCD2FD520459F610032D3F5 /* STFilePickerLib.m in Sources */,
 				DCDF6FC8205AE94C001B2F95 /* FileContract.m in Sources */,
 				DCDF705F20643850001B2F95 /* FMDatabaseAdditions.m in Sources */,
 				F355E24B20C04067007DAEE5 /* SyncQueueRepository.m in Sources */,
-				DC6BFB9C20C55F9E00B7E697 /* PrepareSyncService.m in Sources */,
+				DC6BFB9C20C55F9E00B7E697 /* STPrepareSyncService.m in Sources */,
 				DCEB072820BEAE9800D50758 /* STDownloader.m in Sources */,
 				DCEB075420BEAFBC00D50758 /* STFileDownloadCallback.m in Sources */,
 				F355E24520C025AB007DAEE5 /* SyncQueueEntryDbo.m in Sources */,

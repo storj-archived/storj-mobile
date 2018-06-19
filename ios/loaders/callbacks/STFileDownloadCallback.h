@@ -2,7 +2,7 @@
 //  STFileDownloadCallback.h
 //  StorjMobile
 //
-//  Created by Barterio on 5/30/18.
+//  Created by Bogdan Artemenko on 5/30/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 

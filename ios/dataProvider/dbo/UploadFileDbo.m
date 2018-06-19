@@ -2,12 +2,12 @@
 //  UploadFileDbo.m
 //  StorjMobile
 //
-//  Created by Barterio on 3/23/18.
+//  Created by Bogdan Artemenko on 3/23/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
 #import "UploadFileDbo.h"
-#import "UploadFileModel.h"
+#import "STUploadFileModel.h"
 #import "UploadFileContract.h"
 
 @implementation UploadFileDbo
@@ -33,9 +33,9 @@ BOOL isIdSet = false;
   return self;
 }
 
--(UploadFileModel *) toModel
+-(STUploadFileModel *) toModel
 {
-  return [[UploadFileModel alloc]initWithFileHandle:_fileHandle progress:_progress size:_size uploaded:_uploaded name:_name uri:_uri bucketId:_bucketId];
+  return [[STUploadFileModel alloc]initWithFileHandle:_fileHandle progress:_progress size:_size uploaded:_uploaded name:_name uri:_uri bucketId:_bucketId];
 }
 
 -(long) getId{

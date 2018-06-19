@@ -2,12 +2,12 @@
 //  Response.m
 //  StorjMobile
 //
-//  Created by Barterio on 3/19/18.
+//  Created by Bogdan Artemenko on 3/19/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
 #import "Response.h"
-#import "Error.h"
+#import "STError.h"
 
 @implementation Response
 
@@ -15,13 +15,13 @@
 @synthesize _isSuccess;
 
 -(instancetype)initWithSuccess:(BOOL)isSuccess
-                  andWithError:(Error *)error{
+                  andWithError:(STError *)error{
   if(self = [super init]){
     _isSuccess = isSuccess;
     if(error != nil){
       _error = error;
     } else {
-      _error = [[Error alloc]initWithErrorCode:0
+      _error = [[STError alloc]initWithErrorCode:0
                                andErrorMessage:@DEFAULT_ERROR_MESSAGE];
     }
   }
@@ -33,7 +33,7 @@
            andWithErrorMessage:(NSString *)errorMessage{
   if(self = [super init]){
     _isSuccess = isSuccess;
-    _error = [[Error alloc] initWithErrorCode:errorCode
+    _error = [[STError alloc] initWithErrorCode:errorCode
                               andErrorMessage:errorMessage];
   }
   return self;
@@ -43,7 +43,7 @@
            andWithErrorMessage:(NSString *)errorMessage{
   if(self = [super init]){
     _isSuccess = isSuccess;
-    _error = [[Error alloc] initWithErrorCode:0
+    _error = [[STError alloc] initWithErrorCode:0
                               andErrorMessage:errorMessage];
   }
   return self;

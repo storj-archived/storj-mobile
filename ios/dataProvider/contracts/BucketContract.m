@@ -2,7 +2,7 @@
 //  BucketContract.m
 //  StorjMobile
 //
-//  Created by Barterio on 3/15/18.
+//  Created by Bogdan Artemenko on 3/15/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 

@@ -8,7 +8,7 @@
 
 @import Foundation;
 #import "BaseRepository.h"
-#import "SyncQueueEntryModel.h"
+#import "STSyncQueueEntryModel.h"
 #import "SyncQueueEntryDbo.h"
 
 @class Response;
@@ -22,14 +22,14 @@
 
 -(NSArray *) getAll;
 
--(SyncQueueEntryModel *) getById: (int) _id;
+-(STSyncQueueEntryModel *) getById: (int) _id;
 
--(SyncQueueEntryModel *) getByLocalPath: (NSString *) localPath
+-(STSyncQueueEntryModel *) getByLocalPath: (NSString *) localPath
                                bucketId: (NSString *) bucketId;
 
--(Response *) insertWithModel: (SyncQueueEntryModel *) model;
+-(Response *) insertWithModel: (STSyncQueueEntryModel *) model;
 
--(Response *) updateWithModel: (SyncQueueEntryModel *) model;
+-(Response *) updateWithModel: (STSyncQueueEntryModel *) model;
 
 -(Response *) deleteById: (int) _id;
 

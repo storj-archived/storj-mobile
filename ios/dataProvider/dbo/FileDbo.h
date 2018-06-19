@@ -2,14 +2,14 @@
 //  FileDbo.h
 //  StorjMobile
 //
-//  Created by Barterio on 3/23/18.
+//  Created by Bogdan Artemenko on 3/23/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
 @import Foundation;
 #import "IConvertibleToJS.h"
 
-@class FileModel;
+@class STFileModel;
 
 @interface FileDbo : NSObject<IConvertibleToJS, NSCopying> {
   
@@ -43,9 +43,9 @@
 @property (nonatomic, strong) NSString *_fileUri;
 @property (nonatomic, strong) NSString *_thumbnail;
 
-+(FileDbo *) fileDboFromFileModel: (FileModel *) model;
++(FileDbo *) fileDboFromFileModel: (STFileModel *) model;
 
--(instancetype) initWithFileModel: (FileModel *) model;
+-(instancetype) initWithFileModel: (STFileModel *) model;
 
 -(instancetype) initWithBucketId: (NSString *) bucketId
                          created: (NSString *) created
@@ -64,6 +64,6 @@
                          fileUri: (NSString *) fileUri
                        thumbnail: (NSString *) thumbnail;
 
--(FileModel *) toModel;
+-(STFileModel *) toModel;
 
 @end

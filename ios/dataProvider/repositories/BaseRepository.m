@@ -2,12 +2,12 @@
 //  BaseRepository.m
 //  StorjMobile
 //
-//  Created by Barterio on 3/19/18.
+//  Created by Bogdan Artemenko on 3/19/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
 #import "BaseRepository.h"
-#import "DatabaseFactory.h"
+#import "STDatabaseFactory.h"
 #import "Response.h"
 
 @implementation BaseRepository
@@ -24,7 +24,7 @@
   static dispatch_once_t onceToken;
   static FMDatabaseQueue *queue;
   dispatch_once(&onceToken, ^{
-    dbPath = [[DatabaseFactory getSharedDatabaseFactory] getDBPath];
+    dbPath = [[STDatabaseFactory getSharedDatabaseFactory] getDBPath];
     queue =[FMDatabaseQueue databaseQueueWithPath: dbPath
                                             flags:SQLITE_OPEN_READONLY];
   });
@@ -38,7 +38,7 @@
   static dispatch_once_t onceToken;
   static FMDatabaseQueue *queue;
   dispatch_once(&onceToken, ^{
-    dbPath =[[DatabaseFactory getSharedDatabaseFactory] getDBPath];
+    dbPath =[[STDatabaseFactory getSharedDatabaseFactory] getDBPath];
     queue =[FMDatabaseQueue databaseQueueWithPath:dbPath
                                             flags:SQLITE_OPEN_READWRITE];
   });

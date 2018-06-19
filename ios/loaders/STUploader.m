@@ -2,24 +2,24 @@
 //  STUploader.m
 //  StorjMobile
 //
-//  Created by Barterio on 5/21/18.
+//  Created by Bogdan Artemenko on 5/21/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
 #import "STUploader.h"
 
-#import "UploadFileModel.h"
-#import "FileModel.h"
+#import "STUploadFileModel.h"
+#import "STFileModel.h"
 
 #import "UploadFileDbo.h"
 #import "FileDbo.h"
 
-#import "UploadFileRepository.h"
-#import "FileRepository.h"
+#import "STUploadFileRepository.h"
+#import "STFileRepository.h"
 
-#import "FileUtils.h"
+#import "STFileUtils.h"
 #import "Logger.h"
-#import "ThumbnailProcessor.h"
+#import "STThumbnailProcessor.h"
 
 #import "SingleResponse.h"
 
@@ -41,8 +41,8 @@
   
   StorjWrapper *_storjWrapper;
   
-  UploadFileRepository *_uploadFileRepository;
-  FileRepository *_fileRepository;
+  STUploadFileRepository *_uploadFileRepository;
+  STFileRepository *_fileRepository;
 }
 
 -(instancetype) initWithBucketId: (NSString *) bucketId
@@ -60,21 +60,21 @@
   return self;
 }
 
--(UploadFileRepository *) _uploadFileRepository
+-(STUploadFileRepository *) _uploadFileRepository
 {
   if(!_uploadFileRepository)
   {
-    _uploadFileRepository = [[UploadFileRepository alloc] init];
+    _uploadFileRepository = [[STUploadFileRepository alloc] init];
   }
   
   return _uploadFileRepository;
 }
 
--(FileRepository *) _fileRepository
+-(STFileRepository *) _fileRepository
 {
   if(!_fileRepository)
   {
-    _fileRepository = [[FileRepository alloc] init];
+    _fileRepository = [[STFileRepository alloc] init];
   }
   
   return _fileRepository;
@@ -97,8 +97,8 @@
 
 -(void) startUpload
 {
-  NSNumber *fileSize = [FileUtils getFileSizeWithPath:_localPath];
-  NSString *fileName = _fileName ? _fileName : [FileUtils getFileNameWithPath:_localPath];
+  NSNumber *fileSize = [STFileUtils getFileSizeWithPath:_localPath];
+  NSString *fileName = [STFileUtils getFileNameWithPath:_localPath];
   
   _uploadFileDbo = [[UploadFileDbo alloc] initWithFileHandle:0
                                                     progress:0
@@ -126,7 +126,7 @@
     [_uploadFileDbo setProgress: _uploadProgress];
     [_uploadFileDbo setUploaded: uploadedBytes];
     
-    UploadFileModel * fileModel =[[UploadFileModel alloc] initWithUploadFileDbo:_uploadFileDbo];
+    STUploadFileModel * fileModel =[[STUploadFileModel alloc] initWithUploadFileDbo:_uploadFileDbo];
     Response *response = [[self _uploadFileRepository] updateByModel:fileModel];
     if(_notifyUploadFileCallback)
     {
@@ -148,7 +148,7 @@
   };
   
   _innerUploadFileCallback.onSuccess = ^(SJFile * file){
-    ThumbnailProcessor *thumbnailProcessor = [[ThumbnailProcessor alloc]
+    STThumbnailProcessor *thumbnailProcessor = [[STThumbnailProcessor alloc]
                                               initWithFileRepository:[self _fileRepository]];
     NSString *thumbnail = nil;
     // Due to the fact that StorjLib returns mimeType: application/octet-stream, we are trying to
@@ -159,7 +159,7 @@
       thumbnail = [thumbnailGenerationResponse getResult];
     }
     
-    FileModel *fileModel = [[FileModel alloc] initWithSJFile:file
+    STFileModel *fileModel = [[STFileModel alloc] initWithSJFile:file
                                                      starred:NO
                                                       synced:NO
                                                downloadState:0
@@ -191,7 +191,7 @@
   @synchronized (_uploadFileDbo)
   {
     [_uploadFileDbo setFileHandle:fileRef];
-    UploadFileModel *fileModel = [[UploadFileModel alloc] initWithUploadFileDbo:_uploadFileDbo];
+    STUploadFileModel *fileModel = [[STUploadFileModel alloc] initWithUploadFileDbo:_uploadFileDbo];
     
     Response *insertResponse = [[self _uploadFileRepository] insertWithModel:fileModel];
     if([insertResponse isSuccess])

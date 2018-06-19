@@ -2,12 +2,12 @@
 //  SettingsDbo.m
 //  StorjMobile
 //
-//  Created by Barterio on 5/31/18.
+//  Created by Bogdan Artemenko on 5/31/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
 #import "SettingsDbo.h"
-#import "SettingsModel.h"
+#import "STSettingsModel.h"
 #import "SettingsContract.h"
 
 #import "DictionaryUtils.h"
@@ -25,10 +25,10 @@
   return self;
 }
 
--(SettingsModel *) toModel
+-(STSettingsModel *) toModel
 {
   
-  return [[SettingsModel alloc] initWithSettingsId:__id
+  return [[STSettingsModel alloc] initWithSettingsId:__id
                                        firstSignIn:_isFirstSignIn
                                         syncStatus:_syncStatus
                                       syncSettings:_syncSettings

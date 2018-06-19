@@ -11,8 +11,8 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-#import "PermissionManager.h"
-#import "SyncScheduler.h"
+#import "STPermissionManager.h"
+#import "STSyncScheduler.h"
 
 @implementation AppDelegate
 
@@ -48,7 +48,7 @@
 
 -(void) requestPermissions
 {
-  PermissionManager *permissionManager = [[PermissionManager  alloc] init];
+  STPermissionManager *permissionManager = [[STPermissionManager  alloc] init];
   
   if([permissionManager isAllPermissionsGranted])
   {
@@ -88,7 +88,7 @@
 
 -(void) launchScheduler
 {
-  [[SyncScheduler sharedInstance] startSyncDelayed];
+  [[STSyncScheduler sharedInstance] startSyncDelayed];
 }
 
 @end

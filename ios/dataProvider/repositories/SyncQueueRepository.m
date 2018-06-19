@@ -30,7 +30,7 @@ static NSArray * columns;
   return [self getArrayWithRequest:(NSString *) request];
 }
 
--(SyncQueueEntryModel *) getById: (int) _id
+-(STSyncQueueEntryModel *) getById: (int) _id
 {
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ?",
                        @"*",
@@ -41,7 +41,7 @@ static NSArray * columns;
   return [self getSingleModelWithRequest: (NSString *) request params: (NSArray *) params];
 }
 
--(SyncQueueEntryModel *) getByLocalPath: (NSString *) localPath bucketId: (NSString *) bucketId
+-(STSyncQueueEntryModel *) getByLocalPath: (NSString *) localPath bucketId: (NSString *) bucketId
 {
   NSString *request = [NSString stringWithFormat:@"SELECT %@ FROM %@ WHERE %@ = ? AND %@ = ?",
                        @"*",
@@ -53,7 +53,7 @@ static NSArray * columns;
   return [self getSingleModelWithRequest: (NSString *) request params: (NSArray *) params];
 }
 
--(Response *) insertWithModel: (SyncQueueEntryModel *) model
+-(Response *) insertWithModel: (STSyncQueueEntryModel *) model
 {
   if(!model || ![model isValid])
   {
@@ -61,12 +61,12 @@ static NSArray * columns;
   }
 
   Response *result = [super executeInsertIntoTable:SynchronizationQueueContract.TABLE_NAME
-                                          fromDict: [SyncQueueRepository getUpdateDictionaryFromModel: (SyncQueueEntryModel *) model]];
+                                          fromDict: [SyncQueueRepository getUpdateDictionaryFromModel: (STSyncQueueEntryModel *) model]];
   
   return result;
 }
 
--(Response *) updateWithModel: (SyncQueueEntryModel *) model
+-(Response *) updateWithModel: (STSyncQueueEntryModel *) model
 {
   if(!model || ![model isValid])
   {
@@ -76,7 +76,7 @@ static NSArray * columns;
   Response *result = [super executeUpdateAtTable:(NSString *) SynchronizationQueueContract.TABLE_NAME
                                       objectKey:(NSString *) SynchronizationQueueContract.ID
                                        objectId:(NSString *) [@(model._id) stringValue]
-                               updateDictionary:(NSDictionary *) [SyncQueueRepository getUpdateDictionaryFromModel: (SyncQueueEntryModel *) model]];
+                               updateDictionary:(NSDictionary *) [SyncQueueRepository getUpdateDictionaryFromModel: (STSyncQueueEntryModel *) model]];
   
   return result;
 }
@@ -88,7 +88,7 @@ static NSArray * columns;
                       withObjecktValue:[@(_id) stringValue]];
 }
 
-+(NSDictionary *) getUpdateDictionaryFromModel: (SyncQueueEntryModel *) model
++(NSDictionary *) getUpdateDictionaryFromModel: (STSyncQueueEntryModel *) model
 {
   NSDictionary* dict = [model toDictionary];
   
@@ -112,9 +112,9 @@ static NSArray * columns;
   return result;
 }
 
--(SyncQueueEntryModel *) getSingleModelWithRequest: (NSString *) request params: (NSArray *) params
+-(STSyncQueueEntryModel *) getSingleModelWithRequest: (NSString *) request params: (NSArray *) params
 {
-  __block SyncQueueEntryModel *model = nil;
+  __block STSyncQueueEntryModel *model = nil;
   
   getCallback callback = ^(FMResultSet *resultSet)
   {
@@ -124,7 +124,7 @@ static NSArray * columns;
       
       if(dbo)
       {
-        model = [[SyncQueueEntryModel alloc] initWithDbo:(SyncQueueEntryDbo *) dbo];
+        model = [[STSyncQueueEntryModel alloc] initWithDbo:(SyncQueueEntryDbo *) dbo];
       }
     }
   };
@@ -133,14 +133,14 @@ static NSArray * columns;
   return model;
 }
 
--(SyncQueueEntryModel *) getSingleModelWithRequest: (NSString *) request
+-(STSyncQueueEntryModel *) getSingleModelWithRequest: (NSString *) request
 {
   return [self getSingleModelWithRequest:(NSString *) request params:(NSArray *) [NSArray array]];
 }
 
 -(NSArray *) getArrayWithRequest: (NSString *) request params: (NSArray *) params
 {
-  __block NSMutableArray<SyncQueueEntryModel *> *syncQueue = [NSMutableArray<SyncQueueEntryModel *> array];
+  __block NSMutableArray<STSyncQueueEntryModel *> *syncQueue = [NSMutableArray<STSyncQueueEntryModel *> array];
   
   getCallback callback = ^(FMResultSet *resultSet)
   {
@@ -150,7 +150,7 @@ static NSArray * columns;
       
       if(dbo)
       {
-        [syncQueue addObject: [[SyncQueueEntryModel alloc] initWithDbo:(SyncQueueEntryDbo *) dbo]];
+        [syncQueue addObject: [[STSyncQueueEntryModel alloc] initWithDbo:(SyncQueueEntryDbo *) dbo]];
       }
     }
   };

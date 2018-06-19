@@ -2,12 +2,12 @@
 //  FileDbo.m
 //  StorjMobile
 //
-//  Created by Barterio on 3/23/18.
+//  Created by Bogdan Artemenko on 3/23/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
 #import "FileDbo.h"
-#import "FileModel.h"
+#import "STFileModel.h"
 #import "FileContract.h"
 #import "DictionaryUtils.h"
 
@@ -29,7 +29,7 @@ BOOL _isDecrypted;
 BOOL _isStarred;
 BOOL _isSynced;
 
--(instancetype) initWithFileModel: (FileModel *) model {
+-(instancetype) initWithFileModel: (STFileModel *) model {
   return [self initWithBucketId: [model _bucketId ]
                         created: [model _created]
                         erasure: [model _erasure]
@@ -118,14 +118,14 @@ BOOL _isSynced;
   return resultDictionary;
 }
 
-+(FileDbo *)fileDboFromFileModel:(FileModel *)model {
++(FileDbo *)fileDboFromFileModel:(STFileModel *)model {
   
   return [[FileDbo alloc] initWithFileModel:model];
 }
 
--(FileModel *) toModel {
+-(STFileModel *) toModel {
   
-  return [[FileModel alloc] initWithBucketId: _bucketId
+  return [[STFileModel alloc] initWithBucketId: _bucketId
                                      created: _created
                                      erasure: _erasure
                                         hmac: _hmac

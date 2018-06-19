@@ -2,14 +2,14 @@
 //  Response.h
 //  StorjMobile
 //
-//  Created by Barterio on 3/19/18.
+//  Created by Bogdan Artemenko on 3/19/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
 @import Foundation;
 #import "IConvertibleToJS.h"
 
-@class Error;
+@class STError;
 
 #define RESPONSE_KEY_IS_SUCCESS "isSuccess"
 #define RESPONSE_KEY_ERROR "error"
@@ -18,10 +18,10 @@
 @interface Response : NSObject<IConvertibleToJS>
 
 @property (getter=isSuccess)BOOL _isSuccess;
-@property (nonatomic, strong, getter=getError) Error * _error;
+@property (nonatomic, strong, getter=getError) STError * _error;
 
 -(instancetype) initWithSuccess: (BOOL) isSuccess
-                   andWithError: (Error *) error;
+                   andWithError: (STError *) error;
 
 -(instancetype) initWithSuccess: (BOOL) isSuccess
                   withErrorCode: (int) errorCode

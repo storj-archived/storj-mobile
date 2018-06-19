@@ -2,7 +2,7 @@
 //  SyncSettings.h
 //  StorjMobile
 //
-//  Created by Barterio on 6/12/18.
+//  Created by Bogdan Artemenko on 6/12/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 

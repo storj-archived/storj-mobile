@@ -2,7 +2,7 @@
 //  STUploader.h
 //  StorjMobile
 //
-//  Created by Barterio on 5/21/18.
+//  Created by Bogdan Artemenko on 5/21/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 

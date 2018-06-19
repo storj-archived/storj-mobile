@@ -2,7 +2,7 @@
 //  DictionaryUtils.h
 //  StorjMobile
 //
-//  Created by Barterio on 3/21/18.
+//  Created by Bogdan Artemenko on 3/21/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 #import "IConvertibleToJS.h"
@@ -16,7 +16,7 @@
 
 +(NSString *) convertToJsonWithArray: (NSArray *) array;
 
-+(NSString *) convertToJsonWithArray:(NSArray *) array andConvertCallback: (ConvertCallback) callback;
++(NSString *) convertToJsonWithArray:(NSArray *) array andConvertCallback: (STConvertCallback) callback;
 
 +(BOOL) isNSStringValid: (NSString *) stringToCheck;
 

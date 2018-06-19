@@ -2,24 +2,23 @@
 //  STDownloader.m
 //  StorjMobile
 //
-//  Created by Barterio on 5/30/18.
+//  Created by Bogdan Artemenko on 5/30/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
 #import "STDownloader.h"
 
-#import "FileModel.h"
-#import "DownloadFileModel.h"
+#import "STFileModel.h"
 
 #import "FileDbo.h"
 #import "UploadFileDbo.h"
 
-#import "FileRepository.h"
-#import "UploadFileRepository.h"
+#import "STFileRepository.h"
+#import "STUploadFileRepository.h"
 
-#import "FileUtils.h"
+#import "STFileUtils.h"
 #import "StorjWrapperSingletone.h"
-#import "ThumbnailProcessor.h"
+#import "STThumbnailProcessor.h"
 #import "Logger.h"
 
 #import "STFileDownloadCallback.h"
@@ -41,7 +40,7 @@
   
   StorjWrapper *_storjWrapper;
   
-  FileRepository *_fileRepository;
+  STFileRepository *_fileRepository;
   
   BOOL _isDownloadComplete;
 }
@@ -61,11 +60,11 @@
   return self;
 }
 
--(FileRepository *) _fileRepository
+-(STFileRepository *) _fileRepository
 {
   if(!_fileRepository)
   {
-    _fileRepository = [[FileRepository alloc] init];
+    _fileRepository = [[STFileRepository alloc] init];
   }
   
   return _fileRepository;
@@ -143,7 +142,7 @@
     if([updateResponse isSuccess])
     {
 
-      ThumbnailProcessor *thumbnailProcessor = [[ThumbnailProcessor alloc]
+      STThumbnailProcessor *thumbnailProcessor = [[STThumbnailProcessor alloc]
                                                 initWithFileRepository:[self _fileRepository]];
       SingleResponse *thumbnailResponse = [thumbnailProcessor getThumbnailWithFileId:fileId
                                                                             filePath:localPath];

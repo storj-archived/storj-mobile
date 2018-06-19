@@ -2,13 +2,13 @@
 //  BucketDbo.m
 //  StorjMobile
 //
-//  Created by Barterio on 3/23/18.
+//  Created by Bogdan Artemenko on 3/23/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
 #import "BucketDbo.h"
 #import "DictionaryUtils.h"
-#import "BucketModel.h"
+#import "STBucketModel.h"
 #import "BucketContract.h"
 
 @implementation BucketDbo
@@ -17,11 +17,11 @@
 
 
 
-+(BucketDbo *)bucketDboFromBucketModel:(BucketModel *)model{
++(BucketDbo *)bucketDboFromBucketModel:(STBucketModel *)model{
   return [[BucketDbo alloc] initWithBucketModel:model];
 }
 
--(instancetype) initWithBucketModel: (BucketModel *) model{
+-(instancetype) initWithBucketModel: (STBucketModel *) model{
   return [self initWithId:[model _id]
                      name:[model name]
                   created:[model created]
@@ -54,8 +54,8 @@
   return self;
 }
 
--(BucketModel *)toModel{
-  return [[BucketModel alloc] initWithId:_id
+-(STBucketModel *)toModel{
+  return [[STBucketModel alloc] initWithId:_id
                              name:_name
                           created:_created
                              hash:_hash

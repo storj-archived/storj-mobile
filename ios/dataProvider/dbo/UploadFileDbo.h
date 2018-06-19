@@ -2,14 +2,14 @@
 //  UploadFileDbo.h
 //  StorjMobile
 //
-//  Created by Barterio on 3/23/18.
+//  Created by Bogdan Artemenko on 3/23/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
 @import Foundation;
 #import "IConvertibleToJS.h"
 
-@class UploadFileModel;
+@class STUploadFileModel;
 @class UploadFileContract;
 
 @interface UploadFileDbo : NSObject<NSCopying>
@@ -30,6 +30,6 @@
                               uri: (NSString *)uri
                          bucketId: (NSString *)bucketId;
 
--(UploadFileModel *) toModel;
+-(STUploadFileModel *) toModel;
 
 @end

@@ -2,14 +2,14 @@
 //  BucketDbo.h
 //  StorjMobile
 //
-//  Created by Barterio on 3/23/18.
+//  Created by Bogdan Artemenko on 3/23/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
 @import Foundation;
 #import "IConvertibleToJS.h"
 
-@class BucketModel;
+@class STBucketModel;
 @class BucketContract;
 
 @interface BucketDbo : NSObject<IConvertibleToJS, NSCopying> {
@@ -27,7 +27,7 @@
 @property (getter=isDecrypted)BOOL _isDecrypted;
 @property (getter=isStarred)BOOL _isStarred;
 
-+(BucketDbo *) bucketDboFromBucketModel: (BucketModel *) model;
++(BucketDbo *) bucketDboFromBucketModel: (STBucketModel *) model;
 
 -(instancetype) initWithId: (NSString *) modelId
                       name: (NSString *) name
@@ -36,7 +36,7 @@
                isDecrypted: (BOOL) isDecrypted
                  isStarred: (BOOL) isStarred;
 
--(instancetype) initWithBucketModel: (BucketModel *) model;
+-(instancetype) initWithBucketModel: (STBucketModel *) model;
 
--(BucketModel *) toModel;
+-(STBucketModel *) toModel;
 @end

@@ -2,13 +2,13 @@
 //  IConvertibleToJS.h
 //  StorjMobile
 //
-//  Created by Barterio on 3/19/18.
+//  Created by Bogdan Artemenko on 3/19/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
 @import Foundation;
 
-typedef NSDictionary * (^ConvertCallback)(NSObject *);
+typedef NSDictionary * (^STConvertCallback)(NSObject *);
 
 @protocol IConvertibleToJS <NSObject>
 

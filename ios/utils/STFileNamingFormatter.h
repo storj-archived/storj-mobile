@@ -2,11 +2,11 @@
 //  STFileNamingFormatter.h
 //  StorjMobile
 //
-//  Created by Barterio on 6/4/18.
+//  Created by Bogdan Artemenko on 6/4/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 @class STAssetFileModel;
 
 @interface STFileNamingFormatter : NSObject

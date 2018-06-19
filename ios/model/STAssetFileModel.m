@@ -2,7 +2,7 @@
 //  STAssetFileModel.m
 //  StorjMobile
 //
-//  Created by Barterio on 6/7/18.
+//  Created by Bogdan Artemenko on 6/7/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 

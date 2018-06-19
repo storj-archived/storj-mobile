@@ -2,7 +2,7 @@
 //  DictionaryUtils.m
 //  StorjMobile
 //
-//  Created by Barterio on 3/21/18.
+//  Created by Bogdan Artemenko on 3/21/18.
 //  Copyright © 2018 Storj. All rights reserved.
 //
 
@@ -32,7 +32,7 @@
 }
 
 +(NSString *) convertToJsonWithArray: (NSArray<IConvertibleToJS> *) array{
-  ConvertCallback callback = ^(NSObject<IConvertibleToJS> *object)
+  STConvertCallback callback = ^(NSObject<IConvertibleToJS> *object)
   {
     NSDictionary *dict = nil;
     dict = [object toDictionary];
@@ -42,7 +42,7 @@
   return [self convertToJsonWithArray: array andConvertCallback: callback];
 }
 
-+(NSString *) convertToJsonWithArray:(NSArray *) array andConvertCallback: (ConvertCallback) callback
++(NSString *) convertToJsonWithArray:(NSArray *) array andConvertCallback: (STConvertCallback) callback
 {
   NSError * err;
   NSMutableArray *marray = [NSMutableArray arrayWithCapacity: [array count]];
