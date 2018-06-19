@@ -232,9 +232,10 @@ RCT_REMAP_METHOD(updateSyncQueueEntryStatus, updateSyncQueueEntryStatusWithId: (
                                                                      Resolver: (RCTPromiseResolveBlock) resolver
                                                                   andRejecter: (RCTPromiseRejectBlock) rejecter)
 {
-  if(newStatus != 0 || newStatus != 3)
+  if(newStatus != 3 && newStatus != 0)
   {
     resolver([[SingleResponse errorResponseWithMessage: @"Can set to idle or cancelled state only"] toDictionary]);
+    return;
   }
   
   UpdateDboCallback callback = ^(SyncQueueEntryDbo *dbo)

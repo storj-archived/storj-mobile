@@ -192,7 +192,7 @@ static NSTimer *startSyncTimer;
 -(void) setStartSyncTimer
 {
   dispatch_async(dispatch_get_main_queue(), ^{
-    startSyncTimer = [NSTimer scheduledTimerWithTimeInterval: (60 * 5)
+    startSyncTimer = [NSTimer scheduledTimerWithTimeInterval: (60 * 0.2)
                                                            target: self
                                                          selector: @selector(scheduleSync)
                                                          userInfo: nil

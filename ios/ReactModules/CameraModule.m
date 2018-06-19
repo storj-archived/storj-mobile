@@ -7,6 +7,7 @@
 
 #import "CameraModule.h"
 #import "StorjBackgroundServices.h"
+#import "UploadService.h"
 
 @implementation CameraModule
 @synthesize _bucketId;
@@ -45,9 +46,12 @@ didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
   NSString *filePath = [[NSURL fileURLWithPath: path] absoluteString];
   [picker dismissViewControllerAnimated:YES completion:NULL];
   if(filePath) {
-    [[StorjBackgroundServices allocWithZone:nil] uploadFileWithBucketId: _bucketId
-                                                          withLocalPath: filePath
-                                                               fileName: @""];
+    [[UploadService sharedInstance] uploadFileWithBucketId: _bucketId
+                                                  fileName: fileName
+                                                 localPath: filePath];
+//    [[StorjBackgroundServices allocWithZone:nil] uploadFileWithBucketId: _bucketId
+//                                                          withLocalPath: filePath
+//                                                               fileName: @""];
   }
 }
 

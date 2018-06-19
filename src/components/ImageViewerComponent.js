@@ -39,6 +39,7 @@ export default class ImageViewerComponent extends Component {
                             : Platform.select({
                                 ios: 
                                     <ProgressViewIOS 
+                                        style = { { width: getDeviceWidth() } }
                                         progress = { this.props.progress }
                                         trackTintColor = { '#f2f2f2' }
                                         progressTintColor = { '#2794ff' } />,
