@@ -97,7 +97,6 @@ static NSTimer *startSyncTimer;
     
     BOOL isWiFiRequired = [self isMemberOfBitmask: syncSettings.syncSettings
                                             value: SyncOnWifi];
-//if(!false && ![self isOnWiFi])
     if(isWiFiRequired && ![self isOnWiFi])
     {
       [Logger log: @"WiFi connection required for synchronization."];
@@ -107,7 +106,6 @@ static NSTimer *startSyncTimer;
     
     BOOL isDeviceOnChargingRequired = [self isMemberOfBitmask: syncSettings.syncSettings
                                                         value: SyncOnCharge];
-    
     if(isDeviceOnChargingRequired && ![self isCharging])
     {
       [Logger log: @"Device must be on charge for synchronization."];
@@ -182,7 +180,7 @@ static NSTimer *startSyncTimer;
 -(void) setRescheduleTimer
 {
   dispatch_async(dispatch_get_main_queue(), ^{
-    rescheduleSyncTimer = [NSTimer scheduledTimerWithTimeInterval: 60 * 15
+    rescheduleSyncTimer = [NSTimer scheduledTimerWithTimeInterval: (60 * 15)
                                              target: self
                                            selector: @selector(scheduleSync)
                                            userInfo: nil
@@ -194,7 +192,7 @@ static NSTimer *startSyncTimer;
 -(void) setStartSyncTimer
 {
   dispatch_async(dispatch_get_main_queue(), ^{
-    startSyncTimer = [NSTimer scheduledTimerWithTimeInterval: 60 * 5
+    startSyncTimer = [NSTimer scheduledTimerWithTimeInterval: (60 * 5)
                                                            target: [SyncService sharedInstance]
                                                          selector: @selector(startSync)
                                                          userInfo: nil
