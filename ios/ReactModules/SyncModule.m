@@ -10,7 +10,7 @@
 #import "SettingsRepository.h"
 #import "SyncService.h"
 #import "SyncSettings.h"
-
+#import "SyncScheduler.h"
 #define RESOLVER "RCTresolver"
 #define REJECTER "RCTrejecter"
 
@@ -510,7 +510,7 @@ RCT_REMAP_METHOD(changeSyncStatus,
   if(value)
   {
     settings = settings | (SyncON | SyncPhotos);
-    //scheduleSync
+    [[SyncScheduler sharedInstance] startSyncDelayed];
   }
   else
   {

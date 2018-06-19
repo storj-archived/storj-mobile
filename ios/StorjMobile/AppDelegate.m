@@ -88,7 +88,7 @@
 
 -(void) launchScheduler
 {
-  [[SyncScheduler sharedInstance] scheduleSync];
+  [[SyncScheduler sharedInstance] startSyncDelayed];
 }
 
 @end

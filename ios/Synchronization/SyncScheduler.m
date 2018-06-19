@@ -91,7 +91,7 @@ static NSTimer *startSyncTimer;
                           value: SyncON])
     {
       [Logger log: @"Synchronization turned off."];
-      [self rescheduleSyncTask];
+      //[self rescheduleSyncTask];
       return;
     }
     
@@ -130,7 +130,7 @@ static NSTimer *startSyncTimer;
       [rescheduleSyncTimer invalidate];
     }
     
-    [self startSyncDelayed];
+    [[SyncService sharedInstance] startSync];
   };
   return scheduleSyncTask;
 }
@@ -192,9 +192,9 @@ static NSTimer *startSyncTimer;
 -(void) setStartSyncTimer
 {
   dispatch_async(dispatch_get_main_queue(), ^{
-    startSyncTimer = [NSTimer scheduledTimerWithTimeInterval: (60 * 5)
-                                                           target: [SyncService sharedInstance]
-                                                         selector: @selector(startSync)
+    startSyncTimer = [NSTimer scheduledTimerWithTimeInterval: (60 * 1)
+                                                           target: self
+                                                         selector: @selector(scheduleSync)
                                                          userInfo: nil
                                                           repeats: NO];
     [Logger log:@"Synchronization start scheduled"];

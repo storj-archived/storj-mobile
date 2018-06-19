@@ -14,4 +14,6 @@
 
 -(void) scheduleSync;
 
+-(void) startSyncDelayed;
+
 @end
