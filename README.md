@@ -4,8 +4,8 @@ All files will be encrypted before sending to distributed network.
 
 # Overview
 
-- [Getting started](#anchor)
-- [Storj API Description](#anchor)
+- [Getting started](#anchorGettingStarted)
+- [Storj API Description](#anchorStorjApiDescription)
 	 - [Authorization](#anchorAuthorization)
 		  - [Generate mnemonic](#anchorAuthGenerateMnemonic) 
 		  - [Check mnemonic](#anchorAuthCheckMnemonic) 
@@ -33,7 +33,7 @@ All files will be encrypted before sending to distributed network.
   - [Ios](#anchorIosTutorial)
   - [React-native](#anchorRnTutorial)
 
-<a name="anchor"></a>
+<a name="anchorGettingStarted"></a>
 ## Getting Started
 Install react native(Building projects with native code) -> https://facebook.github.io/react-native/docs/getting-started.html 
 
