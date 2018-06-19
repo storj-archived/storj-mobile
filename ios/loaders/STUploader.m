@@ -98,7 +98,7 @@
 -(void) startUpload
 {
   NSNumber *fileSize = [FileUtils getFileSizeWithPath:_localPath];
-  NSString *fileName = [FileUtils getFileNameWithPath:_localPath];
+  NSString *fileName = _fileName ? _fileName : [FileUtils getFileNameWithPath:_localPath];
   
   _uploadFileDbo = [[UploadFileDbo alloc] initWithFileHandle:0
                                                     progress:0
@@ -179,9 +179,15 @@
     [_notifyUploadFileCallback uploadCompleteWithFileHandle:[_uploadFileDbo fileHandle] fileId:[fileModel _fileId]];
   };
   
-  long fileRef = [[self _storjWrapper] uploadFile:_localPath
-                                         toBucket:_bucketId
-                                   withCompletion:_innerUploadFileCallback];
+//  long fileRef = [[self _storjWrapper] uploadFile:_localPath
+//                                         toBucket:_bucketId
+//                                   withCompletion:_innerUploadFileCallback];
+  
+  long fileRef = [[self _storjWrapper] uploadFile: _localPath
+                          toBucket: _bucketId
+                          fileName: _fileName
+                    withCompletion: _innerUploadFileCallback];
+  
   @synchronized (_uploadFileDbo)
   {
     [_uploadFileDbo setFileHandle:fileRef];

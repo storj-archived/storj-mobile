@@ -231,15 +231,54 @@ RCT_REMAP_METHOD(updateSyncQueueEntryStatus, updateSyncQueueEntryStatusWithId: (
                                                                      Resolver: (RCTPromiseResolveBlock) resolver
                                                                   andRejecter: (RCTPromiseRejectBlock) rejecter)
 {
+  if(newStatus != 0 || newStatus != 3)
+  {
+    resolver([[SingleResponse errorResponseWithMessage: @"Can set to idle or cancelled state only"] toDictionary]);
+  }
+  
+  UpdateDboCallback callback = ^(SyncQueueEntryDbo *dbo)
+  {
+    dbo.status = newStatus;
+  };
+  
+  [self updateSyncQueueEntryWithId: _id
+                          callback: callback
+                          Resolver: resolver
+                       andRejecter: rejecter];
+}
+
+RCT_REMAP_METHOD(updateSyncQueueEntryFileName, updateSyncQueueEntryFileNameWith: (int) _id
+                                                                       newFileName: (NSString *) newFileName
+                                                                        Resolver: (RCTPromiseResolveBlock) resolver
+                                                                     andRejecter: (RCTPromiseRejectBlock) rejecter)
+{
+  if(!newFileName)
+  {
+    resolver([[SingleResponse errorResponseWithMessage: @"No file name provided!"] toDictionary]);
+  }
+  
+  UpdateDboCallback callback = ^(SyncQueueEntryDbo *dbo)
+  {
+    dbo.fileName = newFileName;
+    dbo.status = 0;
+  };
+  
+  [self updateSyncQueueEntryWithId: _id
+                          callback: callback
+                          Resolver: resolver
+                       andRejecter: rejecter];
+}
+
+typedef void(^UpdateDboCallback)(SyncQueueEntryDbo *);
+
+-(void) updateSyncQueueEntryWithId: (int) _id
+                                callback: (UpdateDboCallback) updateCallback
+                                Resolver: (RCTPromiseResolveBlock) resolver
+                             andRejecter: (RCTPromiseRejectBlock) rejecter
+{
   void (^callback)(NSDictionary *) = ^(NSDictionary *param)
   {
     RCTPromiseResolveBlock resolve = param[@RESOLVER];
-    
-    if(newStatus == 1 || newStatus == 5)
-    {
-      resolve([[SingleResponse errorResponseWithMessage:@"Can't update entry that is beeing processed"] toDictionary]);
-      return;
-    }
     
     SyncQueueEntryModel *entry = [[self syncQueueRepository] getById: _id];
     
@@ -249,8 +288,14 @@ RCT_REMAP_METHOD(updateSyncQueueEntryStatus, updateSyncQueueEntryStatusWithId: (
       return;
     }
     
+    if(entry.status == 1 || entry.status == 5)
+    {
+      resolve([[SingleResponse errorResponseWithMessage:@"Can't update entry that is beeing processed"] toDictionary]);
+      return;
+    }
+    
     SyncQueueEntryDbo *dbo = [entry toDbo];
-    dbo.status = newStatus;
+    updateCallback(dbo);
     
     entry = [[SyncQueueEntryModel alloc] initWithDbo: dbo];
     
@@ -272,6 +317,7 @@ RCT_REMAP_METHOD(updateSyncQueueEntryStatus, updateSyncQueueEntryStatusWithId: (
                     andMethodHandlerBlock: callback];
 }
 
+
 RCT_REMAP_METHOD(getUploadingFile, getUploadingFileWithFileHandle: (NSString *) fileHandle
                  WithResolver: (RCTPromiseResolveBlock) resolver
                  andRejecter: (RCTPromiseRejectBlock) rejecter){
@@ -280,13 +326,16 @@ RCT_REMAP_METHOD(getUploadingFile, getUploadingFileWithFileHandle: (NSString *) 
                                @REJECTER : rejecter}
    andMethodHandlerBlock:^(NSDictionary * _Nonnull param) {
      RCTPromiseResolveBlock resolve = param[@RESOLVER];
+     
      if(!fileHandle){
        SingleResponse *response = [SingleResponse errorResponseWithMessage:@"invalid file handle"];
        resolve([response toDictionary]);
        return;
      }
+     
      UploadFileModel *uploadingFileModel = [[self uploadFileRepository] getByFileId:fileHandle];
      SingleResponse *response;
+     
      if(!uploadingFileModel){
        response = [SingleResponse errorResponseWithMessage:@"Uploading file not found"];
      } else {
