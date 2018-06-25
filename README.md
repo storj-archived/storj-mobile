@@ -21,6 +21,8 @@ All files will be encrypted before sending to distributed network.
 	     - [Bucket deletion](#anchorBucketDelete)
 	  - [Files](#anchorFiles)
 		  - [File Upload](#anchorFilesUpload)
+		  - [File Upload Progress](#anchorFileUploadProgress)
+		  - [File Upload Cancelation](#anchorFileUploadCancelation)
 		  - [File Download](#anchorFilesDownload)
 - [Features](#anchorFeatures)	
 - [Project Structure](#anchorProjStruct)
@@ -331,7 +333,7 @@ Before uploading file will be encrypted, and splitted on little chunks. During t
 
 To upload file you should call
 
-Android:
+######Android:
  ```java 
  long uploadFile(String bucketId, String localPath, UploadFileCallback callback)
  ```
@@ -340,30 +342,61 @@ Android:
 
 Return value of this method - is fileHandle, that is needed to cancel upload.
 
-File upload cancellation:
+######iOS:
+
+```
+-(long) uploadFile: (NSString * _Nonnull) localPath
+          toBucket: (NSString * _Nonnull) bucketId
+    withCompletion: (SJFileUploadCallback *_Nonnull) completion;
+```
+<a name="anchorFileUploadProgress"></a>
+
+#####File uploading propgress: 
+
+######Android
+
+In your [UploadFileCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/UploadFileCallback.java)
+you can find 
+
+```java
+void onProgress(String filePath, double progress, long uploadedBytes, long totalBytes)
+```
+callback. It parameters contains all needed information to implement progress of file uploading in your application.
+
+######iOS
+
+In yout [SJFileUploadCallback](https://github.com/storj/ios-libstorj/blob/master/StorjIOS/StorjIOS/StorjCallbacks/FileOperations/SJFileUploadCallback.h) you can find 
+
+```
+(^SJFileUploadProgressCallbackBlock)(NSString *fileId,
+                                                    double progress,
+                                                    double uploadedBytes,
+                                                    double totalBytes);
+```
+
+callback block. It parameters contains all needed information to implement progress of file uploading in your application.
+<a name="anchorFileUploadCancelation"></a>
+#####File upload cancellation:
+
+Just save you fileHandle and pass it as a parameter to this method.
+
+######Android
 
 ```java
 boolean cancelUpload(long uploadState)
 ```
 
-Just save you fileHandle and pass it as a parameter to this method.
-
-File uploading propgress: 
-
-in your [UploadFileCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/UploadFileCallback.java)
-you can find 
-```java
-void onProgress(String filePath, double progress, long uploadedBytes, long totalBytes)
+######iOS
 ```
-callback. It parameters contain all needed information to implement progress of file uploading in your application.
-
-IOS:
+-(BOOL) cancelUpload:(long) fileRef;
+```
 
 <a name="anchorFilesDownload"></a>
 ##### File downloading
-Android: 
 
 Before file downloading you should check that your device has enough free memory in its disk space. In other case - you can face issues in download behaviour.
+
+######Android: 
 
 ```java
 long downloadFile(String bucketId, String fileId, String localPath, DownloadFileCallback callback)
@@ -373,15 +406,34 @@ This method has three parameters - id of the file, path, to the file, and [Downl
 
 Return value of this method - is fileHandle, that is needed to cancel download.
 
-File download cancellation:
+######iOS:
+```
+-(long) downloadFile: (NSString * _Nonnull) fileId
+          fromBucket: (NSString * _Nonnull) bucketId
+           localPath: (NSString * _Nonnull) localPath
+      withCompletion: (SJFileDownloadCallback* _Nonnull) completion;
+```
+
+This method has three parameters - file id, Bucket id, path to the file and [SJDownloadFileCallback](https://github.com/storj/ios-libstorj/blob/master/StorjIOS/StorjIOS/StorjCallbacks/FileOperations/SJFileDownloadCallback.h)
+
+Return value of this method - is fileHandle, that is needed to cancel download.
+
+<a name="anchorFileDownloadCancelation"></a>
+#####File download cancellation:
+
+Just save you fileHandle and pass it as a parameter to this method.
+
+######Android
 
 ```java
 boolean cancelDownload(long downloadState)
 ```
 
-Just save you fileHandle and pass it as a parameter to this method.
+######iOS
 
-IOS:
+```
+-(BOOL) cancelDownload: (long) fileRef;
+```
 
 <a name="anchorFeatures"></a>
 ## Features
@@ -389,6 +441,7 @@ IOS:
 Storj Mobile iOS and Android App is multifunctional cloud storage consumer mobile application that allows to individual use all popular cloud storage features but in very secure way and to store files around distributed network of computers around the world.
 
 We designed Storj Mobile applications with the next list of features inside:
+
 - registration
 - authorization
 - file download
