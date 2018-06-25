@@ -475,11 +475,51 @@ Android part is written in Java language and its main modules are:
 2. **services** - list of our background services that executes long-running operations.
      
      - **ServiceModule** - entry point that is responsible for binding another services.
-     
+     - **FetchService** - updates buckets and files in background.
+     - **UploadService** - service responsible for uploading files.
+     - **DownloadService** - service responsible for downloading files.
+     - **SynchronizationService** - service which handles SyncQueue.
+     - **SynchronizationSchedulerJobService** - job service that takes difference between files in user folders and Storj and fills SyncQueue.
+    
+    **FetchService**
+    ```
+    void getBuckets()
+    void getFiles(String bucketId)
+    void createBucket(final String bucketName)
+    void deleteBucket(final String bucketId)
+     ```
+
+    **UploadService**
+    Has two worker threads for uploading files to Storj. One is for ordinary upload and another one is for synchronization     related upload and one thread for upload cancellation.
+    Service module method for invoking ordinary file upload
+     ```
+    void uploadFile(String bucketId, String localPath, String fileName)
+     ```
+    
+    **DownloadService**
+    One worker thread for downloading files to device, one at a time. Also has a copy file method that downloads file from     one bucket and invoke upload to target bucket.
+    Method in ServiceModule for invoking file downloading
+     ```
+    void downloadFile(String bucketId, String fileId, String localPath)
+    void copyFile(String bucketId, String fileId, String localPath, String targetBucketId)
+     ```
+    
+    **SynchronizationService**
+    Handles sync queue and working with UploadService for invoking sync related upload and cancellation. Intent service       that process one request at a time. 
+    Has few puplic methods in ServiceModule for sync start and cancel and for removing entrie from sync queue. StartSync      only process the sync queue but doesn't fill it with new entries.
+     ```
+    void startSync()
+    void cancelSync()
+    void removeFileFromSyncQueue(int id)
+     ```
+    
+    **SynchronizationSchedulerJobService**
+    Service that finds difference between user local files and Storj and fills sync Queue with new entries. Has no public     methods. Invoked directly by FirebaseJobDispatcher. On filling the queue starts SynchronizationService to process all     entries.
+    
      Next methods of this service are called from frontend part to bind all services when application started.
-     ```void bindGetBucketsService(Promise promise)
-        void bindUploadService(Promise promise)
-        void bindDownloadService(Promise promise)
+     ```
+    void bindGetBucketsService(Promise promise)
+    void bindDownloadService(Promise promise)
      ```
 
 <a name="anchorIssues"></a>
