@@ -78,7 +78,7 @@ export default function filesReducer(state = initialState, action) {
             newState.fileListModels = filesManager.selectFile(action.payload.file);
             break;
         case SELECT_FILES: 
-            newState.fileListModels = filesManager.selectFiles(action.payload.bucketId, action.payload.searchSequence); 
+            newState.fileListModels = filesManager.selectFiles(action.payload.filteredFiles); 
             break;
         case DESELECT_FILE:
             newState.fileListModels = filesManager.deselectFile(action.payload.file);
@@ -98,5 +98,6 @@ export default function filesReducer(state = initialState, action) {
         default:
             return state || initialState;
     }
+
     return newState;
 }

@@ -32,6 +32,7 @@ export default class HeaderBucketsListComponent extends BucketsListComponent {
                     animatedScrollValue = { this.props.animatedScrollValue }
                     setSearch = { this.props.setSearch }
                     clearSearch = { this.props.clearSearch }
+                    searchSubSequence = { this.props.searchSubSequence }
                     searchIndex = { this.props.searchIndex }
                     openedBucketId = { this.props.bucketId }
                     selectAll = { this.props.selectAll }

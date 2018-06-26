@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { setDashboardBucketId } from '../reducers/mainContainer/mainReducerActions';
-import { navigateToDashboardFilesScreen, redirectToFavoriteBucketsScreen, redirectToFavoriteFilesScreen } from '../reducers/navigation/navigationActions';
+import { navigateToDashboardFilesScreen, redirectToFavoriteBucketsScreen, redirectToFavoriteFilesScreen, redirectToRecentSyncFilesScreen } from '../reducers/navigation/navigationActions';
 import { uploadFileStart, uploadFileSuccess } from '../reducers/asyncActions/fileActionsAsync';
 import { listSyncQueueEntriesAsync, updateSyncQueueEntryFileNameAsync, updateSyncQueueEntryStatusAsync } from "../reducers/mainContainer/SyncQueue/syncQueueReducerAsyncActions";
 import { getSyncStatusFromCode, getActionIconFromCode, getActionsFromCode, getIsLoading, getAllFromCode } from "../utils/syncQueue/syncStatusMapper";
@@ -82,7 +82,8 @@ class DashboardContainer extends Component {
                 bandwidthAmount = { this.props.bandwidth } 
                 navigateToDashboardFilesScreen = { this.props.navigateToDashboardFilesScreen }
                 redirectToFavoriteBucketsScreen = { this.props.redirectToFavoriteBucketsScreen }
-                redirectToFavoriteFilesScreen = { this.props.redirectToFavoriteFilesScreen } />
+                redirectToFavoriteFilesScreen = { this.props.redirectToFavoriteFilesScreen }
+                redirectToRecentSyncFilesScreen = { this.props.redirectToRecentSyncFilesScreen } />
         )
     }
 }
@@ -112,7 +113,8 @@ function mapDispatchToProps(dispatch) {
             navigateToDashboardFilesScreen,
             listSyncQueueEntriesAsync,
             updateSyncQueueEntryFileNameAsync,
-            updateSyncQueueEntryStatusAsync
+            updateSyncQueueEntryStatusAsync,
+            redirectToRecentSyncFilesScreen
         }, dispatch),
         getUploadingFile: (fileHandle) => dispatch(uploadFileStart(fileHandle)),
         uploadSuccess: (fileHandle, fileId) => dispatch(uploadFileSuccess(fileHandle, fileId))

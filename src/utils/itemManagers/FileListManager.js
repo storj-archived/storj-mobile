@@ -309,8 +309,8 @@ export default class FileListManager {
      * Selecting files
      * @param {object} files
      */
-    selectFiles(bucketId, searchSequence) {        
-        return this._changeFilesSelection(bucketId, true, searchSequence);
+    selectFiles(filteredFiles) {        
+        return this._changeFilesSelection(filteredFiles);
     }
 
     /**
@@ -349,29 +349,21 @@ export default class FileListManager {
     }    
 
     /**
-     * Updating files isSelected prop
-     * @param {string} bucketId 
-     * @param {bool} value 
+     * Setting file as selected depends on bucket id and searchSequence
+     * @param {array} filteredFiles to select
+     * @returns updated list of files
      */
-    _changeFilesSelection(bucketId, value, searchSequence) {
-        if (searchSequence) {
-            this.newFilesList = this.newFilesList.map(file => {
-                if (file.entity.bucketId === bucketId && file.entity.name.toLowerCase().includes(searchSequence.toLowerCase()))
-                    file.isSelected = value; 
+    _changeFilesSelection(filteredFiles) {
 
-                return file;
-            })
-
-            return this.newFilesList;
-        }
-        
         this.newFilesList = this.newFilesList.map(file => {
-            if(file.entity.bucketId === bucketId) 
-                file.isSelected = value;  
+            for(let i = 0; i < filteredFiles.length; i++) {
 
+                if(file.entity.id === filteredFiles[i].entity.id)
+                    file.isSelected = true;
+            }
             return file;
         });
-        
+
         return this.newFilesList;
     }    
 }

@@ -103,7 +103,7 @@ export default class DashboardListComponent extends Component{
                                 this.props, 
                                 syncedfilesCount, 
                                 TYPES.SYNCED,
-                                () => this.props.redirectToFavoriteFilesScreen(TYPES.SYNCED)
+                                this.props.redirectToRecentSyncFilesScreen
                             )
                         }
                         </View>

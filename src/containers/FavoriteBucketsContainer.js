@@ -3,7 +3,7 @@ import { Animated } from "react-native";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { dashboardContainerActions } from '../reducers/mainContainer/mainReducerActions';
-import { bucketsListContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
+import { bucketsListContainerBucketActions, selectBuckets, deselectBuckets } from '../reducers/mainContainer/Buckets/bucketReducerActions';
 import { bucketsListContainerActions, setSearch, clearSearch } from '../reducers/mainContainer/mainReducerActions';
 import { dashboardNavigateBack, navigateBack } from '../reducers/navigation/navigationActions';
 import { getShortBucketName } from "../utils/fileUtils";
@@ -44,6 +44,15 @@ class FavoriteBucketsContainer extends BaseListContainer {
     }
 
     /**
+     * Action for clearing selection on dashboard favorite buckets screen,
+     * also disables selection mode for closing selection header
+     */
+    deselectBuckets() {
+        this.props.deselectBuckets();
+        this.props.disableSelectionMode();
+    }
+
+    /**
      * Implementation of virtual method from base list container
      * that handles bucket on onPress
      * @param {ListItemModel<BucketModel>} bucket ListItemModel initialized with BucketModel
@@ -62,6 +71,16 @@ class FavoriteBucketsContainer extends BaseListContainer {
         this.props.dashboardNavigateBack();
         this.props.disableSelectionMode();
         this.props.setDashboardBucketId(null);
+    }
+
+    getDataForSelection() {
+        let data = this.getData().slice();
+        
+        if(this.props.searchSubSequence) {
+            return data.filter(bucket => bucket.entity.name.toLowerCase().includes(this.props.searchSubSequence.toLowerCase()))
+        }
+
+        return data;
     }
 
     render() {
@@ -96,8 +115,8 @@ class FavoriteBucketsContainer extends BaseListContainer {
                 disableSelectionMode = { this.props.disableSelectionMode }
                 showOptions = { this.props.screenProps.showOptions }
                 getSelectedFilesCount = { this.getSelectedItemsCount(data) }
-                selectAll = { this.props.screenProps.selectAll }
-                deselectAll = { this.props.screenProps.deselectAll } />
+                selectAll = { () => this.props.selectBuckets(this.getDataForSelection()) }
+                deselectAll = { this.deselectBuckets.bind(this) } />
         );
     }
 }
@@ -124,7 +143,9 @@ function mapDispatchToProps(dispatch) {
         dashboardNavigateBack,
         navigateBack,
         setSearch,
-        clearSearch
+        clearSearch,
+        selectBuckets,
+        deselectBuckets
     }, dispatch);
 }
 

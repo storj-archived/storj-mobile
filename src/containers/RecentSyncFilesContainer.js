@@ -15,7 +15,7 @@ import headerFilesListBinder from "../viewBinders/headerFilesListBinder";
 import PropTypes from 'prop-types';
 
 /**
- * Container for favorite files screen on dashboard
+ * Container for recentSync files screen on dashboard
  */
 class FavoriteFilesContainer extends BaseFilesListContainer {
     constructor(props) {
@@ -30,17 +30,15 @@ class FavoriteFilesContainer extends BaseFilesListContainer {
     }
 
     /**
-     * Overriden method from BaseFileListContainer
-     * selects starred all files and uploadingFiles
      * @returns {ListItemModel<FileModel>[]} ListItemModels initialized with FileModel
      */
     getData() { 
         return this.props.fileListModels.concat(this.props.uploadingFileListModels)
-                                        .filter(file => file.getStarred() === true);
+                                        .filter(file => file.getSynced() === true);
     }
 
     /**
-     * Action for clearing selection on dashboard favorite files screen,
+     * Action for clearing selection on dashboard recentSync files screen,
      * also disables selection mode for closing selection header
      */
     deselectFiles() {

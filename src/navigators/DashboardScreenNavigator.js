@@ -3,6 +3,7 @@ import FilesScreen from '../containers/DashboardFilesListContainer';
 import DashboardScreen from '../containers/DashboardContainer';
 import FavoriteFilesScreen from '../containers/FavoriteFilesContainer';
 import FavoriteBucketsScreen from "../containers/FavoriteBucketsContainer";
+import RecentSyncFilesScreen from "../containers/RecentSyncFilesContainer";
 
 const DashboardScreenNavigator = StackNavigator(
     {
@@ -21,6 +22,10 @@ const DashboardScreenNavigator = StackNavigator(
         FavoriteFilesScreen: {
             screen: FavoriteFilesScreen,
             routeName: 'FavoritesFilesScreen'
+        },
+        RecentSyncFilesScreen: {
+            screen: RecentSyncFilesScreen,
+            routeName: 'RecentSyncFilesScreen'
         }
     }, 
     {

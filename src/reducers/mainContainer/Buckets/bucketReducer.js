@@ -33,7 +33,7 @@ export default function mainReducer(state = initialState, action) {
             newState.buckets = bucketsManager.changeItemSelectionStatus(action.payload.bucket, true);            
             break;
         case SELECT_BUCKETS:
-            newState.buckets = bucketsManager.selectBuckets(action.isFavorites, action.searchSequence);           
+            newState.buckets = bucketsManager.selectBuckets(action.filteredBuckets);           
             break;
         case DESELECT_BUCKET:
             newState.buckets = bucketsManager.changeItemSelectionStatus(action.payload.bucket, false);            
@@ -68,5 +68,6 @@ export default function mainReducer(state = initialState, action) {
         default:
             return state || initialState;
     }
+
     return newState; 
 };

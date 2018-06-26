@@ -31,25 +31,17 @@ export default class ItemManager {
 
     /**
      * Change isSelected prop to true for all buckets
+     * @param {Array} filteredBuckets to select
      * @returns {ListItemModel[]} 
      */
-    selectBuckets(isFavorites, searchSequence) {
+    selectBuckets(filteredBuckets) {
 
-        if(!isFavorites) {
-            this.itemList = this.itemList.map((bucket) => {
-                if(bucket.entity.name.toLowerCase().includes(searchSequence.toLowerCase())) bucket.isSelected = true;
-                return bucket;
-            })
+        this.itemList = this.itemList.map(bucket => {
+            for(let i = 0; i < filteredBuckets.length; i++) {
 
-            return this.itemList;
-        }
-
-        this.itemList = this.itemList.map((bucket) => {
-            if (bucket.getStarred() && 
-                bucket.entity.name.toLowerCase()
-                .includes(searchSequence.toLowerCase())) 
+                if(bucket.entity.id === filteredBuckets[i].entity.id)
                     bucket.isSelected = true;
-            
+            }
             return bucket;
         });
 
@@ -114,29 +106,4 @@ export default class ItemManager {
 
         return this.itemList;
     }
-
-    //TODO: delete, depreciated
-    _selectBucket(bucketId) {
-        let isBucketSelected = false;
-
-        for(let i = 0; i < this.selectedBuckets.length; i++) {
-            if(this.selectedBuckets[i] === bucketId) isBucketSelected = true;
-        };
-
-        if(!isBucketSelected)
-            this.selectedBuckets.push(bucketId);
-
-        return this.selectedBuckets;
-    };
-
-    //TODO: delete, depreciated
-    _deselectBucket(bucketId) {
-        let index = this.selectedBuckets.indexOf(bucketId);
-            
-        if(index > -1) {
-            this.selectedBuckets.splice(index, 1);
-        }
-
-        return this.selectedBuckets;
-    };
 }

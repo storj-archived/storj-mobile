@@ -211,11 +211,20 @@ export function redirectToFavoriteBucketsScreen(itemType) {
     });
 }
 
-export function redirectToFavoriteFilesScreen(itemType) {
+export function redirectToFavoriteFilesScreen() {
     return NavigationActions.reset({
         index: 0,
         actions: [
-          NavigationActions.navigate({ routeName: 'FavoriteFilesScreen', params: { itemType }})
+          NavigationActions.navigate({ routeName: 'FavoriteFilesScreen' })
+        ]
+    });
+}
+
+export function redirectToRecentSyncFilesScreen() {
+    return NavigationActions.reset({
+        index: 0,
+        actions: [
+            NavigationActions.navigate({ routeName: 'RecentSyncFilesScreen' })
         ]
     });
 }

@@ -322,12 +322,20 @@ class MainContainer extends Component {
         ServiceModule.deleteFile(bucketId, fileId);
     }
 
+    /**
+     * Deletes files with isSelected property and disables
+     * selecting mode afterwards
+     * @param {string} bucketId 
+     */
     deleteSelectedFiles(bucketId) {
         this.props.fileListModels.forEach(fileItem => { 
 
             if(fileItem.isSelected)
                 this.deleteFile(fileItem.entity.bucketId, fileItem.getId());
         });
+
+        if(this.props.isSingleItemSelected)
+            this.props.disableSelectionMode();
     }
     
     componentWillUnmount () {
@@ -549,13 +557,34 @@ class MainContainer extends Component {
         this.props.disableSelectionMode();
     }
 
-    selectAll(bucketId, isFavoritesBuckets) {
+    getFilteredFiles(bucketId, searchSequence) {
+        let filteredFiles = this.props.fileListModels.slice();
+
+        if(searchSequence) {
+            return filteredFiles.filter(file => file.entity.bucketId === bucketId && 
+                file.entity.name.toLowerCase().includes(searchSequence.toLowerCase()))
+        }
+
+        return filteredFiles.filter(file => file.entity.bucketId === bucketId);
+    } 
+
+    getBucketsForSelection() {
+        let data = this.props.buckets.slice();
+        
+        if(this.props.searchSequence) {
+            return data.filter(bucket => bucket.entity.name.toLowerCase().includes(this.props.searchSequence.toLowerCase()))
+        }
+
+        return data;
+    }
+
+    selectAll(bucketId) {
         if(bucketId) {
-            this.props.selectFiles(bucketId, this.props.searchSequence);
+            this.props.selectFiles( this.getFilteredFiles(bucketId, this.props.searchSequence) );
             return;
         }
 
-        this.props.selectBuckets(isFavoritesBuckets, this.props.searchSequence);
+        this.props.selectBuckets(this.getBucketsForSelection());
     }
 
     deselectAll() {
