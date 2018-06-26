@@ -24,13 +24,14 @@ All files will be encrypted before sending to distributed network.
 		  - [File Upload Progress](#anchorFileUploadProgress)
 		  - [File Upload Cancelation](#anchorFileUploadCancelation)
 		  - [File Download](#anchorFilesDownload)
+		  - [File Download Cancelation](#anchorFileDownloadCancelation)
 - [Features](#anchorFeatures)	
 - [Project Structure](#anchorProjStruct)
   - [Frontend](#anchorFront)
   - [Android](#anchorAndroid)
   - [iOS](#anchorIos)
 - [Known Issues](#anchorIssues)
-- [Steb by step tutorials](#anchorTutorials)
+- [Step by step tutorials](#anchorTutorials)
   - [Android](#anchorAndroidTutorial)
   - [Ios](#anchorIosTutorial)
   - [React-native](#anchorRnTutorial)
@@ -344,7 +345,7 @@ Return value of this method - is fileHandle, that is needed to cancel upload.
 
 ######iOS:
 
-```
+```objc
 -(long) uploadFile: (NSString * _Nonnull) localPath
           toBucket: (NSString * _Nonnull) bucketId
     withCompletion: (SJFileUploadCallback *_Nonnull) completion;
@@ -367,7 +368,7 @@ callback. It parameters contains all needed information to implement progress of
 
 In yout [SJFileUploadCallback](https://github.com/storj/ios-libstorj/blob/master/StorjIOS/StorjIOS/StorjCallbacks/FileOperations/SJFileUploadCallback.h) you can find 
 
-```
+```objc
 (^SJFileUploadProgressCallbackBlock)(NSString *fileId,
                                                     double progress,
                                                     double uploadedBytes,
@@ -387,7 +388,7 @@ boolean cancelUpload(long uploadState)
 ```
 
 ######iOS
-```
+```objc
 -(BOOL) cancelUpload:(long) fileRef;
 ```
 
@@ -407,7 +408,7 @@ This method has three parameters - id of the file, path, to the file, and [Downl
 Return value of this method - is fileHandle, that is needed to cancel download.
 
 ######iOS:
-```
+```objc
 -(long) downloadFile: (NSString * _Nonnull) fileId
           fromBucket: (NSString * _Nonnull) bucketId
            localPath: (NSString * _Nonnull) localPath
@@ -431,7 +432,7 @@ boolean cancelDownload(long downloadState)
 
 ######iOS
 
-```
+```objc
 -(BOOL) cancelDownload: (long) fileRef;
 ```
 
@@ -535,6 +536,7 @@ Android part is written in Java language and its main modules are:
      - **SynchronizationSchedulerJobService** - job service that takes difference between files in user folders and Storj and fills SyncQueue.
     
     **FetchService**
+    
     ```
     void getBuckets()
     void getFiles(String bucketId)
@@ -545,6 +547,7 @@ Android part is written in Java language and its main modules are:
     **UploadService**
     Has two worker threads for uploading files to Storj. One is for ordinary upload and another one is for synchronization     related upload and one thread for upload cancellation.
     Service module method for invoking ordinary file upload
+    
      ```
     void uploadFile(String bucketId, String localPath, String fileName)
      ```
@@ -552,6 +555,7 @@ Android part is written in Java language and its main modules are:
     **DownloadService**
     One worker thread for downloading files to device, one at a time. Also has a copy file method that downloads file from     one bucket and invoke upload to target bucket.
     Method in ServiceModule for invoking file downloading
+    
      ```
     void downloadFile(String bucketId, String fileId, String localPath)
     void copyFile(String bucketId, String fileId, String localPath, String targetBucketId)
@@ -560,6 +564,7 @@ Android part is written in Java language and its main modules are:
     **SynchronizationService**
     Handles sync queue and working with UploadService for invoking sync related upload and cancellation. Intent service       that process one request at a time. 
     Has few puplic methods in ServiceModule for sync start and cancel and for removing entrie from sync queue. StartSync      only process the sync queue but doesn't fill it with new entries.
+    
      ```
     void startSync()
     void cancelSync()
@@ -570,10 +575,95 @@ Android part is written in Java language and its main modules are:
     Service that finds difference between user local files and Storj and fills sync Queue with new entries. Has no public     methods. Invoked directly by FirebaseJobDispatcher. On filling the queue starts SynchronizationService to process all     entries.
     
      Next methods of this service are called from frontend part to bind all services when application started.
+     
      ```
     void bindGetBucketsService(Promise promise)
     void bindDownloadService(Promise promise)
      ```
+
+<a name="anchorIos"></a>
+###iOS
+
+iOS part is written in Objective-C language and its main modules are:
+
+1. **dataProvider** - out database layer. This layer includes:
+    - **contracts** - entities, that describes correspondings tables.
+    
+    - **dbo** - Data base objects. Dbo - is an object that defines how the data will be sent to the database.
+    
+    - **repositories** - We use a repository to separate the logic that retrieves the data and maps it to the entity model from the business logic that acts on the model.
+    
+    In our current implementation whe have 4 tables:
+    
+    - **Buckets** - stores already uploaded buckets and its metadata.
+    - **Files**- stores already uploaded files metadata. Also stores thumbnail of downloaded/uploaded file as base64 String.
+    - **UploadingFiles** - stores all uplaoding files. When uploading finish files will be removed and placed to the Files table.
+    - **SynchronizationQueue** - stores synchronization queue list.  
+    - **Settings** - stores all settings.
+    
+    We use SQLite3 as local database with FMDB wrapper.
+    
+2. **services** - list of our 'background' services that executes long-running operations.
+     
+     - **STStorjBackgroundServices** - updates buckets and files in background.
+     - **STUploadService** - service responsible for uploading files.
+     - **STSyncService** - service which handles SyncQueue.
+     - **STSyncScheduler** - job service that takes difference between files in user folders and Storj and fills SyncQueue.
+    
+    **STStorjBackgroundServices**
+    
+    ```
+    -(void) getBuckets;
+    -(void) getFiles:(NSString *) bucketId;
+    -(void) createBucket:(NSString *)bucketName);
+    -(void) deleteBucket(final String bucketId);
+    -(void) deleteFileByBucketId:(NSString *) bucketId andWithFileId: (NSString *) fileId);
+    ```
+
+    **STUploadService**
+    Has two worker threads for uploading files to Storj. One is for ordinary upload and another one is for synchronization     related upload and one thread for upload cancellation.
+    Service module method for invoking ordinary file upload
+    
+     ```
+	-(void) uploadFileWithBucketId: (NSString *) bucketId
+	                      fileName: (NSString *) fileName
+   		                  localPath: (NSString *) localPath;
+
+	-(void) syncFileWithSyncEntryId: (int) syncEntryId
+       	                bucketId: (NSString *) bucketId
+          	             fileName: (NSString *) fileName
+             		         localPath: (NSString *) localPath;
+
+	-(void) cancelSyncEntry: (int) syncEntryId;
+
+	-(void) clean;
+     ```
+    
+    **STSyncService**
+    Handles sync queue and working with STUploadService for invoking sync related upload and cancellation. Intent service       that process one request at a time. 
+    Has few puplic methods in ServiceModule for sync start and cancel and for removing entrie from sync queue. StartSync only process the sync queue but doesn't fill it with new entries.
+    
+     ```
+	   -(void) startSync;
+
+		-(void) stopSync;
+
+		-(void) removeFileFromSyncQueue: (int) syncEntryId;
+
+		-(void) clean;
+     ```
+    
+    **STSyncScheduler**
+    Service that finds difference between user local files and Storj and fills sync Queue with new entries. Runs on application start and fills sync Queue in case if user granted all neccessary permissions, logged in and enabled Synchronization. On filling the queue starts SynchronizationService to process all     entries.
+     
+     ```
+		-(void) scheduleSync;
+
+		-(void) startSyncDelayed;
+
+		-(void) cancelSchedule;
+     ```
+
 
 <a name="anchorIssues"></a>
 ## Issues
@@ -610,6 +700,7 @@ dependencies {
 ```
 
 If you are using older versions of Android it could be a bit different. For example:
+
 ```Gradle
 dependencies {
     compile 'io.storj:libstorj-android:0.7.2'
@@ -620,6 +711,7 @@ dependencies {
 After this press File -> Sync project with gradle files
 
 Also add next line to your AndroidManifest.xml
+
 ```XML
     <uses-permission android:name="android.permission.INTERNET" />
 ```
@@ -636,9 +728,6 @@ You can read detailed api description in API section
 
 
 Create new class with the RegisterModule name there.
-
-
-
 
 ````java
 package StorjModule;
