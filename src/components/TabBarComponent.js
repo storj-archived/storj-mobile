@@ -49,6 +49,8 @@ export default class TabBarComponent extends Component {
     }
 
     showTabBar() {
+        if(this.props.screenProps.isFirstSignIn) return;
+        
         Animated.timing(this.tabBarPositionAnimated, {
             toValue: 0,
             easing: Easing.circle,
