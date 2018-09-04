@@ -17,7 +17,7 @@ import thunk from "redux-thunk";
 /**
  * Declaration of redux store with combining all reducers
  */
-const combinedReducers = combineReducers({
+export const combinedReducers = combineReducers({
     authReducer, 
     navReducer, 
     mainScreenNavReducer, 
@@ -41,4 +41,4 @@ const rootReducer = (state, action) => {
     return combinedReducers(state, action)
 }
 
-export const store = createStore(combinedReducers, applyMiddleware(thunk));
+export const store = createStore(rootReducer, applyMiddleware(thunk));

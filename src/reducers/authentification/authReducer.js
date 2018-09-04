@@ -92,18 +92,6 @@ export default function authReducer(state, action) {
             newState.user.isAccountExist = true;
 
             return newState;
-        case CLEAR: 
-            newState.user.isLoggedIn = false, 
-            newState.user.email = null, 
-            newState.user.password = null, 
-            newState.user.mnemonic = null,
-            newState.user.error = null, 
-            newState.user.isLoading = false, 
-            newState.user.isRedirectedFromRegister = false,
-            newState.user.isEmailConfirmed = true,
-            newState.user.isAccountExist = true
-
-            return newState;
         case SAVE_MNEMONIC: 
             newState.user.mnemonic = action.mnemonic
 
