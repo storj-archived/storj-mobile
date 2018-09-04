@@ -16,8 +16,6 @@ import StorjLib from '../utils/StorjModule';
 import SyncModule from '../utils/SyncModule';
 import { LoginStateModel } from '../models/LoginStateModel';
 import infoScreensConstants from '../utils/constants/infoScreensConstants';
- 
-const FIRST_ACTION = 'FIRST_ACTION';
 
 /**
  * Container for QRCodeScannerComponent

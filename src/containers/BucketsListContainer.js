@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { bucketsListContainerActions } from '../reducers/mainContainer/mainReducerActions';
 import { bucketsListContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
-import { navigateToFilesScreen, navigateBack } from '../reducers/navigation/navigationActions';
+import { navigateToFilesScreen } from '../reducers/navigation/navigationActions';
 import { getShortBucketName } from "../utils/fileUtils";
 import ServiceModule from '../utils/ServiceModule';
 import BaseListContainer from "../containers/BaseListContainer";

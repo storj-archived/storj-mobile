@@ -72,7 +72,6 @@ export default class SyncQueueCallbackObject {
         return _callbackObject.get(SyncQueueCallbackObject);
     }
     static set CallbackObject(callbackObject) {
-        console.log(callbackObject);
         _callbackObject.set(SyncQueueCallbackObject, _checkCallBack(callbackObject));
     }
 

@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { redirectToMainScreen, openSelectBucketScreen } from '../reducers/navigation/navigationActions';
 import { imageViewerActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import ServiceModule from '../utils/ServiceModule';
-import SyncModule from "../utils/SyncModule";
 import TabBarActionModelFactory from '../models/TabBarActionModel';
 import ImageViewComponent from "../components/ImageViewerComponent";
 import BaseFileViewerContainer from '../containers/BaseFileViewerContainer';

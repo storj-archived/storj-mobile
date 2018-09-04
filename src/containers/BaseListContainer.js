@@ -1,8 +1,5 @@
-import React, { Component } from 'react';
-import ServiceModule from '../utils/ServiceModule';
-import StorjModule from '../utils/StorjModule';
+import { Component } from 'react';
 import ListItemModel from '../models/ListItemModel';
-import PropTypes from 'prop-types';
 
 /** 
  * Base class for all screen containers with lists

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import TabBarActionModelFactory from '../models/TabBarActionModel';
@@ -8,7 +8,6 @@ import { redirectToMainScreen } from '../reducers/navigation/navigationActions';
 import { imageViewerActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import OpenFileModule from '../utils/OpenFileModule';
 import { getFileSize } from "../utils/fileUtils";
-import SyncModule from '../utils/SyncModule';
 
 class FilePreviewContainer extends BaseFileViewerContainer {
     constructor(props) {

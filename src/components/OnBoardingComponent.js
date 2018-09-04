@@ -4,15 +4,12 @@ import {
     TouchableOpacity,
     StyleSheet,
     Image,
-    ScrollView,
     Platform,
     Dimensions
 } from 'react-native';
 import React, { Component } from 'react';
-import ContentSlider from '../components/ContentSliderComponent';
 import onBoardingScreensConstants from '../utils/constants/onBoardingScreeensConstants';
 import { getDeviceWidth, getWidth, getHeight } from '../utils/adaptive';
-import { NavigationActions } from 'react-navigation';
 import SideSwipe from '../components/SideSwipeComponent';
 
 
@@ -30,9 +27,10 @@ OnBoardingScreen = (props) => {
 };
 
 PaginationComponent = (props) => {
-    return(<View style = { styles.paginationCompContainer }>
-                <View style = {[ styles.paginationComponent, { backgroundColor: props.color }]} />
-            </View>
+    return (
+        <View style = { styles.paginationCompContainer }>
+            <View style = {[ styles.paginationComponent, { backgroundColor: props.color }]} />
+        </View>
     );
 }
 

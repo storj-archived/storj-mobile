@@ -8,9 +8,7 @@ import {
     Clipboard
 } from 'react-native';
 import React, { Component } from 'react';
-import mnemonicScreenConstants from '../../utils/constants/mnemonicScreenConstants';
 import { getWidth, getHeight } from '../../utils/adaptive';
-import StorjModule from '../../utils/StorjModule';
 import PropTypes from 'prop-types';
 
 

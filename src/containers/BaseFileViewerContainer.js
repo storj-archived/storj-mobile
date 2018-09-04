@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Alert, BackHandler, Platform } from 'react-native';
 import ServiceModule from '../utils/ServiceModule';
 import StorjModule from '../utils/StorjModule';
 import SyncModule from '../utils/SyncModule';
 import OpenFileModule from '../utils/OpenFileModule';
 import ListItemModel from '../models/ListItemModel';
-import PropTypes from 'prop-types';
 import FileModel from "../models/FileModel";
 
 /** 

@@ -3,11 +3,9 @@ import {
     Text,
     StyleSheet,
     Image,
-    TouchableOpacity,
-    Alert
+    TouchableOpacity
 } from 'react-native';
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { getHeight, getWidth } from '../utils/adaptive';
 
 export default class PinOptionComponent extends Component {

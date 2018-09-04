@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import StorjModule from '../../utils/StorjModule';
 import { getHeight, getWidth } from '../../utils/adaptive';
-import { BUCKET_ACTIONS } from '../../utils/constants/actionConstants';
 
 export default class PinCodeGenerationComponent extends Component {
     constructor(props) {
@@ -79,8 +78,6 @@ export default class PinCodeGenerationComponent extends Component {
     }    
 
     checkCodes(newVal) {
-        let result;
-        
         for(let i = 0; i < this.letterCount - 1; i++) {
             if(this.state.code[i] !== this.state.repeatCode[i]) {                                
                 this.setErrorState(); 
@@ -163,8 +160,7 @@ export default class PinCodeGenerationComponent extends Component {
             textStyle,
             errorStyle,
             containerStyle,
-            containerPinStyle,
-            ...props
+            containerPinStyle
         } = this.props;
         
         return (

@@ -1,11 +1,9 @@
 import {
     View,
-    StyleSheet,
-    Animated
+    StyleSheet
 } from 'react-native';
 import React, { Component } from 'react';
 import MyAccountNavContainer from '../../containers/MyAccountNavContainer';
-import { resetPassword } from '../../reducers/authentification/authActions';
 import PropTypes from 'prop-types';
 
 export default class MyAccountNavComponent extends Component {

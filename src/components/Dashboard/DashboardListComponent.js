@@ -4,7 +4,6 @@ import {
     ScrollView,
     StyleSheet,
     Animated,
-    TouchableOpacity,
     Image
 } from 'react-native';
 import React, { Component } from 'react';
@@ -12,10 +11,8 @@ import { getHeight, getWidth } from '../../utils/adaptive';
 import PropTypes from 'prop-types';
 import { TYPES } from '../../utils/constants/typesConstants';
 import DashboardItemListComponent from './DashboardItemListComponent';
-import SyncQueueEntryComponent from "../SynQueue/SyncQueueEntryComponent";
 import { getShortBucketName } from "../../utils/fileUtils";
 import { InfoButtonComponent } from '../InfoButtonComponent';
-import ServiceModule from '../../utils/ServiceModule';
 
 export default class DashboardListComponent extends Component{
     constructor(props) {

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import InputComponent from '../components/InputComponent';
-import { getWidth, getHeight, getDeviceWidth, getDeviceHeight } from '../utils/adaptive';
+import { getWidth, getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 
 export default class InitializeComponent extends Component {

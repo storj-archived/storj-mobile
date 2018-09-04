@@ -2,8 +2,6 @@ import {
     View,
     Text,
     Image,
-    TouchableOpacity,
-    Alert,
     StyleSheet
 } from 'react-native';
 import React, { Component } from 'react';

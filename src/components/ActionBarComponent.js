@@ -1,6 +1,5 @@
 import {
     View,
-    Text,
     StyleSheet,
     Image,
     TouchableOpacity
@@ -8,7 +7,6 @@ import {
 import React, { Component } from 'react';
 import { getWidth, getHeight } from '../utils/adaptive';
 import { TabBarActionModel } from '../models/TabBarActionModel';
-import InputPopUpComponent from '../components/InputPopUpComponent';
 import PropTypes from 'prop-types';
 
 /**
@@ -45,7 +43,6 @@ export default class ActionBarComponent extends Component {
 
     getTapBarAction() {
         return this.props.actions.map((action, index) => {
-            var icon = action.iconPath;
             let imageWrapperStyle = index === 0 
                 ? styles.imageWrapper 
                 : [styles.imageWrapper, styles.imageWrapperBorder];

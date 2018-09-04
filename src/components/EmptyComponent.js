@@ -1,6 +1,5 @@
 import {
-    View,
-    Text
+    View
 } from 'react-native';
 import React, { Component } from 'react';
 

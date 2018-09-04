@@ -16,7 +16,6 @@ export default class FilesListComponent extends BaseListComponent {
     }
 
     render() {
-        const isGridView = this.props.isGridViewShown;
         let isEmpty = this.props.data.length === 0 && !this.props.isLoading;
 
         return(

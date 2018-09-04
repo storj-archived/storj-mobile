@@ -1,13 +1,9 @@
 import React, {Component} from 'react';
 import {
-    Text,
     View,
     ScrollView,
     StyleSheet,
-    Animated,
-    PanResponder,
-    TouchableHighlight,
-    TouchableOpacity
+    TouchableHighlight
 } from 'react-native';
 import { getWidth, getHeight } from '../utils/adaptive';
 
@@ -83,6 +79,7 @@ export default class ContentSlider extends Component {
     render() {
         const width = this.state.width;
         const height = this.state.height;
+        
         return (
             <View style={ [styles.mainContainer, this.props.style ]}>
                 <ScrollView

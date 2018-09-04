@@ -10,7 +10,6 @@ import {
     ProgressViewIOS,
     Platform
 } from 'react-native';
-import PhotoView from 'react-native-photo-view';
 import React, { Component } from 'react';
 import { getDeviceWidth, getDeviceHeight, getWidth, getHeight } from '../utils/adaptive';
 import { getShortBucketName, getFileNameWithFixedSize } from "../utils/fileUtils";

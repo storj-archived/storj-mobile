@@ -1,5 +1,5 @@
-import { BackHandler, Platform, DeviceEventEmitter, Animated } from 'react-native';
-import React, { Component } from 'react';
+import { BackHandler, Platform, Animated } from 'react-native';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { bucketNavigateBack, dashboardNavigateBack, openImageViewer, openFilePreview } from '../reducers/navigation/navigationActions';
@@ -9,7 +9,6 @@ import { getFileSize, getFullFileName, getShortFileName } from "../utils/fileUti
 import FilesListComponent from '../components/FilesListComponent';
 import BaseFilesListContainer from '../containers/BaseFilesListContainer';
 import PropTypes from 'prop-types';
-import ServiceModule from "../utils/ServiceModule";
 
 /** 
  * Files screen, base screen, appears after opening bucket on bucket screen

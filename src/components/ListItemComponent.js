@@ -11,7 +11,6 @@ import {
 import React, {
     Component
 } from 'react';
-import { connect } from 'react-redux';
 import { getWidth, getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 

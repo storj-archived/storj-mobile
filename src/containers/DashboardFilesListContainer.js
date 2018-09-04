@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
     Animated
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderComponent';
 import { myPicturesListContainerMainActions, getPicturesBucketId, dashboardContainerActions, filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { dashboardContainerBucketActions } from '../reducers/mainContainer/Buckets/bucketReducerActions';
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';

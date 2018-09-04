@@ -2,12 +2,10 @@ import {
     View,
     Text,
     Image,
-    Button,
     TouchableOpacity,
     StyleSheet
 } from 'react-native';
-import React, { Component } from 'react';
-import infoScreensConstants from '../utils/constants/infoScreensConstants';
+import React from 'react';
 import { getWidth, getHeight, getDeviceWidth, getDeviceHeight } from '../utils/adaptive';
 
 /**

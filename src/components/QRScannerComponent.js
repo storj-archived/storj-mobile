@@ -6,7 +6,6 @@ import {
     Image
 } from 'react-native';
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { getWidth, getHeight, getDeviceWidth, getDeviceHeight } from '../utils/adaptive';
 import Barcode from 'react-native-smart-barcode';
 

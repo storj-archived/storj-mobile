@@ -59,10 +59,6 @@ class DashboardScreenContainer extends Component {
 }
 
 function mapStateToProps(state) {
-    let routes = state.dashboardScreenNavReducer.routes;
-    let index = state.dashboardScreenNavReducer.index;
-    let currentScreenName = routes[index].routeName;    
-
     return {      
         buckets: state.bucketReducer.buckets,
         defaultRoute: routes[0].routeName

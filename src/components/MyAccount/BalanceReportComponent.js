@@ -1,9 +1,7 @@
 import {
     View,
     Text,
-    StyleSheet,
-    TouchableOpacity,
-    Image
+    StyleSheet
 } from 'react-native';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';

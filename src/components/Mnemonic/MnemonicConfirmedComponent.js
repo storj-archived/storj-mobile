@@ -3,11 +3,9 @@ import {
     Text,
     Image,
     TouchableOpacity,
-    Alert,
     StyleSheet
 } from 'react-native';
 import React, { Component } from 'react';
-import mnemonicScreenConstants from '../../utils/constants/mnemonicScreenConstants';
 import { getWidth, getHeight } from '../../utils/adaptive';
 import PropTypes from 'prop-types';
 

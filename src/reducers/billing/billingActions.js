@@ -1,5 +1,4 @@
 import { BILLING_CONSTANTS } from '../../utils/constants/actionConstants';
-import StorjModule from '../../utils/StorjModule';
 import { getSum, roundToGBAmount } from '../../utils/utils';
 import { getDebitsRequest, getCreditsRequest, createWalletRequest, getWalletRequest } from '../../utils/dataservice';
 

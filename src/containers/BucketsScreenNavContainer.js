@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { NavigationAction, addNavigationHelpers } from 'react-navigation';
+import { addNavigationHelpers } from 'react-navigation';
 import BucketsScreenNavigator from '../navigators/BucketsScreenNavigator';
 
 class BucketsScreenNavContainer extends Component {

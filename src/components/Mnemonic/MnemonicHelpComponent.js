@@ -8,7 +8,6 @@ import {
 import React, { Component } from 'react';
 import { getWidth, getHeight, getDeviceHeight } from '../../utils/adaptive';
 import mnemonicScreenConstants from '../../utils/constants/mnemonicScreenConstants';
-import PropTypes from 'prop-types';
 
 export default class MnemonicHelpComponent extends Component {
     constructor(props) {

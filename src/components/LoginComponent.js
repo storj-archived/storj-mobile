@@ -1,19 +1,16 @@
 import {
     View,
-    TextInput,
     StyleSheet,
     TouchableOpacity,
-    Image,
     Text,
     ActivityIndicator,
-    Keyboard,
     ScrollView,
     Platform
 } from 'react-native';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import InputComponent from '../components/InputComponent';
-import { getWidth, getHeight, getDeviceWidth, getDeviceHeight } from '../utils/adaptive';
+import { getWidth, getHeight } from '../utils/adaptive';
 
 /**
  * LoginScreen component

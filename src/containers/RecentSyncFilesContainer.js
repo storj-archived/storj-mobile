@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Animated } from "react-native";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -12,7 +12,6 @@ import { dashboardNavigateBack, navigateToDashboardFilesScreen, navigateBack } f
 import filesActions from '../reducers/mainContainer/Files/filesReducerActions';
 import BaseFilesListContainer from "../containers/BaseFilesListContainer";
 import headerFilesListBinder from "../viewBinders/headerFilesListBinder";
-import PropTypes from 'prop-types';
 
 /**
  * Container for recentSync files screen on dashboard

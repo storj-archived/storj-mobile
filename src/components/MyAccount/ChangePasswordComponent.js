@@ -3,8 +3,6 @@ import {
     Text,
     StyleSheet,
     TouchableOpacity,
-    ScrollView,
-    Switch,
     Image
 } from 'react-native';
 import React, { Component } from 'react';

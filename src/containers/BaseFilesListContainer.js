@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import BaseListContainer from "../containers/BaseListContainer";
 import ServiceModule from '../utils/ServiceModule';
 import StorjModule from '../utils/StorjModule';
@@ -6,7 +5,6 @@ import PropTypes from 'prop-types';
 import ListItemModel from '../models/ListItemModel';
 import FileModel from '../models/FileModel';
 import { isImage } from '../utils/fileUtils';
-import OpenFileModule from '../utils/OpenFileModule';
 
 /** 
  * Base class for all screen with file lists

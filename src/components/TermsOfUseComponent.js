@@ -2,7 +2,7 @@ import {
     WebView,
     StyleSheet
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 
 /**
  * Terms of use component

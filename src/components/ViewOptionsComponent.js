@@ -9,7 +9,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getHeight, getWidth } from '../utils/adaptive';
 import SORTING from '../utils/constants/sortingConstants';
-import SyncModule from '../utils/SyncModule';
 
 export default class ViewOptionsComponent extends Component {
     constructor(props) {

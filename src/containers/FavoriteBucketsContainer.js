@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Animated } from "react-native";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -7,10 +7,8 @@ import { bucketsListContainerBucketActions, selectBuckets, deselectBuckets } fro
 import { bucketsListContainerActions, setSearch, clearSearch } from '../reducers/mainContainer/mainReducerActions';
 import { dashboardNavigateBack, navigateBack } from '../reducers/navigation/navigationActions';
 import { getShortBucketName } from "../utils/fileUtils";
-import filesActions from '../reducers/mainContainer/Files/filesReducerActions';
 import BaseListContainer from "../containers/BaseListContainer";
 import HeaderBucketsListComponent from "../components/HeaderBucketsListComponent";
-import PropTypes from 'prop-types';
 import BucketModel from '../models/BucketModel';
 
 /**

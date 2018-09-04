@@ -6,11 +6,10 @@ import {
     Text,
     TouchableOpacity
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 //import ListComponent from '../components/ListComponent';
 import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderComponent';
 import { getHeight, getWidth } from '../utils/adaptive';
-import { TYPES } from '../utils/constants/typesConstants';
 import PropTypes from 'prop-types';
 import BaseListComponent from './BaseListComponent';
 

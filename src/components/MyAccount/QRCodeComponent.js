@@ -2,7 +2,6 @@ import {
     View,
     Text,
     StyleSheet,
-    Image,
     TouchableOpacity
 } from 'react-native';
 import React, { Component } from 'react';
@@ -10,7 +9,6 @@ import PropTypes from 'prop-types';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import myAccountConstants from '../../utils/constants/myAccountConstants';
 import QRCode from 'react-native-qrcode';
-import StorjModule from '../../utils/StorjModule';
 
 export default class QRCodeComponent extends Component {
     constructor(props) {

@@ -12,9 +12,7 @@ import {
 import PhotoView from 'react-native-photo-view';
 import React, { Component } from 'react';
 import { getDeviceWidth, getDeviceHeight, getWidth, getHeight } from '../utils/adaptive';
-import { getShortBucketName } from "../utils/fileUtils";
 import ActionBar from '../components/ActionBarComponent';
-import SelectBucketComponent from '../components/SelectBucketComponent';
 
 export default class ImageViewerComponent extends Component {
 

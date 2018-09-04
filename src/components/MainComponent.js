@@ -1,7 +1,5 @@
 import {
     View,
-    Text,
-    Animated,
     ActivityIndicator,
     StyleSheet
 } from 'react-native';

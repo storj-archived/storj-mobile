@@ -2,18 +2,13 @@ import React, {Component} from 'react';
 import {
     View,
     StyleSheet,
-    ScrollView,
     RefreshControl,
     Text,
-    Image,
-    Keyboard,
-    TouchableOpacity,
     Animated
 } from 'react-native';
 import ListItemComponent from "../components/ListItemComponent";
 import GridItemComponent from '../components/GridItemComponent';
 import ExpanderComponent from '../components/ExpanderComponent';
-import ListItemModel from '../models/ListItemModel';
 import PropTypes from 'prop-types';
 import { getWidth, getHeight, getDeviceWidth } from '../utils/adaptive';
 import SORTING from '../utils/constants/sortingConstants';

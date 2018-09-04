@@ -55,7 +55,7 @@ import BucketModel from '../models/BucketModel';
 import FileModel from '../models/FileModel';
 import {listUploadingFiles} from "../reducers/asyncActions/fileActionsAsync";
 import { listSyncQueueEntriesAsync, updateSyncQueueEntryFileNameAsync, updateSyncQueueEntryStatusAsync } from "../reducers/mainContainer/SyncQueue/syncQueueReducerAsyncActions";
-import { getSyncStatusFromCode, getActionIconFromCode, getActionsFromCode, getIsLoading, getAllFromCode } from "../utils/syncQueue/syncStatusMapper";
+import { getAllFromCode } from "../utils/syncQueue/syncStatusMapper";
 import SyncQueueEntryComponent from "../components/SynQueue/SyncQueueEntryComponent";
 import SyncQueueCallbackObject from "../models/SyncQueueCallbackObject";
 import SyncState from '../utils/constants/SyncState';
@@ -391,18 +391,16 @@ class MainContainer extends Component {
         let filePickerResponse = await filePicker.show(type);
         this.props.hideActionBar();
 
-        console.log("filePickerResponse", filePickerResponse);
         filePickerResponse.result.forEach(file => {
             this.filePickerResponsePaths.push(file.path);
         });
-        console.log("filePickerResponsePaths", this.filePickerResponsePaths);
+
         this.props.openSelectBucketScreen(this.getBucketId.bind(this));
     }  
 
     getBucketId(params) {
         if(params.bucketId) {
             this.filePickerResponsePaths.forEach(element => {
-                console.log("------getBucketId----------", this.filePickerResponsePaths);
                 ServiceModule.uploadFile(params.bucketId, element);
             });  
         }

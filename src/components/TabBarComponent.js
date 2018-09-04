@@ -9,7 +9,7 @@ import {
     TouchableWithoutFeedback
 } from 'react-native';
 import React, { Component } from 'react';
-import { getWidth, getHeight, getDeviceWidth} from '../utils/adaptive';
+import { getWidth, getHeight } from '../utils/adaptive';
 import { getPicturesBucketId } from '../reducers/mainContainer/mainReducerActions';
 import PropTypes from 'prop-types';
 import ServiceModule from '../utils/ServiceModule';

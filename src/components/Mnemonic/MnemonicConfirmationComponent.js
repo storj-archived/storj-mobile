@@ -2,12 +2,8 @@ import {
     View,
     Text,
     Image,
-    TextInput,
     TouchableOpacity,
-    StyleSheet,
-    Clipboard,
-    Linking,
-    Alert
+    StyleSheet
 } from 'react-native';
 import React, { Component } from 'react';
 import { WORDLIST } from '../../utils/constants/wordList';

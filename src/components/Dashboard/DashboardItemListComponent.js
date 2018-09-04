@@ -2,8 +2,7 @@ import {
     View,
     Text
 } from 'react-native';
-import React, { Component } from 'react';
-import ListComponent from '../../components/ListComponent';
+import React from 'react';
 import DashboardListFooterComponent from '../../components/Dashboard/DashboardListFooterComponent';
 import DashboardListHeaderComponent from '../../components/Dashboard/DashboardListHeaderComponent';
 import PropTypes from 'prop-types';

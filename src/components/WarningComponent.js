@@ -2,9 +2,7 @@ import {
     View,
     Text,
     StyleSheet,
-    TouchableOpacity,
-    StatusBar,
-    Image
+    StatusBar
 } from 'react-native';
 import React, { Component } from 'react';
 import { getHeight, getWidth } from '../utils/adaptive';

@@ -148,7 +148,6 @@ export default class FileListManager {
      * @param {string} fileId 
      */
     _deleteFileEntry(array, bucketId, fileId) {
-        console.log("_deleteFileEntry", array, bucketId, fileId);
         array = array.filter(fileEntry => fileEntry.getId() !== fileId);
         
         return array;

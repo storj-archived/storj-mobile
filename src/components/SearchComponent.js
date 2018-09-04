@@ -133,7 +133,7 @@ export default class SearchComponent extends Component {
         } else if (this.props.isSelectBucketScreen) {
             return this.selectBucketScreenHeader();
         }
-        console.log("this.props.lastSync", this.props.lastSync)
+
         return(
             
             <View style = { [ styles.rowContainer, styles.mainContainer, this.props.styleContainer ] }>

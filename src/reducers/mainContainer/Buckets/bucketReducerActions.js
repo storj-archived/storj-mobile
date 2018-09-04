@@ -1,8 +1,6 @@
 import { BUCKET_ACTIONS } from '../../../utils/constants/actionConstants';
 import { SYNC_BUCKETS } from '../../../utils/constants/SyncBuckets';
 import ServiceModule from '../../../utils/ServiceModule';
-import ListItemModel from '../../../models/ListItemModel';
-import BucketModel from '../../../models/BucketModel';
 
 const { PICTURES } = SYNC_BUCKETS;
 

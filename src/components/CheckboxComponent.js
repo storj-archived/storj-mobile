@@ -4,7 +4,7 @@ import {
     StyleSheet
 } from 'react-native';
 import React, { Component } from 'react';
-import { getWidth, getHeight } from '../utils/adaptive';
+import { getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 
 /**

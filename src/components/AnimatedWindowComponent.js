@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {
-    Animated,
-    View
+    Animated
 } from "react-native";
 
 export default class AnimatedWindowComponent extends Component {

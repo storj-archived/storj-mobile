@@ -1,4 +1,3 @@
-import FileListModel from '../../../models/FileListModel';
 import FileListManager from '../../../utils/itemManagers/FileListManager';
 import { FILE_ACTIONS, MAIN_ACTIONS } from '../../../utils/constants/actionConstants';
 

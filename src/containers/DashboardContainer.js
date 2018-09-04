@@ -5,7 +5,7 @@ import { setDashboardBucketId } from '../reducers/mainContainer/mainReducerActio
 import { navigateToDashboardFilesScreen, redirectToFavoriteBucketsScreen, redirectToFavoriteFilesScreen, redirectToRecentSyncFilesScreen } from '../reducers/navigation/navigationActions';
 import { uploadFileStart, uploadFileSuccess } from '../reducers/asyncActions/fileActionsAsync';
 import { listSyncQueueEntriesAsync, updateSyncQueueEntryFileNameAsync, updateSyncQueueEntryStatusAsync } from "../reducers/mainContainer/SyncQueue/syncQueueReducerAsyncActions";
-import { getSyncStatusFromCode, getActionIconFromCode, getActionsFromCode, getIsLoading, getAllFromCode } from "../utils/syncQueue/syncStatusMapper";
+import { getAllFromCode } from "../utils/syncQueue/syncStatusMapper";
 import SyncQueueCallbackObject from "../models/SyncQueueCallbackObject";
 import DashboardListComponent from '../components/Dashboard/DashboardListComponent';
 import SyncQueueEntryComponent from "../components/SynQueue/SyncQueueEntryComponent";
