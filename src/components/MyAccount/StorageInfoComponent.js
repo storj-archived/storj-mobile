@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     infoText: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(15),
         lineHeight: getHeight(23),
         color: '#384B65'

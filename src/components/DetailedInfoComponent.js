@@ -96,13 +96,13 @@ const styles = StyleSheet.create({
         // paddingHorizontal: getWidth(20)
     },
     labelText: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(16),
         lineHeight: getHeight(19),
         color: '#384B65'
     },
     infoText: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(16),
         lineHeight: getHeight(19),
         color: 'rgba(56, 75, 101, 0.4)'

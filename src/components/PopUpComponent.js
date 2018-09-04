@@ -45,14 +45,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: getWidth(20)
     },
     popUpInfoText: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         lineHeight: getHeight(20),
         color: '#384B65',
         elevation: 5
     },
     popUpCancelText: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         lineHeight: getHeight(20),
         color: '#2794FF'

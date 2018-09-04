@@ -64,12 +64,12 @@ const styles = StyleSheet.create({
         width: getWidth(7)
     },
     amountText:{
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         color: '#384B65'
     },
     dateText:{
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         color: 'rgba(56, 75, 101, 0.4)',
         marginRight: getWidth(10)

@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         marginLeft: getWidth(5)
     },
     buttonTextRegular: { 
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         color: '#FFFFFF' 
     },
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         color: '#384B65' 
     },
     buttonTextBold: { 
-        fontFamily: 'Montserrat-Bold', 
+        fontFamily: 'montserrat_bold', 
         fontSize: getHeight(15), 
         lineHeight: getHeight(20), 
         color: '#FFFFFF' 

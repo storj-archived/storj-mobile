@@ -49,12 +49,12 @@ const titleLinkStyles = StyleSheet.create({
         alignItems: 'center'
     },
     titleText: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(14), 
         color: 'rgba(56, 75, 101, 0.4)'
     },
     linkText: {
-        fontFamily: 'Montserrat-Medium',
+        fontFamily: 'montserrat_medium',
         fontSize: getHeight(12), 
         color: '#2794FF'
     },

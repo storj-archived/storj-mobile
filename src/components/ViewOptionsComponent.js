@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
         width: getWidth(24)
     },
     labelText: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(16),
         lineHeight: getHeight(19),
         color: '#2794FF'

@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     titleText: { 
-        fontFamily: 'Montserrat-Bold', 
+        fontFamily: 'montserrat_bold', 
         fontSize: getHeight(30), 
         lineHeight: getHeight(33),
         color: '#384B65' 
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
         marginLeft: getWidth(20),
     },
     skipText: {
-        fontFamily: 'Montserrat-Medium', 
+        fontFamily: 'montserrat_medium', 
         fontSize: getHeight(18), 
         lineHeight: getHeight(22),
         color: '#2794FF'
@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
         height: getHeight(50)
     },
     infoText: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         lineHeight: getHeight(23),
         color: '#384B65' 
@@ -313,7 +313,7 @@ const styles = StyleSheet.create({
         width: getWidth(7)
     },
     wordText:{
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         color: '#384B65'
     },
@@ -344,7 +344,7 @@ const styles = StyleSheet.create({
         marginTop: getHeight(20)
     },
     wordNumberText: {
-        fontFamily: 'Montserrat-Medium', 
+        fontFamily: 'montserrat_medium', 
         fontSize: getHeight(12), 
         lineHeight: getHeight(15),
         color: 'rgba(56, 75, 101, 0.4)' 
@@ -362,7 +362,7 @@ const styles = StyleSheet.create({
         borderWidth: getWidth(1.5)
     },
     confirmButtonText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(14),
         color: 'white'
     },

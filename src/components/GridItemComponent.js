@@ -115,13 +115,13 @@ const gridItemStyles = StyleSheet.create({
         justifyContent: 'center'
     },
     mainTitleText: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         lineHeight: getHeight(14),
         fontSize: getHeight(12),
         color: '#384B65'
     },
     extentionText: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         lineHeight: getHeight(14),
         fontSize: getHeight(12),
         color: 'rgba(56, 75, 101, 0.4)'

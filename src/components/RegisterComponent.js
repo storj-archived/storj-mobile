@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
         left: getWidth(20)
     },
     titleBold: {
-        fontFamily: 'Montserrat-ExtraBold',
+        fontFamily: 'montserrat_extrabold',
         fontSize: getHeight(30),
         color: '#384B65'
     },
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
         borderRadius: getWidth(8)
     },
     createAccountText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(16),
         color: '#FFFFFF'
     },
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
         marginTop: getHeight(15)
     },
     footerLink: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         color: '#2794FF'
     },
     agreementWrapper: {
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
         lineHeight: getHeight(24),
         fontSize: getHeight(16),
         color: '#384b65',
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         marginLeft: getWidth(11)
     },
     blurredButton: {

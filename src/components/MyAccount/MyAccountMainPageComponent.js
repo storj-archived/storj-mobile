@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
         width: getWidth(24)
     },
     buttonTextRegular: { 
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         color: '#FFFFFF' 
     },
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
         marginTop: getHeight(2)
     },
     buttonTextBold: { 
-        fontFamily: 'Montserrat-Bold', 
+        fontFamily: 'montserrat_bold', 
         fontSize: getHeight(15), 
         lineHeight: getHeight(20), 
         color: '#FFFFFF' 
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row' 
     },
     titleText: { 
-        fontFamily: 'Montserrat-Bold', 
+        fontFamily: 'montserrat_bold', 
         fontSize: getHeight(30), 
         color: '#384B65' 
     },
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     generateQRText: { 
-        fontFamily: 'Montserrat-SemiBold', 
+        fontFamily: 'montserrat_semibold', 
         fontSize: getHeight(12), 
         color: '#2794FF' 
     },
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     logOutText: { 
-        fontFamily: 'Montserrat-SemiBold', 
+        fontFamily: 'montserrat_semibold', 
         fontSize: getHeight(16), 
         color: '#EB5757' 
     },

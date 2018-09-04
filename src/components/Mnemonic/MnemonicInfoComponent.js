@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         width: getWidth(24)
     },
     titleText: { 
-        fontFamily: 'Montserrat-Bold', 
+        fontFamily: 'montserrat_bold', 
         fontSize: getHeight(27), 
         lineHeight: getHeight(33),
         color: '#384B65',
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     nextButtonText: { 
-        fontFamily: 'Montserrat-SemiBold', 
+        fontFamily: 'montserrat_semibold', 
         fontSize: getHeight(16), 
         color: '#2794FF' 
     },
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
         marginTop: getHeight(45)
     },
     infoText:{
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         lineHeight: getHeight(23),
         color: '#384B65'
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
         borderWidth: getWidth(1.5)
     },
     backupButtonText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(14),
         color: 'white'
     },

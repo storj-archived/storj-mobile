@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start'
     },
     titleText: {
-        fontFamily: 'Montserrat-Bold', 
+        fontFamily: 'montserrat_bold', 
         fontSize: getHeight(30),
         color: '#384B65'
     },
@@ -188,12 +188,12 @@ const styles = StyleSheet.create({
         borderColor: params.colorBlue
     },
     loginText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: params.buttonText,
         color: params.colorBlue
     },
     signUpText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: params.buttonText,
         color: 'white'
     },
@@ -219,19 +219,19 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start'
     },
     titleBold: {
-        fontFamily: 'Montserrat-ExtraBold',   
+        fontFamily: 'montserrat_extrabold',   
         alignSelf: 'flex-start',  
         fontSize: params.titleBoldSize,
         color: '#384B65'
     },
     titleLight: {
-        fontFamily: 'Montserrat-ExtraBold',
+        fontFamily: 'montserrat_extrabold',
         fontSize: params.titleBoldSize,
         color: params.colorBlue,
         backgroundColor: 'transparent'
     },
     textInfo: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         lineHeight: getHeight(25),
         fontSize: params.text,
         color: params.colorDarkBlue

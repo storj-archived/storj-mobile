@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         marginTop: getHeight(12)
     },
     infoText: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(14), 
         color: '#384B65'
     }

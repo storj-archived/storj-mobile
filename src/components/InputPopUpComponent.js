@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     buttonText: {
-        fontFamily: 'Montserrat-SemiBold',
+        fontFamily: 'montserrat_semibold',
         fontSize: getHeight(16)
     },
     image: {
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     textInput: {
         flex: 1,
         paddingHorizontal: getWidth(10),
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(16),
         color: '#384B65'
     },

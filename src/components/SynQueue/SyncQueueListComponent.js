@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     },
     title: {
         color: "#384B65",
-        fontFamily: "Montserrat-Bold",
+        fontFamily: "montserrat_bold",
         fontSize: getHeight(30),
         width: getWidth(169)
     },
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     },
     touchableRightText: {
         color: "#2794FF",
-        fontFamily: "Montserrat-Medium",
+        fontFamily: "montserrat_medium",
         fontSize: getHeight(18)
     }, 
     touchableRightWrapper: {

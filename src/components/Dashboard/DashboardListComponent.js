@@ -177,12 +177,12 @@ const styles = StyleSheet.create({
         width: getWidth(24) 
     },
     buttonTextRegular: { 
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         color: '#FFFFFF' 
     },
     buttonTextBold: { 
-        fontFamily: 'Montserrat-Bold', 
+        fontFamily: 'montserrat_bold', 
         fontSize: getHeight(16), 
         lineHeight: getHeight(20), 
         color: '#FFFFFF' 
@@ -202,12 +202,12 @@ const styles = StyleSheet.create({
         width: getWidth(320)
     },
     explanationTextRegular: { 
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         color: '#384B65' 
     },
     explanationTextBold: { 
-        fontFamily: 'Montserrat-Bold', 
+        fontFamily: 'montserrat_bold', 
         fontSize: getHeight(16), 
         color: '#384B65' 
     },

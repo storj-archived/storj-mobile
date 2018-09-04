@@ -178,12 +178,12 @@ const styles = StyleSheet.create({
         marginLeft: getWidth(15),
         fontSize: getHeight(30), 
         color: '#384B65',
-        fontFamily: 'Montserrat-Bold'
+        fontFamily: 'montserrat_bold'
     },
     textDone: {
         fontSize: getHeight(18),
         color: '#2794FF',
-        fontFamily: 'Montserrat-Medium'
+        fontFamily: 'montserrat_medium'
     },
     searchComponent: {
         paddingVertical: getHeight(10),

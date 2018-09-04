@@ -77,19 +77,19 @@ const styles = StyleSheet.create({
         height: getHeight(75)
     },
     titleText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(28),
         alignSelf:'flex-start',
         color: '#384B65'
     },
     infoTextBold: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(16),
         alignSelf: 'flex-start',
         color: '#384B65'
     },
     infoTextRegular: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(16),
         alignSelf:'flex-start',
         color: '#384B65'
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         borderRadius: getWidth(6)
     },
     buttonText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(16),
         color: 'white'
     }

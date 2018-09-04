@@ -136,7 +136,7 @@ const listItemStyles = StyleSheet.create({
         flex: 0.9
     },
     mainTitleText: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(16),
         color: '#384B65'
     },
@@ -163,12 +163,12 @@ const listItemStyles = StyleSheet.create({
         width: getWidth(24) 
     },
     extentionText: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(16),
         color: 'rgba(56, 75, 101, 0.4)'
     },
     fileSizeText: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(12),
         color: 'rgba(56, 75, 101, 0.4)'
     }

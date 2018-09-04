@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         height: getHeight(60)
     },
     extentionText: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(16),
         color: 'rgba(56, 75, 101, 0.4)'
     }

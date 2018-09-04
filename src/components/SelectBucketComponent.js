@@ -176,13 +176,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(56, 75, 101, 0.2)'
     },
     titleText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(16),
         color: '#384B65',
         alignSelf: 'center'
     },
     blueText: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(16),
         color: '#2794FF'
     },
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     uploadText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(16),
         color: 'white'
     },
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
         width: getWidth(24)
     },
     bucketNameText: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(16),
         color: '#384B65',
         marginLeft: getWidth(10)

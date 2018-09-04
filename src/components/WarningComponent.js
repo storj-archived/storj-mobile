@@ -29,7 +29,7 @@ export default class WarningComponent extends Component{
 
 const styles = StyleSheet.create({
     secretPhraseText: { 
-        fontFamily: 'Montserrat-Medium', 
+        fontFamily: 'montserrat_medium', 
         fontSize: getHeight(12), 
         color: '#FFFFFF' 
     },

@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     titleText: { 
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(28), 
         lineHeight: getHeight(33),
         color: '#384B65' 
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
         width: getWidth(24)
     },
     explanationText: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         marginTop: getHeight(10),
         fontSize: getHeight(14), 
         lineHeight: getHeight(17),
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
         height: getHeight(55)
     },
     switchText: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         lineHeight: getHeight(20),
         color: '#384B65' 
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     deleteAccountText: { 
-        fontFamily: 'Montserrat-SemiBold', 
+        fontFamily: 'montserrat_semibold', 
         fontSize: getHeight(16), 
         color: '#EB5757' 
     },

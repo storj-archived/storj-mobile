@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         width: getWidth(335)
     },
     titleText: { 
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         lineHeight: getHeight(23),
         color: '#384B65'

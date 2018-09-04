@@ -54,13 +54,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     titleText: { 
-        fontFamily: 'Montserrat-Bold', 
+        fontFamily: 'montserrat_bold', 
         fontSize: getHeight(16), 
         lineHeight: getHeight(23),
         color: '#384B65'
     },
     regularText: { 
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         lineHeight: getHeight(23),
         color: '#384B65'
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         borderWidth: getWidth(1.5)
     },
     refreshButtonText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(14),
         color: 'white'
     },

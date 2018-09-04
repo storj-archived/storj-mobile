@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
         height: getHeight(45)
     },
     titleText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(30),
         color: '#384B65'
     },
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     },
     infoText: {
         marginTop: getHeight(125),
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(16),
         color: '#384B65'
     },
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
         borderColor: '#2794FF'
     },
     buttonText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(16),
         color: '#2794FF'
     },
@@ -255,13 +255,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     footerText: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(16),
         color: '#384B65',
         marginTop: getHeight(15)
      },
     footerLink: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         color: '#2794FF'
     }
 });

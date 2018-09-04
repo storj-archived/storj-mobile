@@ -34,7 +34,7 @@ ShallowWrapper {
             style={
               Object {
                 "color": "#384B65",
-                "fontFamily": "Montserrat-ExtraBold",
+                "fontFamily": "montserrat_extrabold",
                 "fontSize": 60,
                 "marginBottom": 10,
               }
@@ -99,7 +99,7 @@ ShallowWrapper {
                     Object {
                       "alignSelf": "flex-end",
                       "color": "#2794FF",
-                      "fontFamily": "Montserrat-Bold",
+                      "fontFamily": "montserrat_bold",
                       "fontSize": 32,
                       "lineHeight": 48,
                       "marginTop": 40,
@@ -153,7 +153,7 @@ ShallowWrapper {
                     Object {
                       "alignSelf": "flex-end",
                       "color": "#2794FF",
-                      "fontFamily": "Montserrat-Regular",
+                      "fontFamily": "montserrat_regular",
                       "fontSize": 26,
                       "fontWeight": "bold",
                       "marginBottom": 48,
@@ -195,7 +195,7 @@ ShallowWrapper {
               style={
                 Object {
                   "color": "white",
-                  "fontFamily": "Montserrat-Bold",
+                  "fontFamily": "montserrat_bold",
                   "fontSize": 32,
                 }
               }
@@ -227,7 +227,7 @@ ShallowWrapper {
               style={
                 Object {
                   "color": "#2794FF",
-                  "fontFamily": "Montserrat-Bold",
+                  "fontFamily": "montserrat_bold",
                   "fontSize": 32,
                 }
               }
@@ -242,7 +242,7 @@ ShallowWrapper {
             style={
               Object {
                 "color": "#384B65",
-                "fontFamily": "Montserrat-Regular",
+                "fontFamily": "montserrat_regular",
                 "fontSize": 32,
                 "marginTop": 30,
               }
@@ -257,7 +257,7 @@ ShallowWrapper {
               style={
                 Object {
                   "color": "#2794FF",
-                  "fontFamily": "Montserrat-Bold",
+                  "fontFamily": "montserrat_bold",
                 }
               }
             >
@@ -289,7 +289,7 @@ ShallowWrapper {
               style={
                 Object {
                   "color": "#384B65",
-                  "fontFamily": "Montserrat-ExtraBold",
+                  "fontFamily": "montserrat_extrabold",
                   "fontSize": 60,
                   "marginBottom": 10,
                 }
@@ -354,7 +354,7 @@ ShallowWrapper {
                       Object {
                         "alignSelf": "flex-end",
                         "color": "#2794FF",
-                        "fontFamily": "Montserrat-Bold",
+                        "fontFamily": "montserrat_bold",
                         "fontSize": 32,
                         "lineHeight": 48,
                         "marginTop": 40,
@@ -408,7 +408,7 @@ ShallowWrapper {
                       Object {
                         "alignSelf": "flex-end",
                         "color": "#2794FF",
-                        "fontFamily": "Montserrat-Regular",
+                        "fontFamily": "montserrat_regular",
                         "fontSize": 26,
                         "fontWeight": "bold",
                         "marginBottom": 48,
@@ -440,7 +440,7 @@ ShallowWrapper {
               "ellipsizeMode": "tail",
               "style": Object {
                 "color": "#384B65",
-                "fontFamily": "Montserrat-ExtraBold",
+                "fontFamily": "montserrat_extrabold",
                 "fontSize": 60,
                 "marginBottom": 10,
               },
@@ -505,7 +505,7 @@ ShallowWrapper {
                         Object {
                           "alignSelf": "flex-end",
                           "color": "#2794FF",
-                          "fontFamily": "Montserrat-Bold",
+                          "fontFamily": "montserrat_bold",
                           "fontSize": 32,
                           "lineHeight": 48,
                           "marginTop": 40,
@@ -559,7 +559,7 @@ ShallowWrapper {
                         Object {
                           "alignSelf": "flex-end",
                           "color": "#2794FF",
-                          "fontFamily": "Montserrat-Regular",
+                          "fontFamily": "montserrat_regular",
                           "fontSize": 26,
                           "fontWeight": "bold",
                           "marginBottom": 48,
@@ -636,7 +636,7 @@ ShallowWrapper {
                         Object {
                           "alignSelf": "flex-end",
                           "color": "#2794FF",
-                          "fontFamily": "Montserrat-Bold",
+                          "fontFamily": "montserrat_bold",
                           "fontSize": 32,
                           "lineHeight": 48,
                           "marginTop": 40,
@@ -666,7 +666,7 @@ ShallowWrapper {
                         Object {
                           "alignSelf": "flex-end",
                           "color": "#2794FF",
-                          "fontFamily": "Montserrat-Bold",
+                          "fontFamily": "montserrat_bold",
                           "fontSize": 32,
                           "lineHeight": 48,
                           "marginTop": 40,
@@ -690,7 +690,7 @@ ShallowWrapper {
                       "style": Object {
                         "alignSelf": "flex-end",
                         "color": "#2794FF",
-                        "fontFamily": "Montserrat-Bold",
+                        "fontFamily": "montserrat_bold",
                         "fontSize": 32,
                         "lineHeight": 48,
                         "marginTop": 40,
@@ -748,7 +748,7 @@ ShallowWrapper {
                         Object {
                           "alignSelf": "flex-end",
                           "color": "#2794FF",
-                          "fontFamily": "Montserrat-Regular",
+                          "fontFamily": "montserrat_regular",
                           "fontSize": 26,
                           "fontWeight": "bold",
                           "marginBottom": 48,
@@ -778,7 +778,7 @@ ShallowWrapper {
                         Object {
                           "alignSelf": "flex-end",
                           "color": "#2794FF",
-                          "fontFamily": "Montserrat-Regular",
+                          "fontFamily": "montserrat_regular",
                           "fontSize": 26,
                           "fontWeight": "bold",
                           "marginBottom": 48,
@@ -802,7 +802,7 @@ ShallowWrapper {
                       "style": Object {
                         "alignSelf": "flex-end",
                         "color": "#2794FF",
-                        "fontFamily": "Montserrat-Regular",
+                        "fontFamily": "montserrat_regular",
                         "fontSize": 26,
                         "fontWeight": "bold",
                         "marginBottom": 48,
@@ -849,7 +849,7 @@ ShallowWrapper {
                 style={
                   Object {
                     "color": "white",
-                    "fontFamily": "Montserrat-Bold",
+                    "fontFamily": "montserrat_bold",
                     "fontSize": 32,
                   }
                 }
@@ -881,7 +881,7 @@ ShallowWrapper {
                 style={
                   Object {
                     "color": "#2794FF",
-                    "fontFamily": "Montserrat-Bold",
+                    "fontFamily": "montserrat_bold",
                     "fontSize": 32,
                   }
                 }
@@ -896,7 +896,7 @@ ShallowWrapper {
               style={
                 Object {
                   "color": "#384B65",
-                  "fontFamily": "Montserrat-Regular",
+                  "fontFamily": "montserrat_regular",
                   "fontSize": 32,
                   "marginTop": 30,
                 }
@@ -911,7 +911,7 @@ ShallowWrapper {
                 style={
                   Object {
                     "color": "#2794FF",
-                    "fontFamily": "Montserrat-Bold",
+                    "fontFamily": "montserrat_bold",
                   }
                 }
               >
@@ -939,7 +939,7 @@ ShallowWrapper {
                 style={
                   Object {
                     "color": "white",
-                    "fontFamily": "Montserrat-Bold",
+                    "fontFamily": "montserrat_bold",
                     "fontSize": 32,
                   }
                 }
@@ -968,7 +968,7 @@ ShallowWrapper {
                 "ellipsizeMode": "tail",
                 "style": Object {
                   "color": "white",
-                  "fontFamily": "Montserrat-Bold",
+                  "fontFamily": "montserrat_bold",
                   "fontSize": 32,
                 },
               },
@@ -991,7 +991,7 @@ ShallowWrapper {
                 style={
                   Object {
                     "color": "#2794FF",
-                    "fontFamily": "Montserrat-Bold",
+                    "fontFamily": "montserrat_bold",
                     "fontSize": 32,
                   }
                 }
@@ -1023,7 +1023,7 @@ ShallowWrapper {
                 "ellipsizeMode": "tail",
                 "style": Object {
                   "color": "#2794FF",
-                  "fontFamily": "Montserrat-Bold",
+                  "fontFamily": "montserrat_bold",
                   "fontSize": 32,
                 },
               },
@@ -1050,7 +1050,7 @@ ShallowWrapper {
                   style={
                     Object {
                       "color": "#2794FF",
-                      "fontFamily": "Montserrat-Bold",
+                      "fontFamily": "montserrat_bold",
                     }
                   }
                 >
@@ -1060,7 +1060,7 @@ ShallowWrapper {
               "ellipsizeMode": "tail",
               "style": Object {
                 "color": "#384B65",
-                "fontFamily": "Montserrat-Regular",
+                "fontFamily": "montserrat_regular",
                 "fontSize": 32,
                 "marginTop": 30,
               },
@@ -1080,7 +1080,7 @@ ShallowWrapper {
                   "onPress": undefined,
                   "style": Object {
                     "color": "#2794FF",
-                    "fontFamily": "Montserrat-Bold",
+                    "fontFamily": "montserrat_bold",
                   },
                 },
                 "ref": null,
@@ -1120,7 +1120,7 @@ ShallowWrapper {
               style={
                 Object {
                   "color": "#384B65",
-                  "fontFamily": "Montserrat-ExtraBold",
+                  "fontFamily": "montserrat_extrabold",
                   "fontSize": 60,
                   "marginBottom": 10,
                 }
@@ -1185,7 +1185,7 @@ ShallowWrapper {
                       Object {
                         "alignSelf": "flex-end",
                         "color": "#2794FF",
-                        "fontFamily": "Montserrat-Bold",
+                        "fontFamily": "montserrat_bold",
                         "fontSize": 32,
                         "lineHeight": 48,
                         "marginTop": 40,
@@ -1239,7 +1239,7 @@ ShallowWrapper {
                       Object {
                         "alignSelf": "flex-end",
                         "color": "#2794FF",
-                        "fontFamily": "Montserrat-Regular",
+                        "fontFamily": "montserrat_regular",
                         "fontSize": 26,
                         "fontWeight": "bold",
                         "marginBottom": 48,
@@ -1281,7 +1281,7 @@ ShallowWrapper {
                 style={
                   Object {
                     "color": "white",
-                    "fontFamily": "Montserrat-Bold",
+                    "fontFamily": "montserrat_bold",
                     "fontSize": 32,
                   }
                 }
@@ -1313,7 +1313,7 @@ ShallowWrapper {
                 style={
                   Object {
                     "color": "#2794FF",
-                    "fontFamily": "Montserrat-Bold",
+                    "fontFamily": "montserrat_bold",
                     "fontSize": 32,
                   }
                 }
@@ -1328,7 +1328,7 @@ ShallowWrapper {
               style={
                 Object {
                   "color": "#384B65",
-                  "fontFamily": "Montserrat-Regular",
+                  "fontFamily": "montserrat_regular",
                   "fontSize": 32,
                   "marginTop": 30,
                 }
@@ -1343,7 +1343,7 @@ ShallowWrapper {
                 style={
                   Object {
                     "color": "#2794FF",
-                    "fontFamily": "Montserrat-Bold",
+                    "fontFamily": "montserrat_bold",
                   }
                 }
               >
@@ -1375,7 +1375,7 @@ ShallowWrapper {
                 style={
                   Object {
                     "color": "#384B65",
-                    "fontFamily": "Montserrat-ExtraBold",
+                    "fontFamily": "montserrat_extrabold",
                     "fontSize": 60,
                     "marginBottom": 10,
                   }
@@ -1440,7 +1440,7 @@ ShallowWrapper {
                         Object {
                           "alignSelf": "flex-end",
                           "color": "#2794FF",
-                          "fontFamily": "Montserrat-Bold",
+                          "fontFamily": "montserrat_bold",
                           "fontSize": 32,
                           "lineHeight": 48,
                           "marginTop": 40,
@@ -1494,7 +1494,7 @@ ShallowWrapper {
                         Object {
                           "alignSelf": "flex-end",
                           "color": "#2794FF",
-                          "fontFamily": "Montserrat-Regular",
+                          "fontFamily": "montserrat_regular",
                           "fontSize": 26,
                           "fontWeight": "bold",
                           "marginBottom": 48,
@@ -1526,7 +1526,7 @@ ShallowWrapper {
                 "ellipsizeMode": "tail",
                 "style": Object {
                   "color": "#384B65",
-                  "fontFamily": "Montserrat-ExtraBold",
+                  "fontFamily": "montserrat_extrabold",
                   "fontSize": 60,
                   "marginBottom": 10,
                 },
@@ -1591,7 +1591,7 @@ ShallowWrapper {
                           Object {
                             "alignSelf": "flex-end",
                             "color": "#2794FF",
-                            "fontFamily": "Montserrat-Bold",
+                            "fontFamily": "montserrat_bold",
                             "fontSize": 32,
                             "lineHeight": 48,
                             "marginTop": 40,
@@ -1645,7 +1645,7 @@ ShallowWrapper {
                           Object {
                             "alignSelf": "flex-end",
                             "color": "#2794FF",
-                            "fontFamily": "Montserrat-Regular",
+                            "fontFamily": "montserrat_regular",
                             "fontSize": 26,
                             "fontWeight": "bold",
                             "marginBottom": 48,
@@ -1722,7 +1722,7 @@ ShallowWrapper {
                           Object {
                             "alignSelf": "flex-end",
                             "color": "#2794FF",
-                            "fontFamily": "Montserrat-Bold",
+                            "fontFamily": "montserrat_bold",
                             "fontSize": 32,
                             "lineHeight": 48,
                             "marginTop": 40,
@@ -1752,7 +1752,7 @@ ShallowWrapper {
                           Object {
                             "alignSelf": "flex-end",
                             "color": "#2794FF",
-                            "fontFamily": "Montserrat-Bold",
+                            "fontFamily": "montserrat_bold",
                             "fontSize": 32,
                             "lineHeight": 48,
                             "marginTop": 40,
@@ -1776,7 +1776,7 @@ ShallowWrapper {
                         "style": Object {
                           "alignSelf": "flex-end",
                           "color": "#2794FF",
-                          "fontFamily": "Montserrat-Bold",
+                          "fontFamily": "montserrat_bold",
                           "fontSize": 32,
                           "lineHeight": 48,
                           "marginTop": 40,
@@ -1834,7 +1834,7 @@ ShallowWrapper {
                           Object {
                             "alignSelf": "flex-end",
                             "color": "#2794FF",
-                            "fontFamily": "Montserrat-Regular",
+                            "fontFamily": "montserrat_regular",
                             "fontSize": 26,
                             "fontWeight": "bold",
                             "marginBottom": 48,
@@ -1864,7 +1864,7 @@ ShallowWrapper {
                           Object {
                             "alignSelf": "flex-end",
                             "color": "#2794FF",
-                            "fontFamily": "Montserrat-Regular",
+                            "fontFamily": "montserrat_regular",
                             "fontSize": 26,
                             "fontWeight": "bold",
                             "marginBottom": 48,
@@ -1888,7 +1888,7 @@ ShallowWrapper {
                         "style": Object {
                           "alignSelf": "flex-end",
                           "color": "#2794FF",
-                          "fontFamily": "Montserrat-Regular",
+                          "fontFamily": "montserrat_regular",
                           "fontSize": 26,
                           "fontWeight": "bold",
                           "marginBottom": 48,
@@ -1935,7 +1935,7 @@ ShallowWrapper {
                   style={
                     Object {
                       "color": "white",
-                      "fontFamily": "Montserrat-Bold",
+                      "fontFamily": "montserrat_bold",
                       "fontSize": 32,
                     }
                   }
@@ -1967,7 +1967,7 @@ ShallowWrapper {
                   style={
                     Object {
                       "color": "#2794FF",
-                      "fontFamily": "Montserrat-Bold",
+                      "fontFamily": "montserrat_bold",
                       "fontSize": 32,
                     }
                   }
@@ -1982,7 +1982,7 @@ ShallowWrapper {
                 style={
                   Object {
                     "color": "#384B65",
-                    "fontFamily": "Montserrat-Regular",
+                    "fontFamily": "montserrat_regular",
                     "fontSize": 32,
                     "marginTop": 30,
                   }
@@ -1997,7 +1997,7 @@ ShallowWrapper {
                   style={
                     Object {
                       "color": "#2794FF",
-                      "fontFamily": "Montserrat-Bold",
+                      "fontFamily": "montserrat_bold",
                     }
                   }
                 >
@@ -2025,7 +2025,7 @@ ShallowWrapper {
                   style={
                     Object {
                       "color": "white",
-                      "fontFamily": "Montserrat-Bold",
+                      "fontFamily": "montserrat_bold",
                       "fontSize": 32,
                     }
                   }
@@ -2054,7 +2054,7 @@ ShallowWrapper {
                   "ellipsizeMode": "tail",
                   "style": Object {
                     "color": "white",
-                    "fontFamily": "Montserrat-Bold",
+                    "fontFamily": "montserrat_bold",
                     "fontSize": 32,
                   },
                 },
@@ -2077,7 +2077,7 @@ ShallowWrapper {
                   style={
                     Object {
                       "color": "#2794FF",
-                      "fontFamily": "Montserrat-Bold",
+                      "fontFamily": "montserrat_bold",
                       "fontSize": 32,
                     }
                   }
@@ -2109,7 +2109,7 @@ ShallowWrapper {
                   "ellipsizeMode": "tail",
                   "style": Object {
                     "color": "#2794FF",
-                    "fontFamily": "Montserrat-Bold",
+                    "fontFamily": "montserrat_bold",
                     "fontSize": 32,
                   },
                 },
@@ -2136,7 +2136,7 @@ ShallowWrapper {
                     style={
                       Object {
                         "color": "#2794FF",
-                        "fontFamily": "Montserrat-Bold",
+                        "fontFamily": "montserrat_bold",
                       }
                     }
                   >
@@ -2146,7 +2146,7 @@ ShallowWrapper {
                 "ellipsizeMode": "tail",
                 "style": Object {
                   "color": "#384B65",
-                  "fontFamily": "Montserrat-Regular",
+                  "fontFamily": "montserrat_regular",
                   "fontSize": 32,
                   "marginTop": 30,
                 },
@@ -2166,7 +2166,7 @@ ShallowWrapper {
                     "onPress": undefined,
                     "style": Object {
                       "color": "#2794FF",
-                      "fontFamily": "Montserrat-Bold",
+                      "fontFamily": "montserrat_bold",
                     },
                   },
                   "ref": null,

@@ -56,7 +56,7 @@ const footerLinkStyles = StyleSheet.create({
         alignItems: 'center'
     },
     titleText: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(16), 
         color: '#2794FF'
     },

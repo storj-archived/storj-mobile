@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         marginLeft: getWidth(31)
     },
     titleBold: {
-        fontFamily: 'Montserrat-Light',
+        fontFamily: 'montserrat_light',
         lineHeight: getHeight(42),
         fontSize: getHeight(30),
         color: '#384b65',
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         borderRadius: getWidth(6)
     },
     tryAgainText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(14),
         color: 'white'
     }

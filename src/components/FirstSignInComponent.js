@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
         marginTop: getHeight(15),
     },
     titleText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(28),
         alignSelf:'flex-start',
         color: '#384B65'
@@ -186,12 +186,12 @@ const styles = StyleSheet.create({
         marginTop: getHeight(19)
     },
     titleLightRegularText: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(16),
         color: '#384B65'
     },
     titleLightBoldText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(16),
         color: '#384B65'
     },
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
         borderRadius: getWidth(6)
     },
     syncMyDeviceText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(16),
         color: 'white'
     },
@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
     },
     label: {
         marginLeft: getWidth(15),
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(16),
         color: '#2794FF'
     },

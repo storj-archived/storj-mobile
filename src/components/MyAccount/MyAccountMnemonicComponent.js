@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
         marginLeft: getWidth(15)
     },
     titleText: { 
-        fontFamily: 'Montserrat-Bold', 
+        fontFamily: 'montserrat_bold', 
         fontSize: getHeight(28),
         color: '#384B65' 
     },
@@ -180,19 +180,19 @@ const styles = StyleSheet.create({
         width: getWidth(24)
     },
     cancelText: {
-        fontFamily: 'Montserrat-Medium', 
+        fontFamily: 'montserrat_medium', 
         fontSize: getHeight(18), 
         lineHeight: getHeight(22),
         color: '#2794FF'
     },
     lesserTitleText: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         lineHeight: getHeight(25),
         color: '#384B65'
     },
     lesserTitleBoldText: {
-        fontFamily: 'Montserrat-Bold'
+        fontFamily: 'montserrat_bold'
     },
     mnemonicContainer: {
         flexDirection: 'row',
@@ -203,14 +203,14 @@ const styles = StyleSheet.create({
         marginLeft: getWidth(75)
     },
     index: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         lineHeight: getHeight(25),
         color: 'rgba(56, 75, 101, 0.4)'
     },
     word: {
         marginLeft: getWidth(20),
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         lineHeight: getHeight(25),
         color: '#384B65'
@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
     },
     clipboardText: {
         marginLeft: getWidth(15),
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         lineHeight: getHeight(20),
         color: '#2794FF'
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
         borderWidth: getWidth(1.5)
     },
     nextButtonText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(14),
         color: 'white'
     },
@@ -262,14 +262,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: getWidth(20)
     },
     popUpInfoText: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         lineHeight: getHeight(20),
         color: '#384B65',
         elevation: 5
     },
     popUpCancelText: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         lineHeight: getHeight(20),
         color: '#2794FF'
@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
         marginTop: getHeight(17)
     },
     yourMnemonicText: {
-        fontFamily: 'Montserrat-Medium', 
+        fontFamily: 'montserrat_medium', 
         fontSize: getHeight(12), 
         lineHeight: getHeight(15),
         color: 'rgba(56, 75, 101, 0.4)'

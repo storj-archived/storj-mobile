@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
         left: getWidth(20)
     },
     titleBold: {
-        fontFamily: 'Montserrat-ExtraBold',
+        fontFamily: 'montserrat_extrabold',
         fontSize: getHeight(30),
         color: '#384B65',
         marginBottom: getHeight(5)
@@ -155,14 +155,14 @@ const styles = StyleSheet.create({
         marginTop: getHeight(21),
         color: '#4b657d',
         opacity: 0.4,
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontWeight: 'bold'
     },
     mnemonicInfoLinkText: {
         fontSize: getHeight(13),
         color: '#2794FF',
         alignSelf: 'flex-end',
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontWeight: 'bold',
         marginBottom: getHeight(24)
     },
@@ -190,23 +190,23 @@ const styles = StyleSheet.create({
         borderWidth: getWidth(1)
     },
     loginViaQRText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(16),
         color: '#2794FF'
     },
     createAccountText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(16),
         color: 'white'
     },
     footerText: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(16),
         color: '#384B65',
         marginTop: getHeight(15)
      },
     footerLink: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         color: '#2794FF'
     },
     agreementWrapper: {
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         fontSize: getHeight(16),
         color: '#2794FF',
-        fontFamily: 'Montserrat-Bold'
+        fontFamily: 'montserrat_bold'
     },
     inputsMargin: {
         marginTop: getHeight(35)

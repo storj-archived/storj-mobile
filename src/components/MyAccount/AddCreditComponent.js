@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
         marginTop: getHeight(15)
     },
     titleText: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16),
         lineHeight: getHeight(23),
         color: '#2794FF'
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     infoText: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16),
         lineHeight: getHeight(23),
         color: '#384B65'
@@ -237,13 +237,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(56, 75, 101, 0.2)'
     },
     boldTitle: {
-        fontFamily: 'Montserrat-Bold', 
+        fontFamily: 'montserrat_bold', 
         fontSize: getHeight(16),
         lineHeight: getHeight(20),
         color: '#384B65'
     },
     infoAdditionalText: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(14),
         lineHeight: getHeight(20),
         color: 'rgba(56, 75, 101, 0.4)'
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
         borderWidth: getWidth(1.5)
     },
     createWalletButtonText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(14),
         color: 'white'
     }

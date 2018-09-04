@@ -109,19 +109,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     storageText: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         lineHeight: getHeight(20),
         color: '#FFFFFF'
     },
     storageAmountText: {
-        fontFamily: 'Montserrat-Bold', 
+        fontFamily: 'montserrat_bold', 
         fontSize: getHeight(30), 
         lineHeight: getHeight(33),
         color: '#FFFFFF'
     },
     extraText: {
-        fontFamily: 'Montserrat-Medium', 
+        fontFamily: 'montserrat_medium', 
         fontSize: getHeight(14), 
         color: '#A8CEFF'
     },
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
         height: getHeight(23)
     },
     limitText: {
-        fontFamily: 'Montserrat-Medium', 
+        fontFamily: 'montserrat_medium', 
         fontSize: getHeight(12), 
         lineHeight: getHeight(15),
         color: '#A8CEFF',
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: getWidth(20)
     },
     explanationText: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(14), 
         lineHeight: getHeight(17),
         color: 'rgba(56, 75, 101, 0.4)',

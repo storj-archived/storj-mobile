@@ -216,14 +216,14 @@ const styles = StyleSheet.create({
         paddingVertical: 0,
         fontSize: getHeight(16),
         color: '#384B65',
-        fontFamily: 'Montserrat-SemiBold',
+        fontFamily: 'montserrat_semibold',
         flex: 1
     },
     updateStatus: {
         marginRight: getWidth(15),
         fontSize: getHeight(12),
         color: '#384B65',
-        fontFamily: 'Montserrat-Regular'
+        fontFamily: 'montserrat_regular'
     },
     updateTextContainer: {
         width: getWidth(90), 

@@ -297,7 +297,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start'
     },
     mainTitleText: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(16),
         color: '#384B65'
     },
@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
         marginLeft: getWidth(10)
     },
     extentionText: {
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(16),
         color: 'rgba(56, 75, 101, 0.4)'
     }

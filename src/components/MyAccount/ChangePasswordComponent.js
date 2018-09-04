@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     titleText: { 
-        fontFamily: 'Montserrat-Bold', 
+        fontFamily: 'montserrat_bold', 
         fontSize: getHeight(30), 
         color: '#384B65' 
     },
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         marginLeft: getWidth(20),
     },
     infoText: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(16), 
         lineHeight: getHeight(20),
         color: '#384B65' 
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
         borderWidth: getWidth(1.5)
     },
     sendLinkButtonText: {
-        fontFamily: 'Montserrat-Bold',
+        fontFamily: 'montserrat_bold',
         fontSize: getHeight(14),
         color: 'white'
     },

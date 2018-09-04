@@ -5,6 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/background</item>
         <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:fontFamily">@raw/montserrat_regular</item>
     </style>
 
 </resources>

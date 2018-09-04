@@ -89,13 +89,13 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: getHeight(12),
-        fontFamily: "Montserrat-Regular",
+        fontFamily: "montserrat_regular",
         color: "#38424b"
     },
     textFileName: {
         color: "#384B65",
         fontSize: getHeight(14),
-        fontFamily: "Montserrat-SemiBold",
+        fontFamily: "montserrat_semibold",
     },
     errorText: {
         color: "red"

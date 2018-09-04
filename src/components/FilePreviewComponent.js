@@ -219,12 +219,12 @@ const styles = StyleSheet.create({
         width: getWidth(24)
     }, 
     text: {
-        fontFamily: 'Montserrat-Regular', 
+        fontFamily: 'montserrat_regular', 
         fontSize: getHeight(18), 
         color: 'rgba(56, 75, 101, 0.4)'
     },
     boldText: {
-        fontFamily: 'Montserrat-SemiBold', 
+        fontFamily: 'montserrat_semibold', 
         fontSize: getHeight(18), 
         color: '#384B65'
     },

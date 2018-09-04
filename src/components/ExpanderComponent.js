@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     },
     expanderText: {
         marginTop: getHeight(30),        
-        fontFamily: 'Montserrat-Regular',
+        fontFamily: 'montserrat_regular',
         fontSize: getHeight(14),
         color: 'rgba(56, 75, 101, 0.4)'
     },
