@@ -126,6 +126,8 @@ const listComponent = (title, data, props, count, itemType, navigationPress) => 
             props.navigateToDashboardFilesScreen();
         }
 
+        this.emptyFunction = () => {};
+
         return(
             <DashboardItemListComponent 
                 animatedScrollValue = { animatedScrollValue }
@@ -135,17 +137,17 @@ const listComponent = (title, data, props, count, itemType, navigationPress) => 
                 itemType = { itemType }
                 navigationPress = { navigationPress }
                 props = { props }
-                getItemSize = { () => {} }
+                getItemSize = { this.emptyFunction }
                 isLoading = { false }
                 searchSubSequence = { null }
                 sortingMode = { null }
-                onRefresh = { () => {} }
+                onRefresh = { this.emptyFunction }
                 isGridViewShown = { false }
                 onPress = { onPress }
                 isExpanderDisabled = { true }
-                onLongPress = { () => {} }
-                onDotsPress = { () => {} }
-                onCancelPress = { () => {} }
+                onLongPress = { this.emptyFunction }
+                onDotsPress = { this.emptyFunction }
+                onCancelPress = { this.emptyFunction }
                 selectedItemId = { null }
                 isSelectionMode = { false }
                 listItemIcon = { itemType === TYPES.BUCKETS ? require('../../images/Icons/BucketListItemIcon.png') : require('../../images/Icons/FileListItemIcon.png')  }

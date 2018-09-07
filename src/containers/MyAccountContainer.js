@@ -10,6 +10,8 @@ import PropTypes from 'prop-types';
 class MyAccountContainer extends Component {
     constructor(props) {
         super(props);
+
+        this.balance = this.balance.bind(this);
     }
 
     shouldComponentUpdate(nextProps) {
@@ -104,7 +106,7 @@ class MyAccountContainer extends Component {
                 showCredits = { this.props.screenProps.showCredits } 
                 storageAmount = { this.props.storage }
                 bandwidthAmount = { this.props.bandwidth }                
-                getBalance = { this.balance.bind(this) }
+                getBalance = { this.balance }
                 transactionList = { this.calculateTransactions() }
                 resetPassword = { this.props.resetPassword } /> 
         );
@@ -112,10 +114,6 @@ class MyAccountContainer extends Component {
 }
 
 function mapStateToProps(state) {
-    let routes = state.myAccountScreenNavReducer.routes;
-    let index = state.myAccountScreenNavReducer.index;
-    let currentAccountScreenName = routes[index].routeName;
-
     let screenIndex = state.mainScreenNavReducer.index;
     let currentScreenName = state.mainScreenNavReducer.routes[screenIndex].routeName;
 

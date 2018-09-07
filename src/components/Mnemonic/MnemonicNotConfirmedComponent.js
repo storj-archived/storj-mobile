@@ -12,6 +12,13 @@ import PropTypes from 'prop-types';
 export default class MnemonicNotConfirmedComponent extends Component {
     constructor(props) {
         super(props);
+
+        this.backPress = this.backPress.bind(this);
+    }
+
+    backPress() {
+        this.props.navigation.state.params.setNewData(); 
+        this.props.screenProps.navigateBack(); 
     }
     
     render() {
@@ -27,15 +34,12 @@ export default class MnemonicNotConfirmedComponent extends Component {
                             style = { styles.errorImage }
                             resizeMode = 'contain' />
                     </View>
-                    <TouchableOpacity onPress = { () => { 
-                        this.props.navigation.state.params.setNewData(); 
-                        this.props.screenProps.navigateBack(); } }>
-                        
+                    <TouchableOpacity onPress = { this.backPress }>
                         <View style = { styles.backButton } >
                             <Text style = { styles.backButtonText }>Try again</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress = { () => { this.props.screenProps.redirectToLoginScreen(); } } >
+                    <TouchableOpacity onPress = { this.props.screenProps.redirectToLoginScreen } >
                         <View style = { styles.nextButton }>
                             <Text style = { styles.nextButtonText }>Skip</Text>
                         </View>

@@ -82,7 +82,7 @@ export default class LoginComponent extends Component {
                     <TouchableOpacity style = { styles.loginViaQRButton } onPressOut = { this.redirectToQRScannerScreen }> 
                         <Text style = { styles.loginViaQRText }>Login via QR code</Text>
                     </TouchableOpacity>
-                    <Text style = { styles.footerText }>Don't have an account? <Text onPress = { this.props.registerButtonOnPress } style = { styles.footerLink }>Sign Up</Text></Text>              
+                    <Text style = { styles.footerText }>Don't have an account? <Text onPress = { this.registerButtonOnPress } style = { styles.footerLink }>Sign Up</Text></Text>              
                 </View>
                 {
                     this.props.isLoading ?

@@ -29,7 +29,13 @@ export default class MainComponent extends Component {
             showQR: false,
             showStorageInfo: false,
             showCredits: false
-        }
+        };
+
+        this.showOptions = this.showOptions.bind(this);
+        this.showQR = this.showQR.bind(this);
+        this.showStorageInfo = this.showStorageInfo.bind(this);
+        this.showCredits = this.showCredits.bind(this);
+        this.onCreateBucketApply = this.onCreateBucketApply.bind(this);
     };
 
     showOptions() {
@@ -46,6 +52,11 @@ export default class MainComponent extends Component {
 
     showCredits() {
         this.setState({ showCredits: !this.state.showCredits });
+    }
+
+    onCreateBucketApply(bucketName) {
+        this.props.createBucket(bucketName);
+        this.props.hideCreateBucketInput(); 
     }
     
     render() {
@@ -68,14 +79,14 @@ export default class MainComponent extends Component {
                         selectAll = { this.props.selectAll }
                         deselectAll = { this.props.deselectAll }
                         redirectToInitializationScreen = { this.props.redirectToInitializationScreen }
-                        showOptions = { this.showOptions.bind(this) }
-                        showQR = { this.showQR.bind(this) }
-                        showCredits = { this.showCredits.bind(this) }
-                        showStorageInfo = { this.showStorageInfo.bind(this) }
+                        showOptions = { this.showOptions }
+                        showQR = { this.showQR }
+                        showCredits = { this.showCredits }
+                        showStorageInfo = { this.showStorageInfo }
                         isSingleItemSelected = { this.props.isSingleItemSelected }
                         isActionBarShown = { this.props.isActionBarShown }
                         isSelectionMode = { this.props.isSelectionMode }
-                        onActionBarPress = { () => { this.props.onActionBarPress(); } }
+                        onActionBarPress = { this.props.onActionBarPress }
                         buckets = { this.props.buckets }
                         openBucket = { this.props.openBucket } 
                         bucketNavigateBack = { this.props.bucketNavigateBack } 
@@ -94,11 +105,8 @@ export default class MainComponent extends Component {
                         <View style = { styles.popUpBackgroundtWrapper }>
                             <View style={ [ styles.popUpBackgroundtWrapper, styles.dimBlack ] } />
                             <CreateBucketPopUpComponent 
-                                onCancel = { () => { this.props.hideCreateBucketInput(); } }
-                                onApply = { (bucketName) => { 
-                                    this.props.createBucket(bucketName);
-                                    this.props.hideCreateBucketInput(); 
-                                }} />
+                                onCancel = { this.props.hideCreateBucketInput }
+                                onApply = { this.onCreateBucketApply } />
                         </View> : null
                 }
                 {
@@ -121,7 +129,7 @@ export default class MainComponent extends Component {
                             isGridViewShown = { this.props.isGridViewShown }
                             setGridView = { this.props.setGridView }
                             setListView = { this.props.setListView }
-                            showOptions = { this.showOptions.bind(this) } /> : null
+                            showOptions = { this.showOptions } /> : null
                 }
                 {
                     this.state.showQR ? 
@@ -129,12 +137,12 @@ export default class MainComponent extends Component {
                             email = { this.props.email }
                             password = { this.props.password }
                             mnemonic = { this.props.mnemonic }
-                            showQR = { this.showQR.bind(this) } /> : null
+                            showQR = { this.showQR } /> : null
                 }
                 {
                     this.state.showStorageInfo ?
                         <StorageInfoComponent 
-                            showStorageInfo = { this.showStorageInfo.bind(this) } /> : null
+                            showStorageInfo = { this.showStorageInfo } /> : null
                 }
                 {
                     this.state.showCredits ?
@@ -142,7 +150,7 @@ export default class MainComponent extends Component {
                             wallets = { this.props.wallets }
                             createWallet = { this.props.createWallet }
                             getWallets = { this.props.getWallets }
-                            showCredits = { this.showCredits.bind(this) } /> : null
+                            showCredits = { this.showCredits } /> : null
                 }
                 {
                     this.props.isChangePasswordPopupShown ? 

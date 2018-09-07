@@ -16,7 +16,14 @@ export default class CreateBucketPopUpComponent extends Component {
         this.state = {
             bucketName: ''
         };
+
+        this.onApply = this.onApply.bind(this);
+        this.onChangeText = this.onChangeText.bind(this);
     };
+
+    onChangeText(text) {
+        this.setState({ bucketName: text });
+    }
 
     onApply() {
         if(!this.state.bucketName)
@@ -34,7 +41,7 @@ export default class CreateBucketPopUpComponent extends Component {
                     <TextInput
                         autoFocus
                         value = { this.state.bucketName }
-                        onChangeText = { (value) => { this.setState({ bucketName: value }); } }
+                        onChangeText = { this.onChangeText }
                         placeholder = { 'Folder title' } 
                         placeholderTextColor = { 'rgba(56, 75, 101, 0.4)' }
                         style = { styles.textInput } 
@@ -47,7 +54,7 @@ export default class CreateBucketPopUpComponent extends Component {
                         style = { styles.cancelButton } 
                         text='Cancel' />
                     <ButtonComponent 
-                        onPress = { () => { this.onApply() } }
+                        onPress = { this.onApply }
                         style = { styles.applyButton } 
                         textStyle = { [ styles.buttonText, styles.applyText ] }
                         text='OK' />

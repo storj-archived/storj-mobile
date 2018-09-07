@@ -7,6 +7,13 @@ import ListItemModel from '../models/ListItemModel';
 class BaseListContainer extends Component {
     constructor(props) {
         super(props);
+
+        this.onCancelPress = this.onCancelPress.bind(this);
+        this.onPress = this.onPress.bind(this);
+        this.onLongPress = this.onLongPress.bind(this);
+        this.onDotsPress = this.onDotsPress.bind(this);
+        this.disableSelectionMode = this.disableSelectionMode.bind(this);
+        this.getSelectedItemsCount = this.getSelectedItemsCount.bind(this);
     }
     
     /**

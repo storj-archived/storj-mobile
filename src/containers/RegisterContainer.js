@@ -35,6 +35,14 @@ export class RegisterContainer extends Component {
             isLoading: false
         };
         
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangePassword = this.onChangePassword.bind(this);
+        this.onChangePasswordRepeat = this.onChangePasswordRepeat.bind(this);
+        this.onChangeTermsAcceptence = this.onChangeTermsAcceptence.bind(this);
+        this.navigateBack = this.navigateBack.bind(this);
+        this.redirectToTermsOfUse = this.redirectToTermsOfUse.bind(this);
+        this.redirectToLoginScreen = this.redirectToLoginScreen.bind(this);
     };
     
     /**
@@ -225,14 +233,14 @@ export class RegisterContainer extends Component {
 		return(
                 <RegisterComponent
                     isLoading = { this.state.isLoading }
-                    onSubmit = { this.onSubmit.bind(this) }
-                    onChangeEmail = { this.onChangeEmail.bind(this) }
-                    onChangePassword = { this.onChangePassword.bind(this) }
-                    onChangePasswordRepeat = { this.onChangePasswordRepeat.bind(this) }
-                    onChangeTermsAcceptence = { this.onChangeTermsAcceptence.bind(this) }
-                    navigateBack = { this.navigateBack.bind(this) }
-                    redirectToTermsOfUse = { this.redirectToTermsOfUse.bind(this) }
-                    redirectToLoginScreen = { this.redirectToLoginScreen.bind(this) }
+                    onSubmit = { this.onSubmit }
+                    onChangeEmail = { this.onChangeEmail }
+                    onChangePassword = { this.onChangePassword }
+                    onChangePasswordRepeat = { this.onChangePasswordRepeat }
+                    onChangeTermsAcceptence = { this.onChangeTermsAcceptence }
+                    navigateBack = { this.navigateBack }
+                    redirectToTermsOfUse = { this.redirectToTermsOfUse }
+                    redirectToLoginScreen = { this.redirectToLoginScreen }
                     isEmailError = { this.state.errorModel.isEmailError }
                     isPasswordError = { this.state.errorModel.isPasswordError }
                     isPasswordMatchError = { this.state.errorModel.isPasswordMatchError }

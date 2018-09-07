@@ -27,6 +27,8 @@ export default class ContentSlider extends Component {
         };
 
         this.ref = null;
+        this.onSwipe = this.onSwipe.bind(this);
+        this._onRef = this._onRef.bind(this);
     }
 
     _onRef(ref) {
@@ -83,11 +85,11 @@ export default class ContentSlider extends Component {
         return (
             <View style={ [styles.mainContainer, this.props.style ]}>
                 <ScrollView
-                    ref = { ref => this._onRef(ref) }
+                    ref = { this._onRef }
                     decelerationRate = { 0.99 }
                     horizontal = { true }
                     scrollEnabled = { true }
-                    onMomentumScrollEnd = { (event) => { this.onSwipe(event) } }
+                    onMomentumScrollEnd = { this.onSwipe }
                     showsHorizontalScrollIndicator = { false }
                     style={ styles.container }>
                     { this.state.content.map((item) => {                    

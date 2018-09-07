@@ -19,10 +19,13 @@ export default class ChangePasswordComponent extends Component{
             email: null,
             isError: false
         }
+
+        this.sendEmail = this.sendEmail.bind(this);
+        this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.emptyFunction = () => {};
     }
 
     async sendEmail() {
-
         if(validator.isEmail(this.state.email)) {
             let result = await this.props.screenProps.resetPassword(this.state.email);
             
@@ -30,6 +33,10 @@ export default class ChangePasswordComponent extends Component{
                 this.props.screenProps.changePasswordPopupStatus(true);
             } else this.setState({isError: true});
         } else this.setState({isError: true}); 
+    }
+
+    onChangeEmail(value) {
+        this.setState({ email: value, isError: false });
     }
 
     render() {
@@ -55,14 +62,14 @@ export default class ChangePasswordComponent extends Component{
                 <Text style = { styles.infoText }>Enter your email address below and we’ll send you a link to reset your password.</Text>
                 <InputComponent 
                         style = { styles.emailInput }
-                        onChangeText = { (value) => { this.setState({ email: value, isError: false }) } }  
+                        onChangeText = { this.onChangeEmail }  
                         placeholder = {'Enter your email'}
                         isError = { this.props.isPasswordError }
                         regularMessage = { 'Your email' }
                         errorMessage = { 'There is no such email in our system' }
                         isError = { this.state.isError } />
-                <TouchableOpacity onPress = { this.state.email ? () => { this.sendEmail() } : () => {} }>
-                    <View style = { this.state.email ? styles.sendLinkButton : [ styles.sendLinkButton ,styles.blurredButton ] } >
+                <TouchableOpacity onPress = { this.state.email ? this.sendEmail : this.emptyFunction }>
+                    <View style = { this.state.email ? styles.sendLinkButton : [ styles.sendLinkButton, styles.blurredButton ] } >
                         <Text style = { styles.sendLinkButtonText }>Reset password</Text>
                     </View>
                 </TouchableOpacity>

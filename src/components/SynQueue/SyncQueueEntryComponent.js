@@ -19,6 +19,7 @@ export default class SyncQueueEntryComponent extends Component {
 
     render() {
         const name = getFileNameWithFixedSize(this.props.fileName, 25);
+        
         return(
             <View style = { this.props.styleContainer ? styles.mainContainer2 : styles.mainContainer }>
                 <View style = { styles.rowRapper }>

@@ -18,6 +18,13 @@ export default class SearchComponent extends Component {
             isSearchIconShown: true,
             searchValue: this.props.searchSubSequence
         };
+
+        this.onOptionPress = this.onOptionPress.bind(this);
+        this.navigateBack = this.navigateBack.bind(this);
+        this.onFocus = this.onFocus.bind(this);
+        this.onBlur = this.onBlur.bind(this);
+        this.onChangeText = this.onChangeText.bind(this);
+        this._onRef = this._onRef.bind(this);
     }
 
     shouldComponentUpdate(nextProps) {
@@ -27,6 +34,10 @@ export default class SearchComponent extends Component {
         }
 
         return true;
+    }
+
+    _onRef(ref) {
+        this._fileTextInput = ref;
     }
 
     getSelectedBucketName() {
@@ -51,30 +62,38 @@ export default class SearchComponent extends Component {
         this.setState({ searchValue: this.props.searchSubSequence });
     }
 
+    onFocus() {
+        this.setState({ isSearchIconShown: false });
+    }
+
+    onBlur() {
+        if(!this.state.searchValue) {
+            this.setState({ isSearchIconShown: true }); 
+        }
+    }
+
+    onChangeText(value) {
+        this.props.setSearch(this.props.searchIndex, value); 
+        this.setState({ searchValue: value }); 
+    }
+
     fileScreenHeader() {
         return(
             <View style = { [ styles.rowContainer, this.props.styleContainer ] }>
-                <TouchableOpacity style = { styles.backButtonWrapper } onPress = { () => { this.props.navigateBack ? this.navigateBack() : () => {} } }>
+                <TouchableOpacity style = { styles.backButtonWrapper } onPress = { this.props.navigateBack ? this.navigateBack : () => {}  }>
                     <Image style = { styles.backButton } source = { require("../images/Icons/BackButton.png") } resizeMode = { 'contain' } />
                 </TouchableOpacity>
                 <View style = { [ styles.rowContainer, styles.mainContainer, styles.fileHeader ] }>
                     <View style = {[ styles.rowContainer, { height: getHeight(50) } ]}>
                         <TextInput
-                            ref = { comp => this._fileTextInput = comp }
-                            onFocus = { () => { this.setState({ isSearchIconShown: false }); } }
-                            onBlur = { () => { 
-                                if(!this.state.searchValue) {
-                                    this.setState({ isSearchIconShown: true }); 
-                                }
-                            }}
+                            ref = { this._onRef }
+                            onFocus = { this.onFocus }
+                            onBlur = { this.onBlur }
                             placeholder = { this.state.isSearchIconShown ? this.getSelectedBucketName() : null }
                             placeholderTextColor = { '#000000' }
                             underlineColorAndroid = { 'transparent' } 
                             style = { styles.textInput }
-                            onChangeText = { (value) => { 
-                                this.props.setSearch(this.props.searchIndex, value); 
-                                this.setState({ searchValue: value }); 
-                            }} 
+                            onChangeText = { this.onChangeText } 
                             value = { this.state.searchValue } />
                     </View>
                     <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>
@@ -85,7 +104,7 @@ export default class SearchComponent extends Component {
                                 <Text style = { styles.updateStatus }>{ this.props.lastSync }</Text>
                             </View>
                         }
-                        <TouchableOpacity onPress = { this.onOptionPress.bind(this) }>
+                        <TouchableOpacity onPress = { this.onOptionPress }>
                             <Image style = { styles.image } source = { require("../images/Icons/SearchOptions.png") } resizeMode = { 'contain' } />
                         </TouchableOpacity>
                     </View>
@@ -97,26 +116,19 @@ export default class SearchComponent extends Component {
     selectBucketScreenHeader() {
         return(
             <View style = { [ styles.rowContainer, this.props.styleContainer ] }>
-                <TouchableOpacity style = { styles.backButtonWrapper } onPress = { () => { this.props.navigateBack ? this.props.navigateBack() : () => {} } }>
+                <TouchableOpacity style = { styles.backButtonWrapper } onPress = { this.props.navigateBack ? this.props.navigateBack : () => {} }>
                     <Image style = { styles.backButton } source = { require("../images/Icons/BackButton.png") } resizeMode = { 'contain' } />
                 </TouchableOpacity>
                 <View style = { [ styles.rowContainer, styles.mainContainer, styles.fileHeader ] }>
                     <View style = {[ styles.rowContainer, { height: getHeight(50) } ]}>
                         <TextInput
-                            onFocus = { () => { this.setState({ isSearchIconShown: false }); } }
-                            onBlur = { () => { 
-                                if(!this.state.searchValue) {
-                                    this.setState({ isSearchIconShown: true }); 
-                                }
-                            }}
+                            onFocus = { this.onFocus }
+                            onBlur = { this.onBlur }
                             placeholder = { this.state.isSearchIconShown ? 'Where to upload?' : null }
                             placeholderTextColor = { '#000000' }
                             underlineColorAndroid = { 'transparent' } 
                             style = { styles.textInput }
-                            onChangeText = { (value) => { 
-                                this.props.setSearch(this.props.searchIndex, value); 
-                                this.setState({ searchValue: value }); 
-                            }} 
+                            onChangeText = { this.onChangeText }  
                             value = { this.state.searchValue } />
                     </View>
                     <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>
@@ -141,20 +153,13 @@ export default class SearchComponent extends Component {
                         { this.state.isSearchIconShown && this.props.placeholder !== 'Pictures' ? <Image style={ styles.searchImage } source = { require("../images/Icons/Search.png") } resizeMode = { 'contain' } /> : null }
                         <TextInput
                             ref = { comp => this._bucketTextInput = comp }
-                            onFocus = { () => { this.setState({ isSearchIconShown: false }); } }
-                            onBlur = { () => { 
-                                if(!this.state.searchValue) {
-                                    this.setState({ isSearchIconShown: true }); 
-                                }
-                            }}
+                            onFocus = { this.onFocus }
+                            onBlur = { this.onBlur }
                             placeholder = { this.state.isSearchIconShown ? this.props.placeholder : null }
                             placeholderTextColor = { '#000000' }
                             underlineColorAndroid = { 'transparent' } 
                             style = { styles.textInput }
-                            onChangeText = { (value) => { 
-                                this.props.setSearch(this.props.searchIndex, value); 
-                                this.setState({ searchValue: value }); 
-                            }} 
+                            onChangeText = { this.onChangeText }  
                             value = { this.state.searchValue } />
                     </View>
                     <View style = { [ styles.rowContainer, styles.updateStatusContainer ] }>
@@ -165,7 +170,7 @@ export default class SearchComponent extends Component {
                             </View>
                             : null
                         }
-                        <TouchableOpacity onPress = { this.onOptionPress.bind(this) }>
+                        <TouchableOpacity onPress = { this.onOptionPress }>
                             <Image style = { styles.image } source = { require("../images/Icons/SearchOptions.png") } resizeMode = { 'contain' } />
                         </TouchableOpacity>
                     </View>

@@ -27,6 +27,8 @@ class MyAccountNavContainer extends Component {
         super(props);
 
         this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
+        this.redirectToAboutPage = this.redirectToAboutPage.bind(this);
+        this.redirectToHelpPage = this.redirectToHelpPage.bind(this);
     }
 
     componentDidMount() {
@@ -45,16 +47,18 @@ class MyAccountNavContainer extends Component {
         let currentScreen = this.props.nav.routes[0].routeName;
 
         switch (currentScreen) {
-            case 'MyAccountMainPageScreen': return; 
-            break;
+            case 'MyAccountMainPageScreen': 
+                return;
             case 'StorageScreen': 
             case 'BalanceScreen': 
-            case 'SettingsScreen': this.props.redirectToMyAccountScreen();
-            break;
+            case 'SettingsScreen': 
+                this.props.redirectToMyAccountScreen();
+                break;
             case 'ChangePasswordScreen': 
             case 'PinCodeGenerationScreen': 
-            case 'MyAccountMnemonicScreen': this.props.redirectToSettingsScreen();
-            break;
+            case 'MyAccountMnemonicScreen': 
+                this.props.redirectToSettingsScreen();
+                break;
             default: this.props.redirectToMyAccountScreen();
         }
     }
@@ -95,8 +99,8 @@ class MyAccountNavContainer extends Component {
                         redirectToMyAccountScreen: this.props.redirectToMyAccountScreen,
                         redirectToMyAccountMnemonicScreen: this.props.redirectToMyAccountMnemonicScreen,
                         changePasswordPopupStatus: this.props.changePasswordPopupStatus,
-                        redirectToAboutPage: this.redirectToAboutPage.bind(this),
-                        redirectToHelpPage: this.redirectToHelpPage.bind(this),
+                        redirectToAboutPage: this.redirectToAboutPage,
+                        redirectToHelpPage: this.redirectToHelpPage,
 
                         showSyncWindow: this.props.showSyncWindow
                     } }

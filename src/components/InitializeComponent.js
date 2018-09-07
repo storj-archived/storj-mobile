@@ -20,7 +20,13 @@ export default class InitializeComponent extends Component {
         this.state = {
             isKeyboardShown: false
         }
+
+        this._onRef = this._onRef.bind(this);
     };
+
+    _onRef(ref) {
+        this._inputComponent = ref;
+    }
 
     componentWillMount() {
         this.keyboardListenerShow = Keyboard.addListener('keyboardDidShow', () => {
@@ -90,9 +96,9 @@ export default class InitializeComponent extends Component {
                                                 </View>
                                             </TouchableOpacity>
                                             <InputComponent 
-                                                ref = { component => this._inputComponent = component }
+                                                ref = { this._onRef }
                                                 inputStyle = { styles.pincodeInputStyle }
-                                                onChangeText = { value => this.props.onChangePasscode(value) }
+                                                onChangeText = { this.props.onChangePasscode }
                                                 autoFocus = { true }
                                                 keyboardType = { 'numeric' }
                                                 placeholder = {'Passcode'} 
@@ -105,15 +111,15 @@ export default class InitializeComponent extends Component {
                                                 <View style = { styles.buttonBlock } >
                                                     <TouchableOpacity 
                                                         style = { styles.buttonContainer } 
-                                                        onPressOut = { () => this.props.redirectToLoginScreen() }>
+                                                        onPressOut = { this.props.redirectToLoginScreen }>
                                                             <Text style = { styles.buttonText }>Log in via password</Text>
                                                     </TouchableOpacity>
                                                     <TouchableOpacity 
                                                         style = { [styles.buttonContainer, { marginTop: getHeight(10) } ] } 
-                                                        onPressOut = { () => this.props.redirectToQRScannerScreen() }>
+                                                        onPressOut = { this.props.redirectToQRScannerScreen }>
                                                             <Text style = { styles.buttonText }>Log in via QR code</Text>
                                                     </TouchableOpacity>
-                                                    <Text style = { styles.footerText }>Don't have an account? <Text onPress = { () => this.props.redirectToRegisterScreen() } style = { styles.footerLink }>Sign Up</Text></Text>
+                                                    <Text style = { styles.footerText }>Don't have an account? <Text onPress = { this.props.redirectToRegisterScreen } style = { styles.footerLink }>Sign Up</Text></Text>
                                                 </View>
                                         }
                                     </View>

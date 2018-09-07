@@ -50,6 +50,9 @@ class InitializeContainer extends Component {
             isFinished: false,
             isFirstLaunch: true
         };
+
+        this.onChangePasscode = this.onChangePasscode.bind(this);
+        this._onRef = this._onRef.bind(this);
     };
 
     async componentWillMount() {
@@ -70,6 +73,9 @@ class InitializeContainer extends Component {
         }
     }
 
+    _onRef(ref) {
+        this._initializeComponent = ref;
+    }
 
     onChangePasscode(value) {
         if(this.state.isFinished) return;
@@ -156,11 +162,11 @@ class InitializeContainer extends Component {
     render() {
         return(
             <InitializeComponent
-                ref = { component => this._initializeComponent = component }
+                ref = { this._onRef }
                 enterPassCode = { this.state.enterPassCode }
                 isError = { this.state.isError }
                 filledPins = { this.state.filledPins }
-                onChangePasscode = { this.onChangePasscode.bind(this) }
+                onChangePasscode = { this.onChangePasscode }
                 isPasscodeWrong = { this.state.isPasscodeWrong }
                 isLoading = { this.state.isLoading }
                 infoText = { this.state.infoText }

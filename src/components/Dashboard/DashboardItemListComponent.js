@@ -11,22 +11,27 @@ import BaseListComponent from '../BaseListComponent';
 export default class DashboardItemListComponent extends BaseListComponent {
     constructor(props) {
         super(props);
+
+        this.navigationPress = this.navigationPress.bind(this);
+    }
+
+    navigationPress() {
+        this.props.navigationPress(this.props.itemType);
     }
 
     render() {
         return(
             <View>  
                 <DashboardListHeaderComponent
-                    onPress = { () => { this.props.navigationPress(this.props.itemType) } }
+                    onPress = { this.navigationPress }
                     title = { this.props.title } />
                 <this.ListComponent
                     textComp = { (props) => <Text numberOfLines = { 1 } style = { props.style }>{ this.props.getBucketName(props.children) }</Text> }
                     listItemIcon = { this.props.listItemIcon }
-                    cloudListItemIcon = { this.props.cloudListItemIcon }
-                    />
+                    cloudListItemIcon = { this.props.cloudListItemIcon } />
                 <DashboardListFooterComponent
                     count = { this.props.count } 
-                    onPress = { () => { this.props.navigationPress(this.props.itemType) } } />
+                    onPress = { this.navigationPress } />
             </View>
         )
     }

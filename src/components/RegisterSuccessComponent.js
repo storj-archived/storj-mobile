@@ -41,7 +41,7 @@ export default class RegisterSuccessComponent extends Component {
                         <Text style = { styles.infoText } >{ infoScreensConstants.registerSuccessMainText[0] }</Text>
                         <Text style = { styles.infoText } >{ infoScreensConstants.registerSuccessMainText[1] }</Text>
                     </View>
-                    <TouchableOpacity onPress = { () => { this.props.screenProps.redirectToMnemonicInfoScreen(); } }>
+                    <TouchableOpacity onPress = { this.props.screenProps.redirectToMnemonicInfoScreen }>
                         <View style = { styles.nextButton }>
                             <Text style = { styles.nextButtonText }>Next</Text>
                         </View>

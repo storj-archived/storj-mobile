@@ -16,6 +16,8 @@ import { InfoButtonComponent } from '../InfoButtonComponent';
 export default class MyAccountMainPageComponent extends Component{
     constructor(props) {
         super(props);     
+
+        this.logOut = this.logOut.bind(this);
     }
 
     logOut() {
@@ -111,7 +113,7 @@ export default class MyAccountMainPageComponent extends Component{
                                     onPress = { this.props.screenProps.showSyncWindow } />
                             }
                         </View>
-                        <TouchableOpacity onPress = { () => { this.logOut(); } }>
+                        <TouchableOpacity onPress = { this.logOut }>
                             <View style = { styles.logOutButton }>
                                 <Text style = { styles.logOutText }>Log out</Text>
                             </View>

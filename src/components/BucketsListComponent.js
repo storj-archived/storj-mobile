@@ -14,8 +14,6 @@ export default class BucketsListComponent extends BaseListComponent {
     }
 
     render() {
-        const isGridView = this.props.isGridViewShown;
-
         return(
             <View style = { styles.mainContainer }>
                 <this.ListComponent

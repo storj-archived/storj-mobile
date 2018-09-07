@@ -49,8 +49,6 @@ export default class ListComponent extends Component {
 
     sortByName(items, sortingObject) {         
         items.forEach((item) => {
-            var firstLetter = item.getName()[0];
-
             var prop = item.getName().charAt(0).toUpperCase();            
             
             if(!sortingObject[prop]) {

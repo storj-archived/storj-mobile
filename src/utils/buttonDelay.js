@@ -1,10 +1,8 @@
-let timerId = null;
-
-function clear(context) {
+function clear(context, timerId) {
     context.isLoading = false;
     clearTimeout(timerId);
 }
 
 export function setButtonInvokeTimeout(duration, context) {
-    timerId = setTimeout(() => clear(context), duration);
+    let timerId = setTimeout(() => clear(context, timerId), duration);
 }

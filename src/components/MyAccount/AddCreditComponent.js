@@ -22,6 +22,10 @@ export default class AddCreditComponent extends Component {
             showStorjCredits: false,
             showBTCCredits: false
         }
+
+        this.showBTCCredits = this.showBTCCredits.bind(this);
+        this.showStorjCredits = this.showStorjCredits.bind(this);
+        this.createStorjWallet = this.createStorjWallet.bind(this);
     }
 
     hideBasicWallets(name) {
@@ -58,7 +62,7 @@ export default class AddCreditComponent extends Component {
                             </Text>
                         </View>
                     </View>
-                    <TouchableOpacity onPress = { () => { this.createStorjWallet(); } }>
+                    <TouchableOpacity onPress = { this.createStorjWallet }>
                         <View style = { styles.createWalletButton } >
                             <Text style = { styles.createWalletButtonText }>Create Wallet</Text>
                         </View>

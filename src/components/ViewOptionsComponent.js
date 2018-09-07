@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { getHeight, getWidth } from '../utils/adaptive';
 import SORTING from '../utils/constants/sortingConstants';
 
+//TODO: remove arrow func part 2
 export default class ViewOptionsComponent extends Component {
     constructor(props) {
         super(props)
@@ -17,14 +18,6 @@ export default class ViewOptionsComponent extends Component {
         this.state = {
             isSortingShown: false
         }
-    }
-
-    closeView() {
-        this.props.showOptions();
-    }
-
-    setSelectinMode() {
-        this.props.enableSelectionMode();     
     }
 
     renderOptionItem(imageSource, title, onPress) {
@@ -53,7 +46,7 @@ export default class ViewOptionsComponent extends Component {
                             "List view", 
                             () => {
                                 this.props.setListView(); 
-                                this.closeView();
+                                this.props.showOptions();
                             }
                         ) :
                         this.renderOptionItem( 
@@ -61,7 +54,7 @@ export default class ViewOptionsComponent extends Component {
                             "Grid view", 
                             () => {
                                 this.props.setGridView();
-                                this.closeView();
+                                this.props.showOptions();
                             }
                         )   
                 }
@@ -70,8 +63,8 @@ export default class ViewOptionsComponent extends Component {
                         require('../images/Icons/SelectItems.png'), 
                         "Select items", 
                         () => {
-                            this.setSelectinMode();
-                            this.closeView();
+                            this.props.enableSelectionMode();
+                            this.props.showOptions();
                         }
                     )
                 }
@@ -90,7 +83,7 @@ export default class ViewOptionsComponent extends Component {
                             this.props.setSorting(SORTING.BY_DATE);
                             this.props.getBuckets(SORTING.BY_DATE);
                             this.props.getFiles(SORTING.BY_DATE);
-                            this.closeView();
+                            this.props.showOptions();
                         }
                     )
                 }
@@ -102,7 +95,7 @@ export default class ViewOptionsComponent extends Component {
                             this.props.setSorting(SORTING.BY_NAME);
                             this.props.getBuckets(SORTING.BY_NAME);
                             this.props.getFiles(SORTING.BY_NAME);
-                            this.closeView();
+                            this.props.showOptions();
                         }
                     )
                 }
@@ -121,7 +114,7 @@ export default class ViewOptionsComponent extends Component {
     render() {
         return(
             <View style = { [ styles.backgroundWrapper ] }>  
-                <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { () => this.closeView() } />
+                <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { this.props.showOptions } />
                 {
                     this.mainRender()
                 }

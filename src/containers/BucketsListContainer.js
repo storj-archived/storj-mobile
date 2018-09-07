@@ -50,15 +50,15 @@ class BucketsListContainer extends BaseListContainer {
         return(
             <BucketsListComponent
                 isGridViewShown = { this.props.isGridViewShown }
-                onPress = { (bucket) => { this.onPress(bucket); } }
-                onLongPress = { (bucket) => { this.onLongPress(bucket); } }
-                onDotsPress = { (bucket) => { this.onDotsPress(bucket); } }
-                onCancelPress = { (bucket) => { this.onCancelPress(bucket); } }
+                onPress = { this.onPress }
+                onLongPress = { this.onLongPress }
+                onDotsPress = { this.onDotsPress }
+                onCancelPress = { this.onCancelPress }
                 selectedItemId = { this.props.screenProps.selectedItemId }
                 animatedScrollValue = { this.props.screenProps.animatedScrollValue }
                 isSelectionMode = { this.props.isSelectionMode }
                 isLoading = { false }
-                onRefresh = { () => ServiceModule.getBuckets() }
+                onRefresh = { ServiceModule.getBuckets }
                 sortingMode = { this.props.sortingMode }
                 searchSubSequence = { this.props.searchSubSequence }
                 getItemSize = { () => {} }

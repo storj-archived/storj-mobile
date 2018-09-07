@@ -12,6 +12,10 @@ import { getHeight, getWidth } from '../utils/adaptive';
 export default class PinOptionComponent extends Component {
     constructor(props) {
         super(props)
+
+        this.closeView = this.closeView.bind(this);
+        this.onChangePin = this.onChangePin.bind(this);
+        this.onDeletePin = this.onDeletePin.bind(this);
     }
 
     /**
@@ -52,26 +56,28 @@ export default class PinOptionComponent extends Component {
         );
     }
 
-    renderOptions() {
-        return(
-            <View style = { styles.mainContainer } >
-                {
-                    this.renderOptionItem("Change PIN", () => { this.props.redirectToPinCodeGenerationScreen(); this.closeView(); })
-                }
-                {
-                    this.renderOptionItem("Delete PIN", () => { this.tryDeletePIN(); this.closeView(); }, styles.redTextColor)
-                }
-            </View>
-        )
+    onChangePin() {
+        this.props.redirectToPinCodeGenerationScreen(); 
+        this.closeView();
+    }
+
+    onDeletePin() {
+        this.tryDeletePIN(); 
+        this.closeView();
     }
 
     render() {
         return(
             <View style = { [ styles.backgroundWrapper ] }>  
-                <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { () => this.closeView() } />
-                {
-                    this.renderOptions()
-                }
+                <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { this.closeView } />
+                <View style = { styles.mainContainer } >
+                    {
+                        this.renderOptionItem("Change PIN", this.onChangePin)
+                    }
+                    {
+                        this.renderOptionItem("Delete PIN", this.onDeletePin, styles.redTextColor)
+                    }
+                </View>
             </View>
         )
     }

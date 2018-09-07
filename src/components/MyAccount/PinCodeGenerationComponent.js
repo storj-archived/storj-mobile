@@ -11,6 +11,7 @@ import {
 import StorjModule from '../../utils/StorjModule';
 import { getHeight, getWidth } from '../../utils/adaptive';
 
+//TODO remove arrow functions from render pt2
 export default class PinCodeGenerationComponent extends Component {
     constructor(props) {
         super(props)
@@ -36,6 +37,8 @@ export default class PinCodeGenerationComponent extends Component {
 
         this.textInputsRefs = [];
         this.pinCodes = [];
+        this.handleEdit = this.handleEdit.bind(this);
+        this._onRef = this._onRef.bind(this);
 
         this.isKeyboardShown = false;
     }
@@ -54,6 +57,10 @@ export default class PinCodeGenerationComponent extends Component {
     componentWillUnmount() {
         if(this.keyboardListenerShow) this.keyboardListenerShow.remove();
         if(this.keyboardListenerHide) this.keyboardListenerHide.remove();
+    }
+
+    _onRef(ref) {
+        this._textInput = ref;
     }
 
     setErrorState() {
@@ -216,10 +223,10 @@ export default class PinCodeGenerationComponent extends Component {
                     </TouchableOpacity>
                 </View>
                 <TextInput 
-                    ref = { component => this._textInput = component }
+                    ref = { this._onRef }
                     style = { { position: 'absolute', right: 0, top: 0, height: 1, width:1 } }
                     caretHidden = { true }
-                    onChangeText = { this.handleEdit.bind(this) }
+                    onChangeText = { this.handleEdit }
                     returnKeyType = { 'done' }
                     autoCapitalize = { 'sentences' }
                     underlineColorAndroid = { 'transparent' }

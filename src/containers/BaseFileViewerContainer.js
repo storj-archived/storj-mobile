@@ -25,6 +25,7 @@ class BaseFileViewerContainer extends Component {
 
         this.toggleActionBar = this.toggleActionBar.bind(this);
         this.navigateBack = this.navigateBack.bind(this);
+        this.share = this.share.bind(this);
     }
 
     /**
@@ -103,7 +104,7 @@ class BaseFileViewerContainer extends Component {
     }
 
     async deleteFile() {
-        let deleteResponse = await ServiceModule.deleteFile(this.bucketId, this.fileId);
+        await ServiceModule.deleteFile(this.bucketId, this.fileId);
         this.props.redirectToMainScreen();
     }
 

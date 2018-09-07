@@ -16,6 +16,8 @@ class FilePreviewContainer extends BaseFileViewerContainer {
         this.size = props.size;
         this.navigateBack = this.navigateBack.bind(this);
         this.isOpened = false;
+
+        this.openFile = this.openFile.bind(this);
     }
 
     async openFile() {
@@ -47,8 +49,8 @@ class FilePreviewContainer extends BaseFileViewerContainer {
         return(
             <FilePreviewComponent
                 showProgress = { this.showProgress }
-                openFile = { this.openFile.bind(this) }
-                onShare = { this.share.bind(this) }
+                openFile = { this.openFile }
+                onShare = { this.share }
                 isLoading = { this.props.isLoading }
                 isDownloaded = { this.props.isDownloaded }
                 progress = { this.props.progress }

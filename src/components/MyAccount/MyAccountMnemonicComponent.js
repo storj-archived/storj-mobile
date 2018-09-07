@@ -25,6 +25,9 @@ export default class MyAccountMnemonicComponent extends Component {
         }
 
         this.secondWordsRowIndexCorrection = 13;
+
+        this.copyToClipboard = this.copyToClipboard.bind(this);
+        this.cancelCopy = this.cancelCopy.bind(this);
     }
 
     async componentDidMount() { 
@@ -110,7 +113,7 @@ export default class MyAccountMnemonicComponent extends Component {
                             ? this.mnemonicToArrayView(this.state.mnemonic)
                             : null
                     }
-                    <TouchableOpacity onPress = { this.copyToClipboard.bind(this) }>
+                    <TouchableOpacity onPress = { this.copyToClipboard }>
                         <View style = { styles.copyToClipboardContainer }>
                             <Image
                                 style = { styles.icon }
@@ -123,7 +126,7 @@ export default class MyAccountMnemonicComponent extends Component {
                         this.state.showCopyPopUp 
                         ? <View style = { styles.popUpContainer } >
                             <Text style = { styles.popUpInfoText } >Copied to clipboard</Text>
-                            <TouchableOpacity onPress = { this.cancelCopy.bind(this) } >
+                            <TouchableOpacity onPress = { this.cancelCopy } >
                                 <Text style = { styles.popUpCancelText }>OK</Text>
                             </TouchableOpacity>
                         </View> : null

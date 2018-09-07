@@ -19,6 +19,8 @@ export default class CheckboxComponent extends Component {
         this.state = {
             isChecked: props.isChecked && isBoolean ? props.isChecked : false 
         };
+
+        this.onPress = this.onPress.bind(this);
     };
 
     /**
@@ -33,7 +35,7 @@ export default class CheckboxComponent extends Component {
 
     render() {
         return(
-            <TouchableOpacity style = { styles.checkboxWrapper } onPress = { () => { this.onPress(); } }>
+            <TouchableOpacity style = { styles.checkboxWrapper } onPress = { this.onPress }>
                 <View style = { this.state.isChecked ? styles.checked : null }/>
             </TouchableOpacity>
         );

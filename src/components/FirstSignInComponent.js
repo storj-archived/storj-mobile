@@ -17,13 +17,16 @@ export default class FirstSignInComponent extends Component {
             options: props.options,
             showModal: false
         }
+
+        this.showModal = this.showModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
-    showModal = () => {
+    showModal() {
         this.setState({ showModal: true });
     }
 
-    closeModal = async () => {
+    async closeModal() {
         this.setState({ 
             showModal: false
         });
@@ -114,7 +117,7 @@ export default class FirstSignInComponent extends Component {
                                 );
                             })
                         }
-                        <TouchableOpacity style = { styles.goButton } onPress = { this.closeModal.bind(this) }>
+                        <TouchableOpacity style = { styles.goButton } onPress = { this.closeModal }>
                             <Text style = { styles.syncMyDeviceText }>Go</Text>
                         </TouchableOpacity>
                     </View>
@@ -149,7 +152,7 @@ export default class FirstSignInComponent extends Component {
                             <Text style = { styles.titleLightRegularText }> or add them manually.</Text> 
                         </View>
                     </View>
-                    <TouchableOpacity style = { styles.syncMyDeviceButton } onPressOut = { this.showModal.bind(this) }>
+                    <TouchableOpacity style = { styles.syncMyDeviceButton } onPressOut = { this.showModal }>
                         <Text style = { styles.syncMyDeviceText }>Sync my files</Text>
                     </TouchableOpacity>
                 </View>

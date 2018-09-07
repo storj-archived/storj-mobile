@@ -78,7 +78,7 @@ export default class RegisterComponent extends Component {
                         style = { styles.footerText }>Already have an account? 
                         <Text 
                             style = { styles.footerLink }
-                            onPress = { () => { this.redirectToLoginScreen(); } }> Login</Text></Text>
+                            onPress = { this.redirectToLoginScreen }> Login</Text></Text>
                 </View>
                 {
                     this.props.isLoading ?

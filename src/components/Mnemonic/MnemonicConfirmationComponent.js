@@ -23,6 +23,13 @@ export default class MnemonicConfirmationComponent extends Component {
             secondWord: ''
         }
 
+        this.showFirstSet = this.showFirstSet.bind(this); 
+        this.showSecondSet = this.showSecondSet.bind(this); 
+        this.checkIsWordsInMnemonic = this.checkIsWordsInMnemonic.bind(this);
+        this.setNewData = this.setNewData.bind(this);
+        this.setFirstWord = this.setFirstWord.bind(this); 
+        this.setSecondWord = this.setSecondWord.bind(this); 
+
         this.WORD_NUMBER = 'Word #';
         this.data = this.getWords();
     }
@@ -103,11 +110,7 @@ export default class MnemonicConfirmationComponent extends Component {
     }
 
     checkBothWordsInputed() {
-        let result = this.containWord(this.state.firstWord, this.WORD_NUMBER) && 
-                      this.containWord(this.state.secondWord, this.WORD_NUMBER)
-                        ? false : true;
-
-        return result;
+        return !this.containWord(this.state.firstWord, this.WORD_NUMBER) && !this.containWord(this.state.secondWord, this.WORD_NUMBER);
     }
 
     checkIsWordsInMnemonic() {
@@ -119,7 +122,7 @@ export default class MnemonicConfirmationComponent extends Component {
         if(this.containWord(this.state.mnemonic, this.state.firstWord) && this.containWord(this.state.mnemonic, this.state.secondWord)) {
             this.props.screenProps.redirectToMnemonicConfirmedScreen();
         } else {
-            this.props.screenProps.redirectToMnemonicNotConfirmedScreen(this.setNewData.bind(this));
+            this.props.screenProps.redirectToMnemonicNotConfirmedScreen(this.setNewData);
         }
     }
 
@@ -130,13 +133,16 @@ export default class MnemonicConfirmationComponent extends Component {
     }
 
     render() {
+        let isContainFirstWord = this.containWord(this.state.firstWord, this.WORD_NUMBER);
+        let isContainSecondWord = this.containWord(this.state.secondWord, this.WORD_NUMBER);
+
         return(
             <View style = { styles.mainContainer }>
                 <View style = { styles.topContainer } >
                     <View style = { styles.topContentContainer } >
                         <View style = { styles.flexRow }>
                             <TouchableOpacity 
-                                onPress = { () => { this.props.screenProps.redirectToMnemonicGenerationScreen(); } }
+                                onPress = { this.props.screenProps.redirectToMnemonicGenerationScreen }
                                 style = { styles.backButtonContainer } >
                                 <Image 
                                     source = { require('../../images/MyAccount/BlueBackButton.png') }
@@ -149,7 +155,7 @@ export default class MnemonicConfirmationComponent extends Component {
                             </View>
                         </View>
                         <TouchableOpacity 
-                            onPress = { () => { this.props.screenProps.redirectToLoginScreen(); } }
+                            onPress = { this.props.screenProps.redirectToLoginScreen }
                             style = { styles.backButtonContainer } >
                             <Text style = { [styles.skipText, styles.titleMargin] }>Skip</Text>
                         </TouchableOpacity>
@@ -159,11 +165,11 @@ export default class MnemonicConfirmationComponent extends Component {
                     <Text style = { styles.infoText }>{ mnemonicScreenConstants.mnemonicScreenConfirmationMainText }</Text>
                 </View>
                 <View style = { styles.wordsMargin }>
-                    <TouchableOpacity onPress = { this.showFirstSet.bind(this) }>
+                    <TouchableOpacity onPress = { this.showFirstSet }>
                         <View style = { styles.contentContainer }>
-                            <View style = { !this.containWord(this.state.firstWord, this.WORD_NUMBER) ? { marginTop: getHeight(-3) } : null }>
+                            <View style = { !isContainFirstWord ? { marginTop: getHeight(-3) } : null }>
                                 {
-                                    !this.containWord(this.state.firstWord, this.WORD_NUMBER)
+                                    !isContainFirstWord
                                         ? <Text style = { styles.wordNumberText }>{ this.WORD_NUMBER + this.data.firstWordIndex }</Text>
                                         : null
                                 }
@@ -176,11 +182,11 @@ export default class MnemonicConfirmationComponent extends Component {
                         <View style = { styles.underline }/>
                     </TouchableOpacity>
                     <View style = { styles.secondWordMargin } >
-                        <TouchableOpacity onPress = { this.showSecondSet.bind(this) }>
+                        <TouchableOpacity onPress = { this.showSecondSet }>
                             <View style = { styles.contentContainer }>
-                                <View style = { !this.containWord(this.state.secondWord, this.WORD_NUMBER) ? { marginTop: getHeight(-3) } : null }>
+                                <View style = { !isContainSecondWord ? { marginTop: getHeight(-3) } : null }>
                                     {
-                                        !this.containWord(this.state.secondWord, this.WORD_NUMBER) 
+                                        !isContainSecondWord 
                                             ? <Text style = { styles.wordNumberText }>{ this.WORD_NUMBER + this.data.secondWordIndex }</Text>
                                             : null
                                     }
@@ -194,7 +200,7 @@ export default class MnemonicConfirmationComponent extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <TouchableOpacity onPress = { this.checkIsWordsInMnemonic.bind(this) }>
+                <TouchableOpacity onPress = { this.checkIsWordsInMnemonic }>
                     <View style = { 
                             this.checkBothWordsInputed() 
                                 ? styles.confirmButton
@@ -205,12 +211,12 @@ export default class MnemonicConfirmationComponent extends Component {
                 </TouchableOpacity>
                 {
                     this.state.showFirstSet 
-                        ? this.getWordPopUpData({ data: this.data.firstSet, setWord: this.setFirstWord.bind(this) })
+                        ? this.getWordPopUpData({ data: this.data.firstSet, setWord: this.setFirstWord })
                         : null
                 }
                 {
                     this.state.showSecondSet
-                        ? this.getWordPopUpData({ data: this.data.secondSet, setWord: this.setSecondWord.bind(this) })
+                        ? this.getWordPopUpData({ data: this.data.secondSet, setWord: this.setSecondWord })
                         : null
                 }
             </View>

@@ -2,6 +2,7 @@ import React from "react";
 import { getFileSize, getFullFileName, getShortFileName } from "../utils/fileUtils";
 import HeaderFilesListComponent from "../components/HeaderFilesListComponent";
 
+//TODO: remove arrow
 export default function headerFilesListBinder() {
     return (props) => (
         <HeaderFilesListComponent
@@ -13,15 +14,15 @@ export default function headerFilesListBinder() {
                 getFileName = { this.props.isGridViewShown ? getShortFileName : getFullFileName }
                 selectedItemId = { this.props.selectedItemId }
                 isGridViewShown = { this.props.isGridViewShown }
-                onPress = { (item) => { this.onPress(item); } }
-                onLongPress = { (item) => { this.onLongPress(item); } }
-                onDotsPress = { (item) => { this.onDotsPress(item); } }
-                onCancelPress = { (item) => { this.onCancelPress(item); } }                             
+                onPress = { this.onPress }
+                onLongPress = { this.onLongPress }
+                onDotsPress = { this.onDotsPress }
+                onCancelPress = { this.onCancelPress }                             
                 isSelectionMode = { this.props.isSelectionMode }
                 isSingleItemSelected = { this.props.isSingleItemSelected }
                 sortingMode = { this.props.sortingMode }
                 searchSubSequence = { this.props.searchSubSequence }
-                onRefresh = { this.onRefresh.bind(this) }
+                onRefresh = { this.onRefresh }
 
                 selectAll = { props.selectAll }
                 deselectAll = { props.deselectAll }

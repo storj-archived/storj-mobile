@@ -31,6 +31,14 @@ class QRScannerContainer extends Component {
 
         this.releaseTimer = null;
         this.stateModel = new LoginStateModel();
+
+        this.navigateBack = this.navigateBack.bind(this);
+        this._onBarCodeRead = this._onBarCodeRead.bind(this);
+        this._onRef = this._onRef.bind(this);
+    }
+
+    _onRef(ref) {
+        this._barComponent = ref;
     }
 
     /**
@@ -154,16 +162,16 @@ class QRScannerContainer extends Component {
     /**
      * Redirecting on previous page
      */
-    navigateBack = () => {
+    navigateBack() {
         this.props.navigateBack();
     }
 
     render() {
         return (
             <QRScannerComponent
-                ref = { component => this._barComponent = component }
+                ref = { this._onRef }
                 viewAppear = { this.state.viewAppear }
-                navigateBack = { this.navigateBack.bind(this) }
+                navigateBack = { this.navigateBack }
                 onBarCodeRead = { this._onBarCodeRead } />
         )
     }  

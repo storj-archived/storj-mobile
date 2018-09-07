@@ -1,13 +1,11 @@
 import {
-    NativeModules,
-    Platform
+    NativeModules
 } from 'react-native'
 
 const OpenFileModule = (() => {
     let instance = null;
 
     const openFileModule = NativeModules.OpenFileModule;
-    const isAndroid = Platform.OS === 'android';
 
     class OpenFileModule {
 

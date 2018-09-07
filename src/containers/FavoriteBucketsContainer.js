@@ -19,6 +19,11 @@ class FavoriteBucketsContainer extends BaseListContainer {
         super(props);
 
         this.animatedScrollValue = new Animated.Value(0);
+
+        this.emptyFunction = () => {};
+        this.deselectBuckets = this.deselectBuckets.bind(this);
+        this.navigateBack = this.navigateBack.bind(this);
+        this.selectAll = this.selectAll.bind(this);
     }
 
     /**
@@ -81,6 +86,10 @@ class FavoriteBucketsContainer extends BaseListContainer {
         return data;
     }
 
+    selectAll() {
+        this.props.selectBuckets(this.getDataForSelection());
+    }
+
     render() {
         let data = this.getData();
         
@@ -90,31 +99,31 @@ class FavoriteBucketsContainer extends BaseListContainer {
                 isLoading = { this.props.isLoading }
                 data = { data }
                 animatedScrollValue = { this.animatedScrollValue }
-                getItemSize = { () => {} }
+                getItemSize = { this.emptyFunction }
                 getBucketName = { getShortBucketName }
                 selectedItemId = { this.props.selectedItemId }
                 isGridViewShown = { this.props.isGridViewShown }
-                onPress = { (bucket) => { this.onPress(bucket); } }
-                onLongPress = { (bucket) => { this.onLongPress(bucket); } }
-                onDotsPress = { (bucket) => { this.onDotsPress(bucket); } }
-                onCancelPress = { (bucket) => { this.onCancelPress(bucket); } }                             
+                onPress = { this.onPress }
+                onLongPress = { this.onLongPress }
+                onDotsPress = { this.onDotsPress }
+                onCancelPress = { this.onCancelPress }                             
                 isSelectionMode = { this.props.isSelectionMode }
                 isSingleItemSelected = { this.props.isSingleItemSelected }
                 sortingMode = { this.props.sortingMode }
                 searchSubSequence = { this.props.searchSubSequence }
-                onRefresh = { () => {} }
+                onRefresh = { this.emptyFunction }
 
                 isFilesScreen = { true }
                 searchIndex = { 3 }
-                navigateBack = { this.navigateBack.bind(this) }
+                navigateBack = { this.navigateBack }
                 buckets = { [] }
                 setSearch = { this.props.setSearch }
                 clearSearch = { this.props.clearSearch }
                 disableSelectionMode = { this.props.disableSelectionMode }
                 showOptions = { this.props.screenProps.showOptions }
                 getSelectedFilesCount = { this.getSelectedItemsCount(data) }
-                selectAll = { () => this.props.selectBuckets(this.getDataForSelection()) }
-                deselectAll = { this.deselectBuckets.bind(this) } />
+                selectAll = { this.selectAll }
+                deselectAll = { this.deselectBuckets } />
         );
     }
 }

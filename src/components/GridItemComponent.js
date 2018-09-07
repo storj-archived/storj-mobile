@@ -18,7 +18,7 @@ export default class GridItemComponent extends Component {
         const props = this.props;
         return(
             <TouchableOpacity 
-                style = { props.isSingleItemSelected ? [gridItemStyles.listItemContainer, gridItemStyles.itemSelected] : gridItemStyles.listItemContainer }
+                style = { props.isSingleItemSelected ? [ gridItemStyles.listItemContainer, gridItemStyles.itemSelected ] : gridItemStyles.listItemContainer }
                 onPress = { props.onPress }
                 onLongPress = { props.onLongPress }>
                     <View style = { gridItemStyles.listItemContent }>

@@ -23,7 +23,12 @@ export default class QRScannerComponent extends Component {
 
         this.navigateBack = this.props.navigateBack ? this.props.navigateBack : () => {};
         this.onBarCodeRead = this.props.onBarCodeRead ? this.props.onBarCodeRead : () => {};
+        this._onRef = this._onRef.bind(this);
     };
+
+    _onRef(ref) {
+        this._barCode = ref;
+    }
 
     /**
      * Setting border color of qrscanner 
@@ -69,13 +74,13 @@ export default class QRScannerComponent extends Component {
                         <Barcode 
                         scannerRectCornerColor = { this.state.borderColor }
                         style = { styles.barCodeContainer } 
-                        ref = { component => this._barCode = component }
+                        ref = { this._onRef }
                         onBarCodeRead = {this.onBarCodeRead}/> : null
                 }
                 { 
                     <View style = {  styles.backgroundWrapper  }>
                         <View style = { styles.buttonPanelContainer }>
-                            <TouchableOpacity onPress = { () => this.navigateBack() } >
+                            <TouchableOpacity onPress = { this.navigateBack } >
                                 <Image style = { styles.backButton } source = { require('../images/Icons/BackButton.png') }/>
                             </TouchableOpacity>
                         </View>

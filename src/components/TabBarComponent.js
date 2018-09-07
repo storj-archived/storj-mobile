@@ -24,6 +24,12 @@ export default class TabBarComponent extends Component {
 
         this.tabBarPositionAnimated = new Animated.Value(0);
         this.isLoading = false;
+
+        this.onDashboardPress = this.onDashboardPress.bind(this);
+        this.onBucketPress = this.onBucketPress.bind(this);
+        this.onPicturesPress = this.onPicturesPress.bind(this);
+        this.onAccountPress = this.onAccountPress.bind(this);
+        this.onActionBarPress = this.onActionBarPress.bind(this);
     }
 
     componentWillMount () {
@@ -102,6 +108,44 @@ export default class TabBarComponent extends Component {
         setButtonInvokeTimeout(10, this);
     }
 
+    onDashboardPress() {
+        this.actionWithDelay(() => {                                
+            this.props.navigation.navigate("DashboardScreen");  
+            this.props.navigation.listSettings(this.props.navigation.email);
+        });
+    }
+
+    onBucketPress() {
+        this.actionWithDelay(() => {  
+            this.props.navigation.navigate("BucketsScreen");          
+            this.props.navigation.listSettings(this.props.navigation.email);                      
+        });
+    }
+
+    onPicturesPress() {
+        this.actionWithDelay(() => { 
+            let picturesBucketId = getPicturesBucketId(this.props.navigation.buckets);
+
+            if(!picturesBucketId) return;
+            this.props.navigation.listSettings(this.props.navigation.email);
+            ServiceModule.getFiles(picturesBucketId);   
+            this.props.navigation.pushLoading(picturesBucketId);
+            this.props.navigation.setPhotosBucketId(picturesBucketId);                     
+            this.props.navigation.navigate("MyPhotosScreen");
+        });
+    }
+
+    onAccountPress() {
+        this.actionWithDelay(() => {                                                            
+            this.props.navigation.hideActionBar();                                
+            this.props.navigation.navigate("MyAccountScreen");
+        });
+    }
+
+    onActionBarPress() {
+        this.actionWithDelay(() => { this.props.navigation.onActionBarPress(); });
+    }
+
     render() {
         let navIndex = this.props.navigationState.index;
         let actionButtonSource = !this.props.navigation.isActionBarShown 
@@ -117,47 +161,29 @@ export default class TabBarComponent extends Component {
                     <View style = { styles.tabContainer }>
                         <TouchableOpacity 
                             style = { styles.tabItemContainer } 
-                            onPress = { () => this.actionWithDelay(() => {                                
-                                this.props.navigation.navigate("DashboardScreen");  
-                                this.props.navigation.listSettings(this.props.navigation.email);                                   
-                            }) }>
+                            onPress = { this.onDashboardPress }>
                             <View><Image source = { require('../images/TabBar/HomeTabBar.png') } style = { navIndex === 0 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
                         <TouchableOpacity 
                             style = { styles.tabItemContainer } 
-                            onPress = { () => this.actionWithDelay(() => {  
-                                this.props.navigation.navigate("BucketsScreen");          
-                                this.props.navigation.listSettings(this.props.navigation.email);                      
-                            }) }>                            
+                            onPress = { this.onBucketPress }>                            
                             <View><Image source = { require('../images/TabBar/BucketTabBar.png') } style = { navIndex === 1 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
                         <View style = { styles.tabItemContainer } ></View>
                         <TouchableOpacity 
                             style = { styles.tabItemContainer } 
-                            onPress = { () => this.actionWithDelay(() => { 
-                                let picturesBucketId = getPicturesBucketId(this.props.navigation.buckets);
-
-                                if(!picturesBucketId) return;
-                                this.props.navigation.listSettings(this.props.navigation.email);
-                                ServiceModule.getFiles(picturesBucketId);   
-                                this.props.navigation.pushLoading(picturesBucketId);
-                                this.props.navigation.setPhotosBucketId(picturesBucketId);                     
-                                this.props.navigation.navigate("MyPhotosScreen");
-                            }) }>
+                            onPress = { this.onPicturesPress  }>
                             <View><Image source = { require('../images/TabBar/MyPhotos.png') } style = { navIndex === 2 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
                         <TouchableOpacity 
                             style = { styles.tabItemContainer } 
-                            onPress = { () => this.actionWithDelay(() => {                                                            
-                                this.props.navigation.hideActionBar();                                
-                                this.props.navigation.navigate("MyAccountScreen");
-                            }) }>
+                            onPress = { this.onAccountPress }>
                             <View><Image source = { require('../images/TabBar/UserTabBar.png') } style = { navIndex === 3 ? styleIconSelected : styleIcon }/></View>
                         </TouchableOpacity>
                     </View>
                 </View>
                 <View style = { styles.actionButtonWrapper }>
-                    <TouchableWithoutFeedback onPress = { () => this.actionWithDelay(() => { this.props.navigation.onActionBarPress(); }) }>
+                    <TouchableWithoutFeedback onPress = { this.onActionBarPress }>
                         <View>
                             <Image 
                                 source = { actionButtonSource } 

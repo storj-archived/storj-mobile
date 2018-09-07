@@ -1,6 +1,5 @@
 import {
-    NativeModules,
-    Platform
+    NativeModules
 } from 'react-native'
 
 const FilePicker = (() => {
@@ -9,7 +8,6 @@ const FilePicker = (() => {
     const filePickerLibAndroid = NativeModules.FilePickerAndroid;
     const imagePickerLibIos = NativeModules.FilePickerIos;
     const documentsPickerModule = NativeModules.DocumentsPickerModule;
-    const isAndroid = Platform.OS === 'android';
 
     class FilePicker {
 

@@ -21,10 +21,17 @@ export default class InputComponent extends Component {
         this.state = {
             isTextShown: this.props.isPassword
         };
+
+        this.onPress = this.onPress.bind(this);
+        this._onRef = this._onRef.bind(this);
     };
 
     onPress() {
         this.setState({isTextShown: !this.state.isTextShown})
+    }
+
+    _onRef(ref) {
+        this._textInput = ref;
     }
 
     render() {
@@ -45,7 +52,7 @@ export default class InputComponent extends Component {
                 <Text style = { placeholderStyle }> { message } </Text>
                 <View style = { styles.textInputWrapper }>
                     <TextInput 
-                        ref = { component => this._textInput = component }
+                        ref = { this._onRef }
                         placeholderTextColor = 'grey'
                         placeholder = { this.props.placeholder }
                         editable = { this.props.editable}
@@ -63,7 +70,7 @@ export default class InputComponent extends Component {
                             (() => {
                                 if(this.props.isPassword) {
                                     return (
-                                         <TouchableOpacity onPress = { () => { this.onPress() } }>
+                                         <TouchableOpacity onPress = { this.onPress }>
                                             <Image                     
                                                 style = { styles.eye } 
                                                 source = {

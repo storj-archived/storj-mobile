@@ -27,6 +27,15 @@ export default class FilePreviewComponent extends Component {
             isSelectBucketShown: false,
             isDetailedInfoShown: false
         }
+
+        this.showSelectBuckets = this.showSelectBuckets.bind(this);
+        this.showDetailedInfo = this.showDetailedInfo.bind(this);
+        this.onPress = this.onPress.bind(this);
+        this.emptyFunction = () => {};
+    }
+
+    onPress(bucket) {
+        this.selectBucketCallback({ bucketId: bucket.getId() });
     }
 
     showSelectBuckets(callback) {
@@ -86,7 +95,7 @@ export default class FilePreviewComponent extends Component {
                             source = { require("../images/Icons/BackButton.png") } />
                         <View style = { styles.flexRow }>
                             <Button 
-                                onPress = { () => { this.showDetailedInfo() } }
+                                onPress = { this.showDetailedInfo }
                                 source = { require("../images/Icons/BlueInfo.png") } />
                             <Button 
                                 style = { styles.searchButtonMargin }
@@ -112,29 +121,29 @@ export default class FilePreviewComponent extends Component {
                     {
                         this.state.isSelectBucketShown  
                             ? <SelectBucketComponent
-                                getItemSize = { () => {} }
+                                getItemSize = { this.emptyFunction }
                                 isLoading = { false }
                                 searchSubSequence = { null }
                                 sortingMode = { null }
-                                onRefresh = { () => {} }
+                                onRefresh = { this.emptyFunction }
                                 isGridViewShown = { this.props.isGridViewShown }
-                                onPress = { (bucket) => { this.selectBucketCallback({ bucketId: bucket.getId() }); } }
-                                onLongPress = { () => {} }
-                                onDotsPress = { () => {} }
-                                onCancelPress = { () => {} }
+                                onPress = { this.onPress }
+                                onLongPress = { this.emptyFunction }
+                                onDotsPress = { this.emptyFunction }
+                                onCancelPress = { this.emptyFunction }
                                 selectedItemId = { null }
                                 isSelectionMode = { false }
                                 data = { this.props.buckets }
                                 getBucketName = { getShortBucketName }
                                 
-                                showOptions = { () => {} }
-                                navigateBack = { this.showSelectBuckets.bind(this) } />
+                                showOptions = { this.emptyFunction }
+                                navigateBack = { this.showSelectBuckets } />
                             : null
                     }
                     {
                         this.state.isDetailedInfoShown 
                             ? <DetailedInfoComponent
-                                showDetailedInfo = { this.showDetailedInfo.bind(this) }
+                                showDetailedInfo = { this.showDetailedInfo }
                                 fileName = { this.props.name }
                                 type = { this.props.mimeType }
                                 size = { this.props.size }

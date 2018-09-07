@@ -4,8 +4,7 @@ import {
     TouchableOpacity,
     StyleSheet,
     Image,
-    Platform,
-    Dimensions
+    Platform
 } from 'react-native';
 import React, { Component } from 'react';
 import onBoardingScreensConstants from '../utils/constants/onBoardingScreeensConstants';
@@ -50,6 +49,9 @@ export default class OnBoardingComponent extends Component {
             { imagePath: onBoardingScreensConstants.incomeImagePath, textArray: onBoardingScreensConstants.incomeMainText },
             { imagePath: onBoardingScreensConstants.spaceImagePath, textArray: onBoardingScreensConstants.spaceMainText }
         ];
+
+        this.onIndexChange = this.onIndexChange.bind(this);
+        this.onRenderItem = this.onRenderItem.bind(this);
     };
 
     /**
@@ -58,24 +60,24 @@ export default class OnBoardingComponent extends Component {
     static navigationOptions = {
         header: null
     };
-    
-    /**
-     * Navigation to LoginScreen
-     */
-    redirectToSingInScreen() {
-        this.props.screenProps.redirectToLoginScreen();
+
+    onIndexChange(index) {
+        let finalIndex = this.state.currentIndex;
+
+        if(index === finalIndex) return;
+
+        index >= finalIndex 
+            ? finalIndex += 1
+            : finalIndex -= 1;
+
+        this.setState(() => ({ currentIndex: finalIndex }))
     }
 
-    /**
-     * Navigation to RegisterScreen
-     */
-    redirectToSingUpScreen() {
-        this.props.screenProps.redirectToRegisterScreen();
+    onRenderItem({ itemIndex, currentIndex, item, animatedValue }) {
+        return OnBoardingScreen(item);
     }
 
     render() {
-        const { width } = Dimensions.get('window');
-
         return(
             <View style={ styles.screen }>
                 <View style = { styles.titleContainer }>
@@ -88,21 +90,8 @@ export default class OnBoardingComponent extends Component {
                         contentOffset = { 0 }
                         data = { this.data }
                         threshold = { getWidth(50) }
-                        onIndexChange={ index => {
-                            let finalIndex = this.state.currentIndex;
-
-                            if(index === finalIndex) return;
-
-                            index >= finalIndex 
-                                ? finalIndex += 1
-                                : finalIndex -= 1;
-
-                            this.setState(() => ({ currentIndex: finalIndex }))
-                            
-                        }}
-                        renderItem = { ({ itemIndex, currentIndex, item, animatedValue }) => (
-                            OnBoardingScreen(item)
-                        )} />
+                        onIndexChange={ this.onIndexChange }
+                        renderItem = { this.onRenderItem } />
                     <View style = { styles.paginationContainer }>
                         {
                             this.data.map((element, index) => {
@@ -118,12 +107,12 @@ export default class OnBoardingComponent extends Component {
                 <View style={ styles.footer }>                   
                     <TouchableOpacity 
                         style={ [ styles.button, styles.buttonLogin ] } 
-                        onPress = { this.redirectToSingInScreen.bind(this) }>
+                        onPress = { this.props.screenProps.redirectToLoginScreen }>
                             <Text style={ styles.loginText }>Log in</Text>
                     </TouchableOpacity>
                     <TouchableOpacity 
                         style={ [ styles.button, styles.buttonSignUp ] } 
-                        onPress = { this.redirectToSingUpScreen.bind(this) }>
+                        onPress = { this.props.screenProps.redirectToRegisterScreen }>
                             <Text style={ styles.signUpText }>Create account</Text>
                     </TouchableOpacity>
                 </View>

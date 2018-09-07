@@ -72,6 +72,22 @@ class MainContainer extends Component {
 
         this.isLoading = false;
 
+        this.interpolate = this.interpolate.bind(this);
+        this.interpolateBackground = this.interpolateBackground.bind(this);
+        this.getSyncQueueEntry = this.getSyncQueueEntry.bind(this);
+        this.showSyncWindow = this.showSyncWindow.bind(this);
+        this.hideSyncWindow = this.hideSyncWindow.bind(this);
+        this.getLoadingSyncEntry = this.getLoadingSyncEntry.bind(this);
+        this.getSyncEntryLoadingCount = this.getSyncEntryLoadingCount.bind(this);
+        this.getBuckets = this.getBuckets.bind(this);
+        this.getFiles = this.getFiles.bind(this);
+        this.getBucketId = this.getBucketId.bind(this);
+        this.createBucket = this.createBucket.bind(this);
+        this.onActionBarPress = this.onActionBarPress.bind(this);
+        this.selectAll = this.selectAll.bind(this);
+        this.deselectAll = this.deselectAll.bind(this);
+        this.deletePIN = this.deletePIN.bind(this);
+
         //Common stuff
         let newAction = TabBarActionModelFactory.createNewAction;
         let uploadFileIcon = require('../images/ActionBar/UploadFileIcon.png');
@@ -227,8 +243,6 @@ class MainContainer extends Component {
 
         return loadingEntries.length;
     }
-
-    _getLoadingSyncEntry = () => this.props.syncQueueEntries.find(entry => entry.entity.status === SyncState.PROCESSING);
 
     getLoadingSyncEntry() {
         let loadingSyncEntry = this.props.syncQueueEntries.find(entry => entry.entity.status === SyncState.PROCESSING);
@@ -692,41 +706,39 @@ class MainContainer extends Component {
     render() {
         const index = this.props.bucketsScreenNavReducer.index;      
         const routes = this.props.bucketsScreenNavReducer.routes;
-        const props = this.props;
         
         this.setFavouriteAction.changeIcon(this.props.isStarredBucketsSelected ? this.unfavIcon : this.favIcon);
         this.setFavouriteFilesAction.changeIcon(this.props.isStarredFilesSelected ? this.unfavIcon : this.favIcon);
 
         return(
             <MainComponent
-                getLoadingSyncEntry = { this._getLoadingSyncEntry.bind(this) } 
-                interpolate = { this.interpolate.bind(this) }
-                interpolateBackground = { this.interpolateBackground.bind(this) }
+                interpolate = { this.interpolate }
+                interpolateBackground = { this.interpolateBackground }
                 syncQueueEntries = { this.props.syncQueueEntries }
-                renderSyncQueueEntry = { this.getSyncQueueEntry.bind(this) }
-                showSyncWindow = { this.showSyncWindow.bind(this) }
-                hideSyncWindow = { this.hideSyncWindow.bind(this) }
+                renderSyncQueueEntry = { this.getSyncQueueEntry }
+                showSyncWindow = { this.showSyncWindow }
+                hideSyncWindow = { this.hideSyncWindow }
                 isSyncWindowShown = { this.props.isSyncWindowShown }
-                getLoadingSyncEntry = { this.getLoadingSyncEntry.bind(this) }
-                getSyncEntryLoadingCount = { this.getSyncEntryLoadingCount.bind(this) }
+                getLoadingSyncEntry = { this.getLoadingSyncEntry }
+                getSyncEntryLoadingCount = { this.getSyncEntryLoadingCount }
 
-                getBuckets = { this.getBuckets.bind(this) }
-                getFiles = { this.getFiles.bind(this) }
-                getBucketId = { this.getBucketId.bind(this) }
+                getBuckets = { this.getBuckets }
+                getFiles = { this.getFiles }
+                getBucketId = { this.getBucketId }
                 redirectToInitializationScreen = { this.props.redirectToInitializationScreen.bind(this) }
                 redirectToPinCodeGenerationScreen = { this.props.redirectToPinCodeGenerationScreen }
                 isGridViewShown = { this.props.isGridViewShown }
                 setGridView = { this.props.setGridView }
                 setListView = { this.props.setListView }
                 bucketScreenRouteName = { routes[index].routeName }
-                createBucket = { this.createBucket.bind(this) }
+                createBucket = { this.createBucket }
                 hideCreateBucketInput = { this.props.hideCreateBucketInput }
                 tapBarActions = { this.getTapBarActions() } 
                 enableSelectionMode = { this.props.enableSelectionMode }
                 disableSelectionMode = { this.props.disableSelectionMode }
                 isSelectionMode = { this.props.isSelectionMode }
                 isSingleItemSelected = { this.props.isSingleItemSelected }
-                onActionBarPress = { () => { this.onActionBarPress(); } }
+                onActionBarPress = { this.onActionBarPress }
                 isActionBarShown = { this.props.isActionBarShown } 
                 isCreateBucketInputShown = { this.props.isCreateBucketInputShown }
                 wallets = { this.props.wallets }
@@ -741,13 +753,13 @@ class MainContainer extends Component {
                 email = { this.props.email }
                 password = { this.props.password }
                 mnemonic = { this.props.mnemonic }
-                selectAll = { this.selectAll.bind(this) }
-                deselectAll = { this.deselectAll.bind(this) }
+                selectAll = { this.selectAll }
+                deselectAll = { this.deselectAll }
                 changePINOptionStatus = { this.props.changePINOptionStatus }
                 changePasswordPopupStatus = { this.props.changePasswordPopupStatus }
                 isPinOptionsShown = { this.props.isPinOptionsShown }
                 isChangePasswordPopupShown = { this.props.isChangePasswordPopupShown }
-                deletePIN = { this.deletePIN.bind(this) }
+                deletePIN = { this.deletePIN }
                 searchSequence = { this.props.searchSequence } />
         );
     }

@@ -39,6 +39,14 @@ class LoginContainer extends Component {
             errorModel: new LoginErrorModel(),
             isLoading: false
         };
+
+        this.onChangeEmailInput = this.onChangeEmailInput.bind(this);
+        this.onChangePasswordInput = this.onChangePasswordInput.bind(this);
+        this.onChangeMnemonicInput = this.onChangeMnemonicInput.bind(this);
+        this.redirectToForgotPassword = this.redirectToForgotPassword.bind(this);
+        this.tryLogin = this.tryLogin.bind(this);
+        this.redirectToQRScannerScreen = this.redirectToQRScannerScreen.bind(this);
+        this.redirectToRegisterScreen = this.redirectToRegisterScreen.bind(this);
     };
 
     /**
@@ -236,13 +244,13 @@ class LoginContainer extends Component {
                 isEmailError = { this.state.errorModel.isEmailError }
                 isPasswordError = { this.state.errorModel.isPasswordError }
                 isMnemonicError = { this.state.errorModel.isMnemonicError }
-                onChangeLogin = { this.onChangeEmailInput.bind(this) }
-                onChangePassword = { this.onChangePasswordInput.bind(this) }
-                onChangeMnemonic = { this.onChangeMnemonicInput.bind(this) }
-                redirectToForgotPassword = { this.redirectToForgotPassword.bind(this) }
-                onSubmit = { this.tryLogin.bind(this) }
-                redirectToQRScannerScreen = { this.redirectToQRScannerScreen.bind(this) }
-                registerButtonOnPress = { this.redirectToRegisterScreen.bind(this) }
+                onChangeLogin = { this.onChangeEmailInput }
+                onChangePassword = { this.onChangePasswordInput }
+                onChangeMnemonic = { this.onChangeMnemonicInput }
+                redirectToForgotPassword = { this.redirectToForgotPassword }
+                onSubmit = { this.tryLogin }
+                redirectToQRScannerScreen = { this.redirectToQRScannerScreen }
+                registerButtonOnPress = { this.redirectToRegisterScreen }
                 redirectToMnemonicHelpScreen = { this.props.screenProps.redirectToMnemonicHelpScreen }
             />
 		);

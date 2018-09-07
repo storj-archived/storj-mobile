@@ -19,6 +19,8 @@ export default class MnemonicInfoComponent extends Component {
             showEmailAlert: false,
             showBackupAlert: false
         }
+
+        this.skipPress = this.skipPress.bind(this);
     }
 
     showEmailAlert() {
@@ -60,6 +62,10 @@ export default class MnemonicInfoComponent extends Component {
             { cancelable: false }
         );
     }
+
+    skipPress() {
+        this.setState({showEmailAlert: true});
+    }
     
     render() {
         return(
@@ -68,7 +74,7 @@ export default class MnemonicInfoComponent extends Component {
                     <View style = { styles.titleContainer } >
                         <TouchableOpacity 
                             style = { styles.backButton }
-                            onPress = { () => { this.props.screenProps.redirectToRegisterSuccessScreen(); } } >
+                            onPress = { this.props.screenProps.redirectToRegisterSuccessScreen } >
                             <Image 
                                 source = { require('../../images/MyAccount/BlueBackButton.png') }
                                 style = { styles.icon }
@@ -88,12 +94,12 @@ export default class MnemonicInfoComponent extends Component {
                     <View style = { styles.infoContainer }>
                         <Text style = { styles.infoText } >{ mnemonicScreenConstants.mnemonicScreenExplanationText }</Text>
                     </View>
-                    <TouchableOpacity onPress = { () => { this.props.screenProps.redirectToMnemonicGenerationScreen() } }>
+                    <TouchableOpacity onPress = { this.props.screenProps.redirectToMnemonicGenerationScreen }>
                         <View style = { styles.backupButton } >
                             <Text style = { styles.backupButtonText }>Generate</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress = { () => { this.setState({showEmailAlert: true}); } } >
+                    <TouchableOpacity onPress = { this.skipPress } >
                         <View style = { styles.nextButton }>
                             <Text style = { styles.nextButtonText }>Skip</Text>
                         </View>

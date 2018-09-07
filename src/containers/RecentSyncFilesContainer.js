@@ -26,6 +26,10 @@ class FavoriteFilesContainer extends BaseFilesListContainer {
          * default props of this FileListContainer
          */
         this.HeaderFilesListComponent = headerFilesListBinder.call(this);
+
+        this.navigateBack = this.navigateBack.bind(this);
+        this.deselectFiles = this.deselectFiles.bind(this);
+        this.selectAll = this.selectAll.bind(this);
     }
 
     /**
@@ -66,6 +70,10 @@ class FavoriteFilesContainer extends BaseFilesListContainer {
         return data;
     }
 
+    selectAll() {
+        this.props.selectFiles(this.getDataForSelection());
+    }
+
     render() {
         let data = this.getData();
 
@@ -77,9 +85,9 @@ class FavoriteFilesContainer extends BaseFilesListContainer {
                 animatedScrollValue = { this.animatedScrollValue }
                 isFilesScreen = { true }
                 searchIndex = { 4 }
-                navigateBack = { this.navigateBack.bind(this) }
-                selectAll = { () => this.props.selectFiles(this.getDataForSelection()) }
-                deselectAll = { this.deselectFiles.bind(this) }
+                navigateBack = { this.navigateBack }
+                selectAll = { this.selectAll }
+                deselectAll = { this.deselectFiles }
                 searchSubSequence = { this.props.searchSubSequence } />
         );
     }

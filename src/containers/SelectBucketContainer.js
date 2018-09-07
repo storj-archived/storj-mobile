@@ -24,6 +24,10 @@ class SelectBucketContainer extends BaseListContainer {
         super(props);
 
         this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
+
+        this.emptyFunction = () => {};
+        this.onBucketPress = this.onBucketPress.bind(this);
+        this._onRef = this._onRef.bind(this);
     };
 
     componentDidMount() {
@@ -40,7 +44,11 @@ class SelectBucketContainer extends BaseListContainer {
     
     onHardwareBackPress() {
 		this.props.redirectToMainScreen();
-	}
+    }
+    
+    _onRef(ref) {
+        this._selectBucketComponent = ref;
+    }
 
     getBucketName() {
         let bucketName = this.props.bucketIdToCopy ? 
@@ -68,17 +76,17 @@ class SelectBucketContainer extends BaseListContainer {
 
 		return(
             <SelectBucketComponent
-                ref = { component => this._selectBucketComponent = component }
-                getItemSize = { () => {} }
+                ref = { this._onRef }
+                getItemSize = { this.emptyFunction }
                 isLoading = { false }
                 searchSubSequence = { this.props.searchSubSequence }
                 sortingMode = { null }
-                onRefresh = { () => {} }
+                onRefresh = { this.emptyFunction }
                 isGridViewShown = { this.props.isGridViewShown }
-                onPress = { this.onBucketPress.bind(this) }
-                onLongPress = { () => {} }
-                onDotsPress = { () => {} }
-                onCancelPress = { () => {} }
+                onPress = { this.onBucketPress }
+                onLongPress = { this.emptyFunction }
+                onDotsPress = { this.emptyFunction }
+                onCancelPress = { this.emptyFunction }
                 selectedItemId = { null }
                 data = { this.props.buckets }
                 isListActionsDisabled = { true }
@@ -90,7 +98,7 @@ class SelectBucketContainer extends BaseListContainer {
                 bucketIdToCopy = { this.getBucketToCopyId() }
                 copyFiles = { this.props.navigation.state.params.callback }
                 setBucketIdToCopy = { this.props.setBucketIdToCopy }
-                showOptions = { () => {} }
+                showOptions = { this.emptyFunction }
                 openBucket = { this.props.openBucket }
                 navigateToFilesScreen = { this.props.navigateToFilesScreen }
                 navigateBack = { this.props.redirectToMainScreen } />
@@ -101,12 +109,14 @@ class SelectBucketContainer extends BaseListContainer {
 /**
  * connecting reducer to component props 
  */
-function mapStateToProps(state) { return { 
-    buckets: state.bucketReducer.buckets,
-    isGridViewShown: state.mainReducer.isGridViewShown,
-    searchSubSequence: state.mainReducer.selectBucketsSearchSubSequence,
-    bucketIdToCopy: state.mainReducer.bucketIdToCopy
-}; };
+function mapStateToProps(state) { 
+    return { 
+        buckets: state.bucketReducer.buckets,
+        isGridViewShown: state.mainReducer.isGridViewShown,
+        searchSubSequence: state.mainReducer.selectBucketsSearchSubSequence,
+        bucketIdToCopy: state.mainReducer.bucketIdToCopy
+    }; 
+};
 function mapDispatchToProps(dispatch) { 
     return bindActionCreators({
         redirectToMainScreen, 

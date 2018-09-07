@@ -21,7 +21,7 @@ export default class MnemonicHelpComponent extends Component {
                     <View>
                         <View style = { [styles.flexRow, styles.titleContainer] }>
                             <TouchableOpacity 
-                                onPress = { () => this.props.screenProps.redirectToLoginScreen() }
+                                onPress = { this.props.screenProps.redirectToLoginScreen }
                                 style = { styles.backButtonContainer } >
                                 <Image 
                                     source = { require('../../images/MyAccount/BlueBackButton.png') }
@@ -49,7 +49,7 @@ export default class MnemonicHelpComponent extends Component {
                             <Text style = { styles.infoTextRegular }>You’ll need to generate a new one below.</Text>
                         </View>
                         <View style = { styles.buttonContainer }>
-                            <TouchableOpacity onPressOut = { () => this.props.screenProps.redirectToMnemonicGenerationScreen() }>
+                            <TouchableOpacity onPressOut = { this.props.screenProps.redirectToMnemonicGenerationScreen }>
                                 <Text style = { styles.buttonText }>Generate a new secret phrase</Text>
                             </TouchableOpacity>
                         </View>

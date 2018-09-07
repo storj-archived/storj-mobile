@@ -10,15 +10,21 @@ import { getHeight, getWidth } from '../utils/adaptive';
 export default class PopUpComponent extends Component {
     constructor(props) {
         super(props)
+
+        this.hidePasswordPopUp = this.hidePasswordPopUp.bind(this);
+    }
+
+    hidePasswordPopUp() {
+        this.props.changePasswordPopupStatus(false);
     }
 
     render() {
         return(
             <View style = { [ styles.backgroundWrapper ] }>  
-                <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { () => this.props.changePasswordPopupStatus(false) } />
+                <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { this.hidePasswordPopUp } />
                 <View style = { styles.popUpContainer } >
                     <Text style = { styles.popUpInfoText } >{ this.props.message }</Text>
-                    <TouchableOpacity onPress = { () => this.props.changePasswordPopupStatus(false) } >
+                    <TouchableOpacity onPress = { this.hidePasswordPopUp } >
                         <Text style = { styles.popUpCancelText }>OK</Text>
                     </TouchableOpacity>
                 </View>

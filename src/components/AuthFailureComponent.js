@@ -26,7 +26,7 @@ const AuthFailureComponent = (props) => {
                 </View>
             </View>
             <View style = { styles.footer }>
-                <TouchableOpacity style = { styles.tryAgainButton } onPress = { () => { props.screenProps.redirectToLoginScreen(); } }>
+                <TouchableOpacity style = { styles.tryAgainButton } onPress = { props.screenProps.redirectToLoginScreen }>
                     <Text style = { styles.tryAgainText }>TRY AGAIN</Text>
                 </TouchableOpacity>  
             </View>

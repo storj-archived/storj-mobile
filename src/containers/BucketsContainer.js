@@ -31,6 +31,7 @@ class BucketsContainer extends Component {
         this.setFirstSignIn = this.setFirstSignIn.bind(this);
         this.changeSyncStatus = this.changeSyncStatus.bind(this);
         this.navigateBack = this.navigateBack.bind(this);
+        this.createBucket = this.createBucket.bind(this);
     }
 
     shouldComponentUpdate(nextProps) { 
@@ -101,7 +102,7 @@ class BucketsContainer extends Component {
                     setFirstSignIn = { this.setFirstSignIn }
                     changeSyncStatus = { this.changeSyncStatus }
                     SYNC_ENUM = { SYNC_ENUM }
-                    createBucket = { this.createBucket.bind(this)} 
+                    createBucket = { this.createBucket } 
                     options = { options } />
             );
         } else {
@@ -124,7 +125,7 @@ class BucketsContainer extends Component {
                     openedBucketId = { this.props.openedBucketId }
                     selectedItemId = { this.props.selectedItemId }
                     files = { this.props.files }
-                    navigateBack = { () => { this.navigateBack(); } }
+                    navigateBack = { this.navigateBack }
                     searchSubSequence = { this.props.searchSubSequence } /> 
             );
         }

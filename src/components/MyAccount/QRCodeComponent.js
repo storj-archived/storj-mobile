@@ -20,15 +20,17 @@ export default class QRCodeComponent extends Component {
     }
 
     render() {
+        let credentials = this.getCredentials(); 
+
         return(
             <View style = { [ styles.backgroundWrapper ] }>  
                 <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { this.props.showQR } />
                     <View style = { styles.mainContainer } >
                         <View style = { styles.qrContainer }>
                         {
-                            this.getCredentials() ?
+                            credentials ?
                                 <QRCode
-                                    value = { this.getCredentials() }
+                                    value = { credentials }
                                     size = { getHeight(200) }
                                     bgColor = { 'black' }
                                     fgColor = { 'white' } /> : null

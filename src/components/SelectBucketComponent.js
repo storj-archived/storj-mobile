@@ -22,6 +22,10 @@ export default class SelectBucketComponent extends BaseListComponent {
         }
 
         this.animatedScrollValue = new Animated.Value(0);
+
+        this.showSelection = this.showSelection.bind(this);
+        this.onUploadPress = this.onUploadPress.bind(this);
+        this.emptyFunction = () => {};
     }
 
     getBucketId(bucket) {
@@ -56,20 +60,20 @@ export default class SelectBucketComponent extends BaseListComponent {
                             isListActionsDisabled = { this.props.isListActionsDisabled } />
 
                         <BucketsScreenHeaderComponent
-                            setDashboardBucketId = { () => {} }
+                            setDashboardBucketId = { this.emptyFunction }
                             isSelectBucketScreen = { true }
                             buckets = { this.props.buckets }
-                            selectItem = { () => {} }
+                            selectItem = { this.emptyFunction }
                             showOptions = { this.props.showOptions }
                             navigateBack = { this.props.navigateBack }
-                            deselectItem = { () => {} }     
+                            deselectItem = { this.emptyFunction }     
                             isSelectionMode = { false }
                             openedBucketId = { null }
                             animatedScrollValue = { this.animatedScrollValue }
-                            enableSelectionMode = { () => {} }
-                            disableSelectionMode = { () => {} }  
-                            onSingleItemSelected = { () => {} }  
-                            isSingleItemSelected = { () => {} } 
+                            enableSelectionMode = { this.emptyFunction }
+                            disableSelectionMode = { this.emptyFunction }  
+                            onSingleItemSelected = { this.emptyFunction }  
+                            isSingleItemSelected = { this.emptyFunction } 
                             setSearch = { this.props.setSearch }
                             clearSearch = { this.props.clearSearch }
                             searchIndex = { this.props.searchIndex }/>
@@ -81,7 +85,7 @@ export default class SelectBucketComponent extends BaseListComponent {
             <View style = { styles.backgroundWrapper }>
                 <TouchableOpacity 
                     style = { [ styles.backgroundWrapper, styles.dimBlack ] } 
-                    onPress = { () => this.props.navigateBack() }>
+                    onPress = { this.props.navigateBack }>
                     <View />
                 </TouchableOpacity>
                 <View style = { styles.preselectContainer }>
@@ -102,7 +106,7 @@ export default class SelectBucketComponent extends BaseListComponent {
                             resizeMode = 'contain' />
                     </View>
                     <View style = { styles.underLine }></View>
-                    <TouchableOpacity onPress = { () => { this.showSelection() } }>
+                    <TouchableOpacity onPress = { this.showSelection }>
                         <View style = {[ styles.bucketContainer, styles.textPadding ]}> 
                             <Text style = { styles.blueText }>Select another bucket...</Text>  
                             <Image 
@@ -114,7 +118,7 @@ export default class SelectBucketComponent extends BaseListComponent {
                     <View style = { styles.underLine }></View>
                     <TouchableOpacity 
                         style = { styles.uploadButton } 
-                        onPress = { () => { this.onUploadPress() }} >
+                        onPress = { this.onUploadPress } >
                         <Text style = { styles.uploadText }>Upload</Text>
                     </TouchableOpacity>
                 </View>

@@ -26,6 +26,7 @@ class DashboardFilesListContainer extends BaseFilesListContainer {
          * default props of this FileListContainer
          */
         this.HeaderFilesListComponent = headerFilesListBinder.call(this);
+        this.navigateBack = this.navigateBack.bind(this);
     }
 
     /** 
@@ -52,7 +53,6 @@ class DashboardFilesListContainer extends BaseFilesListContainer {
 
     render() {        
         let data = this.getData();
-        let isLoading = this.props.loadingStack.includes(this.props.bucketId);
         
         return (
             <this.HeaderFilesListComponent
@@ -62,7 +62,7 @@ class DashboardFilesListContainer extends BaseFilesListContainer {
                 animatedScrollValue = { this.animatedScrollValue }
                 isFilesScreen = { true }
                 searchIndex = { 4 }
-                navigateBack = { this.navigateBack.bind(this) }
+                navigateBack = { this.navigateBack }
                 selectAll = { this.props.screenProps.selectAll }
                 deselectAll = { this.props.screenProps.deselectAll }
                 searchSubSequence = { this.props.searchSubSequence } />

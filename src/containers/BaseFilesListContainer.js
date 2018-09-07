@@ -12,6 +12,8 @@ import { isImage } from '../utils/fileUtils';
 class BaseFilesListContainer extends BaseListContainer {
     constructor(props) {
         super(props);
+
+        this.onRefresh = this.onRefresh.bind(this);
     }    
             
     /**

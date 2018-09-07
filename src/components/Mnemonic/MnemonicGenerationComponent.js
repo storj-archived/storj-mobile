@@ -12,6 +12,7 @@ import { getWidth, getHeight } from '../../utils/adaptive';
 import StorjModule from '../../utils/StorjModule';
 import PropTypes from 'prop-types';
 
+//TODO: remove all arrow functions from all maps in render
 /**
 * MnemonicGeneration component
 */
@@ -27,6 +28,10 @@ export default class MnemonicGenerationComponent extends Component {
             showCopyPopUp: false,
             isBackButtonBlocked: false
         }
+
+        this.copyToClipboard = this.copyToClipboard.bind(this);
+        this.cancelCopy = this.cancelCopy.bind(this);
+        this.redirectToMnemonicInfoScreen = this.redirectToMnemonicInfoScreen.bind(this);
 
         this.secondWordsRowIndexCorrection = 13;
     }
@@ -45,6 +50,11 @@ export default class MnemonicGenerationComponent extends Component {
 
     cancelCopy() {
         this.setState({showCopyPopUp: false});
+    }
+
+    redirectToMnemonicInfoScreen() {
+        if(this.state.isBackButtonBlocked) return;
+        this.props.screenProps.redirectToMnemonicInfoScreen();
     }
 
     mnemonicToArrayView(mnemonic) {
@@ -90,10 +100,7 @@ export default class MnemonicGenerationComponent extends Component {
                         <View style = { styles.topContentContainer } >
                             <View style = { styles.flexRow }>
                                 <TouchableOpacity 
-                                    onPress = { () => { 
-                                        if(this.state.isBackButtonBlocked) return;
-                                        this.props.screenProps.redirectToMnemonicInfoScreen();
-                                     } }
+                                    onPress = { this.redirectToMnemonicInfoScreen }
                                     style = { styles.backButtonContainer } >
                                     <Image 
                                         source = { require('../../images/MyAccount/BlueBackButton.png') }
@@ -104,7 +111,7 @@ export default class MnemonicGenerationComponent extends Component {
                                 </View>
                             </View>
                             <TouchableOpacity 
-                                onPress = { () => { this.props.screenProps.redirectToLoginScreen(); } }
+                                onPress = { this.props.screenProps.redirectToLoginScreen }
                                 style = { styles.backButtonContainer } >
                                 <Text style = { [styles.cancelText, styles.titleMargin] }>Skip</Text>
                             </TouchableOpacity>
@@ -125,7 +132,7 @@ export default class MnemonicGenerationComponent extends Component {
                             ? this.mnemonicToArrayView(this.state.mnemonic)
                             : null
                     }
-                    <TouchableOpacity onPress = { this.copyToClipboard.bind(this) }>
+                    <TouchableOpacity onPress = { this.copyToClipboard }>
                         <View style = { styles.copyToClipboardContainer }>
                             <Image
                                 style = { styles.icon }
@@ -143,7 +150,7 @@ export default class MnemonicGenerationComponent extends Component {
                         this.state.showCopyPopUp 
                         ? <View style = { styles.popUpContainer } >
                             <Text style = { styles.popUpInfoText } >Copied to clipboard</Text>
-                            <TouchableOpacity onPress = { this.cancelCopy.bind(this) } >
+                            <TouchableOpacity onPress = { this.cancelCopy } >
                                 <Text style = { styles.popUpCancelText }>OK</Text>
                             </TouchableOpacity>
                         </View> : null

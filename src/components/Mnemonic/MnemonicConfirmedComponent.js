@@ -30,7 +30,7 @@ export default class MnemonicConfirmedComponent extends Component {
                             style = { styles.successImage }
                             resizeMode = 'contain' />
                     </View>
-                    <TouchableOpacity onPress = { () => { this.props.screenProps.redirectToLoginScreen(); } }>
+                    <TouchableOpacity onPress = { this.props.screenProps.redirectToLoginScreen }>
                         <View style = { styles.loginButton } >
                             <Text style = { styles.loginButtonText }>Sign in</Text>
                         </View>
