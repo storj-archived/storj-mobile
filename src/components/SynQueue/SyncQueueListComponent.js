@@ -7,6 +7,7 @@ import {
     StyleSheet,
     TouchableOpacity
 } from "react-native";
+import PropTypes from 'prop-types';
 import { getWidth, getHeight } from "../../utils/adaptive";
 
 export default class SyncQueueListComponent extends Component {
@@ -42,6 +43,15 @@ export default class SyncQueueListComponent extends Component {
             </View>
         ); 
     }
+}
+
+SyncQueueListComponent.propTypes = {
+    data: PropTypes.array,
+    onCancelPress: PropTypes.func,
+    onTouchableRightPress: PropTypes.func,
+    renderItem: PropTypes.func,
+    title: PropTypes.string,
+    touchableRightTitle: PropTypes.string
 }
 
 const styles = StyleSheet.create({

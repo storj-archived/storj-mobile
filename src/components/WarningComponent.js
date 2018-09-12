@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import { getHeight, getWidth } from '../utils/adaptive';
+import PropTypes from 'prop-types';
 
 /**
  * Red warning on top of application with message 
@@ -24,6 +25,11 @@ export default class WarningComponent extends Component{
         );
     }
 }
+
+WarningComponent.propTypes = {
+    message: PropTypes.string,
+    statusBarColor: PropTypes.object
+};
 
 const styles = StyleSheet.create({
     secretPhraseText: { 

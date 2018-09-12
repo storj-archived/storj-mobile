@@ -19,6 +19,7 @@
     <application
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
+        
       android:name="io.storj.mobile.MainApplication"
       android:allowBackup="true"
       android:theme="@style/AppTheme">
@@ -73,6 +74,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
-
+        <meta-data android:name="android.max_aspect"
+    android:value="2.1"/>   
     </application>
 </manifest>

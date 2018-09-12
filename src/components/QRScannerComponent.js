@@ -8,6 +8,8 @@ import {
 import React, { Component } from 'react';
 import { getWidth, getHeight, getDeviceWidth, getDeviceHeight } from '../utils/adaptive';
 import Barcode from 'react-native-smart-barcode';
+import PropTypes from 'prop-types';
+
 
 /**
  * QRCodeScannerScreen component
@@ -99,6 +101,12 @@ export default class QRScannerComponent extends Component {
 		);
 	};
 }
+
+QRScannerComponent.propTypes = {
+    navigateBack: PropTypes.func,
+    onBarCodeRead: PropTypes.func,
+    viewAppear: PropTypes.bool
+};
 
 const styles = StyleSheet.create({
     mainContainer: {

@@ -48,6 +48,10 @@ export default class QRCodeComponent extends Component {
 
 QRCodeComponent.propTypes = {
     showQR: PropTypes.func,
+    email: PropTypes.string,
+    hideActionBar: PropTypes.bool,
+    mnemonic: PropTypes.string,
+    password: PropTypes.string
 }
 
 const styles = StyleSheet.create({

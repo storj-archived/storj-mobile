@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import { getWidth, getHeight } from '../utils/adaptive';
+import PropTypes from 'prop-types';
 
 export default class CreateBucketPopUpComponent extends Component {
     constructor(props) {
@@ -62,6 +63,11 @@ export default class CreateBucketPopUpComponent extends Component {
             </View>
         );
     };
+}
+
+CreateBucketPopUpComponent.propTypes = {
+    onApply: PropTypes.func,
+    onCancel: PropTypes.func
 }
 
 const ButtonComponent = (props) => (

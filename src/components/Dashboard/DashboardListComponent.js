@@ -227,11 +227,18 @@ const styles = StyleSheet.create({
 });
 
 DashboardListComponent.propTypes = {
-    animatedScrollValue: PropTypes.object,
+    activeScreen: PropTypes.string,
     bandwidthAmount: PropTypes.string,
     buckets: PropTypes.array,
     files: PropTypes.array,
+    listSyncQueueEntriesAsync: PropTypes.func,
     navigateToDashboardFilesScreen: PropTypes.func,
-    setDashboardBucketId: PropTypes.func,  
-    storageAmount: PropTypes.string
+    redirectToFavoriteBucketsScreen: PropTypes.func,
+    redirectToFavoriteFilesScreen: PropTypes.func,
+    redirectToRecentSyncFilesScreen: PropTypes.func,
+    setDashboardBucketId: PropTypes.func,
+    storageAmount: PropTypes.string,
+    syncQueueEntries: PropTypes.array,
+    updateSyncQueueEntryFileNameAsync: PropTypes.func,
+    updateSyncQueueEntryStatusAsync: PropTypes.func
 };

@@ -211,5 +211,10 @@ BucketsScreenHeaderComponent.propTypes = {
     navigateBack: PropTypes.func,
     openedBucketId: PropTypes.string,
     selectedItemsCount: PropTypes.number,
-    showOptions: PropTypes.func
+    showOptions: PropTypes.func,
+    clearSearch: PropTypes.func,
+    deselectAll: PropTypes.func,
+    searchIndex: PropTypes.number,
+    selectAll: PropTypes.func,
+    setSearch: PropTypes.func
 };

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import StorjModule from '../../utils/StorjModule';
 import { getHeight, getWidth } from '../../utils/adaptive';
+import PropTypes from 'prop-types';
 
 //TODO remove arrow functions from render pt2
 export default class PinCodeGenerationComponent extends Component {
@@ -238,6 +239,11 @@ export default class PinCodeGenerationComponent extends Component {
             </View>
         );
     }
+}
+
+PinCodeGenerationComponent.propTypes = {
+    navigation: PropTypes.object,
+    screenProps: PropTypes.object
 }
 
 const styles = StyleSheet.create({

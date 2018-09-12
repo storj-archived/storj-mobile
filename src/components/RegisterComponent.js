@@ -104,7 +104,9 @@ RegisterComponent.propTypes = {
     isPasswordError: PropTypes.bool,
     isPasswordMatchError: PropTypes.bool,
     isTermsAcceptedError: PropTypes.bool,
-    isButtonDisabled: PropTypes.bool
+    isButtonDisabled: PropTypes.bool,
+    isLoading: PropTypes.bool,
+    redirectToTermsOfUse: PropTypes.func
 };
 
 const styles = StyleSheet.create({

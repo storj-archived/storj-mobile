@@ -153,7 +153,9 @@ export default class AddCreditComponent extends Component {
 
 AddCreditComponent.propTypes = {
     showCredits: PropTypes.func,
-    wallets: PropTypes.array
+    wallets: PropTypes.array,
+    createWallet: PropTypes.func,
+    getWallets: PropTypes.func
 }
 
 const styles = StyleSheet.create({

@@ -127,7 +127,12 @@ ViewOptionsComponent.propTypes = {
     showOptions: PropTypes.func,
     isGridViewShown: PropTypes.bool,
     setGridView: PropTypes.func,
-    setListView: PropTypes.func
+    setListView: PropTypes.func,
+    enableSelectionMode: PropTypes.func,
+    getBuckets: PropTypes.func,
+    getFiles: PropTypes.func,
+    isSelectionMode: PropTypes.bool,
+    setSorting: PropTypes.func
 }
 
 const styles = StyleSheet.create({

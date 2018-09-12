@@ -36,6 +36,36 @@ export default class FilesListComponent extends BaseListComponent {
     }
 }
 
+FilesListComponent.propTypes = {
+    buckets: PropTypes.array,
+    bucketId: PropTypes.string,
+    clearSearch: PropTypes.func,
+    data: PropTypes.array,
+    deselectAll: PropTypes.func,
+    disableSelectionMode: PropTypes.func,
+    getFileName: PropTypes.func,
+    getItemSize: PropTypes.func,
+    getSelectedFilesCount: PropTypes.number,
+    isFilesScreen: PropTypes.bool,
+    isGridViewShown: PropTypes.bool,
+    isLoading: PropTypes.bool,
+    isSelectionMode: PropTypes.bool,
+    isSingleItemSelected: PropTypes.bool,
+    lastSync: PropTypes.string,
+    navigateBack: PropTypes.func,
+    onCancelPress: PropTypes.func,
+    onDotsPress: PropTypes.func,
+    onLongPress: PropTypes.func,
+    onPress: PropTypes.func,
+    onRefresh: PropTypes.func,
+    placeholder: PropTypes.string,
+    searchIndex: PropTypes.number,
+    selectAll: PropTypes.func,
+    setSearch: PropTypes.func,
+    showOptions: PropTypes.func,
+    sortingMode: PropTypes.string
+};
+
 function textComp (props) {
     return (
         <Text numberOfLines = {1} style = { props.style }>{ this.props.getFileName(props.children).name }

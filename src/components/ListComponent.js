@@ -228,7 +228,7 @@ export default class ListComponent extends Component {
                     : this.getListItemsList();
     }
 
-    render() {                     
+    render() {
         return (
             <Animated.ScrollView style = { styles.listContainer }
                 decelerationRate = { 'normal' }
@@ -257,25 +257,30 @@ export default class ListComponent extends Component {
     }
 }
 
-/* ListComponent.propTypes = {
-    isExpanderDisabled: PropTypes.bool,
-    listItemIcon: PropTypes.number,
-    mainTitlePath: PropTypes.string,
-    sortOptions: PropTypes.string,
-    idPath: PropTypes.string,
-    onPress: PropTypes.func,
-    onSingleItemSelected: PropTypes.func,                   
+ListComponent.propTypes = {
     animatedScrollValue: PropTypes.object,
-    enableSelectionMode: PropTypes.func,
-    disableSelectionMode: PropTypes.func,
-    isSelectDisabled: PropTypes.bool,
-    isSelectionMode: PropTypes.bool,
-    isSingleItemSelected: PropTypes.bool,
-    deselectItem: PropTypes.func,
-    selectItem: PropTypes.func,
+    cloudListItemIcon: PropTypes.number,
+    contentWrapperStyle: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.object
+    ]),
     data: PropTypes.array,
-    bucketsCount: PropTypes.number
-}; */
+    getItemSize: PropTypes.func,
+    isExpanderDisabled: PropTypes.bool,
+    isGridViewShown: PropTypes.bool,
+    isListActionsDisabled: PropTypes.bool,
+    isRefreshing: PropTypes.bool,
+    isSelectionMode: PropTypes.bool,
+    listItemIcon: PropTypes.number,
+    onCancelPress: PropTypes.func,
+    onDotsPress: PropTypes.func,
+    onRefresh: PropTypes.func,
+    onLongPress: PropTypes.func,
+    onPress: PropTypes.func,
+    selectedItemId: PropTypes.string,
+    sortingMode: PropTypes.string,
+    textComp: PropTypes.func
+}; 
 
 const styles = StyleSheet.create({
     listContainer: {

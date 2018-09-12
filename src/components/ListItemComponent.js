@@ -76,6 +76,23 @@ export default class ListItemComponent extends Component {
     }
 }
 
+ListItemComponent.propTypes = {
+    children: PropTypes.object,
+    isLoading: PropTypes.bool,
+    isSelected: PropTypes.bool,
+    isSelectionMode: PropTypes.bool,
+    isSingleItemSelected: PropTypes.bool,
+    listItemIconSource: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    onCancelPress: PropTypes.func,
+    onDotsPress: PropTypes.func,
+    onLongPress: PropTypes.func,
+    onPress: PropTypes.func,
+    progress: PropTypes.number,
+    isExpanderDisabled: PropTypes.bool,
+    isListActionsDisabled: PropTypes.bool,
+    size: PropTypes.string
+};
+
 const SelectionCheckboxComponent = (props) => (
     props.isSelected ? <Image style = { listItemStyles.selectedIcon } source = { require('../images/Icons/ListItemSelected.png') } /> 
                                                     : <Image style = { listItemStyles.selectedIcon } source = { require('../images/Icons/ListItemUnselected.png') } />

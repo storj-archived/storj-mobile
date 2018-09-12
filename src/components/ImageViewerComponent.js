@@ -13,6 +13,7 @@ import PhotoView from 'react-native-photo-view';
 import React, { Component } from 'react';
 import { getDeviceWidth, getDeviceHeight, getWidth, getHeight } from '../utils/adaptive';
 import ActionBar from '../components/ActionBarComponent';
+import PropTypes from 'prop-types';
 
 export default class ImageViewerComponent extends Component {
 
@@ -78,6 +79,20 @@ export default class ImageViewerComponent extends Component {
             </TouchableWithoutFeedback>   
         );
     }
+}
+
+ImageViewerComponent.propTypes = {
+    actionBarActions: PropTypes.array,
+    buckets: PropTypes.array,
+    fileUri: PropTypes.object,
+    isDownloaded: PropTypes.bool,
+    isLoading: PropTypes.bool,
+    onBackPress: PropTypes.func,
+    onOptionsPress: PropTypes.func,
+    onShare: PropTypes.func,
+    progress: PropTypes.number,
+    showActionBar: PropTypes.bool,
+    showProgress: PropTypes.bool
 }
 
 const LoadingComponent = (props) => (

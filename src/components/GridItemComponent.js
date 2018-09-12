@@ -77,23 +77,20 @@ const SelectionCheckboxComponent = (props) => (
                                                     : <Image style = { gridItemStyles.selectedIcon } source = { require('../images/Icons/GridItemUnselected.png') } />
 );
 
-/* GridItemComponent.propTypes = {
-    itemType: PropTypes.string,
-    item: PropTypes.object,
-    onLongPress: PropTypes.func,
-    isSelectionModeEnabled: PropTypes.bool,
-    isSelectDisabled: PropTypes.bool,
+GridItemComponent.propTypes = {
+    children: PropTypes.object,
+    isLoading: PropTypes.bool,
+    isSelected: PropTypes.bool,
+    isSelectionMode: PropTypes.bool,
     isSingleItemSelected: PropTypes.bool,
-    isItemActionsSelected: PropTypes.bool,
-    selectItemId: PropTypes.func,
+    listItemIconSource: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+    onCancelPress: PropTypes.func,
+    onDotsPress: PropTypes.func,
+    onLongPress: PropTypes.func,
     onPress: PropTypes.func,
     progress: PropTypes.number,
-    listItemIcon: PropTypes.number, 
-    isFileLoading: PropTypes.bool,
-    isSelected: PropTypes.bool,
-    disableSelectionMode: PropTypes.func,
-    onSingleItemSelected: PropTypes.func
-}; */
+    size: PropTypes.string
+};
 
 const gridItemStyles = StyleSheet.create({
     listItemContainer: {

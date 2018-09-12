@@ -243,5 +243,9 @@ SearchComponent.propTypes = {
     navigateBack: PropTypes.func,
     openedBucketId: PropTypes.string,
     showOptions: PropTypes.func,
+    styleContainer: PropTypes.number,
+    clearSearch: PropTypes.func,
+    searchIndex: PropTypes.number,
+    setSearch: PropTypes.func,
     styleContainer: PropTypes.number
 }; 

@@ -237,5 +237,11 @@ LoginComponent.propTypes = {
     isEmailError: PropTypes.bool,
     isPasswordError: PropTypes.bool,
     isMnemonicError: PropTypes.bool,
-    isRedirectedFromRegister: PropTypes.bool
+    isRedirectedFromRegister: PropTypes.bool,
+    isLoading: PropTypes.bool,
+    onChangeMnemonic: PropTypes.func,
+    redirectToForgotPassword: PropTypes.func,
+    redirectToMnemonicHelpScreen: PropTypes.func,
+    redirectToQRScannerScreen: PropTypes.func,
+    registerButtonOnPress: PropTypes.func
 };

@@ -276,6 +276,7 @@ const styles = StyleSheet.create({
 });
 
 SettingsComponent.propTypes = {
+    changePINOptionStatus: PropTypes.func,
     changeSyncStatus: PropTypes.func,
     email: PropTypes.string,
     getStateObject: PropTypes.func,

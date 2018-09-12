@@ -49,5 +49,16 @@ BucketsListComponent.propTypes = {
     onPress: PropTypes.func,
     refresh: PropTypes.func,
     selectBucket: PropTypes.func,
-    selectedItemId: PropTypes.string
+    selectedItemId: PropTypes.string,
+    data: PropTypes.array,
+    getBucketName: PropTypes.func,
+    getItemSize: PropTypes.func,
+    isLoading: PropTypes.bool,
+    onCancelPress: PropTypes.func,
+    onDotsPress: PropTypes.func,
+    onLongPress: PropTypes.func,
+    onPress: PropTypes.func,
+    onRefresh: PropTypes.func,
+    selectedItemId: PropTypes.string,
+    sortingMode: PropTypes.string
 }

@@ -26,8 +26,8 @@ export default class ExpanderComponent extends Component {
     onPress() {
         this.setState({ isExpanded: !this.state.isExpanded });
     }
-
-    render() {        
+     
+    render() {     
         var expanderContainerStyle = this.state.isExpanded ? styles.expanderContainer : [styles.expanderContainer, styles.expanderBorder];
         return (
             <TouchableOpacity style = { expanderContainerStyle } onPress = { this.onPress }>

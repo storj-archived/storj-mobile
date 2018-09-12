@@ -8,6 +8,7 @@ import {
 import React, { Component } from 'react';
 import infoScreensConstants from '../utils/constants/infoScreensConstants';
 import { getWidth, getHeight } from '../utils/adaptive';
+import PropTypes from 'prop-types';
 
 /**
 * RegisterSuccess component
@@ -51,6 +52,11 @@ export default class RegisterSuccessComponent extends Component {
         );
     }   
 }
+
+RegisterSuccessComponent.propTypes = {
+    navigation: PropTypes.object,
+    screenProps: PropTypes.object
+};
 
 const styles = StyleSheet.create({
     mainContainer: { 

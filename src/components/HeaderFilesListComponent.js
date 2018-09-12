@@ -6,6 +6,7 @@ import React from "react";
 import { getHeight } from "../utils/adaptive";
 import FilesListComponent from "../components/FilesListComponent";
 import BucketsScreenHeaderComponent from "../components/BucketsScreenHeaderComponent";
+import PropTypes from 'prop-types';
 
 export default class HeaderFilesListComponent extends FilesListComponent {
     constructor(props) {
@@ -18,7 +19,6 @@ export default class HeaderFilesListComponent extends FilesListComponent {
                 {
                     super.render()
                 }
-
                 <BucketsScreenHeaderComponent
                         lastSync = { this.props.lastSync }
                         navigateBack = { this.props.navigateBack }
@@ -41,6 +41,37 @@ export default class HeaderFilesListComponent extends FilesListComponent {
         );
     }
 }
+
+HeaderFilesListComponent.propTypes = {
+    bucketId: PropTypes.string,
+    animatedScrollValue: PropTypes.object,
+    bucketId: PropTypes.string,
+    buckets: PropTypes.array,
+    clearSearch: PropTypes.func,
+    data: PropTypes.array,
+    deselectAll: PropTypes.func,
+    disableSelectionMode: PropTypes.func,
+    getFileName: PropTypes.func,
+    getItemSize: PropTypes.func,
+    getSelectedFilesCount: PropTypes.number,
+    isFilesScreen: PropTypes.bool,
+    isGridViewShown: PropTypes.bool,
+    isLoading: PropTypes.bool,
+    isSelectionMode: PropTypes.bool,
+    isSingleItemSelected: PropTypes.bool,
+    navigateBack: PropTypes.func,
+    onCancelPress: PropTypes.func,
+    onDotsPress: PropTypes.func,
+    onLongPress: PropTypes.func,
+    onPress: PropTypes.func,
+    onRefresh: PropTypes.func,
+    placeholder: PropTypes.string,
+    searchIndex: PropTypes.number,
+    selectAll: PropTypes.func,
+    setSearch: PropTypes.func,
+    showOptions: PropTypes.func,
+    sortingMode: PropTypes.string
+};
 
 const styles = StyleSheet.create({
     mainContainer: {

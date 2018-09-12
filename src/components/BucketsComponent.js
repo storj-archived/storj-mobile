@@ -66,5 +66,10 @@ BucketsComponent.propTypes = {
     selectedItemId: PropTypes.string,
     selectedItemsCount: PropTypes.number,
     setSelectionId: PropTypes.func,
-    showOptions: PropTypes.func
+    showOptions: PropTypes.func,
+    clearSearch: PropTypes.func,
+    deselectAll: PropTypes.func,
+    searchIndex: PropTypes.number,
+    selectAll: PropTypes.func,
+    setSearch: PropTypes.func
 }
