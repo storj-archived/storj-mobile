@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
     TouchableOpacity,
     View,
@@ -7,30 +7,23 @@ import {
 } from 'react-native';
 import { getHeight, getWidth } from '../utils/adaptive';
 
-export default class PopUpComponent extends Component {
-    constructor(props) {
-        super(props)
+export default PopUpComponent = (props) => {
 
-        this.hidePasswordPopUp = this.hidePasswordPopUp.bind(this);
+    hidePasswordPopUp = () => {
+        props.changePasswordPopupStatus(false);
     }
 
-    hidePasswordPopUp() {
-        this.props.changePasswordPopupStatus(false);
-    }
-
-    render() {
-        return(
-            <View style = { [ styles.backgroundWrapper ] }>  
-                <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { this.hidePasswordPopUp } />
-                <View style = { styles.popUpContainer } >
-                    <Text style = { styles.popUpInfoText } >{ this.props.message }</Text>
-                    <TouchableOpacity onPress = { this.hidePasswordPopUp } >
-                        <Text style = { styles.popUpCancelText }>OK</Text>
-                    </TouchableOpacity>
-                </View>
+    return(
+        <View style = { [ styles.backgroundWrapper ] }>  
+            <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { hidePasswordPopUp } />
+            <View style = { styles.popUpContainer } >
+                <Text style = { styles.popUpInfoText } >{ props.message }</Text>
+                <TouchableOpacity onPress = { hidePasswordPopUp } >
+                    <Text style = { styles.popUpCancelText }>OK</Text>
+                </TouchableOpacity>
             </View>
-        )
-    }
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({

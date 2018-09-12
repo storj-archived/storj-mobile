@@ -5,6 +5,7 @@ import { StyleSheet, View } from 'react-native';
 export default class ProgressCircleComponent extends Component {
     constructor(props) {
         super(props)
+        
         this.state = this.getInitialStateFromProps(props)
     }
 

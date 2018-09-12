@@ -2,32 +2,27 @@ import {
     View,
     StyleSheet
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import MyAccountNavContainer from '../../containers/MyAccountNavContainer';
 import PropTypes from 'prop-types';
 
-export default class MyAccountNavComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
+export default MyAccountNavComponent = (props) => {
 
-    render() {
-        return(
-            <View style={ styles.mainContainer }>
-                <MyAccountNavContainer
-                    redirectToInitializationScreen = { this.props.redirectToInitializationScreen }
-                    showSyncWindow = { this.props.showSyncWindow }
-                    showQR = { this.props.showQR }
-                    showStorageInfo = { this.props.showStorageInfo }
-                    showCredits = { this.props.showCredits }                      
-                    storageAmount = { this.props.storageAmount }
-                    bandwidthAmount = { this.props.bandwidthAmount }
-                    getBalance = { this.props.getBalance }
-                    transactionList = { this.props.transactionList }
-                    resetPassword = { this.props.resetPassword } />
-            </View>
-        );
-    }
+    return(
+        <View style={ styles.mainContainer }>
+            <MyAccountNavContainer
+                redirectToInitializationScreen = { props.redirectToInitializationScreen }
+                showSyncWindow = { props.showSyncWindow }
+                showQR = { props.showQR }
+                showStorageInfo = { props.showStorageInfo }
+                showCredits = { props.showCredits }                      
+                storageAmount = { props.storageAmount }
+                bandwidthAmount = { props.bandwidthAmount }
+                getBalance = { props.getBalance }
+                transactionList = { props.transactionList }
+                resetPassword = { props.resetPassword } />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

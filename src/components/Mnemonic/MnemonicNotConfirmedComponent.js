@@ -5,49 +5,42 @@ import {
     TouchableOpacity,
     StyleSheet
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import { getWidth, getHeight } from '../../utils/adaptive';
 import PropTypes from 'prop-types';
 
-export default class MnemonicNotConfirmedComponent extends Component {
-    constructor(props) {
-        super(props);
+export default MnemonicNotConfirmedComponent = (props) => {
 
-        this.backPress = this.backPress.bind(this);
-    }
-
-    backPress() {
-        this.props.navigation.state.params.setNewData(); 
-        this.props.screenProps.navigateBack(); 
+    backPress = () => {
+        props.navigation.state.params.setNewData(); 
+        props.screenProps.navigateBack(); 
     }
     
-    render() {
-        return(
-            <View style = { styles.mainContainer }>
-                <View style = { styles.contentContainer }>
-                    <View style = { styles.titleContainer } >
-                        <Text style = { styles.titleText } >Uh oh! Secret phrase backup failed</Text>
-                    </View>
-                    <View style = { styles.errorImageContainer }>
-                        <Image
-                            source = { require('../../images/RegisterInfoScreens/Error.png') }
-                            style = { styles.errorImage }
-                            resizeMode = 'contain' />
-                    </View>
-                    <TouchableOpacity onPress = { this.backPress }>
-                        <View style = { styles.backButton } >
-                            <Text style = { styles.backButtonText }>Try again</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress = { this.props.screenProps.redirectToLoginScreen } >
-                        <View style = { styles.nextButton }>
-                            <Text style = { styles.nextButtonText }>Skip</Text>
-                        </View>
-                    </TouchableOpacity>
+    return(
+        <View style = { styles.mainContainer }>
+            <View style = { styles.contentContainer }>
+                <View style = { styles.titleContainer } >
+                    <Text style = { styles.titleText } >Uh oh! Secret phrase backup failed</Text>
                 </View>
+                <View style = { styles.errorImageContainer }>
+                    <Image
+                        source = { require('../../images/RegisterInfoScreens/Error.png') }
+                        style = { styles.errorImage }
+                        resizeMode = 'contain' />
+                </View>
+                <TouchableOpacity onPress = { backPress }>
+                    <View style = { styles.backButton } >
+                        <Text style = { styles.backButtonText }>Try again</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress = { props.screenProps.redirectToLoginScreen } >
+                    <View style = { styles.nextButton }>
+                        <Text style = { styles.nextButtonText }>Skip</Text>
+                    </View>
+                </TouchableOpacity>
             </View>
-        );
-    }   
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

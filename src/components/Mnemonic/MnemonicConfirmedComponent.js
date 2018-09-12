@@ -5,40 +5,35 @@ import {
     TouchableOpacity,
     StyleSheet
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import { getWidth, getHeight } from '../../utils/adaptive';
 import PropTypes from 'prop-types';
 
-export default class MnemonicConfirmedComponent extends Component {
-    constructor(props) {
-        super(props)
-    }
+export default MnemonicConfirmedComponent = (props) => {
     
-    render() {
-        return(
-            <View style = { styles.mainContainer }>
-                <View style = { styles.contentContainer }>
-                    <View style = { styles.titleContainer } >
-                        <Text style = { styles.titleText } >Success!</Text>
-                    </View>
-                    <View style = { styles.infoContainer }>
-                        <Text style = { styles.infoText }>You’re ready to sign in and start using Storj!</Text>
-                    </View>
-                    <View style = { styles.successImageContainer }>
-                        <Image
-                            source = { require('../../images/RegisterInfoScreens/SuccessImage.png') }
-                            style = { styles.successImage }
-                            resizeMode = 'contain' />
-                    </View>
-                    <TouchableOpacity onPress = { this.props.screenProps.redirectToLoginScreen }>
-                        <View style = { styles.loginButton } >
-                            <Text style = { styles.loginButtonText }>Sign in</Text>
-                        </View>
-                    </TouchableOpacity>
+    return(
+        <View style = { styles.mainContainer }>
+            <View style = { styles.contentContainer }>
+                <View style = { styles.titleContainer } >
+                    <Text style = { styles.titleText } >Success!</Text>
                 </View>
+                <View style = { styles.infoContainer }>
+                    <Text style = { styles.infoText }>You’re ready to sign in and start using Storj!</Text>
+                </View>
+                <View style = { styles.successImageContainer }>
+                    <Image
+                        source = { require('../../images/RegisterInfoScreens/SuccessImage.png') }
+                        style = { styles.successImage }
+                        resizeMode = 'contain' />
+                </View>
+                <TouchableOpacity onPress = { props.screenProps.redirectToLoginScreen }>
+                    <View style = { styles.loginButton } >
+                        <Text style = { styles.loginButtonText }>Sign in</Text>
+                    </View>
+                </TouchableOpacity>
             </View>
-        );
-    }   
+        </View>
+    ); 
 }
 
 const styles = StyleSheet.create({

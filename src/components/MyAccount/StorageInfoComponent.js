@@ -5,37 +5,32 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import myAccountConstants from '../../utils/constants/myAccountConstants';
 
-export default class StorageInfoComponent extends Component {
-    constructor(props) {
-        super(props)
-    }
+export default StorageInfoComponent = (props) => {
 
-    render() {
-        return(
-            <View style = { [ styles.backgroundWrapper ] }>  
-                <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { this.props.showStorageInfo } />
-                    <View style = { styles.mainContainer } >
-                        <View style = { styles.infoContainer } >
-                            <Text style = { styles.infoText }>{ myAccountConstants.storageInfoText }</Text>
-                        </View>
-                        <View style = { styles.closeButton }>
-                            <TouchableOpacity 
-                                onPress = { this.props.showStorageInfo } >
-                                    <Image 
-                                        style = { styles.icon }
-                                        source = { require('../../images/MyAccount/Close.png') }
-                                        resizeMode = 'contain' />
-                            </TouchableOpacity>
-                        </View>
+    return(
+        <View style = { [ styles.backgroundWrapper ] }>  
+            <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { props.showStorageInfo } />
+                <View style = { styles.mainContainer } >
+                    <View style = { styles.infoContainer } >
+                        <Text style = { styles.infoText }>{ myAccountConstants.storageInfoText }</Text>
                     </View>
-            </View>
-        )
-    }
+                    <View style = { styles.closeButton }>
+                        <TouchableOpacity 
+                            onPress = { props.showStorageInfo } >
+                                <Image 
+                                    style = { styles.icon }
+                                    source = { require('../../images/MyAccount/Close.png') }
+                                    resizeMode = 'contain' />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+        </View>
+    )
 }
 
 StorageInfoComponent.propTypes = {

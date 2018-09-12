@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
     TouchableOpacity,
     View,
@@ -9,36 +9,31 @@ import {
 import { getHeight, getWidth } from '../../utils/adaptive';
 import PropTypes from 'prop-types';
 
-export default class DashboardListFooterComponent extends Component {
-    constructor(props) {
-        super(props)
-    }
+export default DashboardListFooterComponent = (props) => {
     
-    getCount() {
-        let count = this.props.count;
+    getCount = () => {
+        let count = props.count;
         
         if(count > 3) return count - 3;
         if(count <= 3) return '';
     }
 
-    render() {
-        return(
-            <TouchableOpacity onPress = { this.props.onPress }>
-                <View style = { footerLinkStyles.container }>
-                    <View style = { footerLinkStyles.contentContainer }>
-                        <Text style = { footerLinkStyles.titleText }>{ this.getCount() + " more..." } </Text>
-                        <View style = { footerLinkStyles.flexRow } >
-                            <Image 
-                                style = { footerLinkStyles.expandImage } 
-                                source = { require('../../images/DashboardScreen/BlueVector.png') } 
-                                resizeMode = 'contain' />
-                        </View>
+    return(
+        <TouchableOpacity onPress = { props.onPress }>
+            <View style = { footerLinkStyles.container }>
+                <View style = { footerLinkStyles.contentContainer }>
+                    <Text style = { footerLinkStyles.titleText }>{ getCount() + " more..." } </Text>
+                    <View style = { footerLinkStyles.flexRow } >
+                        <Image 
+                            style = { footerLinkStyles.expandImage } 
+                            source = { require('../../images/DashboardScreen/BlueVector.png') } 
+                            resizeMode = 'contain' />
                     </View>
                 </View>
-                <View style = { footerLinkStyles.underLine }></View>
-            </TouchableOpacity>
-        )
-    }
+            </View>
+            <View style = { footerLinkStyles.underLine }></View>
+        </TouchableOpacity>
+    )
 }
 
 const footerLinkStyles = StyleSheet.create({

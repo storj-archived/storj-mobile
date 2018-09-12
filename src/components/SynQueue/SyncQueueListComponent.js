@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
     View,
     Image,
@@ -10,39 +10,34 @@ import {
 import PropTypes from 'prop-types';
 import { getWidth, getHeight } from "../../utils/adaptive";
 
-export default class SyncQueueListComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
+export default SyncQueueListComponent = (props) => {
 
-    render() {
-        return(
-            <View style = { [ styles.container, this.props.containerStyle ] }>
-                <View style = { styles.headerContainer }>
-                    <View style = { styles.row }>
-                        <TouchableOpacity style = { styles.cancelWrapper } onPress = { this.props.onCancelPress }>
-                            <Image style = { styles.icon } source = { require("../../images/Icons/BlueCross.png") } />
-                        </TouchableOpacity>
-                        <View style={ styles.titleWrapper }>
-                            <Text numberOfLines = { 2 } style = { styles.title }>{ this.props.title }</Text>
-                        </View>
-                    </View>
-                    <TouchableOpacity style = { styles.touchableRightWrapper } onPress = { this.props.onTouchableRightPress }>
-                        <Text style = { styles.touchableRightText }>{ this.props.touchableRightTitle }</Text>
+    return(
+        <View style = { [ styles.container, props.containerStyle ] }>
+            <View style = { styles.headerContainer }>
+                <View style = { styles.row }>
+                    <TouchableOpacity style = { styles.cancelWrapper } onPress = { props.onCancelPress }>
+                        <Image style = { styles.icon } source = { require("../../images/Icons/BlueCross.png") } />
                     </TouchableOpacity>
+                    <View style={ styles.titleWrapper }>
+                        <Text numberOfLines = { 2 } style = { styles.title }>{ props.title }</Text>
+                    </View>
                 </View>
-                <View style = { styles.contentWrapper }>
-                    <FlatList
-                        contentContainerStyle = { styles.contentContainer }
-                        style = { { height: 320 } }
-                        data = { this.props.data }
-                        renderItem = { this.props.renderItem }
-                        ItemSeparatorComponent = { () => <View style = { styles.itemSeparator } /> }
-                        ListEmptyComponent = { null } />
-                </View>
+                <TouchableOpacity style = { styles.touchableRightWrapper } onPress = { props.onTouchableRightPress }>
+                    <Text style = { styles.touchableRightText }>{ props.touchableRightTitle }</Text>
+                </TouchableOpacity>
             </View>
-        ); 
-    }
+            <View style = { styles.contentWrapper }>
+                <FlatList
+                    contentContainerStyle = { styles.contentContainer }
+                    style = { { height: 320 } }
+                    data = { props.data }
+                    renderItem = { props.renderItem }
+                    ItemSeparatorComponent = { () => <View style = { styles.itemSeparator } /> }
+                    ListEmptyComponent = { null } />
+            </View>
+        </View>
+    ); 
 }
 
 SyncQueueListComponent.propTypes = {

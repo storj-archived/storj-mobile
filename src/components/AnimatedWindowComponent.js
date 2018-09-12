@@ -1,18 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import {
     Animated
 } from "react-native";
 
-export default class AnimatedWindowComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
+export default AnimatedWindowComponent = (props) => {
 
-    render() {
-        return(
-            <Animated.View style = { [ this.props.style, this.props.interpolate() ] }>
-                { this.props.children }
-            </Animated.View>
-        );
-    }
+    return(
+        <Animated.View style = { [ props.style, props.interpolate() ] }>
+            { props.children }
+        </Animated.View>
+    );
 } 

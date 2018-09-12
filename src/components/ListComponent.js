@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
     View,
     StyleSheet,
@@ -17,12 +17,9 @@ import { getFileNameWithFixedSize } from "../utils/fileUtils";
 /**
 * Custom List component
 */
-export default class ListComponent extends Component {
-    constructor(props) {
-        super(props); 
-    }
+export default ListComponent = (props) => {
 
-    sortByDate(items, sortingObject) {
+    sortByDate = (items, sortingObject) => {
         let monthNames = [
             "January", "February", "March",
             "April", "May", "June", "July",
@@ -47,7 +44,7 @@ export default class ListComponent extends Component {
         });
     }
 
-    sortByName(items, sortingObject) {         
+    sortByName = (items, sortingObject) => {         
         items.forEach((item) => {
             var prop = item.getName().charAt(0).toUpperCase();            
             
@@ -59,28 +56,28 @@ export default class ListComponent extends Component {
         });
     }
    
-    searchFilter(data) {
-        if(!this.props.searchSubSequence) return data;
+    searchFilter = (data) => {
+        if(!props.searchSubSequence) return data;
 
         return data.filter(item => 
             item.getName()
                 .toLowerCase()
-                .includes(this.props.searchSubSequence.toLowerCase()));
+                .includes(props.searchSubSequence.toLowerCase()));
 
     }
 
-    sort(items) {
-        let data = this.searchFilter(items);
+    sort = (items) => {
+        let data = searchFilter(items);
         
         let sortingObject = {};
         let sortingCallback;
 
-        switch(this.props.sortingMode) {
-            case SORTING.BY_DATE: sortingCallback = this.sortByDate;
+        switch(props.sortingMode) {
+            case SORTING.BY_DATE: sortingCallback = sortByDate;
                 break;
-            case SORTING.BY_NAME: sortingCallback = this.sortByName;
+            case SORTING.BY_NAME: sortingCallback = sortByName;
                 break;
-            default: sortingCallback = this.sortByDate;
+            default: sortingCallback = sortByDate;
         }
         
         sortingCallback(data, sortingObject);
@@ -88,12 +85,12 @@ export default class ListComponent extends Component {
         return sortingObject;
     }
 
-    isItemActionsSelected = (item) => item.getId() === this.props.selectedItemId;
+    isItemActionsSelected = (item) => item.getId() === props.selectedItemId;
 
-    getGridItemsList() {
-        let sorting = this.sort(this.props.data);
+    getGridItemsList = () => {
+        let sorting = sort(props.data);
 
-        return Object.getOwnPropertyNames(sorting).reverse().map((propName, index) => {
+        return Object.getOwnPropertyNames(sorting).reverse().map((propName) => {
             return (
                 <View key = { propName }>
                     {
@@ -124,7 +121,7 @@ export default class ListComponent extends Component {
                                                 element.map((item) => {
                                                     return(
                                                         <View style = { styles.itemContainer } key = { item.getId() }>
-                                                            { this.getItem(item, GridItemComponent) }
+                                                            { getItem(item, GridItemComponent) }
                                                         </View>
                                                     );
                                                 })
@@ -134,7 +131,7 @@ export default class ListComponent extends Component {
                                 })
                                 return(
                                     <ExpanderComponent
-                                        isListActionsDisabled = { this.props.isListActionsDisabled }
+                                        isListActionsDisabled = { props.isListActionsDisabled }
                                         propName = { propName } 
                                         listItems = { listItems } />
                                 );
@@ -147,28 +144,30 @@ export default class ListComponent extends Component {
         });
     }
 
-    getListItemsList() {
-        let sorting = this.sort(this.props.data);
+    renderItems = (sorting, propName) => {
+        let prop = sorting[propName];
+        if(Array.isArray(prop) && prop.length) {
+            let listItems = prop.map((item) => { 
+                return getItem(item, ListItemComponent);
+            });
+
+            return(
+                <ExpanderComponent
+                    isListActionsDisabled = { props.isListActionsDisabled }
+                    propName = { propName } 
+                    listItems = { listItems } />
+            );
+        }
+    }
+
+    getListItemsList = () => {
+        let sorting = sort(props.data);
 
         return Object.getOwnPropertyNames(sorting).reverse().map((propName, index) => {
             return (
                 <View key = { propName }>
                     {
-                        (() => {
-                            let prop = sorting[propName];
-                            if(Array.isArray(prop) && prop.length) {
-                                let listItems = prop.map((item, indexInner) => { 
-                                    return this.getItem(item, ListItemComponent);
-                                });
-
-                                return(
-                                    <ExpanderComponent
-                                        isListActionsDisabled = { this.props.isListActionsDisabled }
-                                        propName = { propName } 
-                                        listItems = { listItems } />
-                                );
-                            }
-                        })()
+                        renderItems(sorting, propName)
                     }
                     <View style = { styles.underLine }/>   
                 </View>
@@ -176,39 +175,40 @@ export default class ListComponent extends Component {
         });
     }
 
-    getItemsWithoutExpander() {
-        return this.props.data.map((item) => {
-            return this.getItem(item, ListItemComponent);
+    getItemsWithoutExpander = () => {
+        return props.data.map((item) => {
+            return getItem(item, ListItemComponent);
         })
     }
 
-    getItem(item, ItemType) {
-        const TextComp = this.props.textComp;
-        const isSingleItemSelected = this.isItemActionsSelected(item);
-        const size = item.entity.size ? this.props.getItemSize(item.entity.size) : null;
+    getItem = (item, ItemType) => {
+        const TextComp = props.textComp;
+        const isSingleItemSelected = isItemActionsSelected(item);
+        const size = item.entity.size ? props.getItemSize(item.entity.size) : null;
         const listItemIconSource = item.entity.thumbnail ? 
                                     { uri: 'data:image/png;base64,' + item.entity.thumbnail } 
-                                    : item.entity.isDownloaded ? this.props.listItemIcon : this.props.cloudListItemIcon;
+                                    : item.entity.isDownloaded ? props.listItemIcon : props.cloudListItemIcon;
         const starredIcon = item.getStarred() ? '★' : null;
         let fullItemName = getFileNameWithFixedSize(item.getName(), 20)
+
         return(
             <ItemType
-                isExpanderDisabled = { this.props.isExpanderDisabled }
+                isExpanderDisabled = { props.isExpanderDisabled }
                 key = { item.getId() }
                 listItemIconSource = { listItemIconSource }
-                onPress = { () => { this.props.onPress(item); } }
-                onLongPress = { () => { this.props.onLongPress(item); } }
-                onDotsPress = { () => { this.props.onDotsPress(item); } }
-                onCancelPress = { () => { this.props.onCancelPress(item); } }
-                isSelectionMode = { this.props.isSelectionMode }
+                onPress = { () => props.onPress(item) }
+                onLongPress = { () => props.onLongPress(item) }
+                onDotsPress = { () => props.onDotsPress(item) }
+                onCancelPress = { () => props.onCancelPress(item) }
+                isSelectionMode = { props.isSelectionMode }
                 isSingleItemSelected = { isSingleItemSelected }
                 isSelected = { item.isSelected }
                 isLoading = { item.isLoading }
                 progress = { item.progress } 
                 size = { size }
-                isListActionsDisabled = { this.props.isListActionsDisabled } >
+                isListActionsDisabled = { props.isListActionsDisabled } >
 
-                <TextComp style = { this.props.isExpanderDisabled ? [styles.mainTitleText, styles.textMargin] : styles.mainTitleText }>
+                <TextComp style = { props.isExpanderDisabled ? [styles.mainTitleText, styles.textMargin] : styles.mainTitleText }>
                     <Text style = { styles.blueStar }>
                         { starredIcon }
                     </Text>
@@ -219,42 +219,40 @@ export default class ListComponent extends Component {
         );
     }
 
-    getItemsList() {
-        if(this.props.isExpanderDisabled) 
-            return this.getItemsWithoutExpander();
+    getItemsList = () => {
+        if(props.isExpanderDisabled) 
+            return getItemsWithoutExpander();
     
-        return this.props.isGridViewShown 
-                    ? this.getGridItemsList()
-                    : this.getListItemsList();
+        return props.isGridViewShown 
+                    ? getGridItemsList()
+                    : getListItemsList();
     }
-
-    render() {
-        return (
-            <Animated.ScrollView style = { styles.listContainer }
-                decelerationRate = { 'normal' }
-                scrollEventThrottle = { 16 }
-                onScroll = {
-                    Animated.event([{
-                        nativeEvent: { 
-                                contentOffset: { 
-                                    y: this.props.animatedScrollValue 
-                                } 
-                            }
+                    
+    return (
+        <Animated.ScrollView style = { styles.listContainer }
+            decelerationRate = { 'normal' }
+            scrollEventThrottle = { 16 }
+            onScroll = {
+                Animated.event([{
+                    nativeEvent: { 
+                            contentOffset: { 
+                                y: props.animatedScrollValue 
+                            } 
                         }
-                    ], { useNativeDriver: true }) }
-                refreshControl = {
-                    <RefreshControl
-                        enabled = { !this.props.isSelectionMode }
-                        refreshing = { this.props.isRefreshing }
-                        onRefresh = { this.props.onRefresh } /> }>
-                        <View style = { this.props.contentWrapperStyle ? this.props.contentWrapperStyle : null }>
-                            {
-                                this.getItemsList()
-                            }
-                        </View>
-            </Animated.ScrollView>       
-        );
-    }
+                    }
+                ], { useNativeDriver: true }) }
+            refreshControl = {
+                <RefreshControl
+                    enabled = { !props.isSelectionMode }
+                    refreshing = { props.isRefreshing }
+                    onRefresh = { props.onRefresh } /> }>
+                    <View style = { props.contentWrapperStyle ? props.contentWrapperStyle : null }>
+                        {
+                            getItemsList()
+                        }
+                    </View>
+        </Animated.ScrollView>       
+    );
 }
 
 ListComponent.propTypes = {

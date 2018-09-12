@@ -3,26 +3,21 @@ import {
     Text,
     StyleSheet
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { getHeight, getWidth } from '../../utils/adaptive';
 
-export default class StorageReportComponent extends Component{
-    constructor(props) {
-        super(props);
-    }
+export default StorageReportComponent = (props) => {
 
-    render() {
-        return(
-            <View style = { styles.mainContainer }>
-                <View style = { styles.contentContainer }>
-                    <Text style = { styles.amountText }>{ this.props.amount + "GB" }</Text>
-                    <Text style = { styles.dateText }>{ this.props.date }</Text>
-                </View>
-                <View style = { styles.underline }/>
+    return(
+        <View style = { styles.mainContainer }>
+            <View style = { styles.contentContainer }>
+                <Text style = { styles.amountText }>{ props.amount + "GB" }</Text>
+                <Text style = { styles.dateText }>{ props.date }</Text>
             </View>
-        );
-    }
+            <View style = { styles.underline }/>
+        </View>
+    );
 }
 
 StorageReportComponent.propTypes = {

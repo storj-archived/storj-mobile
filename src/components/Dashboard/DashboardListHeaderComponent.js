@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
     TouchableOpacity,
     View,
@@ -9,29 +9,24 @@ import {
 import { getHeight, getWidth } from '../../utils/adaptive';
 import PropTypes from 'prop-types';
 
-export default class DashboardListHeaderComponent extends Component {
-    constructor(props) {
-        super(props)
-    }
+export default DashboardListHeaderComponent = (props) => {
 
-    render() {
-        return(
-            <TouchableOpacity onPress = { this.props.onPress }>
-                <View style = { titleLinkStyles.container }>
-                    <View style = { titleLinkStyles.contentContainer }>
-                        <Text style = { titleLinkStyles.titleText }>{this.props.title}</Text>
-                        <View style = { titleLinkStyles.flexRow } >
-                            <Text style = { titleLinkStyles.linkText } >View all</Text>
-                            <Image 
-                                style = { titleLinkStyles.expandImage } 
-                                source = { require('../../images/DashboardScreen/BlueVector.png') } 
-                                resizeMode = 'contain' />
-                        </View>
+    return(
+        <TouchableOpacity onPress = { props.onPress }>
+            <View style = { titleLinkStyles.container }>
+                <View style = { titleLinkStyles.contentContainer }>
+                    <Text style = { titleLinkStyles.titleText }>{ props.title }</Text>
+                    <View style = { titleLinkStyles.flexRow } >
+                        <Text style = { titleLinkStyles.linkText } >View all</Text>
+                        <Image 
+                            style = { titleLinkStyles.expandImage } 
+                            source = { require('../../images/DashboardScreen/BlueVector.png') } 
+                            resizeMode = 'contain' />
                     </View>
                 </View>
-            </TouchableOpacity>
-        )
-    }
+            </View>
+        </TouchableOpacity>
+    )
 }
 
 const titleLinkStyles = StyleSheet.create({

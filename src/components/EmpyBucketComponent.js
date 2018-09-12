@@ -4,31 +4,26 @@ import {
     Image,
     StyleSheet
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import { getWidth, getHeight } from '../utils/adaptive';
 
-export default class EmptyBucketComponent extends Component {
-    constructor(props){
-        super(props)
-    }
-
-    render() {
-        return(
-            <View style = { styles.mainContainer }>
-                <View style = { styles.contentContainer }>
-                    <View style = { styles.titleContainer } >
-                        <Text style = { styles.titleText } >Start storing! Add some files here.</Text>
-                    </View>
-                    <View style = { styles.imageContainer }>
-                        <Image
-                            source = { require('../images/MainScreen/File.png') }
-                            style = { styles.image }
-                            resizeMode = 'contain' />
-                    </View>
+export default EmptyBucketComponent = () => {
+    
+    return(
+        <View style = { styles.mainContainer }>
+            <View style = { styles.contentContainer }>
+                <View style = { styles.titleContainer } >
+                    <Text style = { styles.titleText } >Start storing! Add some files here.</Text>
+                </View>
+                <View style = { styles.imageContainer }>
+                    <Image
+                        source = { require('../images/MainScreen/File.png') }
+                        style = { styles.image }
+                        resizeMode = 'contain' />
                 </View>
             </View>
-        );
-    } 
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

@@ -5,7 +5,7 @@ import {
     TouchableOpacity,
     StyleSheet
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import infoScreensConstants from '../utils/constants/infoScreensConstants';
 import { getWidth, getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
@@ -13,44 +13,39 @@ import PropTypes from 'prop-types';
 /**
 * RegisterSuccess component
 */
-export default class RegisterSuccessComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
-    
-    render() {
-        return(
-            <View style = { styles.mainContainer }>
-                <View style = { styles.contentContainer }>
-                    <View style = { styles.titleContainer }>
-                        <View style = { styles.titleTextContainer }>
-                            <Text style = { styles.titleText }>Verify your email</Text>
-                        </View>
-                        <TouchableOpacity 
-                            style = { styles.resendEmailButton }
-                            onPress = { () => {} } > 
-                            <Text style = { styles.resendEmailText } >Re-send email</Text>
-                        </TouchableOpacity>
+export default RegisterSuccessComponent = (props) => {
+
+    return(
+        <View style = { styles.mainContainer }>
+            <View style = { styles.contentContainer }>
+                <View style = { styles.titleContainer }>
+                    <View style = { styles.titleTextContainer }>
+                        <Text style = { styles.titleText }>Verify your email</Text>
                     </View>
-                    <View style = { styles.successImageContainer }>
-                        <Image
-                            source = { require('../images/RegisterInfoScreens/SuccessImage.png') }
-                            style = { styles.successImage }
-                            resizeMode = 'contain' />
-                    </View>
-                    <View style = { styles.infoContainer }>
-                        <Text style = { styles.infoText } >{ infoScreensConstants.registerSuccessMainText[0] }</Text>
-                        <Text style = { styles.infoText } >{ infoScreensConstants.registerSuccessMainText[1] }</Text>
-                    </View>
-                    <TouchableOpacity onPress = { this.props.screenProps.redirectToMnemonicInfoScreen }>
-                        <View style = { styles.nextButton }>
-                            <Text style = { styles.nextButtonText }>Next</Text>
-                        </View>
+                    <TouchableOpacity 
+                        style = { styles.resendEmailButton }
+                        onPress = { () => {} } > 
+                        <Text style = { styles.resendEmailText } >Re-send email</Text>
                     </TouchableOpacity>
                 </View>
+                <View style = { styles.successImageContainer }>
+                    <Image
+                        source = { require('../images/RegisterInfoScreens/SuccessImage.png') }
+                        style = { styles.successImage }
+                        resizeMode = 'contain' />
+                </View>
+                <View style = { styles.infoContainer }>
+                    <Text style = { styles.infoText } >{ infoScreensConstants.registerSuccessMainText[0] }</Text>
+                    <Text style = { styles.infoText } >{ infoScreensConstants.registerSuccessMainText[1] }</Text>
+                </View>
+                <TouchableOpacity onPress = { props.screenProps.redirectToMnemonicInfoScreen }>
+                    <View style = { styles.nextButton }>
+                        <Text style = { styles.nextButtonText }>Next</Text>
+                    </View>
+                </TouchableOpacity>
             </View>
-        );
-    }   
+        </View>
+    ); 
 }
 
 RegisterSuccessComponent.propTypes = {

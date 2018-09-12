@@ -6,72 +6,70 @@ import {
     ScrollView,
     Image
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import StorageReportComponent from './StorageReportComponent';
 import { uuidv4 } from '../../utils/utils';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-export default class StorageComponent extends Component{
-    constructor(props) {
-        super(props);
+export default StorageComponent = (props) => {
+
+    renderTransactions = () => {
+        return props.screenProps.transactionList.map(transaction => {                            
+            return <StorageReportComponent 
+                        key = { uuidv4() }
+                        date = { moment(transaction.timestamp).format('MMMM-DD-YYYY') }
+                        amount = { transaction.amount } />
+        })
     }
 
-    render() {
-        return(
-            <View style = { styles.mainContainer }>
-                <View style = { styles.topContainer } >
-                    <View style = { styles.contentContainer } >
-                        <TouchableOpacity 
-                            style = { styles.backButton }
-                            onPress = { this.props.screenProps.redirectToMyAccountScreen } >
-                            <Image 
-                                source = { require('../../images/MyAccount/BackButton.png') }
-                                style = { styles.icon }
-                                resizeMode = 'contain' />
-                        </TouchableOpacity>
-                        <View style = { styles.infoTextContainer }>
-                            <Text style = { styles.storageText }>Storage</Text>
-                            <View style = { styles.flexRow }>
-                                <Text style = { styles.storageAmountText }>40.20 GB</Text>
-                                <View style = { styles.extraContainer }>
-                                    <Text style = { styles.extraText }>15.2 GB paid</Text>
-                                </View>
+    return(
+        <View style = { styles.mainContainer }>
+            <View style = { styles.topContainer } >
+                <View style = { styles.contentContainer } >
+                    <TouchableOpacity 
+                        style = { styles.backButton }
+                        onPress = { props.screenProps.redirectToMyAccountScreen } >
+                        <Image 
+                            source = { require('../../images/MyAccount/BackButton.png') }
+                            style = { styles.icon }
+                            resizeMode = 'contain' />
+                    </TouchableOpacity>
+                    <View style = { styles.infoTextContainer }>
+                        <Text style = { styles.storageText }>Storage</Text>
+                        <View style = { styles.flexRow }>
+                            <Text style = { styles.storageAmountText }>40.20 GB</Text>
+                            <View style = { styles.extraContainer }>
+                                <Text style = { styles.extraText }>15.2 GB paid</Text>
                             </View>
                         </View>
-                        <TouchableOpacity style = { styles.infoButton } onPress = { this.props.screenProps.showStorageInfo }>
-                            <Image 
-                                source = { require('../../images/MyAccount/StorageInfo.png') }
-                                style = { styles.icon } 
-                                resizeMode = 'contain' />
-                        </TouchableOpacity>
                     </View>
-                    <View style = { styles.progressFull }>
-                        <View style = { styles.filledProgress }/>
-                    </View>
-                    <View style = { styles.limitContainer }>
-                        <Text style = { styles.limitText }>25 GB free</Text>
-                        <View style = { styles.limit } />
-                    </View>
+                    <TouchableOpacity style = { styles.infoButton } onPress = { props.screenProps.showStorageInfo }>
+                        <Image 
+                            source = { require('../../images/MyAccount/StorageInfo.png') }
+                            style = { styles.icon } 
+                            resizeMode = 'contain' />
+                    </TouchableOpacity>
                 </View>
-                <View style = { styles.explanationContainer }>
-                    <Text style = { styles.explanationText }>Storage using history</Text>
+                <View style = { styles.progressFull }>
+                    <View style = { styles.filledProgress }/>
                 </View>
-                <ScrollView style = { styles.scrollViewContainer } decelerationRate = { 'normal' } >
-                {
-                        this.props.screenProps.transactionList.map(transaction => {                            
-                            return <StorageReportComponent 
-                                        key = { uuidv4() }
-                                        date = { moment(transaction.timestamp).format('MMMM-DD-YYYY') }
-                                        amount = { transaction.amount } />
-                        })
-                }            
-                    
-                </ScrollView>
+                <View style = { styles.limitContainer }>
+                    <Text style = { styles.limitText }>25 GB free</Text>
+                    <View style = { styles.limit } />
+                </View>
             </View>
-        );
-    }
+            <View style = { styles.explanationContainer }>
+                <Text style = { styles.explanationText }>Storage using history</Text>
+            </View>
+            <ScrollView style = { styles.scrollViewContainer } decelerationRate = { 'normal' } >
+                {
+                    renderTransactions()
+                }            
+            </ScrollView>
+        </View>
+    );
 }
 
 

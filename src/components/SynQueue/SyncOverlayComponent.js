@@ -1,23 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 import {
     StyleSheet,
     TouchableOpacity
 } from "react-native";
 
-export default class SyncOverlayComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
+export default SyncOverlayComponent = (props) => {
 
-    render() {
-        return(
-            <TouchableOpacity onPress = { this.props.onPress } style = { styles.mainContainer } >
-                {
-                    this.props.children
-                }
-            </TouchableOpacity>
-        );
-    }
+    return(
+        <TouchableOpacity onPress = { props.onPress } style = { styles.mainContainer } >
+            {
+                props.children
+            }
+        </TouchableOpacity>
+    );
 }
 
 const styles = StyleSheet.create({

@@ -5,15 +5,12 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import { getHeight, getWidth } from '../utils/adaptive';
 
-export default class PinOptionComponent extends Component {
-    constructor(props) {
-        super(props)
-    }
+export default DetailedInfoComponent = (props) => {
 
-    renderOptionItem(title, infoText) {
+    renderOptionItem = (title, infoText) => {
         return(
             <View style = { styles.itemContainer } >
                 <Text style = { styles.labelText }>{ title }</Text>
@@ -22,8 +19,8 @@ export default class PinOptionComponent extends Component {
         )
     }
 
-    renderOptions() {
-        const starredIcon = this.props.isStarred ? '★' : null;
+    renderOptions = () => {
+        const starredIcon = props.isStarred ? '★' : null;
 
         return(
             <View style = { styles.mainContainer } >
@@ -34,32 +31,30 @@ export default class PinOptionComponent extends Component {
                             <Text style = { styles.blueStar }>
                                 { starredIcon }
                             </Text>
-                        { this.props.fileName }</Text>
+                        { props.fileName }</Text>
                     </View>
                 </View>
                 {
-                    this.renderOptionItem('Type', this.props.type)
+                    renderOptionItem('Type', props.type)
                 }
                 {
-                    this.renderOptionItem('Size', this.props.size)
+                    renderOptionItem('Size', props.size)
                 }
                 {
-                    this.renderOptionItem('Created', new Date(this.props.creationDate).toDateString())
+                    renderOptionItem('Created', new Date(props.creationDate).toDateString())
                 }
             </View>
         )
     }
 
-    render() {
-        return(
-            <View style = { [ styles.backgroundWrapper ] }>  
-                <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { this.props.showDetailedInfo } />
-                {
-                    this.renderOptions()
-                }
-            </View>
-        )
-    }
+    return(
+        <View style = { [ styles.backgroundWrapper ] }>  
+            <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { props.showDetailedInfo } />
+            {
+                renderOptions()
+            }
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({

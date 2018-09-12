@@ -5,28 +5,23 @@ import {
     TouchableOpacity,
     Image
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import PropTypes from 'prop-types';
 
-export default class OptionsComponent extends Component{
-    constructor(props) {
-        super(props);
-    }
+export default OptionsComponent = (props) => {
 
-    render() {
-        return(
-            <TouchableOpacity onPress = { this.props.onPress }>
-                <View style = { styles.mainContainer }>
-                    <View style = { styles.flexRow }>
-                        <Image style = { styles.icon } source = { this.props.imageSource } resizeMode = 'contain' />
-                        <Text style = { styles.titleText }>{ this.props.title }</Text>
-                    </View>
-                    <Image style = { styles.expanderIcon } source = { require('../../images/DashboardScreen/BlueVector.png') }/>
+    return(
+        <TouchableOpacity onPress = { props.onPress }>
+            <View style = { styles.mainContainer }>
+                <View style = { styles.flexRow }>
+                    <Image style = { styles.icon } source = { props.imageSource } resizeMode = 'contain' />
+                    <Text style = { styles.titleText }>{ props.title }</Text>
                 </View>
-            </TouchableOpacity>
-        );
-    }
+                <Image style = { styles.expanderIcon } source = { require('../../images/DashboardScreen/BlueVector.png') }/>
+            </View>
+        </TouchableOpacity>
+    );
 }
 
 const styles = StyleSheet.create({

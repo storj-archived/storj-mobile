@@ -12,7 +12,6 @@ import StorjModule from '../../utils/StorjModule';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import PropTypes from 'prop-types';
 
-//TODO remove arrow functions from render pt2
 export default class PinCodeGenerationComponent extends Component {
     constructor(props) {
         super(props)
@@ -40,6 +39,7 @@ export default class PinCodeGenerationComponent extends Component {
         this.pinCodes = [];
         this.handleEdit = this.handleEdit.bind(this);
         this._onRef = this._onRef.bind(this);
+        this.onPress = this.onPress.bind(this);
 
         this.isKeyboardShown = false;
     }
@@ -62,6 +62,13 @@ export default class PinCodeGenerationComponent extends Component {
 
     _onRef(ref) {
         this._textInput = ref;
+    }
+
+    onPress() {
+        if(this.isKeyboardShown) return;
+
+        this._textInput.blur();
+        this._textInput.focus();
     }
 
     setErrorState() {
@@ -159,16 +166,29 @@ export default class PinCodeGenerationComponent extends Component {
             this.props.screenProps.redirectToSettingsScreen();
         });
     }
+
+    renderPins() {
+        let currentCodeArray = this.state.code.length === 4 ? this.state.repeatCode : this.state.code;
+        
+        return new Array(this.letterCount).fill(' ').map((element, index) => {
+            return(
+                currentCodeArray[index] ?
+                    <View 
+                        key = { index } 
+                        style = { styles.pin }>
+                        <View style = { styles.inputFilled } />
+                    </View> :
+                    <View 
+                        key = { index } 
+                        style = { styles.pin } /> 
+            )
+        });
+    }
     
     render() {
         const {
-            text,
-            success,
-            pinStyle,
             textStyle,
-            errorStyle,
-            containerStyle,
-            containerPinStyle
+            containerStyle
         } = this.props;
         
         return (
@@ -192,33 +212,10 @@ export default class PinCodeGenerationComponent extends Component {
                 <View style={[styles.container, containerStyle]}>
                     <Text style = { this.state.isValid ? [styles.text, textStyle] : styles.errorText }>{ this.state.text }</Text>
                     <TouchableOpacity 
-                        onPress = { () => {
-                                if(!this.isKeyboardShown) {
-                                    this._textInput.blur();
-                                    this._textInput.focus();
-                                }
-                            } }>
+                        onPress = { this.onPress }>
                         <View style = { styles.containerPin }>
                             {
-                                (
-                                    () => {
-                                        let currentCodeArray = this.state.code.length === 4 ? this.state.repeatCode : this.state.code;
-                                        return new Array(this.letterCount).fill(' ').map((element, index) => {
-                                            return(
-                                                currentCodeArray[index] ?
-                                                    <View 
-                                                        key = { index } 
-                                                        style = { styles.pin }>
-                                                        <View style = { styles.inputFilled } />
-                                                    </View> :
-                                                    <View 
-                                                        key = { index } 
-                                                        style = { styles.pin } /> 
-                                                    
-                                            )
-                                        })
-                                    }
-                                )()
+                                this.renderPins()
                             }
                         </View>
                     </TouchableOpacity>

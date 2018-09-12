@@ -32,6 +32,7 @@ export default class MnemonicGenerationComponent extends Component {
         this.copyToClipboard = this.copyToClipboard.bind(this);
         this.cancelCopy = this.cancelCopy.bind(this);
         this.redirectToMnemonicInfoScreen = this.redirectToMnemonicInfoScreen.bind(this);
+        this.redirectToMnemonicConfirmationScreen = this.redirectToMnemonicConfirmationScreen.bind(this);
 
         this.secondWordsRowIndexCorrection = 13;
     }
@@ -55,6 +56,10 @@ export default class MnemonicGenerationComponent extends Component {
     redirectToMnemonicInfoScreen() {
         if(this.state.isBackButtonBlocked) return;
         this.props.screenProps.redirectToMnemonicInfoScreen();
+    }
+
+    redirectToMnemonicConfirmationScreen() {
+        this.props.screenProps.redirectToMnemonicConfirmationScreen(this.state.mnemonic);
     }
 
     mnemonicToArrayView(mnemonic) {
@@ -141,7 +146,7 @@ export default class MnemonicGenerationComponent extends Component {
                             <Text style = { styles.clipboardText }>Copy to clipboard</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress = { () => { this.props.screenProps.redirectToMnemonicConfirmationScreen(this.state.mnemonic); } } >
+                    <TouchableOpacity onPress = { this.redirectToMnemonicConfirmationScreen } >
                         <View style = { styles.nextButton } >
                             <Text style = { styles.nextButtonText }>Next</Text>
                         </View>

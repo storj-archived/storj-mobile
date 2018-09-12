@@ -5,38 +5,33 @@ import {
     TouchableOpacity,
     StyleSheet
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import { getWidth, getHeight } from '../utils/adaptive';
 
-export default class NoInernerComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
-    
-    render() {
-        return(
-            <View style = { styles.mainContainer }>
-                <View style = { styles.contentContainer }>
-                    <View style = { styles.titleContainer } >
-                        <Text style = { styles.titleText } >No internet connection. </Text>
-                        <Text style = { styles.regularText }>We can’t download</Text>
-                    </View>
-                    <Text style = { styles.regularText }>your buckets.</Text>
-                    <View style = { styles.imageContainer }>
-                        <Image
-                            source = { require('../images/MainScreen/NoInternet.png') }
-                            style = { styles.image }
-                            resizeMode = 'contain' />
-                    </View>
-                    <TouchableOpacity onPress = { () => { } }>
-                        <View style = { styles.refreshButton } >
-                            <Text style = { styles.refreshButtonText }>Refresh</Text>
-                        </View>
-                    </TouchableOpacity>
+export default NoInernerComponent = () => {
+
+    return(
+        <View style = { styles.mainContainer }>
+            <View style = { styles.contentContainer }>
+                <View style = { styles.titleContainer } >
+                    <Text style = { styles.titleText } >No internet connection. </Text>
+                    <Text style = { styles.regularText }>We can’t download</Text>
                 </View>
+                <Text style = { styles.regularText }>your buckets.</Text>
+                <View style = { styles.imageContainer }>
+                    <Image
+                        source = { require('../images/MainScreen/NoInternet.png') }
+                        style = { styles.image }
+                        resizeMode = 'contain' />
+                </View>
+                <TouchableOpacity onPress = { () => {} }>
+                    <View style = { styles.refreshButton } >
+                        <Text style = { styles.refreshButtonText }>Refresh</Text>
+                    </View>
+                </TouchableOpacity>
             </View>
-        );
-    }   
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

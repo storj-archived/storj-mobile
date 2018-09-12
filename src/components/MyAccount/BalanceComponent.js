@@ -6,59 +6,58 @@ import {
     ScrollView,
     Image
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import BalanceReportComponent from './BalanceReportComponent';
 import moment from 'moment';
 import { uuidv4 } from '../../utils/utils';
 import PropTypes from 'prop-types';
 
-export default class BalanceComponent extends Component{
-    constructor(props) {
-        super(props);
+export default BalanceComponent = (props) => {
+
+    mapTransactionList = () => {
+        return props.screenProps.transactionList.map(transaction => {
+            return <BalanceReportComponent 
+                        key = { uuidv4() }
+                        date = { moment(transaction.timestamp).format('MMMM-DD-YYYY') }
+                        amount = { transaction.amount } />
+        })
     }
 
-    render() {
-        return(
-            <View style = { styles.mainContainer }>
-                <View style = { styles.topContainer } >
-                    <View style = { styles.contentContainer } >
-                        <TouchableOpacity 
-                            style = { styles.backButton }
-                            onPress = { this.props.screenProps.redirectToMyAccountScreen } >
-                            <Image 
-                                source = { require('../../images/MyAccount/BackButton.png') }
-                                style = { styles.icon }
-                                resizeMode = 'contain' />
-                        </TouchableOpacity>
-                        <View style = { styles.infoTextContainer }>
-                            <Text style = { styles.storageText }>Balance</Text>
-                            <Text style = { styles.storageAmountText }>{ this.props.screenProps.getBalance() }</Text>
-                        </View>
-                        <TouchableOpacity 
-                            style = { styles.addCreditButton }
-                            onPress = { this.props.screenProps.showCredits }
-                             > 
-                            <Text style = { styles.addCreditText } >Add credits...</Text>
-                        </TouchableOpacity>
+    return(
+        <View style = { styles.mainContainer }>
+            <View style = { styles.topContainer } >
+                <View style = { styles.contentContainer } >
+                    <TouchableOpacity 
+                        style = { styles.backButton }
+                        onPress = { props.screenProps.redirectToMyAccountScreen } >
+                        <Image 
+                            source = { require('../../images/MyAccount/BackButton.png') }
+                            style = { styles.icon }
+                            resizeMode = 'contain' />
+                    </TouchableOpacity>
+                    <View style = { styles.infoTextContainer }>
+                        <Text style = { styles.storageText }>Balance</Text>
+                        <Text style = { styles.storageAmountText }>{ props.screenProps.getBalance() }</Text>
                     </View>
+                    <TouchableOpacity 
+                        style = { styles.addCreditButton }
+                        onPress = { props.screenProps.showCredits } > 
+
+                        <Text style = { styles.addCreditText } >Add credits...</Text>
+                    </TouchableOpacity>
                 </View>
-                <View style = { styles.explanationContainer }>
-                    <Text style = { styles.explanationText }>Billing history</Text>
-                </View>
-                <ScrollView style = { styles.scrollViewContainer } decelerationRate = { 'normal' } >                    
-                    {
-                        this.props.screenProps.transactionList.map(transaction => {
-                            return <BalanceReportComponent 
-                                        key = { uuidv4() }
-                                        date = { moment(transaction.timestamp).format('MMMM-DD-YYYY') }
-                                        amount = { transaction.amount } />
-                        })
-                    }                                                            
-                </ScrollView>
             </View>
-        );
-    }
+            <View style = { styles.explanationContainer }>
+                <Text style = { styles.explanationText }>Billing history</Text>
+            </View>
+            <ScrollView style = { styles.scrollViewContainer } decelerationRate = { 'normal' } >                    
+                {
+                    mapTransactionList()
+                }                                                            
+            </ScrollView>
+        </View>
+    );
 }
 
 

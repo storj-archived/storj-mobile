@@ -5,22 +5,15 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { getHeight, getWidth } from '../utils/adaptive';
 import SORTING from '../utils/constants/sortingConstants';
 
 //TODO: remove arrow func part 2
-export default class ViewOptionsComponent extends Component {
-    constructor(props) {
-        super(props)
+export default ViewOptionsComponent = (props) => {
 
-        this.state = {
-            isSortingShown: false
-        }
-    }
-
-    renderOptionItem(imageSource, title, onPress) {
+    renderOptionItem = (imageSource, title, onPress) => {
         return(
             <TouchableOpacity style = { styles.itemContainer } onPress = { onPress } >
                 <View style = { styles.marginImage }>
@@ -33,94 +26,96 @@ export default class ViewOptionsComponent extends Component {
         )
     }
 
-    renderMainOptions() {
+    listView = () => {
+        props.setListView(); 
+        props.showOptions();
+    }
+
+    gridView = () => {
+        props.setGridView();
+        props.showOptions();
+    }
+
+    enableSelectionMode = () => {
+        props.enableSelectionMode();
+        props.showOptions();
+    }
+
+    renderMainOptions = () => {
         return(
             <View style = { styles.mainContainer } >
                 {
-                    this.renderOptionItem( require('../images/Icons/SortIcon.png'), "Sort items...", () => { this.setState({isSortingShown: true}) })
+                    renderOptionItem( require('../images/Icons/SortIcon.png'), "Sort items...", props.setSortingShown )
                 }
                 {
-                    this.props.isGridViewShown ?
-                        this.renderOptionItem( 
+                    props.isGridViewShown ?
+                        renderOptionItem( 
                             require('../images/Icons/ListIcon.png'), 
                             "List view", 
-                            () => {
-                                this.props.setListView(); 
-                                this.props.showOptions();
-                            }
+                            listView
                         ) :
-                        this.renderOptionItem( 
+                        renderOptionItem( 
                             require('../images/Icons/GridIcon.png'), 
                             "Grid view", 
-                            () => {
-                                this.props.setGridView();
-                                this.props.showOptions();
-                            }
+                            gridView
                         )   
                 }
                 {
-                    this.renderOptionItem( 
+                    renderOptionItem( 
                         require('../images/Icons/SelectItems.png'), 
                         "Select items", 
-                        () => {
-                            this.props.enableSelectionMode();
-                            this.props.showOptions();
-                        }
+                        enableSelectionMode
                     )
                 }
             </View>
         )
     }
 
-    renderSorting() {
+    sortByDate = () => {
+        props.setSorting(SORTING.BY_DATE);
+        props.getBuckets(SORTING.BY_DATE);
+        props.getFiles(SORTING.BY_DATE);
+        props.showOptions();
+        props.unsetSortingShown();
+    }
+
+    sortByName = () => {
+        props.setSorting(SORTING.BY_NAME);
+        props.getBuckets(SORTING.BY_NAME);
+        props.getFiles(SORTING.BY_NAME);
+        props.showOptions();
+        props.unsetSortingShown();
+    }
+
+    renderSorting = () => {
         return(
             <View style = { styles.mainContainer } >
                 {
-                    this.renderOptionItem( 
+                    renderOptionItem( 
                         null, 
                         "Sort by date", 
-                        () => { 
-                            this.props.setSorting(SORTING.BY_DATE);
-                            this.props.getBuckets(SORTING.BY_DATE);
-                            this.props.getFiles(SORTING.BY_DATE);
-                            this.props.showOptions();
-                        }
+                        sortByDate
                     )
                 }
                 {
-                    this.renderOptionItem( 
+                    renderOptionItem( 
                         null, 
                         "Sort by name", 
-                        () => { 
-                            this.props.setSorting(SORTING.BY_NAME);
-                            this.props.getBuckets(SORTING.BY_NAME);
-                            this.props.getFiles(SORTING.BY_NAME);
-                            this.props.showOptions();
-                        }
+                        sortByName
                     )
                 }
             </View>
         )
     }
 
-    mainRender() {
-        if(this.state.isSortingShown) {
-            return this.renderSorting();
-        }
-
-        return this.renderMainOptions();
-    }
-
-    render() {
-        return(
-            <View style = { [ styles.backgroundWrapper ] }>  
-                <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { this.props.showOptions } />
-                {
-                    this.mainRender()
-                }
-            </View>
-        )
-    }
+    return(
+        <View style = { [ styles.backgroundWrapper ] }>  
+            <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { props.showOptions } />
+            {
+                props.isSortingShown ? renderSorting() : renderMainOptions()
+            }
+        </View>
+    );
 }
 
 ViewOptionsComponent.propTypes = {

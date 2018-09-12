@@ -5,24 +5,17 @@ import {
     TouchableOpacity,
     Alert
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { getHeight, getWidth } from '../utils/adaptive';
 
-export default class PinOptionComponent extends Component {
-    constructor(props) {
-        super(props)
-
-        this.closeView = this.closeView.bind(this);
-        this.onChangePin = this.onChangePin.bind(this);
-        this.onDeletePin = this.onDeletePin.bind(this);
-    }
+export default PinOptionComponent = (props) => {
 
     /**
      * Function that close pop-up
      */
-    closeView() {
-        this.props.changePINOptionStatus(false);
+    closeView = () => {
+        props.changePINOptionStatus(false);
     }
 
     /**
@@ -31,7 +24,7 @@ export default class PinOptionComponent extends Component {
      * @param {Function} onPress 
      * @param {object/number} style additional style to text if needed
      */
-    renderOptionItem(title, onPress, style) {
+    renderOptionItem = (title, onPress, style) => {
         return(
             <TouchableOpacity style = { styles.itemContainer } onPress = { onPress } >
                 <View style = { styles.marginLabel }>
@@ -44,43 +37,41 @@ export default class PinOptionComponent extends Component {
     /**
      * Alert and after new importKeys without PIN
      */
-    tryDeletePIN() {
+    tryDeletePIN = () => {
         Alert.alert(
             'Remove PIN?',
             'You’ll have to use login/password instead',
             [
                 { text: 'Cancel', onPress: () => {}, style: 'cancel' },
-                { text: 'Remove PIN', onPress: async () => { await this.props.deletePIN() } }
+                { text: 'Remove PIN', onPress: async () => { await props.deletePIN() } }
             ],
             { cancelable: false }
         );
     }
 
-    onChangePin() {
-        this.props.redirectToPinCodeGenerationScreen(); 
-        this.closeView();
+    onChangePin = () => {
+        props.redirectToPinCodeGenerationScreen(); 
+        closeView();
     }
 
-    onDeletePin() {
-        this.tryDeletePIN(); 
-        this.closeView();
+    onDeletePin = () => {
+        tryDeletePIN(); 
+        closeView();
     }
 
-    render() {
-        return(
-            <View style = { [ styles.backgroundWrapper ] }>  
-                <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { this.closeView } />
-                <View style = { styles.mainContainer } >
-                    {
-                        this.renderOptionItem("Change PIN", this.onChangePin)
-                    }
-                    {
-                        this.renderOptionItem("Delete PIN", this.onDeletePin, styles.redTextColor)
-                    }
-                </View>
+    return(
+        <View style = { [ styles.backgroundWrapper ] }>  
+            <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { closeView } />
+            <View style = { styles.mainContainer } >
+                {
+                    renderOptionItem("Change PIN", onChangePin)
+                }
+                {
+                    renderOptionItem("Delete PIN", onDeletePin, styles.redTextColor)
+                }
             </View>
-        )
-    }
+        </View>
+    )
 }
 
 PinOptionComponent.propTypes = {

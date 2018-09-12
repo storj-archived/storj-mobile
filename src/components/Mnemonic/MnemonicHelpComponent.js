@@ -5,59 +5,54 @@ import {
     StyleSheet,
     Image
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import { getWidth, getHeight, getDeviceHeight } from '../../utils/adaptive';
 import mnemonicScreenConstants from '../../utils/constants/mnemonicScreenConstants';
 
-export default class MnemonicHelpComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
+export default MnemonicHelpComponent = (props) => {
 
-    render() {
-        return(
-            <View style={ styles.mainContainer }>
-                <View style = { styles.contentContainer }>
-                    <View>
-                        <View style = { [styles.flexRow, styles.titleContainer] }>
-                            <TouchableOpacity 
-                                onPress = { this.props.screenProps.redirectToLoginScreen }
-                                style = { styles.backButtonContainer } >
-                                <Image 
-                                    source = { require('../../images/MyAccount/BlueBackButton.png') }
-                                    style = { styles.icon } />
-                            </TouchableOpacity>
-                            <View style = { styles.titleMargin } >
-                                <Text style = { styles.titleText }>Secret phrase help</Text>
-                            </View>
-                        </View>
-                        <View style = { styles.infoTextContainer }>
-                            <Text style = { styles.infoTextBold }>What is it?</Text>
-                            <View style = { styles.firstRegularInfoTextMargin }>
-                                <Text style = { styles.infoTextRegular } >{mnemonicScreenConstants.mnemonicHelpInfoText1}</Text>
-                            </View>
-                            <View style = { styles.secondRegularInfoTextMargin }>
-                                <Text style = { styles.infoTextRegular } >{mnemonicScreenConstants.mnemonicHelpInfoText2}</Text>
-                            </View>
+    return(
+        <View style={ styles.mainContainer }>
+            <View style = { styles.contentContainer }>
+                <View>
+                    <View style = { [styles.flexRow, styles.titleContainer] }>
+                        <TouchableOpacity 
+                            onPress = { props.screenProps.redirectToLoginScreen }
+                            style = { styles.backButtonContainer } >
+                            <Image 
+                                source = { require('../../images/MyAccount/BlueBackButton.png') }
+                                style = { styles.icon } />
+                        </TouchableOpacity>
+                        <View style = { styles.titleMargin } >
+                            <Text style = { styles.titleText }>Secret phrase help</Text>
                         </View>
                     </View>
-                    <View>
-                        <View style = { styles.additionalInfoTextBoldMargin }>
-                            <Text style = { styles.infoTextBold }>Never created one, or can’t find it?</Text>
+                    <View style = { styles.infoTextContainer }>
+                        <Text style = { styles.infoTextBold }>What is it?</Text>
+                        <View style = { styles.firstRegularInfoTextMargin }>
+                            <Text style = { styles.infoTextRegular } >{mnemonicScreenConstants.mnemonicHelpInfoText1}</Text>
                         </View>
-                        <View style = { styles.additionalInfoTextRegularMargin }>
-                            <Text style = { styles.infoTextRegular }>You’ll need to generate a new one below.</Text>
-                        </View>
-                        <View style = { styles.buttonContainer }>
-                            <TouchableOpacity onPressOut = { this.props.screenProps.redirectToMnemonicGenerationScreen }>
-                                <Text style = { styles.buttonText }>Generate a new secret phrase</Text>
-                            </TouchableOpacity>
+                        <View style = { styles.secondRegularInfoTextMargin }>
+                            <Text style = { styles.infoTextRegular } >{mnemonicScreenConstants.mnemonicHelpInfoText2}</Text>
                         </View>
                     </View>
-                </View> 
-            </View>
-        );
-    }
+                </View>
+                <View>
+                    <View style = { styles.additionalInfoTextBoldMargin }>
+                        <Text style = { styles.infoTextBold }>Never created one, or can’t find it?</Text>
+                    </View>
+                    <View style = { styles.additionalInfoTextRegularMargin }>
+                        <Text style = { styles.infoTextRegular }>You’ll need to generate a new one below.</Text>
+                    </View>
+                    <View style = { styles.buttonContainer }>
+                        <TouchableOpacity onPressOut = { props.screenProps.redirectToMnemonicGenerationScreen }>
+                            <Text style = { styles.buttonText }>Generate a new secret phrase</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </View> 
+        </View>
+    );
 }
 
 

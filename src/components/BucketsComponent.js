@@ -3,45 +3,40 @@ import {
     StyleSheet,
     Animated
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import BucketsScreenNavigation from '../containers/BucketsScreenNavContainer';
 import BucketsScreenHeaderComponent from '../components/BucketsScreenHeaderComponent';
 import PropTypes from 'prop-types';
 
-export default class BucketsComponent extends Component {
-    constructor(props) {
-        super(props);
+export default BucketsComponent = (props) => {
 
-        this.animatedScrollValue = new Animated.Value(0);
-    }
+    const animatedScrollValue = new Animated.Value(0);
 
-    render() {
-        return(
-            <View style={ styles.mainContainer }>
-                <BucketsScreenNavigation
-                    animatedScrollValue = { this.animatedScrollValue }
-                    setSelectionId = { this.props.setSelectionId }
-                    selectedItemId = { this.props.selectedItemId }  />
-                <BucketsScreenHeaderComponent
-                    lastSync = { this.props.lastSync }
-                    searchSubSequence = { this.props.searchSubSequence }
-                    selectAll = { this.props.selectAll }
-                    deselectAll = { this.props.deselectAll }
-                    setSearch = { this.props.setSearch }
-                    clearSearch = { this.props.clearSearch }
-                    searchIndex = { this.props.searchIndex } 
-                    isFilesScreen = { this.props.isFilesScreen }
-                    selectedItemsCount = { this.props.selectedItemsCount }
-                    showOptions = { this.props.showOptions }
-                    isSelectionMode = { this.props.isSelectionMode }
-                    disableSelectionMode = { this.props.disableSelectionMode }
-                    animatedScrollValue = { this.animatedScrollValue }
-                    navigateBack = { this.props.navigateBack }
-                    buckets = { this.props.buckets }
-                    openedBucketId = { this.props.openedBucketId } />
-            </View>
-        );
-    }
+    return(
+        <View style={ styles.mainContainer }>
+            <BucketsScreenNavigation
+                animatedScrollValue = { animatedScrollValue }
+                setSelectionId = { props.setSelectionId }
+                selectedItemId = { props.selectedItemId }  />
+            <BucketsScreenHeaderComponent
+                lastSync = { props.lastSync }
+                searchSubSequence = { props.searchSubSequence }
+                selectAll = { props.selectAll }
+                deselectAll = { props.deselectAll }
+                setSearch = { props.setSearch }
+                clearSearch = { props.clearSearch }
+                searchIndex = { props.searchIndex } 
+                isFilesScreen = { props.isFilesScreen }
+                selectedItemsCount = { props.selectedItemsCount }
+                showOptions = { props.showOptions }
+                isSelectionMode = { props.isSelectionMode }
+                disableSelectionMode = { props.disableSelectionMode }
+                animatedScrollValue = { animatedScrollValue }
+                navigateBack = { props.navigateBack }
+                buckets = { props.buckets }
+                openedBucketId = { props.openedBucketId } />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

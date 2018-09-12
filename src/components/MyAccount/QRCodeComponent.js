@@ -4,46 +4,41 @@ import {
     StyleSheet,
     TouchableOpacity
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import myAccountConstants from '../../utils/constants/myAccountConstants';
 import QRCode from 'react-native-qrcode';
 
-export default class QRCodeComponent extends Component {
-    constructor(props) {
-        super(props);
+export default QRCodeComponent = (props) => {
+
+    getCredentials = () => {
+        return JSON.stringify({email: props.email, password: props.password, mnemonic: props.mnemonic})
     }
 
-    getCredentials() {
-        return JSON.stringify({email: this.props.email, password: this.props.password, mnemonic: this.props.mnemonic})
-    }
+    const credentials = getCredentials(); 
 
-    render() {
-        let credentials = this.getCredentials(); 
-
-        return(
-            <View style = { [ styles.backgroundWrapper ] }>  
-                <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { this.props.showQR } />
-                    <View style = { styles.mainContainer } >
-                        <View style = { styles.qrContainer }>
-                        {
-                            credentials ?
-                                <QRCode
-                                    value = { credentials }
-                                    size = { getHeight(200) }
-                                    bgColor = { 'black' }
-                                    fgColor = { 'white' } /> : null
-                        }
-                        </View>
-                        <View style = { styles.infoTextContainer }>
-                            <Text style = { styles.infoText }>{ myAccountConstants.qrCodeInfoText[0] }</Text>
-                            <Text style = { styles.infoText }>{ myAccountConstants.qrCodeInfoText[1] }</Text>
-                        </View>
+    return (
+        <View style = { [ styles.backgroundWrapper ] }>  
+            <TouchableOpacity style = { [ styles.backgroundWrapper, styles.dimBlack ] } onPress = { props.showQR } />
+                <View style = { styles.mainContainer } >
+                    <View style = { styles.qrContainer }>
+                    {
+                        credentials ?
+                            <QRCode
+                                value = { credentials }
+                                size = { getHeight(200) }
+                                bgColor = { 'black' }
+                                fgColor = { 'white' } /> : null
+                    }
                     </View>
-            </View>
-        )
-    }
+                    <View style = { styles.infoTextContainer }>
+                        <Text style = { styles.infoText }>{ myAccountConstants.qrCodeInfoText[0] }</Text>
+                        <Text style = { styles.infoText }>{ myAccountConstants.qrCodeInfoText[1] }</Text>
+                    </View>
+                </View>
+        </View>
+    );
 }
 
 QRCodeComponent.propTypes = {

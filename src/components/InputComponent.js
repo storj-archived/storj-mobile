@@ -34,6 +34,23 @@ export default class InputComponent extends Component {
         this._textInput = ref;
     }
 
+    renderEye() {
+        if(this.props.isPassword) {
+            return (
+                 <TouchableOpacity onPress = { this.onPress }>
+                    <Image                     
+                        style = { styles.eye } 
+                        source = {
+                            this.state.isTextShown ? 
+                            require('../images/Icons/Eye.png') : 
+                            require('../images/Icons/EyeClosed.png') 
+                        } 
+                        resizeMode = 'contain'/>
+                </TouchableOpacity>
+            );
+        }
+    }
+
     render() {
         let placeholderStyle, message, underlineStyle;
 
@@ -67,22 +84,7 @@ export default class InputComponent extends Component {
                         value={ this.props.value }
                         onSubmitEditing = { () => Keyboard.dismiss() } />
                         {
-                            (() => {
-                                if(this.props.isPassword) {
-                                    return (
-                                         <TouchableOpacity onPress = { this.onPress }>
-                                            <Image                     
-                                                style = { styles.eye } 
-                                                source = {
-                                                    this.state.isTextShown ? 
-                                                    require('../images/Icons/Eye.png') : 
-                                                    require('../images/Icons/EyeClosed.png') 
-                                                } 
-                                                resizeMode = 'contain'/>
-                                        </TouchableOpacity>
-                                    );
-                                }
-                            })()
+                            this.renderEye()
                         }
                 </View>
                 <View style = { underlineStyle }/>

@@ -5,7 +5,6 @@ import {
     StyleSheet,
     TouchableOpacity,
     TouchableWithoutFeedback,
-    ActivityIndicator,
     ProgressBarAndroid,
     ProgressViewIOS,
     Platform
@@ -31,11 +30,16 @@ export default class FilePreviewComponent extends Component {
         this.showSelectBuckets = this.showSelectBuckets.bind(this);
         this.showDetailedInfo = this.showDetailedInfo.bind(this);
         this.onPress = this.onPress.bind(this);
+        this.onShare = this.onShare.bind(this);
         this.emptyFunction = () => {};
     }
 
     onPress(bucket) {
         this.selectBucketCallback({ bucketId: bucket.getId() });
+    }
+
+    async onShare() {
+        await this.props.onShare(this.props.fileUri.uri);
     }
 
     showSelectBuckets(callback) {
@@ -114,7 +118,7 @@ export default class FilePreviewComponent extends Component {
                                 <ActionBar 
                                     actions = { this.props.actionBarActions } /> :
                                 <Button
-                                    onPress = { async () => { await this.props.onShare(this.props.fileUri.uri); } }
+                                    onPress = { this.onShare }
                                     source = { require("../images/Icons/BlueShare.png") } />       
                         }
                     </View>
@@ -155,12 +159,6 @@ export default class FilePreviewComponent extends Component {
         );
     }
 }
-
-const LoadingComponent = (props) => (
-    <View style = { styles.loadingComponentContainer }>
-        <ActivityIndicator animating = { props.isLoading ? true : false } size = { 'large' } color = { 'blue' } />
-    </View>
-); 
 
 const Button = (props) => (
     <TouchableOpacity onPress = { props.onPress } style = { props.style }>

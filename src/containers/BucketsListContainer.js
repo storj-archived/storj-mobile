@@ -17,6 +17,9 @@ import BucketModel from '../models/BucketModel';
 class BucketsListContainer extends BaseListContainer {
     constructor(props) {
         super(props);
+
+        this._onSelectionPress = this._onSelectionPress.bind(this);
+        this._onPress = this._onPress.bind(this);
     }
 
     /**

@@ -2,127 +2,100 @@ import {
     View,
     Text,
     StyleSheet,
-    Animated,
     Image,
     TouchableOpacity
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import SearchComponent from '../components/SearchComponent';
 import { getWidth, getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 
-export default class BucketsScreenHeaderComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
+export default BucketsScreenHeaderComponent = (props) => {
 
-    render() {
-        return(
-            <View style = { styles.mainContainer }>
-                <AnimatedHeader
-                    lastSync = { this.props.lastSync }
-                    searchSubSequence = { this.props.searchSubSequence }
-                    placeholder = { this.props.placeholder }
-                    setSearch = { this.props.setSearch }
-                    clearSearch = { this.props.clearSearch }
-                    searchIndex = { this.props.searchIndex }
-                    isSelectBucketScreen = { this.props.isSelectBucketScreen } 
-                    isFilesScreen = { this.props.isFilesScreen } 
-                    selectedItemsCount = { this.props.selectedItemsCount }
-                    showOptions = { this.props.showOptions }
-                    buckets = { this.props.buckets }
-                    openedBucketId = { this.props.openedBucketId }
-                    navigateBack = { this.props.navigateBack }
-                    isSelectionMode = { this.props.isSelectionMode }
-                    disableSelectionMode = { this.props.disableSelectionMode }
-                    animatedScrollValue = { this.props.animatedScrollValue }
-                    selectAll = { this.props.selectAll }
-                    deselectAll = { this.props.deselectAll } />
-            </View>
-        );
-    }
+    return(
+        <View style = { styles.mainContainer }>
+            <AnimatedHeader
+                lastSync = { props.lastSync }
+                searchSubSequence = { props.searchSubSequence }
+                placeholder = { props.placeholder }
+                setSearch = { props.setSearch }
+                clearSearch = { props.clearSearch }
+                searchIndex = { props.searchIndex }
+                isSelectBucketScreen = { props.isSelectBucketScreen } 
+                isFilesScreen = { props.isFilesScreen } 
+                selectedItemsCount = { props.selectedItemsCount }
+                showOptions = { props.showOptions }
+                buckets = { props.buckets }
+                openedBucketId = { props.openedBucketId }
+                navigateBack = { props.navigateBack }
+                isSelectionMode = { props.isSelectionMode }
+                disableSelectionMode = { props.disableSelectionMode }
+                animatedScrollValue = { props.animatedScrollValue }
+                selectAll = { props.selectAll }
+                deselectAll = { props.deselectAll } />
+        </View>
+    );
 }
 
-function rotateTransform(xOffset) {
-    return [
-        {
-            transform: [
-                
-            ]
-        },
-        {
-            transform: [                
-            ]
-        },
-        {
-            transform: [
-                
-            ]
-        }
-    ];
-}
+AnimatedHeader = (props) => {
 
-class AnimatedHeader extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    renderSearchComponent(res) {
+    renderSearchComponent = () => {
         return(
-            <View style = { [ styles.searchWrapper ] }>
-                <Animated.View style = { [ styles.searchWrapperInner, res[1] ] }>
+            <View style = { styles.searchWrapper }>
+                <View style = { styles.searchWrapperInner }>
                     <SearchComponent
-                        lastSync = { this.props.lastSync }
-                        searchSubSequence = { this.props.searchSubSequence }
-                        placeholder = { this.props.placeholder }
-                        searchIndex = { this.props.searchIndex }
-                        setSearch = { this.props.setSearch }
-                        clearSearch = { this.props.clearSearch }                    
-                        isSelectBucketScreen = { this.props.isSelectBucketScreen }
-                        isFilesScreen = { this.props.isFilesScreen }
-                        showOptions = { this.props.showOptions }
-                        buckets = { this.props.buckets }
-                        openedBucketId = { this.props.openedBucketId }
+                        lastSync = { props.lastSync }
+                        searchSubSequence = { props.searchSubSequence }
+                        placeholder = { props.placeholder }
+                        searchIndex = { props.searchIndex }
+                        setSearch = { props.setSearch }
+                        clearSearch = { props.clearSearch }                    
+                        isSelectBucketScreen = { props.isSelectBucketScreen }
+                        isFilesScreen = { props.isFilesScreen }
+                        showOptions = { props.showOptions }
+                        buckets = { props.buckets }
+                        openedBucketId = { props.openedBucketId }
                         styleContainer = { styles.searchComponent }
-                        navigateBack = { this.props.navigateBack } />
-                </Animated.View>
+                        navigateBack = { props.navigateBack } />
+                </View>
             </View>
         );
     }
 
-    renderSelectComponent(res) {   
-        let count = this.props.selectedItemsCount;
+    onSelectAllPress = () => {
+        props.selectAll(props.openedBucketId, props.isFilesScreen);
+    }
+
+    renderSelectComponent = () => {   
+        let count = props.selectedItemsCount;
         return(
             <View style = { styles.selectionContainer }>
-                <Animated.View style = { [ styles.selectionWrapper, res[2] ] }>
+                <View style = { styles.selectionWrapper }>
                     <View style = { styles.flexRow }>
                         <TouchableOpacity 
                             style = { styles.imageContainer } 
-                            onPress = { this.props.deselectAll } >
+                            onPress = { props.deselectAll } >
                             <Image style = { styles.image } source = { require('../images/Icons/BlueCross.png') } resizeMode = 'contain' />
                         </TouchableOpacity>
                         <Text style = { styles.selectionText }>{ count + " selected" }</Text>
                     </View>
                     <Text
-                        onPress = { () => this.props.selectAll(this.props.openedBucketId, this.props.isFilesScreen) }
+                        onPress = { onSelectAllPress  }
                         style = { styles.textDone }>Select all</Text>
-                </Animated.View>
+                </View>
             </View>
         );
     }
 
-    render() {
-        const selectionMode = this.props.isSelectionMode ? null: styles.justifyContentFlexEnd;
-        const transformArr = rotateTransform(this.props.animatedScrollValue);
+    const selectionMode = props.isSelectionMode ? null: styles.justifyContentFlexEnd;
 
-        return(
-            <Animated.View style={ [ styles.headerContainer, selectionMode, transformArr[0] ] }>
-                {
-                    this.props.isSelectionMode ? this.renderSelectComponent(transformArr) : this.renderSearchComponent(transformArr)
-                }
-            </Animated.View>
-        );
-    }
+    return(
+        <View style = { [ styles.headerContainer, selectionMode ] } >
+            {
+                props.isSelectionMode ? renderSelectComponent() : renderSearchComponent()
+            }
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

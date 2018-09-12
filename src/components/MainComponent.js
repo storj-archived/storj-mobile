@@ -28,13 +28,16 @@ export default class MainComponent extends Component {
             showOptions: false,
             showQR: false,
             showStorageInfo: false,
-            showCredits: false
+            showCredits: false,
+            isSortingShown: false
         };
 
         this.showOptions = this.showOptions.bind(this);
         this.showQR = this.showQR.bind(this);
         this.showStorageInfo = this.showStorageInfo.bind(this);
         this.showCredits = this.showCredits.bind(this);
+        this.setSortingShown = this.setSortingShown.bind(this);
+        this.unsetSortingShown = this.unsetSortingShown.bind(this);
         this.onCreateBucketApply = this.onCreateBucketApply.bind(this);
     };
 
@@ -52,6 +55,14 @@ export default class MainComponent extends Component {
 
     showCredits() {
         this.setState({ showCredits: !this.state.showCredits });
+    }
+
+    setSortingShown() {
+        this.setState({ isSortingShown: true });
+    }
+
+    unsetSortingShown() {
+        this.setState({ isSortingShown: false });
     }
 
     onCreateBucketApply(bucketName) {
@@ -129,6 +140,9 @@ export default class MainComponent extends Component {
                             isGridViewShown = { this.props.isGridViewShown }
                             setGridView = { this.props.setGridView }
                             setListView = { this.props.setListView }
+                            setSortingShown = { this.setSortingShown }
+                            unsetSortingShown = { this.unsetSortingShown }
+                            isSortingShown = { this.state.isSortingShown }
                             showOptions = { this.showOptions } /> : null
                 }
                 {

@@ -3,30 +3,25 @@ import {
     StyleSheet,
     Animated
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import DashboardScreenNavigation from '../../containers/DashboardScreenNavContainer';
 
-export default class DashboardComponent extends Component {
-    constructor(props) {
-        super(props);
+export default DashboardComponent = (props) => {
 
-        this.animatedScrollValue = new Animated.Value(0);
-    }
+    const animatedScrollValue = new Animated.Value(0);
 
-    render() {
-        return(
-            <View style={ styles.mainContainer }>
-                <DashboardScreenNavigation
-                    setSelectionId = { this.props.setSelectionId }
-                    defaultRoute = { this.props.defaultRoute }
-                    animatedScrollValue = { this.animatedScrollValue }
-                    showOptions = { this.props.showOptions }
-                    selectAll = { this.props.selectAll }
-                    deselectAll = { this.props.deselectAll } />
-            </View>
-        )
-    }
+    return(
+        <View style={ styles.mainContainer }>
+            <DashboardScreenNavigation
+                setSelectionId = { props.setSelectionId }
+                defaultRoute = { props.defaultRoute }
+                animatedScrollValue = { animatedScrollValue }
+                showOptions = { props.showOptions }
+                selectAll = { props.selectAll }
+                deselectAll = { props.deselectAll } />
+        </View>
+    )
 }
 
 DashboardComponent.propTypes = {

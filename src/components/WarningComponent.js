@@ -4,26 +4,21 @@ import {
     StyleSheet,
     StatusBar
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import { getHeight, getWidth } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 
 /**
  * Red warning on top of application with message 
  */
-export default class WarningComponent extends Component{
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return(
-            <View style = { this.props.message ? styles.secretPhraseButton : styles.secretPhraseHide } >
-                <StatusBar backgroundColor = { this.props.statusBarColor }/>
-                <Text style = { styles.secretPhraseText }>{this.props.message}</Text> 
-            </View>
-        );
-    }
+export default WarningComponent = (props) => {
+    
+    return(
+        <View style = { props.message ? styles.secretPhraseButton : styles.secretPhraseHide } >
+            <StatusBar backgroundColor = { props.statusBarColor }/>
+            <Text style = { styles.secretPhraseText }>{props.message}</Text> 
+        </View>
+    );
 }
 
 WarningComponent.propTypes = {

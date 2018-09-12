@@ -6,7 +6,7 @@ import {
     ScrollView,
     ActivityIndicator
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import InputComponent from '../components/InputComponent';
 import Checkbox from '../components/CheckboxComponent';
@@ -15,81 +15,64 @@ import { getWidth, getHeight, getDeviceWidth, getDeviceHeight } from '../utils/a
 /**
  * RegisterScreen component
  */
-export default class RegisterComponent extends Component {
-	constructor(props) {
-        super(props);
+export default RegisterComponent = (props) => {
 
-        /**
-         * prevents calling undefined or null objects
-         */
-        this.onSubmit = props.onSubmit ? props.onSubmit : () => {};
-        this.onChangeEmail = props.onChangeEmail ? props.onChangeEmail : () => {};
-        this.onChangePassword = props.onChangePassword ? props.onChangePassword : () => {};
-        this.onChangePasswordRepeat = props.onChangePasswordRepeat ? props.onChangePasswordRepeat : () => {};
-        this.onChangeTermsAccepted = props.onChangeTermsAcceptence ? props.onChangeTermsAcceptence : () => {};
-        this.navigateBack = props.navigateBack ? props.navigateBack : () => {};
-        this.redirectToTermsOfUse = props.redirectToTermsOfUse ? props.redirectToTermsOfUse : () => {};
-        this.redirectToLoginScreen = props.redirectToLoginScreen ? props.redirectToLoginScreen : () => {};
-    };
-
-	render() {
-		return(
-            <ScrollView style={ styles.mainContainer } keyboardDismissMode = { "on-drag" } keyboardShouldPersistTaps = { 'always' } >
-                <View style = { styles.contentWrapper }>
-                    <Text style = { styles.titleBold }>Let’s get started</Text>
-                    <View style = { styles.firstInputMargin }>
-                        <InputComponent 
-                            onChangeText = { this.onChangeEmail }
-                            isPassword = { false } 
-                            placeholder = {'Email'}
-                            isError = { this.props.isEmailError }
-                            errorMessage = { 'Invalid Email' } />
-                    </View>
-                    <View>
-                        <InputComponent 
-                            onChangeText = { this.onChangePassword } 
-                            isPassword = { true } 
-                            placeholder = {'Password'}
-                            isError = { this.props.isPasswordError }
-                            errorMessage = { 'Invalid password' } />
-                    </View>
-                    <View>
-                        <InputComponent 
-                            onChangeText = { this.onChangePasswordRepeat } 
-                            isPassword = { true } 
-                            placeholder = {'Confirm password'}
-                            isError = { this.props.isPasswordMatchError }
-                            errorMessage = { 'Password doesn`t match' } />
-                    </View>
-                    <View style = { styles.agreementWrapper }>
-                        <Checkbox onPress = { this.onChangeTermsAccepted }/>
-                        <Text style = { styles.agreementText }>I agree to the  
-                            <Text style = { styles.footerLink } onPress = { this.redirectToTermsOfUse } > Terms of Service</Text> 
-                        </Text>
-                    </View>
+    return(
+        <ScrollView style={ styles.mainContainer } keyboardDismissMode = { "on-drag" } keyboardShouldPersistTaps = { 'always' } >
+            <View style = { styles.contentWrapper }>
+                <Text style = { styles.titleBold }>Let’s get started</Text>
+                <View style = { styles.firstInputMargin }>
+                    <InputComponent 
+                        onChangeText = { props.onChangeEmail }
+                        isPassword = { false } 
+                        placeholder = {'Email'}
+                        isError = { props.isEmailError }
+                        errorMessage = { 'Invalid Email' } />
                 </View>
-                <View style = { styles.footer }>
-                    <TouchableOpacity 
-                    style = { this.props.isButtonDisabled ? [styles.createAccountButton, styles.blurredButton] : styles.createAccountButton } 
-                    onPressOut = { this.props.isButtonDisabled ? () => {} : this.onSubmit }>
-                        <Text style = { styles.createAccountText }>Create account</Text>
-                    </TouchableOpacity>
+                <View>
+                    <InputComponent 
+                        onChangeText = { props.onChangePassword } 
+                        isPassword = { true } 
+                        placeholder = {'Password'}
+                        isError = { props.isPasswordError }
+                        errorMessage = { 'Invalid password' } />
+                </View>
+                <View>
+                    <InputComponent 
+                        onChangeText = { props.onChangePasswordRepeat } 
+                        isPassword = { true } 
+                        placeholder = {'Confirm password'}
+                        isError = { props.isPasswordMatchError }
+                        errorMessage = { 'Password doesn`t match' } />
+                </View>
+                <View style = { styles.agreementWrapper }>
+                    <Checkbox onPress = { props.onChangeTermsAcceptence }/>
+                    <Text style = { styles.agreementText }>I agree to the  
+                        <Text style = { styles.footerLink } onPress = { props.redirectToTermsOfUse } > Terms of Service</Text> 
+                    </Text>
+                </View>
+            </View>
+            <View style = { styles.footer }>
+                <TouchableOpacity 
+                style = { props.isButtonDisabled ? [styles.createAccountButton, styles.blurredButton] : styles.createAccountButton } 
+                onPressOut = { props.isButtonDisabled ? () => {} : props.onSubmit }>
+                    <Text style = { styles.createAccountText }>Create account</Text>
+                </TouchableOpacity>
+                <Text 
+                    style = { styles.footerText }>Already have an account? 
                     <Text 
-                        style = { styles.footerText }>Already have an account? 
-                        <Text 
-                            style = { styles.footerLink }
-                            onPress = { this.redirectToLoginScreen }> Login</Text></Text>
-                </View>
-                {
-                    this.props.isLoading ?
-                        <View style={ [ styles.backgroundWrapper, styles.setChildCenter ] }>
-                            <ActivityIndicator animating={ true } color={ "#2782ff" } size={ "large" }/>
-                        </View>
-                        : null
-                }
-            </ScrollView>
-		);
-	};
+                        style = { styles.footerLink }
+                        onPress = { props.redirectToLoginScreen }> Login</Text></Text>
+            </View>
+            {
+                props.isLoading ?
+                    <View style={ [ styles.backgroundWrapper, styles.setChildCenter ] }>
+                        <ActivityIndicator animating={ true } color={ "#2782ff" } size={ "large" }/>
+                    </View>
+                    : null
+            }
+        </ScrollView>
+    );
 }
 
 RegisterComponent.propTypes = {

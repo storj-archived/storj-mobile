@@ -4,72 +4,66 @@ import {
     TouchableOpacity,
     Image
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import { getWidth, getHeight } from '../utils/adaptive';
 import ProgressCircleComponent from '../components/ProgressCircleComponent';
 import PropTypes from 'prop-types';
 
-export default class GridItemComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        const props = this.props;
-        return(
-            <TouchableOpacity 
-                style = { props.isSingleItemSelected ? [ gridItemStyles.listItemContainer, gridItemStyles.itemSelected ] : gridItemStyles.listItemContainer }
-                onPress = { props.onPress }
-                onLongPress = { props.onLongPress }>
-                    <View style = { gridItemStyles.listItemContent }>
-                        <View>
-                            <Image 
-                                style = { gridItemStyles.fileTypeIcon } 
-                                source = { props.listItemIconSource }
-                                resizeMode = 'contain' /> 
-                            {
-                                props.isLoading ?
-                                    <View style = { gridItemStyles.progressCircle }>
-                                        <ProgressCircleComponent
-                                            percent = { props.progress * 100 }
-                                            radius = { 17 }
-                                            borderWidth = { 2 }
-                                            color = "#2794FF"
-                                            shadowColor = "#FFFFFF"
-                                            bgColor = "#A8CEFF" >
-                                            <TouchableOpacity onPress = { props.onCancelPress }>
-                                                <Image 
-                                                    source = { require('../images/Icons/CancelDownload.png') } 
-                                                    style = { gridItemStyles.cancelDownloadImage } 
-                                                    resizeMode = 'contain' /> 
-                                            </TouchableOpacity>
-                                        </ProgressCircleComponent>
-                                    </View> 
-                                    : null
-                            }  
-                        </View>
-                        <View style = { gridItemStyles.textWrapper }>
-                            {
-                                this.props.children
-                            }
-                            {
-                                props.isListActionsDisabled || props.isSelectionMode ? 
-                                    <View/>
-                                    : <TouchableOpacity 
-                                        style = { gridItemStyles.listItemActionsIconContainer } 
-                                        onPress = { props.onDotsPress }>
-                                        <Image style = { gridItemStyles.listItemActionsIcon } source = { require('../images/Icons/listItemActions.png') } />
-                                    </TouchableOpacity> 
-                            }
-                        </View>
+export default GridItemComponent = (props) => {
+    
+    return(
+        <TouchableOpacity 
+            style = { props.isSingleItemSelected ? [ gridItemStyles.listItemContainer, gridItemStyles.itemSelected ] : gridItemStyles.listItemContainer }
+            onPress = { props.onPress }
+            onLongPress = { props.onLongPress }>
+                <View style = { gridItemStyles.listItemContent }>
+                    <View>
+                        <Image 
+                            style = { gridItemStyles.fileTypeIcon } 
+                            source = { props.listItemIconSource }
+                            resizeMode = 'contain' /> 
                         {
-                            props.isSelectionMode ? <SelectionCheckboxComponent isSelected = { props.isSelected } /> 
-                                                    : null 
+                            props.isLoading ?
+                                <View style = { gridItemStyles.progressCircle }>
+                                    <ProgressCircleComponent
+                                        percent = { props.progress * 100 }
+                                        radius = { 17 }
+                                        borderWidth = { 2 }
+                                        color = "#2794FF"
+                                        shadowColor = "#FFFFFF"
+                                        bgColor = "#A8CEFF" >
+                                        <TouchableOpacity onPress = { props.onCancelPress }>
+                                            <Image 
+                                                source = { require('../images/Icons/CancelDownload.png') } 
+                                                style = { gridItemStyles.cancelDownloadImage } 
+                                                resizeMode = 'contain' /> 
+                                        </TouchableOpacity>
+                                    </ProgressCircleComponent>
+                                </View> 
+                                : null
+                        }  
+                    </View>
+                    <View style = { gridItemStyles.textWrapper }>
+                        {
+                            props.children
+                        }
+                        {
+                            props.isListActionsDisabled || props.isSelectionMode ? 
+                                <View/>
+                                : <TouchableOpacity 
+                                    style = { gridItemStyles.listItemActionsIconContainer } 
+                                    onPress = { props.onDotsPress }>
+                                    <Image style = { gridItemStyles.listItemActionsIcon } source = { require('../images/Icons/listItemActions.png') } />
+                                </TouchableOpacity> 
                         }
                     </View>
-            </TouchableOpacity>
-        );
-    }
+                    {
+                        props.isSelectionMode ? <SelectionCheckboxComponent isSelected = { props.isSelected } /> 
+                                                : null 
+                    }
+                </View>
+        </TouchableOpacity>
+    );
 }
 
 const SelectionCheckboxComponent = (props) => (

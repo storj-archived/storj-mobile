@@ -6,123 +6,106 @@ import {
     ScrollView,
     Image
 } from 'react-native';
-import React, { Component } from 'react';
+import React from 'react';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import OptionsComponent from './OptionsComponent';
 import StorjModule from '../../utils/StorjModule';
 import PropTypes from 'prop-types';
 import { InfoButtonComponent } from '../InfoButtonComponent';
 
-export default class MyAccountMainPageComponent extends Component{
-    constructor(props) {
-        super(props);     
+export default MyAccountMainPageComponent = (props) => {
 
-        this.logOut = this.logOut.bind(this);
-    }
-
-    logOut() {
+    logOut = () => {
         StorjModule.deleteKeys().then(() => {
-            this.props.screenProps.clearAuthReducer();
-            this.props.screenProps.redirectToInitializationScreen();
+            props.screenProps.clearAuthReducer();
+            props.screenProps.redirectToInitializationScreen();
         }, (e) => {
             console.log(e);
         });
     }
-
-    render() {        
-        return(
-            <View style = { styles.mainContainer }>
-                <ScrollView 
-                    showsVerticalScrollIndicator = { false } 
-                    decelerationRate = { 'normal' } 
-                    style = { styles.scrollContainer } >
-                <View style = { styles.contentContainer }>
-                    <View style = { styles.titleContainer }>
-                        <Text style = { styles.titleText }>My account</Text>
-                        <TouchableOpacity 
-                            style = { styles.generateQRButton }
-                            onPress = { this.props.screenProps.showQR } > 
-                            <Text style = { styles.generateQRText } >Generate QR</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style = { styles.topButtonsContainer }>
-                        <InfoButtonComponent 
-                            imagePath = { require('../../images/DashboardScreen/Storage.png') }
-                            title = { 'Storage' }
-                            amount = { this.props.screenProps.storageAmount } />
-                        <InfoButtonComponent 
-                            imagePath = { require('../../images/DashboardScreen/Bandwidth.png') }
-                            title = { 'Bandwidth' }
-                            amount = { this.props.screenProps.bandwidthAmount } />
-                    </View>
-                    <TouchableOpacity onPress = { this.props.screenProps.redirectToBalanceScreen } >
-                        <View style = { styles.balanceButton }>
-                            <View style = { styles.balanceContentContainer }>  
-                                <View style = { styles.balanceContent }>
-                                    <Image 
-                                        style = { styles.buttonImage } 
-                                        source = { require('../../images/MyAccount/Wallet.png') } 
-                                        resizeMode = 'contain' />
-                                    <Text style = { [styles.buttonTextRegular, styles.mainText] }>Balance</Text>
-                                </View>
-                                <View style = { styles.balanceContent }>
-                                    <Text style = { [styles.buttonTextBold, styles.balanceCount] }>
-                                        { this.props.screenProps.getBalance() }
-                                    </Text>
-                                    <Image 
-                                        style = { styles.expandImage } 
-                                        source = { require('../../images/DashboardScreen/Vector.png') } 
-                                        resizeMode = 'contain' />
-                                </View>
+       
+    return(
+        <View style = { styles.mainContainer }>
+            <ScrollView 
+                showsVerticalScrollIndicator = { false } 
+                decelerationRate = { 'normal' } 
+                style = { styles.scrollContainer } >
+            <View style = { styles.contentContainer }>
+                <View style = { styles.titleContainer }>
+                    <Text style = { styles.titleText }>My account</Text>
+                    <TouchableOpacity 
+                        style = { styles.generateQRButton }
+                        onPress = { props.screenProps.showQR } > 
+                        <Text style = { styles.generateQRText } >Generate QR</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style = { styles.topButtonsContainer }>
+                    <InfoButtonComponent 
+                        imagePath = { require('../../images/DashboardScreen/Storage.png') }
+                        title = { 'Storage' }
+                        amount = { props.screenProps.storageAmount } />
+                    <InfoButtonComponent 
+                        imagePath = { require('../../images/DashboardScreen/Bandwidth.png') }
+                        title = { 'Bandwidth' }
+                        amount = { props.screenProps.bandwidthAmount } />
+                </View>
+                <TouchableOpacity onPress = { props.screenProps.redirectToBalanceScreen } >
+                    <View style = { styles.balanceButton }>
+                        <View style = { styles.balanceContentContainer }>  
+                            <View style = { styles.balanceContent }>
+                                <Image 
+                                    style = { styles.buttonImage } 
+                                    source = { require('../../images/MyAccount/Wallet.png') } 
+                                    resizeMode = 'contain' />
+                                <Text style = { [styles.buttonTextRegular, styles.mainText] }>Balance</Text>
                             </View>
+                            <View style = { styles.balanceContent }>
+                                <Text style = { [styles.buttonTextBold, styles.balanceCount] }>
+                                    { props.screenProps.getBalance() }
+                                </Text>
+                                <Image 
+                                    style = { styles.expandImage } 
+                                    source = { require('../../images/DashboardScreen/Vector.png') } 
+                                    resizeMode = 'contain' />
+                            </View>
+                        </View>
+                    </View>
+                </TouchableOpacity>
+                    <View style = { styles.optionsMargin } >
+                        <OptionsComponent 
+                            title = { 'Secret phrase' }
+                            imageSource = { require('../../images/MyAccount/SecretPhrase.png') }
+                            onPress = { props.screenProps.redirectToMyAccountMnemonicScreen } />
+                        <View style = { styles.underline } />
+                        <OptionsComponent 
+                            title = { 'Settings' }
+                            imageSource = { require('../../images/MyAccount/Settings.png') }
+                            onPress = { props.screenProps.redirectToSettingsScreen } />
+                        <View style = { styles.underline } />
+                        <OptionsComponent 
+                            title = { 'Help' }
+                            imageSource = { require('../../images/MyAccount/Help.png') }
+                            onPress = { props.screenProps.redirectToHelpPage } />
+                        <View style = { styles.underline } />
+                        <OptionsComponent 
+                            title = { 'About' }
+                            imageSource = { require('../../images/MyAccount/Info.png') }
+                            onPress = { props.screenProps.redirectToAboutPage } />
+                        <View style = { styles.underline } />
+                        <OptionsComponent 
+                            title = { 'Show synchronization queue' }
+                            imageSource = { require('../../images/MyAccount/Info.png') }
+                            onPress = { props.screenProps.showSyncWindow } />
+                    </View>
+                    <TouchableOpacity onPress = { logOut }>
+                        <View style = { styles.logOutButton }>
+                            <Text style = { styles.logOutText }>Log out</Text>
                         </View>
                     </TouchableOpacity>
-                        <View style = { styles.optionsMargin } >
-                            {
-                                <OptionsComponent 
-                                    title = { 'Secret phrase' }
-                                    imageSource = { require('../../images/MyAccount/SecretPhrase.png') }
-                                    onPress = { this.props.screenProps.redirectToMyAccountMnemonicScreen } />
-                            }
-                            <View style = { styles.underline } />
-                            {
-                                <OptionsComponent 
-                                    title = { 'Settings' }
-                                    imageSource = { require('../../images/MyAccount/Settings.png') }
-                                    onPress = { this.props.screenProps.redirectToSettingsScreen } />
-                            }
-                            <View style = { styles.underline } />
-                            {
-                                <OptionsComponent 
-                                    title = { 'Help' }
-                                    imageSource = { require('../../images/MyAccount/Help.png') }
-                                    onPress = { this.props.screenProps.redirectToHelpPage } />
-                            }
-                            <View style = { styles.underline } />
-                            {
-                                <OptionsComponent 
-                                    title = { 'About' }
-                                    imageSource = { require('../../images/MyAccount/Info.png') }
-                                    onPress = { this.props.screenProps.redirectToAboutPage } />
-                            }
-                            <View style = { styles.underline } />
-                            {
-                                <OptionsComponent 
-                                    title = { 'Show synchronization queue' }
-                                    imageSource = { require('../../images/MyAccount/Info.png') }
-                                    onPress = { this.props.screenProps.showSyncWindow } />
-                            }
-                        </View>
-                        <TouchableOpacity onPress = { this.logOut }>
-                            <View style = { styles.logOutButton }>
-                                <Text style = { styles.logOutText }>Log out</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                </ScrollView>
-            </View>
-        );
-    }
+                </View>
+            </ScrollView>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({

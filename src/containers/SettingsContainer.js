@@ -48,27 +48,27 @@ class SettingsContainer extends Component {
         };
     }
 
-    changeSyncStatus(value) {
-        value ? this.checkSyncBucketsExistance() : null;
-        this.props.changeSyncStatus(this.email, value);
+    changeSyncStatus() {
+        !this.props.syncStatus ? this.checkSyncBucketsExistance() : null;
+        this.props.changeSyncStatus(this.email, !this.props.syncStatus);
     }
-    setWifiConstraint(value, prevSettingsState) {
-        this.props.setWifiConstraint(this.email, value, prevSettingsState);
+    setWifiConstraint() {
+        this.props.setWifiConstraint(this.email, !this.props.onWifi, this.getStateObject());
     }
-    setChargingConstraint(value, prevSettingsState) {
-        this.props.setChargingConstraint(this.email, value, prevSettingsState);
+    setChargingConstraint() {
+        this.props.setChargingConstraint(this.email, !this.props.onCharging, this.getStateObject());
     }
-    syncPhotosAction(value, prevSettingsState) {
-        this.props.syncPhotosAction(this.email, value, prevSettingsState);
+    syncPhotosAction() {
+        this.props.syncPhotosAction(this.email, !this.props.syncPhotos, this.getStateObject());
     }
-    syncMoviesAction(value, prevSettingsState) {
-        this.props.syncMoviesAction(this.email, value, prevSettingsState);
+    syncMoviesAction() {
+        this.props.syncMoviesAction(this.email, !this.props.syncMovies, this.getStateObject());
     }
-    syncDocumentsAction(value, prevSettingsState) {
-        this.props.syncDocumentsAction(this.email, value, prevSettingsState);
+    syncDocumentsAction() {
+        this.props.syncDocumentsAction(this.email, !this.props.syncDocuments, this.getStateObject());
     }
-    syncMusicAction(value, prevSettingsState) {
-        this.props.syncMusicAction(this.email, value, prevSettingsState);
+    syncMusicAction() {
+        this.props.syncMusicAction(this.email, !this.props.syncMusic, this.getStateObject());
     }
 
     checkSyncBucketsExistance() {
@@ -104,10 +104,6 @@ class SettingsContainer extends Component {
                 syncStatus = { this.props.syncStatus }
                 onWifi = { this.props.onWifi } 
                 onCharging = { this.props.onCharging }
-                syncPhotos = { this.props.syncPhotos }
-                syncMovies = { this.props.syncMovies }
-                syncDocuments = { this.props.syncDocuments } 
-                syncMusic = { this.props.syncMusic }
                 changePINOptionStatus = { this.props.changePINOptionStatus } />
         );
     }

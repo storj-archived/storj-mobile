@@ -22,6 +22,7 @@ export default class InitializeComponent extends Component {
         }
 
         this._onRef = this._onRef.bind(this);
+        this.onPress = this.onPress.bind(this);
     };
 
     _onRef(ref) {
@@ -47,6 +48,81 @@ export default class InitializeComponent extends Component {
         Keyboard.dismiss();
     }
 
+    onPress() {
+        if(!this.state.isKeyboardShown) {
+            this._inputComponent._textInput.blur();
+            this._inputComponent._textInput.focus();
+        }
+    }
+
+    renderPIN() {
+        return new Array(4).fill(' ').map((element, index) => {
+            return(
+                this.props.filledPins[index] ?
+                    <View 
+                        key = { index } 
+                        style = { styles.pin }>
+                        <View style = { styles.inputFilled } />
+                    </View> :
+                    <View 
+                        key = { index } 
+                        style = { styles.pin } /> 
+                    
+            )
+        });
+    }
+
+    renderWithPIN() {
+        if(this.props.enterPassCode){
+            return(
+                <View style = { styles.contentWrapper }>
+                    <View style = { styles.titleContainer }> 
+                        <Text style = { styles.titleText }>Sign in</Text>
+                    </View>
+                    <View style = { styles.contentContainer } >
+                        <Text style = { !this.props.isError ? styles.infoText : [ styles.infoText, { color: '#EB5757' } ] }>{ this.props.infoText }</Text>
+                        <TouchableOpacity 
+                            onPress = { this.onPress } 
+                            style = { { backgroundColor: '#FFFFFF' } } >
+
+                            <View style = { styles.containerPin }>
+                                {
+                                    this.renderPIN()
+                                }
+                            </View>
+                        </TouchableOpacity>
+                        <InputComponent 
+                            ref = { this._onRef }
+                            inputStyle = { styles.pincodeInputStyle }
+                            onChangeText = { this.props.onChangePasscode }
+                            autoFocus = { true }
+                            keyboardType = { 'numeric' }
+                            placeholder = {'Passcode'} 
+                            value = { this.props.filledPins }
+                            isError = { this.props.isPasscodeWrong }
+                            errorMessage = {'Invalid filledPins'} />
+                    </View>
+                    {
+                        this.state.isKeyboardShown ? null :
+                            <View style = { styles.buttonBlock } >
+                                <TouchableOpacity 
+                                    style = { styles.buttonContainer } 
+                                    onPressOut = { this.props.redirectToLoginScreen }>
+                                        <Text style = { styles.buttonText }>Log in via password</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity 
+                                    style = { [styles.buttonContainer, { marginTop: getHeight(10) } ] } 
+                                    onPressOut = { this.props.redirectToQRScannerScreen }>
+                                        <Text style = { styles.buttonText }>Log in via QR code</Text>
+                                </TouchableOpacity>
+                                <Text style = { styles.footerText }>Don't have an account? <Text onPress = { this.props.redirectToRegisterScreen } style = { styles.footerLink }>Sign Up</Text></Text>
+                            </View>
+                    }
+                </View>
+            );
+        }
+    }
+
     render() {
         return(
             <ScrollView contentContainerStyle={ styles.mainContainer } keyboardDismissMode = { "interactive" }>
@@ -57,75 +133,7 @@ export default class InitializeComponent extends Component {
                             resizeMode = 'contain' />
                     </View>
                     {
-                        (()=>{
-                            if(this.props.enterPassCode){
-                                return(
-                                    <View style = { styles.contentWrapper }>
-                                        <View style = { styles.titleContainer }> 
-                                            <Text style = { styles.titleText }>Sign in</Text>
-                                        </View>
-                                        <View style = { styles.contentContainer } >
-                                            <Text style = { !this.props.isError ? styles.infoText : [ styles.infoText, { color: '#EB5757' } ] }>{ this.props.infoText }</Text>
-                                            <TouchableOpacity onPress = { () => {
-                                                if(!this.state.isKeyboardShown) {
-                                                    this._inputComponent._textInput.blur();
-                                                    this._inputComponent._textInput.focus();
-                                                }
-                                            } } style = { { backgroundColor: '#FFFFFF' } } >
-                                                <View style = { styles.containerPin }>
-                                                    {
-                                                        (
-                                                            () => {
-                                                                return new Array(4).fill(' ').map((element, index) => {
-                                                                    return(
-                                                                        this.props.filledPins[index] ?
-                                                                            <View 
-                                                                                key = { index } 
-                                                                                style = { styles.pin }>
-                                                                                <View style = { styles.inputFilled } />
-                                                                            </View> :
-                                                                            <View 
-                                                                                key = { index } 
-                                                                                style = { styles.pin } /> 
-                                                                            
-                                                                    )
-                                                                })
-                                                            }
-                                                        )()
-                                                    }
-                                                </View>
-                                            </TouchableOpacity>
-                                            <InputComponent 
-                                                ref = { this._onRef }
-                                                inputStyle = { styles.pincodeInputStyle }
-                                                onChangeText = { this.props.onChangePasscode }
-                                                autoFocus = { true }
-                                                keyboardType = { 'numeric' }
-                                                placeholder = {'Passcode'} 
-                                                value = { this.props.filledPins }
-                                                isError = { this.props.isPasscodeWrong }
-                                                errorMessage = {'Invalid filledPins'} />
-                                        </View>
-                                        {
-                                            this.state.isKeyboardShown ? null :
-                                                <View style = { styles.buttonBlock } >
-                                                    <TouchableOpacity 
-                                                        style = { styles.buttonContainer } 
-                                                        onPressOut = { this.props.redirectToLoginScreen }>
-                                                            <Text style = { styles.buttonText }>Log in via password</Text>
-                                                    </TouchableOpacity>
-                                                    <TouchableOpacity 
-                                                        style = { [styles.buttonContainer, { marginTop: getHeight(10) } ] } 
-                                                        onPressOut = { this.props.redirectToQRScannerScreen }>
-                                                            <Text style = { styles.buttonText }>Log in via QR code</Text>
-                                                    </TouchableOpacity>
-                                                    <Text style = { styles.footerText }>Don't have an account? <Text onPress = { this.props.redirectToRegisterScreen } style = { styles.footerLink }>Sign Up</Text></Text>
-                                                </View>
-                                        }
-                                    </View>
-                                );
-                            }
-                        })()
+                        this.renderWithPIN()
                     }  
                     {
                         this.props.isLoading ?

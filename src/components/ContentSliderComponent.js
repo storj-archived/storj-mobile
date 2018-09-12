@@ -29,6 +29,7 @@ export default class ContentSlider extends Component {
         this.ref = null;
         this.onSwipe = this.onSwipe.bind(this);
         this._onRef = this._onRef.bind(this);
+        this.onButtonClick = this.onButtonClick.bind(this);
     }
 
     _onRef(ref) {
@@ -59,11 +60,11 @@ export default class ContentSlider extends Component {
     * Occurs on button click
     * @param {number} index next position of content
     */
-    onButtonClick(index) {
-        if(this.state.position === index) return;
+    onButtonClick(item) {
+        if(this.state.position === item.index) return;
         
-        let mult = this.state.position - index > 0 ? -1 : 1;
-        let nextPosition = Math.abs(this.state.position - index);
+        let mult = this.state.position - item.index > 0 ? -1 : 1;
+        let nextPosition = Math.abs(this.state.position - item.index);
         
         this.move(mult * nextPosition);
     }
@@ -78,9 +79,36 @@ export default class ContentSlider extends Component {
         this.move(nextPosition);
     }
 
-    render() {
+    renderContent() {
         const width = this.state.width;
         const height = this.state.height;
+
+        return this.state.content.map((item) => {                    
+            return(
+                <View
+                    key = { item.index }
+                    style = { { height, width } } >
+                    { this.props.content[item.index] }
+                </View>
+            );
+        })
+    }
+
+    renderPaginationItems() {
+        return this.state.content.map((item) => {
+            return (
+                <TouchableHighlight
+                    key = { item.index }
+                    underlayColor = "#ccc"
+                    onPressOut = { this.onButtonClick }
+                    style = { [ styles.button, item.isSelected ? styles.buttonSelected : null ] }>
+                    <View/>
+                </TouchableHighlight>
+            );
+        });
+    }
+
+    render() {
         
         return (
             <View style={ [styles.mainContainer, this.props.style ]}>
@@ -92,28 +120,14 @@ export default class ContentSlider extends Component {
                     onMomentumScrollEnd = { this.onSwipe }
                     showsHorizontalScrollIndicator = { false }
                     style={ styles.container }>
-                    { this.state.content.map((item) => {                    
-                            return(
-                                <View
-                                    key = { item.index }
-                                    style = { { height, width } } >
-                                    { this.props.content[item.index] }
-                                </View>
-                            );
-                    })}
+                    { 
+                        this.renderContent()
+                    }
                 </ScrollView>
                 <View style={styles.buttons}>
-                    { this.state.content.map((item) => {
-                        return (
-                            <TouchableHighlight
-                                key = { item.index }
-                                underlayColor = "#ccc"
-                                onPressOut = { () => { this.onButtonClick(item.index); } }
-                                style = { [ styles.button, item.isSelected ? styles.buttonSelected : null ] }>
-                                <View/>
-                            </TouchableHighlight>
-                        );
-                    })}
+                    {
+                        this.renderPaginationItems()
+                    }
                 </View>
         </View>);
     }

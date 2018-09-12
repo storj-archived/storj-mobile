@@ -17,6 +17,7 @@ import { InfoButtonComponent } from '../InfoButtonComponent';
 export default class DashboardListComponent extends Component{
     constructor(props) {
         super(props);
+        
         this.props.listSyncQueueEntriesAsync();
     }
 
