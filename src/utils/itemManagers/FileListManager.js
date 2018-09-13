@@ -1,5 +1,6 @@
 import ListItemModel from '../../models/ListItemModel';
 import FileListModel from '../../models/FileListModel';
+import { includes } from "../utils"
 
 /**
  * Exposes methods to manage Files in reducer.
@@ -61,17 +62,27 @@ export default class FileListManager {
      * @returns updated status
      */
     updateFileStarred(files, starredStatus) {        
-        let fileIds = files.map(file => file.getId());
-        
-        this.newFilesList = this.newFilesList.map(file => {
-            if(fileIds.includes(file.getId())) { 
-                file.entity.isStarred = starredStatus;
-            }   
+        let fileIds = [];
+        let filesLength = files.length;
 
-            return file;
-        });
+        for(let i = 0; i < filesLength; i++) {
+            fileIds.push(files[i].getId());
+        };
 
-        return this.newFilesList;
+        let resultArray = [];
+        let newFilesListLength = this.newFilesList.length;
+
+        for(let i = 0; i < newFilesListLength; i++) {
+            var temp = this.newFilesList[i];
+
+            if(includes(fileIds, temp.getId())) { 
+                temp.entity.isStarred = starredStatus;
+            }
+
+            resultArray.push(temp);
+        }
+
+        return resultArray;
     }
 
     //------------------------------------------------------------------------
@@ -98,9 +109,18 @@ export default class FileListManager {
      * @param {string} id 
      */
     delete(id) {
-        this.newFileUploadingList = this.newFileUploadingList.filter(file => file.getId() !== id);
-        
-        return this.newFileUploadingList;
+        let resultArray = [];
+        let newFileUploadingListLength = this.newFileUploadingList.length;
+
+        for(let i = 0; i < newFileUploadingListLength; i++) {
+            var temp = this.newFileUploadingList[i];
+
+            if(temp.getId() !== id) {
+                resultArray.push(temp);
+            }
+        }
+
+        return resultArray;
     }
 
     /**
@@ -109,17 +129,19 @@ export default class FileListManager {
      * @param {ListItemModel} file 
      */
     _addFileEntry(array, bucketId, file) {
+        let arrayLength = array.length;
         let doesContain = false;
-
-        array.forEach((item) => {
-             if(item.getId() === file.getId()) doesContain = true;
-        });
+        
+        for(let i = 0; i < arrayLength; i++) {
+            if (array[i].getId() === file.getId()) {
+                doesContain = true;
+                break;
+            }
+        }
 
         if(!doesContain) {
             array.push(file);
         }
-
-        array = array.map(file => file);
         return array;
     }
 
@@ -130,16 +152,21 @@ export default class FileListManager {
      * @param {string} id 
      */
     _updateFileEntry(array, bucketId, file, id) {
-        array = array.map((fileEntry) => {            
-            if(fileEntry.getId() === id) {
-                fileEntry.entity = file.entity;
-                fileEntry.isLoading = false;    
+        let resultArray = [];
+        let arrayLength = array.length;
+
+        for(let i = 0; i < arrayLength; i++) {
+            let temp = array[i];
+
+            if(temp.getId() === id) {
+                temp.entity = file.entity;
+                temp.isLoading = false;    
             }
 
-            return fileEntry;
-        });
+            resultArray.push(temp);
+        }
 
-        return array;
+        return resultArray;
     }
 
     /**
@@ -148,9 +175,17 @@ export default class FileListManager {
      * @param {string} fileId 
      */
     _deleteFileEntry(array, bucketId, fileId) {
-        array = array.filter(fileEntry => fileEntry.getId() !== fileId);
-        
-        return array;
+        let resultArray = [];
+        let length = array.length;
+
+        for(let i = 0; i < length; i++) {
+            let temp = array[i];
+            if(temp.getId() !== fileId && temp.entity.bucketId === bucketId) {
+                resultArray.push(temp);
+            } 
+        }
+
+        return resultArray;
     }
 
     /**
@@ -159,66 +194,43 @@ export default class FileListManager {
      * @param {ListItemModel[]} files 
      */
     listFiles(bucketId, files) {
-        let tempFilesArray = this.newFilesList.filter(file => file.entity.bucketId !== bucketId);
-        
-        this.newFilesList = tempFilesArray.concat(files);
+        let tempFilesArray = [];
+        newFilesListLength = this.newFilesList.length;
 
-        return this.newFilesList;
+        for(let i = 0; i < newFilesListLength; i++) {
+            let temp = this.newFilesList[i];
+            if(temp.entity.bucketId !== bucketId) tempFilesArray.push(temp);
+        }
+        
+        Array.prototype.push.apply(tempFilesArray, files);
+
+        return tempFilesArray;
     }
 
     /**
      * Retrieve list of uploading files from selected bucket
-     * @param {string} bucketId 
-     * @param {object[]} files 
      */
-    listUploadingFiles(bucketId, files) {
-        let names = files.map(file => file.getName());
-        let tempFilesArray = this.newFileUploadingList.filter(file => file.entity.bucketId === bucketId);        
-
-        let newArray = tempFilesArray.filter(file => !names.includes(file.getName)).concat(this.newFileUploadingList.filter(file => file.entity.bucketId !== bucketId));
-
-        return this.newFileUploadingList;
-    }
-    
-    /**
-     * Initializes uploading files
-     * @param {object[]} files 
-     */
-    getUploadingFiles(files) {
-        this.newFileUploadingList = files.slice();
-
+    listUploadingFiles() {
         return this.newFileUploadingList;
     }
 
-    /**
-     * Updating propgress for uploading file
-     * @param {string} bucketId 
-     * @param {string} fileId 
-     * @param {double} progress 
-     * @param {double} fileRef reference of file, used to cancel upload
-     */
-    updateFileUploadingProgress(bucketId, fileId, progress, fileRef) {
-        this.newFileUploadingList.forEach(fileEntry => {
-            if(fileEntry.getId() === fileId){
-                fileEntry.progress = progress;
-                fileEntry.fileRef = fileRef;
-            }                
-        });
-
-        return this.newFileUploadingList;
-    }
 
     update(id, progress, uploaded) {
-        this.newFileUploadingList = this.newFileUploadingList.map(file => {
-                if(file.getId() === id) {
-                    file.progress = progress;
-                    file.fileRef = id;
-                }            
+        let resultArray = [];
+        let length = this.newFileUploadingList.length;
 
-            return file;
-        });
+        for(let i = 0; i < length; i++) {
+            var temp = this.newFileUploadingList[i];
 
-        return this.newFileUploadingList;
+            if (temp.getId() === id) {
+                temp.progress = progress;
+                temp.fileRef = id;
+            }  
+
+            resultArray.push(temp);
+        }
+
+        return resultArray;
     }
 
     /**
@@ -228,20 +240,23 @@ export default class FileListManager {
      * @param {string} localPath 
      * @param {string} thumbnail 
      */
-    fileDownloaded(bucketId, fileId, localPath, thumbnail) {
-        this.newFilesList = this.newFilesList.map(fileEntry => {
-            if(fileEntry.getId() === fileId) {
-                fileEntry.isLoading = false;
-                fileEntry.progress = 0;
-                fileEntry.entity.localPath = localPath;
-                fileEntry.entity.isDownloaded = localPath ? true : false;
-                fileEntry.entity.thumbnail = thumbnail;
-            }
-            
-            return fileEntry;
-        });
-    
-        return this.newFilesList;
+    fileDownloaded(fileId, localPath, thumbnail) {
+        let resultArray = [];
+        let length = this.newFilesList.length;
+
+        for(let i = 0; i < length; i++) {
+            if(this.newFilesList[i].getId() === fileId){
+                this.newFilesList[i].isLoading = false;
+                this.newFilesList[i].progress = 0;
+                this.newFilesList[i].entity.localPath = localPath;
+                this.newFilesList[i].entity.isDownloaded = localPath ? true : false;
+                this.newFilesList[i].entity.thumbnail = thumbnail;
+            }  
+
+            resultArray.push(this.newFilesList[i]);
+        }
+
+        return resultArray;
     }
 
     /**
@@ -251,18 +266,23 @@ export default class FileListManager {
      * @param {double} progress 
      * @param {double} fileRef 
      */
-    updateFileDownloadingProgress(bucketId, fileId, progress, fileRef) {
-        this.newFilesList = this.newFilesList.map(fileEntry => {
-            if(fileEntry.getId() === fileId) {
-                fileEntry.isLoading = true;
-                fileEntry.progress = progress;
-                fileEntry.fileRef = fileRef;
-            }
-            
-            return fileEntry;
-        });
+    updateFileDownloadingProgress(fileId, progress, fileRef) {
+        let resultArray = [];
+        let length = this.newFilesList.length;
 
-        return this.newFilesList;
+        for(let i = 0; i < length; i++) {
+            var temp = this.newFilesList[i];
+
+            if (temp.getId() === fileId) {
+                temp.isLoading = true;
+                temp.progress = progress;
+                temp.fileRef = fileRef;
+            }  
+
+            resultArray.push(temp);
+        }
+
+        return resultArray;
     }
 
     /**
@@ -270,31 +290,24 @@ export default class FileListManager {
      * @param {string} bucketId 
      * @param {string} fileId 
      */
-    cancelDownload(bucketId, fileId) {
-        this.newFilesList = this.newFilesList.map(fileEntry => {
-            if(fileEntry.getId() !== fileId) {
+    cancelDownload(fileId) {
+        let resultArray = [];
+        let length = this.newFilesList.length;
+
+        for(let i = 0; i < length; i++) {
+            var temp = this.newFilesList[i];
+
+            if(temp.getId() === fileId){
                 fileEntry.isLoading = false;
                 fileEntry.progress = 0;
-            }          
+            }  
 
-            return fileEntry;
-        });        
-       
-        return this.newFilesList;
+            resultArray.push(temps);
+        }
+
+        return resultArray;
     }
 
-    /**
-     * Updating file after cancelling upload
-     * @param {string} bucketId 
-     * @param {string} fileId 
-     */
-    cancelUpload(bucketId, fileId) {
-        this.newFileUploadingList = this.newFileUploadingList.filter(fileEntry => {
-            return fileEntry.getId() !== fileId                      
-        });
-       
-        return this.newFilesList;
-    }
 
     /**
      * Selecting file
@@ -324,11 +337,16 @@ export default class FileListManager {
      * Deselecting all files
      */
     clearSelection() {
-        this.newFilesList.forEach((file) => {
-            file.isSelected = false;
-        });
+        let resultArray = [];
+        let length = this.newFilesList.length;
 
-        return this.newFilesList;
+        for (let i = 0; i < length; i++) {
+            var temp = this.newFilesList[i];
+            temp.isSelected = false;
+            resultArray.push(temp);
+        }
+
+        return resultArray;
     }
 
     /**
@@ -337,14 +355,20 @@ export default class FileListManager {
      * @param {bool} value 
      */
     _changeFileSelection(fileId, value) {
-        this.newFilesList = this.newFilesList.map(file => {                
-            if(file.getId() === fileId)
-                file.isSelected = value;         
-                
-            return file;
-        });
+        let resultArray = [];
+        let length = this.newFilesList.length;
 
-        return this.newFilesList;
+        for (let i = 0; i < length; i++) {
+            var temp = this.newFilesList[i];
+
+            if (temp.getId() === fileId) {
+                temp.isSelected = value; 
+            }  
+
+            resultArray.push(this.newFilesList[i]);
+        }
+
+        return resultArray;
     }    
 
     /**
@@ -353,16 +377,20 @@ export default class FileListManager {
      * @returns updated list of files
      */
     _changeFilesSelection(filteredFiles) {
+        let resultArray = [];
+        let length = this.newFilesList.length;
 
-        this.newFilesList = this.newFilesList.map(file => {
-            for(let i = 0; i < filteredFiles.length; i++) {
+        for(let i = 0; i < length; i++) {
+            var temp = this.newFilesList[i];
 
-                if(file.entity.id === filteredFiles[i].entity.id)
-                    file.isSelected = true;
-            }
-            return file;
-        });
+            for(let j = 0; j < filteredFiles.length; j++) {
+                if (temp.entity.id === filteredFiles[j].entity.id)
+                    temp.isSelected = true;
+            } 
 
-        return this.newFilesList;
+            resultArray.push(temp);
+        }
+
+        return resultArray;
     }    
 }

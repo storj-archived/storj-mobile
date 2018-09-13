@@ -118,3 +118,16 @@ export const formatAmount = function (amount) {
 export function formatInput(string) {
     return string.trim().toLowerCase();
 }
+
+/**
+ * [].includes() analog
+ */
+export function includes(array, item) {
+    let arrayLength = array.length;
+
+    for(let i = 0; i < arrayLength; i++) {
+        if(array[i] === item) return true;
+    }
+
+    return false;
+}
