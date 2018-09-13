@@ -1,18 +1,22 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {
     View,
     StyleSheet,
     Text,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    FlatList,
+    Animated
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { getWidth, getHeight } from '../utils/adaptive';
 
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
+
 /**
  * Custom Expander component, used in main page
  */
-export default class ExpanderComponent extends Component {
+export default class ExpanderComponent extends PureComponent {
     constructor(props) {
         super(props); 
 
@@ -25,12 +29,6 @@ export default class ExpanderComponent extends Component {
 
     onPress() {
         this.setState({ isExpanded: !this.state.isExpanded });
-    }
-
-    listItems() {
-        if(this.state.isExpanded) {
-            return this.props.listItems;
-        }
     }
 
     render() {        
@@ -51,8 +49,18 @@ export default class ExpanderComponent extends Component {
                 </View>
                 <View>
                 { 
-                    this.listItems()
-                }
+                     this.state.isExpanded ?
+                        <AnimatedFlatList
+                            scrollEventThrottle = { 16 }
+                            onScroll = { 
+                                Animated.event(
+                                    [{ nativeEvent: { contentOffset: {y:  new Animated.Value(0) }}}],
+                                    { useNativeDriver: true }
+                                )}
+                            data = { this.props.listItems }
+                            renderItem = { this.props.getItem }
+                            keyExtractor = { (item, i) => `${i}` } /> : null                          
+                }   	
                 </View>
             </TouchableOpacity>)
     };

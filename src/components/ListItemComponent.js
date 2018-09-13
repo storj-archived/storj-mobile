@@ -8,63 +8,68 @@ import {
     ProgressViewIOS,
     ProgressBarAndroid
 } from 'react-native';
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { getWidth, getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 
-export default ListItemComponent  = (props) => {
+export default class ListItemComponent extends PureComponent {
+    constructor(props) {
+        super(props)
+    }
 
-    return(
+    render() {
+        var props = this.props;
+        return ( 
         <TouchableOpacity 
             style = { props.isSingleItemSelected ? [listItemStyles.listItemContainer, listItemStyles.itemSelected] : listItemStyles.listItemContainer }
             onPress = { props.onPress }
             onLongPress = { props.onLongPress }>
-                <View style = { props.isExpanderDisabled ? [listItemStyles.listItemContent, listItemStyles.justifyStart] : listItemStyles.listItemContent }>
-                    {
-                        props.isSelectionMode ? <SelectionCheckboxComponent isSelected = { props.isSelected } /> 
-                                                : null   
+            <View style = { props.isExpanderDisabled ? [listItemStyles.listItemContent, listItemStyles.justifyStart] : listItemStyles.listItemContent }>
+                {
+                    props.isSelectionMode ? <SelectionCheckboxComponent isSelected = { props.isSelected } /> 
+                                            : null   
+                }
+                <View>
+                    <Image 
+                        style = { listItemStyles.itemTypeIcon } 
+                        source = { props.listItemIconSource }
+                        resizeMode = 'contain' />
+                </View>
+                <View style = { listItemStyles.textWrapper }>
+                    { 
+                        props.children
                     }
-                    <View>
-                        <Image 
-                            style = { listItemStyles.itemTypeIcon } 
-                            source = { props.listItemIconSource }
-                            resizeMode = 'contain' />
-                    </View>
-                    <View style = { listItemStyles.textWrapper }>
-                        { 
-                            props.children
-                        }
-                        {
-                            props.isLoading ? 
-                                Platform.select({
-                                    ios: 
-                                        <ProgressViewIOS 
-                                            progress = { props.progress }
-                                            trackTintColor = { '#f2f2f2' }
-                                            progressTintColor = { '#2794ff' } />,
-                                    android:
-                                        <ProgressBarAndroid    
-                                            progress = { props.progress } 
-                                            styleAttr = { 'Horizontal' } 
-                                            color = { '#2794FF' } 
-                                            animating = {true} 
-                                            indeterminate = { false } />
-                                })
-                                : props.size ? <Text style = { listItemStyles.fileSizeText }>{ props.size }</Text> 
-                                                : null
-                        }
-                    </View>
                     {
-                        props.isListActionsDisabled || (props.isSelectionMode && props.isExpanderDisabled) ? 
-                            <View/>
-                            : <RightIconComponent 
-                                onPress = { props.isLoading ? props.onCancelPress : props.onDotsPress } 
-                                iconSource = { props.isLoading ? require('../images/Icons/CancelDownload.png') : require('../images/Icons/listItemActions.png') } /> 
-                            
+                        props.isLoading ? 
+                            Platform.select({
+                                ios: 
+                                    <ProgressViewIOS 
+                                        progress = { props.progress }
+                                        trackTintColor = { '#f2f2f2' }
+                                        progressTintColor = { '#2794ff' } />,
+                                android:
+                                    <ProgressBarAndroid    
+                                        progress = { props.progress } 
+                                        styleAttr = { 'Horizontal' } 
+                                        color = { '#2794FF' } 
+                                        animating = {true} 
+                                        indeterminate = { false } />
+                            })
+                            : props.size ? <Text style = { listItemStyles.fileSizeText }>{ props.size }</Text> 
+                                            : null
                     }
                 </View>
-        </TouchableOpacity>
-    );
+                {
+                    props.isListActionsDisabled || (props.isSelectionMode && props.isExpanderDisabled) ? 
+                        <View/>
+                        : <RightIconComponent 
+                            onPress = { props.isLoading ? props.onCancelPress : props.onDotsPress } 
+                            iconSource = { props.isLoading ? require('../images/Icons/CancelDownload.png') : require('../images/Icons/listItemActions.png') } /> 
+                        
+                }
+            </View>
+    </TouchableOpacity>);
+    }
 }
 
 ListItemComponent.propTypes = {

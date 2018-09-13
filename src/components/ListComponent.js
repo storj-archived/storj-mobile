@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import {
     View,
     StyleSheet,
     RefreshControl,
     Text,
-    Animated
+    Animated,
+    FlatList
 } from 'react-native';
 import ListItemComponent from "../components/ListItemComponent";
 import GridItemComponent from '../components/GridItemComponent';
@@ -14,12 +15,27 @@ import { getWidth, getHeight, getDeviceWidth } from '../utils/adaptive';
 import SORTING from '../utils/constants/sortingConstants';
 import { getFileNameWithFixedSize } from "../utils/fileUtils";
 
-/**
-* Custom List component
-*/
-export default ListComponent = (props) => {
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
-    sortByDate = (items, sortingObject) => {
+export default class ListComponent extends PureComponent {
+    constructor(props) {
+        super(props)
+
+        this.sortByDate = this.sortByDate.bind(this);
+        this.sortByName = this.sortByName.bind(this);
+        this.searchFilter = this.searchFilter.bind(this);
+        this.sort = this.sort.bind(this);
+        this.isItemActionsSelected = this.isItemActionsSelected.bind(this);
+        this.getListExpanders = this.getListExpanders.bind(this);
+        this.getGridExpander = this.getGridExpander.bind(this);
+        this.getListExpander = this.getListExpander.bind(this);
+        this.getGridItem = this.getGridItem.bind(this);
+        this.getItem = this.getItem.bind(this);
+        this.getItemsList = this.getItemsList.bind(this);
+        this.getRenderCallback = this.getRenderCallback.bind(this);
+    }
+
+    sortByDate(items, sortingObject) {
         let monthNames = [
             "January", "February", "March",
             "April", "May", "June", "July",
@@ -44,7 +60,7 @@ export default ListComponent = (props) => {
         });
     }
 
-    sortByName = (items, sortingObject) => {         
+    sortByName(items, sortingObject) {         
         items.forEach((item) => {
             var prop = item.getName().charAt(0).toUpperCase();            
             
@@ -56,28 +72,28 @@ export default ListComponent = (props) => {
         });
     }
    
-    searchFilter = (data) => {
-        if(!props.searchSubSequence) return data;
+    searchFilter(data) {
+        if(!this.props.searchSubSequence) return data;
 
         return data.filter(item => 
             item.getName()
                 .toLowerCase()
-                .includes(props.searchSubSequence.toLowerCase()));
+                .includes(this.props.searchSubSequence.toLowerCase()));
 
     }
 
-    sort = (items) => {
-        let data = searchFilter(items);
+    sort(items) {
+        let data = this.searchFilter(items);
         
         let sortingObject = {};
         let sortingCallback;
 
-        switch(props.sortingMode) {
-            case SORTING.BY_DATE: sortingCallback = sortByDate;
+        switch(this.props.sortingMode) {
+            case SORTING.BY_DATE: sortingCallback = this.sortByDate;
                 break;
-            case SORTING.BY_NAME: sortingCallback = sortByName;
+            case SORTING.BY_NAME: sortingCallback = this.sortByName;
                 break;
-            default: sortingCallback = sortByDate;
+            default: sortingCallback = this.sortByDate;
         }
         
         sortingCallback(data, sortingObject);
@@ -85,174 +101,164 @@ export default ListComponent = (props) => {
         return sortingObject;
     }
 
-    isItemActionsSelected = (item) => item.getId() === props.selectedItemId;
+    isItemActionsSelected(item) { return item.getId() === this.props.selectedItemId; } 
 
-    getGridItemsList = () => {
-        let sorting = sort(props.data);
+    getListExpanders() {
+        var sorting = this.sort(this.props.data);
 
-        return Object.getOwnPropertyNames(sorting).reverse().map((propName) => {
-            return (
-                <View key = { propName }>
-                    {
-                        (() => {
-                            let prop = sorting[propName];
-                            let rowNumber = 1;
+        var expanders = Object.getOwnPropertyNames(sorting).reverse().map((propName) => 
+        {
+            return {
+                propName,
+                prop: sorting[propName]
+            }
+        });
 
-                            if(Array.isArray(prop) && prop.length) {
+        return expanders;
+    }
 
-                                if(prop.length > 3) {
-                                    rowNumber = Math.floor(prop.length / 3);
+    getGridExpander(expander) {
+        if(expander.item) expander = expander.item;
 
-                                    if(prop.length % 3 != 0) {
-                                        rowNumber += 1
-                                    }
-                                }
+        return (
+            <View>
+            {
+                (() => {
+                    let rowNumber = 1;
+                    let prop = expander.prop;
 
-                                let data = [];
+                    if(Array.isArray(prop) && prop.length) {
 
-                                for(let i = 0; i < rowNumber; i++) {
-                                    data.push(prop.splice(0,3));
-                                }
+                        if(prop.length > 3) {
+                            rowNumber = Math.floor(prop.length / 3);
 
-                                let listItems = data.map((element, listIndex) => {
-                                    return(
-                                        <View key = { listIndex } style = { styles.unitContainer }>
-                                            {
-                                                element.map((item) => {
-                                                    return(
-                                                        <View style = { styles.itemContainer } key = { item.getId() }>
-                                                            { getItem(item, GridItemComponent) }
-                                                        </View>
-                                                    );
-                                                })
-                                            }
-                                        </View>
-                                    );
-                                })
-                                return(
-                                    <ExpanderComponent
-                                        isListActionsDisabled = { props.isListActionsDisabled }
-                                        propName = { propName } 
-                                        listItems = { listItems } />
-                                );
+                            if(prop.length % 3 != 0) {
+                                rowNumber += 1
                             }
-                        })()
+                        }
+
+                        let data = [];
+
+                        for(let i = 0; i < rowNumber; i++) {
+                            data.push(prop.splice(0,3));
+                        }
+
+                        return(
+                            <ExpanderComponent
+                                itemType = { ListItemComponent }
+                                getItem = { this.getGridItem }
+                                isListActionsDisabled = { this.props.isListActionsDisabled }
+                                propName = { expander.propName }
+                                listItems = { data } />
+                        );
                     }
-                    <View style = { styles.underLine }/>
-                </View>
-            );
-        });
+                })()
+            }
+            <View style = { styles.underLine }/>
+        </View>);
     }
 
-    renderItems = (sorting, propName) => {
-        let prop = sorting[propName];
-        if(Array.isArray(prop) && prop.length) {
-            let listItems = prop.map((item) => { 
-                return getItem(item, ListItemComponent);
-            });
+    getListExpander(expander) {
+        if(expander.item) expander = expander.item;
 
-            return(
+        return (
+            <View>
                 <ExpanderComponent
-                    isListActionsDisabled = { props.isListActionsDisabled }
-                    propName = { propName } 
-                    listItems = { listItems } />
-            );
-        }
+                    itemType = { ListItemComponent }
+                    getItem = { this.getItem }
+                    isListActionsDisabled = { this.props.isListActionsDisabled }
+                    propName = { expander.propName }
+                    listItems = { expander.prop } />
+                <View style = { styles.underLine }/>   
+            </View>
+        );
     }
 
-    getListItemsList = () => {
-        let sorting = sort(props.data);
-
-        return Object.getOwnPropertyNames(sorting).reverse().map((propName, index) => {
-            return (
-                <View key = { propName }>
-                    {
-                        renderItems(sorting, propName)
-                    }
-                    <View style = { styles.underLine }/>   
-                </View>
-            );
-        });
+    getGridItem(gridItem) {
+        return(
+            <View style = { styles.unitContainer }>
+                {
+                    gridItem.item.map((item) => {
+                        return(
+                            <View style = { styles.itemContainer }>
+                                { this.getItem(item) }
+                            </View>
+                        );
+                    })
+                }
+            </View>
+        );
     }
 
-    getItemsWithoutExpander = () => {
-        return props.data.map((item) => {
-            return getItem(item, ListItemComponent);
-        })
-    }
-
-    getItem = (item, ItemType) => {
-        const TextComp = props.textComp;
-        const isSingleItemSelected = isItemActionsSelected(item);
-        const size = item.entity.size ? props.getItemSize(item.entity.size) : null;
+    getItem(item) {
+        if(item.item) item = item.item;
+        const ItemType = this.props.isGridViewShown ? GridItemComponent : ListItemComponent;
+        const TextComp = this.props.textComp;
+        const isSingleItemSelected = this.isItemActionsSelected(item);
+        const size = item.entity.size ? this.props.getItemSize(item.entity.size) : null;
         const listItemIconSource = item.entity.thumbnail ? 
                                     { uri: 'data:image/png;base64,' + item.entity.thumbnail } 
-                                    : item.entity.isDownloaded ? props.listItemIcon : props.cloudListItemIcon;
-        const starredIcon = item.getStarred() ? '★' : null;
-        let fullItemName = getFileNameWithFixedSize(item.getName(), 20)
+                                    : item.entity.isDownloaded ? this.props.listItemIcon : this.props.cloudListItemIcon;
+        const starredIcon = item.getStarred() ? '★' : '';
+        let fullItemName = getFileNameWithFixedSize(item.getName(), 20);
 
         return(
             <ItemType
-                isExpanderDisabled = { props.isExpanderDisabled }
-                key = { item.getId() }
+                isExpanderDisabled = { this.props.isExpanderDisabled }
+                //key = { item.getId() }
                 listItemIconSource = { listItemIconSource }
-                onPress = { () => props.onPress(item) }
-                onLongPress = { () => props.onLongPress(item) }
-                onDotsPress = { () => props.onDotsPress(item) }
-                onCancelPress = { () => props.onCancelPress(item) }
-                isSelectionMode = { props.isSelectionMode }
+                onPress = { () => { this.props.onPress(item); } }
+                onLongPress = { () => { this.props.onLongPress(item); } }
+                onDotsPress = { () => { this.props.onDotsPress(item); } }
+                onCancelPress = { () => { this.props.onCancelPress(item); } }
+                isSelectionMode = { this.props.isSelectionMode }
                 isSingleItemSelected = { isSingleItemSelected }
                 isSelected = { item.isSelected }
                 isLoading = { item.isLoading }
                 progress = { item.progress } 
                 size = { size }
-                isListActionsDisabled = { props.isListActionsDisabled } >
+                isListActionsDisabled = { this.props.isListActionsDisabled } >
 
-                <TextComp style = { props.isExpanderDisabled ? [styles.mainTitleText, styles.textMargin] : styles.mainTitleText }>
+                <TextComp style = { this.props.isExpanderDisabled ? [styles.mainTitleText, styles.textMargin] : styles.mainTitleText }>
                     <Text style = { styles.blueStar }>
                         { starredIcon }
                     </Text>
-                    { fullItemName.name }
+                    <Text> { fullItemName.name } </Text>
                     <Text style = { styles.extentionText } >{ fullItemName.extention }</Text>
-                    </TextComp>
+                </TextComp>
             </ItemType>
         );
     }
 
-    getItemsList = () => {
-        if(props.isExpanderDisabled) 
-            return getItemsWithoutExpander();
+    getItemsList() {
+        return this.props.isExpanderDisabled ? this.props.data : this.getListExpanders();
+    } 
     
-        return props.isGridViewShown 
-                    ? getGridItemsList()
-                    : getListItemsList();
+
+    getRenderCallback() {
+        if (this.props.isExpanderDisabled) return this.getItem;
+         
+        return this.props.isGridViewShown ? this.getGridExpander : this.getListExpander;
     }
-                    
-    return (
-        <Animated.ScrollView style = { styles.listContainer }
-            decelerationRate = { 'normal' }
-            scrollEventThrottle = { 16 }
-            onScroll = {
-                Animated.event([{
-                    nativeEvent: { 
-                            contentOffset: { 
-                                y: props.animatedScrollValue 
-                            } 
-                        }
-                    }
-                ], { useNativeDriver: true }) }
-            refreshControl = {
-                <RefreshControl
-                    enabled = { !props.isSelectionMode }
-                    refreshing = { props.isRefreshing }
-                    onRefresh = { props.onRefresh } /> }>
-                    <View style = { props.contentWrapperStyle ? props.contentWrapperStyle : null }>
-                        {
-                            getItemsList()
-                        }
-                    </View>
-        </Animated.ScrollView>       
-    );
+
+    render() {
+        return (    
+            <View style = { this.props.contentWrapperStyle ? this.props.contentWrapperStyle : null }>
+                <AnimatedFlatList
+                    style = { styles.listContainer }
+                    scrollEventThrottle = { 16 }
+                    onScroll = { 
+                        Animated.event(
+                            [{ nativeEvent: { contentOffset: {y:  new Animated.Value(0) }}}],
+                            { useNativeDriver: true }
+                        )}
+                    data = { this.getItemsList() }
+                    renderItem = { this.getRenderCallback() }
+                    keyExtractor = { (item, i) => `${i}${i}${i}`} />
+            </View>
+        );
+    }
+    
 }
 
 ListComponent.propTypes = {
