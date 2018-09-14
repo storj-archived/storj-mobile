@@ -8,13 +8,22 @@ import {
     ProgressViewIOS,
     ProgressBarAndroid
 } from 'react-native';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { getWidth, getHeight } from '../utils/adaptive';
 import PropTypes from 'prop-types';
 
-export default class ListItemComponent extends PureComponent {
+export default class ListItemComponent extends Component {
     constructor(props) {
         super(props)
+    }
+
+    shouldComponentUpdate(nextProps) {
+        var isSelectedChanged = this.props.isSelected !== nextProps.isSelected;
+        var isProgressChanged = this.props.progress !== nextProps.progress;        
+        var isSelectionModeChanged = this.props.isSelectionMode !== nextProps.isSelectionMode;
+        var isSingleItemSelectedChanged = this.props.isSingleItemSelected !== nextProps.isSingleItemSelected;
+
+        return isSelectedChanged || isProgressChanged || isSelectionModeChanged || isSingleItemSelectedChanged;
     }
 
     render() {
@@ -105,23 +114,6 @@ const RightIconComponent = (props) => (
 
     </TouchableOpacity>
 );
-
-//TODO: add comments for all this stuff
-/* ListItemComponent2.propTypes = {
-    item: PropTypes.object,
-    onLongPress: PropTypes.func,
-    isSelectionModeEnabled: PropTypes.bool,
-    isSingleItemSelected: PropTypes.bool,
-    isItemActionsSelected: PropTypes.bool,
-    selectItemId: PropTypes.func,
-    onPress: PropTypes.func,
-    progress: PropTypes.number,
-    listItemIcon: PropTypes.number, 
-    isFileLoading: PropTypes.bool,
-    isSelected: PropTypes.bool,
-    disableSelectionMode: PropTypes.func,
-    onSingleItemSelected: PropTypes.func
-}; */
 
 const listItemStyles = StyleSheet.create({
     listItemContainer: {

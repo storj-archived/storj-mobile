@@ -570,24 +570,45 @@ class MainContainer extends Component {
     }
 
     getFilteredFiles(bucketId, searchSequence) {
-        let filteredFiles = this.props.fileListModels.slice();
+        let resultArray = [];
+        let length = this.props.fileListModels.length;
 
-        if(searchSequence) {
-            return filteredFiles.filter(file => file.entity.bucketId === bucketId && 
-                file.entity.name.toLowerCase().includes(searchSequence.toLowerCase()))
+        if(!searchSequence) {
+            for(let i = 0; i < length; i++) {
+                let file = this.props.fileListModels[i];
+
+                if(file.entity.bucketId === bucketId) resultArray.push(file);
+            }
+
+            return resultArray;
         }
 
-        return filteredFiles.filter(file => file.entity.bucketId === bucketId);
+        for(let i = 0; i < length; i++) {
+            let file = this.props.fileListModels[i];
+
+            if(file.entity.bucketId === bucketId && file.entity.name.toLowerCase().includes(searchSequence.toLowerCase())) 
+                resultArray.push(file);
+        }
+
+        return resultArray;
     } 
 
-    getBucketsForSelection() {
-        let data = this.props.buckets.slice();
-        
-        if(this.props.searchSequence) {
-            return data.filter(bucket => bucket.entity.name.toLowerCase().includes(this.props.searchSequence.toLowerCase()))
+    getBucketsForSelection() {       
+        if(!this.props.searchSequence) {
+            return this.props.buckets;
         }
 
-        return data;
+        let resultArray = [];
+        let length = this.props.buckets.length;
+
+        for(let i = 0; i < length; i++) {
+            let bucket = this.props.buckets[i];
+            if(bucket.entity.name.toLowerCase().includes(this.props.searchSequence.toLowerCase())) 
+                resultArray.push(bucket);
+        }
+        
+
+        return resultArray; 
     }
 
     selectAll(bucketId) {

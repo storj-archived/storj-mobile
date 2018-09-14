@@ -21,8 +21,8 @@ export default class FileListManager {
      * @param {string} bucketId 
      * @param {object} file
      */
-    addFileEntry(bucketId, file) {
-        return this._addFileEntry(this.newFilesList, bucketId, file);
+    addFileEntry(file) {
+        return this._addFileEntry(this.newFilesList, file);
     }
 
     /**
@@ -30,8 +30,8 @@ export default class FileListManager {
      * @param {string} bucketId 
      * @param {object} file
      */
-    addFileEntryU(bucketId, file) {
-        return this._addFileEntry(this.newFileUploadingList, bucketId, file);
+    addFileEntryU(file) {
+        return this._addFileEntry(this.newFileUploadingList, file);
     }
 
     //--------------------------------------------------------------------------
@@ -125,10 +125,9 @@ export default class FileListManager {
 
     /**
      * @param {FileListModel[]} array
-     * @param {string} bucketId 
      * @param {ListItemModel} file 
      */
-    _addFileEntry(array, bucketId, file) {
+    _addFileEntry(array, file) {
         let arrayLength = array.length;
         let doesContain = false;
         
@@ -287,7 +286,6 @@ export default class FileListManager {
 
     /**
      * Updating file after cancelling download
-     * @param {string} bucketId 
      * @param {string} fileId 
      */
     cancelDownload(fileId) {
@@ -298,11 +296,11 @@ export default class FileListManager {
             var temp = this.newFilesList[i];
 
             if(temp.getId() === fileId){
-                fileEntry.isLoading = false;
-                fileEntry.progress = 0;
+                temp.isLoading = false;
+                temp.progress = 0;
             }  
 
-            resultArray.push(temps);
+            resultArray.push(temp);
         }
 
         return resultArray;

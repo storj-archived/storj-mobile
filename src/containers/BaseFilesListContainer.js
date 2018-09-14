@@ -20,9 +20,27 @@ class BaseFilesListContainer extends BaseListContainer {
      * Combine all files and uploading files
      * @returns {ListItemModel<FileModel>[]} ListItemModels initialized with FileModel
      */
-    getData() { 
-        return this.props.fileListModels.concat(this.props.uploadingFileListModels)
-                                        .filter(file => file.entity.bucketId === this.props.bucketId);
+    getData() {
+        let resultArray = [];
+        let fileListModelsLength = this.props.fileListModels.length;
+
+        for(let i = 0; i < fileListModelsLength; i++) {
+            let file = this.props.fileListModels[i];
+
+            if(file.entity.bucketId === this.props.bucketId) 
+                resultArray.push(file);
+        }
+
+        let uploadingFileListModelsLength = this.props.uploadingFileListModels.length;
+
+        for(let i = 0; i < uploadingFileListModelsLength; i++) {
+            let file = this.props.uploadingFileListModels[i];
+
+            if(file.entity.bucketId === this.props.bucketId) 
+                resultArray.push(file);
+        }
+
+        return resultArray;
     }
 
     /**

@@ -2,9 +2,7 @@ import React, {PureComponent} from 'react';
 import {
     View,
     StyleSheet,
-    RefreshControl,
     Text,
-    Animated,
     FlatList
 } from 'react-native';
 import ListItemComponent from "../components/ListItemComponent";
@@ -14,8 +12,6 @@ import PropTypes from 'prop-types';
 import { getWidth, getHeight, getDeviceWidth } from '../utils/adaptive';
 import SORTING from '../utils/constants/sortingConstants';
 import { getFileNameWithFixedSize } from "../utils/fileUtils";
-
-const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 export default class ListComponent extends PureComponent {
     constructor(props) {
@@ -145,7 +141,6 @@ export default class ListComponent extends PureComponent {
 
                         return(
                             <ExpanderComponent
-                                itemType = { ListItemComponent }
                                 getItem = { this.getGridItem }
                                 isListActionsDisabled = { this.props.isListActionsDisabled }
                                 propName = { expander.propName }
@@ -164,7 +159,6 @@ export default class ListComponent extends PureComponent {
         return (
             <View>
                 <ExpanderComponent
-                    itemType = { ListItemComponent }
                     getItem = { this.getItem }
                     isListActionsDisabled = { this.props.isListActionsDisabled }
                     propName = { expander.propName }
@@ -205,7 +199,7 @@ export default class ListComponent extends PureComponent {
         return(
             <ItemType
                 isExpanderDisabled = { this.props.isExpanderDisabled }
-                //key = { item.getId() }
+                key = { item.getId() }
                 listItemIconSource = { listItemIconSource }
                 onPress = { () => { this.props.onPress(item); } }
                 onLongPress = { () => { this.props.onLongPress(item); } }
@@ -241,20 +235,19 @@ export default class ListComponent extends PureComponent {
         return this.props.isGridViewShown ? this.getGridExpander : this.getListExpander;
     }
 
+    keyExtractor(item, i) {
+        return "" + i;
+    } 
+
+
     render() {
         return (    
             <View style = { this.props.contentWrapperStyle ? this.props.contentWrapperStyle : null }>
-                <AnimatedFlatList
+                <FlatList
                     style = { styles.listContainer }
-                    scrollEventThrottle = { 16 }
-                    onScroll = { 
-                        Animated.event(
-                            [{ nativeEvent: { contentOffset: {y:  new Animated.Value(0) }}}],
-                            { useNativeDriver: true }
-                        )}
                     data = { this.getItemsList() }
                     renderItem = { this.getRenderCallback() }
-                    keyExtractor = { (item, i) => `${i}${i}${i}`} />
+                    keyExtractor = { this.keyExtractor } />
             </View>
         );
     }

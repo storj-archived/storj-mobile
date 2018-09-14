@@ -35,17 +35,22 @@ export default class ItemManager {
      * @returns {ListItemModel[]} 
      */
     selectBuckets(filteredBuckets) {
+        let resultArray = [];
+        let length = this.itemList.length;
 
-        this.itemList = this.itemList.map(bucket => {
-            for(let i = 0; i < filteredBuckets.length; i++) {
+        for(let i = 0; i < length; i++) {
+            let bucket = this.itemList[i];
 
-                if(bucket.entity.id === filteredBuckets[i].entity.id)
+            for(let j = 0; j < filteredBuckets.length; j++) {
+
+                if(bucket.entity.id === filteredBuckets[j].entity.id)
                     bucket.isSelected = true;
             }
-            return bucket;
-        });
 
-        return this.itemList;
+            resultArray.push(bucket);
+        }
+
+        return resultArray;
     };
 
     /**
@@ -77,8 +82,14 @@ export default class ItemManager {
      * @returns {ListItemModel[]} 
      */
     deleteItem(itemId) {
-        
-        let index = this.itemList.map(item => item.getId()).indexOf(itemId);
+        let length = this.itemList.length;
+        let idArray = new Array(length);
+
+        for(let i = 0; i < length; i++) {
+            idArray[i] = this.itemList[i].getId();
+        }
+
+        let index = idArray.indexOf(itemId)
 
         if(index > -1) {
             this.itemList.splice(index, 1);
@@ -94,16 +105,28 @@ export default class ItemManager {
      * @returns updated buckets
      */
     updateStarred(buckets, starredStatus) {
-        let idList = buckets.map(bucket => bucket.getId());
+        let bucketsLength = buckets.length;
+        
+        let idArray = new Array(bucketsLength);
+        
 
-        this.itemList = this.itemList.map(item => {
-            if(idList.includes(item.getId())) {                           
+        for(let i = 0; i < bucketsLength; i++) {
+            idArray[i] = buckets[i].getId();
+        }
+
+        let length = this.itemList.length;
+        let resultArray = new Array(length);
+
+        for(let i = 0; i < length; i++) {
+            let item = this.itemList[i];
+
+            if(idArray.includes(item.getId())) {                           
                 item.entity.isStarred = starredStatus;
             }
-            
-            return item;
-        });
 
-        return this.itemList;
+            resultArray[i] = item;
+        }
+
+        return resultArray;
     }
 }
