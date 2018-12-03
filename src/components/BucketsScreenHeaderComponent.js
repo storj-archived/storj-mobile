@@ -8,6 +8,7 @@ import {
 import React from 'react';
 import SearchComponent from '../components/SearchComponent';
 import { getWidth, getHeight } from '../utils/adaptive';
+import Button from "./ButtonComponent";
 import PropTypes from 'prop-types';
 
 export default BucketsScreenHeaderComponent = (props) => {
@@ -72,12 +73,10 @@ AnimatedHeader = (props) => {
             <View style = { styles.selectionContainer }>
                 <View style = { styles.selectionWrapper }>
                     <View style = { styles.flexRow }>
-                        <TouchableOpacity 
-                            style = { styles.imageContainer } 
-                            onPress = { props.deselectAll } >
-                            <Image style = { styles.image } source = { require('../images/Icons/BlueCross.png') } resizeMode = 'contain' />
-                        </TouchableOpacity>
-                        <Text style = { styles.selectionText }>{ count + " selected" }</Text>
+                    <Button
+                        onPress = { props.deselectAll }
+                        source = { require('../images/Icons/BlueCross.png') } />
+                    <Text style = { styles.selectionText }>{ count + " selected" }</Text>
                     </View>
                     <Text
                         onPress = { onSelectAllPress  }
@@ -142,13 +141,13 @@ const styles = StyleSheet.create({
         flex: 1
     },
     selectionWrapper: {
-        paddingHorizontal: getWidth(15),
+        paddingRight: getWidth(15),
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
     },
     selectionText: {
-        marginLeft: getWidth(15),
+        marginLeft: getWidth(5),
         fontSize: getHeight(30), 
         color: '#384B65',
         fontFamily: 'montserrat_bold'

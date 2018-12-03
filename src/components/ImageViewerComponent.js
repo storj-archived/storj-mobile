@@ -1,8 +1,6 @@
 import {
-    Image,
     View,
     StyleSheet,
-    TouchableOpacity,
     TouchableWithoutFeedback,
     ProgressBarAndroid,
     ProgressViewIOS,
@@ -12,6 +10,7 @@ import PhotoView from 'react-native-photo-view';
 import React from 'react';
 import { getDeviceWidth, getDeviceHeight, getWidth, getHeight } from '../utils/adaptive';
 import ActionBar from '../components/ActionBarComponent';
+import Button from "./ButtonComponent";
 import PropTypes from 'prop-types';
 
 export default ImageViewerComponent = (props) => {
@@ -26,7 +25,7 @@ export default ImageViewerComponent = (props) => {
             <View style = { styles.mainContainer} >
                 <View style = { [ styles.backgroundWrapper, { opacity: 0.93 } ] } />
                 {
-                    !props.showProgress || props.isDownloaded ? 
+                    props.isDownloaded ? 
                         <PhotoView
                             source = { props.fileUri }
                             minimumZoomScale = { 1 }
@@ -88,15 +87,8 @@ ImageViewerComponent.propTypes = {
     onOptionsPress: PropTypes.func,
     onShare: PropTypes.func,
     progress: PropTypes.number,
-    showActionBar: PropTypes.bool,
-    showProgress: PropTypes.bool
+    showActionBar: PropTypes.bool
 }
-
-const Button = (props) => (
-    <TouchableOpacity onPress = { props.onPress }>
-        <Image source = { props.source } />
-    </TouchableOpacity>
-);
 
 const styles = StyleSheet.create({
     mainContainer: {

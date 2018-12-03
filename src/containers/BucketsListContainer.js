@@ -46,7 +46,13 @@ class BucketsListContainer extends BaseListContainer {
     }
 
     shouldComponentUpdate(nextProps) {
-        return nextProps.activeScreen === "BucketsScreen";
+        var currenName = nextProps.nav.routes[nextProps.nav.index].routeName;
+
+        if (currenName === "FilesScreen" ) {
+            return false;
+        } 
+
+        return true;
     }
 
     render() {        
@@ -76,6 +82,7 @@ function mapStateToProps(state) {
     let currentScreenName = state.mainScreenNavReducer.routes[screenIndex].routeName;
 
     return {
+        nav: state.bucketsScreenNavReducer,
         activeScreen: currentScreenName,
         isSelectionMode: state.mainReducer.isSelectionMode,
         isSingleItemSelected: state.mainReducer.isSingleItemSelected,
@@ -87,7 +94,8 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {...bindActionCreators({
+    return {
+        ...bindActionCreators({
             ...bucketsListContainerActions,
             ...bucketsListContainerBucketActions, 
             navigateToFilesScreen 

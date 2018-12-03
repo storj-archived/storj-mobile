@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, { Component } from 'react';
 import {
     View,
     StyleSheet,
@@ -13,7 +13,7 @@ import { getWidth, getHeight } from '../utils/adaptive';
 /**
  * Custom Expander component, used in main page
  */
-export default class ExpanderComponent extends PureComponent {
+export default class ExpanderComponent extends Component {
     constructor(props) {
         super(props); 
 

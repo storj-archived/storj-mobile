@@ -3,7 +3,6 @@ import {
     View,
     Text,
     StyleSheet,
-    TouchableOpacity,
     TouchableWithoutFeedback,
     ProgressBarAndroid,
     ProgressViewIOS,
@@ -15,6 +14,7 @@ import { getShortBucketName, getFileNameWithFixedSize } from "../utils/fileUtils
 import ActionBar from '../components/ActionBarComponent';
 import SelectBucketComponent from '../components/SelectBucketComponent';
 import DetailedInfoComponent from '../components/DetailedInfoComponent';
+import Button from "./ButtonComponent";
 
 export default class FilePreviewComponent extends Component {
 
@@ -56,7 +56,7 @@ export default class FilePreviewComponent extends Component {
 
     render() {
         const starredIcon = this.props.isStarred ? '★' : null;
-        let { name, extention } = getFileNameWithFixedSize(this.props.name, 20);
+        let { name, extention } = this.props.name ? getFileNameWithFixedSize(this.props.name, 20) : { name: null, extention: null };
 
         return(
             <TouchableWithoutFeedback style = { backgroundColor = "transparent" } onPress = { this.props.showActionBar ? this.props.onOptionsPress : null }>
@@ -102,7 +102,6 @@ export default class FilePreviewComponent extends Component {
                                 onPress = { this.showDetailedInfo }
                                 source = { require("../images/Icons/BlueInfo.png") } />
                             <Button 
-                                style = { styles.searchButtonMargin }
                                 onPress = { this.props.onOptionsPress }
                                 source = { require("../images/Icons/SearchOptions.png") } />
                         </View>
@@ -160,12 +159,6 @@ export default class FilePreviewComponent extends Component {
     }
 }
 
-const Button = (props) => (
-    <TouchableOpacity onPress = { props.onPress } style = { props.style }>
-        <Image source = { props.source } style = { styles.icon } resizeMode = 'contain' />
-    </TouchableOpacity>
-);
-
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
@@ -180,7 +173,7 @@ const styles = StyleSheet.create({
         height: getHeight(72),
         flexDirection: 'row',
         alignItems: 'center',
-        paddingHorizontal: getWidth(24)
+        paddingHorizontal: getWidth(10)
     },
     topButtonsWrapper: {
         top: 0,

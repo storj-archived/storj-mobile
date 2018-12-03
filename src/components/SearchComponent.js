@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import { getHeight, getWidth } from '../utils/adaptive';
+import Button from "./ButtonComponent";
 import PropTypes from 'prop-types';
  
 export default class SearchComponent extends Component {
@@ -80,9 +81,9 @@ export default class SearchComponent extends Component {
     fileScreenHeader() {
         return(
             <View style = { [ styles.rowContainer, this.props.styleContainer ] }>
-                <TouchableOpacity style = { styles.backButtonWrapper } onPress = { this.props.navigateBack ? this.navigateBack : () => {}  }>
-                    <Image style = { styles.backButton } source = { require("../images/Icons/BackButton.png") } resizeMode = { 'contain' } />
-                </TouchableOpacity>
+                <Button
+                    onPress = { this.props.navigateBack ? this.navigateBack : () => {} }
+                    source = { require("../images/Icons/BackButton.png") } />
                 <View style = { [ styles.rowContainer, styles.mainContainer, styles.fileHeader ] }>
                     <View style = {[ styles.rowContainer, { height: getHeight(50) } ]}>
                         <TextInput

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addNavigationHelpers } from 'react-navigation';
+import { bindActionCreators } from 'redux';
 import BucketsScreenNavigator from '../navigators/BucketsScreenNavigator';
 
 class BucketsScreenNavContainer extends Component {
@@ -32,4 +33,12 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(BucketsScreenNavContainer);
+function mapDispatchToProps(dispatch) {
+    return {
+        ...bindActionCreators({ 
+        }, dispatch),
+        dispatch
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BucketsScreenNavContainer);

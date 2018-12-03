@@ -1,4 +1,5 @@
 import ListItemModel from '../../models/ListItemModel';
+import { includes } from "../utils"
 
 /**
  * Exposes methods to manage Buckets in reducer.
@@ -20,10 +21,21 @@ export default class ItemManager {
      * @returns {ListItemModel[]} 
      */
     changeItemSelectionStatus(item, value) {
-        let index = this.itemList.indexOf(item);
+        let length = this.itemList.length;
+        let idArray = [];
+        let itemId = item.getId();
 
-        if(index > -1) {
-            this.itemList[index].isSelected = value;
+        for(let i = 0; i < length; i++) {
+            idArray.push(this.itemList[i].getId());
+        }
+
+        if(includes(idArray, itemId)) {
+            for(let j = 0; j < length; j++) {
+                let bucket = this.itemList[j];
+                
+                if(bucket.getId() === itemId)
+                    bucket.isSelected = value;
+            }
         }
 
         return this.itemList;

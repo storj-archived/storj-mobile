@@ -22,8 +22,9 @@ export default class ListItemComponent extends Component {
         var isProgressChanged = this.props.progress !== nextProps.progress;        
         var isSelectionModeChanged = this.props.isSelectionMode !== nextProps.isSelectionMode;
         var isSingleItemSelectedChanged = this.props.isSingleItemSelected !== nextProps.isSingleItemSelected;
+        var isStarredChanged = this.props.isStarred !== nextProps.isStarred;
 
-        return isSelectedChanged || isProgressChanged || isSelectionModeChanged || isSingleItemSelectedChanged;
+        return isSelectedChanged || isProgressChanged || isSelectionModeChanged || isSingleItemSelectedChanged || isStarredChanged;
     }
 
     render() {
@@ -126,7 +127,8 @@ const listItemStyles = StyleSheet.create({
     },
     listItemContent: {
         flex: 1,
-        marginHorizontal: getWidth(10),
+        marginLeft: getWidth(10),
+        marginRight: getWidth(0),
         flexDirection: 'row',
         borderBottomWidth: 0.3,
         borderColor: 'rgba(56, 75, 101, 0.2)',
@@ -139,15 +141,10 @@ const listItemStyles = StyleSheet.create({
     textWrapper: {
         flex: 0.9
     },
-    mainTitleText: {
-        fontFamily: 'montserrat_regular',
-        fontSize: getHeight(16),
-        color: '#384B65'
-    },
     listItemActionsIconContainer: {        
         height: getHeight(55),
-        width: getWidth(50),
-        alignItems: 'flex-end',
+        width: getWidth(55),
+        alignItems: 'center',
         justifyContent: 'center'
     },
     itemTypeIcon: {
@@ -165,11 +162,6 @@ const listItemStyles = StyleSheet.create({
     cancelDownloadImage: { 
         height: getHeight(24), 
         width: getWidth(24) 
-    },
-    extentionText: {
-        fontFamily: 'montserrat_regular',
-        fontSize: getHeight(16),
-        color: 'rgba(56, 75, 101, 0.4)'
     },
     fileSizeText: {
         fontFamily: 'montserrat_regular',

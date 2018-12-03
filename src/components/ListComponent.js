@@ -207,6 +207,7 @@ export default class ListComponent extends PureComponent {
                 onCancelPress = { () => { this.props.onCancelPress(item); } }
                 isSelectionMode = { this.props.isSelectionMode }
                 isSingleItemSelected = { isSingleItemSelected }
+                isStarred = { item.getStarred() }
                 isSelected = { item.isSelected }
                 isLoading = { item.isLoading }
                 progress = { item.progress } 

@@ -19,8 +19,9 @@ export default class GridItemComponent extends Component {
         var isProgressChanged = this.props.progress !== nextProps.progress;        
         var isSelectionModeChanged = this.props.isSelectionMode !== nextProps.isSelectionMode;
         var isSingleItemSelectedChanged = this.props.isSingleItemSelected !== nextProps.isSingleItemSelected;
+        var isStarredChanged = this.props.isStarred !== nextProps.isStarred;
 
-        return isSelectedChanged || isProgressChanged || isSelectionModeChanged || isSingleItemSelectedChanged;
+        return isSelectedChanged || isProgressChanged || isSelectionModeChanged || isSingleItemSelectedChanged || isStarredChanged;
     }
 
     render() {
