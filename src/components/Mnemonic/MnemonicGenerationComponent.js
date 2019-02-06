@@ -104,13 +104,16 @@ export default class MnemonicGenerationComponent extends Component {
                     <View style = { styles.topContainer } >
                         <View style = { styles.topContentContainer } >
                             <View style = { styles.flexRow }>
-                                <TouchableOpacity 
-                                    onPress = { this.redirectToMnemonicInfoScreen }
-                                    style = { styles.backButtonContainer } >
-                                    <Image 
-                                        source = { require('../../images/MyAccount/BlueBackButton.png') }
-                                        style = { styles.icon } />
-                                </TouchableOpacity>
+                                {
+                                    this.state.isBackButtonBlocked ? null :
+                                        <TouchableOpacity
+                                            onPress = { this.redirectToMnemonicInfoScreen }
+                                            style = { styles.backButtonContainer } >
+                                            <Image
+                                                source = { require('../../images/MyAccount/BlueBackButton.png') }
+                                                style = { styles.icon } />
+                                        </TouchableOpacity>
+                                }
                                 <View style = { styles.titleContainer }>
                                     <Text style = { styles.titleText }>Safeguard your secret phrase</Text>
                                 </View>

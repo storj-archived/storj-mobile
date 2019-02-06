@@ -32,7 +32,7 @@ public class FilePickerModule extends ReactContextBaseJavaModule implements Acti
     public static final String KEY_PATH = "path";
     public static final String KEY_NAME = "name";
     public static final String KEY_RESULT = "result";
-    public static final String KEY_ERROR_MESSAGE = "errorMessage";
+    public static final String KEY_ERROR_MESSAGE = "message";
     public static final String KEY_SUCCESS = "isSuccess";
 
     public static final String OPTIONS_KEY_MIME_TYPE = "mimeType";

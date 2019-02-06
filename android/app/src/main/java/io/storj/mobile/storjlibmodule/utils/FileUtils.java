@@ -208,8 +208,8 @@ public class FileUtils {
             return Environment.getExternalStorageDirectory() + "/" + split[1];
         }
 
-        // TODO handle non-primary volumes
-        return null;
+        // TODO Check if other 'Document' file path retrieves as expected
+        return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS) + "/" + split[1];
     }
 
     private static String getMediaDocumentFilePath(Context context, Uri uri) {

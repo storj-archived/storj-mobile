@@ -1,12 +1,18 @@
 package io.storj.mobile.storjlibmodule.utils;
 
 import android.content.Context;
+import android.util.Log;
 
+import java.net.MalformedURLException;
 import java.util.concurrent.CountDownLatch;
 
 import io.storj.libstorj.File;
+import io.storj.libstorj.Storj;
 import io.storj.libstorj.UploadFileCallback;
 import io.storj.libstorj.android.StorjAndroid;
+import io.storj.mobile.storjlibmodule.StorjLibModule;
+
+import static io.storj.mobile.storjlibmodule.StorjLibModule.STORJ_URL;
 
 public class Uploader {
     Context mContext;
@@ -24,7 +30,15 @@ public class Uploader {
 
         final CountDownLatch uploadLatch = new CountDownLatch(1);
 
-        long fileHandle = StorjAndroid.getInstance(mContext).uploadFile(bucketId, fileName, localPath, new UploadFileCallback() {
+        Storj storj = null;
+        try {
+            storj = StorjAndroid.getInstance(mContext, STORJ_URL);
+        } catch (MalformedURLException e) {
+            Log.e("Storj.Lib.Module", "getStorj: ", e);
+            // TODO: 06.02.19 Handle NPE corner case
+        }
+
+        long fileHandle = storj.uploadFile(bucketId, fileName, localPath, new UploadFileCallback() {
             @Override
             public void onProgress(String s, double v, long l, long l1) {
                 mCallback.onProgress(s, v, l, l1);
@@ -52,7 +66,15 @@ public class Uploader {
             return false;
         }
 
-        return StorjAndroid.getInstance(mContext).cancelUpload(uploadState);
+        Storj storj = null;
+        try {
+            storj = StorjAndroid.getInstance(mContext, STORJ_URL);
+        } catch (MalformedURLException e) {
+            Log.e("Storj.Lib.Module", "getStorj: ", e);
+            return false;
+        }
+
+        return storj.cancelUpload(uploadState);
     }
 
     public interface Callback {

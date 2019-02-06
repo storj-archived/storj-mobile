@@ -88,11 +88,6 @@ export default MyAccountMainPageComponent = (props) => {
                             onPress = { props.screenProps.redirectToHelpPage } />
                         <View style = { styles.underline } />
                         <OptionsComponent 
-                            title = { 'About' }
-                            imageSource = { require('../../images/MyAccount/Info.png') }
-                            onPress = { props.screenProps.redirectToAboutPage } />
-                        <View style = { styles.underline } />
-                        <OptionsComponent 
                             title = { 'Show synchronization queue' }
                             imageSource = { require('../../images/MyAccount/Info.png') }
                             onPress = { props.screenProps.showSyncWindow } />
@@ -201,7 +196,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(56, 75, 101, 0.2)'
     },
     logOutButton: { 
-        marginTop: getHeight(10),
+        marginTop: getHeight(65),
         marginBottom: getHeight(70),
         width: getWidth(335),
         height: getHeight(50),

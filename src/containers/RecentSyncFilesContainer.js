@@ -9,6 +9,7 @@ import { dashboardContainerBucketActions } from '../reducers/mainContainer/Bucke
 import { filesListContainerMainActions } from '../reducers/mainContainer/mainReducerActions';
 import { filesListContainerFileActions, selectFiles, deselectFiles } from '../reducers/mainContainer/Files/filesReducerActions';
 import { dashboardNavigateBack, navigateToDashboardFilesScreen, navigateBack } from '../reducers/navigation/navigationActions';
+import { listFiles, listUploadingFiles } from "../reducers/asyncActions/fileActionsAsync";
 import filesActions from '../reducers/mainContainer/Files/filesReducerActions';
 import BaseFilesListContainer from "../containers/BaseFilesListContainer";
 import headerFilesListBinder from "../viewBinders/headerFilesListBinder";
@@ -134,7 +135,9 @@ function mapDispatchToProps(dispatch) {
         navigateToDashboardFilesScreen,
         navigateBack,
         selectFiles,
-        deselectFiles
+        deselectFiles,
+        listFilesAsync: (bucketId) => dispatch(listFiles(bucketId)),
+        listUploadingFilesAsync: (bucketId) => dispatch(listUploadingFiles(bucketId))
     }, dispatch);
 }
 

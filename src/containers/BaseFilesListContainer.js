@@ -77,7 +77,8 @@ class BaseFilesListContainer extends BaseListContainer {
      */
     onRefresh() {
         this.props.pushLoading(this.props.bucketId);
-        ServiceModule.getFiles(this.props.bucketId);         
+        ServiceModule.getFiles(this.props.bucketId); 
+        this.props.listUploadingFilesAsync(this.props.bucketId);     
     }
 
     /**

@@ -100,30 +100,17 @@ export default class TabBarComponent extends Component {
         };
     }
 
-    actionWithDelay = (action) => {
-        if(this.isLoading) return;
-
-        this.isLoading = true;
-        action();
-        setButtonInvokeTimeout(10, this);
-    }
-
-    onDashboardPress() {
-        this.actionWithDelay(() => {                                
+    onDashboardPress() {                              
             this.props.navigation.navigate("DashboardScreen");  
             this.props.navigation.listSettings(this.props.navigation.email);
-        });
     }
 
     onBucketPress() {
-        this.actionWithDelay(() => {  
             this.props.navigation.navigate("BucketsScreen");          
-            this.props.navigation.listSettings(this.props.navigation.email);                      
-        });
+            this.props.navigation.listSettings(this.props.navigation.email);      
     }
 
     onPicturesPress() {
-        this.actionWithDelay(() => { 
             let picturesBucketId = getPicturesBucketId(this.props.navigation.buckets);
 
             if(!picturesBucketId) return;
@@ -132,18 +119,15 @@ export default class TabBarComponent extends Component {
             this.props.navigation.pushLoading(picturesBucketId);
             this.props.navigation.setPhotosBucketId(picturesBucketId);                     
             this.props.navigation.navigate("MyPhotosScreen");
-        });
     }
 
-    onAccountPress() {
-        this.actionWithDelay(() => {                                                            
+    onAccountPress() {                                                     
             this.props.navigation.hideActionBar();                                
             this.props.navigation.navigate("MyAccountScreen");
-        });
     }
 
     onActionBarPress() {
-        this.actionWithDelay(() => { this.props.navigation.onActionBarPress(); });
+            this.props.navigation.onActionBarPress(); 
     }
 
     render() {

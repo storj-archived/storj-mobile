@@ -9,8 +9,10 @@ import { dashboardContainerBucketActions } from '../reducers/mainContainer/Bucke
 import { filesListContainerFileActions } from '../reducers/mainContainer/Files/filesReducerActions';
 import { dashboardNavigateBack, navigateToDashboardFilesScreen, navigateBack, openImageViewer, openFilePreview } from '../reducers/navigation/navigationActions';
 import filesActions from '../reducers/mainContainer/Files/filesReducerActions';
+import { listUploadingFiles } from "../reducers/asyncActions/fileActionsAsync";
 import BaseFilesListContainer from '../containers/BaseFilesListContainer';
 import headerFilesListBinder from "../viewBinders/headerFilesListBinder";
+import ServiceModule from "../utils/ServiceModule";
 import PropTypes from 'prop-types';
 
 /** 
@@ -49,6 +51,12 @@ class DashboardFilesListContainer extends BaseFilesListContainer {
         this.props.dashboardNavigateBack();
         this.props.disableSelectionMode();
         this.props.setDashboardBucketId(null);
+    }
+
+    onRefresh() {
+        this.props.pushLoading(this.props.bucketId);
+        ServiceModule.getFiles(this.props.bucketId); 
+        this.props.listUploadingFiles(this.props.bucketId);     
     }
 
     render() {        
@@ -104,7 +112,8 @@ function mapDispatchToProps(dispatch) {
             ...filesListContainerFileActions, 
             dashboardNavigateBack,
             navigateToDashboardFilesScreen,
-            navigateBack
+            navigateBack,
+            listUploadingFiles
         }, dispatch);    
 }
 

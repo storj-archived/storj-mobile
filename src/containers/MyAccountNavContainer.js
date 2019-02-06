@@ -27,7 +27,6 @@ class MyAccountNavContainer extends Component {
         super(props);
 
         this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
-        this.redirectToAboutPage = this.redirectToAboutPage.bind(this);
         this.redirectToHelpPage = this.redirectToHelpPage.bind(this);
     }
 
@@ -63,13 +62,8 @@ class MyAccountNavContainer extends Component {
         }
     }
 
-    redirectToAboutPage() {
-        const aboutUri = "https://storj.io/faq.html";
-        Linking.openURL(aboutUri);
-    }
-
     redirectToHelpPage() {
-        const helpUri = "https://storj.io/support.html";
+        const helpUri = "https://storjlabs.atlassian.net/servicedesk/customer/portals";
         Linking.openURL(helpUri);
     }
 
@@ -99,7 +93,6 @@ class MyAccountNavContainer extends Component {
                         redirectToMyAccountScreen: this.props.redirectToMyAccountScreen,
                         redirectToMyAccountMnemonicScreen: this.props.redirectToMyAccountMnemonicScreen,
                         changePasswordPopupStatus: this.props.changePasswordPopupStatus,
-                        redirectToAboutPage: this.redirectToAboutPage,
                         redirectToHelpPage: this.redirectToHelpPage,
 
                         showSyncWindow: this.props.showSyncWindow

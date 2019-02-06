@@ -1,6 +1,7 @@
 package io.storj.mobile.storjlibmodule;
 
 import android.os.Environment;
+import android.util.Log;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -13,6 +14,7 @@ import io.storj.mobile.storjlibmodule.responses.Response;
 import io.storj.mobile.storjlibmodule.responses.SingleResponse;
 
 import java.io.File;
+import java.net.MalformedURLException;
 
 import io.storj.libstorj.Keys;
 import io.storj.libstorj.Storj;
@@ -41,6 +43,7 @@ interface IMethodHandlerCallback {
 }
 
 public class StorjLibModule extends ReactContextBaseJavaModule {
+    public static final String STORJ_URL = "https://api.v2.storj.io";
 
     private static final String E_VERIFY_KEYS = "STORJ_E_VERIFY_KEYS";
     private static final String E_CHECK_MNEMONIC = "E_CHECK_MNEMONIC";
@@ -59,7 +62,14 @@ public class StorjLibModule extends ReactContextBaseJavaModule {
     }
 
     private Storj getStorj() {
-        return StorjAndroid.getInstance(getReactApplicationContext());
+        Storj storj = null;
+        try {
+            storj = StorjAndroid.getInstance(getReactApplicationContext(), STORJ_URL);
+        } catch (MalformedURLException e) {
+            Log.e("Storj.Lib.Module", "getStorj: ", e);
+            // TODO: 06.02.19 Handle NPE corner case
+        }
+        return storj;
     }
 
     private String toJson(Object convertible) {

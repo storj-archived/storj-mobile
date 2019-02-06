@@ -6,6 +6,7 @@ import android.os.Process;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import java.net.MalformedURLException;
 import java.util.List;
 
 import io.storj.libstorj.CreateBucketCallback;
@@ -28,6 +29,7 @@ import io.storj.libstorj.GetBucketsCallback;
 import io.storj.libstorj.ListFilesCallback;
 import io.storj.libstorj.android.StorjAndroid;
 
+import static io.storj.mobile.storjlibmodule.StorjLibModule.STORJ_URL;
 import static io.storj.mobile.storjlibmodule.services.ServiceModule.GET_BUCKETS;
 import static io.storj.mobile.storjlibmodule.services.ServiceModule.GET_FILES;
 import static io.storj.mobile.storjlibmodule.services.ServiceModule.BUCKET_CREATED;
@@ -337,6 +339,15 @@ public class FetchService extends BaseReactService {
     }
 
     private Storj getInstance() {
-        return StorjAndroid.getInstance(this);
+
+        Storj storj = null;
+        try {
+            storj = StorjAndroid.getInstance(this, STORJ_URL);
+        } catch (MalformedURLException e) {
+            Log.e("Storj.Lib.Module", "getStorj: ", e);
+            // TODO: 06.02.19 Handle NPE corner case
+        }
+
+        return storj;
     }
 }

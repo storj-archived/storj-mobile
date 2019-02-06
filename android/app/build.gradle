@@ -156,7 +156,7 @@ android {
 dependencies {
     compile project(':react-native-smart-barcode')
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'io.storj:libstorj-android:0.7.2'
+    compile 'io.storj:libstorj-android:0.8'
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.facebook.react:react-native:+'
     compile 'com.google.code.gson:gson:2.8.2'

@@ -405,6 +405,11 @@ class MainContainer extends Component {
         let filePickerResponse = await filePicker.show(type);
         this.props.hideActionBar();
 
+        // TODO: change to isSuccess after backend refactoring
+        if (!filePickerResponse && !filePickerResponse.response) {
+            return;
+        }
+
         filePickerResponse.result.forEach(file => {
             this.filePickerResponsePaths.push(file.path);
         });
@@ -441,7 +446,10 @@ class MainContainer extends Component {
         this.props.hideActionBar();
 
         if(filePickerResponse.isSuccess) {
-            filePickerResponse.result.forEach(file => ServiceModule.uploadFile(bucketId, file.path));
+            filePickerResponse.result.forEach(file => {
+            filePickerResponse.result.forEach(file => {
+                ServiceModule.uploadFile(bucketId, file.path)
+            });
         }
     }
 

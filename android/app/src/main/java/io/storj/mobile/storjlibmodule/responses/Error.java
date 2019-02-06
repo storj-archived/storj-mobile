@@ -10,8 +10,8 @@ import io.storj.mobile.storjlibmodule.interfaces.IConvertibleToJs;
  */
 
 public class Error implements IConvertibleToJs {
-    private final String KEY_ERROR_MESSAGE = "errorMessage";
-    private final String KEY_ERROR_CODE = "errorCode";
+    private final String KEY_ERROR_MESSAGE = "message";
+    private final String KEY_ERROR_CODE = "code";
 
     private String _message;
     private int _code;

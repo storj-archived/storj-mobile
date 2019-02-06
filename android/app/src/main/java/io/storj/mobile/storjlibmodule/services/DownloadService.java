@@ -9,7 +9,10 @@ import android.util.Log;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 
+import java.net.MalformedURLException;
+
 import io.storj.libstorj.DownloadFileCallback;
+import io.storj.libstorj.Storj;
 import io.storj.libstorj.android.StorjAndroid;
 import io.storj.mobile.storjlibmodule.dataprovider.DatabaseFactory;
 import io.storj.mobile.storjlibmodule.dataprovider.contracts.FileContract;
@@ -20,6 +23,8 @@ import io.storj.mobile.storjlibmodule.responses.SingleResponse;
 import io.storj.mobile.storjlibmodule.utils.ProgressResolver;
 import io.storj.mobile.storjlibmodule.utils.ThumbnailProcessor;
 import io.storj.mobile.storjlibmodule.utils.UploadSyncObject;
+
+import static io.storj.mobile.storjlibmodule.StorjLibModule.STORJ_URL;
 
 /**
  * Created by Yaroslav-Note on 3/13/2018.
@@ -110,7 +115,16 @@ public class DownloadService extends BaseReactService {
             return false;
         }
 
-        final long fileHandle = StorjAndroid.getInstance(DownloadService.this).downloadFile(bucketId, fileId, localPath, new DownloadFileCallback() {
+        Storj storj;
+        try {
+            storj = StorjAndroid.getInstance(DownloadService.this, STORJ_URL);
+        } catch (MalformedURLException e) {
+            Log.e("Storj.Lib.Module", "getStorj: ", e);
+            // TODO: 06.02.19 Handle NPE corner case
+            return false;
+        }
+
+        final long fileHandle = storj.downloadFile(bucketId, fileId, localPath, new DownloadFileCallback() {
             @Override
             public void onProgress(String fileId, double progress, long downloadedBytes, long totalBytes) {
                 synchronized (fileDbo) {
