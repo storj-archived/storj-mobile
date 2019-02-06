@@ -1,6 +1,6 @@
 import { StackNavigator } from 'react-navigation';
-import BucketsScreen from '../containers/BucketsListContainer';
-import FilesScreen from '../containers/FilesListContainer';
+import BucketsScreen from '../containers/Buckets/BucketsListContainer';
+import FilesScreen from '../containers/Files/FilesListContainer';
 
 
 const BucketsScreenNavigator = StackNavigator(

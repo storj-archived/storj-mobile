@@ -15,7 +15,7 @@ import {
 } from '../reducers/authentification/authActions';
 import { RegisterStateModel } from '../models/RegisterStateModel';
 import { RegisterErrorModel } from '../models/RegisterErrorModel';
-import RegisterComponent from '../components/RegisterComponent';
+import RegisterComponent from '../components/Registration/RegisterComponent';
 import StorjModule from '../utils/StorjModule';
 import validator from '../utils/validator';
 import infoScreensConstants from '../utils/constants/infoScreensConstants';

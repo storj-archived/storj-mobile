@@ -3,7 +3,7 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import sinon from 'sinon';
 import Adapter from 'enzyme-adapter-react-16';
-import InputComponent from '../../src/components/InputComponent';
+import InputComponent from '../../src/components/Common/InputComponent';
 
 Enzyme.configure({ adapter: new Adapter() });
 

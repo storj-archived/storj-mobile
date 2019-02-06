@@ -8,7 +8,7 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16'
 import configureStore from 'redux-mock-store';
 import Enzyme, { shallow } from 'enzyme'; 
-import LoginComponent from '../../src/components/LoginComponent';
+import LoginComponent from '../../src/components/Login/LoginComponent';
 
 Enzyme.configure({ adapter: new Adapter() });
 

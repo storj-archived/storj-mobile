@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
-import DashboardScreenNavigation from '../../containers/DashboardScreenNavContainer';
+import DashboardScreenNavigation from '../../containers/Dashboard/DashboardScreenNavContainer';
 
 export default DashboardComponent = (props) => {
 

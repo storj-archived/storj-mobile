@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import { TYPES } from '../../utils/constants/typesConstants';
 import DashboardItemListComponent from './DashboardItemListComponent';
 import { getShortBucketName } from "../../utils/fileUtils";
-import { InfoButtonComponent } from '../InfoButtonComponent';
+import { InfoButtonComponent } from '../Common/InfoButtonComponent';
 
 export default class DashboardListComponent extends Component{
     constructor(props) {

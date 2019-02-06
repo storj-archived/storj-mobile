@@ -1,10 +1,10 @@
 import { StackNavigator } from 'react-navigation';
 import MyAccountMainPageScreen from '../components/MyAccount/MyAccountMainPageComponent';
-import StorageScreen from '../components/MyAccount/StorageComponent';
-import BalanceScreen from '../components/MyAccount/BalanceComponent';
-import SettingsScreen from '../containers/SettingsContainer';
-import ChangePasswordScreen from '../components/MyAccount/ChangePasswordComponent';
-import PinCodeGenerationScreen from '../components/MyAccount/PinCodeGenerationComponent';
+import StorageScreen from '../components/MyAccount/Storage/StorageComponent';
+import BalanceScreen from '../components/MyAccount/Balance/BalanceComponent';
+import SettingsScreen from '../containers/MyAccount/SettingsContainer';
+import ChangePasswordScreen from '../components/MyAccount/Settings/ChangePasswordComponent';
+import PinCodeGenerationScreen from '../components/MyAccount/Settings/PIN/PinCodeGenerationComponent';
 import MyAccountMnemonicScreen from '../components/MyAccount/MyAccountMnemonicComponent';
 
 const MyAccountScreenNavigator = StackNavigator(

@@ -52,7 +52,7 @@ import {
 import ListItemModel from '../models/ListItemModel';
 import BucketModel from '../models/BucketModel';
 import FileModel from '../models/FileModel';
-import WarningComponent from '../components/WarningComponent';
+import WarningComponent from '../components/Common/WarningComponent';
 import { uploadFileStart, uploadFileSuccess } from '../reducers/asyncActions/fileActionsAsync';
 import { listSyncQueueEntriesAsync, getSyncQueueEntryAsync } from "../reducers/mainContainer/SyncQueue/syncQueueReducerAsyncActions";
 import { listSettingsAsync } from "../reducers/mainContainer/MyAccount/Settings/SettingsActionsAsync";
@@ -372,8 +372,7 @@ function mapDispatchToProps(dispatch) {
 		setNameAlreadyExistException,
 		unsetNameAlreadyExistException,
 		createBucket,
-		getBuckets,    
-		createBucket,
+		getBuckets,
 		popLoading,
 		deleteBucket,
 		uploadFileError,

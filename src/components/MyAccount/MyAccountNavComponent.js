@@ -3,7 +3,7 @@ import {
     StyleSheet
 } from 'react-native';
 import React from 'react';
-import MyAccountNavContainer from '../../containers/MyAccountNavContainer';
+import MyAccountNavContainer from '../../containers/MyAccount/MyAccountNavContainer';
 import PropTypes from 'prop-types';
 
 export default MyAccountNavComponent = (props) => {

@@ -11,7 +11,7 @@ import { getHeight, getWidth } from '../../utils/adaptive';
 import OptionsComponent from './OptionsComponent';
 import StorjModule from '../../utils/StorjModule';
 import PropTypes from 'prop-types';
-import { InfoButtonComponent } from '../InfoButtonComponent';
+import { InfoButtonComponent } from '../Common/InfoButtonComponent';
 
 export default MyAccountMainPageComponent = (props) => {
 

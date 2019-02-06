@@ -6,7 +6,7 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16'
 import Enzyme, { shallow } from 'enzyme'; 
 import sinon from 'sinon';
-import FirstSignInComponent from '../../src/components/FirstSignInComponent';
+import FirstSignInComponent from '../../src/components/Login/FirstSignInComponent';
 
 Enzyme.configure({ adapter: new Adapter() });
 

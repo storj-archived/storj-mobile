@@ -1,23 +1,22 @@
 import StorjLib from '../utils/StorjModule';
 import { StackNavigator } from 'react-navigation';
-import InitializationScreen from '../containers/InitializeContainer';
-import OnBoardingScreen from '../components/OnBoardingComponent';
+import InitializationScreen from '../containers/Login/InitializeContainer';
+import OnBoardingScreen from '../components/Onboarding/OnBoardingComponent';
 import RegisterScreen from '../containers/RegisterContainer';
-import LoginScreen from '../containers/LoginContainer';
+import LoginScreen from '../containers/Login/LoginContainer';
 import MainScreen from '../containers/MainContainer';
-import AuthFailureInfoScreen from '../components/AuthFailureComponent';
-import RegisterSuccessInfoScreen from '../components/RegisterSuccessComponent';
-import TermsOfUseScreen from '../components/TermsOfUseComponent';
+import AuthFailureInfoScreen from '../components/Login/AuthFailureComponent';
+import RegisterSuccessInfoScreen from '../components/Registration/RegisterSuccessComponent';
 import MnemonicGenerationScreen from '../components/Mnemonic/MnemonicGenerationComponent';
-import QRScannerScreen from '../containers/QRScannerContainer';
-import ImageViewerScreen from '../containers/ImageViewerContainer';
+import QRScannerScreen from '../containers/Login/QRScannerContainer';
+import ImageViewerScreen from '../containers/Files/ImageViewerContainer';
 import MnemonicInfoScreen from '../components/Mnemonic/MnemonicInfoComponent';
 import MnemonicConfirmationScreen from '../components/Mnemonic/MnemonicConfirmationComponent';
 import MnemonicConfirmedScreen from '../components/Mnemonic/MnemonicConfirmedComponent';
 import MnemonicNotConfirmedScreen from '../components/Mnemonic/MnemonicNotConfirmedComponent';
 import MnemonicHelpScreen from '../components/Mnemonic/MnemonicHelpComponent';
-import FilePreviewScreen from '../containers/FilePreviewContainer';
-import SelectBucketScreen from '../containers/SelectBucketContainer';
+import FilePreviewScreen from '../containers/Files/FilePreviewContainer';
+import SelectBucketScreen from '../containers/Buckets/SelectBucketContainer';
 
 /**
  * Creating program main navigator
@@ -51,10 +50,6 @@ const StackNav = StackNavigator(
         RegisterSuccessInfoScreen: {
             screen: RegisterSuccessInfoScreen,
             routeName: 'RegisterSuccessInfoScreen'
-        },
-        TermsOfUseScreen: {
-            screen: TermsOfUseScreen,
-            routeName: 'TermsOfUseScreen'
         },
         MnemonicInfoScreen: {
             screen: MnemonicInfoScreen,

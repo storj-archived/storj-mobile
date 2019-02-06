@@ -5,7 +5,7 @@ import {
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import ViewOptionsComponent from '../../src/components/ViewOptionsComponent';
+import ViewOptionsComponent from '../../src/components/Header/ViewOptionsComponent';
 
 Enzyme.configure({ adapter: new Adapter() });
 

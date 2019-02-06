@@ -1,9 +1,9 @@
 import { TabNavigator } from 'react-navigation';
 import TabBarComponent from '../components/TabBarComponent';
-import BucketsScreen from '../containers/BucketsContainer';
-import MyPhotosScreen from '../containers/MyPhotosContainer';
-import DashboardScreen from '../containers/DashboardScreenContainer';
-import MyAccountScreen from '../containers/MyAccountContainer';
+import BucketsScreen from '../containers/Buckets/BucketsContainer';
+import MyPhotosScreen from '../containers/Buckets/MyPhotosContainer';
+import DashboardScreen from '../containers/Dashboard/DashboardScreenContainer';
+import MyAccountScreen from '../containers/MyAccount/MyAccountContainer';
 
 /**
  * Main Screen Tab Navigator

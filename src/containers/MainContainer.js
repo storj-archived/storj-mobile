@@ -447,7 +447,6 @@ class MainContainer extends Component {
 
         if(filePickerResponse.isSuccess) {
             filePickerResponse.result.forEach(file => {
-            filePickerResponse.result.forEach(file => {
                 ServiceModule.uploadFile(bucketId, file.path)
             });
         }

@@ -3,7 +3,7 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import MainComponent from '../../src/components/MainComponent';
 import ActionBarComponent from '../../src/components/ActionBarComponent';
-import CreateBucketPopUpComponent from '../../src/components/InputPopUpComponent';
+import CreateBucketPopUpComponent from '../../src/components/Buckets/InputPopUpComponent';
 
 Enzyme.configure({ adapter: new Adapter() });
 

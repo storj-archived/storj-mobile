@@ -6,7 +6,7 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16'
 import Enzyme, { shallow } from 'enzyme'; 
 import sinon from 'sinon';
-import AddCreditComponent from '../../src/components/MyAccount/AddCreditComponent';
+import AddCreditComponent from '../../src/components/MyAccount/Balance/AddCreditComponent';
 
 Enzyme.configure({ adapter: new Adapter() });
 jest.unmock('ScrollView');

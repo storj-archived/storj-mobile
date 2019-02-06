@@ -2,7 +2,7 @@ import 'react-native';
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16'
-import LoginContainer from '../../src/containers/LoginContainer';
+import LoginContainer from '../../src/containers/Login/LoginContainer';
 import configureStore from 'redux-mock-store';
 import { loginActionsCreators, registerActionsCreators } from '../../src/reducers/authentification/authActions';
 import authReducer from '../../src/reducers/authentification/authReducer';

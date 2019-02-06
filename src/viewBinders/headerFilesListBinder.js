@@ -1,6 +1,6 @@
 import React from "react";
 import { getFileSize, getFullFileName, getShortFileName } from "../utils/fileUtils";
-import HeaderFilesListComponent from "../components/HeaderFilesListComponent";
+import HeaderFilesListComponent from "../components/Files/HeaderFilesListComponent";
 
 //TODO: remove arrow
 export default function headerFilesListBinder() {

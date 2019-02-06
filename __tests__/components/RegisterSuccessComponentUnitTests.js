@@ -4,7 +4,7 @@ import {
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import RegisterSuccessComponent from '../../src/components/RegisterSuccessComponent';
+import RegisterSuccessComponent from '../../src/components/Registration/RegisterSuccessComponent';
 
 Enzyme.configure({ adapter: new Adapter() });
 

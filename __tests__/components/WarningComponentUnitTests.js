@@ -5,7 +5,7 @@ import {
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import WarningComponent from '../../src/components/WarningComponent';
+import WarningComponent from '../../src/components/Common/WarningComponent';
 
 Enzyme.configure({ adapter: new Adapter() });
 

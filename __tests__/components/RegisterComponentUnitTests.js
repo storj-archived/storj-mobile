@@ -2,8 +2,8 @@ import 'react-native';
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Checkbox from '../../src/components/CheckboxComponent'
-import RegisterComponent from '../../src/components/RegisterComponent';
+import Checkbox from '../../src/components/Common/CheckboxComponent'
+import RegisterComponent from '../../src/components/Registration/RegisterComponent';
 
 Enzyme.configure({ adapter: new Adapter() });
 

@@ -6,7 +6,7 @@ import React from 'react';
 import DashboardListFooterComponent from '../../components/Dashboard/DashboardListFooterComponent';
 import DashboardListHeaderComponent from '../../components/Dashboard/DashboardListHeaderComponent';
 import PropTypes from 'prop-types';
-import BaseListComponent from '../BaseListComponent';
+import BaseListComponent from '../Lists/BaseListComponent';
 
 export default class DashboardItemListComponent extends BaseListComponent {
     constructor(props) {
