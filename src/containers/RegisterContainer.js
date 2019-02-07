@@ -126,7 +126,7 @@ export class RegisterContainer extends Component {
      */
     saveData = (mnemonic, email, password) => {
         this.props.login(email, password, mnemonic)
-    }
+    };
 
     /**
      * Submit registration info

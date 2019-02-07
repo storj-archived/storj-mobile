@@ -47,7 +47,7 @@ describe('Authentification reducer tests', () => {
         const result = authReducer(state, action);
 
         expect(result).not.toBe(state);
-    })
+    });
 
     /**
      * loginSuccess action test to see if reducer returns valid state
@@ -93,7 +93,7 @@ describe('Authentification reducer tests', () => {
         const result = authReducer(state, action);
 
         expect(result).not.toBe(state);
-    })
+    });
 
     /**
      * registerError action test to see if reducer returns valid state
@@ -185,7 +185,7 @@ describe('Authentification reducer tests', () => {
         const result = authReducer(state, action);
 
         expect(result).not.toBe(state);
-    })
+    });
 
     /**
      * registerSuccess action test to see if reducer returns valid state
@@ -231,7 +231,7 @@ describe('Authentification reducer tests', () => {
         const result = authReducer(state, action);
 
         expect(result).not.toBe(state);
-    })
+    });
 
     /**
      * registerError action test to see if reducer returns valid state

@@ -15,7 +15,7 @@ export default SettingsComponent = (props) => {
 
     changePINOptionStatus = () => {
         props.changePINOptionStatus(true);
-    }
+    };
 
     return(
         <View style = { styles.mainContainer } >

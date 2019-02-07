@@ -2050,4 +2050,4 @@ export const WORDLIST = [
     "zero",
     "zone",
     "zoo"
-]
+];

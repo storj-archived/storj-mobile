@@ -72,7 +72,7 @@ async function _getBillingRequest(url, params) {
     params.__nonce = uuidv4();
     url += "?" + toQueryString(params);
 
-    let request = _createRequest(url, 'GET', auth.authString)
+    let request = _createRequest(url, 'GET', auth.authString);
 
     return request;
 }

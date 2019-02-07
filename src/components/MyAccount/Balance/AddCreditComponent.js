@@ -15,13 +15,13 @@ import myAccountConstants from '../../../utils/constants/myAccountConstants';
 
 export default class AddCreditComponent extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             showBasicWallets: true,
             showStorjCredits: false,
             showBTCCredits: false
-        }
+        };
 
         this.showBTCCredits = this.showBTCCredits.bind(this);
         this.showStorjCredits = this.showStorjCredits.bind(this);
@@ -156,7 +156,7 @@ AddCreditComponent.propTypes = {
     wallets: PropTypes.array,
     createWallet: PropTypes.func,
     getWallets: PropTypes.func
-}
+};
 
 const styles = StyleSheet.create({
     mainContainer: {

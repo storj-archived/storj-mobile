@@ -221,7 +221,7 @@ export const registerActionsCreators = {
     redirectToLoginScreen,
     redirectToAuthFailureScreen,
     redirectToRegisterSuccessScreen
-}
+};
 export const qrScannerActionCreators = {
     loginSuccess,
     loginError,
@@ -231,15 +231,15 @@ export const qrScannerActionCreators = {
     redirectToMainScreen,
     navigateBack,
     redirectToInitializeScreen
-}
+};
 
 export const initializeActionCreators = {
     login,
     redirectToQRScannerScreen,
     redirectToLoginScreen,
     navigateToRegisterScreen
-}
+};
 
 export const pincodeActionCreators = {
     clear
-}
+};

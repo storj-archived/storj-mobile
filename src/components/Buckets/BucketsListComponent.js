@@ -59,4 +59,4 @@ BucketsListComponent.propTypes = {
     onLongPress: PropTypes.func,
     onRefresh: PropTypes.func,
     sortingMode: PropTypes.string
-}
+};

@@ -11,7 +11,7 @@ export default PopUpComponent = (props) => {
 
     hidePasswordPopUp = () => {
         props.changePasswordPopupStatus(false);
-    }
+    };
 
     return(
         <View style = { [ styles.backgroundWrapper ] }>  
@@ -68,4 +68,4 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
         opacity: 0.2
     }
-})
+});

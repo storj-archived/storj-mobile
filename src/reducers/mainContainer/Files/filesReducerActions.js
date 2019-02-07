@@ -186,6 +186,6 @@ const allFileActions = {
 
 export const favouritesFileActions = {
     updateFavouriteFiles
-}
+};
 
 export default allFileActions;

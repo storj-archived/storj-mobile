@@ -13,12 +13,12 @@ import PropTypes from 'prop-types';
 
 export default class ChangePasswordComponent extends Component{
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             email: null,
             isError: false
-        }
+        };
 
         this.sendEmail = this.sendEmail.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -150,4 +150,4 @@ const styles = StyleSheet.create({
 ChangePasswordComponent.propTypes = {
     navigation: PropTypes.object,
     screenProps: PropTypes.object
-}
+};

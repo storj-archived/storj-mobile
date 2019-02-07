@@ -14,7 +14,7 @@ export default QRCodeComponent = (props) => {
 
     getCredentials = () => {
         return JSON.stringify({email: props.email, password: props.password, mnemonic: props.mnemonic})
-    }
+    };
 
     const credentials = getCredentials(); 
 
@@ -47,7 +47,7 @@ QRCodeComponent.propTypes = {
     hideActionBar: PropTypes.bool,
     mnemonic: PropTypes.string,
     password: PropTypes.string
-}
+};
 
 const styles = StyleSheet.create({
     mainContainer: {

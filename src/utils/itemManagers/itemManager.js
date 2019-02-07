@@ -101,7 +101,7 @@ export default class ItemManager {
             idArray[i] = this.itemList[i].getId();
         }
 
-        let index = idArray.indexOf(itemId)
+        let index = idArray.indexOf(itemId);
 
         if(index > -1) {
             this.itemList.splice(index, 1);

@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
 
 export default class PinCodeGenerationComponent extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.letterCount = 4;
         this.HEADER_CHANGE = 'Change PIN';
@@ -132,7 +132,7 @@ export default class PinCodeGenerationComponent extends Component {
             return;
         };
 
-        newValue = newValue[newValue.length - 1]     
+        newValue = newValue[newValue.length - 1];
 
         if(this.state.code.length === 0) {
             this.setState({ header: this.HEADER_CHANGE, text: this.TEXT_ENTER, isValid: true });
@@ -241,7 +241,7 @@ export default class PinCodeGenerationComponent extends Component {
 PinCodeGenerationComponent.propTypes = {
     navigation: PropTypes.object,
     screenProps: PropTypes.object
-}
+};
 
 const styles = StyleSheet.create({
     mainContainer: {

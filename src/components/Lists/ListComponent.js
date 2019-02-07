@@ -15,7 +15,7 @@ import { getFileNameWithFixedSize } from "../../utils/fileUtils";
 
 export default class ListComponent extends PureComponent {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.sortByDate = this.sortByDate.bind(this);
         this.sortByName = this.sortByName.bind(this);

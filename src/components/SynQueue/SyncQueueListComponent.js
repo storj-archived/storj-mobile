@@ -47,7 +47,7 @@ SyncQueueListComponent.propTypes = {
     renderItem: PropTypes.func,
     title: PropTypes.string,
     touchableRightTitle: PropTypes.string
-}
+};
 
 const styles = StyleSheet.create({
     container: {

@@ -22,7 +22,7 @@ export default BalanceComponent = (props) => {
                         date = { moment(transaction.timestamp).format('MMMM-DD-YYYY') }
                         amount = { transaction.amount } />
         })
-    }
+    };
 
     return(
         <View style = { styles.mainContainer }>
@@ -186,4 +186,4 @@ const styles = StyleSheet.create({
 BalanceComponent.propTypes = {
     navigation: PropTypes.object,
     screenProps: PropTypes.object
-}
+};

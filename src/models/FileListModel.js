@@ -9,5 +9,8 @@ export default class FileListModel {
     constructor(bucketId = null, files = []) {
         this.bucketId = bucketId;
         this.files = files;
+
+        this.entity = null;
+        this.isLoading = false;
     }
 }

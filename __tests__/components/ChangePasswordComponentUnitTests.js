@@ -29,7 +29,7 @@ describe('ChangePasswordComponent', () => {
                 screenProps = {{ redirectToSettingsScreen: () => {} }} />
         );
 
-        wrapper.setState({ isError: true })
+        wrapper.setState({ isError: true });
 
         expect(wrapper).toMatchSnapshot();
     });
@@ -52,4 +52,4 @@ describe('ChangePasswordComponent', () => {
 
         expect(resetPasswordSpy.mock.calls.length).toBe(1);
     });
-})
+});

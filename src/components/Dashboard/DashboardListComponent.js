@@ -125,7 +125,7 @@ const listComponent = (title, data, props, count, itemType, navigationPress) => 
 
             props.setDashboardBucketId(item.entity.bucketId);
             props.navigateToDashboardFilesScreen();
-        }
+        };
 
         this.emptyFunction = () => {};
 
@@ -156,7 +156,7 @@ const listComponent = (title, data, props, count, itemType, navigationPress) => 
                 data = { data }
                 getBucketName = { getShortBucketName } />
     )
-}
+};
 
 const styles = StyleSheet.create({
     mainContainer: { 

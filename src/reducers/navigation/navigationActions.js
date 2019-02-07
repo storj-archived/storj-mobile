@@ -251,7 +251,7 @@ export const authNavigationActions = {
     redirectToFavoriteBucketsScreen,
     redirectToFavoriteFilesScreen,
     navigateBack
-}
+};
 
 export const myAccountNavigationActions = {
     redirectToMyAccountScreen,
@@ -262,4 +262,4 @@ export const myAccountNavigationActions = {
     redirectToStorageScreen,
     redirectToMyAccountMnemonicScreen,
     navigateBack
-}
+};

@@ -15,7 +15,7 @@ const FilePicker = (() => {
             var options = {
                 mimeType:'*/*',
                 pickerTitle:'Choose file to download'
-            }            
+            };
 
             var filePickerLib = null;
 

@@ -145,7 +145,7 @@ class QRScannerContainer extends Component {
             this._barComponent.setBorderColor('#EB5757');
             this.releaseTimer = setTimeout(() => {this._startScan();}, 2500);
         }
-    }
+    };
 
     /**
      * Functions that starting and stopping scanning action in QRScannerComponent
@@ -154,10 +154,10 @@ class QRScannerContainer extends Component {
         clearTimeout(this.releaseTimer);
         this._barComponent.setBorderColor('white');
         this._barComponent._barCode.startScan();
-    }
+    };
     _stopScan = (e) => {
         this._barComponent._barCode.stopScan();
-    }
+    };
 
     /**
      * Redirecting on previous page

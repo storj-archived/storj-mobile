@@ -104,7 +104,7 @@ class MainContainer extends Component {
             let myPhotosBucketId = this.props.buckets.filter(bucket => bucket.entity.name === "Pictures")[0].entity.id;
              
             return myPhotosBucketId;
-        }
+        };
 
         let actionWithDelay = (action) => {
             if(this.isLoading) return;
@@ -112,7 +112,7 @@ class MainContainer extends Component {
             this.isLoading = true;
             action();
             setButtonInvokeTimeout(2000, this);
-        }
+        };
 
         //Action callbacks
         let createBucketAction = newAction(() => {  actionWithDelay(() => this.props.showCreateBucketInput()) }, require('../images/ActionBar/NewBucketIcon.png'));
@@ -165,7 +165,7 @@ class MainContainer extends Component {
         this.downloadListener = (fileParams) => {
             let res = observablePropFactory.getObservable(fileParams.fileId);
             res.Property = fileParams;
-        }
+        };
 
         this.onHardwareBackPress = this.onHardwareBackPress.bind(this);
 

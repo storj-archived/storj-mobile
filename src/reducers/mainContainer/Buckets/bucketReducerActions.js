@@ -80,7 +80,7 @@ export function getPicturesBucketId(buckets) {
 
 export const navigationContainerBucketActions = {
     createBucket
-}
+};
 
 //action creators for main container
 export const mainContainerBucketActions = {
@@ -103,7 +103,7 @@ export const dashboardContainerBucketActions = {
     deselectBucket,
     createBucket,
     getBuckets    
-}
+};
 
 export const initializeContainerBucketActions = {
     getBuckets

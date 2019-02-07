@@ -100,4 +100,4 @@ const styles = StyleSheet.create({
 MnemonicConfirmedComponent.propTypes = {
     navigation: PropTypes.object,
     screenProps: PropTypes.object
-}
+};

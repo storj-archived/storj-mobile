@@ -18,7 +18,7 @@ export default class MnemonicInfoComponent extends Component {
         this.state = {
             showEmailAlert: false,
             showBackupAlert: false
-        }
+        };
 
         this.skipPress = this.skipPress.bind(this);
     }
@@ -202,4 +202,4 @@ const styles = StyleSheet.create({
 MnemonicInfoComponent.propTypes = {
     navigation: PropTypes.object,
     screenProps: PropTypes.object
-}
+};

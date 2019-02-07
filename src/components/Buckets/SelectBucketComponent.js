@@ -19,7 +19,7 @@ export default class SelectBucketComponent extends BaseListComponent {
 
         this.state = { 
             showSelection: false
-        }
+        };
 
         this.animatedScrollValue = new Animated.Value(0);
 
@@ -251,4 +251,4 @@ SelectBucketComponent.propTypes = {
     selectBucket: PropTypes.func,
     selectedItemId: PropTypes.string,
     setSelectionId: PropTypes.func
-}
+};

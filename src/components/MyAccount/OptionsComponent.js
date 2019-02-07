@@ -54,4 +54,4 @@ OptionsComponent.propTypes = {
     imageSource: PropTypes.number,
     onPress: PropTypes.func,
     title: PropTypes.string
-}
+};

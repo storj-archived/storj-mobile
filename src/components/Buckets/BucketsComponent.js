@@ -67,4 +67,4 @@ BucketsComponent.propTypes = {
     searchIndex: PropTypes.number,
     selectAll: PropTypes.func,
     setSearch: PropTypes.func
-}
+};

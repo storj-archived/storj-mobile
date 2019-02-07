@@ -79,7 +79,7 @@ class InitializeContainer extends Component {
 
     onChangePasscode(value) {
         if(this.state.isFinished) return;
-        if(this.state.isError) this.setState({ isError: false, infoText: this.REGULAR_MESSAGE })
+        if(this.state.isError) this.setState({ isError: false, infoText: this.REGULAR_MESSAGE });
         this.setState({ filledPins: value });
         this.pincode = value;
 

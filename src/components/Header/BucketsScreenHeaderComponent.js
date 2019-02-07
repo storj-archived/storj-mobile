@@ -61,11 +61,11 @@ AnimatedHeader = (props) => {
                 </View>
             </View>
         );
-    }
+    };
 
     onSelectAllPress = () => {
         props.selectAll(props.openedBucketId, props.isFilesScreen);
-    }
+    };
 
     renderSelectComponent = () => {   
         let count = props.selectedItemsCount;
@@ -84,7 +84,7 @@ AnimatedHeader = (props) => {
                 </View>
             </View>
         );
-    }
+    };
 
     const selectionMode = props.isSelectionMode ? null: styles.justifyContentFlexEnd;
 
@@ -95,7 +95,7 @@ AnimatedHeader = (props) => {
             }
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     mainContainer: {

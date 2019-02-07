@@ -22,7 +22,7 @@ export default StorageComponent = (props) => {
                         date = { moment(transaction.timestamp).format('MMMM-DD-YYYY') }
                         amount = { transaction.amount } />
         })
-    }
+    };
 
     return(
         <View style = { styles.mainContainer }>
@@ -182,4 +182,4 @@ const styles = StyleSheet.create({
 StorageComponent.propTypes = {
     navigation: PropTypes.object,
     screenProps: PropTypes.object
-}
+};

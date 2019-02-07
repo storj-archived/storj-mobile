@@ -25,7 +25,7 @@ export default class FilePreviewComponent extends Component {
         this.state = {
             isSelectBucketShown: false,
             isDetailedInfoShown: false
-        }
+        };
 
         this.showSelectBuckets = this.showSelectBuckets.bind(this);
         this.showDetailedInfo = this.showDetailedInfo.bind(this);

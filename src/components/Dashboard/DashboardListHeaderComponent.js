@@ -63,4 +63,4 @@ const titleLinkStyles = StyleSheet.create({
 DashboardListHeaderComponent.propTypes = {
     onPress: PropTypes.func,
     title: PropTypes.string
-}
+};

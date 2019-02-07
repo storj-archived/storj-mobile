@@ -35,7 +35,7 @@ export default StorageInfoComponent = (props) => {
 
 StorageInfoComponent.propTypes = {
     showStorageInfo: PropTypes.func,
-}
+};
 
 const styles = StyleSheet.create({
     mainContainer: {

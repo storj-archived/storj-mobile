@@ -39,6 +39,6 @@ const rootReducer = (state, action) => {
     }
   
     return combinedReducers(state, action)
-}
+};
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));

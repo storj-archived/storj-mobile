@@ -27,7 +27,7 @@ export default class MnemonicGenerationComponent extends Component {
             mnemonic: null,
             showCopyPopUp: false,
             isBackButtonBlocked: false
-        }
+        };
 
         this.copyToClipboard = this.copyToClipboard.bind(this);
         this.cancelCopy = this.cancelCopy.bind(this);
@@ -328,4 +328,4 @@ const styles = StyleSheet.create({
 MnemonicGenerationComponent.propTypes = {
     navigation: PropTypes.object,
     screenProps: PropTypes.object
-}
+};

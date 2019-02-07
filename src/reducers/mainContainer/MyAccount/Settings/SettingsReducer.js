@@ -107,5 +107,5 @@ formatLastSync = function(lastSync) {
     if(diffDays > 1) return lastSyncString + diffDays + " days ago";
 
     return result;
-}
+};
 

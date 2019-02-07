@@ -22,7 +22,7 @@ export default MyAccountMainPageComponent = (props) => {
         }, (e) => {
             console.log(e);
         });
-    }
+    };
        
     return(
         <View style = { styles.mainContainer }>
@@ -219,4 +219,4 @@ const styles = StyleSheet.create({
 MyAccountMainPageComponent.propTypes = {
     navigation: PropTypes.object,
     screenProps: PropTypes.object
-}
+};

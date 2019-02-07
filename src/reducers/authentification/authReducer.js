@@ -93,7 +93,7 @@ export default function authReducer(state, action) {
 
             return newState;
         case SAVE_MNEMONIC: 
-            newState.user.mnemonic = action.mnemonic
+            newState.user.mnemonic = action.mnemonic;
 
             return newState;
         default:

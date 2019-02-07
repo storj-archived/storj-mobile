@@ -68,7 +68,7 @@ export default class CreateBucketPopUpComponent extends Component {
 CreateBucketPopUpComponent.propTypes = {
     onApply: PropTypes.func,
     onCancel: PropTypes.func
-}
+};
 
 const ButtonComponent = (props) => (
     <TouchableOpacity style = { [styles.button, props.style] } onPress = { props.onPress }>

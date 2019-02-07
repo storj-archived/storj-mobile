@@ -17,7 +17,7 @@ export default ImageViewerComponent = (props) => {
 
     onPress = async () => {
         await props.onShare(props.fileUri.uri);
-    }
+    };
 
     //Pass uri through screen props
     return(
@@ -88,7 +88,7 @@ ImageViewerComponent.propTypes = {
     onShare: PropTypes.func,
     progress: PropTypes.number,
     showActionBar: PropTypes.bool
-}
+};
 
 const styles = StyleSheet.create({
     mainContainer: {

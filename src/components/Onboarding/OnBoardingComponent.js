@@ -31,7 +31,7 @@ PaginationComponent = (props) => {
             <View style = {[ styles.paginationComponent, { backgroundColor: props.color }]} />
         </View>
     );
-}
+};
 
 /**
  * OnBoarding component, using SliderComponent to switch between 1 and 2 content screens, described above
@@ -42,7 +42,7 @@ export default class OnBoardingComponent extends Component {
 
         this.state = {
             currentIndex: 0
-        }
+        };
 
         this.data = [
             { imagePath: onBoardingScreensConstants.safetyImagePath, textArray: onBoardingScreensConstants.safetyMainText },

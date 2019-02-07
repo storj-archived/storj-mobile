@@ -24,22 +24,22 @@ export default ViewOptionsComponent = (props) => {
                 </View>
             </TouchableOpacity>
         )
-    }
+    };
 
     listView = () => {
         props.setListView(); 
         props.showOptions();
-    }
+    };
 
     gridView = () => {
         props.setGridView();
         props.showOptions();
-    }
+    };
 
     enableSelectionMode = () => {
         props.enableSelectionMode();
         props.showOptions();
-    }
+    };
 
     renderMainOptions = () => {
         return(
@@ -69,7 +69,7 @@ export default ViewOptionsComponent = (props) => {
                 }
             </View>
         )
-    }
+    };
 
     sortByDate = () => {
         props.setSorting(SORTING.BY_DATE);
@@ -77,7 +77,7 @@ export default ViewOptionsComponent = (props) => {
         props.getFiles(SORTING.BY_DATE);
         props.showOptions();
         props.unsetSortingShown();
-    }
+    };
 
     sortByName = () => {
         props.setSorting(SORTING.BY_NAME);
@@ -85,7 +85,7 @@ export default ViewOptionsComponent = (props) => {
         props.getFiles(SORTING.BY_NAME);
         props.showOptions();
         props.unsetSortingShown();
-    }
+    };
 
     renderSorting = () => {
         return(
@@ -106,7 +106,7 @@ export default ViewOptionsComponent = (props) => {
                 }
             </View>
         )
-    }
+    };
 
     return(
         <View style = { [ styles.backgroundWrapper ] }>  
@@ -128,7 +128,7 @@ ViewOptionsComponent.propTypes = {
     getFiles: PropTypes.func,
     isSelectionMode: PropTypes.bool,
     setSorting: PropTypes.func
-}
+};
 
 const styles = StyleSheet.create({
     mainContainer: {

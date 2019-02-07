@@ -23,7 +23,7 @@ export default StorageReportComponent = (props) => {
 StorageReportComponent.propTypes = {
     amount: PropTypes.string,
     date: PropTypes.string
-}
+};
 
 
 const styles = StyleSheet.create({

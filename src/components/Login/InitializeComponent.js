@@ -19,7 +19,7 @@ export default class InitializeComponent extends Component {
 
         this.state = {
             isKeyboardShown: false
-        }
+        };
 
         this._onRef = this._onRef.bind(this);
         this.onPress = this.onPress.bind(this);

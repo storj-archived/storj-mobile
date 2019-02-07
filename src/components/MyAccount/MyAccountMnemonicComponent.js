@@ -22,7 +22,7 @@ export default class MyAccountMnemonicComponent extends Component {
         this.state = {
             mnemonic: null,
             showCopyPopUp: false
-        }
+        };
 
         this.secondWordsRowIndexCorrection = 13;
 
@@ -296,4 +296,4 @@ const styles = StyleSheet.create({
 MyAccountMnemonicComponent.propTypes = {
     navigation: PropTypes.object,
     screenProps: PropTypes.object
-}
+};

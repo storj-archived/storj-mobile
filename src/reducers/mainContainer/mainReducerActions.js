@@ -241,7 +241,7 @@ export const dashboardContainerActions = {
     setSelectionId,
     setDashboardBucketId,
     clearSearch
-}
+};
 
 export const initializeContainerActions = {
     setFirstSignIn,
@@ -288,8 +288,8 @@ export const setCurrentMainScreenActions = {
     hideActionBar,
     pushLoading,
     popLoading
-}
+};
 
 export const navigationContainerMainActions = {
     setIsConnected
-}
+};

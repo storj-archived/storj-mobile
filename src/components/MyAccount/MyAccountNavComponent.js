@@ -42,4 +42,4 @@ MyAccountNavComponent.propTypes = {
     showStorageInfo: PropTypes.func,
     storageAmount: PropTypes.string,
     transactionList: PropTypes.array
-}
+};

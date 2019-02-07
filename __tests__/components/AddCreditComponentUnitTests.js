@@ -41,7 +41,7 @@ describe('AddCreditComponent', () => {
                 showCredits = { () => {} } />
         );
 
-        wrapper.setState({ showBasicWallets: false, showBTCCredits: true })
+        wrapper.setState({ showBasicWallets: false, showBTCCredits: true });
 
         expect(wrapper).toMatchSnapshot();
     });
@@ -53,7 +53,7 @@ describe('AddCreditComponent', () => {
                 wallets = {[]} />
         );
 
-        wrapper.setState({ showBasicWallets: false, showStorjCredits: true })
+        wrapper.setState({ showBasicWallets: false, showStorjCredits: true });
 
         expect(wrapper).toMatchSnapshot();
     });
@@ -67,7 +67,7 @@ describe('AddCreditComponent', () => {
                 showCredits = { showCreditsSpy } />
         );
 
-        wrapper.setState({ showBasicWallets: false, showBTCCredits: true })
+        wrapper.setState({ showBasicWallets: false, showBTCCredits: true });
 
         expect(showCreditsSpy.mock.calls.length).toBe(1);
     });
@@ -89,4 +89,4 @@ describe('AddCreditComponent', () => {
 
         expect(createWalletSpy.mock.calls.length).toBe(1);
     });
-})
+});

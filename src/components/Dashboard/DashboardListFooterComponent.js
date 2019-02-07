@@ -16,7 +16,7 @@ export default DashboardListFooterComponent = (props) => {
         
         if(count > 3) return count - 3;
         if(count <= 3) return '';
-    }
+    };
 
     return(
         <TouchableOpacity onPress = { props.onPress }>
@@ -31,7 +31,7 @@ export default DashboardListFooterComponent = (props) => {
                     </View>
                 </View>
             </View>
-            <View style = { footerLinkStyles.underLine }></View>
+            <View style = {footerLinkStyles.underLine}/>
         </TouchableOpacity>
     )
 }
@@ -69,4 +69,4 @@ const footerLinkStyles = StyleSheet.create({
 DashboardListFooterComponent.propTypes = {
     count: PropTypes.number,
     onPress: PropTypes.func
-}
+};

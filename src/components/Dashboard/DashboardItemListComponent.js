@@ -65,4 +65,4 @@ DashboardItemListComponent.propTypes = {
     onRefresh: PropTypes.func,
     props: PropTypes.object,
     title: PropTypes.string
-}
+};

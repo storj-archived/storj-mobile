@@ -25,7 +25,7 @@ export default BalanceReportComponent = (props) => {
 BalanceReportComponent.propTypes = {
     amount: PropTypes.string,
     date: PropTypes.string
-}
+};
 
 const styles = StyleSheet.create({
     mainContainer: {

@@ -61,7 +61,7 @@ describe('FirstSignInComponent', () => {
                 { type: 'Documents', isSelected: false, title: 'My documents', mask: 4 },
                 { type: 'Music', isSelected: false, title: 'My music', mask: 2 } ],
             showModal: true
-        }
+        };
 
         expect(wrapper.state()).toEqual(expectedState);
     });
@@ -92,7 +92,7 @@ describe('FirstSignInComponent', () => {
     });
 
     it('correct functions invokes count when showModal is false', () => {
-        const creationSpy = jest.fn()
+        const creationSpy = jest.fn();
 
         const wrapper = shallow(
             <FirstSignInComponent 
@@ -172,13 +172,13 @@ describe('FirstSignInComponent', () => {
                 { type: 'Documents', isSelected: true, title: 'My documents', mask: 4 },
                 { type: 'Music', isSelected: true, title: 'My music', mask: 2 } ],
             showModal: false
-        }
+        };
 
         expect(wrapper.state()).toEqual(expectedState);
     });
 
     it('correct functions invokes count when showModal is true', () => {
-        const creationSpy = jest.fn()
+        const creationSpy = jest.fn();
 
         const wrapper = shallow(
             <FirstSignInComponent 
@@ -206,4 +206,4 @@ describe('FirstSignInComponent', () => {
 
         expect(creationSpy.mock.calls.length).toBe(4);
     });
-})
+});

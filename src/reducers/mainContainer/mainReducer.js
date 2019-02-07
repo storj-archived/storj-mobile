@@ -138,10 +138,10 @@ export default function mainReducer(state = initialState, action) {
             newState.selectedItemId = null;
             break;
         case SET_PHOTOS_BUCKET_ID:            
-            newState.myPhotosBucketId = action.payload.myPhotosBucketId
+            newState.myPhotosBucketId = action.payload.myPhotosBucketId;
             break;
         case SET_DASHBOARD_BUCKET_ID:            
-            newState.dashboardBucketId = action.payload.dashboardBucketId
+            newState.dashboardBucketId = action.payload.dashboardBucketId;
             break;
         case PUSH_LOADING:
             newState.loadingStack = loadingStack.setLoading(action.payload.value);

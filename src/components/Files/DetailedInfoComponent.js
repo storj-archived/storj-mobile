@@ -17,7 +17,7 @@ export default DetailedInfoComponent = (props) => {
                 <Text style = { styles.infoText }>{ infoText }</Text>
             </View>
         )
-    }
+    };
 
     renderOptions = () => {
         const starredIcon = props.isStarred ? '★' : null;
@@ -45,7 +45,7 @@ export default DetailedInfoComponent = (props) => {
                 }
             </View>
         )
-    }
+    };
 
     return(
         <View style = { [ styles.backgroundWrapper ] }>  

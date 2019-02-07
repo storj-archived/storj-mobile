@@ -16,7 +16,7 @@ export default class FirstSignInComponent extends Component {
         this.state = {
             options: props.options,
             showModal: false
-        }
+        };
 
         this.showModal = this.showModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
@@ -61,7 +61,7 @@ export default class FirstSignInComponent extends Component {
             if(value.type === type) value.isSelected = !value.isSelected;
             return value;
         })});
-    }
+    };
 
     getCallback = (type) => {
         switch(type) {
@@ -74,20 +74,20 @@ export default class FirstSignInComponent extends Component {
             case 'Music': this.filesSelection();
             break;
         }
-    }
+    };
 
     photosSelection = () => {
         this.changeOptions('Pictures');
-    }
+    };
     videosSelection = () => {
         this.changeOptions('Movies');
-    }
+    };
     musicSelection = () => {
         this.changeOptions('Documents');
-    }
+    };
     filesSelection = () => {
         this.changeOptions('Music');
-    }
+    };
 
     showModalView = () => {
         if(this.state.showModal) {
@@ -124,7 +124,7 @@ export default class FirstSignInComponent extends Component {
                 </View>
             );
         }
-    }
+    };
 
     render() {
         return(
@@ -166,7 +166,7 @@ export default class FirstSignInComponent extends Component {
 
 FirstSignInComponent.propTypes = {
     createBucket: PropTypes.func
-}
+};
 
 const styles = StyleSheet.create({
     mainContainer: {

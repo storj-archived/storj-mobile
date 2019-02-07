@@ -25,7 +25,7 @@ class BucketsContainer extends Component {
 
         this.state = {
             isLoading: false
-        }
+        };
 
         this.email = props.email;
         this.setFirstSignIn = this.setFirstSignIn.bind(this);
@@ -93,7 +93,7 @@ class BucketsContainer extends Component {
         ] : [
             { type: 'Pictures', isSelected: false, title: 'My photos' },
             { type: 'Documents', isSelected: false, title: 'My documents' },
-        ]
+        ];
 
         if(this.props.isFirstSignIn) {
             return(

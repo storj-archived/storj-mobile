@@ -22,7 +22,7 @@ export const InfoButtonComponent = (props) => {
             </View>
         </View>
     )
-}
+};
 
 const styles = StyleSheet.create({
     button: { 

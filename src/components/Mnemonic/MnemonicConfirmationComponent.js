@@ -21,7 +21,7 @@ export default class MnemonicConfirmationComponent extends Component {
             showSecondSet: false,
             firstWord: '',
             secondWord: ''
-        }
+        };
 
         this.showFirstSet = this.showFirstSet.bind(this); 
         this.showSecondSet = this.showSecondSet.bind(this); 
@@ -235,7 +235,7 @@ const WordContainer = (element, index, setWord) => {
             <View style = { styles.underline }/>
         </View>
     )
-}
+};
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -370,4 +370,4 @@ const styles = StyleSheet.create({
 MnemonicConfirmationComponent.propTypes = {
     navigation: PropTypes.object,
     screenProps: PropTypes.object
-}
+};

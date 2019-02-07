@@ -21,7 +21,7 @@ export default class QRScannerComponent extends Component {
 
         this.state = {
             borderColor: '#FFFFFF'
-        }
+        };
 
         this.navigateBack = this.props.navigateBack ? this.props.navigateBack : () => {};
         this.onBarCodeRead = this.props.onBarCodeRead ? this.props.onBarCodeRead : () => {};

@@ -14,7 +14,7 @@ export default MnemonicNotConfirmedComponent = (props) => {
     backPress = () => {
         props.navigation.state.params.setNewData(); 
         props.screenProps.navigateBack(); 
-    }
+    };
     
     return(
         <View style = { styles.mainContainer }>
@@ -122,4 +122,4 @@ const styles = StyleSheet.create({
 MnemonicNotConfirmedComponent.propTypes = {
     navigation: PropTypes.object,
     screenProps: PropTypes.object
-}
+};

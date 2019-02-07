@@ -16,7 +16,7 @@ export default PinOptionComponent = (props) => {
      */
     closeView = () => {
         props.changePINOptionStatus(false);
-    }
+    };
 
     /**
      * Pop-up item
@@ -32,7 +32,7 @@ export default PinOptionComponent = (props) => {
                 </View>
             </TouchableOpacity>
         )
-    }
+    };
 
     /**
      * Alert and after new importKeys without PIN
@@ -47,17 +47,17 @@ export default PinOptionComponent = (props) => {
             ],
             { cancelable: false }
         );
-    }
+    };
 
     onChangePin = () => {
         props.redirectToPinCodeGenerationScreen(); 
         closeView();
-    }
+    };
 
     onDeletePin = () => {
         tryDeletePIN(); 
         closeView();
-    }
+    };
 
     return(
         <View style = { [ styles.backgroundWrapper ] }>  
@@ -78,7 +78,7 @@ PinOptionComponent.propTypes = {
     changePINOptionStatus: PropTypes.func,
     redirectToPinCodeGenerationScreen: PropTypes.func,
     deletePIN: PropTypes.func
-}
+};
 
 const styles = StyleSheet.create({
     mainContainer: {

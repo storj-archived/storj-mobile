@@ -32,7 +32,7 @@ const AuthFailureComponent = (props) => {
             </View>
         </View>
     );
-}
+};
 
 export default AuthFailureComponent;
 
