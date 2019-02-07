@@ -29,7 +29,7 @@ export class RegisterStateModel {
             stateModel.email === this.email 
             && stateModel.password === this.password
             && stateModel.areTermsAccepted === this.areTermsAccepted
-            && stateModel.passwordRepeat == this.passwordRepeat
+            && stateModel.passwordRepeat === this.passwordRepeat
         );
     };
 }

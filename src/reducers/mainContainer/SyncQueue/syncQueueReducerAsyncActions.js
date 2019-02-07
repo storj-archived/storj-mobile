@@ -10,7 +10,7 @@ export function listSyncQueueEntriesAsync(syncQueueEntries) {
 
         if(listQueueEntriesResponse.isSuccess) {
             let syncQueueEntries = JSON.parse(listQueueEntriesResponse.result);
-            syncQueueEntries = syncQueueEntries.map(syncQueueEntry => new ListItemModel(SyncQueueEntryModel.fromModel(syncQueueEntry), false, syncQueueEntry.status == SyncState.PROCESSING));
+            syncQueueEntries = syncQueueEntries.map(syncQueueEntry => new ListItemModel(SyncQueueEntryModel.fromModel(syncQueueEntry), false, syncQueueEntry.status === SyncState.PROCESSING));
 
             dispatch(listSyncQueueEntries(syncQueueEntries));
         }
@@ -44,7 +44,7 @@ export function getSyncQueueEntryAsync(id) {
 function processUpdateResponse(dispatch, response) {
     if(response.isSuccess) {
         let syncQueueEntry = JSON.parse(response.result);
-        syncQueueEntry = new ListItemModel(SyncQueueEntryModel.fromModel(syncQueueEntry), false, syncQueueEntry.status == SyncState.PROCESSING);
+        syncQueueEntry = new ListItemModel(SyncQueueEntryModel.fromModel(syncQueueEntry), false, syncQueueEntry.status === SyncState.PROCESSING);
 
         dispatch(updateSyncQueueEntry(syncQueueEntry));
     }

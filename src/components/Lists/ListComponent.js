@@ -128,7 +128,7 @@ export default class ListComponent extends PureComponent {
                         if(prop.length > 3) {
                             rowNumber = Math.floor(prop.length / 3);
 
-                            if(prop.length % 3 != 0) {
+                            if(prop.length % 3 !== 0) {
                                 rowNumber += 1
                             }
                         }

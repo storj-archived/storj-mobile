@@ -395,7 +395,7 @@ class MainContainer extends Component {
     onActionBarPress() {
         const currentScreen = this.getCurrentScreen();
 
-        if(currentScreen != "MyAccountScreen") {
+        if(currentScreen !== "MyAccountScreen") {
             this.props.isActionBarShown ? 
                 this.props.hideActionBar() : this.props.showActionBar();
         }

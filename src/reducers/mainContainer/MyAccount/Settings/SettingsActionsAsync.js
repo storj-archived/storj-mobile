@@ -145,7 +145,6 @@ export function setFirstSignInAsync(settingsId, value, callback) {
 }
 
 function getObjectFromInt(settings) {
-    console.log("settings", settings)
     return {
         syncStatus: settings & SYNC_ENUM.SYNC_ON ? true : false, 
         onWifi: settings & SYNC_ENUM.ON_WIFI ? true : false,
