@@ -248,7 +248,7 @@ export default class FileListManager {
                 this.newFilesList[i].isLoading = false;
                 this.newFilesList[i].progress = 0;
                 this.newFilesList[i].entity.localPath = localPath;
-                this.newFilesList[i].entity.isDownloaded = localPath ? true : false;
+                this.newFilesList[i].entity.isDownloaded = !!localPath;
                 this.newFilesList[i].entity.thumbnail = thumbnail;
             }  
 

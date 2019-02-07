@@ -76,7 +76,7 @@ function textComp (props) {
 
 const LoadingComponent = (props) => (
     <View style = { styles.loadingComponentContainer }>
-        <ActivityIndicator animating = { props.isLoading ? true : false } size = { 'large' } color = { 'blue' } />
+        <ActivityIndicator animating = { !!props.isLoading } size = { 'large' } color = { 'blue' } />
     </View>
 ); 
 

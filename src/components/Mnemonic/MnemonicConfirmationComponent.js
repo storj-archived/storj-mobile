@@ -127,7 +127,7 @@ export default class MnemonicConfirmationComponent extends Component {
     }
 
     containWord(array, word) {
-        let result = array.indexOf(word) !== -1 ? true : false;
+        let result = array.indexOf(word) !== -1;
 
         return result;
     }

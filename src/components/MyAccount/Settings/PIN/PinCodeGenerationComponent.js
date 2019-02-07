@@ -113,7 +113,7 @@ export default class PinCodeGenerationComponent extends Component {
     handleEdit(newValue) { 
         if((!this.isCleared && newValue === '') || !['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].includes(newValue[newValue.length - 1])) return;
        
-        this.isCleared = this.isCleared ? false : true;
+        this.isCleared = !this.isCleared;
 
         let codeFull = this.state.code.length === this.letterCount;
         let repeatCodeFull = this.state.repeatCode.length === this.letterCount;

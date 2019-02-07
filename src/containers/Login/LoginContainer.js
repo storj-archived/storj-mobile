@@ -134,7 +134,7 @@ class LoginContainer extends Component {
         this.setState({ isLoading: true });
 
         let isEmailValid = validator.isEmail(this.state.stateModel.email);
-        let isPasswordValid = this.state.stateModel.password ? true : false;
+        let isPasswordValid = !!this.state.stateModel.password;
         let isMnemonicValid = await StorjLib.checkMnemonic(formatInput(this.state.stateModel.mnemonic));
         
         if(isEmailValid && isPasswordValid && isMnemonicValid) {

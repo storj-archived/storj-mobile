@@ -58,7 +58,7 @@ class QRScannerContainer extends Component {
      */
 	tryLogin = async () => {
         let isEmailValid = validator.isEmail(this.stateModel.email);
-        let isPasswordValid = this.stateModel.password ? true : false;
+        let isPasswordValid = !!this.stateModel.password;
         let isMnemonicValid = await StorjLib.checkMnemonic(this.stateModel.mnemonic);
 
         if(isEmailValid && isPasswordValid && isMnemonicValid) {

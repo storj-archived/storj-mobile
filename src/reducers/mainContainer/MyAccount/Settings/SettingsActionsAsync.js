@@ -146,13 +146,13 @@ export function setFirstSignInAsync(settingsId, value, callback) {
 
 function getObjectFromInt(settings) {
     return {
-        syncStatus: settings & SYNC_ENUM.SYNC_ON ? true : false, 
-        onWifi: settings & SYNC_ENUM.ON_WIFI ? true : false,
-        onCharging: settings & SYNC_ENUM.ON_CHARGING ? true : false,
-        syncPhotos: settings & SYNC_ENUM.SYNC_PHOTOS ? true : false,
-        syncMovies: settings & SYNC_ENUM.SYNC_MOVIES ? true : false,
-        syncDocuments: settings & SYNC_ENUM.SYNC_DOCUMENTS ? true : false,
-        syncMusic: settings & SYNC_ENUM.SYNC_MUSIC ? true : false
+        syncStatus: !!(settings & SYNC_ENUM.SYNC_ON),
+        onWifi: !!(settings & SYNC_ENUM.ON_WIFI),
+        onCharging: !!(settings & SYNC_ENUM.ON_CHARGING),
+        syncPhotos: !!(settings & SYNC_ENUM.SYNC_PHOTOS),
+        syncMovies: !!(settings & SYNC_ENUM.SYNC_MOVIES),
+        syncDocuments: !!(settings & SYNC_ENUM.SYNC_DOCUMENTS),
+        syncMusic: !!(settings & SYNC_ENUM.SYNC_MUSIC)
     };
 }
 
