@@ -1,12 +1,9 @@
 import {
     TouchableOpacity,
-    Alert,
-    Text
-} from 'react-native';
+    Alert} from 'react-native';
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16'
-import Enzyme, { shallow } from 'enzyme'; 
-import sinon from 'sinon';
+import Enzyme, { shallow } from 'enzyme';
 import MnemonicInfoComponent from '../../src/components/Mnemonic/MnemonicInfoComponent';
 
 Enzyme.configure({ adapter: new Adapter() });

@@ -4,8 +4,6 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16'
 import LoginContainer from '../../src/containers/Login/LoginContainer';
 import configureStore from 'redux-mock-store';
-import { loginActionsCreators, registerActionsCreators } from '../../src/reducers/authentification/authActions';
-import authReducer from '../../src/reducers/authentification/authReducer';
 import { testUser } from 'jest-mock';
 import sinon from 'sinon';
 import { LoginStateModel } from '../../src/models/LoginStateModel';

@@ -1,4 +1,4 @@
-import { Dimensions, PixelRatio } from 'react-native';
+import { Dimensions} from 'react-native';
 
 const design = {
     height: 667,
@@ -21,7 +21,6 @@ export function getWidth(elementWidth) {
     let ratio = elementWidth/design.width;
 
     return Math.round(design.deviceWidth * ratio);
-    //return elementWidth * PixelRatio.get() / 2;
 };
 
 export function getHeight(elementHeight) {

@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { myPicturesListContainerMainActions, getPicturesBucketId, dashboardContainerActions, filesListContainerMainActions } from '../../reducers/mainContainer/mainReducerActions';
+import { myPicturesListContainerMainActions, dashboardContainerActions, filesListContainerMainActions } from '../../reducers/mainContainer/mainReducerActions';
 import { dashboardContainerBucketActions } from '../../reducers/mainContainer/Buckets/bucketReducerActions';
 import { filesListContainerFileActions } from '../../reducers/mainContainer/Files/filesReducerActions';
 import { dashboardNavigateBack, navigateToDashboardFilesScreen, navigateBack, openImageViewer, openFilePreview } from '../../reducers/navigation/navigationActions';

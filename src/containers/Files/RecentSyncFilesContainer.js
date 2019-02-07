@@ -3,7 +3,7 @@ import { Animated } from "react-native";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { openImageViewer, openFilePreview } from '../../reducers/navigation/navigationActions';
-import { myPicturesListContainerMainActions, getPicturesBucketId } from '../../reducers/mainContainer/mainReducerActions';
+import { myPicturesListContainerMainActions} from '../../reducers/mainContainer/mainReducerActions';
 import { dashboardContainerActions } from '../../reducers/mainContainer/mainReducerActions';
 import { dashboardContainerBucketActions } from '../../reducers/mainContainer/Buckets/bucketReducerActions';
 import { filesListContainerMainActions } from '../../reducers/mainContainer/mainReducerActions';

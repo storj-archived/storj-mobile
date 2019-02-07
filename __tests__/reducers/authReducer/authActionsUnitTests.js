@@ -1,4 +1,3 @@
-import { NavigationActions } from 'react-navigation';
 import authActions from '../../../src/utils/constants/actionConstants';
 import { loginActionsCreators, registerActionsCreators } from '../../../src/reducers/authentification/authActions';
 

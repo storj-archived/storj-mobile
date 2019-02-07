@@ -1,10 +1,7 @@
 import {
     View,
     Text,
-    StyleSheet,
-    Image,
-    TouchableOpacity
-} from 'react-native';
+    StyleSheet} from 'react-native';
 import React from 'react';
 import SearchComponent from './SearchComponent';
 import { getWidth, getHeight } from '../../utils/adaptive';

@@ -1,9 +1,3 @@
-import {
-    View,
-    TextInput,
-    Button,
-    NativeModules
-} from 'react-native';
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16'
 import configureStore from 'redux-mock-store';

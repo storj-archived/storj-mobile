@@ -1,11 +1,8 @@
 import {
-    TouchableOpacity,
-    Text
-} from 'react-native';
+    TouchableOpacity} from 'react-native';
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16'
-import Enzyme, { shallow } from 'enzyme'; 
-import sinon from 'sinon';
+import Enzyme, { shallow } from 'enzyme';
 import AddCreditComponent from '../../src/components/MyAccount/Balance/AddCreditComponent';
 
 Enzyme.configure({ adapter: new Adapter() });

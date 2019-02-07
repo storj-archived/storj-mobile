@@ -6,7 +6,7 @@ import {
     StyleSheet
 } from 'react-native';
 import React from 'react';
-import { getWidth, getHeight, getDeviceWidth, getDeviceHeight } from '../../utils/adaptive';
+import { getWidth, getHeight} from '../../utils/adaptive';
 
 /**
  * RegisterFailure component

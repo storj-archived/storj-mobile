@@ -71,13 +71,11 @@ class MyAccountContainer extends Component {
     }
 
     calculateTransactions() {
-        let temp = [];
-
         const convertedCredits = this.convertedCredits();
         const convertedDebits = this.convertedDebits();
         const convertedPromoCredits = this.convertedPromoCredits();
-            
-        temp = [
+
+        let temp = [
             ...convertedCredits,
             ...convertedDebits,
             ...convertedPromoCredits

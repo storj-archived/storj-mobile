@@ -63,7 +63,7 @@ export function getFirstAndLastDayOfCurrentMonth() {
  */
 export function setToTwoDecimalPlaces(num) {
     const roundedToTwoPlaces = Math.round(num * 100) / 100;
-    
+
     return roundedToTwoPlaces.toFixed(2);
 };
 
