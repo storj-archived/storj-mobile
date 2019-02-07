@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
-import SettingsComponent from "../../components/MyAccount/SettingsComponent";
+import SettingsComponent from "../../components/MyAccount/Settings/SettingsComponent";
 import { SYNC_BUCKETS } from "../../utils/constants/SyncBuckets";
 import { 
     listSettingsAsync,
