@@ -55,9 +55,7 @@ async function _postWalletRequest(url, params) {
     params.user = auth.email;
     params.__nonce = uuidv4();
 
-    let request = _createRequest(url, 'POST', auth.authString, params);
-
-    return request;
+    return _createRequest(url, 'POST', auth.authString, params);
 }
 
 /**
@@ -72,9 +70,7 @@ async function _getBillingRequest(url, params) {
     params.__nonce = uuidv4();
     url += "?" + toQueryString(params);
 
-    let request = _createRequest(url, 'GET', auth.authString);
-
-    return request;
+    return _createRequest(url, 'GET', auth.authString);
 }
 
 

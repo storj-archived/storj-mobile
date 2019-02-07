@@ -33,8 +33,7 @@ export function roundToGBAmount(num, type) {
 
     // Checks to see if the amount is less than one cent
     if (modNum.indexOf('0.00') === 0) {
-        const lessThanOneCent = '< 0.01';
-        return lessThanOneCent;
+        return '< 0.01';
     }
 
     return modNum + '';
@@ -64,9 +63,8 @@ export function getFirstAndLastDayOfCurrentMonth() {
  */
 export function setToTwoDecimalPlaces(num) {
     const roundedToTwoPlaces = Math.round(num * 100) / 100;
-    const setToTwoPlaces = roundedToTwoPlaces.toFixed(2);
-
-    return setToTwoPlaces;
+    
+    return roundedToTwoPlaces.toFixed(2);
 };
 
 /** 

@@ -1,10 +1,6 @@
-import {
-    NativeModules,
-    Platform
-} from 'react-native'
+import {NativeModules, Platform} from 'react-native'
 import BucketModel from '../models/BucketModel';
 import FileModel from '../models//FileModel';
-import keysModel from '../models/keysModel';
 
 //TODO: StorjModule wil send us only Response objects, 
 // so all try/catch blocks should be removed and all error logic should be after checking !isSuccess
@@ -181,9 +177,7 @@ const StorjLib = (() => {
          * @param {string} bucketId 
          */
         async deleteBucket(bucketId) {
-            let response = await storjLib.deleteBucket(bucketId);
-            
-            return response;
+            return await storjLib.deleteBucket(bucketId);
         }
 
         /**

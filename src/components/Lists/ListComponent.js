@@ -1,17 +1,12 @@
 import React, {PureComponent} from 'react';
-import {
-    View,
-    StyleSheet,
-    Text,
-    FlatList
-} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import ListItemComponent from "./ListItemComponent";
 import GridItemComponent from './GridItemComponent';
 import ExpanderComponent from '../Common/ExpanderComponent';
 import PropTypes from 'prop-types';
-import { getWidth, getHeight, getDeviceWidth } from '../../utils/adaptive';
+import {getDeviceWidth, getHeight, getWidth} from '../../utils/adaptive';
 import SORTING from '../../utils/constants/sortingConstants';
-import { getFileNameWithFixedSize } from "../../utils/fileUtils";
+import {getFileNameWithFixedSize} from "../../utils/fileUtils";
 
 export default class ListComponent extends PureComponent {
     constructor(props) {
@@ -102,15 +97,12 @@ export default class ListComponent extends PureComponent {
     getListExpanders() {
         var sorting = this.sort(this.props.data);
 
-        var expanders = Object.getOwnPropertyNames(sorting).reverse().map((propName) => 
-        {
+        return Object.getOwnPropertyNames(sorting).reverse().map((propName) => {
             return {
                 propName,
                 prop: sorting[propName]
             }
         });
-
-        return expanders;
     }
 
     getGridExpander(expander) {

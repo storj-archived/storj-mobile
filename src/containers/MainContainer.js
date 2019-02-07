@@ -1,46 +1,46 @@
-import { Keyboard, BackHandler, Platform, Alert, Animated, Easing } from 'react-native';
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { 
-    showActionBar,
+import {Alert, Animated, BackHandler, Easing, Keyboard, Platform} from 'react-native';
+import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {
+    changePasswordPopupStatus,
+    changePINOptionStatus,
+    disableSelectionMode,
+    enableSelectionMode,
     hideActionBar,
-    showCreateBucketInput,
     hideCreateBucketInput,
+    openBucket,
     setGridView,
     setListView,
-    openBucket,
     setSorting,
-    enableSelectionMode,
-    disableSelectionMode,
-    changePINOptionStatus,
-    changePasswordPopupStatus,
+    showActionBar,
+    showCreateBucketInput,
     toggleSyncWindow
 } from '../reducers/mainContainer/mainReducerActions';
-import {    
+import {
     createBucket,
-    deleteBucket, 
-    updateFavourite,
-    selectBuckets,
+    deleteBucket,
     deselectBuckets,
-    getBuckets
+    getBuckets,
+    selectBuckets,
+    updateFavourite
 } from '../reducers/mainContainer/Buckets/bucketReducerActions';
-import { 
-    deleteFile, 
-    updateFavouriteFiles,
-    selectFiles,
+import {
+    deleteFile,
+    deselectFiles,
     listFiles,
-    deselectFiles
+    selectFiles,
+    updateFavouriteFiles
 } from '../reducers/mainContainer/Files/filesReducerActions';
-import { 
-    redirectToMainScreen, 
-    redirectToInitializationScreen, 
-    bucketNavigateBack, 
+import {
+    bucketNavigateBack,
     dashboardNavigateBack,
-    redirectToPinCodeGenerationScreen,
-    openSelectBucketScreen
+    openSelectBucketScreen,
+    redirectToInitializationScreen,
+    redirectToMainScreen,
+    redirectToPinCodeGenerationScreen
 } from '../reducers/navigation/navigationActions';
-import { createWallet, getWallets } from '../reducers/billing/billingActions';
+import {createWallet, getWallets} from '../reducers/billing/billingActions';
 import TabBarActionModelFactory from '../models/TabBarActionModel';
 import MainComponent from '../components/MainComponent';
 import filePicker from '../utils/filePicker';
@@ -49,19 +49,23 @@ import ServiceModule from '../utils/serviceModule';
 import SyncModule from '../utils/syncModule';
 import StorjModule from '../utils/storjModule';
 import CameraModule from '../utils/cameraModule';
-import { SYNC_BUCKETS } from '../utils/constants/syncBuckets';
+import {SYNC_BUCKETS} from '../utils/constants/syncBuckets';
 import ListItemModel from '../models/ListItemModel';
 import BucketModel from '../models/BucketModel';
 import FileModel from '../models/FileModel';
 import {listUploadingFiles} from "../reducers/asyncActions/fileActionsAsync";
-import { listSyncQueueEntriesAsync, updateSyncQueueEntryFileNameAsync, updateSyncQueueEntryStatusAsync } from "../reducers/mainContainer/SyncQueue/syncQueueReducerAsyncActions";
-import { getAllFromCode } from "../utils/syncQueue/syncStatusMapper";
+import {
+    listSyncQueueEntriesAsync,
+    updateSyncQueueEntryFileNameAsync,
+    updateSyncQueueEntryStatusAsync
+} from "../reducers/mainContainer/SyncQueue/syncQueueReducerAsyncActions";
+import {getAllFromCode} from "../utils/syncQueue/syncStatusMapper";
 import SyncQueueEntryComponent from "../components/SynQueue/SyncQueueEntryComponent";
 import SyncQueueCallbackObject from "../models/SyncQueueCallbackObject";
 import SyncState from '../utils/constants/syncState';
-import { getDeviceHeight } from "../utils/adaptive";
-import { getFileCopyName } from "../utils/fileUtils";
-import { setButtonInvokeTimeout } from '../utils/buttonDelay';
+import {getDeviceHeight} from "../utils/adaptive";
+import {getFileCopyName} from "../utils/fileUtils";
+import {setButtonInvokeTimeout} from '../utils/buttonDelay';
 
 
 const { PICTURES } = SYNC_BUCKETS;
@@ -101,9 +105,7 @@ class MainContainer extends Component {
         let myPhotosBucketIdGetter = () => {
             if(this.props.myPhotosBucketId) return this.props.myPhotosBucketId;
 
-            let myPhotosBucketId = this.props.buckets.filter(bucket => bucket.entity.name === "Pictures")[0].entity.id;
-             
-            return myPhotosBucketId;
+            return this.props.buckets.filter(bucket => bucket.entity.name === "Pictures")[0].entity.id;
         };
 
         let actionWithDelay = (action) => {
@@ -376,7 +378,6 @@ class MainContainer extends Component {
 
         if(routes[index].routeName === "ImageViewerScreen") {
             this.props.redirectToMainScreen();
-            return;
         }
     }
 
@@ -387,9 +388,8 @@ class MainContainer extends Component {
     getCurrentScreen() {
         const index = this.props.mainScreenNavReducer.index;      
         const routes = this.props.mainScreenNavReducer.routes;
-        const currentScreen = routes[index].routeName;
-
-        return currentScreen;
+        
+        return routes[index].routeName;
     }
 
     onActionBarPress() {

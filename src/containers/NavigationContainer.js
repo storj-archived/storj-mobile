@@ -20,12 +20,12 @@ import {
 	setIsConnected
 } from '../reducers/mainContainer/mainReducerActions';
 import { saveMnemonic } from '../reducers/authentification/authActions';
-import { 
+import {
 	setNameAlreadyExistException,
 	unsetNameAlreadyExistException,
 	createBucket,
 	getBuckets,
-    deleteBucket 
+    deleteBucket
 } from '../reducers/mainContainer/Buckets/bucketReducerActions';
 import {
     uploadFileError,
@@ -36,7 +36,7 @@ import {
 	deleteFile,
 	listFiles
 } from '../reducers/mainContainer/Files/filesReducerActions'
-import { 
+import {
 	redirectToLoginScreen,
     redirectToMainScreen,
     redirectToMnemonicConfirmationScreen,
@@ -47,7 +47,7 @@ import {
     redirectToRegisterScreen,
 	redirectToRegisterSuccessScreen,
 	redirectToMnemonicHelpScreen,
-	navigateBack 
+	navigateBack
 } from '../reducers/navigation/navigationActions';
 import ListItemModel from '../models/ListItemModel';
 import BucketModel from '../models/BucketModel';
@@ -284,8 +284,7 @@ class Apps extends Component {
 	}
 
 	chooseWarning() {
-		let warningColor = '#EB5757';
-		let color = warningColor;
+		let color = '#EB5757';
 		let message;
 
 		if(!this.props.isEmailConfirmed) {			

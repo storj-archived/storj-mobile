@@ -1,14 +1,8 @@
-import {
-    View,
-    Text,
-    Image,
-    TouchableOpacity,
-    StyleSheet
-} from 'react-native';
-import React, { Component } from 'react';
-import { WORDLIST } from '../../utils/constants/wordList';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {Component} from 'react';
+import {WORDLIST} from '../../utils/constants/wordList';
 import mnemonicScreenConstants from '../../utils/constants/mnemonicScreenConstants';
-import { getWidth, getHeight } from '../../utils/adaptive';
+import {getHeight, getWidth} from '../../utils/adaptive';
 import PropTypes from 'prop-types';
 
 export default class MnemonicConfirmationComponent extends Component {
@@ -127,9 +121,7 @@ export default class MnemonicConfirmationComponent extends Component {
     }
 
     containWord(array, word) {
-        let result = array.indexOf(word) !== -1;
-
-        return result;
+        return array.indexOf(word) !== -1;
     }
 
     render() {

@@ -40,9 +40,7 @@ export function getFileSize(itemSize) {
 
 export function getShortBucketName(name) {
     if(name.length > 13) {
-        let firstRowName = name.slice(0,10) + '...';
-
-        return firstRowName;
+        return name.slice(0,10) + '...';
     }; 
 
     return name;

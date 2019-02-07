@@ -60,8 +60,7 @@ class BucketsContainer extends Component {
 
     getSelectedItemsCount() {
         if(this.props.screenName === "FilesScreen") {
-            let result = this.getSelectedFilesCount();
-            return result;
+            return this.getSelectedFilesCount();
         } else {
             return this.getSelectedBucketsCount();
         }
