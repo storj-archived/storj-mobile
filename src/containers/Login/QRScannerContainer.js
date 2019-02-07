@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
-import { getFirstAction, setFirstAction } from '../../utils/AsyncStorageModule';
+import { getFirstAction, setFirstAction } from '../../utils/asyncStorageModule';
 import { connect } from 'react-redux';
 import validator from '../../utils/validator';
 import { 
@@ -12,8 +12,8 @@ import {
     redirectToInitializeScreen 
 } from '../../reducers/authentification/authActions';
 import QRScannerComponent from '../../components/Login/QRScannerComponent';
-import StorjLib from '../../utils/StorjModule';
-import SyncModule from '../../utils/SyncModule';
+import StorjLib from '../../utils/storjModule';
+import SyncModule from '../../utils/syncModule';
 import { LoginStateModel } from '../../models/LoginStateModel';
 import infoScreensConstants from '../../utils/constants/infoScreensConstants';
 

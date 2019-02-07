@@ -57,8 +57,8 @@ import { uploadFileStart, uploadFileSuccess } from '../reducers/asyncActions/fil
 import { listSyncQueueEntriesAsync, getSyncQueueEntryAsync } from "../reducers/mainContainer/SyncQueue/syncQueueReducerAsyncActions";
 import { listSettingsAsync } from "../reducers/mainContainer/MyAccount/Settings/SettingsActionsAsync";
 
-import SyncModule from '../utils/SyncModule';
-import ServiceModule from '../utils/ServiceModule';
+import SyncModule from '../utils/syncModule';
+import ServiceModule from '../utils/serviceModule';
 
 import { statusBarHeightIos } from "../utils/adaptive";
 

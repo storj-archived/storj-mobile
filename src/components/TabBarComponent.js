@@ -12,7 +12,7 @@ import React, { Component } from 'react';
 import { getWidth, getHeight } from '../utils/adaptive';
 import { getPicturesBucketId } from '../reducers/mainContainer/mainReducerActions';
 import PropTypes from 'prop-types';
-import ServiceModule from '../utils/ServiceModule';
+import ServiceModule from '../utils/serviceModule';
 import { setButtonInvokeTimeout } from '../utils/buttonDelay';
 
 /**

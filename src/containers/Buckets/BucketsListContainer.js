@@ -5,7 +5,7 @@ import { bucketsListContainerActions } from '../../reducers/mainContainer/mainRe
 import { bucketsListContainerBucketActions } from '../../reducers/mainContainer/Buckets/bucketReducerActions';
 import { navigateToFilesScreen } from '../../reducers/navigation/navigationActions';
 import { getShortBucketName } from "../../utils/fileUtils";
-import ServiceModule from '../../utils/ServiceModule';
+import ServiceModule from '../../utils/serviceModule';
 import BaseListContainer from "../BaseListContainer";
 import BucketsListComponent from '../../components/Buckets/BucketsListComponent';
 import ListItemModel from '../../models/ListItemModel';

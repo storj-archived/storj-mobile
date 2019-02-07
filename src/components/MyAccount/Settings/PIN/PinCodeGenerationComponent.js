@@ -8,7 +8,7 @@ import {
     Keyboard,
     TextInput
 } from 'react-native';
-import StorjModule from '../../../../utils/StorjModule';
+import StorjModule from '../../../../utils/storjModule';
 import { getHeight, getWidth } from '../../../../utils/adaptive';
 import PropTypes from 'prop-types';
 

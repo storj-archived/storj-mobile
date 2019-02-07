@@ -1,8 +1,8 @@
 import { listSyncQueueEntries, updateSyncQueueEntry } from "./syncQueueReducerActions";
-import SyncModule from "../../../utils/SyncModule";
+import SyncModule from "../../../utils/syncModule";
 import SyncQueueEntryModel from "../../../models/SyncQueueEntryModel";
 import ListItemModel from "../../../models/ListItemModel";
-import SyncState from "../../../utils/constants/SyncState";
+import SyncState from "../../../utils/constants/syncState";
 
 export function listSyncQueueEntriesAsync(syncQueueEntries) {
     return async (dispatch) => {

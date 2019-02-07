@@ -4,12 +4,8 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureStore from 'redux-mock-store';
 import sinon from 'sinon';
-import { createStore, combineReducers } from 'redux';
 import RegisterContainer from '../../src/containers/RegisterContainer';
-import { RegisterStateModel } from '../../src/models/RegisterStateModel';
-import StorjModule from '../../src/utils/StorjModule';
-import { Provider } from 'react-redux';
-import { STATUS_CODES } from 'http';
+import StorjModule from '../../src/utils/storjModule';
 
 Enzyme.configure({ adapter: new Adapter() });
 

@@ -1,4 +1,4 @@
-import StorjLib from '../utils/StorjModule';
+import StorjLib from '../utils/storjModule';
 import { StackNavigator } from 'react-navigation';
 import InitializationScreen from '../containers/Login/InitializeContainer';
 import OnBoardingScreen from '../components/Onboarding/OnBoardingComponent';

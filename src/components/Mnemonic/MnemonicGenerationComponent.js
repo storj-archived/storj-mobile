@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import { getWidth, getHeight } from '../../utils/adaptive';
-import StorjModule from '../../utils/StorjModule';
+import StorjModule from '../../utils/storjModule';
 import PropTypes from 'prop-types';
 
 //TODO: remove all arrow functions from all maps in render

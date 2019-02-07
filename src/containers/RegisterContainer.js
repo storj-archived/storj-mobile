@@ -16,10 +16,10 @@ import {
 import { RegisterStateModel } from '../models/RegisterStateModel';
 import { RegisterErrorModel } from '../models/RegisterErrorModel';
 import RegisterComponent from '../components/Registration/RegisterComponent';
-import StorjModule from '../utils/StorjModule';
+import StorjModule from '../utils/storjModule';
 import validator from '../utils/validator';
 import infoScreensConstants from '../utils/constants/infoScreensConstants';
-import { getFirstAction, setFirstAction } from '../utils/AsyncStorageModule';
+import { getFirstAction, setFirstAction } from '../utils/asyncStorageModule';
 import PropTypes from 'prop-types';
 
 /**

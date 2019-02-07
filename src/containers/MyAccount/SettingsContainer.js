@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import SettingsComponent from "../../components/MyAccount/Settings/SettingsComponent";
-import { SYNC_BUCKETS } from "../../utils/constants/SyncBuckets";
+import { SYNC_BUCKETS } from "../../utils/constants/syncBuckets";
 import { 
     listSettingsAsync,
     changeSyncStatusAsync,
@@ -16,7 +16,7 @@ import {
 import {
     changePINOptionStatus
 } from '../../reducers/mainContainer/mainReducerActions';
-import ServiceModule from '../../utils/ServiceModule';
+import ServiceModule from '../../utils/serviceModule';
 
 class SettingsContainer extends Component {
     constructor(props) {

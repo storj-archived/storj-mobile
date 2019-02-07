@@ -1,5 +1,5 @@
 import fileActions from "../mainContainer/Files/filesReducerActions";
-import SyncModule from "../../utils/SyncModule";
+import SyncModule from "../../utils/syncModule";
 import FileModel from "../../models/FileModel";
 import ListItemModel from "../../models/ListItemModel";
 import moment from 'moment';

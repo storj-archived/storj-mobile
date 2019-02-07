@@ -57,8 +57,6 @@ BucketsListComponent.propTypes = {
     onCancelPress: PropTypes.func,
     onDotsPress: PropTypes.func,
     onLongPress: PropTypes.func,
-    onPress: PropTypes.func,
     onRefresh: PropTypes.func,
-    selectedItemId: PropTypes.string,
     sortingMode: PropTypes.string
 }

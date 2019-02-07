@@ -1,5 +1,5 @@
 import { BUCKET_ACTIONS, MAIN_ACTIONS } from '../../../utils/constants/actionConstants';
-import ItemManager from '../../../utils/itemManagers/ItemManager';
+import ItemManager from '../../../utils/itemManagers/itemManager';
 
 const { 
     SELECT_BUCKET, 

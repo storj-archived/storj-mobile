@@ -1,5 +1,5 @@
-import SyncState from "../constants/SyncState";
-import GetFromCodeCallback from "./GetFromCodeCallback";
+import SyncState from "../constants/syncState";
+import GetFromCodeCallback from "./getFromCodeCallback";
 
 const _emptyFunc = () => {};
 

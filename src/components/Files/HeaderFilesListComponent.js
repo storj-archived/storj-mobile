@@ -43,7 +43,6 @@ export default class HeaderFilesListComponent extends FilesListComponent {
 }
 
 HeaderFilesListComponent.propTypes = {
-    bucketId: PropTypes.string,
     animatedScrollValue: PropTypes.object,
     bucketId: PropTypes.string,
     buckets: PropTypes.array,

@@ -14,7 +14,7 @@ import {
 } from '../../reducers/mainContainer/mainReducerActions';
 import BucketsComponent from '../../components/Buckets/BucketsComponent';
 import FirstSignInComponent from '../../components/Login/FirstSignInComponent';
-import ServiceModule from '../../utils/ServiceModule';
+import ServiceModule from '../../utils/serviceModule';
 import { bucketNavigateBack } from '../../reducers/navigation/navigationActions';
 import { changeSyncStatusAsync, setFirstSignInAsync, SYNC_ENUM } from "../../reducers/mainContainer/MyAccount/Settings/SettingsActionsAsync";
 import PropTypes from 'prop-types';

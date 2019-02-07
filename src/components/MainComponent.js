@@ -18,7 +18,7 @@ import SyncOverlayComponent from "../components/SynQueue/SyncOverlayComponent";
 import SyncQueueListComponent from "../components/SynQueue/SyncQueueListComponent";
 import { getHeight } from "../utils/adaptive";
 import PropTypes from 'prop-types';
-import ServiceModule from "../utils/ServiceModule"
+import ServiceModule from "../utils/serviceModule"
 
 export default class MainComponent extends Component {
     constructor(props) {
@@ -260,13 +260,10 @@ MainComponent.propTypes = {
     deselectAll: PropTypes.func,
     disableSelectionMode: PropTypes.func,
     getWallets: PropTypes.func,
-    hideCreateBucketInput: PropTypes.func,
     isActionBarShown: PropTypes.bool,
     isCreateBucketInputShown: PropTypes.bool,
     isGridViewShown: PropTypes.bool,
     isLoading: PropTypes.bool,
-    isSelectionMode: PropTypes.bool,
-    isSingleItemSelected: PropTypes.bool,
     onActionBarPress: PropTypes.func,
     openBucket: PropTypes.func,
     redirectToInitializationScreen: PropTypes.func,

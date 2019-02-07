@@ -218,7 +218,6 @@ LoginComponent.propTypes = {
     onSubmit: PropTypes.func,
     onChangeLogin: PropTypes.func,
     onChangePassword: PropTypes.func,
-    registerButtonOnPress: PropTypes.func,
     email: PropTypes.string,
     password: PropTypes.string,
     mnemonic: PropTypes.string,

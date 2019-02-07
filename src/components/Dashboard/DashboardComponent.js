@@ -29,7 +29,6 @@ DashboardComponent.propTypes = {
     showOptions: PropTypes.func,
     defaultRoute: PropTypes.string,
     animatedScrollValue: PropTypes.number,
-    defaultRoute: PropTypes.string
 }
 
 const styles = StyleSheet.create({

@@ -16,14 +16,14 @@ import {
     redirectToInitializeScreen,
     redirectToQRScannerScreen
 } from '../../reducers/authentification/authActions';
-import StorjLib from '../../utils/StorjModule';
-import SyncModule from "../../utils/SyncModule";
+import StorjLib from '../../utils/storjModule';
+import SyncModule from "../../utils/syncModule";
 import LoginComponent from '../../components/Login/LoginComponent';
 import validator from '../../utils/validator';
 import { LoginStateModel } from '../../models/LoginStateModel';
 import { LoginErrorModel } from '../../models/LoginErrorModel';
 import infoScreensConstants from '../../utils/constants/infoScreensConstants';
-import { getFirstAction, setFirstAction } from '../../utils/AsyncStorageModule';
+import { getFirstAction, setFirstAction } from '../../utils/asyncStorageModule';
 import { formatInput } from '../../utils/utils';
 import PropTypes from 'prop-types';
 

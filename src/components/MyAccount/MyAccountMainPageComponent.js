@@ -9,7 +9,7 @@ import {
 import React from 'react';
 import { getHeight, getWidth } from '../../utils/adaptive';
 import OptionsComponent from './OptionsComponent';
-import StorjModule from '../../utils/StorjModule';
+import StorjModule from '../../utils/storjModule';
 import PropTypes from 'prop-types';
 import { InfoButtonComponent } from '../Common/InfoButtonComponent';
 

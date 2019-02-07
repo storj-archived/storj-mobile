@@ -6,7 +6,7 @@ import FilePreviewComponent from "../../components/Files/FilePreviewComponent";
 import BaseFileViewerContainer from './BaseFileViewerContainer';
 import { redirectToMainScreen } from '../../reducers/navigation/navigationActions';
 import { imageViewerActions } from '../../reducers/mainContainer/Files/filesReducerActions';
-import OpenFileModule from '../../utils/OpenFileModule';
+import OpenFileModule from '../../utils/openFileModule';
 import { getFileSize } from "../../utils/fileUtils";
 
 class FilePreviewContainer extends BaseFileViewerContainer {

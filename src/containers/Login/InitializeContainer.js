@@ -8,8 +8,8 @@ import {
 } from '../../reducers/navigation/navigationActions';
 import { getDebits, getCredits, getWallets }  from '../../reducers/billing/billingActions';
 import { listSettingsAsync } from "../../reducers/mainContainer/MyAccount/Settings/SettingsActionsAsync";
-import StorjLib from '../../utils/StorjModule';
-import { getFirstAction } from '../../utils/AsyncStorageModule';
+import StorjLib from '../../utils/storjModule';
+import { getFirstAction } from '../../utils/asyncStorageModule';
 import ListItemModel from '../../models/ListItemModel';
 import FileModel from '../../models/FileModel';
 import BucketModel from '../../models/BucketModel';
@@ -27,8 +27,8 @@ import {
 import {
     listFiles
 } from '../../reducers/mainContainer/Files/filesReducerActions';
-import ServiceModule from '../../utils/ServiceModule';
-import SyncModule from '../../utils/SyncModule';
+import ServiceModule from '../../utils/serviceModule';
+import SyncModule from '../../utils/syncModule';
 import PropTypes from 'prop-types';
 import InitializeComponent from '../../components/Login/InitializeComponent';
 

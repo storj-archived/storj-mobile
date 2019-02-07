@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { redirectToMainScreen, openSelectBucketScreen } from '../../reducers/navigation/navigationActions';
 import { imageViewerActions } from '../../reducers/mainContainer/Files/filesReducerActions';
-import ServiceModule from '../../utils/ServiceModule';
+import ServiceModule from '../../utils/serviceModule';
 import TabBarActionModelFactory from '../../models/TabBarActionModel';
 import ImageViewComponent from "../../components/Files/ImageViewerComponent";
 import BaseFileViewerContainer from './BaseFileViewerContainer';

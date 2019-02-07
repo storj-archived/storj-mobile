@@ -1,5 +1,5 @@
 import { NativeModules, Platform } from 'react-native';
-import { SYNC_BUCKETS } from '../utils/constants/SyncBuckets';
+import { SYNC_BUCKETS } from './constants/syncBuckets';
 
 const { PICTURES } = SYNC_BUCKETS;
 

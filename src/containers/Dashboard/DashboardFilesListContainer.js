@@ -12,7 +12,7 @@ import filesActions from '../../reducers/mainContainer/Files/filesReducerActions
 import { listUploadingFiles } from "../../reducers/asyncActions/fileActionsAsync";
 import BaseFilesListContainer from '../Files/BaseFilesListContainer';
 import headerFilesListBinder from "../../viewBinders/headerFilesListBinder";
-import ServiceModule from "../../utils/ServiceModule";
+import ServiceModule from "../../utils/serviceModule";
 import PropTypes from 'prop-types';
 
 /** 
@@ -137,7 +137,6 @@ DashboardFilesListContainer.propTypes = {
     fileListModels: PropTypes.array,    
     isLoading: PropTypes.bool,
     isSelectionMode: PropTypes.bool,
-    isSingleItemSelected: PropTypes.bool,       
     screenProps: PropTypes.object,    
     uploadingFileListModels: PropTypes.array
 };

@@ -1,6 +1,6 @@
 import { uuidv4, toQueryString, getFirstAndLastDayOfCurrentMonth } from '../utils/utils';
 import { sha256 } from '../utils/sha256';
-import StorjModule from '../utils/StorjModule';
+import StorjModule from './storjModule';
 import { DEBITS_URL, CREDITS_URL, WALLETS_URL, USERS_URL } from '../utils/constants/urlConstants';
 
 

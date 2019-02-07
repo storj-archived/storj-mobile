@@ -1,6 +1,6 @@
 import { MAIN_ACTIONS } from '../../utils/constants/actionConstants';
-import { SYNC_BUCKETS } from '../../utils/constants/SyncBuckets';
-import ServiceModule from '../../utils/ServiceModule';
+import { SYNC_BUCKETS } from '../../utils/constants/syncBuckets';
+import ServiceModule from '../../utils/serviceModule';
 
 const { PICTURES } = SYNC_BUCKETS;
 
@@ -257,7 +257,6 @@ export const bucketsListContainerActions = {
 };
 
 export const filesListContainerMainActions = {
-    disableSelectionMode,
     onSingleItemSelected,
     closeBucket,
     setLoading,

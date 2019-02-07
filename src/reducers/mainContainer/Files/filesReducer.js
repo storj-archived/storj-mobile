@@ -1,4 +1,4 @@
-import FileListManager from '../../../utils/itemManagers/FileListManager';
+import FileListManager from '../../../utils/itemManagers/fileListManager';
 import { FILE_ACTIONS, MAIN_ACTIONS } from '../../../utils/constants/actionConstants';
 
 const { DISABLE_SELECTION_MODE } = MAIN_ACTIONS;

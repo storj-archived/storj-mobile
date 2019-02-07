@@ -297,13 +297,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center'
     },
-    flexRow: {
-        flexDirection: 'row'
-    },
-    icon: {
-        height: getHeight(24),
-        width: getWidth(24)
-    },
     expanderIconContainer: {
         height: getHeight(24),
         width: getWidth(24),

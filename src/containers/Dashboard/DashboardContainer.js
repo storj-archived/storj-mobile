@@ -9,9 +9,9 @@ import { getAllFromCode } from "../../utils/syncQueue/syncStatusMapper";
 import SyncQueueCallbackObject from "../../models/SyncQueueCallbackObject";
 import DashboardListComponent from '../../components/Dashboard/DashboardListComponent';
 import SyncQueueEntryComponent from "../../components/SynQueue/SyncQueueEntryComponent";
-import ServiceModule from '../../utils/ServiceModule';
-import StorjModule from '../../utils/StorjModule';
-import SyncState from '../../utils/constants/SyncState';
+import ServiceModule from '../../utils/serviceModule';
+import StorjModule from '../../utils/storjModule';
+import SyncState from '../../utils/constants/syncState';
 
 class DashboardContainer extends Component {
     constructor(props) {
