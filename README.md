@@ -218,7 +218,7 @@ Register new user with given email and password. Send email with confirmation li
 void register(String user, String pass, RegisterCallback callback)
 ```
 
-Check what is [RegisterCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/RegisterCallback.java)
+Check what is [RegisterCallback](https://github.com/storj/java-libstorj/blob/main/src/main/java/io/storj/libstorj/RegisterCallback.java)
 
 ###### iOS
 
@@ -255,7 +255,7 @@ boolean decrypted
 public void getBuckets(GetBucketsCallback callback)
 ```
 
-[GetBucketsCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/GetBucketsCallback.java)
+[GetBucketsCallback](https://github.com/storj/java-libstorj/blob/main/src/main/java/io/storj/libstorj/GetBucketsCallback.java)
 
 ###### iOS
 
@@ -272,7 +272,7 @@ public void getBuckets(GetBucketsCallback callback)
 ```java
 void createBucket(String bucketName, CreateBucketCallback callback)
 ```
-This method has two parameters - bucket name and [CreateBucketCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/CreateBucketCallback.java) callback.
+This method has two parameters - bucket name and [CreateBucketCallback](https://github.com/storj/java-libstorj/blob/main/src/main/java/io/storj/libstorj/CreateBucketCallback.java) callback.
 
 ###### IOS 
 
@@ -295,7 +295,7 @@ To delete bucket you should call:
 void deleteBucket(String bucketId, DeleteBucketCallback callback)
 ```
 
-This method has two parameters - String bucketId and [DeleteBucketCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/DeleteBucketCallback.java) callback.
+This method has two parameters - String bucketId and [DeleteBucketCallback](https://github.com/storj/java-libstorj/blob/main/src/main/java/io/storj/libstorj/DeleteBucketCallback.java) callback.
 
 ###### iOS
 
@@ -339,7 +339,7 @@ To upload file you should call
  long uploadFile(String bucketId, String localPath, UploadFileCallback callback)
  ```
  
- This method has three parameters - id of the bucket, path, to the file, and [UploadFileCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/UploadFileCallback.java)
+ This method has three parameters - id of the bucket, path, to the file, and [UploadFileCallback](https://github.com/storj/java-libstorj/blob/main/src/main/java/io/storj/libstorj/UploadFileCallback.java)
 
 Return value of this method - is fileHandle, that is needed to cancel upload.
 
@@ -356,7 +356,7 @@ Return value of this method - is fileHandle, that is needed to cancel upload.
 
 ######Android
 
-In your [UploadFileCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/UploadFileCallback.java)
+In your [UploadFileCallback](https://github.com/storj/java-libstorj/blob/main/src/main/java/io/storj/libstorj/UploadFileCallback.java)
 you can find 
 
 ```java
@@ -366,7 +366,7 @@ callback. It parameters contains all needed information to implement progress of
 
 ######iOS
 
-In yout [SJFileUploadCallback](https://github.com/storj/ios-libstorj/blob/master/StorjIOS/StorjIOS/StorjCallbacks/FileOperations/SJFileUploadCallback.h) you can find 
+In yout [SJFileUploadCallback](https://github.com/storj/ios-libstorj/blob/main/StorjIOS/StorjIOS/StorjCallbacks/FileOperations/SJFileUploadCallback.h) you can find 
 
 ```objc
 (^SJFileUploadProgressCallbackBlock)(NSString *fileId,
@@ -403,7 +403,7 @@ Before file downloading you should check that your device has enough free memory
 long downloadFile(String bucketId, String fileId, String localPath, DownloadFileCallback callback)
 ```
 
-This method has three parameters - id of the file, path, to the file, and [DownloadFileCallback](https://github.com/storj/java-libstorj/blob/master/src/main/java/io/storj/libstorj/DownloadFileCallback.java)
+This method has three parameters - id of the file, path, to the file, and [DownloadFileCallback](https://github.com/storj/java-libstorj/blob/main/src/main/java/io/storj/libstorj/DownloadFileCallback.java)
 
 Return value of this method - is fileHandle, that is needed to cancel download.
 
@@ -415,7 +415,7 @@ Return value of this method - is fileHandle, that is needed to cancel download.
       withCompletion: (SJFileDownloadCallback* _Nonnull) completion;
 ```
 
-This method has three parameters - file id, Bucket id, path to the file and [SJDownloadFileCallback](https://github.com/storj/ios-libstorj/blob/master/StorjIOS/StorjIOS/StorjCallbacks/FileOperations/SJFileDownloadCallback.h)
+This method has three parameters - file id, Bucket id, path to the file and [SJDownloadFileCallback](https://github.com/storj/ios-libstorj/blob/main/StorjIOS/StorjIOS/StorjCallbacks/FileOperations/SJFileDownloadCallback.h)
 
 Return value of this method - is fileHandle, that is needed to cancel download.
 
